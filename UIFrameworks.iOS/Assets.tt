@@ -1,0 +1,17 @@
+﻿﻿<#@ template language="C#" debug="True" hostspecific="true" #>
+<#@ assembly name="System.Core" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="System.IO" #>
+namespace UIFrameworks.iOS
+{
+    public static class Assets
+    {
+    <#var directories = Directory.GetDirectories(this.Host.ResolvePath("Assets.xcassets")).Select(a=>a.Split('/').Last().Split('.').First());
+      foreach(var f in directories)
+      {#>  
+        public static string <#= f.Replace("-","_") #> => "<#= f #>";
+    <#}#>  
+    }
+}
