@@ -7,8 +7,8 @@
     <ProjectGuid>{FD08DB79-4DC2-4A40-BDDC-6149ACABDFD9}</ProjectGuid>
     <ProjectTypeGuids>{EFBA0AD7-5A72-4C68-AF49-83D382785DCF};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <OutputType>Library</OutputType>
-    <RootNamespace>UIFrameworks.Android.Sandbox</RootNamespace>
-    <AssemblyName>UIFrameworks.Android.Sandbox</AssemblyName>
+    <RootNamespace>EOS.UI.Android.Sandbox</RootNamespace>
+    <AssemblyName>EOS.UI.Android.Sandbox</AssemblyName>
     <TargetFrameworkVersion>v8.1</TargetFrameworkVersion>
     <AndroidApplication>True</AndroidApplication>
     <AndroidResgenFile>Resources\Resource.designer.cs</AndroidResgenFile>
@@ -95,9 +95,9 @@
     <Folder Include="Assets\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\UIFrameworks.Android\UIFrameworks.Android.csproj">
+    <ProjectReference Include="..\EOS.UI.Android\EOS.UI.Android.csproj">
       <Project>{E321BA43-E86F-480F-B91E-1BCC90323BA1}</Project>
-      <Name>UIFrameworks.Android</Name>
+      <Name>EOS.UI.Android</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />

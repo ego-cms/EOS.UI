@@ -1,10 +1,11 @@
 ﻿using Android.App;
 using Android.Widget;
 using Android.OS;
+using Android;
 
-namespace UIFrameworks.Android.Sandbox
+namespace EOS.UI.Android.Sandbox
 {
-    [Activity(Label = "UIFrameworks.Android.Sandbox", MainLauncher = true, Icon = "@mipmap/icon")]
+    [Activity(Label = "EOS.UI.Android.Sandbox", MainLauncher = true, Icon = "@mipmap/icon")]
     public class MainActivity : Activity
     {
         int count = 1;
