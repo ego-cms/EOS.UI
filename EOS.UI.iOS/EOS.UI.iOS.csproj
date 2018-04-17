@@ -30,6 +30,7 @@
     </MtouchLink>
     <MtouchHttpClientHandler>
     </MtouchHttpClientHandler>
+    <LangVersion>7.1</LangVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -46,6 +47,7 @@
     </MtouchVerbosity>
     <MtouchHttpClientHandler>
     </MtouchHttpClientHandler>
+    <LangVersion>7.1</LangVersion>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />

@@ -5,6 +5,6 @@ namespace UIFrameworks.Android.Traverser
 {
     public interface IEOSViewTraverser
     {
-        void TraverseView<T>(ViewGroup viewGroup, Action action);
+        void TraverseView<T>(ViewGroup viewGroup, Action<T> action);
     }
 }
