@@ -9,10 +9,10 @@
     <Import_RootNamespace>UIFrameworks.Shared.Themes</Import_RootNamespace>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="$(MSBuildThisFileDirectory)Helpers\Contants.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Helpers\ThemeEnumeration.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Interfaces\ITheme.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Interfaces\IThemeControl.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Interfaces\IThemeProvider.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Helpers\EOSContants.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Helpers\EOSThemeEnumeration.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Interfaces\IEOSTheme.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Interfaces\IEOSThemeControl.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Interfaces\IEOSThemeProvider.cs" />
   </ItemGroup>
 </Project>

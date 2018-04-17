@@ -2,7 +2,7 @@
 
 namespace UIFrameworks.Shared.Themes.Interfaces
 {
-    public interface ITheme
+    public interface IEOSTheme
     {
         Dictionary<string, object> ThemeValues { get; }
     }

@@ -3,7 +3,7 @@ using Android.Views;
 
 namespace UIFrameworks.Android.Traverser
 {
-    public class ViewTraverser : IViewTraverser
+    public class EOSViewTraverser : IEOSViewTraverser
     {
         public void TraverseView<T>(ViewGroup viewGroup, Action action)
         {

@@ -1,6 +1,6 @@
 ﻿namespace UIFrameworks.Shared.Themes.Helpers
 {
-    public static class Constants
+    public static class EOSConstants
     {
         public const string BackgroundColor = "backgroundColor";
         public const string TextColor = "textColor";

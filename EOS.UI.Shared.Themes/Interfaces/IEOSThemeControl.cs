@@ -1,8 +1,8 @@
 ﻿namespace UIFrameworks.Shared.Themes.Interfaces
 {
-    public interface IThemeControl
+    public interface IEOSThemeControl
     {
-        IThemeProvider GetThemeProvider();
+        IEOSThemeProvider GetThemeProvider();
         void UpdateAppearance();
         bool IsThemeIgnored { get; }
         void ResetCustomization();
