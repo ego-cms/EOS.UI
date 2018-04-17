@@ -11,8 +11,8 @@ namespace EOS.UI.iOS.Traverser
             {
                 if(subView is T view)
                     action?.Invoke(view);
-
-                TraverseView(subView, action);
+                else
+                    TraverseView(subView, action);
             }
         }
     }

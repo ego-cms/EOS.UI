@@ -11,8 +11,7 @@ namespace UIFrameworks.Android.Traverser
             {
                 if(viewGroup.GetChildAt(i) is T view)
                     action?.Invoke(view);
-
-                if(viewGroup.GetChildAt(i) is ViewGroup childrenViewGroup)
+                else if(viewGroup.GetChildAt(i) is ViewGroup childrenViewGroup)
                     TraverseView(childrenViewGroup, action);
             }
         }
