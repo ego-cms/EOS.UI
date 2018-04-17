@@ -5,14 +5,14 @@ namespace EOS.UI.iOS.Traverser
 {
     public class EOSViewTraverser : IEOSViewTraverser
     {
-        public void TraverseView<T>(UIViewController viewController, Action<T> action)
+        public void TraverseView<T>(UIView parentView, Action<T> action)
         {
-            foreach(var controller in viewController.ChildViewControllers)
+            foreach(var subView in parentView.Subviews)
             {
-                if(controller is T view)
+                if(subView is T view)
                     action?.Invoke(view);
 
-                TraverseView(controller, action);
+                TraverseView(subView, action);
             }
         }
     }
