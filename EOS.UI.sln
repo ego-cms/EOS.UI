@@ -2,20 +2,20 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27428.2037
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UIFrameworks.iOS.Sandbox", "UIFrameworks.iOS.Sandbox\UIFrameworks.iOS.Sandbox.csproj", "{28EDC59E-9773-4482-9E73-80E8AC319614}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EOS.UI.iOS.Sandbox", "EOS.UI.iOS.Sandbox\EOS.UI.iOS.Sandbox.csproj", "{28EDC59E-9773-4482-9E73-80E8AC319614}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UIFrameworks.iOS", "UIFrameworks.iOS\UIFrameworks.iOS.csproj", "{91A2A6A0-37B8-47AE-A38B-C80667B42049}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EOS.UI.iOS", "EOS.UI.iOS\EOS.UI.iOS.csproj", "{91A2A6A0-37B8-47AE-A38B-C80667B42049}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UIFrameworks.Android", "UIFrameworks.Android\UIFrameworks.Android.csproj", "{E321BA43-E86F-480F-B91E-1BCC90323BA1}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EOS.UI.Android", "EOS.UI.Android\EOS.UI.Android.csproj", "{E321BA43-E86F-480F-B91E-1BCC90323BA1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UIFrameworks.Android.Sandbox", "UIFrameworks.Android.Sandbox\UIFrameworks.Android.Sandbox.csproj", "{FD08DB79-4DC2-4A40-BDDC-6149ACABDFD9}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EOS.UI.Android.Sandbox", "EOS.UI.Android.Sandbox\EOS.UI.Android.Sandbox.csproj", "{FD08DB79-4DC2-4A40-BDDC-6149ACABDFD9}"
 EndProject
-Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "UIFrameworks.Shared.Themes", "UIFrameworks.Shared.Themes\UIFrameworks.Shared.Themes.shproj", "{3722AE67-FC49-4983-974D-D4BDED69FCE4}"
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "EOS.UI.Shared.Themes", "EOS.UI.Shared.Themes\EOS.UI.Shared.Themes.shproj", "{3722AE67-FC49-4983-974D-D4BDED69FCE4}"
 EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
-		UIFrameworks.Shared.Themes\UIFrameworks.Shared.Themes.projitems*{3722ae67-fc49-4983-974d-d4bded69fce4}*SharedItemsImports = 13
-		UIFrameworks.Shared.Themes\UIFrameworks.Shared.Themes.projitems*{e321ba43-e86f-480f-b91e-1bcc90323ba1}*SharedItemsImports = 4
+		EOS.UI.Shared.Themes\UIFrameworks.Shared.Themes.projitems*{3722ae67-fc49-4983-974d-d4bded69fce4}*SharedItemsImports = 13
+		EOS.UI.Shared.Themes\UIFrameworks.Shared.Themes.projitems*{e321ba43-e86f-480f-b91e-1bcc90323ba1}*SharedItemsImports = 4
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|iPhone = Debug|iPhone

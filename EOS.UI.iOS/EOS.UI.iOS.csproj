@@ -6,8 +6,8 @@
     <ProjectGuid>{91A2A6A0-37B8-47AE-A38B-C80667B42049}</ProjectGuid>
     <ProjectTypeGuids>{FEACFBD2-3405-455C-9665-78FE426C6842};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <OutputType>Library</OutputType>
-    <RootNamespace>UIFrameworks.iOS</RootNamespace>
-    <AssemblyName>UIFrameworks.iOS</AssemblyName>
+    <RootNamespace>EOS.UI.iOS</RootNamespace>
+    <AssemblyName>EOS.UI.iOS</AssemblyName>
     <IPhoneResourcePrefix>Resources</IPhoneResourcePrefix>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">

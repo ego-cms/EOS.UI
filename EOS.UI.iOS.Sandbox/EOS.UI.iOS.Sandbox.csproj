@@ -6,8 +6,8 @@
     <ProjectGuid>{28EDC59E-9773-4482-9E73-80E8AC319614}</ProjectGuid>
     <ProjectTypeGuids>{FEACFBD2-3405-455C-9665-78FE426C6842};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <OutputType>Exe</OutputType>
-    <RootNamespace>UIFrameworks.iOS.Sandbox</RootNamespace>
-    <AssemblyName>UIFrameworks.Sandbox</AssemblyName>
+    <RootNamespace>EOS.UI.iOS.Sandbox</RootNamespace>
+    <AssemblyName>EOS.UI.Sandbox</AssemblyName>
     <IPhoneResourcePrefix>Resources</IPhoneResourcePrefix>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|iPhoneSimulator' ">
@@ -105,9 +105,9 @@
     <Compile Include="AppDelegate.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\UIFrameworks.iOS\UIFrameworks.iOS.csproj">
+    <ProjectReference Include="..\EOS.UI.iOS\EOS.UI.iOS.csproj">
       <Project>{91A2A6A0-37B8-47AE-A38B-C80667B42049}</Project>
-      <Name>UIFrameworks.iOS</Name>
+      <Name>EOS.UI.iOS</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />

@@ -6,8 +6,8 @@
     <ProjectGuid>{E321BA43-E86F-480F-B91E-1BCC90323BA1}</ProjectGuid>
     <ProjectTypeGuids>{EFBA0AD7-5A72-4C68-AF49-83D382785DCF};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <OutputType>Library</OutputType>
-    <RootNamespace>UIFrameworks.Android</RootNamespace>
-    <AssemblyName>UIFrameworks.Android</AssemblyName>
+    <RootNamespace>EOS.UI.Android</RootNamespace>
+    <AssemblyName>EOS.UI.Android</AssemblyName>
     <TargetFrameworkVersion>v8.1</TargetFrameworkVersion>
     <AndroidResgenFile>Resources\Resource.designer.cs</AndroidResgenFile>
     <AndroidResgenClass>Resource</AndroidResgenClass>
@@ -53,6 +53,7 @@
   <ItemGroup>
     <AndroidResource Include="Resources\values\Strings.xml" />
   </ItemGroup>
+  <Import Project="..\EOS.UI.Shared.Themes\EOS.UI.Shared.Themes.projitems" Label="Shared" />
   <ItemGroup>
     <AndroidAsset Include="Assets\Fonts\capture_it_light.ttf" />
   </ItemGroup>
