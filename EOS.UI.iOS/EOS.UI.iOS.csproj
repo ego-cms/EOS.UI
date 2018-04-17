@@ -79,8 +79,8 @@
       <LastGenOutput>Assets.cs</LastGenOutput>
     </None>
     <None Include="Info.plist" />
-    <BundleResource Include="Resources\capture_it_dark.ttf" />
-    <BundleResource Include="Resources\capture_it_light.ttf" />
+    <BundleResource Include="Resources\Fonts\capture_it_dark.ttf" />
+    <BundleResource Include="Resources\Fonts\capture_it_light.ttf" />
   </ItemGroup>
   <Import Project="..\EOS.UI.Shared.Themes\EOS.UI.Shared.Themes.projitems" Label="Shared" />
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
