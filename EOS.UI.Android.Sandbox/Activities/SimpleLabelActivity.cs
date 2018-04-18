@@ -1,10 +1,10 @@
 ﻿using Android.App;
 using Android.OS;
-using UIFrameworks.Shared.Themes.Helpers;
+using C = UIFrameworks.Shared.Themes.Helpers.Controls;
 
 namespace EOS.UI.Android.Sandbox.Activities
 {
-    [Activity(Label = Controls.SimpleLabel)]
+    [Activity(Label = C.SimpleLabel)]
     public class SimpleLabelActivity : BaseActivity
     {
         protected override void OnCreate(Bundle savedInstanceState)
