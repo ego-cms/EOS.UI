@@ -5,7 +5,7 @@ using UIFrameworks.Shared.Themes.Helpers;
 namespace EOS.UI.Android.Sandbox.Activities
 {
     [Activity(Label = Controls.BadgeLabel)]
-    public class BadgeLabelActivity : Activity
+    public class BadgeLabelActivity : BaseActivity
     {
         protected override void OnCreate(Bundle savedInstanceState)
         {

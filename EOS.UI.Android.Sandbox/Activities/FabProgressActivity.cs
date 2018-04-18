@@ -5,7 +5,7 @@ using UIFrameworks.Shared.Themes.Helpers;
 namespace EOS.UI.Android.Sandbox.Activities
 {
     [Activity(Label = Controls.FabProgress)]
-    public class FabProgressActivity : Activity
+    public class FabProgressActivity : BaseActivity
     {
         protected override void OnCreate(Bundle savedInstanceState)
         {

@@ -1,5 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Linq;
+using System.Collections.Generic;
 using Android.App;
+using Android.Content;
 using Android.OS;
 using Android.Support.V7.Widget;
 using EOS.UI.Android.Sandbox.Activities;
@@ -12,14 +15,14 @@ namespace EOS.UI.Android.Sandbox
     public class MainActivity : Activity
     {
         private RecyclerView _recyclerView;
-        private List<string> _controlNames = new List<string>
+        private Dictionary<string, Type> _controlDictionary = new Dictionary<string, Type>
         {
-            Controls.BadgeLabel,
-            Controls.GhostButton,
-            Controls.SimpleButton,
-            Controls.SimpleLabel,
-            Controls.Input,
-            Controls.FabProgress,
+            { Controls.BadgeLabel, typeof(BadgeLabelActivity) },
+            { Controls.GhostButton, typeof(GhostButtonActivity) },
+            { Controls.SimpleButton,typeof(SimpleButtonActivity) },
+            { Controls.SimpleLabel, typeof(SimpleLabelActivity) },
+            { Controls.Input, typeof(InputActivity) },
+            { Controls.FabProgress,typeof(FabProgressActivity) }
         };
 
         protected override void OnCreate(Bundle savedInstanceState)
@@ -31,7 +34,7 @@ namespace EOS.UI.Android.Sandbox
             var layoutManager = new LinearLayoutManager(BaseContext);
             _recyclerView.SetLayoutManager(layoutManager);
 
-            var adapter = new ControlsAdapter(new List<string>(_controlNames));
+            var adapter = new ControlsAdapter(_controlDictionary.Select(item => item.Key).ToList());
 
             adapter.ItemClick += ItemClick;
             _recyclerView.SetAdapter(adapter);
@@ -39,27 +42,7 @@ namespace EOS.UI.Android.Sandbox
 
         private void ItemClick(object sender, int e)
         {
-            switch(e)
-            {
-                case 0:
-                    StartActivity(typeof(BadgeLabelActivity));
-                    break;
-                case 1:
-                    StartActivity(typeof(GhostButtonActivity));
-                    break;
-                case 2:
-                    StartActivity(typeof(SimpleButtonActivity));
-                    break;
-                case 3:
-                    StartActivity(typeof(SimpleLabelActivity));
-                    break;
-                case 4:
-                    StartActivity(typeof(InputActivity));
-                    break;
-                case 5:
-                    StartActivity(typeof(FabProgressActivity));
-                    break;
-            }
+            StartActivity(new Intent(this, Java.Lang.Class.FromType(_controlDictionary.ElementAt(e).Value)));
         }
     }
 }
