@@ -1,5 +1,5 @@
-﻿using EOS.UI.Shared.Themes.Helpers;
-using UIFrameworks.Shared.Themes.Helpers;
+﻿using System;
+using EOS.UI.Shared.Themes.Helpers;
 using UIFrameworks.Shared.Themes.Interfaces;
 
 namespace EOS.UI.iOS.Themes
@@ -8,8 +8,17 @@ namespace EOS.UI.iOS.Themes
     {
         private IEOSTheme _theme;
 
-        internal EOSThemeProvider()
+        private EOSThemeProvider()
         {
+        }
+
+        static Lazy<EOSThemeProvider> _instance = new Lazy<EOSThemeProvider>(() => new EOSThemeProvider());
+
+        public static EOSThemeProvider Instance{
+            get
+            {
+                return _instance.Value;
+            }
         }
 
         public IEOSTheme GetCurrentTheme()
