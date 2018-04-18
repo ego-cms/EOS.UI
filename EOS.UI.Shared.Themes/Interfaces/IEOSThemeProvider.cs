@@ -1,4 +1,4 @@
-﻿using UIFrameworks.Shared.Themes.Helpers;
+﻿using EOS.UI.Shared.Themes.Helpers;
 
 namespace UIFrameworks.Shared.Themes.Interfaces
 {
@@ -6,5 +6,6 @@ namespace UIFrameworks.Shared.Themes.Interfaces
     {
         IEOSTheme GetCurrentTheme();
         void SetCurrentTheme(EOSThemeEnumeration themeEnumeration);
+        T GetEOSProperty<T>(IEOSThemeControl control, string propertyName); 
     }
 }
