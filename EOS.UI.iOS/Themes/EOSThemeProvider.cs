@@ -1,4 +1,5 @@
-﻿using UIFrameworks.Shared.Themes.Helpers;
+﻿using EOS.UI.Shared.Themes.Helpers;
+using UIFrameworks.Shared.Themes.Helpers;
 using UIFrameworks.Shared.Themes.Interfaces;
 
 namespace EOS.UI.iOS.Themes
@@ -29,6 +30,19 @@ namespace EOS.UI.iOS.Themes
                 case EOSThemeEnumeration.Dark:
                     _theme = new DarkEOSTheme();
                     break;
+            }
+        }
+
+        public T GetEOSProperty<T>(IEOSThemeControl control, string propertyName)
+        {
+            var currentStyle = control.GetCurrentEOSStyle();
+            if (currentStyle == null)
+            {
+                return (T)currentStyle.ThemeValues[propertyName];
+            }
+            else
+            {
+                return (T)_theme.ThemeValues[propertyName];
             }
         }
     }
