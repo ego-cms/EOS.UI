@@ -20,13 +20,13 @@ namespace EOS.UI.iOS.Sandbox.TableSources
         public override UITableViewCell GetCell(UITableView tableView, NSIndexPath indexPath)
         {
             var cell = (UITableViewCell)tableView.DequeueReusableCell(_cellIdentifier, indexPath);
-            cell.TextLabel.Text = ControlsData.Instance.Identifiers.ElementAt(indexPath.Row).Value;
+            cell.TextLabel.Text = ControlsData.Instance.Names.ElementAt(indexPath.Row).Key;
             return cell;
         }
 
         public override nint RowsInSection(UITableView tableview, nint section)
         {
-            return ControlsData.Instance.Identifiers.Count;
+            return ControlsData.Instance.Names.Count;
         }
 
         public override void RowSelected(UITableView tableView, NSIndexPath indexPath)

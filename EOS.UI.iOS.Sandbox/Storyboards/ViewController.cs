@@ -30,10 +30,10 @@ namespace EOS.UI.iOS.Sandbox
 
         void OnRowSelected(object sender, NSIndexPath indexPath)
         {
-            var element = ControlsData.Instance.Identifiers.ElementAt(indexPath.Row);
-            var storyboard = UIStoryboard.FromName(element.Key, null);
-            var viewController = storyboard.InstantiateViewController(element.Key);
-            viewController.NavigationItem.Title = element.Value;
+            var element = ControlsData.Instance.Names.ElementAt(indexPath.Row);
+            var storyboard = UIStoryboard.FromName(element.Value, null);
+            var viewController = storyboard.InstantiateViewController(element.Value);
+            viewController.NavigationItem.Title = element.Key;
             this.NavigationController.PushViewController(viewController, true);
         }
     }

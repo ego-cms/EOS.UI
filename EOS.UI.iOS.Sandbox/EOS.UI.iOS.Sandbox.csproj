@@ -151,5 +151,6 @@
       <Name>EOS.UI.iOS</Name>
     </ProjectReference>
   </ItemGroup>
+  <Import Project="..\EOS.UI.Shared.Themes\EOS.UI.Shared.Themes.projitems" Label="Shared" Condition="Exists('..\EOS.UI.Shared.Themes\EOS.UI.Shared.Themes.projitems')" />
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
 </Project>
