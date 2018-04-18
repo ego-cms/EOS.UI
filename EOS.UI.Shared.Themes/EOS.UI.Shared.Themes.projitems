@@ -10,7 +10,6 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="$(MSBuildThisFileDirectory)Helpers\EOSConstants.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Helpers\EOSThemeEnumeration.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Interfaces\IEOSTheme.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Interfaces\IEOSThemeControl.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Interfaces\IEOSThemeProvider.cs" />
