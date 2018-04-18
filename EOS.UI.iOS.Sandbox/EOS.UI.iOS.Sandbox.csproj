@@ -92,9 +92,19 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Resources\" />
+    <Folder Include="TableSources\" />
+    <Folder Include="Controls\" />
+    <Folder Include="Storyboards\" />
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="LaunchScreen.storyboard" />
+    <InterfaceDefinition Include="Storyboards\Main.storyboard" />
+    <InterfaceDefinition Include="Storyboards\SimpleButtonView.storyboard" />
+    <InterfaceDefinition Include="Storyboards\SimpleLabelView.storyboard" />
+    <InterfaceDefinition Include="Storyboards\BadgeLabelView.storyboard" />
+    <InterfaceDefinition Include="Storyboards\GhostButtonView.storyboard" />
+    <InterfaceDefinition Include="Storyboards\FabProgressView.storyboard" />
+    <InterfaceDefinition Include="Storyboards\InputControlView.storyboard" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Info.plist" />
@@ -103,6 +113,37 @@
   <ItemGroup>
     <Compile Include="Main.cs" />
     <Compile Include="AppDelegate.cs" />
+    <Compile Include="TableSources\ControlTableSource.cs" />
+    <Compile Include="Controls\ControlsData.cs" />
+    <Compile Include="Storyboards\ViewController.cs" />
+    <Compile Include="Storyboards\ViewController.designer.cs">
+      <DependentUpon>ViewController.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Storyboards\BaseViewController.cs" />
+    <Compile Include="Storyboards\SimpleButtonView.cs" />
+    <Compile Include="Storyboards\SimpleButtonView.designer.cs">
+      <DependentUpon>SimpleButtonView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Storyboards\SimpleLabelView.cs" />
+    <Compile Include="Storyboards\SimpleLabelView.designer.cs">
+      <DependentUpon>SimpleLabelView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Storyboards\BadgeLabelView.cs" />
+    <Compile Include="Storyboards\BadgeLabelView.designer.cs">
+      <DependentUpon>BadgeLabelView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Storyboards\GhostButtonView.cs" />
+    <Compile Include="Storyboards\GhostButtonView.designer.cs">
+      <DependentUpon>GhostButtonView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Storyboards\FabProgressView.cs" />
+    <Compile Include="Storyboards\FabProgressView.designer.cs">
+      <DependentUpon>FabProgressView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Storyboards\InputControlView.cs" />
+    <Compile Include="Storyboards\InputControlView.designer.cs">
+      <DependentUpon>InputControlView.cs</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\EOS.UI.iOS\EOS.UI.iOS.csproj">
@@ -110,5 +151,6 @@
       <Name>EOS.UI.iOS</Name>
     </ProjectReference>
   </ItemGroup>
+  <Import Project="..\EOS.UI.Shared.Themes\EOS.UI.Shared.Themes.projitems" Label="Shared" Condition="Exists('..\EOS.UI.Shared.Themes\EOS.UI.Shared.Themes.projitems')" />
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
 </Project>
