@@ -11,11 +11,8 @@ using UIKit;
 
 namespace EOS.UI.iOS.Sandbox
 {
-    [Register ("InputControlView")]
-    partial class InputControlView
+    [Register ("BadgeLabel")]
+    partial class BadgeLabel
     {
-        void ReleaseDesignerOutlets ()
-        {
-        }
     }
 }
