@@ -45,14 +45,16 @@ namespace EOS.UI.iOS.Themes
         public T GetEOSProperty<T>(IEOSThemeControl control, string propertyName)
         {
             var currentStyle = control.GetCurrentEOSStyle();
-            if (currentStyle == null)
+            Object value = null;
+            if (currentStyle != null)
             {
-                return (T)currentStyle.ThemeValues[propertyName];
+                currentStyle.ThemeValues.TryGetValue(propertyName, out value);
             }
             else
             {
-                return (T)_theme.ThemeValues[propertyName];
+                _theme.ThemeValues.TryGetValue(propertyName, out value);
             }
+            return (T)value;
         }
     }
 }
