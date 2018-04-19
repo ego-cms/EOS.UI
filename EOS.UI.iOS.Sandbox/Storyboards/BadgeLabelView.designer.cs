@@ -19,6 +19,9 @@ namespace EOS.UI.iOS.Sandbox
 		UIKit.UIPickerView colorPicker { get; set; }
 
 		[Outlet]
+		UIKit.UISegmentedControl colorSegmentedControl { get; set; }
+
+		[Outlet]
 		UIKit.UIView containerView { get; set; }
 
 		[Outlet]
@@ -32,6 +35,9 @@ namespace EOS.UI.iOS.Sandbox
 
 		[Outlet]
 		UIKit.UITextField letterSpacingField { get; set; }
+
+		[Outlet]
+		UIKit.UIButton resetButton { get; set; }
 		
 		void ReleaseDesignerOutlets ()
 		{
@@ -55,9 +61,9 @@ namespace EOS.UI.iOS.Sandbox
 				cornerRadiusField = null;
 			}
 
-			if (letterSpacingField != null) {
-				letterSpacingField.Dispose ();
-				letterSpacingField = null;
+			if (fontPicker != null) {
+				fontPicker.Dispose ();
+				fontPicker = null;
 			}
 
 			if (fontSizeField != null) {
@@ -65,9 +71,19 @@ namespace EOS.UI.iOS.Sandbox
 				fontSizeField = null;
 			}
 
-			if (fontPicker != null) {
-				fontPicker.Dispose ();
-				fontPicker = null;
+			if (letterSpacingField != null) {
+				letterSpacingField.Dispose ();
+				letterSpacingField = null;
+			}
+
+			if (colorSegmentedControl != null) {
+				colorSegmentedControl.Dispose ();
+				colorSegmentedControl = null;
+			}
+
+			if (resetButton != null) {
+				resetButton.Dispose ();
+				resetButton = null;
 			}
 		}
 	}

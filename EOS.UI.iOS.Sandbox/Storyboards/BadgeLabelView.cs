@@ -45,8 +45,11 @@ namespace EOS.UI.iOS.Sandbox
                                           label.Frame.GetCenterY() == containerView.Frame.GetCenterY(), label);
 
             fontSizeField.Text = label.TextSize.ToString();
+            fontSizeField.PrimaryActionTriggered += (sender, e) => fontSizeField.ResignFirstResponder();
             cornerRadiusField.Text = label.CornerRadius.ToString();
+            cornerRadiusField.PrimaryActionTriggered += (sender, e) => cornerRadiusField.ResignFirstResponder();
             letterSpacingField.Text = label.LetterSpacing.ToString();
+            letterSpacingField.PrimaryActionTriggered += (sender, e) => letterSpacingField.ResignFirstResponder();
 
             fontPicker.DataSource = new FontPickerSource();
             fontPicker.Delegate = new FontPickerDelegate();
@@ -59,7 +62,12 @@ namespace EOS.UI.iOS.Sandbox
 
             applyButton.TouchUpInside += (sender, e) =>
             {
-                label.BackgroundColor = FontColors.ElementAt((int)colorPicker.SelectedRowInComponent(0)).Value;
+                var color = FontColors.ElementAt((int)colorPicker.SelectedRowInComponent(0)).Value;
+                if (colorSegmentedControl.SelectedSegment == 0)
+                    label.BackgroundColor = color;
+                else
+                    label.TextColor = color;
+
                 label.Font = Fonts.ElementAt((int)fontPicker.SelectedRowInComponent(0));
                 if (letterSpacingField.Text != string.Empty)
                     label.LetterSpacing = Convert.ToInt32(letterSpacingField.Text);
@@ -67,13 +75,9 @@ namespace EOS.UI.iOS.Sandbox
                     label.CornerRadius = Convert.ToInt32(cornerRadiusField.Text);
                 if(fontSizeField.Text != String.Empty)
                     label.TextSize = Convert.ToInt32(fontSizeField.Text);
-            };  
-
-            letterSpacingField.PrimaryActionTriggered += (sender, e) => letterSpacingField.ResignFirstResponder();
-            cornerRadiusField.PrimaryActionTriggered += (sender, e) => cornerRadiusField.ResignFirstResponder();
-            fontSizeField.PrimaryActionTriggered += (sender, e) => fontSizeField.ResignFirstResponder();
+            };
+            resetButton.TouchUpInside += (sender, e) => label.ResetCustomization();
 		}
-
 
         //font picker
         public class FontPickerSource : UIPickerViewDataSource
