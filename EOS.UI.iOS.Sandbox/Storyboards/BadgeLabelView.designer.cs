@@ -1,21 +1,74 @@
 // WARNING
 //
-// This file has been generated automatically by Visual Studio from the outlets and
-// actions declared in your storyboard file.
-// Manual changes to this file will not be maintained.
+// This file has been generated automatically by Visual Studio to store outlets and
+// actions made in the UI designer. If it is removed, they will be lost.
+// Manual changes to this file may not be handled correctly.
 //
 using Foundation;
-using System;
 using System.CodeDom.Compiler;
-using UIKit;
 
 namespace EOS.UI.iOS.Sandbox
 {
-    [Register ("BadgeLabelView")]
-    partial class BadgeLabelView
-    {
-        void ReleaseDesignerOutlets ()
-        {
-        }
-    }
+	[Register ("BadgeLabelView")]
+	partial class BadgeLabelView
+	{
+		[Outlet]
+		UIKit.UIButton applyButton { get; set; }
+
+		[Outlet]
+		UIKit.UIPickerView colorPicker { get; set; }
+
+		[Outlet]
+		UIKit.UIView containerView { get; set; }
+
+		[Outlet]
+		UIKit.UITextField cornerRadiusField { get; set; }
+
+		[Outlet]
+		UIKit.UIPickerView fontPicker { get; set; }
+
+		[Outlet]
+		UIKit.UITextField fontSizeField { get; set; }
+
+		[Outlet]
+		UIKit.UITextField letterSpacingField { get; set; }
+		
+		void ReleaseDesignerOutlets ()
+		{
+			if (applyButton != null) {
+				applyButton.Dispose ();
+				applyButton = null;
+			}
+
+			if (colorPicker != null) {
+				colorPicker.Dispose ();
+				colorPicker = null;
+			}
+
+			if (containerView != null) {
+				containerView.Dispose ();
+				containerView = null;
+			}
+
+			if (cornerRadiusField != null) {
+				cornerRadiusField.Dispose ();
+				cornerRadiusField = null;
+			}
+
+			if (letterSpacingField != null) {
+				letterSpacingField.Dispose ();
+				letterSpacingField = null;
+			}
+
+			if (fontSizeField != null) {
+				fontSizeField.Dispose ();
+				fontSizeField = null;
+			}
+
+			if (fontPicker != null) {
+				fontPicker.Dispose ();
+				fontPicker = null;
+			}
+		}
+	}
 }
