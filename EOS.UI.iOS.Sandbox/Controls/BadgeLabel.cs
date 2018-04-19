@@ -3,6 +3,7 @@ using EOS.UI.Shared.Themes.Helpers;
 using EOS.UI.Shared.Themes.Interfaces;
 using Foundation;
 using System;
+using UIFrameworks.Shared.Themes.Helpers;
 using UIFrameworks.Shared.Themes.Interfaces;
 using UIKit;
 
@@ -10,7 +11,19 @@ namespace EOS.UI.iOS.Sandbox
 {
     public partial class BadgeLabel : UILabel, IEOSThemeControl
     {
-        public bool IsEOSCustomizationIgnored => throw new NotImplementedException();
+        public bool IsEOSCustomizationIgnored
+        {
+            get
+            {
+                var provider = GetThemeProvider();
+                return !(CornerRadius == provider.GetEOSProperty<int>(this, EOSConstants.CornerRadius) &&
+                         BackgroundColor == provider.GetEOSProperty<UIColor>(this, EOSConstants.BackgroundColor) &&
+                         Font == provider.GetEOSProperty<UIFont>(this, EOSConstants.Font) &&
+                         TextColor == provider.GetEOSProperty<UIColor>(this, EOSConstants.TextColor) &&
+                         TextSize == provider.GetEOSProperty<int>(this, EOSConstants.TextSize) &&
+                         LetterSpacing == provider.GetEOSProperty<int>(this, EOSConstants.LetterSpacing));
+            }
+        }
 
         public int CornerRadius
         {
@@ -18,18 +31,29 @@ namespace EOS.UI.iOS.Sandbox
             set => this.Layer.CornerRadius = value;
         }
 
+        private int _letterSpacing;
         public int LetterSpacing
         {
-            get => 0;
+            get => _letterSpacing;
             set
             {
                 SetLetterSpacing(value);
+                _letterSpacing = value;
+
             }
+        }
+
+        public int TextSize
+        {
+            get => (int)Font.PointSize;
+            set => SetTextSize(value);
         }
 
         public BadgeLabel()
         {
-            this.Layer.MasksToBounds = true;
+            Text = String.Empty;
+            Layer.MasksToBounds = true;
+            ResetCustomization();
         }
 
         public BadgeLabel(IntPtr handle) : base(handle)
@@ -43,31 +67,47 @@ namespace EOS.UI.iOS.Sandbox
 
         public IEOSThemeProvider GetThemeProvider()
         {
-            var provider = EOSThemeProvider.Instance;
-            return (IEOSThemeProvider) provider;
+            return EOSThemeProvider.Instance;
         }
 
         public void ResetCustomization()
         {
-            throw new NotImplementedException();
+            var provider = GetThemeProvider();
+            CornerRadius = provider.GetEOSProperty<int>(this, EOSConstants.CornerRadius);
+            BackgroundColor = provider.GetEOSProperty<UIColor>(this, EOSConstants.BackgroundColor);
+            Font = provider.GetEOSProperty<UIFont>(this, EOSConstants.Font);
+            TextColor = provider.GetEOSProperty<UIColor>(this, EOSConstants.TextColor);
+            TextSize = provider.GetEOSProperty<int>(this, EOSConstants.TextSize);
+            LetterSpacing = provider.GetEOSProperty<int>(this, EOSConstants.LetterSpacing);
+            SizeToFit();
         }
 
-        public IEOSStyle SetEOSStyle(EOSStyleEnumeration style)
+        public void SetEOSStyle(EOSStyleEnumeration style)
         {
-            return null;
         }
 
         public void UpdateAppearance()
         {
-            SizeToFit();
+            if (IsEOSCustomizationIgnored)
+            {
+                ResetCustomization();
+            }
         }
 
         private void SetLetterSpacing(int spacing)
         {
-            NSString str = new NSString(Text);
-            var attributedString = new NSMutableAttributedString(Text);
+            var attributedString = new NSMutableAttributedString(AttributedText);
             attributedString.AddAttribute(UIStringAttributeKey.KerningAdjustment, new NSNumber(spacing), new NSRange(0, Text.Length));
-            this.AttributedText = attributedString;
+            AttributedText = attributedString;
+            SizeToFit();
+        }
+
+        private void SetTextSize(int value)
+        {
+            var attributedString = new NSMutableAttributedString(AttributedText);
+            attributedString.AddAttribute(UIStringAttributeKey.Font, Font.WithSize(value), new NSRange(0, Text.Length));
+            AttributedText = attributedString;
+            SizeToFit();
         }
     }
 }

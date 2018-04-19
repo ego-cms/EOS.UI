@@ -13,13 +13,61 @@ namespace EOS.UI.iOS.Sandbox
 	partial class BadgeLabelView
 	{
 		[Outlet]
+		UIKit.UIButton applyButton { get; set; }
+
+		[Outlet]
+		UIKit.UIPickerView colorPicker { get; set; }
+
+		[Outlet]
 		UIKit.UIView containerView { get; set; }
+
+		[Outlet]
+		UIKit.UITextField cornerRadiusField { get; set; }
+
+		[Outlet]
+		UIKit.UIPickerView fontPicker { get; set; }
+
+		[Outlet]
+		UIKit.UITextField fontSizeField { get; set; }
+
+		[Outlet]
+		UIKit.UITextField letterSpacingField { get; set; }
 		
 		void ReleaseDesignerOutlets ()
 		{
+			if (applyButton != null) {
+				applyButton.Dispose ();
+				applyButton = null;
+			}
+
+			if (colorPicker != null) {
+				colorPicker.Dispose ();
+				colorPicker = null;
+			}
+
 			if (containerView != null) {
 				containerView.Dispose ();
 				containerView = null;
+			}
+
+			if (cornerRadiusField != null) {
+				cornerRadiusField.Dispose ();
+				cornerRadiusField = null;
+			}
+
+			if (letterSpacingField != null) {
+				letterSpacingField.Dispose ();
+				letterSpacingField = null;
+			}
+
+			if (fontSizeField != null) {
+				fontSizeField.Dispose ();
+				fontSizeField = null;
+			}
+
+			if (fontPicker != null) {
+				fontPicker.Dispose ();
+				fontPicker = null;
 			}
 		}
 	}
