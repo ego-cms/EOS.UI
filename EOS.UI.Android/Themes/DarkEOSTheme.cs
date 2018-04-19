@@ -12,7 +12,7 @@ namespace UIFrameworks.Android.Themes
             { EOSConstants.BackgroundColor, Color.Black },
             { EOSConstants.TextColor, Color.White },
             { EOSConstants.TextSize, 17 },
-            { EOSConstants.Font, "Fonts/capture_it_light.ttf" },
+            { EOSConstants.Font, "Fonts/OpenSansRegular.ttf" },
             { EOSConstants.CornerRadius, 3 },
             { EOSConstants.LetterSpacing, 1 },
         };

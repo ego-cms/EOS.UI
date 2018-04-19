@@ -104,7 +104,7 @@ namespace EOS.UI.Android.Controls
 
         #region IEOSThemeControl implementation
 
-        public bool IsEOSCustomizationIgnored { get; private set; }
+        public bool IsEOSCustomizationIgnored { get; private set; } = true;
 
         public IEOSThemeProvider GetThemeProvider()
         {
