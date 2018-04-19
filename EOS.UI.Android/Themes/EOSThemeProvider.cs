@@ -6,11 +6,10 @@ namespace UIFrameworks.Android.Themes
 {
     public class EOSThemeProvider: IEOSThemeProvider
     {
-        private IEOSTheme _theme;
+        private IEOSTheme _theme = new LightEOSTheme();
 
         private EOSThemeProvider()
         {
-
         }
 
         static Lazy<EOSThemeProvider> _instance = new Lazy<EOSThemeProvider>(() => new EOSThemeProvider());
@@ -25,9 +24,6 @@ namespace UIFrameworks.Android.Themes
 
         public IEOSTheme GetCurrentTheme()
         {
-            if(_theme == null)
-                _theme = new LightEOSTheme();
-
             return _theme;
         }
 
@@ -48,14 +44,9 @@ namespace UIFrameworks.Android.Themes
         public T GetEOSProperty<T>(IEOSThemeControl control, string propertyName)
         {
             var currentStyle = control.GetCurrentEOSStyle();
-            if (currentStyle == null)
-            {
-                return (T)currentStyle.ThemeValues[propertyName];
-            }
-            else
-            {
-                return (T)_theme.ThemeValues[propertyName];
-            }
+            Object val = null;
+            currentStyle?.ThemeValues?.TryGetValue(propertyName, out val);
+            return (T)(val ?? _theme.ThemeValues[propertyName]);
         }
     }
 }
