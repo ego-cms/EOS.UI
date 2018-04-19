@@ -6,7 +6,7 @@ namespace EOS.UI.iOS.Themes
 {
     public class EOSThemeProvider : IEOSThemeProvider
     {
-        private IEOSTheme _theme;
+        private IEOSTheme _theme = new LightEOSTheme();
 
         private EOSThemeProvider()
         {
@@ -14,7 +14,8 @@ namespace EOS.UI.iOS.Themes
 
         static Lazy<EOSThemeProvider> _instance = new Lazy<EOSThemeProvider>(() => new EOSThemeProvider());
 
-        public static EOSThemeProvider Instance{
+        public static EOSThemeProvider Instance
+        {
             get
             {
                 return _instance.Value;
@@ -23,15 +24,12 @@ namespace EOS.UI.iOS.Themes
 
         public IEOSTheme GetCurrentTheme()
         {
-            if(_theme == null)
-                _theme = new LightEOSTheme();
-
             return _theme;
         }
 
         public void SetCurrentTheme(EOSThemeEnumeration themeEnumeration)
         {
-            switch(themeEnumeration)
+            switch (themeEnumeration)
             {
                 case EOSThemeEnumeration.Light:
                     _theme = new LightEOSTheme();
@@ -45,14 +43,9 @@ namespace EOS.UI.iOS.Themes
         public T GetEOSProperty<T>(IEOSThemeControl control, string propertyName)
         {
             var currentStyle = control.GetCurrentEOSStyle();
-            if (currentStyle == null)
-            {
-                return (T)currentStyle.ThemeValues[propertyName];
-            }
-            else
-            {
-                return (T)_theme.ThemeValues[propertyName];
-            }
+            Object val = null;
+            currentStyle?.ThemeValues?.TryGetValue(propertyName, out val);
+            return (T)(val ?? _theme.ThemeValues[propertyName]);
         }
     }
 }

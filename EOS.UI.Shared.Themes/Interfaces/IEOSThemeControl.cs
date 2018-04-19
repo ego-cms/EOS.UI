@@ -10,6 +10,6 @@ namespace UIFrameworks.Shared.Themes.Interfaces
         bool IsEOSCustomizationIgnored { get; }
         void ResetCustomization();
         IEOSStyle GetCurrentEOSStyle();
-        IEOSStyle SetEOSStyle(EOSStyleEnumeration style);
+        void SetEOSStyle(EOSStyleEnumeration style);
     }
 }
