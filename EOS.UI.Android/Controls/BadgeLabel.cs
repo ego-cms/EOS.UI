@@ -135,9 +135,9 @@ namespace EOS.UI.Android.Controls
             return null;
         }
 
-        public IEOSStyle SetEOSStyle(EOSStyleEnumeration style)
+        public void SetEOSStyle(EOSStyleEnumeration style)
         {
-            throw new NotImplementedException();
+
         }
 
         #endregion
