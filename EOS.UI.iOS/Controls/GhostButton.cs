@@ -16,9 +16,9 @@ namespace EOS.UI.iOS.Controls
         private bool _isEOSCustomizationIgnored = false;
         public bool IsEOSCustomizationIgnored => _isEOSCustomizationIgnored;
 
-        public override UIFont Font 
-        { 
-            get => base.Font; 
+        public override UIFont Font
+        {
+            get => base.Font;
             set
             {
                 base.Font = value;
@@ -64,7 +64,7 @@ namespace EOS.UI.iOS.Controls
 
         public int TextSize
         {
-            get => (int) Font.PointSize;
+            get => (int)Font.PointSize;
             set
             {
                 Font = Font.WithSize(value);
@@ -83,6 +83,23 @@ namespace EOS.UI.iOS.Controls
             }
         }
 
+        public override bool Enabled
+        {
+            get => base.Enabled;
+            set
+            {
+                base.Enabled = value;
+                if (value)
+                {
+                    SetTitle(Title(UIControlState.Normal), UIControlState.Normal);
+                }
+                else
+                {
+                    SetTitle(Title(UIControlState.Disabled), UIControlState.Disabled);
+                }
+            }
+        }
+
         public GhostButton()
         {
             Layer.MasksToBounds = true;
@@ -90,24 +107,43 @@ namespace EOS.UI.iOS.Controls
             UpdateAppearance();
         }
 
-		public override void SetTitle(string title, UIControlState forState)
-		{
-            var attrString = new NSMutableAttributedString(title);
+        public override void SetTitle(string title, UIControlState forState)
+        {
+            NSMutableAttributedString attrString;
+            if (title != null)
+            {
+                attrString = new NSMutableAttributedString(title);
+            }
+            else
+            {
+                var sourceString = GetAttributedTitle(forState);
+                attrString = new NSMutableAttributedString(sourceString?.Length > 0 ? sourceString : GetAttributedTitle(UIControlState.Normal));
+            }
+
             var range = new NSRange(0, attrString.Length);
             attrString.AddAttribute(UIStringAttributeKey.KerningAdjustment, new NSNumber(LetterSpacing), range);
             attrString.AddAttribute(UIStringAttributeKey.Font, Font.WithSize(TextSize), range);
+            switch (forState)
+            {
+                case UIControlState.Normal:
+                    attrString.AddAttribute(UIStringAttributeKey.ForegroundColor, EnabledTextColor, range);
+                    break;
+                case UIControlState.Disabled:
+                    attrString.AddAttribute(UIStringAttributeKey.ForegroundColor, DisabledTextColor, range);
+                    break;
+            }
             SetAttributedTitle(attrString, forState);
-		}
+        }
 
-		public override void SetTitleColor(UIColor color, UIControlState forState)
-		{
-            var attrString = new NSMutableAttributedString(GetAttributedTitle(forState));
+        public override void SetTitleColor(UIColor color, UIControlState forState)
+        {
+            var attrString = new NSMutableAttributedString(GetAttributedTitle(UIControlState.Normal));
             var range = new NSRange(0, attrString.Length);
             attrString.AddAttribute(UIStringAttributeKey.ForegroundColor, color, range);
             SetAttributedTitle(attrString, forState);
-		}
+        }
 
-		public IEOSStyle GetCurrentEOSStyle()
+        public IEOSStyle GetCurrentEOSStyle()
         {
             return null;
         }
