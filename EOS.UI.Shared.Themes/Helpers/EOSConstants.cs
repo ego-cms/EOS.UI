@@ -4,6 +4,8 @@
     {
         public const string BackgroundColor = "backgroundColor";
         public const string TextColor = "textColor";
+        public const string DisabledTextColor = "disabledTextColor";
+        public const string PressedStateTextColor = "pressedStateTextColor";
         public const string TextSize = "textSize";
         public const string CornerRadius = "cornerRadius";
         public const string Font = "font";

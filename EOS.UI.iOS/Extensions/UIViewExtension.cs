@@ -426,6 +426,21 @@ namespace EOS.UI.iOS.Extensions
             label.SizeToFit();
         }
 
+        public static void SetLetterSpacing(this UIButton button, int spacing)
+        {
+            var existEnabledAttrString = button.GetAttributedTitle(UIControlState.Normal);
+            var enabledAttrString = new NSMutableAttributedString(existEnabledAttrString);
+
+            var existDisabledAttrString = button.GetAttributedTitle(UIControlState.Normal);
+            var disabledAttrString = new NSMutableAttributedString(existDisabledAttrString);
+
+            enabledAttrString.AddAttribute(UIStringAttributeKey.KerningAdjustment, new NSNumber(spacing), new NSRange(0, enabledAttrString.Length));
+            disabledAttrString.AddAttribute(UIStringAttributeKey.KerningAdjustment, new NSNumber(spacing), new NSRange(0, disabledAttrString.Length));
+            button.SetAttributedTitle(enabledAttrString, UIControlState.Normal);
+            button.SetAttributedTitle(disabledAttrString, UIControlState.Disabled);
+            button.SizeToFit();
+        }
+
         public static void SetTextSize(this UILabel label, int value)
         {
             var attributedString = new NSMutableAttributedString(label.AttributedText);
