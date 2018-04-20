@@ -74,6 +74,8 @@
     <Compile Include="Themes\LightEOSTheme.cs" />
     <Compile Include="Traverser\IEOSViewTraverser.cs" />
     <Compile Include="Traverser\EOSViewTraverser.cs" />
+    <Compile Include="Extensions\UIViewExtension.cs" />
+    <Compile Include="Controls\BadgeLabel.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets.tt">
@@ -83,6 +85,10 @@
     <None Include="Info.plist" />
     <BundleResource Include="Resources\Fonts\capture_it_dark.ttf" />
     <BundleResource Include="Resources\Fonts\capture_it_light.ttf" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Extensions\" />
+    <Folder Include="Controls\" />
   </ItemGroup>
   <Import Project="..\EOS.UI.Shared.Themes\EOS.UI.Shared.Themes.projitems" Label="Shared" />
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />

@@ -25,16 +25,16 @@ namespace EOS.UI.iOS.Sandbox
 		UIKit.UIView containerView { get; set; }
 
 		[Outlet]
-		UIKit.UITextField cornerRadiusField { get; set; }
+		UIKit.UIPickerView cornerRadiusPicker { get; set; }
 
 		[Outlet]
 		UIKit.UIPickerView fontPicker { get; set; }
 
 		[Outlet]
-		UIKit.UITextField fontSizeField { get; set; }
+		UIKit.UIPickerView fontSizePicker { get; set; }
 
 		[Outlet]
-		UIKit.UITextField letterSpacingField { get; set; }
+		UIKit.UIPickerView letterSpacingPicker { get; set; }
 
 		[Outlet]
 		UIKit.UIButton resetButton { get; set; }
@@ -51,14 +51,14 @@ namespace EOS.UI.iOS.Sandbox
 				colorPicker = null;
 			}
 
+			if (colorSegmentedControl != null) {
+				colorSegmentedControl.Dispose ();
+				colorSegmentedControl = null;
+			}
+
 			if (containerView != null) {
 				containerView.Dispose ();
 				containerView = null;
-			}
-
-			if (cornerRadiusField != null) {
-				cornerRadiusField.Dispose ();
-				cornerRadiusField = null;
 			}
 
 			if (fontPicker != null) {
@@ -66,24 +66,24 @@ namespace EOS.UI.iOS.Sandbox
 				fontPicker = null;
 			}
 
-			if (fontSizeField != null) {
-				fontSizeField.Dispose ();
-				fontSizeField = null;
-			}
-
-			if (letterSpacingField != null) {
-				letterSpacingField.Dispose ();
-				letterSpacingField = null;
-			}
-
-			if (colorSegmentedControl != null) {
-				colorSegmentedControl.Dispose ();
-				colorSegmentedControl = null;
-			}
-
 			if (resetButton != null) {
 				resetButton.Dispose ();
 				resetButton = null;
+			}
+
+			if (fontSizePicker != null) {
+				fontSizePicker.Dispose ();
+				fontSizePicker = null;
+			}
+
+			if (letterSpacingPicker != null) {
+				letterSpacingPicker.Dispose ();
+				letterSpacingPicker = null;
+			}
+
+			if (cornerRadiusPicker != null) {
+				cornerRadiusPicker.Dispose ();
+				cornerRadiusPicker = null;
 			}
 		}
 	}
