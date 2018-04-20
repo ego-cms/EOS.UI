@@ -14,5 +14,8 @@ namespace EOS.UI.iOS.Sandbox
     [Register ("InputControlView")]
     partial class InputControlView
     {
+        void ReleaseDesignerOutlets ()
+        {
+        }
     }
 }

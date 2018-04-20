@@ -39,42 +39,86 @@ namespace EOS.UI.Android.Controls
 
         #endregion
 
-        #region public Api
+        #region customization
 
-        public void SetCustomBackgroundColor(Color color)
+        private Color _backgroundColor;
+        public Color BackgroundColor
         {
-            IsEOSCustomizationIgnored = false;
-            (Background as GradientDrawable).SetColor(color);
+            get => _backgroundColor;
+            set
+            {
+                IsEOSCustomizationIgnored = true;
+                _backgroundColor = value;
+                (Background as GradientDrawable).SetColor(_backgroundColor);
+            }
         }
 
-        public void SetCustomFont(Typeface fontTypeFace)
+        public override void SetBackgroundColor(Color color)
         {
-            IsEOSCustomizationIgnored = false;
-            SetTypeface(fontTypeFace, TypefaceStyle.Normal);
+            BackgroundColor = color;
         }
 
-        public void SetCustomLetterSpacing(float spacing)
+        public override Typeface Typeface
         {
-            IsEOSCustomizationIgnored = false;
-            LetterSpacing = spacing;
+            get => base.Typeface;
+            set
+            {
+                IsEOSCustomizationIgnored = true;
+                base.Typeface = value;
+            }
         }
 
-        public void SetCustomTextColor(Color color)
+        public override void SetTypeface(Typeface tf, [GeneratedEnum] TypefaceStyle style)
         {
-            IsEOSCustomizationIgnored = false;
-            SetTextColor(color);
+            IsEOSCustomizationIgnored = true;
+            base.SetTypeface(tf, style);
         }
 
-        public void SetCustomTextSize(float size)
+        public override float LetterSpacing
         {
-            IsEOSCustomizationIgnored = false;
-            TextSize = size;
+            get => base.LetterSpacing;
+            set
+            {
+                IsEOSCustomizationIgnored = true;
+                base.LetterSpacing = value;
+            }
         }
 
-        public void SetCornerRadius(float radius)
+        private Color _textColor;
+        public Color TextColor
         {
-            IsEOSCustomizationIgnored = false;
-            (Background as GradientDrawable).SetCornerRadius(radius);
+            get => _textColor;
+            set
+            {
+                IsEOSCustomizationIgnored = true;
+                _textColor = value;
+                base.SetTextColor(value);
+            }
+        }
+
+        public override void SetTextColor(Color color)
+        {
+            TextColor = color;
+        }
+
+        public override float TextSize
+        {
+            get => base.TextSize;
+            set
+            {
+                IsEOSCustomizationIgnored = true;
+                base.TextSize = value; 
+            }
+        }
+
+        public float CornerRadius
+        {
+            get => (Background as GradientDrawable).CornerRadius;
+            set
+            {
+                IsEOSCustomizationIgnored = true;
+                (Background as GradientDrawable).SetCornerRadius(value);
+            }
         }
 
         #endregion
@@ -86,6 +130,7 @@ namespace EOS.UI.Android.Controls
             Background = CreateDefaultDrawable();
             if(attrs != null)
                 InitializeAttributes(attrs);
+            UpdateAppearance();
         }
 
         private GradientDrawable CreateDefaultDrawable()
@@ -104,7 +149,7 @@ namespace EOS.UI.Android.Controls
 
         #region IEOSThemeControl implementation
 
-        public bool IsEOSCustomizationIgnored { get; private set; } = true;
+        public bool IsEOSCustomizationIgnored { get; private set; }
 
         public IEOSThemeProvider GetThemeProvider()
         {
@@ -113,20 +158,20 @@ namespace EOS.UI.Android.Controls
 
         public void UpdateAppearance()
         {
-            if(IsEOSCustomizationIgnored)
+            if(!IsEOSCustomizationIgnored)
             {
                 (Background as GradientDrawable).SetColor(GetThemeProvider().GetEOSProperty<Color>(this, EOSConstants.BackgroundColor));
-                SetTypeface(Typeface.CreateFromAsset(Context.Assets, GetThemeProvider().GetEOSProperty<string>(this, EOSConstants.Font)), TypefaceStyle.Normal);
-                LetterSpacing = GetThemeProvider().GetEOSProperty<float>(this, EOSConstants.LetterSpacing);
-                SetTextColor(GetThemeProvider().GetEOSProperty<Color>(this, EOSConstants.TextColor));
-                TextSize = GetThemeProvider().GetEOSProperty<float>(this, EOSConstants.TextSize);
+                base.SetTypeface(Typeface.CreateFromAsset(Context.Assets, GetThemeProvider().GetEOSProperty<string>(this, EOSConstants.Font)), TypefaceStyle.Normal);
+                base.LetterSpacing = GetThemeProvider().GetEOSProperty<float>(this, EOSConstants.LetterSpacing);
+                base.SetTextColor(GetThemeProvider().GetEOSProperty<Color>(this, EOSConstants.TextColor));
+                base.TextSize = GetThemeProvider().GetEOSProperty<float>(this, EOSConstants.TextSize);
                 (Background as GradientDrawable).SetCornerRadius(GetThemeProvider().GetEOSProperty<float>(this, EOSConstants.CornerRadius));
             }
         }
 
         public void ResetCustomization()
         {
-            IsEOSCustomizationIgnored = true;
+            IsEOSCustomizationIgnored = false;
             UpdateAppearance();
         }
 

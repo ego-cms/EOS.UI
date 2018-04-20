@@ -12,7 +12,7 @@ using R = Android.Resource;
 
 namespace EOS.UI.Android.Sandbox.Activities
 {
-    [Activity(Label = C.SimpleLabel)]
+    [Activity(Label = ControlNames.SimpleLabel)]
     public class SimpleLabelActivity : BaseActivity
     {
         private SimpleLabel _simpleLabel;

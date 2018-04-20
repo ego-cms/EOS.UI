@@ -1,10 +1,10 @@
 ﻿using Android.App;
 using Android.OS;
-using C = UIFrameworks.Shared.Themes.Helpers.Controls;
+using UIFrameworks.Shared.Themes.Helpers;
 
 namespace EOS.UI.Android.Sandbox.Activities
 {
-    [Activity(Label = C.Input)]
+    [Activity(Label = ControlNames.Input)]
     public class InputActivity : BaseActivity
     {
         protected override void OnCreate(Bundle savedInstanceState)

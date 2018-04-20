@@ -1,21 +1,27 @@
-﻿using System.Globalization;
-using System.Linq;
+﻿using System.Linq;
 using Android.App;
 using Android.Graphics;
 using Android.OS;
 using Android.Widget;
 using EOS.UI.Android.Controls;
-using UIFrameworks.Shared.Themes.Interfaces;
 using static EOS.UI.Android.Sandbox.Helpers.Constants;
-using C = UIFrameworks.Shared.Themes.Helpers.Controls;
 using R = Android.Resource;
+using UIFrameworks.Shared.Themes.Helpers;
 
 namespace EOS.UI.Android.Sandbox.Activities
 {
-    [Activity(Label = C.BadgeLabel)]
+    [Activity(Label = ControlNames.BadgeLabel)]
     public class BadgeLabelActivity : BaseActivity
     {
         private BadgeLabel _badge;
+        private Spinner _backgroundColorSpinner;
+        private Spinner _textColorSpinner;
+        private Spinner _fontSpinner;
+        private Spinner _letterSpacingView;
+        private Spinner _textSizeView;
+        private Spinner _cornerRadiusView;
+
+
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
@@ -24,62 +30,83 @@ namespace EOS.UI.Android.Sandbox.Activities
             _badge = FindViewById<BadgeLabel>(Resource.Id.badgeLabel);
             _badge.UpdateAppearance();
 
-            var backgroundColorSpinner = FindViewById<Spinner>(Resource.Id.spinnerBackgroundColor);
-            var textColorSpinner = FindViewById<Spinner>(Resource.Id.spinnerTextColor);
-            var fontSpinner = FindViewById<Spinner>(Resource.Id.spinnerFont);
-            var letterSpacingView = FindViewById<EditText>(Resource.Id.editLetterSpacing);
-            var textSizeView = FindViewById<EditText>(Resource.Id.editTextSize);
-            var cornerRadiusView = FindViewById<EditText>(Resource.Id.editCornerRadius);
+            var themeSpinner = FindViewById<Spinner>(Resource.Id.spinnerTheme);
+            _backgroundColorSpinner = FindViewById<Spinner>(Resource.Id.spinnerBackgroundColor);
+            _textColorSpinner = FindViewById<Spinner>(Resource.Id.spinnerTextColor);
+            _fontSpinner = FindViewById<Spinner>(Resource.Id.spinnerFont);
+            _letterSpacingView = FindViewById<Spinner>(Resource.Id.spinnerLetterSpacing);
+            _textSizeView = FindViewById<Spinner>(Resource.Id.spinnerTextSize);
+            _cornerRadiusView = FindViewById<Spinner>(Resource.Id.spinnerCornerRadius);
 
-            backgroundColorSpinner.Adapter = new ArrayAdapter(this, R.Layout.SimpleSpinnerItem, Colors.ColorsCollection.Select(item => item.Key).ToList());
-            backgroundColorSpinner.ItemSelected += BackgroundColorSpinner_ItemSelected;
-            textColorSpinner.Adapter = new ArrayAdapter(this, R.Layout.SimpleSpinnerItem, Colors.ColorsCollection.Select(item => item.Key).ToList());
-            textColorSpinner.ItemSelected += TextColorSpinner_ItemSelected;
-            fontSpinner.Adapter = new ArrayAdapter(this, R.Layout.SimpleSpinnerItem, Fonts.FontsCollection.Select(item => item.Key).ToList());
-            fontSpinner.ItemSelected += FontSpinner_ItemSelected;
+            themeSpinner.Adapter = new ArrayAdapter(this, R.Layout.SimpleSpinnerItem, ThemeTypes.ThemeCollection.Select(item => item.Key).ToList());
+            themeSpinner.ItemSelected += ThemeSpinner_ItemSelected;
 
-            letterSpacingView.AfterTextChanged += LetterSpacingView_AfterTextChanged;
-            textSizeView.AfterTextChanged += TextSizeView_AfterTextChanged;
-            cornerRadiusView.AfterTextChanged += CornerRadiusView_AfterTextChanged;
+            _backgroundColorSpinner.Adapter = new ArrayAdapter(this, R.Layout.SimpleSpinnerItem, Colors.ColorsCollection.Select(item => item.Key).ToList());
+            _backgroundColorSpinner.ItemSelected += BackgroundColorSpinner_ItemSelected;
+
+            _textColorSpinner.Adapter = new ArrayAdapter(this, R.Layout.SimpleSpinnerItem, Colors.ColorsCollection.Select(item => item.Key).ToList());
+            _textColorSpinner.ItemSelected += TextColorSpinner_ItemSelected;
+
+            _fontSpinner.Adapter = new ArrayAdapter(this, R.Layout.SimpleSpinnerItem, Fonts.FontsCollection.Select(item => item.Key).ToList());
+            _fontSpinner.ItemSelected += FontSpinner_ItemSelected;
+
+            _letterSpacingView.Adapter = new ArrayAdapter(this, R.Layout.SimpleSpinnerItem, Sizes.LetterSpacingCollection.Select(item => item.Key).ToList());
+            _letterSpacingView.ItemSelected += LetterSpacingView_ItemSelected;
+
+            _textSizeView.Adapter = new ArrayAdapter(this, R.Layout.SimpleSpinnerItem, Sizes.TextSizeCollection.Select(item => item.Key).ToList());
+            _textSizeView.ItemSelected += TextSizeView_ItemSelected;
+
+            _cornerRadiusView.Adapter = new ArrayAdapter(this, R.Layout.SimpleSpinnerItem, Sizes.CornerRadusCollection.Select(item => item.Key).ToList());
+            _cornerRadiusView.ItemSelected += CornerRadiusView_ItemSelected;
         }
 
-        private void CornerRadiusView_AfterTextChanged(object sender, global::Android.Text.AfterTextChangedEventArgs e)
+        private void ThemeSpinner_ItemSelected(object sender, AdapterView.ItemSelectedEventArgs e)
         {
-            if(float.TryParse((sender as EditText).Text, out float result))
-                if(result > 0f)
-                    _badge.SetCornerRadius(result);
+            _badge.GetThemeProvider().SetCurrentTheme(ThemeTypes.ThemeCollection.ElementAt(e.Position).Value);
+            _badge.ResetCustomization();
+
+            _backgroundColorSpinner.SetSelection(0);
+            _textColorSpinner.SetSelection(0);
+            _fontSpinner.SetSelection(0);
+            _letterSpacingView.SetSelection(0);
+            _textSizeView.SetSelection(0);
+            _cornerRadiusView.SetSelection(0);
         }
 
-        private void TextSizeView_AfterTextChanged(object sender, global::Android.Text.AfterTextChangedEventArgs e)
+        private void CornerRadiusView_ItemSelected(object sender, AdapterView.ItemSelectedEventArgs e)
         {
-            if(float.TryParse((sender as EditText).Text, out float result))
-                if(result > 0f)
-                    _badge.SetCustomTextSize(result);
+            if(e.Position > 0)
+                _badge.CornerRadius = Sizes.CornerRadusCollection.ElementAt(e.Position).Value;
         }
 
-        private void LetterSpacingView_AfterTextChanged(object sender, global::Android.Text.AfterTextChangedEventArgs e)
+        private void TextSizeView_ItemSelected(object sender, AdapterView.ItemSelectedEventArgs e)
         {
-            if(float.TryParse((sender as EditText).Text, NumberStyles.Any, CultureInfo.InvariantCulture, out float result))
-                if(result > 0)
-                    _badge.SetCustomLetterSpacing(result);
+            if(e.Position > 0)
+                _badge.TextSize = Sizes.TextSizeCollection.ElementAt(e.Position).Value;
+        }
+
+        private void LetterSpacingView_ItemSelected(object sender, AdapterView.ItemSelectedEventArgs e)
+        {
+            if(e.Position > 0)
+                _badge.LetterSpacing = Sizes.LetterSpacingCollection.ElementAt(e.Position).Value;
         }
 
         private void FontSpinner_ItemSelected(object sender, AdapterView.ItemSelectedEventArgs e)
         {
             if(e.Position > 0)
-                _badge.SetCustomFont(Typeface.CreateFromAsset(Assets, Fonts.FontsCollection.ElementAt(e.Position).Value));
+                _badge.Typeface  = Typeface.CreateFromAsset(Assets, Fonts.FontsCollection.ElementAt(e.Position).Value);
         }
 
         private void TextColorSpinner_ItemSelected(object sender, AdapterView.ItemSelectedEventArgs e)
         {
             if(e.Position > 0)
-                _badge.SetCustomTextColor(Colors.ColorsCollection.ElementAt(e.Position).Value);
+                _badge.TextColor = Colors.ColorsCollection.ElementAt(e.Position).Value;
         }
 
         private void BackgroundColorSpinner_ItemSelected(object sender, AdapterView.ItemSelectedEventArgs e)
         {
             if(e.Position > 0)
-                _badge.SetCustomBackgroundColor(Colors.ColorsCollection.ElementAt(e.Position).Value);
+                _badge.BackgroundColor = Colors.ColorsCollection.ElementAt(e.Position).Value;
         }
     }
 }

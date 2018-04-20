@@ -14,7 +14,6 @@ Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "EOS.UI.Shared.Themes", "EOS
 EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
-		EOS.UI.Shared.Themes\EOS.UI.Shared.Themes.projitems*{28edc59e-9773-4482-9e73-80e8ac319614}*SharedItemsImports = 4
 		EOS.UI.Shared.Themes\EOS.UI.Shared.Themes.projitems*{3722ae67-fc49-4983-974d-d4bded69fce4}*SharedItemsImports = 13
 		EOS.UI.Shared.Themes\EOS.UI.Shared.Themes.projitems*{91a2a6a0-37b8-47ae-a38b-c80667b42049}*SharedItemsImports = 4
 		EOS.UI.Shared.Themes\EOS.UI.Shared.Themes.projitems*{e321ba43-e86f-480f-b91e-1bcc90323ba1}*SharedItemsImports = 4
