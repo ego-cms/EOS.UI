@@ -32,6 +32,7 @@ namespace EOS.UI.iOS.Sandbox
             _textFields = new List<UITextField>()
             {
                 backgroundColorField,
+                letterSpacingField,
                 themeField,
                 fontField,
                 fontColorField,
