@@ -5,12 +5,14 @@
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp">
         <EOS.UI.Android.Controls.BadgeLabel
             android:id="@+id/badgeLabel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Default Text" />
+            android:text="Default Text"
+            android:layout_gravity="center" />
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
