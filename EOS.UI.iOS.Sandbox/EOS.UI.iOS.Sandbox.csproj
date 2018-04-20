@@ -95,6 +95,7 @@
     <Folder Include="TableSources\" />
     <Folder Include="Storyboards\" />
     <Folder Include="Controls\" />
+    <Folder Include="Helpers\" />
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="LaunchScreen.storyboard" />
@@ -144,6 +145,7 @@
       <DependentUpon>InputControlView.cs</DependentUpon>
     </Compile>
     <Compile Include="Controls\ControlsData.cs" />
+    <Compile Include="Helpers\Constants.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\EOS.UI.iOS\EOS.UI.iOS.csproj">
