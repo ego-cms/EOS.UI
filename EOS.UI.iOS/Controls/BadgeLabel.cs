@@ -53,7 +53,7 @@ namespace EOS.UI.iOS.Controls
             get => base.Font;
             set
             {
-                base.Font = value;
+                base.Font = value.WithSize(TextSize);
                 _isEOSCustomizationIgnored = true;
             }
         }
