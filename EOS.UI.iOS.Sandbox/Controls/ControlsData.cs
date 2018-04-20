@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using SharedControls = UIFrameworks.Shared.Themes.Helpers.Controls;
+using SharedControls = UIFrameworks.Shared.Themes.Helpers.ControlNames;
 
 namespace EOS.UI.iOS.Sandbox.Controls
 {

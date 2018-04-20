@@ -7,7 +7,7 @@ using Android.OS;
 using Android.Support.V7.Widget;
 using EOS.UI.Android.Sandbox.Activities;
 using EOS.UI.Android.Sandbox.RecyclerImplementation;
-using C = UIFrameworks.Shared.Themes.Helpers.Controls;
+using UIFrameworks.Shared.Themes.Helpers;
 
 namespace EOS.UI.Android.Sandbox
 {
@@ -17,12 +17,12 @@ namespace EOS.UI.Android.Sandbox
         private RecyclerView _recyclerView;
         private Dictionary<string, Type> _controlDictionary = new Dictionary<string, Type>
         {
-            { C.BadgeLabel, typeof(BadgeLabelActivity) },
-            { C.GhostButton, typeof(GhostButtonActivity) },
-            { C.SimpleButton,typeof(SimpleButtonActivity) },
-            { C.SimpleLabel, typeof(SimpleLabelActivity) },
-            { C.Input, typeof(InputActivity) },
-            { C.FabProgress,typeof(FabProgressActivity) }
+            { ControlNames.BadgeLabel, typeof(BadgeLabelActivity) },
+            { ControlNames.GhostButton, typeof(GhostButtonActivity) },
+            { ControlNames.SimpleButton,typeof(SimpleButtonActivity) },
+            { ControlNames.SimpleLabel, typeof(SimpleLabelActivity) },
+            { ControlNames.Input, typeof(InputActivity) },
+            { ControlNames.FabProgress,typeof(FabProgressActivity) }
         };
 
         protected override void OnCreate(Bundle savedInstanceState)
