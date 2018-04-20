@@ -128,6 +128,7 @@ namespace EOS.UI.Android.Controls
         private void Initialize(IAttributeSet attrs = null)
         {
             Background = CreateDefaultDrawable();
+            SetPadding(15, 0, 15, 0);
             if(attrs != null)
                 InitializeAttributes(attrs);
             UpdateAppearance();
