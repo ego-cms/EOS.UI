@@ -38,30 +38,59 @@ namespace EOS.UI.Android.Controls
 
         #endregion
 
-        #region public Api
+        #region customization
 
-        public void SetCustomFont(Typeface fontTypeFace)
+        public override Typeface Typeface
         {
-            IsEOSCustomizationIgnored = false;
-            SetTypeface(fontTypeFace, TypefaceStyle.Normal);
+            get => base.Typeface;
+            set
+            {
+                IsEOSCustomizationIgnored = true;
+                base.Typeface = value;
+            }
         }
 
-        public void SetCustomLetterSpacing(float spacing)
+        public override void SetTypeface(Typeface tf, [GeneratedEnum] TypefaceStyle style)
         {
-            IsEOSCustomizationIgnored = false;
-            LetterSpacing = spacing;
+            IsEOSCustomizationIgnored = true;
+            base.SetTypeface(tf, style);
         }
 
-        public void SetCustomTextColor(Color color)
+        public override float LetterSpacing
         {
-            IsEOSCustomizationIgnored = false;
-            SetTextColor(color);
+            get => base.LetterSpacing;
+            set
+            {
+                IsEOSCustomizationIgnored = true;
+                base.LetterSpacing = value;
+            }
         }
 
-        public void SetCustomTextSize(float size)
+        private Color _textColor;
+        public Color TextColor
         {
-            IsEOSCustomizationIgnored = false;
-            TextSize = size;
+            get => _textColor;
+            set
+            {
+                IsEOSCustomizationIgnored = true;
+                _textColor = value;
+                base.SetTextColor(value);
+            }
+        }
+
+        public override void SetTextColor(Color color)
+        {
+            TextColor = color;
+        }
+
+        public override float TextSize
+        {
+            get => base.TextSize;
+            set
+            {
+                IsEOSCustomizationIgnored = true;
+                base.TextSize = value;
+            }
         }
 
         #endregion
@@ -83,7 +112,7 @@ namespace EOS.UI.Android.Controls
 
         #region IEOSThemeControl implementation
 
-        public bool IsEOSCustomizationIgnored { get; private set; } = true;
+        public bool IsEOSCustomizationIgnored { get; private set; }
 
         public IEOSThemeProvider GetThemeProvider()
         {
@@ -92,18 +121,18 @@ namespace EOS.UI.Android.Controls
 
         public void UpdateAppearance()
         {
-            if(IsEOSCustomizationIgnored)
+            if(!IsEOSCustomizationIgnored)
             {
-                SetTypeface(Typeface.CreateFromAsset(Context.Assets, GetThemeProvider().GetEOSProperty<string>(this, EOSConstants.Font)), TypefaceStyle.Normal);
-                LetterSpacing = GetThemeProvider().GetEOSProperty<float>(this, EOSConstants.LetterSpacing);
-                SetTextColor(GetThemeProvider().GetEOSProperty<Color>(this, EOSConstants.TextColor));
-                TextSize = GetThemeProvider().GetEOSProperty<float>(this, EOSConstants.TextSize);
+                base.SetTypeface(Typeface.CreateFromAsset(Context.Assets, GetThemeProvider().GetEOSProperty<string>(this, EOSConstants.Font)), TypefaceStyle.Normal);
+                base.LetterSpacing = GetThemeProvider().GetEOSProperty<float>(this, EOSConstants.LetterSpacing);
+                base.SetTextColor(GetThemeProvider().GetEOSProperty<Color>(this, EOSConstants.TextColor));
+                base.TextSize = GetThemeProvider().GetEOSProperty<float>(this, EOSConstants.TextSize);
             }
         }
 
         public void ResetCustomization()
         {
-            IsEOSCustomizationIgnored = true;
+            IsEOSCustomizationIgnored = false;
             UpdateAppearance();
         }
 

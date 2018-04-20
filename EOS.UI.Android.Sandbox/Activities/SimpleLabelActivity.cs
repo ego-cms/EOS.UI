@@ -6,9 +6,8 @@ using Android.OS;
 using Android.Widget;
 using EOS.UI.Android.Controls;
 using static EOS.UI.Android.Sandbox.Helpers.Constants;
-using C = UIFrameworks.Shared.Themes.Helpers.Controls;
 using R = Android.Resource;
-
+using UIFrameworks.Shared.Themes.Helpers;
 
 namespace EOS.UI.Android.Sandbox.Activities
 {
@@ -16,6 +15,10 @@ namespace EOS.UI.Android.Sandbox.Activities
     public class SimpleLabelActivity : BaseActivity
     {
         private SimpleLabel _simpleLabel;
+        private Spinner _textColorSpinner;
+        private Spinner _fontSpinner;
+        private Spinner _letterSpacingView;
+        private Spinner _textSizeView;
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
@@ -23,47 +26,62 @@ namespace EOS.UI.Android.Sandbox.Activities
             SetContentView(Resource.Layout.SimpleLabelLayout);
 
             _simpleLabel = FindViewById<SimpleLabel>(Resource.Id.simpleLabel);
-            _simpleLabel.UpdateAppearance();
 
-            var textColorSpinner = FindViewById<Spinner>(Resource.Id.spinnerTextColor);
-            var fontSpinner = FindViewById<Spinner>(Resource.Id.spinnerFont);
-            var letterSpacingView = FindViewById<EditText>(Resource.Id.editLetterSpacing);
-            var textSizeView = FindViewById<EditText>(Resource.Id.editTextSize);
+            var themeSpinner = FindViewById<Spinner>(Resource.Id.spinnerTheme);
+            _textColorSpinner = FindViewById<Spinner>(Resource.Id.spinnerTextColor);
+            _fontSpinner = FindViewById<Spinner>(Resource.Id.spinnerFont);
+            _letterSpacingView = FindViewById<Spinner>(Resource.Id.spinnerLetterSpacing);
+            _textSizeView = FindViewById<Spinner>(Resource.Id.spinnerTextSize);
 
-            textColorSpinner.Adapter = new ArrayAdapter(this, R.Layout.SimpleSpinnerItem, Colors.ColorsCollection.Select(item => item.Key).ToList());
-            textColorSpinner.ItemSelected += TextColorSpinner_ItemSelected;
-            fontSpinner.Adapter = new ArrayAdapter(this, R.Layout.SimpleSpinnerItem, Fonts.FontsCollection.Select(item => item.Key).ToList());
-            fontSpinner.ItemSelected += FontSpinner_ItemSelected;
+            themeSpinner.Adapter = new ArrayAdapter(this, R.Layout.SimpleSpinnerItem, ThemeTypes.ThemeCollection.Select(item => item.Key).ToList());
+            themeSpinner.ItemSelected += ThemeSpinner_ItemSelected;
 
-            letterSpacingView.AfterTextChanged += LetterSpacingView_AfterTextChanged;
-            textSizeView.AfterTextChanged += TextSizeView_AfterTextChanged;
+            _textColorSpinner.Adapter = new ArrayAdapter(this, R.Layout.SimpleSpinnerItem, Colors.ColorsCollection.Select(item => item.Key).ToList());
+            _textColorSpinner.ItemSelected += TextColorSpinner_ItemSelected;
+
+            _fontSpinner.Adapter = new ArrayAdapter(this, R.Layout.SimpleSpinnerItem, Fonts.FontsCollection.Select(item => item.Key).ToList());
+            _fontSpinner.ItemSelected += FontSpinner_ItemSelected;
+
+            _letterSpacingView.Adapter = new ArrayAdapter(this, R.Layout.SimpleSpinnerItem, Sizes.LetterSpacingCollection.Select(item => item.Key).ToList());
+            _letterSpacingView.ItemSelected += LetterSpacingView_ItemSelected;
+
+            _textSizeView.Adapter = new ArrayAdapter(this, R.Layout.SimpleSpinnerItem, Sizes.TextSizeCollection.Select(item => item.Key).ToList());
+            _textSizeView.ItemSelected += TextSizeView_ItemSelected;
         }
 
-        private void TextSizeView_AfterTextChanged(object sender, global::Android.Text.AfterTextChangedEventArgs e)
+        private void ThemeSpinner_ItemSelected(object sender, AdapterView.ItemSelectedEventArgs e)
         {
-            if(float.TryParse((sender as EditText).Text, out float result))
-                if(result > 0f)
-                    _simpleLabel.SetCustomTextSize(result);
+            _simpleLabel.GetThemeProvider().SetCurrentTheme(ThemeTypes.ThemeCollection.ElementAt(e.Position).Value);
+            _simpleLabel.ResetCustomization();
+
+            _textColorSpinner.SetSelection(0);
+            _fontSpinner.SetSelection(0);
+            _letterSpacingView.SetSelection(0);
+            _textSizeView.SetSelection(0);
         }
 
-        private void LetterSpacingView_AfterTextChanged(object sender, global::Android.Text.AfterTextChangedEventArgs e)
+        private void TextSizeView_ItemSelected(object sender, AdapterView.ItemSelectedEventArgs e)
         {
-            if(float.TryParse((sender as EditText).Text, NumberStyles.Any, CultureInfo.InvariantCulture, out float result))
-                if(result > 0)
-                    _simpleLabel.SetCustomLetterSpacing(result);
+            if(e.Position > 0)
+                _simpleLabel.TextSize = Sizes.TextSizeCollection.ElementAt(e.Position).Value;
+        }
+
+        private void LetterSpacingView_ItemSelected(object sender, AdapterView.ItemSelectedEventArgs e)
+        {
+            if(e.Position > 0)
+                _simpleLabel.LetterSpacing = Sizes.LetterSpacingCollection.ElementAt(e.Position).Value;
         }
 
         private void FontSpinner_ItemSelected(object sender, AdapterView.ItemSelectedEventArgs e)
         {
             if(e.Position > 0)
-                _simpleLabel.SetCustomFont(Typeface.CreateFromAsset(Assets, Fonts.FontsCollection.ElementAt(e.Position).Value));
+                _simpleLabel.Typeface = Typeface.CreateFromAsset(Assets, Fonts.FontsCollection.ElementAt(e.Position).Value);
         }
 
         private void TextColorSpinner_ItemSelected(object sender, AdapterView.ItemSelectedEventArgs e)
         {
             if(e.Position > 0)
-                _simpleLabel.SetCustomTextColor(Colors.ColorsCollection.ElementAt(e.Position).Value);
+                _simpleLabel.TextColor = Colors.ColorsCollection.ElementAt(e.Position).Value;
         }
-
     }
 }
