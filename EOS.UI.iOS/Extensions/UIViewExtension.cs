@@ -7,9 +7,10 @@ using System.Linq.Expressions;
 using System.Reflection;
 using CoreAnimation;
 using CoreGraphics;
+using Foundation;
 using UIKit;
 
-namespace EOS.UI.iOS.Sandbox.Extensions
+namespace EOS.UI.iOS.Extensions
 {
     public static class UIViewExtension
     {
@@ -415,6 +416,22 @@ namespace EOS.UI.iOS.Sandbox.Extensions
             point.X = x ?? point.X;
             point.Y = y ?? point.Y;
             return point;
+        }
+
+        public static void SetLetterSpacing(this UILabel label, int spacing)
+        {
+            var attributedString = new NSMutableAttributedString(label.AttributedText);
+            attributedString.AddAttribute(UIStringAttributeKey.KerningAdjustment, new NSNumber(spacing), new NSRange(0, label.AttributedText.Length));
+            label.AttributedText = attributedString;
+            label.SizeToFit();
+        }
+
+        public static void SetTextSize(this UILabel label, int value)
+        {
+            var attributedString = new NSMutableAttributedString(label.AttributedText);
+            attributedString.AddAttribute(UIStringAttributeKey.Font, label.Font.WithSize(value), new NSRange(0, label.AttributedText.Length));
+            label.AttributedText = attributedString;
+            label.SizeToFit();
         }
     }
 }

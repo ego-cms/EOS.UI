@@ -93,9 +93,8 @@
   <ItemGroup>
     <Folder Include="Resources\" />
     <Folder Include="TableSources\" />
-    <Folder Include="Controls\" />
     <Folder Include="Storyboards\" />
-    <Folder Include="Extensions\" />
+    <Folder Include="Controls\" />
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="LaunchScreen.storyboard" />
@@ -115,7 +114,6 @@
     <Compile Include="Main.cs" />
     <Compile Include="AppDelegate.cs" />
     <Compile Include="TableSources\ControlTableSource.cs" />
-    <Compile Include="Controls\ControlsData.cs" />
     <Compile Include="Storyboards\ViewController.cs" />
     <Compile Include="Storyboards\ViewController.designer.cs">
       <DependentUpon>ViewController.cs</DependentUpon>
@@ -145,11 +143,7 @@
     <Compile Include="Storyboards\InputControlView.designer.cs">
       <DependentUpon>InputControlView.cs</DependentUpon>
     </Compile>
-    <Compile Include="Controls\BadgeLabel.cs" />
-    <Compile Include="Controls\BadgeLabel.designer.cs">
-      <DependentUpon>BadgeLabel.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Extensions\UIViewExtension.cs" />
+    <Compile Include="Controls\ControlsData.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\EOS.UI.iOS\EOS.UI.iOS.csproj">
