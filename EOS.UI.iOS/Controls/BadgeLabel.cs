@@ -13,7 +13,7 @@ namespace EOS.UI.iOS.Controls
     [Register("BadgeLabel")]
     public class BadgeLabel : UILabel, IEOSThemeControl
     {
-        private bool _isEOSCustomizationIgnored = false;
+        private bool _isEOSCustomizationIgnored;
         public bool IsEOSCustomizationIgnored => _isEOSCustomizationIgnored;
 
         public int CornerRadius
@@ -82,6 +82,7 @@ namespace EOS.UI.iOS.Controls
         {
             Text = String.Empty;
             Layer.MasksToBounds = true;
+            _isEOSCustomizationIgnored = false;
             UpdateAppearance();
         }
 
@@ -120,6 +121,7 @@ namespace EOS.UI.iOS.Controls
                 TextColor = provider.GetEOSProperty<UIColor>(this, EOSConstants.TextColor);
                 TextSize = provider.GetEOSProperty<int>(this, EOSConstants.TextSize);
                 LetterSpacing = provider.GetEOSProperty<int>(this, EOSConstants.LetterSpacing);
+                _isEOSCustomizationIgnored = false;
                 SizeToFit();
             }
         }
