@@ -23,8 +23,9 @@
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:weightSum="3">
+            android:layout_marginTop="5dp"
+            android:weightSum="3"
+            android:layout_marginBottom="5dp">
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -40,12 +41,17 @@
                 android:paddingLeft="3dp"
                 android:paddingRight="3dp" />
         </LinearLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@android:color/darker_gray" />
         <LinearLayout
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:weightSum="3">
+            android:layout_marginTop="5dp"
+            android:weightSum="3"
+            android:layout_marginBottom="5dp">
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -61,12 +67,17 @@
                 android:paddingLeft="3dp"
                 android:paddingRight="3dp" />
         </LinearLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@android:color/darker_gray" />
         <LinearLayout
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:weightSum="3">
+            android:layout_marginTop="5dp"
+            android:weightSum="3"
+            android:layout_marginBottom="5dp">
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -82,12 +93,17 @@
                 android:paddingRight="3dp"
                 android:paddingLeft="3dp" />
         </LinearLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@android:color/darker_gray" />
         <LinearLayout
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:weightSum="3">
+            android:layout_marginTop="5dp"
+            android:weightSum="3"
+            android:layout_marginBottom="5dp">
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -103,12 +119,17 @@
                 android:paddingLeft="3dp"
                 android:paddingEnd="3dp" />
         </LinearLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@android:color/darker_gray" />
         <LinearLayout
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:weightSum="3">
+            android:layout_marginTop="5dp"
+            android:weightSum="3"
+            android:layout_marginBottom="5dp">
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -124,12 +145,17 @@
                 android:paddingLeft="3dp"
                 android:paddingEnd="3dp" />
         </LinearLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@android:color/darker_gray" />
         <LinearLayout
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:weightSum="3">
+            android:layout_marginTop="5dp"
+            android:weightSum="3"
+            android:layout_marginBottom="5dp">
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -145,12 +171,17 @@
                 android:paddingLeft="3dp"
                 android:paddingEnd="3dp" />
         </LinearLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@android:color/darker_gray" />
         <LinearLayout
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:weightSum="3">
+            android:layout_marginTop="5dp"
+            android:weightSum="3"
+            android:layout_marginBottom="5dp">
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -166,5 +197,9 @@
                 android:paddingLeft="3dp"
                 android:paddingEnd="3dp" />
         </LinearLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@android:color/darker_gray" />
     </LinearLayout>
 </ScrollView>
