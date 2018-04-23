@@ -9,6 +9,7 @@ using EOS.UI.Shared.Themes.Interfaces;
 using UIFrameworks.Android.Themes;
 using UIFrameworks.Shared.Themes.Helpers;
 using UIFrameworks.Shared.Themes.Interfaces;
+using A = Android;
 
 namespace EOS.UI.Android.Controls
 {
@@ -99,6 +100,8 @@ namespace EOS.UI.Android.Controls
 
         private void Initialize(IAttributeSet attrs = null)
         {
+            SetMaxLines(1);
+            Ellipsize = A.Text.TextUtils.TruncateAt.End;
             if(attrs != null)
                 InitializeAttributes(attrs);
         }

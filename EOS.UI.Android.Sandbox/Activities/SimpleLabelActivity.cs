@@ -8,6 +8,9 @@ using EOS.UI.Android.Controls;
 using static EOS.UI.Android.Sandbox.Helpers.Constants;
 using R = Android.Resource;
 using UIFrameworks.Shared.Themes.Helpers;
+using UIFrameworks.Shared.Themes.Interfaces;
+using UIFrameworks.Android.Themes;
+using EOS.UI.Android.Sandbox.Adapters;
 
 namespace EOS.UI.Android.Sandbox.Activities
 {
@@ -15,6 +18,7 @@ namespace EOS.UI.Android.Sandbox.Activities
     public class SimpleLabelActivity : BaseActivity
     {
         private SimpleLabel _simpleLabel;
+        private Spinner _themeSpinner;
         private Spinner _textColorSpinner;
         private Spinner _fontSpinner;
         private Spinner _letterSpacingView;
@@ -27,37 +31,48 @@ namespace EOS.UI.Android.Sandbox.Activities
 
             _simpleLabel = FindViewById<SimpleLabel>(Resource.Id.simpleLabel);
 
-            var themeSpinner = FindViewById<Spinner>(Resource.Id.spinnerTheme);
+            _themeSpinner = FindViewById<Spinner>(Resource.Id.spinnerTheme);
             _textColorSpinner = FindViewById<Spinner>(Resource.Id.spinnerTextColor);
             _fontSpinner = FindViewById<Spinner>(Resource.Id.spinnerFont);
             _letterSpacingView = FindViewById<Spinner>(Resource.Id.spinnerLetterSpacing);
             _textSizeView = FindViewById<Spinner>(Resource.Id.spinnerTextSize);
+            var resetButton = FindViewById<Button>(Resource.Id.buttonResetCustomization);
 
-            themeSpinner.Adapter = new ArrayAdapter(this, R.Layout.SimpleSpinnerItem, ThemeTypes.ThemeCollection.Select(item => item.Key).ToList());
-            themeSpinner.ItemSelected += ThemeSpinner_ItemSelected;
+            _themeSpinner.Adapter = new SpinnerAdapter(this, R.Layout.SimpleSpinnerItem, ThemeTypes.ThemeCollection.Select(item => item.Key).ToList());
+            _themeSpinner.ItemSelected += ThemeSpinner_ItemSelected;
 
-            _textColorSpinner.Adapter = new ArrayAdapter(this, R.Layout.SimpleSpinnerItem, Colors.ColorsCollection.Select(item => item.Key).ToList());
+            _textColorSpinner.Adapter = new SpinnerAdapter(this, R.Layout.SimpleSpinnerItem, Colors.ColorsCollection.Select(item => item.Key).ToList());
             _textColorSpinner.ItemSelected += TextColorSpinner_ItemSelected;
 
-            _fontSpinner.Adapter = new ArrayAdapter(this, R.Layout.SimpleSpinnerItem, Fonts.FontsCollection.Select(item => item.Key).ToList());
+            _fontSpinner.Adapter = new SpinnerAdapter(this, R.Layout.SimpleSpinnerItem, Fonts.FontsCollection.Select(item => item.Key).ToList());
             _fontSpinner.ItemSelected += FontSpinner_ItemSelected;
 
-            _letterSpacingView.Adapter = new ArrayAdapter(this, R.Layout.SimpleSpinnerItem, Sizes.LetterSpacingCollection.Select(item => item.Key).ToList());
+            _letterSpacingView.Adapter = new SpinnerAdapter(this, R.Layout.SimpleSpinnerItem, Sizes.LetterSpacingCollection.Select(item => item.Key).ToList());
             _letterSpacingView.ItemSelected += LetterSpacingView_ItemSelected;
 
-            _textSizeView.Adapter = new ArrayAdapter(this, R.Layout.SimpleSpinnerItem, Sizes.TextSizeCollection.Select(item => item.Key).ToList());
+            _textSizeView.Adapter = new SpinnerAdapter(this, R.Layout.SimpleSpinnerItem, Sizes.TextSizeCollection.Select(item => item.Key).ToList());
             _textSizeView.ItemSelected += TextSizeView_ItemSelected;
+
+            SetCurrenTheme(_simpleLabel.GetThemeProvider().GetCurrentTheme());
+
+            resetButton.Click += delegate
+            {
+                ResetCustomValues();
+            };
+        }
+
+        private void SetCurrenTheme(IEOSTheme iEOSTheme)
+        {
+            if(iEOSTheme is LightEOSTheme)
+                _themeSpinner.SetSelection(1);
+            if(iEOSTheme is DarkEOSTheme)
+                _themeSpinner.SetSelection(2);
         }
 
         private void ThemeSpinner_ItemSelected(object sender, AdapterView.ItemSelectedEventArgs e)
         {
             _simpleLabel.GetThemeProvider().SetCurrentTheme(ThemeTypes.ThemeCollection.ElementAt(e.Position).Value);
-            _simpleLabel.ResetCustomization();
-
-            _textColorSpinner.SetSelection(0);
-            _fontSpinner.SetSelection(0);
-            _letterSpacingView.SetSelection(0);
-            _textSizeView.SetSelection(0);
+            ResetCustomValues();
         }
 
         private void TextSizeView_ItemSelected(object sender, AdapterView.ItemSelectedEventArgs e)
@@ -83,5 +98,15 @@ namespace EOS.UI.Android.Sandbox.Activities
             if(e.Position > 0)
                 _simpleLabel.TextColor = Colors.ColorsCollection.ElementAt(e.Position).Value;
         }
+
+        private void ResetCustomValues()
+        {
+            _simpleLabel.ResetCustomization();
+            _textColorSpinner.SetSelection(0);
+            _fontSpinner.SetSelection(0);
+            _letterSpacingView.SetSelection(0);
+            _textSizeView.SetSelection(0);
+        }
+
     }
 }
