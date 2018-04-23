@@ -82,6 +82,8 @@ namespace EOS.UI.iOS.Controls
         {
             Text = String.Empty;
             Layer.MasksToBounds = true;
+            Lines = 1;
+            LineBreakMode = UILineBreakMode.TailTruncation;
             _isEOSCustomizationIgnored = false;
             UpdateAppearance();
         }
