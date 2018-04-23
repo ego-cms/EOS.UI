@@ -97,6 +97,7 @@
     <Compile Include="Activities\GhostButtonActivity.cs" />
     <Compile Include="Activities\BadgeLabelActivity.cs" />
     <Compile Include="Activities\MainActivity.cs" />
+    <Compile Include="Adapters\SpinnerAdapter.cs" />
     <Compile Include="Helpers\Constants.cs" />
     <Compile Include="RecyclerImplementation\ControlsAdapter.cs" />
     <Compile Include="RecyclerImplementation\ControlsViewHolder.cs" />
