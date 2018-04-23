@@ -1,3 +1,4 @@
+using CoreGraphics;
 using EOS.UI.iOS.Controls;
 using EOS.UI.iOS.Extensions;
 using EOS.UI.iOS.Sandbox.Storyboards;
@@ -26,15 +27,13 @@ namespace EOS.UI.iOS.Sandbox
             ghostButton.EnabledTextColor = UIColor.Red;
             ghostButton.DisabledTextColor = UIColor.Blue;
             ghostButton.PressedStateTextColor = UIColor.Orange;
-            ghostButton.Enabled = false;
+            ghostButton.Enabled = true;
 
-            ghostButton.TouchUpInside += (sender, e) => 
-            {
-                
-            };
+            var rect = new CGRect(0, 0, 100, 100);
 
             containerView.ConstrainLayout(() => ghostButton.Frame.GetCenterX() == containerView.Frame.GetCenterX() &&
-                                          ghostButton.Frame.GetCenterY() == containerView.Frame.GetCenterY(), ghostButton);
+                                          ghostButton.Frame.GetCenterY() == containerView.Frame.GetCenterY() , ghostButton);
+
 		}
 	}
 }

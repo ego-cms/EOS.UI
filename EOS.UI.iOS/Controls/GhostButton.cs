@@ -1,4 +1,6 @@
 ﻿using System;
+using CoreAnimation;
+using CoreGraphics;
 using EOS.UI.iOS.Extensions;
 using EOS.UI.iOS.Themes;
 using EOS.UI.Shared.Themes.Helpers;
@@ -104,6 +106,7 @@ namespace EOS.UI.iOS.Controls
         public GhostButton()
         {
             Layer.MasksToBounds = true;
+            Layer.CornerRadius = 5;
             base.SetAttributedTitle(new NSAttributedString(String.Empty), UIControlState.Normal);
             UpdateAppearance();
         }
@@ -180,5 +183,13 @@ namespace EOS.UI.iOS.Controls
                 SizeToFit();
             }
         }
-    }
+
+		public override void TouchesBegan(NSSet touches, UIEvent evt)
+		{
+            base.TouchesBegan(touches, evt);
+            var touch = touches.AnyObject as UITouch;
+            var location = touch.LocationInView(this);
+            this.RippleAnimate();
+		}
+	}
 }

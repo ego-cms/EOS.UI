@@ -7,6 +7,7 @@ using System.Linq.Expressions;
 using System.Reflection;
 using CoreAnimation;
 using CoreGraphics;
+using EOS.UI.iOS.Controls;
 using Foundation;
 using UIKit;
 
@@ -373,7 +374,7 @@ namespace EOS.UI.iOS.Extensions
         /// <param name="view">current view</param>
         /// <param name="corners">corners enums</param>
         /// <param name="size">size of rounded corners</param>
-        public static void RoundCorners(this UIView view, UIRectCorner corners, int size)
+        internal static void RoundCorners(this UIView view, UIRectCorner corners, int size)
         {
             view.Layer.Mask = null;
             var bounds = view.Bounds;
@@ -394,7 +395,7 @@ namespace EOS.UI.iOS.Extensions
         /// <param name="y">The y coordinate.</param>
         /// <param name="width">Width.</param>
         /// <param name="height">Height.</param>
-        public static CGRect ResizeRect(this CGRect frame, nfloat? x = null, nfloat? y = null, nfloat? width = null, nfloat? height = null)
+        internal static CGRect ResizeRect(this CGRect frame, nfloat? x = null, nfloat? y = null, nfloat? width = null, nfloat? height = null)
         {
             frame.X = x ?? frame.X;
             frame.Y = y ?? frame.Y;
@@ -411,14 +412,19 @@ namespace EOS.UI.iOS.Extensions
         /// <param name="point">Point.</param>
         /// <param name="x">The x coordinate.</param>
         /// <param name="y">The y coordinate.</param>
-        public static CGPoint ReplacePoint(this CGPoint point, nfloat? x = null, nfloat? y = null)
+        internal static CGPoint ReplacePoint(this CGPoint point, nfloat? x = null, nfloat? y = null)
         {
             point.X = x ?? point.X;
             point.Y = y ?? point.Y;
             return point;
         }
 
-        public static void SetLetterSpacing(this UILabel label, int spacing)
+        /// <summary>
+        /// Sets the letter spacing for the UILabel
+        /// </summary>
+        /// <param name="label">Label.</param>
+        /// <param name="spacing">Spacing.</param>
+        internal static void SetLetterSpacing(this UILabel label, int spacing)
         {
             var attributedString = new NSMutableAttributedString(label.AttributedText);
             attributedString.AddAttribute(UIStringAttributeKey.KerningAdjustment, new NSNumber(spacing), new NSRange(0, label.AttributedText.Length));
@@ -426,7 +432,12 @@ namespace EOS.UI.iOS.Extensions
             label.SizeToFit();
         }
 
-        public static void SetLetterSpacing(this UIButton button, int spacing)
+        /// <summary>
+        /// Sets the letter spacing for the UIButton
+        /// </summary>
+        /// <param name="button">Button.</param>
+        /// <param name="spacing">Spacing.</param>
+        internal static void SetLetterSpacing(this UIButton button, int spacing)
         {
             var existEnabledAttrString = button.GetAttributedTitle(UIControlState.Normal);
             var enabledAttrString = new NSMutableAttributedString(existEnabledAttrString);
@@ -441,12 +452,57 @@ namespace EOS.UI.iOS.Extensions
             button.SizeToFit();
         }
 
-        public static void SetTextSize(this UILabel label, int value)
+        /// <summary>
+        /// Sets the size of the UILabel
+        /// </summary>
+        /// <param name="label">Label.</param>
+        /// <param name="size">Size.</param>
+        internal static void SetTextSize(this UILabel label, int size)
         {
             var attributedString = new NSMutableAttributedString(label.AttributedText);
-            attributedString.AddAttribute(UIStringAttributeKey.Font, label.Font.WithSize(value), new NSRange(0, label.AttributedText.Length));
+            attributedString.AddAttribute(UIStringAttributeKey.Font, label.Font.WithSize(size), new NSRange(0, label.AttributedText.Length));
             label.AttributedText = attributedString;
             label.SizeToFit();
+        }
+
+        /// <summary>
+        /// Add ripple animation to the UIButton
+        /// </summary>
+        /// <param name="button">Button.</param>
+        /// <param name="rippleColor">Ripple color.</param>
+        /// <param name="scaleDuration">Scale duration.</param>
+        /// <param name="fadeDuration">Fade duration.</param>
+        /// <param name="completitionHandler">Completition handler.</param>
+        internal static void RippleAnimate(this UIButton button, UIColor rippleColor = null, nfloat? scaleDuration = null, nfloat? fadeDuration = null, Action completitionHandler = null)
+        {
+            const int scale = 100;
+            var color = rippleColor ?? UIColor.LightGray.ColorWithAlpha(0.1f);
+            var scaleTime = scaleDuration ?? 0.5f;
+            var fadeTime = fadeDuration ?? 0.1f;
+
+            var rippleView = new RippleView(button.Bounds, color);
+            button.AddSubview(rippleView);
+
+            var scaleAction = new Action(() =>
+            {
+                var widthRatio = button.Frame.Width / rippleView.Frame.Width;
+                var transform = new CGAffineTransform(widthRatio * scale, 0, 0, widthRatio * scale, 0, 0);
+                rippleView.Transform = transform;
+            });
+
+            var fadeAction = new Action(() =>
+            {
+                rippleView.Alpha = 0;
+            });
+
+            UIView.Animate(scaleTime, scaleAction, () => 
+            {
+                UIView.Animate(fadeTime, fadeAction, () =>
+                {
+                    rippleView.RemoveFromSuperview();
+                    completitionHandler?.Invoke();
+                });
+            });
         }
     }
 }
