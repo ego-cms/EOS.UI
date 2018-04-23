@@ -41,6 +41,8 @@ namespace EOS.UI.Android.Sandbox.Activities
             _letterSpacingView = FindViewById<Spinner>(Resource.Id.spinnerLetterSpacing);
             _textSizeView = FindViewById<Spinner>(Resource.Id.spinnerTextSize);
             _cornerRadiusView = FindViewById<Spinner>(Resource.Id.spinnerCornerRadius);
+            var resetButton = FindViewById<Button>(Resource.Id.buttonResetCustomization);
+
 
             _themeSpinner.Adapter = new SpinnerAdapter(this, R.Layout.SimpleSpinnerItem, ThemeTypes.ThemeCollection.Select(item => item.Key).ToList());
             _themeSpinner.ItemSelected += ThemeSpinner_ItemSelected;
@@ -64,6 +66,11 @@ namespace EOS.UI.Android.Sandbox.Activities
             _cornerRadiusView.ItemSelected += CornerRadiusView_ItemSelected;
 
             SetCurrenTheme(_badge.GetThemeProvider().GetCurrentTheme());
+
+            resetButton.Click += delegate
+            {
+                ResetCustomValues();
+            };
         }
 
         private void SetCurrenTheme(IEOSTheme iEOSTheme)
@@ -79,14 +86,7 @@ namespace EOS.UI.Android.Sandbox.Activities
             if(e.Position > 0)
             {
                 _badge.GetThemeProvider().SetCurrentTheme(ThemeTypes.ThemeCollection.ElementAt(e.Position).Value);
-                _badge.ResetCustomization();
-
-                _backgroundColorSpinner.SetSelection(0);
-                _textColorSpinner.SetSelection(0);
-                _fontSpinner.SetSelection(0);
-                _letterSpacingView.SetSelection(0);
-                _textSizeView.SetSelection(0);
-                _cornerRadiusView.SetSelection(0);
+                ResetCustomValues();
             }
         }
 
@@ -124,6 +124,17 @@ namespace EOS.UI.Android.Sandbox.Activities
         {
             if(e.Position > 0)
                 _badge.BackgroundColor = Colors.ColorsCollection.ElementAt(e.Position).Value;
+        }
+
+        private void ResetCustomValues()
+        {
+            _badge.ResetCustomization();
+            _backgroundColorSpinner.SetSelection(0);
+            _textColorSpinner.SetSelection(0);
+            _fontSpinner.SetSelection(0);
+            _letterSpacingView.SetSelection(0);
+            _textSizeView.SetSelection(0);
+            _cornerRadiusView.SetSelection(0);
         }
     }
 }
