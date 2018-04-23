@@ -8,6 +8,7 @@ using Android.Support.V7.Widget;
 using EOS.UI.Android.Sandbox.Activities;
 using EOS.UI.Android.Sandbox.RecyclerImplementation;
 using UIFrameworks.Shared.Themes.Helpers;
+using Android.Views;
 
 namespace EOS.UI.Android.Sandbox
 {
