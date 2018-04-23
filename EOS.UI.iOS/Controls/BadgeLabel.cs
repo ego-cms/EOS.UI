@@ -53,7 +53,7 @@ namespace EOS.UI.iOS.Controls
             get => base.Font;
             set
             {
-                base.Font = value;
+                base.Font = value.WithSize(TextSize);
                 _isEOSCustomizationIgnored = true;
             }
         }
@@ -78,10 +78,26 @@ namespace EOS.UI.iOS.Controls
             }
         }
 
-        public BadgeLabel()
+        private string _text;
+        public override string Text
         {
-            Text = String.Empty;
+            get => _text;
+            set
+            {
+                _text = value;
+                NSMutableAttributedString attributedString = AttributedText != null ?
+                       new NSMutableAttributedString(AttributedText) : new NSMutableAttributedString(_text);
+                attributedString.MutableString.SetString(new NSString(_text));
+                AttributedText = attributedString;
+            }
+        }
+
+		public BadgeLabel()
+        {
+            this.Text = " ";
             Layer.MasksToBounds = true;
+            Lines = 1;
+            LineBreakMode = UILineBreakMode.TailTruncation;
             _isEOSCustomizationIgnored = false;
             UpdateAppearance();
         }

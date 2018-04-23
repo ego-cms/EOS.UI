@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UIKit;
 using EOS.UI.Shared.Themes.Helpers;
+using UIFrameworks.Shared.Themes.Helpers;
 
 namespace EOS.UI.iOS.Sandbox
 {
@@ -27,11 +28,12 @@ namespace EOS.UI.iOS.Sandbox
             base.ViewDidLoad();
 
             var label = new BadgeLabel();
-            label.Text = "Some text";
+            label.Text = "Default Text";
 
             _textFields = new List<UITextField>()
             {
                 backgroundColorField,
+                letterSpacingField,
                 themeField,
                 fontField,
                 fontColorField,
@@ -45,7 +47,7 @@ namespace EOS.UI.iOS.Sandbox
             }));
 
             containerView.ConstrainLayout(() => label.Frame.GetCenterX() == containerView.Frame.GetCenterX() &&
-                                          label.Frame.GetCenterY() == containerView.Frame.GetCenterY(), label);
+                                                label.Frame.GetCenterY() == containerView.Frame.GetCenterY(), label);
 
             var rect = new CGRect(0, 0, 100, 150);
 
@@ -53,7 +55,7 @@ namespace EOS.UI.iOS.Sandbox
             themePicker.ShowSelectionIndicator = true;
             themePicker.DataSource = new ThemePickerSource();
             var themePickerDelegate = new ThemePickerDelegate();
-            themePickerDelegate.DidSelected += (object sender, KeyValuePair<string, EOSThemeEnumeration> e) => 
+            themePickerDelegate.DidSelected += (object sender, KeyValuePair<string, EOSThemeEnumeration> e) =>
             {
                 themeField.Text = e.Key;
                 var provider = label.GetThemeProvider();
@@ -65,6 +67,10 @@ namespace EOS.UI.iOS.Sandbox
                 fontSizeField.Text = String.Empty;
                 cornerRadiusField.Text = String.Empty;
             };
+            themeField.Text = label.GetThemeProvider().GetCurrentTheme().ThemeValues[EOSConstants.BackgroundColor] == UIColor.White ?
+                "Light" : "Dark";
+
+
             themePicker.Delegate = themePickerDelegate;
             themeField.InputView = themePicker;
 
@@ -76,6 +82,12 @@ namespace EOS.UI.iOS.Sandbox
             {
                 label.BackgroundColor = e.Value;
                 backgroundColorField.Text = e.Key;
+            };
+            backgroundColorField.EditingDidBegin += (sender, e) =>
+            {
+                var colorPair = Constants.Colors.ElementAt((int)colorPicker.SelectedRowInComponent(0));
+                label.BackgroundColor = colorPair.Value;
+                backgroundColorField.Text = colorPair.Key;
             };
             colorPicker.Delegate = backgroundColorPickerDelegate;
             backgroundColorField.InputView = colorPicker;
@@ -89,6 +101,12 @@ namespace EOS.UI.iOS.Sandbox
                 label.Font = e;
                 fontField.Text = e.Name;
             };
+            fontField.EditingDidBegin += (sender, e) =>
+            {
+                var font = Constants.Fonts.ElementAt((int)fontPicker.SelectedRowInComponent(0));
+                label.Font = font;
+                fontField.Text = font.Name;
+            };
             fontPicker.Delegate = fontPickerDelegate;
             fontField.InputView = fontPicker;
 
@@ -100,6 +118,12 @@ namespace EOS.UI.iOS.Sandbox
             {
                 label.TextColor = e.Value;
                 fontColorField.Text = e.Key;
+            };
+            fontColorField.EditingDidBegin += (sender, e) =>
+            {
+                var colorPair = Constants.Colors.ElementAt((int)fontColorPicker.SelectedRowInComponent(0));
+                label.TextColor = colorPair.Value;
+                fontColorField.Text = colorPair.Key;
             };
             fontColorPicker.Delegate = fontColorPickerDelegate;
             fontColorField.InputView = fontColorPicker;
@@ -113,8 +137,15 @@ namespace EOS.UI.iOS.Sandbox
                 label.LetterSpacing = e;
                 letterSpacingField.Text = e.ToString();
             };
+            letterSpacingField.EditingDidBegin += (sender, e) =>
+            {
+                var spacing = Constants.LetterSpacingValues[(int)letterSpacingPicker.SelectedRowInComponent(0)];
+                label.LetterSpacing = spacing;
+                letterSpacingField.Text = spacing.ToString();
+            };
             letterSpacingPicker.Delegate = letterSpacingPickerDelegate;
             letterSpacingField.InputView = letterSpacingPicker;
+
 
             var fontSizePicker = new UIPickerView(rect);
             fontSizePicker.ShowSelectionIndicator = true;
@@ -124,6 +155,12 @@ namespace EOS.UI.iOS.Sandbox
             {
                 label.TextSize = e;
                 fontSizeField.Text = e.ToString();
+            };
+            fontSizeField.EditingDidBegin += (sender, e) =>
+            {
+                var size = Constants.FontSizeValues[(int)fontSizePicker.SelectedRowInComponent(0)];
+                label.TextSize = size;
+                fontSizeField.Text = size.ToString();
             };
             fontSizePicker.Delegate = fontSizePickerDelegate;
             fontSizeField.InputView = fontSizePicker;
@@ -137,13 +174,19 @@ namespace EOS.UI.iOS.Sandbox
                 label.CornerRadius = e;
                 cornerRadiusField.Text = e.ToString();
             };
+            cornerRadiusField.EditingDidBegin += (sender, e) =>
+            {
+                var size = Constants.CornerRadiusValues[(int)cornerRadiusPicker.SelectedRowInComponent(0)];
+                label.CornerRadius = size;
+                cornerRadiusField.Text = size.ToString();
+            };
             cornerRadiusPicker.Delegate = cornerRadiusPickerDelegate;
             cornerRadiusField.InputView = cornerRadiusPicker;
 
             resetButton.TouchUpInside += (sender, e) =>
             {
                 label.ResetCustomization();
-                _textFields.ForEach(f => f.Text = String.Empty);
+                _textFields.Except(new List<UITextField>() { themeField }).ToList().ForEach(f => f.Text = String.Empty);
             };
         }
 
@@ -309,7 +352,7 @@ namespace EOS.UI.iOS.Sandbox
             }
         }
 
-        public class ThemePickerDelegate: UIPickerViewDelegate
+        public class ThemePickerDelegate : UIPickerViewDelegate
         {
             public event EventHandler<KeyValuePair<string, EOSThemeEnumeration>> DidSelected;
 

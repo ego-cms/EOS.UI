@@ -97,6 +97,7 @@
     <Compile Include="Activities\GhostButtonActivity.cs" />
     <Compile Include="Activities\BadgeLabelActivity.cs" />
     <Compile Include="Activities\MainActivity.cs" />
+    <Compile Include="Adapters\SpinnerAdapter.cs" />
     <Compile Include="Helpers\Constants.cs" />
     <Compile Include="RecyclerImplementation\ControlsAdapter.cs" />
     <Compile Include="RecyclerImplementation\ControlsViewHolder.cs" />
@@ -144,13 +145,16 @@
     <AndroidResource Include="Resources\mipmap-xxxhdpi\Icon.png" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Resources\drawable\" />
+    <AndroidResource Include="Resources\values\colors.xml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\EOS.UI.Android\EOS.UI.Android.csproj">
       <Project>{e321ba43-e86f-480f-b91e-1bcc90323ba1}</Project>
       <Name>EOS.UI.Android</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\RightArrow.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <Import Project="..\packages\Xamarin.Android.Support.Annotations.27.0.2\build\MonoAndroid81\Xamarin.Android.Support.Annotations.targets" Condition="Exists('..\packages\Xamarin.Android.Support.Annotations.27.0.2\build\MonoAndroid81\Xamarin.Android.Support.Annotations.targets')" />
