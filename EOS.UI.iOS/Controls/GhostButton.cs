@@ -79,6 +79,7 @@ namespace EOS.UI.iOS.Controls
             set
             {
                 _pressedStateTextColor = value;
+                SetTitleColor(_pressedStateTextColor, UIControlState.Highlighted);
                 _isEOSCustomizationIgnored = true;
             }
         }
@@ -116,8 +117,9 @@ namespace EOS.UI.iOS.Controls
             }
             else
             {
+                var defaultSourceString = GetAttributedTitle(UIControlState.Normal);
                 var sourceString = GetAttributedTitle(forState);
-                attrString = new NSMutableAttributedString(sourceString?.Length > 0 ? sourceString : GetAttributedTitle(UIControlState.Normal));
+                attrString = new NSMutableAttributedString(sourceString?.Length > 0 ? sourceString : defaultSourceString);
             }
 
             var range = new NSRange(0, attrString.Length);

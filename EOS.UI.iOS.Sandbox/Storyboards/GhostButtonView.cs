@@ -18,13 +18,14 @@ namespace EOS.UI.iOS.Sandbox
 		public override void ViewDidLoad()
 		{
             base.ViewDidLoad();
-            containerView.BackgroundColor = UIColor.Brown;
 
             var ghostButton = new GhostButton();
+            ghostButton.SetTitle("Press me", UIControlState.Normal);
             ghostButton.LetterSpacing = 8;
+            ghostButton.TextSize = 20;
             ghostButton.EnabledTextColor = UIColor.Red;
             ghostButton.DisabledTextColor = UIColor.Blue;
-            ghostButton.SetTitle("Press me", UIControlState.Normal);
+            ghostButton.PressedStateTextColor = UIColor.Orange;
             ghostButton.Enabled = false;
 
             ghostButton.TouchUpInside += (sender, e) => 
