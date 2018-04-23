@@ -11,6 +11,7 @@ using UIFrameworks.Android.Themes;
 using UIFrameworks.Shared.Themes.Helpers;
 using UIFrameworks.Shared.Themes.Interfaces;
 using AndroidViews = Android.Views;
+using AndroidText = Android.Text;
 
 namespace EOS.UI.Android.Controls
 {
@@ -130,7 +131,8 @@ namespace EOS.UI.Android.Controls
         {
             Background = CreateDefaultDrawable();
             SetPadding(15, 0, 15, 0);
-            Gravity = AndroidViews.GravityFlags.Center;
+            SetMaxLines(1);
+            Ellipsize = AndroidText.TextUtils.TruncateAt.End;
             if(attrs != null)
                 InitializeAttributes(attrs);
             UpdateAppearance();
