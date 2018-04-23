@@ -1,10 +1,13 @@
 using CoreGraphics;
 using EOS.UI.iOS.Controls;
 using EOS.UI.iOS.Extensions;
+using EOS.UI.iOS.Sandbox.Helpers;
 using EOS.UI.iOS.Sandbox.Storyboards;
 using EOS.UI.Shared.Themes.Helpers;
 using System;
+using System.Linq;
 using System.Collections.Generic;
+using UIFrameworks.Shared.Themes.Helpers;
 using UIKit;
 using static EOS.UI.iOS.Sandbox.BadgeLabelView;
 
@@ -44,7 +47,7 @@ namespace EOS.UI.iOS.Sandbox
             }));
 
             containerView.ConstrainLayout(() => _simpleLabel.Frame.GetCenterX() == containerView.Frame.GetCenterX() &&
-                                          _simpleLabel.Frame.GetCenterY() == containerView.Frame.GetCenterY(), _simpleLabel);
+                                                _simpleLabel.Frame.GetCenterY() == containerView.Frame.GetCenterY(), _simpleLabel);
 
             var frame = new CGRect(0, 0, 100, 150);
 
@@ -53,6 +56,12 @@ namespace EOS.UI.iOS.Sandbox
             InitFontPicker(frame);
             InitTextColorPicker(frame);
             InitLetterSpacingPicker(frame);
+
+            resetButton.TouchUpInside += (sender, e) =>
+            {
+                _simpleLabel.ResetCustomization();
+                _textFields.Except(new List<UITextField>() { themeField }).ToList().ForEach(f => f.Text = String.Empty);
+            };
         }
 
         private void InitThemePicker(CGRect frame)
@@ -75,6 +84,8 @@ namespace EOS.UI.iOS.Sandbox
             };
             themePicker.Delegate = themePickerDelegate;
             themeField.InputView = themePicker;
+            themeField.Text = _simpleLabel.GetThemeProvider().GetCurrentTheme().ThemeValues[EOSConstants.BackgroundColor] == UIColor.White ?
+            "Light" : "Dark";
         }
 
         private void InitTextSizePicker(CGRect frame)
@@ -119,8 +130,8 @@ namespace EOS.UI.iOS.Sandbox
             var textColorPickerDelegate = new ColorPickerDelegate();
             textColorPickerDelegate.DidSelected += (object sender, KeyValuePair<string, UIColor> e) =>
             {
-                _simpleLabel.TextColor = e.Value;
-                textColorField.Text = e.Key;
+                var colorPair = Constants.Colors.ElementAt((int)textColorPicker.SelectedRowInComponent(0));
+                _simpleLabel.TextColor = colorPair.Value;
             };
             textColorPicker.Delegate = textColorPickerDelegate;
             textColorField.InputView = textColorPicker;

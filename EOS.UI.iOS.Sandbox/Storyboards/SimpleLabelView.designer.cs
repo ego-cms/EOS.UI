@@ -28,6 +28,10 @@ namespace EOS.UI.iOS.Sandbox
 
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
+        UIKit.UIButton resetButton { get; set; }
+
+        [Outlet]
+        [GeneratedCode ("iOS Designer", "1.0")]
         UIKit.UITextField textColorField { get; set; }
 
         [Outlet]
@@ -53,6 +57,11 @@ namespace EOS.UI.iOS.Sandbox
             if (letterSpacingField != null) {
                 letterSpacingField.Dispose ();
                 letterSpacingField = null;
+            }
+
+            if (resetButton != null) {
+                resetButton.Dispose ();
+                resetButton = null;
             }
 
             if (textColorField != null) {

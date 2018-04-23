@@ -68,10 +68,27 @@ namespace EOS.UI.iOS.Controls
             }
         }
 
+        private string _text;
+        public override string Text
+        {
+            get => _text;
+            set
+            {
+                _text = value;
+                var attributedString = AttributedText != null ?
+                       new NSMutableAttributedString(AttributedText) 
+                       : new NSMutableAttributedString(_text);
+                attributedString.MutableString.SetString(new NSString(_text));
+                AttributedText = attributedString;
+            }
+        }
+
         public SimpleLabel()
         {
-            Text = String.Empty;
+            Text = " ";
             Layer.MasksToBounds = true;
+            Lines = 1;
+            LineBreakMode = UILineBreakMode.TailTruncation;
             _isEOSCustomizationIgnored = false;
             UpdateAppearance();
         }
