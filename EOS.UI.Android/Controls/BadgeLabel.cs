@@ -10,6 +10,7 @@ using EOS.UI.Shared.Themes.Interfaces;
 using UIFrameworks.Android.Themes;
 using UIFrameworks.Shared.Themes.Helpers;
 using UIFrameworks.Shared.Themes.Interfaces;
+using AndroidViews = Android.Views;
 
 namespace EOS.UI.Android.Controls
 {
@@ -128,6 +129,8 @@ namespace EOS.UI.Android.Controls
         private void Initialize(IAttributeSet attrs = null)
         {
             Background = CreateDefaultDrawable();
+            SetPadding(15, 0, 15, 0);
+            Gravity = AndroidViews.GravityFlags.Center;
             if(attrs != null)
                 InitializeAttributes(attrs);
             UpdateAppearance();
