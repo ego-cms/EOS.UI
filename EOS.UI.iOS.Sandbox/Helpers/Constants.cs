@@ -7,6 +7,8 @@ namespace EOS.UI.iOS.Sandbox.Helpers
 {
     public static class Constants
     {
+        public static UIColor BackgroundColor = UIColor.FromRGB(117, 117, 117);
+
         public static Dictionary<string, UIColor> Colors = new Dictionary<string, UIColor>()
         {
             {"White", UIColor.White},
