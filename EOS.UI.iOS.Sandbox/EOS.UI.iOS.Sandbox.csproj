@@ -146,6 +146,7 @@
     </Compile>
     <Compile Include="Controls\ControlsData.cs" />
     <Compile Include="Helpers\Constants.cs" />
+    <Compile Include="Controls\Pickers.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\EOS.UI.iOS\EOS.UI.iOS.csproj">

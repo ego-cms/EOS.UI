@@ -69,7 +69,7 @@ namespace EOS.UI.iOS.Controls
             get => (int)Font.PointSize;
             set
             {
-                Font = Font.WithSize(value);
+                this.SetTextSize(value);
                 _isEOSCustomizationIgnored = true;
             }
         }

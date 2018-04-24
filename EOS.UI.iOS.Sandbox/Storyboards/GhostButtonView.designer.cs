@@ -14,12 +14,76 @@ namespace EOS.UI.iOS.Sandbox
 	{
 		[Outlet]
 		UIKit.UIView containerView { get; set; }
+
+		[Outlet]
+		UIKit.UITextField disabledColorField { get; set; }
+
+		[Outlet]
+		UIKit.UITextField enabledColorField { get; set; }
+
+		[Outlet]
+		UIKit.UITextField fontField { get; set; }
+
+		[Outlet]
+		UIKit.UITextField fontSizeField { get; set; }
+
+		[Outlet]
+		UIKit.UITextField letterSpacingField { get; set; }
+
+		[Outlet]
+		UIKit.UITextField pressedColorField { get; set; }
+
+		[Outlet]
+		UIKit.UIButton resetButton { get; set; }
+
+		[Outlet]
+		UIKit.UITextField themeField { get; set; }
 		
 		void ReleaseDesignerOutlets ()
 		{
 			if (containerView != null) {
 				containerView.Dispose ();
 				containerView = null;
+			}
+
+			if (themeField != null) {
+				themeField.Dispose ();
+				themeField = null;
+			}
+
+			if (fontField != null) {
+				fontField.Dispose ();
+				fontField = null;
+			}
+
+			if (letterSpacingField != null) {
+				letterSpacingField.Dispose ();
+				letterSpacingField = null;
+			}
+
+			if (enabledColorField != null) {
+				enabledColorField.Dispose ();
+				enabledColorField = null;
+			}
+
+			if (disabledColorField != null) {
+				disabledColorField.Dispose ();
+				disabledColorField = null;
+			}
+
+			if (fontSizeField != null) {
+				fontSizeField.Dispose ();
+				fontSizeField = null;
+			}
+
+			if (pressedColorField != null) {
+				pressedColorField.Dispose ();
+				pressedColorField = null;
+			}
+
+			if (resetButton != null) {
+				resetButton.Dispose ();
+				resetButton = null;
 			}
 		}
 	}

@@ -466,21 +466,41 @@ namespace EOS.UI.iOS.Extensions
         }
 
         /// <summary>
+        /// Sets the size of the text for UIButton
+        /// </summary>
+        /// <param name="button">Button.</param>
+        /// <param name="size">Size.</param>
+        internal static void SetTextSize(this UIButton button, int size)
+        {
+            var normalAttrString = new NSMutableAttributedString(button.GetAttributedTitle(UIControlState.Normal));
+            var disabledAttrString = new NSMutableAttributedString(button.GetAttributedTitle(UIControlState.Disabled));
+            var highlightedAttrString = new NSMutableAttributedString(button.GetAttributedTitle(UIControlState.Highlighted));
+            normalAttrString.AddAttribute(UIStringAttributeKey.Font, button.Font.WithSize(size), new NSRange(0, normalAttrString.Length));
+            disabledAttrString.AddAttribute(UIStringAttributeKey.Font, button.Font.WithSize(size), new NSRange(0, disabledAttrString.Length));
+            highlightedAttrString.AddAttribute(UIStringAttributeKey.Font, button.Font.WithSize(size), new NSRange(0, highlightedAttrString.Length));
+            button.SetAttributedTitle(normalAttrString, UIControlState.Normal);
+            button.SetAttributedTitle(normalAttrString, UIControlState.Disabled);
+            button.SetAttributedTitle(normalAttrString, UIControlState.Highlighted);
+            button.SizeToFit();
+        }
+
+        /// <summary>
         /// Add ripple animation to the UIButton
         /// </summary>
         /// <param name="button">Button.</param>
+        /// <param name="startLocation">Touch location.</param>
         /// <param name="rippleColor">Ripple color.</param>
         /// <param name="scaleDuration">Scale duration.</param>
         /// <param name="fadeDuration">Fade duration.</param>
         /// <param name="completitionHandler">Completition handler.</param>
-        internal static void RippleAnimate(this UIButton button, UIColor rippleColor = null, nfloat? scaleDuration = null, nfloat? fadeDuration = null, Action completitionHandler = null)
+        internal static void RippleAnimate(this UIButton button, CGPoint? startLocation = null, UIColor rippleColor = null, nfloat? scaleDuration = null, nfloat? fadeDuration = null, Action completitionHandler = null)
         {
             const int scale = 100;
             var color = rippleColor ?? UIColor.LightGray.ColorWithAlpha(0.1f);
             var scaleTime = scaleDuration ?? 0.5f;
             var fadeTime = fadeDuration ?? 0.1f;
 
-            var rippleView = new RippleView(button.Bounds, color);
+            var rippleView = new RippleView(button.Bounds, startLocation.GetValueOrDefault(), color);
             button.AddSubview(rippleView);
 
             var scaleAction = new Action(() =>
