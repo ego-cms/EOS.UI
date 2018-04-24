@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using EOS.UI.Shared.Themes.Helpers;
 using UIKit;
+using System.Linq;
 
 namespace EOS.UI.iOS.Sandbox.Helpers
 {
@@ -44,6 +45,8 @@ namespace EOS.UI.iOS.Sandbox.Helpers
                     Fonts.Add(font);
                 }
             }
+
+            Fonts = Fonts.OrderBy(f => f.Name).ToList();
         }
     }
 }
