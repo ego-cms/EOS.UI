@@ -14,7 +14,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/titleTextView"
             android:textSize="25sp"
-            android:paddingLeft="25dp"
+            android:paddingLeft="15dp"
             android:paddingBottom="10dp"
             android:paddingTop="10dp"
             tools:text="Title" />
