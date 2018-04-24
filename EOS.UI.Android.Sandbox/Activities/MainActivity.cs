@@ -12,7 +12,7 @@ using UIFrameworks.Shared.Themes.Helpers;
 
 namespace EOS.UI.Android.Sandbox
 {
-    [Activity(Label = "Sandbox", MainLauncher = true, Icon = "@mipmap/icon", ScreenOrientation = ScreenOrientation.Portrait)]
+    [Activity(Label = "@string/app_name", MainLauncher = true, Icon = "@mipmap/icon", ScreenOrientation = ScreenOrientation.Portrait)]
     public class MainActivity : Activity
     {
         private RecyclerView _recyclerView;
