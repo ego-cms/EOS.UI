@@ -1,29 +1,29 @@
 ﻿using System;
-using System.Linq;
 using System.Collections.Generic;
+using System.Linq;
 using Android.App;
 using Android.Content;
+using Android.Content.PM;
 using Android.OS;
 using Android.Support.V7.Widget;
 using EOS.UI.Android.Sandbox.Activities;
 using EOS.UI.Android.Sandbox.RecyclerImplementation;
 using UIFrameworks.Shared.Themes.Helpers;
-using Android.Views;
 
 namespace EOS.UI.Android.Sandbox
 {
-    [Activity(Label = "Sandbox", MainLauncher = true, Icon = "@mipmap/icon")]
+    [Activity(Label = "Sandbox", MainLauncher = true, Icon = "@mipmap/icon", ScreenOrientation = ScreenOrientation.Portrait)]
     public class MainActivity : Activity
     {
         private RecyclerView _recyclerView;
         private Dictionary<string, Type> _controlDictionary = new Dictionary<string, Type>
         {
             { ControlNames.BadgeLabel, typeof(BadgeLabelActivity) },
+            { ControlNames.SimpleLabel, typeof(SimpleLabelActivity) },
             { ControlNames.GhostButton, typeof(GhostButtonActivity) },
             { ControlNames.SimpleButton,typeof(SimpleButtonActivity) },
-            { ControlNames.SimpleLabel, typeof(SimpleLabelActivity) },
-            { ControlNames.Input, typeof(InputActivity) },
-            { ControlNames.FabProgress,typeof(FabProgressActivity) }
+            { ControlNames.FabProgress,typeof(FabProgressActivity) },
+            { ControlNames.Input, typeof(InputActivity) }
         };
 
         protected override void OnCreate(Bundle savedInstanceState)

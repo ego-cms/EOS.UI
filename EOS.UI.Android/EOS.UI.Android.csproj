@@ -56,15 +56,6 @@
   <ItemGroup>
     <AndroidResource Include="Resources\values\Strings.xml" />
   </ItemGroup>
-  <ItemGroup>
-    <AndroidAsset Include="Assets\Fonts\capture_it_light.ttf" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidAsset Include="Assets\Fonts\capture_it_dark.ttf" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidAsset Include="Assets\Fonts\OpenSansRegular.ttf" />
-  </ItemGroup>
   <Import Project="..\EOS.UI.Shared.Themes\EOS.UI.Shared.Themes.projitems" Label="Shared" />
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
 </Project>
