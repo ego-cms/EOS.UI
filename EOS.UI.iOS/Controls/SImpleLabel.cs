@@ -53,7 +53,7 @@ namespace EOS.UI.iOS.Controls
             get => base.Font;
             set
             {
-                base.Font = value;
+                base.Font = value.WithSize(TextSize);
                 _isEOSCustomizationIgnored = true;
             }
         }
@@ -122,10 +122,17 @@ namespace EOS.UI.iOS.Controls
             if (!IsEOSCustomizationIgnored)
             {
                 var provider = GetThemeProvider();
-                base.Font = provider.GetEOSProperty<UIFont>(this, EOSConstants.Font);
-                base.TextColor = provider.GetEOSProperty<UIColor>(this, EOSConstants.TextColor);
-                this.SetTextSize(provider.GetEOSProperty<int>(this, EOSConstants.TextSize));
-                this.SetLetterSpacing(provider.GetEOSProperty<int>(this, EOSConstants.LetterSpacing));
+                //base.Font = provider.GetEOSProperty<UIFont>(this, EOSConstants.Font);
+                //base.TextColor = provider.GetEOSProperty<UIColor>(this, EOSConstants.TextColor);
+                //this.SetTextSize(provider.GetEOSProperty<int>(this, EOSConstants.TextSize));
+                //this.SetLetterSpacing(provider.GetEOSProperty<int>(this, EOSConstants.LetterSpacing));
+
+                Font = provider.GetEOSProperty<UIFont>(this, EOSConstants.Font);
+                TextColor = provider.GetEOSProperty<UIColor>(this, EOSConstants.TextColor);
+                TextSize = provider.GetEOSProperty<int>(this, EOSConstants.TextSize);
+                LetterSpacing = provider.GetEOSProperty<int>(this, EOSConstants.LetterSpacing);
+                _isEOSCustomizationIgnored = false;
+
                 SizeToFit();
             }
         }

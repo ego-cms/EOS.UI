@@ -93,13 +93,19 @@ namespace EOS.UI.iOS.Sandbox
             var textSizePicker = new UIPickerView(frame);
             textSizePicker.ShowSelectionIndicator = true;
             textSizePicker.DataSource = new FontSizesPickerSource();
-            var fontSizePickerDelegate = new FontSizesPickerDelegate();
-            fontSizePickerDelegate.DidSelected += (object sender, int e) =>
+            var textSizePickerDelegate = new FontSizesPickerDelegate();
+            textSizePickerDelegate.DidSelected += (object sender, int e) =>
             {
                 _simpleLabel.TextSize = e;
                 textSizeField.Text = e.ToString();
             };
-            textSizePicker.Delegate = fontSizePickerDelegate;
+            textSizeField.EditingDidBegin += (sender, e) =>
+            {
+                var size = Constants.FontSizeValues[(int)textSizePicker.SelectedRowInComponent(0)];
+                _simpleLabel.TextSize = size;
+                textSizeField.Text = size.ToString();
+            };
+            textSizePicker.Delegate = textSizePickerDelegate;
             textSizeField.InputView = textSizePicker;
         }
 
@@ -116,6 +122,12 @@ namespace EOS.UI.iOS.Sandbox
                 _simpleLabel.Font = e;
                 fontField.Text = e.Name;
             };
+            fontField.EditingDidBegin += (sender, e) =>
+            {
+                var font = Constants.Fonts.ElementAt((int)fontPicker.SelectedRowInComponent(0));
+                _simpleLabel.Font = font;
+                fontField.Text = font.Name;
+            };
             fontPicker.Delegate = fontPickerDelegate;
             fontField.InputView = fontPicker;
         }
@@ -130,8 +142,14 @@ namespace EOS.UI.iOS.Sandbox
             var textColorPickerDelegate = new ColorPickerDelegate();
             textColorPickerDelegate.DidSelected += (object sender, KeyValuePair<string, UIColor> e) =>
             {
+                _simpleLabel.TextColor = e.Value;
+                textColorField.Text = e.Key;
+            };
+            textColorField.EditingDidBegin += (sender, e) =>
+            {
                 var colorPair = Constants.Colors.ElementAt((int)textColorPicker.SelectedRowInComponent(0));
                 _simpleLabel.TextColor = colorPair.Value;
+                textColorField.Text = colorPair.Key;
             };
             textColorPicker.Delegate = textColorPickerDelegate;
             textColorField.InputView = textColorPicker;
@@ -149,6 +167,12 @@ namespace EOS.UI.iOS.Sandbox
             {
                 _simpleLabel.LetterSpacing = e;
                 letterSpacingField.Text = e.ToString();
+            };
+            letterSpacingField.EditingDidBegin += (sender, e) =>
+            {
+                var spacing = Constants.LetterSpacingValues[(int)letterSpacingPicker.SelectedRowInComponent(0)];
+                _simpleLabel.LetterSpacing = spacing;
+                letterSpacingField.Text = spacing.ToString();
             };
             letterSpacingPicker.Delegate = letterSpacingPickerDelegate;
             letterSpacingField.InputView = letterSpacingPicker;
