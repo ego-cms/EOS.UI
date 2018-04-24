@@ -14,7 +14,7 @@ using UIFrameworks.Android.Themes;
 
 namespace EOS.UI.Android.Sandbox.Activities
 {
-    [Activity(Label = ControlNames.BadgeLabel)]
+    [Activity(Label = ControlNames.BadgeLabel) ]
     public class BadgeLabelActivity : BaseActivity
     {
         private BadgeLabel _badge;

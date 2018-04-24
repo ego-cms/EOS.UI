@@ -1,5 +1,6 @@
 ﻿using System;
 using EOS.UI.iOS.Sandbox.Controls;
+using EOS.UI.iOS.Sandbox.Helpers;
 using UIKit;
 
 namespace EOS.UI.iOS.Sandbox.Storyboards
@@ -12,6 +13,9 @@ namespace EOS.UI.iOS.Sandbox.Storyboards
 		{
             base.ViewWillAppear(animated);
             NavigationController.SetNavigationBarHidden(false, false);
+
+
+            View.BackgroundColor = Constants.BackgroundColor;
 		}
 	}
 }

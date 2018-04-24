@@ -1,4 +1,5 @@
 ﻿using Android.App;
+using Android.Content.PM;
 using Android.OS;
 using Android.Views;
 using R = Android.Resource;
@@ -13,6 +14,7 @@ namespace EOS.UI.Android.Sandbox.Activities
             base.OnCreate(savedInstanceState);
             ActionBar.SetHomeButtonEnabled(true);
             ActionBar.SetDisplayHomeAsUpEnabled(true);
+            RequestedOrientation = ScreenOrientation.Portrait;
         }
 
         public override bool OnOptionsItemSelected(IMenuItem item)
