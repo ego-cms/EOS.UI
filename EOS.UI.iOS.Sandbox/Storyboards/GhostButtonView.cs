@@ -189,6 +189,12 @@ namespace EOS.UI.iOS.Sandbox
             stateField.Text = Constants.States.ElementAt(0).Key;
             statePicker.Delegate = statePickerDelegate;
             stateField.InputView = statePicker;
+
+            resetButton.TouchUpInside += (sender, e) =>
+            {
+                ghostButton.ResetCustomization();
+                _textFields.Except(new List<UITextField>() { themeField,  stateField }).ToList().ForEach(f => f.Text = String.Empty);
+            };
 		}
 	}
 }

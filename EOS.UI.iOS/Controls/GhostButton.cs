@@ -68,12 +68,14 @@ namespace EOS.UI.iOS.Controls
             }
         }
 
+        private int _textSize;
         public int TextSize
         {
-            get => (int)Font.PointSize;
+            get => _textSize == 0 ? (int)base.Font.PointSize : _textSize;
             set
             {
-                this.SetTextSize(value);
+                _textSize = value;
+                this.SetTextSize(_textSize);
                 _isEOSCustomizationIgnored = true;
             }
         }
@@ -164,7 +166,8 @@ namespace EOS.UI.iOS.Controls
 
         public void ResetCustomization()
         {
-            throw new NotImplementedException();
+            _isEOSCustomizationIgnored = false;
+            UpdateAppearance();
         }
 
         public void SetEOSStyle(EOSStyleEnumeration style)
