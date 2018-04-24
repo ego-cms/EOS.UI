@@ -116,6 +116,18 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="XqO-q5-ujl">
+                                <rect key="frame" x="179" y="454" width="180" height="30"/>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="State" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gZj-0n-rUa">
+                                <rect key="frame" x="16" y="458" width="41" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -128,13 +140,17 @@
                             <constraint firstItem="6xc-qD-MTc" firstAttribute="leading" secondItem="RIU-oC-tBl" secondAttribute="leading" id="7oB-R3-lhS"/>
                             <constraint firstItem="Q4T-p7-2h6" firstAttribute="trailing" secondItem="bKg-1F-qG1" secondAttribute="trailing" id="8kC-Uq-U5I"/>
                             <constraint firstItem="zXU-Fg-Tl0" firstAttribute="trailing" secondItem="bKg-1F-qG1" secondAttribute="trailing" id="C1y-UN-NQl"/>
+                            <constraint firstItem="XqO-q5-ujl" firstAttribute="trailing" secondItem="bKg-1F-qG1" secondAttribute="trailing" id="CBe-rW-C05"/>
                             <constraint firstItem="zXU-Fg-Tl0" firstAttribute="width" secondItem="bKg-1F-qG1" secondAttribute="width" id="DNb-Ze-OPF"/>
                             <constraint firstItem="7tF-4z-XcI" firstAttribute="leading" secondItem="RIU-oC-tBl" secondAttribute="leading" id="GHa-8D-e5r"/>
                             <constraint firstItem="6xc-qD-MTc" firstAttribute="top" secondItem="q3m-LD-b5Z" secondAttribute="bottom" constant="20" id="HrT-ST-Y3D"/>
                             <constraint firstItem="203" firstAttribute="top" secondItem="JWS-tC-smw" secondAttribute="bottom" constant="32" id="IOX-da-1dv"/>
                             <constraint firstItem="7G2-3o-BVE" firstAttribute="top" secondItem="6xc-qD-MTc" secondAttribute="bottom" constant="20" id="LLB-6f-mnu"/>
+                            <constraint firstItem="XqO-q5-ujl" firstAttribute="centerY" secondItem="gZj-0n-rUa" secondAttribute="centerY" id="Lc6-f9-T8N"/>
+                            <constraint firstItem="XqO-q5-ujl" firstAttribute="width" secondItem="bKg-1F-qG1" secondAttribute="width" id="LeE-cA-w0J"/>
                             <constraint firstItem="vcu-vP-JFC" firstAttribute="centerY" secondItem="q3m-LD-b5Z" secondAttribute="centerY" id="QSY-zn-lUt"/>
                             <constraint firstItem="zXU-Fg-Tl0" firstAttribute="centerY" secondItem="ic1-Ji-Jio" secondAttribute="centerY" id="Qzf-lB-f3Y"/>
+                            <constraint firstItem="gZj-0n-rUa" firstAttribute="top" secondItem="7G2-3o-BVE" secondAttribute="bottom" constant="20" id="RCz-AK-JBP"/>
                             <constraint firstItem="blY-bb-ldc" firstAttribute="width" secondItem="bKg-1F-qG1" secondAttribute="width" id="RXq-Kh-BZE"/>
                             <constraint firstItem="q3m-LD-b5Z" firstAttribute="top" secondItem="gdV-Ze-lJ9" secondAttribute="bottom" constant="20" id="Rod-GE-aT4"/>
                             <constraint firstItem="Q4T-p7-2h6" firstAttribute="width" secondItem="bKg-1F-qG1" secondAttribute="width" id="TWf-Ga-fM7"/>
@@ -149,6 +165,7 @@
                             <constraint firstItem="RIU-oC-tBl" firstAttribute="leading" secondItem="206" secondAttribute="leading" constant="16" id="f2c-NS-I3f"/>
                             <constraint firstItem="gdV-Ze-lJ9" firstAttribute="leading" secondItem="RIU-oC-tBl" secondAttribute="leading" id="hMh-xK-66B"/>
                             <constraint firstItem="Q4T-p7-2h6" firstAttribute="centerY" secondItem="6xc-qD-MTc" secondAttribute="centerY" id="ivP-Hy-bS3"/>
+                            <constraint firstItem="gZj-0n-rUa" firstAttribute="leading" secondItem="7G2-3o-BVE" secondAttribute="leading" id="ixK-5J-TfA"/>
                             <constraint firstItem="q3m-LD-b5Z" firstAttribute="leading" secondItem="RIU-oC-tBl" secondAttribute="leading" id="kwq-on-3Ea"/>
                             <constraint firstItem="blY-bb-ldc" firstAttribute="trailing" secondItem="bKg-1F-qG1" secondAttribute="trailing" id="lvG-BV-q2U"/>
                             <constraint firstItem="ic1-Ji-Jio" firstAttribute="leading" secondItem="RIU-oC-tBl" secondAttribute="leading" id="ojD-di-WbJ"/>
@@ -170,6 +187,7 @@
                         <outlet property="letterSpacingField" destination="zXU-Fg-Tl0" id="Fdj-v5-udc"/>
                         <outlet property="pressedColorField" destination="blY-bb-ldc" id="Tkc-qJ-442"/>
                         <outlet property="resetButton" destination="JWS-tC-smw" id="vya-F2-Cc7"/>
+                        <outlet property="stateField" destination="XqO-q5-ujl" id="rvt-3d-Gad"/>
                         <outlet property="themeField" destination="bKg-1F-qG1" id="0Ae-NT-YNd"/>
                     </connections>
                 </viewController>

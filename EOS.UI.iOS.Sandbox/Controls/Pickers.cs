@@ -184,4 +184,33 @@ namespace EOS.UI.iOS.Sandbox.Controls.Pickers
             DidSelected?.Invoke(this, Constants.Themes.ElementAt((int)row));
         }
     }
+
+    //disabled/enabled picker
+    public class StatePickerSource : UIPickerViewDataSource
+    {
+        public override nint GetComponentCount(UIPickerView pickerView)
+        {
+            return 1;
+        }
+
+        public override nint GetRowsInComponent(UIPickerView pickerView, nint component)
+        {
+            return Constants.States.Count;
+        }
+    }
+
+    public class StatePickerDelegate : UIPickerViewDelegate
+    {
+        public event EventHandler<KeyValuePair<string, bool>> DidSelected;
+
+        public override string GetTitle(UIPickerView pickerView, nint row, nint component)
+        {
+            return Constants.States.ElementAt((int)row).Key;
+        }
+
+        public override void Selected(UIPickerView pickerView, nint row, nint component)
+        {
+            DidSelected?.Invoke(this, Constants.States.ElementAt((int)row));
+        }
+    }
 }

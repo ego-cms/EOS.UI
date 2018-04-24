@@ -18,12 +18,16 @@ namespace EOS.UI.iOS.Controls
         private bool _isEOSCustomizationIgnored = false;
         public bool IsEOSCustomizationIgnored => _isEOSCustomizationIgnored;
 
+
+        private UIFont _font;
         public override UIFont Font
         {
-            get => base.Font;
+            get => _font ?? base.Font;
             set
             {
-                base.Font = value;
+                _font = value.WithSize(TextSize);
+                this.SetFont(_font);
+                base.Font = _font;
                 _isEOSCustomizationIgnored = true;
             }
         }
@@ -180,6 +184,7 @@ namespace EOS.UI.iOS.Controls
                 PressedStateTextColor = provider.GetEOSProperty<UIColor>(this, EOSConstants.PressedStateTextColor);
                 TextSize = provider.GetEOSProperty<int>(this, EOSConstants.TextSize);
                 LetterSpacing = provider.GetEOSProperty<int>(this, EOSConstants.LetterSpacing);
+                _isEOSCustomizationIgnored = false;
                 SizeToFit();
             }
         }

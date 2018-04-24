@@ -21,7 +21,7 @@ namespace EOS.UI.iOS.Sandbox.Helpers
             {"Orange", UIColor.Orange},
             {"Black", UIColor.Black}
         };
-        public static List<int> CornerRadiusValues = new List<int>() {0, 1, 2, 3, 4, 5, 7, 8, 9, 10 };
+        public static List<int> CornerRadiusValues = new List<int>() { 0, 1, 2, 3, 4, 5, 7, 8, 9, 10 };
 
         public static List<int> FontSizeValues = new List<int>() { 17, 19, 24, 32, 40 };
 
@@ -31,6 +31,12 @@ namespace EOS.UI.iOS.Sandbox.Helpers
             {
                 { "Light", EOSThemeEnumeration.Light },
                 { "Dark", EOSThemeEnumeration.Dark },
+            };
+
+        public static Dictionary<string, bool> States = new Dictionary<string, bool>()
+            {
+                { "Enabled", true },
+                { "Disabled", false },
             };
 
         public static List<UIFont> Fonts;

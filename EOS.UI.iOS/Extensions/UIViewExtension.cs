@@ -479,8 +479,22 @@ namespace EOS.UI.iOS.Extensions
             disabledAttrString.AddAttribute(UIStringAttributeKey.Font, button.Font.WithSize(size), new NSRange(0, disabledAttrString.Length));
             highlightedAttrString.AddAttribute(UIStringAttributeKey.Font, button.Font.WithSize(size), new NSRange(0, highlightedAttrString.Length));
             button.SetAttributedTitle(normalAttrString, UIControlState.Normal);
-            button.SetAttributedTitle(normalAttrString, UIControlState.Disabled);
-            button.SetAttributedTitle(normalAttrString, UIControlState.Highlighted);
+            button.SetAttributedTitle(disabledAttrString, UIControlState.Disabled);
+            button.SetAttributedTitle(highlightedAttrString, UIControlState.Highlighted);
+            button.SizeToFit();
+        }
+
+        internal static void SetFont(this UIButton button, UIFont font)
+        {
+            var normalAttrString = new NSMutableAttributedString(button.GetAttributedTitle(UIControlState.Normal));
+            var disabledAttrString = new NSMutableAttributedString(button.GetAttributedTitle(UIControlState.Disabled));
+            var highlightedAttrString = new NSMutableAttributedString(button.GetAttributedTitle(UIControlState.Highlighted));
+            normalAttrString.AddAttribute(UIStringAttributeKey.Font, font.WithSize(button.Font.PointSize), new NSRange(0, normalAttrString.Length));
+            disabledAttrString.AddAttribute(UIStringAttributeKey.Font, font.WithSize(button.Font.PointSize), new NSRange(0, disabledAttrString.Length));
+            highlightedAttrString.AddAttribute(UIStringAttributeKey.Font, font.WithSize(button.Font.PointSize), new NSRange(0, highlightedAttrString.Length));
+            button.SetAttributedTitle(normalAttrString, UIControlState.Normal);
+            button.SetAttributedTitle(disabledAttrString, UIControlState.Disabled);
+            button.SetAttributedTitle(highlightedAttrString, UIControlState.Highlighted);
             button.SizeToFit();
         }
 

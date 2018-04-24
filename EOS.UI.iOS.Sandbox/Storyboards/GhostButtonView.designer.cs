@@ -37,6 +37,9 @@ namespace EOS.UI.iOS.Sandbox
 		UIKit.UIButton resetButton { get; set; }
 
 		[Outlet]
+		UIKit.UITextField stateField { get; set; }
+
+		[Outlet]
 		UIKit.UITextField themeField { get; set; }
 		
 		void ReleaseDesignerOutlets ()
@@ -46,19 +49,9 @@ namespace EOS.UI.iOS.Sandbox
 				containerView = null;
 			}
 
-			if (themeField != null) {
-				themeField.Dispose ();
-				themeField = null;
-			}
-
-			if (fontField != null) {
-				fontField.Dispose ();
-				fontField = null;
-			}
-
-			if (letterSpacingField != null) {
-				letterSpacingField.Dispose ();
-				letterSpacingField = null;
+			if (disabledColorField != null) {
+				disabledColorField.Dispose ();
+				disabledColorField = null;
 			}
 
 			if (enabledColorField != null) {
@@ -66,14 +59,19 @@ namespace EOS.UI.iOS.Sandbox
 				enabledColorField = null;
 			}
 
-			if (disabledColorField != null) {
-				disabledColorField.Dispose ();
-				disabledColorField = null;
+			if (fontField != null) {
+				fontField.Dispose ();
+				fontField = null;
 			}
 
 			if (fontSizeField != null) {
 				fontSizeField.Dispose ();
 				fontSizeField = null;
+			}
+
+			if (letterSpacingField != null) {
+				letterSpacingField.Dispose ();
+				letterSpacingField = null;
 			}
 
 			if (pressedColorField != null) {
@@ -84,6 +82,16 @@ namespace EOS.UI.iOS.Sandbox
 			if (resetButton != null) {
 				resetButton.Dispose ();
 				resetButton = null;
+			}
+
+			if (themeField != null) {
+				themeField.Dispose ();
+				themeField = null;
+			}
+
+			if (stateField != null) {
+				stateField.Dispose ();
+				stateField = null;
 			}
 		}
 	}

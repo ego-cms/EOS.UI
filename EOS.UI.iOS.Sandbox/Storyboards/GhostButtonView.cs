@@ -29,12 +29,6 @@ namespace EOS.UI.iOS.Sandbox
 
             var ghostButton = new GhostButton();
             ghostButton.SetTitle("Press me", UIControlState.Normal);
-            ghostButton.LetterSpacing = 8;
-            ghostButton.TextSize = 20;
-            ghostButton.EnabledTextColor = UIColor.Red;
-            ghostButton.DisabledTextColor = UIColor.Blue;
-            ghostButton.PressedStateTextColor = UIColor.Orange;
-            ghostButton.Enabled = true;
 
             containerView.ConstrainLayout(() => ghostButton.Frame.GetCenterX() == containerView.Frame.GetCenterX() &&
                                           ghostButton.Frame.GetCenterY() == containerView.Frame.GetCenterY() , ghostButton);
@@ -47,7 +41,8 @@ namespace EOS.UI.iOS.Sandbox
                 enabledColorField,
                 disabledColorField,
                 pressedColorField,
-                fontSizeField
+                fontSizeField,
+                stateField
             };
 
             View.AddGestureRecognizer(new UITapGestureRecognizer(() =>
@@ -66,7 +61,7 @@ namespace EOS.UI.iOS.Sandbox
                 var provider = ghostButton.GetThemeProvider();
                 provider.SetCurrentTheme(e.Value);
                 ghostButton.UpdateAppearance();
-                _textFields.Except(new []{themeField}).ToList().ForEach(f => f.Text = String.Empty);
+                _textFields.Except(new []{themeField, stateField}).ToList().ForEach(f => f.Text = String.Empty);
             };
             themeField.Text = ghostButton.GetThemeProvider().GetCurrentTheme().ThemeValues[EOSConstants.BackgroundColor] == UIColor.White ?
                 "Light" : "Dark";
@@ -181,6 +176,19 @@ namespace EOS.UI.iOS.Sandbox
             pressedColorPicker.Delegate = pressedColorPickerDelegate;
             pressedColorField.InputView = pressedColorPicker;
 
+
+            var statePicker = new UIPickerView(rect);
+            statePicker.ShowSelectionIndicator = true;
+            statePicker.DataSource = new StatePickerSource();
+            var statePickerDelegate = new StatePickerDelegate();
+            statePickerDelegate.DidSelected += (object sender, KeyValuePair<string, bool> e) =>
+            {
+                ghostButton.Enabled = e.Value;
+                stateField.Text = e.Key;
+            };
+            stateField.Text = Constants.States.ElementAt(0).Key;
+            statePicker.Delegate = statePickerDelegate;
+            stateField.InputView = statePicker;
 		}
 	}
 }
