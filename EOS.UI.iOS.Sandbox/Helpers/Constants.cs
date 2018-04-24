@@ -2,11 +2,14 @@
 using System.Collections.Generic;
 using EOS.UI.Shared.Themes.Helpers;
 using UIKit;
+using System.Linq;
 
 namespace EOS.UI.iOS.Sandbox.Helpers
 {
     public static class Constants
     {
+        public static UIColor BackgroundColor = UIColor.FromRGB(117, 117, 117);
+
         public static Dictionary<string, UIColor> Colors = new Dictionary<string, UIColor>()
         {
             {"White", UIColor.White},
@@ -44,6 +47,8 @@ namespace EOS.UI.iOS.Sandbox.Helpers
                     Fonts.Add(font);
                 }
             }
+
+            Fonts = Fonts.OrderBy(f => f.Name).ToList();
         }
     }
 }

@@ -84,6 +84,9 @@ namespace EOS.UI.iOS.Controls
             get => _text;
             set
             {
+                if (_text == value)
+                    return;
+
                 _text = value;
                 NSMutableAttributedString attributedString = AttributedText != null ?
                        new NSMutableAttributedString(AttributedText) : new NSMutableAttributedString(_text);

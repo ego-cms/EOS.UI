@@ -36,6 +36,7 @@ namespace EOS.UI.Android.Sandbox.Helpers
             public const string Roboto = "Roboto";
             public const string Berkshireswash = "Berkshireswash";
             public const string Amita = "Amita";
+            public const string AcademyEngraved = "AcademyEngraved";
 
             public static Dictionary<string, string> FontsCollection = new Dictionary<string, string>()
             {
@@ -43,6 +44,7 @@ namespace EOS.UI.Android.Sandbox.Helpers
                 { Roboto, "Fonts/Roboto.ttf" },
                 { Berkshireswash, "Fonts/Berkshireswash.ttf" },
                 { Amita, "Fonts/Amita.ttf" },
+                { AcademyEngraved, "Fonts/academyEngraved.ttf" },
             };
         }
 
