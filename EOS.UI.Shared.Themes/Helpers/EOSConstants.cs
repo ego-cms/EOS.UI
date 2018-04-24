@@ -10,7 +10,7 @@
         public const string LetterSpacing = "letterSpacing";
     }
 
-    public static class Controls
+    public static class ControlNames
     {
         public const string BadgeLabel = "Badge label";
         public const string GhostButton = "Ghost button";

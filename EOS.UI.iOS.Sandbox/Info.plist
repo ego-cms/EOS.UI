@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>CFBundleName</key>
-	<string>UIFrameworks.Sandbox</string>
+	<string>EOS Sandbox</string>
 	<key>CFBundleIdentifier</key>
 	<string>com.egocms.uiframeworks.UIFrameworks-Sandbox</string>
 	<key>CFBundleShortVersionString</key>
@@ -29,8 +29,6 @@
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
 		<string>UIInterfaceOrientationPortraitUpsideDown</string>
-		<string>UIInterfaceOrientationLandscapeLeft</string>
-		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
 	<key>XSAppIconAssets</key>
 	<string>Assets.xcassets/AppIcon.appiconset</string>

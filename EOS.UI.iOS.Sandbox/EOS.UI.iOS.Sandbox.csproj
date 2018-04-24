@@ -89,12 +89,24 @@
     <ImageAsset Include="Assets.xcassets\Contents.json">
       <Visible>false</Visible>
     </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon-App-20x20%402x.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon-App-20x20%403x.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon-App-29x29%402x.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon-App-29x29%403x.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon-App-40x40%402x.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon-App-40x40%403x.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon-App-60x60%402x.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon-App-60x60%403x.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon-App-76x76%401x.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon-App-76x76%402x.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon-App-83.5x83.5%402x.png" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Resources\" />
     <Folder Include="TableSources\" />
-    <Folder Include="Controls\" />
     <Folder Include="Storyboards\" />
+    <Folder Include="Controls\" />
+    <Folder Include="Helpers\" />
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="LaunchScreen.storyboard" />
@@ -114,7 +126,6 @@
     <Compile Include="Main.cs" />
     <Compile Include="AppDelegate.cs" />
     <Compile Include="TableSources\ControlTableSource.cs" />
-    <Compile Include="Controls\ControlsData.cs" />
     <Compile Include="Storyboards\ViewController.cs" />
     <Compile Include="Storyboards\ViewController.designer.cs">
       <DependentUpon>ViewController.cs</DependentUpon>
@@ -144,6 +155,8 @@
     <Compile Include="Storyboards\InputControlView.designer.cs">
       <DependentUpon>InputControlView.cs</DependentUpon>
     </Compile>
+    <Compile Include="Controls\ControlsData.cs" />
+    <Compile Include="Helpers\Constants.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\EOS.UI.iOS\EOS.UI.iOS.csproj">
@@ -151,6 +164,5 @@
       <Name>EOS.UI.iOS</Name>
     </ProjectReference>
   </ItemGroup>
-  <Import Project="..\EOS.UI.Shared.Themes\EOS.UI.Shared.Themes.projitems" Label="Shared" Condition="Exists('..\EOS.UI.Shared.Themes\EOS.UI.Shared.Themes.projitems')" />
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
 </Project>

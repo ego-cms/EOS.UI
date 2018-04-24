@@ -12,7 +12,7 @@ namespace EOS.UI.iOS.Themes
             { EOSConstants.BackgroundColor, UIColor.Black },
             { EOSConstants.TextColor, UIColor.White },
             { EOSConstants.TextSize, 17 },
-            { EOSConstants.Font, "Fonts/capture_it_light.ttf" },
+            { EOSConstants.Font, UIFont.SystemFontOfSize(17) },
             { EOSConstants.CornerRadius, 3 },
             { EOSConstants.LetterSpacing, 1 },
         };

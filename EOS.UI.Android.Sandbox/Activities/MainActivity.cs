@@ -1,8 +1,9 @@
 ﻿using System;
-using System.Linq;
 using System.Collections.Generic;
+using System.Linq;
 using Android.App;
 using Android.Content;
+using Android.Content.PM;
 using Android.OS;
 using Android.Support.V7.Widget;
 using EOS.UI.Android.Sandbox.Activities;
@@ -11,18 +12,18 @@ using UIFrameworks.Shared.Themes.Helpers;
 
 namespace EOS.UI.Android.Sandbox
 {
-    [Activity(Label = "Sandbox", MainLauncher = true, Icon = "@mipmap/icon")]
+    [Activity(Label = "@string/app_name", MainLauncher = true, Icon = "@mipmap/icon", ScreenOrientation = ScreenOrientation.Portrait)]
     public class MainActivity : Activity
     {
         private RecyclerView _recyclerView;
         private Dictionary<string, Type> _controlDictionary = new Dictionary<string, Type>
         {
-            { Controls.BadgeLabel, typeof(BadgeLabelActivity) },
-            { Controls.GhostButton, typeof(GhostButtonActivity) },
-            { Controls.SimpleButton,typeof(SimpleButtonActivity) },
-            { Controls.SimpleLabel, typeof(SimpleLabelActivity) },
-            { Controls.Input, typeof(InputActivity) },
-            { Controls.FabProgress,typeof(FabProgressActivity) }
+            { ControlNames.BadgeLabel, typeof(BadgeLabelActivity) },
+            { ControlNames.SimpleLabel, typeof(SimpleLabelActivity) },
+            { ControlNames.GhostButton, typeof(GhostButtonActivity) },
+            { ControlNames.SimpleButton,typeof(SimpleButtonActivity) },
+            { ControlNames.FabProgress,typeof(FabProgressActivity) },
+            { ControlNames.Input, typeof(InputActivity) }
         };
 
         protected override void OnCreate(Bundle savedInstanceState)
