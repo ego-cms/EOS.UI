@@ -58,7 +58,6 @@
   </ItemGroup>
   <ItemGroup>
     <AndroidAsset Include="Assets\Fonts\capture_it_light.ttf" />
-    <AndroidAsset Include="Assets\Fonts\academyEngraved.ttf" />
   </ItemGroup>
   <ItemGroup>
     <AndroidAsset Include="Assets\Fonts\capture_it_dark.ttf" />

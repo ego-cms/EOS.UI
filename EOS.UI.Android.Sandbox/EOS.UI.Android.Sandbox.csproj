@@ -132,6 +132,7 @@
     <AndroidResource Include="Resources\layout\SimpleLabelLayout.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
+    <AndroidAsset Include="Assets\Fonts\academyEngraved.ttf" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\layout\Main.axml">
