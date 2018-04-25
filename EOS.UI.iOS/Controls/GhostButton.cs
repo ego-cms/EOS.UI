@@ -15,8 +15,7 @@ namespace EOS.UI.iOS.Controls
     [Register("GhostButton")]
     public class GhostButton : UIButton, IEOSThemeControl
     {
-        private bool _isEOSCustomizationIgnored = false;
-        public bool IsEOSCustomizationIgnored => _isEOSCustomizationIgnored;
+        public bool IsEOSCustomizationIgnored { get; private set; }
 
 
         private UIFont _font;
@@ -28,7 +27,7 @@ namespace EOS.UI.iOS.Controls
                 _font = value.WithSize(TextSize);
                 this.SetFont(_font);
                 base.Font = _font;
-                _isEOSCustomizationIgnored = true;
+                IsEOSCustomizationIgnored = true;
             }
         }
 
@@ -40,7 +39,7 @@ namespace EOS.UI.iOS.Controls
             {
                 _letterSpacing = value;
                 this.SetLetterSpacing(_letterSpacing);
-                _isEOSCustomizationIgnored = true;
+                IsEOSCustomizationIgnored = true;
             }
         }
 
@@ -52,7 +51,7 @@ namespace EOS.UI.iOS.Controls
             {
                 _enabledTextColor = value;
                 SetTitleColor(_enabledTextColor, UIControlState.Normal);
-                _isEOSCustomizationIgnored = true;
+                IsEOSCustomizationIgnored = true;
             }
         }
 
@@ -64,7 +63,7 @@ namespace EOS.UI.iOS.Controls
             {
                 _disabledTextColor = value;
                 SetTitleColor(_disabledTextColor, UIControlState.Disabled);
-                _isEOSCustomizationIgnored = true;
+                IsEOSCustomizationIgnored = true;
             }
         }
 
@@ -76,7 +75,7 @@ namespace EOS.UI.iOS.Controls
             {
                 _textSize = value;
                 this.SetTextSize(_textSize);
-                _isEOSCustomizationIgnored = true;
+                IsEOSCustomizationIgnored = true;
             }
         }
 
@@ -88,7 +87,7 @@ namespace EOS.UI.iOS.Controls
             {
                 _pressedStateTextColor = value;
                 SetTitleColor(_pressedStateTextColor, UIControlState.Highlighted);
-                _isEOSCustomizationIgnored = true;
+                IsEOSCustomizationIgnored = true;
             }
         }
 
@@ -113,6 +112,7 @@ namespace EOS.UI.iOS.Controls
         {
             Layer.MasksToBounds = true;
             Layer.CornerRadius = 5;
+            BackgroundColor = UIColor.Clear;
             base.SetAttributedTitle(new NSAttributedString(String.Empty), UIControlState.Normal);
             UpdateAppearance();
         }
@@ -166,7 +166,7 @@ namespace EOS.UI.iOS.Controls
 
         public void ResetCustomization()
         {
-            _isEOSCustomizationIgnored = false;
+            IsEOSCustomizationIgnored = false;
             UpdateAppearance();
         }
 
@@ -180,14 +180,13 @@ namespace EOS.UI.iOS.Controls
             if (!IsEOSCustomizationIgnored)
             {
                 var provider = GetThemeProvider();
-                BackgroundColor = provider.GetEOSProperty<UIColor>(this, EOSConstants.BackgroundColor);
                 Font = provider.GetEOSProperty<UIFont>(this, EOSConstants.Font);
                 EnabledTextColor = provider.GetEOSProperty<UIColor>(this, EOSConstants.TextColor);
                 DisabledTextColor = provider.GetEOSProperty<UIColor>(this, EOSConstants.DisabledTextColor);
                 PressedStateTextColor = provider.GetEOSProperty<UIColor>(this, EOSConstants.PressedStateTextColor);
                 TextSize = provider.GetEOSProperty<int>(this, EOSConstants.TextSize);
                 LetterSpacing = provider.GetEOSProperty<int>(this, EOSConstants.LetterSpacing);
-                _isEOSCustomizationIgnored = false;
+                IsEOSCustomizationIgnored = false;
                 SizeToFit();
             }
         }
