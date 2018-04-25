@@ -518,36 +518,77 @@ namespace EOS.UI.iOS.Extensions
         /// <param name="scaleDuration">Scale duration.</param>
         /// <param name="fadeDuration">Fade duration.</param>
         /// <param name="completitionHandler">Completition handler.</param>
-        internal static void RippleAnimate(this UIButton button, CGPoint? startLocation = null, UIColor rippleColor = null, nfloat? scaleDuration = null, nfloat? fadeDuration = null, Action completitionHandler = null)
+        internal static void RippleAnimate(this UIButton button, CGPoint startLocation, UIColor rippleColor = null, nfloat? scaleDuration = null, nfloat? fadeDuration = null, Action completitionHandler = null)
         {
-            const int scale = 100;
             var color = rippleColor ?? UIColor.LightGray.ColorWithAlpha(0.1f);
-            var scaleTime = scaleDuration ?? 0.5f;
-            var fadeTime = fadeDuration ?? 0.1f;
+            var scaleTime = scaleDuration ?? 1.5f;
+            var fadeTime = fadeDuration ?? 1.5f;
+            var initialSize = 10.0;
 
-            var rippleView = new RippleView(button.Bounds, startLocation.GetValueOrDefault(), color);
-            button.AddSubview(rippleView);
+            if (startLocation == default(CGPoint))
+                throw new ArgumentNullException(nameof(startLocation), "RippleAnimate must have 'startLocation' argument");
 
-            var scaleAction = new Action(() =>
+            var tapLocation = startLocation;
+
+            CALayer aLayer = SetupAnimationLayer(button, color, initialSize, tapLocation);
+            CABasicAnimation animation = CreateScaleAnimation(button, initialSize, scaleTime);
+            CAKeyFrameAnimation fade = SetupFadeAnimation(fadeTime);
+            AddAnimationsToLayer(aLayer, animation, fade);
+        }
+
+        private static void AddAnimationsToLayer(CALayer aLayer, CABasicAnimation animation, CAKeyFrameAnimation fade)
+        {
+            var animGroup = new CAAnimationGroup();
+
+            animGroup.Duration = 0.5;
+            animGroup.Delegate = new RippleAnimationDelegate();
+            animGroup.Animations = new[] { (CAAnimation)animation, fade };
+            animGroup.SetValueForKey(aLayer, new NSString("animationLayer"));
+            aLayer.AddAnimation(animGroup, "scale");
+        }
+
+        private static CAKeyFrameAnimation SetupFadeAnimation(nfloat fadeTime)
+        {
+            var fade = CAKeyFrameAnimation.FromKeyPath("opacity");
+            fade.Values = new[] { NSObject.FromObject(1.0), NSObject.FromObject(1.0), NSObject.FromObject(0.5), NSObject.FromObject(0.5), NSObject.FromObject(0.0) };
+            fade.Duration = fadeTime;
+            return fade;
+        }
+
+        private static CALayer SetupAnimationLayer(UIButton button, UIColor color, double initialSize, CGPoint tapLocation)
+        {
+            var aLayer = new CALayer();
+            aLayer.BackgroundColor = color.CGColor;
+
+            aLayer.Frame = new CGRect(0, 0, initialSize, initialSize);
+            aLayer.CornerRadius = (nfloat)initialSize / 2;
+            aLayer.MasksToBounds = true;
+            aLayer.Position = tapLocation;
+            button.Layer.InsertSublayer(aLayer, button.Layer.Sublayers.Length);
+            return aLayer;
+        }
+
+        private static CABasicAnimation CreateScaleAnimation(UIButton button, double initialSize, double scaleTime)
+        {
+            var animation = CABasicAnimation.FromKeyPath("transform.scale");
+            animation.To = NSObject.FromObject(10.5 * Math.Max(button.Frame.Width, button.Frame.Height) / initialSize);
+            animation.Duration = scaleTime;
+            animation.RemovedOnCompletion = true;
+            animation.FillMode = CAFillMode.Forwards;
+            return animation;
+        }
+    }
+
+    class RippleAnimationDelegate : CAAnimationDelegate
+    {
+        public override void AnimationStopped(CAAnimation anim, bool finished)
+        {
+            var layer = anim.ValueForKeyPath(new NSString("animationLayer")) as CALayer;
+            if (layer != null)
             {
-                var widthRatio = button.Frame.Width / rippleView.Frame.Width;
-                var transform = new CGAffineTransform(widthRatio * scale, 0, 0, widthRatio * scale, 0, 0);
-                rippleView.Transform = transform;
-            });
-
-            var fadeAction = new Action(() =>
-            {
-                rippleView.Alpha = 0;
-            });
-
-            UIView.Animate(scaleTime, scaleAction, () => 
-            {
-                UIView.Animate(fadeTime, fadeAction, () =>
-                {
-                    rippleView.RemoveFromSuperview();
-                    completitionHandler?.Invoke();
-                });
-            });
+                layer.RemoveAnimation("scale");
+                layer.RemoveFromSuperLayer();
+            }
         }
     }
 }

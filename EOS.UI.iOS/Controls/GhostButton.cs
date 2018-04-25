@@ -196,7 +196,7 @@ namespace EOS.UI.iOS.Controls
             base.TouchesBegan(touches, evt);
             var touch = touches.AnyObject as UITouch;
             var location = touch.LocationInView(this);
-            this.RippleAnimate();
+            this.RippleAnimate(location);
 		}
 	}
 }
