@@ -1,9 +1,7 @@
 ﻿using System.Collections;
 using Android.Content;
-using Android.Graphics;
 using Android.Views;
 using Android.Widget;
-using A = Android;
 
 namespace EOS.UI.Android.Sandbox.Adapters
 {
@@ -23,7 +21,7 @@ namespace EOS.UI.Android.Sandbox.Adapters
             text.Gravity = GravityFlags.CenterVertical;
             text.SetText(item.ToString(), TextView.BufferType.Normal);
             var parameters = text.LayoutParameters;
-            parameters.Height = position == 0 ? parameters.Height = 1 : parameters.Height = 65;
+            parameters.Height = position == 0 ? parameters.Height = 1 : parameters.Height = (int)(35 * Context.Resources.DisplayMetrics.Density);
             text.LayoutParameters = parameters;
 
             return view;
