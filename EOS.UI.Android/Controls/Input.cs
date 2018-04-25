@@ -8,6 +8,7 @@ using Android.Views;
 using Android.Widget;
 using EOS.UI.Shared.Themes.Helpers;
 using EOS.UI.Shared.Themes.Interfaces;
+using Java.Lang;
 using UIFrameworks.Android.Themes;
 using UIFrameworks.Shared.Themes.Helpers;
 using UIFrameworks.Shared.Themes.Interfaces;
@@ -43,36 +44,101 @@ namespace EOS.UI.Android.Controls
 
         #region customization
 
-        private Drawable _drawableLeftUnfocuced;
-        public Drawable DrawableLeftUnfocuced
+        public override bool Enabled
         {
-            get => _drawableLeftUnfocuced;
+            get => base.Enabled;
             set
             {
-                _drawableLeftUnfocuced = value;
-                if(FindFocus() != this)
-                    SetCompoundDrawablesWithIntrinsicBounds(_drawableLeftUnfocuced, null, null, null);
+                if(Enabled != value)
+                    UpdateEnabledState(value);
+                base.Enabled = value;
             }
         }
 
-        private Drawable _drawableLeftFocuced;
-        public Drawable DrawableLeftFocuced
+        private Color _underlineColorFocused;
+        public Color UnderlineColorFocused
         {
-            get => _drawableLeftFocuced;
+            get => _underlineColorFocused;
             set
             {
-                _drawableLeftFocuced = value;
-                if(FindFocus() == this)
-                    SetCompoundDrawablesWithIntrinsicBounds(_drawableLeftUnfocuced, null, null, null);
+                IsEOSCustomizationIgnored = true;
+                _underlineColorFocused = value;
+                if(Enabled && FindFocus() == this)
+                    Background.SetColorFilter(value, PorterDuff.Mode.SrcIn);
             }
         }
 
-        public override void SetCompoundDrawablesWithIntrinsicBounds(Drawable left, Drawable top, Drawable right, Drawable bottom)
+        private Color _underlineColorUnfocused;
+        public Color UnderlineColorUnfocused
+        {
+            get => _underlineColorFocused;
+            set
+            {
+                IsEOSCustomizationIgnored = true;
+                _underlineColorUnfocused = value;
+                if(Enabled && FindFocus() != this)
+                    Background.SetColorFilter(value, PorterDuff.Mode.SrcIn);
+            }
+        }
+
+        private Color _underlineColorDisabled;
+        public Color UnderlineColorDisabled
+        {
+            get => _underlineColorDisabled;
+            set
+            {
+                IsEOSCustomizationIgnored = true;
+                _underlineColorDisabled = value;
+                if(!Enabled)
+                    Background.SetColorFilter(value, PorterDuff.Mode.SrcIn);
+            }
+        }
+
+        private Drawable _drawableLeftUnfocused;
+        public Drawable DrawableLeftUnfocused
+        {
+            get => _drawableLeftUnfocused;
+            set
+            {
+                IsEOSCustomizationIgnored = true;
+                _drawableLeftUnfocused = value;
+                if(Enabled && FindFocus() != this)
+                    base.SetCompoundDrawablesWithIntrinsicBounds(_drawableLeftUnfocused, null, null, null);
+            }
+        }
+
+        private Drawable _drawableLeftFocused;
+        public Drawable DrawableLeftFocused
+        {
+            get => _drawableLeftFocused;
+            set
+            {
+                IsEOSCustomizationIgnored = true;
+                _drawableLeftFocused = value;
+                if(Enabled && FindFocus() == this)
+                    base.SetCompoundDrawablesWithIntrinsicBounds(_drawableLeftFocused, null, null, null);
+            }
+        }
+
+        private Drawable _drawableLeftDisabled;
+        public Drawable DrawableLeftDisabled
+        {
+            get => _drawableLeftDisabled;
+            set
+            {
+                IsEOSCustomizationIgnored = true;
+                _drawableLeftDisabled = value;
+                if(!Enabled)
+                    base.SetCompoundDrawablesWithIntrinsicBounds(_drawableLeftDisabled, null, null, null);
+            }
+        }
+
+        public override void SetCompoundDrawables(Drawable left, Drawable top, Drawable right, Drawable bottom)
         {
             if(left != null)
                 IsEOSCustomizationIgnored = true;
 
-            base.SetCompoundDrawablesWithIntrinsicBounds(left, top, right, bottom);
+            base.SetCompoundDrawables(left, top, right, bottom);
         }
 
         private Color _hintTextColor;
@@ -83,26 +149,27 @@ namespace EOS.UI.Android.Controls
             {
                 IsEOSCustomizationIgnored = true;
                 _hintTextColor = value;
-                base.SetHintTextColor(value);
+                if(Enabled)
+                    base.SetHintTextColor(value);
             }
         }
-        
-        public new void SetHintTextColor(Color color)
-        {
-            HintTextColor = color;
-        }
 
-        private float _hintTextSize;
-        public float HintTextSize
+        private Color _hintTextColorDisabled;
+        public Color HintTextColorDisabled
         {
-            get => _hintTextSize;
+            get => _hintTextColorDisabled;
             set
             {
                 IsEOSCustomizationIgnored = true;
-                _hintTextSize = value;
-                if(FindFocus() != this)
-                    TextSize = _hintTextSize;
+                _hintTextColorDisabled = value;
+                if(!Enabled)
+                    base.SetHintTextColor(value);
             }
+        }
+
+        public new void SetHintTextColor(Color color)
+        {
+            HintTextColor = color;
         }
 
         public override Typeface Typeface
@@ -139,25 +206,37 @@ namespace EOS.UI.Android.Controls
             {
                 IsEOSCustomizationIgnored = true;
                 _textColor = value;
-                base.SetTextColor(value);
+                if(Enabled)
+                    base.SetTextColor(value);
             }
         }
+
+        private Color _textColorDisabled;
+        public Color TextColorDisabled
+        {
+            get => _textColorDisabled;
+            set
+            {
+                IsEOSCustomizationIgnored = true;
+                _textColorDisabled = value;
+                if(!Enabled)
+                    base.SetTextColor(value);
+            }
+        }
+
 
         public override void SetTextColor(Color color)
         {
             TextColor = color;
         }
 
-        private float _textSize;
         public override float TextSize
         {
-            get => _textSize;
+            get => base.TextSize;
             set
             {
                 IsEOSCustomizationIgnored = true;
-                _textSize = value;
-                if(FindFocus() != this)
-                    base.TextSize = value;
+                base.TextSize = value;
             }
         }
 
@@ -180,6 +259,28 @@ namespace EOS.UI.Android.Controls
             //TODO: Implement set attrs logic
         }
 
+
+        private void UpdateEnabledState(bool enabled)
+        {
+            base.SetTextColor(enabled ? TextColor : TextColorDisabled);
+            base.SetHintTextColor(enabled ? HintTextColor : HintTextColorDisabled);
+            if(!enabled)
+            {
+                base.SetCompoundDrawablesWithIntrinsicBounds(DrawableLeftDisabled, null, null, null);
+                Background.SetColorFilter(UnderlineColorDisabled, PorterDuff.Mode.SrcIn);
+            }
+            else if(FindFocus() == this)
+            {
+                base.SetCompoundDrawablesWithIntrinsicBounds(DrawableLeftFocused, null, null, null);
+                Background.SetColorFilter(UnderlineColorFocused, PorterDuff.Mode.SrcIn);
+            }
+            else
+            {
+                base.SetCompoundDrawablesWithIntrinsicBounds(DrawableLeftUnfocused, null, null, null);
+                Background.SetColorFilter(UnderlineColorUnfocused, PorterDuff.Mode.SrcIn);
+            }
+        }
+
         #endregion
 
         #region IEOSThemeControl implementation
@@ -195,14 +296,21 @@ namespace EOS.UI.Android.Controls
         {
             if(!IsEOSCustomizationIgnored)
             {
-                base.SetTypeface(Typeface.CreateFromAsset(Context.Assets, GetThemeProvider().GetEOSProperty<string>(this, EOSConstants.Font)), TypefaceStyle.Normal);
-                base.LetterSpacing = GetThemeProvider().GetEOSProperty<float>(this, EOSConstants.LetterSpacing);
-                base.SetTextColor(GetThemeProvider().GetEOSProperty<Color>(this, EOSConstants.TextColor));
+                Typeface = Typeface.CreateFromAsset(Context.Assets, GetThemeProvider().GetEOSProperty<string>(this, EOSConstants.Font));
+                LetterSpacing = GetThemeProvider().GetEOSProperty<float>(this, EOSConstants.LetterSpacing);
                 TextSize = GetThemeProvider().GetEOSProperty<float>(this, EOSConstants.TextSize);
-                HintTextSize = GetThemeProvider().GetEOSProperty<float>(this, EOSConstants.HintTextSize);
-                base.SetHintTextColor(GetThemeProvider().GetEOSProperty<Color>(this, EOSConstants.HintTextColor));
-                DrawableLeftFocuced = Context.Resources.GetDrawable(GetThemeProvider().GetEOSProperty<int>(this, EOSConstants.LeftImageFocused));
-                DrawableLeftUnfocuced = Context.Resources.GetDrawable(GetThemeProvider().GetEOSProperty<int>(this, EOSConstants.LeftImageUnfocused));
+                TextColor = GetThemeProvider().GetEOSProperty<Color>(this, EOSConstants.TextColor);
+                TextColorDisabled = GetThemeProvider().GetEOSProperty<Color>(this, EOSConstants.TextColorDisabled);
+                HintTextColor = GetThemeProvider().GetEOSProperty<Color>(this, EOSConstants.HintTextColor);
+                HintTextColorDisabled = GetThemeProvider().GetEOSProperty<Color>(this, EOSConstants.HintTextColorDisabled);
+                DrawableLeftFocused = Context.Resources.GetDrawable(GetThemeProvider().GetEOSProperty<int>(this, EOSConstants.LeftImageFocused));
+                DrawableLeftUnfocused = Context.Resources.GetDrawable(GetThemeProvider().GetEOSProperty<int>(this, EOSConstants.LeftImageUnfocused));
+                DrawableLeftDisabled = Context.Resources.GetDrawable(GetThemeProvider().GetEOSProperty<int>(this, EOSConstants.LeftImageDisabled));
+                UnderlineColorFocused = GetThemeProvider().GetEOSProperty<Color>(this, EOSConstants.UnderlineColorFocused);
+                UnderlineColorUnfocused = GetThemeProvider().GetEOSProperty<Color>(this, EOSConstants.UnderlineColorUnfocused);
+                UnderlineColorDisabled = GetThemeProvider().GetEOSProperty<Color>(this, EOSConstants.UnderlineColorDisabled);
+                IsEOSCustomizationIgnored = false;
+                UpdateEnabledState(Enabled);
             }
         }
 
@@ -228,7 +336,8 @@ namespace EOS.UI.Android.Controls
 
         public void OnFocusChange(View v, bool hasFocus)
         {
-            SetCompoundDrawablesWithIntrinsicBounds(hasFocus ? DrawableLeftFocuced : DrawableLeftUnfocuced, null, null, null);
+            Background.SetColorFilter(hasFocus ? UnderlineColorFocused : UnderlineColorUnfocused, PorterDuff.Mode.SrcIn);
+            base.SetCompoundDrawablesWithIntrinsicBounds(hasFocus ? DrawableLeftFocused : DrawableLeftUnfocused, null, null, null);
         }
 
         #endregion

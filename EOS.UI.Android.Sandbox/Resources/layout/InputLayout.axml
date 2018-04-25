@@ -9,11 +9,17 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp">
         <EOS.UI.Android.Controls.Input
-            android:id="@+id/input"
+            android:id="@+id/inputTop"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Default Text"
-            android:layout_gravity="center" />
+            android:layout_gravity="center"
+            android:hint="Enter text" />
+        <EOS.UI.Android.Controls.Input
+            android:id="@+id/inputBottom"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:hint="Enter text" />
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
@@ -28,7 +34,7 @@
             android:layout_marginBottom="5dp">
             <TextView
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:text="Theme"
                 android:textSize="18sp"
                 android:layout_weight="2"
@@ -45,10 +51,6 @@
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:background="@android:color/darker_gray" />
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="@android:color/darker_gray" />
         <LinearLayout
             android:orientation="horizontal"
             android:layout_width="match_parent"
@@ -58,7 +60,7 @@
             android:layout_marginBottom="5dp">
             <TextView
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:text="Font"
                 android:textSize="18sp"
                 android:layout_weight="2"
@@ -84,33 +86,7 @@
             android:layout_marginBottom="5dp">
             <TextView
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Text color"
-                android:textSize="18sp"
-                android:layout_weight="2"
-                android:paddingLeft="3dp" />
-            <Spinner
-                android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:id="@+id/spinnerTextColor"
-                android:layout_weight="1"
-                android:paddingLeft="3dp"
-                android:paddingEnd="3dp" />
-        </LinearLayout>
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="@android:color/darker_gray" />
-        <LinearLayout
-            android:orientation="horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:weightSum="3"
-            android:layout_marginBottom="5dp">
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
                 android:text="Letter spacing"
                 android:textSize="18sp"
                 android:layout_weight="2"
@@ -136,7 +112,7 @@
             android:layout_marginBottom="5dp">
             <TextView
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:text="Text size"
                 android:textSize="18sp"
                 android:layout_weight="2"
@@ -162,15 +138,15 @@
             android:layout_marginBottom="5dp">
             <TextView
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Hint text size"
+                android:layout_height="match_parent"
+                android:text="Text color"
                 android:textSize="18sp"
                 android:layout_weight="2"
                 android:paddingLeft="3dp" />
             <Spinner
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:id="@+id/spinnerHintTextSize"
+                android:id="@+id/spinnerTextColor"
                 android:layout_weight="1"
                 android:paddingLeft="3dp"
                 android:paddingEnd="3dp" />
@@ -188,7 +164,33 @@
             android:layout_marginBottom="5dp">
             <TextView
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
+                android:text="Text color disabled"
+                android:textSize="18sp"
+                android:layout_weight="2"
+                android:paddingLeft="3dp" />
+            <Spinner
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/spinnerTextColorDisabled"
+                android:layout_weight="1"
+                android:paddingLeft="3dp"
+                android:paddingEnd="3dp" />
+        </LinearLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@android:color/darker_gray" />
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:weightSum="3"
+            android:layout_marginBottom="5dp">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
                 android:text="Hint text color"
                 android:textSize="18sp"
                 android:layout_weight="2"
@@ -214,8 +216,60 @@
             android:layout_marginBottom="5dp">
             <TextView
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Drawable unfocused"
+                android:layout_height="match_parent"
+                android:text="Hint text color disabled"
+                android:textSize="18sp"
+                android:layout_weight="2"
+                android:paddingLeft="3dp" />
+            <Spinner
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/spinnerHintTextColorDisabled"
+                android:layout_weight="1"
+                android:paddingLeft="3dp"
+                android:paddingRight="3dp" />
+        </LinearLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@android:color/darker_gray" />
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:weightSum="3"
+            android:layout_marginBottom="5dp">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="Icon focused"
+                android:textSize="18sp"
+                android:layout_weight="2"
+                android:paddingLeft="3dp" />
+            <Spinner
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/spinnerDrawableFocused"
+                android:layout_weight="1"
+                android:paddingLeft="3dp"
+                android:paddingRight="3dp" />
+        </LinearLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@android:color/darker_gray" />
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:weightSum="3"
+            android:layout_marginBottom="5dp">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="Icon unfocused"
                 android:textSize="18sp"
                 android:layout_weight="2"
                 android:paddingLeft="3dp" />
@@ -241,17 +295,122 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Drawable focused"
+                android:text="Icon disabled"
                 android:textSize="18sp"
                 android:layout_weight="2"
                 android:paddingLeft="3dp" />
             <Spinner
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:id="@+id/spinnerDrawableFocused"
+                android:id="@+id/spinnerDrawableDisabled"
                 android:layout_weight="1"
                 android:paddingLeft="3dp"
                 android:paddingRight="3dp" />
+        </LinearLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@android:color/darker_gray" />
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:weightSum="3"
+            android:layout_marginBottom="5dp">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="Underline color focused"
+                android:textSize="18sp"
+                android:layout_weight="2"
+                android:paddingLeft="3dp" />
+            <Spinner
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/spinnerUnderlineColorFocused"
+                android:layout_weight="1"
+                android:paddingLeft="3dp"
+                android:paddingRight="3dp" />
+        </LinearLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@android:color/darker_gray" />
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:weightSum="3"
+            android:layout_marginBottom="5dp">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="Underline color unfocused"
+                android:textSize="18sp"
+                android:layout_weight="2"
+                android:paddingLeft="3dp" />
+            <Spinner
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/spinnerUnderlineColorUnfocused"
+                android:layout_weight="1"
+                android:paddingLeft="3dp"
+                android:paddingRight="3dp" />
+        </LinearLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@android:color/darker_gray" />
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:weightSum="3"
+            android:layout_marginBottom="5dp">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="Underline color disabled"
+                android:textSize="18sp"
+                android:layout_weight="2"
+                android:paddingLeft="3dp" />
+            <Spinner
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/spinnerUnderlineColorDisabled"
+                android:layout_weight="1"
+                android:paddingLeft="3dp"
+                android:paddingRight="3dp" />
+        </LinearLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@android:color/darker_gray" />
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:weightSum="3"
+            android:layout_marginBottom="5dp">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="Disabled"
+                android:textSize="18sp"
+                android:paddingLeft="3dp"
+                android:layout_weight="2"
+                android:gravity="center_vertical" />
+            <Switch
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/switchDisabled"
+                android:paddingLeft="3dp"
+                android:paddingRight="3dp"
+                android:layout_weight="1" />
         </LinearLayout>
         <View
             android:layout_width="match_parent"

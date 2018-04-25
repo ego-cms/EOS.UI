@@ -61,10 +61,22 @@
     <AndroidAsset Include="Assets\Fonts\OpenSansRegular.ttf" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\DrawableLeftFocused.xml" />
+    <AndroidResource Include="Resources\drawable\AccountCircle.xml" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\DrawableLeftUnfocused.xml" />
+    <AndroidResource Include="Resources\drawable\AccountKey.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\AccountOff.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\Airballoon.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\Android.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\Apple.xml" />
   </ItemGroup>
   <Import Project="..\EOS.UI.Shared.Themes\EOS.UI.Shared.Themes.projitems" Label="Shared" />
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />

@@ -12,14 +12,19 @@ namespace UIFrameworks.Android.Themes
         {
             { EOSConstants.BackgroundColor, Color.White },
             { EOSConstants.TextColor, Color.Black },
+            { EOSConstants.TextColorDisabled, Color.DarkGray },
             { EOSConstants.TextSize, 17f },
             { EOSConstants.Font, "Fonts/OpenSansRegular.ttf" },
             { EOSConstants.CornerRadius, 5f },
             { EOSConstants.LetterSpacing, 0.1f },
-            { EOSConstants.HintTextColor, Color.Red },
-            { EOSConstants.HintTextSize, 10f },
-            { EOSConstants.LeftImageFocused, Resource.Drawable.DrawableLeftFocused },
-            { EOSConstants.LeftImageUnfocused, Resource.Drawable.DrawableLeftFocused },
+            { EOSConstants.HintTextColor, Color.LightGray },
+            { EOSConstants.HintTextColorDisabled, Color.Gray },
+            { EOSConstants.LeftImageFocused, Resource.Drawable.AccountCircle },
+            { EOSConstants.LeftImageUnfocused, Resource.Drawable.AccountKey },
+            { EOSConstants.LeftImageDisabled, Resource.Drawable.AccountOff },
+            { EOSConstants.UnderlineColorFocused, Color.White },
+            { EOSConstants.UnderlineColorUnfocused, Color.DarkGray },
+            { EOSConstants.UnderlineColorDisabled, Color.LightGray },
         };
     }
 }
