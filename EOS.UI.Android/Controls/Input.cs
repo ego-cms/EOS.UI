@@ -4,6 +4,7 @@ using Android.Graphics;
 using Android.Graphics.Drawables;
 using Android.Runtime;
 using Android.Util;
+using Android.Views;
 using Android.Widget;
 using EOS.UI.Shared.Themes.Helpers;
 using EOS.UI.Shared.Themes.Interfaces;
@@ -14,7 +15,7 @@ using A = Android;
 
 namespace EOS.UI.Android.Controls
 {
-    public class Input: EditText, IEOSThemeControl
+    public class Input: EditText, IEOSThemeControl, View.IOnFocusChangeListener
     {
         #region constructors
 
@@ -74,21 +75,34 @@ namespace EOS.UI.Android.Controls
             base.SetCompoundDrawablesWithIntrinsicBounds(left, top, right, bottom);
         }
 
-        private Color _backgroundColor;
-        public Color BackgroundColor
+        private Color _hintTextColor;
+        public Color HintTextColor
         {
-            get => _backgroundColor;
+            get => _hintTextColor;
             set
             {
                 IsEOSCustomizationIgnored = true;
-                _backgroundColor = value;
-                (Background as GradientDrawable).SetColor(_backgroundColor);
+                _hintTextColor = value;
+                base.SetHintTextColor(value);
             }
         }
-
-        public override void SetBackgroundColor(Color color)
+        
+        public new void SetHintTextColor(Color color)
         {
-            BackgroundColor = color;
+            HintTextColor = color;
+        }
+
+        private float _hintTextSize;
+        public float HintTextSize
+        {
+            get => _hintTextSize;
+            set
+            {
+                IsEOSCustomizationIgnored = true;
+                _hintTextSize = value;
+                if(FindFocus() != this)
+                    TextSize = _hintTextSize;
+            }
         }
 
         public override Typeface Typeface
@@ -134,23 +148,16 @@ namespace EOS.UI.Android.Controls
             TextColor = color;
         }
 
+        private float _textSize;
         public override float TextSize
         {
-            get => base.TextSize;
+            get => _textSize;
             set
             {
                 IsEOSCustomizationIgnored = true;
-                base.TextSize = value; 
-            }
-        }
-
-        public float CornerRadius
-        {
-            get => (Background as GradientDrawable).CornerRadius;
-            set
-            {
-                IsEOSCustomizationIgnored = true;
-                (Background as GradientDrawable).SetCornerRadius(value);
+                _textSize = value;
+                if(FindFocus() != this)
+                    base.TextSize = value;
             }
         }
 
@@ -160,20 +167,12 @@ namespace EOS.UI.Android.Controls
 
         private void Initialize(IAttributeSet attrs = null)
         {
-            Background = CreateDefaultDrawable();
-            SetPadding(15, 0, 15, 0);
             SetMaxLines(1);
             Ellipsize = A.Text.TextUtils.TruncateAt.End;
+            OnFocusChangeListener = this;
             if(attrs != null)
                 InitializeAttributes(attrs);
             UpdateAppearance();
-        }
-
-        private GradientDrawable CreateDefaultDrawable()
-        {
-            var drawable = new GradientDrawable();
-            drawable.SetShape(ShapeType.Rectangle);
-            return drawable;
         }
 
         private void InitializeAttributes(IAttributeSet attrs)
@@ -196,12 +195,14 @@ namespace EOS.UI.Android.Controls
         {
             if(!IsEOSCustomizationIgnored)
             {
-                (Background as GradientDrawable).SetColor(GetThemeProvider().GetEOSProperty<Color>(this, EOSConstants.BackgroundColor));
                 base.SetTypeface(Typeface.CreateFromAsset(Context.Assets, GetThemeProvider().GetEOSProperty<string>(this, EOSConstants.Font)), TypefaceStyle.Normal);
                 base.LetterSpacing = GetThemeProvider().GetEOSProperty<float>(this, EOSConstants.LetterSpacing);
                 base.SetTextColor(GetThemeProvider().GetEOSProperty<Color>(this, EOSConstants.TextColor));
-                base.TextSize = GetThemeProvider().GetEOSProperty<float>(this, EOSConstants.TextSize);
-                (Background as GradientDrawable).SetCornerRadius(GetThemeProvider().GetEOSProperty<float>(this, EOSConstants.CornerRadius));
+                TextSize = GetThemeProvider().GetEOSProperty<float>(this, EOSConstants.TextSize);
+                HintTextSize = GetThemeProvider().GetEOSProperty<float>(this, EOSConstants.HintTextSize);
+                base.SetHintTextColor(GetThemeProvider().GetEOSProperty<Color>(this, EOSConstants.HintTextColor));
+                DrawableLeftFocuced = Context.Resources.GetDrawable(GetThemeProvider().GetEOSProperty<int>(this, EOSConstants.LeftImageFocused));
+                DrawableLeftUnfocuced = Context.Resources.GetDrawable(GetThemeProvider().GetEOSProperty<int>(this, EOSConstants.LeftImageUnfocused));
             }
         }
 
@@ -219,6 +220,15 @@ namespace EOS.UI.Android.Controls
         public void SetEOSStyle(EOSStyleEnumeration style)
         {
 
+        }
+
+        #endregion
+
+        #region IOnFocusChangeListener implementation
+
+        public void OnFocusChange(View v, bool hasFocus)
+        {
+            SetCompoundDrawablesWithIntrinsicBounds(hasFocus ? DrawableLeftFocuced : DrawableLeftUnfocuced, null, null, null);
         }
 
         #endregion

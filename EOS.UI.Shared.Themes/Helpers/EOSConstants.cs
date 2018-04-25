@@ -8,6 +8,10 @@
         public const string CornerRadius = "cornerRadius";
         public const string Font = "font";
         public const string LetterSpacing = "letterSpacing";
+        public const string HintTextColor = "hintTextColor";
+        public const string HintTextSize = "hintTextSize";
+        public const string LeftImageUnfocused = "leftImageUnfocused";
+        public const string LeftImageFocused = "leftImageFocused";
     }
 
     public static class ControlNames
