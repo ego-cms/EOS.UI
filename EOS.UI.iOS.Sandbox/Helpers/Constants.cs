@@ -33,6 +33,12 @@ namespace EOS.UI.iOS.Sandbox.Helpers
                 { "Dark", EOSThemeEnumeration.Dark },
             };
 
+        public static Dictionary<string, bool> States = new Dictionary<string, bool>()
+            {
+                { "Enabled", true },
+                { "Disabled", false },
+            };
+
         public static List<UIFont> Fonts;
 
         static Constants()

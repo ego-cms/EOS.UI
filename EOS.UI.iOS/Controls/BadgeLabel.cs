@@ -107,6 +107,7 @@ namespace EOS.UI.iOS.Controls
 
         public BadgeLabel(IntPtr handle) : base(handle)
         {
+            UpdateAppearance();
         }
 
         public IEOSStyle GetCurrentEOSStyle()
