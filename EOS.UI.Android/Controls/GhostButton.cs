@@ -152,6 +152,7 @@ namespace EOS.UI.Android.Controls
 
         private void Initialize(IAttributeSet attributeSet = null)
         {
+            SetBackgroundDrawable(Context.GetDrawable(Resource.Drawable.RippleEffect));
             UpdateAppearance();
         }
 
@@ -180,13 +181,6 @@ namespace EOS.UI.Android.Controls
         public void SetEOSStyle(EOSStyleEnumeration style)
         {
 
-        }
-
-        private GradientDrawable CreateDefaultDrawable()
-        {
-            var drawable = new GradientDrawable();
-            drawable.SetShape(ShapeType.Rectangle);
-            return drawable;
         }
 
         public void UpdateAppearance()

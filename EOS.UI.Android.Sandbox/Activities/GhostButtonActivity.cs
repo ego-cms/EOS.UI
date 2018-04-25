@@ -31,6 +31,7 @@ namespace EOS.UI.Android.Sandbox.Activities
             var letterSpacingSpinner = FindViewById<Spinner>(Resource.Id.spinnerLetterSpacing);
             var textSizeSpinner = FindViewById<Spinner>(Resource.Id.spinnerTextSize);
             var stateSpinner = FindViewById<Spinner>(Resource.Id.spinnerState);
+            ghostButton.ResetCustomization();
 
             var resetButton = FindViewById<Button>(Resource.Id.buttonResetCustomization);
             var spinners = new List<Spinner>()
