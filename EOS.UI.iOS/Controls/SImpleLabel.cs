@@ -74,12 +74,15 @@ namespace EOS.UI.iOS.Controls
             get => _text;
             set
             {
-                _text = value;
-                var attributedString = AttributedText != null ?
-                       new NSMutableAttributedString(AttributedText) 
-                       : new NSMutableAttributedString(_text);
-                attributedString.MutableString.SetString(new NSString(_text));
-                AttributedText = attributedString;
+                if(_text != value)
+                {
+                    _text = value;
+                    var attributedString = AttributedText != null ?
+                           new NSMutableAttributedString(AttributedText)
+                           : new NSMutableAttributedString(_text);
+                    attributedString.MutableString.SetString(new NSString(_text));
+                    AttributedText = attributedString;
+                }
             }
         }
 
@@ -122,17 +125,11 @@ namespace EOS.UI.iOS.Controls
             if (!IsEOSCustomizationIgnored)
             {
                 var provider = GetThemeProvider();
-                //base.Font = provider.GetEOSProperty<UIFont>(this, EOSConstants.Font);
-                //base.TextColor = provider.GetEOSProperty<UIColor>(this, EOSConstants.TextColor);
-                //this.SetTextSize(provider.GetEOSProperty<int>(this, EOSConstants.TextSize));
-                //this.SetLetterSpacing(provider.GetEOSProperty<int>(this, EOSConstants.LetterSpacing));
-
                 Font = provider.GetEOSProperty<UIFont>(this, EOSConstants.Font);
                 TextColor = provider.GetEOSProperty<UIColor>(this, EOSConstants.TextColor);
                 TextSize = provider.GetEOSProperty<int>(this, EOSConstants.TextSize);
                 LetterSpacing = provider.GetEOSProperty<int>(this, EOSConstants.LetterSpacing);
                 _isEOSCustomizationIgnored = false;
-
                 SizeToFit();
             }
         }
