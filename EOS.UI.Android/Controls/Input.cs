@@ -71,7 +71,7 @@ namespace EOS.UI.Android.Controls
         private Color _underlineColorUnfocused;
         public Color UnderlineColorUnfocused
         {
-            get => _underlineColorFocused;
+            get => _underlineColorUnfocused;
             set
             {
                 IsEOSCustomizationIgnored = true;
