@@ -152,8 +152,21 @@ namespace EOS.UI.Android.Controls
 
         private void Initialize(IAttributeSet attributeSet = null)
         {
-            SetBackgroundDrawable(Context.GetDrawable(Resource.Drawable.RippleEffect));
+            Background = CreateRippleDrawable();
             UpdateAppearance();
+        }
+
+        private Drawable CreateRippleDrawable()
+        {
+            return new RippleDrawable(new ColorStateList(
+                new int[][]
+                {
+                    new int[] { },
+                },
+                new int[]
+                {
+                    _pressedStateTextColor
+            }), new ColorDrawable(Color.Transparent), new ColorDrawable(Color.Gray));
         }
 
         public override void SetTypeface(Typeface tf, [GeneratedEnum] TypefaceStyle style)
