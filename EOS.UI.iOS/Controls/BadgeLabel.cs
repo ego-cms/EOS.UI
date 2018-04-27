@@ -135,9 +135,9 @@ namespace EOS.UI.iOS.Controls
             {
                 var provider = GetThemeProvider();
                 CornerRadius = provider.GetEOSProperty<int>(this, EOSConstants.CornerRadius);
-                BackgroundColor = provider.GetEOSProperty<UIColor>(this, EOSConstants.BackgroundColor);
+                BackgroundColor = provider.GetEOSProperty<UIColor>(this, EOSConstants.PrimaryColor);
                 Font = provider.GetEOSProperty<UIFont>(this, EOSConstants.Font);
-                TextColor = provider.GetEOSProperty<UIColor>(this, EOSConstants.TextColor);
+                TextColor = provider.GetEOSProperty<UIColor>(this, EOSConstants.SecondaryColor);
                 TextSize = provider.GetEOSProperty<int>(this, EOSConstants.TextSize);
                 LetterSpacing = provider.GetEOSProperty<int>(this, EOSConstants.LetterSpacing);
                 _isEOSCustomizationIgnored = false;
