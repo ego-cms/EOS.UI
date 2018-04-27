@@ -2,8 +2,8 @@
 {
     public static class EOSConstants
     {
-        public const string BackgroundColor = "backgroundColor";
-        public const string TextColor = "textColor";
+        public const string PrimaryColor = "primaryColor";
+        public const string SecondaryColor = "secondaryColor";
         public const string TextSize = "textSize";
         public const string CornerRadius = "cornerRadius";
         public const string Font = "font";

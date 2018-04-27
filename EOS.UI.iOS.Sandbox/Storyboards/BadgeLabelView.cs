@@ -67,7 +67,7 @@ namespace EOS.UI.iOS.Sandbox
                 fontSizeField.Text = String.Empty;
                 cornerRadiusField.Text = String.Empty;
             };
-            themeField.Text = label.GetThemeProvider().GetCurrentTheme().ThemeValues[EOSConstants.BackgroundColor] == UIColor.White ?
+            themeField.Text = label.GetThemeProvider().GetCurrentTheme().ThemeValues[EOSConstants.PrimaryColor] == UIColor.White ?
                 "Light" : "Dark";
 
 
