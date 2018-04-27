@@ -133,6 +133,7 @@
     <InterfaceDefinition Include="Storyboards\GhostButtonView.storyboard" />
     <InterfaceDefinition Include="Storyboards\FabProgressView.storyboard" />
     <InterfaceDefinition Include="Storyboards\InputControlView.storyboard" />
+    <InterfaceDefinition Include="Storyboards\SimpleButtonView.storyboard" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Info.plist" />

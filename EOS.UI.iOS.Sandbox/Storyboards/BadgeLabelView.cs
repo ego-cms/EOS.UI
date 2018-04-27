@@ -60,14 +60,10 @@ namespace EOS.UI.iOS.Sandbox
                 themeField.Text = e.Key;
                 var provider = label.GetThemeProvider();
                 provider.SetCurrentTheme(e.Value);
-                label.UpdateAppearance();
-                backgroundColorField.Text = String.Empty;
-                fontField.Text = String.Empty;
-                fontColorField.Text = String.Empty;
-                fontSizeField.Text = String.Empty;
-                cornerRadiusField.Text = String.Empty;
+                label.ResetCustomization();
+                _textFields.Except(new[] { themeField }).ToList().ForEach(f => f.Text = String.Empty);
             };
-            themeField.Text = label.GetThemeProvider().GetCurrentTheme().ThemeValues[EOSConstants.BackgroundColor] == UIColor.White ?
+            themeField.Text = label.GetThemeProvider().GetCurrentTheme().ThemeValues[EOSConstants.PrimaryColor] == UIColor.White ?
                 "Light" : "Dark";
 
 

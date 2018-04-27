@@ -29,7 +29,7 @@ namespace EOS.UI.iOS.Sandbox
 
             _simpleLabel = new SimpleLabel
             {
-                Text = "Some text"
+                Text = "Default text"
             };
 
             _textFields = new List<UITextField>()
@@ -77,14 +77,12 @@ namespace EOS.UI.iOS.Sandbox
                 themeField.Text = e.Key;
                 var provider = _simpleLabel.GetThemeProvider();
                 provider.SetCurrentTheme(e.Value);
-                _simpleLabel.UpdateAppearance();
-                fontField.Text = string.Empty;
-                textColorField.Text = string.Empty;
-                textSizeField.Text = string.Empty;
+                _simpleLabel.ResetCustomization();
+                _textFields.Except(new[] { themeField }).ToList().ForEach(f => f.Text = String.Empty);
             };
             themePicker.Delegate = themePickerDelegate;
             themeField.InputView = themePicker;
-            themeField.Text = _simpleLabel.GetThemeProvider().GetCurrentTheme().ThemeValues[EOSConstants.BackgroundColor] == UIColor.White ?
+            themeField.Text = _simpleLabel.GetThemeProvider().GetCurrentTheme().ThemeValues[EOSConstants.PrimaryColor] == UIColor.White ?
             "Light" : "Dark";
         }
 

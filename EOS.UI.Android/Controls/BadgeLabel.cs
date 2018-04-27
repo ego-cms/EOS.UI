@@ -164,10 +164,10 @@ namespace EOS.UI.Android.Controls
         {
             if(!IsEOSCustomizationIgnored)
             {
-                (Background as GradientDrawable).SetColor(GetThemeProvider().GetEOSProperty<Color>(this, EOSConstants.BackgroundColor));
+                (Background as GradientDrawable).SetColor(GetThemeProvider().GetEOSProperty<Color>(this, EOSConstants.PrimaryColor));
                 base.SetTypeface(Typeface.CreateFromAsset(Context.Assets, GetThemeProvider().GetEOSProperty<string>(this, EOSConstants.Font)), TypefaceStyle.Normal);
                 base.LetterSpacing = GetThemeProvider().GetEOSProperty<float>(this, EOSConstants.LetterSpacing);
-                base.SetTextColor(GetThemeProvider().GetEOSProperty<Color>(this, EOSConstants.TextColor));
+                base.SetTextColor(GetThemeProvider().GetEOSProperty<Color>(this, EOSConstants.SecondaryColor));
                 base.TextSize = GetThemeProvider().GetEOSProperty<float>(this, EOSConstants.TextSize);
                 (Background as GradientDrawable).SetCornerRadius(GetThemeProvider().GetEOSProperty<float>(this, EOSConstants.CornerRadius));
             }
