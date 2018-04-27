@@ -7,12 +7,15 @@ using EOS.UI.Shared.Themes.Interfaces;
 using UIFrameworks.Shared.Themes.Helpers;
 using UIFrameworks.Shared.Themes.Interfaces;
 using UIKit;
+using CoreGraphics;
 
 namespace EOS.UI.iOS.Controls
 {
     [Register("BadgeLabel")]
     public class BadgeLabel : UILabel, IEOSThemeControl
     {
+        private UIEdgeInsets _insets;
+
         private bool _isEOSCustomizationIgnored;
         public bool IsEOSCustomizationIgnored => _isEOSCustomizationIgnored;
 
@@ -95,10 +98,11 @@ namespace EOS.UI.iOS.Controls
             }
         }
 
-		public BadgeLabel()
+        public BadgeLabel()
         {
             this.Text = " ";
             Layer.MasksToBounds = true;
+            _insets = new UIEdgeInsets(0, 15, 0, 15);
             Lines = 1;
             LineBreakMode = UILineBreakMode.TailTruncation;
             _isEOSCustomizationIgnored = false;
@@ -143,6 +147,21 @@ namespace EOS.UI.iOS.Controls
                 _isEOSCustomizationIgnored = false;
                 SizeToFit();
             }
+        }
+
+        public override void DrawText(CGRect rect)
+        {
+            rect = new CGRect(rect.X + _insets.Left, rect.Y + _insets.Top, 
+                              rect.Width + _insets.Left + _insets.Right, rect.Height + _insets.Top + _insets.Bottom);
+            base.DrawText(rect);
+        }
+
+        public override CGRect TextRectForBounds(CGRect bounds, nint numberOfLines)
+        {
+            var textRect = base.TextRectForBounds(bounds, numberOfLines);
+            var requredRect = new CGRect(textRect.GetMinX() + _insets.Left, textRect.GetMinY() + _insets.Top,
+                           textRect.Width + _insets.Left + _insets.Right, textRect.Height + _insets.Bottom + _insets.Top);
+            return requredRect;
         }
     }
 }
