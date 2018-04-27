@@ -29,7 +29,7 @@ namespace EOS.UI.iOS.Sandbox
 
             _simpleLabel = new SimpleLabel
             {
-                Text = "Some text"
+                Text = "Default text"
             };
 
             _textFields = new List<UITextField>()
