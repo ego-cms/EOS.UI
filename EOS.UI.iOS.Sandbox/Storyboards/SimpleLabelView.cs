@@ -77,10 +77,8 @@ namespace EOS.UI.iOS.Sandbox
                 themeField.Text = e.Key;
                 var provider = _simpleLabel.GetThemeProvider();
                 provider.SetCurrentTheme(e.Value);
-                _simpleLabel.UpdateAppearance();
-                fontField.Text = string.Empty;
-                textColorField.Text = string.Empty;
-                textSizeField.Text = string.Empty;
+                _simpleLabel.ResetCustomization();
+                _textFields.Except(new[] { themeField }).ToList().ForEach(f => f.Text = String.Empty);
             };
             themePicker.Delegate = themePickerDelegate;
             themeField.InputView = themePicker;
