@@ -11,6 +11,15 @@ namespace EOS.UI.iOS.Sandbox
 
         public InputControlView (IntPtr handle) : base (handle)
         {
+            
         }
+
+        public override void ViewDidLayoutSubviews()
+        {
+            if(scrollView.ContentSize.Height == 0)
+                scrollView.ContentSize = new CoreGraphics.CGSize(scrollView.ContentSize.Width, propertiesContainer.Frame.Height + 220);
+            base.ViewDidLayoutSubviews();
+        }
+
     }
 }

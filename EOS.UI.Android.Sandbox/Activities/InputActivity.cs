@@ -198,8 +198,8 @@ namespace EOS.UI.Android.Sandbox.Activities
         {
             if(e.Position > 0)
             {
-                _inputTop.DrawableLeftUnfocused =  BaseContext.GetDrawable(Icons.DrawableCollection.ElementAt(e.Position).Value);
-                _inputBottom.DrawableLeftUnfocused = BaseContext.GetDrawable(Icons.DrawableCollection.ElementAt(e.Position).Value);
+                _inputTop.LeftImageUnfocused =  BaseContext.GetDrawable(Icons.DrawableCollection.ElementAt(e.Position).Value);
+                _inputBottom.LeftImageUnfocused = BaseContext.GetDrawable(Icons.DrawableCollection.ElementAt(e.Position).Value);
             }
         }
 
@@ -207,8 +207,8 @@ namespace EOS.UI.Android.Sandbox.Activities
         {
             if(e.Position > 0)
             {
-                _inputTop.DrawableLeftFocused = BaseContext.GetDrawable(Icons.DrawableCollection.ElementAt(e.Position).Value);
-                _inputBottom.DrawableLeftFocused = BaseContext.GetDrawable(Icons.DrawableCollection.ElementAt(e.Position).Value);
+                _inputTop.LeftImageFocused = BaseContext.GetDrawable(Icons.DrawableCollection.ElementAt(e.Position).Value);
+                _inputBottom.LeftImageFocused = BaseContext.GetDrawable(Icons.DrawableCollection.ElementAt(e.Position).Value);
             }
         }
 
@@ -216,8 +216,8 @@ namespace EOS.UI.Android.Sandbox.Activities
         {
             if(e.Position > 0)
             {
-                _inputTop.DrawableLeftDisabled = BaseContext.GetDrawable(Icons.DrawableCollection.ElementAt(e.Position).Value);
-                _inputBottom.DrawableLeftDisabled = BaseContext.GetDrawable(Icons.DrawableCollection.ElementAt(e.Position).Value);
+                _inputTop.LeftImageDisabled = BaseContext.GetDrawable(Icons.DrawableCollection.ElementAt(e.Position).Value);
+                _inputBottom.LeftImageDisabled = BaseContext.GetDrawable(Icons.DrawableCollection.ElementAt(e.Position).Value);
             }
         }
 

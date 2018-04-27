@@ -11,10 +11,19 @@ namespace EOS.UI.iOS.Themes
         {
             { EOSConstants.BackgroundColor, UIColor.Black },
             { EOSConstants.TextColor, UIColor.White },
+            { EOSConstants.TextColorDisabled, UIColor.LightGray },
             { EOSConstants.TextSize, 17 },
             { EOSConstants.Font, UIFont.SystemFontOfSize(17) },
             { EOSConstants.CornerRadius, 3 },
             { EOSConstants.LetterSpacing, 1 },
+            { EOSConstants.HintTextColor, UIColor.Gray },
+            { EOSConstants.HintTextColorDisabled, UIColor.LightGray },
+            { EOSConstants.LeftImageFocused, "AccountCircle" },
+            { EOSConstants.LeftImageUnfocused, "AccountKey" },
+            { EOSConstants.LeftImageDisabled, "AccountOff" },
+            { EOSConstants.UnderlineColorFocused, UIColor.Black },
+            { EOSConstants.UnderlineColorUnfocused, UIColor.DarkGray },
+            { EOSConstants.UnderlineColorDisabled, UIColor.LightGray },
         };
     }
 }

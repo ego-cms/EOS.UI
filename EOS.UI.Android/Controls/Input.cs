@@ -8,7 +8,6 @@ using Android.Views;
 using Android.Widget;
 using EOS.UI.Shared.Themes.Helpers;
 using EOS.UI.Shared.Themes.Interfaces;
-using Java.Lang;
 using UIFrameworks.Android.Themes;
 using UIFrameworks.Shared.Themes.Helpers;
 using UIFrameworks.Shared.Themes.Interfaces;
@@ -94,42 +93,42 @@ namespace EOS.UI.Android.Controls
             }
         }
 
-        private Drawable _drawableLeftUnfocused;
-        public Drawable DrawableLeftUnfocused
+        private Drawable _leftImageUnfocused;
+        public Drawable LeftImageUnfocused
         {
-            get => _drawableLeftUnfocused;
+            get => _leftImageUnfocused;
             set
             {
                 IsEOSCustomizationIgnored = true;
-                _drawableLeftUnfocused = value;
+                _leftImageUnfocused = value;
                 if(Enabled && FindFocus() != this)
-                    base.SetCompoundDrawablesWithIntrinsicBounds(_drawableLeftUnfocused, null, null, null);
+                    base.SetCompoundDrawablesWithIntrinsicBounds(_leftImageUnfocused, null, null, null);
             }
         }
 
-        private Drawable _drawableLeftFocused;
-        public Drawable DrawableLeftFocused
+        private Drawable _leftImageFocused;
+        public Drawable LeftImageFocused
         {
-            get => _drawableLeftFocused;
+            get => _leftImageFocused;
             set
             {
                 IsEOSCustomizationIgnored = true;
-                _drawableLeftFocused = value;
+                _leftImageFocused = value;
                 if(Enabled && FindFocus() == this)
-                    base.SetCompoundDrawablesWithIntrinsicBounds(_drawableLeftFocused, null, null, null);
+                    base.SetCompoundDrawablesWithIntrinsicBounds(_leftImageFocused, null, null, null);
             }
         }
 
-        private Drawable _drawableLeftDisabled;
-        public Drawable DrawableLeftDisabled
+        private Drawable _leftImageDisabled;
+        public Drawable LeftImageDisabled
         {
-            get => _drawableLeftDisabled;
+            get => _leftImageDisabled;
             set
             {
                 IsEOSCustomizationIgnored = true;
-                _drawableLeftDisabled = value;
+                _leftImageDisabled = value;
                 if(!Enabled)
-                    base.SetCompoundDrawablesWithIntrinsicBounds(_drawableLeftDisabled, null, null, null);
+                    base.SetCompoundDrawablesWithIntrinsicBounds(_leftImageDisabled, null, null, null);
             }
         }
 
@@ -169,7 +168,10 @@ namespace EOS.UI.Android.Controls
 
         public new void SetHintTextColor(Color color)
         {
-            HintTextColor = color;
+            if(Enabled)
+                HintTextColor = color;
+            else
+                HintTextColorDisabled = color;
         }
 
         public override Typeface Typeface
@@ -266,17 +268,17 @@ namespace EOS.UI.Android.Controls
             base.SetHintTextColor(enabled ? HintTextColor : HintTextColorDisabled);
             if(!enabled)
             {
-                base.SetCompoundDrawablesWithIntrinsicBounds(DrawableLeftDisabled, null, null, null);
+                base.SetCompoundDrawablesWithIntrinsicBounds(LeftImageDisabled, null, null, null);
                 Background.SetColorFilter(UnderlineColorDisabled, PorterDuff.Mode.SrcIn);
             }
             else if(FindFocus() == this)
             {
-                base.SetCompoundDrawablesWithIntrinsicBounds(DrawableLeftFocused, null, null, null);
+                base.SetCompoundDrawablesWithIntrinsicBounds(LeftImageFocused, null, null, null);
                 Background.SetColorFilter(UnderlineColorFocused, PorterDuff.Mode.SrcIn);
             }
             else
             {
-                base.SetCompoundDrawablesWithIntrinsicBounds(DrawableLeftUnfocused, null, null, null);
+                base.SetCompoundDrawablesWithIntrinsicBounds(LeftImageUnfocused, null, null, null);
                 Background.SetColorFilter(UnderlineColorUnfocused, PorterDuff.Mode.SrcIn);
             }
         }
@@ -303,9 +305,9 @@ namespace EOS.UI.Android.Controls
                 TextColorDisabled = GetThemeProvider().GetEOSProperty<Color>(this, EOSConstants.TextColorDisabled);
                 HintTextColor = GetThemeProvider().GetEOSProperty<Color>(this, EOSConstants.HintTextColor);
                 HintTextColorDisabled = GetThemeProvider().GetEOSProperty<Color>(this, EOSConstants.HintTextColorDisabled);
-                DrawableLeftFocused = Context.Resources.GetDrawable(GetThemeProvider().GetEOSProperty<int>(this, EOSConstants.LeftImageFocused));
-                DrawableLeftUnfocused = Context.Resources.GetDrawable(GetThemeProvider().GetEOSProperty<int>(this, EOSConstants.LeftImageUnfocused));
-                DrawableLeftDisabled = Context.Resources.GetDrawable(GetThemeProvider().GetEOSProperty<int>(this, EOSConstants.LeftImageDisabled));
+                LeftImageFocused = Context.Resources.GetDrawable(GetThemeProvider().GetEOSProperty<int>(this, EOSConstants.LeftImageFocused));
+                LeftImageUnfocused = Context.Resources.GetDrawable(GetThemeProvider().GetEOSProperty<int>(this, EOSConstants.LeftImageUnfocused));
+                LeftImageDisabled = Context.Resources.GetDrawable(GetThemeProvider().GetEOSProperty<int>(this, EOSConstants.LeftImageDisabled));
                 UnderlineColorFocused = GetThemeProvider().GetEOSProperty<Color>(this, EOSConstants.UnderlineColorFocused);
                 UnderlineColorUnfocused = GetThemeProvider().GetEOSProperty<Color>(this, EOSConstants.UnderlineColorUnfocused);
                 UnderlineColorDisabled = GetThemeProvider().GetEOSProperty<Color>(this, EOSConstants.UnderlineColorDisabled);
@@ -337,7 +339,7 @@ namespace EOS.UI.Android.Controls
         public void OnFocusChange(View v, bool hasFocus)
         {
             Background.SetColorFilter(hasFocus ? UnderlineColorFocused : UnderlineColorUnfocused, PorterDuff.Mode.SrcIn);
-            base.SetCompoundDrawablesWithIntrinsicBounds(hasFocus ? DrawableLeftFocused : DrawableLeftUnfocused, null, null, null);
+            base.SetCompoundDrawablesWithIntrinsicBounds(hasFocus ? LeftImageFocused : LeftImageUnfocused, null, null, null);
         }
 
         #endregion
