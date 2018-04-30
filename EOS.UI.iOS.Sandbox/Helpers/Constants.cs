@@ -28,10 +28,20 @@ namespace EOS.UI.iOS.Sandbox.Helpers
         public static List<int> LetterSpacingValues;
 
         public static Dictionary<string, EOSThemeEnumeration> Themes = new Dictionary<string, EOSThemeEnumeration>()
-            {
-                { "Light", EOSThemeEnumeration.Light },
-                { "Dark", EOSThemeEnumeration.Dark },
-            };
+        {
+            { "Light", EOSThemeEnumeration.Light },
+            { "Dark", EOSThemeEnumeration.Dark },
+        };
+
+        public static Dictionary<string, string> Icons = new Dictionary<string, string>()
+        {
+            { "AccountCircle", "AccountCircle" },
+            { "AccountKey", "AccountKey"},
+            { "AccountOff", "AccountOff"},
+            { "Airballoon", "Airballoon"},
+            { "Android", "Android"},
+            { "Apple", "Apple"},
+        };
 
         public static Dictionary<string, bool> States = new Dictionary<string, bool>()
             {

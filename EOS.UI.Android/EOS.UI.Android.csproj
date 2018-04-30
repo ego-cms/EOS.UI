@@ -55,9 +55,13 @@
     <Compile Include="Traverser\IEOSViewTraverser.cs" />
     <Compile Include="Traverser\EOSViewTraverser.cs" />
     <Compile Include="Controls\GhostButton.cs" />
+    <Compile Include="Controls\Input.cs" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\values\Strings.xml" />
+    <AndroidResource Include="Resources\drawable\AccountKey.xml" />
+    <AndroidResource Include="Resources\drawable\AccountOff.xml" />
+    <AndroidResource Include="Resources\drawable\AccountCircle.xml" />
   </ItemGroup>
   <ItemGroup>
     <AndroidAsset Include="Assets\Fonts\OpenSansRegular.ttf" />
