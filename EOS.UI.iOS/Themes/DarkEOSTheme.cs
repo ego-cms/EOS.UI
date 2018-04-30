@@ -17,6 +17,14 @@ namespace EOS.UI.iOS.Themes
             { EOSConstants.Font, UIFont.SystemFontOfSize(17) },
             { EOSConstants.CornerRadius, 3 },
             { EOSConstants.LetterSpacing, 1 },
+            { EOSConstants.HintTextColor, UIColor.Gray },
+            { EOSConstants.HintTextColorDisabled, UIColor.LightGray },
+            { EOSConstants.LeftImageFocused, "AccountCircle" },
+            { EOSConstants.LeftImageUnfocused, "AccountKey" },
+            { EOSConstants.LeftImageDisabled, "AccountOff" },
+            { EOSConstants.UnderlineColorFocused, UIColor.Black },
+            { EOSConstants.UnderlineColorUnfocused, UIColor.DarkGray },
+            { EOSConstants.UnderlineColorDisabled, UIColor.LightGray },
         };
     }
 }

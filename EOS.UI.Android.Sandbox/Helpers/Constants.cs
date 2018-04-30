@@ -127,5 +127,26 @@ namespace EOS.UI.Android.Sandbox.Helpers
                 { Dark, EOSThemeEnumeration.Dark },
             };
         }
+
+        public static class Icons
+        {
+            public const string AccountCircle = "account circle";
+            public const string AccountKey = "account key";
+            public const string AccountOff = "account off";
+            public const string AndroidIcon = "android";
+            public const string Airballoon = "air balloon";
+            public const string Apple = "apple";
+
+            public static Dictionary<string, int> DrawableCollection = new Dictionary<string, int>()
+            {
+                { string.Empty, 0 },
+                { AccountCircle, Resource.Drawable.AccountCircle },
+                { AccountKey, Resource.Drawable.AccountKey },
+                { AccountOff, Resource.Drawable.AccountOff },
+                { Airballoon, Resource.Drawable.Airballoon },
+                { AndroidIcon, Resource.Drawable.Android },
+                { Apple, Resource.Drawable.Apple },
+            };
+        }
     }
 }
