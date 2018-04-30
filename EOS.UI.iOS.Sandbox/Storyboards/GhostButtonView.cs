@@ -42,7 +42,6 @@ namespace EOS.UI.iOS.Sandbox
                 disabledColorField,
                 pressedColorField,
                 fontSizeField,
-                stateField
             };
 
             View.AddGestureRecognizer(new UITapGestureRecognizer(() =>
@@ -61,7 +60,7 @@ namespace EOS.UI.iOS.Sandbox
                 var provider = ghostButton.GetThemeProvider();
                 provider.SetCurrentTheme(e.Value);
                 ghostButton.UpdateAppearance();
-                _textFields.Except(new []{themeField, stateField}).ToList().ForEach(f => f.Text = String.Empty);
+                _textFields.Except(new []{themeField}).ToList().ForEach(f => f.Text = String.Empty);
             };
             themeField.Text = ghostButton.GetThemeProvider().GetCurrentTheme().ThemeValues[EOSConstants.BackgroundColor] == UIColor.White ?
                 "Light" : "Dark";
@@ -176,24 +175,15 @@ namespace EOS.UI.iOS.Sandbox
             pressedColorPicker.Delegate = pressedColorPickerDelegate;
             pressedColorField.InputView = pressedColorPicker;
 
-
-            var statePicker = new UIPickerView(rect);
-            statePicker.ShowSelectionIndicator = true;
-            statePicker.DataSource = new StatePickerSource();
-            var statePickerDelegate = new StatePickerDelegate();
-            statePickerDelegate.DidSelected += (object sender, KeyValuePair<string, bool> e) =>
+            stateSwitch.ValueChanged += (sender, e) => 
             {
-                ghostButton.Enabled = e.Value;
-                stateField.Text = e.Key;
+                ghostButton.Enabled = stateSwitch.On;
             };
-            stateField.Text = Constants.States.ElementAt(0).Key;
-            statePicker.Delegate = statePickerDelegate;
-            stateField.InputView = statePicker;
 
             resetButton.TouchUpInside += (sender, e) =>
             {
                 ghostButton.ResetCustomization();
-                _textFields.Except(new List<UITextField>() { themeField,  stateField }).ToList().ForEach(f => f.Text = String.Empty);
+                _textFields.Except(new List<UITextField>() { themeField }).ToList().ForEach(f => f.Text = String.Empty);
             };
 		}
 	}

@@ -37,7 +37,7 @@ namespace EOS.UI.iOS.Sandbox
 		UIKit.UIButton resetButton { get; set; }
 
 		[Outlet]
-		UIKit.UITextField stateField { get; set; }
+		UIKit.UISwitch stateSwitch { get; set; }
 
 		[Outlet]
 		UIKit.UITextField themeField { get; set; }
@@ -89,9 +89,9 @@ namespace EOS.UI.iOS.Sandbox
 				themeField = null;
 			}
 
-			if (stateField != null) {
-				stateField.Dispose ();
-				stateField = null;
+			if (stateSwitch != null) {
+				stateSwitch.Dispose ();
+				stateSwitch = null;
 			}
 		}
 	}
