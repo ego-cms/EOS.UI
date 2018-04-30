@@ -1,4 +1,4 @@
-﻿// WARNING
+// WARNING
 //
 // This file has been generated automatically by Visual Studio from the outlets and
 // actions declared in your storyboard file.
@@ -13,9 +13,6 @@ namespace EOS.UI.iOS.Sandbox
     [Register ("InputControlView")]
     partial class InputControlView
     {
-        [Outlet]
-        UIKit.NSLayoutConstraint scrollViewHeight { get; set; }
-
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
         UIKit.UIView containerBottomView { get; set; }

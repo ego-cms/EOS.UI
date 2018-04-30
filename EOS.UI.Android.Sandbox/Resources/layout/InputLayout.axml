@@ -4,20 +4,27 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@color/background_color">
-    <EOS.UI.Android.Controls.Input
-        android:id="@+id/inputTop"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginTop="20dp"
-        android:hint="Enter text" />
-    <EOS.UI.Android.Controls.Input
-        android:id="@+id/inputBottom"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginBottom="20dp"
-        android:hint="Enter text" />
+        android:background="@color/background_color"
+        android:orientation="vertical"
+        android:layout_gravity="center">
+        <EOS.UI.Android.Controls.Input
+            android:id="@+id/inputTop"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="20dp"
+            android:hint="Enter text" />
+        <EOS.UI.Android.Controls.Input
+            android:id="@+id/inputBottom"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginBottom="20dp"
+            android:hint="Enter text" />
+    </LinearLayout>
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"

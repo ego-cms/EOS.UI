@@ -43,6 +43,12 @@ namespace EOS.UI.iOS.Sandbox.Helpers
             { "Apple", "Apple"},
         };
 
+        public static Dictionary<string, bool> States = new Dictionary<string, bool>()
+            {
+                { "Enabled", true },
+                { "Disabled", false },
+            };
+
         public static List<UIFont> Fonts;
 
         static Constants()
@@ -60,7 +66,7 @@ namespace EOS.UI.iOS.Sandbox.Helpers
 
             Fonts = Fonts.OrderBy(f => f.Name).ToList();
             FontSizeValues = Enumerable.Range(10, 31).Where(i=>i%2==0).ToList();
-            CornerRadiusValues = Enumerable.Range(10, 61).Where(i => (i-10) % 4 == 0).ToList();
+            CornerRadiusValues = Enumerable.Range(1, 10).Where(i => (i-10) % 4 == 0).ToList();
             LetterSpacingValues = Enumerable.Range(1, 10).ToList();
         }
     }

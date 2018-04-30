@@ -7,6 +7,7 @@ using System.Linq.Expressions;
 using System.Reflection;
 using CoreAnimation;
 using CoreGraphics;
+using EOS.UI.iOS.Controls;
 using Foundation;
 using UIKit;
 
@@ -373,7 +374,7 @@ namespace EOS.UI.iOS.Extensions
         /// <param name="view">current view</param>
         /// <param name="corners">corners enums</param>
         /// <param name="size">size of rounded corners</param>
-        public static void RoundCorners(this UIView view, UIRectCorner corners, int size)
+        internal static void RoundCorners(this UIView view, UIRectCorner corners, int size)
         {
             view.Layer.Mask = null;
             var bounds = view.Bounds;
@@ -394,7 +395,7 @@ namespace EOS.UI.iOS.Extensions
         /// <param name="y">The y coordinate.</param>
         /// <param name="width">Width.</param>
         /// <param name="height">Height.</param>
-        public static CGRect ResizeRect(this CGRect frame, nfloat? x = null, nfloat? y = null, nfloat? width = null, nfloat? height = null)
+        internal static CGRect ResizeRect(this CGRect frame, nfloat? x = null, nfloat? y = null, nfloat? width = null, nfloat? height = null)
         {
             frame.X = x ?? frame.X;
             frame.Y = y ?? frame.Y;
@@ -411,14 +412,19 @@ namespace EOS.UI.iOS.Extensions
         /// <param name="point">Point.</param>
         /// <param name="x">The x coordinate.</param>
         /// <param name="y">The y coordinate.</param>
-        public static CGPoint ReplacePoint(this CGPoint point, nfloat? x = null, nfloat? y = null)
+        internal static CGPoint ReplacePoint(this CGPoint point, nfloat? x = null, nfloat? y = null)
         {
             point.X = x ?? point.X;
             point.Y = y ?? point.Y;
             return point;
         }
 
-        public static void SetLetterSpacing(this UILabel label, int spacing)
+        /// <summary>
+        /// Sets the letter spacing for the UILabel
+        /// </summary>
+        /// <param name="label">Label.</param>
+        /// <param name="spacing">Spacing.</param>
+        internal static void SetLetterSpacing(this UILabel label, int spacing)
         {
             var attributedString = new NSMutableAttributedString(label.AttributedText);
             attributedString.AddAttribute(UIStringAttributeKey.KerningAdjustment, new NSNumber(spacing), new NSRange(0, label.AttributedText.Length));
@@ -426,12 +432,163 @@ namespace EOS.UI.iOS.Extensions
             label.SizeToFit();
         }
 
-        public static void SetTextSize(this UILabel label, int value)
+        /// <summary>
+        /// Sets the letter spacing for the UIButton
+        /// </summary>
+        /// <param name="button">Button.</param>
+        /// <param name="spacing">Spacing.</param>
+        internal static void SetLetterSpacing(this UIButton button, int spacing)
+        {
+            var existEnabledAttrString = button.GetAttributedTitle(UIControlState.Normal);
+            var enabledAttrString = new NSMutableAttributedString(existEnabledAttrString);
+
+            var existDisabledAttrString = button.GetAttributedTitle(UIControlState.Normal);
+            var disabledAttrString = new NSMutableAttributedString(existDisabledAttrString);
+
+            var existHighlightedAttrString = button.GetAttributedTitle(UIControlState.Normal);
+            var highlightedAttrString = new NSMutableAttributedString(existDisabledAttrString);
+
+            enabledAttrString.AddAttribute(UIStringAttributeKey.KerningAdjustment, new NSNumber(spacing), new NSRange(0, enabledAttrString.Length));
+            disabledAttrString.AddAttribute(UIStringAttributeKey.KerningAdjustment, new NSNumber(spacing), new NSRange(0, disabledAttrString.Length));
+            highlightedAttrString.AddAttribute(UIStringAttributeKey.KerningAdjustment, new NSNumber(spacing), new NSRange(0, highlightedAttrString.Length));
+            button.SetAttributedTitle(enabledAttrString, UIControlState.Normal);
+            button.SetAttributedTitle(disabledAttrString, UIControlState.Disabled);
+            button.SetAttributedTitle(highlightedAttrString, UIControlState.Disabled);
+            button.SizeToFit();
+        }
+
+        /// <summary>
+        /// Sets the size of the UILabel
+        /// </summary>
+        /// <param name="label">Label.</param>
+        /// <param name="size">Size.</param>
+        internal static void SetTextSize(this UILabel label, int size)
         {
             var attributedString = new NSMutableAttributedString(label.AttributedText);
-            attributedString.AddAttribute(UIStringAttributeKey.Font, label.Font.WithSize(value), new NSRange(0, label.AttributedText.Length));
+            attributedString.AddAttribute(UIStringAttributeKey.Font, label.Font.WithSize(size), new NSRange(0, label.AttributedText.Length));
             label.AttributedText = attributedString;
             label.SizeToFit();
+        }
+
+        /// <summary>
+        /// Sets the size of the text for UIButton
+        /// </summary>
+        /// <param name="button">Button.</param>
+        /// <param name="size">Size.</param>
+        internal static void SetTextSize(this UIButton button, int size)
+        {
+            var normalAttrString = new NSMutableAttributedString(button.GetAttributedTitle(UIControlState.Normal));
+            var disabledAttrString = new NSMutableAttributedString(button.GetAttributedTitle(UIControlState.Disabled));
+            var highlightedAttrString = new NSMutableAttributedString(button.GetAttributedTitle(UIControlState.Highlighted));
+            normalAttrString.AddAttribute(UIStringAttributeKey.Font, button.Font.WithSize(size), new NSRange(0, normalAttrString.Length));
+            disabledAttrString.AddAttribute(UIStringAttributeKey.Font, button.Font.WithSize(size), new NSRange(0, disabledAttrString.Length));
+            highlightedAttrString.AddAttribute(UIStringAttributeKey.Font, button.Font.WithSize(size), new NSRange(0, highlightedAttrString.Length));
+            button.SetAttributedTitle(normalAttrString, UIControlState.Normal);
+            button.SetAttributedTitle(disabledAttrString, UIControlState.Disabled);
+            button.SetAttributedTitle(highlightedAttrString, UIControlState.Highlighted);
+            button.SizeToFit();
+        }
+
+
+        /// <summary>
+        /// Sets the font for UIButton
+        /// </summary>
+        /// <param name="button">Button.</param>
+        /// <param name="font">Font.</param>
+        internal static void SetFont(this UIButton button, UIFont font)
+        {
+            var normalAttrString = new NSMutableAttributedString(button.GetAttributedTitle(UIControlState.Normal));
+            var disabledAttrString = new NSMutableAttributedString(button.GetAttributedTitle(UIControlState.Disabled));
+            var highlightedAttrString = new NSMutableAttributedString(button.GetAttributedTitle(UIControlState.Highlighted));
+            normalAttrString.AddAttribute(UIStringAttributeKey.Font, font, new NSRange(0, normalAttrString.Length));
+            disabledAttrString.AddAttribute(UIStringAttributeKey.Font, font, new NSRange(0, disabledAttrString.Length));
+            highlightedAttrString.AddAttribute(UIStringAttributeKey.Font, font, new NSRange(0, highlightedAttrString.Length));
+            button.SetAttributedTitle(normalAttrString, UIControlState.Normal);
+            button.SetAttributedTitle(disabledAttrString, UIControlState.Disabled);
+            button.SetAttributedTitle(highlightedAttrString, UIControlState.Highlighted);
+            button.SizeToFit();
+        }
+
+        /// <summary>
+        /// Add ripple animation to the UIButton
+        /// </summary>
+        /// <param name="button">Button.</param>
+        /// <param name="startLocation">Touch location.</param>
+        /// <param name="rippleColor">Ripple color.</param>
+        /// <param name="scaleDuration">Scale duration.</param>
+        /// <param name="fadeDuration">Fade duration.</param>
+        /// <param name="completitionHandler">Completition handler.</param>
+        internal static void RippleAnimate(this UIButton button, CGPoint startLocation, UIColor rippleColor = null, nfloat? scaleDuration = null, nfloat? fadeDuration = null, Action completitionHandler = null)
+        {
+            var color = rippleColor ?? UIColor.LightGray.ColorWithAlpha(0.1f);
+            var scaleTime = scaleDuration ?? 1.5f;
+            var fadeTime = fadeDuration ?? 1.5f;
+            var initialSize = 10.0;
+
+            if (startLocation == default(CGPoint))
+                throw new ArgumentNullException(nameof(startLocation), "RippleAnimate must have 'startLocation' argument");
+
+            var tapLocation = startLocation;
+
+            CALayer aLayer = SetupAnimationLayer(button, color, initialSize, tapLocation);
+            CABasicAnimation animation = CreateScaleAnimation(button, initialSize, scaleTime);
+            CAKeyFrameAnimation fade = SetupFadeAnimation(fadeTime);
+            AddAnimationsToLayer(aLayer, animation, fade);
+        }
+
+        private static void AddAnimationsToLayer(CALayer aLayer, CABasicAnimation animation, CAKeyFrameAnimation fade)
+        {
+            var animGroup = new CAAnimationGroup();
+
+            animGroup.Duration = 0.5;
+            animGroup.Delegate = new RippleAnimationDelegate();
+            animGroup.Animations = new[] { (CAAnimation)animation, fade };
+            animGroup.SetValueForKey(aLayer, new NSString("animationLayer"));
+            aLayer.AddAnimation(animGroup, "scale");
+        }
+
+        private static CAKeyFrameAnimation SetupFadeAnimation(nfloat fadeTime)
+        {
+            var fade = CAKeyFrameAnimation.FromKeyPath("opacity");
+            fade.Values = new[] { NSObject.FromObject(1.0), NSObject.FromObject(1.0), NSObject.FromObject(0.5), NSObject.FromObject(0.5), NSObject.FromObject(0.0) };
+            fade.Duration = fadeTime;
+            return fade;
+        }
+
+        private static CALayer SetupAnimationLayer(UIButton button, UIColor color, double initialSize, CGPoint tapLocation)
+        {
+            var aLayer = new CALayer();
+            aLayer.BackgroundColor = color.CGColor;
+
+            aLayer.Frame = new CGRect(0, 0, initialSize, initialSize);
+            aLayer.CornerRadius = (nfloat)initialSize / 2;
+            aLayer.MasksToBounds = true;
+            aLayer.Position = tapLocation;
+            button.Layer.InsertSublayer(aLayer, button.Layer.Sublayers.Length);
+            return aLayer;
+        }
+
+        private static CABasicAnimation CreateScaleAnimation(UIButton button, double initialSize, double scaleTime)
+        {
+            var animation = CABasicAnimation.FromKeyPath("transform.scale");
+            animation.To = NSObject.FromObject(10.5 * Math.Max(button.Frame.Width, button.Frame.Height) / initialSize);
+            animation.Duration = scaleTime;
+            animation.RemovedOnCompletion = true;
+            animation.FillMode = CAFillMode.Forwards;
+            return animation;
+        }
+    }
+
+    class RippleAnimationDelegate : CAAnimationDelegate
+    {
+        public override void AnimationStopped(CAAnimation anim, bool finished)
+        {
+            var layer = anim.ValueForKeyPath(new NSString("animationLayer")) as CALayer;
+            if (layer != null)
+            {
+                layer.RemoveAnimation("scale");
+                layer.RemoveFromSuperLayer();
+            }
         }
     }
 }

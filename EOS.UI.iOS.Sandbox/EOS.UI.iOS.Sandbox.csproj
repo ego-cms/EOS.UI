@@ -158,6 +158,39 @@
     <ImageAsset Include="Assets.xcassets\Contents.json">
       <Visible>false</Visible>
     </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon-App-20x20%402x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon-App-20x20%403x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon-App-29x29%402x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon-App-29x29%403x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon-App-40x40%402x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon-App-40x40%403x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon-App-60x60%402x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon-App-60x60%403x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon-App-76x76%401x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon-App-76x76%402x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon-App-83.5x83.5%402x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
     <ImageAsset Include="Assets.xcassets\AccountCircle.imageset\Contents.json">
       <Visible>false</Visible>
     </ImageAsset>
@@ -183,16 +216,16 @@
   <ItemGroup>
     <InterfaceDefinition Include="LaunchScreen.storyboard" />
     <InterfaceDefinition Include="Storyboards\Main.storyboard" />
-    <InterfaceDefinition Include="Storyboards\SimpleButtonView.storyboard" />
-    <InterfaceDefinition Include="Storyboards\SimpleLabelView.storyboard" />
     <InterfaceDefinition Include="Storyboards\BadgeLabelView.storyboard" />
     <InterfaceDefinition Include="Storyboards\GhostButtonView.storyboard" />
     <InterfaceDefinition Include="Storyboards\FabProgressView.storyboard" />
     <InterfaceDefinition Include="Storyboards\InputControlView.storyboard" />
+    <InterfaceDefinition Include="Storyboards\SimpleButtonView.storyboard" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Info.plist" />
     <None Include="Entitlements.plist" />
+    <InterfaceDefinition Include="Storyboards\SimpleLabelView.storyboard" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Main.cs" />
@@ -231,6 +264,7 @@
     </Compile>
     <Compile Include="Controls\ControlsData.cs" />
     <Compile Include="Helpers\Constants.cs" />
+    <Compile Include="Controls\Pickers.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\EOS.UI.iOS\EOS.UI.iOS.csproj">
