@@ -21,6 +21,7 @@ namespace EOS.UI.iOS.Sandbox.Helpers
             {"Orange", UIColor.Orange},
             {"Black", UIColor.Black}
         };
+
         public static List<int> CornerRadiusValues = new List<int>() {0, 1, 2, 3, 4, 5, 7, 8, 9, 10 };
 
         public static List<int> FontSizeValues = new List<int>() { 17, 19, 24, 32, 40 };
@@ -28,10 +29,20 @@ namespace EOS.UI.iOS.Sandbox.Helpers
         public static List<int> LetterSpacingValues = new List<int>() { 1, 2, 3, 4, 5, 6, 7 };
 
         public static Dictionary<string, EOSThemeEnumeration> Themes = new Dictionary<string, EOSThemeEnumeration>()
-            {
-                { "Light", EOSThemeEnumeration.Light },
-                { "Dark", EOSThemeEnumeration.Dark },
-            };
+        {
+            { "Light", EOSThemeEnumeration.Light },
+            { "Dark", EOSThemeEnumeration.Dark },
+        };
+
+        public static Dictionary<string, string> Icons = new Dictionary<string, string>()
+        {
+            { "AccountCircle", "AccountCircle" },
+            { "AccountKey", "AccountKey"},
+            { "AccountOff", "AccountOff"},
+            { "Airballoon", "Airballoon"},
+            { "Android", "Android"},
+            { "Apple", "Apple"},
+        };
 
         public static List<UIFont> Fonts;
 

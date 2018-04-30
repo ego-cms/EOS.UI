@@ -16,6 +16,14 @@ namespace EOS.UI.iOS.Sandbox
     {
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
+        UIKit.UIView containerBottomView { get; set; }
+
+        [Outlet]
+        [GeneratedCode ("iOS Designer", "1.0")]
+        UIKit.UIView containerTopView { get; set; }
+
+        [Outlet]
+        [GeneratedCode ("iOS Designer", "1.0")]
         UIKit.UITextField fontTextField { get; set; }
 
         [Outlet]
@@ -84,10 +92,20 @@ namespace EOS.UI.iOS.Sandbox
 
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
-        UIKit.UITextField underlineColorUnocusedTextField { get; set; }
+        UIKit.UITextField underlineColorUnfocusedTextField { get; set; }
 
         void ReleaseDesignerOutlets ()
         {
+            if (containerBottomView != null) {
+                containerBottomView.Dispose ();
+                containerBottomView = null;
+            }
+
+            if (containerTopView != null) {
+                containerTopView.Dispose ();
+                containerTopView = null;
+            }
+
             if (fontTextField != null) {
                 fontTextField.Dispose ();
                 fontTextField = null;
@@ -173,9 +191,9 @@ namespace EOS.UI.iOS.Sandbox
                 underlineColorFocusedTextField = null;
             }
 
-            if (underlineColorUnocusedTextField != null) {
-                underlineColorUnocusedTextField.Dispose ();
-                underlineColorUnocusedTextField = null;
+            if (underlineColorUnfocusedTextField != null) {
+                underlineColorUnfocusedTextField.Dispose ();
+                underlineColorUnfocusedTextField = null;
             }
         }
     }

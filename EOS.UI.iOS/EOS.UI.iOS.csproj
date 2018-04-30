@@ -62,10 +62,10 @@
     <ImageAsset Include="Assets.xcassets\AccountCircle.imageset\account_circle@3x.png">
       <Visible>false</Visible>
     </ImageAsset>
-    <ImageAsset Include="Assets.xcassets\AccountKey.imageset\account-key@2x.png">
+    <ImageAsset Include="Assets.xcassets\AccountKey.imageset\account-off@2x.png">
       <Visible>false</Visible>
     </ImageAsset>
-    <ImageAsset Include="Assets.xcassets\AccountKey.imageset\account-key@3x.png">
+    <ImageAsset Include="Assets.xcassets\AccountKey.imageset\account-off@3x.png">
       <Visible>false</Visible>
     </ImageAsset>
     <ImageAsset Include="Assets.xcassets\AccountOff.imageset\account-off@2x.png">

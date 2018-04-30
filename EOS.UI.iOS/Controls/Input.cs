@@ -128,7 +128,7 @@ namespace EOS.UI.iOS.Controls
             {
                 IsEOSCustomizationIgnored = true;
                 _placeholderColor = value;
-                if(Enabled)
+                if(Enabled && Placeholder != null)
                     AttributedPlaceholder = new NSAttributedString(Placeholder, null, value);
             }
         }
@@ -141,7 +141,7 @@ namespace EOS.UI.iOS.Controls
             {
                 IsEOSCustomizationIgnored = true;
                 _placeholderColorDisabled = value;
-                if(!Enabled)
+                if(!Enabled && Placeholder != null)
                     AttributedPlaceholder = new NSAttributedString(Placeholder, null, value);
             }
         }
@@ -281,7 +281,6 @@ namespace EOS.UI.iOS.Controls
             Started += Input_Started;
             Ended += Input_Ended;
 
-            Text = " ";
             Layer.MasksToBounds = true;
             IsEOSCustomizationIgnored = false;
             UpdateAppearance();
@@ -304,7 +303,8 @@ namespace EOS.UI.iOS.Controls
         private void UpdateEnabledState(bool enabled)
         {
             base.TextColor = (enabled ? TextColor : TextColorDisabled);
-            base.AttributedPlaceholder = new NSAttributedString(Placeholder, null, enabled ? PlaceholderColor : PlaceholderColorDisabled);
+            if(Placeholder != null)
+                base.AttributedPlaceholder = new NSAttributedString(Placeholder, null, enabled ? PlaceholderColor : PlaceholderColorDisabled);
 
             if(!enabled)
             {
@@ -328,18 +328,24 @@ namespace EOS.UI.iOS.Controls
 
         private void SetLetterSpacing(int spacing)
         {
-            var attributedString = new NSMutableAttributedString(AttributedText);
-            attributedString.AddAttribute(UIStringAttributeKey.KerningAdjustment, new NSNumber(spacing), new NSRange(0, AttributedText.Length));
-            AttributedText = attributedString;
-            SizeToFit();
+            if(AttributedText != null)
+            {
+                var attributedString = new NSMutableAttributedString(AttributedText);
+                attributedString.AddAttribute(UIStringAttributeKey.KerningAdjustment, new NSNumber(spacing), new NSRange(0, AttributedText.Length));
+                AttributedText = attributedString;
+                SizeToFit();
+            }
         }
 
         private void SetTextSize(int size)
         {
-            var attributedString = new NSMutableAttributedString(AttributedText);
-            attributedString.AddAttribute(UIStringAttributeKey.Font, Font.WithSize(size), new NSRange(0, AttributedText.Length));
-            AttributedText = attributedString;
-            SizeToFit();
+            if(AttributedText != null)
+            {
+                var attributedString = new NSMutableAttributedString(AttributedText);
+                attributedString.AddAttribute(UIStringAttributeKey.Font, Font.WithSize(size), new NSRange(0, AttributedText.Length));
+                AttributedText = attributedString;
+                SizeToFit();
+            }
         }
 
         public override void LayoutSubviews()
