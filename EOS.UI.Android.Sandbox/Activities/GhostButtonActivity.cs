@@ -7,6 +7,7 @@ using Android.OS;
 using Android.Widget;
 using EOS.UI.Android.Controls;
 using EOS.UI.Android.Sandbox.Adapters;
+using UIFrameworks.Android.Themes;
 using UIFrameworks.Shared.Themes.Helpers;
 using static EOS.UI.Android.Sandbox.Helpers.Constants;
 using R = Android.Resource;
@@ -44,7 +45,7 @@ namespace EOS.UI.Android.Sandbox.Activities
                 letterSpacingSpinner,
                 textSizeSpinner
             };
-
+          
             themeSpinner.Adapter = new SpinnerAdapter(this, R.Layout.SimpleSpinnerItem, ThemeTypes.ThemeCollection.Select(item => item.Key).ToList());
             themeSpinner.ItemSelected += (sender, e) =>
             {
@@ -55,6 +56,13 @@ namespace EOS.UI.Android.Sandbox.Activities
                     spinners.Except(new[] { themeSpinner }).ToList().ForEach(s => s.SetSelection(0));
                 }
             };
+
+            var theme = ghostButton.GetThemeProvider().GetCurrentTheme();
+            if (theme is LightEOSTheme)
+                themeSpinner.SetSelection(1);
+            if (theme is DarkEOSTheme)
+                themeSpinner.SetSelection(2);
+
 
             fontSpinner.Adapter = new SpinnerAdapter(this, R.Layout.SimpleSpinnerItem, Fonts.FontsCollection.Select(item => item.Key).ToList());
             fontSpinner.ItemSelected += (sender, e) =>
@@ -92,6 +100,13 @@ namespace EOS.UI.Android.Sandbox.Activities
                 if (e.Position > 0)
                     ghostButton.PressedStateTextColor = Colors.ColorsCollection.ElementAt(e.Position).Value;
             };
+
+            textSizeSpinner.Adapter = new SpinnerAdapter(this, R.Layout.SimpleSpinnerItem, Sizes.TextSizeCollection.Select(item => item.Key).ToList());
+            textSizeSpinner.ItemSelected += (sender, e) => 
+            {
+                if (e.Position > 0)
+                    ghostButton.TextSize = Sizes.TextSizeCollection.ElementAt(e.Position).Value;
+            };;
 
             stateSwitch.CheckedChange += (sender, e) => 
             {
