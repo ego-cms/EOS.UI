@@ -182,8 +182,9 @@ namespace EOS.UI.iOS.Sandbox
 
             resetButton.TouchUpInside += (sender, e) =>
             {
-                ghostButton.ResetCustomization();
                 _textFields.Except(new List<UITextField>() { themeField }).ToList().ForEach(f => f.Text = String.Empty);
+                ghostButton.ResetCustomization();
+                var v = ghostButton.Enabled;
             };
 		}
 	}

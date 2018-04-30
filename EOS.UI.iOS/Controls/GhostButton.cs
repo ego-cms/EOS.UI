@@ -186,6 +186,7 @@ namespace EOS.UI.iOS.Controls
                 PressedStateTextColor = provider.GetEOSProperty<UIColor>(this, EOSConstants.PressedStateTextColor);
                 TextSize = provider.GetEOSProperty<int>(this, EOSConstants.TextSize);
                 LetterSpacing = provider.GetEOSProperty<int>(this, EOSConstants.LetterSpacing);
+                Enabled = base.Enabled;
                 IsEOSCustomizationIgnored = false;
                 SizeToFit();
             }

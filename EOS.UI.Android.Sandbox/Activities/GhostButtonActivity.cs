@@ -30,7 +30,7 @@ namespace EOS.UI.Android.Sandbox.Activities
             var fontSpinner = FindViewById<Spinner>(Resource.Id.spinnerFont);
             var letterSpacingSpinner = FindViewById<Spinner>(Resource.Id.spinnerLetterSpacing);
             var textSizeSpinner = FindViewById<Spinner>(Resource.Id.spinnerTextSize);
-            var stateSpinner = FindViewById<Spinner>(Resource.Id.spinnerState);
+            var stateSwitch = FindViewById<Switch>(Resource.Id.stateSwitch);
             ghostButton.ResetCustomization();
 
             var resetButton = FindViewById<Button>(Resource.Id.buttonResetCustomization);
@@ -52,7 +52,7 @@ namespace EOS.UI.Android.Sandbox.Activities
                 {
                     ghostButton.GetThemeProvider().SetCurrentTheme(ThemeTypes.ThemeCollection.ElementAt(e.Position).Value);
                     ghostButton.ResetCustomization();
-                    spinners.Except(new[] { themeSpinner, stateSpinner }).ToList().ForEach(s => s.SetSelection(0));
+                    spinners.Except(new[] { themeSpinner }).ToList().ForEach(s => s.SetSelection(0));
                 }
             };
 
@@ -93,16 +93,14 @@ namespace EOS.UI.Android.Sandbox.Activities
                     ghostButton.PressedStateTextColor = Colors.ColorsCollection.ElementAt(e.Position).Value;
             };
 
-            stateSpinner.Adapter = new SpinnerAdapter(this, R.Layout.SimpleSpinnerItem, ControlState.Select(item => item.Key).ToList());
-            stateSpinner.ItemSelected += (sender, e) =>
+            stateSwitch.CheckedChange += (sender, e) => 
             {
-                if (e.Position > 0)
-                    ghostButton.Enabled = ControlState.ElementAt(e.Position).Value;
+                ghostButton.Enabled = stateSwitch.Checked;
             };
 
             resetButton.Click += delegate
             {
-                spinners.Except(new[] { themeSpinner, stateSpinner }).ToList().ForEach(s => s.SetSelection(0));
+                spinners.Except(new[] { themeSpinner }).ToList().ForEach(s => s.SetSelection(0));
                 ghostButton.ResetCustomization();
             };
         }
