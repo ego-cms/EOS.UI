@@ -429,11 +429,11 @@ namespace EOS.UI.iOS.Sandbox
 
         private void InitDisabledSwitch()
         {
-            switchDisabled.Selected = false;
-            switchDisabled.TouchCancel += delegate
+            switchDisabled.On = false;
+            switchDisabled.ValueChanged += (sender, e) => 
             {
-                _inputBotton.Enabled = !switchDisabled.Selected;
-                _inputTop.Enabled = !switchDisabled.Selected;
+                _inputBotton.Enabled = !switchDisabled.On;
+                _inputTop.Enabled = !switchDisabled.On;
             };
         }
 
@@ -446,12 +446,5 @@ namespace EOS.UI.iOS.Sandbox
                 ResetFields();
             };
         }
-
-        public override void ViewDidLayoutSubviews()
-        {
-            if(scrollView.ContentSize.Height == 0)
-                scrollView.ContentSize = new CGSize(scrollView.ContentSize.Width, propertiesContainer.Frame.Height);
-            base.ViewDidLayoutSubviews();
-        }
-    }
+	}
 }
