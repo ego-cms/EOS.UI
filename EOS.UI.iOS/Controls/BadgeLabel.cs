@@ -111,7 +111,6 @@ namespace EOS.UI.iOS.Controls
 
         public BadgeLabel(IntPtr handle) : base(handle)
         {
-            UpdateAppearance();
         }
 
         public IEOSStyle GetCurrentEOSStyle()
@@ -140,9 +139,9 @@ namespace EOS.UI.iOS.Controls
             {
                 var provider = GetThemeProvider();
                 CornerRadius = provider.GetEOSProperty<int>(this, EOSConstants.CornerRadius);
-                BackgroundColor = provider.GetEOSProperty<UIColor>(this, EOSConstants.BackgroundColor);
+                BackgroundColor = provider.GetEOSProperty<UIColor>(this, EOSConstants.PrimaryColor);
                 Font = provider.GetEOSProperty<UIFont>(this, EOSConstants.Font);
-                TextColor = provider.GetEOSProperty<UIColor>(this, EOSConstants.TextColor);
+                TextColor = provider.GetEOSProperty<UIColor>(this, EOSConstants.SecondaryColor);
                 TextSize = provider.GetEOSProperty<int>(this, EOSConstants.TextSize);
                 LetterSpacing = provider.GetEOSProperty<int>(this, EOSConstants.LetterSpacing);
                 _isEOSCustomizationIgnored = false;
@@ -152,7 +151,7 @@ namespace EOS.UI.iOS.Controls
 
         public override void DrawText(CGRect rect)
         {
-            rect = new CGRect(rect.X + _insets.Left, rect.Y + _insets.Top, 
+            rect = new CGRect(rect.X + _insets.Left, rect.Y + _insets.Top,
                               rect.Width + _insets.Left + _insets.Right, rect.Height + _insets.Top + _insets.Bottom);
             base.DrawText(rect);
         }

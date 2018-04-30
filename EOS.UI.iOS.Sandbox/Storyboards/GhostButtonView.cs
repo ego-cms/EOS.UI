@@ -62,7 +62,7 @@ namespace EOS.UI.iOS.Sandbox
                 ghostButton.UpdateAppearance();
                 _textFields.Except(new []{themeField}).ToList().ForEach(f => f.Text = String.Empty);
             };
-            themeField.Text = ghostButton.GetThemeProvider().GetCurrentTheme().ThemeValues[EOSConstants.BackgroundColor] == UIColor.White ?
+            themeField.Text = ghostButton.GetThemeProvider().GetCurrentTheme().ThemeValues[EOSConstants.PrimaryColor] == UIColor.White ?
                 "Light" : "Dark";
             themePicker.Delegate = themePickerDelegate;
             themeField.InputView = themePicker;

@@ -1,7 +1,6 @@
 ﻿using System;
 using Android.Content;
 using Android.Graphics;
-using Android.Graphics.Drawables;
 using Android.Runtime;
 using Android.Util;
 using Android.Widget;
@@ -14,26 +13,26 @@ using A = Android;
 
 namespace EOS.UI.Android.Controls
 {
-    public class BadgeLabel: TextView, IEOSThemeControl
+    public class SimpleLabel : TextView, IEOSThemeControl
     {
         #region constructors
 
-        public BadgeLabel(Context context) : base(context)
+        public SimpleLabel(Context context) : base(context)
         {
             Initialize();
         }
 
-        public BadgeLabel(Context context, IAttributeSet attrs) : base(context, attrs)
+        public SimpleLabel(Context context, IAttributeSet attrs) : base(context, attrs)
         {
             Initialize(attrs);
         }
 
-        public BadgeLabel(Context context, IAttributeSet attrs, int defStyle) : base(context, attrs, defStyle)
+        public SimpleLabel(Context context, IAttributeSet attrs, int defStyle) : base(context, attrs, defStyle)
         {
             Initialize(attrs);
         }
 
-        public BadgeLabel(IntPtr javaReference, JniHandleOwnership transfer) : base(javaReference, transfer)
+        public SimpleLabel(IntPtr javaReference, JniHandleOwnership transfer) : base(javaReference, transfer)
         {
             Initialize();
         }
@@ -41,23 +40,6 @@ namespace EOS.UI.Android.Controls
         #endregion
 
         #region customization
-
-        private Color _backgroundColor;
-        public Color BackgroundColor
-        {
-            get => _backgroundColor;
-            set
-            {
-                IsEOSCustomizationIgnored = true;
-                _backgroundColor = value;
-                (Background as GradientDrawable).SetColor(_backgroundColor);
-            }
-        }
-
-        public override void SetBackgroundColor(Color color)
-        {
-            BackgroundColor = color;
-        }
 
         public override Typeface Typeface
         {
@@ -108,17 +90,7 @@ namespace EOS.UI.Android.Controls
             set
             {
                 IsEOSCustomizationIgnored = true;
-                base.TextSize = value; 
-            }
-        }
-
-        public float CornerRadius
-        {
-            get => (Background as GradientDrawable).CornerRadius;
-            set
-            {
-                IsEOSCustomizationIgnored = true;
-                (Background as GradientDrawable).SetCornerRadius(value);
+                base.TextSize = value;
             }
         }
 
@@ -128,20 +100,10 @@ namespace EOS.UI.Android.Controls
 
         private void Initialize(IAttributeSet attrs = null)
         {
-            Background = CreateDefaultDrawable();
-            SetPadding(15, 0, 15, 0);
             SetMaxLines(1);
             Ellipsize = A.Text.TextUtils.TruncateAt.End;
             if(attrs != null)
                 InitializeAttributes(attrs);
-            UpdateAppearance();
-        }
-
-        private GradientDrawable CreateDefaultDrawable()
-        {
-            var drawable = new GradientDrawable();
-            drawable.SetShape(ShapeType.Rectangle);
-            return drawable;
         }
 
         private void InitializeAttributes(IAttributeSet attrs)
@@ -164,12 +126,10 @@ namespace EOS.UI.Android.Controls
         {
             if(!IsEOSCustomizationIgnored)
             {
-                (Background as GradientDrawable).SetColor(GetThemeProvider().GetEOSProperty<Color>(this, EOSConstants.PrimaryColor));
                 base.SetTypeface(Typeface.CreateFromAsset(Context.Assets, GetThemeProvider().GetEOSProperty<string>(this, EOSConstants.Font)), TypefaceStyle.Normal);
                 base.LetterSpacing = GetThemeProvider().GetEOSProperty<float>(this, EOSConstants.LetterSpacing);
-                base.SetTextColor(GetThemeProvider().GetEOSProperty<Color>(this, EOSConstants.SecondaryColor));
+                base.SetTextColor(GetThemeProvider().GetEOSProperty<Color>(this, EOSConstants.PrimaryColor));
                 base.TextSize = GetThemeProvider().GetEOSProperty<float>(this, EOSConstants.TextSize);
-                (Background as GradientDrawable).SetCornerRadius(GetThemeProvider().GetEOSProperty<float>(this, EOSConstants.CornerRadius));
             }
         }
 

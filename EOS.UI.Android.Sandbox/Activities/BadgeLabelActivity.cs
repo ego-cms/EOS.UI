@@ -43,7 +43,6 @@ namespace EOS.UI.Android.Sandbox.Activities
             _cornerRadiusView = FindViewById<Spinner>(Resource.Id.spinnerCornerRadius);
             var resetButton = FindViewById<Button>(Resource.Id.buttonResetCustomization);
 
-
             _themeSpinner.Adapter = new SpinnerAdapter(this, R.Layout.SimpleSpinnerItem, ThemeTypes.ThemeCollection.Select(item => item.Key).ToList());
             _themeSpinner.ItemSelected += ThemeSpinner_ItemSelected;
 

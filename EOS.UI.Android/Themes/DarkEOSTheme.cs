@@ -9,8 +9,8 @@ namespace UIFrameworks.Android.Themes
     {
         public Dictionary<string, object> ThemeValues => new Dictionary<string, object>()
         {
-            { EOSConstants.BackgroundColor, Color.Black },
-            { EOSConstants.TextColor, Color.White },
+            { EOSConstants.PrimaryColor, Color.Black },
+            { EOSConstants.SecondaryColor, Color.White },
             { EOSConstants.DisabledTextColor, Color.LightGray},
             { EOSConstants.PressedStateTextColor, Color.LightGray},
             { EOSConstants.TextSize, 22f },

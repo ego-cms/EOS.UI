@@ -17,7 +17,6 @@ namespace EOS.UI.iOS.Controls
     {
         public bool IsEOSCustomizationIgnored { get; private set; }
 
-
         private UIFont _font;
         public override UIFont Font
         {
@@ -181,7 +180,7 @@ namespace EOS.UI.iOS.Controls
             {
                 var provider = GetThemeProvider();
                 Font = provider.GetEOSProperty<UIFont>(this, EOSConstants.Font);
-                EnabledTextColor = provider.GetEOSProperty<UIColor>(this, EOSConstants.TextColor);
+                EnabledTextColor = provider.GetEOSProperty<UIColor>(this, EOSConstants.PrimaryColor);
                 DisabledTextColor = provider.GetEOSProperty<UIColor>(this, EOSConstants.DisabledTextColor);
                 PressedStateTextColor = provider.GetEOSProperty<UIColor>(this, EOSConstants.PressedStateTextColor);
                 TextSize = provider.GetEOSProperty<int>(this, EOSConstants.TextSize);
