@@ -28,7 +28,7 @@ namespace EOS.UI.iOS.Sandbox
             base.ViewDidLoad();
 
             var ghostButton = new GhostButton();
-            ghostButton.SetTitle("Press me", UIControlState.Normal);
+            ghostButton.SetTitle("DEFAULT TEXT", UIControlState.Normal);
 
             containerView.ConstrainLayout(() => ghostButton.Frame.GetCenterX() == containerView.Frame.GetCenterX() &&
                                           ghostButton.Frame.GetCenterY() == containerView.Frame.GetCenterY() , ghostButton);
