@@ -15,8 +15,8 @@ namespace EOS.UI.iOS.Sandbox.Controls
         {
             Names = new Dictionary<string, string>() {
                 {SharedControls.BadgeLabel, BadgeLabelView.Identifier},
-                {SharedControls.SimpleLabel, SimpleLabelView.Identifier},
                 {SharedControls.GhostButton, GhostButtonView.Identifier},
+                {SharedControls.SimpleLabel, SimpleLabelView.Identifier},
                 {SharedControls.SimpleButton, SimpleButtonView.Identifier},
                 {SharedControls.FabProgress, FabProgressView.Identifier},
                 {SharedControls.Input, InputControlView.Identifier}

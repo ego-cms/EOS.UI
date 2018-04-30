@@ -4,6 +4,8 @@
     {
         public const string PrimaryColor = "primaryColor";
         public const string SecondaryColor = "secondaryColor";
+        public const string DisabledTextColor = "disabledTextColor";
+        public const string PressedStateTextColor = "pressedStateTextColor";
         public const string TextSize = "textSize";
         public const string CornerRadius = "cornerRadius";
         public const string Font = "font";

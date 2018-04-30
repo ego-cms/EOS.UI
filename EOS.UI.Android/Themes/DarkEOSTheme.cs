@@ -11,6 +11,8 @@ namespace UIFrameworks.Android.Themes
         {
             { EOSConstants.PrimaryColor, Color.Black },
             { EOSConstants.SecondaryColor, Color.White },
+            { EOSConstants.DisabledTextColor, Color.LightGray},
+            { EOSConstants.PressedStateTextColor, Color.LightGray},
             { EOSConstants.TextSize, 22f },
             { EOSConstants.Font, "Fonts/OpenSansRegular.ttf" },
             { EOSConstants.CornerRadius, 20f },

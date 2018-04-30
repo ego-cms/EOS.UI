@@ -53,12 +53,16 @@
     <Compile Include="Themes\EOSThemeProvider.cs" />
     <Compile Include="Traverser\IEOSViewTraverser.cs" />
     <Compile Include="Traverser\EOSViewTraverser.cs" />
+    <Compile Include="Controls\GhostButton.cs" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\values\Strings.xml" />
   </ItemGroup>
   <ItemGroup>
     <AndroidAsset Include="Assets\Fonts\OpenSansRegular.ttf" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Resources\drawable\" />
   </ItemGroup>
   <Import Project="..\EOS.UI.Shared.Themes\EOS.UI.Shared.Themes.projitems" Label="Shared" />
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
