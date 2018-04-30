@@ -69,8 +69,6 @@ namespace EOS.UI.iOS.Sandbox
             };
             themeField.Text = label.GetThemeProvider().GetCurrentTheme().ThemeValues[EOSConstants.BackgroundColor] == UIColor.White ?
                 "Light" : "Dark";
-
-
             themePicker.Delegate = themePickerDelegate;
             themeField.InputView = themePicker;
 

@@ -17,7 +17,7 @@ namespace EOS.UI.Android.Sandbox.Helpers
             public const string Yellow = "yellow";
             public const string Brown = "brown";
 
-            public static Dictionary<string, Color> ColorsCollection = new Dictionary<string, Color>()
+            public static readonly Dictionary<string, Color> ColorsCollection = new Dictionary<string, Color>()
             {
                 { string.Empty, Color.Transparent },
                 { Black, Color.Black },
@@ -38,7 +38,7 @@ namespace EOS.UI.Android.Sandbox.Helpers
             public const string Amita = "Amita";
             public const string AcademyEngraved = "AcademyEngraved";
 
-            public static Dictionary<string, string> FontsCollection = new Dictionary<string, string>()
+            public static readonly Dictionary<string, string> FontsCollection = new Dictionary<string, string>()
             {
                 { string.Empty, string.Empty },
                 { Roboto, "Fonts/Roboto.ttf" },
@@ -48,9 +48,16 @@ namespace EOS.UI.Android.Sandbox.Helpers
             };
         }
 
+        public static readonly Dictionary<string, bool> ControlState = new Dictionary<string, bool>()
+        {
+            {string.Empty, true},
+            {"enabled", true},
+            {"disabled", false},
+        };
+
         public static class Sizes
         {
-            public static Dictionary<string, float> LetterSpacingCollection = new Dictionary<string, float>()
+            public static readonly Dictionary<string, float> LetterSpacingCollection = new Dictionary<string, float>()
             {
                 { string.Empty, 0f },
                 { "0.1", 0.1f },
@@ -65,7 +72,7 @@ namespace EOS.UI.Android.Sandbox.Helpers
                 { "1", 1f },
             };
 
-            public static Dictionary<string, float> TextSizeCollection = new Dictionary<string, float>()
+            public static readonly Dictionary<string, float> TextSizeCollection = new Dictionary<string, float>()
             {
                 { string.Empty, 0f },
                 { "10", 10f },
@@ -86,7 +93,7 @@ namespace EOS.UI.Android.Sandbox.Helpers
                 { "40", 40f },
             };
 
-            public static Dictionary<string, float> CornerRadusCollection = new Dictionary<string, float>()
+            public static readonly Dictionary<string, float> CornerRadusCollection = new Dictionary<string, float>()
             {
                 { string.Empty, 0f },
                 { "10", 10f },

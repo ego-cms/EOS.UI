@@ -76,6 +76,7 @@
     <Compile Include="Traverser\EOSViewTraverser.cs" />
     <Compile Include="Extensions\UIViewExtension.cs" />
     <Compile Include="Controls\BadgeLabel.cs" />
+    <Compile Include="Controls\GhostButton.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets.tt">
