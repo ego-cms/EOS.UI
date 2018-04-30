@@ -429,11 +429,11 @@ namespace EOS.UI.iOS.Sandbox
 
         private void InitDisabledSwitch()
         {
-            switchDisabled.On = false;
+            switchDisabled.On = true;
             switchDisabled.ValueChanged += (sender, e) => 
             {
-                _inputBotton.Enabled = !switchDisabled.On;
-                _inputTop.Enabled = !switchDisabled.On;
+                _inputBotton.Enabled = switchDisabled.On;
+                _inputTop.Enabled = switchDisabled.On;
             };
         }
 

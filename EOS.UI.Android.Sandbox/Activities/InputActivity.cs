@@ -269,8 +269,8 @@ namespace EOS.UI.Android.Sandbox.Activities
 
         public void OnCheckedChanged(CompoundButton buttonView, bool isChecked)
         {
-            _inputTop.Enabled = !isChecked;
-            _inputBottom.Enabled = !isChecked;
+            _inputTop.Enabled = isChecked;
+            _inputBottom.Enabled = isChecked;
         }
     }
 }

@@ -1,7 +1,6 @@
 using Foundation;
 using System;
 using System.Linq;
-using EOS.UI.iOS.Extensions;
 using EOS.UI.iOS.Themes;
 using EOS.UI.Shared.Themes.Helpers;
 using EOS.UI.Shared.Themes.Interfaces;
@@ -154,7 +153,7 @@ namespace EOS.UI.iOS.Controls
             {
                 IsEOSCustomizationIgnored = true;
                 _underlineColorFocused = value;
-                if(Enabled && Focused)
+                if(Enabled && Focused && _underlineLayer != null)
                 {
                     _underlineLayer.BorderWidth = InputConstants.UnderlineHeight;
                     _underlineLayer.BorderColor = value.CGColor;
@@ -170,7 +169,7 @@ namespace EOS.UI.iOS.Controls
             {
                 IsEOSCustomizationIgnored = true;
                 _underlineColorUnfocused = value;
-                if(Enabled && !Focused)
+                if(Enabled && !Focused && _underlineLayer != null)
                 {
                     _underlineLayer.BorderWidth = InputConstants.UnderlineHeight;
                     _underlineLayer.BorderColor = value.CGColor;
@@ -186,7 +185,7 @@ namespace EOS.UI.iOS.Controls
             {
                 IsEOSCustomizationIgnored = true;
                 _underlineColorDisabled = value;
-                if(!Enabled)
+                if(!Enabled && _underlineLayer != null)
                 {
                     _underlineLayer.BorderWidth = InputConstants.UnderlineHeight;
                     _underlineLayer.BorderColor = value.CGColor;
@@ -260,22 +259,6 @@ namespace EOS.UI.iOS.Controls
             _leftImageContainer = new UIView(new CGRect(0, 0, InputConstants.IconSize + InputConstants.IconPadding, InputConstants.IconSize));
             _leftImageContainer.AddSubview(_leftImageView);
 
-            _underlineLayer = new CALayer
-            {
-                BorderColor = UIColor.Gray.CGColor,
-                BorderWidth = InputConstants.UnderlineHeight,
-                Frame = new CGRect(
-                    0,
-                    Frame.Size.Height - InputConstants.UnderlineHeight,
-                    Frame.Size.Width,
-                    Frame.Size.Height
-                ),
-                Name = InputConstants.UnderlineName
-            };
-
-            Layer.AddSublayer(_underlineLayer);
-            Layer.MasksToBounds = true;
-
             LeftView = _leftImageContainer;
             LeftViewMode = UITextFieldViewMode.Always;
             Started += Input_Started;
@@ -288,16 +271,16 @@ namespace EOS.UI.iOS.Controls
 
         private void Input_Ended(object sender, EventArgs e)
         {
-            _leftImageView.Image = LeftImageFocused;
+            _leftImageView.Image = LeftImageUnfocused;
             _underlineLayer.BorderWidth = InputConstants.UnderlineHeight;
-            _underlineLayer.BorderColor = UnderlineColorFocused.CGColor;
+            _underlineLayer.BorderColor = UnderlineColorUnfocused.CGColor;
         }
 
         private void Input_Started(object sender, EventArgs e)
         {
-            _leftImageView.Image = LeftImageUnfocused;
+            _leftImageView.Image = LeftImageFocused;
             _underlineLayer.BorderWidth = InputConstants.UnderlineHeight;
-            _underlineLayer.BorderColor = UnderlineColorUnfocused.CGColor;
+            _underlineLayer.BorderColor = UnderlineColorFocused.CGColor;
         }
 
         private void UpdateEnabledState(bool enabled)
@@ -351,6 +334,25 @@ namespace EOS.UI.iOS.Controls
         public override void LayoutSubviews()
         {
             base.LayoutSubviews();
+
+            if(_underlineLayer == null)
+            {
+                _underlineLayer = new CALayer
+                {
+                    BorderColor = UIColor.Red.CGColor,
+                    BorderWidth = InputConstants.UnderlineHeight,
+                    Frame = new CGRect(
+                        0,
+                        Frame.Size.Height - InputConstants.UnderlineHeight,
+                        Frame.Size.Width,
+                        Frame.Size.Height
+                    ),
+                    Name = InputConstants.UnderlineName
+                };
+                Layer.AddSublayer(_underlineLayer);
+                Layer.MasksToBounds = true;
+            }
+
             UpdateUnderline();
         }
 
@@ -410,7 +412,6 @@ namespace EOS.UI.iOS.Controls
                 UnderlineColorUnfocused = provider.GetEOSProperty<UIColor>(this, EOSConstants.UnderlineColorUnfocused);
                 UnderlineColorDisabled = provider.GetEOSProperty<UIColor>(this, EOSConstants.UnderlineColorDisabled);
                 IsEOSCustomizationIgnored = false;
-                UpdateEnabledState(Enabled);
                 SizeToFit();
             }
         }
