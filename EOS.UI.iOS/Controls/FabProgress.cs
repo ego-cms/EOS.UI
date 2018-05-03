@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Threading.Tasks;
 using CoreGraphics;
+using EOS.UI.iOS.Extensions;
+using EOS.UI.iOS.Helpers;
 using EOS.UI.iOS.Themes;
 using EOS.UI.Shared.Themes.Helpers;
 using EOS.UI.Shared.Themes.Interfaces;
@@ -58,10 +60,9 @@ namespace EOS.UI.iOS.Controls
             set
             {
                 base.Enabled = value;
-                if (DisabledColor != null)
-                {
-                    BackgroundColor = DisabledColor;
-                }
+                if (!value)
+                    _normalBackgroundColor = BackgroundColor;
+                BackgroundColor = value ? _normalBackgroundColor : DisabledColor;
             }
         }
 
@@ -125,6 +126,15 @@ namespace EOS.UI.iOS.Controls
             UpdateAppearance();
         }
 
+        public void SetShadowConfig(ShadowConfig config)
+        {
+            Layer.ShadowColor = config.Color;
+            Layer.ShadowOffset = config.Offset;
+            Layer.ShadowRadius = config.Radius;
+            Layer.ShadowOpacity = config.Opacity;
+            IsEOSCustomizationIgnored = true;
+        }
+
         public IEOSStyle GetCurrentEOSStyle()
         {
             return null;
@@ -138,6 +148,7 @@ namespace EOS.UI.iOS.Controls
         public void ResetCustomization()
         {
             IsEOSCustomizationIgnored = false;
+
             UpdateAppearance();
         }
 
@@ -151,11 +162,14 @@ namespace EOS.UI.iOS.Controls
             {
                 var provider = GetThemeProvider();
                 BackgroundColor = provider.GetEOSProperty<UIColor>(this, EOSConstants.FabProgressPrimaryColor);
+                _normalBackgroundColor = BackgroundColor;
                 PressedColor = provider.GetEOSProperty<UIColor>(this, EOSConstants.FabProgressPressedColor);
                 DisabledColor = provider.GetEOSProperty<UIColor>(this, EOSConstants.FabProgressDisabledColor);
                 Image = UIImage.FromBundle(provider.GetEOSProperty<string>(this, EOSConstants.CalendarImage));
+                _normalImage = Image;
                 PreloaderImage = UIImage.FromBundle(provider.GetEOSProperty<string>(this, EOSConstants.FabProgressPreloaderImage));
                 ButtonSize = provider.GetEOSProperty<int>(this, EOSConstants.FabProgressSize);
+                SetShadowConfig(provider.GetEOSProperty<ShadowConfig>(this, EOSConstants.FabShadow));
                 IsEOSCustomizationIgnored = false;
             }
         }
@@ -163,11 +177,8 @@ namespace EOS.UI.iOS.Controls
         private void UpdateSize()
         {
             Layer.MasksToBounds = false;
+            Frame = Frame.ResizeRect(height: ButtonSize, width: ButtonSize);
             Layer.CornerRadius = ButtonSize / 2;
-            Layer.ShadowColor = UIColor.Black.CGColor;
-            Layer.ShadowOffset = new CGSize(0, 0);
-            Layer.ShadowRadius = 5;
-            Layer.ShadowOpacity = 0.2f;
         }
 
         private async void OpenAnimate()

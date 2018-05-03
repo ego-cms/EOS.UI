@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using EOS.UI.Shared.Themes.Helpers;
 using UIKit;
 using System.Linq;
+using EOS.UI.iOS.Helpers;
+using CoreGraphics;
 
 namespace EOS.UI.iOS.Sandbox.Helpers
 {
@@ -26,6 +28,8 @@ namespace EOS.UI.iOS.Sandbox.Helpers
         public static List<int> FontSizeValues;
 
         public static List<int> LetterSpacingValues;
+
+        public static List<int> FabProgressSizes;
 
         public static Dictionary<string, EOSThemeEnumeration> Themes = new Dictionary<string, EOSThemeEnumeration>()
         {
@@ -68,6 +72,7 @@ namespace EOS.UI.iOS.Sandbox.Helpers
             FontSizeValues = Enumerable.Range(10, 31).Where(i=>i%2==0).ToList();
             CornerRadiusValues = Enumerable.Range(1, 10).Where(i => (i-10) % 4 == 0).ToList();
             LetterSpacingValues = Enumerable.Range(1, 10).ToList();
+            FabProgressSizes = Enumerable.Range(40, 50).Where(i => i%10 == 0).ToList();
         }
     }
 }

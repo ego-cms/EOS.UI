@@ -69,9 +69,16 @@ namespace EOS.UI.iOS.Sandbox.Controls.Pickers
         }
     }
 
-    //fontsizes picker
-    public class FontSizesPickerSource : UIPickerViewDataSource
+    //int picker
+    public class ValuePickerSource<T> : UIPickerViewDataSource
     {
+        private IEnumerable<T> _source;
+
+        public ValuePickerSource(IEnumerable<T> source)
+        {
+            _source = source;
+        }
+
         public override nint GetComponentCount(UIPickerView pickerView)
         {
             return 1;
@@ -79,80 +86,29 @@ namespace EOS.UI.iOS.Sandbox.Controls.Pickers
 
         public override nint GetRowsInComponent(UIPickerView pickerView, nint component)
         {
-            return Constants.FontSizeValues.Count;
+            return _source.Count();
         }
     }
 
-    public class FontSizesPickerDelegate : UIPickerViewDelegate
+    public class ValuePickerDelegate<T> : UIPickerViewDelegate
     {
-        public event EventHandler<int> DidSelected;
+        private IEnumerable<T> _source;
+
+        public event EventHandler<T> DidSelected;
+
+        public ValuePickerDelegate(IEnumerable<T> source)
+        {
+            _source = source;
+        }
 
         public override string GetTitle(UIPickerView pickerView, nint row, nint component)
         {
-            return Constants.FontSizeValues[(int)row].ToString();
+            return ((T)_source.ElementAt((int)row)).ToString();
         }
 
         public override void Selected(UIPickerView pickerView, nint row, nint component)
         {
-            DidSelected?.Invoke(this, Constants.FontSizeValues[(int)row]);
-        }
-    }
-
-    //letterSpacing picker
-    public class LetterSpacingPickerSource : UIPickerViewDataSource
-    {
-        public override nint GetComponentCount(UIPickerView pickerView)
-        {
-            return 1;
-        }
-
-        public override nint GetRowsInComponent(UIPickerView pickerView, nint component)
-        {
-            return Constants.LetterSpacingValues.Count;
-        }
-    }
-
-    public class LetterSpacingPickerDelegate : UIPickerViewDelegate
-    {
-        public event EventHandler<int> DidSelected;
-
-        public override string GetTitle(UIPickerView pickerView, nint row, nint component)
-        {
-            return Constants.LetterSpacingValues[(int)row].ToString();
-        }
-
-        public override void Selected(UIPickerView pickerView, nint row, nint component)
-        {
-            DidSelected?.Invoke(this, Constants.LetterSpacingValues[(int)row]);
-        }
-    }
-
-    //cornerradius picker
-    public class CornerRadiusPickerSource : UIPickerViewDataSource
-    {
-        public override nint GetComponentCount(UIPickerView pickerView)
-        {
-            return 1;
-        }
-
-        public override nint GetRowsInComponent(UIPickerView pickerView, nint component)
-        {
-            return Constants.CornerRadiusValues.Count;
-        }
-    }
-
-    public class CornerRadiusPickerDelegate : UIPickerViewDelegate
-    {
-        public event EventHandler<int> DidSelected;
-
-        public override string GetTitle(UIPickerView pickerView, nint row, nint component)
-        {
-            return Constants.CornerRadiusValues[(int)row].ToString();
-        }
-
-        public override void Selected(UIPickerView pickerView, nint row, nint component)
-        {
-            DidSelected?.Invoke(this, Constants.CornerRadiusValues[(int)row]);
+            DidSelected?.Invoke(this, (T)_source.ElementAt((int)row));
         }
     }
 

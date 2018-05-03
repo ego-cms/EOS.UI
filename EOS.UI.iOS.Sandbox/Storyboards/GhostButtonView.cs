@@ -87,8 +87,8 @@ namespace EOS.UI.iOS.Sandbox
 
             var letterSpacingPicker = new UIPickerView(rect);
             letterSpacingPicker.ShowSelectionIndicator = true;
-            letterSpacingPicker.DataSource = new LetterSpacingPickerSource();
-            var letterSpacingPickerDelegate = new LetterSpacingPickerDelegate();
+            letterSpacingPicker.DataSource = new ValuePickerSource<int>(Constants.LetterSpacingValues);
+            var letterSpacingPickerDelegate = new ValuePickerDelegate<int>(Constants.LetterSpacingValues);
             letterSpacingPickerDelegate.DidSelected += (object sender, int e) =>
             {
                 ghostButton.LetterSpacing = e;
@@ -141,8 +141,8 @@ namespace EOS.UI.iOS.Sandbox
 
             var fontSizePicker = new UIPickerView(rect);
             fontSizePicker.ShowSelectionIndicator = true;
-            fontSizePicker.DataSource = new FontSizesPickerSource();
-            var fontSizePickerDelegate = new FontSizesPickerDelegate();
+            fontSizePicker.DataSource = new ValuePickerSource<int>(Constants.FontSizeValues);
+            var fontSizePickerDelegate = new ValuePickerDelegate<int>(Constants.FontSizeValues);
             fontSizePickerDelegate.DidSelected += (object sender, int e) =>
             {
                 ghostButton.TextSize = e;

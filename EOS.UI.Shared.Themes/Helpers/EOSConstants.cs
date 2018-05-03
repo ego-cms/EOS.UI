@@ -25,6 +25,7 @@
         public const string FabProgressPressedColor = "fabProgressPressedColor";
         public const string FabProgressDisabledColor = "fabProgressDisabledColor";
         public const string FabProgressSize = "fabProgressSize";
+        public const string FabShadow = "fabShadow";
     }
 
     public static class ControlNames

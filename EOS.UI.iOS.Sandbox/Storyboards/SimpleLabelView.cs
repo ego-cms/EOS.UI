@@ -91,8 +91,8 @@ namespace EOS.UI.iOS.Sandbox
         {
             var textSizePicker = new UIPickerView(frame);
             textSizePicker.ShowSelectionIndicator = true;
-            textSizePicker.DataSource = new FontSizesPickerSource();
-            var textSizePickerDelegate = new FontSizesPickerDelegate();
+            textSizePicker.DataSource = new ValuePickerSource<int>(Constants.FontSizeValues);
+            var textSizePickerDelegate = new ValuePickerDelegate<int>(Constants.FontSizeValues);
             textSizePickerDelegate.DidSelected += (object sender, int e) =>
             {
                 _simpleLabel.TextSize = e;
@@ -159,9 +159,9 @@ namespace EOS.UI.iOS.Sandbox
             var letterSpacingPicker = new UIPickerView(frame)
             {
                 ShowSelectionIndicator = true,
-                DataSource = new LetterSpacingPickerSource()
+                DataSource = new ValuePickerSource<int>(Constants.LetterSpacingValues)
             };
-            var letterSpacingPickerDelegate = new LetterSpacingPickerDelegate();
+            var letterSpacingPickerDelegate = new ValuePickerDelegate<int>(Constants.LetterSpacingValues);
             letterSpacingPickerDelegate.DidSelected += (object sender, int e) =>
             {
                 _simpleLabel.LetterSpacing = e;

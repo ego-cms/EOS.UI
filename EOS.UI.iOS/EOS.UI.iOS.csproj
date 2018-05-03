@@ -108,6 +108,7 @@
     <Compile Include="Controls\BadgeLabel.cs" />
     <Compile Include="Controls\GhostButton.cs" />
     <Compile Include="Controls\FabProgress.cs" />
+    <Compile Include="Helpers\ShadowConfig.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets.tt">

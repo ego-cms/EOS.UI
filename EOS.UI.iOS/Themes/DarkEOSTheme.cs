@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using EOS.UI.iOS.Helpers;
 using UIFrameworks.Shared.Themes.Helpers;
 using UIFrameworks.Shared.Themes.Interfaces;
 using UIKit;
@@ -29,8 +30,9 @@ namespace EOS.UI.iOS.Themes
             { EOSConstants.FabProgressPreloaderImage, "preloader"},
             { EOSConstants.FabProgressPrimaryColor, UIColor.FromRGB(255, 92, 73)},
             { EOSConstants.FabProgressPressedColor, UIColor.FromRGB(255, 92, 73)},
-            { EOSConstants.FabProgressDisabledColor, null},
-            { EOSConstants.FabProgressSize, 50}
+            { EOSConstants.FabProgressDisabledColor, UIColor.FromRGB(255, 92, 73)},
+            { EOSConstants.FabProgressSize, 50},
+            { EOSConstants.FabShadow, Constants.ShadowConfigs["dark"]}
         };
     }
 }
