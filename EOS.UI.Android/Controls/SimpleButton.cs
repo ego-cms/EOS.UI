@@ -2,8 +2,10 @@
 using Android.Content;
 using Android.Content.Res;
 using Android.Graphics;
+using Android.Graphics.Drawables;
 using Android.Runtime;
 using Android.Util;
+using Android.Views;
 using Android.Widget;
 using EOS.UI.Shared.Themes.Helpers;
 using EOS.UI.Shared.Themes.Interfaces;
@@ -14,11 +16,16 @@ using R = Android.Resource;
 
 namespace EOS.UI.Android.Controls
 {
-    public class SimpleButton: Button, IEOSThemeControl
+    public class SimpleButton: Button, IEOSThemeControl, View.IOnTouchListener
     {
         #region fields
 
-        private int[][] _states;
+        private int[][] _states = new int[][]
+        {
+            new int[] { R.Attribute.StateEnabled },
+            new int[] { -R.Attribute.StateEnabled },
+            new int[] { R.Attribute.StatePressed },
+        };
 
         #endregion
 
@@ -48,13 +55,63 @@ namespace EOS.UI.Android.Controls
 
         #region customization
 
+        public override bool Enabled
+        {
+            get => base.Enabled;
+            set
+            {
+                if(Enabled != value)
+                    UpdateEnabledState(value);
+                base.Enabled = value;
+            }
+        }
+
+        private Color _enabledBackgroundColor;
+        public Color EnabledBackgroundColor
+        {
+            get => _enabledBackgroundColor;
+            set
+            {
+                IsEOSCustomizationIgnored = true;
+                _enabledBackgroundColor = value;
+                if(Enabled)
+                    Background = CreateRippleDrawable(EnabledBackgroundColor);
+            }
+        }
+
+        private Color _disabledBackgroundColor;
+        public Color DisabledBackgroundColor
+        {
+            get => _disabledBackgroundColor;
+            set
+            {
+                IsEOSCustomizationIgnored = true;
+                _disabledBackgroundColor = value;
+                if(!Enabled)
+                    Background = new ColorDrawable(_disabledBackgroundColor);
+            }
+        }
+
+        private Color _pressedBackgroundColor;
+        public Color PressedBackgroundColor
+        {
+            get => _pressedBackgroundColor;
+            set
+            {
+                IsEOSCustomizationIgnored = true;
+                _pressedBackgroundColor = value;
+                if(Enabled)
+                    Background = CreateRippleDrawable(EnabledBackgroundColor);
+            }
+        }
+
         public override Typeface Typeface
         {
             get => base.Typeface;
             set
             {
-                base.Typeface = value;
                 IsEOSCustomizationIgnored = true;
+                base.Typeface = value;
             }
         }
 
@@ -63,8 +120,8 @@ namespace EOS.UI.Android.Controls
             get => base.LetterSpacing;
             set
             {
-                base.LetterSpacing = value;
                 IsEOSCustomizationIgnored = true;
+                base.LetterSpacing = value;
             }
         }
 
@@ -73,8 +130,8 @@ namespace EOS.UI.Android.Controls
             get => base.TextSize;
             set
             {
-                base.TextSize = value;
                 IsEOSCustomizationIgnored = true;
+                base.TextSize = value;
             }
         }
 
@@ -84,22 +141,10 @@ namespace EOS.UI.Android.Controls
             get => _enabledTextColor;
             set
             {
-                _enabledTextColor = value;
-                var colorSet = new ColorStateList(
-                new int[][]
-                {
-                    new int[] { R.Attribute.StateEnabled },
-                    new int[] { -R.Attribute.StateEnabled},
-                    new int[] { R.Attribute.StatePressed },
-                },
-                new int[]
-                {
-                    _enabledTextColor,
-                    DisabledTextColor,
-                    PressedStateTextColor
-                });
-                base.SetTextColor(colorSet);
                 IsEOSCustomizationIgnored = true;
+                _enabledTextColor = value;
+                if(Enabled)
+                    base.SetTextColor(value);
             }
         }
 
@@ -109,47 +154,21 @@ namespace EOS.UI.Android.Controls
             get => _disabledTextColor;
             set
             {
-                _disabledTextColor = value;
-                var colorSet = new ColorStateList(
-                new int[][]
-                {
-                    new int[] { R.Attribute.StateEnabled },
-                    new int[] { -R.Attribute.StateEnabled },
-                    new int[] { R.Attribute.StatePressed },
-                },
-                new int[]
-                {
-                    EnabledTextColor,
-                    _disabledTextColor,
-                    PressedStateTextColor,
-                });
-                base.SetTextColor(colorSet);
                 IsEOSCustomizationIgnored = true;
+                _disabledTextColor = value;
+                if(!Enabled)
+                    base.SetTextColor(value);
             }
         }
 
-        private Color _pressedStateTextColor;
-        public Color PressedStateTextColor
+        private Color _pressedTextColor;
+        public Color PressedTextColor
         {
-            get => _pressedStateTextColor;
+            get => _pressedTextColor;
             set
             {
-                _pressedStateTextColor = value;
-                var colorSet = new ColorStateList(
-                new int[][]
-                {
-                    new int[] { R.Attribute.StateEnabled },
-                    new int[] { -R.Attribute.StateEnabled},
-                    new int[] { R.Attribute.StatePressed },
-                },
-                new int[]
-                {
-                    EnabledTextColor,
-                    DisabledTextColor,
-                    _pressedStateTextColor,
-                });
-                base.SetTextColor(colorSet);
                 IsEOSCustomizationIgnored = true;
+                _pressedTextColor = value;
             }
         }
 
@@ -159,7 +178,9 @@ namespace EOS.UI.Android.Controls
 
         private void Initialize(IAttributeSet attrs = null)
         {
-            SetMaxLines(1);
+            SetOnTouchListener(this);
+            Background = CreateRippleDrawable(EnabledBackgroundColor);
+            UpdateAppearance();
             if(attrs != null)
                 InitializeAttributes(attrs);
         }
@@ -167,6 +188,30 @@ namespace EOS.UI.Android.Controls
         private void InitializeAttributes(IAttributeSet attrs)
         {
             //TODO: Implement set attrs logic
+        }
+
+        private Drawable CreateRippleDrawable(Color contentColor)
+        {
+            return new RippleDrawable(
+                CreateBackgroundColorStateList(),
+                new ColorDrawable(contentColor),
+                new ColorDrawable(Color.Gray));
+        }
+
+        private ColorStateList CreateBackgroundColorStateList()
+        {
+            return new ColorStateList(
+               new int[][] { new int[] { } },
+               new int[]
+               {
+                   PressedBackgroundColor,
+               });
+        }
+
+        private void UpdateEnabledState(bool enabled)
+        {
+            base.SetTextColor(enabled ? EnabledTextColor : DisabledTextColor);
+            Background = enabled ? CreateRippleDrawable(EnabledBackgroundColor) : new ColorDrawable(DisabledBackgroundColor);
         }
 
         #endregion
@@ -186,8 +231,14 @@ namespace EOS.UI.Android.Controls
             {
                 base.SetTypeface(Typeface.CreateFromAsset(Context.Assets, GetThemeProvider().GetEOSProperty<string>(this, EOSConstants.Font)), TypefaceStyle.Normal);
                 base.LetterSpacing = GetThemeProvider().GetEOSProperty<float>(this, EOSConstants.LetterSpacing);
-                base.SetTextColor(GetThemeProvider().GetEOSProperty<Color>(this, EOSConstants.PrimaryColor));
                 base.TextSize = GetThemeProvider().GetEOSProperty<float>(this, EOSConstants.TextSize);
+                EnabledTextColor = GetThemeProvider().GetEOSProperty<Color>(this, EOSConstants.SecondaryColor);
+                DisabledTextColor = GetThemeProvider().GetEOSProperty<Color>(this, EOSConstants.SecondaryColorDisabled);
+                PressedTextColor = GetThemeProvider().GetEOSProperty<Color>(this, EOSConstants.SecondaryColorPressed);
+                EnabledBackgroundColor = GetThemeProvider().GetEOSProperty<Color>(this, EOSConstants.PrimaryColor);
+                DisabledBackgroundColor = GetThemeProvider().GetEOSProperty<Color>(this, EOSConstants.PrimaryColorDisabled);
+                PressedBackgroundColor = GetThemeProvider().GetEOSProperty<Color>(this, EOSConstants.PrimaryColorPressed);
+                IsEOSCustomizationIgnored = false;
             }
         }
 
@@ -204,18 +255,25 @@ namespace EOS.UI.Android.Controls
 
         public void SetEOSStyle(EOSStyleEnumeration style)
         {
-            var provider = GetThemeProvider();
-            base.SetTypeface(Typeface.CreateFromAsset(Context.Assets, provider.GetEOSProperty<string>(this, EOSConstants.Font)), TypefaceStyle.Normal);
-            base.LetterSpacing = provider.GetEOSProperty<float>(this, EOSConstants.LetterSpacing);
-            EnabledTextColor = provider.GetEOSProperty<Color>(this, EOSConstants.PrimaryColor);
-            DisabledTextColor = provider.GetEOSProperty<Color>(this, EOSConstants.DisabledTextColor);
-            PressedStateTextColor = provider.GetEOSProperty<Color>(this, EOSConstants.PressedStateTextColor);
-            base.TextSize = provider.GetEOSProperty<float>(this, EOSConstants.TextSize);
-            IsEOSCustomizationIgnored = false;
+
         }
 
         #endregion
 
+        #region IOnTouchListener implementation
 
+        public bool OnTouch(View v, MotionEvent e)
+        {
+            if(Enabled)
+            {
+                if(e.Action == MotionEventActions.Down)
+                    base.SetTextColor(PressedTextColor);
+                if(e.Action == MotionEventActions.Up || e.Action == MotionEventActions.Cancel)
+                    base.SetTextColor(EnabledTextColor);
+            }
+            return false;
+        }
+
+        #endregion
     }
 }

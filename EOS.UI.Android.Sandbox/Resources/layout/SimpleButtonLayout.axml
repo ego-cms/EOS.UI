@@ -3,4 +3,329 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/background_color"/>
+    android:background="@color/background_color">
+    <EOS.UI.Android.Controls.SimpleButton
+        android:id="@+id/simpleButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="20dp"
+        android:text="Simple Button" />
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@android:color/darker_gray" />
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:weightSum="3"
+                android:layout_marginBottom="5dp">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="Theme"
+                    android:textSize="18sp"
+                    android:layout_weight="2"
+                    android:paddingLeft="3dp"
+                    android:gravity="center_vertical" />
+                <Spinner
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:id="@+id/spinnerTheme"
+                    android:layout_weight="1"
+                    android:paddingLeft="3dp"
+                    android:paddingRight="3dp" />
+            </LinearLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@android:color/darker_gray" />
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:weightSum="3"
+                android:layout_marginBottom="5dp">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="Font"
+                    android:textSize="18sp"
+                    android:layout_weight="2"
+                    android:paddingLeft="3dp"
+                    android:gravity="center_vertical" />
+                <Spinner
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:id="@+id/spinnerFont"
+                    android:layout_weight="1"
+                    android:paddingRight="3dp"
+                    android:paddingLeft="3dp" />
+            </LinearLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@android:color/darker_gray" />
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:weightSum="3"
+                android:layout_marginBottom="5dp">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="Letter spacing"
+                    android:textSize="18sp"
+                    android:layout_weight="2"
+                    android:paddingLeft="3dp"
+                    android:gravity="center_vertical" />
+                <Spinner
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:id="@+id/spinnerLetterSpacing"
+                    android:layout_weight="1"
+                    android:paddingLeft="3dp"
+                    android:paddingEnd="3dp" />
+            </LinearLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@android:color/darker_gray" />
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:weightSum="3"
+                android:layout_marginBottom="5dp">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="Text size"
+                    android:textSize="18sp"
+                    android:layout_weight="2"
+                    android:paddingLeft="3dp"
+                    android:gravity="center_vertical" />
+                <Spinner
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:id="@+id/spinnerTextSize"
+                    android:layout_weight="1"
+                    android:paddingLeft="3dp"
+                    android:paddingEnd="3dp" />
+            </LinearLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@android:color/darker_gray" />
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:weightSum="3"
+                android:layout_marginBottom="5dp">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="Text color enabled"
+                    android:textSize="18sp"
+                    android:layout_weight="2"
+                    android:paddingLeft="3dp"
+                    android:gravity="center_vertical" />
+                <Spinner
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:id="@+id/spinnerTextColorEnabled"
+                    android:layout_weight="1"
+                    android:paddingLeft="3dp"
+                    android:paddingEnd="3dp" />
+            </LinearLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@android:color/darker_gray" />
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:weightSum="3"
+                android:layout_marginBottom="5dp">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="Text color disabled"
+                    android:textSize="18sp"
+                    android:layout_weight="2"
+                    android:paddingLeft="3dp"
+                    android:gravity="center_vertical" />
+                <Spinner
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:id="@+id/spinnerTextColorDisabled"
+                    android:layout_weight="1"
+                    android:paddingLeft="3dp"
+                    android:paddingEnd="3dp" />
+            </LinearLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@android:color/darker_gray" />
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:weightSum="3"
+                android:layout_marginBottom="5dp">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="Text color pressed"
+                    android:textSize="18sp"
+                    android:layout_weight="2"
+                    android:paddingLeft="3dp"
+                    android:gravity="center_vertical" />
+                <Spinner
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:id="@+id/spinnerTextColorPressed"
+                    android:layout_weight="1"
+                    android:paddingLeft="3dp"
+                    android:paddingRight="3dp" />
+            </LinearLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@android:color/darker_gray" />
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:weightSum="3"
+                android:layout_marginBottom="5dp">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="Background color enabled"
+                    android:textSize="18sp"
+                    android:layout_weight="2"
+                    android:paddingLeft="3dp"
+                    android:gravity="center_vertical" />
+                <Spinner
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:id="@+id/spinnerBackgroundColorEnabled"
+                    android:layout_weight="1"
+                    android:paddingLeft="3dp"
+                    android:paddingRight="3dp" />
+            </LinearLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@android:color/darker_gray" />
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:weightSum="3"
+                android:layout_marginBottom="5dp">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="Background color disabled"
+                    android:textSize="18sp"
+                    android:layout_weight="2"
+                    android:paddingLeft="3dp"
+                    android:gravity="center_vertical" />
+                <Spinner
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:id="@+id/spinnerBackgroundColorDisabled"
+                    android:layout_weight="1"
+                    android:paddingLeft="3dp"
+                    android:paddingRight="3dp" />
+            </LinearLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@android:color/darker_gray" />
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:weightSum="3"
+                android:layout_marginBottom="5dp">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="Background color pressed"
+                    android:textSize="18sp"
+                    android:layout_weight="2"
+                    android:paddingLeft="3dp"
+                    android:gravity="center_vertical" />
+                <Spinner
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:id="@+id/spinnerBackgroundColorPressed"
+                    android:layout_weight="1"
+                    android:paddingLeft="3dp"
+                    android:paddingRight="3dp" />
+            </LinearLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@android:color/darker_gray" />
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:weightSum="3"
+                android:layout_marginBottom="5dp">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="Enabled"
+                    android:textSize="18sp"
+                    android:paddingLeft="3dp"
+                    android:layout_weight="2"
+                    android:gravity="center_vertical" />
+                <Switch
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:id="@+id/switchDisabled"
+                    android:checked="true"
+                    android:paddingLeft="3dp"
+                    android:paddingRight="3dp"
+                    android:layout_weight="1" />
+            </LinearLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@android:color/darker_gray" />
+            <Button
+                android:text="Reset customization"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/buttonResetCustomization" />
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

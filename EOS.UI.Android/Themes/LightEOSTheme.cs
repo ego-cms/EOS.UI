@@ -11,9 +11,11 @@ namespace UIFrameworks.Android.Themes
         public Dictionary<string, object> ThemeValues => new Dictionary<string, object>()
         {
             { EOSConstants.PrimaryColor, Color.White },
+            { EOSConstants.PrimaryColorDisabled, Color.LightCoral},
+            { EOSConstants.PrimaryColorPressed, Color.LightBlue},
             { EOSConstants.SecondaryColor, Color.Black },
-            { EOSConstants.DisabledTextColor, Color.LightGray},
-            { EOSConstants.PressedStateTextColor, Color.LightGray},
+            { EOSConstants.SecondaryColorDisabled, Color.LightGray},
+            { EOSConstants.SecondaryColorPressed, Color.LightGray},
             { EOSConstants.TextSize, 17f },
             { EOSConstants.Font, "Fonts/OpenSansRegular.ttf" },
             { EOSConstants.CornerRadius, 5f },
