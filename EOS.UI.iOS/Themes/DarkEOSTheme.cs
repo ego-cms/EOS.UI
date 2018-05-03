@@ -25,6 +25,12 @@ namespace EOS.UI.iOS.Themes
             { EOSConstants.UnderlineColorFocused, UIColor.Black },
             { EOSConstants.UnderlineColorUnfocused, UIColor.DarkGray },
             { EOSConstants.UnderlineColorDisabled, UIColor.LightGray },
+            { EOSConstants.CalendarImage, "calendar"},
+            { EOSConstants.FabProgressPreloaderImage, "preloader"},
+            { EOSConstants.FabProgressPrimaryColor, UIColor.FromRGB(255, 92, 73)},
+            { EOSConstants.FabProgressPressedColor, UIColor.FromRGB(255, 92, 73)},
+            { EOSConstants.FabProgressDisabledColor, null},
+            { EOSConstants.FabProgressSize, 50}
         };
     }
 }

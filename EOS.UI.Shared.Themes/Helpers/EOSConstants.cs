@@ -18,6 +18,13 @@
         public const string UnderlineColorUnfocused = "underlineColorUnfocused";
         public const string UnderlineColorFocused = "underlineColorFocused";
         public const string UnderlineColorDisabled = "underlineColorDisabled";
+        //fab progress constans
+        public const string CalendarImage = "calendarImage";
+        public const string FabProgressPreloaderImage = "fabProgressPreloaderImage";
+        public const string FabProgressPrimaryColor = "fabProgressPrimaryColor";
+        public const string FabProgressPressedColor = "fabProgressPressedColor";
+        public const string FabProgressDisabledColor = "fabProgressDisabledColor";
+        public const string FabProgressSize = "fabProgressSize";
     }
 
     public static class ControlNames
