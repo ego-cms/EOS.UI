@@ -11,7 +11,6 @@ using System.Collections.Generic;
 using System.Linq;
 using UIFrameworks.Shared.Themes.Helpers;
 using UIKit;
-using static EOS.UI.iOS.Sandbox.BadgeLabelView;
 
 namespace EOS.UI.iOS.Sandbox
 {

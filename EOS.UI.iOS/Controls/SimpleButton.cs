@@ -10,10 +10,19 @@ using UIKit;
 
 namespace EOS.UI.iOS.Controls
 {
-    [Register("GhostButton")]
-    public class GhostButton : UIButton, IEOSThemeControl
+    [Register("SimpleButton")]
+    public class SimpleButton : UIButton, IEOSThemeControl
     {
-        public bool IsEOSCustomizationIgnored { get; private set; }
+        #region constructor
+
+        public SimpleButton()
+        {
+            Initialization();
+        }
+
+        #endregion
+
+        #region customization
 
         private UIFont _font;
         public override UIFont Font
@@ -36,6 +45,18 @@ namespace EOS.UI.iOS.Controls
             {
                 _letterSpacing = value;
                 this.SetLetterSpacing(_letterSpacing);
+                IsEOSCustomizationIgnored = true;
+            }
+        }
+
+        private int _textSize;
+        public int TextSize
+        {
+            get => _textSize == 0 ? (int)base.Font.PointSize : _textSize;
+            set
+            {
+                _textSize = value;
+                this.SetTextSize(_textSize);
                 IsEOSCustomizationIgnored = true;
             }
         }
@@ -64,26 +85,51 @@ namespace EOS.UI.iOS.Controls
             }
         }
 
-        private int _textSize;
-        public int TextSize
+        private UIColor _pressedTextColor;
+        public UIColor PressedTextColor
         {
-            get => _textSize == 0 ? (int)base.Font.PointSize : _textSize;
+            get => _pressedTextColor;
             set
             {
-                _textSize = value;
-                this.SetTextSize(_textSize);
+                _pressedTextColor = value;
+                SetTitleColor(_pressedTextColor, UIControlState.Highlighted);
                 IsEOSCustomizationIgnored = true;
             }
         }
 
-        private UIColor _pressedStateTextColor;
-        public UIColor PressedStateTextColor
+        private UIColor _enabledBackgroundColor;
+        public UIColor EnabledBackgroundColor
         {
-            get => _pressedStateTextColor;
+            get => _enabledBackgroundColor;
             set
             {
-                _pressedStateTextColor = value;
-                SetTitleColor(_pressedStateTextColor, UIControlState.Highlighted);
+                _enabledBackgroundColor = value;
+                if(Enabled)
+                    BackgroundColor = value;
+                IsEOSCustomizationIgnored = true;
+            }
+        }
+
+        private UIColor _disabledBackgroundColor;
+        public UIColor DisabledBackgroundColor
+        {
+            get => _disabledBackgroundColor;
+            set
+            {
+                _disabledBackgroundColor = value;
+                if(!Enabled)
+                    BackgroundColor = value;
+                IsEOSCustomizationIgnored = true;
+            }
+        }
+
+        private UIColor _pressedBackgroundColor;
+        public UIColor PressedBackgroundColor
+        {
+            get => _pressedBackgroundColor;
+            set
+            {
+                _pressedBackgroundColor = value;
                 IsEOSCustomizationIgnored = true;
             }
         }
@@ -93,31 +139,52 @@ namespace EOS.UI.iOS.Controls
             get => base.Enabled;
             set
             {
+                if(Enabled != value)
+                    ToggleState(value);
                 base.Enabled = value;
-                if (value)
-                {
-                    SetTitle(Title(UIControlState.Normal), UIControlState.Normal);
-                }
-                else
-                {
-                    SetTitle(Title(UIControlState.Disabled), UIControlState.Disabled);
-                }
             }
         }
 
-        public GhostButton()
+        #endregion
+
+        #region utility methods
+
+        private void Initialization()
         {
             Layer.MasksToBounds = true;
             Layer.CornerRadius = 5;
-            BackgroundColor = UIColor.Clear;
-            base.SetAttributedTitle(new NSAttributedString(String.Empty), UIControlState.Normal);
+            base.SetAttributedTitle(new NSAttributedString(string.Empty), UIControlState.Normal);
             UpdateAppearance();
+        }
+
+        public override bool Highlighted
+        {
+            get => base.Highlighted;
+            set
+            {
+                BackgroundColor = value ? PressedBackgroundColor : EnabledBackgroundColor;
+                base.Highlighted = value;
+            }
+        }
+
+        private void ToggleState(bool enabled)
+        {
+            var state = enabled ? UIControlState.Normal : UIControlState.Disabled;
+            SetTitle(Title(state), state);
+            BackgroundColor = enabled ? EnabledBackgroundColor : DisabledBackgroundColor;
+        }
+
+        public override void SetTitleColor(UIColor color, UIControlState forState)
+        {
+            var attrString = new NSMutableAttributedString(GetAttributedTitle(UIControlState.Normal));
+            attrString.AddAttribute(UIStringAttributeKey.ForegroundColor, color, new NSRange(0, attrString.Length));
+            SetAttributedTitle(attrString, forState);
         }
 
         public override void SetTitle(string title, UIControlState forState)
         {
             NSMutableAttributedString attrString;
-            if (title != null)
+            if(title != null)
             {
                 attrString = new NSMutableAttributedString(title);
             }
@@ -131,7 +198,7 @@ namespace EOS.UI.iOS.Controls
             var range = new NSRange(0, attrString.Length);
             attrString.AddAttribute(UIStringAttributeKey.KerningAdjustment, new NSNumber(LetterSpacing), range);
             attrString.AddAttribute(UIStringAttributeKey.Font, Font.WithSize(TextSize), range);
-            switch (forState)
+            switch(forState)
             {
                 case UIControlState.Normal:
                     attrString.AddAttribute(UIStringAttributeKey.ForegroundColor, EnabledTextColor, range);
@@ -143,13 +210,18 @@ namespace EOS.UI.iOS.Controls
             SetAttributedTitle(attrString, forState);
         }
 
-        public override void SetTitleColor(UIColor color, UIControlState forState)
+        public override void TouchesBegan(NSSet touches, UIEvent evt)
         {
-            var attrString = new NSMutableAttributedString(GetAttributedTitle(UIControlState.Normal));
-            var range = new NSRange(0, attrString.Length);
-            attrString.AddAttribute(UIStringAttributeKey.ForegroundColor, color, range);
-            SetAttributedTitle(attrString, forState);
+            base.TouchesBegan(touches, evt);
+            this.RippleAnimate((touches.AnyObject as UITouch).LocationInView(this));
         }
+
+        #endregion
+
+        #region IEOSThemeControl implementation
+
+        public bool IsEOSCustomizationIgnored { get; private set; }
+
 
         public IEOSStyle GetCurrentEOSStyle()
         {
@@ -169,32 +241,29 @@ namespace EOS.UI.iOS.Controls
 
         public void SetEOSStyle(EOSStyleEnumeration style)
         {
-            throw new NotImplementedException();
+
         }
 
         public void UpdateAppearance()
         {
-            if (!IsEOSCustomizationIgnored)
+            if(!IsEOSCustomizationIgnored)
             {
                 var provider = GetThemeProvider();
                 Font = provider.GetEOSProperty<UIFont>(this, EOSConstants.Font);
-                EnabledTextColor = provider.GetEOSProperty<UIColor>(this, EOSConstants.PrimaryColor);
+                EnabledTextColor = provider.GetEOSProperty<UIColor>(this, EOSConstants.SecondaryColor);
                 DisabledTextColor = provider.GetEOSProperty<UIColor>(this, EOSConstants.SecondaryColorDisabled);
-                PressedStateTextColor = provider.GetEOSProperty<UIColor>(this, EOSConstants.SecondaryColorPressed);
+                PressedTextColor = provider.GetEOSProperty<UIColor>(this, EOSConstants.SecondaryColorPressed);
                 TextSize = provider.GetEOSProperty<int>(this, EOSConstants.TextSize);
                 LetterSpacing = provider.GetEOSProperty<int>(this, EOSConstants.LetterSpacing);
+                EnabledBackgroundColor = provider.GetEOSProperty<UIColor>(this, EOSConstants.PrimaryColor);
+                DisabledBackgroundColor = provider.GetEOSProperty<UIColor>(this, EOSConstants.PrimaryColorDisabled);
+                PressedBackgroundColor = provider.GetEOSProperty<UIColor>(this, EOSConstants.PrimaryColorPressed);
                 Enabled = base.Enabled;
                 IsEOSCustomizationIgnored = false;
                 SizeToFit();
             }
         }
 
-		public override void TouchesBegan(NSSet touches, UIEvent evt)
-		{
-            base.TouchesBegan(touches, evt);
-            var touch = touches.AnyObject as UITouch;
-            var location = touch.LocationInView(this);
-            this.RippleAnimate(location);
-		}
-	}
+        #endregion
+    }
 }

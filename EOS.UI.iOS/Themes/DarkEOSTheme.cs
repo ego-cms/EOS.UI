@@ -10,6 +10,8 @@ namespace EOS.UI.iOS.Themes
         public Dictionary<string, object> ThemeValues => new Dictionary<string, object>()
         {
             { EOSConstants.PrimaryColor, UIColor.Black },
+            { EOSConstants.PrimaryColorDisabled, UIColor.Gray },
+            { EOSConstants.PrimaryColorPressed, UIColor.LightGray },
             { EOSConstants.SecondaryColor, UIColor.White },
             { EOSConstants.SecondaryColorDisabled, UIColor.LightTextColor},
             { EOSConstants.SecondaryColorPressed, UIColor.LightTextColor},

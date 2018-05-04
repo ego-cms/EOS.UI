@@ -18,17 +18,6 @@ namespace EOS.UI.Android.Controls
 {
     public class SimpleButton: Button, IEOSThemeControl, View.IOnTouchListener
     {
-        #region fields
-
-        private int[][] _states = new int[][]
-        {
-            new int[] { R.Attribute.StateEnabled },
-            new int[] { -R.Attribute.StateEnabled },
-            new int[] { R.Attribute.StatePressed },
-        };
-
-        #endregion
-
         #region constructors
 
         public SimpleButton(Context context) : base(context)
