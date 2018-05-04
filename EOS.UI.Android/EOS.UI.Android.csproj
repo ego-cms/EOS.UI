@@ -55,12 +55,15 @@
     <Compile Include="Traverser\EOSViewTraverser.cs" />
     <Compile Include="Controls\GhostButton.cs" />
     <Compile Include="Controls\Input.cs" />
+    <Compile Include="Controls\FabProgress.cs" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\values\Strings.xml" />
     <AndroidResource Include="Resources\drawable\AccountKey.xml" />
     <AndroidResource Include="Resources\drawable\AccountOff.xml" />
     <AndroidResource Include="Resources\drawable\AccountCircle.xml" />
+    <AndroidResource Include="Resources\drawable\icCalendar.xml" />
+    <AndroidResource Include="Resources\drawable\icPreloader.xml" />
   </ItemGroup>
   <ItemGroup>
     <AndroidAsset Include="Assets\Fonts\OpenSansRegular.ttf" />
