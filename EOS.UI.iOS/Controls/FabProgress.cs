@@ -87,6 +87,10 @@ namespace EOS.UI.iOS.Controls
                 _normalImage = _image;
                 _image = value;
                 SetImage(_image, UIControlState.Normal);
+                VerticalAlignment = UIControlContentVerticalAlignment.Fill;
+                HorizontalAlignment = UIControlContentHorizontalAlignment.Fill;
+                ContentMode = UIViewContentMode.ScaleToFill;
+                UpdateImageInsets();
                 IsEOSCustomizationIgnored = true;
             }
         }
@@ -110,6 +114,7 @@ namespace EOS.UI.iOS.Controls
             {
                 _buttonSize = value;
                 UpdateSize();
+                UpdateImageInsets();
                 IsEOSCustomizationIgnored = true;
             }
         }
@@ -214,6 +219,13 @@ namespace EOS.UI.iOS.Controls
             await Task.Delay(150);
             Image = _normalImage;
             _isOpen = false;
+        }
+
+        private void UpdateImageInsets()
+        {
+            var padding =(nfloat)(ButtonSize * 0.15);
+            var insets = new UIEdgeInsets(padding, padding, padding, padding);
+            ImageEdgeInsets = insets;
         }
     }
 }
