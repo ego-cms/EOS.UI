@@ -1,9 +1,12 @@
 ﻿using System;
+using System.Threading.Tasks;
+using Android.App;
 using Android.Content;
 using Android.Graphics;
 using Android.Graphics.Drawables;
 using Android.Runtime;
 using Android.Util;
+using Android.Views.Animations;
 using Android.Widget;
 using EOS.UI.Shared.Themes.Helpers;
 using EOS.UI.Shared.Themes.Interfaces;
@@ -15,6 +18,12 @@ namespace EOS.UI.Android.Controls
 {
     public class FabProgress : ImageButton, IEOSThemeControl
     {
+        private const int _animationDuration = 200;
+        private bool _isOpen;
+        private Animation _openAnimation;
+        private Animation _closeAnimation;
+        private Drawable _normalImage;
+
         public bool IsEOSCustomizationIgnored { get; private set; }
 
         private Color _backgroundColor;
@@ -24,7 +33,7 @@ namespace EOS.UI.Android.Controls
             set
             {
                 _backgroundColor = value;
-                SetBackgroundColor(_backgroundColor);
+                (Background as GradientDrawable).SetColor(value);
                 IsEOSCustomizationIgnored = true;
             }
         }
@@ -79,6 +88,11 @@ namespace EOS.UI.Android.Controls
 
         private void Initialize()
         {
+            _openAnimation = AnimationUtils.LoadAnimation(Application.Context, Resource.Animation.FabOpenAnimation);
+            _closeAnimation = AnimationUtils.LoadAnimation(Application.Context, Resource.Animation.FabCloseAnimation);
+
+            Click += OnClick;
+
             UpdateAppearance();
         }
 
@@ -109,8 +123,30 @@ namespace EOS.UI.Android.Controls
                 var provider = GetThemeProvider();
                 Image = Resources.GetDrawable(provider.GetEOSProperty<int>(this, EOSConstants.CalendarImage));
                 PreloaderImage = Resources.GetDrawable(provider.GetEOSProperty<int>(this, EOSConstants.FabProgressPreloaderImage));
+
+                var roundedDrawable = (GradientDrawable) Resources.GetDrawable(Resource.Drawable.FabButton);
+                SetBackgroundDrawable(roundedDrawable);
+
+                BackgroundColor = provider.GetEOSProperty<Color>(this, EOSConstants.FabProgressPrimaryColor);
                 IsEOSCustomizationIgnored = false;
             }
         }
-    }
+
+        async void OnClick(object sender, EventArgs e)
+        {
+            if (_isOpen)
+            {
+                StartAnimation(_closeAnimation);
+                await Task.Delay(_animationDuration);
+                SetImageDrawable(Image);
+                _isOpen = false;
+            }
+            else
+            {
+                SetImageDrawable(PreloaderImage);
+                StartAnimation(_openAnimation);
+                _isOpen = true;
+            }
+        }
+	}
 }

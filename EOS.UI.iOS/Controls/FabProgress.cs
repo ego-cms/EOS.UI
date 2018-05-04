@@ -84,13 +84,8 @@ namespace EOS.UI.iOS.Controls
             get => _image;
             set
             {
-                _normalImage = _image;
                 _image = value;
-                SetImage(_image, UIControlState.Normal);
-                VerticalAlignment = UIControlContentVerticalAlignment.Fill;
-                HorizontalAlignment = UIControlContentHorizontalAlignment.Fill;
-                ContentMode = UIViewContentMode.ScaleToFill;
-                UpdateImageInsets();
+                SetImage(_image);
                 IsEOSCustomizationIgnored = true;
             }
         }
@@ -171,7 +166,6 @@ namespace EOS.UI.iOS.Controls
                 PressedColor = provider.GetEOSProperty<UIColor>(this, EOSConstants.FabProgressPressedColor);
                 DisabledColor = provider.GetEOSProperty<UIColor>(this, EOSConstants.FabProgressDisabledColor);
                 Image = UIImage.FromBundle(provider.GetEOSProperty<string>(this, EOSConstants.CalendarImage));
-                _normalImage = Image;
                 PreloaderImage = UIImage.FromBundle(provider.GetEOSProperty<string>(this, EOSConstants.FabProgressPreloaderImage));
                 ButtonSize = provider.GetEOSProperty<int>(this, EOSConstants.FabProgressSize);
                 SetShadowConfig(provider.GetEOSProperty<ShadowConfig>(this, EOSConstants.FabShadow));
@@ -190,7 +184,7 @@ namespace EOS.UI.iOS.Controls
         {
             BeginAnimations("a1");
             SetAnimationDuration(0.1);
-            Image = PreloaderImage;
+            SetImage(PreloaderImage);
             Transform = CGAffineTransform.MakeScale(0.9f, 0.9f);
             CommitAnimations();
             await Task.Delay(100);
@@ -217,7 +211,7 @@ namespace EOS.UI.iOS.Controls
             Transform = CGAffineTransform.MakeRotation(0f);
             CommitAnimations();
             await Task.Delay(150);
-            Image = _normalImage;
+            SetImage(Image);
             _isOpen = false;
         }
 
@@ -226,6 +220,15 @@ namespace EOS.UI.iOS.Controls
             var padding =(nfloat)(ButtonSize * 0.15);
             var insets = new UIEdgeInsets(padding, padding, padding, padding);
             ImageEdgeInsets = insets;
+        }
+
+        private void SetImage(UIImage image)
+        {
+            base.SetImage(image, UIControlState.Normal);
+            VerticalAlignment = UIControlContentVerticalAlignment.Fill;
+            HorizontalAlignment = UIControlContentHorizontalAlignment.Fill;
+            ContentMode = UIViewContentMode.ScaleToFill;
+            UpdateImageInsets();
         }
     }
 }

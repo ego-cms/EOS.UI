@@ -28,6 +28,7 @@ namespace UIFrameworks.Android.Themes
             { EOSConstants.UnderlineColorDisabled, Color.LightGray },
             { EOSConstants.CalendarImage, Resource.Drawable.icCalendar },
             { EOSConstants.FabProgressPreloaderImage, Resource.Drawable.icPreloader },
+            { EOSConstants.FabProgressPrimaryColor, new Color(255, 92, 73) },
         };
     }
 }

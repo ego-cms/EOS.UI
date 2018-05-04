@@ -64,12 +64,16 @@
     <AndroidResource Include="Resources\drawable\AccountCircle.xml" />
     <AndroidResource Include="Resources\drawable\icCalendar.xml" />
     <AndroidResource Include="Resources\drawable\icPreloader.xml" />
+    <AndroidResource Include="Resources\drawable\FabButton.xml" />
+    <AndroidResource Include="Resources\anim\FabOpenAnimation.xml" />
+    <AndroidResource Include="Resources\anim\FabCloseAnimation.xml" />
   </ItemGroup>
   <ItemGroup>
     <AndroidAsset Include="Assets\Fonts\OpenSansRegular.ttf" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Resources\drawable\" />
+    <Folder Include="Resources\anim\" />
   </ItemGroup>
   <Import Project="..\EOS.UI.Shared.Themes\EOS.UI.Shared.Themes.projitems" Label="Shared" />
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
