@@ -62,7 +62,7 @@ namespace EOS.UI.iOS.Controls
                 base.Enabled = value;
                 if (!value)
                     _normalBackgroundColor = BackgroundColor;
-                BackgroundColor = value ? _normalBackgroundColor : DisabledColor;
+                base.BackgroundColor = value ? _normalBackgroundColor : DisabledColor;
             }
         }
 
@@ -74,7 +74,7 @@ namespace EOS.UI.iOS.Controls
                 base.Highlighted = value;
                 if (value)
                     _normalBackgroundColor = BackgroundColor;
-                BackgroundColor = value ? PressedColor : _normalBackgroundColor;
+                base.BackgroundColor = value ? PressedColor : _normalBackgroundColor;
             }
         }
 

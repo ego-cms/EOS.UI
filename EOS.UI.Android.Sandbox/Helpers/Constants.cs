@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using Android.Graphics;
 using EOS.UI.Shared.Themes.Helpers;
 
@@ -113,6 +114,8 @@ namespace EOS.UI.Android.Sandbox.Helpers
                 { "66", 66f },
                 { "70", 70f },
             };
+           
+            public static readonly List<int> FabProgressSizes = Enumerable.Range(100, 80).Where(i => i % 10 == 0).ToList();
         }
 
         public static class ThemeTypes

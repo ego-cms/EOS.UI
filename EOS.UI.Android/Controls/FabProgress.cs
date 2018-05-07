@@ -6,6 +6,7 @@ using Android.Graphics;
 using Android.Graphics.Drawables;
 using Android.Runtime;
 using Android.Util;
+using Android.Views;
 using Android.Views.Animations;
 using Android.Widget;
 using EOS.UI.Shared.Themes.Helpers;
@@ -16,15 +17,28 @@ using UIFrameworks.Shared.Themes.Interfaces;
 
 namespace EOS.UI.Android.Controls
 {
-    public class FabProgress : ImageButton, IEOSThemeControl
+    public class FabProgress : ImageButton, IEOSThemeControl, View.IOnTouchListener
     {
-        private const int _animationDuration = 200;
+        private const int _animationDuration = 300;
+        private const int _padding = 21;
         private bool _isOpen;
         private Animation _openAnimation;
         private Animation _closeAnimation;
-        private Drawable _normalImage;
+        private Color _normalBackgroundColor;
 
         public bool IsEOSCustomizationIgnored { get; private set; }
+
+        public override bool Enabled
+        {
+            get => base.Enabled;
+            set
+            {
+                base.Enabled = value;
+                if (!value)
+                    _normalBackgroundColor = BackgroundColor;
+                (Background as GradientDrawable).SetColor(value ? _normalBackgroundColor : DisabledColor);
+            }
+        }
 
         private Color _backgroundColor;
         public Color BackgroundColor
@@ -34,6 +48,44 @@ namespace EOS.UI.Android.Controls
             {
                 _backgroundColor = value;
                 (Background as GradientDrawable).SetColor(value);
+                IsEOSCustomizationIgnored = true;
+            }
+        }
+
+        private Color _disabledColor;
+        public Color DisabledColor
+        {
+            get => _disabledColor;
+            set
+            {
+                _disabledColor = value;
+                IsEOSCustomizationIgnored = true;
+            }
+        }
+
+        private Color _pressedColor;
+        public Color PressedColor
+        {
+            get => _pressedColor;
+            set
+            {
+                _pressedColor = value;
+                IsEOSCustomizationIgnored = true;
+            }
+        }
+
+        private int _buttonSize;
+        public int ButtonSize
+        {
+            get => _buttonSize;
+            set
+            {
+                _buttonSize = value;
+                LayoutParameters.Width = value;
+                LayoutParameters.Height = value;
+                SetScaleType(ScaleType.FitCenter);
+                RequestLayout();
+                SetPadding(_padding, _padding, _padding, _padding);
                 IsEOSCustomizationIgnored = true;
             }
         }
@@ -90,9 +142,8 @@ namespace EOS.UI.Android.Controls
         {
             _openAnimation = AnimationUtils.LoadAnimation(Application.Context, Resource.Animation.FabOpenAnimation);
             _closeAnimation = AnimationUtils.LoadAnimation(Application.Context, Resource.Animation.FabCloseAnimation);
-
             Click += OnClick;
-
+            SetOnTouchListener(this);
             UpdateAppearance();
         }
 
@@ -110,6 +161,9 @@ namespace EOS.UI.Android.Controls
         {
             IsEOSCustomizationIgnored = false;
             UpdateAppearance();
+            LayoutParameters.Width = ViewGroup.LayoutParams.WrapContent;
+            LayoutParameters.Height = ViewGroup.LayoutParams.WrapContent;
+            RequestLayout();
         }
 
         public void SetEOSStyle(EOSStyleEnumeration style)
@@ -123,11 +177,11 @@ namespace EOS.UI.Android.Controls
                 var provider = GetThemeProvider();
                 Image = Resources.GetDrawable(provider.GetEOSProperty<int>(this, EOSConstants.CalendarImage));
                 PreloaderImage = Resources.GetDrawable(provider.GetEOSProperty<int>(this, EOSConstants.FabProgressPreloaderImage));
-
                 var roundedDrawable = (GradientDrawable) Resources.GetDrawable(Resource.Drawable.FabButton);
                 SetBackgroundDrawable(roundedDrawable);
-
                 BackgroundColor = provider.GetEOSProperty<Color>(this, EOSConstants.FabProgressPrimaryColor);
+                DisabledColor = provider.GetEOSProperty<Color>(this, EOSConstants.FabProgressDisabledColor);
+                PressedColor = provider.GetEOSProperty<Color>(this, EOSConstants.FabProgressPressedColor);
                 IsEOSCustomizationIgnored = false;
             }
         }
@@ -147,6 +201,18 @@ namespace EOS.UI.Android.Controls
                 StartAnimation(_openAnimation);
                 _isOpen = true;
             }
+        }
+
+		public bool OnTouch(View v, MotionEvent e)
+        {
+            if (Enabled)
+            {
+                if (e.Action == MotionEventActions.Down)
+                    (Background as GradientDrawable).SetColor(PressedColor);
+                if (e.Action == MotionEventActions.Up || e.Action == MotionEventActions.Cancel)
+                    (Background as GradientDrawable).SetColor(BackgroundColor);
+            }
+            return false;
         }
 	}
 }
