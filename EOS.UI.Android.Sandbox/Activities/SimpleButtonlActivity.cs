@@ -121,7 +121,7 @@ namespace EOS.UI.Android.Sandbox.Activities
         private void TextColorEnabledSpinner_ItemSelected(object sender, AdapterView.ItemSelectedEventArgs e)
         {
             if(e.Position > 0)
-                _simpleButton.EnabledTextColor = Colors.ColorsCollection.ElementAt(e.Position).Value;
+                _simpleButton.TextColor = Colors.ColorsCollection.ElementAt(e.Position).Value;
         }
 
         private void TextColorDisabledSpinner_ItemSelected(object sender, AdapterView.ItemSelectedEventArgs e)
@@ -139,7 +139,7 @@ namespace EOS.UI.Android.Sandbox.Activities
         private void BackgroundColorEnabledSpinner_ItemSelected(object sender, AdapterView.ItemSelectedEventArgs e)
         {
             if(e.Position > 0)
-                _simpleButton.EnabledBackgroundColor = Colors.ColorsCollection.ElementAt(e.Position).Value;
+                _simpleButton.BackgroundColor = Colors.ColorsCollection.ElementAt(e.Position).Value;
         }
 
         private void BackgroundColorDisabledSpinner_ItemSelected(object sender, AdapterView.ItemSelectedEventArgs e)

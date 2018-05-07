@@ -164,13 +164,13 @@ namespace EOS.UI.iOS.Sandbox
             var textColorPickerDelegate = new ColorPickerDelegate();
             textColorPickerDelegate.DidSelected += (object sender, KeyValuePair<string, UIColor> e) =>
             {
-                _simpleButton.EnabledTextColor = e.Value;
+                _simpleButton.TextColor = e.Value;
                 textColorEnabledTextField.Text = e.Key;
             };
             textColorEnabledTextField.EditingDidBegin += (sender, e) =>
             {
                 var colorPair = Constants.Colors.ElementAt((int)textColorPicker.SelectedRowInComponent(0));
-                _simpleButton.EnabledTextColor = colorPair.Value;
+                _simpleButton.TextColor = colorPair.Value;
                 textColorEnabledTextField.Text = colorPair.Key;
             };
             textColorPicker.Delegate = textColorPickerDelegate;
@@ -227,13 +227,13 @@ namespace EOS.UI.iOS.Sandbox
             var backgroundColorPickerDelegate = new ColorPickerDelegate();
             backgroundColorPickerDelegate.DidSelected += (object sender, KeyValuePair<string, UIColor> e) =>
             {
-                _simpleButton.EnabledBackgroundColor = e.Value;
+                _simpleButton.BackgroundColor = e.Value;
                 backgroundColorEnabledTextField.Text = e.Key;
             };
             backgroundColorEnabledTextField.EditingDidBegin += (sender, e) =>
             {
                 var colorPair = Constants.Colors.ElementAt((int)backgroundColorPicker.SelectedRowInComponent(0));
-                _simpleButton.EnabledBackgroundColor = colorPair.Value;
+                _simpleButton.BackgroundColor = colorPair.Value;
                 backgroundColorEnabledTextField.Text = colorPair.Key;
             };
             backgroundColorPicker.Delegate = backgroundColorPickerDelegate;
