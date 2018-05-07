@@ -24,7 +24,6 @@ namespace EOS.UI.Android.Controls
         private bool _isOpen;
         private Animation _openAnimation;
         private Animation _closeAnimation;
-        private Color _normalBackgroundColor;
 
         public bool IsEOSCustomizationIgnored { get; private set; }
 
@@ -34,9 +33,7 @@ namespace EOS.UI.Android.Controls
             set
             {
                 base.Enabled = value;
-                if (!value)
-                    _normalBackgroundColor = BackgroundColor;
-                (Background as GradientDrawable).SetColor(value ? _normalBackgroundColor : DisabledColor);
+                (Background as GradientDrawable).SetColor(value ? BackgroundColor : DisabledBackgroundColor);
             }
         }
 
@@ -47,29 +44,32 @@ namespace EOS.UI.Android.Controls
             set
             {
                 _backgroundColor = value;
-                (Background as GradientDrawable).SetColor(value);
+                if(Enabled)
+                    (Background as GradientDrawable).SetColor(value);
                 IsEOSCustomizationIgnored = true;
             }
         }
 
-        private Color _disabledColor;
-        public Color DisabledColor
+        private Color _disabledBackgroundColor;
+        public Color DisabledBackgroundColor
         {
-            get => _disabledColor;
+            get => _disabledBackgroundColor;
             set
             {
-                _disabledColor = value;
+                _disabledBackgroundColor = value;
+                if (!Enabled)
+                    (Background as GradientDrawable).SetColor(DisabledBackgroundColor);
                 IsEOSCustomizationIgnored = true;
             }
         }
 
-        private Color _pressedColor;
-        public Color PressedColor
+        private Color _pressedBackgroundColor;
+        public Color PressedBackgroundColor
         {
-            get => _pressedColor;
+            get => _pressedBackgroundColor;
             set
             {
-                _pressedColor = value;
+                _pressedBackgroundColor = value;
                 IsEOSCustomizationIgnored = true;
             }
         }
@@ -180,8 +180,8 @@ namespace EOS.UI.Android.Controls
                 var roundedDrawable = (GradientDrawable) Resources.GetDrawable(Resource.Drawable.FabButton);
                 SetBackgroundDrawable(roundedDrawable);
                 BackgroundColor = provider.GetEOSProperty<Color>(this, EOSConstants.FabProgressPrimaryColor);
-                DisabledColor = provider.GetEOSProperty<Color>(this, EOSConstants.FabProgressDisabledColor);
-                PressedColor = provider.GetEOSProperty<Color>(this, EOSConstants.FabProgressPressedColor);
+                DisabledBackgroundColor = provider.GetEOSProperty<Color>(this, EOSConstants.FabProgressDisabledColor);
+                PressedBackgroundColor = provider.GetEOSProperty<Color>(this, EOSConstants.FabProgressPressedColor);
                 IsEOSCustomizationIgnored = false;
             }
         }
@@ -208,7 +208,7 @@ namespace EOS.UI.Android.Controls
             if (Enabled)
             {
                 if (e.Action == MotionEventActions.Down)
-                    (Background as GradientDrawable).SetColor(PressedColor);
+                    (Background as GradientDrawable).SetColor(PressedBackgroundColor);
                 if (e.Action == MotionEventActions.Up || e.Action == MotionEventActions.Cancel)
                     (Background as GradientDrawable).SetColor(BackgroundColor);
             }

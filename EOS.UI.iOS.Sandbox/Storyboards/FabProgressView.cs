@@ -91,13 +91,13 @@ namespace EOS.UI.iOS.Sandbox
             var pressedColorDelegate = new ColorPickerDelegate();
             pressedColorDelegate.DidSelected += (object sender, KeyValuePair<string, UIColor> e) =>
             {
-                _fab.PressedColor = e.Value;
+                _fab.PressedBackgroundColor = e.Value;
                 pressedField.Text = e.Key;
             };
             pressedField.EditingDidBegin += (sender, e) =>
             {
                 var colorPair = Constants.Colors.ElementAt((int)pressedColorPicker.SelectedRowInComponent(0));
-                _fab.PressedColor = colorPair.Value;
+                _fab.PressedBackgroundColor = colorPair.Value;
                 pressedField.Text = colorPair.Key;
             };
             pressedColorPicker.Delegate = pressedColorDelegate;
@@ -109,13 +109,13 @@ namespace EOS.UI.iOS.Sandbox
             var disabledColorDelegate = new ColorPickerDelegate();
             disabledColorDelegate.DidSelected += (object sender, KeyValuePair<string, UIColor> e) =>
             {
-                _fab.DisabledColor = e.Value;
+                _fab.DisabledBackgroundColor = e.Value;
                 disabledField.Text = e.Key;
             };
             disabledField.EditingDidBegin += (sender, e) =>
             {
                 var colorPair = Constants.Colors.ElementAt((int)disabledColorPicker.SelectedRowInComponent(0));
-                _fab.DisabledColor = colorPair.Value;
+                _fab.DisabledBackgroundColor = colorPair.Value;
                 disabledField.Text = colorPair.Key;
             };
             disabledColorPicker.Delegate = disabledColorDelegate;

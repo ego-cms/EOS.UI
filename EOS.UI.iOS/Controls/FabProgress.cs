@@ -17,39 +17,42 @@ namespace EOS.UI.iOS.Controls
     public class FabProgress : UIButton, IEOSThemeControl
     {
         private bool _isOpen;
-        private UIColor _normalBackgroundColor;
-        private UIImage _normalImage;
 
         public bool IsEOSCustomizationIgnored { get; private set; }
 
+        private UIColor _backgroundColor;
         public override UIColor BackgroundColor
         {
-            get => base.BackgroundColor;
+            get => _backgroundColor;
             set
             {
-                base.BackgroundColor = value;
+                _backgroundColor = value;
+                if(Enabled)
+                    base.BackgroundColor = value;
                 IsEOSCustomizationIgnored = true;
             }
         }
 
-        private UIColor _pressedColor;
-        public UIColor PressedColor
+        private UIColor _pressedBackgroundColor;
+        public UIColor PressedBackgroundColor
         {
-            get => _pressedColor;
+            get => _pressedBackgroundColor;
             set
             {
-                _pressedColor = value;
+                _pressedBackgroundColor = value;
                 IsEOSCustomizationIgnored = true;
             }
         }
 
-        private UIColor _disabledColor;
-        public UIColor DisabledColor
+        private UIColor _disabledBackgroundColor;
+        public UIColor DisabledBackgroundColor
         {
-            get => _disabledColor;
+            get => _disabledBackgroundColor;
             set
             {
-                _disabledColor = value;
+                _disabledBackgroundColor = value;
+                if (!Enabled)
+                    base.BackgroundColor = _disabledBackgroundColor;
                 IsEOSCustomizationIgnored = true;
             }
         }
@@ -60,9 +63,7 @@ namespace EOS.UI.iOS.Controls
             set
             {
                 base.Enabled = value;
-                if (!value)
-                    _normalBackgroundColor = BackgroundColor;
-                base.BackgroundColor = value ? _normalBackgroundColor : DisabledColor;
+                base.BackgroundColor = value ? BackgroundColor : DisabledBackgroundColor;
             }
         }
 
@@ -72,9 +73,7 @@ namespace EOS.UI.iOS.Controls
             set
             {
                 base.Highlighted = value;
-                if (value)
-                    _normalBackgroundColor = BackgroundColor;
-                base.BackgroundColor = value ? PressedColor : _normalBackgroundColor;
+                base.BackgroundColor = value ? PressedBackgroundColor : BackgroundColor;
             }
         }
 
@@ -162,9 +161,8 @@ namespace EOS.UI.iOS.Controls
             {
                 var provider = GetThemeProvider();
                 BackgroundColor = provider.GetEOSProperty<UIColor>(this, EOSConstants.FabProgressPrimaryColor);
-                _normalBackgroundColor = BackgroundColor;
-                PressedColor = provider.GetEOSProperty<UIColor>(this, EOSConstants.FabProgressPressedColor);
-                DisabledColor = provider.GetEOSProperty<UIColor>(this, EOSConstants.FabProgressDisabledColor);
+                PressedBackgroundColor = provider.GetEOSProperty<UIColor>(this, EOSConstants.FabProgressPressedColor);
+                DisabledBackgroundColor = provider.GetEOSProperty<UIColor>(this, EOSConstants.FabProgressDisabledColor);
                 Image = UIImage.FromBundle(provider.GetEOSProperty<string>(this, EOSConstants.CalendarImage));
                 PreloaderImage = UIImage.FromBundle(provider.GetEOSProperty<string>(this, EOSConstants.FabProgressPreloaderImage));
                 ButtonSize = provider.GetEOSProperty<int>(this, EOSConstants.FabProgressSize);
