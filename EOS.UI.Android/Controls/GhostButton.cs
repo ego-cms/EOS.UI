@@ -184,8 +184,8 @@ namespace EOS.UI.Android.Controls
                 base.SetTypeface(Typeface.CreateFromAsset(Context.Assets, provider.GetEOSProperty<string>(this, EOSConstants.Font)), TypefaceStyle.Normal);
                 base.LetterSpacing = provider.GetEOSProperty<float>(this, EOSConstants.LetterSpacing);
                 EnabledTextColor = provider.GetEOSProperty<Color>(this, EOSConstants.PrimaryColor);
-                DisabledTextColor = provider.GetEOSProperty<Color>(this, EOSConstants.DisabledTextColor);
-                PressedStateTextColor = provider.GetEOSProperty<Color>(this, EOSConstants.PressedStateTextColor);
+                DisabledTextColor = provider.GetEOSProperty<Color>(this, EOSConstants.SecondaryColorDisabled);
+                PressedStateTextColor = provider.GetEOSProperty<Color>(this, EOSConstants.SecondaryColorPressed);
                 base.TextSize = provider.GetEOSProperty<float>(this, EOSConstants.TextSize);
                 IsEOSCustomizationIgnored = false;
             }

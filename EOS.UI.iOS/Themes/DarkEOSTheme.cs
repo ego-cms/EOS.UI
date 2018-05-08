@@ -11,8 +11,8 @@ namespace EOS.UI.iOS.Themes
         {
             { EOSConstants.PrimaryColor, UIColor.Black },
             { EOSConstants.SecondaryColor, UIColor.White },
-            { EOSConstants.DisabledTextColor, UIColor.LightTextColor},
-            { EOSConstants.PressedStateTextColor, UIColor.LightTextColor},
+            { EOSConstants.SecondaryColorDisabled, UIColor.LightTextColor},
+            { EOSConstants.SecondaryColorPressed, UIColor.LightTextColor},
             { EOSConstants.TextSize, 17 },
             { EOSConstants.Font, UIFont.SystemFontOfSize(17) },
             { EOSConstants.CornerRadius, 3 },
