@@ -8,165 +8,120 @@ using UIKit;
 
 namespace EOS.UI.iOS.Sandbox.Controls.Pickers
 {
-    //font picker
-    public class FontPickerSource : UIPickerViewDataSource
-    {
-        public override nint GetComponentCount(UIPickerView pickerView)
-        {
-            return 1;
-        }
+	//color picker
+	public class ColorPickerSource : UIPickerViewDataSource
+	{
+		public override nint GetComponentCount(UIPickerView pickerView)
+		{
+			return 1;
+		}
 
-        public override nint GetRowsInComponent(UIPickerView pickerView, nint component)
-        {
-            return Constants.Fonts.Count;
-        }
-    }
+		public override nint GetRowsInComponent(UIPickerView pickerView, nint component)
+		{
+			return Constants.Colors.Count;
+		}
+	}
 
-    public class FontPickerDelegate : UIPickerViewDelegate
-    {
-        public event EventHandler<UIFont> DidSelected;
+	public class ColorPickerDelegate : UIPickerViewDelegate
+	{
+		public event EventHandler<KeyValuePair<String, UIColor>> DidSelected;
 
-        public override string GetTitle(UIPickerView pickerView, nint row, nint component)
-        {
-            return Constants.Fonts[(int)row].Name;
-        }
+		public override NSAttributedString GetAttributedTitle(UIPickerView pickerView, nint row, nint component)
+		{
+			var pair = Constants.Colors.ElementAt((int)row);
+			var attributedString = new NSMutableAttributedString(pair.Key);
+			attributedString.AddAttribute(UIStringAttributeKey.ForegroundColor, pair.Value, new NSRange(0, attributedString.Length));
+			return attributedString;
+		}
 
-        public override void Selected(UIPickerView pickerView, nint row, nint component)
-        {
-            DidSelected?.Invoke(this, Constants.Fonts[(int)row]);
-        }
-    }
+		public override void Selected(UIPickerView pickerView, nint row, nint component)
+		{
+			DidSelected?.Invoke(this, Constants.Colors.ElementAt((int)row));
+		}
+	}
 
-    //color picker
-    public class ColorPickerSource : UIPickerViewDataSource
-    {
-        public override nint GetComponentCount(UIPickerView pickerView)
-        {
-            return 1;
-        }
-
-        public override nint GetRowsInComponent(UIPickerView pickerView, nint component)
-        {
-            return Constants.Colors.Count;
-        }
-    }
-
-    public class ColorPickerDelegate : UIPickerViewDelegate
-    {
-        public event EventHandler<KeyValuePair<String, UIColor>> DidSelected;
-
-        public override NSAttributedString GetAttributedTitle(UIPickerView pickerView, nint row, nint component)
-        {
-            var pair = Constants.Colors.ElementAt((int)row);
-            var attributedString = new NSMutableAttributedString(pair.Key);
-            attributedString.AddAttribute(UIStringAttributeKey.ForegroundColor, pair.Value, new NSRange(0, attributedString.Length));
-            return attributedString;
-        }
-
-        public override void Selected(UIPickerView pickerView, nint row, nint component)
-        {
-            DidSelected?.Invoke(this, Constants.Colors.ElementAt((int)row));
-        }
-    }
-
-    //int picker
-    public class ValuePickerSource<T> : UIPickerViewDataSource
-    {
-        private IEnumerable<T> _source;
+	//generic picker
+	public class ValuePickerSource<T> : UIPickerViewDataSource
+	{
+		private IEnumerable<T> _source;
 
         public ValuePickerSource(IEnumerable<T> source)
-        {
-            _source = source;
-        }
+		{
+			_source = source;
+		}
 
-        public override nint GetComponentCount(UIPickerView pickerView)
-        {
-            return 1;
-        }
+		public override nint GetComponentCount(UIPickerView pickerView)
+		{
+			return 1;
+		}
 
-        public override nint GetRowsInComponent(UIPickerView pickerView, nint component)
-        {
-            return _source.Count();
-        }
-    }
+		public override nint GetRowsInComponent(UIPickerView pickerView, nint component)
+		{
+			return _source.Count();
+		}
+	}
 
-    public class ValuePickerDelegate<T> : UIPickerViewDelegate
-    {
-        private IEnumerable<T> _source;
+	public class ValuePickerDelegate<T> : UIPickerViewDelegate
+	{
+		private IEnumerable<T> _source;
 
-        public event EventHandler<T> DidSelected;
+		public event EventHandler<T> DidSelected;
 
-        public ValuePickerDelegate(IEnumerable<T> source)
-        {
-            _source = source;
-        }
+		public ValuePickerDelegate(IEnumerable<T> source)
+		{
+			_source = source;
+		}
 
-        public override string GetTitle(UIPickerView pickerView, nint row, nint component)
-        {
-            return ((T)_source.ElementAt((int)row)).ToString();
-        }
+		public override string GetTitle(UIPickerView pickerView, nint row, nint component)
+		{
+			return _source.ElementAt((int)row).ToString();
+		}
 
-        public override void Selected(UIPickerView pickerView, nint row, nint component)
-        {
-            DidSelected?.Invoke(this, (T)_source.ElementAt((int)row));
-        }
-    }
+		public override void Selected(UIPickerView pickerView, nint row, nint component)
+		{
+			DidSelected?.Invoke(this, (T) _source.ElementAt((int)row));
+		}
+	}
 
-    //theme picker
-    public class ThemePickerSource : UIPickerViewDataSource
-    {
-        public override nint GetComponentCount(UIPickerView pickerView)
-        {
-            return 1;
-        }
+	public class DictionaryPickerSource<T1, T2> : UIPickerViewDataSource
+	{
+		private IDictionary<T1, T2> _source;
 
-        public override nint GetRowsInComponent(UIPickerView pickerView, nint component)
-        {
-            return Constants.Themes.Count;
-        }
-    }
+		public DictionaryPickerSource(Dictionary<T1, T2> source)
+		{
+			_source = source;
+		}
 
-    public class ThemePickerDelegate : UIPickerViewDelegate
-    {
-        public event EventHandler<KeyValuePair<string, EOSThemeEnumeration>> DidSelected;
+		public override nint GetComponentCount(UIPickerView pickerView)
+		{
+			return 1;
+		}
 
-        public override string GetTitle(UIPickerView pickerView, nint row, nint component)
-        {
-            return Constants.Themes.ElementAt((int)row).Key;
-        }
+		public override nint GetRowsInComponent(UIPickerView pickerView, nint component)
+		{
+			return _source.Count();
+		}
+	}
 
-        public override void Selected(UIPickerView pickerView, nint row, nint component)
-        {
-            DidSelected?.Invoke(this, Constants.Themes.ElementAt((int)row));
-        }
-    }
+	public class DictionaryPickerDelegate<T1, T2> : UIPickerViewDelegate
+	{
+		private Dictionary<T1, T2> _source;
 
-    //disabled/enabled picker
-    public class StatePickerSource : UIPickerViewDataSource
-    {
-        public override nint GetComponentCount(UIPickerView pickerView)
-        {
-            return 1;
-        }
+		public event EventHandler<KeyValuePair<T1, T2>> DidSelected;
 
-        public override nint GetRowsInComponent(UIPickerView pickerView, nint component)
-        {
-            return Constants.States.Count;
-        }
-    }
+		public DictionaryPickerDelegate(Dictionary<T1, T2> source)
+		{
+			_source = source;
+		}
 
-    public class StatePickerDelegate : UIPickerViewDelegate
-    {
-        public event EventHandler<KeyValuePair<string, bool>> DidSelected;
+		public override string GetTitle(UIPickerView pickerView, nint row, nint component)
+		{
+			return _source.ElementAt((int)row).Key.ToString();
+		}
 
-        public override string GetTitle(UIPickerView pickerView, nint row, nint component)
-        {
-            return Constants.States.ElementAt((int)row).Key;
-        }
-
-        public override void Selected(UIPickerView pickerView, nint row, nint component)
-        {
-            DidSelected?.Invoke(this, Constants.States.ElementAt((int)row));
-        }
-    }
+		public override void Selected(UIPickerView pickerView, nint row, nint component)
+		{
+			DidSelected?.Invoke(this, _source.ElementAt((int)row));
+		}
+	}
 }
