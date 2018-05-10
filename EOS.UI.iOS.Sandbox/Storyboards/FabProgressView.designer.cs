@@ -31,6 +31,9 @@ namespace EOS.UI.iOS.Sandbox
 		UIKit.UIButton resetButton { get; set; }
 
 		[Outlet]
+		UIKit.UITextField shadowField { get; set; }
+
+		[Outlet]
 		UIKit.UITextField sizeField { get; set; }
 
 		[Outlet]
@@ -38,19 +41,14 @@ namespace EOS.UI.iOS.Sandbox
 		
 		void ReleaseDesignerOutlets ()
 		{
-			if (containerView != null) {
-				containerView.Dispose ();
-				containerView = null;
-			}
-
-			if (themeField != null) {
-				themeField.Dispose ();
-				themeField = null;
-			}
-
 			if (backgroundField != null) {
 				backgroundField.Dispose ();
 				backgroundField = null;
+			}
+
+			if (containerView != null) {
+				containerView.Dispose ();
+				containerView = null;
 			}
 
 			if (disabledField != null) {
@@ -76,6 +74,16 @@ namespace EOS.UI.iOS.Sandbox
 			if (sizeField != null) {
 				sizeField.Dispose ();
 				sizeField = null;
+			}
+
+			if (themeField != null) {
+				themeField.Dispose ();
+				themeField = null;
+			}
+
+			if (shadowField != null) {
+				shadowField.Dispose ();
+				shadowField = null;
 			}
 		}
 	}

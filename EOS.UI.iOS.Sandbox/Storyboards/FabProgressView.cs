@@ -1,16 +1,17 @@
 using CoreGraphics;
 using EOS.UI.iOS.Controls;
 using EOS.UI.iOS.Extensions;
+using EOS.UI.iOS.Helpers;
 using EOS.UI.iOS.Sandbox.Controls.Pickers;
 using EOS.UI.iOS.Sandbox.Helpers;
 using EOS.UI.iOS.Sandbox.Storyboards;
 using EOS.UI.Shared.Themes.Helpers;
-using Foundation;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using UIFrameworks.Shared.Themes.Helpers;
 using UIKit;
+using Constants = EOS.UI.iOS.Sandbox.Helpers.Constants;
 
 namespace EOS.UI.iOS.Sandbox
 {
@@ -140,6 +141,27 @@ namespace EOS.UI.iOS.Sandbox
 			};
 			sizePicker.Delegate = sizePickerDelegate;
 			sizeField.InputView = sizePicker;
+
+			var shadowPicker = new UIPickerView(rect);
+            shadowPicker.ShowSelectionIndicator = true;
+			shadowPicker.DataSource = new DictionaryPickerSource<string, ShadowConfig>(Constants.ShadowConfigs);
+			var shadowPickerDelegate = new DictionaryPickerDelegate<String, ShadowConfig>(Constants.ShadowConfigs);
+			shadowPickerDelegate.DidSelected += (object sender, KeyValuePair<String, ShadowConfig> e) =>
+            {
+                _fab.ShadowConfig = e.Value;
+                shadowField.Text = e.Key;
+                UpdateFrame();
+            };
+            shadowField.EditingDidBegin += (sender, e) =>
+            {
+				var pair = Constants.ShadowConfigs.ElementAt((int)shadowPicker.SelectedRowInComponent(0));
+				_fab.ShadowConfig = pair.Value;
+                shadowField.Text = pair.Key;
+                UpdateFrame();
+            };
+            shadowPicker.Delegate = shadowPickerDelegate;
+            shadowField.InputView = shadowPicker;
+
 
 			enableSwitch.ValueChanged += (sender, e) =>
 			{
