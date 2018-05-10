@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using EOS.UI.iOS.Helpers;
 using UIFrameworks.Shared.Themes.Helpers;
 using UIFrameworks.Shared.Themes.Interfaces;
 using UIKit;
