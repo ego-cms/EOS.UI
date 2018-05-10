@@ -113,6 +113,46 @@ namespace EOS.UI.Android.Sandbox.Helpers
                 { "66", 66f },
                 { "70", 70f },
             };
+
+            public static readonly Dictionary<string, int> BorderWidthCollection = new Dictionary<string, int>()
+            {
+                { string.Empty, 0 },
+                { "1", 1 },
+                { "2", 2 },
+                { "3", 3 },
+                { "4", 4 },
+                { "5", 5 },
+                { "6", 6 },
+                { "7", 7 },
+                { "8", 8 },
+                { "9", 9 },
+                { "10", 10 },
+            };
+
+            public static readonly Dictionary<string, int> PaddingsCollection = new Dictionary<string, int>()
+            {
+                { string.Empty, 0 },
+                { "1", 1 },
+                { "2", 2 },
+                { "3", 3 },
+                { "4", 4 },
+                { "5", 5 },
+                { "6", 6 },
+                { "7", 7 },
+                { "8", 8 },
+                { "9", 9 },
+                { "10", 10 },
+                { "11", 11 },
+                { "12", 12 },
+                { "13", 13 },
+                { "14", 14 },
+                { "15", 15 },
+                { "16", 16 },
+                { "17", 17 },
+                { "18", 18 },
+                { "19", 19 },
+                { "20", 20 },
+            };
         }
 
         public static class ThemeTypes
@@ -146,6 +186,21 @@ namespace EOS.UI.Android.Sandbox.Helpers
                 { Airballoon, Resource.Drawable.Airballoon },
                 { AndroidIcon, Resource.Drawable.Android },
                 { Apple, Resource.Drawable.Apple },
+            };
+        }
+
+        public static class Titles
+        {
+            public const string FirstTitle = "first title";
+            public const string SecondTitle = "second title";
+            public const string ThirdTitle = "third title";
+
+            public static Dictionary<string, string> TitleCollection = new Dictionary<string, string>()
+            {
+                { string.Empty, string.Empty },
+                { FirstTitle, "First" },
+                { SecondTitle, "Second" },
+                { ThirdTitle, "Third" },
             };
         }
     }

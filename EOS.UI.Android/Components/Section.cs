@@ -20,28 +20,28 @@ namespace EOS.UI.Android.Components
         private SimpleLabel _titleLabel;
         private Button _actionButton;
         private RelativeLayout _containerLayout;
-        private Action _action;
 
         #endregion
 
         #region constructors
 
-        public Section(View itemView, Action action = null) : base(itemView)
+        public Section(View itemView) : base(itemView)
         {
-            _action = action;
             _containerLayout = itemView.FindViewById<RelativeLayout>(Resource.Id.sectionContainer);
             _titleLabel = itemView.FindViewById<SimpleLabel>(Resource.Id.sectionTitle);
             _actionButton = itemView.FindViewById<Button>(Resource.Id.sectionButton);
 
             _actionButton.Click += delegate
             {
-                _action?.Invoke();
+                SectionAction?.Invoke();
             };
         }
 
         #endregion
 
         #region customization
+
+        public Action SectionAction { get; set; }
 
         public string SectionName
         {
@@ -115,10 +115,10 @@ namespace EOS.UI.Android.Components
 
         public Typeface ButtonNameFont
         {
-            get => _titleLabel.Typeface;
+            get => _actionButton.Typeface;
             set
             {
-                _titleLabel.Typeface = value;
+                _actionButton.Typeface = value;
                 IsEOSCustomizationIgnored = true;
             }
         }
@@ -130,8 +130,7 @@ namespace EOS.UI.Android.Components
             set
             {
                 _sectionNameColor = value;
-                if(!HasBorder)
-                    _titleLabel.TextColor = value;
+                _titleLabel.TextColor = value;
                 IsEOSCustomizationIgnored = true;
             }
         }
@@ -143,13 +142,21 @@ namespace EOS.UI.Android.Components
             set
             {
                 _buttonNameColor = value;
-                if(!HasBorder)
-                    _actionButton.SetTextColor(value);
+                _actionButton.SetTextColor(value);
                 IsEOSCustomizationIgnored = true;
             }
         }
 
-        public bool HasBorder { get; set; }
+        private bool _hasBorder;
+        public bool HasBorder
+        {
+            get => _hasBorder;
+            set
+            {
+                _hasBorder = value;
+                _containerLayout.Background = CreateDrawableBackground();
+            }
+        }
 
         private Color _backgroundColor;
         public Color BackgroundColor
@@ -170,7 +177,6 @@ namespace EOS.UI.Android.Components
             set
             {
                 _borderWidth = value;
-                HasBorder = true;
                 _containerLayout.Background = CreateDrawableBackground();
                 IsEOSCustomizationIgnored = true;
             }
@@ -183,7 +189,6 @@ namespace EOS.UI.Android.Components
             set
             {
                 _borderColor = value;
-                HasBorder = true;
                 _containerLayout.Background = CreateDrawableBackground();
                 IsEOSCustomizationIgnored = true;
             }
@@ -194,13 +199,13 @@ namespace EOS.UI.Android.Components
             _containerLayout.SetPadding(left, top, right, bottom);
         }
 
-        private bool _hasAction;
-        public bool HasAction
+        private bool _hasButton;
+        public bool HasButton
         {
-            get => _hasAction;
+            get => _hasButton;
             set
             {
-                _hasAction = value;
+                _hasButton = value;
                 _actionButton.Visibility = value ? ViewStates.Visible : ViewStates.Gone;
             }
         }
@@ -228,7 +233,7 @@ namespace EOS.UI.Android.Components
 
         #region IEOSThemeControl implementation
 
-        public bool IsEOSCustomizationIgnored { get; private set; }
+        public bool IsEOSCustomizationIgnored { get; set; }
 
         public IEOSThemeProvider GetThemeProvider()
         {
@@ -240,7 +245,7 @@ namespace EOS.UI.Android.Components
             if(!IsEOSCustomizationIgnored)
             {
                 HasBorder = GetThemeProvider().GetEOSProperty<bool>(this, EOSConstants.HasSectionBorder);
-                HasAction = GetThemeProvider().GetEOSProperty<bool>(this, EOSConstants.HasSectionAction);
+                HasButton = GetThemeProvider().GetEOSProperty<bool>(this, EOSConstants.HasSectionAction);
                 SectionName = GetThemeProvider().GetEOSProperty<string>(this, EOSConstants.SectionTitle);
                 ButtonText = GetThemeProvider().GetEOSProperty<string>(this, EOSConstants.SectionActionTitle);
                 SectionTextSize = GetThemeProvider().GetEOSProperty<float>(this, EOSConstants.TextSize);

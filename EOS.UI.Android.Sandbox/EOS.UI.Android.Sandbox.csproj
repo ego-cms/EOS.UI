@@ -92,6 +92,7 @@
     <Compile Include="Activities\BaseActivity.cs" />
     <Compile Include="Activities\FabProgressActivity.cs" />
     <Compile Include="Activities\InputActivity.cs" />
+    <Compile Include="Activities\SectionActivity.cs" />
     <Compile Include="Activities\SimpleLabelActivity.cs" />
     <Compile Include="Activities\SimpleButtonlActivity.cs" />
     <Compile Include="Activities\GhostButtonActivity.cs" />
@@ -101,6 +102,8 @@
     <Compile Include="Helpers\Constants.cs" />
     <Compile Include="RecyclerImplementation\ControlsAdapter.cs" />
     <Compile Include="RecyclerImplementation\ControlsViewHolder.cs" />
+    <Compile Include="RecyclerImplementation\SectionAdapter.cs" />
+    <Compile Include="RecyclerImplementation\SimpleViewHolder.cs" />
     <Compile Include="Resources\Resource.designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -174,6 +177,16 @@
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable\Apple.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\layout\SimpleCell.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\layout\SectionLayout.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <Import Project="..\packages\Xamarin.Android.Support.Annotations.27.0.2\build\MonoAndroid81\Xamarin.Android.Support.Annotations.targets" Condition="Exists('..\packages\Xamarin.Android.Support.Annotations.27.0.2\build\MonoAndroid81\Xamarin.Android.Support.Annotations.targets')" />
