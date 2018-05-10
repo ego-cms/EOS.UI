@@ -8,6 +8,35 @@ using UIKit;
 
 namespace EOS.UI.iOS.Sandbox.Controls.Pickers
 {
+    //font picker
+    public class FontPickerSource : UIPickerViewDataSource
+    {
+        public override nint GetComponentCount(UIPickerView pickerView)
+        {
+            return 1;
+        }
+
+        public override nint GetRowsInComponent(UIPickerView pickerView, nint component)
+        {
+            return Constants.Fonts.Count;
+        }
+    }
+
+    public class FontPickerDelegate : UIPickerViewDelegate
+    {
+        public event EventHandler<UIFont> DidSelected;
+
+        public override string GetTitle(UIPickerView pickerView, nint row, nint component)
+        {
+            return Constants.Fonts[(int)row].Name;
+        }
+
+        public override void Selected(UIPickerView pickerView, nint row, nint component)
+        {
+            DidSelected?.Invoke(this, Constants.Fonts[(int)row]);
+        }
+    }
+
     //color picker
     public class ColorPickerSource : UIPickerViewDataSource
     {
@@ -40,7 +69,7 @@ namespace EOS.UI.iOS.Sandbox.Controls.Pickers
         }
     }
 
-    //generic picker
+    //int picker
     public class ValuePickerSource<T> : UIPickerViewDataSource
     {
         private IEnumerable<T> _source;
@@ -83,15 +112,9 @@ namespace EOS.UI.iOS.Sandbox.Controls.Pickers
         }
     }
 
-	public class DictionaryPickerSource<T1,T2> : UIPickerViewDataSource
+    //theme picker
+    public class ThemePickerSource : UIPickerViewDataSource
     {
-		private IDictionary<T1, T2> _source;
-
-        public DictionaryPickerSource(Dictionary<T1,T2> source)
-        {
-            _source = source;
-        }
-
         public override nint GetComponentCount(UIPickerView pickerView)
         {
             return 1;
@@ -99,29 +122,51 @@ namespace EOS.UI.iOS.Sandbox.Controls.Pickers
 
         public override nint GetRowsInComponent(UIPickerView pickerView, nint component)
         {
-            return _source.Count();
+            return Constants.Themes.Count;
         }
     }
 
-	public class DictionaryPickerDelegate<T1,T2> : UIPickerViewDelegate
+    public class ThemePickerDelegate : UIPickerViewDelegate
     {
-        private Dictionary<T1, T2> _source;
-
-		public event EventHandler<KeyValuePair<T1,T2>> DidSelected;
-
-        public DictionaryPickerDelegate(Dictionary<T1,T2> source)
-        {
-            _source = source;
-        }
+        public event EventHandler<KeyValuePair<string, EOSThemeEnumeration>> DidSelected;
 
         public override string GetTitle(UIPickerView pickerView, nint row, nint component)
         {
-			return _source.ElementAt((int)row).Key.ToString();
+            return Constants.Themes.ElementAt((int)row).Key;
         }
 
         public override void Selected(UIPickerView pickerView, nint row, nint component)
         {
-			DidSelected?.Invoke(this, _source.ElementAt((int)row));
+            DidSelected?.Invoke(this, Constants.Themes.ElementAt((int)row));
+        }
+    }
+
+    //disabled/enabled picker
+    public class StatePickerSource : UIPickerViewDataSource
+    {
+        public override nint GetComponentCount(UIPickerView pickerView)
+        {
+            return 1;
+        }
+
+        public override nint GetRowsInComponent(UIPickerView pickerView, nint component)
+        {
+            return Constants.States.Count;
+        }
+    }
+
+    public class StatePickerDelegate : UIPickerViewDelegate
+    {
+        public event EventHandler<KeyValuePair<string, bool>> DidSelected;
+
+        public override string GetTitle(UIPickerView pickerView, nint row, nint component)
+        {
+            return Constants.States.ElementAt((int)row).Key;
+        }
+
+        public override void Selected(UIPickerView pickerView, nint row, nint component)
+        {
+            DidSelected?.Invoke(this, Constants.States.ElementAt((int)row));
         }
     }
 }

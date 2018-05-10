@@ -3,6 +3,7 @@ using EOS.UI.iOS.Controls;
 using EOS.UI.iOS.Extensions;
 using EOS.UI.iOS.Sandbox.Controls.Pickers;
 using EOS.UI.iOS.Sandbox.Helpers;
+using EOS.UI.iOS.Sandbox.Pickers;
 using EOS.UI.iOS.Sandbox.Storyboards;
 using EOS.UI.Shared.Themes.Helpers;
 using System;
@@ -110,8 +111,8 @@ namespace EOS.UI.iOS.Sandbox
         {
             var themePicker = new UIPickerView(rect);
             themePicker.ShowSelectionIndicator = true;
-			themePicker.DataSource = new DictionaryPickerSource<String, EOSThemeEnumeration>(Constants.Themes);
-			var themePickerDelegate = new DictionaryPickerDelegate<String, EOSThemeEnumeration>(Constants.Themes);
+            themePicker.DataSource = new ThemePickerSource();
+            var themePickerDelegate = new ThemePickerDelegate();
             themePickerDelegate.DidSelected += (object sender, KeyValuePair<string, EOSThemeEnumeration> e) =>
             {
                 themeTextField.Text = e.Key;
@@ -132,8 +133,8 @@ namespace EOS.UI.iOS.Sandbox
         {
             var fontPicker = new UIPickerView(rect);
             fontPicker.ShowSelectionIndicator = true;
-			fontPicker.DataSource = new ValuePickerSource<UIFont>(Constants.Fonts);
-			var fontPickerDelegate = new ValuePickerDelegate<UIFont>(Constants.Fonts);
+            fontPicker.DataSource = new FontPickerSource();
+            var fontPickerDelegate = new FontPickerDelegate();
             fontPickerDelegate.DidSelected += (object sender, UIFont e) =>
             {
                 _inputTop.Font = e;
@@ -293,20 +294,20 @@ namespace EOS.UI.iOS.Sandbox
         {
             var iconFocusedPicker = new UIPickerView(rect);
             iconFocusedPicker.ShowSelectionIndicator = true;
-			iconFocusedPicker.DataSource = new ValuePickerSource<String>(Constants.Icons);
-			var iconFocusedPickerDelegate = new ValuePickerDelegate<String>(Constants.Icons);
-            iconFocusedPickerDelegate.DidSelected += (object sender, string e) =>
+            iconFocusedPicker.DataSource = new IconPickerSource();
+            var iconFocusedPickerDelegate = new IconPickerDelegate();
+            iconFocusedPickerDelegate.DidSelected += (object sender, KeyValuePair<string, UIImage> e) =>
             {
-				_inputTop.LeftImageFocused = UIImage.FromBundle(e);
-				_inputBotton.LeftImageFocused = UIImage.FromBundle(e);
-				iconFocusedTextField.Text = e;
+                _inputTop.LeftImageFocused = e.Value;
+                _inputBotton.LeftImageFocused = e.Value;
+                iconFocusedTextField.Text = e.Key;
             };
             iconFocusedTextField.EditingDidBegin += (sender, e) =>
             {
-				var iconName = Constants.Icons.ElementAt((int)iconFocusedPicker.SelectedRowInComponent(0));
-                _inputTop.LeftImageFocused = UIImage.FromBundle(iconName);
-                _inputBotton.LeftImageFocused = UIImage.FromBundle(iconName);
-                iconFocusedTextField.Text = iconName;
+                var iconPair = Constants.Icons.ElementAt((int)iconFocusedPicker.SelectedRowInComponent(0));
+                _inputTop.LeftImageFocused = UIImage.FromBundle(iconPair.Value);
+                _inputBotton.LeftImageFocused = UIImage.FromBundle(iconPair.Value);
+                iconFocusedTextField.Text = iconPair.Key;
             };
             iconFocusedPicker.Delegate = iconFocusedPickerDelegate;
             iconFocusedTextField.InputView = iconFocusedPicker;
@@ -316,20 +317,20 @@ namespace EOS.UI.iOS.Sandbox
         {
             var iconUnfocusedPicker = new UIPickerView(rect);
             iconUnfocusedPicker.ShowSelectionIndicator = true;
-			iconUnfocusedPicker.DataSource = new ValuePickerSource<String>(Constants.Icons);
-			var iconUnfocusedPickerDelegate = new ValuePickerDelegate<String>(Constants.Icons);
-            iconUnfocusedPickerDelegate.DidSelected += (object sender, String e) =>
+            iconUnfocusedPicker.DataSource = new IconPickerSource();
+            var iconUnfocusedPickerDelegate = new IconPickerDelegate();
+            iconUnfocusedPickerDelegate.DidSelected += (object sender, KeyValuePair<string, UIImage> e) =>
             {
-                _inputTop.LeftImageUnfocused = UIImage.FromBundle(e);
-				_inputBotton.LeftImageUnfocused = UIImage.FromBundle(e);
-                iconUnfocusedTextField.Text = e;
+                _inputTop.LeftImageUnfocused = e.Value;
+                _inputBotton.LeftImageUnfocused = e.Value;
+                iconUnfocusedTextField.Text = e.Key;
             };
             iconUnfocusedTextField.EditingDidBegin += (sender, e) =>
             {
-				var iconName = Constants.Icons.ElementAt((int)iconUnfocusedPicker.SelectedRowInComponent(0));
-                _inputTop.LeftImageUnfocused = UIImage.FromBundle(iconName);
-                _inputBotton.LeftImageUnfocused = UIImage.FromBundle(iconName);
-                iconUnfocusedTextField.Text = iconName;
+                var iconPair = Constants.Icons.ElementAt((int)iconUnfocusedPicker.SelectedRowInComponent(0));
+                _inputTop.LeftImageUnfocused = UIImage.FromBundle(iconPair.Value);
+                _inputBotton.LeftImageUnfocused = UIImage.FromBundle(iconPair.Value);
+                iconUnfocusedTextField.Text = iconPair.Key;
             };
             iconUnfocusedPicker.Delegate = iconUnfocusedPickerDelegate;
             iconUnfocusedTextField.InputView = iconUnfocusedPicker;
@@ -339,20 +340,20 @@ namespace EOS.UI.iOS.Sandbox
         {
             var iconDisabledPicker = new UIPickerView(rect);
             iconDisabledPicker.ShowSelectionIndicator = true;
-			iconDisabledPicker.DataSource = new ValuePickerSource<String>(Constants.Icons);
-			var iconDisabledPickerDelegate = new ValuePickerDelegate<String>(Constants.Icons);
-            iconDisabledPickerDelegate.DidSelected += (object sender, String e) =>
+            iconDisabledPicker.DataSource = new IconPickerSource();
+            var iconDisabledPickerDelegate = new IconPickerDelegate();
+            iconDisabledPickerDelegate.DidSelected += (object sender, KeyValuePair<string, UIImage> e) =>
             {
-                _inputTop.LeftImageDisabled = UIImage.FromBundle(e);
-                _inputBotton.LeftImageDisabled = UIImage.FromBundle(e);
-                iconDisabledTextField.Text = e;
+                _inputTop.LeftImageDisabled = e.Value;
+                _inputBotton.LeftImageDisabled = e.Value;
+                iconDisabledTextField.Text = e.Key;
             };
             iconDisabledTextField.EditingDidBegin += (sender, e) =>
             {
-				var iconName = Constants.Icons.ElementAt((int)iconDisabledPicker.SelectedRowInComponent(0));
-                _inputTop.LeftImageDisabled = UIImage.FromBundle(iconName);
-                _inputBotton.LeftImageDisabled = UIImage.FromBundle(iconName);
-				iconDisabledTextField.Text = iconName;
+                var iconPair = Constants.Icons.ElementAt((int)iconDisabledPicker.SelectedRowInComponent(0));
+                _inputTop.LeftImageDisabled = UIImage.FromBundle(iconPair.Value);
+                _inputBotton.LeftImageDisabled = UIImage.FromBundle(iconPair.Value);
+                iconDisabledTextField.Text = iconPair.Key;
             };
             iconDisabledPicker.Delegate = iconDisabledPickerDelegate;
             iconDisabledTextField.InputView = iconDisabledPicker;

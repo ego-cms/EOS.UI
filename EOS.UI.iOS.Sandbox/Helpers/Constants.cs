@@ -31,22 +31,20 @@ namespace EOS.UI.iOS.Sandbox.Helpers
 
         public static List<int> FabProgressSizes;
 
-		public static List<UIFont> Fonts;
-
         public static Dictionary<string, EOSThemeEnumeration> Themes = new Dictionary<string, EOSThemeEnumeration>()
         {
             { "Light", EOSThemeEnumeration.Light },
             { "Dark", EOSThemeEnumeration.Dark },
         };
 
-		public static List<string> Icons = new List<string>()
+        public static Dictionary<string, string> Icons = new Dictionary<string, string>()
         {
-			{ "account-circle"},
-			{ "account-key"},
-            { "account-off"},
-			{ "airbaloon"},
-            { "android"},
-            { "apple"}
+            { "AccountCircle", "AccountCircle" },
+            { "AccountKey", "AccountKey"},
+            { "AccountOff", "AccountOff"},
+            { "Airballoon", "Airballoon"},
+            { "Android", "Android"},
+            { "Apple", "Apple"},
         };
 
         public static Dictionary<string, bool> States = new Dictionary<string, bool>()
@@ -55,21 +53,7 @@ namespace EOS.UI.iOS.Sandbox.Helpers
                 { "Disabled", false },
             };
 
-		public static Dictionary<string, ShadowConfig> ShadowConfigs = new Dictionary<string, ShadowConfig>()
-            {
-                {"Shadow 1", new ShadowConfig(){
-                        Color = UIColor.LightGray.CGColor,
-                        Offset = new CGSize(0,0),
-                        Radius = 5,
-                        Opacity = 0.7f
-                    }},
-                {"Shadow 2", new ShadowConfig(){
-                        Color = UIColor.Black.CGColor,
-                        Offset = new CGSize(0,0),
-                        Radius = 3,
-                        Opacity = 0.2f
-                    }}
-            };
+        public static List<UIFont> Fonts;
 
         static Constants()
         {

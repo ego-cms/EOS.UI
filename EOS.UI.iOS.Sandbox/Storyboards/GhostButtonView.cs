@@ -52,8 +52,8 @@ namespace EOS.UI.iOS.Sandbox
             var rect = new CGRect(0, 0, 100, 100);
             var themePicker = new UIPickerView(rect);
             themePicker.ShowSelectionIndicator = true;
-			themePicker.DataSource = new DictionaryPickerSource<String, EOSThemeEnumeration>(Constants.Themes);
-			var themePickerDelegate = new DictionaryPickerDelegate<String, EOSThemeEnumeration>(Constants.Themes);
+            themePicker.DataSource = new ThemePickerSource();
+            var themePickerDelegate = new ThemePickerDelegate();
             themePickerDelegate.DidSelected += (object sender, KeyValuePair<string, EOSThemeEnumeration> e) =>
             {
                 themeField.Text = e.Key;
@@ -69,8 +69,8 @@ namespace EOS.UI.iOS.Sandbox
 
             var fontPicker = new UIPickerView(rect);
             fontPicker.ShowSelectionIndicator = true;
-			fontPicker.DataSource = new ValuePickerSource<UIFont>(Constants.Fonts);
-			var fontPickerDelegate = new ValuePickerDelegate<UIFont>(Constants.Fonts);
+            fontPicker.DataSource = new FontPickerSource();
+            var fontPickerDelegate = new FontPickerDelegate();
             fontPickerDelegate.DidSelected += (object sender, UIFont e) =>
             {
                 ghostButton.Font = e;

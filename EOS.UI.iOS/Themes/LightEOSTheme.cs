@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using CoreGraphics;
 using EOS.UI.iOS.Helpers;
 using UIFrameworks.Shared.Themes.Helpers;
 using UIFrameworks.Shared.Themes.Interfaces;
@@ -32,13 +31,8 @@ namespace EOS.UI.iOS.Themes
             { EOSConstants.FabProgressPrimaryColor, UIColor.FromRGB(255, 92, 73)},
             { EOSConstants.FabProgressPressedColor, UIColor.FromRGB(255, 92, 73)},
             { EOSConstants.FabProgressDisabledColor, UIColor.FromRGB(255, 92, 73)},
-			{ EOSConstants.FabShadow, new ShadowConfig(){
-                        Color = UIColor.LightGray.CGColor,
-                        Offset = new CGSize(0,0),
-                        Radius = 5,
-                        Opacity = 0.7f
-                    }},
             { EOSConstants.FabProgressSize, 50},
+            { EOSConstants.FabShadow, Constants.ShadowConfigs["light"]}
         };
     }
 }
