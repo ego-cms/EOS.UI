@@ -1,4 +1,4 @@
-using CoreGraphics;
+﻿using CoreGraphics;
 using EOS.UI.iOS.Controls;
 using EOS.UI.iOS.Extensions;
 using EOS.UI.iOS.Sandbox.Storyboards;
@@ -54,8 +54,8 @@ namespace EOS.UI.iOS.Sandbox
 
             var themePicker = new UIPickerView(rect);
             themePicker.ShowSelectionIndicator = true;
-            themePicker.DataSource = new ThemePickerSource();
-            var themePickerDelegate = new ThemePickerDelegate();
+			themePicker.DataSource = new DictionaryPickerSource<string, EOSThemeEnumeration>(Constants.Themes);
+            var themePickerDelegate = new DictionaryPickerDelegate<String ,EOSThemeEnumeration>(Constants.Themes);
             themePickerDelegate.DidSelected += (object sender, KeyValuePair<string, EOSThemeEnumeration> e) =>
             {
                 themeField.Text = e.Key;
@@ -89,8 +89,8 @@ namespace EOS.UI.iOS.Sandbox
 
             var fontPicker = new UIPickerView(rect);
             fontPicker.ShowSelectionIndicator = true;
-            fontPicker.DataSource = new FontPickerSource();
-            var fontPickerDelegate = new FontPickerDelegate();
+            fontPicker.DataSource = new ValuePickerSource<UIFont>(Constants.Fonts);
+			var fontPickerDelegate = new ValuePickerDelegate<UIFont>(Constants.Fonts);
             fontPickerDelegate.DidSelected += (object sender, UIFont e) =>
             {
                 label.Font = e;

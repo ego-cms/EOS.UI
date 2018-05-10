@@ -113,6 +113,18 @@ namespace EOS.UI.iOS.Controls
             }
         }
 
+		private ShadowConfig _shadowConfig;
+        public ShadowConfig ShadowConfig
+		{
+			get => _shadowConfig;
+            set
+			{
+				_shadowConfig = value;
+				IsEOSCustomizationIgnored = true;
+				SetShadowConfig(_shadowConfig);
+			}
+		}
+
         public FabProgress()
         {
             TouchUpInside += (sender, e) =>
@@ -123,15 +135,6 @@ namespace EOS.UI.iOS.Controls
                     CloseAnimate();
             };
             UpdateAppearance();
-        }
-
-        public void SetShadowConfig(ShadowConfig config)
-        {
-            Layer.ShadowColor = config.Color;
-            Layer.ShadowOffset = config.Offset;
-            Layer.ShadowRadius = config.Radius;
-            Layer.ShadowOpacity = config.Opacity;
-            IsEOSCustomizationIgnored = true;
         }
 
         public IEOSStyle GetCurrentEOSStyle()
@@ -166,7 +169,7 @@ namespace EOS.UI.iOS.Controls
                 Image = UIImage.FromBundle(provider.GetEOSProperty<string>(this, EOSConstants.CalendarImage));
                 PreloaderImage = UIImage.FromBundle(provider.GetEOSProperty<string>(this, EOSConstants.FabProgressPreloaderImage));
                 ButtonSize = provider.GetEOSProperty<int>(this, EOSConstants.FabProgressSize);
-                SetShadowConfig(provider.GetEOSProperty<ShadowConfig>(this, EOSConstants.FabShadow));
+                ShadowConfig = provider.GetEOSProperty<ShadowConfig>(this, EOSConstants.FabShadow);
                 IsEOSCustomizationIgnored = false;
             }
         }
@@ -227,6 +230,15 @@ namespace EOS.UI.iOS.Controls
             HorizontalAlignment = UIControlContentHorizontalAlignment.Fill;
             ContentMode = UIViewContentMode.ScaleToFill;
             UpdateImageInsets();
+        }
+
+		private void SetShadowConfig(ShadowConfig config)
+        {
+            Layer.ShadowColor = config.Color;
+            Layer.ShadowOffset = config.Offset;
+            Layer.ShadowRadius = config.Radius;
+            Layer.ShadowOpacity = config.Opacity;
+            IsEOSCustomizationIgnored = true;
         }
     }
 }

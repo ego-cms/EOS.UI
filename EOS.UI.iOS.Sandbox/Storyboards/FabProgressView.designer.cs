@@ -32,6 +32,8 @@ namespace EOS.UI.iOS.Sandbox
 
 		[Outlet]
 		UIKit.UITextField sizeField { get; set; }
+		[Outlet]
+		UIKit.UITextField shadowField { get; set; }
 
 		[Outlet]
 		UIKit.UITextField themeField { get; set; }

@@ -141,7 +141,17 @@ namespace EOS.UI.Android.Controls
         private void Initialize()
         {
             _openAnimation = AnimationUtils.LoadAnimation(Application.Context, Resource.Animation.FabOpenAnimation);
+			_openAnimation.AnimationEnd += (sender, e) => 
+			{
+				_isOpen = true;
+			};
+
             _closeAnimation = AnimationUtils.LoadAnimation(Application.Context, Resource.Animation.FabCloseAnimation);
+			_closeAnimation.AnimationEnd += (sender, e) => 
+			{
+				SetImageDrawable(Image);
+                _isOpen = false;
+			};
             Click += OnClick;
             SetOnTouchListener(this);
             UpdateAppearance();
@@ -191,15 +201,11 @@ namespace EOS.UI.Android.Controls
             if (_isOpen)
             {
                 StartAnimation(_closeAnimation);
-                await Task.Delay(_animationDuration);
-                SetImageDrawable(Image);
-                _isOpen = false;
             }
             else
             {
                 SetImageDrawable(PreloaderImage);
                 StartAnimation(_openAnimation);
-                _isOpen = true;
             }
         }
 
