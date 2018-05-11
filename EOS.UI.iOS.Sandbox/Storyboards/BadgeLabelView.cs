@@ -1,4 +1,4 @@
-using CoreGraphics;
+﻿using CoreGraphics;
 using EOS.UI.iOS.Controls;
 using EOS.UI.iOS.Extensions;
 using EOS.UI.iOS.Sandbox.Storyboards;
@@ -54,8 +54,8 @@ namespace EOS.UI.iOS.Sandbox
 
             var themePicker = new UIPickerView(rect);
             themePicker.ShowSelectionIndicator = true;
-            themePicker.DataSource = new ThemePickerSource();
-            var themePickerDelegate = new ThemePickerDelegate();
+			themePicker.DataSource = new DictionaryPickerSource<string, EOSThemeEnumeration>(Constants.Themes);
+            var themePickerDelegate = new DictionaryPickerDelegate<String ,EOSThemeEnumeration>(Constants.Themes);
             themePickerDelegate.DidSelected += (object sender, KeyValuePair<string, EOSThemeEnumeration> e) =>
             {
                 themeField.Text = e.Key;
@@ -89,8 +89,8 @@ namespace EOS.UI.iOS.Sandbox
 
             var fontPicker = new UIPickerView(rect);
             fontPicker.ShowSelectionIndicator = true;
-            fontPicker.DataSource = new FontPickerSource();
-            var fontPickerDelegate = new FontPickerDelegate();
+            fontPicker.DataSource = new ValuePickerSource<UIFont>(Constants.Fonts);
+			var fontPickerDelegate = new ValuePickerDelegate<UIFont>(Constants.Fonts);
             fontPickerDelegate.DidSelected += (object sender, UIFont e) =>
             {
                 label.Font = e;
@@ -125,8 +125,8 @@ namespace EOS.UI.iOS.Sandbox
 
             var letterSpacingPicker = new UIPickerView(rect);
             letterSpacingPicker.ShowSelectionIndicator = true;
-            letterSpacingPicker.DataSource = new LetterSpacingPickerSource();
-            var letterSpacingPickerDelegate = new LetterSpacingPickerDelegate();
+            letterSpacingPicker.DataSource = new ValuePickerSource<int>(Constants.LetterSpacingValues);
+            var letterSpacingPickerDelegate = new ValuePickerDelegate<int>(Constants.LetterSpacingValues);
             letterSpacingPickerDelegate.DidSelected += (object sender, int e) =>
             {
                 label.LetterSpacing = e;
@@ -144,8 +144,8 @@ namespace EOS.UI.iOS.Sandbox
 
             var fontSizePicker = new UIPickerView(rect);
             fontSizePicker.ShowSelectionIndicator = true;
-            fontSizePicker.DataSource = new FontSizesPickerSource();
-            var fontSizePickerDelegate = new FontSizesPickerDelegate();
+            fontSizePicker.DataSource = new ValuePickerSource<int>(Constants.FontSizeValues);
+			var fontSizePickerDelegate = new ValuePickerDelegate<int>(Constants.FontSizeValues);
             fontSizePickerDelegate.DidSelected += (object sender, int e) =>
             {
                 label.TextSize = e;
@@ -162,8 +162,8 @@ namespace EOS.UI.iOS.Sandbox
 
             var cornerRadiusPicker = new UIPickerView(rect);
             cornerRadiusPicker.ShowSelectionIndicator = true;
-            cornerRadiusPicker.DataSource = new CornerRadiusPickerSource();
-            var cornerRadiusPickerDelegate = new CornerRadiusPickerDelegate();
+			cornerRadiusPicker.DataSource = new ValuePickerSource<int>(Constants.CornerRadiusValues);
+			var cornerRadiusPickerDelegate = new ValuePickerDelegate<int>(Constants.CornerRadiusValues);
             cornerRadiusPickerDelegate.DidSelected += (object sender, int e) =>
             {
                 label.CornerRadius = e;

@@ -83,36 +83,6 @@
     <Reference Include="Xamarin.iOS" />
   </ItemGroup>
   <ItemGroup>
-    <ImageAsset Include="Assets.xcassets\AccountCircle.imageset\account_circle@2x.png">
-      <Visible>false</Visible>
-    </ImageAsset>
-    <ImageAsset Include="Assets.xcassets\AccountCircle.imageset\account_circle@3x.png">
-      <Visible>false</Visible>
-    </ImageAsset>
-    <ImageAsset Include="Assets.xcassets\AccountKey.imageset\account-key@2x.png">
-      <Visible>false</Visible>
-    </ImageAsset>
-    <ImageAsset Include="Assets.xcassets\AccountKey.imageset\account-key@3x.png">
-      <Visible>false</Visible>
-    </ImageAsset>
-    <ImageAsset Include="Assets.xcassets\AccountOff.imageset\account-off@2x.png">
-      <Visible>false</Visible>
-    </ImageAsset>
-    <ImageAsset Include="Assets.xcassets\AccountOff.imageset\account-off@3x.png">
-      <Visible>false</Visible>
-    </ImageAsset>
-    <ImageAsset Include="Assets.xcassets\Airballoon.imageset\airballoon@2x.png">
-      <Visible>false</Visible>
-    </ImageAsset>
-    <ImageAsset Include="Assets.xcassets\Airballoon.imageset\airballoon@3x.png">
-      <Visible>false</Visible>
-    </ImageAsset>
-    <ImageAsset Include="Assets.xcassets\Android.imageset\android@2x.png">
-      <Visible>false</Visible>
-    </ImageAsset>
-    <ImageAsset Include="Assets.xcassets\Android.imageset\android@3x.png">
-      <Visible>false</Visible>
-    </ImageAsset>
     <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Contents.json">
       <Visible>false</Visible>
     </ImageAsset>
@@ -147,12 +117,6 @@
       <Visible>false</Visible>
     </ImageAsset>
     <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon-App-83.5x83.5@2x.png">
-      <Visible>false</Visible>
-    </ImageAsset>
-    <ImageAsset Include="Assets.xcassets\Apple.imageset\apple@2x.png">
-      <Visible>false</Visible>
-    </ImageAsset>
-    <ImageAsset Include="Assets.xcassets\Apple.imageset\apple@3x.png">
       <Visible>false</Visible>
     </ImageAsset>
     <ImageAsset Include="Assets.xcassets\Contents.json">
@@ -191,24 +155,6 @@
     <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon-App-83.5x83.5%402x.png">
       <Visible>false</Visible>
     </ImageAsset>
-    <ImageAsset Include="Assets.xcassets\AccountCircle.imageset\Contents.json">
-      <Visible>false</Visible>
-    </ImageAsset>
-    <ImageAsset Include="Assets.xcassets\AccountKey.imageset\Contents.json">
-      <Visible>false</Visible>
-    </ImageAsset>
-    <ImageAsset Include="Assets.xcassets\AccountOff.imageset\Contents.json">
-      <Visible>false</Visible>
-    </ImageAsset>
-    <ImageAsset Include="Assets.xcassets\Android.imageset\Contents.json">
-      <Visible>false</Visible>
-    </ImageAsset>
-    <ImageAsset Include="Assets.xcassets\Airballoon.imageset\Contents.json">
-      <Visible>false</Visible>
-    </ImageAsset>
-    <ImageAsset Include="Assets.xcassets\Apple.imageset\Contents.json">
-      <Visible>false</Visible>
-    </ImageAsset>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Resources\" />
@@ -230,8 +176,6 @@
   <ItemGroup>
     <Compile Include="Main.cs" />
     <Compile Include="AppDelegate.cs" />
-    <Compile Include="Pickers\IconPickerSource.cs" />
-    <Compile Include="Pickers\IconPickerDelegate.cs" />
     <Compile Include="TableSources\ControlTableSource.cs" />
     <Compile Include="Storyboards\ViewController.cs" />
     <Compile Include="Storyboards\ViewController.designer.cs">
@@ -271,6 +215,20 @@
       <Project>{91A2A6A0-37B8-47AE-A38B-C80667B42049}</Project>
       <Name>EOS.UI.iOS</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\account-key%402x.png" />
+    <BundleResource Include="Resources\account-key%403x.png" />
+    <BundleResource Include="Resources\account-circle%402x.png" />
+    <BundleResource Include="Resources\account-circle%403x.png" />
+    <BundleResource Include="Resources\account-off%402x.png" />
+    <BundleResource Include="Resources\account-off%403x.png" />
+    <BundleResource Include="Resources\airbaloon%402x.png" />
+    <BundleResource Include="Resources\airbaloon%403x.png" />
+    <BundleResource Include="Resources\android%402x.png" />
+    <BundleResource Include="Resources\android%403x.png" />
+    <BundleResource Include="Resources\apple%402x.png" />
+    <BundleResource Include="Resources\apple%403x.png" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
 </Project>
