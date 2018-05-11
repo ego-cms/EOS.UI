@@ -44,7 +44,7 @@ namespace EOS.UI.Android.Controls
             set
             {
                 _backgroundColor = value;
-                if(Enabled)
+                if (Enabled)
                     (Background as GradientDrawable).SetColor(value);
                 IsEOSCustomizationIgnored = true;
             }
@@ -141,19 +141,20 @@ namespace EOS.UI.Android.Controls
         private void Initialize()
         {
             _openAnimation = AnimationUtils.LoadAnimation(Application.Context, Resource.Animation.FabOpenAnimation);
-			_openAnimation.AnimationEnd += (sender, e) =>  
-              { 
-                _isOpen = true; 
-              }; 
+            _openAnimation.AnimationEnd += (sender, e) =>
+              {
+                  _isOpen = true;
+              };
             _closeAnimation = AnimationUtils.LoadAnimation(Application.Context, Resource.Animation.FabCloseAnimation);
-			_closeAnimation.AnimationEnd += (sender, e) =>  
-              { 
-                SetImageDrawable(Image); 
-                        _isOpen = false; 
-              }; 
+            _closeAnimation.AnimationEnd += (sender, e) =>
+              {
+                  SetImageDrawable(Image);
+                  _isOpen = false;
+              };
             Click += OnClick;
             SetOnTouchListener(this);
             UpdateAppearance();
+            Elevation = 10f;
         }
 
         public IEOSStyle GetCurrentEOSStyle()
@@ -186,7 +187,7 @@ namespace EOS.UI.Android.Controls
                 var provider = GetThemeProvider();
                 Image = Resources.GetDrawable(provider.GetEOSProperty<int>(this, EOSConstants.CalendarImage));
                 PreloaderImage = Resources.GetDrawable(provider.GetEOSProperty<int>(this, EOSConstants.FabProgressPreloaderImage));
-                var roundedDrawable = (GradientDrawable) Resources.GetDrawable(Resource.Drawable.FabButton);
+                var roundedDrawable = (GradientDrawable)Resources.GetDrawable(Resource.Drawable.FabButton);
                 SetBackgroundDrawable(roundedDrawable);
                 BackgroundColor = provider.GetEOSProperty<Color>(this, EOSConstants.FabProgressPrimaryColor);
                 DisabledBackgroundColor = provider.GetEOSProperty<Color>(this, EOSConstants.FabProgressDisabledColor);
@@ -208,7 +209,7 @@ namespace EOS.UI.Android.Controls
             }
         }
 
-		public bool OnTouch(View v, MotionEvent e)
+        public bool OnTouch(View v, MotionEvent e)
         {
             if (Enabled)
             {
@@ -219,5 +220,5 @@ namespace EOS.UI.Android.Controls
             }
             return false;
         }
-	}
+    }
 }
