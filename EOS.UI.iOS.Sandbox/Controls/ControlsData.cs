@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using EOS.UI.iOS.Sandbox.Storyboards;
 using SharedControls = UIFrameworks.Shared.Themes.Helpers.ControlNames;
 
 namespace EOS.UI.iOS.Sandbox.Controls
@@ -13,13 +14,15 @@ namespace EOS.UI.iOS.Sandbox.Controls
 
         private ControlsData()
         {
-            Names = new Dictionary<string, string>() {
-                {SharedControls.BadgeLabel, BadgeLabelView.Identifier},
-                {SharedControls.GhostButton, GhostButtonView.Identifier},
-                {SharedControls.SimpleLabel, SimpleLabelView.Identifier},
-                {SharedControls.SimpleButton, SimpleButtonView.Identifier},
-                {SharedControls.FabProgress, FabProgressView.Identifier},
-                {SharedControls.Input, InputControlView.Identifier}
+            Names = new Dictionary<string, string>()
+            {
+                { SharedControls.BadgeLabel, BadgeLabelView.Identifier },
+                { SharedControls.GhostButton, GhostButtonView.Identifier },
+                { SharedControls.SimpleLabel, SimpleLabelView.Identifier },
+                { SharedControls.SimpleButton, SimpleButtonView.Identifier },
+                { SharedControls.FabProgress, FabProgressView.Identifier },
+                { SharedControls.Input, InputControlView.Identifier },
+                { SharedControls.Section, SectionView.Identifier }
             };
         }
     }

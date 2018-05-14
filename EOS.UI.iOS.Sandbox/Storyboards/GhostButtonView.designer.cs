@@ -1,4 +1,4 @@
-// WARNING
+﻿// WARNING
 //
 // This file has been generated automatically by Visual Studio from the outlets and
 // actions declared in your storyboard file.
@@ -52,11 +52,20 @@ namespace EOS.UI.iOS.Sandbox
         [Outlet]
         UIKit.UITextField themeField { get; set; }
 
+        [Outlet]
+        [GeneratedCode ("iOS Designer", "1.0")]
+        UIKit.UILabel custom { get; set; }
+
         void ReleaseDesignerOutlets ()
         {
             if (containerView != null) {
                 containerView.Dispose ();
                 containerView = null;
+            }
+
+            if (custom != null) {
+                custom.Dispose ();
+                custom = null;
             }
 
             if (disabledColorField != null) {

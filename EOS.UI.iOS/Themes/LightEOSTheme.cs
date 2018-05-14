@@ -12,12 +12,17 @@ namespace EOS.UI.iOS.Themes
         {
             { EOSConstants.PrimaryColor, UIColor.White },
             { EOSConstants.SecondaryColor, UIColor.Black },
-            { EOSConstants.SecondaryColorDisabled, UIColor.LightTextColor},
-            { EOSConstants.SecondaryColorPressed, UIColor.LightTextColor},
+            { EOSConstants.SecondaryColorDisabled, UIColor.LightGray},
+            { EOSConstants.SecondaryColorPressed, UIColor.LightGray},
+            { EOSConstants.TertiaryColor, UIColor.Blue },
+            { EOSConstants.QuaternaryColor, UIColor.LightGray },
             { EOSConstants.TextSize, 17 },
+            { EOSConstants.SecondaryTextSize, 17 },
             { EOSConstants.Font, UIFont.SystemFontOfSize(17)},
+            { EOSConstants.SecondaryFont, UIFont.SystemFontOfSize(17) },
             { EOSConstants.CornerRadius, 3 },
             { EOSConstants.LetterSpacing, 1 },
+            { EOSConstants.SecondaryLetterSpacing, 1 },
             { EOSConstants.HintTextColor, UIColor.LightGray },
             { EOSConstants.HintTextColorDisabled, UIColor.Gray },
             { EOSConstants.LeftImageFocused, "AccountCircle" },
@@ -26,6 +31,15 @@ namespace EOS.UI.iOS.Themes
             { EOSConstants.UnderlineColorFocused, UIColor.White },
             { EOSConstants.UnderlineColorUnfocused, UIColor.DarkGray },
             { EOSConstants.UnderlineColorDisabled, UIColor.LightGray },
+            { EOSConstants.BorderWidth, 2 },
+            { EOSConstants.SectionTitle, "Light section" },
+            { EOSConstants.SectionActionTitle, "View All" },
+            { EOSConstants.LeftPadding, 5 },
+            { EOSConstants.TopPadding, 7 },
+            { EOSConstants.RightPadding, 7 },
+            { EOSConstants.BottomPadding, 5 },
+            { EOSConstants.HasSectionBorder, true },
+            { EOSConstants.HasSectionAction, true }
         };
     }
 }

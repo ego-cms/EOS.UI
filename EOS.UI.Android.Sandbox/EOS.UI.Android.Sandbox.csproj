@@ -9,7 +9,7 @@
     <OutputType>Library</OutputType>
     <RootNamespace>EOS.UI.Android.Sandbox</RootNamespace>
     <AssemblyName>EOS.UI.Android.Sandbox</AssemblyName>
-    <TargetFrameworkVersion>v8.1</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v7.1</TargetFrameworkVersion>
     <AndroidApplication>True</AndroidApplication>
     <AndroidResgenFile>Resources\Resource.designer.cs</AndroidResgenFile>
     <AndroidResgenClass>Resource</AndroidResgenClass>

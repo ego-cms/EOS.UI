@@ -7,12 +7,11 @@
 using Foundation;
 using System;
 using System.CodeDom.Compiler;
-using UIKit;
 
-namespace EOS.UI.iOS.Sandbox
+namespace EOS.UI.iOS.Controls
 {
-    [Register ("FabProgressView")]
-    partial class FabProgressView
+    [Register ("SimpleLabel")]
+    partial class SimpleLabel
     {
         void ReleaseDesignerOutlets ()
         {

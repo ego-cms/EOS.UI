@@ -92,6 +92,10 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
+    <Compile Include="Components\Section.cs" />
+    <Compile Include="Components\Section.designer.cs">
+      <DependentUpon>Section.cs</DependentUpon>
+    </Compile>
     <Compile Include="Controls\Input.cs" />
     <Compile Include="Helpers\Constants.cs" />
     <Compile Include="Controls\SimpleLabel.cs" />
@@ -113,6 +117,7 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Assets.cs</LastGenOutput>
     </None>
+    <InterfaceDefinition Include="Components\Section.xib" />
     <None Include="Info.plist" />
     <BundleResource Include="Resources\Fonts\capture_it_dark.ttf" />
     <BundleResource Include="Resources\Fonts\capture_it_light.ttf" />

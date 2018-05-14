@@ -42,6 +42,6 @@
         public const string SimpleLabel = "Simple label";
         public const string Input = "Input";
         public const string FabProgress = "Fab progress";
-        public const string Section = "Section component";
+        public const string Section = "Section";
     }
 }
