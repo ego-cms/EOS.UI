@@ -189,7 +189,6 @@ namespace EOS.UI.iOS.Controls
                 LetterSpacing = provider.GetEOSProperty<int>(this, EOSConstants.LetterSpacing);
                 Enabled = base.Enabled;
                 IsEOSCustomizationIgnored = false;
-                SizeToFit();
             }
         }
 
