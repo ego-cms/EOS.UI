@@ -115,7 +115,18 @@ namespace EOS.UI.Android.Sandbox.Helpers
                 { "70", 70f },
             };
            
-            public static readonly List<int> FabProgressSizes = Enumerable.Range(100, 80).Where(i => i % 10 == 0).ToList();
+            public static readonly Dictionary<string, int> FabProgressSizes = new Dictionary<string, int>()
+            {
+                { string.Empty, 100 },
+                { "110", 110 },
+                { "120", 120 },
+                { "130", 130 },
+                { "140", 140 },
+                { "150", 150 },
+                { "160", 160 },
+                { "170", 170 },
+                { "180", 180 },
+            };
         }
 
         public static class ThemeTypes

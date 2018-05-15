@@ -71,14 +71,14 @@ namespace EOS.UI.Android.Sandbox.Activities
             pressedColorSpinner.ItemSelected += (sender, e) =>
             {
                 if (e.Position > 0)
-                    fab.DisabledBackgroundColor = Colors.ColorsCollection.ElementAt(e.Position).Value;
+                    fab.PressedBackgroundColor = Colors.ColorsCollection.ElementAt(e.Position).Value;
             };
 
-            sizeSpinner.Adapter = new SpinnerAdapter(this, R.Layout.SimpleSpinnerItem, Sizes.FabProgressSizes);
+            sizeSpinner.Adapter = new SpinnerAdapter(this, R.Layout.SimpleSpinnerItem, Sizes.FabProgressSizes.Select(i => i.Key).ToList());
             sizeSpinner.ItemSelected += (sender, e) =>
             {
                 if (e.Position > 0)
-                    fab.ButtonSize = Sizes.FabProgressSizes.ElementAt(e.Position);
+                    fab.ButtonSize = Sizes.FabProgressSizes.ElementAt(e.Position).Value;
             };
 
             stateSwitch.CheckedChange += (sender, e) =>

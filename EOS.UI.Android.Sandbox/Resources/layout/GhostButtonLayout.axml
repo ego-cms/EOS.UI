@@ -77,19 +77,20 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="2dp"
-            android:weightSum="3"
-            android:layout_marginBottom="2dp">
+            android:layout_marginBottom="2dp"
+            android:weightSum="3">
             <TextView
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:text="Enabled text color"
                 android:gravity="center_vertical"
                 android:textSize="18sp"
                 android:layout_weight="2"
-                android:paddingLeft="3dp" />
+                android:paddingLeft="3dp"
+                android:paddingBottom="3dp" />
             <Spinner
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:id="@+id/spinnerEnabledTextColor"
                 android:layout_weight="1"
                 android:paddingLeft="3dp"
@@ -108,7 +109,7 @@
             android:layout_marginBottom="2dp">
             <TextView
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:text="Disabled text color"
                 android:textSize="18sp"
                 android:layout_weight="2"
@@ -116,7 +117,7 @@
                 android:paddingLeft="3dp" />
             <Spinner
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:id="@+id/spinnerDisabledTextColor"
                 android:layout_weight="1"
                 android:paddingLeft="3dp"
@@ -135,7 +136,7 @@
             android:layout_marginBottom="2dp">
             <TextView
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:text="Pressed text color"
                 android:textSize="18sp"
                 android:layout_weight="2"
@@ -143,7 +144,7 @@
                 android:paddingLeft="3dp" />
             <Spinner
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:id="@+id/spinnerPressedTextColor"
                 android:layout_weight="1"
                 android:paddingLeft="3dp"
