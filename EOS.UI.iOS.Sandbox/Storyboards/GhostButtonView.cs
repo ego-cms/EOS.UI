@@ -60,7 +60,7 @@ namespace EOS.UI.iOS.Sandbox
 				themeField.Text = e.Key;
 				var provider = ghostButton.GetThemeProvider();
 				provider.SetCurrentTheme(e.Value);
-				ghostButton.UpdateAppearance();
+				ghostButton.ResetCustomization();
 				_textFields.Except(new[] { themeField }).ToList().ForEach(f => f.Text = String.Empty);
 			};
 			themeField.Text = ghostButton.GetThemeProvider().GetCurrentTheme().ThemeValues[EOSConstants.PrimaryColor] == UIColor.White ?
