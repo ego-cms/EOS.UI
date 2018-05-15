@@ -192,12 +192,12 @@ namespace EOS.UI.iOS.Controls
             }
         }
 
-		public override void TouchesBegan(NSSet touches, UIEvent evt)
-		{
+        public override void TouchesBegan(NSSet touches, UIEvent evt)
+        {
             base.TouchesBegan(touches, evt);
             var touch = touches.AnyObject as UITouch;
             var location = touch.LocationInView(this);
             this.RippleAnimate(location);
-		}
-	}
+        }
+    }
 }
