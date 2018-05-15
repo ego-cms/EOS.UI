@@ -429,7 +429,6 @@ namespace EOS.UI.iOS.Extensions
             var attributedString = new NSMutableAttributedString(label.AttributedText);
             attributedString.AddAttribute(UIStringAttributeKey.KerningAdjustment, new NSNumber(spacing), new NSRange(0, label.AttributedText.Length));
             label.AttributedText = attributedString;
-            label.SizeToFit();
         }
 
         /// <summary>
@@ -454,7 +453,6 @@ namespace EOS.UI.iOS.Extensions
             button.SetAttributedTitle(enabledAttrString, UIControlState.Normal);
             button.SetAttributedTitle(disabledAttrString, UIControlState.Disabled);
             button.SetAttributedTitle(highlightedAttrString, UIControlState.Disabled);
-            button.SizeToFit();
         }
 
         /// <summary>
@@ -467,7 +465,6 @@ namespace EOS.UI.iOS.Extensions
             var attributedString = new NSMutableAttributedString(label.AttributedText);
             attributedString.AddAttribute(UIStringAttributeKey.Font, label.Font.WithSize(size), new NSRange(0, label.AttributedText.Length));
             label.AttributedText = attributedString;
-            label.SizeToFit();
         }
 
         /// <summary>
@@ -486,7 +483,6 @@ namespace EOS.UI.iOS.Extensions
             button.SetAttributedTitle(normalAttrString, UIControlState.Normal);
             button.SetAttributedTitle(disabledAttrString, UIControlState.Disabled);
             button.SetAttributedTitle(highlightedAttrString, UIControlState.Highlighted);
-            button.SizeToFit();
         }
 
 
@@ -506,7 +502,6 @@ namespace EOS.UI.iOS.Extensions
             button.SetAttributedTitle(normalAttrString, UIControlState.Normal);
             button.SetAttributedTitle(disabledAttrString, UIControlState.Disabled);
             button.SetAttributedTitle(highlightedAttrString, UIControlState.Highlighted);
-            button.SizeToFit();
         }
 
         /// <summary>
