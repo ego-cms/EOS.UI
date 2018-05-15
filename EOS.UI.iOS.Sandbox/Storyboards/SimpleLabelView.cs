@@ -46,9 +46,10 @@ namespace EOS.UI.iOS.Sandbox
             {
                 _textFields.ForEach(field => field.ResignFirstResponder());
             }));
-
-            containerView.ConstrainLayout(() => _simpleLabel.Frame.GetCenterX() == containerView.Frame.GetCenterX() &&
-                                                _simpleLabel.Frame.GetCenterY() == containerView.Frame.GetCenterY(), _simpleLabel);
+            _simpleLabel.TextAlignment = UITextAlignment.Center;
+            containerView.ConstrainLayout(() => _simpleLabel.Frame.GetCenterY() == containerView.Frame.GetCenterY() &&
+                                          _simpleLabel.Frame.Left == containerView.Frame.Left &&
+                                          _simpleLabel.Frame.Right == containerView.Frame.Right, _simpleLabel);
 
             var frame = new CGRect(0, 0, 100, 150);
 

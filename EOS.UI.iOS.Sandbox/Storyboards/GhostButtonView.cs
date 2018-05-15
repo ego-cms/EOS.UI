@@ -29,9 +29,10 @@ namespace EOS.UI.iOS.Sandbox
 
 			var ghostButton = new GhostButton();
 			ghostButton.SetTitle("DEFAULT TEXT", UIControlState.Normal);
-
-			containerView.ConstrainLayout(() => ghostButton.Frame.GetCenterX() == containerView.Frame.GetCenterX() &&
-										  ghostButton.Frame.GetCenterY() == containerView.Frame.GetCenterY(), ghostButton);
+            containerView.ConstrainLayout(() => ghostButton.Frame.GetCenterX() == containerView.Frame.GetCenterX() &&
+                                          ghostButton.Frame.GetCenterY() == containerView.Frame.GetCenterY() &&
+                                          ghostButton.Frame.Left == containerView.Frame.Left &&
+                                          ghostButton.Frame.Right == containerView.Frame.Right, ghostButton);
 
 			_textFields = new List<UITextField>()
 			{

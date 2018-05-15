@@ -12,7 +12,7 @@ using EOS.UI.Shared.Themes.Interfaces;
 using UIFrameworks.Android.Themes;
 using UIFrameworks.Shared.Themes.Helpers;
 using UIFrameworks.Shared.Themes.Interfaces;
-
+using TextUtils = Android.Text.TextUtils;
 
 namespace EOS.UI.Android.Controls
 {
@@ -128,6 +128,8 @@ namespace EOS.UI.Android.Controls
             SetOnTouchListener(this);
             Background = CreateRippleDrawable();
             UpdateAppearance();
+            SetLines(1);
+            Ellipsize = TextUtils.TruncateAt.End;
         }
 
         private void UpdateEnabledState(bool enabled)
