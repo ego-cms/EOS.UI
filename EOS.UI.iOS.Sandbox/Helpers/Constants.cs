@@ -58,16 +58,16 @@ namespace EOS.UI.iOS.Sandbox.Helpers
         public static Dictionary<string, ShadowConfig> ShadowConfigs = new Dictionary<string, ShadowConfig>()
             {
                 {"Shadow 1", new ShadowConfig(){
-                        Color = UIColor.LightGray.CGColor,
+                        Color = UIColor.Black.CGColor,
                         Offset = new CGSize(0,0),
-                        Radius = 5,
+                        Radius = 4,
                         Opacity = 0.7f
                     }},
                 {"Shadow 2", new ShadowConfig(){
                         Color = UIColor.Black.CGColor,
                         Offset = new CGSize(0,0),
-                        Radius = 3,
-                        Opacity = 0.2f
+                        Radius = 8,
+                        Opacity = 0.9f
                     }}
             };
 

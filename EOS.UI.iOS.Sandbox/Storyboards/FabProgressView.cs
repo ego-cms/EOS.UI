@@ -44,6 +44,7 @@ namespace EOS.UI.iOS.Sandbox
                 sizeField,
                 disabledField,
                 pressedField,
+                shadowField
             };
             View.AddGestureRecognizer(new UITapGestureRecognizer(() =>
             {

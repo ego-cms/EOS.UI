@@ -33,12 +33,12 @@ namespace EOS.UI.iOS.Themes
             { EOSConstants.FabProgressPressedColor, UIColor.FromRGB(255, 92, 73)},
             { EOSConstants.FabProgressDisabledColor, UIColor.FromRGB(255, 92, 73)},
             { EOSConstants.FabProgressSize, 50},
-			{ EOSConstants.FabShadow,  new ShadowConfig(){ 
-                        Color = UIColor.Black.CGColor, 
-                        Offset = new CGSize(0,0), 
-                        Radius = 3, 
-                        Opacity = 0.2f 
-                    }}, 
+            { EOSConstants.FabShadow,  new ShadowConfig(){
+                        Color = UIColor.Black.CGColor,
+                        Offset = new CGSize(0,0),
+                        Radius = 1,
+                        Opacity = 0.7f
+                    }},
         };
     }
 }
