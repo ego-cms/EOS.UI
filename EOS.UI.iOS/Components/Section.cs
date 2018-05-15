@@ -16,6 +16,7 @@ namespace EOS.UI.iOS.Components
         #region fields
 
         private UIEdgeInsets _edgeInsets;
+        private bool _subscribed;
 
         public static readonly NSString Key = new NSString("Section");
         public static readonly UINib Nib;
@@ -31,6 +32,7 @@ namespace EOS.UI.iOS.Components
 
         public Section(IntPtr handle) : base(handle)
         {
+            
         }
 
         #endregion
@@ -38,6 +40,7 @@ namespace EOS.UI.iOS.Components
         #region customization
 
         public Action SectionAction { get; set; }
+
         public string SectionName
         {
             get => sectionName.Text;
@@ -48,12 +51,14 @@ namespace EOS.UI.iOS.Components
             }
         }
 
+        private string _buttonTitle;
         public string ButtonText
         {
-            get => sectionButton.Title(UIControlState.Normal);
+            get => _buttonTitle;
             set
             {
-                sectionButton.SetTitle(value, UIControlState.Normal);
+                _buttonTitle = value;
+                sectionButton.SetAttributedTitle(new NSAttributedString(value ?? string.Empty), UIControlState.Normal);
                 IsEOSCustomizationIgnored = true;
             }
         }
@@ -164,7 +169,7 @@ namespace EOS.UI.iOS.Components
             get => UIColor.FromCGColor(Layer.BackgroundColor);
             set
             {
-                Layer.BackgroundColor = value.CGColor;
+                Layer.BackgroundColor = value?.CGColor;
                 IsEOSCustomizationIgnored = true;
             }
         }
@@ -196,13 +201,8 @@ namespace EOS.UI.iOS.Components
         public void SetPaddings(int left, int top, int right, int bottom)
         {
             _edgeInsets = new UIEdgeInsets(top, left, bottom, right);
-            base.Draw(InsetRect(Bounds, _edgeInsets));
-            IsEOSCustomizationIgnored = true;
-        }
-
-        public override void Draw(CGRect rect)
-        {
-            base.Draw(_edgeInsets != null ? InsetRect(rect, _edgeInsets) : rect);
+            //base.DrawRect(InsetRect(Bounds, _edgeInsets), base.ViewPrintFormatter);
+            Frame = InsetRect(Frame, _edgeInsets);
             IsEOSCustomizationIgnored = true;
         }
 
@@ -211,7 +211,7 @@ namespace EOS.UI.iOS.Components
             get => sectionButton.Hidden;
             set
             {
-                sectionButton.Hidden = value;
+                sectionButton.Hidden = !value;
                 IsEOSCustomizationIgnored = true;
             }
         }
@@ -223,23 +223,34 @@ namespace EOS.UI.iOS.Components
         public void Initialize()
         {
             if(sectionButton != null)
-                sectionButton.TouchDown += delegate
+            {
+                sectionButton.SetAttributedTitle(new NSAttributedString(ButtonText ?? string.Empty), UIControlState.Normal);
+                sectionName.AttributedText = new NSAttributedString(SectionName ?? string.Empty);
+                if(!_subscribed)
                 {
-                    SectionAction?.Invoke();
-                };
+                    sectionButton.TouchDown += delegate
+                    {
+                        SectionAction?.Invoke();
+                    };
+                    _subscribed = true;
+                }
+            }
         }
 
         private void SetButtonTextColor(UIColor color)
         {
-            var attrString = new NSMutableAttributedString(sectionButton.GetAttributedTitle(UIControlState.Normal));
-            var range = new NSRange(0, attrString.Length);
-            attrString.AddAttribute(UIStringAttributeKey.ForegroundColor, color, range);
-            sectionButton.SetAttributedTitle(attrString, UIControlState.Normal);
+            if(color != null)
+            {
+                var attrString = new NSMutableAttributedString(sectionButton.GetAttributedTitle(UIControlState.Normal));
+                var range = new NSRange(0, attrString.Length);
+                attrString.AddAttribute(UIStringAttributeKey.ForegroundColor, color, range);
+                sectionButton.SetAttributedTitle(attrString, UIControlState.Normal);
+            }
         }
 
         private void ToggleBorderVisibility()
         {
-            if(HasBorder)
+            if(HasBorder && BorderColor != null)
             {
                 Layer.BorderColor = BorderColor.CGColor;
                 Layer.BorderWidth = BorderWidth;
@@ -257,8 +268,8 @@ namespace EOS.UI.iOS.Components
         {
             return new CGRect(rect.X + insets.Left,
                               rect.Y + insets.Top,
-                              rect.Width - insets.Left - insets.Right,
-                              rect.Height - insets.Top - insets.Bottom);
+                              rect.Width + insets.Left + insets.Right,
+                              rect.Height + insets.Top + insets.Bottom);
         }
 
         #endregion
