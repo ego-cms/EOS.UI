@@ -162,9 +162,9 @@
                         <outlet property="backgroundField" destination="Wrz-ub-qbi" id="5GN-2i-BNS"/>
                         <outlet property="containerView" destination="2uI-Rd-yLH" id="gd3-t3-E4B"/>
                         <outlet property="disabledField" destination="7wH-7c-Wly" id="0Ax-5F-UGP"/>
-                        <outlet property="enableSwitch" destination="PRC-RK-RK9" id="GxR-87-oK5"/>
-                        <outlet property="pressedField" destination="9Pd-C3-qgq" id="C6C-Ze-WUb"/>
-                        <outlet property="resetButton" destination="LcA-VA-fSG" id="ZbC-Zv-vw9"/>
+                        <outlet property="enableSwitch" destination="PRC-RK-RK9" id="vx9-5r-wEE"/>
+                        <outlet property="pressedField" destination="9Pd-C3-qgq" id="9e3-2g-7pC"/>
+                        <outlet property="resetButton" destination="LcA-VA-fSG" id="Zpa-LP-Bs2"/>
                         <outlet property="shadowField" destination="kaW-iQ-eEV" id="QQU-EL-SNu"/>
                         <outlet property="sizeField" destination="ZQv-NL-IuI" id="s9B-Vd-CS5"/>
                         <outlet property="themeField" destination="bjz-CI-c9V" id="frh-Vk-BP7"/>

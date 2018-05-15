@@ -109,6 +109,10 @@
     <Compile Include="Controls\GhostButton.cs" />
     <Compile Include="Controls\FabProgress.cs" />
     <Compile Include="Helpers\ShadowConfig.cs" />
+    <Compile Include="Controls\CircleProgress.cs" />
+    <Compile Include="Controls\CircleProgress.designer.cs">
+      <DependentUpon>CircleProgress.cs</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets.tt">
@@ -124,8 +128,14 @@
     <BundleResource Include="Resources\preloader.png" />
     <BundleResource Include="Resources\preloader%402x.png" />
     <BundleResource Include="Resources\preloader%403x.png" />
+    <BundleResource Include="Resources\done.png" />
+    <BundleResource Include="Resources\done%402x.png" />
+    <BundleResource Include="Resources\done%403x.png" />
   </ItemGroup>
   <ItemGroup />
+  <ItemGroup>
+    <InterfaceDefinition Include="Controls\CircleProgress.xib" />
+  </ItemGroup>
   <Import Project="..\EOS.UI.Shared.Themes\EOS.UI.Shared.Themes.projitems" Label="Shared" />
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
 </Project>

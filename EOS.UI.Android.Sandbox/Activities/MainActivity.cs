@@ -23,7 +23,8 @@ namespace EOS.UI.Android.Sandbox
             { ControlNames.GhostButton, typeof(GhostButtonActivity) },
             { ControlNames.SimpleButton,typeof(SimpleButtonActivity) },
             { ControlNames.FabProgress,typeof(FabProgressActivity) },
-            { ControlNames.Input, typeof(InputActivity) }
+            { ControlNames.Input, typeof(InputActivity) },
+            { ControlNames.CircleProgress, typeof(CircleProgressActivity) },
         };
 
         protected override void OnCreate(Bundle savedInstanceState)

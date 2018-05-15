@@ -26,6 +26,8 @@
         public const string FabProgressDisabledColor = "fabProgressDisabledColor";
         public const string FabProgressSize = "fabProgressSize";
         public const string FabShadow = "fabShadow";
+		//circle progress
+		public const string CircleProgressShown = "CircleProgressShown";
     }
 
     public static class ControlNames
@@ -35,6 +37,7 @@
         public const string SimpleButton = "Simple button";
         public const string SimpleLabel = "Simple label";
         public const string Input = "Input";
-        public const string FabProgress = "Fab progress";
+		public const string FabProgress = "Fab progress";
+		public const string CircleProgress = "Circle progress";
     }
 }
