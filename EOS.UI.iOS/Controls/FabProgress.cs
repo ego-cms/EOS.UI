@@ -17,7 +17,10 @@ namespace EOS.UI.iOS.Controls
     [Register("FabProgress")]
     public class FabProgress : UIButton, IEOSThemeControl
     {
-        private bool _isOpen;
+        //image padding percent
+        private const double _paddingPercent= 0.24;
+        private const string _rotationAnimationKey = "rotationAnimation";
+        private CABasicAnimation _rotationAnimation;
 
         public bool IsEOSCustomizationIgnored { get; private set; }
 
@@ -125,16 +128,34 @@ namespace EOS.UI.iOS.Controls
                 SetShadowConfig(_shadowConfig);
             }
         }
+        
+        public bool InProgress { get; private set; }
 
         public FabProgress()
         {
+            TouchDown += (sender, e) => 
+            {
+                UIView.Animate(0.1, () =>
+                {
+                    Transform = CGAffineTransform.MakeScale(0.85f, 0.85f);
+                });
+            };
+            
             TouchUpInside += (sender, e) =>
             {
-                if (!_isOpen)
-                    OpenAnimate();
-                else
-                    CloseAnimate();
+                UIView.Animate(0.2, () =>
+                {
+                    Transform = CGAffineTransform.MakeScale(1.5f, 1.5f);
+                    Transform = CGAffineTransform.MakeScale(1, 1);
+                });
             };
+            _rotationAnimation = new CABasicAnimation();
+            _rotationAnimation.KeyPath = "transform.rotation.z";
+            _rotationAnimation.From = new NSNumber(0);
+            _rotationAnimation.To = new NSNumber(3.14);
+            _rotationAnimation.Duration = 0.5;
+            _rotationAnimation.Cumulative = true;
+            _rotationAnimation.RepeatCount = Int32.MaxValue;
             UpdateAppearance();
         }
 
@@ -182,6 +203,22 @@ namespace EOS.UI.iOS.Controls
                 IsEOSCustomizationIgnored = false;
             }
         }
+        
+        public void StartProgressAnimation()
+        {
+            if (InProgress)
+                return;
+            SetImage(PreloaderImage);
+            Layer.AddAnimation(_rotationAnimation, _rotationAnimationKey);
+            InProgress = true;
+        }
+        
+        public void StopProgressAnimation()
+        {
+            Layer.RemoveAnimation(_rotationAnimationKey);
+            SetImage(Image);
+            InProgress = false;
+        }
 
         private void UpdateSize()
         {
@@ -190,49 +227,9 @@ namespace EOS.UI.iOS.Controls
             Layer.CornerRadius = ButtonSize / 2;
         }
 
-        private void OpenAnimate()
-        {
-            UIView.Animate(0.1, () =>
-            {
-                SetImage(PreloaderImage);
-                Transform = CGAffineTransform.MakeScale(0.9f, 0.9f);
-            }, () =>
-            {
-                UIView.Animate(0.2, () =>
-                {
-                    Transform = CGAffineTransform.MakeScale(2f, 2f);
-                    Transform = CGAffineTransform.MakeScale(1, 1);
-                    Transform = CGAffineTransform.MakeRotation(3.14f);
-                }, () =>
-                    {
-                        _isOpen = true;
-                    });
-            });
-        }
-
-        private void CloseAnimate()
-        {
-            UIView.Animate(0.1, () =>
-            {
-                Transform = CGAffineTransform.MakeScale(0.9f, 0.9f);
-            }, () =>
-            {
-                UIView.Animate(0.2, () =>
-                {
-                    Transform = CGAffineTransform.MakeScale(2f, 2f);
-                    Transform = CGAffineTransform.MakeScale(1, 1);
-                    Transform = CGAffineTransform.MakeRotation(0f);
-                }, () =>
-                {
-                    SetImage(Image);
-                    _isOpen = false;
-                });
-            });
-        }
-
         private void UpdateImageInsets()
         {
-            var padding = (nfloat)(ButtonSize * 0.15);
+            var padding = (nfloat)(ButtonSize * _paddingPercent);
             var insets = new UIEdgeInsets(padding, padding, padding, padding);
             ImageEdgeInsets = insets;
         }
