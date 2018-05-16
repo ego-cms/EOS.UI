@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Threading.Tasks;
 using CoreAnimation;
 using CoreGraphics;
 using EOS.UI.iOS.Extensions;
@@ -18,8 +17,13 @@ namespace EOS.UI.iOS.Controls
     public class FabProgress : UIButton, IEOSThemeControl
     {
         //image padding percent
-        private const double _paddingPercent= 0.24;
+        private const double _paddingRatio= 0.24;
         private const string _rotationAnimationKey = "rotationAnimation";
+        private const double _360degrees = 6.28319;//value in radians
+        private const float _startScale = 0.85f;
+        private const float _endScale = 1.0f;
+        private const double _animationDuration = 0.1;
+        
         private CABasicAnimation _rotationAnimation;
 
         public bool IsEOSCustomizationIgnored { get; private set; }
@@ -135,25 +139,24 @@ namespace EOS.UI.iOS.Controls
         {
             TouchDown += (sender, e) => 
             {
-                UIView.Animate(0.1, () =>
+                UIView.Animate(_animationDuration, () =>
                 {
-                    Transform = CGAffineTransform.MakeScale(0.85f, 0.85f);
+                    Transform = CGAffineTransform.MakeScale(_startScale, _startScale);
                 });
             };
             
             TouchUpInside += (sender, e) =>
             {
-                UIView.Animate(0.2, () =>
+                UIView.Animate(_animationDuration, () =>
                 {
-                    Transform = CGAffineTransform.MakeScale(1.5f, 1.5f);
-                    Transform = CGAffineTransform.MakeScale(1, 1);
+                    Transform = CGAffineTransform.MakeScale(_endScale, _endScale);
                 });
             };
             _rotationAnimation = new CABasicAnimation();
             _rotationAnimation.KeyPath = "transform.rotation.z";
             _rotationAnimation.From = new NSNumber(0);
-            _rotationAnimation.To = new NSNumber(3.14);
-            _rotationAnimation.Duration = 0.5;
+            _rotationAnimation.To = new NSNumber(_360degrees);
+            _rotationAnimation.Duration = 1;
             _rotationAnimation.Cumulative = true;
             _rotationAnimation.RepeatCount = Int32.MaxValue;
             UpdateAppearance();
@@ -215,6 +218,8 @@ namespace EOS.UI.iOS.Controls
         
         public void StopProgressAnimation()
         {
+            if (!InProgress)
+                return;
             Layer.RemoveAnimation(_rotationAnimationKey);
             SetImage(Image);
             InProgress = false;
@@ -229,7 +234,7 @@ namespace EOS.UI.iOS.Controls
 
         private void UpdateImageInsets()
         {
-            var padding = (nfloat)(ButtonSize * _paddingPercent);
+            var padding = (nfloat)(ButtonSize * _paddingRatio);
             var insets = new UIEdgeInsets(padding, padding, padding, padding);
             ImageEdgeInsets = insets;
         }
