@@ -31,7 +31,7 @@
                                 <rect key="frame" x="16" y="120" width="343" height="692"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" id="11167" translatesAutoresizingMaskIntoConstraints="NO">
-                                        <rect key="frame" x="0.0" y="0.0" width="343" height="550"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="343" height="590"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Theme" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="14247">
                                                 <rect key="frame" x="0.0" y="5" width="54" height="21"/>
@@ -153,23 +153,35 @@
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
+                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="53712">
+                                                <rect key="frame" x="120" y="461" width="223" height="30"/>
+                                                <nil key="textColor"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                <textInputTraits key="textInputTraits"/>
+                                            </textField>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Corner radius" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="53714">
+                                                <rect key="frame" x="0.0" y="466" width="120" height="20.5"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="33690">
+                                                <rect key="frame" x="284" y="507" width="51" height="31"/>
+                                            </switch>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Enabled" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="33689">
-                                                <rect key="frame" x="0.0" y="466" width="58.5" height="19.5"/>
+                                                <rect key="frame" x="0.0" y="513" width="58.5" height="19.5"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                                 <size key="shadowOffset" width="0.0" height="0.0"/>
                                             </label>
-                                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="33690">
-                                                <rect key="frame" x="289" y="460" width="51" height="31"/>
-                                            </switch>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="44692" translatesAutoresizingMaskIntoConstraints="NO">
-                                                <rect key="frame" x="152" y="499" width="39" height="30"/>
+                                                <rect key="frame" x="152" y="552" width="39" height="30"/>
                                                 <state key="normal" title="Reset"/>
                                             </button>
                                         </subviews>
                                         <constraints>
-                                            <constraint id="12383" firstItem="11167" firstAttribute="height" constant="550"/>
+                                            <constraint id="12383" firstItem="11167" firstAttribute="height" constant="590"/>
                                             <constraint id="14612" firstItem="14248" firstAttribute="top" secondItem="11167" secondAttribute="top"/>
                                             <constraint id="14734" firstItem="14248" firstAttribute="trailing" secondItem="11167" secondAttribute="trailing"/>
                                             <constraint id="17166" firstItem="14247" firstAttribute="centerY" secondItem="14248" secondAttribute="centerY"/>
@@ -222,18 +234,24 @@
                                             <constraint id="32416" firstItem="31928" firstAttribute="centerY" secondItem="31927" secondAttribute="centerY"/>
                                             <constraint id="32538" firstItem="31928" firstAttribute="trailing" secondItem="31927" secondAttribute="leading"/>
                                             <constraint id="32660" firstItem="31928" firstAttribute="leading" secondItem="11167" secondAttribute="leading"/>
-                                            <constraint id="33933" firstItem="33690" firstAttribute="top" secondItem="31927" secondAttribute="bottom" constant="16"/>
-                                            <constraint id="34055" firstItem="11167" firstAttribute="trailing" secondItem="33690" secondAttribute="trailing" constant="5"/>
-                                            <constraint id="34298" firstItem="33689" firstAttribute="leading" secondItem="11167" secondAttribute="leading"/>
-                                            <constraint id="34420" firstItem="33689" firstAttribute="centerY" secondItem="33690" secondAttribute="centerY"/>
                                             <constraint id="41971" firstItem="14247" firstAttribute="leading" secondItem="11167" secondAttribute="leading"/>
                                             <constraint id="42093" firstItem="14248" firstAttribute="leading" secondItem="14247" secondAttribute="leading" constant="120"/>
                                             <constraint id="42215" firstItem="18053" firstAttribute="leading" secondItem="11167" secondAttribute="leading"/>
                                             <constraint id="42337" firstItem="18054" firstAttribute="leading" secondItem="18053" secondAttribute="leading" constant="120"/>
                                             <constraint id="42459" firstItem="18053" firstAttribute="leading" secondItem="11167" secondAttribute="leading"/>
                                             <constraint id="42581" firstItem="18053" firstAttribute="centerY" secondItem="18054" secondAttribute="centerY"/>
-                                            <constraint id="44814" firstItem="11167" firstAttribute="bottom" secondItem="44692" secondAttribute="bottom" constant="21"/>
-                                            <constraint id="44936" firstItem="44692" firstAttribute="centerX" secondItem="11167" secondAttribute="centerX"/>
+                                            <constraint id="53713" firstItem="53712" firstAttribute="top" secondItem="31927" secondAttribute="bottom" constant="17"/>
+                                            <constraint id="53715" firstItem="53714" firstAttribute="centerY" secondItem="53712" secondAttribute="centerY"/>
+                                            <constraint id="53716" firstItem="53714" firstAttribute="leading" secondItem="11167" secondAttribute="leading"/>
+                                            <constraint id="53717" firstItem="11167" firstAttribute="trailing" secondItem="53712" secondAttribute="trailing"/>
+                                            <constraint id="53718" firstItem="53712" firstAttribute="leading" secondItem="53714" secondAttribute="leading" constant="120"/>
+                                            <constraint id="53719" firstItem="53712" firstAttribute="leading" secondItem="53714" secondAttribute="trailing"/>
+                                            <constraint id="53720" firstItem="33690" firstAttribute="top" secondItem="53712" secondAttribute="bottom" constant="16"/>
+                                            <constraint id="53721" firstItem="11167" firstAttribute="trailing" secondItem="33690" secondAttribute="trailing" constant="10"/>
+                                            <constraint id="53816" firstItem="44692" firstAttribute="centerX" secondItem="11167" secondAttribute="centerX"/>
+                                            <constraint id="54501" firstItem="33689" firstAttribute="leading" secondItem="11167" secondAttribute="leading"/>
+                                            <constraint id="54502" firstItem="11167" firstAttribute="bottom" secondItem="44692" secondAttribute="bottom" constant="8"/>
+                                            <constraint id="54503" firstItem="33689" firstAttribute="centerY" secondItem="33690" secondAttribute="centerY"/>
                                         </constraints>
                                     </view>
                                 </subviews>
@@ -266,10 +284,11 @@
                         <outlet property="backgroundColorEnabledTextField" destination="28258" id="name-outlet-28258"/>
                         <outlet property="backgroundColorDisabledTextField" destination="30574" id="name-outlet-30574"/>
                         <outlet property="backgroundColorPressedTextField" destination="31927" id="name-outlet-31927"/>
-                        <outlet property="enableSwitch" destination="33690" id="name-outlet-33690"/>
                         <outlet property="containerView" destination="785" id="name-outlet-785"/>
                         <outlet property="scrollView" destination="9588" id="name-outlet-9588"/>
+                        <outlet property="enableSwitch" destination="33690" id="name-outlet-33690"/>
                         <outlet property="resetButton" destination="44692" id="name-outlet-44692"/>
+                        <outlet property="cornerRadiusTextField" destination="53712" id="name-outlet-53712"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="207" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -277,12 +296,4 @@
             <point key="canvasLocation" x="519" y="-3"/>
         </scene>
     </scenes>
-    <resources>
-        <image name="AccountCircle" width="16" height="16"/>
-        <image name="AccountKey" width="16" height="16"/>
-        <image name="AccountOff" width="16" height="16"/>
-        <image name="Airballoon" width="16" height="16"/>
-        <image name="Android" width="16" height="16"/>
-        <image name="Apple" width="16" height="16"/>
-    </resources>
 </document>

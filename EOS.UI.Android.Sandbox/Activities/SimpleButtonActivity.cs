@@ -29,6 +29,7 @@ namespace EOS.UI.Android.Sandbox.Activities
         private Spinner _backgroundColorEnabledSpinner;
         private Spinner _backgroundColorDisabledSpinner;
         private Spinner _backgroundColorPressedSpinner;
+        private Spinner _cornerRadiusSpinner;
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
@@ -48,6 +49,7 @@ namespace EOS.UI.Android.Sandbox.Activities
             _backgroundColorEnabledSpinner = FindViewById<Spinner>(Resource.Id.spinnerBackgroundColorEnabled);
             _backgroundColorDisabledSpinner = FindViewById<Spinner>(Resource.Id.spinnerBackgroundColorDisabled);
             _backgroundColorPressedSpinner = FindViewById<Spinner>(Resource.Id.spinnerBackgroundColorPressed);
+            _cornerRadiusSpinner = FindViewById<Spinner>(Resource.Id.spinnerCornerRadius);
             var resetButton = FindViewById<Button>(Resource.Id.buttonResetCustomization);
             var disableSwitch = FindViewById<Switch>(Resource.Id.switchDisabled);
 
@@ -80,6 +82,9 @@ namespace EOS.UI.Android.Sandbox.Activities
 
             _backgroundColorPressedSpinner.Adapter = new SpinnerAdapter(this, R.Layout.SimpleSpinnerItem, Colors.ColorsCollection.Select(item => item.Key).ToList());
             _backgroundColorPressedSpinner.ItemSelected += BackgroundColorPressedSpinner_ItemSelected;
+
+            _cornerRadiusSpinner.Adapter = new SpinnerAdapter(this, R.Layout.SimpleSpinnerItem, Sizes.CornerRadusCollection.Select(item => item.Key).ToList());
+            _cornerRadiusSpinner.ItemSelected += CornerRadiurSpinner_ItemSelected;
 
             resetButton.Click += delegate
             {
@@ -152,6 +157,12 @@ namespace EOS.UI.Android.Sandbox.Activities
         {
             if(e.Position > 0)
                 _simpleButton.PressedBackgroundColor = Colors.ColorsCollection.ElementAt(e.Position).Value;
+        }
+
+        private void CornerRadiurSpinner_ItemSelected(object sender, AdapterView.ItemSelectedEventArgs e)
+        {
+            if(e.Position > 0)
+                _simpleButton.CornerRadius = Sizes.CornerRadusCollection.ElementAt(e.Position).Value;
         }
 
         private void SetCurrenTheme(IEOSTheme iEOSTheme)

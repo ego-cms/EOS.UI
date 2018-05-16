@@ -32,6 +32,10 @@ namespace EOS.UI.iOS.Sandbox
 
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
+        UIKit.UITextField cornerRadiusTextField { get; set; }
+
+        [Outlet]
+        [GeneratedCode ("iOS Designer", "1.0")]
         UIKit.UISwitch enableSwitch { get; set; }
 
         [Outlet]
@@ -90,6 +94,11 @@ namespace EOS.UI.iOS.Sandbox
             if (containerView != null) {
                 containerView.Dispose ();
                 containerView = null;
+            }
+
+            if (cornerRadiusTextField != null) {
+                cornerRadiusTextField.Dispose ();
+                cornerRadiusTextField = null;
             }
 
             if (enableSwitch != null) {

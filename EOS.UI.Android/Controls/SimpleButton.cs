@@ -3,12 +3,14 @@ using Android.Content;
 using Android.Content.Res;
 using Android.Graphics;
 using Android.Graphics.Drawables;
+using Android.Graphics.Drawables.Shapes;
 using Android.Runtime;
 using Android.Util;
 using Android.Views;
 using Android.Widget;
 using EOS.UI.Shared.Themes.Helpers;
 using EOS.UI.Shared.Themes.Interfaces;
+using Java.Util;
 using UIFrameworks.Android.Themes;
 using UIFrameworks.Shared.Themes.Helpers;
 using UIFrameworks.Shared.Themes.Interfaces;
@@ -77,7 +79,7 @@ namespace EOS.UI.Android.Controls
                 IsEOSCustomizationIgnored = true;
                 _disabledBackgroundColor = value;
                 if(!Enabled)
-                    Background = new ColorDrawable(_disabledBackgroundColor);
+                    Background = CreateGradientDrawable(_disabledBackgroundColor);
             }
         }
 
@@ -166,6 +168,18 @@ namespace EOS.UI.Android.Controls
             }
         }
 
+        private float _cornerRadius;
+        public float CornerRadius
+        {
+            get => _cornerRadius;
+            set
+            {
+                _cornerRadius = value;
+                Background = Enabled? CreateRippleDrawable(BackgroundColor) : CreateGradientDrawable(DisabledBackgroundColor);
+                IsEOSCustomizationIgnored = true;
+            }
+        }
+
         #endregion
 
         #region utility methods
@@ -188,8 +202,8 @@ namespace EOS.UI.Android.Controls
         {
             return new RippleDrawable(
                 CreateBackgroundColorStateList(),
-                new ColorDrawable(contentColor),
-                new ColorDrawable(Color.Gray));
+                CreateGradientDrawable(contentColor),
+                CreateRoundedMaskDrawable());
         }
 
         private ColorStateList CreateBackgroundColorStateList()
@@ -202,10 +216,28 @@ namespace EOS.UI.Android.Controls
                });
         }
 
+        private GradientDrawable CreateGradientDrawable(Color color)
+        {
+            var drawable = new GradientDrawable();
+            drawable.SetShape(ShapeType.Rectangle);
+            drawable.SetColor(color);
+            drawable.SetCornerRadius(CornerRadius);
+            return drawable;
+        }
+
+        private ShapeDrawable CreateRoundedMaskDrawable()
+        {
+            var outerRadii = new float[8];
+            Arrays.Fill(outerRadii, CornerRadius);
+            var shapeDrawable = new ShapeDrawable(new RoundRectShape(outerRadii, null, null));
+            shapeDrawable.Paint.Color = PressedBackgroundColor;
+            return shapeDrawable;
+        }
+
         private void UpdateEnabledState(bool enabled)
         {
             base.SetTextColor(enabled ? TextColor : DisabledTextColor);
-            Background = enabled ? CreateRippleDrawable(BackgroundColor) : new ColorDrawable(DisabledBackgroundColor);
+            Background = enabled ? CreateRippleDrawable(BackgroundColor) : CreateGradientDrawable(DisabledBackgroundColor);
         }
 
         #endregion
@@ -232,6 +264,7 @@ namespace EOS.UI.Android.Controls
                 BackgroundColor = GetThemeProvider().GetEOSProperty<Color>(this, EOSConstants.PrimaryColor);
                 DisabledBackgroundColor = GetThemeProvider().GetEOSProperty<Color>(this, EOSConstants.PrimaryColorDisabled);
                 PressedBackgroundColor = GetThemeProvider().GetEOSProperty<Color>(this, EOSConstants.PrimaryColorPressed);
+                CornerRadius = GetThemeProvider().GetEOSProperty<float>(this, EOSConstants.CornerRadius);
                 IsEOSCustomizationIgnored = false;
             }
         }

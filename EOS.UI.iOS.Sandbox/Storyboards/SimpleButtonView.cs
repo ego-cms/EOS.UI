@@ -45,7 +45,8 @@ namespace EOS.UI.iOS.Sandbox
                 textColorPressedTextField,
                 backgroundColorEnabledTextField,
                 backgroundColorDisabledTextField,
-                backgroundColorPressedTextField
+                backgroundColorPressedTextField,
+                cornerRadiusTextField
             };
 
             View.AddGestureRecognizer(new UITapGestureRecognizer(() =>
@@ -68,6 +69,7 @@ namespace EOS.UI.iOS.Sandbox
             InitBackgroundColorEnabledTextField(rect);
             InitBackgroundColorDisabledTextField(rect);
             InitBackgroundColorPressedTextField(rect);
+            InitCornerRadiusTextField(rect);
             InitDisabledSwitch();
             InitResetButton();
         }
@@ -76,15 +78,15 @@ namespace EOS.UI.iOS.Sandbox
         {
             var themePicker = new UIPickerView(rect);
             themePicker.ShowSelectionIndicator = true;
-            themePicker.DataSource = new ThemePickerSource();
-            var themePickerDelegate = new ThemePickerDelegate();
+            themePicker.DataSource = new DictionaryPickerSource<string, EOSThemeEnumeration>(Constants.Themes);
+            var themePickerDelegate = new DictionaryPickerDelegate<String, EOSThemeEnumeration>(Constants.Themes);
             themePickerDelegate.DidSelected += (object sender, KeyValuePair<string, EOSThemeEnumeration> e) =>
             {
                 themeTextField.Text = e.Key;
-                _simpleButton.GetThemeProvider().SetCurrentTheme(e.Value);
-                _simpleButton.UpdateAppearance();
-
-                ResetFields();
+                var provider = _simpleButton.GetThemeProvider();
+                provider.SetCurrentTheme(e.Value);
+                _simpleButton.ResetCustomization();
+                _textFields.Except(new[] { themeTextField }).ToList().ForEach(f => f.Text = string.Empty);
             };
             themeTextField.Text = _simpleButton.GetThemeProvider().GetCurrentTheme().ThemeValues[EOSConstants.PrimaryColor] == UIColor.White ?
                 "Light" : "Dark";
@@ -97,8 +99,8 @@ namespace EOS.UI.iOS.Sandbox
         {
             var fontPicker = new UIPickerView(rect);
             fontPicker.ShowSelectionIndicator = true;
-            fontPicker.DataSource = new FontPickerSource();
-            var fontPickerDelegate = new FontPickerDelegate();
+            fontPicker.DataSource = new ValuePickerSource<UIFont>(Constants.Fonts);
+            var fontPickerDelegate = new ValuePickerDelegate<UIFont>(Constants.Fonts);
             fontPickerDelegate.DidSelected += (object sender, UIFont e) =>
             {
                 _simpleButton.Font = e;
@@ -118,8 +120,8 @@ namespace EOS.UI.iOS.Sandbox
         {
             var letterSpacingPicker = new UIPickerView(rect);
             letterSpacingPicker.ShowSelectionIndicator = true;
-            letterSpacingPicker.DataSource = new LetterSpacingPickerSource();
-            var letterSpacingPickerDelegate = new LetterSpacingPickerDelegate();
+            letterSpacingPicker.DataSource = new ValuePickerSource<int>(Constants.LetterSpacingValues);
+            var letterSpacingPickerDelegate = new ValuePickerDelegate<int>(Constants.LetterSpacingValues);
             letterSpacingPickerDelegate.DidSelected += (object sender, int e) =>
             {
                 _simpleButton.LetterSpacing = e;
@@ -139,8 +141,8 @@ namespace EOS.UI.iOS.Sandbox
         {
             var textSizePicker = new UIPickerView(rect);
             textSizePicker.ShowSelectionIndicator = true;
-            textSizePicker.DataSource = new FontSizesPickerSource();
-            var fontSizePickerDelegate = new FontSizesPickerDelegate();
+            textSizePicker.DataSource = new ValuePickerSource<int>(Constants.FontSizeValues);
+            var fontSizePickerDelegate = new ValuePickerDelegate<int>(Constants.FontSizeValues);
             fontSizePickerDelegate.DidSelected += (object sender, int e) =>
             {
                 _simpleButton.TextSize = e;
@@ -280,6 +282,27 @@ namespace EOS.UI.iOS.Sandbox
             };
             backgroundColorPicker.Delegate = backgroundColorPickerDelegate;
             backgroundColorPressedTextField.InputView = backgroundColorPicker;
+        }
+
+        private void InitCornerRadiusTextField(CGRect rect)
+        {
+            var cornerRadiusPicker = new UIPickerView(rect);
+            cornerRadiusPicker.ShowSelectionIndicator = true;
+            cornerRadiusPicker.DataSource = new ValuePickerSource<int>(Constants.CornerRadiusValues);
+            var cornerRadiusPickerDelegate = new ValuePickerDelegate<int>(Constants.CornerRadiusValues);
+            cornerRadiusPickerDelegate.DidSelected += (object sender, int e) =>
+            {
+                _simpleButton.CornerRadius = e;
+                cornerRadiusTextField.Text = e.ToString();
+            };
+            cornerRadiusTextField.EditingDidBegin += (sender, e) =>
+            {
+                var size = Constants.CornerRadiusValues[(int)cornerRadiusPicker.SelectedRowInComponent(0)];
+                _simpleButton.CornerRadius = size;
+                cornerRadiusTextField.Text = size.ToString();
+            };
+            cornerRadiusPicker.Delegate = cornerRadiusPickerDelegate;
+            cornerRadiusTextField.InputView = cornerRadiusPicker;
         }
 
         private void InitDisabledSwitch()

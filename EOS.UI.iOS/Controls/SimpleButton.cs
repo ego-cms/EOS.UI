@@ -1,4 +1,5 @@
 ﻿using System;
+using CoreGraphics;
 using EOS.UI.iOS.Extensions;
 using EOS.UI.iOS.Themes;
 using EOS.UI.Shared.Themes.Helpers;
@@ -145,6 +146,16 @@ namespace EOS.UI.iOS.Controls
             }
         }
 
+        public int CornerRadius
+        {
+            get => (int)Layer.CornerRadius;
+            set
+            {
+                Layer.CornerRadius = value;
+                IsEOSCustomizationIgnored = true;
+            }
+        }
+
         #endregion
 
         #region utility methods
@@ -153,6 +164,8 @@ namespace EOS.UI.iOS.Controls
         {
             Layer.MasksToBounds = true;
             Layer.CornerRadius = 5;
+            TitleLabel.Lines = 1;
+            TitleLabel.LineBreakMode = UILineBreakMode.TailTruncation;
             base.SetAttributedTitle(new NSAttributedString(string.Empty), UIControlState.Normal);
             UpdateAppearance();
         }
@@ -258,6 +271,7 @@ namespace EOS.UI.iOS.Controls
                 BackgroundColor = provider.GetEOSProperty<UIColor>(this, EOSConstants.PrimaryColor);
                 DisabledBackgroundColor = provider.GetEOSProperty<UIColor>(this, EOSConstants.PrimaryColorDisabled);
                 PressedBackgroundColor = provider.GetEOSProperty<UIColor>(this, EOSConstants.PrimaryColorPressed);
+                CornerRadius = provider.GetEOSProperty<int>(this, EOSConstants.CornerRadius);
                 Enabled = base.Enabled;
                 IsEOSCustomizationIgnored = false;
                 SizeToFit();
