@@ -12,7 +12,7 @@ using EOS.UI.Shared.Themes.Interfaces;
 using UIFrameworks.Android.Themes;
 using UIFrameworks.Shared.Themes.Helpers;
 using UIFrameworks.Shared.Themes.Interfaces;
-
+using TextUtils = Android.Text.TextUtils;
 
 namespace EOS.UI.Android.Controls
 {
@@ -128,6 +128,8 @@ namespace EOS.UI.Android.Controls
             SetOnTouchListener(this);
             Background = CreateRippleDrawable();
             UpdateAppearance();
+            SetLines(1);
+            Ellipsize = TextUtils.TruncateAt.End;
         }
 
         private void UpdateEnabledState(bool enabled)
@@ -184,8 +186,8 @@ namespace EOS.UI.Android.Controls
                 base.SetTypeface(Typeface.CreateFromAsset(Context.Assets, provider.GetEOSProperty<string>(this, EOSConstants.Font)), TypefaceStyle.Normal);
                 base.LetterSpacing = provider.GetEOSProperty<float>(this, EOSConstants.LetterSpacing);
                 EnabledTextColor = provider.GetEOSProperty<Color>(this, EOSConstants.PrimaryColor);
-                DisabledTextColor = provider.GetEOSProperty<Color>(this, EOSConstants.SecondaryColorDisabled);
-                PressedStateTextColor = provider.GetEOSProperty<Color>(this, EOSConstants.SecondaryColorPressed);
+                DisabledTextColor = provider.GetEOSProperty<Color>(this, EOSConstants.DisabledTextColor);
+                PressedStateTextColor = provider.GetEOSProperty<Color>(this, EOSConstants.PressedStateTextColor);
                 base.TextSize = provider.GetEOSProperty<float>(this, EOSConstants.TextSize);
                 IsEOSCustomizationIgnored = false;
             }

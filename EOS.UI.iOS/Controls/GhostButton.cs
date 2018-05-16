@@ -110,6 +110,8 @@ namespace EOS.UI.iOS.Controls
             Layer.MasksToBounds = true;
             Layer.CornerRadius = 5;
             BackgroundColor = UIColor.Clear;
+            TitleLabel.Lines = 1;
+            TitleLabel.LineBreakMode = UILineBreakMode.TailTruncation;
             base.SetAttributedTitle(new NSAttributedString(String.Empty), UIControlState.Normal);
             UpdateAppearance();
         }
@@ -185,7 +187,6 @@ namespace EOS.UI.iOS.Controls
                 LetterSpacing = provider.GetEOSProperty<int>(this, EOSConstants.LetterSpacing);
                 Enabled = base.Enabled;
                 IsEOSCustomizationIgnored = false;
-                SizeToFit();
             }
         }
 

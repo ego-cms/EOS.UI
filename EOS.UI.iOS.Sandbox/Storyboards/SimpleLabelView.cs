@@ -1,4 +1,4 @@
-using CoreGraphics;
+﻿using CoreGraphics;
 using EOS.UI.iOS.Controls;
 using EOS.UI.iOS.Extensions;
 using EOS.UI.iOS.Sandbox.Helpers;
@@ -45,9 +45,10 @@ namespace EOS.UI.iOS.Sandbox
             {
                 _textFields.ForEach(field => field.ResignFirstResponder());
             }));
-
-            containerView.ConstrainLayout(() => _simpleLabel.Frame.GetCenterX() == containerView.Frame.GetCenterX() &&
-                                                _simpleLabel.Frame.GetCenterY() == containerView.Frame.GetCenterY(), _simpleLabel);
+            _simpleLabel.TextAlignment = UITextAlignment.Center;
+            containerView.ConstrainLayout(() => _simpleLabel.Frame.GetCenterY() == containerView.Frame.GetCenterY() &&
+                                          _simpleLabel.Frame.Left == containerView.Frame.Left &&
+                                          _simpleLabel.Frame.Right == containerView.Frame.Right, _simpleLabel);
 
             var frame = new CGRect(0, 0, 100, 150);
 
@@ -66,12 +67,12 @@ namespace EOS.UI.iOS.Sandbox
 
         private void InitThemePicker(CGRect frame)
         {
-            var themePicker = new UIPickerView(frame)
-            {
-                ShowSelectionIndicator = true,
-                DataSource = new ThemePickerSource()
+			var themePicker = new UIPickerView(frame)
+			{
+				ShowSelectionIndicator = true,
+				DataSource = new DictionaryPickerSource<string, EOSThemeEnumeration>(Constants.Themes)
             };
-            var themePickerDelegate = new ThemePickerDelegate();
+            var themePickerDelegate = new DictionaryPickerDelegate<String ,EOSThemeEnumeration>(Constants.Themes);
             themePickerDelegate.DidSelected += (object sender, KeyValuePair<string, EOSThemeEnumeration> e) =>
             {
                 themeField.Text = e.Key;
@@ -90,8 +91,8 @@ namespace EOS.UI.iOS.Sandbox
         {
             var textSizePicker = new UIPickerView(frame);
             textSizePicker.ShowSelectionIndicator = true;
-            textSizePicker.DataSource = new FontSizesPickerSource();
-            var textSizePickerDelegate = new FontSizesPickerDelegate();
+            textSizePicker.DataSource = new ValuePickerSource<int>(Constants.FontSizeValues);
+			var textSizePickerDelegate = new ValuePickerDelegate<int>(Constants.FontSizeValues);
             textSizePickerDelegate.DidSelected += (object sender, int e) =>
             {
                 _simpleLabel.TextSize = e;
@@ -109,12 +110,12 @@ namespace EOS.UI.iOS.Sandbox
 
         private void InitFontPicker(CGRect frame)
         {
-            var fontPicker = new UIPickerView(frame)
-            {
-                ShowSelectionIndicator = true,
-                DataSource = new FontPickerSource()
+			var fontPicker = new UIPickerView(frame)
+			{
+				ShowSelectionIndicator = true,
+				DataSource = new ValuePickerSource<UIFont>(Constants.Fonts)
             };
-            var fontPickerDelegate = new FontPickerDelegate();
+			var fontPickerDelegate = new ValuePickerDelegate<UIFont>(Constants.Fonts);
             fontPickerDelegate.DidSelected += (object sender, UIFont e) =>
             {
                 _simpleLabel.Font = e;
@@ -155,12 +156,12 @@ namespace EOS.UI.iOS.Sandbox
 
         private void InitLetterSpacingPicker(CGRect frame)
         {
-            var letterSpacingPicker = new UIPickerView(frame)
-            {
-                ShowSelectionIndicator = true,
-                DataSource = new LetterSpacingPickerSource()
+			var letterSpacingPicker = new UIPickerView(frame)
+			{
+				ShowSelectionIndicator = true,
+				DataSource = new ValuePickerSource<int>(Constants.LetterSpacingValues)
             };
-            var letterSpacingPickerDelegate = new LetterSpacingPickerDelegate();
+            var letterSpacingPickerDelegate = new ValuePickerDelegate<int>(Constants.LetterSpacingValues);
             letterSpacingPickerDelegate.DidSelected += (object sender, int e) =>
             {
                 _simpleLabel.LetterSpacing = e;

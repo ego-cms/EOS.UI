@@ -31,7 +31,9 @@ namespace EOS.UI.iOS.Sandbox
             ghostButton.SetTitle("DEFAULT TEXT", UIControlState.Normal);
 
             containerView.ConstrainLayout(() => ghostButton.Frame.GetCenterX() == containerView.Frame.GetCenterX() &&
-                                          ghostButton.Frame.GetCenterY() == containerView.Frame.GetCenterY() , ghostButton);
+                                          ghostButton.Frame.GetCenterY() == containerView.Frame.GetCenterY() &&
+                                          ghostButton.Frame.Left == containerView.Frame.Left &&
+                                          ghostButton.Frame.Right == containerView.Frame.Right, ghostButton);
 
             _textFields = new List<UITextField>()
             {
@@ -52,14 +54,14 @@ namespace EOS.UI.iOS.Sandbox
             var rect = new CGRect(0, 0, 100, 100);
             var themePicker = new UIPickerView(rect);
             themePicker.ShowSelectionIndicator = true;
-            themePicker.DataSource = new ThemePickerSource();
-            var themePickerDelegate = new ThemePickerDelegate();
+			themePicker.DataSource = new DictionaryPickerSource<String, EOSThemeEnumeration>(Constants.Themes);
+			var themePickerDelegate = new DictionaryPickerDelegate<String, EOSThemeEnumeration>(Constants.Themes);
             themePickerDelegate.DidSelected += (object sender, KeyValuePair<string, EOSThemeEnumeration> e) =>
             {
                 themeField.Text = e.Key;
                 var provider = ghostButton.GetThemeProvider();
                 provider.SetCurrentTheme(e.Value);
-                ghostButton.UpdateAppearance();
+                ghostButton.ResetCustomization();
                 _textFields.Except(new []{themeField}).ToList().ForEach(f => f.Text = String.Empty);
             };
             themeField.Text = ghostButton.GetThemeProvider().GetCurrentTheme().ThemeValues[EOSConstants.PrimaryColor] == UIColor.White ?
@@ -69,8 +71,8 @@ namespace EOS.UI.iOS.Sandbox
 
             var fontPicker = new UIPickerView(rect);
             fontPicker.ShowSelectionIndicator = true;
-            fontPicker.DataSource = new FontPickerSource();
-            var fontPickerDelegate = new FontPickerDelegate();
+			fontPicker.DataSource = new ValuePickerSource<UIFont>(Constants.Fonts);
+			var fontPickerDelegate = new ValuePickerDelegate<UIFont>(Constants.Fonts);
             fontPickerDelegate.DidSelected += (object sender, UIFont e) =>
             {
                 ghostButton.Font = e;
@@ -87,8 +89,8 @@ namespace EOS.UI.iOS.Sandbox
 
             var letterSpacingPicker = new UIPickerView(rect);
             letterSpacingPicker.ShowSelectionIndicator = true;
-            letterSpacingPicker.DataSource = new LetterSpacingPickerSource();
-            var letterSpacingPickerDelegate = new LetterSpacingPickerDelegate();
+			letterSpacingPicker.DataSource = new ValuePickerSource<int>(Constants.LetterSpacingValues);
+			var letterSpacingPickerDelegate = new ValuePickerDelegate<int>(Constants.LetterSpacingValues);
             letterSpacingPickerDelegate.DidSelected += (object sender, int e) =>
             {
                 ghostButton.LetterSpacing = e;
@@ -141,8 +143,8 @@ namespace EOS.UI.iOS.Sandbox
 
             var fontSizePicker = new UIPickerView(rect);
             fontSizePicker.ShowSelectionIndicator = true;
-            fontSizePicker.DataSource = new FontSizesPickerSource();
-            var fontSizePickerDelegate = new FontSizesPickerDelegate();
+			fontSizePicker.DataSource = new ValuePickerSource<int>(Constants.FontSizeValues);
+			var fontSizePickerDelegate = new ValuePickerDelegate<int>(Constants.FontSizeValues);
             fontSizePickerDelegate.DidSelected += (object sender, int e) =>
             {
                 ghostButton.TextSize = e;
