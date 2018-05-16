@@ -5,6 +5,7 @@ using Android.Graphics;
 using Android.Graphics.Drawables;
 using Android.Graphics.Drawables.Shapes;
 using Android.Runtime;
+using Android.Text;
 using Android.Util;
 using Android.Views;
 using Android.Widget;
@@ -188,6 +189,8 @@ namespace EOS.UI.Android.Controls
         {
             SetOnTouchListener(this);
             Background = CreateRippleDrawable(BackgroundColor);
+            SetLines(1);
+            Ellipsize = TextUtils.TruncateAt.End;
             UpdateAppearance();
             if(attrs != null)
                 InitializeAttributes(attrs);

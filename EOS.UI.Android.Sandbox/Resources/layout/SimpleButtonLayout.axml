@@ -4,14 +4,19 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/background_color">
-    <EOS.UI.Android.Controls.SimpleButton
-        android:id="@+id/simpleButton"
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:paddingTop="20dp"
+        android:paddingBottom="20dp"
         android:layout_gravity="center"
-        android:layout_marginTop="20dp"
-        android:layout_marginBottom="20dp"
-        android:text="Simple Button" />
+        android:background="@color/background_color">
+        <EOS.UI.Android.Controls.SimpleButton
+            android:id="@+id/simpleButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Simple Button" />
+    </LinearLayout>
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
