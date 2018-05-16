@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Threading.Tasks;
 using Android.App;
 using Android.Content;
 using Android.Graphics;
@@ -19,11 +18,12 @@ namespace EOS.UI.Android.Controls
 {
     public class FabProgress : ImageButton, IEOSThemeControl, View.IOnTouchListener
     {
-        private const int _animationDuration = 300;
-        private const int _padding = 21;
-        private bool _isOpen;
-        private Animation _openAnimation;
-        private Animation _closeAnimation;
+        private const int _animationDuration = 100;
+        private const float _startScale = 0.85f;
+        private const float _endScale = 1.0f;
+        private const int _startPadding = 30;
+        private const double _paddingRation = 0.24;
+        private Animation _rotationAnimation;
 
         public bool IsEOSCustomizationIgnored { get; private set; }
 
@@ -85,7 +85,8 @@ namespace EOS.UI.Android.Controls
                 LayoutParameters.Height = value;
                 SetScaleType(ScaleType.FitCenter);
                 RequestLayout();
-                SetPadding(_padding, _padding, _padding, _padding);
+                var padding = (int)System.Math.Round(_paddingRation * _buttonSize);
+                SetPadding(padding, padding, padding, padding);
                 IsEOSCustomizationIgnored = true;
             }
         }
@@ -112,6 +113,8 @@ namespace EOS.UI.Android.Controls
                 IsEOSCustomizationIgnored = true;
             }
         }
+        
+        public bool InProgress { get; private set; }
 
         public FabProgress(Context context) : base(context)
         {
@@ -140,18 +143,7 @@ namespace EOS.UI.Android.Controls
 
         private void Initialize()
         {
-            _openAnimation = AnimationUtils.LoadAnimation(Application.Context, Resource.Animation.FabOpenAnimation);
-            _openAnimation.AnimationEnd += (sender, e) =>
-              {
-                  _isOpen = true;
-              };
-            _closeAnimation = AnimationUtils.LoadAnimation(Application.Context, Resource.Animation.FabCloseAnimation);
-            _closeAnimation.AnimationEnd += (sender, e) =>
-              {
-                  SetImageDrawable(Image);
-                  _isOpen = false;
-              };
-            Click += OnClick;
+            _rotationAnimation = AnimationUtils.LoadAnimation(Application.Context, Resource.Animation.FabRotationAnimation);
             SetOnTouchListener(this);
             UpdateAppearance();
             Elevation = 10f;
@@ -192,20 +184,8 @@ namespace EOS.UI.Android.Controls
                 BackgroundColor = provider.GetEOSProperty<Color>(this, EOSConstants.FabProgressPrimaryColor);
                 DisabledBackgroundColor = provider.GetEOSProperty<Color>(this, EOSConstants.FabProgressDisabledColor);
                 PressedBackgroundColor = provider.GetEOSProperty<Color>(this, EOSConstants.FabProgressPressedColor);
+                SetPadding(_startPadding, _startPadding, _startPadding, _startPadding);
                 IsEOSCustomizationIgnored = false;
-            }
-        }
-
-        async void OnClick(object sender, EventArgs e)
-        {
-            if (_isOpen)
-            {
-                StartAnimation(_closeAnimation);
-            }
-            else
-            {
-                SetImageDrawable(PreloaderImage);
-                StartAnimation(_openAnimation);
             }
         }
 
@@ -214,11 +194,36 @@ namespace EOS.UI.Android.Controls
             if (Enabled)
             {
                 if (e.Action == MotionEventActions.Down)
+                {
                     (Background as GradientDrawable).SetColor(PressedBackgroundColor);
+                    Animate().ScaleX(_startScale).ScaleY(_startScale).SetDuration(_animationDuration).Start();
+                }
                 if (e.Action == MotionEventActions.Up || e.Action == MotionEventActions.Cancel)
+                {
                     (Background as GradientDrawable).SetColor(BackgroundColor);
+                    Animate().ScaleX(_endScale).ScaleY(_endScale).SetDuration(_animationDuration).Start();
+                }
             }
             return false;
+        }
+        
+        public void StartProgressAnimation()
+        {
+            if (InProgress)
+                return;
+            SetImageDrawable(PreloaderImage);
+            StartAnimation(_rotationAnimation);
+            InProgress = true;
+        }
+        
+        public void StopProgressAnimation()
+        {
+            if (!InProgress)
+                return;
+            SetImageDrawable(Image);
+            ClearAnimation();
+            _rotationAnimation.Cancel();
+            InProgress = false;
         }
     }
 }

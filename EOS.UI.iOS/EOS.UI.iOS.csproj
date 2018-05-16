@@ -89,6 +89,13 @@
     <ImageAsset Include="Assets.xcassets\AccountOff.imageset\Contents.json">
       <Visible>false</Visible>
     </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\icCalendar.imageset\Contents.json" />
+    <ImageAsset Include="Assets.xcassets\icPreloader.imageset\Contents.json" />
+    <ImageAsset Include="Assets.xcassets\icPreloader.imageset\preloader.pdf" />
+    <ImageAsset Include="Assets.xcassets\icCalendar.imageset\icCalendar.pdf" />
+    <ImageAsset Include="Assets.xcassets\icPreloader.imageset\icPreloader.pdf" />
+    <ImageAsset Include="Assets.xcassets\icSuccess.imageset\Contents.json" />
+    <ImageAsset Include="Assets.xcassets\icSuccess.imageset\icSuccess.pdf" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
@@ -122,17 +129,14 @@
     <None Include="Info.plist" />
     <BundleResource Include="Resources\Fonts\capture_it_dark.ttf" />
     <BundleResource Include="Resources\Fonts\capture_it_light.ttf" />
-    <BundleResource Include="Resources\calendar.png" />
-    <BundleResource Include="Resources\calendar%402x.png" />
-    <BundleResource Include="Resources\calendar%403x.png" />
-    <BundleResource Include="Resources\preloader.png" />
-    <BundleResource Include="Resources\preloader%402x.png" />
-    <BundleResource Include="Resources\preloader%403x.png" />
-    <BundleResource Include="Resources\done.png" />
-    <BundleResource Include="Resources\done%402x.png" />
-    <BundleResource Include="Resources\done%403x.png" />
   </ItemGroup>
   <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Assets.xcassets\calenda.imageset\" />
+    <Folder Include="Assets.xcassets\icCalendar.imageset\" />
+    <Folder Include="Assets.xcassets\icPreloader.imageset\" />
+    <Folder Include="Assets.xcassets\icSuccess.imageset\" />
+  </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="Controls\CircleProgress.xib" />
   </ItemGroup>

@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using Android.App;
 using Android.OS;
 using Android.Widget;
@@ -28,6 +29,16 @@ namespace EOS.UI.Android.Sandbox.Activities
             var sizeSpinner = FindViewById<Spinner>(Resource.Id.spinnerSize);
             var stateSwitch = FindViewById<Switch>(Resource.Id.stateSwitch);
             var resetButton = FindViewById<Button>(Resource.Id.buttonResetCustomization);
+            fab.Click += async (sender, e) => 
+            {
+                if (fab.InProgress)
+                    return;
+                fab.StartProgressAnimation();
+                await Task.Delay(5000);
+                fab.StopProgressAnimation();
+            };
+            
+            
             var spinners = new List<Spinner>()
             {
                 themeSpinner,

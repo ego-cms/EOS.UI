@@ -1,14 +1,13 @@
 using CoreGraphics;
 using EOS.UI.iOS.Controls;
-using EOS.UI.iOS.Extensions;
 using EOS.UI.iOS.Helpers;
 using EOS.UI.iOS.Sandbox.Controls.Pickers;
-using EOS.UI.iOS.Sandbox.Helpers;
 using EOS.UI.iOS.Sandbox.Storyboards;
 using EOS.UI.Shared.Themes.Helpers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using UIFrameworks.Shared.Themes.Helpers;
 using UIKit;
 using Constants = EOS.UI.iOS.Sandbox.Helpers.Constants;
@@ -29,9 +28,13 @@ namespace EOS.UI.iOS.Sandbox
         {
             base.ViewDidLoad();
             _fab = new FabProgress();
-            _fab.TouchUpInside += (sender, e) =>
+            _fab.TouchUpInside += async (sender, e) =>
             {
-
+                if (_fab.InProgress)
+                    return;
+                _fab.StartProgressAnimation();
+                await Task.Delay(5000);
+                _fab.StopProgressAnimation();
             };
 
             UpdateFrame();

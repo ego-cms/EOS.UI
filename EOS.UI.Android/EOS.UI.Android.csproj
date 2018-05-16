@@ -66,12 +66,11 @@
     <AndroidResource Include="Resources\drawable\icCalendar.xml" />
     <AndroidResource Include="Resources\drawable\icPreloader.xml" />
     <AndroidResource Include="Resources\drawable\FabButton.xml" />
-    <AndroidResource Include="Resources\anim\FabOpenAnimation.xml" />
-    <AndroidResource Include="Resources\anim\FabCloseAnimation.xml" />
-    <AndroidResource Include="Resources\layout\CircleProgress.axml" />
-    <AndroidResource Include="Resources\drawable\Circular.xml" />
-    <AndroidResource Include="Resources\drawable\success.xml" />
+    <AndroidResource Include="Resources\anim\FabRotationAnimation.xml" />
     <AndroidResource Include="Resources\drawable\SuccessCircle.xml" />
+    <AndroidResource Include="Resources\drawable\success.xml" />
+    <AndroidResource Include="Resources\drawable\Circular.xml" />
+    <AndroidResource Include="Resources\layout\CircleProgress.axml" />
   </ItemGroup>
   <ItemGroup>
     <AndroidAsset Include="Assets\Fonts\OpenSansRegular.ttf" />
