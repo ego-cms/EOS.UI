@@ -42,6 +42,13 @@ namespace EOS.UI.iOS.Sandbox.TableSources
             return 1;
         }
 
+        public override nfloat GetHeightForHeader(UITableView tableView, nint section)
+        {
+            var header = _tableView.DequeueReusableHeaderFooterView("Section");
+            
+            return 120f;
+        }
+
         public override UIView GetViewForHeader(UITableView tableView, nint section)
         {
             var header = _tableView.DequeueReusableHeaderFooterView("Section");
