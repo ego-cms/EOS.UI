@@ -15,7 +15,6 @@ namespace EOS.UI.iOS.Components
     {
         #region fields
 
-        private UIEdgeInsets _edgeInsets;
         private bool _subscribed;
 
         public static readonly NSString Key = new NSString("Section");
@@ -41,12 +40,14 @@ namespace EOS.UI.iOS.Components
 
         public Action SectionAction { get; set; }
 
+        private string _sectionName;
         public string SectionName
         {
-            get => sectionName.Text;
+            get => _sectionName;
             set
             {
-                sectionName.Text = value;
+                _sectionName = value;
+                sectionName.AttributedText = new NSAttributedString(value ?? string.Empty);
                 IsEOSCustomizationIgnored = true;
             }
         }
@@ -200,9 +201,10 @@ namespace EOS.UI.iOS.Components
 
         public void SetPaddings(int left, int top, int right, int bottom)
         {
-            _edgeInsets = new UIEdgeInsets(top, left, bottom, right);
-            //base.DrawRect(InsetRect(Bounds, _edgeInsets), base.ViewPrintFormatter);
-            Frame = InsetRect(Frame, _edgeInsets);
+            paddingTop.Constant = top;
+            paddingBottom.Constant = bottom;
+            paddingLeft.Constant = left;
+            paddingRight.Constant = right;
             IsEOSCustomizationIgnored = true;
         }
 
@@ -262,14 +264,6 @@ namespace EOS.UI.iOS.Components
                 Layer.BorderWidth = 0;
                 Layer.MasksToBounds = true;
             }
-        }
-
-        public static CGRect InsetRect(CGRect rect, UIEdgeInsets insets)
-        {
-            return new CGRect(rect.X + insets.Left,
-                              rect.Y + insets.Top,
-                              rect.Width + insets.Left + insets.Right,
-                              rect.Height + insets.Top + insets.Bottom);
         }
 
         #endregion

@@ -1,10 +1,11 @@
 ﻿// WARNING
 //
-// This file has been generated automatically by Visual Studio to store outlets and
-// actions made in the UI designer. If it is removed, they will be lost.
-// Manual changes to this file may not be handled correctly.
+// This file has been generated automatically by Visual Studio from the outlets and
+// actions declared in your storyboard file.
+// Manual changes to this file will not be maintained.
 //
 using Foundation;
+using System;
 using System.CodeDom.Compiler;
 
 namespace EOS.UI.iOS.Components
@@ -31,24 +32,9 @@ namespace EOS.UI.iOS.Components
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
         UIKit.UILabel sectionName { get; set; }
-        
+
         void ReleaseDesignerOutlets ()
         {
-            if (sectionButton != null) {
-                sectionButton.Dispose ();
-                sectionButton = null;
-            }
-
-            if (sectionName != null) {
-                sectionName.Dispose ();
-                sectionName = null;
-            }
-
-            if (paddingTop != null) {
-                paddingTop.Dispose ();
-                paddingTop = null;
-            }
-
             if (paddingBottom != null) {
                 paddingBottom.Dispose ();
                 paddingBottom = null;
@@ -62,6 +48,21 @@ namespace EOS.UI.iOS.Components
             if (paddingRight != null) {
                 paddingRight.Dispose ();
                 paddingRight = null;
+            }
+
+            if (paddingTop != null) {
+                paddingTop.Dispose ();
+                paddingTop = null;
+            }
+
+            if (sectionButton != null) {
+                sectionButton.Dispose ();
+                sectionButton = null;
+            }
+
+            if (sectionName != null) {
+                sectionName.Dispose ();
+                sectionName = null;
             }
         }
     }
