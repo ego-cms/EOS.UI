@@ -1,6 +1,4 @@
-﻿using System;
-using CoreGraphics;
-using EOS.UI.iOS.Extensions;
+﻿using EOS.UI.iOS.Extensions;
 using EOS.UI.iOS.Themes;
 using EOS.UI.Shared.Themes.Helpers;
 using EOS.UI.Shared.Themes.Interfaces;
@@ -166,6 +164,7 @@ namespace EOS.UI.iOS.Controls
             Layer.CornerRadius = 5;
             TitleLabel.Lines = 1;
             TitleLabel.LineBreakMode = UILineBreakMode.TailTruncation;
+            ContentEdgeInsets = new UIEdgeInsets(ContentEdgeInsets.Top, 10, ContentEdgeInsets.Bottom, 10);
             base.SetAttributedTitle(new NSAttributedString(string.Empty), UIControlState.Normal);
             UpdateAppearance();
         }
