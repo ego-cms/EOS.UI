@@ -92,6 +92,7 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
+    <Compile Include="Controls\SimpleButton.cs" />
     <Compile Include="Controls\Input.cs" />
     <Compile Include="Helpers\Constants.cs" />
     <Compile Include="Controls\SimpleLabel.cs" />
