@@ -55,7 +55,10 @@ namespace EOS.UI.iOS.Sandbox
             }));
 
             containerView.ConstrainLayout(() => _simpleButton.Frame.GetCenterX() == containerView.Frame.GetCenterX() &&
-                                                _simpleButton.Frame.GetCenterY() == containerView.Frame.GetCenterY(), _simpleButton);
+                              _simpleButton.Frame.GetCenterY() == containerView.Frame.GetCenterY() &&
+                              _simpleButton.Frame.Left == containerView.Frame.Left &&
+                              _simpleButton.Frame.Right == containerView.Frame.Right, _simpleButton);
+
 
             var rect = new CGRect(0, 0, 100, 150);
 
