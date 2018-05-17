@@ -452,7 +452,7 @@ namespace EOS.UI.iOS.Extensions
             highlightedAttrString.AddAttribute(UIStringAttributeKey.KerningAdjustment, new NSNumber(spacing), new NSRange(0, highlightedAttrString.Length));
             button.SetAttributedTitle(enabledAttrString, UIControlState.Normal);
             button.SetAttributedTitle(disabledAttrString, UIControlState.Disabled);
-            button.SetAttributedTitle(highlightedAttrString, UIControlState.Disabled);
+            button.SetAttributedTitle(highlightedAttrString, UIControlState.Highlighted);
         }
 
         /// <summary>
