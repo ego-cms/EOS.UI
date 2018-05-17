@@ -10,7 +10,6 @@ using System.Collections.Generic;
 using System.Linq;
 using UIFrameworks.Shared.Themes.Helpers;
 using UIKit;
-using static EOS.UI.iOS.Sandbox.BadgeLabelView;
 
 namespace EOS.UI.iOS.Sandbox
 {
@@ -42,6 +41,8 @@ namespace EOS.UI.iOS.Sandbox
 
             _textFields = new List<UITextField>()
             {
+                _inputTop,
+                _inputBotton,
                 themeTextField,
                 fontTextField,
                 letterSpacingTextField,
@@ -64,10 +65,26 @@ namespace EOS.UI.iOS.Sandbox
             }));
 
             containerTopView.ConstrainLayout(() => _inputTop.Frame.GetCenterX() == containerTopView.Frame.GetCenterX() &&
-                                                   _inputTop.Frame.GetCenterY() == containerTopView.Frame.GetCenterY(), _inputTop);
+                                          _inputTop.Frame.GetCenterY() == containerTopView.Frame.GetCenterY(), _inputTop);
+
+            View.AddConstraint(NSLayoutConstraint.Create(_inputTop, NSLayoutAttribute.Width, NSLayoutRelation.Equal, null, NSLayoutAttribute.Width, 1, 150.0f));
 
             containerBottomView.ConstrainLayout(() => _inputBotton.Frame.GetCenterX() == containerBottomView.Frame.GetCenterX() &&
-                                                      _inputBotton.Frame.GetCenterY() == containerBottomView.Frame.GetCenterY(), _inputBotton);
+                                          _inputBotton.Frame.GetCenterY() == containerBottomView.Frame.GetCenterY(), _inputBotton);
+
+            View.AddConstraint(NSLayoutConstraint.Create(_inputBotton, NSLayoutAttribute.Width, NSLayoutRelation.Equal, null, NSLayoutAttribute.Width, 1, 150.0f));
+
+            _inputTop.ShouldReturn = (textField) =>
+            {
+                textField.ResignFirstResponder();
+                return true;
+            };
+
+            _inputBotton.ShouldReturn = (textField) =>
+            {
+                textField.ResignFirstResponder();
+                return true;
+            };
 
             var rect = new CGRect(0, 0, 100, 150);
 
