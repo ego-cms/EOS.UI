@@ -273,7 +273,6 @@ namespace EOS.UI.iOS.Controls
                 CornerRadius = provider.GetEOSProperty<int>(this, EOSConstants.CornerRadius);
                 Enabled = base.Enabled;
                 IsEOSCustomizationIgnored = false;
-                SizeToFit();
             }
         }
 

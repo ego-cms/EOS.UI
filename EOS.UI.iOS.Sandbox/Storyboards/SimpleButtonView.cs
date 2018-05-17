@@ -337,6 +337,7 @@ namespace EOS.UI.iOS.Sandbox
             backgroundColorEnabledTextField.Text = string.Empty;
             backgroundColorDisabledTextField.Text = string.Empty;
             backgroundColorPressedTextField.Text = string.Empty;
+            cornerRadiusTextField.Text = string.Empty;
         }
 
     }

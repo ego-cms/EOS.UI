@@ -185,6 +185,7 @@ namespace EOS.UI.Android.Sandbox.Activities
             _backgroundColorEnabledSpinner.SetSelection(0);
             _backgroundColorDisabledSpinner.SetSelection(0);
             _backgroundColorPressedSpinner.SetSelection(0);
+            _cornerRadiusSpinner.SetSelection(0);
         }
 
         public void OnCheckedChanged(CompoundButton buttonView, bool isChecked)
