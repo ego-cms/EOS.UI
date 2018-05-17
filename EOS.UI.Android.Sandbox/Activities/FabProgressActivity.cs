@@ -29,16 +29,19 @@ namespace EOS.UI.Android.Sandbox.Activities
             var sizeSpinner = FindViewById<Spinner>(Resource.Id.spinnerSize);
             var stateSwitch = FindViewById<Switch>(Resource.Id.stateSwitch);
             var resetButton = FindViewById<Button>(Resource.Id.buttonResetCustomization);
-            fab.Click += async (sender, e) => 
+            fab.Click += async (sender, e) =>
             {
                 if (fab.InProgress)
                     return;
+                themeSpinner.Enabled = false;
+                resetButton.Enabled = false;
                 fab.StartProgressAnimation();
                 await Task.Delay(5000);
                 fab.StopProgressAnimation();
+                themeSpinner.Enabled = true;
+                resetButton.Enabled = true;
             };
-            
-            
+
             var spinners = new List<Spinner>()
             {
                 themeSpinner,

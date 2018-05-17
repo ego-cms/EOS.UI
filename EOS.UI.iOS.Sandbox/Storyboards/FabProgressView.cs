@@ -32,9 +32,13 @@ namespace EOS.UI.iOS.Sandbox
             {
                 if (_fab.InProgress)
                     return;
+                themeField.Enabled = false;
+                resetButton.Enabled = false;
                 _fab.StartProgressAnimation();
                 await Task.Delay(5000);
                 _fab.StopProgressAnimation();
+                themeField.Enabled = true;
+                resetButton.Enabled = true;
             };
 
             UpdateFrame();
@@ -174,6 +178,8 @@ namespace EOS.UI.iOS.Sandbox
 
             resetButton.TouchUpInside += (sender, e) =>
             {
+                if (_fab.InProgress)
+                    return;
                 _fab.ResetCustomization();
                 _textFields.Except(new List<UITextField>() { themeField }).ToList().ForEach(f => f.Text = String.Empty);
                 UpdateFrame();
