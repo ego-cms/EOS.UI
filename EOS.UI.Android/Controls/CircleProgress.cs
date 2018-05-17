@@ -1,9 +1,11 @@
 ﻿using System;
 using Android.App;
+using Android.Content;
 using Android.Content.Res;
 using Android.Graphics;
 using Android.Graphics.Drawables;
-using Android.OS;
+using Android.Runtime;
+using Android.Util;
 using Android.Views;
 using Android.Widget;
 using EOS.UI.Shared.Themes.Helpers;
@@ -11,10 +13,11 @@ using EOS.UI.Shared.Themes.Interfaces;
 using UIFrameworks.Android.Themes;
 using UIFrameworks.Shared.Themes.Helpers;
 using UIFrameworks.Shared.Themes.Interfaces;
+using Widget = Android.Widget;
 
 namespace EOS.UI.Android.Controls
 {
-    public class CircleProgress : Fragment, View.IOnTouchListener, IEOSThemeControl
+    public class CircleProgress : LinearLayout, View.IOnTouchListener, IEOSThemeControl
     {
         private bool _isRunning;
         private ProgressBar _progressBar;
@@ -35,7 +38,7 @@ namespace EOS.UI.Android.Controls
             {
                 if (value > 100)
                     return;
-                Activity.RunOnUiThread(() =>
+                ((Activity)Context).RunOnUiThread(() =>
                 {
                     _progress = value;
                     if (_checkmarkImage.Visibility == ViewStates.Visible)
@@ -112,25 +115,58 @@ namespace EOS.UI.Android.Controls
             }
         }
 
-        public override void OnCreate(Bundle savedInstanceState)
+        protected CircleProgress(IntPtr javaReference, JniHandleOwnership transfer) : base(javaReference, transfer)
         {
-            base.OnCreate(savedInstanceState);
-
-            // Create your fragment here
+            Initalize();
         }
 
-        public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
+        public CircleProgress(Context context) : base(context)
         {
-            var view = inflater.Inflate(Resource.Layout.CircleProgress, container, false);
+            Initalize();
+        }
+
+        public CircleProgress(Context context, IAttributeSet attrs) : base(context, attrs)
+        {
+            Initalize();
+        }
+
+        public CircleProgress(Context context, IAttributeSet attrs, int defStyleAttr) : base(context, attrs, defStyleAttr)
+        {
+            Initalize();
+        }
+
+        public CircleProgress(Context context, IAttributeSet attrs, int defStyleAttr, int defStyleRes) : base(context, attrs, defStyleAttr, defStyleRes)
+        {
+            Initalize();
+        }
+
+        private void Initalize()
+        {
+            var inflater = (LayoutInflater)Context.GetSystemService(Context.LayoutInflaterService);
+            var view = inflater.Inflate(Resource.Layout.CircleProgress, this);
             _progressBar = view.FindViewById<ProgressBar>(Resource.Id.circularProgressbar);
             _percentText = view.FindViewById<TextView>(Resource.Id.percentText);
             _checkmarkImage = view.FindViewById<ImageView>(Resource.Id.checkmark);
             view.SetOnTouchListener(this);
             _checkmarkImage.Visibility = ViewStates.Invisible;
             _percentText.Text = "0 %";
+            Orientation = Widget.Orientation.Vertical;
+            SetGravity(GravityFlags.CenterHorizontal);
             UpdateAppearance();
-            return view;
         }
+
+        //public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
+        //{
+        //    var view = inflater.Inflate(Resource.Layout.CircleProgress, container, false);
+        //    _progressBar = view.FindViewById<ProgressBar>(Resource.Id.circularProgressbar);
+        //    _percentText = view.FindViewById<TextView>(Resource.Id.percentText);
+        //    _checkmarkImage = view.FindViewById<ImageView>(Resource.Id.checkmark);
+        //    view.SetOnTouchListener(this);
+        //    _checkmarkImage.Visibility = ViewStates.Invisible;
+        //    _percentText.Text = "0 %";
+        //    UpdateAppearance();
+        //    return view;
+        //}
 
         public IEOSStyle GetCurrentEOSStyle()
         {

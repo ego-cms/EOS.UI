@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
     android:background="@android:color/transparent"
-    android:gravity="center_horizontal"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
     <ProgressBar
@@ -12,6 +10,7 @@
         android:layout_height="40dp"
         android:indeterminate="false"
         android:max="100"
+        android:progress="100"
         android:progressDrawable="@drawable/circular"
         android:layout_marginTop="10dp"
         android:layout_marginBottom="-41dp" />
@@ -29,4 +28,4 @@
         android:text="10 %"
         android:layout_marginTop="2dp"
         android:gravity="center_horizontal" />
-</LinearLayout>
+</merge>

@@ -23,7 +23,7 @@ namespace EOS.UI.Android.Sandbox.Activities
         {
             base.OnCreate(savedInstanceState);
             SetContentView(Resource.Layout.CircleProgressLayout);
-            var circleProgressFragment = (CircleProgress) FragmentManager.FindFragmentById(Resource.Id.circleProgress);
+            var circleProgressFragment = FindViewById<CircleProgress>(Resource.Id.circleProgress);
             var themeSpinner = FindViewById<Spinner>(Resource.Id.spinnerTheme);
             var colorSpinner = FindViewById<Spinner>(Resource.Id.spinnerColor);
             var alternativeColorSpinner = FindViewById<Spinner>(Resource.Id.spinnerAlternativeColor);
