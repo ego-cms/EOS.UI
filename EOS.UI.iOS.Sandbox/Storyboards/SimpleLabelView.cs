@@ -9,7 +9,6 @@ using System.Linq;
 using System.Collections.Generic;
 using UIFrameworks.Shared.Themes.Helpers;
 using UIKit;
-using static EOS.UI.iOS.Sandbox.BadgeLabelView;
 using EOS.UI.iOS.Sandbox.Controls.Pickers;
 
 namespace EOS.UI.iOS.Sandbox

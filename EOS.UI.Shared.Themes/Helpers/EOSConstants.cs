@@ -3,9 +3,11 @@
     public static class EOSConstants
     {
         public const string PrimaryColor = "primaryColor";
+        public const string PrimaryColorDisabled = "primaryColorDisabled";
+        public const string PrimaryColorPressed = "primaryColorPressed";
         public const string SecondaryColor = "secondaryColor";
-        public const string DisabledTextColor = "disabledTextColor";
-        public const string PressedStateTextColor = "pressedStateTextColor";
+        public const string SecondaryColorDisabled = "secondaryColorDisabled";
+        public const string SecondaryColorPressed = "secondaryColorPressed";
         public const string TextSize = "textSize";
         public const string CornerRadius = "cornerRadius";
         public const string Font = "font";

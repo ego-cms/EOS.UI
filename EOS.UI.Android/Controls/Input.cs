@@ -302,7 +302,7 @@ namespace EOS.UI.Android.Controls
                 LetterSpacing = GetThemeProvider().GetEOSProperty<float>(this, EOSConstants.LetterSpacing);
                 TextSize = GetThemeProvider().GetEOSProperty<float>(this, EOSConstants.TextSize);
                 TextColor = GetThemeProvider().GetEOSProperty<Color>(this, EOSConstants.SecondaryColor);
-                TextColorDisabled = GetThemeProvider().GetEOSProperty<Color>(this, EOSConstants.DisabledTextColor);
+                TextColorDisabled = GetThemeProvider().GetEOSProperty<Color>(this, EOSConstants.SecondaryColorDisabled);
                 HintTextColor = GetThemeProvider().GetEOSProperty<Color>(this, EOSConstants.HintTextColor);
                 HintTextColorDisabled = GetThemeProvider().GetEOSProperty<Color>(this, EOSConstants.HintTextColorDisabled);
                 LeftImageFocused = Context.Resources.GetDrawable(GetThemeProvider().GetEOSProperty<int>(this, EOSConstants.LeftImageFocused));

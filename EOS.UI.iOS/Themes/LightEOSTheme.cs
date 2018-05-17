@@ -12,9 +12,11 @@ namespace EOS.UI.iOS.Themes
         public Dictionary<string, object> ThemeValues => new Dictionary<string, object>()
         {
             { EOSConstants.PrimaryColor, UIColor.White },
+            { EOSConstants.PrimaryColorDisabled, UIColor.LightGray },
+            { EOSConstants.PrimaryColorPressed, UIColor.Gray },
             { EOSConstants.SecondaryColor, UIColor.Black },
-            { EOSConstants.DisabledTextColor, UIColor.LightTextColor},
-            { EOSConstants.PressedStateTextColor, UIColor.LightTextColor},
+            { EOSConstants.SecondaryColorDisabled, UIColor.LightTextColor},
+            { EOSConstants.SecondaryColorPressed, UIColor.LightTextColor},
             { EOSConstants.TextSize, 17 },
             { EOSConstants.Font, UIFont.SystemFontOfSize(17)},
             { EOSConstants.CornerRadius, 3 },
