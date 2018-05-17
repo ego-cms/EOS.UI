@@ -1,16 +1,20 @@
 ﻿using System.Linq;
 using Android.App;
+using Android.Content;
 using Android.Graphics;
 using Android.OS;
+using Android.Views.InputMethods;
 using Android.Widget;
 using EOS.UI.Android.Controls;
 using EOS.UI.Android.Sandbox.Adapters;
+using EOS.UI.Android.Sandbox.Helpers;
 using UIFrameworks.Android.Themes;
 using UIFrameworks.Shared.Themes.Helpers;
 using UIFrameworks.Shared.Themes.Interfaces;
 using static Android.Widget.CompoundButton;
 using static EOS.UI.Android.Sandbox.Helpers.Constants;
 using R = Android.Resource;
+using A = Android;
 
 namespace EOS.UI.Android.Sandbox.Activities
 {
@@ -60,7 +64,7 @@ namespace EOS.UI.Android.Sandbox.Activities
             _underlineColorUnfocusedSpinner = FindViewById<Spinner>(Resource.Id.spinnerUnderlineColorUnfocused);
             _underlineColorDisabledSpinner = FindViewById<Spinner>(Resource.Id.spinnerUnderlineColorDisabled);
             var resetButton = FindViewById<Button>(Resource.Id.buttonResetCustomization);
-            var disableSwitch = FindViewById<Switch>(Resource.Id.switchDisabled);
+            _disabledSwitch = FindViewById<Switch>(Resource.Id.switchDisabled);
 
             _themeSpinner.Adapter = new SpinnerAdapter(this, R.Layout.SimpleSpinnerItem, ThemeTypes.ThemeCollection.Select(item => item.Key).ToList());
             _themeSpinner.ItemSelected += ThemeSpinner_ItemSelected;
@@ -111,7 +115,9 @@ namespace EOS.UI.Android.Sandbox.Activities
                 ResetCustomValues();
             };
 
-            disableSwitch.SetOnCheckedChangeListener(this);
+            _disabledSwitch.SetOnCheckedChangeListener(this);
+
+            Window.SetSoftInputMode(A.Views.SoftInput.StateAlwaysHidden);
         }
 
         private void SetCurrenTheme(IEOSTheme iEOSTheme)

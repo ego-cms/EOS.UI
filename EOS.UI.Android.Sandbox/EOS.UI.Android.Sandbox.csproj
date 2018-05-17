@@ -99,6 +99,7 @@
     <Compile Include="Activities\MainActivity.cs" />
     <Compile Include="Adapters\SpinnerAdapter.cs" />
     <Compile Include="Helpers\Constants.cs" />
+    <Compile Include="Helpers\ContextHelpers.cs" />
     <Compile Include="RecyclerImplementation\ControlsAdapter.cs" />
     <Compile Include="RecyclerImplementation\ControlsViewHolder.cs" />
     <Compile Include="Resources\Resource.designer.cs" />
