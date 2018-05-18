@@ -23,6 +23,7 @@ namespace EOS.UI.Android.Controls
         private ProgressBar _progressBar;
         private TextView _percentText;
         private ImageView _checkmarkImage;
+        private View _centralRectangle;
 
         public event EventHandler Started;
         public event EventHandler Stopped;
@@ -62,7 +63,7 @@ namespace EOS.UI.Android.Controls
                 _color = value;
                 IsEOSCustomizationIgnored = true;
                 _progressBar.ProgressTintList = ColorStateList.ValueOf(_color);
-                _progressBar.SecondaryProgressTintList = ColorStateList.ValueOf(_color);
+                _centralRectangle.SetBackgroundColor(_color);
                 _percentText.SetTextColor(_color);
             }
         }
@@ -147,6 +148,7 @@ namespace EOS.UI.Android.Controls
             _progressBar = view.FindViewById<ProgressBar>(Resource.Id.circularProgressbar);
             _percentText = view.FindViewById<TextView>(Resource.Id.percentText);
             _checkmarkImage = view.FindViewById<ImageView>(Resource.Id.checkmark);
+            _centralRectangle = view.FindViewById<View>(Resource.Id.centralRectangle);
             view.SetOnTouchListener(this);
             _checkmarkImage.Visibility = ViewStates.Invisible;
             _percentText.Text = "0 %";
@@ -154,19 +156,6 @@ namespace EOS.UI.Android.Controls
             SetGravity(GravityFlags.CenterHorizontal);
             UpdateAppearance();
         }
-
-        //public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
-        //{
-        //    var view = inflater.Inflate(Resource.Layout.CircleProgress, container, false);
-        //    _progressBar = view.FindViewById<ProgressBar>(Resource.Id.circularProgressbar);
-        //    _percentText = view.FindViewById<TextView>(Resource.Id.percentText);
-        //    _checkmarkImage = view.FindViewById<ImageView>(Resource.Id.checkmark);
-        //    view.SetOnTouchListener(this);
-        //    _checkmarkImage.Visibility = ViewStates.Invisible;
-        //    _percentText.Text = "0 %";
-        //    UpdateAppearance();
-        //    return view;
-        //}
 
         public IEOSStyle GetCurrentEOSStyle()
         {

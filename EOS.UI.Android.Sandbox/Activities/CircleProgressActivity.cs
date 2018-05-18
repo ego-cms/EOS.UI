@@ -120,6 +120,7 @@ namespace EOS.UI.Android.Sandbox.Activities
             resetButton.Click += delegate
             {
                 spinners.Except(new[] { themeSpinner }).ToList().ForEach(s => s.SetSelection(0));
+                showProgressSwitch.Checked = true;
                 circleProgressFragment.ResetCustomization();
             };
         }
