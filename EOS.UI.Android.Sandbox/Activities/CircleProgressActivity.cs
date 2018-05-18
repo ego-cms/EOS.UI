@@ -36,7 +36,8 @@ namespace EOS.UI.Android.Sandbox.Activities
                 themeSpinner,
                 colorSpinner,
                 fontSpinner,
-                textSizeSpinner
+                textSizeSpinner,
+                alternativeColorSpinner
             };
 
             int percents = 0;

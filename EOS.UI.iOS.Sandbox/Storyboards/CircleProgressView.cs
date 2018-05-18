@@ -162,6 +162,7 @@ namespace EOS.UI.iOS.Sandbox
             resetButton.TouchUpInside += (sender, e) =>
             {
                 _textFields.Except(new List<UITextField>() { themeField }).ToList().ForEach(f => f.Text = String.Empty);
+                showProgressSwitch.On = true;
                 _circleProgress.ResetCustomization();
             };
         }

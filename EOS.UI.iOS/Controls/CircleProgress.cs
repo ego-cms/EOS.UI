@@ -178,14 +178,14 @@ namespace EOS.UI.iOS
                 }
             }));
             UpdateAppearance();
-            InitCircle();
+            InitCircles();
             circleView.Layer.CornerRadius = circleView.Frame.Height / 2;
             imageView.Layer.CornerRadius = circleView.Frame.Height / 2;
             imageView.Hidden = true;
             percentLabel.Text = "0 %";
         }
 
-        private void InitCircle()
+        private void InitCircles()
         {
             _circleLayer = new CAShapeLayer();
             _circleLayer.FillColor = UIColor.Clear.CGColor;
@@ -196,6 +196,17 @@ namespace EOS.UI.iOS
             circlePath.AddArc(center, _radius, _startAngle, _startAngle, true);
             _circleLayer.Path = circlePath.CGPath;
             circleView.Transform = CGAffineTransform.MakeRotation(_rotatienAngle);
+            
+            var grayCircleLayer = new CAShapeLayer();
+            grayCircleLayer.FillColor = UIColor.Clear.CGColor;
+            grayCircleLayer.StrokeColor = UIColor.FromRGB(234, 234, 234).CGColor;
+            grayCircleLayer.LineWidth = _lineWidth;
+            circlePath = new UIBezierPath();
+            circlePath.AddArc(center, _radius, _startAngle, _360angle, true);
+            grayCircleLayer.Path = circlePath.CGPath;
+            circleView.Transform = CGAffineTransform.MakeRotation(_rotatienAngle);
+            
+            circleView.Layer.AddSublayer(grayCircleLayer);
             circleView.Layer.AddSublayer(_circleLayer);
         }
 
