@@ -244,11 +244,9 @@ namespace EOS.UI.iOS.Controls
                     return;
 
                 _text = value;
-                NSMutableAttributedString attributedString;
-                if(AttributedText != null)
-                    attributedString = new NSMutableAttributedString(AttributedText);
-                else
-                    attributedString = new NSMutableAttributedString(_text);
+                var attributedString = AttributedText != null ?
+                    new NSMutableAttributedString(AttributedText) :
+                    new NSMutableAttributedString(_text);
 
                 attributedString.MutableString.SetString(new NSString(_text));
                 AttributedText = attributedString;

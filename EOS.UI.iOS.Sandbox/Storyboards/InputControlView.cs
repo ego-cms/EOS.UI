@@ -133,8 +133,8 @@ namespace EOS.UI.iOS.Sandbox
             {
                 themeTextField.Text = e.Key;
                 _inputTop.GetThemeProvider().SetCurrentTheme(e.Value);
-                _inputTop.UpdateAppearance();
-                _inputBotton.UpdateAppearance();
+                _inputTop.ResetCustomization();
+                _inputBotton.ResetCustomization();
 
                 ResetFields();
             };
