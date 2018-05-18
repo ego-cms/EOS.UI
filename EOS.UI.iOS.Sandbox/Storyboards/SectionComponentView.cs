@@ -13,14 +13,14 @@ using UIKit;
 
 namespace EOS.UI.iOS.Sandbox.Storyboards
 {
-    public partial class SectionView : BaseViewController
+    public partial class SectionComponentView : BaseViewController
     {
         public const string Identifier = "SectionView";
         private List<UITextField> _textFields;
         private List<object> _dataSource;
 
 
-        public SectionView(IntPtr handle) : base(handle)
+        public SectionComponentView(IntPtr handle) : base(handle)
         {
         }
 

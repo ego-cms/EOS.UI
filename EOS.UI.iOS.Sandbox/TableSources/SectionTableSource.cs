@@ -42,70 +42,65 @@ namespace EOS.UI.iOS.Sandbox.TableSources
             return 1;
         }
 
-        //public override nfloat GetHeightForHeader(UITableView tableView, nint section)
-        //{
-        //    return 60 + SectionModel.TopPadding + SectionModel.BottonPadding;
-        //}
-
         public override UIView GetViewForHeader(UITableView tableView, nint section)
         {
             var header = _tableView.DequeueReusableHeaderFooterView("Section");
 
-            var customSectoion = (header as Section);
+            var customSection = (header as Section);
 
-            customSectoion.Initialize();
+            customSection.Initialize();
 
             if(SectionModel.ResetCustomization)
             {
-                customSectoion.ResetCustomization();
+                customSection.ResetCustomization();
                 SectionModel.ResetCustomization = false;
             }
             else
             {
-                customSectoion.HasBorder = SectionModel.HasBorder;
-                customSectoion.HasButton = SectionModel.HasButton;
-                customSectoion.SectionAction = SectionModel.SectionAction;
+                customSection.HasBorder = SectionModel.HasBorder;
+                customSection.HasButton = SectionModel.HasButton;
+                customSection.SectionAction = SectionModel.SectionAction;
 
                 if(!string.IsNullOrEmpty(SectionModel.SectionName))
-                    customSectoion.SectionName = SectionModel.SectionName;
+                    customSection.SectionName = SectionModel.SectionName;
 
                 if(!string.IsNullOrEmpty(SectionModel.ButtonText))
-                    customSectoion.ButtonText = SectionModel.ButtonText;
+                    customSection.ButtonText = SectionModel.ButtonText;
 
                 if(SectionModel.SectionNameTextSize != 0)
-                    customSectoion.SectionTextSize = SectionModel.SectionNameTextSize;
+                    customSection.SectionTextSize = SectionModel.SectionNameTextSize;
 
                 if(SectionModel.ButtonTextTextSize != 0)
-                    customSectoion.ButtonTextSize = SectionModel.ButtonTextTextSize;
+                    customSection.ButtonTextSize = SectionModel.ButtonTextTextSize;
 
                 if(SectionModel.SectionTextLetterSpacing != 0)
-                    customSectoion.SectionTextLetterSpacing = SectionModel.SectionTextLetterSpacing;
+                    customSection.SectionTextLetterSpacing = SectionModel.SectionTextLetterSpacing;
 
                 if(SectionModel.ButtonTextLetterSpacing != 0)
-                    customSectoion.ButtonTextLetterSpacing = SectionModel.ButtonTextLetterSpacing;
+                    customSection.ButtonTextLetterSpacing = SectionModel.ButtonTextLetterSpacing;
 
                 if(SectionModel.SectionNameFont != null)
-                    customSectoion.SectionNameFont = SectionModel.SectionNameFont;
+                    customSection.SectionNameFont = SectionModel.SectionNameFont;
 
                 if(SectionModel.ButtonNameFont != null)
-                    customSectoion.ButtonNameFont = SectionModel.ButtonNameFont;
+                    customSection.ButtonNameFont = SectionModel.ButtonNameFont;
 
                 if(SectionModel.BackgroundColor != UIColor.Clear)
-                    customSectoion.BackgroundColor = SectionModel.BackgroundColor;
+                    customSection.BackgroundColor = SectionModel.BackgroundColor;
 
                 if(SectionModel.BorderWidth != 0)
-                    customSectoion.BorderWidth = SectionModel.BorderWidth;
+                    customSection.BorderWidth = SectionModel.BorderWidth;
 
                 if(SectionModel.BorderColor != UIColor.Clear)
-                    customSectoion.BorderColor = SectionModel.BorderColor;
+                    customSection.BorderColor = SectionModel.BorderColor;
 
                 if(SectionModel.SectionNameColor != UIColor.Clear)
-                    customSectoion.SectionNameColor = SectionModel.SectionNameColor;
+                    customSection.SectionNameColor = SectionModel.SectionNameColor;
 
                 if(SectionModel.ButtonNameColor != UIColor.Clear)
-                    customSectoion.ButtonNameColor = SectionModel.ButtonNameColor;
+                    customSection.ButtonNameColor = SectionModel.ButtonNameColor;
 
-                customSectoion.SetPaddings(SectionModel.LeftPadding, SectionModel.TopPadding, SectionModel.RightPadding, SectionModel.BottonPadding);
+                customSection.SetPaddings(SectionModel.LeftPadding, SectionModel.TopPadding, SectionModel.RightPadding, SectionModel.BottonPadding);
             }
             return header;
         }

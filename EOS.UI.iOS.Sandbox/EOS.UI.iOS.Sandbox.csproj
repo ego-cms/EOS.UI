@@ -175,9 +175,9 @@
   <ItemGroup>
     <Compile Include="Main.cs" />
     <Compile Include="AppDelegate.cs" />
-    <Compile Include="Storyboards\SectionView.cs" />
-    <Compile Include="Storyboards\SectionView.designer.cs">
-      <DependentUpon>SectionView.cs</DependentUpon>
+    <Compile Include="Storyboards\SectionComponentView.cs" />
+    <Compile Include="Storyboards\SectionComponentView.designer.cs">
+      <DependentUpon>SectionComponentView.cs</DependentUpon>
     </Compile>
     <Compile Include="TableSources\SectionTableSource.cs" />
     <Compile Include="TableSources\ControlTableSource.cs" />

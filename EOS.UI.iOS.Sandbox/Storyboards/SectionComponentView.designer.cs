@@ -11,7 +11,7 @@ using System.CodeDom.Compiler;
 namespace EOS.UI.iOS.Sandbox.Storyboards
 {
     [Register ("SectionView")]
-    partial class SectionView
+    partial class SectionComponentView
     {
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]

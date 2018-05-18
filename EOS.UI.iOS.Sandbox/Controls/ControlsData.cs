@@ -22,7 +22,7 @@ namespace EOS.UI.iOS.Sandbox.Controls
                 { SharedControls.SimpleButton, SimpleButtonView.Identifier },
                 { SharedControls.FabProgress, FabProgressView.Identifier },
                 { SharedControls.Input, InputControlView.Identifier },
-                { SharedControls.Section, SectionView.Identifier }
+                { SharedControls.Section, SectionComponentView.Identifier }
             };
         }
     }
