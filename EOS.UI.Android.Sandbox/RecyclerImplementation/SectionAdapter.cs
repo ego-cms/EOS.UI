@@ -104,7 +104,7 @@ namespace EOS.UI.Android.Sandbox.RecyclerImplementation
         {
             if(viewType == 0)
             {
-                var itemView = LayoutInflater.From(parent.Context).Inflate(Resource.Layout.Section, parent, false);
+                var itemView = LayoutInflater.From(parent.Context).Inflate(EOS.UI.Android.Resource.Layout.Section, parent, false);
                 var viewHolder = new Section(itemView);
                 return viewHolder;
             }
