@@ -44,7 +44,7 @@ namespace EOS.UI.Android.Controls
                     _progress = value;
                     if (_checkmarkImage.Visibility == ViewStates.Visible)
                         _checkmarkImage.Visibility = ViewStates.Invisible;
-                    _progressBar.SetProgress(_progress, true);
+                    _progressBar.Progress = _progress;
                     _percentText.Text = $"{value} %";
                     if (_progress == 100)
                     {
