@@ -2,9 +2,12 @@
 using System.Linq;
 using System.Threading.Tasks;
 using Android.App;
+using Android.Content;
+using Android.Graphics;
 using Android.OS;
 using Android.Widget;
 using EOS.UI.Android.Controls;
+using EOS.UI.Android.Helpers;
 using EOS.UI.Android.Sandbox.Adapters;
 using UIFrameworks.Android.Themes;
 using UIFrameworks.Shared.Themes.Helpers;
@@ -29,6 +32,15 @@ namespace EOS.UI.Android.Sandbox.Activities
             var sizeSpinner = FindViewById<Spinner>(Resource.Id.spinnerSize);
             var stateSwitch = FindViewById<Switch>(Resource.Id.stateSwitch);
             var resetButton = FindViewById<Button>(Resource.Id.buttonResetCustomization);
+            var config = new ShadowConfig()
+            {
+                Color = Color.Black,
+                Offset = new Offset(0,0),
+                Radius = 2,
+                Opacity = 50
+            };
+            fab.SetElevation(Color.Black, 20, 0,0, 0);
+            
             fab.Click += async (sender, e) =>
             {
                 if (fab.InProgress)
@@ -105,6 +117,12 @@ namespace EOS.UI.Android.Sandbox.Activities
                 spinners.Except(new[] { themeSpinner }).ToList().ForEach(s => s.SetSelection(0));
                 fab.ResetCustomization();
             };
+        }
+        
+        public int dip2px(Context context, float dpValue)
+        {
+            float scale = context.Resources.DisplayMetrics.Density;
+            return (int)(dpValue * scale + 0.5f);
         }
     }
 }

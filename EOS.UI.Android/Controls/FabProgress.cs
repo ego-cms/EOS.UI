@@ -3,11 +3,13 @@ using Android.App;
 using Android.Content;
 using Android.Graphics;
 using Android.Graphics.Drawables;
+using Android.Graphics.Drawables.Shapes;
 using Android.Runtime;
 using Android.Util;
 using Android.Views;
 using Android.Views.Animations;
 using Android.Widget;
+using EOS.UI.Android.Helpers;
 using EOS.UI.Shared.Themes.Helpers;
 using EOS.UI.Shared.Themes.Interfaces;
 using UIFrameworks.Android.Themes;
@@ -22,8 +24,10 @@ namespace EOS.UI.Android.Controls
         private const float _startScale = 0.85f;
         private const float _endScale = 1.0f;
         private const int _startPadding = 30;
-        private const double _paddingRation = 0.24;
+        private const double _paddingRatio = 0.24;
         private Animation _rotationAnimation;
+        private const int _cornerRadius = 200;
+        
 
         public bool IsEOSCustomizationIgnored { get; private set; }
 
@@ -49,7 +53,7 @@ namespace EOS.UI.Android.Controls
                 IsEOSCustomizationIgnored = true;
             }
         }
-
+        
         private Color _disabledBackgroundColor;
         public Color DisabledBackgroundColor
         {
@@ -85,7 +89,7 @@ namespace EOS.UI.Android.Controls
                 LayoutParameters.Height = value;
                 SetScaleType(ScaleType.FitCenter);
                 RequestLayout();
-                var padding = (int)System.Math.Round(_paddingRation * _buttonSize);
+                var padding = (int)System.Math.Round(_paddingRatio * _buttonSize);
                 SetPadding(padding, padding, padding, padding);
                 IsEOSCustomizationIgnored = true;
             }
@@ -115,6 +119,18 @@ namespace EOS.UI.Android.Controls
         }
         
         public bool InProgress { get; private set; }
+        
+        private ShadowConfig _shadowConfig;
+        public ShadowConfig ShadowConfig
+        {
+            get => _shadowConfig;
+            set
+            {
+                _shadowConfig = value;
+                IsEOSCustomizationIgnored = true;
+                //this.SetElevation(_shadowConfig.Radius, _shadowConfig.Color, _shadowConfig.Offset.X, _shadowConfig.Offset.Y);
+            }
+        }
 
         public FabProgress(Context context) : base(context)
         {
@@ -146,7 +162,6 @@ namespace EOS.UI.Android.Controls
             _rotationAnimation = AnimationUtils.LoadAnimation(Application.Context, Resource.Animation.FabRotationAnimation);
             SetOnTouchListener(this);
             UpdateAppearance();
-            Elevation = 10f;
         }
 
         public IEOSStyle GetCurrentEOSStyle()
@@ -186,6 +201,15 @@ namespace EOS.UI.Android.Controls
                 PressedBackgroundColor = provider.GetEOSProperty<Color>(this, EOSConstants.FabProgressPressedColor);
                 SetPadding(_startPadding, _startPadding, _startPadding, _startPadding);
                 IsEOSCustomizationIgnored = false;
+
+                //var config = new ShadowConfig()
+                //{
+                //    Color = Color.Black,
+                //    Offset = new Offset(0,0),
+                //    Radius = 2,
+                //    Opacity = 50
+                //};
+                //ShadowConfig = config;
             }
         }
 
@@ -224,6 +248,47 @@ namespace EOS.UI.Android.Controls
             ClearAnimation();
             _rotationAnimation.Cancel();
             InProgress = false;
+        }
+        
+        private void SetShadow(ShadowConfig config)
+        {
+            GradientDrawable shadow = null;
+            
+            var colors1 = new[] { config.Color.ToArgb(), config.Color.ToArgb() };
+            shadow = new GradientDrawable(GradientDrawable.Orientation.TopBottom, colors1);
+            shadow.Alpha = config.Opacity;
+            shadow.SetCornerRadius(_cornerRadius);
+            
+            var colors = new[] { BackgroundColor.ToArgb(), BackgroundColor.ToArgb()};
+            var backColor = new GradientDrawable(GradientDrawable.Orientation.TopBottom, colors);
+            backColor.SetCornerRadius(_cornerRadius);
+
+            Drawable[] layers = new Drawable[2];
+            layers[0] = shadow;
+            layers[1] = backColor;
+
+            LayerDrawable layerList = new LayerDrawable(layers);
+            layerList.SetLayerInset(0, 0, 0, 0, 0);
+            layerList.SetLayerInset(1, 0 - config.Offset.X + config.Radius, config.Offset.Y + config.Radius, config.Offset.X+config.Radius, 0 - config.Offset.Y+config.Radius);
+            
+            
+            LayoutParameters.Width = 110 + config.Radius;
+            LayoutParameters.Height = 110 + config.Radius;
+            SetScaleType(ScaleType.FitCenter);
+            
+            var paddings = (int)(_paddingRatio * 110) + config.Radius;
+            SetPadding(paddings, paddings, paddings, paddings);
+            SetBackgroundDrawable(layerList);
+        }
+        
+        protected override void OnDraw(Canvas canvas)
+        {
+            base.OnDraw(canvas);
+            //LayoutParameters.Width = 170+20;
+            //LayoutParameters.Height = 170+20;
+            //SetScaleType(ScaleType.FitCenter);
+            //var padding = (int)System.Math.Round((_paddingRatio * 100)+20);
+            //SetPadding(padding, padding, padding, padding);
         }
     }
 }

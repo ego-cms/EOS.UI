@@ -42,6 +42,7 @@
     <Reference Include="System.Xml" />
     <Reference Include="System.Core" />
     <Reference Include="Mono.Android" />
+    <Reference Include="Java.Interop" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controls\SimpleButton.cs" />
@@ -58,6 +59,11 @@
     <Compile Include="Controls\Input.cs" />
     <Compile Include="Controls\FabProgress.cs" />
     <Compile Include="Controls\CircleProgress.cs" />
+    <Compile Include="Helpers\ShadowConfig.cs" />
+    <Compile Include="Helpers\Offset.cs" />
+    <Compile Include="Helpers\ShadowExtension.cs" />
+    <Compile Include="Helpers\ShadowViewDrawable.cs" />
+    <Compile Include="Helpers\ShadowProperty.cs" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\values\Strings.xml" />
@@ -80,6 +86,7 @@
     <Folder Include="Resources\drawable\" />
     <Folder Include="Resources\anim\" />
     <Folder Include="Resources\layout\" />
+    <Folder Include="Helpers\" />
   </ItemGroup>
   <Import Project="..\EOS.UI.Shared.Themes\EOS.UI.Shared.Themes.projitems" Label="Shared" />
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
