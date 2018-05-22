@@ -212,7 +212,7 @@ namespace EOS.UI.iOS.Controls
             if (InProgress)
                 return;
             SetImage(PreloaderImage);
-            Layer.AddAnimation(_rotationAnimation, _rotationAnimationKey);
+            ImageView.Layer.AddAnimation(_rotationAnimation, _rotationAnimationKey);
             InProgress = true;
         }
         
@@ -220,7 +220,7 @@ namespace EOS.UI.iOS.Controls
         {
             if (!InProgress)
                 return;
-            Layer.RemoveAnimation(_rotationAnimationKey);
+            ImageView.Layer.RemoveAnimation(_rotationAnimationKey);
             SetImage(Image);
             InProgress = false;
         }

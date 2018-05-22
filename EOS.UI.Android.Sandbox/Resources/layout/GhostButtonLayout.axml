@@ -36,11 +36,12 @@
                 android:paddingLeft="3dp" />
             <Spinner
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:id="@+id/spinnerTheme"
                 android:layout_weight="1"
                 android:paddingLeft="3dp"
-                android:paddingRight="3dp" />
+                android:paddingRight="3dp"
+                android:layout_gravity="center_vertical" />
         </LinearLayout>
         <View
             android:layout_width="match_parent"
@@ -62,11 +63,12 @@
                 android:paddingLeft="3dp" />
             <Spinner
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:id="@id/spinnerFont"
                 android:layout_weight="1"
                 android:paddingLeft="3dp"
-                android:paddingRight="3dp" />
+                android:paddingRight="3dp"
+                android:layout_gravity="center_vertical" />
         </LinearLayout>
         <View
             android:layout_width="match_parent"
@@ -75,10 +77,9 @@
         <LinearLayout
             android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="2dp"
-            android:layout_marginBottom="2dp"
-            android:weightSum="3">
+            android:layout_height="match_parent"
+            android:layout_marginBottom="5dp"
+            android:layout_marginTop="5dp">
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -87,14 +88,15 @@
                 android:textSize="18sp"
                 android:layout_weight="2"
                 android:paddingLeft="3dp"
-                android:paddingBottom="3dp" />
+                android:layout_gravity="center_horizontal" />
             <Spinner
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/spinnerEnabledTextColor"
                 android:layout_weight="1"
                 android:paddingLeft="3dp"
-                android:paddingEnd="3dp" />
+                android:paddingEnd="3dp"
+                android:layout_gravity="center_vertical" />
         </LinearLayout>
         <View
             android:layout_width="match_parent"
@@ -121,7 +123,8 @@
                 android:id="@+id/spinnerDisabledTextColor"
                 android:layout_weight="1"
                 android:paddingLeft="3dp"
-                android:paddingEnd="3dp" />
+                android:paddingEnd="3dp"
+                android:layout_gravity="center_vertical" />
         </LinearLayout>
         <View
             android:layout_width="match_parent"
@@ -148,7 +151,8 @@
                 android:id="@+id/spinnerPressedTextColor"
                 android:layout_weight="1"
                 android:paddingLeft="3dp"
-                android:paddingEnd="3dp" />
+                android:paddingEnd="3dp"
+                android:layout_gravity="center_vertical" />
         </LinearLayout>
         <View
             android:layout_width="match_parent"
@@ -163,18 +167,20 @@
             android:layout_marginBottom="5dp">
             <TextView
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:text="Letter spacing"
                 android:textSize="18sp"
                 android:layout_weight="2"
-                android:paddingLeft="3dp" />
+                android:paddingLeft="3dp"
+                android:layout_gravity="center_vertical" />
             <Spinner
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:id="@id/spinnerLetterSpacing"
                 android:layout_weight="1"
                 android:paddingRight="3dp"
-                android:paddingLeft="3dp" />
+                android:paddingLeft="3dp"
+                android:layout_gravity="center_vertical" />
         </LinearLayout>
         <View
             android:layout_width="match_parent"
@@ -193,7 +199,8 @@
                 android:text="Text size"
                 android:textSize="18sp"
                 android:layout_weight="2"
-                android:paddingLeft="3dp" />
+                android:paddingLeft="3dp"
+                android:layout_gravity="center_vertical" />
             <Spinner
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"

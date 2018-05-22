@@ -63,11 +63,13 @@ namespace EOS.UI.iOS.Controls
             }
         }
 
+        private int _textSize;
         public int TextSize
         {
-            get => (int)Font.PointSize;
+            get => _textSize;
             set
             {
+                _textSize = value;
                 SetTextSize(value);
                 IsEOSCustomizationIgnored = true;
             }
@@ -242,10 +244,28 @@ namespace EOS.UI.iOS.Controls
                     return;
 
                 _text = value;
-                NSMutableAttributedString attributedString = AttributedText != null ?
-                       new NSMutableAttributedString(AttributedText) : new NSMutableAttributedString(_text);
+                var attributedString = AttributedText != null ?
+                    new NSMutableAttributedString(AttributedText) :
+                    new NSMutableAttributedString(_text);
+
                 attributedString.MutableString.SetString(new NSString(_text));
                 AttributedText = attributedString;
+            }
+        }
+
+        private string _plaseHolder;
+        public override string Placeholder
+        {
+            get => _plaseHolder;
+            set
+            {
+                _plaseHolder = value;
+                var attributedString = AttributedPlaceholder != null ?
+                    new NSMutableAttributedString(AttributedPlaceholder) : 
+                    new NSMutableAttributedString(_plaseHolder);
+
+                attributedString.MutableString.SetString(new NSString(_plaseHolder));
+                AttributedPlaceholder = attributedString;
             }
         }
 
@@ -263,9 +283,20 @@ namespace EOS.UI.iOS.Controls
             LeftViewMode = UITextFieldViewMode.Always;
             Started += Input_Started;
             Ended += Input_Ended;
+            EditingChanged += (sender, e) =>
+            {
+                if(AttributedText.Length == 1)
+                {
+                    SetLetterSpacing(LetterSpacing);
+                    SetTextSize(TextSize);
+                }
+            };
 
             Layer.MasksToBounds = true;
             IsEOSCustomizationIgnored = false;
+
+            Text = string.Empty;
+            Placeholder = string.Empty;
             UpdateAppearance();
         }
 
@@ -311,24 +342,40 @@ namespace EOS.UI.iOS.Controls
 
         private void SetLetterSpacing(int spacing)
         {
-            if(AttributedText != null)
-            {
-                var attributedString = new NSMutableAttributedString(AttributedText);
-                attributedString.AddAttribute(UIStringAttributeKey.KerningAdjustment, new NSNumber(spacing), new NSRange(0, AttributedText.Length));
-                AttributedText = attributedString;
-                SizeToFit();
-            }
+            if(AttributedText == null)
+                Text = string.Empty;
+
+            if(AttributedPlaceholder == null)
+                Placeholder = " ";
+
+            var attributedText = new NSMutableAttributedString(AttributedText);
+            attributedText.AddAttribute(UIStringAttributeKey.KerningAdjustment, new NSNumber(spacing), new NSRange(0, AttributedText.Length));
+            AttributedText = attributedText;
+
+            var attributedPlaceholder = new NSMutableAttributedString(AttributedPlaceholder);
+            attributedPlaceholder.AddAttribute(UIStringAttributeKey.KerningAdjustment, new NSNumber(spacing), new NSRange(0, AttributedPlaceholder.Length));
+            AttributedPlaceholder = attributedPlaceholder;
+
+            SizeToFit();
         }
 
         private void SetTextSize(int size)
         {
-            if(AttributedText != null)
-            {
-                var attributedString = new NSMutableAttributedString(AttributedText);
-                attributedString.AddAttribute(UIStringAttributeKey.Font, Font.WithSize(size), new NSRange(0, AttributedText.Length));
-                AttributedText = attributedString;
-                SizeToFit();
-            }
+            if(AttributedText == null)
+                Text = string.Empty;
+
+            if(AttributedPlaceholder == null)
+                Placeholder = " ";
+
+            var attributedText = new NSMutableAttributedString(AttributedText);
+            attributedText.AddAttribute(UIStringAttributeKey.Font, Font.WithSize(size), new NSRange(0, AttributedText.Length));
+            AttributedText = attributedText;
+
+            var attributedPlaceholder = new NSMutableAttributedString(AttributedPlaceholder);
+            attributedPlaceholder.AddAttribute(UIStringAttributeKey.Font, Font.WithSize(size), new NSRange(0, AttributedPlaceholder.Length));
+            AttributedPlaceholder = attributedPlaceholder;
+
+            SizeToFit();
         }
 
         public override void LayoutSubviews()
@@ -343,9 +390,9 @@ namespace EOS.UI.iOS.Controls
                     BorderWidth = InputConstants.UnderlineHeight,
                     Frame = new CGRect(
                         0,
-                        Frame.Size.Height - InputConstants.UnderlineHeight,
-                        Frame.Size.Width,
-                        Frame.Size.Height
+                        Layer.Bounds.Height - InputConstants.UnderlineHeight,
+                        Bounds.Size.Width,
+                        InputConstants.UnderlineHeight
                     ),
                     Name = InputConstants.UnderlineName
                 };
@@ -363,7 +410,13 @@ namespace EOS.UI.iOS.Controls
             {
                 var frame = underlineLayer.Frame;
                 frame.Width = Bounds.Width;
-                underlineLayer.Frame = frame;
+                var height = LeftView.Bounds.Height;
+                underlineLayer.Frame = new CGRect(
+                        0,
+                        Layer.Bounds.Height - InputConstants.UnderlineHeight,
+                        Bounds.Size.Width,
+                        InputConstants.UnderlineHeight
+                    );
             }
         }
 
@@ -371,7 +424,16 @@ namespace EOS.UI.iOS.Controls
 
         #region IEOSThemeControl implementation
 
-        public bool IsEOSCustomizationIgnored { get; private set; }
+        private bool _isEOSCustomizationIgnored;
+        public bool IsEOSCustomizationIgnored
+        {
+            get => _isEOSCustomizationIgnored;
+            private set
+            {
+                _isEOSCustomizationIgnored = value;
+                UpdateUnderline();
+            }
+        }
 
         public IEOSStyle GetCurrentEOSStyle()
         {

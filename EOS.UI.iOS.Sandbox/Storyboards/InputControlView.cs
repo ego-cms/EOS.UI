@@ -41,6 +41,8 @@ namespace EOS.UI.iOS.Sandbox
 
             _textFields = new List<UITextField>()
             {
+                _inputTop,
+                _inputBotton,
                 themeTextField,
                 fontTextField,
                 letterSpacingTextField,
@@ -63,10 +65,26 @@ namespace EOS.UI.iOS.Sandbox
             }));
 
             containerTopView.ConstrainLayout(() => _inputTop.Frame.GetCenterX() == containerTopView.Frame.GetCenterX() &&
-                                                   _inputTop.Frame.GetCenterY() == containerTopView.Frame.GetCenterY(), _inputTop);
+                                          _inputTop.Frame.GetCenterY() == containerTopView.Frame.GetCenterY(), _inputTop);
+
+            View.AddConstraint(NSLayoutConstraint.Create(_inputTop, NSLayoutAttribute.Width, NSLayoutRelation.Equal, null, NSLayoutAttribute.Width, 1, 150.0f));
 
             containerBottomView.ConstrainLayout(() => _inputBotton.Frame.GetCenterX() == containerBottomView.Frame.GetCenterX() &&
-                                                      _inputBotton.Frame.GetCenterY() == containerBottomView.Frame.GetCenterY(), _inputBotton);
+                                          _inputBotton.Frame.GetCenterY() == containerBottomView.Frame.GetCenterY(), _inputBotton);
+
+            View.AddConstraint(NSLayoutConstraint.Create(_inputBotton, NSLayoutAttribute.Width, NSLayoutRelation.Equal, null, NSLayoutAttribute.Width, 1, 150.0f));
+
+            _inputTop.ShouldReturn = (textField) =>
+            {
+                textField.ResignFirstResponder();
+                return true;
+            };
+
+            _inputBotton.ShouldReturn = (textField) =>
+            {
+                textField.ResignFirstResponder();
+                return true;
+            };
 
             var rect = new CGRect(0, 0, 100, 150);
 
@@ -115,8 +133,8 @@ namespace EOS.UI.iOS.Sandbox
             {
                 themeTextField.Text = e.Key;
                 _inputTop.GetThemeProvider().SetCurrentTheme(e.Value);
-                _inputTop.UpdateAppearance();
-                _inputBotton.UpdateAppearance();
+                _inputTop.ResetCustomization();
+                _inputBotton.ResetCustomization();
 
                 ResetFields();
             };
