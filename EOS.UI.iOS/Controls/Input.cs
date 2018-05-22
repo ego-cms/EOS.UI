@@ -18,6 +18,9 @@ namespace EOS.UI.iOS.Controls
     {
         #region fields
 
+        private nfloat _initX;
+        private nfloat _initY;
+        private nfloat _initWidth;
         private UIImageView _leftImageView;
         private UIView _leftImageContainer;
         private CALayer _underlineLayer;
@@ -240,9 +243,6 @@ namespace EOS.UI.iOS.Controls
             get => _text;
             set
             {
-                if(_text == value)
-                    return;
-
                 _text = value;
                 var attributedString = AttributedText != null ?
                     new NSMutableAttributedString(AttributedText) :
@@ -275,6 +275,7 @@ namespace EOS.UI.iOS.Controls
 
         private void Initialize()
         {
+            BackgroundColor = UIColor.White;
             _leftImageView = new UIImageView(new CGRect(0, 0, InputConstants.IconSize, InputConstants.IconSize));
             _leftImageContainer = new UIView(new CGRect(0, 0, InputConstants.IconSize + InputConstants.IconPadding, InputConstants.IconSize));
             _leftImageContainer.AddSubview(_leftImageView);
@@ -382,8 +383,15 @@ namespace EOS.UI.iOS.Controls
         {
             base.LayoutSubviews();
 
-            if(Bounds.Height < 35)
-                Bounds = new CGRect(0, 0, TextInputView.Bounds.Width, 35);
+            if(_initX == 0 && _initY == 0)
+            {
+                _initX = Frame.X;
+                _initY = Frame.Y;
+                _initWidth = Frame.Width;
+            }
+
+            if(Frame.Height < 35)
+                Frame = new CGRect(_initX, _initY, _initWidth, 35);
 
             if(_underlineLayer == null)
             {
@@ -393,7 +401,7 @@ namespace EOS.UI.iOS.Controls
                     BorderWidth = InputConstants.UnderlineHeight,
                     Frame = new CGRect(
                         0,
-                        Layer.Bounds.Height - InputConstants.UnderlineHeight,
+                        Bounds.Height - InputConstants.UnderlineHeight,
                         Bounds.Size.Width,
                         InputConstants.UnderlineHeight
                     ),
@@ -416,7 +424,7 @@ namespace EOS.UI.iOS.Controls
                 var height = LeftView.Bounds.Height;
                 underlineLayer.Frame = new CGRect(
                         0,
-                        Layer.Bounds.Height - InputConstants.UnderlineHeight,
+                        Bounds.Height - InputConstants.UnderlineHeight,
                         Bounds.Size.Width,
                         InputConstants.UnderlineHeight
                     );
@@ -463,9 +471,9 @@ namespace EOS.UI.iOS.Controls
             if(!IsEOSCustomizationIgnored)
             {
                 var provider = GetThemeProvider();
-                Font = provider.GetEOSProperty<UIFont>(this, EOSConstants.Font);
                 LetterSpacing = provider.GetEOSProperty<int>(this, EOSConstants.LetterSpacing);
                 TextSize = provider.GetEOSProperty<int>(this, EOSConstants.TextSize);
+                Font = provider.GetEOSProperty<UIFont>(this, EOSConstants.Font);
                 TextColor = provider.GetEOSProperty<UIColor>(this, EOSConstants.SecondaryColor);
                 TextColorDisabled = provider.GetEOSProperty<UIColor>(this, EOSConstants.SecondaryColorDisabled);
                 PlaceholderColor = provider.GetEOSProperty<UIColor>(this, EOSConstants.HintTextColor);
@@ -477,7 +485,6 @@ namespace EOS.UI.iOS.Controls
                 UnderlineColorUnfocused = provider.GetEOSProperty<UIColor>(this, EOSConstants.UnderlineColorUnfocused);
                 UnderlineColorDisabled = provider.GetEOSProperty<UIColor>(this, EOSConstants.UnderlineColorDisabled);
                 IsEOSCustomizationIgnored = false;
-                SizeToFit();
             }
         }
 
