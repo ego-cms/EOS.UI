@@ -126,12 +126,15 @@ namespace EOS.UI.iOS.Components
             }
         }
 
+        private UIFont _buttonFont;
         public UIFont ButtonNameFont
         {
-            get => sectionButton.Font;
+            get => _buttonFont;
             set
             {
-                sectionButton.Font = value;
+                _buttonFont = value.WithSize(ButtonTextSize);
+                sectionButton.SetFont(_buttonFont);
+                sectionButton.Font = _buttonFont;
                 IsEOSCustomizationIgnored = true;
             }
         }
@@ -288,7 +291,6 @@ namespace EOS.UI.iOS.Components
                 underlineLayer.Frame = new CGRect(0, 0, Frame.Size.Width, isVisible ? BorderWidth : 0);
             }
         }
-
 
         #endregion
 
