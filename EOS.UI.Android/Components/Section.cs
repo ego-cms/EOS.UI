@@ -218,10 +218,13 @@ namespace EOS.UI.Android.Components
         {
             if(HasBorder)
             {
-                var borderedBackground = new GradientDrawable();
-                borderedBackground.SetColor(BackgroundColor);
-                borderedBackground.SetStroke(BorderWidth, BorderColor);
-                return borderedBackground;
+                var border = new GradientDrawable();
+                border.SetStroke(BorderWidth, BorderColor);
+                var background = new ColorDrawable(BackgroundColor);
+                Drawable[] layers = { background, border };
+                var layerDrawable = new LayerDrawable(layers);
+                layerDrawable.SetLayerInset(1, -BorderWidth, 0, -BorderWidth, -BorderWidth);
+                return layerDrawable;
             }
             else
             {
