@@ -275,7 +275,6 @@ namespace EOS.UI.iOS.Controls
 
         private void Initialize()
         {
-            BackgroundColor = UIColor.White;
             _leftImageView = new UIImageView(new CGRect(0, 0, InputConstants.IconSize, InputConstants.IconSize));
             _leftImageContainer = new UIView(new CGRect(0, 0, InputConstants.IconSize + InputConstants.IconPadding, InputConstants.IconSize));
             _leftImageContainer.AddSubview(_leftImageView);
