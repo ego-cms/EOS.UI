@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using CoreGraphics;
 using EOS.UI.iOS.Helpers;
 using UIFrameworks.Shared.Themes.Helpers;
 using UIFrameworks.Shared.Themes.Interfaces;
@@ -28,6 +29,20 @@ namespace EOS.UI.iOS.Themes
             { EOSConstants.UnderlineColorFocused, UIColor.Black },
             { EOSConstants.UnderlineColorUnfocused, UIColor.DarkGray },
             { EOSConstants.UnderlineColorDisabled, UIColor.LightGray },
+            { EOSConstants.CalendarImage, "icCalendar"},
+            { EOSConstants.FabProgressPreloaderImage, "icPreloader"},
+            { EOSConstants.FabProgressPrimaryColor, UIColor.FromRGB(255, 92, 73)},
+            { EOSConstants.FabProgressPressedColor, UIColor.FromRGB(255, 92, 73)},
+            { EOSConstants.FabProgressDisabledColor, UIColor.FromRGB(255, 92, 73)},
+            { EOSConstants.FabProgressSize, 50},
+            { EOSConstants.CircleProgressShown, true},
+            { EOSConstants.FabShadow,  new ShadowConfig(){
+                        Color = UIColor.Black.CGColor,
+                        Offset = new CGSize(0,0),
+                        Radius = 1,
+                        Opacity = 0.7f
+                    }},
+
         };
     }
 }
