@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Linq;
+using CoreAnimation;
 using CoreGraphics;
 using EOS.UI.iOS.Extensions;
 using EOS.UI.iOS.Themes;
@@ -8,6 +10,7 @@ using Foundation;
 using UIFrameworks.Shared.Themes.Helpers;
 using UIFrameworks.Shared.Themes.Interfaces;
 using UIKit;
+using static EOS.UI.iOS.Helpers.Constants;
 
 namespace EOS.UI.iOS.Components
 {
@@ -16,6 +19,7 @@ namespace EOS.UI.iOS.Components
         #region fields
 
         private bool _subscribed;
+        private CALayer _underlineLayer;
 
         public static readonly NSString Key = new NSString("Section");
         public static readonly UINib Nib;
@@ -252,19 +256,39 @@ namespace EOS.UI.iOS.Components
 
         private void ToggleBorderVisibility()
         {
-            if(HasBorder && BorderColor != null)
+            UpdateDivider(HasBorder);
+            Layer.MasksToBounds = true;
+        }
+
+        public override void LayoutSubviews()
+        {
+            base.LayoutSubviews();
+
+            if(_underlineLayer == null)
             {
-                Layer.BorderColor = BorderColor.CGColor;
-                Layer.BorderWidth = BorderWidth;
+                _underlineLayer = new CALayer
+                {
+                    BackgroundColor = BorderColor == null ? UIColor.Clear.CGColor : BorderColor.CGColor,
+                    Frame = new CGRect(0, 0, Frame.Size.Width, BorderWidth),
+                    Name = InputConstants.BorderName
+                };
+                Layer.AddSublayer(_underlineLayer);
                 Layer.MasksToBounds = true;
             }
-            else
+
+            UpdateDivider(HasBorder);
+        }
+
+        private void UpdateDivider(bool isVisible)
+        {
+            var underlineLayer = Layer.Sublayers.FirstOrDefault(item => item.Name == InputConstants.BorderName);
+            if(underlineLayer != null)
             {
-                Layer.BorderColor = UIColor.Clear.CGColor;
-                Layer.BorderWidth = 0;
-                Layer.MasksToBounds = true;
+                underlineLayer.BackgroundColor = BorderColor == null || !isVisible ? UIColor.Clear.CGColor : BorderColor.CGColor;
+                underlineLayer.Frame = new CGRect(0, 0, Frame.Size.Width, isVisible ? BorderWidth : 0);
             }
         }
+
 
         #endregion
 
