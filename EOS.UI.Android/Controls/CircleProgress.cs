@@ -154,7 +154,6 @@ namespace EOS.UI.Android.Controls
             _percentText.Text = _zeroPercents;
             Orientation = Widget.Orientation.Vertical;
             SetGravity(GravityFlags.CenterHorizontal);
-            view.Click += OnClick;
             UpdateAppearance();
         }
 
@@ -200,18 +199,23 @@ namespace EOS.UI.Android.Controls
             _isRunning = false;
         }
 
-        public void OnClick(object sender, EventArgs e)
+
+        public override bool OnTouchEvent(MotionEvent e)
         {
-            if (!_isRunning)
+            if (e.Action == MotionEventActions.Up || e.Action == MotionEventActions.Cancel)
             {
-                Started?.Invoke(this, EventArgs.Empty);
-                _isRunning = true;
+                if (!_isRunning)
+                {
+                    Started?.Invoke(this, EventArgs.Empty);
+                    _isRunning = true;
+                }
+                else
+                {
+                    Stopped?.Invoke(this, EventArgs.Empty);
+                    _isRunning = false;
+                }
             }
-            else
-            {
-                Stopped?.Invoke(this, EventArgs.Empty);
-                _isRunning = false;
-            }
+            return true;
         }
     }
 }

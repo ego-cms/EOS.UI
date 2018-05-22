@@ -103,8 +103,8 @@ namespace EOS.UI.iOS
             }
         }
 
-        private int _textSize;
-        public int TextSize
+        private float _textSize;
+        public float TextSize
         {
             get => _textSize;
             set

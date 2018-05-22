@@ -16,7 +16,7 @@ using UIFrameworks.Shared.Themes.Interfaces;
 
 namespace EOS.UI.Android.Controls
 {
-    public class FabProgress : ImageButton, IEOSThemeControl, View.IOnTouchListener
+    public class FabProgress : ImageButton, IEOSThemeControl
     {
         private const int _animationDuration = 100;
         private const float _startScale = 0.85f;
@@ -144,7 +144,6 @@ namespace EOS.UI.Android.Controls
         private void Initialize()
         {
             _rotationAnimation = AnimationUtils.LoadAnimation(Application.Context, Resource.Animation.FabRotationAnimation);
-            SetOnTouchListener(this);
             UpdateAppearance();
             Elevation = 10f;
         }
@@ -189,7 +188,7 @@ namespace EOS.UI.Android.Controls
             }
         }
 
-        public bool OnTouch(View v, MotionEvent e)
+        public override bool OnTouchEvent(MotionEvent e)
         {
             if (Enabled)
             {
@@ -202,11 +201,12 @@ namespace EOS.UI.Android.Controls
                 {
                     (Background as GradientDrawable).SetColor(BackgroundColor);
                     Animate().ScaleX(_endScale).ScaleY(_endScale).SetDuration(_animationDuration).Start();
+                    PerformClick();
                 }
             }
-            return false;
+            return true;
         }
-        
+
         public void StartProgressAnimation()
         {
             if (InProgress)
