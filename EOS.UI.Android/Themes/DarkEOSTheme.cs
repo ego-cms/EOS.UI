@@ -28,6 +28,12 @@ namespace UIFrameworks.Android.Themes
             { EOSConstants.UnderlineColorFocused, Color.Black },
             { EOSConstants.UnderlineColorUnfocused, Color.DarkGray },
             { EOSConstants.UnderlineColorDisabled, Color.LightGray },
+            { EOSConstants.CalendarImage, Resource.Drawable.icCalendar },
+            { EOSConstants.FabProgressPreloaderImage, Resource.Drawable.icPreloader },
+            { EOSConstants.FabProgressPrimaryColor, new Color(255, 92, 73) },
+            { EOSConstants.FabProgressDisabledColor, new Color(255, 92, 73) },
+            { EOSConstants.FabProgressPressedColor, new Color(255, 92, 73) },
+            { EOSConstants.CircleProgressShown, true}
         };
     }
 }

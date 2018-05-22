@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    android:background="@android:color/transparent"
+    android:gravity="center_horizontal"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <ProgressBar
+        android:id="@+id/circularProgressbar"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:indeterminate="false"
+        android:max="100"
+        android:secondaryProgress="100"
+        android:progressDrawable="@drawable/circular"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="-23dp" />
+    <View
+        android:id="@+id/centralRectangle"
+        android:layout_height="6dp"
+        android:layout_width="6dp"
+        android:layout_marginBottom="-24dp" />
+    <ImageView
+        android:id="@+id/checkmark"
+        android:src="@drawable/success"
+        android:background="@drawable/successcircle"
+        android:layout_height="40dp"
+        android:layout_width="40dp"
+        android:rotation="-60" />
+    <TextView
+        android:id="@+id/percentText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="10 %"
+        android:layout_marginTop="2dp"
+        android:gravity="center_horizontal" />
+</merge>
