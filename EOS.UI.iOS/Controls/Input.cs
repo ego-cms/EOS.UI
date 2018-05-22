@@ -382,6 +382,9 @@ namespace EOS.UI.iOS.Controls
         {
             base.LayoutSubviews();
 
+            if(Bounds.Height < 35)
+                Bounds = new CGRect(0, 0, TextInputView.Bounds.Width, 35);
+
             if(_underlineLayer == null)
             {
                 _underlineLayer = new CALayer
