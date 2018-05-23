@@ -39,9 +39,9 @@ namespace EOS.UI.iOS.Sandbox.Storyboards
                 new SectionModel()
                 {
                     SectionAction = () => { new UIAlertView ("Action", "Action invoked", null, "Ok", null).Show(); },
-                    HasBorder= true,
-                    HasButton = true
-                },
+                    HasBorder= (bool)EOSThemeProvider.Instance.GetCurrentTheme().ThemeValues[EOSConstants.HasSectionBorder],
+                    HasButton = (bool)EOSThemeProvider.Instance.GetCurrentTheme().ThemeValues[EOSConstants.HasSectionAction]
+            },
                 "First item",
                 "Second item",
                 "Third item"
@@ -102,6 +102,7 @@ namespace EOS.UI.iOS.Sandbox.Storyboards
 
             (sectionTableView.Source as SectionTableSource).SectionModel.ResetCustomization = true;
             sectionTableView.ReloadData();
+            ResetFields();
         }
 
         private void InitResetButton()
@@ -548,22 +549,9 @@ namespace EOS.UI.iOS.Sandbox.Storyboards
 
         private void ResetFields()
         {
-            sectionNameTextField.Text = string.Empty;
-            buttonTextTextField.Text = string.Empty;
-            sectionNameFontTextField.Text = string.Empty;
-            buttonTextFontTextField.Text = string.Empty;
-            sectionNameLetterSpacingTextField.Text = string.Empty;
-            buttonTextLetterSpacingTextField.Text = string.Empty;
-            sectionTextSizeTextField.Text = string.Empty;
-            buttonTextSizeTextField.Text = string.Empty;
-            sectionTextColorTextField.Text = string.Empty;
-            buttonTextColorTextField.Text = string.Empty;
-            backgroundColorTextField.Text = string.Empty;
-            borderColorTextField.Text = string.Empty;
-            paddingTopTextField.Text = string.Empty;
-            paddingBottomTextField.Text = string.Empty;
-            paddingLeftTextField.Text = string.Empty;
-            paddingRightTextField.Text = string.Empty;
+            _textFields.Except(new[] { themeTextField }).ToList().ForEach(field => field.Text = string.Empty);
+            hasButtonSwitch.On = (bool)EOSThemeProvider.Instance.GetCurrentTheme().ThemeValues[EOSConstants.HasSectionAction];
+            hasBorderSwitch.On = (bool)EOSThemeProvider.Instance.GetCurrentTheme().ThemeValues[EOSConstants.HasSectionBorder];
         }
     }
 }

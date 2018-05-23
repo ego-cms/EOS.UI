@@ -59,8 +59,8 @@ namespace EOS.UI.Android.Sandbox.Activities
                 new SectionModel()
                 {
                     SectionAction = () => { Toast.MakeText(BaseContext, "Action invoked", ToastLength.Short).Show(); },
-                    HasBorder= true,
-                    HasButton = true
+                    HasBorder= (bool)EOSThemeProvider.Instance.GetCurrentTheme().ThemeValues[EOSConstants.HasSectionBorder],
+                    HasButton = (bool)EOSThemeProvider.Instance.GetCurrentTheme().ThemeValues[EOSConstants.HasSectionAction]
                 },
                 "First item",
                 "Second item",
@@ -161,6 +161,9 @@ namespace EOS.UI.Android.Sandbox.Activities
                 _themeSpinner.SetSelection(1);
             if(iEOSTheme is DarkEOSTheme)
                 _themeSpinner.SetSelection(2);
+
+            _hasBorderSwitch.Checked = (bool)EOSThemeProvider.Instance.GetCurrentTheme().ThemeValues[EOSConstants.HasSectionBorder];
+            _hasButtonSwitch.Checked = (bool)EOSThemeProvider.Instance.GetCurrentTheme().ThemeValues[EOSConstants.HasSectionAction];
         }
 
         private void ResetCustomValues()
@@ -181,6 +184,8 @@ namespace EOS.UI.Android.Sandbox.Activities
             _paddingButtonSpinner.SetSelection(0);
             _paddingLeftSpinner.SetSelection(0);
             _paddingRightSpinner.SetSelection(0);
+            _hasBorderSwitch.Checked = (bool)EOSThemeProvider.Instance.GetCurrentTheme().ThemeValues[EOSConstants.HasSectionBorder];
+            _hasButtonSwitch.Checked = (bool)EOSThemeProvider.Instance.GetCurrentTheme().ThemeValues[EOSConstants.HasSectionAction];
         }
 
         private void ResetCustomizationSwich_Click(object sender, EventArgs e)
