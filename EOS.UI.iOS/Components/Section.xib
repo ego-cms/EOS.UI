@@ -21,15 +21,12 @@
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mbf-gm-wOK">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="58.5"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="289">
-                                <rect key="frame" x="265" y="14.5" width="55" height="30"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="289">
+                                <rect key="frame" x="214.5" y="14.5" width="105.5" height="30"/>
                                 <state key="normal" title="View All"/>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Section" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="134">
-                                <rect key="frame" x="0.0" y="19.5" width="58" height="20"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="20" id="yW9-a5-cqK"/>
-                                </constraints>
+                                <rect key="frame" x="0.0" y="19" width="211" height="20.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -39,6 +36,8 @@
                             <constraint firstAttribute="trailing" secondItem="289" secondAttribute="trailing" id="a49-SY-XIb"/>
                             <constraint firstItem="134" firstAttribute="leading" secondItem="mbf-gm-wOK" secondAttribute="leading" id="euQ-jh-PIN"/>
                             <constraint firstItem="289" firstAttribute="centerY" secondItem="mbf-gm-wOK" secondAttribute="centerY" id="zAt-MW-59E"/>
+                            <constraint id="626" firstItem="134" firstAttribute="width" secondItem="mbf-gm-wOK" secondAttribute="width" multiplier="0.66"/>
+                            <constraint id="627" firstItem="289" firstAttribute="width" secondItem="mbf-gm-wOK" secondAttribute="width" multiplier="0.33"/>
                         </constraints>
                     </view>
                 </subviews>

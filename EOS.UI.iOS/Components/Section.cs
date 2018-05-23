@@ -235,6 +235,9 @@ namespace EOS.UI.iOS.Components
             {
                 sectionButton.SetAttributedTitle(new NSAttributedString(ButtonText ?? string.Empty), UIControlState.Normal);
                 sectionName.AttributedText = new NSAttributedString(SectionName ?? string.Empty);
+
+                sectionButton.LineBreakMode = UILineBreakMode.TailTruncation;
+
                 if(!_subscribed)
                 {
                     sectionButton.TouchDown += delegate
