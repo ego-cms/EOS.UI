@@ -70,6 +70,11 @@ namespace EOS.UI.Android.Sandbox.Controls
 
         #region utility methods
 
+        public void SetSpinnerSelection(int position)
+        {
+            _spinner?.SetSelection(position);
+        }
+
         private void Initialize(IAttributeSet attrs = null)
         {
             var inflater = (LayoutInflater)Context.GetSystemService(Context.LayoutInflaterService);
