@@ -6,6 +6,31 @@ namespace EOS.UI.Android.Sandbox.Helpers
 {
     public class Constants
     {
+        public static class Fields
+        {
+            public static string Theme = "Theme";
+            public static string Background = "Background";
+            public static string Font = "Font";
+            public static string TextColor = "Text color";
+            public static string LetterSpacing = "Letter spacing";
+            public static string TextSize = "Text size";
+            public static string ConerRadius = "Corner radius";
+            public static string EnabledTextColor = "Enabled text color";
+            public static string DisabledTextColor = "Disabled text color";
+            public static string PressedTextColor = "Pressed text color";
+            public static string EnabledBackground = "Enabled background";
+            public static string DisabledBackground  = "Disabled background";
+            public static string PressedBackground = "Pressed background";
+            public static string HintTextColor = "Hint text color";
+            public static string HintTextColorDisabled = "Hint text color disabled";
+            public static string IconFocused = "Icon focused";
+            public static string IconUnocused = "Icon unfocused";
+            public static string IconDisabled = "Icon disabled";
+            public static string UnderlineColorFocused = "Underline color focused";
+            public static string UnderlineColorUnocused = "Underline color unfocused";
+            public static string UnderlineColorDisabled = "Underline color disabled";
+        };
+
         public static class Colors
         {
             public const string Black = "black";
