@@ -19,7 +19,7 @@ namespace EOS.UI.Android.Components
 
         private SimpleLabel _titleLabel;
         private Button _actionButton;
-        private RelativeLayout _containerLayout;
+        private LinearLayout _containerLayout;
 
         #endregion
 
@@ -27,7 +27,7 @@ namespace EOS.UI.Android.Components
 
         public Section(View itemView) : base(itemView)
         {
-            _containerLayout = itemView.FindViewById<RelativeLayout>(Resource.Id.sectionContainer);
+            _containerLayout = itemView.FindViewById<LinearLayout>(Resource.Id.sectionContainer);
             _titleLabel = itemView.FindViewById<SimpleLabel>(Resource.Id.sectionTitle);
             _actionButton = itemView.FindViewById<Button>(Resource.Id.sectionButton);
 
