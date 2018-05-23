@@ -15,6 +15,7 @@ using EOS.UI.Shared.Themes.Interfaces;
 using UIFrameworks.Android.Themes;
 using UIFrameworks.Shared.Themes.Helpers;
 using UIFrameworks.Shared.Themes.Interfaces;
+using Android.Animation;
 
 namespace EOS.UI.Android.Controls
 {
@@ -27,6 +28,9 @@ namespace EOS.UI.Android.Controls
         private const double _paddingRatio = 0.24;
         private Animation _rotationAnimation;
         private const int _cornerRadius = 200;
+        private const int _shadowLayerIndex = 0;
+        private const int _backgroundLayerIndex= 1;
+        private const int _imageLayerIndex = 2;
         
 
         public bool IsEOSCustomizationIgnored { get; private set; }
@@ -37,7 +41,7 @@ namespace EOS.UI.Android.Controls
             set
             {
                 base.Enabled = value;
-                (Background as GradientDrawable).SetColor(value ? BackgroundColor : DisabledBackgroundColor);
+                SetBackgroundColor(value ? BackgroundColor : DisabledBackgroundColor);
             }
         }
 
@@ -49,7 +53,7 @@ namespace EOS.UI.Android.Controls
             {
                 _backgroundColor = value;
                 if (Enabled)
-                    (Background as GradientDrawable).SetColor(value);
+                    SetBackgroundColor(value);
                 IsEOSCustomizationIgnored = true;
             }
         }
@@ -62,7 +66,7 @@ namespace EOS.UI.Android.Controls
             {
                 _disabledBackgroundColor = value;
                 if (!Enabled)
-                    (Background as GradientDrawable).SetColor(DisabledBackgroundColor);
+                    SetBackgroundColor(DisabledBackgroundColor);
                 IsEOSCustomizationIgnored = true;
             }
         }
@@ -102,7 +106,7 @@ namespace EOS.UI.Android.Controls
             set
             {
                 _image = value;
-                SetImageDrawable(value);
+                //SetImageDrawable(value);
                 IsEOSCustomizationIgnored = true;
             }
         }
@@ -128,6 +132,7 @@ namespace EOS.UI.Android.Controls
             {
                 _shadowConfig = value;
                 IsEOSCustomizationIgnored = true;
+                SetShadow(value);
                 //this.SetElevation(_shadowConfig.Radius, _shadowConfig.Color, _shadowConfig.Offset.X, _shadowConfig.Offset.Y);
             }
         }
@@ -202,6 +207,14 @@ namespace EOS.UI.Android.Controls
                 SetPadding(_startPadding, _startPadding, _startPadding, _startPadding);
                 IsEOSCustomizationIgnored = false;
 
+                ShadowConfig = new ShadowConfig
+                {
+                    Color = Color.Blue,
+                    Offset = new Offset(5, 5),
+                    Radius = 10,
+                    Opacity = 100
+                };
+
                 //var config = new ShadowConfig()
                 //{
                 //    Color = Color.Black,
@@ -219,27 +232,55 @@ namespace EOS.UI.Android.Controls
             {
                 if (e.Action == MotionEventActions.Down)
                 {
-                    (Background as GradientDrawable).SetColor(PressedBackgroundColor);
+                    SetBackgroundColor(PressedBackgroundColor);
                     Animate().ScaleX(_startScale).ScaleY(_startScale).SetDuration(_animationDuration).Start();
                 }
                 if (e.Action == MotionEventActions.Up || e.Action == MotionEventActions.Cancel)
                 {
-                    (Background as GradientDrawable).SetColor(BackgroundColor);
+                    SetBackgroundColor(BackgroundColor);
                     Animate().ScaleX(_endScale).ScaleY(_endScale).SetDuration(_animationDuration).Start();
                 }
             }
             return false;
         }
-        
+
         public void StartProgressAnimation()
         {
             if (InProgress)
                 return;
-            SetImageDrawable(PreloaderImage);
-            StartAnimation(_rotationAnimation);
+            
+            var layer = Background as LayerDrawable;
+            if (layer != null)
+            {
+                var d = CreateRotateDrawable(PreloaderImage);
+                SetImageDrawable(d);
+                d.Mutate();
+                var anim = ObjectAnimator.OfInt(d, "level", 0, 10000);
+                anim.SetDuration(1000);
+                anim.SetInterpolator(new LinearInterpolator());
+                anim.RepeatCount = ValueAnimator.Infinite;
+                anim.Start();
+            }
+            else
+            {
+                StartAnimation(_rotationAnimation);
+            }
             InProgress = true;
         }
-        
+
+        private Drawable CreateRotateDrawable(Drawable childDrawable)
+        {
+            var drawable = new RotateDrawable();
+            drawable.Drawable = childDrawable;
+            //drawable.FromDegrees = 0;
+            //drawable.ToDegrees = 360;
+            drawable.PivotXRelative = true;
+            drawable.PivotX = 0.5f;
+            drawable.PivotYRelative = true;
+            drawable.PivotY = 0.5f;
+            return drawable;
+        }
+
         public void StopProgressAnimation()
         {
             if (!InProgress)
@@ -252,6 +293,11 @@ namespace EOS.UI.Android.Controls
         
         private void SetShadow(ShadowConfig config)
         {
+            if (LayoutParameters == null)
+                return;
+
+            //SetImageDrawable(null);
+
             GradientDrawable shadow = null;
             
             var colors1 = new[] { config.Color.ToArgb(), config.Color.ToArgb() };
@@ -263,32 +309,62 @@ namespace EOS.UI.Android.Controls
             var backColor = new GradientDrawable(GradientDrawable.Orientation.TopBottom, colors);
             backColor.SetCornerRadius(_cornerRadius);
 
-            Drawable[] layers = new Drawable[2];
-            layers[0] = shadow;
-            layers[1] = backColor;
+            Drawable[] layers = new Drawable[3];
+            layers[_shadowLayerIndex] = shadow;
+            layers[_backgroundLayerIndex] = backColor;
+            layers[_imageLayerIndex] = Image;
+
+            var paddings = (int)(_paddingRatio * Width) + config.Radius + Image.IntrinsicWidth / 2;
+            SetPadding(paddings, paddings, paddings, paddings);
 
             LayerDrawable layerList = new LayerDrawable(layers);
-            layerList.SetLayerInset(0, 0, 0, 0, 0);
-            layerList.SetLayerInset(1, 0 - config.Offset.X + config.Radius, config.Offset.Y + config.Radius, config.Offset.X+config.Radius, 0 - config.Offset.Y+config.Radius);
-            
-            
-            LayoutParameters.Width = 110 + config.Radius;
-            LayoutParameters.Height = 110 + config.Radius;
-            SetScaleType(ScaleType.FitCenter);
-            
-            var paddings = (int)(_paddingRatio * 110) + config.Radius;
-            SetPadding(paddings, paddings, paddings, paddings);
+            layerList.SetLayerInset(_shadowLayerIndex, 0, 0, 0, 0);
+            layerList.SetLayerInset(_backgroundLayerIndex, 0 - config.Offset.X + config.Radius, config.Offset.Y + config.Radius, config.Offset.X+config.Radius, 0 - config.Offset.Y+config.Radius);
+            layerList.SetLayerSize(_imageLayerIndex, Image.IntrinsicWidth, Image.IntrinsicHeight);
+            SetInsetForImageLayer(layerList, Image, paddings, config.Offset);
+
             SetBackgroundDrawable(layerList);
         }
-        
-        protected override void OnDraw(Canvas canvas)
+
+        private void SetInsetForImageLayer(LayerDrawable layerList, Drawable drawable, int halfWidth, Offset offset)
         {
-            base.OnDraw(canvas);
-            //LayoutParameters.Width = 170+20;
-            //LayoutParameters.Height = 170+20;
-            //SetScaleType(ScaleType.FitCenter);
-            //var padding = (int)System.Math.Round((_paddingRatio * 100)+20);
-            //SetPadding(padding, padding, padding, padding);
+            var xOffset = halfWidth - drawable.IntrinsicWidth / 2 - offset.X;
+            var yOffset = halfWidth - drawable.IntrinsicWidth / 2 + offset.Y;
+            layerList.SetLayerInset(_imageLayerIndex, xOffset, yOffset, 0, 0);
+        }
+
+        private void SetBackgroundColor(Color color)
+        {
+            //if layer drawable gets background color layer.
+            //Otherwise just set GradientDrawable color.
+            var layer = Background as LayerDrawable;
+            if (layer != null)
+            {
+                var drawable = layer.GetDrawable(_backgroundLayerIndex);
+                (drawable as GradientDrawable).SetColor(color);
+            }
+            else
+            {
+                (Background as GradientDrawable).SetColor(color);
+            }
+        }
+
+        //if layer drawable gets background color layer.
+        //Otherwise just set GradientDrawable color.
+        public override void SetImageDrawable(Drawable drawable)
+        {
+            var layer = Background as LayerDrawable;
+            if (layer != null)
+            {
+                layer.SetDrawable(_imageLayerIndex, drawable);
+                layer.SetLayerSize(_imageLayerIndex, drawable.IntrinsicWidth, drawable.IntrinsicHeight);
+                SetInsetForImageLayer(layer, drawable, Width/2, ShadowConfig.Offset);
+                layer.InvalidateSelf();
+            }
+            else
+            {
+                base.SetImageDrawable(drawable);
+            }
         }
     }
 }
