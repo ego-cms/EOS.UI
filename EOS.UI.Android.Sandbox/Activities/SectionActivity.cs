@@ -169,6 +169,8 @@ namespace EOS.UI.Android.Sandbox.Activities
         private void ResetCustomValues()
         {
             (_sectionRecyclerView.GetAdapter() as SectionAdapter).ResetCustomizatin();
+            _sectionFontSpinner.SetSelection(0);
+            _buttonFontSpinner.SetSelection(0);
             _sectionNameSpinner.SetSelection(0);
             _buttonTextSpinner.SetSelection(0);
             _sectionNameLetterSpacingSpinner.SetSelection(0);
