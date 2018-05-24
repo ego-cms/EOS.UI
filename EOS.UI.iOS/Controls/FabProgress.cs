@@ -4,6 +4,7 @@ using CoreGraphics;
 using EOS.UI.iOS.Extensions;
 using EOS.UI.iOS.Helpers;
 using EOS.UI.iOS.Themes;
+using EOS.UI.Shared.Helpers;
 using EOS.UI.Shared.Themes.Helpers;
 using EOS.UI.Shared.Themes.Interfaces;
 using Foundation;

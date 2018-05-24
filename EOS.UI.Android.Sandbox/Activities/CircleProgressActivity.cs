@@ -8,7 +8,7 @@ using Android.Widget;
 using EOS.UI.Android.Controls;
 using EOS.UI.Android.Sandbox.Adapters;
 using EOS.UI.Android.Sandbox.Helpers;
-using UIFrameworks.Android.Themes;
+using EOS.UI.Shared.Themes.Themes;
 using UIFrameworks.Shared.Themes.Helpers;
 using static EOS.UI.Android.Sandbox.Helpers.Constants;
 using R = Android.Resource;

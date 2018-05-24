@@ -5,6 +5,7 @@ using UIKit;
 using System.Linq;
 using EOS.UI.iOS.Helpers;
 using CoreGraphics;
+using EOS.UI.Shared.Helpers;
 
 namespace EOS.UI.iOS.Sandbox.Helpers
 {

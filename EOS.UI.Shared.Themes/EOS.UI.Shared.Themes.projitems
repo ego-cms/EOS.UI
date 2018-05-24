@@ -15,5 +15,11 @@
     <Compile Include="$(MSBuildThisFileDirectory)Interfaces\IEOSThemeProvider.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Interfaces\IEOSStyle.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Helpers\Enums.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Themes\LightEOSTheme.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Helpers\ShadowConfig.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Themes\DarkEOSTheme.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="$(MSBuildThisFileDirectory)Themes\" />
   </ItemGroup>
 </Project>

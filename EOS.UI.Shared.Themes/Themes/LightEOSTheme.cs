@@ -1,16 +1,27 @@
-﻿using System.Collections.Generic;
-using CoreGraphics;
-using EOS.UI.iOS.Helpers;
+﻿using System;
+using System.Collections.Generic;
+using EOS.UI.Shared.Helpers;
 using UIFrameworks.Shared.Themes.Helpers;
 using UIFrameworks.Shared.Themes.Interfaces;
-using UIKit;
 
-namespace EOS.UI.iOS.Themes
+#if __IOS__
+using CoreGraphics;
+using EOS.UI.iOS.Helpers;
+using UIKit;
+#endif
+
+#if __ANDROID__
+using Android.Graphics;
+using EOS.UI.Android;
+#endif
+
+namespace EOS.UI.Shared.Themes.Themes
 {
     public class LightEOSTheme : IEOSTheme
     {
         public Dictionary<string, object> ThemeValues => new Dictionary<string, object>()
         {
+#if __IOS__
             { EOSConstants.PrimaryColor, UIColor.White },
             { EOSConstants.PrimaryColorDisabled, UIColor.LightGray },
             { EOSConstants.PrimaryColorPressed, UIColor.Gray },
@@ -42,6 +53,34 @@ namespace EOS.UI.iOS.Themes
                         Radius = 2,
                         Opacity = 0.9f
                     }}
+#endif
+
+#if __ANDROID__
+            { EOSConstants.PrimaryColor, Color.White },
+            { EOSConstants.PrimaryColorDisabled, Color.LightCoral},
+            { EOSConstants.PrimaryColorPressed, Color.LightBlue},
+            { EOSConstants.SecondaryColor, Color.Black },
+            { EOSConstants.SecondaryColorDisabled, Color.LightGray},
+            { EOSConstants.SecondaryColorPressed, Color.LightGray},
+            { EOSConstants.TextSize, 17f },
+            { EOSConstants.Font, "Fonts/OpenSansRegular.ttf" },
+            { EOSConstants.CornerRadius, 5f },
+            { EOSConstants.LetterSpacing, 0.1f },
+            { EOSConstants.HintTextColor, Color.LightGray },
+            { EOSConstants.HintTextColorDisabled, Color.Gray },
+            { EOSConstants.LeftImageFocused, Resource.Drawable.AccountCircle },
+            { EOSConstants.LeftImageUnfocused, Resource.Drawable.AccountKey },
+            { EOSConstants.LeftImageDisabled, Resource.Drawable.AccountOff },
+            { EOSConstants.UnderlineColorFocused, Color.White },
+            { EOSConstants.UnderlineColorUnfocused, Color.DarkGray },
+            { EOSConstants.UnderlineColorDisabled, Color.LightGray },
+            { EOSConstants.CalendarImage, Resource.Drawable.icCalendar },
+            { EOSConstants.FabProgressPreloaderImage, Resource.Drawable.icPreloader },
+            { EOSConstants.FabProgressPrimaryColor, new Color(255, 92, 73) },
+            { EOSConstants.FabProgressDisabledColor, new Color(255, 92, 73) },
+            { EOSConstants.FabProgressPressedColor, new Color(255, 92, 73) },
+            { EOSConstants.CircleProgressShown, true}
+#endif
         };
     }
 }
