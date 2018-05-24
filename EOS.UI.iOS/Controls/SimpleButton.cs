@@ -262,14 +262,14 @@ namespace EOS.UI.iOS.Controls
             {
                 var provider = GetThemeProvider();
                 Font = provider.GetEOSProperty<UIFont>(this, EOSConstants.Font);
-                TextColor = provider.GetEOSProperty<UIColor>(this, EOSConstants.SecondaryColor);
-                DisabledTextColor = provider.GetEOSProperty<UIColor>(this, EOSConstants.SecondaryColorDisabled);
-                PressedTextColor = provider.GetEOSProperty<UIColor>(this, EOSConstants.SecondaryColorPressed);
+                TextColor = provider.GetEOSProperty<UIColor>(this, EOSConstants.BrandSecondaryColor);
+                DisabledTextColor = provider.GetEOSProperty<UIColor>(this, EOSConstants.BrandSecondaryColorDisabled);
+                PressedTextColor = provider.GetEOSProperty<UIColor>(this, EOSConstants.BrandSecondaryColorPressed);
                 TextSize = provider.GetEOSProperty<int>(this, EOSConstants.TextSize);
                 LetterSpacing = provider.GetEOSProperty<int>(this, EOSConstants.LetterSpacing);
-                BackgroundColor = provider.GetEOSProperty<UIColor>(this, EOSConstants.PrimaryColor);
-                DisabledBackgroundColor = provider.GetEOSProperty<UIColor>(this, EOSConstants.PrimaryColorDisabled);
-                PressedBackgroundColor = provider.GetEOSProperty<UIColor>(this, EOSConstants.PrimaryColorPressed);
+                BackgroundColor = provider.GetEOSProperty<UIColor>(this, EOSConstants.BrandPrimaryColor);
+                DisabledBackgroundColor = provider.GetEOSProperty<UIColor>(this, EOSConstants.BrandPrimaryColorDisabled);
+                PressedBackgroundColor = provider.GetEOSProperty<UIColor>(this, EOSConstants.BrandPrimaryColorPressed);
                 CornerRadius = provider.GetEOSProperty<int>(this, EOSConstants.CornerRadius);
                 Enabled = base.Enabled;
                 IsEOSCustomizationIgnored = false;

@@ -2,12 +2,15 @@
 {
     public static class EOSConstants
     {
-        public const string PrimaryColor = "primaryColor";
-        public const string PrimaryColorDisabled = "primaryColorDisabled";
-        public const string PrimaryColorPressed = "primaryColorPressed";
-        public const string SecondaryColor = "secondaryColor";
-        public const string SecondaryColorDisabled = "secondaryColorDisabled";
-        public const string SecondaryColorPressed = "secondaryColorPressed";
+        public const string BrandPrimaryColor = "brandPrimaryColor";
+        public const string BrandPrimaryColorDisabled = "brandPrimaryColorDisabled";
+        public const string BrandPrimaryColorPressed = "brandPrimaryColorPressed";
+        public const string BrandSecondaryColor = "brandSecondaryColor";
+        public const string BrandSecondaryColorDisabled = "brandSecondaryColorDisabled";
+        public const string BrandSecondaryColorPressed = "brandSecondaryColorPressed";
+        public const string SemanticSuccessColor = "semanticSuccessColor";
+        public const string SemanticErrorColor = "semanticErrorColor";
+        public const string SemanticWarningColor = "semanticWarningColor";
         public const string TextSize = "textSize";
         public const string CornerRadius = "cornerRadius";
         public const string Font = "font";
@@ -28,8 +31,8 @@
         public const string FabProgressDisabledColor = "fabProgressDisabledColor";
         public const string FabProgressSize = "fabProgressSize";
         public const string FabShadow = "fabShadow";
-		//circle progress
-		public const string CircleProgressShown = "CircleProgressShown";
+        //circle progress
+        public const string CircleProgressShown = "CircleProgressShown";
     }
 
     public static class ControlNames

@@ -23,12 +23,15 @@ namespace EOS.UI.Shared.Themes.Themes
         public Dictionary<string, object> ThemeValues => new Dictionary<string, object>()
         {
 #if __IOS__
-            { EOSConstants.PrimaryColor, UIColor.Black },
-            { EOSConstants.PrimaryColorDisabled, UIColor.Gray },
-            { EOSConstants.PrimaryColorPressed, UIColor.LightGray },
-            { EOSConstants.SecondaryColor, UIColor.White },
-            { EOSConstants.SecondaryColorDisabled, UIColor.LightTextColor},
-            { EOSConstants.SecondaryColorPressed, UIColor.LightTextColor},
+            { EOSConstants.BrandPrimaryColor, UIColor.FromRGB(60,109,240) },
+            { EOSConstants.BrandPrimaryColorDisabled, UIColor.Gray },
+            { EOSConstants.BrandPrimaryColorPressed, UIColor.LightGray },
+            { EOSConstants.BrandSecondaryColor, UIColor.White },
+            { EOSConstants.BrandSecondaryColorDisabled, UIColor.LightTextColor},
+            { EOSConstants.BrandSecondaryColorPressed, UIColor.LightTextColor},
+            { EOSConstants.SemanticSuccessColor, UIColor.FromRGB(0,170,94)},
+            { EOSConstants.SemanticErrorColor, UIColor.FromRGB(255,92,73)},
+            { EOSConstants.SemanticWarningColor, UIColor.FromRGB(254,213,0)},
             { EOSConstants.TextSize, 17 },
             { EOSConstants.Font, UIFont.SystemFontOfSize(17) },
             { EOSConstants.CornerRadius, 3 },
@@ -57,12 +60,15 @@ namespace EOS.UI.Shared.Themes.Themes
 #endif
 
 #if __ANDROID__
-            { EOSConstants.PrimaryColor, Color.Black },
-            { EOSConstants.PrimaryColorDisabled, Color.LightBlue},
-            { EOSConstants.PrimaryColorPressed, Color.LightCoral},
-            { EOSConstants.SecondaryColor, Color.White },
-            { EOSConstants.SecondaryColorDisabled, Color.LightGray},
-            { EOSConstants.SecondaryColorPressed, Color.LightGray},
+            { EOSConstants.BrandPrimaryColor, Color.Rgb(60,109,240) },
+            { EOSConstants.BrandPrimaryColorDisabled, Color.LightBlue},
+            { EOSConstants.BrandPrimaryColorPressed, Color.LightCoral},
+            { EOSConstants.BrandSecondaryColor, Color.White },
+            { EOSConstants.BrandSecondaryColorDisabled, Color.LightGray},
+            { EOSConstants.BrandSecondaryColorPressed, Color.LightGray},
+            { EOSConstants.SemanticSuccessColor, Color.Rgb(0,170,94)},
+            { EOSConstants.SemanticErrorColor, Color.Rgb(255,92,73)},
+            { EOSConstants.SemanticWarningColor, Color.Rgb(254,213,0)},
             { EOSConstants.TextSize, 22f },
             { EOSConstants.Font, "Fonts/OpenSansRegular.ttf" },
             { EOSConstants.CornerRadius, 20f },

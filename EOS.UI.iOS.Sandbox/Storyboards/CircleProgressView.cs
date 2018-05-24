@@ -77,7 +77,7 @@ namespace EOS.UI.iOS.Sandbox
                 _circleProgress.ResetCustomization();
                 _textFields.Except(new[] { themeField }).ToList().ForEach(f => f.Text = String.Empty);
             };
-            themeField.Text = _circleProgress.GetThemeProvider().GetCurrentTheme().ThemeValues[EOSConstants.PrimaryColor] == UIColor.White ?
+            themeField.Text = _circleProgress.GetThemeProvider().GetCurrentTheme().ThemeValues[EOSConstants.BrandPrimaryColor] == UIColor.White ?
                 "Light" : "Dark";
             themePicker.Delegate = themePickerDelegate;
             themeField.InputView = themePicker;

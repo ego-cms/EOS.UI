@@ -141,7 +141,7 @@ namespace EOS.UI.iOS.Sandbox
 
                 ResetFields();
             };
-            themeTextField.Text = _inputTop.GetThemeProvider().GetCurrentTheme().ThemeValues[EOSConstants.PrimaryColor] == UIColor.White ?
+            themeTextField.Text = _inputTop.GetThemeProvider().GetCurrentTheme().ThemeValues[EOSConstants.BrandPrimaryColor] == UIColor.White ?
                 "Light" : "Dark";
 
             themePicker.Delegate = themePickerDelegate;
