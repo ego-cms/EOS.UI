@@ -156,9 +156,7 @@
       <Visible>false</Visible>
     </ImageAsset>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Resources\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <InterfaceDefinition Include="LaunchScreen.storyboard" />
     <InterfaceDefinition Include="Storyboards\Main.storyboard" />
@@ -170,11 +168,18 @@
     <InterfaceDefinition Include="Storyboards\CircleProgressView.storyboard" />
   </ItemGroup>
   <ItemGroup>
+    <InterfaceDefinition Include="Controls\DropDown.xib">
+      <SubType>Designer</SubType>
+    </InterfaceDefinition>
     <None Include="Info.plist" />
     <None Include="Entitlements.plist" />
     <InterfaceDefinition Include="Storyboards\SimpleLabelView.storyboard" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controls\DropDown.cs" />
+    <Compile Include="Controls\DropDown.designer.cs">
+      <DependentUpon>DropDown.cs</DependentUpon>
+    </Compile>
     <Compile Include="Main.cs" />
     <Compile Include="AppDelegate.cs" />
     <Compile Include="TableSources\ControlTableSource.cs" />
