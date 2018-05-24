@@ -49,6 +49,7 @@ namespace EOS.UI.iOS.Sandbox.TableSources
             var customSection = (header as Section);
 
             customSection.Initialize();
+            customSection.SectionAction = SectionModel.SectionAction;
 
             if(SectionModel.ResetCustomization)
             {
@@ -59,7 +60,6 @@ namespace EOS.UI.iOS.Sandbox.TableSources
             {
                 customSection.HasBorder = SectionModel.HasBorder;
                 customSection.HasButton = SectionModel.HasButton;
-                customSection.SectionAction = SectionModel.SectionAction;
 
                 if(!string.IsNullOrEmpty(SectionModel.SectionName))
                     customSection.SectionName = SectionModel.SectionName;
