@@ -54,8 +54,8 @@ namespace EOS.UI.iOS.Sandbox
 
             var themePicker = new UIPickerView(rect);
             themePicker.ShowSelectionIndicator = true;
-			themePicker.DataSource = new DictionaryPickerSource<string, EOSThemeEnumeration>(Constants.Themes);
-            var themePickerDelegate = new DictionaryPickerDelegate<String ,EOSThemeEnumeration>(Constants.Themes);
+            themePicker.DataSource = new DictionaryPickerSource<string, EOSThemeEnumeration>(Constants.Themes);
+            var themePickerDelegate = new DictionaryPickerDelegate<String, EOSThemeEnumeration>(Constants.Themes);
             themePickerDelegate.DidSelected += (object sender, KeyValuePair<string, EOSThemeEnumeration> e) =>
             {
                 themeField.Text = e.Key;
@@ -90,7 +90,7 @@ namespace EOS.UI.iOS.Sandbox
             var fontPicker = new UIPickerView(rect);
             fontPicker.ShowSelectionIndicator = true;
             fontPicker.DataSource = new ValuePickerSource<UIFont>(Constants.Fonts);
-			var fontPickerDelegate = new ValuePickerDelegate<UIFont>(Constants.Fonts);
+            var fontPickerDelegate = new ValuePickerDelegate<UIFont>(Constants.Fonts);
             fontPickerDelegate.DidSelected += (object sender, UIFont e) =>
             {
                 label.Font = e;
@@ -145,7 +145,7 @@ namespace EOS.UI.iOS.Sandbox
             var fontSizePicker = new UIPickerView(rect);
             fontSizePicker.ShowSelectionIndicator = true;
             fontSizePicker.DataSource = new ValuePickerSource<int>(Constants.FontSizeValues);
-			var fontSizePickerDelegate = new ValuePickerDelegate<int>(Constants.FontSizeValues);
+            var fontSizePickerDelegate = new ValuePickerDelegate<int>(Constants.FontSizeValues);
             fontSizePickerDelegate.DidSelected += (object sender, int e) =>
             {
                 label.TextSize = e;
@@ -162,8 +162,8 @@ namespace EOS.UI.iOS.Sandbox
 
             var cornerRadiusPicker = new UIPickerView(rect);
             cornerRadiusPicker.ShowSelectionIndicator = true;
-			cornerRadiusPicker.DataSource = new ValuePickerSource<int>(Constants.CornerRadiusValues);
-			var cornerRadiusPickerDelegate = new ValuePickerDelegate<int>(Constants.CornerRadiusValues);
+            cornerRadiusPicker.DataSource = new ValuePickerSource<int>(Constants.CornerRadiusValues);
+            var cornerRadiusPickerDelegate = new ValuePickerDelegate<int>(Constants.CornerRadiusValues);
             cornerRadiusPickerDelegate.DidSelected += (object sender, int e) =>
             {
                 label.CornerRadius = e;

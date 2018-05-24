@@ -1,5 +1,5 @@
 ﻿using System;
-using System.Threading.Tasks;
+using CoreAnimation;
 using CoreGraphics;
 using EOS.UI.iOS.Extensions;
 using EOS.UI.iOS.Helpers;
@@ -16,7 +16,15 @@ namespace EOS.UI.iOS.Controls
     [Register("FabProgress")]
     public class FabProgress : UIButton, IEOSThemeControl
     {
-        private bool _isOpen;
+        //image padding percent
+        private const double _paddingRatio= 0.24;
+        private const string _rotationAnimationKey = "rotationAnimation";
+        private const double _360degrees = 6.28319;//value in radians
+        private const float _startScale = 0.85f;
+        private const float _endScale = 1.0f;
+        private const double _animationDuration = 0.1;
+        
+        private CABasicAnimation _rotationAnimation;
 
         public bool IsEOSCustomizationIgnored { get; private set; }
 
@@ -27,7 +35,7 @@ namespace EOS.UI.iOS.Controls
             set
             {
                 _backgroundColor = value;
-                if(Enabled)
+                if (Enabled)
                     base.BackgroundColor = value;
                 IsEOSCustomizationIgnored = true;
             }
@@ -113,25 +121,53 @@ namespace EOS.UI.iOS.Controls
             }
         }
 
+        private ShadowConfig _shadowConfig;
+        public ShadowConfig ShadowConfig
+        {
+            get => _shadowConfig;
+            set
+            {
+                _shadowConfig = value;
+                IsEOSCustomizationIgnored = true;
+                SetShadowConfig(_shadowConfig);
+            }
+        }
+        
+        public bool InProgress { get; private set; }
+
         public FabProgress()
         {
+            TouchDown += (sender, e) => 
+            {
+                UIView.Animate(_animationDuration, () =>
+                {
+                    Transform = CGAffineTransform.MakeScale(_startScale, _startScale);
+                });
+            };
+            
             TouchUpInside += (sender, e) =>
             {
-                if (!_isOpen)
-                    OpenAnimate();
-                else
-                    CloseAnimate();
+                UIView.Animate(_animationDuration, () =>
+                {
+                    Transform = CGAffineTransform.MakeScale(_endScale, _endScale);
+                });
             };
+            _rotationAnimation = new CABasicAnimation();
+            _rotationAnimation.KeyPath = "transform.rotation.z";
+            _rotationAnimation.From = new NSNumber(0);
+            _rotationAnimation.To = new NSNumber(_360degrees);
+            _rotationAnimation.Duration = 1;
+            _rotationAnimation.Cumulative = true;
+            _rotationAnimation.RepeatCount = Int32.MaxValue;
             UpdateAppearance();
         }
 
-        public void SetShadowConfig(ShadowConfig config)
+        private void SetShadowConfig(ShadowConfig config)
         {
             Layer.ShadowColor = config.Color;
             Layer.ShadowOffset = config.Offset;
             Layer.ShadowRadius = config.Radius;
             Layer.ShadowOpacity = config.Opacity;
-            IsEOSCustomizationIgnored = true;
         }
 
         public IEOSStyle GetCurrentEOSStyle()
@@ -166,9 +202,27 @@ namespace EOS.UI.iOS.Controls
                 Image = UIImage.FromBundle(provider.GetEOSProperty<string>(this, EOSConstants.CalendarImage));
                 PreloaderImage = UIImage.FromBundle(provider.GetEOSProperty<string>(this, EOSConstants.FabProgressPreloaderImage));
                 ButtonSize = provider.GetEOSProperty<int>(this, EOSConstants.FabProgressSize);
-                SetShadowConfig(provider.GetEOSProperty<ShadowConfig>(this, EOSConstants.FabShadow));
+                ShadowConfig = provider.GetEOSProperty<ShadowConfig>(this, EOSConstants.FabShadow);
                 IsEOSCustomizationIgnored = false;
             }
+        }
+        
+        public void StartProgressAnimation()
+        {
+            if (InProgress)
+                return;
+            SetImage(PreloaderImage);
+            ImageView.Layer.AddAnimation(_rotationAnimation, _rotationAnimationKey);
+            InProgress = true;
+        }
+        
+        public void StopProgressAnimation()
+        {
+            if (!InProgress)
+                return;
+            ImageView.Layer.RemoveAnimation(_rotationAnimationKey);
+            SetImage(Image);
+            InProgress = false;
         }
 
         private void UpdateSize()
@@ -178,44 +232,9 @@ namespace EOS.UI.iOS.Controls
             Layer.CornerRadius = ButtonSize / 2;
         }
 
-        private async void OpenAnimate()
-        {
-            BeginAnimations("a1");
-            SetAnimationDuration(0.1);
-            SetImage(PreloaderImage);
-            Transform = CGAffineTransform.MakeScale(0.9f, 0.9f);
-            CommitAnimations();
-            await Task.Delay(100);
-            BeginAnimations("a2");
-            SetAnimationDuration(0.2);
-            Transform = CGAffineTransform.MakeScale(2f, 2f);
-            Transform = CGAffineTransform.MakeScale(1, 1);
-            Transform = CGAffineTransform.MakeRotation(3.14f);
-            CommitAnimations();
-            _isOpen = true;
-        }
-
-        private async void CloseAnimate()
-        {
-            BeginAnimations("a3");
-            SetAnimationDuration(0.1);
-            Transform = CGAffineTransform.MakeScale(0.9f, 0.9f);
-            CommitAnimations();
-            await Task.Delay(100);
-            BeginAnimations("a4");
-            SetAnimationDuration(0.2);
-            Transform = CGAffineTransform.MakeScale(2f, 2f);
-            Transform = CGAffineTransform.MakeScale(1, 1);
-            Transform = CGAffineTransform.MakeRotation(0f);
-            CommitAnimations();
-            await Task.Delay(150);
-            SetImage(Image);
-            _isOpen = false;
-        }
-
         private void UpdateImageInsets()
         {
-            var padding =(nfloat)(ButtonSize * 0.15);
+            var padding = (nfloat)(ButtonSize * _paddingRatio);
             var insets = new UIEdgeInsets(padding, padding, padding, padding);
             ImageEdgeInsets = insets;
         }

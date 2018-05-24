@@ -131,6 +131,9 @@ namespace EOS.UI.iOS.Sandbox
 			var themePickerDelegate = new DictionaryPickerDelegate<String, EOSThemeEnumeration>(Constants.Themes);
             themePickerDelegate.DidSelected += (object sender, KeyValuePair<string, EOSThemeEnumeration> e) =>
             {
+                _inputTop.Text = string.Empty;
+                _inputBotton.Text = string.Empty;
+
                 themeTextField.Text = e.Key;
                 _inputTop.GetThemeProvider().SetCurrentTheme(e.Value);
                 _inputTop.ResetCustomization();
@@ -458,6 +461,8 @@ namespace EOS.UI.iOS.Sandbox
         {
             resetButton.TouchUpInside += (sender, e) =>
             {
+                _inputTop.Text = string.Empty;
+                _inputBotton.Text = string.Empty;
                 _inputTop.ResetCustomization();
                 _inputBotton.ResetCustomization();
                 ResetFields();

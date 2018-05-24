@@ -105,6 +105,8 @@
     <Compile Include="RecyclerImplementation\ControlsViewHolder.cs" />
     <Compile Include="Resources\Resource.designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Activities\CircleProgressActivity.cs" />
+    <Compile Include="Helpers\PlatformTimer.cs" />
   </ItemGroup>
   <ItemGroup>
     <AndroidAsset Include="Assets\Fonts\Amita.ttf" />
@@ -135,6 +137,7 @@
       <SubType>Designer</SubType>
     </AndroidResource>
     <AndroidAsset Include="Assets\Fonts\academyEngraved.ttf" />
+    <AndroidResource Include="Resources\layout\CircleProgressLayout.axml" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\layout\Main.axml">

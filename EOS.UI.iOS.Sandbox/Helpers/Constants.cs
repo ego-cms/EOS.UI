@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using EOS.UI.Shared.Themes.Helpers;
 using UIKit;
 using System.Linq;
+using EOS.UI.iOS.Helpers;
+using CoreGraphics;
 
 namespace EOS.UI.iOS.Sandbox.Helpers
 {
@@ -29,7 +31,7 @@ namespace EOS.UI.iOS.Sandbox.Helpers
 
         public static List<int> FabProgressSizes;
 
-		public static List<UIFont> Fonts;
+        public static List<UIFont> Fonts;
 
         public static Dictionary<string, EOSThemeEnumeration> Themes = new Dictionary<string, EOSThemeEnumeration>()
         {
@@ -37,12 +39,12 @@ namespace EOS.UI.iOS.Sandbox.Helpers
             { "Dark", EOSThemeEnumeration.Dark },
         };
 
-		public static List<string> Icons = new List<string>()
+        public static List<string> Icons = new List<string>()
         {
-			{ "account-circle"},
-			{ "account-key"},
+            { "account-circle"},
+            { "account-key"},
             { "account-off"},
-			{ "airbaloon"},
+            { "airbaloon"},
             { "android"},
             { "apple"}
         };
@@ -51,6 +53,22 @@ namespace EOS.UI.iOS.Sandbox.Helpers
             {
                 { "Enabled", true },
                 { "Disabled", false },
+            };
+
+        public static Dictionary<string, ShadowConfig> ShadowConfigs = new Dictionary<string, ShadowConfig>()
+            {
+                {"Shadow 1", new ShadowConfig(){
+                        Color = UIColor.Black.CGColor,
+                        Offset = new CGSize(0,0),
+                        Radius = 4,
+                        Opacity = 0.7f
+                    }},
+                {"Shadow 2", new ShadowConfig(){
+                        Color = UIColor.Black.CGColor,
+                        Offset = new CGSize(0,0),
+                        Radius = 8,
+                        Opacity = 0.9f
+                    }}
             };
 
         static Constants()
@@ -67,9 +85,10 @@ namespace EOS.UI.iOS.Sandbox.Helpers
             }
 
             Fonts = Fonts.OrderBy(f => f.Name).ToList();
-            FontSizeValues = Enumerable.Range(10, 31).Where(i=>i%2==0).ToList();
-            CornerRadiusValues = Enumerable.Range(1, 10).Where(i => (i-10) % 4 == 0).ToList();
+            FontSizeValues = Enumerable.Range(10, 31).Where(i => i % 2 == 0).ToList();
+            CornerRadiusValues = Enumerable.Range(1, 10).Where(i => (i - 10) % 4 == 0).ToList();
             LetterSpacingValues = Enumerable.Range(1, 10).ToList();
+            FabProgressSizes = Enumerable.Range(40, 50).Where(i => i % 10 == 0).ToList();
         }
     }
 }

@@ -251,6 +251,11 @@ namespace EOS.UI.Android.Controls
             SetHorizontallyScrolling(true);
             SetLines(1);
             Ellipsize = A.Text.TextUtils.TruncateAt.End;
+
+            var denisty = Resources.DisplayMetrics.Density;
+            CompoundDrawablePadding = (int)(10 * denisty);
+            SetPaddingRelative(0, (int)(14 * denisty), 0, (int)(14 * denisty));
+
             OnFocusChangeListener = this;
             if(attrs != null)
                 InitializeAttributes(attrs);
