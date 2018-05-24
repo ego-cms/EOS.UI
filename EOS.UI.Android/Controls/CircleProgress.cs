@@ -17,13 +17,14 @@ using Widget = Android.Widget;
 
 namespace EOS.UI.Android.Controls
 {
-    public class CircleProgress : LinearLayout, View.IOnTouchListener, IEOSThemeControl
+    public class CircleProgress : LinearLayout, IEOSThemeControl
     {
         private bool _isRunning;
         private ProgressBar _progressBar;
         private TextView _percentText;
         private ImageView _checkmarkImage;
         private View _centralRectangle;
+        private const string _zeroPercents = "0 %";
 
         public event EventHandler Started;
         public event EventHandler Stopped;
@@ -44,7 +45,7 @@ namespace EOS.UI.Android.Controls
                     _progress = value;
                     if (_checkmarkImage.Visibility == ViewStates.Visible)
                         _checkmarkImage.Visibility = ViewStates.Invisible;
-                    _progressBar.SetProgress(_progress, true);
+                    _progressBar.Progress = _progress;
                     _percentText.Text = $"{value} %";
                     if (_progress == 100)
                     {
@@ -149,9 +150,8 @@ namespace EOS.UI.Android.Controls
             _percentText = view.FindViewById<TextView>(Resource.Id.percentText);
             _checkmarkImage = view.FindViewById<ImageView>(Resource.Id.checkmark);
             _centralRectangle = view.FindViewById<View>(Resource.Id.centralRectangle);
-            view.SetOnTouchListener(this);
             _checkmarkImage.Visibility = ViewStates.Invisible;
-            _percentText.Text = "0 %";
+            _percentText.Text = _zeroPercents;
             Orientation = Widget.Orientation.Vertical;
             SetGravity(GravityFlags.CenterHorizontal);
             UpdateAppearance();
@@ -194,24 +194,28 @@ namespace EOS.UI.Android.Controls
 
         private void ShowCheckmark()
         {
-            Finished?.Invoke(this, new EventArgs());
+            Finished?.Invoke(this, EventArgs.Empty);
             _checkmarkImage.Visibility = ViewStates.Visible;
             _isRunning = false;
         }
 
-        public bool OnTouch(View v, MotionEvent e)
+
+        public override bool OnTouchEvent(MotionEvent e)
         {
-            if (!_isRunning)
+            if (e.Action == MotionEventActions.Up || e.Action == MotionEventActions.Cancel)
             {
-                Started?.Invoke(this, new EventArgs());
-                _isRunning = true;
+                if (!_isRunning)
+                {
+                    Started?.Invoke(this, EventArgs.Empty);
+                    _isRunning = true;
+                }
+                else
+                {
+                    Stopped?.Invoke(this, EventArgs.Empty);
+                    _isRunning = false;
+                }
             }
-            else
-            {
-                Stopped?.Invoke(this, new EventArgs());
-                _isRunning = false;
-            }
-            return false;
+            return true;
         }
     }
 }

@@ -248,8 +248,14 @@ namespace EOS.UI.Android.Controls
 
         private void Initialize(IAttributeSet attrs = null)
         {
-            SetMaxLines(1);
+            SetHorizontallyScrolling(true);
+            SetLines(1);
             Ellipsize = A.Text.TextUtils.TruncateAt.End;
+
+            var denisty = Resources.DisplayMetrics.Density;
+            CompoundDrawablePadding = (int)(10 * denisty);
+            SetPaddingRelative(0, (int)(14 * denisty), 0, (int)(14 * denisty));
+
             OnFocusChangeListener = this;
             if(attrs != null)
                 InitializeAttributes(attrs);
@@ -338,6 +344,8 @@ namespace EOS.UI.Android.Controls
 
         public void OnFocusChange(View v, bool hasFocus)
         {
+            if(hasFocus)
+                SetSelection(string.IsNullOrEmpty(Text) ? 0 : Text.Length - 1);
             Background.SetColorFilter(hasFocus ? UnderlineColorFocused : UnderlineColorUnfocused, PorterDuff.Mode.SrcIn);
             base.SetCompoundDrawablesWithIntrinsicBounds(hasFocus ? LeftImageFocused : LeftImageUnfocused, null, null, null);
         }

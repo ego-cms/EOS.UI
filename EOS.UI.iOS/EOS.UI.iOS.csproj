@@ -89,13 +89,27 @@
     <ImageAsset Include="Assets.xcassets\AccountOff.imageset\Contents.json">
       <Visible>false</Visible>
     </ImageAsset>
-    <ImageAsset Include="Assets.xcassets\icCalendar.imageset\Contents.json" />
-    <ImageAsset Include="Assets.xcassets\icPreloader.imageset\Contents.json" />
-    <ImageAsset Include="Assets.xcassets\icPreloader.imageset\preloader.pdf" />
-    <ImageAsset Include="Assets.xcassets\icCalendar.imageset\icCalendar.pdf" />
-    <ImageAsset Include="Assets.xcassets\icPreloader.imageset\icPreloader.pdf" />
-    <ImageAsset Include="Assets.xcassets\icSuccess.imageset\Contents.json" />
-    <ImageAsset Include="Assets.xcassets\icSuccess.imageset\icSuccess.pdf" />
+    <ImageAsset Include="Assets.xcassets\icCalendar.imageset\Contents.json">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\icPreloader.imageset\Contents.json">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\icPreloader.imageset\preloader.pdf">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\icCalendar.imageset\icCalendar.pdf">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\icPreloader.imageset\icPreloader.pdf">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\icSuccess.imageset\Contents.json">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\icSuccess.imageset\icSuccess.pdf">
+      <Visible>false</Visible>
+    </ImageAsset>
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

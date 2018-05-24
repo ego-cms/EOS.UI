@@ -19,6 +19,7 @@ namespace EOS.UI.iOS
         private readonly nfloat _startAngle = 0f;
         private readonly nfloat _rotatienAngle = -1.57f;
         private readonly nfloat _360angle = 6.28319f;
+        private const string _zeroPercents = "0 %";
         private CAShapeLayer _circleLayer;
 
         public event EventHandler Started;
@@ -102,8 +103,8 @@ namespace EOS.UI.iOS
             }
         }
 
-        private int _textSize;
-        public int TextSize
+        private float _textSize;
+        public float TextSize
         {
             get => _textSize;
             set
@@ -168,12 +169,12 @@ namespace EOS.UI.iOS
             {
                 if (!_isRunnung)
                 {
-                    Started?.Invoke(this, new EventArgs());
+                    Started?.Invoke(this, EventArgs.Empty);
                     _isRunnung = true;
                 }
                 else
                 {
-                    Stopped?.Invoke(this, new EventArgs());
+                    Stopped?.Invoke(this, EventArgs.Empty);
                     _isRunnung = false;
                 }
             }));
@@ -182,7 +183,7 @@ namespace EOS.UI.iOS
             circleView.Layer.CornerRadius = circleView.Frame.Height / 2;
             imageView.Layer.CornerRadius = circleView.Frame.Height / 2;
             imageView.Hidden = true;
-            percentLabel.Text = "0 %";
+            percentLabel.Text = _zeroPercents;
         }
 
         private void InitCircles()
@@ -221,7 +222,7 @@ namespace EOS.UI.iOS
 
         private void ShowCheckmark()
         {
-            Finished?.Invoke(this, new EventArgs());
+            Finished?.Invoke(this, EventArgs.Empty);
             imageView.Hidden = false;
             _circleLayer.Path = null;
             _isRunnung = false;

@@ -18,6 +18,9 @@ namespace EOS.UI.iOS.Controls
     {
         #region fields
 
+        private nfloat _initX;
+        private nfloat _initY;
+        private nfloat _initWidth;
         private UIImageView _leftImageView;
         private UIView _leftImageContainer;
         private CALayer _underlineLayer;
@@ -63,11 +66,13 @@ namespace EOS.UI.iOS.Controls
             }
         }
 
+        private int _textSize;
         public int TextSize
         {
-            get => (int)Font.PointSize;
+            get => _textSize;
             set
             {
+                _textSize = value;
                 SetTextSize(value);
                 IsEOSCustomizationIgnored = true;
             }
@@ -238,14 +243,29 @@ namespace EOS.UI.iOS.Controls
             get => _text;
             set
             {
-                if(_text == value)
-                    return;
-
                 _text = value;
-                NSMutableAttributedString attributedString = AttributedText != null ?
-                       new NSMutableAttributedString(AttributedText) : new NSMutableAttributedString(_text);
+                var attributedString = AttributedText != null ?
+                    new NSMutableAttributedString(AttributedText) :
+                    new NSMutableAttributedString(_text);
+
                 attributedString.MutableString.SetString(new NSString(_text));
                 AttributedText = attributedString;
+            }
+        }
+
+        private string _plaseHolder;
+        public override string Placeholder
+        {
+            get => _plaseHolder;
+            set
+            {
+                _plaseHolder = value;
+                var attributedString = AttributedPlaceholder != null ?
+                    new NSMutableAttributedString(AttributedPlaceholder) : 
+                    new NSMutableAttributedString(_plaseHolder);
+
+                attributedString.MutableString.SetString(new NSString(_plaseHolder));
+                AttributedPlaceholder = attributedString;
             }
         }
 
@@ -263,9 +283,20 @@ namespace EOS.UI.iOS.Controls
             LeftViewMode = UITextFieldViewMode.Always;
             Started += Input_Started;
             Ended += Input_Ended;
+            EditingChanged += (sender, e) =>
+            {
+                if(AttributedText.Length == 1)
+                {
+                    SetLetterSpacing(LetterSpacing);
+                    SetTextSize(TextSize);
+                }
+            };
 
             Layer.MasksToBounds = true;
             IsEOSCustomizationIgnored = false;
+
+            Text = string.Empty;
+            Placeholder = string.Empty;
             UpdateAppearance();
         }
 
@@ -311,29 +342,53 @@ namespace EOS.UI.iOS.Controls
 
         private void SetLetterSpacing(int spacing)
         {
-            if(AttributedText != null)
-            {
-                var attributedString = new NSMutableAttributedString(AttributedText);
-                attributedString.AddAttribute(UIStringAttributeKey.KerningAdjustment, new NSNumber(spacing), new NSRange(0, AttributedText.Length));
-                AttributedText = attributedString;
-                SizeToFit();
-            }
+            if(AttributedText == null)
+                Text = string.Empty;
+
+            if(AttributedPlaceholder == null)
+                Placeholder = " ";
+
+            var attributedText = new NSMutableAttributedString(AttributedText);
+            attributedText.AddAttribute(UIStringAttributeKey.KerningAdjustment, new NSNumber(spacing), new NSRange(0, AttributedText.Length));
+            AttributedText = attributedText;
+
+            var attributedPlaceholder = new NSMutableAttributedString(AttributedPlaceholder);
+            attributedPlaceholder.AddAttribute(UIStringAttributeKey.KerningAdjustment, new NSNumber(spacing), new NSRange(0, AttributedPlaceholder.Length));
+            AttributedPlaceholder = attributedPlaceholder;
         }
 
         private void SetTextSize(int size)
         {
-            if(AttributedText != null)
-            {
-                var attributedString = new NSMutableAttributedString(AttributedText);
-                attributedString.AddAttribute(UIStringAttributeKey.Font, Font.WithSize(size), new NSRange(0, AttributedText.Length));
-                AttributedText = attributedString;
-                SizeToFit();
-            }
+            if(AttributedText == null)
+                Text = string.Empty;
+
+            if(AttributedPlaceholder == null)
+                Placeholder = " ";
+
+            var attributedText = new NSMutableAttributedString(AttributedText);
+            attributedText.AddAttribute(UIStringAttributeKey.Font, Font.WithSize(size), new NSRange(0, AttributedText.Length));
+            AttributedText = attributedText;
+
+            var attributedPlaceholder = new NSMutableAttributedString(AttributedPlaceholder);
+            attributedPlaceholder.AddAttribute(UIStringAttributeKey.Font, Font.WithSize(size), new NSRange(0, AttributedPlaceholder.Length));
+            AttributedPlaceholder = attributedPlaceholder;
+
+            SizeToFit();
         }
 
         public override void LayoutSubviews()
         {
             base.LayoutSubviews();
+
+            if(_initX == 0 && _initY == 0)
+            {
+                _initX = Frame.X;
+                _initY = Frame.Y;
+                _initWidth = Frame.Width;
+            }
+
+            if(Frame.Height < 35)
+                Frame = new CGRect(_initX, _initY, _initWidth, 35);
 
             if(_underlineLayer == null)
             {
@@ -343,9 +398,9 @@ namespace EOS.UI.iOS.Controls
                     BorderWidth = InputConstants.UnderlineHeight,
                     Frame = new CGRect(
                         0,
-                        Frame.Size.Height - InputConstants.UnderlineHeight,
-                        Frame.Size.Width,
-                        Frame.Size.Height
+                        Bounds.Height - InputConstants.UnderlineHeight,
+                        Bounds.Size.Width,
+                        InputConstants.UnderlineHeight
                     ),
                     Name = InputConstants.UnderlineName
                 };
@@ -363,7 +418,13 @@ namespace EOS.UI.iOS.Controls
             {
                 var frame = underlineLayer.Frame;
                 frame.Width = Bounds.Width;
-                underlineLayer.Frame = frame;
+                var height = LeftView.Bounds.Height;
+                underlineLayer.Frame = new CGRect(
+                        0,
+                        Bounds.Height - InputConstants.UnderlineHeight,
+                        Bounds.Size.Width,
+                        InputConstants.UnderlineHeight
+                    );
             }
         }
 
@@ -371,7 +432,16 @@ namespace EOS.UI.iOS.Controls
 
         #region IEOSThemeControl implementation
 
-        public bool IsEOSCustomizationIgnored { get; private set; }
+        private bool _isEOSCustomizationIgnored;
+        public bool IsEOSCustomizationIgnored
+        {
+            get => _isEOSCustomizationIgnored;
+            private set
+            {
+                _isEOSCustomizationIgnored = value;
+                UpdateUnderline();
+            }
+        }
 
         public IEOSStyle GetCurrentEOSStyle()
         {
@@ -398,9 +468,9 @@ namespace EOS.UI.iOS.Controls
             if(!IsEOSCustomizationIgnored)
             {
                 var provider = GetThemeProvider();
-                Font = provider.GetEOSProperty<UIFont>(this, EOSConstants.Font);
                 LetterSpacing = provider.GetEOSProperty<int>(this, EOSConstants.LetterSpacing);
                 TextSize = provider.GetEOSProperty<int>(this, EOSConstants.TextSize);
+                Font = provider.GetEOSProperty<UIFont>(this, EOSConstants.Font);
                 TextColor = provider.GetEOSProperty<UIColor>(this, EOSConstants.SecondaryColor);
                 TextColorDisabled = provider.GetEOSProperty<UIColor>(this, EOSConstants.SecondaryColorDisabled);
                 PlaceholderColor = provider.GetEOSProperty<UIColor>(this, EOSConstants.HintTextColor);
@@ -412,7 +482,6 @@ namespace EOS.UI.iOS.Controls
                 UnderlineColorUnfocused = provider.GetEOSProperty<UIColor>(this, EOSConstants.UnderlineColorUnfocused);
                 UnderlineColorDisabled = provider.GetEOSProperty<UIColor>(this, EOSConstants.UnderlineColorDisabled);
                 IsEOSCustomizationIgnored = false;
-                SizeToFit();
             }
         }
 
