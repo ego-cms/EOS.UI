@@ -29,303 +29,50 @@
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
-            <LinearLayout
-                android:orientation="horizontal"
+            <EOS.UI.Android.Sandbox.Controls.DropDown
+                android:id="@+id/themeDropDown"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:weightSum="3"
-                android:layout_marginBottom="5dp">
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:text="Theme"
-                    android:textSize="18sp"
-                    android:layout_weight="2"
-                    android:paddingLeft="3dp"
-                    android:gravity="center_vertical" />
-                <Spinner
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:id="@+id/spinnerTheme"
-                    android:layout_weight="1"
-                    android:paddingLeft="3dp"
-                    android:paddingRight="3dp" />
-            </LinearLayout>
-            <View
+                android:layout_height="wrap_content" />
+            <EOS.UI.Android.Sandbox.Controls.DropDown
+                android:id="@+id/fontDropDown"
                 android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@android:color/darker_gray" />
-            <LinearLayout
-                android:orientation="horizontal"
+                android:layout_height="wrap_content" />
+            <EOS.UI.Android.Sandbox.Controls.DropDown
+                android:id="@+id/letterSpacingDropDown"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:weightSum="3"
-                android:layout_marginBottom="5dp">
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:text="Font"
-                    android:textSize="18sp"
-                    android:layout_weight="2"
-                    android:paddingLeft="3dp"
-                    android:gravity="center_vertical" />
-                <Spinner
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:id="@+id/spinnerFont"
-                    android:layout_weight="1"
-                    android:paddingRight="3dp"
-                    android:paddingLeft="3dp" />
-            </LinearLayout>
-            <View
+                android:layout_height="wrap_content" />
+            <EOS.UI.Android.Sandbox.Controls.DropDown
+                android:id="@+id/textSizeDropDown"
                 android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@android:color/darker_gray" />
-            <LinearLayout
-                android:orientation="horizontal"
+                android:layout_height="wrap_content" />
+            <EOS.UI.Android.Sandbox.Controls.DropDown
+                android:id="@+id/enabledTextColorDropDown"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:weightSum="3"
-                android:layout_marginBottom="5dp">
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:text="Letter spacing"
-                    android:textSize="18sp"
-                    android:layout_weight="2"
-                    android:paddingLeft="3dp"
-                    android:gravity="center_vertical" />
-                <Spinner
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:id="@+id/spinnerLetterSpacing"
-                    android:layout_weight="1"
-                    android:paddingLeft="3dp"
-                    android:paddingEnd="3dp" />
-            </LinearLayout>
-            <View
+                android:layout_height="wrap_content" />
+            <EOS.UI.Android.Sandbox.Controls.DropDown
+                android:id="@+id/disabledTextColorDropDown"
                 android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@android:color/darker_gray" />
-            <LinearLayout
-                android:orientation="horizontal"
+                android:layout_height="wrap_content" />
+            <EOS.UI.Android.Sandbox.Controls.DropDown
+                android:id="@+id/pressedTextColorDropDown"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:weightSum="3"
-                android:layout_marginBottom="5dp">
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:text="Text size"
-                    android:textSize="18sp"
-                    android:layout_weight="2"
-                    android:paddingLeft="3dp"
-                    android:gravity="center_vertical" />
-                <Spinner
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:id="@+id/spinnerTextSize"
-                    android:layout_weight="1"
-                    android:paddingLeft="3dp"
-                    android:paddingEnd="3dp" />
-            </LinearLayout>
-            <View
+                android:layout_height="wrap_content" />
+            <EOS.UI.Android.Sandbox.Controls.DropDown
+                android:id="@+id/enabledBackgroundDropDown"
                 android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@android:color/darker_gray" />
-            <LinearLayout
-                android:orientation="horizontal"
+                android:layout_height="wrap_content" />
+            <EOS.UI.Android.Sandbox.Controls.DropDown
+                android:id="@+id/disabledBackgroundDropDown"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:weightSum="3"
-                android:layout_marginBottom="5dp">
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:text="Text color enabled"
-                    android:textSize="18sp"
-                    android:layout_weight="2"
-                    android:paddingLeft="3dp"
-                    android:gravity="center_vertical" />
-                <Spinner
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:id="@+id/spinnerTextColorEnabled"
-                    android:layout_weight="1"
-                    android:paddingLeft="3dp"
-                    android:paddingEnd="3dp" />
-            </LinearLayout>
-            <View
+                android:layout_height="wrap_content" />
+            <EOS.UI.Android.Sandbox.Controls.DropDown
+                android:id="@+id/pressedBackgroundDropDown"
                 android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@android:color/darker_gray" />
-            <LinearLayout
-                android:orientation="horizontal"
+                android:layout_height="wrap_content" />
+            <EOS.UI.Android.Sandbox.Controls.DropDown
+                android:id="@+id/cornerRadiusDropDown"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:weightSum="3"
-                android:layout_marginBottom="5dp">
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:text="Text color disabled"
-                    android:textSize="18sp"
-                    android:layout_weight="2"
-                    android:paddingLeft="3dp"
-                    android:gravity="center_vertical" />
-                <Spinner
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:id="@+id/spinnerTextColorDisabled"
-                    android:layout_weight="1"
-                    android:paddingLeft="3dp"
-                    android:paddingEnd="3dp" />
-            </LinearLayout>
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@android:color/darker_gray" />
-            <LinearLayout
-                android:orientation="horizontal"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:weightSum="3"
-                android:layout_marginBottom="5dp">
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:text="Text color pressed"
-                    android:textSize="18sp"
-                    android:layout_weight="2"
-                    android:paddingLeft="3dp"
-                    android:gravity="center_vertical" />
-                <Spinner
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:id="@+id/spinnerTextColorPressed"
-                    android:layout_weight="1"
-                    android:paddingLeft="3dp"
-                    android:paddingRight="3dp" />
-            </LinearLayout>
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@android:color/darker_gray" />
-            <LinearLayout
-                android:orientation="horizontal"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:weightSum="3"
-                android:layout_marginBottom="5dp">
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:text="Background color enabled"
-                    android:textSize="18sp"
-                    android:layout_weight="2"
-                    android:paddingLeft="3dp"
-                    android:gravity="center_vertical" />
-                <Spinner
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:id="@+id/spinnerBackgroundColorEnabled"
-                    android:layout_weight="1"
-                    android:paddingLeft="3dp"
-                    android:paddingRight="3dp" />
-            </LinearLayout>
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@android:color/darker_gray" />
-            <LinearLayout
-                android:orientation="horizontal"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:weightSum="3"
-                android:layout_marginBottom="5dp">
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:text="Background color disabled"
-                    android:textSize="18sp"
-                    android:layout_weight="2"
-                    android:paddingLeft="3dp"
-                    android:gravity="center_vertical" />
-                <Spinner
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:id="@+id/spinnerBackgroundColorDisabled"
-                    android:layout_weight="1"
-                    android:paddingLeft="3dp"
-                    android:paddingRight="3dp" />
-            </LinearLayout>
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@android:color/darker_gray" />
-            <LinearLayout
-                android:orientation="horizontal"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:weightSum="3"
-                android:layout_marginBottom="5dp">
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:text="Background color pressed"
-                    android:textSize="18sp"
-                    android:layout_weight="2"
-                    android:paddingLeft="3dp"
-                    android:gravity="center_vertical" />
-                <Spinner
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:id="@+id/spinnerBackgroundColorPressed"
-                    android:layout_weight="1"
-                    android:paddingLeft="3dp"
-                    android:paddingRight="3dp" />
-            </LinearLayout>
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@android:color/darker_gray" />
-            <LinearLayout
-                android:orientation="horizontal"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:weightSum="3"
-                android:layout_marginBottom="5dp">
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:text="Corner radius"
-                    android:textSize="18sp"
-                    android:layout_weight="2"
-                    android:paddingLeft="3dp"
-                    android:gravity="center_vertical" />
-                <Spinner
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:id="@+id/spinnerCornerRadius"
-                    android:layout_weight="1"
-                    android:paddingLeft="3dp"
-                    android:paddingRight="3dp" />
-            </LinearLayout>
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@android:color/darker_gray" />
+                android:layout_height="wrap_content" />
             <LinearLayout
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
