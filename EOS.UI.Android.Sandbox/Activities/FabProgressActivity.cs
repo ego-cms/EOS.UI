@@ -32,6 +32,7 @@ namespace EOS.UI.Android.Sandbox.Activities
             var sizeSpinner = FindViewById<Spinner>(Resource.Id.spinnerSize);
             var stateSwitch = FindViewById<Switch>(Resource.Id.stateSwitch);
             var resetButton = FindViewById<Button>(Resource.Id.buttonResetCustomization);
+            var shadowSpinner = FindViewById<Spinner>(Resource.Id.spinnerShadow);
             var config = new ShadowConfig()
             {
                 Color = Color.Black,
@@ -60,7 +61,18 @@ namespace EOS.UI.Android.Sandbox.Activities
                 disabledColorSpinner,
                 pressedColorSpinner,
                 backgroundColorSpinner,
-                sizeSpinner
+                sizeSpinner,
+                shadowSpinner
+            };
+
+
+            shadowSpinner.Adapter = new SpinnerAdapter(this, R.Layout.SimpleSpinnerItem, Shadows.ShadowsCollection.Select(item => item.Key).ToList());
+            shadowSpinner.ItemSelected += (sender, e) =>
+            {
+                if (e.Position > 0)
+                {
+                    fab.ShadowConfig = Shadows.ShadowsCollection.ElementAt(e.Position).Value;
+                }
             };
 
             themeSpinner.Adapter = new SpinnerAdapter(this, R.Layout.SimpleSpinnerItem, ThemeTypes.ThemeCollection.Select(item => item.Key).ToList());

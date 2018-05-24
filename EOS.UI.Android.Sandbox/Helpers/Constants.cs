@@ -2,6 +2,7 @@
 using System.Linq;
 using Android.Graphics;
 using EOS.UI.Shared.Themes.Helpers;
+using EOS.UI.Android.Helpers;
 
 namespace EOS.UI.Android.Sandbox.Helpers
 {
@@ -139,6 +140,29 @@ namespace EOS.UI.Android.Sandbox.Helpers
                 { string.Empty, EOSThemeEnumeration.Light },
                 { Light, EOSThemeEnumeration.Light },
                 { Dark, EOSThemeEnumeration.Dark },
+            };
+        }
+
+        public static class Shadows
+        {
+            public const string Shadow1 = "Shadow1";
+            public const string Shadow2 = "Shadow2";
+            public const string Shadow3 = "Shadow3";
+            public const string Shadow4 = "Shadow4";
+            public const string Shadow5 = "Shadow5";
+            public const string Shadow6 = "Ugly shadow";
+            public const string Shadow7 = "No shadow";
+
+            public static Dictionary<string, ShadowConfig> ShadowsCollection = new Dictionary<string, ShadowConfig>()
+            {
+                { string.Empty, null },
+                { Shadow1, new ShadowConfig{ Color = Color.Red, Offset = new Offset(0,0), Radius = 5, Opacity = 200} },
+                { Shadow2, new ShadowConfig{ Color = Color.Green, Offset = new Offset(5,5), Radius = 5, Opacity = 200} },
+                { Shadow3, new ShadowConfig{ Color = Color.Blue, Offset = new Offset(-5,5), Radius = 5, Opacity = 200} },
+                { Shadow4, new ShadowConfig{ Color = Color.Yellow, Offset = new Offset(5,-5), Radius = 5, Opacity = 200} },
+                { Shadow5, new ShadowConfig{ Color = Color.Purple, Offset = new Offset(-5,-5), Radius = 5, Opacity = 200} },
+                { Shadow6, new ShadowConfig{ Color = Color.Purple, Offset = new Offset(-25,-25), Radius = 15, Opacity = 200} },
+                { Shadow7, null },
             };
         }
 

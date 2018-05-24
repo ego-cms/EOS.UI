@@ -29,9 +29,10 @@ namespace EOS.UI.Android.Controls
         private Animation _rotationAnimation;
         private const int _cornerRadius = 200;
         private const int _shadowLayerIndex = 0;
-        private const int _backgroundLayerIndex= 1;
+        private const int _backgroundLayerIndex = 1;
         private const int _imageLayerIndex = 2;
-        
+        private const int _rotationAnimationDuration = 1000;
+        private const float _pivot = 0.5f;
 
         public bool IsEOSCustomizationIgnored { get; private set; }
 
@@ -57,7 +58,7 @@ namespace EOS.UI.Android.Controls
                 IsEOSCustomizationIgnored = true;
             }
         }
-        
+
         private Color _disabledBackgroundColor;
         public Color DisabledBackgroundColor
         {
@@ -106,7 +107,7 @@ namespace EOS.UI.Android.Controls
             set
             {
                 _image = value;
-                //SetImageDrawable(value);
+                SetImageDrawable(value);
                 IsEOSCustomizationIgnored = true;
             }
         }
@@ -121,9 +122,9 @@ namespace EOS.UI.Android.Controls
                 IsEOSCustomizationIgnored = true;
             }
         }
-        
+
         public bool InProgress { get; private set; }
-        
+
         private ShadowConfig _shadowConfig;
         public ShadowConfig ShadowConfig
         {
@@ -132,8 +133,15 @@ namespace EOS.UI.Android.Controls
             {
                 _shadowConfig = value;
                 IsEOSCustomizationIgnored = true;
-                SetShadow(value);
-                //this.SetElevation(_shadowConfig.Radius, _shadowConfig.Color, _shadowConfig.Offset.X, _shadowConfig.Offset.Y);
+                if (value != null)
+                {
+                    SetShadow(value);
+                }
+                else
+                {
+                    Background = CreateBackgroundDrawable();
+                    SetImageDrawable(Image);
+                }
             }
         }
 
@@ -207,14 +215,6 @@ namespace EOS.UI.Android.Controls
                 SetPadding(_startPadding, _startPadding, _startPadding, _startPadding);
                 IsEOSCustomizationIgnored = false;
 
-                ShadowConfig = new ShadowConfig
-                {
-                    Color = Color.Blue,
-                    Offset = new Offset(5, 5),
-                    Radius = 10,
-                    Opacity = 100
-                };
-
                 //var config = new ShadowConfig()
                 //{
                 //    Color = Color.Black,
@@ -248,37 +248,18 @@ namespace EOS.UI.Android.Controls
         {
             if (InProgress)
                 return;
-            
+
             var layer = Background as LayerDrawable;
-            if (layer != null)
+            if (HasShadowDrawable(layer))
             {
-                var d = CreateRotateDrawable(PreloaderImage);
-                SetImageDrawable(d);
-                d.Mutate();
-                var anim = ObjectAnimator.OfInt(d, "level", 0, 10000);
-                anim.SetDuration(1000);
-                anim.SetInterpolator(new LinearInterpolator());
-                anim.RepeatCount = ValueAnimator.Infinite;
-                anim.Start();
+                CreateAndAnimateRotationDrawable();
             }
             else
             {
+                SetImageDrawable(PreloaderImage);
                 StartAnimation(_rotationAnimation);
             }
             InProgress = true;
-        }
-
-        private Drawable CreateRotateDrawable(Drawable childDrawable)
-        {
-            var drawable = new RotateDrawable();
-            drawable.Drawable = childDrawable;
-            //drawable.FromDegrees = 0;
-            //drawable.ToDegrees = 360;
-            drawable.PivotXRelative = true;
-            drawable.PivotX = 0.5f;
-            drawable.PivotYRelative = true;
-            drawable.PivotY = 0.5f;
-            return drawable;
         }
 
         public void StopProgressAnimation()
@@ -290,28 +271,25 @@ namespace EOS.UI.Android.Controls
             _rotationAnimation.Cancel();
             InProgress = false;
         }
-        
+
+        //Will fail if config = null.
         private void SetShadow(ShadowConfig config)
         {
             if (LayoutParameters == null)
                 return;
 
-            //SetImageDrawable(null);
+            SetImageDrawable(null);
 
             GradientDrawable shadow = null;
-            
+
             var colors1 = new[] { config.Color.ToArgb(), config.Color.ToArgb() };
             shadow = new GradientDrawable(GradientDrawable.Orientation.TopBottom, colors1);
             shadow.Alpha = config.Opacity;
             shadow.SetCornerRadius(_cornerRadius);
-            
-            var colors = new[] { BackgroundColor.ToArgb(), BackgroundColor.ToArgb()};
-            var backColor = new GradientDrawable(GradientDrawable.Orientation.TopBottom, colors);
-            backColor.SetCornerRadius(_cornerRadius);
 
             Drawable[] layers = new Drawable[3];
             layers[_shadowLayerIndex] = shadow;
-            layers[_backgroundLayerIndex] = backColor;
+            layers[_backgroundLayerIndex] = CreateBackgroundDrawable();
             layers[_imageLayerIndex] = Image;
 
             var paddings = (int)(_paddingRatio * Width) + config.Radius + Image.IntrinsicWidth / 2;
@@ -319,11 +297,19 @@ namespace EOS.UI.Android.Controls
 
             LayerDrawable layerList = new LayerDrawable(layers);
             layerList.SetLayerInset(_shadowLayerIndex, 0, 0, 0, 0);
-            layerList.SetLayerInset(_backgroundLayerIndex, 0 - config.Offset.X + config.Radius, config.Offset.Y + config.Radius, config.Offset.X+config.Radius, 0 - config.Offset.Y+config.Radius);
+            layerList.SetLayerInset(_backgroundLayerIndex, 0 - config.Offset.X + config.Radius, config.Offset.Y + config.Radius, config.Offset.X + config.Radius, 0 - config.Offset.Y + config.Radius);
             layerList.SetLayerSize(_imageLayerIndex, Image.IntrinsicWidth, Image.IntrinsicHeight);
             SetInsetForImageLayer(layerList, Image, paddings, config.Offset);
 
             SetBackgroundDrawable(layerList);
+        }
+
+        private GradientDrawable CreateBackgroundDrawable()
+        {
+            var colors = new[] { BackgroundColor.ToArgb(), BackgroundColor.ToArgb() };
+            var backColor = new GradientDrawable(GradientDrawable.Orientation.TopBottom, colors);
+            backColor.SetCornerRadius(_cornerRadius);
+            return backColor;
         }
 
         private void SetInsetForImageLayer(LayerDrawable layerList, Drawable drawable, int halfWidth, Offset offset)
@@ -335,10 +321,10 @@ namespace EOS.UI.Android.Controls
 
         private void SetBackgroundColor(Color color)
         {
+            var layer = Background as LayerDrawable;
             //if layer drawable gets background color layer.
             //Otherwise just set GradientDrawable color.
-            var layer = Background as LayerDrawable;
-            if (layer != null)
+            if (HasShadowDrawable(layer))
             {
                 var drawable = layer.GetDrawable(_backgroundLayerIndex);
                 (drawable as GradientDrawable).SetColor(color);
@@ -353,18 +339,54 @@ namespace EOS.UI.Android.Controls
         //Otherwise just set GradientDrawable color.
         public override void SetImageDrawable(Drawable drawable)
         {
+            if (drawable == null)
+            {
+                base.SetImageDrawable(null);
+                return;
+            }
+
             var layer = Background as LayerDrawable;
-            if (layer != null)
+            if (HasShadowDrawable(layer))
             {
                 layer.SetDrawable(_imageLayerIndex, drawable);
                 layer.SetLayerSize(_imageLayerIndex, drawable.IntrinsicWidth, drawable.IntrinsicHeight);
-                SetInsetForImageLayer(layer, drawable, Width/2, ShadowConfig.Offset);
+                SetInsetForImageLayer(layer, drawable, Width / 2, ShadowConfig.Offset);
                 layer.InvalidateSelf();
             }
             else
             {
                 base.SetImageDrawable(drawable);
             }
+        }
+
+        private bool HasShadowDrawable(LayerDrawable layer)
+        {
+            //By default android has ripple drawable which extended from LayerDrawable.
+            //Should check number of layers also.
+            return layer != null && layer.NumberOfLayers == 3;
+        }
+
+
+        private void CreateAndAnimateRotationDrawable()
+        {
+            var d = CreateRotateDrawable(PreloaderImage);
+            SetImageDrawable(d);
+            var anim = ObjectAnimator.OfInt(d, "level", 0, 10000);
+            anim.SetDuration(_rotationAnimationDuration);
+            anim.SetInterpolator(new LinearInterpolator());
+            anim.RepeatCount = ValueAnimator.Infinite;
+            anim.Start();
+        }
+
+        private Drawable CreateRotateDrawable(Drawable childDrawable)
+        {
+            var drawable = new RotateDrawable();
+            drawable.Drawable = childDrawable;
+            drawable.PivotXRelative = true;
+            drawable.PivotX = _pivot;
+            drawable.PivotYRelative = true;
+            drawable.PivotY = _pivot;
+            return drawable;
         }
     }
 }
