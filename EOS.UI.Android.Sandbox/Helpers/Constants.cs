@@ -30,6 +30,11 @@ namespace EOS.UI.Android.Sandbox.Helpers
             public static string UnderlineColorFocused = "Underline color focused";
             public static string UnderlineColorUnocused = "Underline color unfocused";
             public static string UnderlineColorDisabled = "Underline color disabled";
+            public static string DisabledColor = "Disabled color";
+            public static string PressedColor = "Pressed color";
+            public static string Size = "Size";
+            public static string Color = "Color";
+            public static string AlternativeColor = "Alternative color";
         };
 
         public static class Colors

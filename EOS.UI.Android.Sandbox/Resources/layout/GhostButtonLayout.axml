@@ -20,7 +20,35 @@
             android:layout_height="1dp"
             android:layout_marginTop="20dp"
             android:background="@android:color/darker_gray" />
-        <LinearLayout
+        <EOS.UI.Android.Sandbox.Controls.DropDown
+            android:id="@+id/themeDropDown"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+        <EOS.UI.Android.Sandbox.Controls.DropDown
+            android:id="@+id/fontDropDown"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+        <EOS.UI.Android.Sandbox.Controls.DropDown
+            android:id="@+id/enabledTextColorDropDown"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+        <EOS.UI.Android.Sandbox.Controls.DropDown
+            android:id="@+id/disabledTextColorDropDown"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+        <EOS.UI.Android.Sandbox.Controls.DropDown
+            android:id="@+id/pressedTextColorDropDown"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+        <EOS.UI.Android.Sandbox.Controls.DropDown
+            android:id="@+id/letterSpacingDropDown"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+        <EOS.UI.Android.Sandbox.Controls.DropDown
+            android:id="@+id/textSizeDropDown"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    <!--<LinearLayout
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -212,7 +240,7 @@
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:background="@android:color/darker_gray" />
+            android:background="@android:color/darker_gray" />-->
         <LinearLayout
             android:orientation="horizontal"
             android:layout_width="match_parent"

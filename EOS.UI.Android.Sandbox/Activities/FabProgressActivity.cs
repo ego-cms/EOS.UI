@@ -6,6 +6,7 @@ using Android.OS;
 using Android.Widget;
 using EOS.UI.Android.Controls;
 using EOS.UI.Android.Sandbox.Adapters;
+using EOS.UI.Android.Sandbox.Controls;
 using UIFrameworks.Android.Themes;
 using UIFrameworks.Shared.Themes.Helpers;
 using static EOS.UI.Android.Sandbox.Helpers.Constants;
@@ -22,77 +23,82 @@ namespace EOS.UI.Android.Sandbox.Activities
             SetContentView(Resource.Layout.FabProgressLayout);
 
             var fab = FindViewById<FabProgress>(Resource.Id.fabProgress);
-            var themeSpinner = FindViewById<Spinner>(Resource.Id.spinnerTheme);
-            var backgroundColorSpinner = FindViewById<Spinner>(Resource.Id.spinnerBackgroundColor);
-            var disabledColorSpinner = FindViewById<Spinner>(Resource.Id.spinnerDisabled);
-            var pressedColorSpinner = FindViewById<Spinner>(Resource.Id.spinnerPressed);
-            var sizeSpinner = FindViewById<Spinner>(Resource.Id.spinnerSize);
+            var themeDropDown = FindViewById<DropDown>(Resource.Id.themeDropDown);
+            var backgroundColorDropDown = FindViewById<DropDown>(Resource.Id.backgroundDropDown);
+            var disabledColorDropDown = FindViewById<DropDown>(Resource.Id.disabledColorDropDown);
+            var pressedColorDropDown = FindViewById<DropDown>(Resource.Id.pressedColorDropDown);
+            var sizeDropDown = FindViewById<DropDown>(Resource.Id.sizeDropDown);
             var stateSwitch = FindViewById<Switch>(Resource.Id.stateSwitch);
             var resetButton = FindViewById<Button>(Resource.Id.buttonResetCustomization);
             fab.Click += async (sender, e) =>
             {
-                if (fab.InProgress)
+                if(fab.InProgress)
                     return;
-                themeSpinner.Enabled = false;
+                themeDropDown.Enabled = false;
                 resetButton.Enabled = false;
                 fab.StartProgressAnimation();
                 await Task.Delay(5000);
                 fab.StopProgressAnimation();
-                themeSpinner.Enabled = true;
+                themeDropDown.Enabled = true;
                 resetButton.Enabled = true;
             };
 
-            var spinners = new List<Spinner>()
+            var spinners = new List<DropDown>()
             {
-                themeSpinner,
-                disabledColorSpinner,
-                pressedColorSpinner,
-                backgroundColorSpinner,
-                sizeSpinner
+                themeDropDown,
+                disabledColorDropDown,
+                pressedColorDropDown,
+                backgroundColorDropDown,
+                sizeDropDown
             };
 
-            themeSpinner.Adapter = new SpinnerAdapter(this, R.Layout.SimpleSpinnerItem, ThemeTypes.ThemeCollection.Select(item => item.Key).ToList());
-            themeSpinner.ItemSelected += (sender, e) =>
+            themeDropDown.Name = Fields.Theme;
+            themeDropDown.Adapter = new SpinnerAdapter(this, R.Layout.SimpleSpinnerItem, ThemeTypes.ThemeCollection.Select(item => item.Key).ToList());
+            themeDropDown.ItemSelected += (position) =>
             {
-                if (e.Position > 0)
+                if(position > 0)
                 {
-                    fab.GetThemeProvider().SetCurrentTheme(ThemeTypes.ThemeCollection.ElementAt(e.Position).Value);
+                    fab.GetThemeProvider().SetCurrentTheme(ThemeTypes.ThemeCollection.ElementAt(position).Value);
                     fab.ResetCustomization();
-                    spinners.Except(new[] { themeSpinner }).ToList().ForEach(s => s.SetSelection(0));
+                    spinners.Except(new[] { themeDropDown }).ToList().ForEach(s => s.SetSpinnerSelection(0));
                 }
             };
             var theme = fab.GetThemeProvider().GetCurrentTheme();
-            if (theme is LightEOSTheme)
-                themeSpinner.SetSelection(1);
-            if (theme is DarkEOSTheme)
-                themeSpinner.SetSelection(2);
+            if(theme is LightEOSTheme)
+                themeDropDown.SetSpinnerSelection(1);
+            if(theme is DarkEOSTheme)
+                themeDropDown.SetSpinnerSelection(2);
 
-            backgroundColorSpinner.Adapter = new SpinnerAdapter(this, R.Layout.SimpleSpinnerItem, Colors.ColorsCollection.Select(item => item.Key).ToList());
-            backgroundColorSpinner.ItemSelected += (sender, e) =>
+            backgroundColorDropDown.Name = Fields.Background;
+            backgroundColorDropDown.Adapter = new SpinnerAdapter(this, R.Layout.SimpleSpinnerItem, Colors.ColorsCollection.Select(item => item.Key).ToList());
+            backgroundColorDropDown.ItemSelected += (position) =>
             {
-                if (e.Position > 0)
-                    fab.BackgroundColor = Colors.ColorsCollection.ElementAt(e.Position).Value;
+                if(position > 0)
+                    fab.BackgroundColor = Colors.ColorsCollection.ElementAt(position).Value;
             };
 
-            disabledColorSpinner.Adapter = new SpinnerAdapter(this, R.Layout.SimpleSpinnerItem, Colors.ColorsCollection.Select(item => item.Key).ToList());
-            disabledColorSpinner.ItemSelected += (sender, e) =>
+            disabledColorDropDown.Name = Fields.DisabledColor;
+            disabledColorDropDown.Adapter = new SpinnerAdapter(this, R.Layout.SimpleSpinnerItem, Colors.ColorsCollection.Select(item => item.Key).ToList());
+            disabledColorDropDown.ItemSelected += (position) =>
             {
-                if (e.Position > 0)
-                    fab.DisabledBackgroundColor = Colors.ColorsCollection.ElementAt(e.Position).Value;
+                if(position > 0)
+                    fab.DisabledBackgroundColor = Colors.ColorsCollection.ElementAt(position).Value;
             };
 
-            pressedColorSpinner.Adapter = new SpinnerAdapter(this, R.Layout.SimpleSpinnerItem, Colors.ColorsCollection.Select(item => item.Key).ToList());
-            pressedColorSpinner.ItemSelected += (sender, e) =>
+            pressedColorDropDown.Name = Fields.PressedColor;
+            pressedColorDropDown.Adapter = new SpinnerAdapter(this, R.Layout.SimpleSpinnerItem, Colors.ColorsCollection.Select(item => item.Key).ToList());
+            pressedColorDropDown.ItemSelected += (position) =>
             {
-                if (e.Position > 0)
-                    fab.PressedBackgroundColor = Colors.ColorsCollection.ElementAt(e.Position).Value;
+                if(position > 0)
+                    fab.PressedBackgroundColor = Colors.ColorsCollection.ElementAt(position).Value;
             };
 
-            sizeSpinner.Adapter = new SpinnerAdapter(this, R.Layout.SimpleSpinnerItem, Sizes.FabProgressSizes.Select(i => i.Key).ToList());
-            sizeSpinner.ItemSelected += (sender, e) =>
+            sizeDropDown.Name = Fields.Size;
+            sizeDropDown.Adapter = new SpinnerAdapter(this, R.Layout.SimpleSpinnerItem, Sizes.FabProgressSizes.Select(i => i.Key).ToList());
+            sizeDropDown.ItemSelected += (position) =>
             {
-                if (e.Position > 0)
-                    fab.ButtonSize = Sizes.FabProgressSizes.ElementAt(e.Position).Value;
+                if(position > 0)
+                    fab.ButtonSize = Sizes.FabProgressSizes.ElementAt(position).Value;
             };
 
             stateSwitch.CheckedChange += (sender, e) =>
@@ -102,7 +108,7 @@ namespace EOS.UI.Android.Sandbox.Activities
 
             resetButton.Click += delegate
             {
-                spinners.Except(new[] { themeSpinner }).ToList().ForEach(s => s.SetSelection(0));
+                spinners.Except(new[] { themeDropDown }).ToList().ForEach(s => s.SetSpinnerSelection(0));
                 fab.ResetCustomization();
             };
         }
