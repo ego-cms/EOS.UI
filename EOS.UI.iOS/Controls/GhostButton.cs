@@ -133,16 +133,34 @@ namespace EOS.UI.iOS.Controls
             var range = new NSRange(0, attrString.Length);
             attrString.AddAttribute(UIStringAttributeKey.KerningAdjustment, new NSNumber(LetterSpacing), range);
             attrString.AddAttribute(UIStringAttributeKey.Font, Font.WithSize(TextSize), range);
+
+            NSMutableAttributedString resultString = null;
             switch (forState)
             {
                 case UIControlState.Normal:
-                    attrString.AddAttribute(UIStringAttributeKey.ForegroundColor, EnabledTextColor, range);
+                    resultString = new NSMutableAttributedString(attrString);
+                    resultString.AddAttribute(UIStringAttributeKey.ForegroundColor, EnabledTextColor, range);
+                    SetAttributedTitle(resultString, UIControlState.Normal);
+
+                    resultString = new NSMutableAttributedString(attrString);
+                    resultString.AddAttribute(UIStringAttributeKey.ForegroundColor, DisabledTextColor, range);
+                    SetAttributedTitle(resultString, UIControlState.Disabled);
+
+                    resultString = new NSMutableAttributedString(attrString);
+                    resultString.AddAttribute(UIStringAttributeKey.ForegroundColor, PressedStateTextColor, range);
+                    SetAttributedTitle(resultString, UIControlState.Highlighted);
                     break;
                 case UIControlState.Disabled:
-                    attrString.AddAttribute(UIStringAttributeKey.ForegroundColor, DisabledTextColor, range);
+                    resultString = new NSMutableAttributedString(attrString);
+                    resultString.AddAttribute(UIStringAttributeKey.ForegroundColor, DisabledTextColor, range);
+                    SetAttributedTitle(resultString, forState);
+                    break;
+                case UIControlState.Highlighted:
+                    resultString = new NSMutableAttributedString(attrString);
+                    resultString.AddAttribute(UIStringAttributeKey.ForegroundColor, PressedStateTextColor, range);
+                    SetAttributedTitle(resultString, forState);
                     break;
             }
-            SetAttributedTitle(attrString, forState);
         }
 
         public override void SetTitleColor(UIColor color, UIControlState forState)
