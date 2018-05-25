@@ -3,6 +3,7 @@ using EOS.UI.iOS.Sandbox.Controls.Pickers;
 using EOS.UI.iOS.Sandbox.Helpers;
 using EOS.UI.iOS.Sandbox.Storyboards;
 using EOS.UI.Shared.Themes.Helpers;
+using EOS.UI.Shared.Themes.Themes;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -77,8 +78,7 @@ namespace EOS.UI.iOS.Sandbox
                 _circleProgress.ResetCustomization();
                 _textFields.Except(new[] { themeField }).ToList().ForEach(f => f.Text = String.Empty);
             };
-            themeField.Text = _circleProgress.GetThemeProvider().GetCurrentTheme().ThemeValues[EOSConstants.BrandPrimaryColor] == UIColor.White ?
-                "Light" : "Dark";
+            themeField.Text = _circleProgress.GetThemeProvider().GetCurrentTheme() is LightEOSTheme ? "Light" : "Dark";
             themePicker.Delegate = themePickerDelegate;
             themeField.InputView = themePicker;
 

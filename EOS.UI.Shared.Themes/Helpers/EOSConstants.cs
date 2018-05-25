@@ -3,14 +3,21 @@
     public static class EOSConstants
     {
         public const string BrandPrimaryColor = "brandPrimaryColor";
+        public const string BrandPrimaryColorVariant1 = "brandPrimaryColorVariant1";
         public const string BrandPrimaryColorDisabled = "brandPrimaryColorDisabled";
-        public const string BrandPrimaryColorPressed = "brandPrimaryColorPressed";
-        public const string BrandSecondaryColor = "brandSecondaryColor";
+        public const string BrandPrimaryTextColor = "brandPrimaryTextColor";
+        public const string BrandSecondaryTextColor = "brandSecondaryTextColor";
         public const string BrandSecondaryColorDisabled = "brandSecondaryColorDisabled";
         public const string BrandSecondaryColorPressed = "brandSecondaryColorPressed";
         public const string SemanticSuccessColor = "semanticSuccessColor";
         public const string SemanticErrorColor = "semanticErrorColor";
         public const string SemanticWarningColor = "semanticWarningColor";
+        public const string NeutralColor1 = "neutralColor1";
+        public const string NeutralColor2 = "neutralColor2";
+        public const string NeutralColor3 = "neutralColor3";
+        public const string NeutralColor4 = "neutralColor4";
+        public const string NeutralColor5 = "neutralColor5";
+        public const string NeutralColor6 = "neutralColor6";
         public const string TextSize = "textSize";
         public const string CornerRadius = "cornerRadius";
         public const string Font = "font";
@@ -26,9 +33,6 @@
         //fab progress constans
         public const string CalendarImage = "calendarImage";
         public const string FabProgressPreloaderImage = "fabProgressPreloaderImage";
-        public const string FabProgressPrimaryColor = "fabProgressPrimaryColor";
-        public const string FabProgressPressedColor = "fabProgressPressedColor";
-        public const string FabProgressDisabledColor = "fabProgressDisabledColor";
         public const string FabProgressSize = "fabProgressSize";
         public const string FabShadow = "fabShadow";
         //circle progress

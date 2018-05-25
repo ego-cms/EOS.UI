@@ -473,8 +473,8 @@ namespace EOS.UI.iOS.Controls
                 LetterSpacing = provider.GetEOSProperty<int>(this, EOSConstants.LetterSpacing);
                 TextSize = provider.GetEOSProperty<int>(this, EOSConstants.TextSize);
                 Font = provider.GetEOSProperty<UIFont>(this, EOSConstants.Font);
-                TextColor = provider.GetEOSProperty<UIColor>(this, EOSConstants.BrandSecondaryColor);
-                TextColorDisabled = provider.GetEOSProperty<UIColor>(this, EOSConstants.BrandSecondaryColorDisabled);
+                TextColor = provider.GetEOSProperty<UIColor>(this, EOSConstants.NeutralColor1);
+                TextColorDisabled = provider.GetEOSProperty<UIColor>(this, EOSConstants.NeutralColor3);
                 PlaceholderColor = provider.GetEOSProperty<UIColor>(this, EOSConstants.HintTextColor);
                 PlaceholderColorDisabled = provider.GetEOSProperty<UIColor>(this, EOSConstants.HintTextColorDisabled);
                 LeftImageFocused = UIImage.FromBundle(provider.GetEOSProperty<string>(this, EOSConstants.LeftImageFocused));
