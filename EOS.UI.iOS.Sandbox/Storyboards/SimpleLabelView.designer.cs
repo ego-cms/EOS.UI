@@ -20,11 +20,11 @@ namespace EOS.UI.iOS.Sandbox
 
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
-        UIKit.UITextField fontField { get; set; }
+        EOS.UI.iOS.Sandbox.CustomDropDown fontDropDown { get; set; }
 
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
-        UIKit.UITextField letterSpacingField { get; set; }
+        EOS.UI.iOS.Sandbox.CustomDropDown letterSpacingDropDown { get; set; }
 
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
@@ -32,15 +32,15 @@ namespace EOS.UI.iOS.Sandbox
 
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
-        UIKit.UITextField textColorField { get; set; }
+        EOS.UI.iOS.Sandbox.CustomDropDown textColorDropDown { get; set; }
 
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
-        UIKit.UITextField textSizeField { get; set; }
+        EOS.UI.iOS.Sandbox.CustomDropDown textSizeDropDown { get; set; }
 
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
-        UIKit.UITextField themeField { get; set; }
+        EOS.UI.iOS.Sandbox.CustomDropDown themeDropDown { get; set; }
 
         void ReleaseDesignerOutlets ()
         {
@@ -49,14 +49,14 @@ namespace EOS.UI.iOS.Sandbox
                 containerView = null;
             }
 
-            if (fontField != null) {
-                fontField.Dispose ();
-                fontField = null;
+            if (fontDropDown != null) {
+                fontDropDown.Dispose ();
+                fontDropDown = null;
             }
 
-            if (letterSpacingField != null) {
-                letterSpacingField.Dispose ();
-                letterSpacingField = null;
+            if (letterSpacingDropDown != null) {
+                letterSpacingDropDown.Dispose ();
+                letterSpacingDropDown = null;
             }
 
             if (resetButton != null) {
@@ -64,19 +64,24 @@ namespace EOS.UI.iOS.Sandbox
                 resetButton = null;
             }
 
-            if (textColorField != null) {
-                textColorField.Dispose ();
-                textColorField = null;
+            if (textColorDropDown != null) {
+                textColorDropDown.Dispose ();
+                textColorDropDown = null;
             }
 
-            if (textSizeField != null) {
-                textSizeField.Dispose ();
-                textSizeField = null;
+            if (textSizeDropDown != null) {
+                textSizeDropDown.Dispose ();
+                textSizeDropDown = null;
             }
 
-            if (themeField != null) {
-                themeField.Dispose ();
-                themeField = null;
+            if (themeDropDown != null) {
+                themeDropDown.Dispose ();
+                themeDropDown = null;
+            }
+
+            if (themeDropDown != null) {
+                themeDropDown.Dispose ();
+                themeDropDown = null;
             }
         }
     }

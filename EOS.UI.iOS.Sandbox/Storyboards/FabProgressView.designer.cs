@@ -39,7 +39,7 @@ namespace EOS.UI.iOS.Sandbox
 
         [Outlet]
         UIKit.UITextField themeField { get; set; }
-        
+
         void ReleaseDesignerOutlets ()
         {
             if (backgroundField != null) {
@@ -57,19 +57,9 @@ namespace EOS.UI.iOS.Sandbox
                 disabledField = null;
             }
 
-            if (shadowField != null) {
-                shadowField.Dispose ();
-                shadowField = null;
-            }
-
-            if (themeField != null) {
-                themeField.Dispose ();
-                themeField = null;
-            }
-
-            if (sizeField != null) {
-                sizeField.Dispose ();
-                sizeField = null;
+            if (enableSwitch != null) {
+                enableSwitch.Dispose ();
+                enableSwitch = null;
             }
 
             if (pressedField != null) {
@@ -77,14 +67,24 @@ namespace EOS.UI.iOS.Sandbox
                 pressedField = null;
             }
 
-            if (enableSwitch != null) {
-                enableSwitch.Dispose ();
-                enableSwitch = null;
-            }
-
             if (resetButton != null) {
                 resetButton.Dispose ();
                 resetButton = null;
+            }
+
+            if (shadowField != null) {
+                shadowField.Dispose ();
+                shadowField = null;
+            }
+
+            if (sizeField != null) {
+                sizeField.Dispose ();
+                sizeField = null;
+            }
+
+            if (themeField != null) {
+                themeField.Dispose ();
+                themeField = null;
             }
         }
     }

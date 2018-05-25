@@ -14,45 +14,46 @@ namespace EOS.UI.iOS.Sandbox
     partial class BadgeLabelView
     {
         [Outlet]
-        UIKit.UITextField backgroundColorField { get; set; }
-
+        [GeneratedCode ("iOS Designer", "1.0")]
+        EOS.UI.iOS.Sandbox.CustomDropDown backgroundColorDropDown { get; set; }
 
         [Outlet]
+        [GeneratedCode ("iOS Designer", "1.0")]
         UIKit.UIView containerView { get; set; }
 
+        [Outlet]
+        [GeneratedCode ("iOS Designer", "1.0")]
+        EOS.UI.iOS.Sandbox.CustomDropDown cornerRadiusDropDown { get; set; }
 
         [Outlet]
-        UIKit.UITextField cornerRadiusField { get; set; }
-
-
-        [Outlet]
-        UIKit.UITextField fontColorField { get; set; }
-
+        [GeneratedCode ("iOS Designer", "1.0")]
+        EOS.UI.iOS.Sandbox.CustomDropDown fontDropDown { get; set; }
 
         [Outlet]
-        UIKit.UITextField fontField { get; set; }
-
-
-        [Outlet]
-        UIKit.UITextField fontSizeField { get; set; }
-
+        [GeneratedCode ("iOS Designer", "1.0")]
+        EOS.UI.iOS.Sandbox.CustomDropDown letterSpacingDropDown { get; set; }
 
         [Outlet]
-        UIKit.UITextField letterSpacingField { get; set; }
-
-
-        [Outlet]
+        [GeneratedCode ("iOS Designer", "1.0")]
         UIKit.UIButton resetButton { get; set; }
 
+        [Outlet]
+        [GeneratedCode ("iOS Designer", "1.0")]
+        EOS.UI.iOS.Sandbox.CustomDropDown textColorDropDown { get; set; }
 
         [Outlet]
-        UIKit.UITextField themeField { get; set; }
+        [GeneratedCode ("iOS Designer", "1.0")]
+        EOS.UI.iOS.Sandbox.CustomDropDown textSizeDropDown { get; set; }
+
+        [Outlet]
+        [GeneratedCode ("iOS Designer", "1.0")]
+        EOS.UI.iOS.Sandbox.CustomDropDown themeDropDown { get; set; }
 
         void ReleaseDesignerOutlets ()
         {
-            if (backgroundColorField != null) {
-                backgroundColorField.Dispose ();
-                backgroundColorField = null;
+            if (backgroundColorDropDown != null) {
+                backgroundColorDropDown.Dispose ();
+                backgroundColorDropDown = null;
             }
 
             if (containerView != null) {
@@ -60,29 +61,24 @@ namespace EOS.UI.iOS.Sandbox
                 containerView = null;
             }
 
-            if (cornerRadiusField != null) {
-                cornerRadiusField.Dispose ();
-                cornerRadiusField = null;
+            if (cornerRadiusDropDown != null) {
+                cornerRadiusDropDown.Dispose ();
+                cornerRadiusDropDown = null;
             }
 
-            if (fontColorField != null) {
-                fontColorField.Dispose ();
-                fontColorField = null;
+            if (fontDropDown != null) {
+                fontDropDown.Dispose ();
+                fontDropDown = null;
             }
 
-            if (fontField != null) {
-                fontField.Dispose ();
-                fontField = null;
+            if (letterSpacingDropDown != null) {
+                letterSpacingDropDown.Dispose ();
+                letterSpacingDropDown = null;
             }
 
-            if (fontSizeField != null) {
-                fontSizeField.Dispose ();
-                fontSizeField = null;
-            }
-
-            if (letterSpacingField != null) {
-                letterSpacingField.Dispose ();
-                letterSpacingField = null;
+            if (letterSpacingDropDown != null) {
+                letterSpacingDropDown.Dispose ();
+                letterSpacingDropDown = null;
             }
 
             if (resetButton != null) {
@@ -90,9 +86,19 @@ namespace EOS.UI.iOS.Sandbox
                 resetButton = null;
             }
 
-            if (themeField != null) {
-                themeField.Dispose ();
-                themeField = null;
+            if (textColorDropDown != null) {
+                textColorDropDown.Dispose ();
+                textColorDropDown = null;
+            }
+
+            if (textSizeDropDown != null) {
+                textSizeDropDown.Dispose ();
+                textSizeDropDown = null;
+            }
+
+            if (themeDropDown != null) {
+                themeDropDown.Dispose ();
+                themeDropDown = null;
             }
         }
     }
