@@ -355,8 +355,6 @@ namespace EOS.UI.iOS.Controls
             var attributedPlaceholder = new NSMutableAttributedString(AttributedPlaceholder);
             attributedPlaceholder.AddAttribute(UIStringAttributeKey.KerningAdjustment, new NSNumber(spacing), new NSRange(0, AttributedPlaceholder.Length));
             AttributedPlaceholder = attributedPlaceholder;
-
-            SizeToFit();
         }
 
         private void SetTextSize(int size)
@@ -374,8 +372,6 @@ namespace EOS.UI.iOS.Controls
             var attributedPlaceholder = new NSMutableAttributedString(AttributedPlaceholder);
             attributedPlaceholder.AddAttribute(UIStringAttributeKey.Font, Font.WithSize(size), new NSRange(0, AttributedPlaceholder.Length));
             AttributedPlaceholder = attributedPlaceholder;
-
-            SizeToFit();
         }
 
         public override void LayoutSubviews()

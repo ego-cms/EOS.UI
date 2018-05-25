@@ -141,11 +141,11 @@ namespace EOS.UI.iOS.Controls
                     resultString = new NSMutableAttributedString(attrString);
                     resultString.AddAttribute(UIStringAttributeKey.ForegroundColor, EnabledTextColor, range);
                     SetAttributedTitle(resultString, UIControlState.Normal);
-                    
+
                     resultString = new NSMutableAttributedString(attrString);
                     resultString.AddAttribute(UIStringAttributeKey.ForegroundColor, DisabledTextColor, range);
                     SetAttributedTitle(resultString, UIControlState.Disabled);
-                    
+
                     resultString = new NSMutableAttributedString(attrString);
                     resultString.AddAttribute(UIStringAttributeKey.ForegroundColor, PressedStateTextColor, range);
                     SetAttributedTitle(resultString, UIControlState.Highlighted);
