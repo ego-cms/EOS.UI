@@ -1,9 +1,9 @@
 ﻿using System;
+using Android.Animation;
 using Android.App;
 using Android.Content;
 using Android.Graphics;
 using Android.Graphics.Drawables;
-using Android.Graphics.Drawables.Shapes;
 using Android.Runtime;
 using Android.Util;
 using Android.Views;
@@ -15,7 +15,6 @@ using EOS.UI.Shared.Themes.Interfaces;
 using UIFrameworks.Android.Themes;
 using UIFrameworks.Shared.Themes.Helpers;
 using UIFrameworks.Shared.Themes.Interfaces;
-using Android.Animation;
 
 namespace EOS.UI.Android.Controls
 {
@@ -33,6 +32,7 @@ namespace EOS.UI.Android.Controls
         private const int _imageLayerIndex = 2;
         private const int _rotationAnimationDuration = 1000;
         private const float _pivot = 0.5f;
+        private int _initialWidth = -1;
 
         public bool IsEOSCustomizationIgnored { get; private set; }
 
@@ -83,22 +83,22 @@ namespace EOS.UI.Android.Controls
             }
         }
 
-        private int _buttonSize;
-        public int ButtonSize
-        {
-            get => _buttonSize;
-            set
-            {
-                _buttonSize = value;
-                LayoutParameters.Width = value;
-                LayoutParameters.Height = value;
-                SetScaleType(ScaleType.FitCenter);
-                RequestLayout();
-                var padding = (int)System.Math.Round(_paddingRatio * _buttonSize);
-                SetPadding(padding, padding, padding, padding);
-                IsEOSCustomizationIgnored = true;
-            }
-        }
+        //private int _buttonSize;
+        //public int ButtonSize
+        //{
+        //    get => _buttonSize;
+        //    set
+        //    {
+        //        _buttonSize = value;
+        //        LayoutParameters.Width = value;
+        //        LayoutParameters.Height = value;
+        //        SetScaleType(ScaleType.FitCenter);
+        //        RequestLayout();
+        //        var padding = (int)System.Math.Round(_paddingRatio * _buttonSize);
+        //        SetPadding(padding, padding, padding, padding);
+        //        IsEOSCustomizationIgnored = true;
+        //    }
+        //}
 
         private Drawable _image;
         public Drawable Image
@@ -141,6 +141,7 @@ namespace EOS.UI.Android.Controls
                 {
                     Background = CreateBackgroundDrawable();
                     SetImageDrawable(Image);
+                    SetPadding(_startPadding, _startPadding, _startPadding, _startPadding);
                 }
             }
         }
@@ -190,8 +191,8 @@ namespace EOS.UI.Android.Controls
         {
             IsEOSCustomizationIgnored = false;
             UpdateAppearance();
-            LayoutParameters.Width = ViewGroup.LayoutParams.WrapContent;
-            LayoutParameters.Height = ViewGroup.LayoutParams.WrapContent;
+            //LayoutParameters.Width = ViewGroup.LayoutParams.WrapContent;
+            //LayoutParameters.Height = ViewGroup.LayoutParams.WrapContent;
             RequestLayout();
         }
 
@@ -204,14 +205,18 @@ namespace EOS.UI.Android.Controls
             if (!IsEOSCustomizationIgnored)
             {
                 var provider = GetThemeProvider();
-                Image = Resources.GetDrawable(provider.GetEOSProperty<int>(this, EOSConstants.CalendarImage));
-                PreloaderImage = Resources.GetDrawable(provider.GetEOSProperty<int>(this, EOSConstants.FabProgressPreloaderImage));
-                var roundedDrawable = (GradientDrawable)Resources.GetDrawable(Resource.Drawable.FabButton);
-                SetBackgroundDrawable(roundedDrawable);
-                BackgroundColor = provider.GetEOSProperty<Color>(this, EOSConstants.FabProgressPrimaryColor);
+                Image = Resources.GetDrawable(provider.GetEOSProperty<int>(this, EOSConstants.CalendarImage), null);
+                PreloaderImage = Resources.GetDrawable(provider.GetEOSProperty<int>(this, EOSConstants.FabProgressPreloaderImage), null);
+                //var roundedDrawable = (GradientDrawable)Resources.GetDrawable(Resource.Drawable.FabButton);
+                //SetBackgroundDrawable(roundedDrawable);
                 DisabledBackgroundColor = provider.GetEOSProperty<Color>(this, EOSConstants.FabProgressDisabledColor);
                 PressedBackgroundColor = provider.GetEOSProperty<Color>(this, EOSConstants.FabProgressPressedColor);
-                SetPadding(_startPadding, _startPadding, _startPadding, _startPadding);
+                ShadowConfig = provider.GetEOSProperty<ShadowConfig>(this, EOSConstants.FabShadow);
+                //SetPadding(_startPadding, _startPadding, _startPadding, _startPadding);
+
+                //Should initialize after ShadowConfig
+                //ShadowConfig method checks and background drawable which should be used for color.
+                BackgroundColor = provider.GetEOSProperty<Color>(this, EOSConstants.FabProgressPrimaryColor);
                 IsEOSCustomizationIgnored = false;
 
                 //var config = new ShadowConfig()
@@ -272,12 +277,20 @@ namespace EOS.UI.Android.Controls
             InProgress = false;
         }
 
+        public override void Layout(int l, int t, int r, int b)
+        {
+            base.Layout(l, t, r, b);
+            if(_initialWidth<=0)
+                _initialWidth = Width;
+        }
+
         //Will fail if config = null.
         private void SetShadow(ShadowConfig config)
         {
             if (LayoutParameters == null)
                 return;
 
+            var a = Context.MainLooper;
             SetImageDrawable(null);
 
             GradientDrawable shadow = null;
@@ -292,7 +305,7 @@ namespace EOS.UI.Android.Controls
             layers[_backgroundLayerIndex] = CreateBackgroundDrawable();
             layers[_imageLayerIndex] = Image;
 
-            var paddings = (int)(_paddingRatio * Width) + config.Radius + Image.IntrinsicWidth / 2;
+            var paddings = _initialWidth / 2;//(int)(_paddingRatio * Width) + config.Radius + Image.IntrinsicWidth / 2;
             SetPadding(paddings, paddings, paddings, paddings);
 
             LayerDrawable layerList = new LayerDrawable(layers);
@@ -301,7 +314,7 @@ namespace EOS.UI.Android.Controls
             layerList.SetLayerSize(_imageLayerIndex, Image.IntrinsicWidth, Image.IntrinsicHeight);
             SetInsetForImageLayer(layerList, Image, paddings, config.Offset);
 
-            SetBackgroundDrawable(layerList);
+            Background = layerList;
         }
 
         private GradientDrawable CreateBackgroundDrawable()
@@ -319,7 +332,7 @@ namespace EOS.UI.Android.Controls
             layerList.SetLayerInset(_imageLayerIndex, xOffset, yOffset, 0, 0);
         }
 
-        private void SetBackgroundColor(Color color)
+        public override void SetBackgroundColor(Color color)
         {
             var layer = Background as LayerDrawable;
             //if layer drawable gets background color layer.
@@ -328,6 +341,8 @@ namespace EOS.UI.Android.Controls
             {
                 var drawable = layer.GetDrawable(_backgroundLayerIndex);
                 (drawable as GradientDrawable).SetColor(color);
+                layer.Mutate();
+                layer.InvalidateSelf();
             }
             else
             {
@@ -351,6 +366,7 @@ namespace EOS.UI.Android.Controls
                 layer.SetDrawable(_imageLayerIndex, drawable);
                 layer.SetLayerSize(_imageLayerIndex, drawable.IntrinsicWidth, drawable.IntrinsicHeight);
                 SetInsetForImageLayer(layer, drawable, Width / 2, ShadowConfig.Offset);
+                layer.Mutate();
                 layer.InvalidateSelf();
             }
             else

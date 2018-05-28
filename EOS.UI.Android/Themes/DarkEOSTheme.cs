@@ -33,7 +33,8 @@ namespace UIFrameworks.Android.Themes
             { EOSConstants.FabProgressPrimaryColor, new Color(255, 92, 73) },
             { EOSConstants.FabProgressDisabledColor, new Color(255, 92, 73) },
             { EOSConstants.FabProgressPressedColor, new Color(255, 92, 73) },
-            { EOSConstants.CircleProgressShown, true}
+            { EOSConstants.CircleProgressShown, true},
+            { EOSConstants.FabShadow, null}
         };
     }
 }

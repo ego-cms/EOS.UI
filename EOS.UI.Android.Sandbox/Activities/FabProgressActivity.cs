@@ -29,18 +29,10 @@ namespace EOS.UI.Android.Sandbox.Activities
             var backgroundColorSpinner = FindViewById<Spinner>(Resource.Id.spinnerBackgroundColor);
             var disabledColorSpinner = FindViewById<Spinner>(Resource.Id.spinnerDisabled);
             var pressedColorSpinner = FindViewById<Spinner>(Resource.Id.spinnerPressed);
-            var sizeSpinner = FindViewById<Spinner>(Resource.Id.spinnerSize);
+            //var sizeSpinner = FindViewById<Spinner>(Resource.Id.spinnerSize);
             var stateSwitch = FindViewById<Switch>(Resource.Id.stateSwitch);
             var resetButton = FindViewById<Button>(Resource.Id.buttonResetCustomization);
             var shadowSpinner = FindViewById<Spinner>(Resource.Id.spinnerShadow);
-            var config = new ShadowConfig()
-            {
-                Color = Color.Black,
-                Offset = new Offset(0,0),
-                Radius = 2,
-                Opacity = 50
-            };
-            fab.SetElevation(Color.Black, 20, 0,0, 0);
             
             fab.Click += async (sender, e) =>
             {
@@ -61,7 +53,7 @@ namespace EOS.UI.Android.Sandbox.Activities
                 disabledColorSpinner,
                 pressedColorSpinner,
                 backgroundColorSpinner,
-                sizeSpinner,
+                //sizeSpinner,
                 shadowSpinner
             };
 
@@ -112,12 +104,12 @@ namespace EOS.UI.Android.Sandbox.Activities
                     fab.PressedBackgroundColor = Colors.ColorsCollection.ElementAt(e.Position).Value;
             };
 
-            sizeSpinner.Adapter = new SpinnerAdapter(this, R.Layout.SimpleSpinnerItem, Sizes.FabProgressSizes.Select(i => i.Key).ToList());
-            sizeSpinner.ItemSelected += (sender, e) =>
-            {
-                if (e.Position > 0)
-                    fab.ButtonSize = Sizes.FabProgressSizes.ElementAt(e.Position).Value;
-            };
+            //sizeSpinner.Adapter = new SpinnerAdapter(this, R.Layout.SimpleSpinnerItem, Sizes.FabProgressSizes.Select(i => i.Key).ToList());
+            //sizeSpinner.ItemSelected += (sender, e) =>
+            //{
+            //    if (e.Position > 0)
+            //        fab.ButtonSize = Sizes.FabProgressSizes.ElementAt(e.Position).Value;
+            //};
 
             stateSwitch.CheckedChange += (sender, e) =>
             {
