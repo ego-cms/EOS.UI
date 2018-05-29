@@ -35,26 +35,7 @@ namespace EOS.UI.iOS.Sandbox
 
         public void InitSource<T>(List<T> source, Action<T> action, string title, CGRect rectangle)
         {
-            label.Text = title;
-            var picker = new UIPickerView(rectangle)
-            {
-                ShowSelectionIndicator = true,
-                DataSource = new ValuePickerSource<T>(source)
-            };
-            var pickerDelegate = new ValuePickerDelegate<T>(source);
-            pickerDelegate.DidSelected += (object sender, T e) =>
-            {
-                action?.Invoke(e);
-                textField.Text = e.ToString();
-            };
-            textField.EditingDidBegin += (sender, e) =>
-            {
-                var item = source.ElementAt((int)picker.SelectedRowInComponent(0));
-                action?.Invoke(item);
-                textField.Text = item.ToString();
-            };
-            picker.Delegate = pickerDelegate;
-            textField.InputView = picker;
+            InitSource(source.ToDictionary((arg) => arg), action, title, rectangle);
         }
 
         public void InitSource<TKey, TValue>(Dictionary<TKey, TValue> source, Action<TValue> action, string title, CGRect rectangle)
@@ -63,9 +44,9 @@ namespace EOS.UI.iOS.Sandbox
             var picker = new UIPickerView(rectangle)
             {
                 ShowSelectionIndicator = true,
-                DataSource = new DictionaryPickerSource<TKey, TValue>(source)
+                DataSource = new ValuePickerSource<KeyValuePair<TKey, TValue>>(source)
             };
-            var pickerDelegate = new DictionaryPickerDelegate<TKey, TValue>(source);
+            var pickerDelegate = new ValuePickerDelegate<TKey, TValue>(source);
             pickerDelegate.DidSelected += (object sender, KeyValuePair<TKey, TValue> e) =>
             {
                 action?.Invoke(e.Value);
