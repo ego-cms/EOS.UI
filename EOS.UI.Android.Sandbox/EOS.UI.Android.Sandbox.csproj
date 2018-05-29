@@ -184,6 +184,11 @@
     <AndroidResource Include="Resources\drawable\Apple.xml" />
   </ItemGroup>
   <ItemGroup>
+    <AndroidResource Include="Resources\layout\DropDownLayout.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+  </ItemGroup>
+  <ItemGroup>
     <AndroidResource Include="Resources\layout\SimpleCell.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
