@@ -1,18 +1,16 @@
 ﻿using System.Linq;
 using Android.App;
-using Android.Content;
 using Android.Graphics;
 using Android.OS;
 using Android.Widget;
 using EOS.UI.Android.Controls;
-using EOS.UI.Android.Sandbox.Adapters;
+using EOS.UI.Android.Sandbox.Controls;
+using EOS.UI.Shared.Themes.Themes;
 using UIFrameworks.Shared.Themes.Helpers;
 using UIFrameworks.Shared.Themes.Interfaces;
 using static Android.Widget.CompoundButton;
 using static EOS.UI.Android.Sandbox.Helpers.Constants;
-using R = Android.Resource;
 using A = Android;
-using EOS.UI.Shared.Themes.Themes;
 
 namespace EOS.UI.Android.Sandbox.Activities
 {
@@ -21,20 +19,20 @@ namespace EOS.UI.Android.Sandbox.Activities
     {
         private Input _inputTop;
         private Input _inputBottom;
-        private Spinner _themeSpinner;
-        private Spinner _fontSpinner;
-        private Spinner _letterSpacingSpinner;
-        private Spinner _textSizeSpinner;
-        private Spinner _textColorSpinner;
-        private Spinner _textColorSpinnerDisabled;
-        private Spinner _hintTextColorSpinner;
-        private Spinner _hintTextColorSpinnerDisabled;
-        private Spinner _leftDrawableFocusedSpinner;
-        private Spinner _leftDrawableUnfocusedSpinner;
-        private Spinner _leftDrawableDisabledSpinner;
-        private Spinner _underlineColorFocusedSpinner;
-        private Spinner _underlineColorUnfocusedSpinner;
-        private Spinner _underlineColorDisabledSpinner;
+        private SandboxDropDown _themeDropDown;
+        private SandboxDropDown _fontDropDown;
+        private SandboxDropDown _letterSpacingDropDown;
+        private SandboxDropDown _textSizeDropDown;
+        private SandboxDropDown _textColorDropDown;
+        private SandboxDropDown _textColorDisabledDropDown;
+        private SandboxDropDown _hintTextColorDropDown;
+        private SandboxDropDown _hintTextColorDisabledDropDown;
+        private SandboxDropDown _leftDrawableFocusedDropDown;
+        private SandboxDropDown _leftDrawableUnfocusedDropDown;
+        private SandboxDropDown _leftDrawableDisabledDropDown;
+        private SandboxDropDown _underlineColorFocusedDropDown;
+        private SandboxDropDown _underlineColorUnfocusedDropDown;
+        private SandboxDropDown _underlineColorDisabledDropDown;
         private Switch _disabledSwitch;
 
         protected override void OnCreate(Bundle savedInstanceState)
@@ -47,64 +45,78 @@ namespace EOS.UI.Android.Sandbox.Activities
             _inputBottom = FindViewById<Input>(Resource.Id.inputBottom);
             _inputBottom.UpdateAppearance();
 
-            _themeSpinner = FindViewById<Spinner>(Resource.Id.spinnerTheme);
-            _fontSpinner = FindViewById<Spinner>(Resource.Id.spinnerFont);
-            _letterSpacingSpinner = FindViewById<Spinner>(Resource.Id.spinnerLetterSpacing);
-            _textSizeSpinner = FindViewById<Spinner>(Resource.Id.spinnerTextSize);
-            _textColorSpinner = FindViewById<Spinner>(Resource.Id.spinnerTextColor);
-            _textColorSpinnerDisabled = FindViewById<Spinner>(Resource.Id.spinnerTextColorDisabled);
-            _hintTextColorSpinner = FindViewById<Spinner>(Resource.Id.spinnerHintTextColor);
-            _hintTextColorSpinnerDisabled = FindViewById<Spinner>(Resource.Id.spinnerHintTextColorDisabled);
-            _leftDrawableFocusedSpinner = FindViewById<Spinner>(Resource.Id.spinnerDrawableFocused);
-            _leftDrawableUnfocusedSpinner = FindViewById<Spinner>(Resource.Id.spinnerDrawableUnfocused);
-            _leftDrawableDisabledSpinner = FindViewById<Spinner>(Resource.Id.spinnerDrawableDisabled);
-            _underlineColorFocusedSpinner = FindViewById<Spinner>(Resource.Id.spinnerUnderlineColorFocused);
-            _underlineColorUnfocusedSpinner = FindViewById<Spinner>(Resource.Id.spinnerUnderlineColorUnfocused);
-            _underlineColorDisabledSpinner = FindViewById<Spinner>(Resource.Id.spinnerUnderlineColorDisabled);
+            _themeDropDown = FindViewById<SandboxDropDown>(Resource.Id.themeDropDown);
+            _fontDropDown = FindViewById<SandboxDropDown>(Resource.Id.fontDropDown);
+            _letterSpacingDropDown = FindViewById<SandboxDropDown>(Resource.Id.letterSpacingDropDown);
+            _textSizeDropDown = FindViewById<SandboxDropDown>(Resource.Id.textSizeDropDown);
+            _textColorDropDown = FindViewById<SandboxDropDown>(Resource.Id.textColorDropDown);
+            _textColorDisabledDropDown = FindViewById<SandboxDropDown>(Resource.Id.disabledTextColorDropDown);
+            _hintTextColorDropDown = FindViewById<SandboxDropDown>(Resource.Id.hintTextColorDropDown);
+            _hintTextColorDisabledDropDown = FindViewById<SandboxDropDown>(Resource.Id.disabledHintTextColorDropDown);
+            _leftDrawableFocusedDropDown = FindViewById<SandboxDropDown>(Resource.Id.focusedIconDropDown);
+            _leftDrawableUnfocusedDropDown = FindViewById<SandboxDropDown>(Resource.Id.unfocusedIconDropDown);
+            _leftDrawableDisabledDropDown = FindViewById<SandboxDropDown>(Resource.Id.disabledIconDropDown);
+            _underlineColorFocusedDropDown = FindViewById<SandboxDropDown>(Resource.Id.focusedUnderlineColorDropDown);
+            _underlineColorUnfocusedDropDown = FindViewById<SandboxDropDown>(Resource.Id.unfocusedUnderlineColorDropDown);
+            _underlineColorDisabledDropDown = FindViewById<SandboxDropDown>(Resource.Id.disabledUnderlineColorDropDown);
             var resetButton = FindViewById<Button>(Resource.Id.buttonResetCustomization);
             _disabledSwitch = FindViewById<Switch>(Resource.Id.switchDisabled);
 
-            _themeSpinner.Adapter = new SpinnerAdapter(this, R.Layout.SimpleSpinnerItem, ThemeTypes.ThemeCollection.Select(item => item.Key).ToList());
-            _themeSpinner.ItemSelected += ThemeSpinner_ItemSelected;
+            _themeDropDown.Name = Fields.Theme;
+            _themeDropDown.SetupAdapter(ThemeTypes.ThemeCollection.Select(item => item.Key).ToList());
+            _themeDropDown.ItemSelected += ThemeItemSelected;
 
-            _fontSpinner.Adapter = new SpinnerAdapter(this, R.Layout.SimpleSpinnerItem, Fonts.FontsCollection.Select(item => item.Key).ToList());
-            _fontSpinner.ItemSelected += FontSpinner_ItemSelected;
+            _fontDropDown.Name = Fields.Font;
+            _fontDropDown.SetupAdapter(Fonts.FontsCollection.Select(item => item.Key).ToList());
+            _fontDropDown.ItemSelected += FontItemSelected;
 
-            _letterSpacingSpinner.Adapter = new SpinnerAdapter(this, R.Layout.SimpleSpinnerItem, Sizes.LetterSpacingCollection.Select(item => item.Key).ToList());
-            _letterSpacingSpinner.ItemSelected += LetterSpacingView_ItemSelected;
+            _letterSpacingDropDown.Name = Fields.LetterSpacing;
+            _letterSpacingDropDown.SetupAdapter(Sizes.LetterSpacingCollection.Select(item => item.Key).ToList());
+            _letterSpacingDropDown.ItemSelected += LetterSpacingItemSelected;
 
-            _textSizeSpinner.Adapter = new SpinnerAdapter(this, R.Layout.SimpleSpinnerItem, Sizes.TextSizeCollection.Select(item => item.Key).ToList());
-            _textSizeSpinner.ItemSelected += TextSizeView_ItemSelected;
+            _textSizeDropDown.Name = Fields.TextSize;
+            _textSizeDropDown.SetupAdapter(Sizes.TextSizeCollection.Select(item => item.Key).ToList());
+            _textSizeDropDown.ItemSelected += TextSizeView_ItemSelected;
 
-            _textColorSpinner.Adapter = new SpinnerAdapter(this, R.Layout.SimpleSpinnerItem, Colors.ColorsCollection.Select(item => item.Key).ToList());
-            _textColorSpinner.ItemSelected += TextColorSpinner_ItemSelected;
+            _textColorDropDown.Name = Fields.TextColor;
+            _textColorDropDown.SetupAdapter(Colors.ColorsCollection.Select(item => item.Key).ToList());
+            _textColorDropDown.ItemSelected += TextColorItemSelected;
 
-            _textColorSpinnerDisabled.Adapter = new SpinnerAdapter(this, R.Layout.SimpleSpinnerItem, Colors.ColorsCollection.Select(item => item.Key).ToList());
-            _textColorSpinnerDisabled.ItemSelected += TextColorSpinnerDisabled_ItemSelected;
+            _textColorDisabledDropDown.Name = Fields.DisabledTextColor;
+            _textColorDisabledDropDown.SetupAdapter(Colors.ColorsCollection.Select(item => item.Key).ToList());
+            _textColorDisabledDropDown.ItemSelected += TextColorDisabledItemSelected;
 
-            _hintTextColorSpinner.Adapter = new SpinnerAdapter(this, R.Layout.SimpleSpinnerItem, Colors.ColorsCollection.Select(item => item.Key).ToList());
-            _hintTextColorSpinner.ItemSelected += HintTextColor_ItemSelected;
+            _hintTextColorDropDown.Name = Fields.HintTextColor;
+            _hintTextColorDropDown.SetupAdapter(Colors.ColorsCollection.Select(item => item.Key).ToList());
+            _hintTextColorDropDown.ItemSelected += HintTextColorItemSelected;
 
-            _hintTextColorSpinnerDisabled.Adapter = new SpinnerAdapter(this, R.Layout.SimpleSpinnerItem, Colors.ColorsCollection.Select(item => item.Key).ToList());
-            _hintTextColorSpinnerDisabled.ItemSelected += HintTextColorSpinnerDisabled_ItemSelected;
+            _hintTextColorDisabledDropDown.Name = Fields.HintTextColorDisabled;
+            _hintTextColorDisabledDropDown.SetupAdapter(Colors.ColorsCollection.Select(item => item.Key).ToList());
+            _hintTextColorDisabledDropDown.ItemSelected += HintTextColorDisabledItemSelected;
 
-            _leftDrawableFocusedSpinner.Adapter = new SpinnerAdapter(this, R.Layout.SimpleSpinnerItem, Icons.DrawableCollection.Select(item => item.Key).ToList());
-            _leftDrawableFocusedSpinner.ItemSelected += LeftDrawableFocused_ItemSelected;
+            _leftDrawableFocusedDropDown.Name = Fields.IconFocused;
+            _leftDrawableFocusedDropDown.SetupAdapter(Icons.DrawableCollection.Select(item => item.Key).ToList());
+            _leftDrawableFocusedDropDown.ItemSelected += LeftDrawableFocusedItemSelected;
 
-            _leftDrawableUnfocusedSpinner.Adapter = new SpinnerAdapter(this, R.Layout.SimpleSpinnerItem, Icons.DrawableCollection.Select(item => item.Key).ToList());
-            _leftDrawableUnfocusedSpinner.ItemSelected += LeftDrawableUnfocused_ItemSelected;
+            _leftDrawableUnfocusedDropDown.Name = Fields.IconUnocused;
+            _leftDrawableUnfocusedDropDown.SetupAdapter(Icons.DrawableCollection.Select(item => item.Key).ToList());
+            _leftDrawableUnfocusedDropDown.ItemSelected += LeftDrawableUnfocusedItemSelected;
 
-            _leftDrawableDisabledSpinner.Adapter = new SpinnerAdapter(this, R.Layout.SimpleSpinnerItem, Icons.DrawableCollection.Select(item => item.Key).ToList());
-            _leftDrawableDisabledSpinner.ItemSelected += LeftDrawableDisabledSpinner_ItemSelected;
+            _leftDrawableDisabledDropDown.Name = Fields.IconDisabled;
+            _leftDrawableDisabledDropDown.SetupAdapter(Icons.DrawableCollection.Select(item => item.Key).ToList());
+            _leftDrawableDisabledDropDown.ItemSelected += LeftDrawableDisabledItemSelected;
 
-            _underlineColorFocusedSpinner.Adapter = new SpinnerAdapter(this, R.Layout.SimpleSpinnerItem, Colors.ColorsCollection.Select(item => item.Key).ToList());
-            _underlineColorFocusedSpinner.ItemSelected += UnderlineColorFocusedSpinner_ItemSelected;
+            _underlineColorFocusedDropDown.Name = Fields.UnderlineColorFocused;
+            _underlineColorFocusedDropDown.SetupAdapter(Colors.ColorsCollection.Select(item => item.Key).ToList());
+            _underlineColorFocusedDropDown.ItemSelected += UnderlineColorFocusedItemSelected;
 
-            _underlineColorUnfocusedSpinner.Adapter = new SpinnerAdapter(this, R.Layout.SimpleSpinnerItem, Colors.ColorsCollection.Select(item => item.Key).ToList());
-            _underlineColorUnfocusedSpinner.ItemSelected += UnderlineColorUnfocusedSpinner_ItemSelected;
+            _underlineColorUnfocusedDropDown.Name = Fields.UnderlineColorUnocused;
+            _underlineColorUnfocusedDropDown.SetupAdapter(Colors.ColorsCollection.Select(item => item.Key).ToList());
+            _underlineColorUnfocusedDropDown.ItemSelected += UnderlineColorUnfocusedItemSelected;
 
-            _underlineColorDisabledSpinner.Adapter = new SpinnerAdapter(this, R.Layout.SimpleSpinnerItem, Colors.ColorsCollection.Select(item => item.Key).ToList());
-            _underlineColorDisabledSpinner.ItemSelected += UnderlineColorDisabledSpinner_ItemSelected;
+            _underlineColorDisabledDropDown.Name = Fields.UnderlineColorDisabled;
+            _underlineColorDisabledDropDown.SetupAdapter(Colors.ColorsCollection.Select(item => item.Key).ToList());
+            _underlineColorDisabledDropDown.ItemSelected += UnderlineColorDisabledItemSelected;
 
             SetCurrenTheme(_inputTop.GetThemeProvider().GetCurrentTheme());
 
@@ -121,134 +133,134 @@ namespace EOS.UI.Android.Sandbox.Activities
         private void SetCurrenTheme(IEOSTheme iEOSTheme)
         {
             if(iEOSTheme is LightEOSTheme)
-                _themeSpinner.SetSelection(1);
+                _themeDropDown.SetSpinnerSelection(1);
             if(iEOSTheme is DarkEOSTheme)
-                _themeSpinner.SetSelection(2);
+                _themeDropDown.SetSpinnerSelection(2);
         }
 
-        private void ThemeSpinner_ItemSelected(object sender, AdapterView.ItemSelectedEventArgs e)
+        private void ThemeItemSelected(int position)
         {
-            if(e.Position > 0)
+            if(position > 0)
             {
-                _inputTop.GetThemeProvider().SetCurrentTheme(ThemeTypes.ThemeCollection.ElementAt(e.Position).Value);
+                _inputTop.GetThemeProvider().SetCurrentTheme(ThemeTypes.ThemeCollection.ElementAt(position).Value);
                 ResetCustomValues();
             }
         }
 
-        private void TextSizeView_ItemSelected(object sender, AdapterView.ItemSelectedEventArgs e)
+        private void TextSizeView_ItemSelected(int position)
         {
-            if(e.Position > 0)
+            if(position > 0)
             {
-                _inputTop.TextSize = Sizes.TextSizeCollection.ElementAt(e.Position).Value;
-                _inputBottom.TextSize = Sizes.TextSizeCollection.ElementAt(e.Position).Value;
+                _inputTop.TextSize = Sizes.TextSizeCollection.ElementAt(position).Value;
+                _inputBottom.TextSize = Sizes.TextSizeCollection.ElementAt(position).Value;
             }
         }
 
-        private void LetterSpacingView_ItemSelected(object sender, AdapterView.ItemSelectedEventArgs e)
+        private void LetterSpacingItemSelected(int position)
         {
-            if(e.Position > 0)
+            if(position > 0)
             {
-                _inputTop.LetterSpacing = Sizes.LetterSpacingCollection.ElementAt(e.Position).Value;
-                _inputBottom.LetterSpacing = Sizes.LetterSpacingCollection.ElementAt(e.Position).Value;
+                _inputTop.LetterSpacing = Sizes.LetterSpacingCollection.ElementAt(position).Value;
+                _inputBottom.LetterSpacing = Sizes.LetterSpacingCollection.ElementAt(position).Value;
             }
         }
 
-        private void FontSpinner_ItemSelected(object sender, AdapterView.ItemSelectedEventArgs e)
+        private void FontItemSelected(int position)
         {
-            if(e.Position > 0)
+            if(position > 0)
             {
-                _inputTop.Typeface = Typeface.CreateFromAsset(Assets, Fonts.FontsCollection.ElementAt(e.Position).Value);
-                _inputBottom.Typeface = Typeface.CreateFromAsset(Assets, Fonts.FontsCollection.ElementAt(e.Position).Value);
+                _inputTop.Typeface = Typeface.CreateFromAsset(Assets, Fonts.FontsCollection.ElementAt(position).Value);
+                _inputBottom.Typeface = Typeface.CreateFromAsset(Assets, Fonts.FontsCollection.ElementAt(position).Value);
             }
         }
 
-        private void TextColorSpinner_ItemSelected(object sender, AdapterView.ItemSelectedEventArgs e)
+        private void TextColorItemSelected(int position)
         {
-            if(e.Position > 0)
+            if(position > 0)
             {
-                _inputTop.TextColor = Colors.ColorsCollection.ElementAt(e.Position).Value;
-                _inputBottom.TextColor = Colors.ColorsCollection.ElementAt(e.Position).Value;
+                _inputTop.TextColor = Colors.ColorsCollection.ElementAt(position).Value;
+                _inputBottom.TextColor = Colors.ColorsCollection.ElementAt(position).Value;
             }
         }
 
-        private void TextColorSpinnerDisabled_ItemSelected(object sender, AdapterView.ItemSelectedEventArgs e)
+        private void TextColorDisabledItemSelected(int position)
         {
-            if(e.Position > 0)
+            if(position > 0)
             {
-                _inputTop.TextColorDisabled = Colors.ColorsCollection.ElementAt(e.Position).Value;
-                _inputBottom.TextColorDisabled = Colors.ColorsCollection.ElementAt(e.Position).Value;
+                _inputTop.TextColorDisabled = Colors.ColorsCollection.ElementAt(position).Value;
+                _inputBottom.TextColorDisabled = Colors.ColorsCollection.ElementAt(position).Value;
             }
         }
 
-        private void HintTextColor_ItemSelected(object sender, AdapterView.ItemSelectedEventArgs e)
+        private void HintTextColorItemSelected(int position)
         {
-            if(e.Position > 0)
+            if(position > 0)
             {
-                _inputTop.HintTextColor = Colors.ColorsCollection.ElementAt(e.Position).Value;
-                _inputBottom.HintTextColor = Colors.ColorsCollection.ElementAt(e.Position).Value;
+                _inputTop.HintTextColor = Colors.ColorsCollection.ElementAt(position).Value;
+                _inputBottom.HintTextColor = Colors.ColorsCollection.ElementAt(position).Value;
             }
         }
 
-        private void HintTextColorSpinnerDisabled_ItemSelected(object sender, AdapterView.ItemSelectedEventArgs e)
+        private void HintTextColorDisabledItemSelected(int position)
         {
-            if(e.Position > 0)
+            if(position > 0)
             {
-                _inputTop.HintTextColorDisabled = Colors.ColorsCollection.ElementAt(e.Position).Value;
-                _inputBottom.HintTextColorDisabled = Colors.ColorsCollection.ElementAt(e.Position).Value;
+                _inputTop.HintTextColorDisabled = Colors.ColorsCollection.ElementAt(position).Value;
+                _inputBottom.HintTextColorDisabled = Colors.ColorsCollection.ElementAt(position).Value;
             }
         }
 
-        private void LeftDrawableUnfocused_ItemSelected(object sender, AdapterView.ItemSelectedEventArgs e)
+        private void LeftDrawableUnfocusedItemSelected(int position)
         {
-            if(e.Position > 0)
+            if(position > 0)
             {
-                _inputTop.LeftImageUnfocused =  BaseContext.GetDrawable(Icons.DrawableCollection.ElementAt(e.Position).Value);
-                _inputBottom.LeftImageUnfocused = BaseContext.GetDrawable(Icons.DrawableCollection.ElementAt(e.Position).Value);
+                _inputTop.LeftImageUnfocused =  BaseContext.GetDrawable(Icons.DrawableCollection.ElementAt(position).Value);
+                _inputBottom.LeftImageUnfocused = BaseContext.GetDrawable(Icons.DrawableCollection.ElementAt(position).Value);
             }
         }
 
-        private void LeftDrawableFocused_ItemSelected(object sender, AdapterView.ItemSelectedEventArgs e)
+        private void LeftDrawableFocusedItemSelected(int position)
         {
-            if(e.Position > 0)
+            if(position > 0)
             {
-                _inputTop.LeftImageFocused = BaseContext.GetDrawable(Icons.DrawableCollection.ElementAt(e.Position).Value);
-                _inputBottom.LeftImageFocused = BaseContext.GetDrawable(Icons.DrawableCollection.ElementAt(e.Position).Value);
+                _inputTop.LeftImageFocused = BaseContext.GetDrawable(Icons.DrawableCollection.ElementAt(position).Value);
+                _inputBottom.LeftImageFocused = BaseContext.GetDrawable(Icons.DrawableCollection.ElementAt(position).Value);
             }
         }
 
-        private void LeftDrawableDisabledSpinner_ItemSelected(object sender, AdapterView.ItemSelectedEventArgs e)
+        private void LeftDrawableDisabledItemSelected(int position)
         {
-            if(e.Position > 0)
+            if(position > 0)
             {
-                _inputTop.LeftImageDisabled = BaseContext.GetDrawable(Icons.DrawableCollection.ElementAt(e.Position).Value);
-                _inputBottom.LeftImageDisabled = BaseContext.GetDrawable(Icons.DrawableCollection.ElementAt(e.Position).Value);
+                _inputTop.LeftImageDisabled = BaseContext.GetDrawable(Icons.DrawableCollection.ElementAt(position).Value);
+                _inputBottom.LeftImageDisabled = BaseContext.GetDrawable(Icons.DrawableCollection.ElementAt(position).Value);
             }
         }
 
-        private void UnderlineColorFocusedSpinner_ItemSelected(object sender, AdapterView.ItemSelectedEventArgs e)
+        private void UnderlineColorFocusedItemSelected(int position)
         {
-            if(e.Position > 0)
+            if(position > 0)
             {
-                _inputTop.UnderlineColorFocused = Colors.ColorsCollection.ElementAt(e.Position).Value;
-                _inputBottom.UnderlineColorFocused = Colors.ColorsCollection.ElementAt(e.Position).Value;
+                _inputTop.UnderlineColorFocused = Colors.ColorsCollection.ElementAt(position).Value;
+                _inputBottom.UnderlineColorFocused = Colors.ColorsCollection.ElementAt(position).Value;
             }
         }
 
-        private void UnderlineColorUnfocusedSpinner_ItemSelected(object sender, AdapterView.ItemSelectedEventArgs e)
+        private void UnderlineColorUnfocusedItemSelected(int position)
         {
-            if(e.Position > 0)
+            if(position > 0)
             {
-                _inputTop.UnderlineColorUnfocused = Colors.ColorsCollection.ElementAt(e.Position).Value;
-                _inputBottom.UnderlineColorUnfocused = Colors.ColorsCollection.ElementAt(e.Position).Value;
+                _inputTop.UnderlineColorUnfocused = Colors.ColorsCollection.ElementAt(position).Value;
+                _inputBottom.UnderlineColorUnfocused = Colors.ColorsCollection.ElementAt(position).Value;
             }
         }
 
-        private void UnderlineColorDisabledSpinner_ItemSelected(object sender, AdapterView.ItemSelectedEventArgs e)
+        private void UnderlineColorDisabledItemSelected(int position)
         {
-            if(e.Position > 0)
+            if(position > 0)
             {
-                _inputTop.UnderlineColorDisabled = Colors.ColorsCollection.ElementAt(e.Position).Value;
-                _inputBottom.UnderlineColorDisabled = Colors.ColorsCollection.ElementAt(e.Position).Value;
+                _inputTop.UnderlineColorDisabled = Colors.ColorsCollection.ElementAt(position).Value;
+                _inputBottom.UnderlineColorDisabled = Colors.ColorsCollection.ElementAt(position).Value;
             }
         }
 
@@ -256,19 +268,19 @@ namespace EOS.UI.Android.Sandbox.Activities
         {
             _inputTop.ResetCustomization();
             _inputBottom.ResetCustomization();
-            _fontSpinner.SetSelection(0);
-            _letterSpacingSpinner.SetSelection(0);
-            _textSizeSpinner.SetSelection(0);
-            _textColorSpinner.SetSelection(0);
-            _textColorSpinnerDisabled.SetSelection(0);
-            _hintTextColorSpinner.SetSelection(0);
-            _hintTextColorSpinnerDisabled.SetSelection(0);
-            _leftDrawableFocusedSpinner.SetSelection(0);
-            _leftDrawableUnfocusedSpinner.SetSelection(0);
-            _leftDrawableDisabledSpinner.SetSelection(0);
-            _underlineColorFocusedSpinner.SetSelection(0);
-            _underlineColorUnfocusedSpinner.SetSelection(0);
-            _underlineColorDisabledSpinner.SetSelection(0);
+            _fontDropDown.SetSpinnerSelection(0);
+            _letterSpacingDropDown.SetSpinnerSelection(0);
+            _textSizeDropDown.SetSpinnerSelection(0);
+            _textColorDropDown.SetSpinnerSelection(0);
+            _textColorDisabledDropDown.SetSpinnerSelection(0);
+            _hintTextColorDropDown.SetSpinnerSelection(0);
+            _hintTextColorDisabledDropDown.SetSpinnerSelection(0);
+            _leftDrawableFocusedDropDown.SetSpinnerSelection(0);
+            _leftDrawableUnfocusedDropDown.SetSpinnerSelection(0);
+            _leftDrawableDisabledDropDown.SetSpinnerSelection(0);
+            _underlineColorFocusedDropDown.SetSpinnerSelection(0);
+            _underlineColorUnfocusedDropDown.SetSpinnerSelection(0);
+            _underlineColorDisabledDropDown.SetSpinnerSelection(0);
         }
 
         public void OnCheckedChanged(CompoundButton buttonView, bool isChecked)
