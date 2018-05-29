@@ -9,6 +9,7 @@ using Android.Widget;
 using EOS.UI.Android.Models;
 using EOS.UI.Android.Sandbox.Adapters;
 using EOS.UI.Android.Sandbox.RecyclerImplementation;
+using EOS.UI.Shared.Themes.Themes;
 using UIFrameworks.Android.Themes;
 using UIFrameworks.Shared.Themes.Helpers;
 using UIFrameworks.Shared.Themes.Interfaces;

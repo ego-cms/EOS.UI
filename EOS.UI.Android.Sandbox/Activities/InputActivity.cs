@@ -3,18 +3,16 @@ using Android.App;
 using Android.Content;
 using Android.Graphics;
 using Android.OS;
-using Android.Views.InputMethods;
 using Android.Widget;
 using EOS.UI.Android.Controls;
 using EOS.UI.Android.Sandbox.Adapters;
-using EOS.UI.Android.Sandbox.Helpers;
-using UIFrameworks.Android.Themes;
 using UIFrameworks.Shared.Themes.Helpers;
 using UIFrameworks.Shared.Themes.Interfaces;
 using static Android.Widget.CompoundButton;
 using static EOS.UI.Android.Sandbox.Helpers.Constants;
 using R = Android.Resource;
 using A = Android;
+using EOS.UI.Shared.Themes.Themes;
 
 namespace EOS.UI.Android.Sandbox.Activities
 {

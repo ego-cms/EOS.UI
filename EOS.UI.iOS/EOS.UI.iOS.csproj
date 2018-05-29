@@ -126,16 +126,13 @@
     <Compile Include="Assets.cs">
       <DependentUpon>Assets.tt</DependentUpon>
     </Compile>
-    <Compile Include="Themes\DarkEOSTheme.cs" />
     <Compile Include="Themes\EOSThemeProvider.cs" />
-    <Compile Include="Themes\LightEOSTheme.cs" />
     <Compile Include="Traverser\IEOSViewTraverser.cs" />
     <Compile Include="Traverser\EOSViewTraverser.cs" />
     <Compile Include="Extensions\UIViewExtension.cs" />
     <Compile Include="Controls\BadgeLabel.cs" />
     <Compile Include="Controls\GhostButton.cs" />
     <Compile Include="Controls\FabProgress.cs" />
-    <Compile Include="Helpers\ShadowConfig.cs" />
     <Compile Include="Controls\CircleProgress.cs" />
     <Compile Include="Controls\CircleProgress.designer.cs">
       <DependentUpon>CircleProgress.cs</DependentUpon>

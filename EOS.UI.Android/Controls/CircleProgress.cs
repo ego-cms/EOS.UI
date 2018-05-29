@@ -182,8 +182,8 @@ namespace EOS.UI.Android.Controls
             if (!IsEOSCustomizationIgnored)
             {
                 var provider = GetThemeProvider();
-                Color = provider.GetEOSProperty<Color>(this, EOSConstants.PrimaryColor);
-                AlternativeColor = provider.GetEOSProperty<Color>(this, EOSConstants.SecondaryColor);
+                Color = provider.GetEOSProperty<Color>(this, EOSConstants.BrandPrimaryColor);
+                AlternativeColor = provider.GetEOSProperty<Color>(this, EOSConstants.BrandPrimaryColor);
                 ShowProgress = provider.GetEOSProperty<bool>(this, EOSConstants.CircleProgressShown);
                 Typeface = Typeface.CreateFromAsset(Context.Assets, provider.GetEOSProperty<string>(this, EOSConstants.Font));
                 TextSize = provider.GetEOSProperty<float>(this, EOSConstants.TextSize);

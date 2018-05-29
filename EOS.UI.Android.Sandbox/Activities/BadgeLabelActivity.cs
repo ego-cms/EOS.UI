@@ -9,7 +9,7 @@ using R = Android.Resource;
 using UIFrameworks.Shared.Themes.Helpers;
 using EOS.UI.Android.Sandbox.Adapters;
 using UIFrameworks.Shared.Themes.Interfaces;
-using UIFrameworks.Android.Themes;
+using EOS.UI.Shared.Themes.Themes;
 
 namespace EOS.UI.Android.Sandbox.Activities
 {
