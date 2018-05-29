@@ -39,7 +39,8 @@
         public const string SimpleButton = "Simple button";
         public const string SimpleLabel = "Simple label";
         public const string Input = "Input";
-		public const string FabProgress = "Fab progress";
-		public const string CircleProgress = "Circle progress";
+        public const string FabProgress = "Fab progress";
+        public const string CircleProgress = "Circle progress";
+        public const string CTAButton = "CTA Button";
     }
 }
