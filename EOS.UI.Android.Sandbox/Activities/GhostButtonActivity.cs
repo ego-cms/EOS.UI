@@ -21,18 +21,18 @@ namespace EOS.UI.Android.Sandbox.Activities
             SetContentView(Resource.Layout.GhostButtonLayout);
 
             var ghostButton = FindViewById<GhostButton>(Resource.Id.ghostButton);
-            var themeDropDown = FindViewById<SendboxDropDown>(Resource.Id.themeDropDown);
-            var disabledColorDropDown = FindViewById<SendboxDropDown>(Resource.Id.enabledTextColorDropDown);
-            var pressedColorDropDown = FindViewById<SendboxDropDown>(Resource.Id.disabledTextColorDropDown);
-            var enabledColorDropDown = FindViewById<SendboxDropDown>(Resource.Id.pressedTextColorDropDown);
-            var fontDropDown = FindViewById<SendboxDropDown>(Resource.Id.fontDropDown);
-            var letterSpacingDropDown = FindViewById<SendboxDropDown>(Resource.Id.letterSpacingDropDown);
-            var textSizeDropDown = FindViewById<SendboxDropDown>(Resource.Id.textSizeDropDown);
+            var themeDropDown = FindViewById<SandboxDropDown>(Resource.Id.themeDropDown);
+            var disabledColorDropDown = FindViewById<SandboxDropDown>(Resource.Id.enabledTextColorDropDown);
+            var pressedColorDropDown = FindViewById<SandboxDropDown>(Resource.Id.disabledTextColorDropDown);
+            var enabledColorDropDown = FindViewById<SandboxDropDown>(Resource.Id.pressedTextColorDropDown);
+            var fontDropDown = FindViewById<SandboxDropDown>(Resource.Id.fontDropDown);
+            var letterSpacingDropDown = FindViewById<SandboxDropDown>(Resource.Id.letterSpacingDropDown);
+            var textSizeDropDown = FindViewById<SandboxDropDown>(Resource.Id.textSizeDropDown);
             var stateSwitch = FindViewById<Switch>(Resource.Id.stateSwitch);
             ghostButton.ResetCustomization();
 
             var resetButton = FindViewById<Button>(Resource.Id.buttonResetCustomization);
-            var spinners = new List<SendboxDropDown>()
+            var spinners = new List<SandboxDropDown>()
             {
                 themeDropDown,
                 disabledColorDropDown,

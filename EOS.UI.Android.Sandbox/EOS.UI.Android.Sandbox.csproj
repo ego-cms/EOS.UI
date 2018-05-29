@@ -9,7 +9,7 @@
     <OutputType>Library</OutputType>
     <RootNamespace>EOS.UI.Android.Sandbox</RootNamespace>
     <AssemblyName>EOS.UI.Android.Sandbox</AssemblyName>
-    <TargetFrameworkVersion>v7.1</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v8.1</TargetFrameworkVersion>
     <AndroidApplication>True</AndroidApplication>
     <AndroidResgenFile>Resources\Resource.designer.cs</AndroidResgenFile>
     <AndroidResgenClass>Resource</AndroidResgenClass>
@@ -99,7 +99,7 @@
     <Compile Include="Activities\BadgeLabelActivity.cs" />
     <Compile Include="Activities\MainActivity.cs" />
     <Compile Include="Adapters\SpinnerAdapter.cs" />
-    <Compile Include="Controls\SendboxDropDown.cs" />
+    <Compile Include="Controls\SandboxDropDown.cs" />
     <Compile Include="Helpers\Constants.cs" />
     <Compile Include="Helpers\ContextHelpers.cs" />
     <Compile Include="RecyclerImplementation\ControlsAdapter.cs" />

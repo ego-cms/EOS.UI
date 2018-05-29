@@ -16,11 +16,11 @@ namespace EOS.UI.Android.Sandbox.Activities
     public class SimpleLabelActivity : BaseActivity
     {
         private SimpleLabel _simpleLabel;
-        private SendboxDropDown _themeDropDown;
-        private SendboxDropDown _textColorDropDown;
-        private SendboxDropDown _fontDropDown;
-        private SendboxDropDown _letterSpacingDropDown;
-        private SendboxDropDown _textSizeDropDown;
+        private SandboxDropDown _themeDropDown;
+        private SandboxDropDown _textColorDropDown;
+        private SandboxDropDown _fontDropDown;
+        private SandboxDropDown _letterSpacingDropDown;
+        private SandboxDropDown _textSizeDropDown;
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
@@ -29,11 +29,11 @@ namespace EOS.UI.Android.Sandbox.Activities
 
             _simpleLabel = FindViewById<SimpleLabel>(Resource.Id.simpleLabel);
 
-            _themeDropDown = FindViewById<SendboxDropDown>(Resource.Id.themeDropDown);
-            _textColorDropDown = FindViewById<SendboxDropDown>(Resource.Id.textColorDropDown);
-            _fontDropDown = FindViewById<SendboxDropDown>(Resource.Id.fontDropDown);
-            _letterSpacingDropDown = FindViewById<SendboxDropDown>(Resource.Id.letterSpacingDropDown);
-            _textSizeDropDown = FindViewById<SendboxDropDown>(Resource.Id.textSizeDropDown);
+            _themeDropDown = FindViewById<SandboxDropDown>(Resource.Id.themeDropDown);
+            _textColorDropDown = FindViewById<SandboxDropDown>(Resource.Id.textColorDropDown);
+            _fontDropDown = FindViewById<SandboxDropDown>(Resource.Id.fontDropDown);
+            _letterSpacingDropDown = FindViewById<SandboxDropDown>(Resource.Id.letterSpacingDropDown);
+            _textSizeDropDown = FindViewById<SandboxDropDown>(Resource.Id.textSizeDropDown);
             var resetButton = FindViewById<Button>(Resource.Id.buttonResetCustomization);
 
             _themeDropDown.Name = Fields.Theme;
