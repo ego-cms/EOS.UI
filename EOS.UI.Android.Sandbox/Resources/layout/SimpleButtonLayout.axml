@@ -29,47 +29,47 @@
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
-            <EOS.UI.Android.Sandbox.Controls.DropDown
+            <EOS.UI.Android.Sandbox.Controls.SendboxDropDown
                 android:id="@+id/themeDropDown"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
-            <EOS.UI.Android.Sandbox.Controls.DropDown
+            <EOS.UI.Android.Sandbox.Controls.SendboxDropDown
                 android:id="@+id/fontDropDown"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
-            <EOS.UI.Android.Sandbox.Controls.DropDown
+            <EOS.UI.Android.Sandbox.Controls.SendboxDropDown
                 android:id="@+id/letterSpacingDropDown"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
-            <EOS.UI.Android.Sandbox.Controls.DropDown
+            <EOS.UI.Android.Sandbox.Controls.SendboxDropDown
                 android:id="@+id/textSizeDropDown"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
-            <EOS.UI.Android.Sandbox.Controls.DropDown
+            <EOS.UI.Android.Sandbox.Controls.SendboxDropDown
                 android:id="@+id/enabledTextColorDropDown"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
-            <EOS.UI.Android.Sandbox.Controls.DropDown
+            <EOS.UI.Android.Sandbox.Controls.SendboxDropDown
                 android:id="@+id/disabledTextColorDropDown"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
-            <EOS.UI.Android.Sandbox.Controls.DropDown
+            <EOS.UI.Android.Sandbox.Controls.SendboxDropDown
                 android:id="@+id/pressedTextColorDropDown"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
-            <EOS.UI.Android.Sandbox.Controls.DropDown
+            <EOS.UI.Android.Sandbox.Controls.SendboxDropDown
                 android:id="@+id/enabledBackgroundDropDown"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
-            <EOS.UI.Android.Sandbox.Controls.DropDown
+            <EOS.UI.Android.Sandbox.Controls.SendboxDropDown
                 android:id="@+id/disabledBackgroundDropDown"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
-            <EOS.UI.Android.Sandbox.Controls.DropDown
+            <EOS.UI.Android.Sandbox.Controls.SendboxDropDown
                 android:id="@+id/pressedBackgroundDropDown"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
-            <EOS.UI.Android.Sandbox.Controls.DropDown
+            <EOS.UI.Android.Sandbox.Controls.SendboxDropDown
                 android:id="@+id/cornerRadiusDropDown"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />

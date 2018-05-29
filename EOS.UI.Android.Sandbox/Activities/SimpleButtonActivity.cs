@@ -20,17 +20,17 @@ namespace EOS.UI.Android.Sandbox.Activities
     public class SimpleButtonActivity : BaseActivity, IOnCheckedChangeListener
     {
         private SimpleButton _simpleButton;
-        private DropDown _themeDropDown;
-        private DropDown _fontDropDown;
-        private DropDown _letterSpacingDropDown;
-        private DropDown _textSizeDropDown;
-        private DropDown _textColorEnabledDropDown;
-        private DropDown _textColorDisabledDropDown;
-        private DropDown _textColorPressedDropDown;
-        private DropDown _backgroundColorEnabledDropDown;
-        private DropDown _backgroundColorDisabledDropDown;
-        private DropDown _backgroundColorPressedDropDown;
-        private DropDown _cornerRadiusDropDown;
+        private SendboxDropDown _themeDropDown;
+        private SendboxDropDown _fontDropDown;
+        private SendboxDropDown _letterSpacingDropDown;
+        private SendboxDropDown _textSizeDropDown;
+        private SendboxDropDown _textColorEnabledDropDown;
+        private SendboxDropDown _textColorDisabledDropDown;
+        private SendboxDropDown _textColorPressedDropDown;
+        private SendboxDropDown _backgroundColorEnabledDropDown;
+        private SendboxDropDown _backgroundColorDisabledDropDown;
+        private SendboxDropDown _backgroundColorPressedDropDown;
+        private SendboxDropDown _cornerRadiusDropDown;
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
@@ -40,17 +40,17 @@ namespace EOS.UI.Android.Sandbox.Activities
             _simpleButton = FindViewById<SimpleButton>(Resource.Id.simpleButton);
             _simpleButton.UpdateAppearance();
 
-            _themeDropDown = FindViewById<DropDown>(Resource.Id.themeDropDown);
-            _fontDropDown = FindViewById<DropDown>(Resource.Id.fontDropDown);
-            _letterSpacingDropDown = FindViewById<DropDown>(Resource.Id.letterSpacingDropDown);
-            _textSizeDropDown = FindViewById<DropDown>(Resource.Id.textSizeDropDown);
-            _textColorEnabledDropDown = FindViewById<DropDown>(Resource.Id.enabledTextColorDropDown);
-            _textColorDisabledDropDown = FindViewById<DropDown>(Resource.Id.disabledTextColorDropDown);
-            _textColorPressedDropDown = FindViewById<DropDown>(Resource.Id.pressedTextColorDropDown);
-            _backgroundColorEnabledDropDown = FindViewById<DropDown>(Resource.Id.enabledBackgroundDropDown);
-            _backgroundColorDisabledDropDown = FindViewById<DropDown>(Resource.Id.disabledBackgroundDropDown);
-            _backgroundColorPressedDropDown = FindViewById<DropDown>(Resource.Id.pressedBackgroundDropDown);
-            _cornerRadiusDropDown = FindViewById<DropDown>(Resource.Id.cornerRadiusDropDown);
+            _themeDropDown = FindViewById<SendboxDropDown>(Resource.Id.themeDropDown);
+            _fontDropDown = FindViewById<SendboxDropDown>(Resource.Id.fontDropDown);
+            _letterSpacingDropDown = FindViewById<SendboxDropDown>(Resource.Id.letterSpacingDropDown);
+            _textSizeDropDown = FindViewById<SendboxDropDown>(Resource.Id.textSizeDropDown);
+            _textColorEnabledDropDown = FindViewById<SendboxDropDown>(Resource.Id.enabledTextColorDropDown);
+            _textColorDisabledDropDown = FindViewById<SendboxDropDown>(Resource.Id.disabledTextColorDropDown);
+            _textColorPressedDropDown = FindViewById<SendboxDropDown>(Resource.Id.pressedTextColorDropDown);
+            _backgroundColorEnabledDropDown = FindViewById<SendboxDropDown>(Resource.Id.enabledBackgroundDropDown);
+            _backgroundColorDisabledDropDown = FindViewById<SendboxDropDown>(Resource.Id.disabledBackgroundDropDown);
+            _backgroundColorPressedDropDown = FindViewById<SendboxDropDown>(Resource.Id.pressedBackgroundDropDown);
+            _cornerRadiusDropDown = FindViewById<SendboxDropDown>(Resource.Id.cornerRadiusDropDown);
             var resetButton = FindViewById<Button>(Resource.Id.buttonResetCustomization);
             var disableSwitch = FindViewById<Switch>(Resource.Id.switchDisabled);
 

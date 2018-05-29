@@ -25,75 +25,75 @@
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
-            <EOS.UI.Android.Sandbox.Controls.DropDown
+            <EOS.UI.Android.Sandbox.Controls.SendboxDropDown
                 android:id="@+id/themeDropDown"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
-            <EOS.UI.Android.Sandbox.Controls.DropDown
+            <EOS.UI.Android.Sandbox.Controls.SendboxDropDown
                 android:id="@+id/sectionNameDropDown"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
-            <EOS.UI.Android.Sandbox.Controls.DropDown
+            <EOS.UI.Android.Sandbox.Controls.SendboxDropDown
                 android:id="@+id/buttonTextDropDown"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
-            <EOS.UI.Android.Sandbox.Controls.DropDown
+            <EOS.UI.Android.Sandbox.Controls.SendboxDropDown
                 android:id="@+id/sectionNameFontDropDown"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
-            <EOS.UI.Android.Sandbox.Controls.DropDown
+            <EOS.UI.Android.Sandbox.Controls.SendboxDropDown
                 android:id="@+id/buttonTextFontDropDown"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
-            <EOS.UI.Android.Sandbox.Controls.DropDown
+            <EOS.UI.Android.Sandbox.Controls.SendboxDropDown
                 android:id="@+id/sectionNameLetterSpacingDropDown"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
-            <EOS.UI.Android.Sandbox.Controls.DropDown
+            <EOS.UI.Android.Sandbox.Controls.SendboxDropDown
                 android:id="@+id/buttonTextLetterSpacingDropDown"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
-            <EOS.UI.Android.Sandbox.Controls.DropDown
+            <EOS.UI.Android.Sandbox.Controls.SendboxDropDown
                 android:id="@+id/sectionTextSizeDropDown"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
-            <EOS.UI.Android.Sandbox.Controls.DropDown
+            <EOS.UI.Android.Sandbox.Controls.SendboxDropDown
                 android:id="@+id/buttonTextSizeDropDown"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
-            <EOS.UI.Android.Sandbox.Controls.DropDown
+            <EOS.UI.Android.Sandbox.Controls.SendboxDropDown
                 android:id="@+id/sectionTextColorDropDown"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
-            <EOS.UI.Android.Sandbox.Controls.DropDown
+            <EOS.UI.Android.Sandbox.Controls.SendboxDropDown
                 android:id="@+id/buttonTextColorDropDown"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
-            <EOS.UI.Android.Sandbox.Controls.DropDown
+            <EOS.UI.Android.Sandbox.Controls.SendboxDropDown
                 android:id="@+id/backgroundColorDropDown"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
-            <EOS.UI.Android.Sandbox.Controls.DropDown
+            <EOS.UI.Android.Sandbox.Controls.SendboxDropDown
                 android:id="@+id/borderColorDropDown"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
-            <EOS.UI.Android.Sandbox.Controls.DropDown
+            <EOS.UI.Android.Sandbox.Controls.SendboxDropDown
                 android:id="@+id/borderWidthDropDown"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
-            <EOS.UI.Android.Sandbox.Controls.DropDown
+            <EOS.UI.Android.Sandbox.Controls.SendboxDropDown
                 android:id="@+id/paddingTopDropDown"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
-            <EOS.UI.Android.Sandbox.Controls.DropDown
+            <EOS.UI.Android.Sandbox.Controls.SendboxDropDown
                 android:id="@+id/paddingBottomDropDown"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
-            <EOS.UI.Android.Sandbox.Controls.DropDown
+            <EOS.UI.Android.Sandbox.Controls.SendboxDropDown
                 android:id="@+id/paddingLeftDropDown"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
-            <EOS.UI.Android.Sandbox.Controls.DropDown
+            <EOS.UI.Android.Sandbox.Controls.SendboxDropDown
                 android:id="@+id/paddingRightDropDown"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />

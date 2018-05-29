@@ -99,7 +99,7 @@
     <Compile Include="Activities\BadgeLabelActivity.cs" />
     <Compile Include="Activities\MainActivity.cs" />
     <Compile Include="Adapters\SpinnerAdapter.cs" />
-    <Compile Include="Controls\DropDown.cs" />
+    <Compile Include="Controls\SendboxDropDown.cs" />
     <Compile Include="Helpers\Constants.cs" />
     <Compile Include="Helpers\ContextHelpers.cs" />
     <Compile Include="RecyclerImplementation\ControlsAdapter.cs" />
@@ -195,11 +195,6 @@
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\layout\SectionLayout.axml">
-      <SubType>Designer</SubType>
-    </AndroidResource>
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\layout\DropDownLayout.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
   </ItemGroup>

@@ -12,7 +12,7 @@ using R = Android.Resource;
 namespace EOS.UI.Android.Sandbox.Controls
 {
     public delegate void ItemSelectedEventHandler(int position);
-    public class DropDown : LinearLayout
+    public class SendboxDropDown : LinearLayout
     {
         #region fields
 
@@ -40,27 +40,27 @@ namespace EOS.UI.Android.Sandbox.Controls
 
         #region constructors
 
-        public DropDown(Context context) : base(context)
+        public SendboxDropDown(Context context) : base(context)
         {
             Initialize(context);
         }
 
-        public DropDown(Context context, IAttributeSet attrs) : base(context, attrs)
+        public SendboxDropDown(Context context, IAttributeSet attrs) : base(context, attrs)
         {
             Initialize(context, attrs);
         }
 
-        public DropDown(Context context, IAttributeSet attrs, int defStyleAttr) : base(context, attrs, defStyleAttr)
+        public SendboxDropDown(Context context, IAttributeSet attrs, int defStyleAttr) : base(context, attrs, defStyleAttr)
         {
             Initialize(context, attrs);
         }
 
-        public DropDown(Context context, IAttributeSet attrs, int defStyleAttr, int defStyleRes) : base(context, attrs, defStyleAttr, defStyleRes)
+        public SendboxDropDown(Context context, IAttributeSet attrs, int defStyleAttr, int defStyleRes) : base(context, attrs, defStyleAttr, defStyleRes)
         {
             Initialize(context, attrs);
         }
 
-        protected DropDown(IntPtr javaReference, JniHandleOwnership transfer) : base(javaReference, transfer)
+        protected SendboxDropDown(IntPtr javaReference, JniHandleOwnership transfer) : base(javaReference, transfer)
         {
             Initialize();
         }

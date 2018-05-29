@@ -25,14 +25,14 @@ namespace EOS.UI.Android.Sandbox.Activities
             base.OnCreate(savedInstanceState);
             SetContentView(Resource.Layout.CircleProgressLayout);
             var circleProgressFragment = FindViewById<CircleProgress>(Resource.Id.circleProgress);
-            var themeDropDown = FindViewById<DropDown>(Resource.Id.themeDropDown);
-            var colorDropDown = FindViewById<DropDown>(Resource.Id.colorDropDown);
-            var alternativeColorDropDown = FindViewById<DropDown>(Resource.Id.alternativeColorDropDown);
-            var fontDropDown = FindViewById<DropDown>(Resource.Id.fontDropDown);
-            var textSizeDropDown = FindViewById<DropDown>(Resource.Id.textSizeDropDown);
+            var themeDropDown = FindViewById<SendboxDropDown>(Resource.Id.themeDropDown);
+            var colorDropDown = FindViewById<SendboxDropDown>(Resource.Id.colorDropDown);
+            var alternativeColorDropDown = FindViewById<SendboxDropDown>(Resource.Id.alternativeColorDropDown);
+            var fontDropDown = FindViewById<SendboxDropDown>(Resource.Id.fontDropDown);
+            var textSizeDropDown = FindViewById<SendboxDropDown>(Resource.Id.textSizeDropDown);
             var showProgressSwitch = FindViewById<Switch>(Resource.Id.showProgressSwitch);
             var resetButton = FindViewById<Button>(Resource.Id.buttonResetCustomization);
-            var spinners = new List<DropDown>()
+            var spinners = new List<SendboxDropDown>()
             {
                 themeDropDown,
                 colorDropDown,
