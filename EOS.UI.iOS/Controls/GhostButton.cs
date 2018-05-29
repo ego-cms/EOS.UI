@@ -198,9 +198,9 @@ namespace EOS.UI.iOS.Controls
             {
                 var provider = GetThemeProvider();
                 Font = provider.GetEOSProperty<UIFont>(this, EOSConstants.Font);
-                EnabledTextColor = provider.GetEOSProperty<UIColor>(this, EOSConstants.PrimaryColor);
-                DisabledTextColor = provider.GetEOSProperty<UIColor>(this, EOSConstants.SecondaryColorDisabled);
-                PressedStateTextColor = provider.GetEOSProperty<UIColor>(this, EOSConstants.SecondaryColorPressed);
+                EnabledTextColor = provider.GetEOSProperty<UIColor>(this, EOSConstants.BrandPrimaryColor);
+                DisabledTextColor = provider.GetEOSProperty<UIColor>(this, EOSConstants.NeutralColor3);
+                PressedStateTextColor = provider.GetEOSProperty<UIColor>(this, EOSConstants.NeutralColor6);
                 TextSize = provider.GetEOSProperty<int>(this, EOSConstants.TextSize);
                 LetterSpacing = provider.GetEOSProperty<int>(this, EOSConstants.LetterSpacing);
                 Enabled = base.Enabled;

@@ -1,17 +1,14 @@
 ﻿using System.Linq;
-using System.Globalization;
 using Android.App;
 using Android.Graphics;
 using Android.OS;
 using Android.Widget;
 using EOS.UI.Android.Controls;
-using static EOS.UI.Android.Sandbox.Helpers.Constants;
-using R = Android.Resource;
+using EOS.UI.Android.Sandbox.Controls;
+using EOS.UI.Shared.Themes.Themes;
 using UIFrameworks.Shared.Themes.Helpers;
 using UIFrameworks.Shared.Themes.Interfaces;
-using UIFrameworks.Android.Themes;
-using EOS.UI.Android.Sandbox.Adapters;
-using EOS.UI.Android.Sandbox.Controls;
+using static EOS.UI.Android.Sandbox.Helpers.Constants;
 
 namespace EOS.UI.Android.Sandbox.Activities
 {

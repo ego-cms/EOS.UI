@@ -10,6 +10,7 @@ using System.Linq;
 using System.Collections.Generic;
 using UIFrameworks.Shared.Themes.Helpers;
 using UIKit;
+using EOS.UI.Shared.Themes.Themes;
 
 namespace EOS.UI.iOS.Sandbox
 {
@@ -91,9 +92,7 @@ namespace EOS.UI.iOS.Sandbox
                 _simpleButton.ResetCustomization();
                 _textFields.Except(new[] { themeTextField }).ToList().ForEach(f => f.Text = string.Empty);
             };
-            themeTextField.Text = _simpleButton.GetThemeProvider().GetCurrentTheme().ThemeValues[EOSConstants.PrimaryColor] == UIColor.White ?
-                "Light" : "Dark";
-
+            themeTextField.Text = _simpleButton.GetThemeProvider().GetCurrentTheme() is LightEOSTheme ? "Light" : "Dark";
             themePicker.Delegate = themePickerDelegate;
             themeTextField.InputView = themePicker;
         }

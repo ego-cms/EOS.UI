@@ -320,10 +320,10 @@ namespace EOS.UI.iOS.Components
                 ButtonTextLetterSpacing = GetThemeProvider().GetEOSProperty<int>(this, EOSConstants.SecondaryLetterSpacing);
                 SectionNameFont = GetThemeProvider().GetEOSProperty<UIFont>(this, EOSConstants.Font);
                 ButtonNameFont = GetThemeProvider().GetEOSProperty<UIFont>(this, EOSConstants.SecondaryFont);
-                BackgroundColor = GetThemeProvider().GetEOSProperty<UIColor>(this, EOSConstants.PrimaryColor);
-                SectionNameColor = GetThemeProvider().GetEOSProperty<UIColor>(this, EOSConstants.SecondaryColor);
-                ButtonNameColor = GetThemeProvider().GetEOSProperty<UIColor>(this, EOSConstants.TertiaryColor);
-                BorderColor = GetThemeProvider().GetEOSProperty<UIColor>(this, EOSConstants.QuaternaryColor);
+                BackgroundColor = GetThemeProvider().GetEOSProperty<UIColor>(this, EOSConstants.NeutralColor6);
+                SectionNameColor = GetThemeProvider().GetEOSProperty<UIColor>(this, EOSConstants.NeutralColor1);
+                ButtonNameColor = GetThemeProvider().GetEOSProperty<UIColor>(this, EOSConstants.BrandPrimaryColor);
+                BorderColor = GetThemeProvider().GetEOSProperty<UIColor>(this, EOSConstants.NeutralColor4);
                 BorderWidth = GetThemeProvider().GetEOSProperty<int>(this, EOSConstants.BorderWidth);
                 var leftPadding = GetThemeProvider().GetEOSProperty<int>(this, EOSConstants.LeftPadding);
                 var topPadding = GetThemeProvider().GetEOSProperty<int>(this, EOSConstants.TopPadding);

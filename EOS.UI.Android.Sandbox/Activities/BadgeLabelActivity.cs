@@ -4,14 +4,11 @@ using Android.Graphics;
 using Android.OS;
 using Android.Widget;
 using EOS.UI.Android.Controls;
-using static EOS.UI.Android.Sandbox.Helpers.Constants;
-using R = Android.Resource;
-using UIFrameworks.Shared.Themes.Helpers;
-using EOS.UI.Android.Sandbox.Adapters;
-using UIFrameworks.Shared.Themes.Interfaces;
-using UIFrameworks.Android.Themes;
 using EOS.UI.Android.Sandbox.Controls;
-using System.Collections.Generic;
+using EOS.UI.Shared.Themes.Themes;
+using UIFrameworks.Shared.Themes.Helpers;
+using UIFrameworks.Shared.Themes.Interfaces;
+using static EOS.UI.Android.Sandbox.Helpers.Constants;
 
 namespace EOS.UI.Android.Sandbox.Activities
 {

@@ -1,5 +1,6 @@
 ﻿using System;
 using EOS.UI.Shared.Themes.Helpers;
+using EOS.UI.Shared.Themes.Themes;
 using UIFrameworks.Shared.Themes.Interfaces;
 
 namespace UIFrameworks.Android.Themes
