@@ -372,8 +372,6 @@ namespace EOS.UI.iOS.Controls
             var attributedPlaceholder = new NSMutableAttributedString(AttributedPlaceholder);
             attributedPlaceholder.AddAttribute(UIStringAttributeKey.Font, Font.WithSize(size), new NSRange(0, AttributedPlaceholder.Length));
             AttributedPlaceholder = attributedPlaceholder;
-
-            SizeToFit();
         }
 
         public override void LayoutSubviews()
@@ -394,7 +392,7 @@ namespace EOS.UI.iOS.Controls
             {
                 _underlineLayer = new CALayer
                 {
-                    BorderColor = UIColor.Red.CGColor,
+                    BorderColor = GetThemeProvider().GetEOSProperty<UIColor>(this, EOSConstants.NeutralColor3).CGColor,
                     BorderWidth = InputConstants.UnderlineHeight,
                     Frame = new CGRect(
                         0,
@@ -471,16 +469,16 @@ namespace EOS.UI.iOS.Controls
                 LetterSpacing = provider.GetEOSProperty<int>(this, EOSConstants.LetterSpacing);
                 TextSize = provider.GetEOSProperty<int>(this, EOSConstants.TextSize);
                 Font = provider.GetEOSProperty<UIFont>(this, EOSConstants.Font);
-                TextColor = provider.GetEOSProperty<UIColor>(this, EOSConstants.SecondaryColor);
-                TextColorDisabled = provider.GetEOSProperty<UIColor>(this, EOSConstants.SecondaryColorDisabled);
-                PlaceholderColor = provider.GetEOSProperty<UIColor>(this, EOSConstants.HintTextColor);
-                PlaceholderColorDisabled = provider.GetEOSProperty<UIColor>(this, EOSConstants.HintTextColorDisabled);
+                TextColor = provider.GetEOSProperty<UIColor>(this, EOSConstants.NeutralColor1);
+                TextColorDisabled = provider.GetEOSProperty<UIColor>(this, EOSConstants.NeutralColor3);
+                PlaceholderColor = provider.GetEOSProperty<UIColor>(this, EOSConstants.NeutralColor2);
+                PlaceholderColorDisabled = provider.GetEOSProperty<UIColor>(this, EOSConstants.NeutralColor3);
                 LeftImageFocused = UIImage.FromBundle(provider.GetEOSProperty<string>(this, EOSConstants.LeftImageFocused));
                 LeftImageUnfocused = UIImage.FromBundle(provider.GetEOSProperty<string>(this, EOSConstants.LeftImageUnfocused));
                 LeftImageDisabled = UIImage.FromBundle(provider.GetEOSProperty<string>(this, EOSConstants.LeftImageDisabled));
-                UnderlineColorFocused = provider.GetEOSProperty<UIColor>(this, EOSConstants.UnderlineColorFocused);
-                UnderlineColorUnfocused = provider.GetEOSProperty<UIColor>(this, EOSConstants.UnderlineColorUnfocused);
-                UnderlineColorDisabled = provider.GetEOSProperty<UIColor>(this, EOSConstants.UnderlineColorDisabled);
+                UnderlineColorFocused = provider.GetEOSProperty<UIColor>(this, EOSConstants.BrandPrimaryColor);
+                UnderlineColorUnfocused = provider.GetEOSProperty<UIColor>(this, EOSConstants.NeutralColor3);
+                UnderlineColorDisabled = provider.GetEOSProperty<UIColor>(this, EOSConstants.NeutralColor3);
                 IsEOSCustomizationIgnored = false;
             }
         }

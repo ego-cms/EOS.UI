@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using Android.Animation;
 using Android.App;
 using Android.Content;
@@ -209,24 +209,15 @@ namespace EOS.UI.Android.Controls
                 PreloaderImage = Resources.GetDrawable(provider.GetEOSProperty<int>(this, EOSConstants.FabProgressPreloaderImage), null);
                 //var roundedDrawable = (GradientDrawable)Resources.GetDrawable(Resource.Drawable.FabButton);
                 //SetBackgroundDrawable(roundedDrawable);
-                DisabledBackgroundColor = provider.GetEOSProperty<Color>(this, EOSConstants.FabProgressDisabledColor);
-                PressedBackgroundColor = provider.GetEOSProperty<Color>(this, EOSConstants.FabProgressPressedColor);
+                DisabledBackgroundColor = provider.GetEOSProperty<Color>(this, EOSConstants.NeutralColor4);
+                PressedBackgroundColor = provider.GetEOSProperty<Color>(this, EOSConstants.BrandPrimaryColorVariant1);
                 ShadowConfig = provider.GetEOSProperty<ShadowConfig>(this, EOSConstants.FabShadow);
                 //SetPadding(_startPadding, _startPadding, _startPadding, _startPadding);
 
                 //Should initialize after ShadowConfig
                 //ShadowConfig method checks and background drawable which should be used for color.
-                BackgroundColor = provider.GetEOSProperty<Color>(this, EOSConstants.FabProgressPrimaryColor);
+                BackgroundColor = provider.GetEOSProperty<Color>(this, EOSConstants.BrandPrimaryColor);
                 IsEOSCustomizationIgnored = false;
-
-                //var config = new ShadowConfig()
-                //{
-                //    Color = Color.Black,
-                //    Offset = new Offset(0,0),
-                //    Radius = 2,
-                //    Opacity = 50
-                //};
-                //ShadowConfig = config;
             }
         }
 
@@ -289,14 +280,11 @@ namespace EOS.UI.Android.Controls
         {
             if (LayoutParameters == null)
                 return;
-
-            var a = Context.MainLooper;
+            
             SetImageDrawable(null);
 
-            GradientDrawable shadow = null;
-
             var colors1 = new[] { config.Color.ToArgb(), config.Color.ToArgb() };
-            shadow = new GradientDrawable(GradientDrawable.Orientation.TopBottom, colors1);
+            var shadow = new GradientDrawable(GradientDrawable.Orientation.TopBottom, colors1);
             shadow.Alpha = config.Opacity;
             shadow.SetCornerRadius(_cornerRadius);
 
