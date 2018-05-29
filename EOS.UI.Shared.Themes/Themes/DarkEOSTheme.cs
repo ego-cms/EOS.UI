@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using EOS.UI.Shared.Helpers;
 using UIFrameworks.Shared.Themes.Helpers;
 using UIFrameworks.Shared.Themes.Interfaces;
+using EOS.UI.Shared.Themes.Extensions;
 
 #if __IOS__
 using CoreGraphics;
@@ -18,22 +19,35 @@ using EOS.UI.Android;
 
 namespace EOS.UI.Shared.Themes.Themes
 {
+
     public class DarkEOSTheme : IEOSTheme
     {
+        private const string brandPrimaryColor = "#3C6DF0";
+        private const string brandPrimaryColorV1 = "#3151B7";
+        private const string semanticSuccessColor = "#00AA5E";
+        private const string semanticErrorColor = "#FF5C49";
+        private const string semanticWarningColor = "#FED500";
+        private const string neutralColor1 = "#FFFFFF";
+        private const string neutralColor2 = "#F6F6F6";
+        private const string neutralColor3 = "#EAEAEA";
+        private const string neutralColor4 = "#C0BFC0";
+        private const string neutralColor5 = "#C0BFC0";
+        private const string neutralColor6 = "#2E2D2E";
+
         public Dictionary<string, object> ThemeValues => new Dictionary<string, object>()
         {
 #if __IOS__
-            { EOSConstants.BrandPrimaryColor, UIColor.FromRGB(60,109,240) },
-            { EOSConstants.BrandPrimaryColorVariant1, UIColor.FromRGB(49,81,183) },
-            { EOSConstants.SemanticSuccessColor, UIColor.FromRGB(0,170,94)},
-            { EOSConstants.SemanticErrorColor, UIColor.FromRGB(255,92,73)},
-            { EOSConstants.SemanticWarningColor, UIColor.FromRGB(254,213,0)},
-            { EOSConstants.NeutralColor1, UIColor.FromRGB(255,255,255)},
-            { EOSConstants.NeutralColor2, UIColor.FromRGB(246,246,246)},
-            { EOSConstants.NeutralColor3, UIColor.FromRGB(234,234,234)},
-            { EOSConstants.NeutralColor4, UIColor.FromRGB(192,192,192)},
-            { EOSConstants.NeutralColor5, UIColor.FromRGB(119,118,119)},
-            { EOSConstants.NeutralColor6, UIColor.FromRGB(46,45,46)},
+            { EOSConstants.BrandPrimaryColor, ColorExtension.FromHex(brandPrimaryColor) },
+            { EOSConstants.BrandPrimaryColorVariant1, ColorExtension.FromHex(brandPrimaryColorV1)  },
+            { EOSConstants.SemanticSuccessColor, ColorExtension.FromHex(semanticSuccessColor) },
+            { EOSConstants.SemanticErrorColor, ColorExtension.FromHex(semanticErrorColor) },
+            { EOSConstants.SemanticWarningColor, ColorExtension.FromHex(semanticWarningColor) },
+            { EOSConstants.NeutralColor1, ColorExtension.FromHex(neutralColor1) },
+            { EOSConstants.NeutralColor2, ColorExtension.FromHex(neutralColor2) },
+            { EOSConstants.NeutralColor3, ColorExtension.FromHex(neutralColor3) },
+            { EOSConstants.NeutralColor4, ColorExtension.FromHex(neutralColor4) },
+            { EOSConstants.NeutralColor5, ColorExtension.FromHex(neutralColor5) },
+            { EOSConstants.NeutralColor6, ColorExtension.FromHex(neutralColor6) },
             { EOSConstants.TextSize, 17 },
             { EOSConstants.Font, UIFont.SystemFontOfSize(17) },
             { EOSConstants.CornerRadius, 3 },
@@ -54,17 +68,17 @@ namespace EOS.UI.Shared.Themes.Themes
 #endif
 
 #if __ANDROID__
-            { EOSConstants.BrandPrimaryColor, Color.Rgb(60,109,240) },
-            { EOSConstants.BrandPrimaryColorVariant1, Color.Rgb(49,81,183) },
-            { EOSConstants.SemanticSuccessColor, Color.Rgb(0,170,94)},
-            { EOSConstants.SemanticErrorColor, Color.Rgb(255,92,73)},
-            { EOSConstants.SemanticWarningColor, Color.Rgb(254,213,0)},
-            { EOSConstants.NeutralColor1, Color.Rgb(255,255,255)},
-            { EOSConstants.NeutralColor2, Color.Rgb(246,246,246)},
-            { EOSConstants.NeutralColor3, Color.Rgb(234,234,234)},
-            { EOSConstants.NeutralColor4, Color.Rgb(192,192,192)},
-            { EOSConstants.NeutralColor5, Color.Rgb(119,118,119)},
-            { EOSConstants.NeutralColor6, Color.Rgb(46,45,46)},
+            { EOSConstants.BrandPrimaryColor, Color.ParseColor(brandPrimaryColor) },
+            { EOSConstants.BrandPrimaryColorVariant1, Color.ParseColor(brandPrimaryColorV1) },
+            { EOSConstants.SemanticSuccessColor,Color.ParseColor(semanticSuccessColor)},
+            { EOSConstants.SemanticErrorColor, Color.ParseColor(semanticErrorColor)},
+            { EOSConstants.SemanticWarningColor, Color.ParseColor(semanticWarningColor)},
+            { EOSConstants.NeutralColor1, Color.ParseColor(neutralColor1)},
+            { EOSConstants.NeutralColor2, Color.ParseColor(neutralColor2)},
+            { EOSConstants.NeutralColor3, Color.ParseColor(neutralColor3)},
+            { EOSConstants.NeutralColor4, Color.ParseColor(neutralColor4)},
+            { EOSConstants.NeutralColor5, Color.ParseColor(neutralColor5)},
+            { EOSConstants.NeutralColor6, Color.ParseColor(neutralColor6)},
             { EOSConstants.TextSize, 22f },
             { EOSConstants.Font, "Fonts/OpenSansRegular.ttf" },
             { EOSConstants.CornerRadius, 20f },
