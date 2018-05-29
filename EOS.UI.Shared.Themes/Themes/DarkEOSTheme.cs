@@ -49,9 +49,12 @@ namespace EOS.UI.Shared.Themes.Themes
             { EOSConstants.NeutralColor5, ColorExtension.FromHex(neutralColor5) },
             { EOSConstants.NeutralColor6, ColorExtension.FromHex(neutralColor6) },
             { EOSConstants.TextSize, 17 },
+            { EOSConstants.SecondaryTextSize, 17 },
             { EOSConstants.Font, UIFont.SystemFontOfSize(17) },
+            { EOSConstants.SecondaryFont, UIFont.SystemFontOfSize(17) },
             { EOSConstants.CornerRadius, 3 },
             { EOSConstants.LetterSpacing, 1 },
+            { EOSConstants.SecondaryLetterSpacing, 2 },
             { EOSConstants.LeftImageFocused, "account-circle" },
             { EOSConstants.LeftImageUnfocused, "account-key" },
             { EOSConstants.LeftImageDisabled, "account-off" },
@@ -64,7 +67,16 @@ namespace EOS.UI.Shared.Themes.Themes
                         Offset = new CGSize(0,0),
                         Radius = 1,
                         Opacity = 0.7f
-                    }},
+            }},
+            { EOSConstants.BorderWidth, 2 },
+            { EOSConstants.SectionTitle, "Dark section" },
+            { EOSConstants.SectionActionTitle, "View All" },
+            { EOSConstants.LeftPadding, 5 },
+            { EOSConstants.TopPadding, 5 },
+            { EOSConstants.RightPadding, 5 },
+            { EOSConstants.BottomPadding, 5 },
+            { EOSConstants.HasSectionBorder, false },
+            { EOSConstants.HasSectionAction, true }
 #endif
 
 #if __ANDROID__
@@ -80,15 +92,27 @@ namespace EOS.UI.Shared.Themes.Themes
             { EOSConstants.NeutralColor5, Color.ParseColor(neutralColor5)},
             { EOSConstants.NeutralColor6, Color.ParseColor(neutralColor6)},
             { EOSConstants.TextSize, 22f },
+            { EOSConstants.SecondaryTextSize, 22f },
             { EOSConstants.Font, "Fonts/OpenSansRegular.ttf" },
+            { EOSConstants.SecondaryFont, "Fonts/OpenSansRegular.ttf" },
             { EOSConstants.CornerRadius, 20f },
             { EOSConstants.LetterSpacing, 0.5f },
+            { EOSConstants.SecondaryLetterSpacing, 0.5f },
             { EOSConstants.LeftImageFocused, Resource.Drawable.AccountCircle },
             { EOSConstants.LeftImageUnfocused, Resource.Drawable.AccountKey },
             { EOSConstants.LeftImageDisabled, Resource.Drawable.AccountOff },
             { EOSConstants.CalendarImage, Resource.Drawable.icCalendar },
             { EOSConstants.FabProgressPreloaderImage, Resource.Drawable.icPreloader },
-            { EOSConstants.CircleProgressShown, true} 
+            { EOSConstants.CircleProgressShown, true},
+            { EOSConstants.BorderWidth, 2 },
+            { EOSConstants.SectionTitle, "Dark section" },
+            { EOSConstants.SectionActionTitle, "View All" },
+            { EOSConstants.LeftPadding, 5 },
+            { EOSConstants.TopPadding, 5 },
+            { EOSConstants.RightPadding, 5 },
+            { EOSConstants.BottomPadding, 5 },
+            { EOSConstants.HasSectionBorder, false },
+            { EOSConstants.HasSectionAction, true }
 #endif
         };
     }

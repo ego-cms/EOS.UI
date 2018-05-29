@@ -25,6 +25,7 @@ namespace EOS.UI.Android.Sandbox
             { ControlNames.FabProgress,typeof(FabProgressActivity) },
             { ControlNames.Input, typeof(InputActivity) },
             { ControlNames.CircleProgress, typeof(CircleProgressActivity) },
+            { ControlNames.Section, typeof(SectionActivity) },
         };
 
         protected override void OnCreate(Bundle savedInstanceState)
