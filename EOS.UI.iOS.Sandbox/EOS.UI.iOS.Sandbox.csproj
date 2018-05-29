@@ -165,6 +165,7 @@
     <InterfaceDefinition Include="Storyboards\FabProgressView.storyboard" />
     <InterfaceDefinition Include="Storyboards\InputControlView.storyboard" />
     <InterfaceDefinition Include="Storyboards\SimpleButtonView.storyboard" />
+    <InterfaceDefinition Include="Storyboards\CircleProgressView.storyboard" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Info.plist" />
@@ -213,6 +214,11 @@
     <Compile Include="Controls\ControlsData.cs" />
     <Compile Include="Helpers\Constants.cs" />
     <Compile Include="Controls\Pickers.cs" />
+    <Compile Include="Storyboards\CircleProgressView.cs" />
+    <Compile Include="Storyboards\CircleProgressView.designer.cs">
+      <DependentUpon>CircleProgressView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Helpers\PlatformTimer.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\EOS.UI.iOS\EOS.UI.iOS.csproj">

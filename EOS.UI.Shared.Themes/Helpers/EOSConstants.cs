@@ -3,6 +3,8 @@
     public static class EOSConstants
     {
         public const string PrimaryColor = "primaryColor";
+        public const string PrimaryColorDisabled = "primaryColorDisabled";
+        public const string PrimaryColorPressed = "primaryColorPressed";
         public const string SecondaryColor = "secondaryColor";
         public const string SecondaryColorDisabled = "secondaryColorDisabled";
         public const string SecondaryColorPressed = "secondaryColorPressed";
@@ -23,6 +25,16 @@
         public const string UnderlineColorUnfocused = "underlineColorUnfocused";
         public const string UnderlineColorFocused = "underlineColorFocused";
         public const string UnderlineColorDisabled = "underlineColorDisabled";
+        //fab progress constans
+        public const string CalendarImage = "calendarImage";
+        public const string FabProgressPreloaderImage = "fabProgressPreloaderImage";
+        public const string FabProgressPrimaryColor = "fabProgressPrimaryColor";
+        public const string FabProgressPressedColor = "fabProgressPressedColor";
+        public const string FabProgressDisabledColor = "fabProgressDisabledColor";
+        public const string FabProgressSize = "fabProgressSize";
+        public const string FabShadow = "fabShadow";
+		//circle progress
+		public const string CircleProgressShown = "CircleProgressShown";
         public const string BorderWidth = "borderWidth";
         public const string SectionTitle = "sectionTitle";
         public const string SectionActionTitle = "sectionActionTitle";
@@ -41,7 +53,8 @@
         public const string SimpleButton = "Simple button";
         public const string SimpleLabel = "Simple label";
         public const string Input = "Input";
-        public const string FabProgress = "Fab progress";
+		public const string FabProgress = "Fab progress";
+		public const string CircleProgress = "Circle progress";
         public const string Section = "Section";
     }
 }

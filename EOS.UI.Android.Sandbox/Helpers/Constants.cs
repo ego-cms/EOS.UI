@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using Android.Graphics;
 using EOS.UI.Shared.Themes.Helpers;
 
@@ -152,6 +153,19 @@ namespace EOS.UI.Android.Sandbox.Helpers
                 { "18", 18 },
                 { "19", 19 },
                 { "20", 20 },
+            };
+           
+            public static readonly Dictionary<string, int> FabProgressSizes = new Dictionary<string, int>()
+            {
+                { string.Empty, 100 },
+                { "110", 110 },
+                { "120", 120 },
+                { "130", 130 },
+                { "140", 140 },
+                { "150", 150 },
+                { "160", 160 },
+                { "170", 170 },
+                { "180", 180 },
             };
         }
 

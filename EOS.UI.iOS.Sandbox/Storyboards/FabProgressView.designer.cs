@@ -7,15 +7,85 @@
 using Foundation;
 using System;
 using System.CodeDom.Compiler;
-using UIKit;
 
 namespace EOS.UI.iOS.Sandbox
 {
     [Register ("FabProgressView")]
     partial class FabProgressView
     {
+        [Outlet]
+        UIKit.UITextField backgroundField { get; set; }
+
+        [Outlet]
+        UIKit.UIView containerView { get; set; }
+
+        [Outlet]
+        UIKit.UITextField disabledField { get; set; }
+
+        [Outlet]
+        UIKit.UISwitch enableSwitch { get; set; }
+
+        [Outlet]
+        UIKit.UITextField pressedField { get; set; }
+
+        [Outlet]
+        UIKit.UIButton resetButton { get; set; }
+
+        [Outlet]
+        UIKit.UITextField shadowField { get; set; }
+
+        [Outlet]
+        UIKit.UITextField sizeField { get; set; }
+
+        [Outlet]
+        UIKit.UITextField themeField { get; set; }
+        
         void ReleaseDesignerOutlets ()
         {
+            if (backgroundField != null) {
+                backgroundField.Dispose ();
+                backgroundField = null;
+            }
+
+            if (containerView != null) {
+                containerView.Dispose ();
+                containerView = null;
+            }
+
+            if (disabledField != null) {
+                disabledField.Dispose ();
+                disabledField = null;
+            }
+
+            if (shadowField != null) {
+                shadowField.Dispose ();
+                shadowField = null;
+            }
+
+            if (themeField != null) {
+                themeField.Dispose ();
+                themeField = null;
+            }
+
+            if (sizeField != null) {
+                sizeField.Dispose ();
+                sizeField = null;
+            }
+
+            if (pressedField != null) {
+                pressedField.Dispose ();
+                pressedField = null;
+            }
+
+            if (enableSwitch != null) {
+                enableSwitch.Dispose ();
+                enableSwitch = null;
+            }
+
+            if (resetButton != null) {
+                resetButton.Dispose ();
+                resetButton = null;
+            }
         }
     }
 }

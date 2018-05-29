@@ -1,6 +1,4 @@
 ﻿using System;
-using CoreAnimation;
-using CoreGraphics;
 using EOS.UI.iOS.Extensions;
 using EOS.UI.iOS.Themes;
 using EOS.UI.Shared.Themes.Helpers;
@@ -112,6 +110,8 @@ namespace EOS.UI.iOS.Controls
             Layer.MasksToBounds = true;
             Layer.CornerRadius = 5;
             BackgroundColor = UIColor.Clear;
+            TitleLabel.Lines = 1;
+            TitleLabel.LineBreakMode = UILineBreakMode.TailTruncation;
             base.SetAttributedTitle(new NSAttributedString(String.Empty), UIControlState.Normal);
             UpdateAppearance();
         }
@@ -187,16 +187,15 @@ namespace EOS.UI.iOS.Controls
                 LetterSpacing = provider.GetEOSProperty<int>(this, EOSConstants.LetterSpacing);
                 Enabled = base.Enabled;
                 IsEOSCustomizationIgnored = false;
-                SizeToFit();
             }
         }
 
-		public override void TouchesBegan(NSSet touches, UIEvent evt)
-		{
+        public override void TouchesBegan(NSSet touches, UIEvent evt)
+        {
             base.TouchesBegan(touches, evt);
             var touch = touches.AnyObject as UITouch;
             var location = touch.LocationInView(this);
             this.RippleAnimate(location);
-		}
-	}
+        }
+    }
 }

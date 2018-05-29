@@ -68,6 +68,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Components\Section.cs" />
+    <Compile Include="Controls\SimpleButton.cs" />
     <Compile Include="Controls\SimpleLabel.cs" />
     <Compile Include="Controls\BadgeLabel.cs" />
     <Compile Include="Models\SectionModel.cs" />
@@ -80,12 +81,22 @@
     <Compile Include="Traverser\EOSViewTraverser.cs" />
     <Compile Include="Controls\GhostButton.cs" />
     <Compile Include="Controls\Input.cs" />
+    <Compile Include="Controls\FabProgress.cs" />
+    <Compile Include="Controls\CircleProgress.cs" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\values\Strings.xml" />
     <AndroidResource Include="Resources\drawable\AccountKey.xml" />
     <AndroidResource Include="Resources\drawable\AccountOff.xml" />
     <AndroidResource Include="Resources\drawable\AccountCircle.xml" />
+    <AndroidResource Include="Resources\drawable\icCalendar.xml" />
+    <AndroidResource Include="Resources\drawable\icPreloader.xml" />
+    <AndroidResource Include="Resources\drawable\FabButton.xml" />
+    <AndroidResource Include="Resources\anim\FabRotationAnimation.xml" />
+    <AndroidResource Include="Resources\drawable\SuccessCircle.xml" />
+    <AndroidResource Include="Resources\drawable\success.xml" />
+    <AndroidResource Include="Resources\drawable\Circular.xml" />
+    <AndroidResource Include="Resources\layout\CircleProgress.axml" />
   </ItemGroup>
   <ItemGroup>
     <AndroidAsset Include="Assets\Fonts\OpenSansRegular.ttf" />
@@ -95,6 +106,9 @@
     <AndroidResource Include="Resources\layout\Section.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
+    <Folder Include="Resources\drawable\" />
+    <Folder Include="Resources\anim\" />
+    <Folder Include="Resources\layout\" />
   </ItemGroup>
   <Import Project="..\EOS.UI.Shared.Themes\EOS.UI.Shared.Themes.projitems" Label="Shared" />
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />

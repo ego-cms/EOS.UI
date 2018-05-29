@@ -131,13 +131,6 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="829" translatesAutoresizingMaskIntoConstraints="NO" fixedFrame="YES">
-                                <rect key="frame" x="167" y="520" width="42" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -146,7 +139,6 @@
                             <constraint firstAttribute="trailing" secondItem="3tm-k0-jzs" secondAttribute="trailing" constant="16" id="2RW-ke-3nq"/>
                             <constraint firstItem="gdV-Ze-lJ9" firstAttribute="leading" secondItem="7tF-4z-XcI" secondAttribute="leading" id="3NT-4Q-amB"/>
                             <constraint firstItem="gZj-0n-rUa" firstAttribute="leading" secondItem="6xc-qD-MTc" secondAttribute="leading" id="3ao-J6-hZY"/>
-                            <constraint firstItem="BWn-Xd-vNd" firstAttribute="leading" secondItem="206" secondAttribute="leading" constant="310" id="404-uH-BDW"/>
                             <constraint firstItem="LAo-TC-rXb" firstAttribute="centerY" secondItem="gdV-Ze-lJ9" secondAttribute="centerY" id="7Yy-4Z-fz0"/>
                             <constraint firstItem="7tF-4z-XcI" firstAttribute="leading" secondItem="RIU-oC-tBl" secondAttribute="leading" id="GHa-8D-e5r"/>
                             <constraint firstItem="7G2-3o-BVE" firstAttribute="top" secondItem="q3m-LD-b5Z" secondAttribute="bottom" constant="20" id="I9w-8P-C2I"/>
@@ -202,7 +194,6 @@
                         <outlet property="resetButton" destination="JWS-tC-smw" id="vya-F2-Cc7"/>
                         <outlet property="stateSwitch" destination="BWn-Xd-vNd" id="1sn-z1-bKs"/>
                         <outlet property="themeField" destination="bKg-1F-qG1" id="0Ae-NT-YNd"/>
-                        <outlet property="custom" destination="829" id="name-outlet-829"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="207" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -210,4 +201,12 @@
             <point key="canvasLocation" x="679.2" y="253.2234"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="AccountCircle" width="16" height="16"/>
+        <image name="AccountKey" width="16" height="16"/>
+        <image name="AccountOff" width="16" height="16"/>
+        <image name="Airballoon" width="16" height="16"/>
+        <image name="Android" width="16" height="16"/>
+        <image name="Apple" width="16" height="16"/>
+    </resources>
 </document>
