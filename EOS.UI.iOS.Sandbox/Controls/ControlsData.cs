@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using EOS.UI.iOS.Sandbox.Storyboards;
 using SharedControls = UIFrameworks.Shared.Themes.Helpers.ControlNames;
 
 namespace EOS.UI.iOS.Sandbox.Controls
@@ -21,6 +22,7 @@ namespace EOS.UI.iOS.Sandbox.Controls
                 {SharedControls.FabProgress, FabProgressView.Identifier},
                 {SharedControls.Input, InputControlView.Identifier},
                 {SharedControls.CircleProgress, CircleProgressView.Identifier},
+                {SharedControls.Section, SectionComponentView.Identifier },
                 {SharedControls.CTAButton, CTAButtonView.Identifier}
             };
         }

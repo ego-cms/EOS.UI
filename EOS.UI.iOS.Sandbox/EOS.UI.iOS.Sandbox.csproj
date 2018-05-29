@@ -156,9 +156,7 @@
       <Visible>false</Visible>
     </ImageAsset>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Resources\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <InterfaceDefinition Include="LaunchScreen.storyboard" />
     <InterfaceDefinition Include="Storyboards\Main.storyboard" />
@@ -174,10 +172,16 @@
     <None Include="Info.plist" />
     <None Include="Entitlements.plist" />
     <InterfaceDefinition Include="Storyboards\SimpleLabelView.storyboard" />
+    <InterfaceDefinition Include="Storyboards\SectionView.storyboard" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Main.cs" />
     <Compile Include="AppDelegate.cs" />
+    <Compile Include="Storyboards\SectionComponentView.cs" />
+    <Compile Include="Storyboards\SectionComponentView.designer.cs">
+      <DependentUpon>SectionComponentView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TableSources\SectionTableSource.cs" />
     <Compile Include="TableSources\ControlTableSource.cs" />
     <Compile Include="Storyboards\ViewController.cs" />
     <Compile Include="Storyboards\ViewController.designer.cs">
