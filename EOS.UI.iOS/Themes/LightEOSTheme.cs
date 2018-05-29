@@ -15,12 +15,17 @@ namespace EOS.UI.iOS.Themes
             { EOSConstants.PrimaryColorDisabled, UIColor.LightGray },
             { EOSConstants.PrimaryColorPressed, UIColor.Gray },
             { EOSConstants.SecondaryColor, UIColor.Black },
-            { EOSConstants.SecondaryColorDisabled, UIColor.LightTextColor},
-            { EOSConstants.SecondaryColorPressed, UIColor.LightTextColor},
+            { EOSConstants.SecondaryColorDisabled, UIColor.LightGray},
+            { EOSConstants.SecondaryColorPressed, UIColor.LightGray},
+            { EOSConstants.TertiaryColor, UIColor.Blue },
+            { EOSConstants.QuaternaryColor, UIColor.LightGray },
             { EOSConstants.TextSize, 17 },
+            { EOSConstants.SecondaryTextSize, 17 },
             { EOSConstants.Font, UIFont.SystemFontOfSize(17)},
+            { EOSConstants.SecondaryFont, UIFont.SystemFontOfSize(17) },
             { EOSConstants.CornerRadius, 3 },
             { EOSConstants.LetterSpacing, 1 },
+            { EOSConstants.SecondaryLetterSpacing, 1 },
             { EOSConstants.HintTextColor, UIColor.LightGray },
             { EOSConstants.HintTextColorDisabled, UIColor.Gray },
             { EOSConstants.LeftImageFocused, "account-circle" },
@@ -41,7 +46,16 @@ namespace EOS.UI.iOS.Themes
                         Offset = new CGSize(0,0),
                         Radius = 2,
                         Opacity = 0.9f
-                    }}
+                    } },
+            { EOSConstants.BorderWidth, 2 },
+            { EOSConstants.SectionTitle, "Light section" },
+            { EOSConstants.SectionActionTitle, "View All" },
+            { EOSConstants.LeftPadding, 5 },
+            { EOSConstants.TopPadding, 7 },
+            { EOSConstants.RightPadding, 7 },
+            { EOSConstants.BottomPadding, 5 },
+            { EOSConstants.HasSectionBorder, true },
+            { EOSConstants.HasSectionAction, true }
         };
     }
 }
