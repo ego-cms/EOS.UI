@@ -143,8 +143,8 @@ namespace EOS.UI.iOS
             if (!IsEOSCustomizationIgnored)
             {
                 var provider = GetThemeProvider();
-                Color = provider.GetEOSProperty<UIColor>(this, EOSConstants.PrimaryColor);
-                AlternativeColor = provider.GetEOSProperty<UIColor>(this, EOSConstants.SecondaryColor);
+                Color = provider.GetEOSProperty<UIColor>(this, EOSConstants.BrandPrimaryColor);
+                AlternativeColor = provider.GetEOSProperty<UIColor>(this, EOSConstants.BrandPrimaryColor);
                 ShowProgress = provider.GetEOSProperty<bool>(this, EOSConstants.CircleProgressShown);
                 Font = provider.GetEOSProperty<UIFont>(this, EOSConstants.Font);
                 TextSize = provider.GetEOSProperty<int>(this, EOSConstants.TextSize);

@@ -180,9 +180,9 @@ namespace EOS.UI.Android.Controls
                 PreloaderImage = Resources.GetDrawable(provider.GetEOSProperty<int>(this, EOSConstants.FabProgressPreloaderImage));
                 var roundedDrawable = (GradientDrawable)Resources.GetDrawable(Resource.Drawable.FabButton);
                 SetBackgroundDrawable(roundedDrawable);
-                BackgroundColor = provider.GetEOSProperty<Color>(this, EOSConstants.FabProgressPrimaryColor);
-                DisabledBackgroundColor = provider.GetEOSProperty<Color>(this, EOSConstants.FabProgressDisabledColor);
-                PressedBackgroundColor = provider.GetEOSProperty<Color>(this, EOSConstants.FabProgressPressedColor);
+                BackgroundColor = provider.GetEOSProperty<Color>(this, EOSConstants.BrandPrimaryColor);
+                DisabledBackgroundColor = provider.GetEOSProperty<Color>(this, EOSConstants.NeutralColor4);
+                PressedBackgroundColor = provider.GetEOSProperty<Color>(this, EOSConstants.BrandPrimaryColorVariant1);
                 SetPadding(_startPadding, _startPadding, _startPadding, _startPadding);
                 IsEOSCustomizationIgnored = false;
             }

@@ -5,6 +5,7 @@ using UIKit;
 using System.Linq;
 using EOS.UI.iOS.Helpers;
 using CoreGraphics;
+using EOS.UI.Shared.Helpers;
 
 namespace EOS.UI.iOS.Sandbox.Helpers
 {
@@ -81,10 +82,10 @@ namespace EOS.UI.iOS.Sandbox.Helpers
         };
 
         public static Dictionary<string, bool> States = new Dictionary<string, bool>()
-            {
-                { "Enabled", true },
-                { "Disabled", false },
-            };
+        {
+            { "Enabled", true },
+            { "Disabled", false },
+        };
 
         public static Dictionary<string, ShadowConfig> ShadowConfigs = new Dictionary<string, ShadowConfig>()
             {
@@ -101,6 +102,16 @@ namespace EOS.UI.iOS.Sandbox.Helpers
                         Opacity = 0.9f
                     }}
             };
+
+        public static List<string> Titles = new List<string>()
+        {
+            "First",
+            "Second",
+            "Third",
+        };
+
+        public static List<int> WidthValues;
+        public static List<int> PaddingValues;
 
         static Constants()
         {
@@ -120,6 +131,8 @@ namespace EOS.UI.iOS.Sandbox.Helpers
             CornerRadiusValues = Enumerable.Range(1, 10).Where(i => (i - 10) % 4 == 0).ToList();
             LetterSpacingValues = Enumerable.Range(1, 10).ToList();
             FabProgressSizes = Enumerable.Range(40, 50).Where(i => i % 10 == 0).ToList();
+            WidthValues = Enumerable.Range(1, 10).ToList();
+            PaddingValues = Enumerable.Range(1, 10).ToList();
         }
     }
 }

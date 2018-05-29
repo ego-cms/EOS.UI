@@ -6,6 +6,7 @@ using Android.OS;
 using Android.Widget;
 using EOS.UI.Android.Controls;
 using EOS.UI.Android.Sandbox.Adapters;
+using EOS.UI.Shared.Themes.Themes;
 using UIFrameworks.Android.Themes;
 using UIFrameworks.Shared.Themes.Helpers;
 using static EOS.UI.Android.Sandbox.Helpers.Constants;

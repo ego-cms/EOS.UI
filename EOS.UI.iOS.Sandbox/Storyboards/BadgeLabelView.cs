@@ -1,13 +1,13 @@
-﻿using CoreGraphics;
-using EOS.UI.iOS.Controls;
-using EOS.UI.iOS.Extensions;
-using EOS.UI.iOS.Sandbox.Storyboards;
-using EOS.UI.iOS.Sandbox.Helpers;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using CoreGraphics;
+using EOS.UI.iOS.Controls;
+using EOS.UI.iOS.Extensions;
+using EOS.UI.iOS.Sandbox.Helpers;
+using EOS.UI.iOS.Sandbox.Storyboards;
+using EOS.UI.Shared.Themes.Themes;
 using UIKit;
-using UIFrameworks.Shared.Themes.Helpers;
 using static EOS.UI.iOS.Sandbox.Helpers.Constants;
 
 namespace EOS.UI.iOS.Sandbox
@@ -60,7 +60,7 @@ namespace EOS.UI.iOS.Sandbox
                 },
                 Fields.Theme,
                 rect);
-            themeDropDown.SetTextFieldText(label.GetThemeProvider().GetCurrentTheme().ThemeValues[EOSConstants.PrimaryColor] == UIColor.White ? "Light" : "Dark");
+            themeDropDown.SetTextFieldText(label.GetThemeProvider().GetCurrentTheme() is LightEOSTheme  ? "Light" : "Dark");
 
             backgroundColorDropDown.InitSource(
                 color => label.BackgroundColor = color,

@@ -13,6 +13,7 @@ namespace EOS.UI.iOS.Helpers
             public static nfloat IconPadding = 10f;
             public static nfloat UnderlineHeight = 1f;
             public static string UnderlineName = "Underline";
+            public static string BorderName = "BorderName";
         }
     }
 }
