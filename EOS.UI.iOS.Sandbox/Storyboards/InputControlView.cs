@@ -10,6 +10,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UIFrameworks.Shared.Themes.Helpers;
 using UIKit;
+using static EOS.UI.iOS.Sandbox.Helpers.Constants;
 
 namespace EOS.UI.iOS.Sandbox
 {
@@ -20,7 +21,7 @@ namespace EOS.UI.iOS.Sandbox
         private Input _inputTop;
         private Input _inputBotton;
 
-        private List<UITextField> _textFields;
+        private List<CustomDropDown> _dropDowns;
 
         public InputControlView (IntPtr handle) : base (handle)
         {
@@ -39,29 +40,27 @@ namespace EOS.UI.iOS.Sandbox
             _inputBotton.Placeholder = "Enter text";
             _inputBotton.UpdateAppearance();
 
-            _textFields = new List<UITextField>()
+            _dropDowns = new List<CustomDropDown>()
             {
-                _inputTop,
-                _inputBotton,
-                themeTextField,
-                fontTextField,
-                letterSpacingTextField,
-                textSizeTextField,
-                textColorTextField,
-                textColorDisabledTextField,
-                placeholderColorTextField,
-                placeholderColorDisabledTextField,
-                iconFocusedTextField,
-                iconUnfocusedTextField,
-                iconDisabledTextField,
-                underlineColorFocusedTextField,
-                underlineColorUnfocusedTextField,
-                underlineColorDisabledTextField
+                themeDropDown,
+                fontDropDown,
+                letterSpacingDropDown,
+                textSizeDropDown,
+                textColorDropDown,
+                disabledTextColorDropDown,
+                hintTextColorDropDown,
+                disabledHintTextColorDropDown,
+                focusedIconDropDown,
+                unfocusedIconDropDown,
+                disabledIconDropDown,
+                focusedUnderlineColorDropDown,
+                unfocusedUnderlineColorDropDown,
+                disabledUnderlineColorDropDown
             };
 
             View.AddGestureRecognizer(new UITapGestureRecognizer(() =>
             {
-                _textFields.ForEach(f => f.ResignFirstResponder());
+                _dropDowns.ForEach(dropDown => dropDown.CloseInputControl());
             }));
 
             containerTopView.ConstrainLayout(() => _inputTop.Frame.GetCenterX() == containerTopView.Frame.GetCenterX() &&
@@ -108,343 +107,185 @@ namespace EOS.UI.iOS.Sandbox
 
         private void ResetFields()
         {
-            fontTextField.Text = string.Empty;
-            letterSpacingTextField.Text = string.Empty;
-            textSizeTextField.Text = string.Empty;
-            textColorTextField.Text = string.Empty;
-            textColorDisabledTextField.Text = string.Empty;
-            placeholderColorTextField.Text = string.Empty;
-            placeholderColorDisabledTextField.Text = string.Empty;
-            iconFocusedTextField.Text = string.Empty;
-            iconUnfocusedTextField.Text = string.Empty;
-            iconDisabledTextField.Text = string.Empty;
-            underlineColorFocusedTextField.Text = string.Empty;
-            underlineColorUnfocusedTextField.Text = string.Empty;
-            underlineColorDisabledTextField.Text = string.Empty;
+            _dropDowns.Except(new[] { themeDropDown }).ToList().ForEach(dropDown => dropDown.ResetValue());
         }
 
         private void InitThemeTextField(CGRect rect)
         {
-            var themePicker = new UIPickerView(rect);
-            themePicker.ShowSelectionIndicator = true;
-			themePicker.DataSource = new DictionaryPickerSource<String, EOSThemeEnumeration>(Constants.Themes);
-			var themePickerDelegate = new DictionaryPickerDelegate<String, EOSThemeEnumeration>(Constants.Themes);
-            themePickerDelegate.DidSelected += (object sender, KeyValuePair<string, EOSThemeEnumeration> e) =>
-            {
-                _inputTop.Text = string.Empty;
-                _inputBotton.Text = string.Empty;
-
-                themeTextField.Text = e.Key;
-                _inputTop.GetThemeProvider().SetCurrentTheme(e.Value);
-                _inputTop.ResetCustomization();
-                _inputBotton.ResetCustomization();
-
-                ResetFields();
-            };
-            themeTextField.Text = _inputTop.GetThemeProvider().GetCurrentTheme().ThemeValues[EOSConstants.PrimaryColor] == UIColor.White ?
-                "Light" : "Dark";
-
-            themePicker.Delegate = themePickerDelegate;
-            themeTextField.InputView = themePicker;
+            themeDropDown.InitSource(
+                Constants.Themes,
+                (theme) =>
+                {
+                    _inputTop.GetThemeProvider().SetCurrentTheme(theme);
+                    _inputTop.ResetCustomization();
+                    _inputBotton.ResetCustomization();
+                    _dropDowns.Except(new[] { themeDropDown }).ToList().ForEach(dropDown => dropDown.ResetValue());
+                },
+                Fields.Theme,
+                rect);
+            themeDropDown.SetTextFieldText(_inputTop.GetThemeProvider().GetCurrentTheme().ThemeValues[EOSConstants.PrimaryColor] == UIColor.White ? "Light" : "Dark");
         }
 
         private void InitFontTextField(CGRect rect)
         {
-            var fontPicker = new UIPickerView(rect);
-            fontPicker.ShowSelectionIndicator = true;
-			fontPicker.DataSource = new ValuePickerSource<UIFont>(Constants.Fonts);
-			var fontPickerDelegate = new ValuePickerDelegate<UIFont>(Constants.Fonts);
-            fontPickerDelegate.DidSelected += (object sender, UIFont e) =>
-            {
-                _inputTop.Font = e;
-                _inputBotton.Font = e;
-                fontTextField.Text = e.Name;
-            };
-            fontTextField.EditingDidBegin += (sender, e) =>
-            {
-                var font = Constants.Fonts.ElementAt((int)fontPicker.SelectedRowInComponent(0));
-                _inputTop.Font = font;
-                _inputBotton.Font = font;
-                fontTextField.Text = font.Name;
-            };
-            fontPicker.Delegate = fontPickerDelegate;
-            fontTextField.InputView = fontPicker;
+            fontDropDown.InitSource(
+                Fonts,
+                font => 
+                {
+                    _inputTop.Font = font;
+                    _inputBotton.Font = font;
+                },
+                Fields.Font,
+                rect);
         }
 
         private void InitLetterSpacing(CGRect rect)
         {
-            var letterSpacingPicker = new UIPickerView(rect);
-            letterSpacingPicker.ShowSelectionIndicator = true;
-            letterSpacingPicker.DataSource = new ValuePickerSource<int>(Constants.LetterSpacingValues);
-            var letterSpacingPickerDelegate = new ValuePickerDelegate<int>(Constants.LetterSpacingValues);
-            letterSpacingPickerDelegate.DidSelected += (object sender, int e) =>
-            {
-                _inputTop.LetterSpacing = e;
-                _inputBotton.LetterSpacing = e;
-                letterSpacingTextField.Text = e.ToString();
-            };
-            letterSpacingTextField.EditingDidBegin += (sender, e) =>
-            {
-                var spacing = Constants.LetterSpacingValues[(int)letterSpacingPicker.SelectedRowInComponent(0)];
-                _inputBotton.LetterSpacing = spacing;
-                _inputTop.LetterSpacing = spacing;
-                letterSpacingTextField.Text = spacing.ToString();
-            };
-            letterSpacingPicker.Delegate = letterSpacingPickerDelegate;
-            letterSpacingTextField.InputView = letterSpacingPicker;
+            letterSpacingDropDown.InitSource(
+                LetterSpacingValues,
+                spacing => 
+                {
+                    _inputTop.LetterSpacing = spacing;
+                    _inputBotton.LetterSpacing = spacing;
+                },
+                Fields.LetterSpacing,
+                rect);
         }
 
         private void InitTextSizeTextField(CGRect rect)
         {
-            var textSizePicker = new UIPickerView(rect);
-            textSizePicker.ShowSelectionIndicator = true;
-            textSizePicker.DataSource = new ValuePickerSource<int>(Constants.FontSizeValues);
-			var fontSizePickerDelegate = new ValuePickerDelegate<int>(Constants.FontSizeValues);
-            fontSizePickerDelegate.DidSelected += (object sender, int e) =>
-            {
-                _inputTop.TextSize = e;
-                _inputBotton.TextSize = e;
-                textSizeTextField.Text = e.ToString();
-            };
-            textSizeTextField.EditingDidBegin += (sender, e) =>
-            {
-                var size = Constants.FontSizeValues[(int)textSizePicker.SelectedRowInComponent(0)];
-                _inputTop.TextSize = size;
-                _inputBotton.TextSize = size;
-                textSizeTextField.Text = size.ToString();
-            };
-            textSizePicker.Delegate = fontSizePickerDelegate;
-            textSizeTextField.InputView = textSizePicker;
+            textSizeDropDown.InitSource(
+                FontSizeValues,
+                size => 
+                {
+                    _inputTop.TextSize = size;
+                    _inputBotton.TextSize = size;
+                },
+                Fields.TextSize,
+                rect);
         }
 
         private void InitTextColorTextField(CGRect rect)
         {
-            var textColorPicker = new UIPickerView(rect);
-            textColorPicker.ShowSelectionIndicator = true;
-            textColorPicker.DataSource = new ColorPickerSource();
-            var textColorPickerDelegate = new ColorPickerDelegate();
-            textColorPickerDelegate.DidSelected += (object sender, KeyValuePair<string, UIColor> e) =>
-            {
-                _inputTop.TextColor = e.Value;
-                _inputBotton.TextColor = e.Value;
-                textColorTextField.Text = e.Key;
-            };
-            textColorTextField.EditingDidBegin += (sender, e) =>
-            {
-                var colorPair = Constants.Colors.ElementAt((int)textColorPicker.SelectedRowInComponent(0));
-                _inputTop.TextColor = colorPair.Value;
-                _inputBotton.TextColor = colorPair.Value;
-                textColorTextField.Text = colorPair.Key;
-            };
-            textColorPicker.Delegate = textColorPickerDelegate;
-            textColorTextField.InputView = textColorPicker;
+            textColorDropDown.InitSource(
+                color =>
+                {
+                    _inputTop.TextColor = color;
+                    _inputBotton.TextColor = color;
+                },
+                Fields.EnabledTextColor,
+                rect);
         }
 
         private void InitTextColorDisabledTextField(CGRect rect)
         {
-            var textColorDisabledPicker = new UIPickerView(rect);
-            textColorDisabledPicker.ShowSelectionIndicator = true;
-            textColorDisabledPicker.DataSource = new ColorPickerSource();
-            var textColorDisabledPickerDelegate = new ColorPickerDelegate();
-            textColorDisabledPickerDelegate.DidSelected += (object sender, KeyValuePair<string, UIColor> e) =>
-            {
-                _inputTop.TextColorDisabled = e.Value;
-                _inputBotton.TextColorDisabled = e.Value;
-                textColorDisabledTextField.Text = e.Key;
-            };
-            textColorDisabledTextField.EditingDidBegin += (sender, e) =>
-            {
-                var colorPair = Constants.Colors.ElementAt((int)textColorDisabledPicker.SelectedRowInComponent(0));
-                _inputTop.TextColorDisabled = colorPair.Value;
-                _inputBotton.TextColorDisabled = colorPair.Value;
-                textColorDisabledTextField.Text = colorPair.Key;
-            };
-            textColorDisabledPicker.Delegate = textColorDisabledPickerDelegate;
-            textColorDisabledTextField.InputView = textColorDisabledPicker;
+            disabledTextColorDropDown.InitSource(
+                color =>
+                {
+                    _inputTop.TextColorDisabled = color;
+                    _inputBotton.TextColorDisabled = color;
+                },
+                Fields.DisabledTextColor,
+                rect);
         }
 
         private void InitPlaceholderTextField(CGRect rect)
         {
-            var placeholderColorPicker = new UIPickerView(rect);
-            placeholderColorPicker.ShowSelectionIndicator = true;
-            placeholderColorPicker.DataSource = new ColorPickerSource();
-            var placeholderColorPickerDelegate = new ColorPickerDelegate();
-            placeholderColorPickerDelegate.DidSelected += (object sender, KeyValuePair<string, UIColor> e) =>
-            {
-                _inputTop.PlaceholderColor = e.Value;
-                _inputBotton.PlaceholderColor = e.Value;
-                placeholderColorTextField.Text = e.Key;
-            };
-            placeholderColorTextField.EditingDidBegin += (sender, e) =>
-            {
-                var colorPair = Constants.Colors.ElementAt((int)placeholderColorPicker.SelectedRowInComponent(0));
-                _inputTop.PlaceholderColor = colorPair.Value;
-                _inputBotton.PlaceholderColor = colorPair.Value;
-                placeholderColorTextField.Text = colorPair.Key;
-            };
-            placeholderColorPicker.Delegate = placeholderColorPickerDelegate;
-            placeholderColorTextField.InputView = placeholderColorPicker;
+            hintTextColorDropDown.InitSource(
+                color =>
+                {
+                    _inputTop.PlaceholderColor = color;
+                    _inputBotton.PlaceholderColor = color;
+                },
+                Fields.HintTextColor,
+                rect);
         }
 
         private void InitPlaceholderDisabledTextField(CGRect rect)
         {
-            var placeholderDisabledColorPicker = new UIPickerView(rect);
-            placeholderDisabledColorPicker.ShowSelectionIndicator = true;
-            placeholderDisabledColorPicker.DataSource = new ColorPickerSource();
-            var placeholderDisabledColorPickerDelegate = new ColorPickerDelegate();
-            placeholderDisabledColorPickerDelegate.DidSelected += (object sender, KeyValuePair<string, UIColor> e) =>
-            {
-                _inputTop.PlaceholderColorDisabled = e.Value;
-                _inputBotton.PlaceholderColorDisabled = e.Value;
-                placeholderColorDisabledTextField.Text = e.Key;
-            };
-            placeholderColorDisabledTextField.EditingDidBegin += (sender, e) =>
-            {
-                var colorPair = Constants.Colors.ElementAt((int)placeholderDisabledColorPicker.SelectedRowInComponent(0));
-                _inputTop.PlaceholderColorDisabled = colorPair.Value;
-                _inputBotton.PlaceholderColorDisabled = colorPair.Value;
-                placeholderColorDisabledTextField.Text = colorPair.Key;
-            };
-            placeholderDisabledColorPicker.Delegate = placeholderDisabledColorPickerDelegate;
-            placeholderColorDisabledTextField.InputView = placeholderDisabledColorPicker;
+            disabledHintTextColorDropDown.InitSource(
+                color =>
+                {
+                    _inputTop.PlaceholderColorDisabled = color;
+                    _inputBotton.PlaceholderColorDisabled = color;
+                },
+                Fields.HintTextColorDisabled,
+                rect);
         }
 
         private void InitIconFocusedTextField(CGRect rect)
         {
-            var iconFocusedPicker = new UIPickerView(rect);
-            iconFocusedPicker.ShowSelectionIndicator = true;
-			iconFocusedPicker.DataSource = new ValuePickerSource<String>(Constants.Icons);
-			var iconFocusedPickerDelegate = new ValuePickerDelegate<String>(Constants.Icons);
-            iconFocusedPickerDelegate.DidSelected += (object sender, string e) =>
-            {
-				_inputTop.LeftImageFocused = UIImage.FromBundle(e);
-				_inputBotton.LeftImageFocused = UIImage.FromBundle(e);
-				iconFocusedTextField.Text = e;
-            };
-            iconFocusedTextField.EditingDidBegin += (sender, e) =>
-            {
-				var iconName = Constants.Icons.ElementAt((int)iconFocusedPicker.SelectedRowInComponent(0));
-                _inputTop.LeftImageFocused = UIImage.FromBundle(iconName);
-                _inputBotton.LeftImageFocused = UIImage.FromBundle(iconName);
-                iconFocusedTextField.Text = iconName;
-            };
-            iconFocusedPicker.Delegate = iconFocusedPickerDelegate;
-            iconFocusedTextField.InputView = iconFocusedPicker;
+            focusedIconDropDown.InitSource(
+                Icons,
+                icon =>
+                {
+                    _inputTop.LeftImageFocused = UIImage.FromBundle(icon);
+                    _inputBotton.LeftImageFocused = UIImage.FromBundle(icon);
+                },
+                Fields.IconFocused,
+                rect);
         }
 
         private void InitIconUnfocusedTextField(CGRect rect)
         {
-            var iconUnfocusedPicker = new UIPickerView(rect);
-            iconUnfocusedPicker.ShowSelectionIndicator = true;
-			iconUnfocusedPicker.DataSource = new ValuePickerSource<String>(Constants.Icons);
-			var iconUnfocusedPickerDelegate = new ValuePickerDelegate<String>(Constants.Icons);
-            iconUnfocusedPickerDelegate.DidSelected += (object sender, String e) =>
-            {
-                _inputTop.LeftImageUnfocused = UIImage.FromBundle(e);
-				_inputBotton.LeftImageUnfocused = UIImage.FromBundle(e);
-                iconUnfocusedTextField.Text = e;
-            };
-            iconUnfocusedTextField.EditingDidBegin += (sender, e) =>
-            {
-				var iconName = Constants.Icons.ElementAt((int)iconUnfocusedPicker.SelectedRowInComponent(0));
-                _inputTop.LeftImageUnfocused = UIImage.FromBundle(iconName);
-                _inputBotton.LeftImageUnfocused = UIImage.FromBundle(iconName);
-                iconUnfocusedTextField.Text = iconName;
-            };
-            iconUnfocusedPicker.Delegate = iconUnfocusedPickerDelegate;
-            iconUnfocusedTextField.InputView = iconUnfocusedPicker;
+            unfocusedIconDropDown.InitSource(
+                Icons,
+                icon =>
+                {
+                    _inputTop.LeftImageUnfocused = UIImage.FromBundle(icon);
+                    _inputBotton.LeftImageUnfocused = UIImage.FromBundle(icon);
+                },
+                Fields.IconUnfocused,
+                rect);
         }
 
         private void InitIconDisabledTextField(CGRect rect)
         {
-            var iconDisabledPicker = new UIPickerView(rect);
-            iconDisabledPicker.ShowSelectionIndicator = true;
-			iconDisabledPicker.DataSource = new ValuePickerSource<String>(Constants.Icons);
-			var iconDisabledPickerDelegate = new ValuePickerDelegate<String>(Constants.Icons);
-            iconDisabledPickerDelegate.DidSelected += (object sender, String e) =>
-            {
-                _inputTop.LeftImageDisabled = UIImage.FromBundle(e);
-                _inputBotton.LeftImageDisabled = UIImage.FromBundle(e);
-                iconDisabledTextField.Text = e;
-            };
-            iconDisabledTextField.EditingDidBegin += (sender, e) =>
-            {
-				var iconName = Constants.Icons.ElementAt((int)iconDisabledPicker.SelectedRowInComponent(0));
-                _inputTop.LeftImageDisabled = UIImage.FromBundle(iconName);
-                _inputBotton.LeftImageDisabled = UIImage.FromBundle(iconName);
-				iconDisabledTextField.Text = iconName;
-            };
-            iconDisabledPicker.Delegate = iconDisabledPickerDelegate;
-            iconDisabledTextField.InputView = iconDisabledPicker;
+            disabledIconDropDown.InitSource(
+                Icons,
+                icon =>
+                {
+                    _inputTop.LeftImageDisabled = UIImage.FromBundle(icon);
+                    _inputBotton.LeftImageDisabled = UIImage.FromBundle(icon);
+                },
+                Fields.IconDisabled,
+                rect);
         }
 
         private void InitUnderlineFocusedColorTextField(CGRect rect)
         {
-            var underlineFocusedColorPicker = new UIPickerView(rect);
-            underlineFocusedColorPicker.ShowSelectionIndicator = true;
-            underlineFocusedColorPicker.DataSource = new ColorPickerSource();
-            var underlineFocusedColorPickerDelegate = new ColorPickerDelegate();
-            underlineFocusedColorPickerDelegate.DidSelected += (object sender, KeyValuePair<string, UIColor> e) =>
-            {
-                _inputTop.UnderlineColorFocused = e.Value;
-                _inputBotton.UnderlineColorFocused = e.Value;
-                underlineColorFocusedTextField.Text = e.Key;
-            };
-            underlineColorFocusedTextField.EditingDidBegin += (sender, e) =>
-            {
-                var colorPair = Constants.Colors.ElementAt((int)underlineFocusedColorPicker.SelectedRowInComponent(0));
-                _inputTop.UnderlineColorFocused = colorPair.Value;
-                _inputBotton.UnderlineColorFocused = colorPair.Value;
-                underlineColorFocusedTextField.Text = colorPair.Key;
-            };
-            underlineFocusedColorPicker.Delegate = underlineFocusedColorPickerDelegate;
-            underlineColorFocusedTextField.InputView = underlineFocusedColorPicker;
+            focusedUnderlineColorDropDown.InitSource(
+                color =>
+                {
+                    _inputTop.UnderlineColorFocused = color;
+                    _inputBotton.UnderlineColorFocused = color;
+                },
+                Fields.UnderlineColorFocused,
+                rect);
         }
 
         private void InitUnderlineUnfocusedColorTextField(CGRect rect)
         {
-            var underlineUnfocusedColorPicker = new UIPickerView(rect);
-            underlineUnfocusedColorPicker.ShowSelectionIndicator = true;
-            underlineUnfocusedColorPicker.DataSource = new ColorPickerSource();
-            var underlineUnfocusedColorPickerDelegate = new ColorPickerDelegate();
-            underlineUnfocusedColorPickerDelegate.DidSelected += (object sender, KeyValuePair<string, UIColor> e) =>
-            {
-                _inputTop.UnderlineColorUnfocused = e.Value;
-                _inputBotton.UnderlineColorUnfocused = e.Value;
-                underlineColorUnfocusedTextField.Text = e.Key;
-            };
-            underlineColorUnfocusedTextField.EditingDidBegin += (sender, e) =>
-            {
-                var colorPair = Constants.Colors.ElementAt((int)underlineUnfocusedColorPicker.SelectedRowInComponent(0));
-                _inputTop.UnderlineColorUnfocused = colorPair.Value;
-                _inputBotton.UnderlineColorUnfocused = colorPair.Value;
-                underlineColorUnfocusedTextField.Text = colorPair.Key;
-            };
-            underlineUnfocusedColorPicker.Delegate = underlineUnfocusedColorPickerDelegate;
-            underlineColorUnfocusedTextField.InputView = underlineUnfocusedColorPicker;
+            unfocusedUnderlineColorDropDown.InitSource(
+                color =>
+                {
+                    _inputTop.UnderlineColorUnfocused = color;
+                    _inputBotton.UnderlineColorUnfocused = color;
+                },
+                Fields.UnderlineColorUnfocused,
+                rect);
         }
 
         private void InitUnderlineDisabledColorTextField(CGRect rect)
         {
-            var underlineDisabledColorPicker = new UIPickerView(rect);
-            underlineDisabledColorPicker.ShowSelectionIndicator = true;
-            underlineDisabledColorPicker.DataSource = new ColorPickerSource();
-            var underlineDisabledColorPickerDelegate = new ColorPickerDelegate();
-            underlineDisabledColorPickerDelegate.DidSelected += (object sender, KeyValuePair<string, UIColor> e) =>
-            {
-                _inputTop.UnderlineColorDisabled = e.Value;
-                _inputBotton.UnderlineColorDisabled = e.Value;
-                underlineColorDisabledTextField.Text = e.Key;
-            };
-            underlineColorDisabledTextField.EditingDidBegin += (sender, e) =>
-            {
-                var colorPair = Constants.Colors.ElementAt((int)underlineDisabledColorPicker.SelectedRowInComponent(0));
-                _inputTop.UnderlineColorDisabled = colorPair.Value;
-                _inputBotton.UnderlineColorDisabled = colorPair.Value;
-                underlineColorDisabledTextField.Text = colorPair.Key;
-            };
-            underlineDisabledColorPicker.Delegate = underlineDisabledColorPickerDelegate;
-            underlineColorDisabledTextField.InputView = underlineDisabledColorPicker;
+            disabledUnderlineColorDropDown.InitSource(
+                color =>
+                {
+                    _inputTop.UnderlineColorDisabled = color;
+                    _inputBotton.UnderlineColorDisabled = color;
+                },
+                Fields.UnderlineColorDisabled,
+                rect);
         }
 
         private void InitDisabledSwitch()

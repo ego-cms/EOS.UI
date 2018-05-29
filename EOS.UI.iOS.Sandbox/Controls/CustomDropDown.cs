@@ -13,6 +13,12 @@ namespace EOS.UI.iOS.Sandbox
     [DesignTimeVisible(true)]
     public partial class CustomDropDown : UIView
     {
+        public bool Enabled
+        {
+            get => textField.Enabled;
+            set => textField.Enabled = value;
+        }
+
         [Export("initWithCoder:")]
         public CustomDropDown(NSCoder coder) : base(coder)
         {

@@ -16,41 +16,39 @@ namespace EOS.UI.iOS.Sandbox
         [Outlet]
         UIKit.UIView containerView { get; set; }
 
-
-        [Outlet]
-        UIKit.UITextField disabledColorField { get; set; }
-
-
-        [Outlet]
-        UIKit.UITextField enabledColorField { get; set; }
-
-
-        [Outlet]
-        UIKit.UITextField fontField { get; set; }
-
-
-        [Outlet]
-        UIKit.UITextField fontSizeField { get; set; }
-
-
-        [Outlet]
-        UIKit.UITextField letterSpacingField { get; set; }
-
-
-        [Outlet]
-        UIKit.UITextField pressedColorField { get; set; }
-
-
         [Outlet]
         UIKit.UIButton resetButton { get; set; }
-
 
         [Outlet]
         UIKit.UISwitch stateSwitch { get; set; }
 
+        [Outlet]
+        [GeneratedCode ("iOS Designer", "1.0")]
+        EOS.UI.iOS.Sandbox.CustomDropDown disabledTextColorDropDown { get; set; }
 
         [Outlet]
-        UIKit.UITextField themeField { get; set; }
+        [GeneratedCode ("iOS Designer", "1.0")]
+        EOS.UI.iOS.Sandbox.CustomDropDown enabledTextColorDropDown { get; set; }
+
+        [Outlet]
+        [GeneratedCode ("iOS Designer", "1.0")]
+        EOS.UI.iOS.Sandbox.CustomDropDown fontDropDown { get; set; }
+
+        [Outlet]
+        [GeneratedCode ("iOS Designer", "1.0")]
+        EOS.UI.iOS.Sandbox.CustomDropDown letterSpacingDropDown { get; set; }
+
+        [Outlet]
+        [GeneratedCode ("iOS Designer", "1.0")]
+        EOS.UI.iOS.Sandbox.CustomDropDown pressedTextColorDropDown { get; set; }
+
+        [Outlet]
+        [GeneratedCode ("iOS Designer", "1.0")]
+        EOS.UI.iOS.Sandbox.CustomDropDown textSizeDropDown { get; set; }
+
+        [Outlet]
+        [GeneratedCode ("iOS Designer", "1.0")]
+        EOS.UI.iOS.Sandbox.CustomDropDown themeDropDown { get; set; }
 
         void ReleaseDesignerOutlets ()
         {
@@ -59,34 +57,29 @@ namespace EOS.UI.iOS.Sandbox
                 containerView = null;
             }
 
-            if (disabledColorField != null) {
-                disabledColorField.Dispose ();
-                disabledColorField = null;
+            if (disabledTextColorDropDown != null) {
+                disabledTextColorDropDown.Dispose ();
+                disabledTextColorDropDown = null;
             }
 
-            if (enabledColorField != null) {
-                enabledColorField.Dispose ();
-                enabledColorField = null;
+            if (enabledTextColorDropDown != null) {
+                enabledTextColorDropDown.Dispose ();
+                enabledTextColorDropDown = null;
             }
 
-            if (fontField != null) {
-                fontField.Dispose ();
-                fontField = null;
+            if (fontDropDown != null) {
+                fontDropDown.Dispose ();
+                fontDropDown = null;
             }
 
-            if (fontSizeField != null) {
-                fontSizeField.Dispose ();
-                fontSizeField = null;
+            if (letterSpacingDropDown != null) {
+                letterSpacingDropDown.Dispose ();
+                letterSpacingDropDown = null;
             }
 
-            if (letterSpacingField != null) {
-                letterSpacingField.Dispose ();
-                letterSpacingField = null;
-            }
-
-            if (pressedColorField != null) {
-                pressedColorField.Dispose ();
-                pressedColorField = null;
+            if (pressedTextColorDropDown != null) {
+                pressedTextColorDropDown.Dispose ();
+                pressedTextColorDropDown = null;
             }
 
             if (resetButton != null) {
@@ -99,9 +92,14 @@ namespace EOS.UI.iOS.Sandbox
                 stateSwitch = null;
             }
 
-            if (themeField != null) {
-                themeField.Dispose ();
-                themeField = null;
+            if (textSizeDropDown != null) {
+                textSizeDropDown.Dispose ();
+                textSizeDropDown = null;
+            }
+
+            if (themeDropDown != null) {
+                themeDropDown.Dispose ();
+                themeDropDown = null;
             }
         }
     }

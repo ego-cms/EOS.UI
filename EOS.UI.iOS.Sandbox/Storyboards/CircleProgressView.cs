@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UIFrameworks.Shared.Themes.Helpers;
 using UIKit;
+using static EOS.UI.iOS.Sandbox.Helpers.Constants;
 
 namespace EOS.UI.iOS.Sandbox
 {
@@ -17,7 +18,7 @@ namespace EOS.UI.iOS.Sandbox
         private CircleProgress _circleProgress;
         private PlatformTimer _timer;
         private int _percents = 0;
-        private List<UITextField> _textFields;
+        private List<CustomDropDown> _dropDowns;
 
         public CircleProgressView(IntPtr handle) : base(handle)
         {
@@ -49,110 +50,56 @@ namespace EOS.UI.iOS.Sandbox
             };
             containerView.AddSubview(_circleProgress);
 
-            _textFields = new List<UITextField>()
+            _dropDowns = new List<CustomDropDown>()
             {
-                themeField,
-                fontField,
-                colorField,
-                checkmarkColorField,
-                textSizeField
+                themeDropDown,
+                fontDropDown,
+                colorDropDown,
+                alternativeColorDropDown,
+                textSizeDropDown
             };
 
             View.AddGestureRecognizer(new UITapGestureRecognizer(() =>
             {
-                _textFields.ForEach(f => f.ResignFirstResponder());
+                _dropDowns.ForEach(dropDown => dropDown.CloseInputControl());
             }));
 
 
             var rect = new CGRect(0, 0, 100, 100);
-            var themePicker = new UIPickerView(rect);
-            themePicker.ShowSelectionIndicator = true;
-            themePicker.DataSource = new DictionaryPickerSource<string, EOSThemeEnumeration>(Constants.Themes);
-            var themePickerDelegate = new DictionaryPickerDelegate<string, EOSThemeEnumeration>(Constants.Themes);
-            themePickerDelegate.DidSelected += (object sender, KeyValuePair<string, EOSThemeEnumeration> e) =>
-            {
-                themeField.Text = e.Key;
-                var provider = _circleProgress.GetThemeProvider();
-                provider.SetCurrentTheme(e.Value);
-                _circleProgress.ResetCustomization();
-                _textFields.Except(new[] { themeField }).ToList().ForEach(f => f.Text = String.Empty);
-            };
-            themeField.Text = _circleProgress.GetThemeProvider().GetCurrentTheme().ThemeValues[EOSConstants.PrimaryColor] == UIColor.White ?
-                "Light" : "Dark";
-            themePicker.Delegate = themePickerDelegate;
-            themeField.InputView = themePicker;
 
-            var fontPicker = new UIPickerView(rect);
-            fontPicker.ShowSelectionIndicator = true;
-            fontPicker.DataSource = new ValuePickerSource<UIFont>(Constants.Fonts);
-            var fontPickerDelegate = new ValuePickerDelegate<UIFont>(Constants.Fonts);
-            fontPickerDelegate.DidSelected += (object sender, UIFont e) =>
-            {
-                _circleProgress.Font = e;
-                fontField.Text = e.Name;
-            };
-            fontField.EditingDidBegin += (sender, e) =>
-            {
-                var font = Constants.Fonts.ElementAt((int)fontPicker.SelectedRowInComponent(0));
-                _circleProgress.Font = font;
-                fontField.Text = font.Name;
-            };
-            fontPicker.Delegate = fontPickerDelegate;
-            fontField.InputView = fontPicker;
+            themeDropDown.InitSource(
+                Constants.Themes,
+                (theme) =>
+                {
+                    _circleProgress.GetThemeProvider().SetCurrentTheme(theme);
+                    _circleProgress.ResetCustomization();
+                    _dropDowns.Except(new[] { themeDropDown }).ToList().ForEach(dropDown => dropDown.ResetValue());
+                },
+                Fields.Theme,
+                rect);
+            themeDropDown.SetTextFieldText(_circleProgress.GetThemeProvider().GetCurrentTheme().ThemeValues[EOSConstants.PrimaryColor] == UIColor.White ? "Light" : "Dark");
 
-            var fontSizePicker = new UIPickerView(rect);
-            fontSizePicker.ShowSelectionIndicator = true;
-            fontSizePicker.DataSource = new ValuePickerSource<int>(Constants.FontSizeValues);
-            var fontSizePickerDelegate = new ValuePickerDelegate<int>(Constants.FontSizeValues);
-            fontSizePickerDelegate.DidSelected += (object sender, int e) =>
-            {
-                _circleProgress.TextSize = e;
-                textSizeField.Text = e.ToString();
-            };
-            textSizeField.EditingDidBegin += (sender, e) =>
-            {
-                var size = Constants.FontSizeValues[(int)fontSizePicker.SelectedRowInComponent(0)];
-                _circleProgress.TextSize = size;
-                textSizeField.Text = size.ToString();
-            };
-            fontSizePicker.Delegate = fontSizePickerDelegate;
-            textSizeField.InputView = fontSizePicker;
+            fontDropDown.InitSource(
+                Fonts,
+                font => _circleProgress.Font = font,
+                Fields.Font,
+                rect);
 
-            var colorPicker = new UIPickerView(rect);
-            colorPicker.ShowSelectionIndicator = true;
-            colorPicker.DataSource = new ColorPickerSource();
-            var colorPickerDelegate = new ColorPickerDelegate();
-            colorPickerDelegate.DidSelected += (object sender, KeyValuePair<string, UIColor> e) =>
-            {
-                _circleProgress.Color = e.Value;
-                colorField.Text = e.Key;
-            };
-            colorField.EditingDidBegin += (sender, e) =>
-            {
-                var colorPair = Constants.Colors.ElementAt((int)colorPicker.SelectedRowInComponent(0));
-                _circleProgress.Color = colorPair.Value;
-                colorField.Text = colorPair.Key;
-            };
-            colorPicker.Delegate = colorPickerDelegate;
-            colorField.InputView = colorPicker;
+            textSizeDropDown.InitSource(
+                FontSizeValues,
+                size => _circleProgress.TextSize = size,
+                Fields.TextSize,
+                rect);
 
-            var checkmarkColorPicker = new UIPickerView(rect);
-            checkmarkColorPicker.ShowSelectionIndicator = true;
-            checkmarkColorPicker.DataSource = new ColorPickerSource();
-            var checkmarkColorPickerDelegate = new ColorPickerDelegate();
-            checkmarkColorPickerDelegate.DidSelected += (object sender, KeyValuePair<string, UIColor> e) =>
-            {
-                _circleProgress.AlternativeColor = e.Value;
-                checkmarkColorField.Text = e.Key;
-            };
-            checkmarkColorField.EditingDidBegin += (sender, e) =>
-            {
-                var colorPair = Constants.Colors.ElementAt((int)checkmarkColorPicker.SelectedRowInComponent(0));
-                _circleProgress.AlternativeColor = colorPair.Value;
-                checkmarkColorField.Text = colorPair.Key;
-            };
-            checkmarkColorPicker.Delegate = checkmarkColorPickerDelegate;
-            checkmarkColorField.InputView = checkmarkColorPicker;
+            colorDropDown.InitSource(
+                color => _circleProgress.Color = color,
+                Fields.Color,
+                rect);
+
+            alternativeColorDropDown.InitSource(
+                color => _circleProgress.AlternativeColor = color,
+                Fields.AlternativeColor,
+                rect);
 
             showProgressSwitch.ValueChanged += (sender, e) =>
             {
@@ -161,7 +108,7 @@ namespace EOS.UI.iOS.Sandbox
 
             resetButton.TouchUpInside += (sender, e) =>
             {
-                _textFields.Except(new List<UITextField>() { themeField }).ToList().ForEach(f => f.Text = String.Empty);
+                _dropDowns.Except(new [] { themeDropDown }).ToList().ForEach(dropDown => dropDown.ResetValue());
                 showProgressSwitch.On = true;
                 _circleProgress.ResetCustomization();
             };

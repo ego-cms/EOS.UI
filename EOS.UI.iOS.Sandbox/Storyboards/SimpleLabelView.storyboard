@@ -98,9 +98,9 @@
                         <outlet property="themeDropDown" destination="22264" id="name-outlet-22264"/>
                         <outlet property="fontDropDown" destination="22664" id="name-outlet-22664"/>
                         <outlet property="textColorDropDown" destination="23122" id="name-outlet-23122"/>
-                        <outlet property="themeDropDown" destination="22216" id="name-outlet-22216"/>
                         <outlet property="textSizeDropDown" destination="24640" id="name-outlet-24640"/>
                         <outlet property="letterSpacingDropDown" destination="23474" id="name-outlet-23474"/>
+                        <outlet property="themesDropDown" destination="22216" id="name-outlet-22216"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="207" userLabel="First Responder" sceneMemberID="firstResponder"/>

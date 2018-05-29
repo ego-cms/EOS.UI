@@ -14,37 +14,43 @@ namespace EOS.UI.iOS.Sandbox
     partial class FabProgressView
     {
         [Outlet]
-        UIKit.UITextField backgroundField { get; set; }
-
-        [Outlet]
         UIKit.UIView containerView { get; set; }
-
-        [Outlet]
-        UIKit.UITextField disabledField { get; set; }
 
         [Outlet]
         UIKit.UISwitch enableSwitch { get; set; }
 
         [Outlet]
-        UIKit.UITextField pressedField { get; set; }
-
-        [Outlet]
         UIKit.UIButton resetButton { get; set; }
 
         [Outlet]
-        UIKit.UITextField shadowField { get; set; }
+        [GeneratedCode ("iOS Designer", "1.0")]
+        EOS.UI.iOS.Sandbox.CustomDropDown backgroundDropDown { get; set; }
 
         [Outlet]
-        UIKit.UITextField sizeField { get; set; }
+        [GeneratedCode ("iOS Designer", "1.0")]
+        EOS.UI.iOS.Sandbox.CustomDropDown disabledColorDropDown { get; set; }
 
         [Outlet]
-        UIKit.UITextField themeField { get; set; }
+        [GeneratedCode ("iOS Designer", "1.0")]
+        EOS.UI.iOS.Sandbox.CustomDropDown pressedColorDropDown { get; set; }
+
+        [Outlet]
+        [GeneratedCode ("iOS Designer", "1.0")]
+        EOS.UI.iOS.Sandbox.CustomDropDown shadowDropDown { get; set; }
+
+        [Outlet]
+        [GeneratedCode ("iOS Designer", "1.0")]
+        EOS.UI.iOS.Sandbox.CustomDropDown sizeDropDown { get; set; }
+
+        [Outlet]
+        [GeneratedCode ("iOS Designer", "1.0")]
+        EOS.UI.iOS.Sandbox.CustomDropDown themeDropDown { get; set; }
 
         void ReleaseDesignerOutlets ()
         {
-            if (backgroundField != null) {
-                backgroundField.Dispose ();
-                backgroundField = null;
+            if (backgroundDropDown != null) {
+                backgroundDropDown.Dispose ();
+                backgroundDropDown = null;
             }
 
             if (containerView != null) {
@@ -52,9 +58,9 @@ namespace EOS.UI.iOS.Sandbox
                 containerView = null;
             }
 
-            if (disabledField != null) {
-                disabledField.Dispose ();
-                disabledField = null;
+            if (disabledColorDropDown != null) {
+                disabledColorDropDown.Dispose ();
+                disabledColorDropDown = null;
             }
 
             if (enableSwitch != null) {
@@ -62,9 +68,9 @@ namespace EOS.UI.iOS.Sandbox
                 enableSwitch = null;
             }
 
-            if (pressedField != null) {
-                pressedField.Dispose ();
-                pressedField = null;
+            if (pressedColorDropDown != null) {
+                pressedColorDropDown.Dispose ();
+                pressedColorDropDown = null;
             }
 
             if (resetButton != null) {
@@ -72,19 +78,19 @@ namespace EOS.UI.iOS.Sandbox
                 resetButton = null;
             }
 
-            if (shadowField != null) {
-                shadowField.Dispose ();
-                shadowField = null;
+            if (shadowDropDown != null) {
+                shadowDropDown.Dispose ();
+                shadowDropDown = null;
             }
 
-            if (sizeField != null) {
-                sizeField.Dispose ();
-                sizeField = null;
+            if (sizeDropDown != null) {
+                sizeDropDown.Dispose ();
+                sizeDropDown = null;
             }
 
-            if (themeField != null) {
-                themeField.Dispose ();
-                themeField = null;
+            if (themeDropDown != null) {
+                themeDropDown.Dispose ();
+                themeDropDown = null;
             }
         }
     }

@@ -40,7 +40,11 @@ namespace EOS.UI.iOS.Sandbox
 
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
-        EOS.UI.iOS.Sandbox.CustomDropDown themeDropDown { get; set; }
+        UIKit.NSLayoutConstraint themeDropDown { get; set; }
+
+        [Outlet]
+        [GeneratedCode ("iOS Designer", "1.0")]
+        EOS.UI.iOS.Sandbox.CustomDropDown themesDropDown { get; set; }
 
         void ReleaseDesignerOutlets ()
         {
@@ -79,9 +83,9 @@ namespace EOS.UI.iOS.Sandbox
                 themeDropDown = null;
             }
 
-            if (themeDropDown != null) {
-                themeDropDown.Dispose ();
-                themeDropDown = null;
+            if (themesDropDown != null) {
+                themesDropDown.Dispose ();
+                themesDropDown = null;
             }
         }
     }

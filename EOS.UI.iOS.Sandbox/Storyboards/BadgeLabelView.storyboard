@@ -124,7 +124,7 @@
                         <outlet property="letterSpacingDropDown" destination="1738" id="name-outlet-1738"/>
                         <outlet property="textSizeDropDown" destination="1742" id="name-outlet-1742"/>
                         <outlet property="cornerRadiusDropDown" destination="1748" id="name-outlet-1748"/>
-                        <outlet property="letterSpacingDropDown" destination="1736" id="name-outlet-1736"/>
+                        <outlet property="letterSpaceDropDown" destination="1736" id="name-outlet-1736"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="207" userLabel="First Responder" sceneMemberID="firstResponder"/>

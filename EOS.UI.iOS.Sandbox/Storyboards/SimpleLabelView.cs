@@ -35,7 +35,7 @@ namespace EOS.UI.iOS.Sandbox
 
             _dropDowns = new List<CustomDropDown>()
             {
-                themeDropDown,
+                themesDropDown,
                 fontDropDown,
                 textColorDropDown,
                 textSizeDropDown,
@@ -62,23 +62,23 @@ namespace EOS.UI.iOS.Sandbox
             resetButton.TouchUpInside += (sender, e) =>
             {
                 _simpleLabel.ResetCustomization();
-                _dropDowns.Except(new [] { themeDropDown }).ToList().ForEach(d => d.ResetValue());
+                _dropDowns.Except(new [] { themesDropDown }).ToList().ForEach(d => d.ResetValue());
             };
         }
 
         private void InitThemePicker(CGRect frame)
         {
-            themeDropDown.InitSource(
+            themesDropDown.InitSource(
                 Constants.Themes,
                 (theme) =>
                 {
                     _simpleLabel.GetThemeProvider().SetCurrentTheme(theme);
                     _simpleLabel.ResetCustomization();
-                    _dropDowns.Except(new[] { themeDropDown }).ToList().ForEach(dropDown => dropDown.ResetValue());
+                    _dropDowns.Except(new[] { themesDropDown }).ToList().ForEach(dropDown => dropDown.ResetValue());
                 },
                 Fields.Theme,
                 frame);
-            themeDropDown.SetTextFieldText(_simpleLabel.GetThemeProvider().GetCurrentTheme().ThemeValues[EOSConstants.PrimaryColor] == UIColor.White ? "Light" : "Dark");
+            themesDropDown.SetTextFieldText(_simpleLabel.GetThemeProvider().GetCurrentTheme().ThemeValues[EOSConstants.PrimaryColor] == UIColor.White ? "Light" : "Dark");
         }
 
         private void InitTextSizePicker(CGRect frame)

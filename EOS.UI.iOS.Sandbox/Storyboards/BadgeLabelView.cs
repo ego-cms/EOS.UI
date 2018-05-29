@@ -3,14 +3,11 @@ using EOS.UI.iOS.Controls;
 using EOS.UI.iOS.Extensions;
 using EOS.UI.iOS.Sandbox.Storyboards;
 using EOS.UI.iOS.Sandbox.Helpers;
-using Foundation;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using UIKit;
-using EOS.UI.Shared.Themes.Helpers;
 using UIFrameworks.Shared.Themes.Helpers;
-using EOS.UI.iOS.Sandbox.Controls.Pickers;
 using static EOS.UI.iOS.Sandbox.Helpers.Constants;
 
 namespace EOS.UI.iOS.Sandbox
@@ -19,7 +16,7 @@ namespace EOS.UI.iOS.Sandbox
     {
         public const string Identifier = "BadgeLabelView";
 
-        private List<CustomDropDown> _textFields;
+        private List<CustomDropDown> _dropDowns;
 
         public BadgeLabelView(IntPtr handle) : base(handle)
         {
@@ -32,10 +29,10 @@ namespace EOS.UI.iOS.Sandbox
             var label = new BadgeLabel();
             label.Text = "Default Text";
 
-            _textFields = new List<CustomDropDown>()
+            _dropDowns = new List<CustomDropDown>()
             {
                 backgroundColorDropDown,
-                letterSpacingDropDown,
+                letterSpaceDropDown,
                 themeDropDown,
                 fontDropDown,
                 textColorDropDown,
@@ -45,7 +42,7 @@ namespace EOS.UI.iOS.Sandbox
 
             View.AddGestureRecognizer(new UITapGestureRecognizer(() =>
             {
-                _textFields.ForEach(dropDown => dropDown.CloseInputControl());
+                _dropDowns.ForEach(dropDown => dropDown.CloseInputControl());
             }));
 
             containerView.ConstrainLayout(() => label.Frame.GetCenterX() == containerView.Frame.GetCenterX() &&
@@ -59,7 +56,7 @@ namespace EOS.UI.iOS.Sandbox
                 {
                     label.GetThemeProvider().SetCurrentTheme(theme);
                     label.ResetCustomization();
-                    _textFields.Except(new[] { themeDropDown }).ToList().ForEach(dropDown => dropDown.ResetValue());
+                    _dropDowns.Except(new[] { themeDropDown }).ToList().ForEach(dropDown => dropDown.ResetValue());
                 },
                 Fields.Theme,
                 rect);
@@ -81,7 +78,7 @@ namespace EOS.UI.iOS.Sandbox
                 Fields.Font,
                 rect);
 
-            letterSpacingDropDown.InitSource(
+            letterSpaceDropDown.InitSource(
                 LetterSpacingValues,
                 spacing => label.LetterSpacing = spacing,
                 Fields.LetterSpacing,
@@ -102,7 +99,7 @@ namespace EOS.UI.iOS.Sandbox
             resetButton.TouchUpInside += (sender, e) =>
             {
                 label.ResetCustomization();
-                _textFields.Except(new[] { themeDropDown }).ToList().ForEach(dropDown => dropDown.ResetValue());
+                _dropDowns.Except(new[] { themeDropDown }).ToList().ForEach(dropDown => dropDown.ResetValue());
             };
         }
     }

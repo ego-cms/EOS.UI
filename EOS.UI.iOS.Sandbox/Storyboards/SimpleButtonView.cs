@@ -10,6 +10,7 @@ using System.Linq;
 using System.Collections.Generic;
 using UIFrameworks.Shared.Themes.Helpers;
 using UIKit;
+using static EOS.UI.iOS.Sandbox.Helpers.Constants;
 
 namespace EOS.UI.iOS.Sandbox
 {
@@ -18,7 +19,7 @@ namespace EOS.UI.iOS.Sandbox
         public const string Identifier = "SimpleButtonView";
 
         private SimpleButton _simpleButton;
-        private List<UITextField> _textFields;
+        private List<CustomDropDown> _dropDowns;
 
         public SimpleButtonView (IntPtr handle) : base (handle)
         {
@@ -34,24 +35,24 @@ namespace EOS.UI.iOS.Sandbox
 
             _simpleButton.UpdateAppearance();
 
-            _textFields = new List<UITextField>()
+            _dropDowns = new List<CustomDropDown>()
             {
-                themeTextField,
-                fontTextField,
-                letterSpacingTextField,
-                textSizeTextField,
-                textColorEnabledTextField,
-                textColorDisabledTextField,
-                textColorPressedTextField,
-                backgroundColorEnabledTextField,
-                backgroundColorDisabledTextField,
-                backgroundColorPressedTextField,
-                cornerRadiusTextField
+                themeDropDown,
+                fontDropDown,
+                letterSpacingDropDown,
+                textSizeDropDown,
+                enabledTextColorDropDown,
+                disabledTextColorDropDown,
+                pressedTextColorDropDown,
+                enabledBackgrDropDown,
+                disabledBackgroundDropDown,
+                pressedTextColorDropDown,
+                cornerRadiusDropDown
             };
 
             View.AddGestureRecognizer(new UITapGestureRecognizer(() =>
             {
-                _textFields.ForEach(f => f.ResignFirstResponder());
+                _dropDowns.ForEach(dropDown => dropDown.CloseInputControl());
             }));
 
             containerView.ConstrainLayout(() => _simpleButton.Frame.GetCenterX() == containerView.Frame.GetCenterX() &&
@@ -62,250 +63,118 @@ namespace EOS.UI.iOS.Sandbox
 
             var rect = new CGRect(0, 0, 100, 150);
 
-            InitThemeTextField(rect);
-            InitFontTextField(rect);
-            InitLetterSpacing(rect);
-            InitTextSizeTextField(rect);
-            InitTextColorEnabledTextField(rect);
-            InitTextColorDisabledTextField(rect);
-            InitTextColorPressedTextField(rect);
-            InitBackgroundColorEnabledTextField(rect);
-            InitBackgroundColorDisabledTextField(rect);
-            InitBackgroundColorPressedTextField(rect);
-            InitCornerRadiusTextField(rect);
+            InitThemeDropDown(rect);
+            InitFontDropDown(rect);
+            InitLetterSpacingDropDown(rect);
+            InitTextSizeDropDown(rect);
+            InitTextColorEnabledDropDown(rect);
+            InitTextColorDisabledDropDown(rect);
+            InitTextColorPressedDropDown(rect);
+            InitBackgroundColorEnabledDropDown(rect);
+            InitBackgroundColorDisabledDropDown(rect);
+            InitBackgroundColorPressedDropDown(rect);
+            InitCornerRadiusDropDown(rect);
             InitDisabledSwitch();
             InitResetButton();
         }
 
-        private void InitThemeTextField(CGRect rect)
+        private void InitThemeDropDown(CGRect rect)
         {
-            var themePicker = new UIPickerView(rect);
-            themePicker.ShowSelectionIndicator = true;
-            themePicker.DataSource = new DictionaryPickerSource<string, EOSThemeEnumeration>(Constants.Themes);
-            var themePickerDelegate = new DictionaryPickerDelegate<String, EOSThemeEnumeration>(Constants.Themes);
-            themePickerDelegate.DidSelected += (object sender, KeyValuePair<string, EOSThemeEnumeration> e) =>
-            {
-                themeTextField.Text = e.Key;
-                var provider = _simpleButton.GetThemeProvider();
-                provider.SetCurrentTheme(e.Value);
-                _simpleButton.ResetCustomization();
-                _textFields.Except(new[] { themeTextField }).ToList().ForEach(f => f.Text = string.Empty);
-            };
-            themeTextField.Text = _simpleButton.GetThemeProvider().GetCurrentTheme().ThemeValues[EOSConstants.PrimaryColor] == UIColor.White ?
-                "Light" : "Dark";
-
-            themePicker.Delegate = themePickerDelegate;
-            themeTextField.InputView = themePicker;
+            themeDropDown.InitSource(
+                Constants.Themes,
+                (theme) =>
+                {
+                    _simpleButton.GetThemeProvider().SetCurrentTheme(theme);
+                    _simpleButton.ResetCustomization();
+                    _dropDowns.Except(new[] { themeDropDown }).ToList().ForEach(dropDown => dropDown.ResetValue());
+                },
+                Fields.Theme,
+                rect);
+            themeDropDown.SetTextFieldText(_simpleButton.GetThemeProvider().GetCurrentTheme().ThemeValues[EOSConstants.PrimaryColor] == UIColor.White ? "Light" : "Dark");
         }
 
-        private void InitFontTextField(CGRect rect)
+        private void InitFontDropDown(CGRect rect)
         {
-            var fontPicker = new UIPickerView(rect);
-            fontPicker.ShowSelectionIndicator = true;
-            fontPicker.DataSource = new ValuePickerSource<UIFont>(Constants.Fonts);
-            var fontPickerDelegate = new ValuePickerDelegate<UIFont>(Constants.Fonts);
-            fontPickerDelegate.DidSelected += (object sender, UIFont e) =>
-            {
-                _simpleButton.Font = e;
-                fontTextField.Text = e.Name;
-            };
-            fontTextField.EditingDidBegin += (sender, e) =>
-            {
-                var font = Constants.Fonts.ElementAt((int)fontPicker.SelectedRowInComponent(0));
-                _simpleButton.Font = font;
-                fontTextField.Text = font.Name;
-            };
-            fontPicker.Delegate = fontPickerDelegate;
-            fontTextField.InputView = fontPicker;
+            fontDropDown.InitSource(
+                Fonts,
+                font => _simpleButton.Font = font,
+                Fields.Font,
+                rect);
         }
 
-        private void InitLetterSpacing(CGRect rect)
+        private void InitLetterSpacingDropDown(CGRect rect)
         {
-            var letterSpacingPicker = new UIPickerView(rect);
-            letterSpacingPicker.ShowSelectionIndicator = true;
-            letterSpacingPicker.DataSource = new ValuePickerSource<int>(Constants.LetterSpacingValues);
-            var letterSpacingPickerDelegate = new ValuePickerDelegate<int>(Constants.LetterSpacingValues);
-            letterSpacingPickerDelegate.DidSelected += (object sender, int e) =>
-            {
-                _simpleButton.LetterSpacing = e;
-                letterSpacingTextField.Text = e.ToString();
-            };
-            letterSpacingTextField.EditingDidBegin += (sender, e) =>
-            {
-                var spacing = Constants.LetterSpacingValues[(int)letterSpacingPicker.SelectedRowInComponent(0)];
-                _simpleButton.LetterSpacing = spacing;
-                letterSpacingTextField.Text = spacing.ToString();
-            };
-            letterSpacingPicker.Delegate = letterSpacingPickerDelegate;
-            letterSpacingTextField.InputView = letterSpacingPicker;
+            letterSpacingDropDown.InitSource(
+                LetterSpacingValues,
+                spacing => _simpleButton.LetterSpacing = spacing,
+                Fields.LetterSpacing,
+                rect);
         }
 
-        private void InitTextSizeTextField(CGRect rect)
+        private void InitTextSizeDropDown(CGRect rect)
         {
-            var textSizePicker = new UIPickerView(rect);
-            textSizePicker.ShowSelectionIndicator = true;
-            textSizePicker.DataSource = new ValuePickerSource<int>(Constants.FontSizeValues);
-            var fontSizePickerDelegate = new ValuePickerDelegate<int>(Constants.FontSizeValues);
-            fontSizePickerDelegate.DidSelected += (object sender, int e) =>
-            {
-                _simpleButton.TextSize = e;
-                textSizeTextField.Text = e.ToString();
-            };
-            textSizeTextField.EditingDidBegin += (sender, e) =>
-            {
-                var size = Constants.FontSizeValues[(int)textSizePicker.SelectedRowInComponent(0)];
-                _simpleButton.TextSize = size;
-                textSizeTextField.Text = size.ToString();
-            };
-            textSizePicker.Delegate = fontSizePickerDelegate;
-            textSizeTextField.InputView = textSizePicker;
+            textSizeDropDown.InitSource(
+                FontSizeValues,
+                size => _simpleButton.TextSize = size,
+                Fields.TextSize,
+                rect);
         }
 
-        private void InitTextColorEnabledTextField(CGRect rect)
+        private void InitTextColorEnabledDropDown(CGRect rect)
         {
-            var textColorPicker = new UIPickerView(rect);
-            textColorPicker.ShowSelectionIndicator = true;
-            textColorPicker.DataSource = new ColorPickerSource();
-            var textColorPickerDelegate = new ColorPickerDelegate();
-            textColorPickerDelegate.DidSelected += (object sender, KeyValuePair<string, UIColor> e) =>
-            {
-                _simpleButton.TextColor = e.Value;
-                textColorEnabledTextField.Text = e.Key;
-            };
-            textColorEnabledTextField.EditingDidBegin += (sender, e) =>
-            {
-                var colorPair = Constants.Colors.ElementAt((int)textColorPicker.SelectedRowInComponent(0));
-                _simpleButton.TextColor = colorPair.Value;
-                textColorEnabledTextField.Text = colorPair.Key;
-            };
-            textColorPicker.Delegate = textColorPickerDelegate;
-            textColorEnabledTextField.InputView = textColorPicker;
+            enabledTextColorDropDown.InitSource(
+                color => _simpleButton.TextColor = color,
+                Fields.EnabledTextColor,
+                rect);
         }
 
-        private void InitTextColorDisabledTextField(CGRect rect)
+        private void InitTextColorDisabledDropDown(CGRect rect)
         {
-            var textColorDisabledPicker = new UIPickerView(rect);
-            textColorDisabledPicker.ShowSelectionIndicator = true;
-            textColorDisabledPicker.DataSource = new ColorPickerSource();
-            var textColorDisabledPickerDelegate = new ColorPickerDelegate();
-            textColorDisabledPickerDelegate.DidSelected += (object sender, KeyValuePair<string, UIColor> e) =>
-            {
-                _simpleButton.DisabledTextColor = e.Value;
-                textColorDisabledTextField.Text = e.Key;
-            };
-            textColorDisabledTextField.EditingDidBegin += (sender, e) =>
-            {
-                var colorPair = Constants.Colors.ElementAt((int)textColorDisabledPicker.SelectedRowInComponent(0));
-                _simpleButton.DisabledTextColor = colorPair.Value;
-                textColorDisabledTextField.Text = colorPair.Key;
-            };
-            textColorDisabledPicker.Delegate = textColorDisabledPickerDelegate;
-            textColorDisabledTextField.InputView = textColorDisabledPicker;
+            disabledTextColorDropDown.InitSource(
+                color => _simpleButton.DisabledTextColor = color,
+                Fields.DisabledTextColor,
+                rect);
         }
 
-        private void InitTextColorPressedTextField(CGRect rect)
+        private void InitTextColorPressedDropDown(CGRect rect)
         {
-            var textColorDisabledPicker = new UIPickerView(rect);
-            textColorDisabledPicker.ShowSelectionIndicator = true;
-            textColorDisabledPicker.DataSource = new ColorPickerSource();
-            var textColorDisabledPickerDelegate = new ColorPickerDelegate();
-            textColorDisabledPickerDelegate.DidSelected += (object sender, KeyValuePair<string, UIColor> e) =>
-            {
-                _simpleButton.PressedTextColor = e.Value;
-                textColorPressedTextField.Text = e.Key;
-            };
-            textColorPressedTextField.EditingDidBegin += (sender, e) =>
-            {
-                var colorPair = Constants.Colors.ElementAt((int)textColorDisabledPicker.SelectedRowInComponent(0));
-                _simpleButton.PressedTextColor = colorPair.Value;
-                textColorPressedTextField.Text = colorPair.Key;
-            };
-            textColorDisabledPicker.Delegate = textColorDisabledPickerDelegate;
-            textColorPressedTextField.InputView = textColorDisabledPicker;
+            pressedTextColorDropDown.InitSource(
+                color => _simpleButton.PressedTextColor = color,
+                Fields.PressedTextColor,
+                rect);
         }
 
-        private void InitBackgroundColorEnabledTextField(CGRect rect)
+        private void InitBackgroundColorEnabledDropDown(CGRect rect)
         {
-            var backgroundColorPicker = new UIPickerView(rect);
-            backgroundColorPicker.ShowSelectionIndicator = true;
-            backgroundColorPicker.DataSource = new ColorPickerSource();
-            var backgroundColorPickerDelegate = new ColorPickerDelegate();
-            backgroundColorPickerDelegate.DidSelected += (object sender, KeyValuePair<string, UIColor> e) =>
-            {
-                _simpleButton.BackgroundColor = e.Value;
-                backgroundColorEnabledTextField.Text = e.Key;
-            };
-            backgroundColorEnabledTextField.EditingDidBegin += (sender, e) =>
-            {
-                var colorPair = Constants.Colors.ElementAt((int)backgroundColorPicker.SelectedRowInComponent(0));
-                _simpleButton.BackgroundColor = colorPair.Value;
-                backgroundColorEnabledTextField.Text = colorPair.Key;
-            };
-            backgroundColorPicker.Delegate = backgroundColorPickerDelegate;
-            backgroundColorEnabledTextField.InputView = backgroundColorPicker;
+            enabledBackgrDropDown.InitSource(
+                color => _simpleButton.BackgroundColor = color,
+                Fields.EnabledBackground,
+                rect);
         }
 
-        private void InitBackgroundColorDisabledTextField(CGRect rect)
+        private void InitBackgroundColorDisabledDropDown(CGRect rect)
         {
-            var backgroundColorPicker = new UIPickerView(rect);
-            backgroundColorPicker.ShowSelectionIndicator = true;
-            backgroundColorPicker.DataSource = new ColorPickerSource();
-            var backgroundColorPickerDelegate = new ColorPickerDelegate();
-            backgroundColorPickerDelegate.DidSelected += (object sender, KeyValuePair<string, UIColor> e) =>
-            {
-                _simpleButton.DisabledBackgroundColor = e.Value;
-                backgroundColorDisabledTextField.Text = e.Key;
-            };
-            backgroundColorDisabledTextField.EditingDidBegin += (sender, e) =>
-            {
-                var colorPair = Constants.Colors.ElementAt((int)backgroundColorPicker.SelectedRowInComponent(0));
-                _simpleButton.DisabledBackgroundColor = colorPair.Value;
-                backgroundColorDisabledTextField.Text = colorPair.Key;
-            };
-            backgroundColorPicker.Delegate = backgroundColorPickerDelegate;
-            backgroundColorDisabledTextField.InputView = backgroundColorPicker;
+            disabledBackgroundDropDown.InitSource(
+                color => _simpleButton.DisabledBackgroundColor = color,
+                Fields.DisabledBackground,
+                rect);
         }
 
-        private void InitBackgroundColorPressedTextField(CGRect rect)
+        private void InitBackgroundColorPressedDropDown(CGRect rect)
         {
-            var backgroundColorPicker = new UIPickerView(rect);
-            backgroundColorPicker.ShowSelectionIndicator = true;
-            backgroundColorPicker.DataSource = new ColorPickerSource();
-            var backgroundColorPickerDelegate = new ColorPickerDelegate();
-            backgroundColorPickerDelegate.DidSelected += (object sender, KeyValuePair<string, UIColor> e) =>
-            {
-                _simpleButton.PressedBackgroundColor = e.Value;
-                backgroundColorPressedTextField.Text = e.Key;
-            };
-            backgroundColorPressedTextField.EditingDidBegin += (sender, e) =>
-            {
-                var colorPair = Constants.Colors.ElementAt((int)backgroundColorPicker.SelectedRowInComponent(0));
-                _simpleButton.PressedBackgroundColor = colorPair.Value;
-                backgroundColorPressedTextField.Text = colorPair.Key;
-            };
-            backgroundColorPicker.Delegate = backgroundColorPickerDelegate;
-            backgroundColorPressedTextField.InputView = backgroundColorPicker;
+            pressedBackgroundDropDown.InitSource(
+                color => _simpleButton.PressedBackgroundColor = color,
+                Fields.PressedBackground,
+                rect);
         }
 
-        private void InitCornerRadiusTextField(CGRect rect)
+        private void InitCornerRadiusDropDown(CGRect rect)
         {
-            var cornerRadiusPicker = new UIPickerView(rect);
-            cornerRadiusPicker.ShowSelectionIndicator = true;
-            cornerRadiusPicker.DataSource = new ValuePickerSource<int>(Constants.CornerRadiusValues);
-            var cornerRadiusPickerDelegate = new ValuePickerDelegate<int>(Constants.CornerRadiusValues);
-            cornerRadiusPickerDelegate.DidSelected += (object sender, int e) =>
-            {
-                _simpleButton.CornerRadius = e;
-                cornerRadiusTextField.Text = e.ToString();
-            };
-            cornerRadiusTextField.EditingDidBegin += (sender, e) =>
-            {
-                var size = Constants.CornerRadiusValues[(int)cornerRadiusPicker.SelectedRowInComponent(0)];
-                _simpleButton.CornerRadius = size;
-                cornerRadiusTextField.Text = size.ToString();
-            };
-            cornerRadiusPicker.Delegate = cornerRadiusPickerDelegate;
-            cornerRadiusTextField.InputView = cornerRadiusPicker;
+            cornerRadiusDropDown.InitSource(
+                CornerRadiusValues,
+                radius => _simpleButton.CornerRadius = radius,
+                Fields.ConerRadius,
+                rect);
         }
 
         private void InitDisabledSwitch()
@@ -328,16 +197,7 @@ namespace EOS.UI.iOS.Sandbox
 
         private void ResetFields()
         {
-            fontTextField.Text = string.Empty;
-            letterSpacingTextField.Text = string.Empty;
-            textSizeTextField.Text = string.Empty;
-            textColorEnabledTextField.Text = string.Empty;
-            textColorDisabledTextField.Text = string.Empty;
-            textColorPressedTextField.Text = string.Empty;
-            backgroundColorEnabledTextField.Text = string.Empty;
-            backgroundColorDisabledTextField.Text = string.Empty;
-            backgroundColorPressedTextField.Text = string.Empty;
-            cornerRadiusTextField.Text = string.Empty;
+            _dropDowns.Except(new[] { themeDropDown }).ToList().ForEach(dropDown => dropDown.ResetValue());
         }
 
     }

@@ -14,46 +14,44 @@ namespace EOS.UI.iOS.Sandbox
     partial class CircleProgressView
     {
         [Outlet]
-        UIKit.UITextField checkmarkColorField { get; set; }
-
-
-        [Outlet]
-        UIKit.UITextField colorField { get; set; }
-
-
-        [Outlet]
         UIKit.UIView containerView { get; set; }
-
-
-        [Outlet]
-        UIKit.UITextField fontField { get; set; }
-
 
         [Outlet]
         UIKit.UIButton resetButton { get; set; }
 
-
         [Outlet]
         UIKit.UISwitch showProgressSwitch { get; set; }
 
+        [Outlet]
+        [GeneratedCode ("iOS Designer", "1.0")]
+        EOS.UI.iOS.Sandbox.CustomDropDown alternativeColorDropDown { get; set; }
 
         [Outlet]
-        UIKit.UITextField textSizeField { get; set; }
-
+        [GeneratedCode ("iOS Designer", "1.0")]
+        EOS.UI.iOS.Sandbox.CustomDropDown colorDropDown { get; set; }
 
         [Outlet]
-        UIKit.UITextField themeField { get; set; }
+        [GeneratedCode ("iOS Designer", "1.0")]
+        EOS.UI.iOS.Sandbox.CustomDropDown fontDropDown { get; set; }
+
+        [Outlet]
+        [GeneratedCode ("iOS Designer", "1.0")]
+        EOS.UI.iOS.Sandbox.CustomDropDown textSizeDropDown { get; set; }
+
+        [Outlet]
+        [GeneratedCode ("iOS Designer", "1.0")]
+        EOS.UI.iOS.Sandbox.CustomDropDown themeDropDown { get; set; }
 
         void ReleaseDesignerOutlets ()
         {
-            if (checkmarkColorField != null) {
-                checkmarkColorField.Dispose ();
-                checkmarkColorField = null;
+            if (alternativeColorDropDown != null) {
+                alternativeColorDropDown.Dispose ();
+                alternativeColorDropDown = null;
             }
 
-            if (colorField != null) {
-                colorField.Dispose ();
-                colorField = null;
+            if (colorDropDown != null) {
+                colorDropDown.Dispose ();
+                colorDropDown = null;
             }
 
             if (containerView != null) {
@@ -61,9 +59,9 @@ namespace EOS.UI.iOS.Sandbox
                 containerView = null;
             }
 
-            if (fontField != null) {
-                fontField.Dispose ();
-                fontField = null;
+            if (fontDropDown != null) {
+                fontDropDown.Dispose ();
+                fontDropDown = null;
             }
 
             if (resetButton != null) {
@@ -76,14 +74,14 @@ namespace EOS.UI.iOS.Sandbox
                 showProgressSwitch = null;
             }
 
-            if (textSizeField != null) {
-                textSizeField.Dispose ();
-                textSizeField = null;
+            if (textSizeDropDown != null) {
+                textSizeDropDown.Dispose ();
+                textSizeDropDown = null;
             }
 
-            if (themeField != null) {
-                themeField.Dispose ();
-                themeField = null;
+            if (themeDropDown != null) {
+                themeDropDown.Dispose ();
+                themeDropDown = null;
             }
         }
     }

@@ -28,16 +28,17 @@ namespace EOS.UI.iOS.Sandbox.Helpers
             public static string HintTextColor = "Hint text color";
             public static string HintTextColorDisabled = "Hint text color disabled";
             public static string IconFocused = "Icon focused";
-            public static string IconUnocused = "Icon unfocused";
+            public static string IconUnfocused = "Icon unfocused";
             public static string IconDisabled = "Icon disabled";
             public static string UnderlineColorFocused = "Underline color focused";
-            public static string UnderlineColorUnocused = "Underline color unfocused";
+            public static string UnderlineColorUnfocused = "Underline color unfocused";
             public static string UnderlineColorDisabled = "Underline color disabled";
             public static string DisabledColor = "Disabled color";
             public static string PressedColor = "Pressed color";
             public static string Size = "Size";
             public static string Color = "Color";
             public static string AlternativeColor = "Alternative color";
+            public static string Shadow = "Shadow";
         };
 
         public static UIColor BackgroundColor = UIColor.FromRGB(224, 224, 224);

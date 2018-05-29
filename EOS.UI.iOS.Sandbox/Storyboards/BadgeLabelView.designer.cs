@@ -31,7 +31,11 @@ namespace EOS.UI.iOS.Sandbox
 
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
-        EOS.UI.iOS.Sandbox.CustomDropDown letterSpacingDropDown { get; set; }
+        EOS.UI.iOS.Sandbox.CustomDropDown letterSpaceDropDown { get; set; }
+
+        [Outlet]
+        [GeneratedCode ("iOS Designer", "1.0")]
+        UIKit.NSLayoutConstraint letterSpacingDropDown { get; set; }
 
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
@@ -71,9 +75,9 @@ namespace EOS.UI.iOS.Sandbox
                 fontDropDown = null;
             }
 
-            if (letterSpacingDropDown != null) {
-                letterSpacingDropDown.Dispose ();
-                letterSpacingDropDown = null;
+            if (letterSpaceDropDown != null) {
+                letterSpaceDropDown.Dispose ();
+                letterSpaceDropDown = null;
             }
 
             if (letterSpacingDropDown != null) {
