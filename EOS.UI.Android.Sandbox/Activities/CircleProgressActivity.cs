@@ -64,7 +64,7 @@ namespace EOS.UI.Android.Sandbox.Activities
             };
 
             themeDropDown.Name = Fields.Theme;
-            themeDropDown.Adapter = new SpinnerAdapter(this, R.Layout.SimpleSpinnerItem, ThemeTypes.ThemeCollection.Select(item => item.Key).ToList());
+            themeDropDown.SetupAdapter(ThemeTypes.ThemeCollection.Select(item => item.Key).ToList());
             themeDropDown.ItemSelected += (position) =>
             {
                 if(position > 0)
@@ -82,7 +82,7 @@ namespace EOS.UI.Android.Sandbox.Activities
                 themeDropDown.SetSpinnerSelection(2);
 
             fontDropDown.Name = Fields.Font;
-            fontDropDown.Adapter = new SpinnerAdapter(this, R.Layout.SimpleSpinnerItem, Fonts.FontsCollection.Select(item => item.Key).ToList());
+            fontDropDown.SetupAdapter(Fonts.FontsCollection.Select(item => item.Key).ToList());
             fontDropDown.ItemSelected += (position) =>
             {
                 if(position > 0)
@@ -90,7 +90,7 @@ namespace EOS.UI.Android.Sandbox.Activities
             };
 
             colorDropDown.Name = Fields.Color;
-            colorDropDown.Adapter = new SpinnerAdapter(this, R.Layout.SimpleSpinnerItem, Colors.ColorsCollection.Select(item => item.Key).ToList());
+            colorDropDown.SetupAdapter(Colors.ColorsCollection.Select(item => item.Key).ToList());
             colorDropDown.ItemSelected += (position) =>
             {
                 if(position > 0)
@@ -98,7 +98,7 @@ namespace EOS.UI.Android.Sandbox.Activities
             };
 
             alternativeColorDropDown.Name = Fields.AlternativeColor;
-            alternativeColorDropDown.Adapter = new SpinnerAdapter(this, R.Layout.SimpleSpinnerItem, Colors.ColorsCollection.Select(item => item.Key).ToList());
+            alternativeColorDropDown.SetupAdapter(Colors.ColorsCollection.Select(item => item.Key).ToList());
             alternativeColorDropDown.ItemSelected += (position) =>
             {
                 if(position > 0)
@@ -106,7 +106,7 @@ namespace EOS.UI.Android.Sandbox.Activities
             };
 
             textSizeDropDown.Name = Fields.TextSize;
-            textSizeDropDown.Adapter = new SpinnerAdapter(this, R.Layout.SimpleSpinnerItem, Sizes.TextSizeCollection.Select(item => item.Key).ToList());
+            textSizeDropDown.SetupAdapter(Sizes.TextSizeCollection.Select(item => item.Key).ToList());
             textSizeDropDown.ItemSelected += (position) =>
             {
                 if(position > 0)

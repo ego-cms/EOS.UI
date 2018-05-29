@@ -55,47 +55,47 @@ namespace EOS.UI.Android.Sandbox.Activities
             var disableSwitch = FindViewById<Switch>(Resource.Id.switchDisabled);
 
             _themeDropDown.Name = Fields.Theme;
-            _themeDropDown.Adapter = new SpinnerAdapter(this, R.Layout.SimpleSpinnerItem, ThemeTypes.ThemeCollection.Select(item => item.Key).ToList());
+            _themeDropDown.SetupAdapter(ThemeTypes.ThemeCollection.Select(item => item.Key).ToList());
             _themeDropDown.ItemSelected += ThemeItemSelected;
 
             _fontDropDown.Name = Fields.Font;
-            _fontDropDown.Adapter = new SpinnerAdapter(this, R.Layout.SimpleSpinnerItem, Fonts.FontsCollection.Select(item => item.Key).ToList());
+            _fontDropDown.SetupAdapter(Fonts.FontsCollection.Select(item => item.Key).ToList());
             _fontDropDown.ItemSelected += FontSpinner_ItemSelected;
 
             _letterSpacingDropDown.Name = Fields.LetterSpacing;
-            _letterSpacingDropDown.Adapter = new SpinnerAdapter(this, R.Layout.SimpleSpinnerItem, Sizes.LetterSpacingCollection.Select(item => item.Key).ToList());
+            _letterSpacingDropDown.SetupAdapter(Sizes.LetterSpacingCollection.Select(item => item.Key).ToList());
             _letterSpacingDropDown.ItemSelected += LetterSpacingView_ItemSelected;
 
             _textSizeDropDown.Name = Fields.TextSize;
-            _textSizeDropDown.Adapter= new SpinnerAdapter(this, R.Layout.SimpleSpinnerItem, Sizes.TextSizeCollection.Select(item => item.Key).ToList());
+            _textSizeDropDown.SetupAdapter(Sizes.TextSizeCollection.Select(item => item.Key).ToList());
             _textSizeDropDown.ItemSelected += TextSizeItemSelected;
 
             _textColorEnabledDropDown.Name = Fields.EnabledTextColor;
-            _textColorEnabledDropDown.Adapter = new SpinnerAdapter(this, R.Layout.SimpleSpinnerItem, Colors.ColorsCollection.Select(item => item.Key).ToList());
+            _textColorEnabledDropDown.SetupAdapter(Colors.ColorsCollection.Select(item => item.Key).ToList());
             _textColorEnabledDropDown.ItemSelected += TextColorEnabledItemSelected;
 
             _textColorDisabledDropDown.Name = Fields.DisabledTextColor;
-            _textColorDisabledDropDown.Adapter = new SpinnerAdapter(this, R.Layout.SimpleSpinnerItem, Colors.ColorsCollection.Select(item => item.Key).ToList());
+            _textColorDisabledDropDown.SetupAdapter(Colors.ColorsCollection.Select(item => item.Key).ToList());
             _textColorDisabledDropDown.ItemSelected += TextColorDisabledItemSelected;
 
             _textColorPressedDropDown.Name = Fields.PressedTextColor;
-            _textColorPressedDropDown.Adapter = new SpinnerAdapter(this, R.Layout.SimpleSpinnerItem, Colors.ColorsCollection.Select(item => item.Key).ToList());
+            _textColorPressedDropDown.SetupAdapter(Colors.ColorsCollection.Select(item => item.Key).ToList());
             _textColorPressedDropDown.ItemSelected += TextColorPressedItemSelected;
 
             _backgroundColorEnabledDropDown.Name = Fields.EnabledBackground;
-            _backgroundColorEnabledDropDown.Adapter = new SpinnerAdapter(this, R.Layout.SimpleSpinnerItem, Colors.ColorsCollection.Select(item => item.Key).ToList());
+            _backgroundColorEnabledDropDown.SetupAdapter(Colors.ColorsCollection.Select(item => item.Key).ToList());
             _backgroundColorEnabledDropDown.ItemSelected += BackgroundColorEnabledItemSelected;
 
             _backgroundColorDisabledDropDown.Name = Fields.DisabledBackground;
-            _backgroundColorDisabledDropDown.Adapter = new SpinnerAdapter(this, R.Layout.SimpleSpinnerItem, Colors.ColorsCollection.Select(item => item.Key).ToList());
+            _backgroundColorDisabledDropDown.SetupAdapter(Colors.ColorsCollection.Select(item => item.Key).ToList());
             _backgroundColorDisabledDropDown.ItemSelected += BackgroundColorDisabledItemSelected;
 
             _backgroundColorPressedDropDown.Name = Fields.PressedBackground;
-            _backgroundColorPressedDropDown.Adapter = new SpinnerAdapter(this, R.Layout.SimpleSpinnerItem, Colors.ColorsCollection.Select(item => item.Key).ToList());
+            _backgroundColorPressedDropDown.SetupAdapter(Colors.ColorsCollection.Select(item => item.Key).ToList());
             _backgroundColorPressedDropDown.ItemSelected += BackgroundColorPressedItemSelected;
 
             _cornerRadiusDropDown.Name = Fields.ConerRadius;
-            _cornerRadiusDropDown.Adapter = new SpinnerAdapter(this, R.Layout.SimpleSpinnerItem, Sizes.CornerRadusCollection.Select(item => item.Key).ToList());
+            _cornerRadiusDropDown.SetupAdapter(Sizes.CornerRadusCollection.Select(item => item.Key).ToList());
             _cornerRadiusDropDown.ItemSelected += CornerRadiurSpinner_ItemSelected;
 
             resetButton.Click += delegate

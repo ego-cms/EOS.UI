@@ -53,7 +53,7 @@ namespace EOS.UI.Android.Sandbox.Activities
             };
 
             themeDropDown.Name = Fields.Theme;
-            themeDropDown.Adapter = new SpinnerAdapter(this, R.Layout.SimpleSpinnerItem, ThemeTypes.ThemeCollection.Select(item => item.Key).ToList());
+            themeDropDown.SetupAdapter(ThemeTypes.ThemeCollection.Select(item => item.Key).ToList());
             themeDropDown.ItemSelected += (position) =>
             {
                 if(position > 0)
@@ -70,7 +70,7 @@ namespace EOS.UI.Android.Sandbox.Activities
                 themeDropDown.SetSpinnerSelection(2);
 
             backgroundColorDropDown.Name = Fields.Background;
-            backgroundColorDropDown.Adapter = new SpinnerAdapter(this, R.Layout.SimpleSpinnerItem, Colors.ColorsCollection.Select(item => item.Key).ToList());
+            backgroundColorDropDown.SetupAdapter(Colors.ColorsCollection.Select(item => item.Key).ToList());
             backgroundColorDropDown.ItemSelected += (position) =>
             {
                 if(position > 0)
@@ -78,7 +78,7 @@ namespace EOS.UI.Android.Sandbox.Activities
             };
 
             disabledColorDropDown.Name = Fields.DisabledColor;
-            disabledColorDropDown.Adapter = new SpinnerAdapter(this, R.Layout.SimpleSpinnerItem, Colors.ColorsCollection.Select(item => item.Key).ToList());
+            disabledColorDropDown.SetupAdapter(Colors.ColorsCollection.Select(item => item.Key).ToList());
             disabledColorDropDown.ItemSelected += (position) =>
             {
                 if(position > 0)
@@ -86,7 +86,7 @@ namespace EOS.UI.Android.Sandbox.Activities
             };
 
             pressedColorDropDown.Name = Fields.PressedColor;
-            pressedColorDropDown.Adapter = new SpinnerAdapter(this, R.Layout.SimpleSpinnerItem, Colors.ColorsCollection.Select(item => item.Key).ToList());
+            pressedColorDropDown.SetupAdapter(Colors.ColorsCollection.Select(item => item.Key).ToList());
             pressedColorDropDown.ItemSelected += (position) =>
             {
                 if(position > 0)
@@ -94,7 +94,7 @@ namespace EOS.UI.Android.Sandbox.Activities
             };
 
             sizeDropDown.Name = Fields.Size;
-            sizeDropDown.Adapter = new SpinnerAdapter(this, R.Layout.SimpleSpinnerItem, Sizes.FabProgressSizes.Select(i => i.Key).ToList());
+            sizeDropDown.SetupAdapter(Sizes.FabProgressSizes.Select(i => i.Key).ToList());
             sizeDropDown.ItemSelected += (position) =>
             {
                 if(position > 0)

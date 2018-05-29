@@ -25,492 +25,78 @@
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
-            <LinearLayout
-                android:orientation="horizontal"
+            <EOS.UI.Android.Sandbox.Controls.DropDown
+                android:id="@+id/themeDropDown"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:weightSum="3"
-                android:layout_marginBottom="5dp">
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:text="Theme"
-                    android:textSize="18sp"
-                    android:layout_weight="2"
-                    android:paddingLeft="3dp"
-                    android:gravity="center_vertical" />
-                <Spinner
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:id="@+id/spinnerTheme"
-                    android:layout_weight="1"
-                    android:paddingLeft="3dp"
-                    android:paddingRight="3dp" />
-            </LinearLayout>
-            <View
+                android:layout_height="wrap_content" />
+            <EOS.UI.Android.Sandbox.Controls.DropDown
+                android:id="@+id/sectionNameDropDown"
                 android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@android:color/darker_gray" />
-            <LinearLayout
-                android:orientation="horizontal"
+                android:layout_height="wrap_content" />
+            <EOS.UI.Android.Sandbox.Controls.DropDown
+                android:id="@+id/buttonTextDropDown"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:weightSum="3"
-                android:layout_marginBottom="5dp">
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:text="Section name"
-                    android:textSize="18sp"
-                    android:layout_weight="2"
-                    android:paddingLeft="3dp"
-                    android:gravity="center_vertical" />
-                <Spinner
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:id="@+id/spinnerSectionName"
-                    android:layout_weight="1"
-                    android:paddingLeft="3dp"
-                    android:paddingRight="3dp" />
-            </LinearLayout>
-            <View
+                android:layout_height="wrap_content" />
+            <EOS.UI.Android.Sandbox.Controls.DropDown
+                android:id="@+id/sectionNameFontDropDown"
                 android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@android:color/darker_gray" />
-            <LinearLayout
-                android:orientation="horizontal"
+                android:layout_height="wrap_content" />
+            <EOS.UI.Android.Sandbox.Controls.DropDown
+                android:id="@+id/buttonTextFontDropDown"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:weightSum="3"
-                android:layout_marginBottom="5dp">
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:text="Button text"
-                    android:textSize="18sp"
-                    android:layout_weight="2"
-                    android:paddingLeft="3dp"
-                    android:gravity="center_vertical" />
-                <Spinner
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:id="@+id/spinnerButtonText"
-                    android:layout_weight="1"
-                    android:paddingLeft="3dp"
-                    android:paddingRight="3dp" />
-            </LinearLayout>
-            <View
+                android:layout_height="wrap_content" />
+            <EOS.UI.Android.Sandbox.Controls.DropDown
+                android:id="@+id/sectionNameLetterSpacingDropDown"
                 android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@android:color/darker_gray" />
-            <LinearLayout
-                android:orientation="horizontal"
+                android:layout_height="wrap_content" />
+            <EOS.UI.Android.Sandbox.Controls.DropDown
+                android:id="@+id/buttonTextLetterSpacingDropDown"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:weightSum="3"
-                android:layout_marginBottom="5dp">
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:text="Section name font"
-                    android:textSize="18sp"
-                    android:layout_weight="2"
-                    android:paddingLeft="3dp"
-                    android:gravity="center_vertical" />
-                <Spinner
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:id="@+id/spinnerSectionNameFont"
-                    android:layout_weight="1"
-                    android:paddingRight="3dp"
-                    android:paddingLeft="3dp" />
-            </LinearLayout>
-            <View
+                android:layout_height="wrap_content" />
+            <EOS.UI.Android.Sandbox.Controls.DropDown
+                android:id="@+id/sectionTextSizeDropDown"
                 android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@android:color/darker_gray" />
-            <LinearLayout
-                android:orientation="horizontal"
+                android:layout_height="wrap_content" />
+            <EOS.UI.Android.Sandbox.Controls.DropDown
+                android:id="@+id/buttonTextSizeDropDown"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:weightSum="3"
-                android:layout_marginBottom="5dp">
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:text="Button text font"
-                    android:textSize="18sp"
-                    android:layout_weight="2"
-                    android:paddingLeft="3dp"
-                    android:gravity="center_vertical" />
-                <Spinner
-                    android:layout_width="match_parent"
-                    android:id="@+id/spinnerButtonTextFont"
-                    android:layout_weight="1"
-                    android:paddingRight="3dp"
-                    android:paddingLeft="3dp"
-                    android:layout_height="match_parent" />
-            </LinearLayout>
-            <View
+                android:layout_height="wrap_content" />
+            <EOS.UI.Android.Sandbox.Controls.DropDown
+                android:id="@+id/sectionTextColorDropDown"
                 android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@android:color/darker_gray" />
-            <LinearLayout
-                android:orientation="horizontal"
+                android:layout_height="wrap_content" />
+            <EOS.UI.Android.Sandbox.Controls.DropDown
+                android:id="@+id/buttonTextColorDropDown"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:weightSum="3"
-                android:layout_marginBottom="5dp">
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:text="Section name letter spacing"
-                    android:textSize="18sp"
-                    android:layout_weight="2"
-                    android:paddingLeft="3dp"
-                    android:gravity="center_vertical" />
-                <Spinner
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:id="@+id/spinnerSectionNameLetterSpacing"
-                    android:layout_weight="1"
-                    android:paddingLeft="3dp"
-                    android:paddingEnd="3dp" />
-            </LinearLayout>
-            <View
+                android:layout_height="wrap_content" />
+            <EOS.UI.Android.Sandbox.Controls.DropDown
+                android:id="@+id/backgroundColorDropDown"
                 android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@android:color/darker_gray" />
-            <LinearLayout
-                android:orientation="horizontal"
+                android:layout_height="wrap_content" />
+            <EOS.UI.Android.Sandbox.Controls.DropDown
+                android:id="@+id/borderColorDropDown"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:weightSum="3"
-                android:layout_marginBottom="5dp">
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:text="Button text letter spacing"
-                    android:textSize="18sp"
-                    android:layout_weight="2"
-                    android:paddingLeft="3dp"
-                    android:gravity="center_vertical" />
-                <Spinner
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:id="@+id/spinnerButtonTextLetterSpacing"
-                    android:layout_weight="1"
-                    android:paddingLeft="3dp"
-                    android:paddingEnd="3dp" />
-            </LinearLayout>
-            <View
+                android:layout_height="wrap_content" />
+            <EOS.UI.Android.Sandbox.Controls.DropDown
+                android:id="@+id/borderWidthDropDown"
                 android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@android:color/darker_gray" />
-            <LinearLayout
-                android:orientation="horizontal"
+                android:layout_height="wrap_content" />
+            <EOS.UI.Android.Sandbox.Controls.DropDown
+                android:id="@+id/paddingTopDropDown"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:weightSum="3"
-                android:layout_marginBottom="5dp">
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:text="Section text size"
-                    android:textSize="18sp"
-                    android:layout_weight="2"
-                    android:paddingLeft="3dp"
-                    android:gravity="center_vertical" />
-                <Spinner
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:id="@+id/spinnerSectionTextSize"
-                    android:layout_weight="1"
-                    android:paddingLeft="3dp"
-                    android:paddingEnd="3dp" />
-            </LinearLayout>
-            <View
+                android:layout_height="wrap_content" />
+            <EOS.UI.Android.Sandbox.Controls.DropDown
+                android:id="@+id/paddingBottomDropDown"
                 android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@android:color/darker_gray" />
-            <LinearLayout
-                android:orientation="horizontal"
+                android:layout_height="wrap_content" />
+            <EOS.UI.Android.Sandbox.Controls.DropDown
+                android:id="@+id/paddingLeftDropDown"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:weightSum="3"
-                android:layout_marginBottom="5dp">
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:text="Button text size"
-                    android:textSize="18sp"
-                    android:layout_weight="2"
-                    android:paddingLeft="3dp"
-                    android:gravity="center_vertical" />
-                <Spinner
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:id="@+id/spinnerButtonTextSize"
-                    android:layout_weight="1"
-                    android:paddingLeft="3dp"
-                    android:paddingEnd="3dp" />
-            </LinearLayout>
-            <View
+                android:layout_height="wrap_content" />
+            <EOS.UI.Android.Sandbox.Controls.DropDown
+                android:id="@+id/paddingRightDropDown"
                 android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@android:color/darker_gray" />
-            <LinearLayout
-                android:orientation="horizontal"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:weightSum="3"
-                android:layout_marginBottom="5dp">
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:text="Section text color"
-                    android:textSize="18sp"
-                    android:layout_weight="2"
-                    android:paddingLeft="3dp"
-                    android:gravity="center_vertical" />
-                <Spinner
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:id="@+id/spinnerSectionTextColor"
-                    android:layout_weight="1"
-                    android:paddingLeft="3dp"
-                    android:paddingEnd="3dp" />
-            </LinearLayout>
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@android:color/darker_gray" />
-            <LinearLayout
-                android:orientation="horizontal"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:weightSum="3"
-                android:layout_marginBottom="5dp">
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:text="Button text color"
-                    android:textSize="18sp"
-                    android:layout_weight="2"
-                    android:paddingLeft="3dp"
-                    android:gravity="center_vertical" />
-                <Spinner
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:id="@+id/spinnerButtonTextColor"
-                    android:layout_weight="1"
-                    android:paddingLeft="3dp"
-                    android:paddingEnd="3dp" />
-            </LinearLayout>
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@android:color/darker_gray" />
-            <LinearLayout
-                android:orientation="horizontal"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:weightSum="3"
-                android:layout_marginBottom="5dp">
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:text="Background color"
-                    android:textSize="18sp"
-                    android:layout_weight="2"
-                    android:paddingLeft="3dp"
-                    android:gravity="center_vertical" />
-                <Spinner
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:id="@+id/spinnerSectionBackgroundColor"
-                    android:layout_weight="1"
-                    android:paddingLeft="3dp"
-                    android:paddingEnd="3dp" />
-            </LinearLayout>
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@android:color/darker_gray" />
-            <LinearLayout
-                android:orientation="horizontal"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:weightSum="3"
-                android:layout_marginBottom="5dp">
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:text="Border color"
-                    android:textSize="18sp"
-                    android:layout_weight="2"
-                    android:paddingLeft="3dp"
-                    android:gravity="center_vertical" />
-                <Spinner
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:id="@+id/spinnerBorderColor"
-                    android:layout_weight="1"
-                    android:paddingLeft="3dp"
-                    android:paddingRight="3dp" />
-            </LinearLayout>
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@android:color/darker_gray" />
-            <LinearLayout
-                android:orientation="horizontal"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:weightSum="3"
-                android:layout_marginBottom="5dp">
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:text="Border width"
-                    android:textSize="18sp"
-                    android:layout_weight="2"
-                    android:paddingLeft="3dp"
-                    android:gravity="center_vertical" />
-                <Spinner
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:id="@+id/spinnerBorderWidth"
-                    android:layout_weight="1"
-                    android:paddingLeft="3dp"
-                    android:paddingRight="3dp" />
-            </LinearLayout>
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@android:color/darker_gray" />
-            <LinearLayout
-                android:orientation="horizontal"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:weightSum="3"
-                android:layout_marginBottom="5dp">
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:text="Padding top"
-                    android:textSize="18sp"
-                    android:layout_weight="2"
-                    android:paddingLeft="3dp"
-                    android:gravity="center_vertical" />
-                <Spinner
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:id="@+id/spinnerPaddingTop"
-                    android:layout_weight="1"
-                    android:paddingLeft="3dp"
-                    android:paddingRight="3dp" />
-            </LinearLayout>
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@android:color/darker_gray" />
-            <LinearLayout
-                android:orientation="horizontal"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:weightSum="3"
-                android:layout_marginBottom="5dp">
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:text="Padding bottom"
-                    android:textSize="18sp"
-                    android:layout_weight="2"
-                    android:paddingLeft="3dp"
-                    android:gravity="center_vertical" />
-                <Spinner
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:id="@+id/spinnerPaddingBottom"
-                    android:layout_weight="1"
-                    android:paddingLeft="3dp"
-                    android:paddingRight="3dp" />
-            </LinearLayout>
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@android:color/darker_gray" />
-            <LinearLayout
-                android:orientation="horizontal"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:weightSum="3"
-                android:layout_marginBottom="5dp">
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Padding left"
-                    android:textSize="18sp"
-                    android:layout_weight="2"
-                    android:paddingLeft="3dp"
-                    android:gravity="center_vertical" />
-                <Spinner
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:id="@+id/spinnerPaddingLeft"
-                    android:layout_weight="1"
-                    android:paddingLeft="3dp"
-                    android:paddingRight="3dp" />
-            </LinearLayout>
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@android:color/darker_gray" />
-            <LinearLayout
-                android:orientation="horizontal"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:weightSum="3"
-                android:layout_marginBottom="5dp">
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:text="Padding right"
-                    android:textSize="18sp"
-                    android:layout_weight="2"
-                    android:paddingLeft="3dp"
-                    android:gravity="center_vertical" />
-                <Spinner
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:id="@+id/spinnerPaddingRight"
-                    android:layout_weight="1"
-                    android:paddingLeft="3dp"
-                    android:paddingRight="3dp" />
-            </LinearLayout>
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@android:color/darker_gray" />
+                android:layout_height="wrap_content" />
             <LinearLayout
                 android:orientation="horizontal"
                 android:layout_width="match_parent"

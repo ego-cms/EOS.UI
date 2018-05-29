@@ -40,23 +40,23 @@ namespace EOS.UI.Android.Sandbox.Activities
             var resetButton = FindViewById<Button>(Resource.Id.buttonResetCustomization);
 
             _themeDropDown.Name = Fields.Theme;
-            _themeDropDown.Adapter = new SpinnerAdapter(this, R.Layout.SimpleSpinnerItem, ThemeTypes.ThemeCollection.Select(item => item.Key).ToList());
+            _themeDropDown.SetupAdapter(ThemeTypes.ThemeCollection.Select(item => item.Key).ToList());
             _themeDropDown.ItemSelected += ThemeItemSelected;
 
             _textColorDropDown.Name = Fields.TextColor;
-            _textColorDropDown.Adapter = new SpinnerAdapter(this, R.Layout.SimpleSpinnerItem, Colors.ColorsCollection.Select(item => item.Key).ToList());
+            _textColorDropDown.SetupAdapter(Colors.ColorsCollection.Select(item => item.Key).ToList());
             _textColorDropDown.ItemSelected += TextColorItemSelected;
 
             _fontDropDown.Name = Fields.Font;
-            _fontDropDown.Adapter = new SpinnerAdapter(this, R.Layout.SimpleSpinnerItem, Fonts.FontsCollection.Select(item => item.Key).ToList());
+            _fontDropDown.SetupAdapter(Fonts.FontsCollection.Select(item => item.Key).ToList());
             _fontDropDown.ItemSelected += FontItemSelected;
 
             _letterSpacingDropDown.Name = Fields.LetterSpacing;
-            _letterSpacingDropDown.Adapter = new SpinnerAdapter(this, R.Layout.SimpleSpinnerItem, Sizes.LetterSpacingCollection.Select(item => item.Key).ToList());
+            _letterSpacingDropDown.SetupAdapter(Sizes.LetterSpacingCollection.Select(item => item.Key).ToList());
             _letterSpacingDropDown.ItemSelected += LetterSpacingItemSelected;
 
             _textSizeDropDown.Name = Fields.TextSize;
-            _textSizeDropDown.Adapter = new SpinnerAdapter(this, R.Layout.SimpleSpinnerItem, Sizes.TextSizeCollection.Select(item => item.Key).ToList());
+            _textSizeDropDown.SetupAdapter(Sizes.TextSizeCollection.Select(item => item.Key).ToList());
             _textSizeDropDown.ItemSelected += TextSizeItemSelected;
 
             SetCurrenTheme(_simpleLabel.GetThemeProvider().GetCurrentTheme());

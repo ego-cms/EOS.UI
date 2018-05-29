@@ -47,7 +47,7 @@ namespace EOS.UI.Android.Sandbox.Activities
             };
 
             themeDropDown.Name = Fields.Theme;
-            themeDropDown.Adapter = new SpinnerAdapter(this, R.Layout.SimpleSpinnerItem, ThemeTypes.ThemeCollection.Select(item => item.Key).ToList());
+            themeDropDown.SetupAdapter(ThemeTypes.ThemeCollection.Select(item => item.Key).ToList());
             themeDropDown.ItemSelected += (position) =>
             {
                 if(position > 0)
@@ -65,7 +65,7 @@ namespace EOS.UI.Android.Sandbox.Activities
                 themeDropDown.SetSpinnerSelection(2);
 
             fontDropDown.Name = Fields.Font;
-            fontDropDown.Adapter = new SpinnerAdapter(this, R.Layout.SimpleSpinnerItem, Fonts.FontsCollection.Select(item => item.Key).ToList());
+            fontDropDown.SetupAdapter(Fonts.FontsCollection.Select(item => item.Key).ToList());
             fontDropDown.ItemSelected += (position) =>
             {
                 if(position > 0)
@@ -73,7 +73,7 @@ namespace EOS.UI.Android.Sandbox.Activities
             };
 
             letterSpacingDropDown.Name = Fields.LetterSpacing;
-            letterSpacingDropDown.Adapter = new SpinnerAdapter(this, R.Layout.SimpleSpinnerItem, Sizes.LetterSpacingCollection.Select(item => item.Key).ToList());
+            letterSpacingDropDown.SetupAdapter(Sizes.LetterSpacingCollection.Select(item => item.Key).ToList());
             letterSpacingDropDown.ItemSelected += (position) =>
             {
                 if(position > 0)
@@ -81,7 +81,7 @@ namespace EOS.UI.Android.Sandbox.Activities
             };
 
             enabledColorDropDown.Name = Fields.EnabledTextColor;
-            enabledColorDropDown.Adapter = new SpinnerAdapter(this, R.Layout.SimpleSpinnerItem, Colors.ColorsCollection.Select(item => item.Key).ToList());
+            enabledColorDropDown.SetupAdapter(Colors.ColorsCollection.Select(item => item.Key).ToList());
             enabledColorDropDown.ItemSelected += (position) =>
             {
                 if(position > 0)
@@ -89,7 +89,7 @@ namespace EOS.UI.Android.Sandbox.Activities
             };
 
             disabledColorDropDown.Name = Fields.DisabledTextColor;
-            disabledColorDropDown.Adapter = new SpinnerAdapter(this, R.Layout.SimpleSpinnerItem, Colors.ColorsCollection.Select(item => item.Key).ToList());
+            disabledColorDropDown.SetupAdapter(Colors.ColorsCollection.Select(item => item.Key).ToList());
             disabledColorDropDown.ItemSelected += (position) =>
             {
                 if(position > 0)
@@ -97,7 +97,7 @@ namespace EOS.UI.Android.Sandbox.Activities
             };
 
             pressedColorDropDown.Name = Fields.PressedTextColor;
-            pressedColorDropDown.Adapter = new SpinnerAdapter(this, R.Layout.SimpleSpinnerItem, Colors.ColorsCollection.Select(item => item.Key).ToList());
+            pressedColorDropDown.SetupAdapter(Colors.ColorsCollection.Select(item => item.Key).ToList());
             pressedColorDropDown.ItemSelected += (position) =>
             {
                 if(position > 0)
@@ -105,7 +105,7 @@ namespace EOS.UI.Android.Sandbox.Activities
             };
 
             textSizeDropDown.Name = Fields.TextSize;
-            textSizeDropDown.Adapter = new SpinnerAdapter(this, R.Layout.SimpleSpinnerItem, Sizes.TextSizeCollection.Select(item => item.Key).ToList());
+            textSizeDropDown.SetupAdapter(Sizes.TextSizeCollection.Select(item => item.Key).ToList());
             textSizeDropDown.ItemSelected += (position) =>
             {
                 if(position > 0)

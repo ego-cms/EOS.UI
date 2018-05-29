@@ -1,9 +1,13 @@
 ﻿using System;
+using System.Collections;
+using System.Collections.Generic;
 using Android.Content;
 using Android.Runtime;
 using Android.Util;
 using Android.Views;
 using Android.Widget;
+using EOS.UI.Android.Sandbox.Adapters;
+using R = Android.Resource;
 
 namespace EOS.UI.Android.Sandbox.Controls
 {
@@ -14,6 +18,7 @@ namespace EOS.UI.Android.Sandbox.Controls
 
         private TextView _nameTextView;
         private Spinner _spinner;
+        private Context _context;
 
         #endregion
 
@@ -23,12 +28,6 @@ namespace EOS.UI.Android.Sandbox.Controls
         {
             get => _nameTextView.Text;
             set => _nameTextView.Text = value;
-        }
-
-        public ISpinnerAdapter Adapter
-        {
-            get => _spinner.Adapter;
-            set => _spinner.Adapter = value;
         }
 
         #endregion
@@ -43,22 +42,22 @@ namespace EOS.UI.Android.Sandbox.Controls
 
         public DropDown(Context context) : base(context)
         {
-            Initialize();
+            Initialize(context);
         }
 
         public DropDown(Context context, IAttributeSet attrs) : base(context, attrs)
         {
-            Initialize(attrs);
+            Initialize(context, attrs);
         }
 
         public DropDown(Context context, IAttributeSet attrs, int defStyleAttr) : base(context, attrs, defStyleAttr)
         {
-            Initialize(attrs);
+            Initialize(context, attrs);
         }
 
         public DropDown(Context context, IAttributeSet attrs, int defStyleAttr, int defStyleRes) : base(context, attrs, defStyleAttr, defStyleRes)
         {
-            Initialize(attrs);
+            Initialize(context, attrs);
         }
 
         protected DropDown(IntPtr javaReference, JniHandleOwnership transfer) : base(javaReference, transfer)
@@ -75,8 +74,14 @@ namespace EOS.UI.Android.Sandbox.Controls
             _spinner?.SetSelection(position);
         }
 
-        private void Initialize(IAttributeSet attrs = null)
+        public void SetupAdapter(IList source)
         {
+            _spinner.Adapter = new SpinnerAdapter(_context, R.Layout.SimpleSpinnerItem, source);
+        }
+
+        private void Initialize(Context context = null, IAttributeSet attrs = null)
+        {
+            _context = context;
             var inflater = (LayoutInflater)Context.GetSystemService(Context.LayoutInflaterService);
             var view = inflater.Inflate(Resource.Layout.DropDownLayout, this);
 

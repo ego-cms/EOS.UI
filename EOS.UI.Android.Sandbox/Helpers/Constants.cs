@@ -35,6 +35,23 @@ namespace EOS.UI.Android.Sandbox.Helpers
             public static string Size = "Size";
             public static string Color = "Color";
             public static string AlternativeColor = "Alternative color";
+            public static string SectionName = "Section name";
+            public static string ButtonText = "Button text";
+            public static string SectionNameLetterSpacing = "Section name letter spacing";
+            public static string ButtonTextLetterSpacing = "Button text letter spacing";
+            public static string SectionNameFont = "Section name font";
+            public static string ButtonTextFont = "Button text font";
+            public static string SectionTextSize = "Section text size";
+            public static string ButtonTextSize = "Button text font";
+            public static string SectionTextColor = "Section text color";
+            public static string ButtonTextColor = "Button text color";
+            public static string BackgroundColor = "Backgroud color";
+            public static string BorderColor = "Border color";
+            public static string BorderWidth = "Border width";
+            public static string PaddingTop = "Padding top";
+            public static string PaddingBottom = "Padding bottom";
+            public static string PaddingLeft = "Padding left";
+            public static string PaddingRight = "Padding right";
         };
 
         public static class Colors
