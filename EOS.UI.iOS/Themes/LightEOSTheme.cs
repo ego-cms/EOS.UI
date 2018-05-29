@@ -46,7 +46,7 @@ namespace EOS.UI.iOS.Themes
                         Offset = new CGSize(0,0),
                         Radius = 2,
                         Opacity = 0.9f
-                    }}
+                    } },
             { EOSConstants.BorderWidth, 2 },
             { EOSConstants.SectionTitle, "Light section" },
             { EOSConstants.SectionActionTitle, "View All" },
