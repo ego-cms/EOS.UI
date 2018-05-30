@@ -2,14 +2,17 @@
 {
     public static class EOSConstants
     {
-        public const string PrimaryColor = "primaryColor";
-        public const string PrimaryColorDisabled = "primaryColorDisabled";
-        public const string PrimaryColorPressed = "primaryColorPressed";
-        public const string SecondaryColor = "secondaryColor";
-        public const string SecondaryColorDisabled = "secondaryColorDisabled";
-        public const string SecondaryColorPressed = "secondaryColorPressed";
-        public const string TertiaryColor = "tertiaryColor";
-        public const string QuaternaryColor = "quaternaryColor";
+        public const string BrandPrimaryColor = "brandPrimaryColor";
+        public const string BrandPrimaryColorVariant1 = "brandPrimaryColorVariant1";
+        public const string SemanticSuccessColor = "semanticSuccessColor";
+        public const string SemanticErrorColor = "semanticErrorColor";
+        public const string SemanticWarningColor = "semanticWarningColor";
+        public const string NeutralColor1 = "neutralColor1";
+        public const string NeutralColor2 = "neutralColor2";
+        public const string NeutralColor3 = "neutralColor3";
+        public const string NeutralColor4 = "neutralColor4";
+        public const string NeutralColor5 = "neutralColor5";
+        public const string NeutralColor6 = "neutralColor6";
         public const string TextSize = "textSize";
         public const string SecondaryTextSize = "secondaryTextSize";
         public const string CornerRadius = "cornerRadius";
@@ -17,24 +20,16 @@
         public const string SecondaryFont = "secondaryFont";
         public const string LetterSpacing = "letterSpacing";
         public const string SecondaryLetterSpacing = "secondaryLetterSpacing";
-        public const string HintTextColor = "hintTextColor";
-        public const string HintTextColorDisabled = "hintTextColorDisabled";
         public const string LeftImageUnfocused = "leftImageUnfocused";
         public const string LeftImageFocused = "leftImageFocused";
         public const string LeftImageDisabled = "leftImageDisabled";
-        public const string UnderlineColorUnfocused = "underlineColorUnfocused";
-        public const string UnderlineColorFocused = "underlineColorFocused";
-        public const string UnderlineColorDisabled = "underlineColorDisabled";
         //fab progress constans
         public const string CalendarImage = "calendarImage";
         public const string FabProgressPreloaderImage = "fabProgressPreloaderImage";
-        public const string FabProgressPrimaryColor = "fabProgressPrimaryColor";
-        public const string FabProgressPressedColor = "fabProgressPressedColor";
-        public const string FabProgressDisabledColor = "fabProgressDisabledColor";
         public const string FabProgressSize = "fabProgressSize";
         public const string FabShadow = "fabShadow";
-		//circle progress
-		public const string CircleProgressShown = "CircleProgressShown";
+        //circle progress
+        public const string CircleProgressShown = "CircleProgressShown";
         public const string BorderWidth = "borderWidth";
         public const string SectionTitle = "sectionTitle";
         public const string SectionActionTitle = "sectionActionTitle";
@@ -53,9 +48,9 @@
         public const string SimpleButton = "Simple button";
         public const string SimpleLabel = "Simple label";
         public const string Input = "Input";
-        public const string Section = "Section";
         public const string FabProgress = "Fab progress";
         public const string CircleProgress = "Circle progress";
+        public const string Section = "Section";
         public const string CTAButton = "CTA Button";
     }
 }

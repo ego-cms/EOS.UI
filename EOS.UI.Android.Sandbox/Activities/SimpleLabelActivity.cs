@@ -1,16 +1,14 @@
 ﻿using System.Linq;
-using System.Globalization;
 using Android.App;
 using Android.Graphics;
 using Android.OS;
 using Android.Widget;
 using EOS.UI.Android.Controls;
-using static EOS.UI.Android.Sandbox.Helpers.Constants;
-using R = Android.Resource;
+using EOS.UI.Android.Sandbox.Controls;
+using EOS.UI.Shared.Themes.Themes;
 using UIFrameworks.Shared.Themes.Helpers;
 using UIFrameworks.Shared.Themes.Interfaces;
-using UIFrameworks.Android.Themes;
-using EOS.UI.Android.Sandbox.Adapters;
+using static EOS.UI.Android.Sandbox.Helpers.Constants;
 
 namespace EOS.UI.Android.Sandbox.Activities
 {
@@ -18,11 +16,11 @@ namespace EOS.UI.Android.Sandbox.Activities
     public class SimpleLabelActivity : BaseActivity
     {
         private SimpleLabel _simpleLabel;
-        private Spinner _themeSpinner;
-        private Spinner _textColorSpinner;
-        private Spinner _fontSpinner;
-        private Spinner _letterSpacingView;
-        private Spinner _textSizeView;
+        private SandboxDropDown _themeDropDown;
+        private SandboxDropDown _textColorDropDown;
+        private SandboxDropDown _fontDropDown;
+        private SandboxDropDown _letterSpacingDropDown;
+        private SandboxDropDown _textSizeDropDown;
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
@@ -31,27 +29,32 @@ namespace EOS.UI.Android.Sandbox.Activities
 
             _simpleLabel = FindViewById<SimpleLabel>(Resource.Id.simpleLabel);
 
-            _themeSpinner = FindViewById<Spinner>(Resource.Id.spinnerTheme);
-            _textColorSpinner = FindViewById<Spinner>(Resource.Id.spinnerTextColor);
-            _fontSpinner = FindViewById<Spinner>(Resource.Id.spinnerFont);
-            _letterSpacingView = FindViewById<Spinner>(Resource.Id.spinnerLetterSpacing);
-            _textSizeView = FindViewById<Spinner>(Resource.Id.spinnerTextSize);
+            _themeDropDown = FindViewById<SandboxDropDown>(Resource.Id.themeDropDown);
+            _textColorDropDown = FindViewById<SandboxDropDown>(Resource.Id.textColorDropDown);
+            _fontDropDown = FindViewById<SandboxDropDown>(Resource.Id.fontDropDown);
+            _letterSpacingDropDown = FindViewById<SandboxDropDown>(Resource.Id.letterSpacingDropDown);
+            _textSizeDropDown = FindViewById<SandboxDropDown>(Resource.Id.textSizeDropDown);
             var resetButton = FindViewById<Button>(Resource.Id.buttonResetCustomization);
 
-            _themeSpinner.Adapter = new SpinnerAdapter(this, R.Layout.SimpleSpinnerItem, ThemeTypes.ThemeCollection.Select(item => item.Key).ToList());
-            _themeSpinner.ItemSelected += ThemeSpinner_ItemSelected;
+            _themeDropDown.Name = Fields.Theme;
+            _themeDropDown.SetupAdapter(ThemeTypes.ThemeCollection.Select(item => item.Key).ToList());
+            _themeDropDown.ItemSelected += ThemeItemSelected;
 
-            _textColorSpinner.Adapter = new SpinnerAdapter(this, R.Layout.SimpleSpinnerItem, Colors.ColorsCollection.Select(item => item.Key).ToList());
-            _textColorSpinner.ItemSelected += TextColorSpinner_ItemSelected;
+            _textColorDropDown.Name = Fields.TextColor;
+            _textColorDropDown.SetupAdapter(Colors.ColorsCollection.Select(item => item.Key).ToList());
+            _textColorDropDown.ItemSelected += TextColorItemSelected;
 
-            _fontSpinner.Adapter = new SpinnerAdapter(this, R.Layout.SimpleSpinnerItem, Fonts.FontsCollection.Select(item => item.Key).ToList());
-            _fontSpinner.ItemSelected += FontSpinner_ItemSelected;
+            _fontDropDown.Name = Fields.Font;
+            _fontDropDown.SetupAdapter(Fonts.FontsCollection.Select(item => item.Key).ToList());
+            _fontDropDown.ItemSelected += FontItemSelected;
 
-            _letterSpacingView.Adapter = new SpinnerAdapter(this, R.Layout.SimpleSpinnerItem, Sizes.LetterSpacingCollection.Select(item => item.Key).ToList());
-            _letterSpacingView.ItemSelected += LetterSpacingView_ItemSelected;
+            _letterSpacingDropDown.Name = Fields.LetterSpacing;
+            _letterSpacingDropDown.SetupAdapter(Sizes.LetterSpacingCollection.Select(item => item.Key).ToList());
+            _letterSpacingDropDown.ItemSelected += LetterSpacingItemSelected;
 
-            _textSizeView.Adapter = new SpinnerAdapter(this, R.Layout.SimpleSpinnerItem, Sizes.TextSizeCollection.Select(item => item.Key).ToList());
-            _textSizeView.ItemSelected += TextSizeView_ItemSelected;
+            _textSizeDropDown.Name = Fields.TextSize;
+            _textSizeDropDown.SetupAdapter(Sizes.TextSizeCollection.Select(item => item.Key).ToList());
+            _textSizeDropDown.ItemSelected += TextSizeItemSelected;
 
             SetCurrenTheme(_simpleLabel.GetThemeProvider().GetCurrentTheme());
 
@@ -64,49 +67,48 @@ namespace EOS.UI.Android.Sandbox.Activities
         private void SetCurrenTheme(IEOSTheme iEOSTheme)
         {
             if(iEOSTheme is LightEOSTheme)
-                _themeSpinner.SetSelection(1);
+                _themeDropDown.SetSpinnerSelection(1);
             if(iEOSTheme is DarkEOSTheme)
-                _themeSpinner.SetSelection(2);
+                _themeDropDown.SetSpinnerSelection(2);
         }
 
-        private void ThemeSpinner_ItemSelected(object sender, AdapterView.ItemSelectedEventArgs e)
+        private void ThemeItemSelected(int position)
         {
-            _simpleLabel.GetThemeProvider().SetCurrentTheme(ThemeTypes.ThemeCollection.ElementAt(e.Position).Value);
+            _simpleLabel.GetThemeProvider().SetCurrentTheme(ThemeTypes.ThemeCollection.ElementAt(position).Value);
             ResetCustomValues();
         }
 
-        private void TextSizeView_ItemSelected(object sender, AdapterView.ItemSelectedEventArgs e)
+        private void TextSizeItemSelected(int position)
         {
-            if(e.Position > 0)
-                _simpleLabel.TextSize = Sizes.TextSizeCollection.ElementAt(e.Position).Value;
+            if(position > 0)
+                _simpleLabel.TextSize = Sizes.TextSizeCollection.ElementAt(position).Value;
         }
 
-        private void LetterSpacingView_ItemSelected(object sender, AdapterView.ItemSelectedEventArgs e)
+        private void LetterSpacingItemSelected(int position)
         {
-            if(e.Position > 0)
-                _simpleLabel.LetterSpacing = Sizes.LetterSpacingCollection.ElementAt(e.Position).Value;
+            if(position > 0)
+                _simpleLabel.LetterSpacing = Sizes.LetterSpacingCollection.ElementAt(position).Value;
         }
 
-        private void FontSpinner_ItemSelected(object sender, AdapterView.ItemSelectedEventArgs e)
+        private void FontItemSelected(int position)
         {
-            if(e.Position > 0)
-                _simpleLabel.Typeface = Typeface.CreateFromAsset(Assets, Fonts.FontsCollection.ElementAt(e.Position).Value);
+            if(position > 0)
+                _simpleLabel.Typeface = Typeface.CreateFromAsset(Assets, Fonts.FontsCollection.ElementAt(position).Value);
         }
 
-        private void TextColorSpinner_ItemSelected(object sender, AdapterView.ItemSelectedEventArgs e)
+        private void TextColorItemSelected(int position)
         {
-            if(e.Position > 0)
-                _simpleLabel.TextColor = Colors.ColorsCollection.ElementAt(e.Position).Value;
+            if(position > 0)
+                _simpleLabel.TextColor = Colors.ColorsCollection.ElementAt(position).Value;
         }
 
         private void ResetCustomValues()
         {
             _simpleLabel.ResetCustomization();
-            _textColorSpinner.SetSelection(0);
-            _fontSpinner.SetSelection(0);
-            _letterSpacingView.SetSelection(0);
-            _textSizeView.SetSelection(0);
+            _textColorDropDown.SetSpinnerSelection(0);
+            _fontDropDown.SetSpinnerSelection(0);
+            _letterSpacingDropDown.SetSpinnerSelection(0);
+            _textSizeDropDown.SetSpinnerSelection(0);
         }
-
     }
 }

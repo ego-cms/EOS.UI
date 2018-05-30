@@ -306,12 +306,12 @@ namespace EOS.UI.Android.Controls
                 base.SetTypeface(Typeface.CreateFromAsset(Context.Assets, GetThemeProvider().GetEOSProperty<string>(this, EOSConstants.Font)), TypefaceStyle.Normal);
                 base.LetterSpacing = GetThemeProvider().GetEOSProperty<float>(this, EOSConstants.LetterSpacing);
                 base.TextSize = GetThemeProvider().GetEOSProperty<float>(this, EOSConstants.TextSize);
-                TextColor = GetThemeProvider().GetEOSProperty<Color>(this, EOSConstants.SecondaryColor);
-                DisabledTextColor = GetThemeProvider().GetEOSProperty<Color>(this, EOSConstants.SecondaryColorDisabled);
-                PressedTextColor = GetThemeProvider().GetEOSProperty<Color>(this, EOSConstants.SecondaryColorPressed);
-                BackgroundColor = GetThemeProvider().GetEOSProperty<Color>(this, EOSConstants.PrimaryColor);
-                DisabledBackgroundColor = GetThemeProvider().GetEOSProperty<Color>(this, EOSConstants.PrimaryColorDisabled);
-                PressedBackgroundColor = GetThemeProvider().GetEOSProperty<Color>(this, EOSConstants.PrimaryColorPressed);
+                TextColor = GetThemeProvider().GetEOSProperty<Color>(this, EOSConstants.NeutralColor6);
+                DisabledTextColor = GetThemeProvider().GetEOSProperty<Color>(this, EOSConstants.NeutralColor3);
+                PressedTextColor = GetThemeProvider().GetEOSProperty<Color>(this, EOSConstants.NeutralColor6);
+                BackgroundColor = GetThemeProvider().GetEOSProperty<Color>(this, EOSConstants.BrandPrimaryColor);
+                DisabledBackgroundColor = GetThemeProvider().GetEOSProperty<Color>(this, EOSConstants.NeutralColor4);
+                PressedBackgroundColor = GetThemeProvider().GetEOSProperty<Color>(this, EOSConstants.BrandPrimaryColorVariant1);
                 CornerRadius = GetThemeProvider().GetEOSProperty<float>(this, EOSConstants.CornerRadius);
                 IsEOSCustomizationIgnored = false;
             }

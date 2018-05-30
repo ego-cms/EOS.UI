@@ -192,11 +192,10 @@ namespace EOS.UI.iOS.Controls
             attrString.AddAttribute(UIStringAttributeKey.ForegroundColor, color, new NSRange(0, attrString.Length));
             SetAttributedTitle(attrString, forState);
         }
-
         public override void SetTitle(string title, UIControlState forState)
         {
             NSMutableAttributedString attrString;
-            if(title != null)
+            if (title != null)
             {
                 attrString = new NSMutableAttributedString(title);
             }
@@ -210,16 +209,34 @@ namespace EOS.UI.iOS.Controls
             var range = new NSRange(0, attrString.Length);
             attrString.AddAttribute(UIStringAttributeKey.KerningAdjustment, new NSNumber(LetterSpacing), range);
             attrString.AddAttribute(UIStringAttributeKey.Font, Font.WithSize(TextSize), range);
-            switch(forState)
+
+            NSMutableAttributedString resultString = null;
+            switch (forState)
             {
                 case UIControlState.Normal:
-                    attrString.AddAttribute(UIStringAttributeKey.ForegroundColor, TextColor, range);
+                    resultString = new NSMutableAttributedString(attrString);
+                    resultString.AddAttribute(UIStringAttributeKey.ForegroundColor, TextColor, range);
+                    SetAttributedTitle(resultString, UIControlState.Normal);
+
+                    resultString = new NSMutableAttributedString(attrString);
+                    resultString.AddAttribute(UIStringAttributeKey.ForegroundColor, DisabledTextColor, range);
+                    SetAttributedTitle(resultString, UIControlState.Disabled);
+
+                    resultString = new NSMutableAttributedString(attrString);
+                    resultString.AddAttribute(UIStringAttributeKey.ForegroundColor, PressedTextColor, range);
+                    SetAttributedTitle(resultString, UIControlState.Highlighted);
                     break;
                 case UIControlState.Disabled:
-                    attrString.AddAttribute(UIStringAttributeKey.ForegroundColor, DisabledTextColor, range);
+                    resultString = new NSMutableAttributedString(attrString);
+                    resultString.AddAttribute(UIStringAttributeKey.ForegroundColor, DisabledTextColor, range);
+                    SetAttributedTitle(resultString, forState);
+                    break;
+                case UIControlState.Highlighted:
+                    resultString = new NSMutableAttributedString(attrString);
+                    resultString.AddAttribute(UIStringAttributeKey.ForegroundColor, PressedTextColor, range);
+                    SetAttributedTitle(resultString, forState);
                     break;
             }
-            SetAttributedTitle(attrString, forState);
         }
 
         public override void TouchesBegan(NSSet touches, UIEvent evt)
@@ -262,14 +279,14 @@ namespace EOS.UI.iOS.Controls
             {
                 var provider = GetThemeProvider();
                 Font = provider.GetEOSProperty<UIFont>(this, EOSConstants.Font);
-                TextColor = provider.GetEOSProperty<UIColor>(this, EOSConstants.SecondaryColor);
-                DisabledTextColor = provider.GetEOSProperty<UIColor>(this, EOSConstants.SecondaryColorDisabled);
-                PressedTextColor = provider.GetEOSProperty<UIColor>(this, EOSConstants.SecondaryColorPressed);
+                TextColor = provider.GetEOSProperty<UIColor>(this, EOSConstants.NeutralColor6);
+                DisabledTextColor = provider.GetEOSProperty<UIColor>(this, EOSConstants.NeutralColor3);
+                PressedTextColor = provider.GetEOSProperty<UIColor>(this, EOSConstants.NeutralColor6);
                 TextSize = provider.GetEOSProperty<int>(this, EOSConstants.TextSize);
                 LetterSpacing = provider.GetEOSProperty<int>(this, EOSConstants.LetterSpacing);
-                BackgroundColor = provider.GetEOSProperty<UIColor>(this, EOSConstants.PrimaryColor);
-                DisabledBackgroundColor = provider.GetEOSProperty<UIColor>(this, EOSConstants.PrimaryColorDisabled);
-                PressedBackgroundColor = provider.GetEOSProperty<UIColor>(this, EOSConstants.PrimaryColorPressed);
+                BackgroundColor = provider.GetEOSProperty<UIColor>(this, EOSConstants.BrandPrimaryColor);
+                DisabledBackgroundColor = provider.GetEOSProperty<UIColor>(this, EOSConstants.NeutralColor4);
+                PressedBackgroundColor = provider.GetEOSProperty<UIColor>(this, EOSConstants.BrandPrimaryColorVariant1);
                 CornerRadius = provider.GetEOSProperty<int>(this, EOSConstants.CornerRadius);
                 Enabled = base.Enabled;
                 IsEOSCustomizationIgnored = false;

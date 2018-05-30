@@ -307,16 +307,16 @@ namespace EOS.UI.Android.Controls
                 Typeface = Typeface.CreateFromAsset(Context.Assets, GetThemeProvider().GetEOSProperty<string>(this, EOSConstants.Font));
                 LetterSpacing = GetThemeProvider().GetEOSProperty<float>(this, EOSConstants.LetterSpacing);
                 TextSize = GetThemeProvider().GetEOSProperty<float>(this, EOSConstants.TextSize);
-                TextColor = GetThemeProvider().GetEOSProperty<Color>(this, EOSConstants.SecondaryColor);
-                TextColorDisabled = GetThemeProvider().GetEOSProperty<Color>(this, EOSConstants.SecondaryColorDisabled);
-                HintTextColor = GetThemeProvider().GetEOSProperty<Color>(this, EOSConstants.HintTextColor);
-                HintTextColorDisabled = GetThemeProvider().GetEOSProperty<Color>(this, EOSConstants.HintTextColorDisabled);
+                TextColor = GetThemeProvider().GetEOSProperty<Color>(this, EOSConstants.NeutralColor1);
+                TextColorDisabled = GetThemeProvider().GetEOSProperty<Color>(this, EOSConstants.NeutralColor3);
+                HintTextColor = GetThemeProvider().GetEOSProperty<Color>(this, EOSConstants.NeutralColor2);
+                HintTextColorDisabled = GetThemeProvider().GetEOSProperty<Color>(this, EOSConstants.NeutralColor3);
                 LeftImageFocused = Context.Resources.GetDrawable(GetThemeProvider().GetEOSProperty<int>(this, EOSConstants.LeftImageFocused));
                 LeftImageUnfocused = Context.Resources.GetDrawable(GetThemeProvider().GetEOSProperty<int>(this, EOSConstants.LeftImageUnfocused));
                 LeftImageDisabled = Context.Resources.GetDrawable(GetThemeProvider().GetEOSProperty<int>(this, EOSConstants.LeftImageDisabled));
-                UnderlineColorFocused = GetThemeProvider().GetEOSProperty<Color>(this, EOSConstants.UnderlineColorFocused);
-                UnderlineColorUnfocused = GetThemeProvider().GetEOSProperty<Color>(this, EOSConstants.UnderlineColorUnfocused);
-                UnderlineColorDisabled = GetThemeProvider().GetEOSProperty<Color>(this, EOSConstants.UnderlineColorDisabled);
+                UnderlineColorFocused = GetThemeProvider().GetEOSProperty<Color>(this, EOSConstants.BrandPrimaryColor);
+                UnderlineColorUnfocused = GetThemeProvider().GetEOSProperty<Color>(this, EOSConstants.NeutralColor3);
+                UnderlineColorDisabled = GetThemeProvider().GetEOSProperty<Color>(this, EOSConstants.NeutralColor3);
                 IsEOSCustomizationIgnored = false;
                 UpdateEnabledState(Enabled);
             }
