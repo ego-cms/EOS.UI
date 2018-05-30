@@ -94,6 +94,11 @@ namespace EOS.UI.Android.Sandbox.Activities
             disableSwitch.SetOnCheckedChangeListener(this);
 
             SetCurrenTheme(_simpleButton.GetThemeProvider().GetCurrentTheme());
+
+            _simpleButton.Click += delegate
+            {
+                _simpleButton.StartAnimation();
+            };
         }
 
         private void ThemeSpinner_ItemSelected(object sender, AdapterView.ItemSelectedEventArgs e)

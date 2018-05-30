@@ -1,13 +1,16 @@
 ﻿using System;
+using Android.Animation;
 using Android.Content;
 using Android.Content.Res;
 using Android.Graphics;
 using Android.Graphics.Drawables;
 using Android.Graphics.Drawables.Shapes;
 using Android.Runtime;
+using Android.Support.V4.Content;
 using Android.Text;
 using Android.Util;
 using Android.Views;
+using Android.Views.Animations;
 using Android.Widget;
 using EOS.UI.Shared.Themes.Helpers;
 using EOS.UI.Shared.Themes.Interfaces;
@@ -21,6 +24,13 @@ namespace EOS.UI.Android.Controls
 {
     public class SimpleButton: Button, IEOSThemeControl, View.IOnTouchListener
     {
+        #region fields
+
+        private bool _isAnimated;
+        private ObjectAnimator _animator;
+
+        #endregion
+
         #region constructors
 
         public SimpleButton(Context context) : base(context)
@@ -241,6 +251,41 @@ namespace EOS.UI.Android.Controls
         {
             base.SetTextColor(enabled ? TextColor : DisabledTextColor);
             Background = enabled ? CreateRippleDrawable(BackgroundColor) : CreateGradientDrawable(DisabledBackgroundColor);
+        }
+
+        public void StartAnimation()
+        {
+            var preloader = ContextCompat.GetDrawable(Context, Resource.Drawable.icPreloader);
+            var rotateDrawable = new RotateDrawable();
+            rotateDrawable.Drawable = preloader;
+
+            Drawable background = CreateGradientDrawable(BackgroundColor);
+
+            Drawable[] layers = { background, rotateDrawable };
+            var layerDrawable = new LayerDrawable(layers);
+            layerDrawable.SetLayerGravity(1, GravityFlags.Center);
+            Background = layerDrawable;
+
+            var n = 500;
+            _animator = ObjectAnimator.OfInt(rotateDrawable, "Level", 0, 500);
+            _animator.SetDuration(20);
+
+            void action(object s, EventArgs e)
+            {
+                _animator = ObjectAnimator.OfInt(rotateDrawable, "Level", n, n + 500);
+                _animator.SetDuration(20);
+                _animator.AnimationEnd += action;
+                _animator.Start();
+                n = n == 9500 ? 0 : n + 500;
+            }
+
+            _animator.AnimationEnd += action;
+            _animator.Start();
+        }
+
+        public void StopAnimation()
+        {
+
         }
 
         #endregion

@@ -106,9 +106,6 @@
     <AndroidResource Include="Resources\layout\Section.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
-    <Folder Include="Resources\drawable\" />
-    <Folder Include="Resources\anim\" />
-    <Folder Include="Resources\layout\" />
   </ItemGroup>
   <Import Project="..\EOS.UI.Shared.Themes\EOS.UI.Shared.Themes.projitems" Label="Shared" />
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
