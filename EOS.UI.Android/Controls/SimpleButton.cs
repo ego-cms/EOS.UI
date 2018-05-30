@@ -1,13 +1,16 @@
 ﻿using System;
+using Android.Animation;
 using Android.Content;
 using Android.Content.Res;
 using Android.Graphics;
 using Android.Graphics.Drawables;
 using Android.Graphics.Drawables.Shapes;
 using Android.Runtime;
+using Android.Support.V4.Content;
 using Android.Text;
 using Android.Util;
 using Android.Views;
+using Android.Views.Animations;
 using Android.Widget;
 using EOS.UI.Shared.Themes.Helpers;
 using EOS.UI.Shared.Themes.Interfaces;
@@ -15,12 +18,20 @@ using Java.Util;
 using UIFrameworks.Android.Themes;
 using UIFrameworks.Shared.Themes.Helpers;
 using UIFrameworks.Shared.Themes.Interfaces;
+using static EOS.UI.Android.Helpers.Constants;
 using R = Android.Resource;
 
 namespace EOS.UI.Android.Controls
 {
     public class SimpleButton: Button, IEOSThemeControl, View.IOnTouchListener
     {
+        #region fields
+
+        private bool _isAnimated;
+        private ObjectAnimator _animator;
+
+        #endregion
+
         #region constructors
 
         public SimpleButton(Context context) : base(context)
@@ -243,6 +254,37 @@ namespace EOS.UI.Android.Controls
             Background = enabled ? CreateRippleDrawable(BackgroundColor) : CreateGradientDrawable(DisabledBackgroundColor);
         }
 
+        public void StartAnimation()
+        {
+            if(Enabled && !_isAnimated)
+            {
+                var rotateDrawable = new RotateDrawable();
+                rotateDrawable.Drawable = ContextCompat.GetDrawable(Context, Resource.Drawable.icPreloader);
+
+                Drawable[] layers = { CreateGradientDrawable(BackgroundColor), rotateDrawable };
+                var layerDrawable = new LayerDrawable(layers);
+                layerDrawable.SetLayerGravity(1, GravityFlags.Center);
+                Background = layerDrawable;
+                base.SetTextColor(Color.Transparent);
+
+                _animator = ObjectAnimator.OfInt(rotateDrawable, "Level", 0, AnimationConstants.LevelMaxCount);
+                _animator.SetInterpolator(new LinearInterpolator());
+                _animator.SetDuration(AnimationConstants.TurnoverTime);
+                _animator.RepeatCount = ValueAnimator.Infinite;
+                _animator.RepeatMode = ValueAnimatorRepeatMode.Restart;
+                _animator.Start();
+                _isAnimated = true;
+            }
+        }
+
+        public void StopAnimation()
+        {
+            _animator.Cancel();
+            _isAnimated = false;
+            BackgroundColor = _backgroundColor;
+            base.SetTextColor(_textColor);
+        }
+
         #endregion
 
         #region IEOSThemeControl implementation
@@ -294,7 +336,7 @@ namespace EOS.UI.Android.Controls
 
         public bool OnTouch(View v, MotionEvent e)
         {
-            if(Enabled)
+            if(Enabled && !_isAnimated)
             {
                 if(e.Action == MotionEventActions.Down)
                     base.SetTextColor(PressedTextColor);
