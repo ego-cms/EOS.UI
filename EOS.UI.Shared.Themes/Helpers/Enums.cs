@@ -12,4 +12,12 @@ namespace EOS.UI.Shared.Themes.Helpers
         Style1 = 1,
         Style2
     }
+    
+    public enum StateEnum
+    {
+        Default,
+        Progress,
+        Failed,
+        Success
+    }
 }
