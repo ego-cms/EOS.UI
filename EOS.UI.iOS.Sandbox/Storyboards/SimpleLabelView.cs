@@ -11,6 +11,7 @@ using UIFrameworks.Shared.Themes.Helpers;
 using UIKit;
 using EOS.UI.iOS.Sandbox.Controls.Pickers;
 using static EOS.UI.iOS.Sandbox.Helpers.Constants;
+using EOS.UI.Shared.Themes.Themes;
 
 namespace EOS.UI.iOS.Sandbox
 {
@@ -78,7 +79,7 @@ namespace EOS.UI.iOS.Sandbox
                 },
                 Fields.Theme,
                 frame);
-            themesDropDown.SetTextFieldText(_simpleLabel.GetThemeProvider().GetCurrentTheme().ThemeValues[EOSConstants.BrandPrimaryColor] == UIColor.White ? "Light" : "Dark");
+            themesDropDown.SetTextFieldText(_simpleLabel.GetThemeProvider().GetCurrentTheme() is LightEOSTheme ? "Light" : "Dark");
         }
 
         private void InitTextSizePicker(CGRect frame)
