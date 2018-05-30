@@ -249,7 +249,7 @@ namespace EOS.UI.iOS.Controls
 
         #region IEOSThemeControl implementation
 
-        public bool IsEOSCustomizationIgnored { get; private set; }
+        public bool IsEOSCustomizationIgnored { get; protected set; }
 
 
         public IEOSStyle GetCurrentEOSStyle()
@@ -273,7 +273,7 @@ namespace EOS.UI.iOS.Controls
 
         }
 
-        public void UpdateAppearance()
+        public virtual void UpdateAppearance()
         {
             if(!IsEOSCustomizationIgnored)
             {

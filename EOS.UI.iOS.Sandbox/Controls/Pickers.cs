@@ -5,6 +5,7 @@ using EOS.UI.iOS.Sandbox.Helpers;
 using EOS.UI.Shared.Themes.Helpers;
 using Foundation;
 using UIKit;
+using System.Collections;
 
 namespace EOS.UI.iOS.Sandbox.Controls.Pickers
 {
@@ -61,62 +62,20 @@ namespace EOS.UI.iOS.Sandbox.Controls.Pickers
         }
     }
 
-    public class ValuePickerDelegate<T> : UIPickerViewDelegate
+    public class ValuePickerDelegate<TKey, TValue> : UIPickerViewDelegate
     {
-        private IEnumerable<T> _source;
+        private IDictionary<TKey, TValue> _source;
 
-        public event EventHandler<T> DidSelected;
+        public event EventHandler<KeyValuePair<TKey,TValue>> DidSelected;
 
-        public ValuePickerDelegate(IEnumerable<T> source)
+        public ValuePickerDelegate(IDictionary<TKey, TValue> source)
         {
             _source = source;
         }
 
         public override string GetTitle(UIPickerView pickerView, nint row, nint component)
         {
-            return _source.ElementAt((int)row).ToString();
-        }
-
-        public override void Selected(UIPickerView pickerView, nint row, nint component)
-        {
-            DidSelected?.Invoke(this, (T)_source.ElementAt((int)row));
-        }
-    }
-
-    public class DictionaryPickerSource<T1, T2> : UIPickerViewDataSource
-    {
-        private IDictionary<T1, T2> _source;
-
-        public DictionaryPickerSource(Dictionary<T1, T2> source)
-        {
-            _source = source;
-        }
-
-        public override nint GetComponentCount(UIPickerView pickerView)
-        {
-            return 1;
-        }
-
-        public override nint GetRowsInComponent(UIPickerView pickerView, nint component)
-        {
-            return _source.Count();
-        }
-    }
-
-    public class DictionaryPickerDelegate<T1, T2> : UIPickerViewDelegate
-    {
-        private Dictionary<T1, T2> _source;
-
-        public event EventHandler<KeyValuePair<T1, T2>> DidSelected;
-
-        public DictionaryPickerDelegate(Dictionary<T1, T2> source)
-        {
-            _source = source;
-        }
-
-        public override string GetTitle(UIPickerView pickerView, nint row, nint component)
-        {
-            return _source.ElementAt((int)row).Key.ToString();
+            return _source.Keys.ElementAt((int)row).ToString();
         }
 
         public override void Selected(UIPickerView pickerView, nint row, nint component)

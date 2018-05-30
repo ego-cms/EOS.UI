@@ -23,31 +23,39 @@ namespace EOS.UI.iOS.Sandbox
 
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
-        UIKit.UITextField fontTextField { get; set; }
+        EOS.UI.iOS.Sandbox.CustomDropDown disabledHintTextColorDropDown { get; set; }
 
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
-        UIKit.UITextField iconDisabledTextField { get; set; }
+        EOS.UI.iOS.Sandbox.CustomDropDown disabledIconDropDown { get; set; }
 
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
-        UIKit.UITextField iconFocusedTextField { get; set; }
+        EOS.UI.iOS.Sandbox.CustomDropDown disabledTextColorDropDown { get; set; }
 
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
-        UIKit.UITextField iconUnfocusedTextField { get; set; }
+        EOS.UI.iOS.Sandbox.CustomDropDown disabledUnderlineColorDropDown { get; set; }
 
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
-        UIKit.UITextField letterSpacingTextField { get; set; }
+        EOS.UI.iOS.Sandbox.CustomDropDown focusedIconDropDown { get; set; }
 
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
-        UIKit.UITextField placeholderColorDisabledTextField { get; set; }
+        EOS.UI.iOS.Sandbox.CustomDropDown focusedUnderlineColorDropDown { get; set; }
 
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
-        UIKit.UITextField placeholderColorTextField { get; set; }
+        EOS.UI.iOS.Sandbox.CustomDropDown fontDropDown { get; set; }
+
+        [Outlet]
+        [GeneratedCode ("iOS Designer", "1.0")]
+        EOS.UI.iOS.Sandbox.CustomDropDown hintTextColorDropDown { get; set; }
+
+        [Outlet]
+        [GeneratedCode ("iOS Designer", "1.0")]
+        EOS.UI.iOS.Sandbox.CustomDropDown letterSpacingDropDown { get; set; }
 
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
@@ -67,31 +75,23 @@ namespace EOS.UI.iOS.Sandbox
 
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
-        UIKit.UITextField textColorDisabledTextField { get; set; }
+        EOS.UI.iOS.Sandbox.CustomDropDown textColorDropDown { get; set; }
 
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
-        UIKit.UITextField textColorTextField { get; set; }
+        EOS.UI.iOS.Sandbox.CustomDropDown textSizeDropDown { get; set; }
 
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
-        UIKit.UITextField textSizeTextField { get; set; }
+        EOS.UI.iOS.Sandbox.CustomDropDown themeDropDown { get; set; }
 
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
-        UIKit.UITextField themeTextField { get; set; }
+        EOS.UI.iOS.Sandbox.CustomDropDown unfocusedIconDropDown { get; set; }
 
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
-        UIKit.UITextField underlineColorDisabledTextField { get; set; }
-
-        [Outlet]
-        [GeneratedCode ("iOS Designer", "1.0")]
-        UIKit.UITextField underlineColorFocusedTextField { get; set; }
-
-        [Outlet]
-        [GeneratedCode ("iOS Designer", "1.0")]
-        UIKit.UITextField underlineColorUnfocusedTextField { get; set; }
+        EOS.UI.iOS.Sandbox.CustomDropDown unfocusedUnderlineColorDropDown { get; set; }
 
         void ReleaseDesignerOutlets ()
         {
@@ -105,39 +105,49 @@ namespace EOS.UI.iOS.Sandbox
                 containerTopView = null;
             }
 
-            if (fontTextField != null) {
-                fontTextField.Dispose ();
-                fontTextField = null;
+            if (disabledHintTextColorDropDown != null) {
+                disabledHintTextColorDropDown.Dispose ();
+                disabledHintTextColorDropDown = null;
             }
 
-            if (iconDisabledTextField != null) {
-                iconDisabledTextField.Dispose ();
-                iconDisabledTextField = null;
+            if (disabledIconDropDown != null) {
+                disabledIconDropDown.Dispose ();
+                disabledIconDropDown = null;
             }
 
-            if (iconFocusedTextField != null) {
-                iconFocusedTextField.Dispose ();
-                iconFocusedTextField = null;
+            if (disabledTextColorDropDown != null) {
+                disabledTextColorDropDown.Dispose ();
+                disabledTextColorDropDown = null;
             }
 
-            if (iconUnfocusedTextField != null) {
-                iconUnfocusedTextField.Dispose ();
-                iconUnfocusedTextField = null;
+            if (disabledUnderlineColorDropDown != null) {
+                disabledUnderlineColorDropDown.Dispose ();
+                disabledUnderlineColorDropDown = null;
             }
 
-            if (letterSpacingTextField != null) {
-                letterSpacingTextField.Dispose ();
-                letterSpacingTextField = null;
+            if (focusedIconDropDown != null) {
+                focusedIconDropDown.Dispose ();
+                focusedIconDropDown = null;
             }
 
-            if (placeholderColorDisabledTextField != null) {
-                placeholderColorDisabledTextField.Dispose ();
-                placeholderColorDisabledTextField = null;
+            if (focusedUnderlineColorDropDown != null) {
+                focusedUnderlineColorDropDown.Dispose ();
+                focusedUnderlineColorDropDown = null;
             }
 
-            if (placeholderColorTextField != null) {
-                placeholderColorTextField.Dispose ();
-                placeholderColorTextField = null;
+            if (fontDropDown != null) {
+                fontDropDown.Dispose ();
+                fontDropDown = null;
+            }
+
+            if (hintTextColorDropDown != null) {
+                hintTextColorDropDown.Dispose ();
+                hintTextColorDropDown = null;
+            }
+
+            if (letterSpacingDropDown != null) {
+                letterSpacingDropDown.Dispose ();
+                letterSpacingDropDown = null;
             }
 
             if (propertiesContainer != null) {
@@ -160,39 +170,29 @@ namespace EOS.UI.iOS.Sandbox
                 switchDisabled = null;
             }
 
-            if (textColorDisabledTextField != null) {
-                textColorDisabledTextField.Dispose ();
-                textColorDisabledTextField = null;
+            if (textColorDropDown != null) {
+                textColorDropDown.Dispose ();
+                textColorDropDown = null;
             }
 
-            if (textColorTextField != null) {
-                textColorTextField.Dispose ();
-                textColorTextField = null;
+            if (textSizeDropDown != null) {
+                textSizeDropDown.Dispose ();
+                textSizeDropDown = null;
             }
 
-            if (textSizeTextField != null) {
-                textSizeTextField.Dispose ();
-                textSizeTextField = null;
+            if (themeDropDown != null) {
+                themeDropDown.Dispose ();
+                themeDropDown = null;
             }
 
-            if (themeTextField != null) {
-                themeTextField.Dispose ();
-                themeTextField = null;
+            if (unfocusedIconDropDown != null) {
+                unfocusedIconDropDown.Dispose ();
+                unfocusedIconDropDown = null;
             }
 
-            if (underlineColorDisabledTextField != null) {
-                underlineColorDisabledTextField.Dispose ();
-                underlineColorDisabledTextField = null;
-            }
-
-            if (underlineColorFocusedTextField != null) {
-                underlineColorFocusedTextField.Dispose ();
-                underlineColorFocusedTextField = null;
-            }
-
-            if (underlineColorUnfocusedTextField != null) {
-                underlineColorUnfocusedTextField.Dispose ();
-                underlineColorUnfocusedTextField = null;
+            if (unfocusedUnderlineColorDropDown != null) {
+                unfocusedUnderlineColorDropDown.Dispose ();
+                unfocusedUnderlineColorDropDown = null;
             }
         }
     }
