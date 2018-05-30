@@ -1,17 +1,15 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
 using Android.App;
 using Android.Graphics;
 using Android.OS;
 using Android.Widget;
 using EOS.UI.Android.Controls;
-using EOS.UI.Android.Sandbox.Adapters;
-using UIFrameworks.Android.Themes;
+using EOS.UI.Android.Sandbox.Controls;
+using EOS.UI.Shared.Themes.Themes;
 using UIFrameworks.Shared.Themes.Helpers;
 using UIFrameworks.Shared.Themes.Interfaces;
 using static Android.Widget.CompoundButton;
 using static EOS.UI.Android.Sandbox.Helpers.Constants;
-using R = Android.Resource;
 
 namespace EOS.UI.Android.Sandbox.Activities
 {
@@ -19,17 +17,17 @@ namespace EOS.UI.Android.Sandbox.Activities
     public class SimpleButtonActivity : BaseActivity, IOnCheckedChangeListener
     {
         private SimpleButton _simpleButton;
-        private Spinner _themeSpinner;
-        private Spinner _fontSpinner;
-        private Spinner _letterSpacingSpinner;
-        private Spinner _textSizeSpinner;
-        private Spinner _textColorEnabledSpinner;
-        private Spinner _textColorDisabledSpinner;
-        private Spinner _textColorPressedSpinner;
-        private Spinner _backgroundColorEnabledSpinner;
-        private Spinner _backgroundColorDisabledSpinner;
-        private Spinner _backgroundColorPressedSpinner;
-        private Spinner _cornerRadiusSpinner;
+        private SandboxDropDown _themeDropDown;
+        private SandboxDropDown _fontDropDown;
+        private SandboxDropDown _letterSpacingDropDown;
+        private SandboxDropDown _textSizeDropDown;
+        private SandboxDropDown _textColorEnabledDropDown;
+        private SandboxDropDown _textColorDisabledDropDown;
+        private SandboxDropDown _textColorPressedDropDown;
+        private SandboxDropDown _backgroundColorEnabledDropDown;
+        private SandboxDropDown _backgroundColorDisabledDropDown;
+        private SandboxDropDown _backgroundColorPressedDropDown;
+        private SandboxDropDown _cornerRadiusDropDown;
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
@@ -39,52 +37,63 @@ namespace EOS.UI.Android.Sandbox.Activities
             _simpleButton = FindViewById<SimpleButton>(Resource.Id.simpleButton);
             _simpleButton.UpdateAppearance();
 
-            _themeSpinner = FindViewById<Spinner>(Resource.Id.spinnerTheme);
-            _fontSpinner = FindViewById<Spinner>(Resource.Id.spinnerFont);
-            _letterSpacingSpinner = FindViewById<Spinner>(Resource.Id.spinnerLetterSpacing);
-            _textSizeSpinner = FindViewById<Spinner>(Resource.Id.spinnerTextSize);
-            _textColorEnabledSpinner = FindViewById<Spinner>(Resource.Id.spinnerTextColorEnabled);
-            _textColorDisabledSpinner = FindViewById<Spinner>(Resource.Id.spinnerTextColorDisabled);
-            _textColorPressedSpinner = FindViewById<Spinner>(Resource.Id.spinnerTextColorPressed);
-            _backgroundColorEnabledSpinner = FindViewById<Spinner>(Resource.Id.spinnerBackgroundColorEnabled);
-            _backgroundColorDisabledSpinner = FindViewById<Spinner>(Resource.Id.spinnerBackgroundColorDisabled);
-            _backgroundColorPressedSpinner = FindViewById<Spinner>(Resource.Id.spinnerBackgroundColorPressed);
-            _cornerRadiusSpinner = FindViewById<Spinner>(Resource.Id.spinnerCornerRadius);
+            _themeDropDown = FindViewById<SandboxDropDown>(Resource.Id.themeDropDown);
+            _fontDropDown = FindViewById<SandboxDropDown>(Resource.Id.fontDropDown);
+            _letterSpacingDropDown = FindViewById<SandboxDropDown>(Resource.Id.letterSpacingDropDown);
+            _textSizeDropDown = FindViewById<SandboxDropDown>(Resource.Id.textSizeDropDown);
+            _textColorEnabledDropDown = FindViewById<SandboxDropDown>(Resource.Id.enabledTextColorDropDown);
+            _textColorDisabledDropDown = FindViewById<SandboxDropDown>(Resource.Id.disabledTextColorDropDown);
+            _textColorPressedDropDown = FindViewById<SandboxDropDown>(Resource.Id.pressedTextColorDropDown);
+            _backgroundColorEnabledDropDown = FindViewById<SandboxDropDown>(Resource.Id.enabledBackgroundDropDown);
+            _backgroundColorDisabledDropDown = FindViewById<SandboxDropDown>(Resource.Id.disabledBackgroundDropDown);
+            _backgroundColorPressedDropDown = FindViewById<SandboxDropDown>(Resource.Id.pressedBackgroundDropDown);
+            _cornerRadiusDropDown = FindViewById<SandboxDropDown>(Resource.Id.cornerRadiusDropDown);
             var resetButton = FindViewById<Button>(Resource.Id.buttonResetCustomization);
             var disableSwitch = FindViewById<Switch>(Resource.Id.switchDisabled);
 
-            _themeSpinner.Adapter = new SpinnerAdapter(this, R.Layout.SimpleSpinnerItem, ThemeTypes.ThemeCollection.Select(item => item.Key).ToList());
-            _themeSpinner.ItemSelected += ThemeSpinner_ItemSelected;
+            _themeDropDown.Name = Fields.Theme;
+            _themeDropDown.SetupAdapter(ThemeTypes.ThemeCollection.Select(item => item.Key).ToList());
+            _themeDropDown.ItemSelected += ThemeItemSelected;
 
-            _fontSpinner.Adapter = new SpinnerAdapter(this, R.Layout.SimpleSpinnerItem, Fonts.FontsCollection.Select(item => item.Key).ToList());
-            _fontSpinner.ItemSelected += FontSpinner_ItemSelected;
+            _fontDropDown.Name = Fields.Font;
+            _fontDropDown.SetupAdapter(Fonts.FontsCollection.Select(item => item.Key).ToList());
+            _fontDropDown.ItemSelected += FontSpinner_ItemSelected;
 
-            _letterSpacingSpinner.Adapter = new SpinnerAdapter(this, R.Layout.SimpleSpinnerItem, Sizes.LetterSpacingCollection.Select(item => item.Key).ToList());
-            _letterSpacingSpinner.ItemSelected += LetterSpacingView_ItemSelected;
+            _letterSpacingDropDown.Name = Fields.LetterSpacing;
+            _letterSpacingDropDown.SetupAdapter(Sizes.LetterSpacingCollection.Select(item => item.Key).ToList());
+            _letterSpacingDropDown.ItemSelected += LetterSpacingView_ItemSelected;
 
-            _textSizeSpinner.Adapter= new SpinnerAdapter(this, R.Layout.SimpleSpinnerItem, Sizes.TextSizeCollection.Select(item => item.Key).ToList());
-            _textSizeSpinner.ItemSelected += TextSizeSpinner_ItemSelected;
+            _textSizeDropDown.Name = Fields.TextSize;
+            _textSizeDropDown.SetupAdapter(Sizes.TextSizeCollection.Select(item => item.Key).ToList());
+            _textSizeDropDown.ItemSelected += TextSizeItemSelected;
 
-            _textColorEnabledSpinner.Adapter = new SpinnerAdapter(this, R.Layout.SimpleSpinnerItem, Colors.ColorsCollection.Select(item => item.Key).ToList());
-            _textColorEnabledSpinner.ItemSelected += TextColorEnabledSpinner_ItemSelected;
+            _textColorEnabledDropDown.Name = Fields.EnabledTextColor;
+            _textColorEnabledDropDown.SetupAdapter(Colors.ColorsCollection.Select(item => item.Key).ToList());
+            _textColorEnabledDropDown.ItemSelected += TextColorEnabledItemSelected;
 
-            _textColorDisabledSpinner.Adapter = new SpinnerAdapter(this, R.Layout.SimpleSpinnerItem, Colors.ColorsCollection.Select(item => item.Key).ToList());
-            _textColorDisabledSpinner.ItemSelected += TextColorDisabledSpinner_ItemSelected;
+            _textColorDisabledDropDown.Name = Fields.DisabledTextColor;
+            _textColorDisabledDropDown.SetupAdapter(Colors.ColorsCollection.Select(item => item.Key).ToList());
+            _textColorDisabledDropDown.ItemSelected += TextColorDisabledItemSelected;
 
-            _textColorPressedSpinner.Adapter = new SpinnerAdapter(this, R.Layout.SimpleSpinnerItem, Colors.ColorsCollection.Select(item => item.Key).ToList());
-            _textColorPressedSpinner.ItemSelected += TextColorPressedSpinner_ItemSelected;
+            _textColorPressedDropDown.Name = Fields.PressedTextColor;
+            _textColorPressedDropDown.SetupAdapter(Colors.ColorsCollection.Select(item => item.Key).ToList());
+            _textColorPressedDropDown.ItemSelected += TextColorPressedItemSelected;
 
-            _backgroundColorEnabledSpinner.Adapter = new SpinnerAdapter(this, R.Layout.SimpleSpinnerItem, Colors.ColorsCollection.Select(item => item.Key).ToList());
-            _backgroundColorEnabledSpinner.ItemSelected += BackgroundColorEnabledSpinner_ItemSelected;
+            _backgroundColorEnabledDropDown.Name = Fields.EnabledBackground;
+            _backgroundColorEnabledDropDown.SetupAdapter(Colors.ColorsCollection.Select(item => item.Key).ToList());
+            _backgroundColorEnabledDropDown.ItemSelected += BackgroundColorEnabledItemSelected;
 
-            _backgroundColorDisabledSpinner.Adapter = new SpinnerAdapter(this, R.Layout.SimpleSpinnerItem, Colors.ColorsCollection.Select(item => item.Key).ToList());
-            _backgroundColorDisabledSpinner.ItemSelected += BackgroundColorDisabledSpinner_ItemSelected;
+            _backgroundColorDisabledDropDown.Name = Fields.DisabledBackground;
+            _backgroundColorDisabledDropDown.SetupAdapter(Colors.ColorsCollection.Select(item => item.Key).ToList());
+            _backgroundColorDisabledDropDown.ItemSelected += BackgroundColorDisabledItemSelected;
 
-            _backgroundColorPressedSpinner.Adapter = new SpinnerAdapter(this, R.Layout.SimpleSpinnerItem, Colors.ColorsCollection.Select(item => item.Key).ToList());
-            _backgroundColorPressedSpinner.ItemSelected += BackgroundColorPressedSpinner_ItemSelected;
+            _backgroundColorPressedDropDown.Name = Fields.PressedBackground;
+            _backgroundColorPressedDropDown.SetupAdapter(Colors.ColorsCollection.Select(item => item.Key).ToList());
+            _backgroundColorPressedDropDown.ItemSelected += BackgroundColorPressedItemSelected;
 
-            _cornerRadiusSpinner.Adapter = new SpinnerAdapter(this, R.Layout.SimpleSpinnerItem, Sizes.CornerRadusCollection.Select(item => item.Key).ToList());
-            _cornerRadiusSpinner.ItemSelected += CornerRadiurSpinner_ItemSelected;
+            _cornerRadiusDropDown.Name = Fields.ConerRadius;
+            _cornerRadiusDropDown.SetupAdapter(Sizes.CornerRadusCollection.Select(item => item.Key).ToList());
+            _cornerRadiusDropDown.ItemSelected += CornerRadiurSpinner_ItemSelected;
 
             resetButton.Click += delegate
             {
@@ -96,96 +105,96 @@ namespace EOS.UI.Android.Sandbox.Activities
             SetCurrenTheme(_simpleButton.GetThemeProvider().GetCurrentTheme());
         }
 
-        private void ThemeSpinner_ItemSelected(object sender, AdapterView.ItemSelectedEventArgs e)
+        private void ThemeItemSelected(int position)
         {
-            if(e.Position > 0)
+            if(position > 0)
             {
-                _simpleButton.GetThemeProvider().SetCurrentTheme(ThemeTypes.ThemeCollection.ElementAt(e.Position).Value);
+                _simpleButton.GetThemeProvider().SetCurrentTheme(ThemeTypes.ThemeCollection.ElementAt(position).Value);
                 ResetCustomValues();
             }
         }
 
-        private void FontSpinner_ItemSelected(object sender, AdapterView.ItemSelectedEventArgs e)
+        private void FontSpinner_ItemSelected(int position)
         {
-            if(e.Position > 0)
-                _simpleButton.Typeface = Typeface.CreateFromAsset(Assets, Fonts.FontsCollection.ElementAt(e.Position).Value);
+            if(position > 0)
+                _simpleButton.Typeface = Typeface.CreateFromAsset(Assets, Fonts.FontsCollection.ElementAt(position).Value);
         }
 
-        private void LetterSpacingView_ItemSelected(object sender, AdapterView.ItemSelectedEventArgs e)
+        private void LetterSpacingView_ItemSelected(int position)
         {
-            if(e.Position > 0)
-                _simpleButton.LetterSpacing = Sizes.LetterSpacingCollection.ElementAt(e.Position).Value;
+            if(position > 0)
+                _simpleButton.LetterSpacing = Sizes.LetterSpacingCollection.ElementAt(position).Value;
         }
 
-        private void TextSizeSpinner_ItemSelected(object sender, AdapterView.ItemSelectedEventArgs e)
+        private void TextSizeItemSelected(int position)
         {
-            if(e.Position > 0)
-                _simpleButton.TextSize = Sizes.TextSizeCollection.ElementAt(e.Position).Value;
+            if(position > 0)
+                _simpleButton.TextSize = Sizes.TextSizeCollection.ElementAt(position).Value;
         }
 
-        private void TextColorEnabledSpinner_ItemSelected(object sender, AdapterView.ItemSelectedEventArgs e)
+        private void TextColorEnabledItemSelected(int position)
         {
-            if(e.Position > 0)
-                _simpleButton.TextColor = Colors.ColorsCollection.ElementAt(e.Position).Value;
+            if(position > 0)
+                _simpleButton.TextColor = Colors.ColorsCollection.ElementAt(position).Value;
         }
 
-        private void TextColorDisabledSpinner_ItemSelected(object sender, AdapterView.ItemSelectedEventArgs e)
+        private void TextColorDisabledItemSelected(int position)
         {
-            if(e.Position > 0)
-                _simpleButton.DisabledTextColor = Colors.ColorsCollection.ElementAt(e.Position).Value;
+            if(position > 0)
+                _simpleButton.DisabledTextColor = Colors.ColorsCollection.ElementAt(position).Value;
         }
 
-        private void TextColorPressedSpinner_ItemSelected(object sender, AdapterView.ItemSelectedEventArgs e)
+        private void TextColorPressedItemSelected(int position)
         {
-            if(e.Position > 0)
-                _simpleButton.PressedTextColor = Colors.ColorsCollection.ElementAt(e.Position).Value;
+            if(position > 0)
+                _simpleButton.PressedTextColor = Colors.ColorsCollection.ElementAt(position).Value;
         }
 
-        private void BackgroundColorEnabledSpinner_ItemSelected(object sender, AdapterView.ItemSelectedEventArgs e)
+        private void BackgroundColorEnabledItemSelected(int position)
         {
-            if(e.Position > 0)
-                _simpleButton.BackgroundColor = Colors.ColorsCollection.ElementAt(e.Position).Value;
+            if(position > 0)
+                _simpleButton.BackgroundColor = Colors.ColorsCollection.ElementAt(position).Value;
         }
 
-        private void BackgroundColorDisabledSpinner_ItemSelected(object sender, AdapterView.ItemSelectedEventArgs e)
+        private void BackgroundColorDisabledItemSelected(int position)
         {
-            if(e.Position > 0)
-                _simpleButton.DisabledBackgroundColor = Colors.ColorsCollection.ElementAt(e.Position).Value;
+            if(position > 0)
+                _simpleButton.DisabledBackgroundColor = Colors.ColorsCollection.ElementAt(position).Value;
         }
 
-        private void BackgroundColorPressedSpinner_ItemSelected(object sender, AdapterView.ItemSelectedEventArgs e)
+        private void BackgroundColorPressedItemSelected(int position)
         {
-            if(e.Position > 0)
-                _simpleButton.PressedBackgroundColor = Colors.ColorsCollection.ElementAt(e.Position).Value;
+            if(position > 0)
+                _simpleButton.PressedBackgroundColor = Colors.ColorsCollection.ElementAt(position).Value;
         }
 
-        private void CornerRadiurSpinner_ItemSelected(object sender, AdapterView.ItemSelectedEventArgs e)
+        private void CornerRadiurSpinner_ItemSelected(int position)
         {
-            if(e.Position > 0)
-                _simpleButton.CornerRadius = Sizes.CornerRadusCollection.ElementAt(e.Position).Value;
+            if(position > 0)
+                _simpleButton.CornerRadius = Sizes.CornerRadusCollection.ElementAt(position).Value;
         }
 
         private void SetCurrenTheme(IEOSTheme iEOSTheme)
         {
             if(iEOSTheme is LightEOSTheme)
-                _themeSpinner.SetSelection(1);
+                _themeDropDown.SetSpinnerSelection(1);
             if(iEOSTheme is DarkEOSTheme)
-                _themeSpinner.SetSelection(2);
+                _themeDropDown.SetSpinnerSelection(2);
         }
 
         private void ResetCustomValues()
         {
             _simpleButton.ResetCustomization();
-            _fontSpinner.SetSelection(0);
-            _letterSpacingSpinner.SetSelection(0);
-            _textSizeSpinner.SetSelection(0);
-            _textColorEnabledSpinner.SetSelection(0);
-            _textColorDisabledSpinner.SetSelection(0);
-            _textColorPressedSpinner.SetSelection(0);
-            _backgroundColorEnabledSpinner.SetSelection(0);
-            _backgroundColorDisabledSpinner.SetSelection(0);
-            _backgroundColorPressedSpinner.SetSelection(0);
-            _cornerRadiusSpinner.SetSelection(0);
+            _fontDropDown.SetSpinnerSelection(0);
+            _letterSpacingDropDown.SetSpinnerSelection(0);
+            _textSizeDropDown.SetSpinnerSelection(0);
+            _textColorEnabledDropDown.SetSpinnerSelection(0);
+            _textColorDisabledDropDown.SetSpinnerSelection(0);
+            _textColorPressedDropDown.SetSpinnerSelection(0);
+            _backgroundColorEnabledDropDown.SetSpinnerSelection(0);
+            _backgroundColorDisabledDropDown.SetSpinnerSelection(0);
+            _backgroundColorPressedDropDown.SetSpinnerSelection(0);
+            _cornerRadiusDropDown.SetSpinnerSelection(0);
         }
 
         public void OnCheckedChanged(CompoundButton buttonView, bool isChecked)

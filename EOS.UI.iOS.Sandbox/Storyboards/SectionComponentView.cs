@@ -8,6 +8,7 @@ using EOS.UI.iOS.Sandbox.Helpers;
 using EOS.UI.iOS.Sandbox.TableSources;
 using EOS.UI.iOS.Themes;
 using EOS.UI.Shared.Themes.Helpers;
+using EOS.UI.Shared.Themes.Themes;
 using UIFrameworks.Shared.Themes.Helpers;
 using UIKit;
 
@@ -540,8 +541,7 @@ namespace EOS.UI.iOS.Sandbox.Storyboards
                 sectionTableView.ReloadData();
                 ResetFields();
             };
-            themeTextField.Text = EOSThemeProvider.Instance.GetCurrentTheme().ThemeValues[EOSConstants.PrimaryColor] == UIColor.White ?
-                "Light" : "Dark";
+            themeTextField.Text = EOSThemeProvider.Instance.GetCurrentTheme() is LightEOSTheme ? "Light" : "Dark";
 
             themePicker.Delegate = themePickerDelegate;
             themeTextField.InputView = themePicker;
