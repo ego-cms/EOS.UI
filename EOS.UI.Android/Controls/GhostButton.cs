@@ -148,7 +148,7 @@ namespace EOS.UI.Android.Controls
                 {
                     _pressedStateTextColor
                 }), 
-                new ColorDrawable(Color.Transparent), new ColorDrawable(Color.Gray));
+                new ColorDrawable(Color.Transparent), new ColorDrawable(Color.White));
         }
 
         public override void SetTypeface(Typeface tf, [GeneratedEnum] TypefaceStyle style)

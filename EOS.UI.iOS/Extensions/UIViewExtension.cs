@@ -515,7 +515,7 @@ namespace EOS.UI.iOS.Extensions
         /// <param name="completitionHandler">Completition handler.</param>
         internal static void RippleAnimate(this UIButton button, CGPoint startLocation, UIColor rippleColor = null, nfloat? scaleDuration = null, nfloat? fadeDuration = null, Action completitionHandler = null)
         {
-            var color = rippleColor ?? UIColor.LightGray.ColorWithAlpha(0.1f);
+            var color = rippleColor ?? UIColor.White.ColorWithAlpha(0.1f);
             var scaleTime = scaleDuration ?? 1.5f;
             var fadeTime = fadeDuration ?? 1.5f;
             var initialSize = 10.0;
