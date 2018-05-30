@@ -18,6 +18,7 @@ using Java.Util;
 using UIFrameworks.Android.Themes;
 using UIFrameworks.Shared.Themes.Helpers;
 using UIFrameworks.Shared.Themes.Interfaces;
+using static EOS.UI.Android.Helpers.Constants;
 using R = Android.Resource;
 
 namespace EOS.UI.Android.Controls
@@ -255,37 +256,33 @@ namespace EOS.UI.Android.Controls
 
         public void StartAnimation()
         {
-            var preloader = ContextCompat.GetDrawable(Context, Resource.Drawable.icPreloader);
-            var rotateDrawable = new RotateDrawable();
-            rotateDrawable.Drawable = preloader;
-
-            Drawable background = CreateGradientDrawable(BackgroundColor);
-
-            Drawable[] layers = { background, rotateDrawable };
-            var layerDrawable = new LayerDrawable(layers);
-            layerDrawable.SetLayerGravity(1, GravityFlags.Center);
-            Background = layerDrawable;
-
-            var n = 500;
-            _animator = ObjectAnimator.OfInt(rotateDrawable, "Level", 0, 500);
-            _animator.SetDuration(20);
-
-            void action(object s, EventArgs e)
+            if(Enabled && !_isAnimated)
             {
-                _animator = ObjectAnimator.OfInt(rotateDrawable, "Level", n, n + 500);
-                _animator.SetDuration(20);
-                _animator.AnimationEnd += action;
-                _animator.Start();
-                n = n == 9500 ? 0 : n + 500;
-            }
+                var rotateDrawable = new RotateDrawable();
+                rotateDrawable.Drawable = ContextCompat.GetDrawable(Context, Resource.Drawable.icPreloader);
 
-            _animator.AnimationEnd += action;
-            _animator.Start();
+                Drawable[] layers = { CreateGradientDrawable(BackgroundColor), rotateDrawable };
+                var layerDrawable = new LayerDrawable(layers);
+                layerDrawable.SetLayerGravity(1, GravityFlags.Center);
+                Background = layerDrawable;
+                base.SetTextColor(Color.Transparent);
+
+                _animator = ObjectAnimator.OfInt(rotateDrawable, "Level", 0, AnimationConstants.LevelMaxCount);
+                _animator.SetInterpolator(new LinearInterpolator());
+                _animator.SetDuration(AnimationConstants.TurnoverTime);
+                _animator.RepeatCount = ValueAnimator.Infinite;
+                _animator.RepeatMode = ValueAnimatorRepeatMode.Restart;
+                _animator.Start();
+                _isAnimated = true;
+            }
         }
 
         public void StopAnimation()
         {
-
+            _animator.Cancel();
+            _isAnimated = false;
+            BackgroundColor = _backgroundColor;
+            base.SetTextColor(_textColor);
         }
 
         #endregion
@@ -339,7 +336,7 @@ namespace EOS.UI.Android.Controls
 
         public bool OnTouch(View v, MotionEvent e)
         {
-            if(Enabled)
+            if(Enabled && !_isAnimated)
             {
                 if(e.Action == MotionEventActions.Down)
                     base.SetTextColor(PressedTextColor);

@@ -103,11 +103,6 @@ namespace EOS.UI.Android.Sandbox.Activities
             disableSwitch.SetOnCheckedChangeListener(this);
 
             SetCurrenTheme(_simpleButton.GetThemeProvider().GetCurrentTheme());
-
-            _simpleButton.Click += delegate
-            {
-                _simpleButton.StartAnimation();
-            };
         }
 
         private void ThemeItemSelected(int position)

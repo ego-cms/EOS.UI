@@ -71,6 +71,7 @@
     <Compile Include="Controls\SimpleButton.cs" />
     <Compile Include="Controls\SimpleLabel.cs" />
     <Compile Include="Controls\BadgeLabel.cs" />
+    <Compile Include="Helpers\Constants.cs" />
     <Compile Include="Models\SectionModel.cs" />
     <Compile Include="Resources\Resource.designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
