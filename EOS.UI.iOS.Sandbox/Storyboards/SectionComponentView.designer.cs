@@ -15,35 +15,35 @@ namespace EOS.UI.iOS.Sandbox.Storyboards
     {
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
-        UIKit.UITextField backgroundColorTextField { get; set; }
+        EOS.UI.iOS.Sandbox.CustomDropDown backgoundColorDropDown { get; set; }
 
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
-        UIKit.UITextField borderColorTextField { get; set; }
+        EOS.UI.iOS.Sandbox.CustomDropDown borderColorDropDown { get; set; }
 
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
-        UIKit.UITextField borderWidthTextField { get; set; }
+        EOS.UI.iOS.Sandbox.CustomDropDown borderWidthDropDown { get; set; }
 
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
-        UIKit.UITextField buttonTextColorTextField { get; set; }
+        EOS.UI.iOS.Sandbox.CustomDropDown buttonTextColorDropDown { get; set; }
 
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
-        UIKit.UITextField buttonTextFontTextField { get; set; }
+        EOS.UI.iOS.Sandbox.CustomDropDown buttonTextDropDown { get; set; }
 
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
-        UIKit.UITextField buttonTextLetterSpacingTextField { get; set; }
+        EOS.UI.iOS.Sandbox.CustomDropDown buttonTextFontDropDown { get; set; }
 
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
-        UIKit.UITextField buttonTextSizeTextField { get; set; }
+        EOS.UI.iOS.Sandbox.CustomDropDown buttonTextLetterSpacingDropDown { get; set; }
 
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
-        UIKit.UITextField buttonTextTextField { get; set; }
+        EOS.UI.iOS.Sandbox.CustomDropDown buttonTextSizeDropDown { get; set; }
 
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
@@ -55,19 +55,19 @@ namespace EOS.UI.iOS.Sandbox.Storyboards
 
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
-        UIKit.UITextField paddingBottomTextField { get; set; }
+        EOS.UI.iOS.Sandbox.CustomDropDown paddingBottomDropDown { get; set; }
 
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
-        UIKit.UITextField paddingLeftTextField { get; set; }
+        EOS.UI.iOS.Sandbox.CustomDropDown paddingLeftDropDown { get; set; }
 
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
-        UIKit.UITextField paddingRightTextField { get; set; }
+        EOS.UI.iOS.Sandbox.CustomDropDown paddingRightDropDown { get; set; }
 
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
-        UIKit.UITextField paddingTopTextField { get; set; }
+        EOS.UI.iOS.Sandbox.CustomDropDown paddingTopDropDown { get; set; }
 
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
@@ -79,15 +79,15 @@ namespace EOS.UI.iOS.Sandbox.Storyboards
 
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
-        UIKit.UITextField sectionNameFontTextField { get; set; }
+        EOS.UI.iOS.Sandbox.CustomDropDown sectionNameDropDown { get; set; }
 
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
-        UIKit.UITextField sectionNameLetterSpacingTextField { get; set; }
+        EOS.UI.iOS.Sandbox.CustomDropDown sectionNameFontDropDown { get; set; }
 
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
-        UIKit.UITextField sectionNameTextField { get; set; }
+        EOS.UI.iOS.Sandbox.CustomDropDown sectionNameLetterSpacingDropDown { get; set; }
 
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
@@ -99,56 +99,56 @@ namespace EOS.UI.iOS.Sandbox.Storyboards
 
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
-        UIKit.UITextField sectionTextColorTextField { get; set; }
+        EOS.UI.iOS.Sandbox.CustomDropDown sectionTextColorDropDown { get; set; }
 
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
-        UIKit.UITextField sectionTextSizeTextField { get; set; }
+        EOS.UI.iOS.Sandbox.CustomDropDown sectionTextSizeDropDown { get; set; }
 
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
-        UIKit.UITextField themeTextField { get; set; }
+        EOS.UI.iOS.Sandbox.CustomDropDown themeDropDown { get; set; }
 
         void ReleaseDesignerOutlets ()
         {
-            if (backgroundColorTextField != null) {
-                backgroundColorTextField.Dispose ();
-                backgroundColorTextField = null;
+            if (backgoundColorDropDown != null) {
+                backgoundColorDropDown.Dispose ();
+                backgoundColorDropDown = null;
             }
 
-            if (borderColorTextField != null) {
-                borderColorTextField.Dispose ();
-                borderColorTextField = null;
+            if (borderColorDropDown != null) {
+                borderColorDropDown.Dispose ();
+                borderColorDropDown = null;
             }
 
-            if (borderWidthTextField != null) {
-                borderWidthTextField.Dispose ();
-                borderWidthTextField = null;
+            if (borderWidthDropDown != null) {
+                borderWidthDropDown.Dispose ();
+                borderWidthDropDown = null;
             }
 
-            if (buttonTextColorTextField != null) {
-                buttonTextColorTextField.Dispose ();
-                buttonTextColorTextField = null;
+            if (buttonTextColorDropDown != null) {
+                buttonTextColorDropDown.Dispose ();
+                buttonTextColorDropDown = null;
             }
 
-            if (buttonTextFontTextField != null) {
-                buttonTextFontTextField.Dispose ();
-                buttonTextFontTextField = null;
+            if (buttonTextDropDown != null) {
+                buttonTextDropDown.Dispose ();
+                buttonTextDropDown = null;
             }
 
-            if (buttonTextLetterSpacingTextField != null) {
-                buttonTextLetterSpacingTextField.Dispose ();
-                buttonTextLetterSpacingTextField = null;
+            if (buttonTextFontDropDown != null) {
+                buttonTextFontDropDown.Dispose ();
+                buttonTextFontDropDown = null;
             }
 
-            if (buttonTextSizeTextField != null) {
-                buttonTextSizeTextField.Dispose ();
-                buttonTextSizeTextField = null;
+            if (buttonTextLetterSpacingDropDown != null) {
+                buttonTextLetterSpacingDropDown.Dispose ();
+                buttonTextLetterSpacingDropDown = null;
             }
 
-            if (buttonTextTextField != null) {
-                buttonTextTextField.Dispose ();
-                buttonTextTextField = null;
+            if (buttonTextSizeDropDown != null) {
+                buttonTextSizeDropDown.Dispose ();
+                buttonTextSizeDropDown = null;
             }
 
             if (hasBorderSwitch != null) {
@@ -161,24 +161,24 @@ namespace EOS.UI.iOS.Sandbox.Storyboards
                 hasButtonSwitch = null;
             }
 
-            if (paddingBottomTextField != null) {
-                paddingBottomTextField.Dispose ();
-                paddingBottomTextField = null;
+            if (paddingBottomDropDown != null) {
+                paddingBottomDropDown.Dispose ();
+                paddingBottomDropDown = null;
             }
 
-            if (paddingLeftTextField != null) {
-                paddingLeftTextField.Dispose ();
-                paddingLeftTextField = null;
+            if (paddingLeftDropDown != null) {
+                paddingLeftDropDown.Dispose ();
+                paddingLeftDropDown = null;
             }
 
-            if (paddingRightTextField != null) {
-                paddingRightTextField.Dispose ();
-                paddingRightTextField = null;
+            if (paddingRightDropDown != null) {
+                paddingRightDropDown.Dispose ();
+                paddingRightDropDown = null;
             }
 
-            if (paddingTopTextField != null) {
-                paddingTopTextField.Dispose ();
-                paddingTopTextField = null;
+            if (paddingTopDropDown != null) {
+                paddingTopDropDown.Dispose ();
+                paddingTopDropDown = null;
             }
 
             if (resetCustomizationButton != null) {
@@ -191,19 +191,19 @@ namespace EOS.UI.iOS.Sandbox.Storyboards
                 sectionContainer = null;
             }
 
-            if (sectionNameFontTextField != null) {
-                sectionNameFontTextField.Dispose ();
-                sectionNameFontTextField = null;
+            if (sectionNameDropDown != null) {
+                sectionNameDropDown.Dispose ();
+                sectionNameDropDown = null;
             }
 
-            if (sectionNameLetterSpacingTextField != null) {
-                sectionNameLetterSpacingTextField.Dispose ();
-                sectionNameLetterSpacingTextField = null;
+            if (sectionNameFontDropDown != null) {
+                sectionNameFontDropDown.Dispose ();
+                sectionNameFontDropDown = null;
             }
 
-            if (sectionNameTextField != null) {
-                sectionNameTextField.Dispose ();
-                sectionNameTextField = null;
+            if (sectionNameLetterSpacingDropDown != null) {
+                sectionNameLetterSpacingDropDown.Dispose ();
+                sectionNameLetterSpacingDropDown = null;
             }
 
             if (sectionScroll != null) {
@@ -216,19 +216,19 @@ namespace EOS.UI.iOS.Sandbox.Storyboards
                 sectionTableView = null;
             }
 
-            if (sectionTextColorTextField != null) {
-                sectionTextColorTextField.Dispose ();
-                sectionTextColorTextField = null;
+            if (sectionTextColorDropDown != null) {
+                sectionTextColorDropDown.Dispose ();
+                sectionTextColorDropDown = null;
             }
 
-            if (sectionTextSizeTextField != null) {
-                sectionTextSizeTextField.Dispose ();
-                sectionTextSizeTextField = null;
+            if (sectionTextSizeDropDown != null) {
+                sectionTextSizeDropDown.Dispose ();
+                sectionTextSizeDropDown = null;
             }
 
-            if (themeTextField != null) {
-                themeTextField.Dispose ();
-                themeTextField = null;
+            if (themeDropDown != null) {
+                themeDropDown.Dispose ();
+                themeDropDown = null;
             }
         }
     }

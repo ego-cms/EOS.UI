@@ -78,7 +78,7 @@ namespace EOS.UI.iOS.Sandbox
                 },
                 Fields.Theme,
                 frame);
-            themesDropDown.SetTextFieldText(_simpleLabel.GetThemeProvider().GetCurrentTheme().ThemeValues[EOSConstants.PrimaryColor] == UIColor.White ? "Light" : "Dark");
+            themesDropDown.SetTextFieldText(_simpleLabel.GetThemeProvider().GetCurrentTheme().ThemeValues[EOSConstants.BrandPrimaryColor] == UIColor.White ? "Light" : "Dark");
         }
 
         private void InitTextSizePicker(CGRect frame)
