@@ -283,22 +283,17 @@ namespace EOS.UI.Android.Controls
             
             SetImageDrawable(null);
 
-            var colors1 = new[] { config.Color.ToArgb(), config.Color.ToArgb() };
-            var shadow = new GradientDrawable(GradientDrawable.Orientation.TopBottom, colors1);
-            shadow.Alpha = config.Opacity;
-            shadow.SetCornerRadius(_cornerRadius);
+            var paddings = _initialWidth / 2;
+            SetPadding(paddings, paddings, paddings, paddings);
 
             Drawable[] layers = new Drawable[3];
-            layers[_shadowLayerIndex] = shadow;
+            layers[_shadowLayerIndex] = CreateShadow(config, paddings);
             layers[_backgroundLayerIndex] = CreateBackgroundDrawable();
             layers[_imageLayerIndex] = Image;
 
-            var paddings = _initialWidth / 2;//(int)(_paddingRatio * Width) + config.Radius + Image.IntrinsicWidth / 2;
-            SetPadding(paddings, paddings, paddings, paddings);
-
             LayerDrawable layerList = new LayerDrawable(layers);
             layerList.SetLayerInset(_shadowLayerIndex, 0, 0, 0, 0);
-            layerList.SetLayerInset(_backgroundLayerIndex, 0 - config.Offset.X + config.Radius, config.Offset.Y + config.Radius, config.Offset.X + config.Radius, 0 - config.Offset.Y + config.Radius);
+            layerList.SetLayerInset(_backgroundLayerIndex, 0 - config.Offset.X + config.Blur, config.Offset.Y + config.Blur, config.Offset.X + config.Blur, 0 - config.Offset.Y + config.Blur);
             layerList.SetLayerSize(_imageLayerIndex, Image.IntrinsicWidth, Image.IntrinsicHeight);
             SetInsetForImageLayer(layerList, Image, paddings, config.Offset);
 
@@ -391,6 +386,37 @@ namespace EOS.UI.Android.Controls
             drawable.PivotYRelative = true;
             drawable.PivotY = _pivot;
             return drawable;
+        }
+
+        private Drawable CreateShadow(ShadowConfig config, int halfWidth)
+        {
+            
+            var layers = new Drawable[config.Blur];
+
+            for (int i = 0; i < config.Blur; i++)
+            {
+                var color = config.Color;
+                color.A = (byte)(128 / (2 + 1.25 * i)); //y(x) = 128/(2+x*1.25) looks good
+                var colors = new[] { color.ToArgb(), color.ToArgb() };
+                var layer = new GradientDrawable(GradientDrawable.Orientation.BlTr, colors);
+                layer.SetCornerRadius(_cornerRadius);
+                layers[i] = layer;
+
+                Console.WriteLine($"Layer {i} - Alpha-{color.A}, radius - {config.Blur - i}");
+            }
+
+            var returnDrawable = new LayerDrawable(layers);
+
+            for (int i = 0; i < config.Blur; i++)
+            {
+                var width = halfWidth * 2 - (config.Blur - i) * 2;
+                var leftTop = config.Blur - i;
+                returnDrawable.SetLayerSize(i, width, width);
+                returnDrawable.SetLayerInset(i, leftTop, leftTop, 0, 0);
+                Console.WriteLine($"Layer {i} - leftTop-{leftTop}, width-{width}");
+            }
+
+            return returnDrawable;
         }
     }
 }

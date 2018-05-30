@@ -240,17 +240,19 @@ namespace EOS.UI.Android.Sandbox.Helpers
             public const string Shadow5 = "Shadow5";
             public const string Shadow6 = "Ugly shadow";
             public const string Shadow7 = "No shadow";
+            public const string Shadow8 = "Normal shadow";
 
             public static Dictionary<string, ShadowConfig> ShadowsCollection = new Dictionary<string, ShadowConfig>()
             {
                 { string.Empty, null },
-                { Shadow1, new ShadowConfig{ Color = Color.Red, Offset = new Offset(0,0), Radius = 5, Opacity = 200} },
-                { Shadow2, new ShadowConfig{ Color = Color.Green, Offset = new Offset(5,5), Radius = 5, Opacity = 200} },
-                { Shadow3, new ShadowConfig{ Color = Color.Blue, Offset = new Offset(-5,5), Radius = 5, Opacity = 200} },
-                { Shadow4, new ShadowConfig{ Color = Color.Yellow, Offset = new Offset(5,-5), Radius = 5, Opacity = 200} },
-                { Shadow5, new ShadowConfig{ Color = Color.Purple, Offset = new Offset(-5,-5), Radius = 5, Opacity = 200} },
-                { Shadow6, new ShadowConfig{ Color = Color.Purple, Offset = new Offset(-25,-25), Radius = 15, Opacity = 200} },
+                { Shadow1, new ShadowConfig{ Color = Color.Red, Offset = new Offset(0,0), Blur = 5, Spread = 200} },
+                { Shadow2, new ShadowConfig{ Color = Color.Green, Offset = new Offset(5,5), Blur = 5, Spread = 200} },
+                { Shadow3, new ShadowConfig{ Color = Color.Blue, Offset = new Offset(-5,5), Blur = 5, Spread = 200} },
+                { Shadow4, new ShadowConfig{ Color = Color.Yellow, Offset = new Offset(5,-5), Blur = 5, Spread = 200} },
+                { Shadow5, new ShadowConfig{ Color = Color.Purple, Offset = new Offset(-5,-5), Blur = 5, Spread = 200} },
+                { Shadow6, new ShadowConfig{ Color = Color.Purple, Offset = new Offset(-25,-25), Blur = 15, Spread = 200} },
                 { Shadow7, null },
+                { Shadow8, new ShadowConfig{ Color = Color.Black, Offset = new Offset(0,0), Blur = 2, Spread = 200}  },
             };
         }
 

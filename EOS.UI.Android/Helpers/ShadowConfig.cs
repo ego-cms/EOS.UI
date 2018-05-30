@@ -7,7 +7,7 @@ namespace EOS.UI.Android.Helpers
     {
         public Color Color { get; set; }
         public Offset Offset { get; set; }
-        public int Radius { get; set; }
-        public int Opacity { get; set; }
+        public int Blur { get; set; }
+        public int Spread { get; set; }
     }
 }
