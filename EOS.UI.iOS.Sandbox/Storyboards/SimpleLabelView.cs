@@ -10,6 +10,7 @@ using System.Collections.Generic;
 using UIFrameworks.Shared.Themes.Helpers;
 using UIKit;
 using EOS.UI.iOS.Sandbox.Controls.Pickers;
+using static EOS.UI.iOS.Sandbox.Helpers.Constants;
 using EOS.UI.Shared.Themes.Themes;
 
 namespace EOS.UI.iOS.Sandbox
@@ -17,7 +18,7 @@ namespace EOS.UI.iOS.Sandbox
     public partial class SimpleLabelView : BaseViewController
     {
         public const string Identifier = "SimpleLabelView";
-        private List<UITextField> _textFields;
+        private List<CustomDropDown> _dropDowns;
         private SimpleLabel _simpleLabel;
 
         public SimpleLabelView (IntPtr handle) : base (handle)
@@ -33,18 +34,18 @@ namespace EOS.UI.iOS.Sandbox
                 Text = "Default text"
             };
 
-            _textFields = new List<UITextField>()
+            _dropDowns = new List<CustomDropDown>()
             {
-                themeField,
-                fontField,
-                textColorField,
-                textSizeField,
-                letterSpacingField
+                themesDropDown,
+                fontDropDown,
+                textColorDropDown,
+                textSizeDropDown,
+                letterSpacingDropDown
             };
 
             View.AddGestureRecognizer(new UITapGestureRecognizer(() =>
             {
-                _textFields.ForEach(field => field.ResignFirstResponder());
+                _dropDowns.ForEach(field => field.ResignFirstResponder());
             }));
             _simpleLabel.TextAlignment = UITextAlignment.Center;
             containerView.ConstrainLayout(() => _simpleLabel.Frame.GetCenterY() == containerView.Frame.GetCenterY() &&
@@ -62,119 +63,58 @@ namespace EOS.UI.iOS.Sandbox
             resetButton.TouchUpInside += (sender, e) =>
             {
                 _simpleLabel.ResetCustomization();
-                _textFields.Except(new List<UITextField>() { themeField }).ToList().ForEach(f => f.Text = String.Empty);
+                _dropDowns.Except(new [] { themesDropDown }).ToList().ForEach(d => d.ResetValue());
             };
         }
 
         private void InitThemePicker(CGRect frame)
         {
-			var themePicker = new UIPickerView(frame)
-			{
-				ShowSelectionIndicator = true,
-				DataSource = new DictionaryPickerSource<string, EOSThemeEnumeration>(Constants.Themes)
-            };
-            var themePickerDelegate = new DictionaryPickerDelegate<String ,EOSThemeEnumeration>(Constants.Themes);
-            themePickerDelegate.DidSelected += (object sender, KeyValuePair<string, EOSThemeEnumeration> e) =>
-            {
-                themeField.Text = e.Key;
-                var provider = _simpleLabel.GetThemeProvider();
-                provider.SetCurrentTheme(e.Value);
-                _simpleLabel.ResetCustomization();
-                _textFields.Except(new[] { themeField }).ToList().ForEach(f => f.Text = String.Empty);
-            };
-            themeField.Text = _simpleLabel.GetThemeProvider().GetCurrentTheme() is LightEOSTheme ? "Light" : "Dark";
-            themePicker.Delegate = themePickerDelegate;
-            themeField.InputView = themePicker;
+            themesDropDown.InitSource(
+                Constants.Themes,
+                (theme) =>
+                {
+                    _simpleLabel.GetThemeProvider().SetCurrentTheme(theme);
+                    _simpleLabel.ResetCustomization();
+                    _dropDowns.Except(new[] { themesDropDown }).ToList().ForEach(dropDown => dropDown.ResetValue());
+                },
+                Fields.Theme,
+                frame);
+            themesDropDown.SetTextFieldText(_simpleLabel.GetThemeProvider().GetCurrentTheme() is LightEOSTheme ? "Light" : "Dark");
         }
 
         private void InitTextSizePicker(CGRect frame)
         {
-            var textSizePicker = new UIPickerView(frame);
-            textSizePicker.ShowSelectionIndicator = true;
-            textSizePicker.DataSource = new ValuePickerSource<int>(Constants.FontSizeValues);
-			var textSizePickerDelegate = new ValuePickerDelegate<int>(Constants.FontSizeValues);
-            textSizePickerDelegate.DidSelected += (object sender, int e) =>
-            {
-                _simpleLabel.TextSize = e;
-                textSizeField.Text = e.ToString();
-            };
-            textSizeField.EditingDidBegin += (sender, e) =>
-            {
-                var size = Constants.FontSizeValues[(int)textSizePicker.SelectedRowInComponent(0)];
-                _simpleLabel.TextSize = size;
-                textSizeField.Text = size.ToString();
-            };
-            textSizePicker.Delegate = textSizePickerDelegate;
-            textSizeField.InputView = textSizePicker;
+            textSizeDropDown.InitSource(
+                FontSizeValues,
+                size => _simpleLabel.TextSize = size,
+                Fields.TextSize,
+                frame);
         }
 
         private void InitFontPicker(CGRect frame)
         {
-			var fontPicker = new UIPickerView(frame)
-			{
-				ShowSelectionIndicator = true,
-				DataSource = new ValuePickerSource<UIFont>(Constants.Fonts)
-            };
-			var fontPickerDelegate = new ValuePickerDelegate<UIFont>(Constants.Fonts);
-            fontPickerDelegate.DidSelected += (object sender, UIFont e) =>
-            {
-                _simpleLabel.Font = e;
-                fontField.Text = e.Name;
-            };
-            fontField.EditingDidBegin += (sender, e) =>
-            {
-                var font = Constants.Fonts.ElementAt((int)fontPicker.SelectedRowInComponent(0));
-                _simpleLabel.Font = font;
-                fontField.Text = font.Name;
-            };
-            fontPicker.Delegate = fontPickerDelegate;
-            fontField.InputView = fontPicker;
+            fontDropDown.InitSource(
+                Fonts,
+                font => _simpleLabel.Font = font,
+                Fields.Font,
+                frame);
         }
 
         private void InitTextColorPicker(CGRect frame)
         {
-            var textColorPicker = new UIPickerView(frame)
-            {
-                ShowSelectionIndicator = true,
-                DataSource = new ColorPickerSource()
-            };
-            var textColorPickerDelegate = new ColorPickerDelegate();
-            textColorPickerDelegate.DidSelected += (object sender, KeyValuePair<string, UIColor> e) =>
-            {
-                _simpleLabel.TextColor = e.Value;
-                textColorField.Text = e.Key;
-            };
-            textColorField.EditingDidBegin += (sender, e) =>
-            {
-                var colorPair = Constants.Colors.ElementAt((int)textColorPicker.SelectedRowInComponent(0));
-                _simpleLabel.TextColor = colorPair.Value;
-                textColorField.Text = colorPair.Key;
-            };
-            textColorPicker.Delegate = textColorPickerDelegate;
-            textColorField.InputView = textColorPicker;
+            textColorDropDown.InitSource(
+                color => _simpleLabel.TextColor = color,
+                Fields.TextColor,
+                frame);
         }
 
         private void InitLetterSpacingPicker(CGRect frame)
         {
-			var letterSpacingPicker = new UIPickerView(frame)
-			{
-				ShowSelectionIndicator = true,
-				DataSource = new ValuePickerSource<int>(Constants.LetterSpacingValues)
-            };
-            var letterSpacingPickerDelegate = new ValuePickerDelegate<int>(Constants.LetterSpacingValues);
-            letterSpacingPickerDelegate.DidSelected += (object sender, int e) =>
-            {
-                _simpleLabel.LetterSpacing = e;
-                letterSpacingField.Text = e.ToString();
-            };
-            letterSpacingField.EditingDidBegin += (sender, e) =>
-            {
-                var spacing = Constants.LetterSpacingValues[(int)letterSpacingPicker.SelectedRowInComponent(0)];
-                _simpleLabel.LetterSpacing = spacing;
-                letterSpacingField.Text = spacing.ToString();
-            };
-            letterSpacingPicker.Delegate = letterSpacingPickerDelegate;
-            letterSpacingField.InputView = letterSpacingPicker;
+            letterSpacingDropDown.InitSource(
+                LetterSpacingValues,
+                spacing => _simpleLabel.LetterSpacing = spacing,
+                Fields.LetterSpacing,
+                frame);
         }
     }
 }
