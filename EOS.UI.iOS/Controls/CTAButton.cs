@@ -26,7 +26,16 @@ namespace EOS.UI.iOS.Controls
         
         public StateEnum ButtonState { get; set; }
 
-        public bool InProgress { get; set; }
+        private bool _inProgress;
+        public bool InProgress
+        {
+            get => _inProgress;
+            set
+            {
+                _inProgress = value;
+                UserInteractionEnabled = !value;
+            }
+        }
 
         public bool Success { get; set; }
 
@@ -76,11 +85,11 @@ namespace EOS.UI.iOS.Controls
 
         public void StartProgressAnimation()
         {
+            InProgress = true;
             SaveTitles();
             SetTitle(string.Empty, UIControlState.Normal);
             SetImage(PreloaderImage);
             ImageView.Layer.AddAnimation(_rotationAnimation, _rotationAnimationKey);
-            InProgress = true;
         }
         
         public void StopProgressAnimation()

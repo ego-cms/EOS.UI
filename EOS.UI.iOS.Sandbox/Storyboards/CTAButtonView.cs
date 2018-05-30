@@ -16,7 +16,7 @@ namespace EOS.UI.iOS.Sandbox
     public partial class CTAButtonView : BaseViewController
     {
         public const string Identifier = "CTAButtonView";
-        private CTAButton _simpleButton;
+        private CTAButton _ctaButton;
         private List<CustomDropDown> _dropDowns;
 
         public CTAButtonView (IntPtr handle) : base (handle)
@@ -27,23 +27,19 @@ namespace EOS.UI.iOS.Sandbox
         {
             base.ViewDidLoad();
 
-            _simpleButton = new CTAButton();
-            _simpleButton.SetTitle("Simple button", UIControlState.Normal);
-            _simpleButton.LetterSpacing = 3;
-            _simpleButton.TextSize = 50;
+            _ctaButton = new CTAButton();
+            _ctaButton.SetTitle("CTA button", UIControlState.Normal);
             
-            containerView.ConstrainLayout(() => _simpleButton.Frame.GetCenterX() == containerView.Frame.GetCenterX() &&
-                              _simpleButton.Frame.GetCenterY() == containerView.Frame.GetCenterY() &&
-                              _simpleButton.Frame.Left == containerView.Frame.Left &&
-                              _simpleButton.Frame.Right == containerView.Frame.Right, _simpleButton);
+            containerView.ConstrainLayout(() => _ctaButton.Frame.GetCenterX() == containerView.Frame.GetCenterX() &&
+                              _ctaButton.Frame.GetCenterY() == containerView.Frame.GetCenterY() &&
+                              _ctaButton.Frame.Left == containerView.Frame.Left &&
+                              _ctaButton.Frame.Right == containerView.Frame.Right, _ctaButton);
             
-            _simpleButton.TouchUpInside += async (sender, e) =>
+            _ctaButton.TouchUpInside += async (sender, e) =>
             {
-                if (_simpleButton.InProgress)
-                    return;
-                _simpleButton.StartProgressAnimation();
+                _ctaButton.StartProgressAnimation();
                 await Task.Delay(5000);
-                _simpleButton.StopProgressAnimation();
+                _ctaButton.StopProgressAnimation();
             };
             
             _dropDowns = new List<CustomDropDown>()
@@ -58,6 +54,7 @@ namespace EOS.UI.iOS.Sandbox
                 enabledBackgroundDropDown,
                 disabledBackgroundDropDown,
                 pressedTextColorDropDown,
+                pressedBackgroundDropdown,
                 cornerRadiusDropDown
             };
 
@@ -88,20 +85,20 @@ namespace EOS.UI.iOS.Sandbox
                 Constants.Themes,
                 (theme) =>
                 {
-                    _simpleButton.GetThemeProvider().SetCurrentTheme(theme);
-                    _simpleButton.ResetCustomization();
+                    _ctaButton.GetThemeProvider().SetCurrentTheme(theme);
+                    _ctaButton.ResetCustomization();
                     _dropDowns.Except(new[] { themeDropDown }).ToList().ForEach(dropDown => dropDown.ResetValue());
                 },
                 Fields.Theme,
                 rect);
-            themeDropDown.SetTextFieldText(_simpleButton.GetThemeProvider().GetCurrentTheme() is LightEOSTheme ? "Light" : "Dark");
+            themeDropDown.SetTextFieldText(_ctaButton.GetThemeProvider().GetCurrentTheme() is LightEOSTheme ? "Light" : "Dark");
         }
 
         private void InitFontDropDown(CGRect rect)
         {
             fontDropDown.InitSource(
                 Fonts,
-                font => _simpleButton.Font = font,
+                font => _ctaButton.Font = font,
                 Fields.Font,
                 rect);
         }
@@ -110,7 +107,7 @@ namespace EOS.UI.iOS.Sandbox
         {
             letterSpacingDropDown.InitSource(
                 LetterSpacingValues,
-                spacing => _simpleButton.LetterSpacing = spacing,
+                spacing => _ctaButton.LetterSpacing = spacing,
                 Fields.LetterSpacing,
                 rect);
         }
@@ -119,7 +116,7 @@ namespace EOS.UI.iOS.Sandbox
         {
             textSizeDropDown.InitSource(
                 FontSizeValues,
-                size => _simpleButton.TextSize = size,
+                size => _ctaButton.TextSize = size,
                 Fields.TextSize,
                 rect);
         }
@@ -127,7 +124,7 @@ namespace EOS.UI.iOS.Sandbox
         private void InitTextColorEnabledDropDown(CGRect rect)
         {
             enabledTextColorDropDown.InitSource(
-                color => _simpleButton.TextColor = color,
+                color => _ctaButton.TextColor = color,
                 Fields.EnabledTextColor,
                 rect);
         }
@@ -135,7 +132,7 @@ namespace EOS.UI.iOS.Sandbox
         private void InitTextColorDisabledDropDown(CGRect rect)
         {
             disabledTextColorDropDown.InitSource(
-                color => _simpleButton.DisabledTextColor = color,
+                color => _ctaButton.DisabledTextColor = color,
                 Fields.DisabledTextColor,
                 rect);
         }
@@ -143,7 +140,7 @@ namespace EOS.UI.iOS.Sandbox
         private void InitTextColorPressedDropDown(CGRect rect)
         {
             pressedTextColorDropDown.InitSource(
-                color => _simpleButton.PressedTextColor = color,
+                color => _ctaButton.PressedTextColor = color,
                 Fields.PressedTextColor,
                 rect);
         }
@@ -151,7 +148,7 @@ namespace EOS.UI.iOS.Sandbox
         private void InitBackgroundColorEnabledDropDown(CGRect rect)
         {
             enabledBackgroundDropDown.InitSource(
-                color => _simpleButton.BackgroundColor = color,
+                color => _ctaButton.BackgroundColor = color,
                 Fields.EnabledBackground,
                 rect);
         }
@@ -159,7 +156,7 @@ namespace EOS.UI.iOS.Sandbox
         private void InitBackgroundColorDisabledDropDown(CGRect rect)
         {
             disabledBackgroundDropDown.InitSource(
-                color => _simpleButton.DisabledBackgroundColor = color,
+                color => _ctaButton.DisabledBackgroundColor = color,
                 Fields.DisabledBackground,
                 rect);
         }
@@ -167,7 +164,7 @@ namespace EOS.UI.iOS.Sandbox
         private void InitBackgroundColorPressedDropDown(CGRect rect)
         {
             pressedBackgroundDropdown.InitSource(
-                color => _simpleButton.PressedBackgroundColor = color,
+                color => _ctaButton.PressedBackgroundColor = color,
                 Fields.PressedBackground,
                 rect);
         }
@@ -176,7 +173,7 @@ namespace EOS.UI.iOS.Sandbox
         {
             cornerRadiusDropDown.InitSource(
                 CornerRadiusValues,
-                radius => _simpleButton.CornerRadius = radius,
+                radius => _ctaButton.CornerRadius = radius,
                 Fields.ConerRadius,
                 rect);
         }
@@ -186,7 +183,7 @@ namespace EOS.UI.iOS.Sandbox
             enableSwitch.On = true;
             enableSwitch.ValueChanged += (sender, e) =>
             {
-                _simpleButton.Enabled = enableSwitch.On;
+                _ctaButton.Enabled = enableSwitch.On;
             };
         }
 
@@ -194,7 +191,7 @@ namespace EOS.UI.iOS.Sandbox
         {
             resetButton.TouchUpInside += (sender, e) =>
             {
-                _simpleButton.ResetCustomization();
+                _ctaButton.ResetCustomization();
                 ResetFields();
             };
         }
