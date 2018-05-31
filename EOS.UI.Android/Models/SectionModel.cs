@@ -26,5 +26,30 @@ namespace EOS.UI.Android.Models
         public int BottonPadding { get; set; }
         public int RightPadding { get; set; }
         public int LeftPadding { get; set; }
+
+        public void CopyData(SectionModel model)
+        {
+            ResetCustomization = model.ResetCustomization;
+            SectionName = model.SectionName;
+            ButtonText = model.ButtonText;
+            HasButton = model.HasButton;
+            SectionAction = model.SectionAction;
+            SectionNameTextSize = model.SectionNameTextSize;
+            ButtonTextTextSize = model.ButtonTextTextSize;
+            SectionTextLetterSpacing = model.SectionTextLetterSpacing;
+            ButtonTextLetterSpacing = model.ButtonTextLetterSpacing;
+            SectionNameFont = model.SectionNameFont;
+            ButtonNameFont = model.ButtonNameFont;
+            SectionNameColor = model.SectionNameColor;
+            ButtonNameColor = model.ButtonNameColor;
+            BackgroundColor = model.BackgroundColor;
+            HasBorder = model.HasBorder;
+            BorderColor = model.BorderColor;
+            BorderWidth = model.BorderWidth;
+            TopPadding = model.TopPadding;
+            BottonPadding = model.BottonPadding;
+            RightPadding = model.RightPadding;
+            LeftPadding = model.LeftPadding;
+        }
     }
 }

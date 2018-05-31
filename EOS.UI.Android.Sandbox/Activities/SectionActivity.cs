@@ -22,7 +22,7 @@ namespace EOS.UI.Android.Sandbox.Activities
     {
         private RecyclerView _sectionRecyclerView;
         private List<object> _dataSource;
-
+        
         private SandboxDropDown _themeDropDown;
         private SandboxDropDown _sectionNameDropDown;
         private SandboxDropDown _buttonTextDropDown;
@@ -43,7 +43,7 @@ namespace EOS.UI.Android.Sandbox.Activities
         private SandboxDropDown _paddingRightDropDown;
         private Switch _hasBorderSwitch;
         private Switch _hasButtonSwitch;
-        private Button _resetCustomizationSwich;
+        private Button _resetCustomizationButton;
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
@@ -54,14 +54,16 @@ namespace EOS.UI.Android.Sandbox.Activities
             var layoutManager = new LinearLayoutManager(BaseContext);
             _sectionRecyclerView.SetLayoutManager(layoutManager);
 
+            var defaultModel = new SectionModel()
+            {
+                SectionAction = () => { Toast.MakeText(BaseContext, "Action invoked", ToastLength.Short).Show(); },
+                HasBorder = (bool)EOSThemeProvider.Instance.GetCurrentTheme().ThemeValues[EOSConstants.HasSectionBorder],
+                HasButton = (bool)EOSThemeProvider.Instance.GetCurrentTheme().ThemeValues[EOSConstants.HasSectionAction]
+            };
+
             _dataSource = new List<object>()
             {
-                new SectionModel()
-                {
-                    SectionAction = () => { Toast.MakeText(BaseContext, "Action invoked", ToastLength.Short).Show(); },
-                    HasBorder= (bool)EOSThemeProvider.Instance.GetCurrentTheme().ThemeValues[EOSConstants.HasSectionBorder],
-                    HasButton = (bool)EOSThemeProvider.Instance.GetCurrentTheme().ThemeValues[EOSConstants.HasSectionAction]
-                },
+                defaultModel,
                 "First item",
                 "Second item",
                 "Third item"
@@ -90,7 +92,7 @@ namespace EOS.UI.Android.Sandbox.Activities
             _paddingRightDropDown = FindViewById<SandboxDropDown>(Resource.Id.paddingRightDropDown);
             _hasBorderSwitch = FindViewById<Switch>(Resource.Id.switchHasBorder);
             _hasButtonSwitch = FindViewById<Switch>(Resource.Id.switchHasButton);
-            _resetCustomizationSwich = FindViewById<Button>(Resource.Id.buttonResetCustomization);
+            _resetCustomizationButton = FindViewById<Button>(Resource.Id.buttonResetCustomization);
 
             _themeDropDown.Name = Fields.Theme;
             _themeDropDown.SetupAdapter(ThemeTypes.ThemeCollection.Select(item => item.Key).ToList());
@@ -168,7 +170,7 @@ namespace EOS.UI.Android.Sandbox.Activities
 
             _hasButtonSwitch.CheckedChange += HasButtonSwitch_CheckedChange;
 
-            _resetCustomizationSwich.Click += ResetCustomizationSwich_Click;
+            _resetCustomizationButton.Click += ResetCustomizationClick;
 
             SetCurrenTheme(EOSThemeProvider.Instance.GetCurrentTheme());
         }
@@ -186,7 +188,14 @@ namespace EOS.UI.Android.Sandbox.Activities
 
         private void ResetCustomValues()
         {
-            (_sectionRecyclerView.GetAdapter() as SectionAdapter).ResetCustomizatin();
+            var defaultModel = new SectionModel()
+            {
+                SectionAction = () => { Toast.MakeText(BaseContext, "Action invoked", ToastLength.Short).Show(); },
+                HasBorder = (bool)EOSThemeProvider.Instance.GetCurrentTheme().ThemeValues[EOSConstants.HasSectionBorder],
+                HasButton = (bool)EOSThemeProvider.Instance.GetCurrentTheme().ThemeValues[EOSConstants.HasSectionAction]
+            };
+
+            (_sectionRecyclerView.GetAdapter() as SectionAdapter).ResetCustomizatin(defaultModel);
             _sectionFontDropDown.SetSpinnerSelection(0);
             _buttonFontDropDown.SetSpinnerSelection(0);
             _sectionNameDropDown.SetSpinnerSelection(0);
@@ -208,7 +217,7 @@ namespace EOS.UI.Android.Sandbox.Activities
             _hasButtonSwitch.Checked = (bool)EOSThemeProvider.Instance.GetCurrentTheme().ThemeValues[EOSConstants.HasSectionAction];
         }
 
-        private void ResetCustomizationSwich_Click(object sender, EventArgs e)
+        private void ResetCustomizationClick(object sender, EventArgs e)
         {
             ResetCustomValues();
         }

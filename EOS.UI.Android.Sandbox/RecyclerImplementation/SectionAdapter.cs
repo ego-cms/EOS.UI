@@ -13,10 +13,11 @@ namespace EOS.UI.Android.Sandbox.RecyclerImplementation
         private List<object> _itemSource = new List<object>();
         public List<object> Headers => _itemSource.FindAll(item => item is SectionModel);
 
-        public void ResetCustomizatin()
+        public void ResetCustomizatin(SectionModel defaultModel)
         {
             if(Headers.FirstOrDefault() is SectionModel section)
             {
+                section.CopyData(defaultModel);
                 section.ResetCustomization = true;
                 NotifyDataSetChanged();
             }

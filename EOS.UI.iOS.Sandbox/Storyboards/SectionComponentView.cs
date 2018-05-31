@@ -110,6 +110,14 @@ namespace EOS.UI.iOS.Sandbox.Storyboards
         {
             resetCustomizationButton.TouchUpInside += (sender, e) =>
             {
+                var defaultModel = new SectionModel()
+                {
+                    SectionAction = () => { new UIAlertView("Action", "Action invoked", null, "Ok", null).Show(); },
+                    HasBorder = (bool)EOSThemeProvider.Instance.GetCurrentTheme().ThemeValues[EOSConstants.HasSectionBorder],
+                    HasButton = (bool)EOSThemeProvider.Instance.GetCurrentTheme().ThemeValues[EOSConstants.HasSectionAction]
+                };
+
+                (sectionTableView.Source as SectionTableSource).SectionModel.CopyData(defaultModel);
                 (sectionTableView.Source as SectionTableSource).SectionModel.ResetCustomization = true;
                 sectionTableView.ReloadData();
                 ResetFields();
@@ -360,6 +368,13 @@ namespace EOS.UI.iOS.Sandbox.Storyboards
                 (theme) =>
                 {
                     EOSThemeProvider.Instance.SetCurrentTheme(theme);
+                    var defaultModel = new SectionModel()
+                    {
+                        SectionAction = () => { new UIAlertView("Action", "Action invoked", null, "Ok", null).Show(); },
+                        HasBorder = (bool)EOSThemeProvider.Instance.GetCurrentTheme().ThemeValues[EOSConstants.HasSectionBorder],
+                        HasButton = (bool)EOSThemeProvider.Instance.GetCurrentTheme().ThemeValues[EOSConstants.HasSectionAction]
+                    };
+                    (sectionTableView.Source as SectionTableSource).SectionModel.CopyData(defaultModel);
                     (sectionTableView.Source as SectionTableSource).SectionModel.ResetCustomization = true;
                     sectionTableView.ReloadData();
                     _dropDowns.Except(new[] { themeDropDown }).ToList().ForEach(dropDown => dropDown.ResetValue());
