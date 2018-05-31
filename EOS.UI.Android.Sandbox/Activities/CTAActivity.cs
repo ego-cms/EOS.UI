@@ -52,7 +52,7 @@ namespace EOS.UI.Android.Sandbox.Activities
             {
                 RunOnUiThread(() =>
                 {
-                    _CTAButton.StopAnimation();
+                    _CTAButton.StopProgressAnimation();
                     _isAnimated = false;
                     ToggleEnableState();
                 });
@@ -62,7 +62,7 @@ namespace EOS.UI.Android.Sandbox.Activities
             {
                 if(!_isAnimated)
                 {
-                    _CTAButton.StartAnimation();
+                    _CTAButton.StartProgressAnimation();
                     _timer.Start();
                     _isAnimated = true;
                     ToggleEnableState();
