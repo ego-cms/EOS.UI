@@ -44,7 +44,7 @@ namespace EOS.UI.Android.Sandbox.Helpers
             public static string SectionNameFont = "Section name font";
             public static string ButtonTextFont = "Button text font";
             public static string SectionTextSize = "Section text size";
-            public static string ButtonTextSize = "Button text font";
+            public static string ButtonTextSize = "Button text size";
             public static string SectionTextColor = "Section text color";
             public static string ButtonTextColor = "Button text color";
             public static string BackgroundColor = "Backgroud color";

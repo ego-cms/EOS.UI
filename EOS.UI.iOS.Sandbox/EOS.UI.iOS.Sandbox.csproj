@@ -168,12 +168,17 @@
     <InterfaceDefinition Include="Storyboards\CircleProgressView.storyboard" />
   </ItemGroup>
   <ItemGroup>
+    <InterfaceDefinition Include="Controls\CustomDropDown.xib" />
     <None Include="Info.plist" />
     <None Include="Entitlements.plist" />
     <InterfaceDefinition Include="Storyboards\SimpleLabelView.storyboard" />
     <InterfaceDefinition Include="Storyboards\SectionView.storyboard" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controls\CustomDropDown.cs" />
+    <Compile Include="Controls\CustomDropDown.designer.cs">
+      <DependentUpon>CustomDropDown.cs</DependentUpon>
+    </Compile>
     <Compile Include="Main.cs" />
     <Compile Include="AppDelegate.cs" />
     <Compile Include="Storyboards\SectionComponentView.cs" />

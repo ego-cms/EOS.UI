@@ -15,7 +15,6 @@ namespace EOS.UI.iOS.Sandbox.TableSources
         private List<string> _source;
         public SectionModel SectionModel { get; set; }
 
-
         public SectionTableSource(UITableView table, List<object> dataSource)
         {
             SectionModel = dataSource.FirstOrDefault(item => item is SectionModel) as SectionModel;

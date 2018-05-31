@@ -16,23 +16,31 @@ namespace EOS.UI.iOS.Sandbox
     {
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
-        UIKit.UITextField backgroundColorDisabledTextField { get; set; }
-
-        [Outlet]
-        [GeneratedCode ("iOS Designer", "1.0")]
-        UIKit.UITextField backgroundColorEnabledTextField { get; set; }
-
-        [Outlet]
-        [GeneratedCode ("iOS Designer", "1.0")]
-        UIKit.UITextField backgroundColorPressedTextField { get; set; }
-
-        [Outlet]
-        [GeneratedCode ("iOS Designer", "1.0")]
         UIKit.UIView containerView { get; set; }
 
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
-        UIKit.UITextField cornerRadiusTextField { get; set; }
+        EOS.UI.iOS.Sandbox.CustomDropDown cornerRadiusDropDown { get; set; }
+
+        [Outlet]
+        [GeneratedCode ("iOS Designer", "1.0")]
+        EOS.UI.iOS.Sandbox.CustomDropDown disabledBackgroundDropDown { get; set; }
+
+        [Outlet]
+        [GeneratedCode ("iOS Designer", "1.0")]
+        EOS.UI.iOS.Sandbox.CustomDropDown disabledTextColorDropDown { get; set; }
+
+        [Outlet]
+        [GeneratedCode ("iOS Designer", "1.0")]
+        EOS.UI.iOS.Sandbox.CustomDropDown enabledBackgrDropDown { get; set; }
+
+        [Outlet]
+        [GeneratedCode ("iOS Designer", "1.0")]
+        UIKit.NSLayoutConstraint enabledBackgroundDropDown { get; set; }
+
+        [Outlet]
+        [GeneratedCode ("iOS Designer", "1.0")]
+        EOS.UI.iOS.Sandbox.CustomDropDown enabledTextColorDropDown { get; set; }
 
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
@@ -40,11 +48,19 @@ namespace EOS.UI.iOS.Sandbox
 
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
-        UIKit.UITextField fontTextField { get; set; }
+        EOS.UI.iOS.Sandbox.CustomDropDown fontDropDown { get; set; }
 
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
-        UIKit.UITextField letterSpacingTextField { get; set; }
+        EOS.UI.iOS.Sandbox.CustomDropDown letterSpacingDropDown { get; set; }
+
+        [Outlet]
+        [GeneratedCode ("iOS Designer", "1.0")]
+        EOS.UI.iOS.Sandbox.CustomDropDown pressedBackgroundDropDown { get; set; }
+
+        [Outlet]
+        [GeneratedCode ("iOS Designer", "1.0")]
+        EOS.UI.iOS.Sandbox.CustomDropDown pressedTextColorDropDown { get; set; }
 
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
@@ -56,49 +72,47 @@ namespace EOS.UI.iOS.Sandbox
 
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
-        UIKit.UITextField textColorDisabledTextField { get; set; }
+        EOS.UI.iOS.Sandbox.CustomDropDown textSizeDropDown { get; set; }
 
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
-        UIKit.UITextField textColorEnabledTextField { get; set; }
-
-        [Outlet]
-        [GeneratedCode ("iOS Designer", "1.0")]
-        UIKit.UITextField textColorPressedTextField { get; set; }
-
-        [Outlet]
-        [GeneratedCode ("iOS Designer", "1.0")]
-        UIKit.UITextField textSizeTextField { get; set; }
-
-        [Outlet]
-        [GeneratedCode ("iOS Designer", "1.0")]
-        UIKit.UITextField themeTextField { get; set; }
+        EOS.UI.iOS.Sandbox.CustomDropDown themeDropDown { get; set; }
 
         void ReleaseDesignerOutlets ()
         {
-            if (backgroundColorDisabledTextField != null) {
-                backgroundColorDisabledTextField.Dispose ();
-                backgroundColorDisabledTextField = null;
-            }
-
-            if (backgroundColorEnabledTextField != null) {
-                backgroundColorEnabledTextField.Dispose ();
-                backgroundColorEnabledTextField = null;
-            }
-
-            if (backgroundColorPressedTextField != null) {
-                backgroundColorPressedTextField.Dispose ();
-                backgroundColorPressedTextField = null;
-            }
-
             if (containerView != null) {
                 containerView.Dispose ();
                 containerView = null;
             }
 
-            if (cornerRadiusTextField != null) {
-                cornerRadiusTextField.Dispose ();
-                cornerRadiusTextField = null;
+            if (cornerRadiusDropDown != null) {
+                cornerRadiusDropDown.Dispose ();
+                cornerRadiusDropDown = null;
+            }
+
+            if (disabledBackgroundDropDown != null) {
+                disabledBackgroundDropDown.Dispose ();
+                disabledBackgroundDropDown = null;
+            }
+
+            if (disabledTextColorDropDown != null) {
+                disabledTextColorDropDown.Dispose ();
+                disabledTextColorDropDown = null;
+            }
+
+            if (enabledBackgrDropDown != null) {
+                enabledBackgrDropDown.Dispose ();
+                enabledBackgrDropDown = null;
+            }
+
+            if (enabledBackgroundDropDown != null) {
+                enabledBackgroundDropDown.Dispose ();
+                enabledBackgroundDropDown = null;
+            }
+
+            if (enabledTextColorDropDown != null) {
+                enabledTextColorDropDown.Dispose ();
+                enabledTextColorDropDown = null;
             }
 
             if (enableSwitch != null) {
@@ -106,14 +120,24 @@ namespace EOS.UI.iOS.Sandbox
                 enableSwitch = null;
             }
 
-            if (fontTextField != null) {
-                fontTextField.Dispose ();
-                fontTextField = null;
+            if (fontDropDown != null) {
+                fontDropDown.Dispose ();
+                fontDropDown = null;
             }
 
-            if (letterSpacingTextField != null) {
-                letterSpacingTextField.Dispose ();
-                letterSpacingTextField = null;
+            if (letterSpacingDropDown != null) {
+                letterSpacingDropDown.Dispose ();
+                letterSpacingDropDown = null;
+            }
+
+            if (pressedBackgroundDropDown != null) {
+                pressedBackgroundDropDown.Dispose ();
+                pressedBackgroundDropDown = null;
+            }
+
+            if (pressedTextColorDropDown != null) {
+                pressedTextColorDropDown.Dispose ();
+                pressedTextColorDropDown = null;
             }
 
             if (resetButton != null) {
@@ -126,29 +150,14 @@ namespace EOS.UI.iOS.Sandbox
                 scrollView = null;
             }
 
-            if (textColorDisabledTextField != null) {
-                textColorDisabledTextField.Dispose ();
-                textColorDisabledTextField = null;
+            if (textSizeDropDown != null) {
+                textSizeDropDown.Dispose ();
+                textSizeDropDown = null;
             }
 
-            if (textColorEnabledTextField != null) {
-                textColorEnabledTextField.Dispose ();
-                textColorEnabledTextField = null;
-            }
-
-            if (textColorPressedTextField != null) {
-                textColorPressedTextField.Dispose ();
-                textColorPressedTextField = null;
-            }
-
-            if (textSizeTextField != null) {
-                textSizeTextField.Dispose ();
-                textSizeTextField = null;
-            }
-
-            if (themeTextField != null) {
-                themeTextField.Dispose ();
-                themeTextField = null;
+            if (themeDropDown != null) {
+                themeDropDown.Dispose ();
+                themeDropDown = null;
             }
         }
     }
