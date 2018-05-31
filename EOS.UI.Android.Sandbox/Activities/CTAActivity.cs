@@ -1,6 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
+using System.Timers;
 using Android.App;
 using Android.Graphics;
 using Android.OS;
@@ -12,6 +12,7 @@ using UIFrameworks.Shared.Themes.Helpers;
 using UIFrameworks.Shared.Themes.Interfaces;
 using static Android.Widget.CompoundButton;
 using static EOS.UI.Android.Sandbox.Helpers.Constants;
+using A = Android;
 
 namespace EOS.UI.Android.Sandbox.Activities
 {
@@ -34,6 +35,7 @@ namespace EOS.UI.Android.Sandbox.Activities
         private Switch _disableSwitch;
         private bool _isAnimated;
         private List<SandboxDropDown> _dropDowns;
+        private Timer _timer;
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
@@ -44,16 +46,27 @@ namespace EOS.UI.Android.Sandbox.Activities
             _CTAButton.UpdateAppearance();
             _CTAButton.Text = "CTA button";
 
-            _CTAButton.Click += delegate
+            _timer = new Timer(5000);
+            _timer.AutoReset = false;
+            _timer.Elapsed += (s, e) =>
+            {
+                RunOnUiThread(() =>
+                {
+                    _CTAButton.StopAnimation();
+                    _isAnimated = false;
+                    ToggleEnableState();
+                });
+            };
+
+            _CTAButton.Click += (s, e) => 
             {
                 if(!_isAnimated)
+                {
                     _CTAButton.StartAnimation();
-                else
-                    _CTAButton.StopAnimation();
-
-                _isAnimated = !_isAnimated;
-
-                ToggleEnableState();
+                    _timer.Start();
+                    _isAnimated = true;
+                    ToggleEnableState();
+                }
             };
 
             _themeDropDown = FindViewById<SandboxDropDown>(Resource.Id.themeDropDown);
@@ -85,7 +98,7 @@ namespace EOS.UI.Android.Sandbox.Activities
                 _cornerRadiusDropDown,
             };
 
-        _themeDropDown.Name = Fields.Theme;
+            _themeDropDown.Name = Fields.Theme;
             _themeDropDown.SetupAdapter(ThemeTypes.ThemeCollection.Select(item => item.Key).ToList());
             _themeDropDown.ItemSelected += ThemeItemSelected;
 
