@@ -47,9 +47,9 @@ namespace EOS.UI.Android.Sandbox.Activities
             _CTAButton.Click += delegate
             {
                 if(!_isAnimated)
-                    _CTAButton.StartAnimation();
+                    _CTAButton.StartProgressAnimation();
                 else
-                    _CTAButton.StopAnimation();
+                    _CTAButton.StopProgressAnimation();
 
                 _isAnimated = !_isAnimated;
 
