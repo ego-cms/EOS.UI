@@ -121,7 +121,7 @@ namespace EOS.UI.iOS.Components
             get => sectionName.Font;
             set
             {
-                sectionName.Font = value;
+                sectionName.Font = value.WithSize(SectionTextSize);
                 IsEOSCustomizationIgnored = true;
             }
         }
