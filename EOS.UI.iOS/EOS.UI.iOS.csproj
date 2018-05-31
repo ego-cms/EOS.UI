@@ -137,7 +137,6 @@
     <Compile Include="Controls\CircleProgress.designer.cs">
       <DependentUpon>CircleProgress.cs</DependentUpon>
     </Compile>
-    <Compile Include="Controls\CTAButton.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets.tt">

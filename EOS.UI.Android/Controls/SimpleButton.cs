@@ -254,7 +254,7 @@ namespace EOS.UI.Android.Controls
             Background = enabled ? CreateRippleDrawable(BackgroundColor) : CreateGradientDrawable(DisabledBackgroundColor);
         }
 
-        public void StartAnimation()
+        public void StartProgressAnimation()
         {
             if(Enabled && !_isAnimated)
             {
@@ -277,7 +277,7 @@ namespace EOS.UI.Android.Controls
             }
         }
 
-        public void StopAnimation()
+        public void StopProgressAnimation()
         {
             _animator.Cancel();
             _isAnimated = false;
