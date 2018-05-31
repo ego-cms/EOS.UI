@@ -83,9 +83,7 @@
     <Compile Include="Controls\CircleProgress.cs" />
     <Compile Include="Helpers\ShadowConfig.cs" />
     <Compile Include="Helpers\Offset.cs" />
-    <Compile Include="Helpers\ShadowExtension.cs" />
-    <Compile Include="Helpers\ShadowViewDrawable.cs" />
-    <Compile Include="Helpers\ShadowProperty.cs" />
+    <Compile Include="Helpers\CircleShadowDrawable.cs" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\values\Strings.xml" />

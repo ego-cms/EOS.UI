@@ -287,7 +287,7 @@ namespace EOS.UI.Android.Controls
             SetPadding(paddings, paddings, paddings, paddings);
 
             Drawable[] layers = new Drawable[3];
-            layers[_shadowLayerIndex] = CreateShadow(config, paddings);
+            layers[_shadowLayerIndex] = new CircleShadowDrawable(config);
             layers[_backgroundLayerIndex] = CreateBackgroundDrawable();
             layers[_imageLayerIndex] = Image;
 
@@ -386,37 +386,6 @@ namespace EOS.UI.Android.Controls
             drawable.PivotYRelative = true;
             drawable.PivotY = _pivot;
             return drawable;
-        }
-
-        private Drawable CreateShadow(ShadowConfig config, int halfWidth)
-        {
-            
-            var layers = new Drawable[config.Blur];
-
-            for (int i = 0; i < config.Blur; i++)
-            {
-                var color = config.Color;
-                color.A = (byte)(128 / (2 + 1.25 * i)); //y(x) = 128/(2+x*1.25) looks good
-                var colors = new[] { color.ToArgb(), color.ToArgb() };
-                var layer = new GradientDrawable(GradientDrawable.Orientation.BlTr, colors);
-                layer.SetCornerRadius(_cornerRadius);
-                layers[i] = layer;
-
-                Console.WriteLine($"Layer {i} - Alpha-{color.A}, radius - {config.Blur - i}");
-            }
-
-            var returnDrawable = new LayerDrawable(layers);
-
-            for (int i = 0; i < config.Blur; i++)
-            {
-                var width = halfWidth * 2 - (config.Blur - i) * 2;
-                var leftTop = config.Blur - i;
-                returnDrawable.SetLayerSize(i, width, width);
-                returnDrawable.SetLayerInset(i, leftTop, leftTop, 0, 0);
-                Console.WriteLine($"Layer {i} - leftTop-{leftTop}, width-{width}");
-            }
-
-            return returnDrawable;
         }
     }
 }
