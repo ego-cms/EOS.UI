@@ -120,7 +120,7 @@ namespace EOS.UI.Android.Sandbox.Activities
             _buttonTextSizeDropDown.SetupAdapter(Sizes.TextSizeCollection.Select(item => item.Key).ToList());
             _buttonTextSizeDropDown.ItemSelected += ButtonTextSizeItemSelected;
 
-            _sectionTextColorDropDown.Name = Fields.SectionTextSize;
+            _sectionTextColorDropDown.Name = Fields.SectionTextColor;
             _sectionTextColorDropDown.SetupAdapter(Colors.ColorsCollection.Select(item => item.Key).ToList());
             _sectionTextColorDropDown.ItemSelected += SectionTextColorItemSelected;
 
