@@ -77,6 +77,7 @@ namespace EOS.UI.iOS.Controls
             {
                 _textColor = value;
                 SetTitleColor(_textColor, UIControlState.Normal);
+                ImageView.TintColor = _textColor;
                 IsEOSCustomizationIgnored = true;
             }
         }
@@ -198,6 +199,7 @@ namespace EOS.UI.iOS.Controls
             {
                 _preloaderImage = value;
                 IsEOSCustomizationIgnored = true;
+                ImageView.TintColor = TextColor;
             }
         }
 
