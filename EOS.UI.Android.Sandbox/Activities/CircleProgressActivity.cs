@@ -28,6 +28,7 @@ namespace EOS.UI.Android.Sandbox.Activities
             var themeDropDown = FindViewById<SandboxDropDown>(Resource.Id.themeDropDown);
             var colorDropDown = FindViewById<SandboxDropDown>(Resource.Id.colorDropDown);
             var alternativeColorDropDown = FindViewById<SandboxDropDown>(Resource.Id.alternativeColorDropDown);
+            var backgroundColorDropDown = FindViewById<SandboxDropDown>(Resource.Id.backgroundColorDropDown);
             var fontDropDown = FindViewById<SandboxDropDown>(Resource.Id.fontDropDown);
             var textSizeDropDown = FindViewById<SandboxDropDown>(Resource.Id.textSizeDropDown);
             var showProgressSwitch = FindViewById<Switch>(Resource.Id.showProgressSwitch);
@@ -38,7 +39,8 @@ namespace EOS.UI.Android.Sandbox.Activities
                 colorDropDown,
                 fontDropDown,
                 textSizeDropDown,
-                alternativeColorDropDown
+                alternativeColorDropDown,
+                backgroundColorDropDown
             };
 
             int percents = 0;
@@ -103,6 +105,14 @@ namespace EOS.UI.Android.Sandbox.Activities
             {
                 if(position > 0)
                     circleProgressFragment.AlternativeColor = Colors.ColorsCollection.ElementAt(position).Value;
+            };
+
+            backgroundColorDropDown.Name = Fields.FillColor;
+            backgroundColorDropDown.SetupAdapter(Colors.ColorsCollection.Select(item => item.Key).ToList());
+            backgroundColorDropDown.ItemSelected += (position) =>
+            {
+                if(position > 0)
+                    circleProgressFragment.FillColor = Colors.ColorsCollection.ElementAt(position).Value;
             };
 
             textSizeDropDown.Name = Fields.TextSize;

@@ -81,6 +81,18 @@ namespace EOS.UI.Android.Controls
             }
         }
 
+        private Color _fillColor;
+        public Color FillColor
+        {
+            get => _fillColor;
+            set
+            {
+                _fillColor = value;
+                ((_progressBar.ProgressDrawable as LayerDrawable).GetDrawable(0) as GradientDrawable).SetColor(value);
+                IsEOSCustomizationIgnored = true;
+            }
+        }
+
         private bool _showProgress;
         public bool ShowProgress
         {
@@ -184,6 +196,7 @@ namespace EOS.UI.Android.Controls
                 var provider = GetThemeProvider();
                 Color = provider.GetEOSProperty<Color>(this, EOSConstants.BrandPrimaryColor);
                 AlternativeColor = provider.GetEOSProperty<Color>(this, EOSConstants.BrandPrimaryColor);
+                FillColor = provider.GetEOSProperty<Color>(this, EOSConstants.NeutralColor4);
                 ShowProgress = provider.GetEOSProperty<bool>(this, EOSConstants.CircleProgressShown);
                 Typeface = Typeface.CreateFromAsset(Context.Assets, provider.GetEOSProperty<string>(this, EOSConstants.Font));
                 TextSize = provider.GetEOSProperty<float>(this, EOSConstants.TextSize);
