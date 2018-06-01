@@ -19,7 +19,6 @@ using UIFrameworks.Android.Themes;
 using UIFrameworks.Shared.Themes.Helpers;
 using UIFrameworks.Shared.Themes.Interfaces;
 using static EOS.UI.Android.Helpers.Constants;
-using R = Android.Resource;
 
 namespace EOS.UI.Android.Controls
 {
@@ -148,7 +147,7 @@ namespace EOS.UI.Android.Controls
             {
                 IsEOSCustomizationIgnored = true;
                 _textColor = value;
-                _rotateDrawable.SetColorFilter(value, PorterDuff.Mode.SrcIn); 
+                _rotateDrawable.Drawable?.SetColorFilter(value, PorterDuff.Mode.SrcIn);
                 if(Enabled)
                     base.SetTextColor(value);
             }
@@ -203,6 +202,7 @@ namespace EOS.UI.Android.Controls
             {
                 _preloaderImage = value;
                 _rotateDrawable.Drawable = _preloaderImage;
+                _rotateDrawable.Drawable.SetColorFilter(TextColor, PorterDuff.Mode.SrcIn);
             }
         }
 
@@ -274,10 +274,14 @@ namespace EOS.UI.Android.Controls
             {
                 Drawable[] layers = { CreateGradientDrawable(BackgroundColor), _rotateDrawable };
                 var layerDrawable = new LayerDrawable(layers);
-                layerDrawable.SetLayerGravity(1, GravityFlags.Center);
+                
+                var preloaderSize = Height / 2;
+                var insetVertical = Height / 4;
+                var insetHorizontal = (Width - preloaderSize) / 2;
+                layerDrawable.SetLayerInset(1, insetHorizontal, insetVertical, insetHorizontal, insetVertical);
+                
                 Background = layerDrawable;
                 base.SetTextColor(Color.Transparent);
-
                 _animator = ObjectAnimator.OfInt(_rotateDrawable, "Level", 0, AnimationConstants.LevelMaxCount);
                 _animator.SetInterpolator(new LinearInterpolator());
                 _animator.SetDuration(AnimationConstants.TurnoverTime);
