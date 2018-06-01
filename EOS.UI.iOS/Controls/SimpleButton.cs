@@ -170,7 +170,7 @@ namespace EOS.UI.iOS.Controls
         public bool InProgress
         {
             get => _inProgress;
-            set
+            private set
             {
                 _inProgress = value;
                 UserInteractionEnabled = !value;
@@ -199,7 +199,6 @@ namespace EOS.UI.iOS.Controls
             {
                 _preloaderImage = value;
                 IsEOSCustomizationIgnored = true;
-                ImageView.TintColor = TextColor;
             }
         }
 

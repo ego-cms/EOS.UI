@@ -27,8 +27,10 @@ namespace EOS.UI.Android.Controls
     {
         #region fields
 
-        private bool _isAnimated;
         private ObjectAnimator _animator;
+        private RotateDrawable _rotateDrawable = new RotateDrawable();
+        
+        public bool InProgress { get; private set; }
 
         #endregion
 
@@ -146,6 +148,7 @@ namespace EOS.UI.Android.Controls
             {
                 IsEOSCustomizationIgnored = true;
                 _textColor = value;
+                _rotateDrawable.SetColorFilter(value, PorterDuff.Mode.SrcIn); 
                 if(Enabled)
                     base.SetTextColor(value);
             }
@@ -189,6 +192,17 @@ namespace EOS.UI.Android.Controls
                 _cornerRadius = value;
                 Background = Enabled? CreateRippleDrawable(BackgroundColor) : CreateGradientDrawable(DisabledBackgroundColor);
                 IsEOSCustomizationIgnored = true;
+            }
+        }
+
+        private Drawable _preloaderImage;
+        public Drawable PreloaderImage
+        {
+            get => _preloaderImage;
+            set
+            {
+                _preloaderImage = value;
+                _rotateDrawable.Drawable = _preloaderImage;
             }
         }
 
@@ -256,31 +270,28 @@ namespace EOS.UI.Android.Controls
 
         public void StartProgressAnimation()
         {
-            if(Enabled && !_isAnimated)
+            if(Enabled && !InProgress)
             {
-                var rotateDrawable = new RotateDrawable();
-                rotateDrawable.Drawable = ContextCompat.GetDrawable(Context, Resource.Drawable.icPreloader);
-
-                Drawable[] layers = { CreateGradientDrawable(BackgroundColor), rotateDrawable };
+                Drawable[] layers = { CreateGradientDrawable(BackgroundColor), _rotateDrawable };
                 var layerDrawable = new LayerDrawable(layers);
                 layerDrawable.SetLayerGravity(1, GravityFlags.Center);
                 Background = layerDrawable;
                 base.SetTextColor(Color.Transparent);
 
-                _animator = ObjectAnimator.OfInt(rotateDrawable, "Level", 0, AnimationConstants.LevelMaxCount);
+                _animator = ObjectAnimator.OfInt(_rotateDrawable, "Level", 0, AnimationConstants.LevelMaxCount);
                 _animator.SetInterpolator(new LinearInterpolator());
                 _animator.SetDuration(AnimationConstants.TurnoverTime);
                 _animator.RepeatCount = ValueAnimator.Infinite;
                 _animator.RepeatMode = ValueAnimatorRepeatMode.Restart;
                 _animator.Start();
-                _isAnimated = true;
+                InProgress = true;
             }
         }
 
         public void StopProgressAnimation()
         {
             _animator.Cancel();
-            _isAnimated = false;
+            InProgress = false;
             BackgroundColor = _backgroundColor;
             base.SetTextColor(_textColor);
         }
@@ -310,6 +321,7 @@ namespace EOS.UI.Android.Controls
                 DisabledBackgroundColor = GetThemeProvider().GetEOSProperty<Color>(this, EOSConstants.NeutralColor4);
                 PressedBackgroundColor = GetThemeProvider().GetEOSProperty<Color>(this, EOSConstants.BrandPrimaryColorVariant1);
                 CornerRadius = GetThemeProvider().GetEOSProperty<float>(this, EOSConstants.CornerRadius);
+                PreloaderImage = Resources.GetDrawable(GetThemeProvider().GetEOSProperty<int>(this, EOSConstants.FabProgressPreloaderImage));
                 IsEOSCustomizationIgnored = false;
             }
         }
@@ -336,7 +348,10 @@ namespace EOS.UI.Android.Controls
 
         public bool OnTouch(View v, MotionEvent e)
         {
-            if(Enabled && !_isAnimated)
+            if (InProgress)
+                return true;
+            
+            if(Enabled && !InProgress)
             {
                 if(e.Action == MotionEventActions.Down)
                     base.SetTextColor(PressedTextColor);

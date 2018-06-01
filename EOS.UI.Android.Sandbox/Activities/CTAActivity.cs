@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Timers;
 using Android.App;
 using Android.Graphics;
@@ -33,9 +34,7 @@ namespace EOS.UI.Android.Sandbox.Activities
         private SandboxDropDown _cornerRadiusDropDown;
         private Button _resetButton;
         private Switch _disableSwitch;
-        private bool _isAnimated;
         private List<SandboxDropDown> _dropDowns;
-        private Timer _timer;
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
@@ -45,28 +44,13 @@ namespace EOS.UI.Android.Sandbox.Activities
             _CTAButton = FindViewById<SimpleButton>(Resource.Id.simpleButton);
             _CTAButton.UpdateAppearance();
             _CTAButton.Text = "CTA button";
-
-            _timer = new Timer(5000);
-            _timer.AutoReset = false;
-            _timer.Elapsed += (s, e) =>
+            _CTAButton.Click += async (s, e) => 
             {
-                RunOnUiThread(() =>
-                {
-                    _CTAButton.StopProgressAnimation();
-                    _isAnimated = false;
-                    ToggleEnableState();
-                });
-            };
-
-            _CTAButton.Click += (s, e) => 
-            {
-                if(!_isAnimated)
-                {
-                    _CTAButton.StartProgressAnimation();
-                    _timer.Start();
-                    _isAnimated = true;
-                    ToggleEnableState();
-                }
+                _CTAButton.StartProgressAnimation();
+                ToggleEnableState();
+                await Task.Delay(5000);
+                _CTAButton.StopProgressAnimation();
+                ToggleEnableState();
             };
 
             _themeDropDown = FindViewById<SandboxDropDown>(Resource.Id.themeDropDown);
@@ -154,9 +138,9 @@ namespace EOS.UI.Android.Sandbox.Activities
 
         private void ToggleEnableState()
         {
-            _dropDowns.ForEach(dropDown => dropDown.Enabled = !_isAnimated);
-            _resetButton.Enabled = !_isAnimated;
-            _disableSwitch.Enabled = !_isAnimated;
+            _dropDowns.ForEach(dropDown => dropDown.Enabled = !_CTAButton.InProgress);
+            _resetButton.Enabled = !_CTAButton.InProgress;
+            _disableSwitch.Enabled = !_CTAButton.InProgress;
         }
 
         private void ThemeItemSelected(int position)
