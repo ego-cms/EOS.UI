@@ -51,5 +51,6 @@
         public const string FabProgress = "Fab progress";
         public const string CircleProgress = "Circle progress";
         public const string Section = "Section";
+        public const string CTAButton = "CTA Button";
     }
 }
