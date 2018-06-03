@@ -13,7 +13,7 @@ using UIFrameworks.Shared.Themes.Helpers;
 namespace EOS.UI.Android.Sandbox
 {
     [Activity(Label = "@string/app_name", MainLauncher = true, Icon = "@mipmap/icon", ScreenOrientation = ScreenOrientation.Portrait)]
-    public class MainActivity : Activity
+    public class MainActivity : BaseActivity
     {
         private RecyclerView _recyclerView;
         private Dictionary<string, Type> _controlDictionary = new Dictionary<string, Type>
@@ -33,6 +33,10 @@ namespace EOS.UI.Android.Sandbox
             base.OnCreate(savedInstanceState);
             SetContentView(Resource.Layout.Main);
 
+            ActionBar.SetHomeButtonEnabled(false);
+            ActionBar.SetDisplayHomeAsUpEnabled(false);
+
+
             _recyclerView = FindViewById<RecyclerView>(Resource.Id.recyclerView);
             var layoutManager = new LinearLayoutManager(BaseContext);
             _recyclerView.SetLayoutManager(layoutManager);
@@ -41,6 +45,12 @@ namespace EOS.UI.Android.Sandbox
 
             adapter.ItemClick += ItemClick;
             _recyclerView.SetAdapter(adapter);
+        }
+
+        protected override void OnStart()
+        {
+            base.OnStart();
+            UpdateApperaence();
         }
 
         private void ItemClick(object sender, int e)

@@ -28,7 +28,8 @@
             android:paddingRight="3dp"
             android:layout_gravity="center_vertical" />
     </LinearLayout>
-    <View
+    <EOS.UI.Android.Sandbox.Controls.EOSDivider
+        android:id="@+id/dropDownDivider"
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:background="@android:color/darker_gray" />

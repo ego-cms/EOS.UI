@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
@@ -16,23 +16,23 @@
         android:layout_height="1dp"
         android:layout_marginTop="20dp"
         android:background="@android:color/darker_gray" />
-    <EOS.UI.Android.Sandbox.Controls.SandboxDropDown
+    <EOS.UI.Android.Sandbox.Controls.EOSDropDown
         android:id="@+id/themeDropDown"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
-    <EOS.UI.Android.Sandbox.Controls.SandboxDropDown
+    <EOS.UI.Android.Sandbox.Controls.EOSDropDown
         android:id="@+id/backgroundDropDown"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
-    <EOS.UI.Android.Sandbox.Controls.SandboxDropDown
+    <EOS.UI.Android.Sandbox.Controls.EOSDropDown
         android:id="@+id/disabledColorDropDown"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
-    <EOS.UI.Android.Sandbox.Controls.SandboxDropDown
+    <EOS.UI.Android.Sandbox.Controls.EOSDropDown
         android:id="@+id/pressedColorDropDown"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
-    <EOS.UI.Android.Sandbox.Controls.SandboxDropDown
+    <EOS.UI.Android.Sandbox.Controls.EOSDropDown
         android:id="@+id/sizeDropDown"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />

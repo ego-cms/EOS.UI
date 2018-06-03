@@ -19,14 +19,15 @@ namespace EOS.UI.Android.Sandbox.RecyclerImplementation
 
         public override void OnBindViewHolder(RecyclerView.ViewHolder holder, int position)
         {
-            var viewHolder = holder as ControlsViewHolder;
+            var viewHolder = holder as EOSControlsViewHolder;
             viewHolder.ControlTitle.Text = _controlNames[position];
+            viewHolder.UpdateAppearance();
         }
 
         public override RecyclerView.ViewHolder OnCreateViewHolder(ViewGroup parent, int viewType)
         {
             View itemView = LayoutInflater.From(parent.Context).Inflate(Resource.Layout.ControlsItemCell, parent, false);
-            var viewHolder = new ControlsViewHolder(itemView, OnClick);
+            var viewHolder = new EOSControlsViewHolder(itemView, OnClick);
             return viewHolder;
         }
 

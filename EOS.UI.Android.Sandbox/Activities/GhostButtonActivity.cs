@@ -21,18 +21,18 @@ namespace EOS.UI.Android.Sandbox.Activities
             SetContentView(Resource.Layout.GhostButtonLayout);
 
             var ghostButton = FindViewById<GhostButton>(Resource.Id.ghostButton);
-            var themeDropDown = FindViewById<SandboxDropDown>(Resource.Id.themeDropDown);
-            var disabledColorDropDown = FindViewById<SandboxDropDown>(Resource.Id.enabledTextColorDropDown);
-            var pressedColorDropDown = FindViewById<SandboxDropDown>(Resource.Id.disabledTextColorDropDown);
-            var enabledColorDropDown = FindViewById<SandboxDropDown>(Resource.Id.pressedTextColorDropDown);
-            var fontDropDown = FindViewById<SandboxDropDown>(Resource.Id.fontDropDown);
-            var letterSpacingDropDown = FindViewById<SandboxDropDown>(Resource.Id.letterSpacingDropDown);
-            var textSizeDropDown = FindViewById<SandboxDropDown>(Resource.Id.textSizeDropDown);
+            var themeDropDown = FindViewById<EOSDropDown>(Resource.Id.themeDropDown);
+            var disabledColorDropDown = FindViewById<EOSDropDown>(Resource.Id.enabledTextColorDropDown);
+            var pressedColorDropDown = FindViewById<EOSDropDown>(Resource.Id.disabledTextColorDropDown);
+            var enabledColorDropDown = FindViewById<EOSDropDown>(Resource.Id.pressedTextColorDropDown);
+            var fontDropDown = FindViewById<EOSDropDown>(Resource.Id.fontDropDown);
+            var letterSpacingDropDown = FindViewById<EOSDropDown>(Resource.Id.letterSpacingDropDown);
+            var textSizeDropDown = FindViewById<EOSDropDown>(Resource.Id.textSizeDropDown);
             var stateSwitch = FindViewById<Switch>(Resource.Id.stateSwitch);
             ghostButton.ResetCustomization();
 
             var resetButton = FindViewById<Button>(Resource.Id.buttonResetCustomization);
-            var spinners = new List<SandboxDropDown>()
+            var spinners = new List<EOSDropDown>()
             {
                 themeDropDown,
                 disabledColorDropDown,

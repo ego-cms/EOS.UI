@@ -1,14 +1,14 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<?xml version="1.0" encoding="utf-8"?>
+<EOS.UI.Android.Sandbox.Controls.EOSRelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/background_color">
-    <View
+    <EOS.UI.Android.Sandbox.Controls.EOSDivider
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:background="@android:color/darker_gray" />
-    <android.support.v7.widget.RecyclerView
+    <EOS.UI.Android.Sandbox.RecyclerImplementation.EOSRecyclerView
         android:id="@+id/recyclerView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
-</RelativeLayout>
+</EOS.UI.Android.Sandbox.Controls.EOSRelativeLayout>
