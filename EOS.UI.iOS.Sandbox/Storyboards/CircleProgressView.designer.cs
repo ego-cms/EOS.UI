@@ -9,87 +9,96 @@ using System.CodeDom.Compiler;
 
 namespace EOS.UI.iOS.Sandbox
 {
-	[Register ("CircleProgressView")]
-	partial class CircleProgressView
-	{
-		[Outlet]
-		[GeneratedCode ("iOS Designer", "1.0")]
-		EOS.UI.iOS.Sandbox.CustomDropDown alternativeColorDropDown { get; set; }
+    [Register("CircleProgressView")]
+    partial class CircleProgressView
+    {
+        [Outlet]
+        [GeneratedCode("iOS Designer", "1.0")]
+        EOS.UI.iOS.Sandbox.CustomDropDown alternativeColorDropDown { get; set; }
 
-		[Outlet]
-		[GeneratedCode ("iOS Designer", "1.0")]
-		EOS.UI.iOS.Sandbox.CustomDropDown colorDropDown { get; set; }
+        [Outlet]
+        [GeneratedCode("iOS Designer", "1.0")]
+        EOS.UI.iOS.Sandbox.CustomDropDown colorDropDown { get; set; }
 
-		[Outlet]
-		UIKit.UIView containerView { get; set; }
+        [Outlet]
+        UIKit.UIView containerView { get; set; }
 
-		[Outlet]
-		EOS.UI.iOS.Sandbox.CustomDropDown fillColorDropDown { get; set; }
+        [Outlet]
+        EOS.UI.iOS.Sandbox.CustomDropDown fillColorDropDown { get; set; }
 
-		[Outlet]
-		[GeneratedCode ("iOS Designer", "1.0")]
-		EOS.UI.iOS.Sandbox.CustomDropDown fontDropDown { get; set; }
+        [Outlet]
+        [GeneratedCode("iOS Designer", "1.0")]
+        EOS.UI.iOS.Sandbox.CustomDropDown fontDropDown { get; set; }
 
-		[Outlet]
-		UIKit.UIButton resetButton { get; set; }
+        [Outlet]
+        UIKit.UIButton resetButton { get; set; }
 
-		[Outlet]
-		UIKit.UISwitch showProgressSwitch { get; set; }
+        [Outlet]
+        UIKit.UISwitch showProgressSwitch { get; set; }
 
-		[Outlet]
-		[GeneratedCode ("iOS Designer", "1.0")]
-		EOS.UI.iOS.Sandbox.CustomDropDown textSizeDropDown { get; set; }
+        [Outlet]
+        [GeneratedCode("iOS Designer", "1.0")]
+        EOS.UI.iOS.Sandbox.CustomDropDown textSizeDropDown { get; set; }
 
-		[Outlet]
-		[GeneratedCode ("iOS Designer", "1.0")]
-		EOS.UI.iOS.Sandbox.CustomDropDown themeDropDown { get; set; }
-		
-		void ReleaseDesignerOutlets ()
-		{
-			if (containerView != null) {
-				containerView.Dispose ();
-				containerView = null;
-			}
+        [Outlet]
+        [GeneratedCode("iOS Designer", "1.0")]
+        EOS.UI.iOS.Sandbox.CustomDropDown themeDropDown { get; set; }
 
-			if (resetButton != null) {
-				resetButton.Dispose ();
-				resetButton = null;
-			}
+        void ReleaseDesignerOutlets()
+        {
+            if (containerView != null)
+            {
+                containerView.Dispose();
+                containerView = null;
+            }
 
-			if (showProgressSwitch != null) {
-				showProgressSwitch.Dispose ();
-				showProgressSwitch = null;
-			}
+            if (resetButton != null)
+            {
+                resetButton.Dispose();
+                resetButton = null;
+            }
 
-			if (alternativeColorDropDown != null) {
-				alternativeColorDropDown.Dispose ();
-				alternativeColorDropDown = null;
-			}
+            if (showProgressSwitch != null)
+            {
+                showProgressSwitch.Dispose();
+                showProgressSwitch = null;
+            }
 
-			if (colorDropDown != null) {
-				colorDropDown.Dispose ();
-				colorDropDown = null;
-			}
+            if (alternativeColorDropDown != null)
+            {
+                alternativeColorDropDown.Dispose();
+                alternativeColorDropDown = null;
+            }
 
-			if (fontDropDown != null) {
-				fontDropDown.Dispose ();
-				fontDropDown = null;
-			}
+            if (colorDropDown != null)
+            {
+                colorDropDown.Dispose();
+                colorDropDown = null;
+            }
 
-			if (textSizeDropDown != null) {
-				textSizeDropDown.Dispose ();
-				textSizeDropDown = null;
-			}
+            if (fontDropDown != null)
+            {
+                fontDropDown.Dispose();
+                fontDropDown = null;
+            }
 
-			if (themeDropDown != null) {
-				themeDropDown.Dispose ();
-				themeDropDown = null;
-			}
+            if (textSizeDropDown != null)
+            {
+                textSizeDropDown.Dispose();
+                textSizeDropDown = null;
+            }
 
-			if (fillColorDropDown != null) {
-				fillColorDropDown.Dispose ();
-				fillColorDropDown = null;
-			}
-		}
-	}
+            if (themeDropDown != null)
+            {
+                themeDropDown.Dispose();
+                themeDropDown = null;
+            }
+
+            if (fillColorDropDown != null)
+            {
+                fillColorDropDown.Dispose();
+                fillColorDropDown = null;
+            }
+        }
+    }
 }
