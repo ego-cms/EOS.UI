@@ -1,5 +1,5 @@
-﻿<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="517">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="517">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -34,87 +34,98 @@
                                 <state key="normal" title="Reset"/>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Show progress" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="P4b-cK-lZ7">
-                                <rect key="frame" x="16" y="375.5" width="114.5" height="20.5"/>
+                                <rect key="frame" x="16" y="420.5" width="114.5" height="20.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ZVc-Hv-bww">
-                                <rect key="frame" x="305" y="370" width="51" height="31"/>
+                                <rect key="frame" x="305" y="415" width="51" height="31"/>
                             </switch>
-                            <view contentMode="scaleToFill" id="1758" translatesAutoresizingMaskIntoConstraints="NO" customClass="CustomDropDown">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1758" customClass="CustomDropDown">
                                 <rect key="frame" x="16" y="135" width="343" height="40"/>
+                                <color key="backgroundColor" red="0.89411764705882357" green="0.51372549019607838" blue="0.51372549019607838" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
-                                    <constraint id="1759" firstItem="1758" firstAttribute="height" constant="40"/>
+                                    <constraint firstAttribute="height" constant="40" id="1759"/>
                                 </constraints>
-                                <color key="backgroundColor" colorSpace="calibratedRGB" red="0.89411764705882357" green="0.51372549019607838" blue="0.51372549019607838" alpha="1"/>
                             </view>
-                            <view contentMode="scaleToFill" id="2116" translatesAutoresizingMaskIntoConstraints="NO" customClass="CustomDropDown">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2116" customClass="CustomDropDown">
                                 <rect key="frame" x="16" y="180" width="343" height="40"/>
+                                <color key="backgroundColor" red="0.89411764705882357" green="0.51372549019607838" blue="0.51372549019607838" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
-                                    <constraint id="2117" firstItem="2116" firstAttribute="height" constant="40"/>
+                                    <constraint firstAttribute="height" constant="40" id="2117"/>
                                 </constraints>
-                                <color key="backgroundColor" colorSpace="calibratedRGB" red="0.89411764705882357" green="0.51372549019607838" blue="0.51372549019607838" alpha="1"/>
                             </view>
-                            <view contentMode="scaleToFill" id="2464" translatesAutoresizingMaskIntoConstraints="NO" customClass="CustomDropDown">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2464" customClass="CustomDropDown">
                                 <rect key="frame" x="16" y="225" width="343" height="40"/>
+                                <color key="backgroundColor" red="0.89411764705882357" green="0.51372549019607838" blue="0.51372549019607838" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
-                                    <constraint id="2465" firstItem="2464" firstAttribute="height" constant="40"/>
+                                    <constraint firstAttribute="height" constant="40" id="2465"/>
                                 </constraints>
-                                <color key="backgroundColor" colorSpace="calibratedRGB" red="0.89411764705882357" green="0.51372549019607838" blue="0.51372549019607838" alpha="1"/>
                             </view>
-                            <view contentMode="scaleToFill" id="2931" translatesAutoresizingMaskIntoConstraints="NO" customClass="CustomDropDown">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2931" customClass="CustomDropDown">
                                 <rect key="frame" x="16" y="270" width="343" height="40"/>
+                                <color key="backgroundColor" red="0.89411764705882357" green="0.51372549019607838" blue="0.51372549019607838" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
-                                    <constraint id="2932" firstItem="2931" firstAttribute="height" constant="40"/>
+                                    <constraint firstAttribute="height" constant="40" id="2932"/>
                                 </constraints>
-                                <color key="backgroundColor" colorSpace="calibratedRGB" red="0.89411764705882357" green="0.51372549019607838" blue="0.51372549019607838" alpha="1"/>
                             </view>
-                            <view contentMode="scaleToFill" id="3437" translatesAutoresizingMaskIntoConstraints="NO" customClass="CustomDropDown">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9be-f7-laf" customClass="CustomDropDown">
                                 <rect key="frame" x="16" y="315" width="343" height="40"/>
+                                <color key="backgroundColor" red="0.89411764709999997" green="0.51372549020000002" blue="0.51372549020000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
-                                    <constraint id="3438" firstItem="3437" firstAttribute="height" constant="40"/>
+                                    <constraint firstAttribute="height" constant="40" id="Sa2-PM-bKi"/>
                                 </constraints>
-                                <color key="backgroundColor" colorSpace="calibratedRGB" red="0.89411764705882357" green="0.51372549019607838" blue="0.51372549019607838" alpha="1"/>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3437" customClass="CustomDropDown">
+                                <rect key="frame" x="16" y="360" width="343" height="40"/>
+                                <color key="backgroundColor" red="0.89411764705882357" green="0.51372549019607838" blue="0.51372549019607838" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="3438"/>
+                                </constraints>
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="1758" firstAttribute="top" secondItem="fPP-ua-qUo" secondAttribute="bottom" constant="15" id="1806"/>
+                            <constraint firstItem="1758" firstAttribute="leading" secondItem="518" secondAttribute="leadingMargin" id="1853"/>
+                            <constraint firstItem="1758" firstAttribute="trailing" secondItem="518" secondAttribute="trailingMargin" id="1900"/>
+                            <constraint firstItem="2116" firstAttribute="top" secondItem="1758" secondAttribute="bottom" constant="5" id="2164"/>
+                            <constraint firstItem="2116" firstAttribute="leading" secondItem="518" secondAttribute="leadingMargin" id="2211"/>
+                            <constraint firstItem="2116" firstAttribute="trailing" secondItem="518" secondAttribute="trailingMargin" id="2258"/>
+                            <constraint firstItem="2464" firstAttribute="top" secondItem="2116" secondAttribute="bottom" constant="5" id="2579"/>
+                            <constraint firstItem="2464" firstAttribute="leading" secondItem="518" secondAttribute="leadingMargin" id="2626"/>
+                            <constraint firstItem="2464" firstAttribute="trailing" secondItem="518" secondAttribute="trailingMargin" id="2766"/>
+                            <constraint firstItem="2931" firstAttribute="top" secondItem="2464" secondAttribute="bottom" constant="5" id="3051"/>
+                            <constraint firstItem="2931" firstAttribute="leading" secondItem="518" secondAttribute="leadingMargin" id="3098"/>
+                            <constraint firstItem="2931" firstAttribute="trailing" secondItem="518" secondAttribute="trailingMargin" id="3145"/>
+                            <constraint firstItem="3437" firstAttribute="leading" secondItem="518" secondAttribute="leadingMargin" id="3718"/>
+                            <constraint firstItem="3437" firstAttribute="trailing" secondItem="518" secondAttribute="trailingMargin" id="3765"/>
+                            <constraint firstItem="P4b-cK-lZ7" firstAttribute="leading" secondItem="518" secondAttribute="leadingMargin" id="4114"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="ZVc-Hv-bww" secondAttribute="trailing" constant="5" id="4207"/>
+                            <constraint firstItem="9be-f7-laf" firstAttribute="trailing" secondItem="518" secondAttribute="trailingMargin" id="1ep-mt-oD3"/>
                             <constraint firstItem="fPP-ua-qUo" firstAttribute="leading" secondItem="518" secondAttribute="leadingMargin" id="AaE-v5-2Qz"/>
                             <constraint firstItem="fPP-ua-qUo" firstAttribute="top" secondItem="514" secondAttribute="bottom" id="ELc-in-IC4"/>
+                            <constraint firstItem="9be-f7-laf" firstAttribute="leading" secondItem="518" secondAttribute="leadingMargin" id="HEc-SA-O8j"/>
+                            <constraint firstItem="ZVc-Hv-bww" firstAttribute="top" secondItem="3437" secondAttribute="bottom" constant="15" id="LcS-BB-0K2"/>
+                            <constraint firstItem="9be-f7-laf" firstAttribute="top" secondItem="2931" secondAttribute="bottom" constant="5" id="NID-Dk-rG9"/>
                             <constraint firstItem="ZVc-Hv-bww" firstAttribute="centerY" secondItem="P4b-cK-lZ7" secondAttribute="centerY" id="Qgf-or-VzX"/>
+                            <constraint firstItem="3437" firstAttribute="top" secondItem="9be-f7-laf" secondAttribute="bottom" constant="5" id="d2J-cp-OcH"/>
                             <constraint firstItem="dki-c8-J6h" firstAttribute="centerX" secondItem="518" secondAttribute="centerX" id="ksc-Hi-3BO"/>
                             <constraint firstAttribute="trailingMargin" secondItem="fPP-ua-qUo" secondAttribute="trailing" id="qWa-eK-eoO"/>
                             <constraint firstItem="515" firstAttribute="top" secondItem="dki-c8-J6h" secondAttribute="bottom" constant="32" id="sjL-sd-xCI"/>
-                            <constraint id="1806" firstItem="1758" firstAttribute="top" secondItem="fPP-ua-qUo" secondAttribute="bottom" constant="15"/>
-                            <constraint id="1853" firstItem="1758" firstAttribute="leading" secondItem="518" secondAttribute="leadingMargin"/>
-                            <constraint id="1900" firstItem="1758" firstAttribute="trailing" secondItem="518" secondAttribute="trailingMargin"/>
-                            <constraint id="2164" firstItem="2116" firstAttribute="top" secondItem="1758" secondAttribute="bottom" constant="5"/>
-                            <constraint id="2211" firstItem="2116" firstAttribute="leading" secondItem="518" secondAttribute="leadingMargin"/>
-                            <constraint id="2258" firstItem="2116" firstAttribute="trailing" secondItem="518" secondAttribute="trailingMargin"/>
-                            <constraint id="2579" firstItem="2464" firstAttribute="top" secondItem="2116" secondAttribute="bottom" constant="5"/>
-                            <constraint id="2626" firstItem="2464" firstAttribute="leading" secondItem="518" secondAttribute="leadingMargin"/>
-                            <constraint id="2766" firstItem="2464" firstAttribute="trailing" secondItem="518" secondAttribute="trailingMargin"/>
-                            <constraint id="3051" firstItem="2931" firstAttribute="top" secondItem="2464" secondAttribute="bottom" constant="5"/>
-                            <constraint id="3098" firstItem="2931" firstAttribute="leading" secondItem="518" secondAttribute="leadingMargin"/>
-                            <constraint id="3145" firstItem="2931" firstAttribute="trailing" secondItem="518" secondAttribute="trailingMargin"/>
-                            <constraint id="3671" firstItem="3437" firstAttribute="top" secondItem="2931" secondAttribute="bottom" constant="5"/>
-                            <constraint id="3718" firstItem="3437" firstAttribute="leading" secondItem="518" secondAttribute="leadingMargin"/>
-                            <constraint id="3765" firstItem="3437" firstAttribute="trailing" secondItem="518" secondAttribute="trailingMargin"/>
-                            <constraint id="3985" firstItem="ZVc-Hv-bww" firstAttribute="top" secondItem="3437" secondAttribute="bottom" constant="15"/>
-                            <constraint id="4114" firstItem="P4b-cK-lZ7" firstAttribute="leading" secondItem="518" secondAttribute="leadingMargin"/>
-                            <constraint id="4207" firstItem="518" firstAttribute="trailingMargin" secondItem="ZVc-Hv-bww" secondAttribute="trailing" constant="5"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="alternativeColorDropDown" destination="2931" id="name-outlet-2931"/>
+                        <outlet property="colorDropDown" destination="2464" id="name-outlet-2464"/>
                         <outlet property="containerView" destination="fPP-ua-qUo" id="Lmu-6K-nie"/>
+                        <outlet property="fillColorDropDown" destination="9be-f7-laf" id="pLN-Vl-3HT"/>
+                        <outlet property="fontDropDown" destination="2116" id="name-outlet-2116"/>
                         <outlet property="resetButton" destination="dki-c8-J6h" id="vLU-3w-wfz"/>
                         <outlet property="showProgressSwitch" destination="ZVc-Hv-bww" id="69v-2G-Mwa"/>
-                        <outlet property="themeDropDown" destination="1758" id="name-outlet-1758"/>
-                        <outlet property="fontDropDown" destination="2116" id="name-outlet-2116"/>
-                        <outlet property="colorDropDown" destination="2464" id="name-outlet-2464"/>
-                        <outlet property="alternativeColorDropDown" destination="2931" id="name-outlet-2931"/>
                         <outlet property="textSizeDropDown" destination="3437" id="name-outlet-3437"/>
+                        <outlet property="themeDropDown" destination="1758" id="name-outlet-1758"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="519" userLabel="First Responder" sceneMemberID="firstResponder"/>

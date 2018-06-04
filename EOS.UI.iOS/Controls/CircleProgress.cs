@@ -21,6 +21,7 @@ namespace EOS.UI.iOS
         private readonly nfloat _360angle = 6.28319f;
         private const string _zeroPercents = "0 %";
         private CAShapeLayer _circleLayer;
+        private CAShapeLayer _fillCircleLayer;
 
         public event EventHandler Started;
         public event EventHandler Stopped;
@@ -76,6 +77,19 @@ namespace EOS.UI.iOS
                 _alternativeColor = value;
                 IsEOSCustomizationIgnored = true;
                 imageView.BackgroundColor = _alternativeColor;
+            }
+        }
+
+        private UIColor _fillColor;
+        public UIColor FillColor
+        {
+            get => _fillColor;
+            set
+            {
+                _fillColor = value;
+                IsEOSCustomizationIgnored = true;
+                if (_fillCircleLayer != null)
+                    _fillCircleLayer.StrokeColor = _fillColor.CGColor;
             }
         }
 
@@ -148,7 +162,7 @@ namespace EOS.UI.iOS
                 ShowProgress = provider.GetEOSProperty<bool>(this, EOSConstants.CircleProgressShown);
                 Font = provider.GetEOSProperty<UIFont>(this, EOSConstants.Font);
                 TextSize = provider.GetEOSProperty<int>(this, EOSConstants.TextSize);
-
+                FillColor = provider.GetEOSProperty<UIColor>(this, EOSConstants.NeutralColor4);
                 IsEOSCustomizationIgnored = false;
             }
         }
@@ -198,16 +212,16 @@ namespace EOS.UI.iOS
             _circleLayer.Path = circlePath.CGPath;
             circleView.Transform = CGAffineTransform.MakeRotation(_rotatienAngle);
             
-            var grayCircleLayer = new CAShapeLayer();
-            grayCircleLayer.FillColor = UIColor.Clear.CGColor;
-            grayCircleLayer.StrokeColor = UIColor.FromRGB(234, 234, 234).CGColor;
-            grayCircleLayer.LineWidth = _lineWidth;
+            _fillCircleLayer = new CAShapeLayer();
+            _fillCircleLayer.FillColor = UIColor.Clear.CGColor;
+            _fillCircleLayer.StrokeColor = FillColor.CGColor;
+            _fillCircleLayer.LineWidth = _lineWidth;
             circlePath = new UIBezierPath();
             circlePath.AddArc(center, _radius, _startAngle, _360angle, true);
-            grayCircleLayer.Path = circlePath.CGPath;
+            _fillCircleLayer.Path = circlePath.CGPath;
             circleView.Transform = CGAffineTransform.MakeRotation(_rotatienAngle);
             
-            circleView.Layer.AddSublayer(grayCircleLayer);
+            circleView.Layer.AddSublayer(_fillCircleLayer);
             circleView.Layer.AddSublayer(_circleLayer);
         }
 
