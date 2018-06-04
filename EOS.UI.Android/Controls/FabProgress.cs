@@ -294,7 +294,6 @@ namespace EOS.UI.Android.Controls
             LayerDrawable layerList = new LayerDrawable(layers);
             layerList.SetLayerInset(_shadowLayerIndex, 0, 0, 0, 0);
             layerList.SetLayerInset(_backgroundLayerIndex, 0 - config.Offset.X + config.Blur, config.Offset.Y + config.Blur, config.Offset.X + config.Blur, 0 - config.Offset.Y + config.Blur);
-            layerList.SetLayerSize(_imageLayerIndex, Image.IntrinsicWidth, Image.IntrinsicHeight);
             SetInsetForImageLayer(layerList, Image, paddings, config.Offset);
 
             Background = layerList;
@@ -312,7 +311,9 @@ namespace EOS.UI.Android.Controls
         {
             var xOffset = halfWidth - drawable.IntrinsicWidth / 2 - offset.X;
             var yOffset = halfWidth - drawable.IntrinsicWidth / 2 + offset.Y;
-            layerList.SetLayerInset(_imageLayerIndex, xOffset, yOffset, 0, 0);
+            var rightOffset = halfWidth - drawable.IntrinsicWidth / 2 + offset.X;
+            var bottomOffset = halfWidth - drawable.IntrinsicWidth / 2 - offset.Y;
+            layerList.SetLayerInset(_imageLayerIndex, xOffset, yOffset, rightOffset, bottomOffset);
         }
 
         public override void SetBackgroundColor(Color color)
