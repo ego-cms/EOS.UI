@@ -1,4 +1,5 @@
 ﻿using System;
+using CoreAnimation;
 using EOS.UI.iOS.Extensions;
 using EOS.UI.iOS.Themes;
 using EOS.UI.Shared.Themes.Helpers;
@@ -13,6 +14,10 @@ namespace EOS.UI.iOS.Controls
     [Register("GhostButton")]
     public class GhostButton : UIButton, IEOSThemeControl
     {
+        private CAAnimationGroup _rippleAnimations;
+        private CALayer _rippleLayer;
+        private const string _rippleAnimationKey = "rippleAnimation";
+        
         public bool IsEOSCustomizationIgnored { get; private set; }
 
         private UIFont _font;
@@ -213,7 +218,10 @@ namespace EOS.UI.iOS.Controls
             base.TouchesBegan(touches, evt);
             var touch = touches.AnyObject as UITouch;
             var location = touch.LocationInView(this);
-            this.RippleAnimate(location);
+            _rippleAnimations = this.CreateRippleAnimations(location);
+            _rippleLayer = this.CrateAnimationLayer(location);
+            _rippleAnimations.SetValueForKey(_rippleLayer, new NSString("animationLayer"));
+            _rippleLayer.AddAnimation(_rippleAnimations, _rippleAnimationKey);
         }
     }
 }

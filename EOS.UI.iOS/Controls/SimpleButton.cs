@@ -17,9 +17,12 @@ namespace EOS.UI.iOS.Controls
     {
         private CABasicAnimation _rotationAnimation;
         private const string _rotationAnimationKey = "rotationAnimation";
+        private const string _rippleAnimationKey = "rippleAnimation";
         private const double _360degrees = 6.28319;//value in radians
         private Dictionary<UIControlState, NSAttributedString> _attributedTitles = new Dictionary<UIControlState, NSAttributedString>();
         private const double _verticalPaddingRatio = 0.25;
+        private CAAnimationGroup _rippleAnimations;
+        private CALayer _rippleLayer;
         
         #region constructor
 
@@ -298,7 +301,17 @@ namespace EOS.UI.iOS.Controls
         public override void TouchesBegan(NSSet touches, UIEvent evt)
         {
             base.TouchesBegan(touches, evt);
-            this.RippleAnimate((touches.AnyObject as UITouch).LocationInView(this));
+            var tapLocation = (touches.AnyObject as UITouch).LocationInView(this);
+            _rippleAnimations = this.CreateRippleAnimations(tapLocation);
+            _rippleLayer = this.CrateAnimationLayer(tapLocation);
+            _rippleAnimations.SetValueForKey(_rippleLayer, new NSString("animationLayer"));
+            _rippleLayer.AddAnimation(_rippleAnimations, _rippleAnimationKey);
+        }
+
+        public override void TouchesEnded(NSSet touches, UIEvent evt)
+        {
+            base.TouchesEnded(touches, evt);
+            _rippleLayer.RemoveAnimation(_rippleAnimationKey);
         }
 
         #endregion
