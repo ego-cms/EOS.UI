@@ -19,20 +19,20 @@ namespace EOS.UI.Android.Sandbox.Activities
     {
         private Input _inputTop;
         private Input _inputBottom;
-        private EOSDropDown _themeDropDown;
-        private EOSDropDown _fontDropDown;
-        private EOSDropDown _letterSpacingDropDown;
-        private EOSDropDown _textSizeDropDown;
-        private EOSDropDown _textColorDropDown;
-        private EOSDropDown _textColorDisabledDropDown;
-        private EOSDropDown _hintTextColorDropDown;
-        private EOSDropDown _hintTextColorDisabledDropDown;
-        private EOSDropDown _leftDrawableFocusedDropDown;
-        private EOSDropDown _leftDrawableUnfocusedDropDown;
-        private EOSDropDown _leftDrawableDisabledDropDown;
-        private EOSDropDown _underlineColorFocusedDropDown;
-        private EOSDropDown _underlineColorUnfocusedDropDown;
-        private EOSDropDown _underlineColorDisabledDropDown;
+        private EOSSandboxDropDown _themeDropDown;
+        private EOSSandboxDropDown _fontDropDown;
+        private EOSSandboxDropDown _letterSpacingDropDown;
+        private EOSSandboxDropDown _textSizeDropDown;
+        private EOSSandboxDropDown _textColorDropDown;
+        private EOSSandboxDropDown _textColorDisabledDropDown;
+        private EOSSandboxDropDown _hintTextColorDropDown;
+        private EOSSandboxDropDown _hintTextColorDisabledDropDown;
+        private EOSSandboxDropDown _leftDrawableFocusedDropDown;
+        private EOSSandboxDropDown _leftDrawableUnfocusedDropDown;
+        private EOSSandboxDropDown _leftDrawableDisabledDropDown;
+        private EOSSandboxDropDown _underlineColorFocusedDropDown;
+        private EOSSandboxDropDown _underlineColorUnfocusedDropDown;
+        private EOSSandboxDropDown _underlineColorDisabledDropDown;
         private Switch _disabledSwitch;
 
         protected override void OnCreate(Bundle savedInstanceState)
@@ -45,20 +45,20 @@ namespace EOS.UI.Android.Sandbox.Activities
             _inputBottom = FindViewById<Input>(Resource.Id.inputBottom);
             _inputBottom.UpdateAppearance();
 
-            _themeDropDown = FindViewById<EOSDropDown>(Resource.Id.themeDropDown);
-            _fontDropDown = FindViewById<EOSDropDown>(Resource.Id.fontDropDown);
-            _letterSpacingDropDown = FindViewById<EOSDropDown>(Resource.Id.letterSpacingDropDown);
-            _textSizeDropDown = FindViewById<EOSDropDown>(Resource.Id.textSizeDropDown);
-            _textColorDropDown = FindViewById<EOSDropDown>(Resource.Id.textColorDropDown);
-            _textColorDisabledDropDown = FindViewById<EOSDropDown>(Resource.Id.disabledTextColorDropDown);
-            _hintTextColorDropDown = FindViewById<EOSDropDown>(Resource.Id.hintTextColorDropDown);
-            _hintTextColorDisabledDropDown = FindViewById<EOSDropDown>(Resource.Id.disabledHintTextColorDropDown);
-            _leftDrawableFocusedDropDown = FindViewById<EOSDropDown>(Resource.Id.focusedIconDropDown);
-            _leftDrawableUnfocusedDropDown = FindViewById<EOSDropDown>(Resource.Id.unfocusedIconDropDown);
-            _leftDrawableDisabledDropDown = FindViewById<EOSDropDown>(Resource.Id.disabledIconDropDown);
-            _underlineColorFocusedDropDown = FindViewById<EOSDropDown>(Resource.Id.focusedUnderlineColorDropDown);
-            _underlineColorUnfocusedDropDown = FindViewById<EOSDropDown>(Resource.Id.unfocusedUnderlineColorDropDown);
-            _underlineColorDisabledDropDown = FindViewById<EOSDropDown>(Resource.Id.disabledUnderlineColorDropDown);
+            _themeDropDown = FindViewById<EOSSandboxDropDown>(Resource.Id.themeDropDown);
+            _fontDropDown = FindViewById<EOSSandboxDropDown>(Resource.Id.fontDropDown);
+            _letterSpacingDropDown = FindViewById<EOSSandboxDropDown>(Resource.Id.letterSpacingDropDown);
+            _textSizeDropDown = FindViewById<EOSSandboxDropDown>(Resource.Id.textSizeDropDown);
+            _textColorDropDown = FindViewById<EOSSandboxDropDown>(Resource.Id.textColorDropDown);
+            _textColorDisabledDropDown = FindViewById<EOSSandboxDropDown>(Resource.Id.disabledTextColorDropDown);
+            _hintTextColorDropDown = FindViewById<EOSSandboxDropDown>(Resource.Id.hintTextColorDropDown);
+            _hintTextColorDisabledDropDown = FindViewById<EOSSandboxDropDown>(Resource.Id.disabledHintTextColorDropDown);
+            _leftDrawableFocusedDropDown = FindViewById<EOSSandboxDropDown>(Resource.Id.focusedIconDropDown);
+            _leftDrawableUnfocusedDropDown = FindViewById<EOSSandboxDropDown>(Resource.Id.unfocusedIconDropDown);
+            _leftDrawableDisabledDropDown = FindViewById<EOSSandboxDropDown>(Resource.Id.disabledIconDropDown);
+            _underlineColorFocusedDropDown = FindViewById<EOSSandboxDropDown>(Resource.Id.focusedUnderlineColorDropDown);
+            _underlineColorUnfocusedDropDown = FindViewById<EOSSandboxDropDown>(Resource.Id.unfocusedUnderlineColorDropDown);
+            _underlineColorDisabledDropDown = FindViewById<EOSSandboxDropDown>(Resource.Id.disabledUnderlineColorDropDown);
             var resetButton = FindViewById<Button>(Resource.Id.buttonResetCustomization);
             _disabledSwitch = FindViewById<Switch>(Resource.Id.switchDisabled);
 

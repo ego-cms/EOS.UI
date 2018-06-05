@@ -21,11 +21,11 @@ namespace EOS.UI.Android.Sandbox.Activities
             SetContentView(Resource.Layout.FabProgressLayout);
 
             var fab = FindViewById<FabProgress>(Resource.Id.fabProgress);
-            var themeDropDown = FindViewById<EOSDropDown>(Resource.Id.themeDropDown);
-            var backgroundColorDropDown = FindViewById<EOSDropDown>(Resource.Id.backgroundDropDown);
-            var disabledColorDropDown = FindViewById<EOSDropDown>(Resource.Id.disabledColorDropDown);
-            var pressedColorDropDown = FindViewById<EOSDropDown>(Resource.Id.pressedColorDropDown);
-            var sizeDropDown = FindViewById<EOSDropDown>(Resource.Id.sizeDropDown);
+            var themeDropDown = FindViewById<EOSSandboxDropDown>(Resource.Id.themeDropDown);
+            var backgroundColorDropDown = FindViewById<EOSSandboxDropDown>(Resource.Id.backgroundDropDown);
+            var disabledColorDropDown = FindViewById<EOSSandboxDropDown>(Resource.Id.disabledColorDropDown);
+            var pressedColorDropDown = FindViewById<EOSSandboxDropDown>(Resource.Id.pressedColorDropDown);
+            var sizeDropDown = FindViewById<EOSSandboxDropDown>(Resource.Id.sizeDropDown);
             var stateSwitch = FindViewById<Switch>(Resource.Id.stateSwitch);
             var resetButton = FindViewById<Button>(Resource.Id.buttonResetCustomization);
             fab.Click += async (sender, e) =>
@@ -41,7 +41,7 @@ namespace EOS.UI.Android.Sandbox.Activities
                 resetButton.Enabled = true;
             };
 
-            var spinners = new List<EOSDropDown>()
+            var spinners = new List<EOSSandboxDropDown>()
             {
                 themeDropDown,
                 disabledColorDropDown,

@@ -2,7 +2,6 @@
 using System.Collections;
 using Android.Content;
 using Android.Graphics;
-using Android.Graphics.Drawables;
 using Android.Runtime;
 using Android.Util;
 using Android.Views;
@@ -18,14 +17,14 @@ using R = Android.Resource;
 namespace EOS.UI.Android.Sandbox.Controls
 {
     public delegate void ItemSelectedEventHandler(int position);
-    public class EOSDropDown : LinearLayout, IEOSThemeControl
+    public class EOSSandboxDropDown : LinearLayout, IEOSThemeControl
     {
         #region fields
 
         private TextView _nameTextView;
         private Spinner _spinner;
         private Context _context;
-        private EOSDivider _divider;
+        private EOSSandboxDivider _divider;
 
         #endregion
 
@@ -47,27 +46,27 @@ namespace EOS.UI.Android.Sandbox.Controls
 
         #region constructors
 
-        public EOSDropDown(Context context) : base(context)
+        public EOSSandboxDropDown(Context context) : base(context)
         {
             Initialize(context);
         }
 
-        public EOSDropDown(Context context, IAttributeSet attrs) : base(context, attrs)
+        public EOSSandboxDropDown(Context context, IAttributeSet attrs) : base(context, attrs)
         {
             Initialize(context, attrs);
         }
 
-        public EOSDropDown(Context context, IAttributeSet attrs, int defStyleAttr) : base(context, attrs, defStyleAttr)
+        public EOSSandboxDropDown(Context context, IAttributeSet attrs, int defStyleAttr) : base(context, attrs, defStyleAttr)
         {
             Initialize(context, attrs);
         }
 
-        public EOSDropDown(Context context, IAttributeSet attrs, int defStyleAttr, int defStyleRes) : base(context, attrs, defStyleAttr, defStyleRes)
+        public EOSSandboxDropDown(Context context, IAttributeSet attrs, int defStyleAttr, int defStyleRes) : base(context, attrs, defStyleAttr, defStyleRes)
         {
             Initialize(context, attrs);
         }
 
-        protected EOSDropDown(IntPtr javaReference, JniHandleOwnership transfer) : base(javaReference, transfer)
+        protected EOSSandboxDropDown(IntPtr javaReference, JniHandleOwnership transfer) : base(javaReference, transfer)
         {
             Initialize();
         }
@@ -83,7 +82,7 @@ namespace EOS.UI.Android.Sandbox.Controls
 
         public void SetupAdapter(IList source)
         {
-            _spinner.Adapter = new EOSSpinnerAdapter(_context, R.Layout.SimpleSpinnerItem, source);
+            _spinner.Adapter = new EOSSandboxSpinnerAdapter(_context, R.Layout.SimpleSpinnerItem, source);
         }
 
         private void Initialize(Context context = null, IAttributeSet attrs = null)
@@ -94,7 +93,7 @@ namespace EOS.UI.Android.Sandbox.Controls
 
             _nameTextView = view.FindViewById<TextView>(Resource.Id.dropDownName);
             _spinner = view.FindViewById<Spinner>(Resource.Id.dropDownSpinner);
-            _divider = view.FindViewById<EOSDivider>(Resource.Id.dropDownDivider);
+            _divider = view.FindViewById<EOSSandboxDivider>(Resource.Id.dropDownDivider);
 
             _spinner.ItemSelected += (sender, e) =>
             {

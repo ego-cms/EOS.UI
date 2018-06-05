@@ -1,32 +1,38 @@
 ﻿using System;
 using Android.Content;
+using Android.Graphics;
 using Android.Runtime;
-using Android.Support.V7.Widget;
 using Android.Util;
+using Android.Views;
 using EOS.UI.Shared.Themes.Helpers;
 using EOS.UI.Shared.Themes.Interfaces;
 using UIFrameworks.Android.Themes;
+using UIFrameworks.Shared.Themes.Helpers;
 using UIFrameworks.Shared.Themes.Interfaces;
 
-namespace EOS.UI.Android.Sandbox.RecyclerImplementation
+namespace EOS.UI.Android.Sandbox.Controls
 {
-    public class EOSRecyclerView : RecyclerView, IEOSThemeControl
+    public class EOSSandboxDivider : View, IEOSThemeControl
     {
-        #region constructor
+        #region constructors
 
-        public EOSRecyclerView(Context context) : base(context)
+        public EOSSandboxDivider(Context context) : base(context)
         {
         }
 
-        public EOSRecyclerView(Context context, IAttributeSet attrs) : base(context, attrs)
+        public EOSSandboxDivider(Context context, IAttributeSet attrs) : base(context, attrs)
         {
         }
 
-        public EOSRecyclerView(Context context, IAttributeSet attrs, int defStyle) : base(context, attrs, defStyle)
+        public EOSSandboxDivider(Context context, IAttributeSet attrs, int defStyleAttr) : base(context, attrs, defStyleAttr)
         {
         }
 
-        protected EOSRecyclerView(IntPtr javaReference, JniHandleOwnership transfer) : base(javaReference, transfer)
+        public EOSSandboxDivider(Context context, IAttributeSet attrs, int defStyleAttr, int defStyleRes) : base(context, attrs, defStyleAttr, defStyleRes)
+        {
+        }
+
+        protected EOSSandboxDivider(IntPtr javaReference, JniHandleOwnership transfer) : base(javaReference, transfer)
         {
         }
 
@@ -45,7 +51,7 @@ namespace EOS.UI.Android.Sandbox.RecyclerImplementation
         {
             if(!IsEOSCustomizationIgnored)
             {
-                GetAdapter().NotifyDataSetChanged();
+                SetBackgroundColor(GetThemeProvider().GetEOSProperty<Color>(this, EOSConstants.NeutralColor3));
             }
         }
 

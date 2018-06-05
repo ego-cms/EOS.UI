@@ -1,9 +1,6 @@
-﻿using System;
-using Android.App;
+﻿using Android.App;
 using Android.Content;
 using Android.Graphics;
-using Android.Runtime;
-using Android.Support.V7.App;
 using Android.Support.V7.Widget;
 using Android.Util;
 using EOS.UI.Shared.Themes.Helpers;
@@ -14,20 +11,20 @@ using UIFrameworks.Shared.Themes.Interfaces;
 
 namespace EOS.UI.Android.Sandbox.Controls
 {
-    public class EOSToolbar : Toolbar, IEOSThemeControl
+    public class EOSSandboxToolbar : Toolbar, IEOSThemeControl
     {
         #region constructors
 
-        public EOSToolbar(Context context) : base(context)
+        public EOSSandboxToolbar(Context context) : base(context)
         {
             Initialize(context);
         }
-        public EOSToolbar(Context context, IAttributeSet attrs) : base(context, attrs)
+        public EOSSandboxToolbar(Context context, IAttributeSet attrs) : base(context, attrs)
         {
             Initialize(context);
         }
 
-        public EOSToolbar(Context context, IAttributeSet attrs, int defStyleAttr) : base(context, attrs, defStyleAttr)
+        public EOSSandboxToolbar(Context context, IAttributeSet attrs, int defStyleAttr) : base(context, attrs, defStyleAttr)
         {
             Initialize(context);
         }

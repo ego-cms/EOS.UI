@@ -17,17 +17,17 @@ namespace EOS.UI.Android.Sandbox.Activities
     public class SimpleButtonActivity : BaseActivity, IOnCheckedChangeListener
     {
         private SimpleButton _simpleButton;
-        private EOSDropDown _themeDropDown;
-        private EOSDropDown _fontDropDown;
-        private EOSDropDown _letterSpacingDropDown;
-        private EOSDropDown _textSizeDropDown;
-        private EOSDropDown _textColorEnabledDropDown;
-        private EOSDropDown _textColorDisabledDropDown;
-        private EOSDropDown _textColorPressedDropDown;
-        private EOSDropDown _backgroundColorEnabledDropDown;
-        private EOSDropDown _backgroundColorDisabledDropDown;
-        private EOSDropDown _backgroundColorPressedDropDown;
-        private EOSDropDown _cornerRadiusDropDown;
+        private EOSSandboxDropDown _themeDropDown;
+        private EOSSandboxDropDown _fontDropDown;
+        private EOSSandboxDropDown _letterSpacingDropDown;
+        private EOSSandboxDropDown _textSizeDropDown;
+        private EOSSandboxDropDown _textColorEnabledDropDown;
+        private EOSSandboxDropDown _textColorDisabledDropDown;
+        private EOSSandboxDropDown _textColorPressedDropDown;
+        private EOSSandboxDropDown _backgroundColorEnabledDropDown;
+        private EOSSandboxDropDown _backgroundColorDisabledDropDown;
+        private EOSSandboxDropDown _backgroundColorPressedDropDown;
+        private EOSSandboxDropDown _cornerRadiusDropDown;
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
@@ -37,17 +37,17 @@ namespace EOS.UI.Android.Sandbox.Activities
             _simpleButton = FindViewById<SimpleButton>(Resource.Id.simpleButton);
             _simpleButton.UpdateAppearance();
 
-            _themeDropDown = FindViewById<EOSDropDown>(Resource.Id.themeDropDown);
-            _fontDropDown = FindViewById<EOSDropDown>(Resource.Id.fontDropDown);
-            _letterSpacingDropDown = FindViewById<EOSDropDown>(Resource.Id.letterSpacingDropDown);
-            _textSizeDropDown = FindViewById<EOSDropDown>(Resource.Id.textSizeDropDown);
-            _textColorEnabledDropDown = FindViewById<EOSDropDown>(Resource.Id.enabledTextColorDropDown);
-            _textColorDisabledDropDown = FindViewById<EOSDropDown>(Resource.Id.disabledTextColorDropDown);
-            _textColorPressedDropDown = FindViewById<EOSDropDown>(Resource.Id.pressedTextColorDropDown);
-            _backgroundColorEnabledDropDown = FindViewById<EOSDropDown>(Resource.Id.enabledBackgroundDropDown);
-            _backgroundColorDisabledDropDown = FindViewById<EOSDropDown>(Resource.Id.disabledBackgroundDropDown);
-            _backgroundColorPressedDropDown = FindViewById<EOSDropDown>(Resource.Id.pressedBackgroundDropDown);
-            _cornerRadiusDropDown = FindViewById<EOSDropDown>(Resource.Id.cornerRadiusDropDown);
+            _themeDropDown = FindViewById<EOSSandboxDropDown>(Resource.Id.themeDropDown);
+            _fontDropDown = FindViewById<EOSSandboxDropDown>(Resource.Id.fontDropDown);
+            _letterSpacingDropDown = FindViewById<EOSSandboxDropDown>(Resource.Id.letterSpacingDropDown);
+            _textSizeDropDown = FindViewById<EOSSandboxDropDown>(Resource.Id.textSizeDropDown);
+            _textColorEnabledDropDown = FindViewById<EOSSandboxDropDown>(Resource.Id.enabledTextColorDropDown);
+            _textColorDisabledDropDown = FindViewById<EOSSandboxDropDown>(Resource.Id.disabledTextColorDropDown);
+            _textColorPressedDropDown = FindViewById<EOSSandboxDropDown>(Resource.Id.pressedTextColorDropDown);
+            _backgroundColorEnabledDropDown = FindViewById<EOSSandboxDropDown>(Resource.Id.enabledBackgroundDropDown);
+            _backgroundColorDisabledDropDown = FindViewById<EOSSandboxDropDown>(Resource.Id.disabledBackgroundDropDown);
+            _backgroundColorPressedDropDown = FindViewById<EOSSandboxDropDown>(Resource.Id.pressedBackgroundDropDown);
+            _cornerRadiusDropDown = FindViewById<EOSSandboxDropDown>(Resource.Id.cornerRadiusDropDown);
             var resetButton = FindViewById<Button>(Resource.Id.buttonResetCustomization);
             var disableSwitch = FindViewById<Switch>(Resource.Id.switchDisabled);
 

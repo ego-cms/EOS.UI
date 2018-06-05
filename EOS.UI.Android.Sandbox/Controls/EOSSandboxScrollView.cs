@@ -14,27 +14,27 @@ using UIFrameworks.Shared.Themes.Interfaces;
 
 namespace EOS.UI.Android.Sandbox.Controls
 {
-    public class EOSLinearLayout : LinearLayout, IEOSThemeControl
+    public class EOSSandboxScrollView : ScrollView, IEOSThemeControl
     {
         #region constructors
 
-        public EOSLinearLayout(Context context) : base(context)
+        public EOSSandboxScrollView(Context context) : base(context)
         {
         }
 
-        public EOSLinearLayout(Context context, IAttributeSet attrs) : base(context, attrs)
+        public EOSSandboxScrollView(Context context, IAttributeSet attrs) : base(context, attrs)
         {
         }
 
-        public EOSLinearLayout(Context context, IAttributeSet attrs, int defStyleAttr) : base(context, attrs, defStyleAttr)
+        public EOSSandboxScrollView(Context context, IAttributeSet attrs, int defStyleAttr) : base(context, attrs, defStyleAttr)
         {
         }
 
-        public EOSLinearLayout(Context context, IAttributeSet attrs, int defStyleAttr, int defStyleRes) : base(context, attrs, defStyleAttr, defStyleRes)
+        public EOSSandboxScrollView(Context context, IAttributeSet attrs, int defStyleAttr, int defStyleRes) : base(context, attrs, defStyleAttr, defStyleRes)
         {
         }
 
-        protected EOSLinearLayout(IntPtr javaReference, JniHandleOwnership transfer) : base(javaReference, transfer)
+        protected EOSSandboxScrollView(IntPtr javaReference, JniHandleOwnership transfer) : base(javaReference, transfer)
         {
         }
 
@@ -53,7 +53,10 @@ namespace EOS.UI.Android.Sandbox.Controls
         {
             if(!IsEOSCustomizationIgnored)
             {
-                (Background as ColorDrawable).Color = GetThemeProvider().GetEOSProperty<Color>(this, EOSConstants.NeutralColor6);
+                if(Background == null)
+                    Background = new ColorDrawable(GetThemeProvider().GetEOSProperty<Color>(this, EOSConstants.NeutralColor6));
+                else
+                    (Background as ColorDrawable).Color =  GetThemeProvider().GetEOSProperty<Color>(this, EOSConstants.NeutralColor6);
             }
         }
 
@@ -65,20 +68,11 @@ namespace EOS.UI.Android.Sandbox.Controls
 
         public IEOSStyle GetCurrentEOSStyle()
         {
-            return EOSSendboxStyleProvider.Instance.Style;
+            return EOSSandboxStyleProvider.Instance.Style;
         }
 
         public void SetEOSStyle(EOSStyleEnumeration style)
         {
-            switch(style)
-            {
-                case EOSStyleEnumeration.SendboxLight:
-                    EOSSendboxStyleProvider.Instance.Style = new EOSSendboxLightStyle();
-                    break;
-                case EOSStyleEnumeration.SendboxDark:
-                    EOSSendboxStyleProvider.Instance.Style = new EOSSendboxDarkStyle();
-                    break;
-            }
         }
 
         #endregion

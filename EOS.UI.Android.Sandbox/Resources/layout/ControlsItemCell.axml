@@ -27,7 +27,7 @@
             android:layout_centerVertical="true"
             android:layout_marginRight="10dp" />
     </RelativeLayout>
-    <EOS.UI.Android.Sandbox.Controls.EOSDivider
+    <EOS.UI.Android.Sandbox.Controls.EOSSandboxDivider
         android:id="@+id/dropDownDivider"
         android:layout_width="match_parent"
         android:layout_height="1dp"

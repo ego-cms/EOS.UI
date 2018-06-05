@@ -5,6 +5,7 @@ using Android.Graphics.Drawables;
 using Android.Runtime;
 using Android.Util;
 using Android.Widget;
+using EOS.UI.Android.Sandbox.Styles;
 using EOS.UI.Shared.Themes.Helpers;
 using EOS.UI.Shared.Themes.Interfaces;
 using UIFrameworks.Android.Themes;
@@ -13,42 +14,28 @@ using UIFrameworks.Shared.Themes.Interfaces;
 
 namespace EOS.UI.Android.Sandbox.Controls
 {
-    public class EOSButton : Button, IEOSThemeControl
+    public class EOSSandboxRelativeLayout : RelativeLayout, IEOSThemeControl
     {
-        #region constructors
+        #region constructor
 
-        public EOSButton(Context context) : base(context)
+        public EOSSandboxRelativeLayout(Context context) : base(context)
         {
-            Initialize();
         }
 
-        public EOSButton(Context context, IAttributeSet attrs) : base(context, attrs)
+        public EOSSandboxRelativeLayout(Context context, IAttributeSet attrs) : base(context, attrs)
         {
-            Initialize();
         }
 
-        public EOSButton(Context context, IAttributeSet attrs, int defStyleAttr) : base(context, attrs, defStyleAttr)
+        public EOSSandboxRelativeLayout(Context context, IAttributeSet attrs, int defStyleAttr) : base(context, attrs, defStyleAttr)
         {
-            Initialize();
         }
 
-        public EOSButton(Context context, IAttributeSet attrs, int defStyleAttr, int defStyleRes) : base(context, attrs, defStyleAttr, defStyleRes)
+        public EOSSandboxRelativeLayout(Context context, IAttributeSet attrs, int defStyleAttr, int defStyleRes) : base(context, attrs, defStyleAttr, defStyleRes)
         {
-            Initialize();
         }
 
-        protected EOSButton(IntPtr javaReference, JniHandleOwnership transfer) : base(javaReference, transfer)
+        protected EOSSandboxRelativeLayout(IntPtr javaReference, JniHandleOwnership transfer) : base(javaReference, transfer)
         {
-            Initialize();
-        }
-
-        #endregion
-
-        #region utility methods
-
-        private void Initialize()
-        {
-            Background = new ColorDrawable(Color.Transparent);
         }
 
         #endregion
@@ -66,7 +53,7 @@ namespace EOS.UI.Android.Sandbox.Controls
         {
             if(!IsEOSCustomizationIgnored)
             {
-                SetTextColor(GetThemeProvider().GetEOSProperty<Color>(this, EOSConstants.BrandPrimaryColor));
+                (Background as ColorDrawable).Color = GetThemeProvider().GetEOSProperty<Color>(this, EOSConstants.NeutralColor6);
             }
         }
 
@@ -78,12 +65,11 @@ namespace EOS.UI.Android.Sandbox.Controls
 
         public IEOSStyle GetCurrentEOSStyle()
         {
-            return null;
+            return EOSSandboxStyleProvider.Instance.Style;
         }
 
         public void SetEOSStyle(EOSStyleEnumeration style)
         {
-
         }
 
         #endregion

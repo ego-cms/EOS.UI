@@ -12,24 +12,24 @@ using UIFrameworks.Shared.Themes.Interfaces;
 
 namespace EOS.UI.Android.Sandbox.RecyclerImplementation
 {
-    public class EOSControlsViewHolder : RecyclerView.ViewHolder, View.IOnTouchListener, IEOSThemeControl
+    public class EOSSandboxControlsViewHolder : RecyclerView.ViewHolder, View.IOnTouchListener, IEOSThemeControl
     {
         private Color _normalBackground = Color.Transparent;
         private Color _selectedBackground = Color.Gray;
         private LinearLayout _container;
         private ImageView _arrowImage;
-        private EOSDivider _divider;
+        private EOSSandboxDivider _divider;
         private Action<int> _clickAction;
 
         public TextView ControlTitle { get; private set; }
              
-        public EOSControlsViewHolder(View itemView, Action<int> clickAction) : base(itemView)
+        public EOSSandboxControlsViewHolder(View itemView, Action<int> clickAction) : base(itemView)
         {
             _clickAction = clickAction;
             _container = itemView.FindViewById<LinearLayout>(Resource.Id.holderContainer);
             ControlTitle = itemView.FindViewById<TextView>(Resource.Id.titleTextView);
             _arrowImage = itemView.FindViewById<ImageView>(Resource.Id.imageArrow);
-            _divider = itemView.FindViewById<EOSDivider>(Resource.Id.dropDownDivider);
+            _divider = itemView.FindViewById<EOSSandboxDivider>(Resource.Id.dropDownDivider);
             _container.SetOnTouchListener(this);
         }
 

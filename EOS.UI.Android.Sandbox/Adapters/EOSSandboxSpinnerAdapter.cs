@@ -11,13 +11,13 @@ using UIFrameworks.Shared.Themes.Interfaces;
 
 namespace EOS.UI.Android.Sandbox.Adapters
 {
-    public class EOSSpinnerAdapter : ArrayAdapter, IEOSThemeControl
+    public class EOSSandboxSpinnerAdapter : ArrayAdapter, IEOSThemeControl
     {
         private int _resourseId;
         private Color _backgroundColor;
         private Color _textColor;
 
-        public EOSSpinnerAdapter(Context context, int resource, IList objects) : base(context, resource, objects)
+        public EOSSandboxSpinnerAdapter(Context context, int resource, IList objects) : base(context, resource, objects)
         {
             _resourseId = resource;
         }

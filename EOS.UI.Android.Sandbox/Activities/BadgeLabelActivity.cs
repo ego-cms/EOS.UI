@@ -20,13 +20,13 @@ namespace EOS.UI.Android.Sandbox.Activities
     public class BadgeLabelActivity : BaseActivity
     {
         private BadgeLabel _badge;
-        private EOSDropDown _themeDropDown;
-        private EOSDropDown _backgroundColorDropDown;
-        private EOSDropDown _textColorDropDown;
-        private EOSDropDown _fontDropDown;
-        private EOSDropDown _letterSpacingDropDown;
-        private EOSDropDown _textSizeDropDown;
-        private EOSDropDown _cornerRadiusDropDown;
+        private EOSSandboxDropDown _themeDropDown;
+        private EOSSandboxDropDown _backgroundColorDropDown;
+        private EOSSandboxDropDown _textColorDropDown;
+        private EOSSandboxDropDown _fontDropDown;
+        private EOSSandboxDropDown _letterSpacingDropDown;
+        private EOSSandboxDropDown _textSizeDropDown;
+        private EOSSandboxDropDown _cornerRadiusDropDown;
         private ScrollView _rootView;
 
         protected override void OnCreate(Bundle savedInstanceState)
@@ -38,13 +38,13 @@ namespace EOS.UI.Android.Sandbox.Activities
             _badge.UpdateAppearance();
 
             _rootView = FindViewById<ScrollView>(Resource.Id.rootView);
-            _themeDropDown = FindViewById<EOSDropDown>(Resource.Id.themeDropDown);
-            _backgroundColorDropDown = FindViewById<EOSDropDown>(Resource.Id.backgroundDropDown);
-            _textColorDropDown = FindViewById<EOSDropDown>(Resource.Id.textColorDropDown);
-            _fontDropDown = FindViewById<EOSDropDown>(Resource.Id.fontDropDown);
-            _letterSpacingDropDown = FindViewById<EOSDropDown>(Resource.Id.letterSpacingDropDown);
-            _textSizeDropDown = FindViewById<EOSDropDown>(Resource.Id.textSizeDropDown);
-            _cornerRadiusDropDown = FindViewById<EOSDropDown>(Resource.Id.cornerRadiusDropDown);
+            _themeDropDown = FindViewById<EOSSandboxDropDown>(Resource.Id.themeDropDown);
+            _backgroundColorDropDown = FindViewById<EOSSandboxDropDown>(Resource.Id.backgroundDropDown);
+            _textColorDropDown = FindViewById<EOSSandboxDropDown>(Resource.Id.textColorDropDown);
+            _fontDropDown = FindViewById<EOSSandboxDropDown>(Resource.Id.fontDropDown);
+            _letterSpacingDropDown = FindViewById<EOSSandboxDropDown>(Resource.Id.letterSpacingDropDown);
+            _textSizeDropDown = FindViewById<EOSSandboxDropDown>(Resource.Id.textSizeDropDown);
+            _cornerRadiusDropDown = FindViewById<EOSSandboxDropDown>(Resource.Id.cornerRadiusDropDown);
             var resetButton = FindViewById<Button>(Resource.Id.buttonResetCustomization);
 
             _themeDropDown.Name = Fields.Theme;

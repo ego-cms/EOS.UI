@@ -19,7 +19,7 @@ namespace EOS.UI.Android.Sandbox.RecyclerImplementation
 
         public override void OnBindViewHolder(RecyclerView.ViewHolder holder, int position)
         {
-            var viewHolder = holder as EOSControlsViewHolder;
+            var viewHolder = holder as EOSSandboxControlsViewHolder;
             viewHolder.ControlTitle.Text = _controlNames[position];
             viewHolder.UpdateAppearance();
         }
@@ -27,7 +27,7 @@ namespace EOS.UI.Android.Sandbox.RecyclerImplementation
         public override RecyclerView.ViewHolder OnCreateViewHolder(ViewGroup parent, int viewType)
         {
             View itemView = LayoutInflater.From(parent.Context).Inflate(Resource.Layout.ControlsItemCell, parent, false);
-            var viewHolder = new EOSControlsViewHolder(itemView, OnClick);
+            var viewHolder = new EOSSandboxControlsViewHolder(itemView, OnClick);
             return viewHolder;
         }
 

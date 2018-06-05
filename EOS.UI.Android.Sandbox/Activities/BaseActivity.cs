@@ -14,6 +14,7 @@ using Android.Support.V7.Widget;
 using EOS.UI.Android.Sandbox.Styles;
 using EOS.UI.Shared.Themes.Helpers;
 using EOS.UI.Shared.Themes.Themes;
+using EOS.UI.Shared.Themes.Interfaces;
 
 namespace EOS.UI.Android.Sandbox.Activities
 {
@@ -79,15 +80,15 @@ namespace EOS.UI.Android.Sandbox.Activities
 
         private void SetStyle()
         {
-            EOSStyleEnumeration style = default;
+            IEOSStyle style = default;
 
             if(EOSThemeProvider.Instance.GetCurrentTheme() is LightEOSTheme)
-                style = EOSStyleEnumeration.SendboxLight;
+                style = new EOSSandboxLightStyle();
 
             if(EOSThemeProvider.Instance.GetCurrentTheme() is DarkEOSTheme)
-                style = EOSStyleEnumeration.SendboxDark;
+                style = new EOSSandboxDarkStyle();
 
-            EOSSendboxStyleProvider.Instance.SetEOSStyle(style);
+            EOSSandboxStyleProvider.Instance.Style = style;
         }
     }
 }

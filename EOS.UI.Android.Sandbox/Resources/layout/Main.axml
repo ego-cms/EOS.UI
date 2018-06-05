@@ -4,23 +4,23 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
-    <EOS.UI.Android.Sandbox.Controls.EOSToolbar
+    <EOS.UI.Android.Sandbox.Controls.EOSSandboxToolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:minHeight="?attr/actionBarSize"
         android:theme="@style/ToolBarStyle" />
-    <EOS.UI.Android.Sandbox.Controls.EOSRelativeLayout
+    <EOS.UI.Android.Sandbox.Controls.EOSSandboxRelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/background_color">
-        <EOS.UI.Android.Sandbox.Controls.EOSDivider
+        <EOS.UI.Android.Sandbox.Controls.EOSSandboxDivider
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:background="@android:color/darker_gray" />
-        <EOS.UI.Android.Sandbox.RecyclerImplementation.EOSRecyclerView
+        <EOS.UI.Android.Sandbox.RecyclerImplementation.EOSSandboxRecyclerView
             android:id="@+id/recyclerView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
-    </EOS.UI.Android.Sandbox.Controls.EOSRelativeLayout>
+    </EOS.UI.Android.Sandbox.Controls.EOSSandboxRelativeLayout>
 </LinearLayout>

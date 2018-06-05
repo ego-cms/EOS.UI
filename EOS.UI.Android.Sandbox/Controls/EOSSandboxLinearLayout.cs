@@ -1,9 +1,11 @@
 ﻿using System;
 using Android.Content;
 using Android.Graphics;
+using Android.Graphics.Drawables;
 using Android.Runtime;
 using Android.Util;
-using Android.Views;
+using Android.Widget;
+using EOS.UI.Android.Sandbox.Styles;
 using EOS.UI.Shared.Themes.Helpers;
 using EOS.UI.Shared.Themes.Interfaces;
 using UIFrameworks.Android.Themes;
@@ -12,27 +14,27 @@ using UIFrameworks.Shared.Themes.Interfaces;
 
 namespace EOS.UI.Android.Sandbox.Controls
 {
-    public class EOSDivider : View, IEOSThemeControl
+    public class EOSSandboxLinearLayout : LinearLayout, IEOSThemeControl
     {
         #region constructors
 
-        public EOSDivider(Context context) : base(context)
+        public EOSSandboxLinearLayout(Context context) : base(context)
         {
         }
 
-        public EOSDivider(Context context, IAttributeSet attrs) : base(context, attrs)
+        public EOSSandboxLinearLayout(Context context, IAttributeSet attrs) : base(context, attrs)
         {
         }
 
-        public EOSDivider(Context context, IAttributeSet attrs, int defStyleAttr) : base(context, attrs, defStyleAttr)
+        public EOSSandboxLinearLayout(Context context, IAttributeSet attrs, int defStyleAttr) : base(context, attrs, defStyleAttr)
         {
         }
 
-        public EOSDivider(Context context, IAttributeSet attrs, int defStyleAttr, int defStyleRes) : base(context, attrs, defStyleAttr, defStyleRes)
+        public EOSSandboxLinearLayout(Context context, IAttributeSet attrs, int defStyleAttr, int defStyleRes) : base(context, attrs, defStyleAttr, defStyleRes)
         {
         }
 
-        protected EOSDivider(IntPtr javaReference, JniHandleOwnership transfer) : base(javaReference, transfer)
+        protected EOSSandboxLinearLayout(IntPtr javaReference, JniHandleOwnership transfer) : base(javaReference, transfer)
         {
         }
 
@@ -51,7 +53,7 @@ namespace EOS.UI.Android.Sandbox.Controls
         {
             if(!IsEOSCustomizationIgnored)
             {
-                SetBackgroundColor(GetThemeProvider().GetEOSProperty<Color>(this, EOSConstants.NeutralColor3));
+                (Background as ColorDrawable).Color = GetThemeProvider().GetEOSProperty<Color>(this, EOSConstants.NeutralColor6);
             }
         }
 
@@ -63,7 +65,7 @@ namespace EOS.UI.Android.Sandbox.Controls
 
         public IEOSStyle GetCurrentEOSStyle()
         {
-            return null;
+            return EOSSandboxStyleProvider.Instance.Style;
         }
 
         public void SetEOSStyle(EOSStyleEnumeration style)
