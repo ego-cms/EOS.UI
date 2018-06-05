@@ -1,18 +1,22 @@
 ﻿using System.Linq;
 using Android.App;
 using Android.Graphics;
+using Android.Graphics.Drawables;
 using Android.OS;
+using Android.Views;
 using Android.Widget;
 using EOS.UI.Android.Controls;
 using EOS.UI.Android.Sandbox.Controls;
 using EOS.UI.Shared.Themes.Themes;
+using UIFrameworks.Android.Themes;
 using UIFrameworks.Shared.Themes.Helpers;
 using UIFrameworks.Shared.Themes.Interfaces;
 using static EOS.UI.Android.Sandbox.Helpers.Constants;
+using A = Android;
 
 namespace EOS.UI.Android.Sandbox.Activities
 {
-    [Activity(Label = ControlNames.BadgeLabel) ]
+    [Activity(Label = ControlNames.BadgeLabel, Theme = "@style/Sandbox.Main") ]
     public class BadgeLabelActivity : BaseActivity
     {
         private BadgeLabel _badge;

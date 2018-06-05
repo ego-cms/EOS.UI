@@ -13,7 +13,7 @@ using static EOS.UI.Android.Sandbox.Helpers.Constants;
 
 namespace EOS.UI.Android.Sandbox.Activities
 {
-    [Activity(Label = ControlNames.SimpleButton)]
+    [Activity(Label = ControlNames.SimpleButton, Theme = "@style/Sandbox.Main")]
     public class SimpleButtonActivity : BaseActivity, IOnCheckedChangeListener
     {
         private SimpleButton _simpleButton;
@@ -111,6 +111,7 @@ namespace EOS.UI.Android.Sandbox.Activities
             {
                 _simpleButton.GetThemeProvider().SetCurrentTheme(ThemeTypes.ThemeCollection.ElementAt(position).Value);
                 ResetCustomValues();
+                UpdateApperaence();
             }
         }
 

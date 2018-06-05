@@ -1,25 +1,24 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Android.App;
 using Android.Content.PM;
 using Android.Graphics;
 using Android.Graphics.Drawables;
 using Android.OS;
-using Android.Text;
-using Android.Text.Style;
 using Android.Views;
-using Android.Widget;
-using EOS.UI.Shared.Themes.Themes;
 using UIFrameworks.Android.Themes;
 using UIFrameworks.Shared.Themes.Helpers;
 using UIFrameworks.Shared.Themes.Interfaces;
 using R = Android.Resource;
-using A = Android;
+using Android.Support.V7.App;
+using Android.Support.V7.Widget;
+using EOS.UI.Android.Sandbox.Styles;
+using EOS.UI.Shared.Themes.Helpers;
+using EOS.UI.Shared.Themes.Themes;
 
 namespace EOS.UI.Android.Sandbox.Activities
 {
-    [Activity]
-    public class BaseActivity : Activity
+    [Activity(Theme = "@style/Sandbox.Main")]
+    public class BaseActivity : AppCompatActivity
     {
         private List<View> _children;
         private List<View> Children => _children = _children ?? GetAllChildren(Window.DecorView);
@@ -27,9 +26,13 @@ namespace EOS.UI.Android.Sandbox.Activities
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
-            ActionBar.SetHomeButtonEnabled(true);
-            ActionBar.SetDisplayHomeAsUpEnabled(true);
             RequestedOrientation = ScreenOrientation.Portrait;
+        }
+
+        protected override void OnStart()
+        {
+            base.OnStart();
+            UpdateApperaence();
         }
 
         public override bool OnOptionsItemSelected(IMenuItem item)
@@ -47,8 +50,7 @@ namespace EOS.UI.Android.Sandbox.Activities
 
         public void UpdateApperaence()
         {
-            ActionBar.SetBackgroundDrawable(new ColorDrawable(EOSThemeProvider.Instance.GetEOSProperty<Color>(null, EOSConstants.NeutralColor4)));
-
+            SetStyle();
             foreach(var view in Children)
                 if(view is IEOSThemeControl eOSTheme)
                     eOSTheme.UpdateAppearance();
@@ -73,6 +75,19 @@ namespace EOS.UI.Android.Sandbox.Activities
                 result.AddRange(GetAllChildren(viewGroup.GetChildAt(i)));
 
             return result;
+        }
+
+        private void SetStyle()
+        {
+            EOSStyleEnumeration style = default;
+
+            if(EOSThemeProvider.Instance.GetCurrentTheme() is LightEOSTheme)
+                style = EOSStyleEnumeration.SendboxLight;
+
+            if(EOSThemeProvider.Instance.GetCurrentTheme() is DarkEOSTheme)
+                style = EOSStyleEnumeration.SendboxDark;
+
+            EOSSendboxStyleProvider.Instance.SetEOSStyle(style);
         }
     }
 }

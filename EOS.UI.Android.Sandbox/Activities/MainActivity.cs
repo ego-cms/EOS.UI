@@ -12,7 +12,7 @@ using UIFrameworks.Shared.Themes.Helpers;
 
 namespace EOS.UI.Android.Sandbox
 {
-    [Activity(Label = "@string/app_name", MainLauncher = true, Icon = "@mipmap/icon", ScreenOrientation = ScreenOrientation.Portrait)]
+    [Activity(Label = "@string/app_name", MainLauncher = true, Theme = "@style/Sandbox.Main", Icon = "@mipmap/icon", ScreenOrientation = ScreenOrientation.Portrait)]
     public class MainActivity : BaseActivity
     {
         private RecyclerView _recyclerView;
@@ -32,10 +32,6 @@ namespace EOS.UI.Android.Sandbox
         {
             base.OnCreate(savedInstanceState);
             SetContentView(Resource.Layout.Main);
-
-            ActionBar.SetHomeButtonEnabled(false);
-            ActionBar.SetDisplayHomeAsUpEnabled(false);
-
 
             _recyclerView = FindViewById<RecyclerView>(Resource.Id.recyclerView);
             var layoutManager = new LinearLayoutManager(BaseContext);

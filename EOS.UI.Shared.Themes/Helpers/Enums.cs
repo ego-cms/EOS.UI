@@ -9,7 +9,7 @@ namespace EOS.UI.Shared.Themes.Helpers
 
     public enum EOSStyleEnumeration
     {
-        Style1 = 1,
-        Style2
+        SendboxLight = 1,
+        SendboxDark
     }
 }

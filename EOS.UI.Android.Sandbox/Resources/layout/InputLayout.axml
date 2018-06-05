@@ -1,10 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<EOS.UI.Android.Sandbox.Controls.EOSLinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:local="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
     android:background="@color/background_color">
-    <LinearLayout
+    <EOS.UI.Android.Sandbox.Controls.EOSToolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="@style/ToolBarStyle"
+        local:navigationIcon="?homeAsUpIndicator" />
+    <EOS.UI.Android.Sandbox.Controls.EOSDivider
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@android:color/darker_gray" />
+    <EOS.UI.Android.Sandbox.Controls.EOSLinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/background_color"
@@ -24,12 +36,12 @@
             android:layout_gravity="center"
             android:layout_marginBottom="20dp"
             android:hint="Enter text" />
-    </LinearLayout>
-    <View
+    </EOS.UI.Android.Sandbox.Controls.EOSLinearLayout>
+    <EOS.UI.Android.Sandbox.Controls.EOSDivider
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:background="@android:color/darker_gray" />
-    <ScrollView
+    <EOS.UI.Android.Sandbox.Controls.EOSScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
         <LinearLayout
@@ -99,7 +111,7 @@
                 android:layout_marginTop="5dp"
                 android:weightSum="3"
                 android:layout_marginBottom="5dp">
-                <TextView
+                <EOS.UI.Android.Sandbox.Controls.EOSTextView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:text="Enabled"
@@ -116,15 +128,15 @@
                     android:paddingRight="3dp"
                     android:layout_weight="1" />
             </LinearLayout>
-            <View
+            <EOS.UI.Android.Sandbox.Controls.EOSDivider
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:background="@android:color/darker_gray" />
-            <Button
+            <EOS.UI.Android.Sandbox.Controls.EOSButton
                 android:text="Reset customization"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/buttonResetCustomization" />
         </LinearLayout>
-    </ScrollView>
-</LinearLayout>
+    </EOS.UI.Android.Sandbox.Controls.EOSScrollView>
+</EOS.UI.Android.Sandbox.Controls.EOSLinearLayout>

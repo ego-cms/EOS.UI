@@ -14,27 +14,27 @@ using UIFrameworks.Shared.Themes.Interfaces;
 
 namespace EOS.UI.Android.Sandbox.Controls
 {
-    public class EOSRelativeLayout : RelativeLayout, IEOSThemeControl
+    public class EOSLinearLayout : LinearLayout, IEOSThemeControl
     {
-        #region constructor
+        #region constructors
 
-        public EOSRelativeLayout(Context context) : base(context)
+        public EOSLinearLayout(Context context) : base(context)
         {
         }
 
-        public EOSRelativeLayout(Context context, IAttributeSet attrs) : base(context, attrs)
+        public EOSLinearLayout(Context context, IAttributeSet attrs) : base(context, attrs)
         {
         }
 
-        public EOSRelativeLayout(Context context, IAttributeSet attrs, int defStyleAttr) : base(context, attrs, defStyleAttr)
+        public EOSLinearLayout(Context context, IAttributeSet attrs, int defStyleAttr) : base(context, attrs, defStyleAttr)
         {
         }
 
-        public EOSRelativeLayout(Context context, IAttributeSet attrs, int defStyleAttr, int defStyleRes) : base(context, attrs, defStyleAttr, defStyleRes)
+        public EOSLinearLayout(Context context, IAttributeSet attrs, int defStyleAttr, int defStyleRes) : base(context, attrs, defStyleAttr, defStyleRes)
         {
         }
 
-        protected EOSRelativeLayout(IntPtr javaReference, JniHandleOwnership transfer) : base(javaReference, transfer)
+        protected EOSLinearLayout(IntPtr javaReference, JniHandleOwnership transfer) : base(javaReference, transfer)
         {
         }
 

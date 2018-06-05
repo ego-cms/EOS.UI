@@ -12,7 +12,7 @@ using static EOS.UI.Android.Sandbox.Helpers.Constants;
 
 namespace EOS.UI.Android.Sandbox.Activities
 {
-    [Activity(Label = ControlNames.GhostButton)]
+    [Activity(Label = ControlNames.GhostButton, Theme = "@style/Sandbox.Main")]
     public class GhostButtonActivity : BaseActivity
     {
         protected override void OnCreate(Bundle savedInstanceState)
@@ -52,6 +52,7 @@ namespace EOS.UI.Android.Sandbox.Activities
                     ghostButton.GetThemeProvider().SetCurrentTheme(ThemeTypes.ThemeCollection.ElementAt(position).Value);
                     ghostButton.ResetCustomization();
                     spinners.Except(new[] { themeDropDown }).ToList().ForEach(s => s.SetSpinnerSelection(0));
+                    UpdateApperaence();
                 }
             };
 

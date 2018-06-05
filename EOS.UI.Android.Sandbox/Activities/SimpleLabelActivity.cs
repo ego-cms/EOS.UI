@@ -12,7 +12,7 @@ using static EOS.UI.Android.Sandbox.Helpers.Constants;
 
 namespace EOS.UI.Android.Sandbox.Activities
 {
-    [Activity(Label = ControlNames.SimpleLabel)]
+    [Activity(Label = ControlNames.SimpleLabel, Theme = "@style/Sandbox.Main")]
     public class SimpleLabelActivity : BaseActivity
     {
         private SimpleLabel _simpleLabel;
@@ -74,8 +74,12 @@ namespace EOS.UI.Android.Sandbox.Activities
 
         private void ThemeItemSelected(int position)
         {
-            _simpleLabel.GetThemeProvider().SetCurrentTheme(ThemeTypes.ThemeCollection.ElementAt(position).Value);
-            ResetCustomValues();
+            if(position > 0)
+            {
+                _simpleLabel.GetThemeProvider().SetCurrentTheme(ThemeTypes.ThemeCollection.ElementAt(position).Value);
+                ResetCustomValues();
+                UpdateApperaence();
+            }
         }
 
         private void TextSizeItemSelected(int position)

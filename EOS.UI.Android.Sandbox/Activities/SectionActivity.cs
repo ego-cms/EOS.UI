@@ -17,7 +17,7 @@ using static EOS.UI.Android.Sandbox.Helpers.Constants;
 
 namespace EOS.UI.Android.Sandbox.Activities
 {
-    [Activity(Label = ControlNames.Section)]
+    [Activity(Label = ControlNames.Section, Theme = "@style/Sandbox.Main")]
     public class SectionActivity : BaseActivity
     {
         private RecyclerView _sectionRecyclerView;
@@ -471,6 +471,7 @@ namespace EOS.UI.Android.Sandbox.Activities
             {
                 EOSThemeProvider.Instance.SetCurrentTheme(ThemeTypes.ThemeCollection.ElementAt(position).Value);
                 ResetCustomValues();
+                UpdateApperaence();
             }
         }
     }

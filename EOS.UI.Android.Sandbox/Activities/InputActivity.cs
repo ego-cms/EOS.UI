@@ -14,7 +14,7 @@ using A = Android;
 
 namespace EOS.UI.Android.Sandbox.Activities
 {
-    [Activity(Label = ControlNames.Input)]
+    [Activity(Label = ControlNames.Input, Theme = "@style/Sandbox.Main")]
     public class InputActivity : BaseActivity, IOnCheckedChangeListener
     {
         private Input _inputTop;
@@ -144,6 +144,7 @@ namespace EOS.UI.Android.Sandbox.Activities
             {
                 _inputTop.GetThemeProvider().SetCurrentTheme(ThemeTypes.ThemeCollection.ElementAt(position).Value);
                 ResetCustomValues();
+                UpdateApperaence();
             }
         }
 

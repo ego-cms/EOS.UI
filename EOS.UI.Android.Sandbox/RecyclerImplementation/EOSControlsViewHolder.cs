@@ -60,8 +60,9 @@ namespace EOS.UI.Android.Sandbox.RecyclerImplementation
         {
             if(!IsEOSCustomizationIgnored)
             {
+                _selectedBackground = GetThemeProvider().GetEOSProperty<Color>(this, EOSConstants.NeutralColor3);
                 ControlTitle.SetTextColor(GetThemeProvider().GetEOSProperty<Color>(this, EOSConstants.NeutralColor1));
-                _arrowImage.Drawable.SetColorFilter(GetThemeProvider().GetEOSProperty<Color>(this, EOSConstants.NeutralColor1), PorterDuff.Mode.SrcIn);
+                _arrowImage.Drawable.SetColorFilter(GetThemeProvider().GetEOSProperty<Color>(this, EOSConstants.NeutralColor3), PorterDuff.Mode.SrcIn);
                 _divider.UpdateAppearance();
             }
         }

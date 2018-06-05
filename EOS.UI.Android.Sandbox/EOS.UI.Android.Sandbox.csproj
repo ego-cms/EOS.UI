@@ -99,10 +99,14 @@
     <Compile Include="Activities\BadgeLabelActivity.cs" />
     <Compile Include="Activities\MainActivity.cs" />
     <Compile Include="Adapters\EOSSpinnerAdapter.cs" />
+    <Compile Include="Controls\EOSButton.cs" />
     <Compile Include="Controls\EOSDivider.cs" />
+    <Compile Include="Controls\EOSLinearLayout.cs" />
     <Compile Include="Controls\EOSRelativeLayout.cs" />
     <Compile Include="Controls\EOSScrollView.cs" />
     <Compile Include="Controls\EOSDropDown.cs" />
+    <Compile Include="Controls\EOSTextView.cs" />
+    <Compile Include="Controls\EOSToolbar.cs" />
     <Compile Include="Helpers\Constants.cs" />
     <Compile Include="Helpers\ContextHelpers.cs" />
     <Compile Include="RecyclerImplementation\ControlsAdapter.cs" />
@@ -114,6 +118,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Activities\CircleProgressActivity.cs" />
     <Compile Include="Helpers\PlatformTimer.cs" />
+    <Compile Include="Styles\EOSSendboxDarkStyle.cs" />
+    <Compile Include="Styles\EOSSendboxLightStyle.cs" />
+    <Compile Include="Styles\EOSSendboxStyleProvider.cs" />
   </ItemGroup>
   <ItemGroup>
     <AndroidAsset Include="Assets\Fonts\Amita.ttf" />
@@ -201,6 +208,9 @@
     <AndroidResource Include="Resources\layout\SectionLayout.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\values\styles.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <Import Project="..\packages\Xamarin.Android.Support.Annotations.27.0.2\build\MonoAndroid81\Xamarin.Android.Support.Annotations.targets" Condition="Exists('..\packages\Xamarin.Android.Support.Annotations.27.0.2\build\MonoAndroid81\Xamarin.Android.Support.Annotations.targets')" />

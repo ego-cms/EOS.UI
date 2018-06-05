@@ -12,7 +12,7 @@ using static EOS.UI.Android.Sandbox.Helpers.Constants;
 
 namespace EOS.UI.Android.Sandbox.Activities
 {
-    [Activity(Label = ControlNames.FabProgress)]
+    [Activity(Label = ControlNames.FabProgress, Theme = "@style/Sandbox.Main")]
     public class FabProgressActivity : BaseActivity
     {
         protected override void OnCreate(Bundle savedInstanceState)
@@ -59,6 +59,7 @@ namespace EOS.UI.Android.Sandbox.Activities
                     fab.GetThemeProvider().SetCurrentTheme(ThemeTypes.ThemeCollection.ElementAt(position).Value);
                     fab.ResetCustomization();
                     spinners.Except(new[] { themeDropDown }).ToList().ForEach(s => s.SetSpinnerSelection(0));
+                    UpdateApperaence();
                 }
             };
             var theme = fab.GetThemeProvider().GetCurrentTheme();
