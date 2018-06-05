@@ -14,7 +14,7 @@
                         <viewControllerLayoutGuide type="top" id="202"/>
                         <viewControllerLayoutGuide type="bottom" id="203"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="206" customClass="EOSUIView">
+                    <view key="view" contentMode="scaleToFill" id="206" customClass="EOSSandboxView">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>

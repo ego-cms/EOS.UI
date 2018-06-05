@@ -90,6 +90,7 @@ namespace EOS.UI.iOS.Sandbox
             };
             picker.Delegate = pickerDelegate;
             textField.InputView = picker;
+            UpdateAppearance();
         }
 
         public void ResetValue()
@@ -140,12 +141,11 @@ namespace EOS.UI.iOS.Sandbox
                 textField.BackgroundColor = GetThemeProvider().GetEOSProperty<UIColor>(this, EOSConstants.NeutralColor6);
                 textField.Layer.BorderColor = GetThemeProvider().GetEOSProperty<UIColor>(this, EOSConstants.NeutralColor3).CGColor;
 
-                //if(textField.InputView != null)
-                //{
-                //    (textField.InputView as UIPickerView).BackgroundColor = GetThemeProvider().GetEOSProperty<UIColor>(this, EOSConstants.NeutralColor6);
-                //    (textField.InputView as UIPickerView).Layer.BorderColor = GetThemeProvider().GetEOSProperty<UIColor>(this, EOSConstants.NeutralColor5).CGColor;
-                //    (textField.InputView as UIPickerView).Layer.ShadowColor = GetThemeProvider().GetEOSProperty<UIColor>(this, EOSConstants.NeutralColor5).CGColor;
-                //}
+                if(textField.InputView != null)
+                {
+                    (textField.InputView as UIPickerView).BackgroundColor = GetThemeProvider().GetEOSProperty<UIColor>(this, EOSConstants.NeutralColor6);
+                    (textField.InputView as UIPickerView).Layer.BorderColor = GetThemeProvider().GetEOSProperty<UIColor>(this, EOSConstants.NeutralColor5).CGColor;
+                }
             }
         }
 

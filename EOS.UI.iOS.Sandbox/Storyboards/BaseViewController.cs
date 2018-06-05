@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using CoreGraphics;
 using UIFrameworks.Shared.Themes.Interfaces;
 using UIKit;
 
@@ -8,7 +9,7 @@ namespace EOS.UI.iOS.Sandbox.Storyboards
     public abstract class BaseViewController: UIViewController
     {
         private List<UIView> _children;
-        private List<UIView> Children => _children = _children ?? GetAllChildren(View);
+        private List<UIView> Children => _children = _children ?? GetChildren();
 
         public BaseViewController(IntPtr intPtr): base(intPtr) { }
 
@@ -18,14 +19,21 @@ namespace EOS.UI.iOS.Sandbox.Storyboards
             NavigationController.SetNavigationBarHidden(false, false);
 		}
 
-        private List<UIView> GetAllChildren(UIView view)
+        private List<UIView> GetChildren()
+        {
+            var result = GetAllSubviews(View);
+            result.Add(NavigationController.NavigationBar);
+            return result;
+        }
+
+        private List<UIView> GetAllSubviews(UIView view)
         {
             var result = new List<UIView>() { view };
             if(view.Subviews == null || view.Subviews.Length == 0)
                 return result;
 
             foreach(var subView in view.Subviews)
-                result.AddRange(GetAllChildren(subView));
+                result.AddRange(GetAllSubviews(subView));
 
             return result;
         }
