@@ -84,6 +84,7 @@
     <Compile Include="Helpers\ShadowConfig.cs" />
     <Compile Include="Helpers\Offset.cs" />
     <Compile Include="Helpers\CircleShadowDrawable.cs" />
+    <Compile Include="Helpers\Helpers.cs" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\values\Strings.xml" />

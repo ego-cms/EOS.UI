@@ -14,6 +14,8 @@ namespace EOS.UI.Android.Helpers
         private ShadowConfig _config;
         private CircleShadowState _circleShadowState;
         private bool _mutated;
+        //Number of 'circles' for blurring. Depends on blur value in points. And device pixel density.
+        private int _iterations;
         private IDictionary<int, byte> _alphas = new Dictionary<int, byte>();
 
         public override int Opacity => 255;
@@ -22,17 +24,17 @@ namespace EOS.UI.Android.Helpers
         {
             _circleShadowState = new CircleShadowState(config);
             _config = config;
+            _iterations = (int)Helpers.DpToPx(_config.Blur);
 
             CalculateAlphas();
         }
 
         private void CalculateAlphas()
         {
-            for (int i = 0; i <= _config.Blur; i++)
+            for (int i = 0; i <= _iterations; i++)
             {
-                var a = GetAlpha(() => GetEquationX(i, _config.Blur));
+                var a = GetAlpha(() => GetEquationX(i, _iterations));
                 _alphas.Add(i, a);
-
                 //formula doesn't work well with 'inside' blurring, just invert indexes and alpha values
                 if (i == 0)
                     continue;
@@ -46,9 +48,8 @@ namespace EOS.UI.Android.Helpers
             var p = new Paint();
             p.SetStyle(Paint.Style.Stroke);
             p.Dither = true;
-            var iterations = _config.Blur;
-            DrawShadowsOutsideBackground(canvas, p, iterations);
-            DrawShadowsBehindBackground(canvas, p, iterations);
+            DrawShadowsOutsideBackground(canvas, p, _iterations);
+            DrawShadowsBehindBackground(canvas, p, _iterations);
         }
 
         private void DrawShadowsBehindBackground(Canvas canvas, Paint p, int iterations)
@@ -83,7 +84,6 @@ namespace EOS.UI.Android.Helpers
             for (int i = 0; i < iterations; i++)
             {
                 var color = _config.Color;
-                //Must always have value because iterations = _config.Blur
                 color.A = _alphas[i];
                 p.Color = color;
                 var radius = canvas.Width / 2 - (iterations - i);

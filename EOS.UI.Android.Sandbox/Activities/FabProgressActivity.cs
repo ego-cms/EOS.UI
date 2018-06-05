@@ -9,6 +9,7 @@ using EOS.UI.Android.Sandbox.Controls;
 using EOS.UI.Shared.Themes.Themes;
 using UIFrameworks.Shared.Themes.Helpers;
 using static EOS.UI.Android.Sandbox.Helpers.Constants;
+using System;
 
 namespace EOS.UI.Android.Sandbox.Activities
 {
@@ -26,6 +27,7 @@ namespace EOS.UI.Android.Sandbox.Activities
             var disabledColorDropDown = FindViewById<SandboxDropDown>(Resource.Id.disabledColorDropDown);
             var pressedColorDropDown = FindViewById<SandboxDropDown>(Resource.Id.pressedColorDropDown);
             var shadowDropDown = FindViewById<SandboxDropDown>(Resource.Id.shadowDropDown);
+            var sizeDropDown = FindViewById<SandboxDropDown>(Resource.Id.sizeDropDown);
             var stateSwitch = FindViewById<Switch>(Resource.Id.stateSwitch);
             var resetButton = FindViewById<Button>(Resource.Id.buttonResetCustomization);
             fab.Click += async (sender, e) =>
@@ -47,7 +49,8 @@ namespace EOS.UI.Android.Sandbox.Activities
                 disabledColorDropDown,
                 pressedColorDropDown,
                 backgroundColorDropDown,
-                shadowDropDown
+                shadowDropDown,
+                sizeDropDown
             };
 
             themeDropDown.Name = Fields.Theme;
@@ -99,6 +102,21 @@ namespace EOS.UI.Android.Sandbox.Activities
                     fab.ShadowConfig = Shadows.ShadowsCollection.ElementAt(position).Value;
             };
 
+
+            sizeDropDown.Name = Fields.Size;
+            sizeDropDown.SetupAdapter(Sizes.FabProgressSizes.Select(i => i.Key).ToList());
+            sizeDropDown.ItemSelected += (position) =>
+            {
+                if (position > 0)
+                {
+                    var lp = fab.LayoutParameters;
+                    lp.Width = Sizes.FabProgressSizes.ElementAt(position).Value;
+                    lp.Height = Sizes.FabProgressSizes.ElementAt(position).Value;
+                    fab.LayoutParameters = lp;
+                    ResetCustomization(fab, themeDropDown, spinners);
+                }
+            };
+
             stateSwitch.CheckedChange += (sender, e) =>
             {
                 fab.Enabled = stateSwitch.Checked;
@@ -106,9 +124,14 @@ namespace EOS.UI.Android.Sandbox.Activities
 
             resetButton.Click += delegate
             {
-                spinners.Except(new[] { themeDropDown }).ToList().ForEach(s => s.SetSpinnerSelection(0));
-                fab.ResetCustomization();
+                ResetCustomization(fab, themeDropDown, spinners);
             };
+        }
+
+        private static void ResetCustomization(FabProgress fab, SandboxDropDown themeDropDown, List<SandboxDropDown> spinners)
+        {
+            spinners.Except(new[] { themeDropDown }).ToList().ForEach(s => s.SetSpinnerSelection(0));
+            fab.ResetCustomization();
         }
     }
 }

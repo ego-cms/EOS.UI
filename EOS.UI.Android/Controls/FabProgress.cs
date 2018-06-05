@@ -271,7 +271,7 @@ namespace EOS.UI.Android.Controls
         public override void Layout(int l, int t, int r, int b)
         {
             base.Layout(l, t, r, b);
-            if(_initialWidth<=0)
+            if(_initialWidth<=0 || _initialWidth != Width)
                 _initialWidth = Width;
         }
 
@@ -309,10 +309,10 @@ namespace EOS.UI.Android.Controls
 
         private void SetInsetForImageLayer(LayerDrawable layerList, Drawable drawable, int halfWidth, Offset offset)
         {
-            var xOffset = halfWidth - drawable.IntrinsicWidth / 2 - offset.X;
-            var yOffset = halfWidth - drawable.IntrinsicWidth / 2 + offset.Y;
-            var rightOffset = halfWidth - drawable.IntrinsicWidth / 2 + offset.X;
-            var bottomOffset = halfWidth - drawable.IntrinsicWidth / 2 - offset.Y;
+            var xOffset = halfWidth - drawable.IntrinsicWidth / 2 - (int)Helpers.Helpers.DpToPx(offset.X);
+            var yOffset = halfWidth - drawable.IntrinsicWidth / 2 + (int)Helpers.Helpers.DpToPx(offset.Y);
+            var rightOffset = halfWidth - drawable.IntrinsicWidth / 2 + (int)Helpers.Helpers.DpToPx(offset.X);
+            var bottomOffset = halfWidth - drawable.IntrinsicWidth / 2 - (int)Helpers.Helpers.DpToPx(offset.Y);
             layerList.SetLayerInset(_imageLayerIndex, xOffset, yOffset, rightOffset, bottomOffset);
         }
 
