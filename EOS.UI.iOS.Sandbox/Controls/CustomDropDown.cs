@@ -5,13 +5,18 @@ using System.Linq;
 using CoreGraphics;
 using EOS.UI.iOS.Sandbox.Controls.Pickers;
 using EOS.UI.iOS.Sandbox.Helpers;
+using EOS.UI.iOS.Themes;
+using EOS.UI.Shared.Themes.Helpers;
+using EOS.UI.Shared.Themes.Interfaces;
 using Foundation;
+using UIFrameworks.Shared.Themes.Helpers;
+using UIFrameworks.Shared.Themes.Interfaces;
 using UIKit;
 
 namespace EOS.UI.iOS.Sandbox
 {
     [DesignTimeVisible(true)]
-    public partial class CustomDropDown : UIView
+    public partial class CustomDropDown : UIView, IEOSThemeControl
     {
         public bool Enabled
         {
@@ -60,6 +65,7 @@ namespace EOS.UI.iOS.Sandbox
             };
             picker.Delegate = pickerDelegate;
             textField.InputView = picker;
+            UpdateAppearance();
         }
 
         public void InitSource(Action<UIColor> action, string title, CGRect rectangle)
@@ -100,5 +106,49 @@ namespace EOS.UI.iOS.Sandbox
         {
             textField.Text = text;
         }
+
+        #region IEOSThemeControl implementation
+
+        public bool IsEOSCustomizationIgnored { get; set; }
+
+        public IEOSStyle GetCurrentEOSStyle()
+        {
+            return null;
+        }
+
+        public IEOSThemeProvider GetThemeProvider()
+        {
+            return EOSThemeProvider.Instance;
+        }
+
+        public void ResetCustomization()
+        {
+            IsEOSCustomizationIgnored = false;
+            UpdateAppearance();
+        }
+
+        public void SetEOSStyle(EOSStyleEnumeration style)
+        {
+        }
+
+        public void UpdateAppearance()
+        {
+            if(!IsEOSCustomizationIgnored)
+            {
+                label.TextColor = GetThemeProvider().GetEOSProperty<UIColor>(this, EOSConstants.NeutralColor1);
+                textField.TextColor = GetThemeProvider().GetEOSProperty<UIColor>(this, EOSConstants.NeutralColor3);
+                textField.BackgroundColor = GetThemeProvider().GetEOSProperty<UIColor>(this, EOSConstants.NeutralColor6);
+                textField.Layer.BorderColor = GetThemeProvider().GetEOSProperty<UIColor>(this, EOSConstants.NeutralColor3).CGColor;
+
+                //if(textField.InputView != null)
+                //{
+                //    (textField.InputView as UIPickerView).BackgroundColor = GetThemeProvider().GetEOSProperty<UIColor>(this, EOSConstants.NeutralColor6);
+                //    (textField.InputView as UIPickerView).Layer.BorderColor = GetThemeProvider().GetEOSProperty<UIColor>(this, EOSConstants.NeutralColor5).CGColor;
+                //    (textField.InputView as UIPickerView).Layer.ShadowColor = GetThemeProvider().GetEOSProperty<UIColor>(this, EOSConstants.NeutralColor5).CGColor;
+                //}
+            }
+        }
+
+        #endregion
     }
 }

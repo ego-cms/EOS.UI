@@ -179,6 +179,7 @@
     <Compile Include="Controls\CustomDropDown.designer.cs">
       <DependentUpon>CustomDropDown.cs</DependentUpon>
     </Compile>
+    <Compile Include="Controls\EOSUIView.cs" />
     <Compile Include="Main.cs" />
     <Compile Include="AppDelegate.cs" />
     <Compile Include="Storyboards\SectionComponentView.cs" />

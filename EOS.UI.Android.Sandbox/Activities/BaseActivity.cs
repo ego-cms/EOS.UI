@@ -1,16 +1,12 @@
 ﻿using System.Collections.Generic;
 using Android.App;
 using Android.Content.PM;
-using Android.Graphics;
-using Android.Graphics.Drawables;
 using Android.OS;
 using Android.Views;
 using UIFrameworks.Android.Themes;
-using UIFrameworks.Shared.Themes.Helpers;
 using UIFrameworks.Shared.Themes.Interfaces;
 using R = Android.Resource;
 using Android.Support.V7.App;
-using Android.Support.V7.Widget;
 using EOS.UI.Android.Sandbox.Styles;
 using EOS.UI.Shared.Themes.Helpers;
 using EOS.UI.Shared.Themes.Themes;
