@@ -5,31 +5,21 @@ using Android.Graphics;
 using Android.Graphics.Drawables;
 using Android.Runtime;
 using Android.Util;
-using Android.Views;
 using Android.Widget;
 using EOS.UI.Shared.Themes.Helpers;
 using EOS.UI.Shared.Themes.Interfaces;
 using UIFrameworks.Android.Themes;
 using UIFrameworks.Shared.Themes.Helpers;
 using UIFrameworks.Shared.Themes.Interfaces;
+using R = Android.Resource;
 using TextUtils = Android.Text.TextUtils;
+
 
 namespace EOS.UI.Android.Controls
 {
-    public class GhostButton : Button, IEOSThemeControl, View.IOnTouchListener
+    public class GhostButton : Button, IEOSThemeControl
     {
         public bool IsEOSCustomizationIgnored { get; private set; }
-
-        public override bool Enabled
-        {
-            get => base.Enabled;
-            set
-            {
-                if(Enabled != value)
-                    UpdateEnabledState(value);
-                base.Enabled = value;
-            }
-        }
 
         public override Typeface Typeface
         {
@@ -68,10 +58,27 @@ namespace EOS.UI.Android.Controls
             set
             {
                 _enabledTextColor = value;
-                if(Enabled)
-                    base.SetTextColor(value);
+                SetTextColorSet(PressedStateTextColor, _enabledTextColor, DisabledTextColor);
                 IsEOSCustomizationIgnored = true;
             }
+        }
+
+        private void SetTextColorSet(Color pressedColor, Color enabledColor, Color disabledColor)
+        {
+            var colorSet = new ColorStateList(
+            new int[][]
+            {
+                new int[] { R.Attribute.StatePressed },
+                new int[] { R.Attribute.StateEnabled },
+                new int[] { -R.Attribute.StateEnabled},
+            },
+            new int[]
+            {
+                pressedColor,
+                enabledColor,
+                disabledColor
+            });
+            base.SetTextColor(colorSet);
         }
 
         private Color _disabledTextColor;
@@ -81,11 +88,11 @@ namespace EOS.UI.Android.Controls
             set
             {
                 _disabledTextColor = value;
-                if(!Enabled)
-                    base.SetTextColor(value);
+                SetTextColorSet(PressedStateTextColor, EnabledTextColor, _disabledTextColor);
                 IsEOSCustomizationIgnored = true;
             }
         }
+
 
         private Color _pressedStateTextColor;
         public Color PressedStateTextColor
@@ -94,9 +101,11 @@ namespace EOS.UI.Android.Controls
             set
             {
                 _pressedStateTextColor = value;
+                SetTextColorSet(_pressedStateTextColor, EnabledTextColor, DisabledTextColor);
                 IsEOSCustomizationIgnored = true;
             }
         }
+
 
         public GhostButton(Context context) : base(context)
         {
@@ -125,7 +134,6 @@ namespace EOS.UI.Android.Controls
 
         private void Initialize(IAttributeSet attributeSet = null)
         {
-            SetOnTouchListener(this);
             Background = CreateRippleDrawable();
             UpdateAppearance();
             SetLines(1);
@@ -191,18 +199,6 @@ namespace EOS.UI.Android.Controls
                 base.TextSize = provider.GetEOSProperty<float>(this, EOSConstants.TextSize);
                 IsEOSCustomizationIgnored = false;
             }
-        }
-
-        public bool OnTouch(View v, MotionEvent e)
-        {
-            if(Enabled)
-            {
-                if(e.Action == MotionEventActions.Down)
-                    base.SetTextColor(PressedStateTextColor);
-                if(e.Action == MotionEventActions.Up || e.Action == MotionEventActions.Cancel)
-                    base.SetTextColor(EnabledTextColor);
-            }
-            return false;
         }
     }
 }
