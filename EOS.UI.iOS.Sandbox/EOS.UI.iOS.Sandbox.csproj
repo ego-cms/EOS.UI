@@ -237,18 +237,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\account-key%402x.png" />
-    <BundleResource Include="Resources\account-key%403x.png" />
-    <BundleResource Include="Resources\account-circle%402x.png" />
-    <BundleResource Include="Resources\account-circle%403x.png" />
-    <BundleResource Include="Resources\account-off%402x.png" />
-    <BundleResource Include="Resources\account-off%403x.png" />
-    <BundleResource Include="Resources\airbaloon%402x.png" />
-    <BundleResource Include="Resources\airbaloon%403x.png" />
-    <BundleResource Include="Resources\android%402x.png" />
-    <BundleResource Include="Resources\android%403x.png" />
-    <BundleResource Include="Resources\apple%402x.png" />
-    <BundleResource Include="Resources\apple%403x.png" />
+    <Folder Include="Resources\" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
 </Project>
