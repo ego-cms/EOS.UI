@@ -29,6 +29,12 @@ namespace EOS.UI.Android.Sandbox.Controls
             set => _nameTextView.Text = value;
         }
 
+        public override bool Enabled
+        {
+            get => _spinner.Enabled;
+            set => _spinner.Enabled = value;
+        }
+
         #endregion
 
         #region events

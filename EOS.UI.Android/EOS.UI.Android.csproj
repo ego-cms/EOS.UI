@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -71,6 +71,7 @@
     <Compile Include="Controls\SimpleButton.cs" />
     <Compile Include="Controls\SimpleLabel.cs" />
     <Compile Include="Controls\BadgeLabel.cs" />
+    <Compile Include="Helpers\Constants.cs" />
     <Compile Include="Models\SectionModel.cs" />
     <Compile Include="Resources\Resource.designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -81,10 +82,10 @@
     <Compile Include="Controls\Input.cs" />
     <Compile Include="Controls\FabProgress.cs" />
     <Compile Include="Controls\CircleProgress.cs" />
-    <Compile Include="Helpers\ShadowConfig.cs" />
-    <Compile Include="Helpers\Offset.cs" />
     <Compile Include="Helpers\CircleShadowDrawable.cs" />
     <Compile Include="Helpers\Helpers.cs" />
+    <Compile Include="Helpers\Offset.cs" />
+    <Compile Include="Helpers\ShadowConfig.cs" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\values\Strings.xml" />
@@ -108,10 +109,6 @@
     <AndroidResource Include="Resources\layout\Section.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
-    <Folder Include="Resources\drawable\" />
-    <Folder Include="Resources\anim\" />
-    <Folder Include="Resources\layout\" />
-    <Folder Include="Helpers\" />
   </ItemGroup>
   <Import Project="..\EOS.UI.Shared.Themes\EOS.UI.Shared.Themes.projitems" Label="Shared" />
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />

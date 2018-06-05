@@ -37,6 +37,7 @@ namespace EOS.UI.Android.Sandbox.Helpers
             public static string Shadow = "Shadow";
             public static string Color = "Color";
             public static string AlternativeColor = "Alternative color";
+            public static string FillColor = "Fill color";
             public static string SectionName = "Section name";
             public static string ButtonText = "Button text";
             public static string SectionNameLetterSpacing = "Section name letter spacing";
