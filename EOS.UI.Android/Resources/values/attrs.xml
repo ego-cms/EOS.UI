@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<resources>
+    <declare-styleable name="BadgeLabel">
+        <attr name="eos_background" format="reference|color"/>
+        <attr name="eos_font" format="string"/>
+        <attr name="eos_letter_spacing" format="integer"/>
+        <attr name="eos_text_color" format="reference|color"/>
+        <attr name="eos_text_size" format="integer"/>
+        <attr name="eos_corner_radius" format="integer"/>
+    </declare-styleable>
+</resources>
