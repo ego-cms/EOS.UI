@@ -51,7 +51,7 @@ namespace EOS.UI.iOS.Sandbox.Storyboards
 
         public void UpdateApperaence()
         {
-            View.BackgroundColor = EOSThemeProvider.Instance.GetEOSProperty<UIColor>(null, EOSConstants.NeutralColor6);
+            View.BackgroundColor = EOSThemeProvider.Instance.GetEOSProperty<UIColor>(EOSConstants.NeutralColor6);
             NavigationController.NavigationBar.BarStyle = EOSThemeProvider.Instance.GetCurrentTheme() is LightEOSTheme ? UIBarStyle.Default : UIBarStyle.Black;
 
             SetStyle();

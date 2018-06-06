@@ -28,6 +28,7 @@ namespace EOS.UI.Android.Sandbox.Activities
             var alternativeColorDropDown = FindViewById<EOSSandboxDropDown>(Resource.Id.alternativeColorDropDown);
             var fontDropDown = FindViewById<EOSSandboxDropDown>(Resource.Id.fontDropDown);
             var textSizeDropDown = FindViewById<EOSSandboxDropDown>(Resource.Id.textSizeDropDown);
+            var backgroundColorDropDown = FindViewById<EOSSandboxDropDown>(Resource.Id.backgroundColorDropDown);
             var showProgressSwitch = FindViewById<Switch>(Resource.Id.showProgressSwitch);
             var resetButton = FindViewById<Button>(Resource.Id.buttonResetCustomization);
             var spinners = new List<EOSSandboxDropDown>()
