@@ -9,12 +9,12 @@ using UIKit;
 
 namespace EOS.UI.iOS.Sandbox.Controls
 {
-    [Register("EOSSandboxUITableView")]
-    public class EOSSandboxUITableView: UITableView, IEOSThemeControl
+    [Register("EOSSandboxTableView")]
+    public class EOSSandboxTableView: UITableView, IEOSThemeControl
     {
         #region constructors
 
-        public EOSSandboxUITableView(IntPtr handle) : base(handle)
+        public EOSSandboxTableView(IntPtr handle) : base(handle)
         {
             UpdateAppearance();
         }

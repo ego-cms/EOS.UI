@@ -16,7 +16,7 @@ using UIKit;
 namespace EOS.UI.iOS.Sandbox
 {
     [DesignTimeVisible(true)]
-    public partial class CustomDropDown : UIView, IEOSThemeControl
+    public partial class EOSSandboxDropDown : UIView, IEOSThemeControl
     {
         public bool Enabled
         {
@@ -25,14 +25,14 @@ namespace EOS.UI.iOS.Sandbox
         }
 
         [Export("initWithCoder:")]
-        public CustomDropDown(NSCoder coder) : base(coder)
+        public EOSSandboxDropDown(NSCoder coder) : base(coder)
         {
             Initialize();
         }
 
         private void Initialize()
         {
-            NSBundle.MainBundle.LoadNib("CustomDropDown", this, null);
+            NSBundle.MainBundle.LoadNib("EOSSandboxDropDown", this, null);
             AddSubview(rootView);
             rootView.Frame = Bounds;
             BackgroundColor = UIColor.Clear;

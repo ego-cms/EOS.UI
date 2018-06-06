@@ -17,7 +17,7 @@ namespace EOS.UI.iOS.Sandbox
         UIKit.UIView containerView { get; set; }
 
         [Outlet]
-        EOS.UI.iOS.Sandbox.CustomDropDown fillColorDropDown { get; set; }
+        EOS.UI.iOS.Sandbox.EOSSandboxDropDown fillColorDropDown { get; set; }
 
         [Outlet]
         UIKit.UIButton resetButton { get; set; }
@@ -27,23 +27,23 @@ namespace EOS.UI.iOS.Sandbox
 
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
-        EOS.UI.iOS.Sandbox.CustomDropDown alternativeColorDropDown { get; set; }
+        EOS.UI.iOS.Sandbox.EOSSandboxDropDown alternativeColorDropDown { get; set; }
 
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
-        EOS.UI.iOS.Sandbox.CustomDropDown colorDropDown { get; set; }
+        EOS.UI.iOS.Sandbox.EOSSandboxDropDown colorDropDown { get; set; }
 
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
-        EOS.UI.iOS.Sandbox.CustomDropDown fontDropDown { get; set; }
+        EOS.UI.iOS.Sandbox.EOSSandboxDropDown fontDropDown { get; set; }
 
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
-        EOS.UI.iOS.Sandbox.CustomDropDown textSizeDropDown { get; set; }
+        EOS.UI.iOS.Sandbox.EOSSandboxDropDown textSizeDropDown { get; set; }
 
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
-        EOS.UI.iOS.Sandbox.CustomDropDown themeDropDown { get; set; }
+        EOS.UI.iOS.Sandbox.EOSSandboxDropDown themeDropDown { get; set; }
 
         void ReleaseDesignerOutlets ()
         {

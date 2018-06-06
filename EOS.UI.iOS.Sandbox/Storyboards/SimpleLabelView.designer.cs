@@ -20,11 +20,11 @@ namespace EOS.UI.iOS.Sandbox
 
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
-        EOS.UI.iOS.Sandbox.CustomDropDown fontDropDown { get; set; }
+        EOS.UI.iOS.Sandbox.EOSSandboxDropDown fontDropDown { get; set; }
 
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
-        EOS.UI.iOS.Sandbox.CustomDropDown letterSpacingDropDown { get; set; }
+        EOS.UI.iOS.Sandbox.EOSSandboxDropDown letterSpacingDropDown { get; set; }
 
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
@@ -32,11 +32,11 @@ namespace EOS.UI.iOS.Sandbox
 
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
-        EOS.UI.iOS.Sandbox.CustomDropDown textColorDropDown { get; set; }
+        EOS.UI.iOS.Sandbox.EOSSandboxDropDown textColorDropDown { get; set; }
 
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
-        EOS.UI.iOS.Sandbox.CustomDropDown textSizeDropDown { get; set; }
+        EOS.UI.iOS.Sandbox.EOSSandboxDropDown textSizeDropDown { get; set; }
 
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
@@ -44,7 +44,7 @@ namespace EOS.UI.iOS.Sandbox
 
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
-        EOS.UI.iOS.Sandbox.CustomDropDown themesDropDown { get; set; }
+        EOS.UI.iOS.Sandbox.EOSSandboxDropDown themesDropDown { get; set; }
 
         void ReleaseDesignerOutlets ()
         {

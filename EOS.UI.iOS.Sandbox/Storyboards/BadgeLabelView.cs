@@ -16,7 +16,7 @@ namespace EOS.UI.iOS.Sandbox
     {
         public const string Identifier = "BadgeLabelView";
 
-        private List<CustomDropDown> _dropDowns;
+        private List<EOSSandboxDropDown> _dropDowns;
 
         public BadgeLabelView(IntPtr handle) : base(handle)
         {
@@ -31,7 +31,7 @@ namespace EOS.UI.iOS.Sandbox
             var label = new BadgeLabel();
             label.Text = "Default Text";
 
-            _dropDowns = new List<CustomDropDown>()
+            _dropDowns = new List<EOSSandboxDropDown>()
             {
                 backgroundColorDropDown,
                 letterSpaceDropDown,

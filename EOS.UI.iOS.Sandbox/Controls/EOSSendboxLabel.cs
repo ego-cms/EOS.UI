@@ -9,12 +9,12 @@ using UIKit;
 
 namespace EOS.UI.iOS.Sandbox.Controls
 {
-    [Register("EOSSendboxUILabel")]
-    public class EOSSendboxUILabel: UILabel, IEOSThemeControl
+    [Register("EOSSendboxLabel")]
+    public class EOSSendboxLabel: UILabel, IEOSThemeControl
     {
         #region constructors
 
-        public EOSSendboxUILabel(IntPtr handle) : base(handle)
+        public EOSSendboxLabel(IntPtr handle) : base(handle)
         {
             UpdateAppearance();
         }

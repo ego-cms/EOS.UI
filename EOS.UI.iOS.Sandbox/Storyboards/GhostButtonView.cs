@@ -15,7 +15,7 @@ namespace EOS.UI.iOS.Sandbox
     public partial class GhostButtonView : BaseViewController
     {
         public const string Identifier = "GhostButtonView";
-        private List<CustomDropDown> _dropDowns;
+        private List<EOSSandboxDropDown> _dropDowns;
 
         public GhostButtonView(IntPtr handle) : base(handle)
         {
@@ -32,7 +32,7 @@ namespace EOS.UI.iOS.Sandbox
                                           ghostButton.Frame.Left == containerView.Frame.Left &&
                                           ghostButton.Frame.Right == containerView.Frame.Right, ghostButton);
 
-            _dropDowns = new List<CustomDropDown>()
+            _dropDowns = new List<EOSSandboxDropDown>()
             {
                 themeDropDown,
                 fontDropDown,

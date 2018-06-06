@@ -18,23 +18,23 @@ namespace EOS.UI.iOS.Sandbox
 
 
         [Outlet]
-        EOS.UI.iOS.Sandbox.CustomDropDown cornerRadiusDropDown { get; set; }
+        EOS.UI.iOS.Sandbox.EOSSandboxDropDown cornerRadiusDropDown { get; set; }
 
 
         [Outlet]
-        EOS.UI.iOS.Sandbox.CustomDropDown disabledBackgroundDropDown { get; set; }
+        EOS.UI.iOS.Sandbox.EOSSandboxDropDown disabledBackgroundDropDown { get; set; }
 
 
         [Outlet]
-        EOS.UI.iOS.Sandbox.CustomDropDown disabledTextColorDropDown { get; set; }
+        EOS.UI.iOS.Sandbox.EOSSandboxDropDown disabledTextColorDropDown { get; set; }
 
 
         [Outlet]
-        EOS.UI.iOS.Sandbox.CustomDropDown enabledBackgroundDropDown { get; set; }
+        EOS.UI.iOS.Sandbox.EOSSandboxDropDown enabledBackgroundDropDown { get; set; }
 
 
         [Outlet]
-        EOS.UI.iOS.Sandbox.CustomDropDown enabledTextColorDropDown { get; set; }
+        EOS.UI.iOS.Sandbox.EOSSandboxDropDown enabledTextColorDropDown { get; set; }
 
 
         [Outlet]
@@ -42,19 +42,19 @@ namespace EOS.UI.iOS.Sandbox
 
 
         [Outlet]
-        EOS.UI.iOS.Sandbox.CustomDropDown fontDropDown { get; set; }
+        EOS.UI.iOS.Sandbox.EOSSandboxDropDown fontDropDown { get; set; }
 
 
         [Outlet]
-        EOS.UI.iOS.Sandbox.CustomDropDown letterSpacingDropDown { get; set; }
+        EOS.UI.iOS.Sandbox.EOSSandboxDropDown letterSpacingDropDown { get; set; }
 
 
         [Outlet]
-        EOS.UI.iOS.Sandbox.CustomDropDown pressedBackgroundDropdown { get; set; }
+        EOS.UI.iOS.Sandbox.EOSSandboxDropDown pressedBackgroundDropdown { get; set; }
 
 
         [Outlet]
-        EOS.UI.iOS.Sandbox.CustomDropDown pressedTextColorDropDown { get; set; }
+        EOS.UI.iOS.Sandbox.EOSSandboxDropDown pressedTextColorDropDown { get; set; }
 
 
         [Outlet]
@@ -62,11 +62,11 @@ namespace EOS.UI.iOS.Sandbox
 
 
         [Outlet]
-        EOS.UI.iOS.Sandbox.CustomDropDown textSizeDropDown { get; set; }
+        EOS.UI.iOS.Sandbox.EOSSandboxDropDown textSizeDropDown { get; set; }
 
 
         [Outlet]
-        EOS.UI.iOS.Sandbox.CustomDropDown themeDropDown { get; set; }
+        EOS.UI.iOS.Sandbox.EOSSandboxDropDown themeDropDown { get; set; }
 
         void ReleaseDesignerOutlets ()
         {

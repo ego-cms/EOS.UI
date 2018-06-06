@@ -17,7 +17,7 @@ namespace EOS.UI.iOS.Sandbox
     {
         public const string Identifier = "CTAButtonView";
         private SimpleButton _simpleButton;
-        private List<CustomDropDown> _dropDowns;
+        private List<EOSSandboxDropDown> _dropDowns;
 
         public CTAButtonView (IntPtr handle) : base (handle)
         {
@@ -42,7 +42,7 @@ namespace EOS.UI.iOS.Sandbox
                 _simpleButton.StopProgressAnimation();
             };
             
-            _dropDowns = new List<CustomDropDown>()
+            _dropDowns = new List<EOSSandboxDropDown>()
             {
                 themeDropDown,
                 fontDropDown,

@@ -18,7 +18,7 @@ namespace EOS.UI.iOS.Sandbox.Storyboards
     public partial class SectionComponentView : BaseViewController
     {
         public const string Identifier = "SectionView";
-        private List<CustomDropDown> _dropDowns;
+        private List<EOSSandboxDropDown> _dropDowns;
         private List<object> _dataSource;
 
         public SectionComponentView(IntPtr handle) : base(handle)
@@ -50,7 +50,7 @@ namespace EOS.UI.iOS.Sandbox.Storyboards
 
             sectionTableView.Source = new SectionTableSource(sectionTableView, _dataSource);
 
-            _dropDowns = new List<CustomDropDown>()
+            _dropDowns = new List<EOSSandboxDropDown>()
             {
                 themeDropDown,
                 sectionNameDropDown,

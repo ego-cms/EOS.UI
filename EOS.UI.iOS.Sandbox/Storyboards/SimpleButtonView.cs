@@ -17,7 +17,7 @@ namespace EOS.UI.iOS.Sandbox
         public const string Identifier = "SimpleButtonView";
 
         private SimpleButton _simpleButton;
-        private List<CustomDropDown> _dropDowns;
+        private List<EOSSandboxDropDown> _dropDowns;
 
         public SimpleButtonView (IntPtr handle) : base (handle)
         {
@@ -33,7 +33,7 @@ namespace EOS.UI.iOS.Sandbox
 
             _simpleButton.UpdateAppearance();
 
-            _dropDowns = new List<CustomDropDown>()
+            _dropDowns = new List<EOSSandboxDropDown>()
             {
                 themeDropDown,
                 fontDropDown,
