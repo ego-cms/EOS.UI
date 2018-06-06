@@ -24,9 +24,10 @@ namespace EOS.UI.iOS.Sandbox.Controls
                 {SharedControls.GhostButton, GhostButtonView.Identifier},
                 {SharedControls.SimpleButton, SimpleButtonView.Identifier},
                 {SharedControls.FabProgress, FabProgressView.Identifier},
-				{SharedControls.Input, InputControlView.Identifier},
-				{SharedControls.CircleProgress, CircleProgressView.Identifier},
-                { SharedControls.Section, SectionComponentView.Identifier }
+                {SharedControls.Input, InputControlView.Identifier},
+                {SharedControls.CircleProgress, CircleProgressView.Identifier},
+                {SharedControls.Section, SectionComponentView.Identifier },
+                {SharedControls.CTAButton, CTAButtonView.Identifier}
             };
         }
     }

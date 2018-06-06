@@ -93,6 +93,7 @@
     <Compile Include="Activities\FabProgressActivity.cs" />
     <Compile Include="Activities\InputActivity.cs" />
     <Compile Include="Activities\SectionActivity.cs" />
+    <Compile Include="Activities\CTAActivity.cs" />
     <Compile Include="Activities\SimpleLabelActivity.cs" />
     <Compile Include="Activities\SimpleButtonActivity.cs" />
     <Compile Include="Activities\GhostButtonActivity.cs" />

@@ -168,6 +168,7 @@
     <InterfaceDefinition Include="Storyboards\InputControlView.storyboard" />
     <InterfaceDefinition Include="Storyboards\SimpleButtonView.storyboard" />
     <InterfaceDefinition Include="Storyboards\CircleProgressView.storyboard" />
+    <InterfaceDefinition Include="Storyboards\CTAButtonView.storyboard" />
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="Controls\CustomDropDown.xib" />
@@ -234,6 +235,10 @@
       <DependentUpon>CircleProgressView.cs</DependentUpon>
     </Compile>
     <Compile Include="Helpers\PlatformTimer.cs" />
+    <Compile Include="Storyboards\CTAButtonView.cs" />
+    <Compile Include="Storyboards\CTAButtonView.designer.cs">
+      <DependentUpon>CTAButtonView.cs</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\EOS.UI.iOS\EOS.UI.iOS.csproj">

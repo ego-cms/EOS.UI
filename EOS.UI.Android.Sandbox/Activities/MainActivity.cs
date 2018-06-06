@@ -26,6 +26,7 @@ namespace EOS.UI.Android.Sandbox
             { ControlNames.Input, typeof(InputActivity) },
             { ControlNames.CircleProgress, typeof(CircleProgressActivity) },
             { ControlNames.Section, typeof(SectionActivity) },
+            { ControlNames.CTAButton, typeof(CTAActivity) },
         };
 
         protected override void OnCreate(Bundle savedInstanceState)

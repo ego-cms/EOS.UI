@@ -54,7 +54,8 @@ namespace EOS.UI.iOS.Sandbox
                 fontDropDown,
                 colorDropDown,
                 alternativeColorDropDown,
-                textSizeDropDown
+                textSizeDropDown,
+                fillColorDropDown
             };
 
             View.AddGestureRecognizer(new UITapGestureRecognizer(() =>
@@ -98,6 +99,11 @@ namespace EOS.UI.iOS.Sandbox
             alternativeColorDropDown.InitSource(
                 color => _circleProgress.AlternativeColor = color,
                 Fields.AlternativeColor,
+                rect);
+            
+            fillColorDropDown.InitSource(
+                color => _circleProgress.FillColor = color,
+                Fields.FillColor,
                 rect);
 
             showProgressSwitch.ValueChanged += (sender, e) =>
