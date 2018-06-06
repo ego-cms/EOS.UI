@@ -180,6 +180,7 @@
       <DependentUpon>CustomDropDown.cs</DependentUpon>
     </Compile>
     <Compile Include="Controls\EOSSandboxNavigationBar.cs" />
+    <Compile Include="Controls\EOSSandboxUITableView.cs" />
     <Compile Include="Controls\EOSSandboxView.cs" />
     <Compile Include="Main.cs" />
     <Compile Include="AppDelegate.cs" />

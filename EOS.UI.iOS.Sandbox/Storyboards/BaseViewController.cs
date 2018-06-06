@@ -1,6 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using CoreGraphics;
+using EOS.UI.iOS.Sandbox.Controls;
+using EOS.UI.iOS.Themes;
+using EOS.UI.Shared.Themes.Themes;
+using UIFrameworks.Shared.Themes.Helpers;
 using UIFrameworks.Shared.Themes.Interfaces;
 using UIKit;
 
@@ -11,9 +16,12 @@ namespace EOS.UI.iOS.Sandbox.Storyboards
         private List<UIView> _children;
         private List<UIView> Children => _children = _children ?? GetChildren();
 
-        public BaseViewController(IntPtr intPtr): base(intPtr) { }
+        public BaseViewController(IntPtr intPtr): base(intPtr)
+        {
+            NavigationItem.BackBarButtonItem = new UIBarButtonItem { Title = ControlsData.BackTitle };
+        }
 
-		public override void ViewWillAppear(bool animated)
+        public override void ViewWillAppear(bool animated)
 		{
             base.ViewWillAppear(animated);
             NavigationController.SetNavigationBarHidden(false, false);
@@ -40,6 +48,9 @@ namespace EOS.UI.iOS.Sandbox.Storyboards
 
         public void UpdateApperaence()
         {
+            View.BackgroundColor = EOSThemeProvider.Instance.GetEOSProperty<UIColor>(null, EOSConstants.NeutralColor6);
+            NavigationController.NavigationBar.BarStyle = EOSThemeProvider.Instance.GetCurrentTheme() is LightEOSTheme ? UIBarStyle.Default : UIBarStyle.Black;
+
             SetStyle();
             foreach(var view in Children)
                 if(view is IEOSThemeControl eOSTheme)

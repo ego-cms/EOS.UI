@@ -1,4 +1,5 @@
 ﻿using System;
+using EOS.UI.iOS.Sandbox.TableSources;
 using EOS.UI.iOS.Themes;
 using EOS.UI.Shared.Themes.Helpers;
 using EOS.UI.Shared.Themes.Interfaces;
@@ -9,12 +10,12 @@ using UIKit;
 
 namespace EOS.UI.iOS.Sandbox.Controls
 {
-    [Register("EOSSandboxNavigationBar")]
-    public class EOSSandboxNavigationBar: UINavigationBar, IEOSThemeControl
+    [Register("EOSSandboxUITableView")]
+    public class EOSSandboxUITableView: UITableView, IEOSThemeControl
     {
         #region constructors
 
-        public EOSSandboxNavigationBar(IntPtr handle) : base(handle)
+        public EOSSandboxUITableView(IntPtr handle) : base(handle)
         {
             UpdateAppearance();
         }
@@ -49,13 +50,9 @@ namespace EOS.UI.iOS.Sandbox.Controls
         {
             if(!IsEOSCustomizationIgnored)
             {
-                BarTintColor = GetThemeProvider().GetEOSProperty<UIColor>(this, EOSConstants.NeutralColor6);
-                TintColor = GetThemeProvider().GetEOSProperty<UIColor>(this, EOSConstants.BrandPrimaryColor);
-                Layer.BorderColor = GetThemeProvider().GetEOSProperty<UIColor>(this, EOSConstants.NeutralColor1).CGColor;
-                TitleTextAttributes = new UIStringAttributes()
-                {
-                    ForegroundColor = GetThemeProvider().GetEOSProperty<UIColor>(this, EOSConstants.NeutralColor1)
-                };
+                BackgroundColor = GetThemeProvider().GetEOSProperty<UIColor>(this, EOSConstants.NeutralColor6);
+                (Source as IEOSThemeControl)?.UpdateAppearance();
+                ReloadData();
             }
         }
 

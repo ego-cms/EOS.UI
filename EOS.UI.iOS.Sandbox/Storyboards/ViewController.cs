@@ -1,16 +1,21 @@
 using EOS.UI.iOS.Sandbox.Controls;
+using EOS.UI.iOS.Sandbox.Storyboards;
 using EOS.UI.iOS.Sandbox.TableSources;
+using EOS.UI.iOS.Themes;
+using EOS.UI.Shared.Themes.Themes;
 using Foundation;
 using System;
 using System.Linq;
+using UIFrameworks.Shared.Themes.Helpers;
 using UIKit;
 
 namespace EOS.UI.iOS.Sandbox
 {
-    public partial class ViewController : UIViewController
+    public partial class ViewController : BaseViewController
     {
         public ViewController(IntPtr handle) : base(handle)
         {
+            NavigationItem.Title = ControlsData.Title;
         }
 
         public override void ViewDidLoad()
@@ -25,16 +30,17 @@ namespace EOS.UI.iOS.Sandbox
         public override void ViewWillAppear(bool animated)
         {
             base.ViewWillAppear(animated);
-            NavigationController.SetNavigationBarHidden(true, false);
+            UpdateApperaence();
+
         }
 
-        void OnRowSelected(object sender, NSIndexPath indexPath)
+        private void OnRowSelected(object sender, NSIndexPath indexPath)
         {
             var element = ControlsData.Instance.Names.ElementAt(indexPath.Row);
             var storyboard = UIStoryboard.FromName(element.Value, null);
             var viewController = storyboard.InstantiateViewController(element.Value);
             viewController.NavigationItem.Title = element.Key;
-            this.NavigationController.PushViewController(viewController, true);
+            NavigationController.PushViewController(viewController, true);
         }
     }
 }
