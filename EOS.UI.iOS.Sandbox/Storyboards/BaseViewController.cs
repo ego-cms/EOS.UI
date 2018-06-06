@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using CoreGraphics;
 using EOS.UI.iOS.Sandbox.Controls;
+using EOS.UI.iOS.Sandbox.Styles;
 using EOS.UI.iOS.Themes;
+using EOS.UI.Shared.Themes.Interfaces;
 using EOS.UI.Shared.Themes.Themes;
 using UIFrameworks.Shared.Themes.Helpers;
 using UIFrameworks.Shared.Themes.Interfaces;
@@ -25,6 +27,7 @@ namespace EOS.UI.iOS.Sandbox.Storyboards
 		{
             base.ViewWillAppear(animated);
             NavigationController.SetNavigationBarHidden(false, false);
+            UpdateApperaence();
 		}
 
         private List<UIView> GetChildren()
@@ -59,15 +62,15 @@ namespace EOS.UI.iOS.Sandbox.Storyboards
 
         private void SetStyle()
         {
-            //EOSStyleEnumeration style = default;
+            IEOSStyle style = default;
 
-            //if(EOSThemeProvider.Instance.GetCurrentTheme() is LightEOSTheme)
-            //    style = EOSStyleEnumeration.SendboxLight;
+            if(EOSThemeProvider.Instance.GetCurrentTheme() is LightEOSTheme)
+                style = new EOSSandboxLightStyle();
 
-            //if(EOSThemeProvider.Instance.GetCurrentTheme() is DarkEOSTheme)
-            //    style = EOSStyleEnumeration.SendboxDark;
+            if(EOSThemeProvider.Instance.GetCurrentTheme() is DarkEOSTheme)
+                style = new EOSSandboxDarkStyle();
 
-            //EOSSendboxStyleProvider.Instance.SetEOSStyle(style);
+            EOSSandboxStyleProvider.Instance.Style = style;
         }
     }
 }

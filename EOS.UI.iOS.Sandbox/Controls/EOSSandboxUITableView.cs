@@ -1,5 +1,4 @@
 ﻿using System;
-using EOS.UI.iOS.Sandbox.TableSources;
 using EOS.UI.iOS.Themes;
 using EOS.UI.Shared.Themes.Helpers;
 using EOS.UI.Shared.Themes.Interfaces;

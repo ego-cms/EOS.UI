@@ -24,7 +24,7 @@
                                     <constraint firstAttribute="height" constant="100" id="nSA-1b-fol"/>
                                 </constraints>
                             </view>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nHo-Kq-o4c">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nHo-Kq-o4c" customClass="EOSSandboxButton">
                                 <rect key="frame" x="187.5" y="674" width="39" height="30"/>
                                 <state key="normal" title="Reset"/>
                             </button>

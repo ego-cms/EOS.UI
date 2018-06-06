@@ -378,6 +378,7 @@ namespace EOS.UI.iOS.Sandbox.Storyboards
                     (sectionTableView.Source as SectionTableSource).SectionModel.ResetCustomization = true;
                     sectionTableView.ReloadData();
                     _dropDowns.Except(new[] { themeDropDown }).ToList().ForEach(dropDown => dropDown.ResetValue());
+                    UpdateApperaence();
                 },
                 Fields.Theme,
                 rect);

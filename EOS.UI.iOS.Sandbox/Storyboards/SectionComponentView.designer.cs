@@ -71,11 +71,11 @@ namespace EOS.UI.iOS.Sandbox.Storyboards
 
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
-        UIKit.UIButton resetCustomizationButton { get; set; }
+        EOS.UI.iOS.Sandbox.Controls.EOSSandboxButton resetCustomizationButton { get; set; }
 
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
-        UIKit.UIView sectionContainer { get; set; }
+        EOS.UI.iOS.Sandbox.Controls.EOSSandboxView sectionContainer { get; set; }
 
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]

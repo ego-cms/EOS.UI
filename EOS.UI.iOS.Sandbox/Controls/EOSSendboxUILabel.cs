@@ -1,5 +1,4 @@
 ﻿using System;
-using EOS.UI.iOS.Sandbox.Styles;
 using EOS.UI.iOS.Themes;
 using EOS.UI.Shared.Themes.Helpers;
 using EOS.UI.Shared.Themes.Interfaces;
@@ -10,13 +9,14 @@ using UIKit;
 
 namespace EOS.UI.iOS.Sandbox.Controls
 {
-    [Register("EOSSandboxView")]
-    public class EOSSandboxView: UIView, IEOSThemeControl
+    [Register("EOSSendboxUILabel")]
+    public class EOSSendboxUILabel: UILabel, IEOSThemeControl
     {
         #region constructors
 
-        public EOSSandboxView(IntPtr handle) : base(handle)
+        public EOSSendboxUILabel(IntPtr handle) : base(handle)
         {
+            UpdateAppearance();
         }
 
         #endregion
@@ -27,7 +27,7 @@ namespace EOS.UI.iOS.Sandbox.Controls
 
         public IEOSStyle GetCurrentEOSStyle()
         {
-            return EOSSandboxStyleProvider.Instance.Style;
+            return null;
         }
 
         public IEOSThemeProvider GetThemeProvider()
@@ -49,7 +49,7 @@ namespace EOS.UI.iOS.Sandbox.Controls
         {
             if(!IsEOSCustomizationIgnored)
             {
-                BackgroundColor = GetThemeProvider().GetEOSProperty<UIColor>(this, EOSConstants.NeutralColor6);
+                TextColor = GetThemeProvider().GetEOSProperty<UIColor>(this, EOSConstants.NeutralColor1);
             }
         }
 

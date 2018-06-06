@@ -57,6 +57,7 @@ namespace EOS.UI.iOS.Sandbox
                     ghostButton.GetThemeProvider().SetCurrentTheme(theme);
                     ghostButton.ResetCustomization();
                     _dropDowns.Except(new[] { themeDropDown }).ToList().ForEach(dropDown => dropDown.ResetValue());
+                    UpdateApperaence();
                 },
                 Fields.Theme,
                 rect);

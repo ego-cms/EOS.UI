@@ -1,10 +1,6 @@
 ﻿<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="205">
-    <device id="retina4_7" orientation="portrait">
-        <adaptation id="fullscreen"/>
-    </device>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="205">
     <dependencies>
-        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -18,115 +14,115 @@
                         <viewControllerLayoutGuide type="top" id="202"/>
                         <viewControllerLayoutGuide type="bottom" id="203"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="206">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                    <view key="view" contentMode="scaleToFill" id="206" customClass="EOSSandboxView">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2uI-Rd-yLH">
-                                <rect key="frame" x="16" y="20" width="343" height="100"/>
+                                <rect key="frame" x="20" y="20" width="374" height="100"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="100" id="sCd-ow-Yaa"/>
                                 </constraints>
                             </view>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Enabled" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1p0-2J-ARX">
-                                <rect key="frame" x="16" y="410.5" width="62" height="20.5"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Enabled" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1p0-2J-ARX" customClass="EOSSendboxUILabel">
+                                <rect key="frame" x="20" y="410.5" width="62" height="20.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="PRC-RK-RK9">
-                                <rect key="frame" x="305" y="405" width="51" height="31"/>
+                                <rect key="frame" x="340" y="405" width="51" height="31"/>
                             </switch>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LcA-VA-fSG">
-                                <rect key="frame" x="168" y="605" width="39" height="30"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LcA-VA-fSG" customClass="EOSSandboxButton">
+                                <rect key="frame" x="187.5" y="674" width="39" height="30"/>
                                 <state key="normal" title="Reset"/>
                             </button>
-                            <view contentMode="scaleToFill" id="1183" translatesAutoresizingMaskIntoConstraints="NO" customClass="CustomDropDown">
-                                <rect key="frame" x="16" y="130" width="343" height="40"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1183" customClass="CustomDropDown">
+                                <rect key="frame" x="20" y="130" width="374" height="40"/>
+                                <color key="backgroundColor" red="0.89411764705882357" green="0.51372549019607838" blue="0.51372549019607838" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
-                                    <constraint id="1184" firstItem="1183" firstAttribute="height" constant="40"/>
+                                    <constraint firstAttribute="height" constant="40" id="1184"/>
                                 </constraints>
-                                <color key="backgroundColor" colorSpace="calibratedRGB" red="0.89411764705882357" green="0.51372549019607838" blue="0.51372549019607838" alpha="1"/>
                             </view>
-                            <view contentMode="scaleToFill" id="1189" translatesAutoresizingMaskIntoConstraints="NO" customClass="CustomDropDown">
-                                <rect key="frame" x="16" y="175" width="343" height="40"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1189" customClass="CustomDropDown">
+                                <rect key="frame" x="20" y="175" width="374" height="40"/>
+                                <color key="backgroundColor" red="0.89411764705882357" green="0.51372549019607838" blue="0.51372549019607838" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
-                                    <constraint id="1190" firstItem="1189" firstAttribute="height" constant="40"/>
+                                    <constraint firstAttribute="height" constant="40" id="1190"/>
                                 </constraints>
-                                <color key="backgroundColor" colorSpace="calibratedRGB" red="0.89411764705882357" green="0.51372549019607838" blue="0.51372549019607838" alpha="1"/>
                             </view>
-                            <view contentMode="scaleToFill" id="1280" translatesAutoresizingMaskIntoConstraints="NO" customClass="CustomDropDown">
-                                <rect key="frame" x="16" y="220" width="343" height="40"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1280" customClass="CustomDropDown">
+                                <rect key="frame" x="20" y="220" width="374" height="40"/>
+                                <color key="backgroundColor" red="0.89411764705882357" green="0.51372549019607838" blue="0.51372549019607838" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
-                                    <constraint id="1281" firstItem="1280" firstAttribute="height" constant="40"/>
+                                    <constraint firstAttribute="height" constant="40" id="1281"/>
                                 </constraints>
-                                <color key="backgroundColor" colorSpace="calibratedRGB" red="0.89411764705882357" green="0.51372549019607838" blue="0.51372549019607838" alpha="1"/>
                             </view>
-                            <view contentMode="scaleToFill" id="1286" translatesAutoresizingMaskIntoConstraints="NO" customClass="CustomDropDown">
-                                <rect key="frame" x="16" y="265" width="343" height="40"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1286" customClass="CustomDropDown">
+                                <rect key="frame" x="20" y="265" width="374" height="40"/>
+                                <color key="backgroundColor" red="0.89411764705882357" green="0.51372549019607838" blue="0.51372549019607838" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
-                                    <constraint id="1287" firstItem="1286" firstAttribute="height" constant="40"/>
+                                    <constraint firstAttribute="height" constant="40" id="1287"/>
                                 </constraints>
-                                <color key="backgroundColor" colorSpace="calibratedRGB" red="0.89411764705882357" green="0.51372549019607838" blue="0.51372549019607838" alpha="1"/>
                             </view>
-                            <view contentMode="scaleToFill" id="1292" translatesAutoresizingMaskIntoConstraints="NO" customClass="CustomDropDown">
-                                <rect key="frame" x="16" y="310" width="343" height="40"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1292" customClass="CustomDropDown">
+                                <rect key="frame" x="20" y="310" width="374" height="40"/>
+                                <color key="backgroundColor" red="0.89411764705882357" green="0.51372549019607838" blue="0.51372549019607838" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
-                                    <constraint id="1293" firstItem="1292" firstAttribute="height" constant="40"/>
+                                    <constraint firstAttribute="height" constant="40" id="1293"/>
                                 </constraints>
-                                <color key="backgroundColor" colorSpace="calibratedRGB" red="0.89411764705882357" green="0.51372549019607838" blue="0.51372549019607838" alpha="1"/>
                             </view>
-                            <view contentMode="scaleToFill" id="2030" translatesAutoresizingMaskIntoConstraints="NO" customClass="CustomDropDown">
-                                <rect key="frame" x="16" y="355" width="343" height="40"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2030" customClass="CustomDropDown">
+                                <rect key="frame" x="20" y="355" width="374" height="40"/>
+                                <color key="backgroundColor" red="0.89411764705882357" green="0.51372549019607838" blue="0.51372549019607838" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
-                                    <constraint id="2031" firstItem="2030" firstAttribute="height" constant="40"/>
+                                    <constraint firstAttribute="height" constant="40" id="2031"/>
                                 </constraints>
-                                <color key="backgroundColor" colorSpace="calibratedRGB" red="0.89411764705882357" green="0.51372549019607838" blue="0.51372549019607838" alpha="1"/>
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="1183" firstAttribute="leading" secondItem="206" secondAttribute="leadingMargin" id="1186"/>
+                            <constraint firstItem="1183" firstAttribute="trailing" secondItem="206" secondAttribute="trailingMargin" id="1187"/>
+                            <constraint firstItem="1189" firstAttribute="top" secondItem="1183" secondAttribute="bottom" constant="5" id="1191"/>
+                            <constraint firstItem="1189" firstAttribute="trailing" secondItem="206" secondAttribute="trailingMargin" id="1192"/>
+                            <constraint firstItem="1189" firstAttribute="trailing" secondItem="206" secondAttribute="trailingMargin" id="1193"/>
+                            <constraint firstItem="1189" firstAttribute="leading" secondItem="206" secondAttribute="leadingMargin" id="1194"/>
+                            <constraint firstItem="1280" firstAttribute="top" secondItem="1189" secondAttribute="bottom" constant="5" id="1282"/>
+                            <constraint firstItem="1280" firstAttribute="leading" secondItem="206" secondAttribute="leadingMargin" id="1283"/>
+                            <constraint firstItem="1280" firstAttribute="trailing" secondItem="206" secondAttribute="trailingMargin" id="1284"/>
+                            <constraint firstItem="1286" firstAttribute="top" secondItem="1280" secondAttribute="bottom" constant="5" id="1288"/>
+                            <constraint firstItem="1286" firstAttribute="leading" secondItem="206" secondAttribute="leadingMargin" id="1289"/>
+                            <constraint firstItem="1286" firstAttribute="trailing" secondItem="206" secondAttribute="trailingMargin" id="1290"/>
+                            <constraint firstItem="1292" firstAttribute="top" secondItem="1286" secondAttribute="bottom" constant="5" id="1294"/>
+                            <constraint firstItem="1292" firstAttribute="leading" secondItem="206" secondAttribute="leadingMargin" id="1295"/>
+                            <constraint firstItem="1292" firstAttribute="trailing" secondItem="206" secondAttribute="trailingMargin" id="1296"/>
+                            <constraint firstItem="1p0-2J-ARX" firstAttribute="leading" secondItem="206" secondAttribute="leadingMargin" id="1300"/>
+                            <constraint firstItem="PRC-RK-RK9" firstAttribute="trailing" secondItem="206" secondAttribute="trailingMargin" constant="-5" id="1301"/>
+                            <constraint firstItem="2uI-Rd-yLH" firstAttribute="bottom" secondItem="1183" secondAttribute="top" constant="-10" id="1341"/>
+                            <constraint firstItem="2030" firstAttribute="top" secondItem="1292" secondAttribute="bottom" constant="5" id="2032"/>
+                            <constraint firstItem="2030" firstAttribute="leading" secondItem="206" secondAttribute="leadingMargin" id="2033"/>
+                            <constraint firstItem="2030" firstAttribute="trailing" secondItem="206" secondAttribute="trailingMargin" id="2034"/>
+                            <constraint firstItem="PRC-RK-RK9" firstAttribute="top" secondItem="2030" secondAttribute="bottom" constant="10" id="2035"/>
                             <constraint firstItem="203" firstAttribute="top" secondItem="LcA-VA-fSG" secondAttribute="bottom" constant="32" id="JJX-w0-0T8"/>
                             <constraint firstItem="LcA-VA-fSG" firstAttribute="centerX" secondItem="206" secondAttribute="centerX" id="UE2-Eo-Rkb"/>
                             <constraint firstAttribute="trailingMargin" secondItem="2uI-Rd-yLH" secondAttribute="trailing" id="kvD-s6-OUu"/>
                             <constraint firstItem="PRC-RK-RK9" firstAttribute="centerY" secondItem="1p0-2J-ARX" secondAttribute="centerY" id="nr1-ul-nd1"/>
                             <constraint firstItem="2uI-Rd-yLH" firstAttribute="leading" secondItem="206" secondAttribute="leadingMargin" id="otY-wG-jnU"/>
                             <constraint firstItem="2uI-Rd-yLH" firstAttribute="top" secondItem="202" secondAttribute="bottom" id="yWT-VD-1GN"/>
-                            <constraint id="1186" firstItem="1183" firstAttribute="leading" secondItem="206" secondAttribute="leadingMargin"/>
-                            <constraint id="1187" firstItem="1183" firstAttribute="trailing" secondItem="206" secondAttribute="trailingMargin"/>
-                            <constraint id="1191" firstItem="1189" firstAttribute="top" secondItem="1183" secondAttribute="bottom" constant="5"/>
-                            <constraint id="1192" firstItem="1189" firstAttribute="trailing" secondItem="206" secondAttribute="trailingMargin"/>
-                            <constraint id="1193" firstItem="1189" firstAttribute="trailing" secondItem="206" secondAttribute="trailingMargin"/>
-                            <constraint id="1194" firstItem="1189" firstAttribute="leading" secondItem="206" secondAttribute="leadingMargin"/>
-                            <constraint id="1282" firstItem="1280" firstAttribute="top" secondItem="1189" secondAttribute="bottom" constant="5"/>
-                            <constraint id="1283" firstItem="1280" firstAttribute="leading" secondItem="206" secondAttribute="leadingMargin"/>
-                            <constraint id="1284" firstItem="1280" firstAttribute="trailing" secondItem="206" secondAttribute="trailingMargin"/>
-                            <constraint id="1288" firstItem="1286" firstAttribute="top" secondItem="1280" secondAttribute="bottom" constant="5"/>
-                            <constraint id="1289" firstItem="1286" firstAttribute="leading" secondItem="206" secondAttribute="leadingMargin"/>
-                            <constraint id="1290" firstItem="1286" firstAttribute="trailing" secondItem="206" secondAttribute="trailingMargin"/>
-                            <constraint id="1294" firstItem="1292" firstAttribute="top" secondItem="1286" secondAttribute="bottom" constant="5"/>
-                            <constraint id="1295" firstItem="1292" firstAttribute="leading" secondItem="206" secondAttribute="leadingMargin"/>
-                            <constraint id="1296" firstItem="1292" firstAttribute="trailing" secondItem="206" secondAttribute="trailingMargin"/>
-                            <constraint id="1300" firstItem="1p0-2J-ARX" firstAttribute="leading" secondItem="206" secondAttribute="leadingMargin"/>
-                            <constraint id="1301" firstItem="PRC-RK-RK9" firstAttribute="trailing" secondItem="206" secondAttribute="trailingMargin" constant="-5"/>
-                            <constraint id="1341" firstItem="2uI-Rd-yLH" firstAttribute="bottom" secondItem="1183" secondAttribute="top" constant="-10"/>
-                            <constraint id="2032" firstItem="2030" firstAttribute="top" secondItem="1292" secondAttribute="bottom" constant="5"/>
-                            <constraint id="2033" firstItem="2030" firstAttribute="leading" secondItem="206" secondAttribute="leadingMargin"/>
-                            <constraint id="2034" firstItem="2030" firstAttribute="trailing" secondItem="206" secondAttribute="trailingMargin"/>
-                            <constraint id="2035" firstItem="PRC-RK-RK9" firstAttribute="top" secondItem="2030" secondAttribute="bottom" constant="10"/>
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="containerView" destination="2uI-Rd-yLH" id="gd3-t3-E4B"/>
-                        <outlet property="enableSwitch" destination="PRC-RK-RK9" id="vx9-5r-wEE"/>
-                        <outlet property="resetButton" destination="LcA-VA-fSG" id="Zpa-LP-Bs2"/>
-                        <outlet property="themeDropDown" destination="1183" id="name-outlet-1183"/>
                         <outlet property="backgroundDropDown" destination="1189" id="name-outlet-1189"/>
+                        <outlet property="containerView" destination="2uI-Rd-yLH" id="gd3-t3-E4B"/>
                         <outlet property="disabledColorDropDown" destination="1280" id="name-outlet-1280"/>
+                        <outlet property="enableSwitch" destination="PRC-RK-RK9" id="vx9-5r-wEE"/>
                         <outlet property="pressedColorDropDown" destination="1286" id="name-outlet-1286"/>
-                        <outlet property="sizeDropDown" destination="1292" id="name-outlet-1292"/>
+                        <outlet property="resetButton" destination="LcA-VA-fSG" id="Zpa-LP-Bs2"/>
                         <outlet property="shadowDropDown" destination="2030" id="name-outlet-2030"/>
+                        <outlet property="sizeDropDown" destination="1292" id="name-outlet-1292"/>
+                        <outlet property="themeDropDown" destination="1183" id="name-outlet-1183"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="207" userLabel="First Responder" sceneMemberID="firstResponder"/>

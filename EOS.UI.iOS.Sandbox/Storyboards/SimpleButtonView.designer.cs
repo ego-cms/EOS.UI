@@ -64,7 +64,7 @@ namespace EOS.UI.iOS.Sandbox
 
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
-        UIKit.UIButton resetButton { get; set; }
+        EOS.UI.iOS.Sandbox.Controls.EOSSandboxButton resetButton { get; set; }
 
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]

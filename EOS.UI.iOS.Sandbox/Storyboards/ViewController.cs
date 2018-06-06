@@ -1,12 +1,9 @@
 using EOS.UI.iOS.Sandbox.Controls;
 using EOS.UI.iOS.Sandbox.Storyboards;
 using EOS.UI.iOS.Sandbox.TableSources;
-using EOS.UI.iOS.Themes;
-using EOS.UI.Shared.Themes.Themes;
 using Foundation;
 using System;
 using System.Linq;
-using UIFrameworks.Shared.Themes.Helpers;
 using UIKit;
 
 namespace EOS.UI.iOS.Sandbox

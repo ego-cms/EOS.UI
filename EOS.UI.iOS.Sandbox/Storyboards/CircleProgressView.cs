@@ -72,6 +72,7 @@ namespace EOS.UI.iOS.Sandbox
                     _circleProgress.GetThemeProvider().SetCurrentTheme(theme);
                     _circleProgress.ResetCustomization();
                     _dropDowns.Except(new[] { themeDropDown }).ToList().ForEach(dropDown => dropDown.ResetValue());
+                    UpdateApperaence();
                 },
                 Fields.Theme,
                 rect);
