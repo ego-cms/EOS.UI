@@ -8,4 +8,12 @@
         <attr name="eos_text_size" format="integer"/>
         <attr name="eos_corner_radius" format="integer"/>
     </declare-styleable>
+    <declare-styleable name="CircleProgress">
+        <attr name="eos_color" format="reference|color"/>
+        <attr name="eos_alternative_color" format="reference|color"/>
+        <attr name="eos_fill_color" format="reference|color"/>
+        <attr name="eos_show_progress" format="integer"/>
+        <attr name="eos_font" format="string"/>
+        <attr name="eos_text_size" format="integer"/>
+    </declare-styleable>
 </resources>

@@ -141,20 +141,20 @@ namespace EOS.UI.Android.Controls
 
         public CircleProgress(Context context, IAttributeSet attrs) : base(context, attrs)
         {
-            Initalize();
+            Initalize(attrs);
         }
 
         public CircleProgress(Context context, IAttributeSet attrs, int defStyleAttr) : base(context, attrs, defStyleAttr)
         {
-            Initalize();
+            Initalize(attrs);
         }
 
         public CircleProgress(Context context, IAttributeSet attrs, int defStyleAttr, int defStyleRes) : base(context, attrs, defStyleAttr, defStyleRes)
         {
-            Initalize();
+            Initalize(attrs);
         }
 
-        private void Initalize()
+        private void Initalize(IAttributeSet attrs = null)
         {
             var inflater = (LayoutInflater)Context.GetSystemService(Context.LayoutInflaterService);
             var view = inflater.Inflate(Resource.Layout.CircleProgress, this);
@@ -166,7 +166,40 @@ namespace EOS.UI.Android.Controls
             _percentText.Text = _zeroPercents;
             Orientation = Widget.Orientation.Vertical;
             SetGravity(GravityFlags.CenterHorizontal);
+
+            if(attrs != null)
+                InitializeAttributes(attrs);
+
             UpdateAppearance();
+        }
+
+        private void InitializeAttributes(IAttributeSet attrs)
+        {
+            var styledAttributes = Context.ObtainStyledAttributes(attrs, Resource.Styleable.CircleProgress, 0, 0);
+
+            var color = styledAttributes.GetColor(Resource.Styleable.CircleProgress_eos_color, Color.Transparent);
+            if(color != Color.Transparent)
+                Color = color;
+
+            var alernativeColor = styledAttributes.GetColor(Resource.Styleable.CircleProgress_eos_alternative_color, Color.Transparent);
+            if(alernativeColor != Color.Transparent)
+                AlternativeColor = alernativeColor;
+
+            var fillColor = styledAttributes.GetColor(Resource.Styleable.CircleProgress_eos_fill_color, Color.Transparent);
+            if(fillColor != Color.Transparent)
+                FillColor = fillColor;
+
+            var showProgress = styledAttributes.GetBoolean(Resource.Styleable.CircleProgress_eos_show_progress, true);
+            if(!showProgress)
+                ShowProgress = showProgress;
+
+            var font = styledAttributes.GetString(Resource.Styleable.CircleProgress_eos_font);
+            if(!string.IsNullOrEmpty(font))
+                Typeface = Typeface.CreateFromAsset(Context.Assets, font);
+
+            var textSize = styledAttributes.GetFloat(Resource.Styleable.CircleProgress_eos_text_size, -1);
+            if(textSize > 0)
+                TextSize = textSize;
         }
 
         public IEOSStyle GetCurrentEOSStyle()
@@ -211,7 +244,6 @@ namespace EOS.UI.Android.Controls
             _checkmarkImage.Visibility = ViewStates.Visible;
             _isRunning = false;
         }
-
 
         public override bool OnTouchEvent(MotionEvent e)
         {
