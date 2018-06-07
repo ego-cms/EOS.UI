@@ -45,7 +45,7 @@ namespace EOS.UI.iOS.Themes
         {
             if(control == null)
                 throw new ArgumentNullException(nameof(control));
-
+            
             var currentStyle = control.GetCurrentEOSStyle();
             Object val = null;
             currentStyle?.ThemeValues?.TryGetValue(propertyName, out val);

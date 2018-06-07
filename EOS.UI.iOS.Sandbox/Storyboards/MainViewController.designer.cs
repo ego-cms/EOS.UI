@@ -8,13 +8,20 @@ using Foundation;
 using System;
 using System.CodeDom.Compiler;
 
-namespace EOS.UI.iOS.Sandbox.Controls
+namespace EOS.UI.iOS.Sandbox
 {
-    [Register ("EOSSendboxUILabel")]
-    partial class EOSSendboxUILabel
+    [Register ("MainViewController")]
+    partial class MainViewController
     {
+        [Outlet]
+        UIKit.UITableView controlsTableView { get; set; }
+
         void ReleaseDesignerOutlets ()
         {
+            if (controlsTableView != null) {
+                controlsTableView.Dispose ();
+                controlsTableView = null;
+            }
         }
     }
 }

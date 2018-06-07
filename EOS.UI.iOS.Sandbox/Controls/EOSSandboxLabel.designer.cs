@@ -10,8 +10,8 @@ using System.CodeDom.Compiler;
 
 namespace EOS.UI.iOS.Sandbox.Controls
 {
-    [Register ("EOSSandboxTableView")]
-    partial class EOSSandboxTableView
+    [Register ("EOSSandboxLabel")]
+    partial class EOSSandboxLabel
     {
         void ReleaseDesignerOutlets ()
         {

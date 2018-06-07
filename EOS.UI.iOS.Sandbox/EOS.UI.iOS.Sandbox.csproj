@@ -186,7 +186,7 @@
     <Compile Include="Controls\EOSSandboxNavigationBar.cs" />
     <Compile Include="Controls\EOSSandboxTableView.cs" />
     <Compile Include="Controls\EOSSandboxView.cs" />
-    <Compile Include="Controls\EOSSendboxLabel.cs" />
+    <Compile Include="Controls\EOSSandboxLabel.cs" />
     <Compile Include="Main.cs" />
     <Compile Include="AppDelegate.cs" />
     <Compile Include="Storyboards\SectionComponentView.cs" />
@@ -198,9 +198,9 @@
     <Compile Include="Styles\EOSSandboxStyleProvider.cs" />
     <Compile Include="TableSources\SectionTableSource.cs" />
     <Compile Include="TableSources\ControlTableSource.cs" />
-    <Compile Include="Storyboards\ViewController.cs" />
-    <Compile Include="Storyboards\ViewController.designer.cs">
-      <DependentUpon>ViewController.cs</DependentUpon>
+    <Compile Include="Storyboards\MainViewController.cs" />
+    <Compile Include="Storyboards\MainViewController.designer.cs">
+      <DependentUpon>MainViewController.cs</DependentUpon>
     </Compile>
     <Compile Include="Storyboards\BaseViewController.cs" />
     <Compile Include="Storyboards\SimpleButtonView.cs" />
