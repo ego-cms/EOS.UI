@@ -99,18 +99,29 @@
     <Compile Include="Activities\GhostButtonActivity.cs" />
     <Compile Include="Activities\BadgeLabelActivity.cs" />
     <Compile Include="Activities\MainActivity.cs" />
-    <Compile Include="Adapters\SpinnerAdapter.cs" />
-    <Compile Include="Controls\SandboxDropDown.cs" />
+    <Compile Include="Adapters\EOSSandboxSpinnerAdapter.cs" />
+    <Compile Include="Controls\EOSSandboxButton.cs" />
+    <Compile Include="Controls\EOSSandboxDivider.cs" />
+    <Compile Include="Controls\EOSSandboxLinearLayout.cs" />
+    <Compile Include="Controls\EOSSandboxRelativeLayout.cs" />
+    <Compile Include="Controls\EOSSandboxScrollView.cs" />
+    <Compile Include="Controls\EOSSandboxDropDown.cs" />
+    <Compile Include="Controls\EOSSandboxTextView.cs" />
+    <Compile Include="Controls\EOSSandboxToolbar.cs" />
     <Compile Include="Helpers\Constants.cs" />
     <Compile Include="Helpers\ContextHelpers.cs" />
     <Compile Include="RecyclerImplementation\ControlsAdapter.cs" />
-    <Compile Include="RecyclerImplementation\ControlsViewHolder.cs" />
+    <Compile Include="RecyclerImplementation\EOSSandboxControlsViewHolder.cs" />
+    <Compile Include="RecyclerImplementation\EOSSandboxRecyclerView.cs" />
     <Compile Include="RecyclerImplementation\SectionAdapter.cs" />
     <Compile Include="RecyclerImplementation\SimpleViewHolder.cs" />
     <Compile Include="Resources\Resource.designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Activities\CircleProgressActivity.cs" />
     <Compile Include="Helpers\PlatformTimer.cs" />
+    <Compile Include="Styles\EOSSandboxDarkStyle.cs" />
+    <Compile Include="Styles\EOSSandboxLightStyle.cs" />
+    <Compile Include="Styles\EOSSandboxStyleProvider.cs" />
   </ItemGroup>
   <ItemGroup>
     <AndroidAsset Include="Assets\Fonts\Amita.ttf" />
@@ -198,6 +209,9 @@
     <AndroidResource Include="Resources\layout\SectionLayout.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\values\styles.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <Import Project="..\packages\Xamarin.Android.Support.Annotations.27.0.2\build\MonoAndroid81\Xamarin.Android.Support.Annotations.targets" Condition="Exists('..\packages\Xamarin.Android.Support.Annotations.27.0.2\build\MonoAndroid81\Xamarin.Android.Support.Annotations.targets')" />

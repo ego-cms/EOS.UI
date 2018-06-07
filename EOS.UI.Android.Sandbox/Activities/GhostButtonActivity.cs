@@ -12,7 +12,7 @@ using static EOS.UI.Android.Sandbox.Helpers.Constants;
 
 namespace EOS.UI.Android.Sandbox.Activities
 {
-    [Activity(Label = ControlNames.GhostButton)]
+    [Activity(Label = ControlNames.GhostButton, Theme = "@style/Sandbox.Main")]
     public class GhostButtonActivity : BaseActivity
     {
         protected override void OnCreate(Bundle savedInstanceState)
@@ -21,18 +21,18 @@ namespace EOS.UI.Android.Sandbox.Activities
             SetContentView(Resource.Layout.GhostButtonLayout);
 
             var ghostButton = FindViewById<GhostButton>(Resource.Id.ghostButton);
-            var themeDropDown = FindViewById<SandboxDropDown>(Resource.Id.themeDropDown);
-            var disabledColorDropDown = FindViewById<SandboxDropDown>(Resource.Id.enabledTextColorDropDown);
-            var pressedColorDropDown = FindViewById<SandboxDropDown>(Resource.Id.disabledTextColorDropDown);
-            var enabledColorDropDown = FindViewById<SandboxDropDown>(Resource.Id.pressedTextColorDropDown);
-            var fontDropDown = FindViewById<SandboxDropDown>(Resource.Id.fontDropDown);
-            var letterSpacingDropDown = FindViewById<SandboxDropDown>(Resource.Id.letterSpacingDropDown);
-            var textSizeDropDown = FindViewById<SandboxDropDown>(Resource.Id.textSizeDropDown);
+            var themeDropDown = FindViewById<EOSSandboxDropDown>(Resource.Id.themeDropDown);
+            var disabledColorDropDown = FindViewById<EOSSandboxDropDown>(Resource.Id.enabledTextColorDropDown);
+            var pressedColorDropDown = FindViewById<EOSSandboxDropDown>(Resource.Id.disabledTextColorDropDown);
+            var enabledColorDropDown = FindViewById<EOSSandboxDropDown>(Resource.Id.pressedTextColorDropDown);
+            var fontDropDown = FindViewById<EOSSandboxDropDown>(Resource.Id.fontDropDown);
+            var letterSpacingDropDown = FindViewById<EOSSandboxDropDown>(Resource.Id.letterSpacingDropDown);
+            var textSizeDropDown = FindViewById<EOSSandboxDropDown>(Resource.Id.textSizeDropDown);
             var stateSwitch = FindViewById<Switch>(Resource.Id.stateSwitch);
             ghostButton.ResetCustomization();
 
             var resetButton = FindViewById<Button>(Resource.Id.buttonResetCustomization);
-            var spinners = new List<SandboxDropDown>()
+            var spinners = new List<EOSSandboxDropDown>()
             {
                 themeDropDown,
                 disabledColorDropDown,
@@ -52,6 +52,7 @@ namespace EOS.UI.Android.Sandbox.Activities
                     ghostButton.GetThemeProvider().SetCurrentTheme(ThemeTypes.ThemeCollection.ElementAt(position).Value);
                     ghostButton.ResetCustomization();
                     spinners.Except(new[] { themeDropDown }).ToList().ForEach(s => s.SetSpinnerSelection(0));
+                    UpdateApperaence();
                 }
             };
 

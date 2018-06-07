@@ -15,35 +15,35 @@ namespace EOS.UI.iOS.Sandbox.Storyboards
     {
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
-        EOS.UI.iOS.Sandbox.CustomDropDown backgoundColorDropDown { get; set; }
+        EOS.UI.iOS.Sandbox.EOSSandboxDropDown backgoundColorDropDown { get; set; }
 
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
-        EOS.UI.iOS.Sandbox.CustomDropDown borderColorDropDown { get; set; }
+        EOS.UI.iOS.Sandbox.EOSSandboxDropDown borderColorDropDown { get; set; }
 
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
-        EOS.UI.iOS.Sandbox.CustomDropDown borderWidthDropDown { get; set; }
+        EOS.UI.iOS.Sandbox.EOSSandboxDropDown borderWidthDropDown { get; set; }
 
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
-        EOS.UI.iOS.Sandbox.CustomDropDown buttonTextColorDropDown { get; set; }
+        EOS.UI.iOS.Sandbox.EOSSandboxDropDown buttonTextColorDropDown { get; set; }
 
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
-        EOS.UI.iOS.Sandbox.CustomDropDown buttonTextDropDown { get; set; }
+        EOS.UI.iOS.Sandbox.EOSSandboxDropDown buttonTextDropDown { get; set; }
 
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
-        EOS.UI.iOS.Sandbox.CustomDropDown buttonTextFontDropDown { get; set; }
+        EOS.UI.iOS.Sandbox.EOSSandboxDropDown buttonTextFontDropDown { get; set; }
 
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
-        EOS.UI.iOS.Sandbox.CustomDropDown buttonTextLetterSpacingDropDown { get; set; }
+        EOS.UI.iOS.Sandbox.EOSSandboxDropDown buttonTextLetterSpacingDropDown { get; set; }
 
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
-        EOS.UI.iOS.Sandbox.CustomDropDown buttonTextSizeDropDown { get; set; }
+        EOS.UI.iOS.Sandbox.EOSSandboxDropDown buttonTextSizeDropDown { get; set; }
 
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
@@ -55,39 +55,39 @@ namespace EOS.UI.iOS.Sandbox.Storyboards
 
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
-        EOS.UI.iOS.Sandbox.CustomDropDown paddingBottomDropDown { get; set; }
+        EOS.UI.iOS.Sandbox.EOSSandboxDropDown paddingBottomDropDown { get; set; }
 
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
-        EOS.UI.iOS.Sandbox.CustomDropDown paddingLeftDropDown { get; set; }
+        EOS.UI.iOS.Sandbox.EOSSandboxDropDown paddingLeftDropDown { get; set; }
 
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
-        EOS.UI.iOS.Sandbox.CustomDropDown paddingRightDropDown { get; set; }
+        EOS.UI.iOS.Sandbox.EOSSandboxDropDown paddingRightDropDown { get; set; }
 
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
-        EOS.UI.iOS.Sandbox.CustomDropDown paddingTopDropDown { get; set; }
+        EOS.UI.iOS.Sandbox.EOSSandboxDropDown paddingTopDropDown { get; set; }
 
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
-        UIKit.UIButton resetCustomizationButton { get; set; }
+        EOS.UI.iOS.Sandbox.Controls.EOSSandboxButton resetCustomizationButton { get; set; }
 
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
-        UIKit.UIView sectionContainer { get; set; }
+        EOS.UI.iOS.Sandbox.Controls.EOSSandboxView sectionContainer { get; set; }
 
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
-        EOS.UI.iOS.Sandbox.CustomDropDown sectionNameDropDown { get; set; }
+        EOS.UI.iOS.Sandbox.EOSSandboxDropDown sectionNameDropDown { get; set; }
 
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
-        EOS.UI.iOS.Sandbox.CustomDropDown sectionNameFontDropDown { get; set; }
+        EOS.UI.iOS.Sandbox.EOSSandboxDropDown sectionNameFontDropDown { get; set; }
 
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
-        EOS.UI.iOS.Sandbox.CustomDropDown sectionNameLetterSpacingDropDown { get; set; }
+        EOS.UI.iOS.Sandbox.EOSSandboxDropDown sectionNameLetterSpacingDropDown { get; set; }
 
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
@@ -99,15 +99,15 @@ namespace EOS.UI.iOS.Sandbox.Storyboards
 
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
-        EOS.UI.iOS.Sandbox.CustomDropDown sectionTextColorDropDown { get; set; }
+        EOS.UI.iOS.Sandbox.EOSSandboxDropDown sectionTextColorDropDown { get; set; }
 
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
-        EOS.UI.iOS.Sandbox.CustomDropDown sectionTextSizeDropDown { get; set; }
+        EOS.UI.iOS.Sandbox.EOSSandboxDropDown sectionTextSizeDropDown { get; set; }
 
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
-        EOS.UI.iOS.Sandbox.CustomDropDown themeDropDown { get; set; }
+        EOS.UI.iOS.Sandbox.EOSSandboxDropDown themeDropDown { get; set; }
 
         void ReleaseDesignerOutlets ()
         {

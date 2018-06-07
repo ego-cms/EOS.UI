@@ -18,7 +18,7 @@ namespace EOS.UI.iOS.Sandbox
     public partial class SimpleLabelView : BaseViewController
     {
         public const string Identifier = "SimpleLabelView";
-        private List<CustomDropDown> _dropDowns;
+        private List<EOSSandboxDropDown> _dropDowns;
         private SimpleLabel _simpleLabel;
 
         public SimpleLabelView (IntPtr handle) : base (handle)
@@ -34,7 +34,7 @@ namespace EOS.UI.iOS.Sandbox
                 Text = "Default text"
             };
 
-            _dropDowns = new List<CustomDropDown>()
+            _dropDowns = new List<EOSSandboxDropDown>()
             {
                 themesDropDown,
                 fontDropDown,
@@ -76,6 +76,7 @@ namespace EOS.UI.iOS.Sandbox
                     _simpleLabel.GetThemeProvider().SetCurrentTheme(theme);
                     _simpleLabel.ResetCustomization();
                     _dropDowns.Except(new[] { themesDropDown }).ToList().ForEach(dropDown => dropDown.ResetValue());
+                    UpdateApperaence();
                 },
                 Fields.Theme,
                 frame);
