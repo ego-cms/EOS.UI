@@ -114,15 +114,15 @@ namespace EOS.UI.Android.Controls
             if(!string.IsNullOrEmpty(font))
                 Typeface = Typeface.CreateFromAsset(Context.Assets, font);
 
-            var letterSpacing = styledAttributes.GetFloat(Resource.Styleable.SimpleButton_eos_letter_spacing, -1);
+            var letterSpacing = styledAttributes.GetFloat(Resource.Styleable.SimpleButton_eos_letterspacing, -1);
             if(letterSpacing > 0)
                 LetterSpacing = letterSpacing;
 
-            var textColor = styledAttributes.GetColor(Resource.Styleable.SimpleButton_eos_text_color, Color.Transparent);
+            var textColor = styledAttributes.GetColor(Resource.Styleable.SimpleButton_eos_textcolor, Color.Transparent);
             if(textColor != Color.Transparent)
                 TextColor = textColor;
 
-            var textSize = styledAttributes.GetFloat(Resource.Styleable.SimpleButton_eos_text_size, -1);
+            var textSize = styledAttributes.GetFloat(Resource.Styleable.SimpleButton_eos_textsize, -1);
             if(textSize > 0)
                 TextSize = textSize;
         }

@@ -181,15 +181,15 @@ namespace EOS.UI.Android.Controls
             if(color != Color.Transparent)
                 Color = color;
 
-            var alernativeColor = styledAttributes.GetColor(Resource.Styleable.CircleProgress_eos_alternative_color, Color.Transparent);
+            var alernativeColor = styledAttributes.GetColor(Resource.Styleable.CircleProgress_eos_alternativecolor, Color.Transparent);
             if(alernativeColor != Color.Transparent)
                 AlternativeColor = alernativeColor;
 
-            var fillColor = styledAttributes.GetColor(Resource.Styleable.CircleProgress_eos_fill_color, Color.Transparent);
+            var fillColor = styledAttributes.GetColor(Resource.Styleable.CircleProgress_eos_fillcolor, Color.Transparent);
             if(fillColor != Color.Transparent)
                 FillColor = fillColor;
 
-            var showProgress = styledAttributes.GetBoolean(Resource.Styleable.CircleProgress_eos_show_progress, true);
+            var showProgress = styledAttributes.GetBoolean(Resource.Styleable.CircleProgress_eos_showprogress, true);
             if(!showProgress)
                 ShowProgress = showProgress;
 
@@ -197,7 +197,7 @@ namespace EOS.UI.Android.Controls
             if(!string.IsNullOrEmpty(font))
                 Typeface = Typeface.CreateFromAsset(Context.Assets, font);
 
-            var textSize = styledAttributes.GetFloat(Resource.Styleable.CircleProgress_eos_text_size, -1);
+            var textSize = styledAttributes.GetFloat(Resource.Styleable.CircleProgress_eos_textsize, -1);
             if(textSize > 0)
                 TextSize = textSize;
         }

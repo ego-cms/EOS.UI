@@ -144,23 +144,23 @@ namespace EOS.UI.Android.Controls
             if(!string.IsNullOrEmpty(font))
                 Typeface = Typeface.CreateFromAsset(Context.Assets, font);
 
-            var letterSpacing = styledAttributes.GetFloat(Resource.Styleable.GhostButton_eos_letter_spacing, -1);
+            var letterSpacing = styledAttributes.GetFloat(Resource.Styleable.GhostButton_eos_letterspacing, -1);
             if(letterSpacing > 0)
                 LetterSpacing = letterSpacing;
 
-            var textColor = styledAttributes.GetColor(Resource.Styleable.GhostButton_eos_text_color, Color.Transparent);
+            var textColor = styledAttributes.GetColor(Resource.Styleable.GhostButton_eos_textcolor, Color.Transparent);
             if(textColor != Color.Transparent)
                 EnabledTextColor = textColor;
 
-            var disabledTextColor = styledAttributes.GetColor(Resource.Styleable.GhostButton_eos_disabled_text_color, Color.Transparent);
+            var disabledTextColor = styledAttributes.GetColor(Resource.Styleable.GhostButton_eos_textcolor_disabled, Color.Transparent);
             if(disabledTextColor != Color.Transparent)
                 DisabledTextColor = disabledTextColor;
 
-            var pressedTextColor = styledAttributes.GetColor(Resource.Styleable.GhostButton_eos_pressed_text_color, Color.Transparent);
+            var pressedTextColor = styledAttributes.GetColor(Resource.Styleable.GhostButton_eos_textcolor_pressed, Color.Transparent);
             if(pressedTextColor != Color.Transparent)
                 PressedStateTextColor = pressedTextColor;
 
-            var textSize = styledAttributes.GetFloat(Resource.Styleable.GhostButton_eos_text_size, -1);
+            var textSize = styledAttributes.GetFloat(Resource.Styleable.GhostButton_eos_textsize, -1);
             if(textSize > 0)
                 TextSize = textSize;
 
