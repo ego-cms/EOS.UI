@@ -46,7 +46,7 @@ namespace EOS.UI.Android.Helpers
 
         public override void Draw(Canvas canvas)
         {
-            _paint.SetStyle(Paint.Style.Stroke);
+            _paint.SetStyle(Paint.Style.Fill);
             DrawShadowsOutsideBackground(canvas, _paint, _iterations);
             DrawShadowsBehindBackground(canvas, _paint, _iterations);
             //var p = new Paint() { Color = Color.Red };
@@ -74,14 +74,14 @@ namespace EOS.UI.Android.Helpers
             {
                 var color = _config.Color;
                 //'Inside' shadow will be with negative index
-                color.A = GetAlphaValue((i - iterations) * -1);
-                p.Color = color;
+                var alpha = GetAlphaValue((i - iterations) * -1);
                 //If Alpha = 255 for 'inside' shadow, then we can draw solid circle and break the loop
-                if (color.A >= 255)
+                if (alpha >= 255)
                 {
                     DrawSolidCircle(canvas, i , p);
                     break;
                 }
+                p.Color = GetColor(alpha, color);
 
                 var radius = canvas.Width / 2 - i;
                 canvas.DrawCircle(canvas.Width / 2, canvas.Width / 2, radius, p);
@@ -91,17 +91,17 @@ namespace EOS.UI.Android.Helpers
         private void DrawSolidCircle(Canvas canvas, int i, Paint p)
         {
             p.SetStyle(Paint.Style.FillAndStroke);
+            p.Color = _config.Color;
             var radius = canvas.Width / 2 - i;
             canvas.DrawCircle(canvas.Width / 2, canvas.Width / 2, radius, p);
         }
 
         private void DrawShadowsOutsideBackground(Canvas canvas, Paint p, int iterations)
         {
-            for (int i = 0; i < iterations; i++)
+            for (int i = iterations; i > 0; i--)
             {
                 var color = _config.Color;
-                color.A = _alphas[i];
-                p.Color = color;
+                p.Color = GetColor(_alphas[i], color);
                 var radius = canvas.Width / 2 - (iterations - i);
 
                 canvas.DrawCircle(canvas.Width / 2, canvas.Width / 2, radius, p);
