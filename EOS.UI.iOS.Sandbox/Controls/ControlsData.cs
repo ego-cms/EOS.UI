@@ -12,9 +12,13 @@ namespace EOS.UI.iOS.Sandbox.Controls
 
         public Dictionary<String, String> Names { get; }
 
+        public const string Title = "Sandbox";
+        public const string BackTitle = "Back";
+
         private ControlsData()
         {
-            Names = new Dictionary<string, string>() {
+            Names = new Dictionary<string, string>()
+            {
                 {SharedControls.BadgeLabel, BadgeLabelView.Identifier},
                 {SharedControls.SimpleLabel, SimpleLabelView.Identifier},
                 {SharedControls.GhostButton, GhostButtonView.Identifier},

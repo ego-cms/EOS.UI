@@ -11,7 +11,7 @@ using System.CodeDom.Compiler;
 namespace EOS.UI.iOS.Sandbox
 {
     [Register ("CustomDropDown")]
-    partial class CustomDropDown
+    partial class EOSSandboxDropDown
     {
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]

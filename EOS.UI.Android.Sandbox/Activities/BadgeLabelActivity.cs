@@ -1,28 +1,33 @@
 ﻿using System.Linq;
 using Android.App;
 using Android.Graphics;
+using Android.Graphics.Drawables;
 using Android.OS;
+using Android.Views;
 using Android.Widget;
 using EOS.UI.Android.Controls;
 using EOS.UI.Android.Sandbox.Controls;
 using EOS.UI.Shared.Themes.Themes;
+using UIFrameworks.Android.Themes;
 using UIFrameworks.Shared.Themes.Helpers;
 using UIFrameworks.Shared.Themes.Interfaces;
 using static EOS.UI.Android.Sandbox.Helpers.Constants;
+using A = Android;
 
 namespace EOS.UI.Android.Sandbox.Activities
 {
-    [Activity(Label = ControlNames.BadgeLabel) ]
+    [Activity(Label = ControlNames.BadgeLabel, Theme = "@style/Sandbox.Main") ]
     public class BadgeLabelActivity : BaseActivity
     {
         private BadgeLabel _badge;
-        private SandboxDropDown _themeDropDown;
-        private SandboxDropDown _backgroundColorDropDown;
-        private SandboxDropDown _textColorDropDown;
-        private SandboxDropDown _fontDropDown;
-        private SandboxDropDown _letterSpacingDropDown;
-        private SandboxDropDown _textSizeDropDown;
-        private SandboxDropDown _cornerRadiusDropDown;
+        private EOSSandboxDropDown _themeDropDown;
+        private EOSSandboxDropDown _backgroundColorDropDown;
+        private EOSSandboxDropDown _textColorDropDown;
+        private EOSSandboxDropDown _fontDropDown;
+        private EOSSandboxDropDown _letterSpacingDropDown;
+        private EOSSandboxDropDown _textSizeDropDown;
+        private EOSSandboxDropDown _cornerRadiusDropDown;
+        private ScrollView _rootView;
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
@@ -32,13 +37,14 @@ namespace EOS.UI.Android.Sandbox.Activities
             _badge = FindViewById<BadgeLabel>(Resource.Id.badgeLabel);
             _badge.UpdateAppearance();
 
-            _themeDropDown = FindViewById<SandboxDropDown>(Resource.Id.themeDropDown);
-            _backgroundColorDropDown = FindViewById<SandboxDropDown>(Resource.Id.backgroundDropDown);
-            _textColorDropDown = FindViewById<SandboxDropDown>(Resource.Id.textColorDropDown);
-            _fontDropDown = FindViewById<SandboxDropDown>(Resource.Id.fontDropDown);
-            _letterSpacingDropDown = FindViewById<SandboxDropDown>(Resource.Id.letterSpacingDropDown);
-            _textSizeDropDown = FindViewById<SandboxDropDown>(Resource.Id.textSizeDropDown);
-            _cornerRadiusDropDown = FindViewById<SandboxDropDown>(Resource.Id.cornerRadiusDropDown);
+            _rootView = FindViewById<ScrollView>(Resource.Id.rootView);
+            _themeDropDown = FindViewById<EOSSandboxDropDown>(Resource.Id.themeDropDown);
+            _backgroundColorDropDown = FindViewById<EOSSandboxDropDown>(Resource.Id.backgroundDropDown);
+            _textColorDropDown = FindViewById<EOSSandboxDropDown>(Resource.Id.textColorDropDown);
+            _fontDropDown = FindViewById<EOSSandboxDropDown>(Resource.Id.fontDropDown);
+            _letterSpacingDropDown = FindViewById<EOSSandboxDropDown>(Resource.Id.letterSpacingDropDown);
+            _textSizeDropDown = FindViewById<EOSSandboxDropDown>(Resource.Id.textSizeDropDown);
+            _cornerRadiusDropDown = FindViewById<EOSSandboxDropDown>(Resource.Id.cornerRadiusDropDown);
             var resetButton = FindViewById<Button>(Resource.Id.buttonResetCustomization);
 
             _themeDropDown.Name = Fields.Theme;
@@ -71,6 +77,8 @@ namespace EOS.UI.Android.Sandbox.Activities
 
             SetCurrenTheme(_badge.GetThemeProvider().GetCurrentTheme());
 
+            UpdateApperaence();
+
             resetButton.Click += delegate
             {
                 ResetCustomValues();
@@ -91,6 +99,7 @@ namespace EOS.UI.Android.Sandbox.Activities
             {
                 _badge.GetThemeProvider().SetCurrentTheme(ThemeTypes.ThemeCollection.ElementAt(position).Value);
                 ResetCustomValues();
+                UpdateApperaence();
             }
         }
 
