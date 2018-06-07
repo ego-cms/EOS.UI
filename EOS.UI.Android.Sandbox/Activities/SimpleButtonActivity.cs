@@ -13,21 +13,21 @@ using static EOS.UI.Android.Sandbox.Helpers.Constants;
 
 namespace EOS.UI.Android.Sandbox.Activities
 {
-    [Activity(Label = ControlNames.SimpleButton)]
+    [Activity(Label = ControlNames.SimpleButton, Theme = "@style/Sandbox.Main")]
     public class SimpleButtonActivity : BaseActivity, IOnCheckedChangeListener
     {
         private SimpleButton _simpleButton;
-        private SandboxDropDown _themeDropDown;
-        private SandboxDropDown _fontDropDown;
-        private SandboxDropDown _letterSpacingDropDown;
-        private SandboxDropDown _textSizeDropDown;
-        private SandboxDropDown _textColorEnabledDropDown;
-        private SandboxDropDown _textColorDisabledDropDown;
-        private SandboxDropDown _textColorPressedDropDown;
-        private SandboxDropDown _backgroundColorEnabledDropDown;
-        private SandboxDropDown _backgroundColorDisabledDropDown;
-        private SandboxDropDown _backgroundColorPressedDropDown;
-        private SandboxDropDown _cornerRadiusDropDown;
+        private EOSSandboxDropDown _themeDropDown;
+        private EOSSandboxDropDown _fontDropDown;
+        private EOSSandboxDropDown _letterSpacingDropDown;
+        private EOSSandboxDropDown _textSizeDropDown;
+        private EOSSandboxDropDown _textColorEnabledDropDown;
+        private EOSSandboxDropDown _textColorDisabledDropDown;
+        private EOSSandboxDropDown _textColorPressedDropDown;
+        private EOSSandboxDropDown _backgroundColorEnabledDropDown;
+        private EOSSandboxDropDown _backgroundColorDisabledDropDown;
+        private EOSSandboxDropDown _backgroundColorPressedDropDown;
+        private EOSSandboxDropDown _cornerRadiusDropDown;
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
@@ -37,17 +37,17 @@ namespace EOS.UI.Android.Sandbox.Activities
             _simpleButton = FindViewById<SimpleButton>(Resource.Id.simpleButton);
             _simpleButton.UpdateAppearance();
 
-            _themeDropDown = FindViewById<SandboxDropDown>(Resource.Id.themeDropDown);
-            _fontDropDown = FindViewById<SandboxDropDown>(Resource.Id.fontDropDown);
-            _letterSpacingDropDown = FindViewById<SandboxDropDown>(Resource.Id.letterSpacingDropDown);
-            _textSizeDropDown = FindViewById<SandboxDropDown>(Resource.Id.textSizeDropDown);
-            _textColorEnabledDropDown = FindViewById<SandboxDropDown>(Resource.Id.enabledTextColorDropDown);
-            _textColorDisabledDropDown = FindViewById<SandboxDropDown>(Resource.Id.disabledTextColorDropDown);
-            _textColorPressedDropDown = FindViewById<SandboxDropDown>(Resource.Id.pressedTextColorDropDown);
-            _backgroundColorEnabledDropDown = FindViewById<SandboxDropDown>(Resource.Id.enabledBackgroundDropDown);
-            _backgroundColorDisabledDropDown = FindViewById<SandboxDropDown>(Resource.Id.disabledBackgroundDropDown);
-            _backgroundColorPressedDropDown = FindViewById<SandboxDropDown>(Resource.Id.pressedBackgroundDropDown);
-            _cornerRadiusDropDown = FindViewById<SandboxDropDown>(Resource.Id.cornerRadiusDropDown);
+            _themeDropDown = FindViewById<EOSSandboxDropDown>(Resource.Id.themeDropDown);
+            _fontDropDown = FindViewById<EOSSandboxDropDown>(Resource.Id.fontDropDown);
+            _letterSpacingDropDown = FindViewById<EOSSandboxDropDown>(Resource.Id.letterSpacingDropDown);
+            _textSizeDropDown = FindViewById<EOSSandboxDropDown>(Resource.Id.textSizeDropDown);
+            _textColorEnabledDropDown = FindViewById<EOSSandboxDropDown>(Resource.Id.enabledTextColorDropDown);
+            _textColorDisabledDropDown = FindViewById<EOSSandboxDropDown>(Resource.Id.disabledTextColorDropDown);
+            _textColorPressedDropDown = FindViewById<EOSSandboxDropDown>(Resource.Id.pressedTextColorDropDown);
+            _backgroundColorEnabledDropDown = FindViewById<EOSSandboxDropDown>(Resource.Id.enabledBackgroundDropDown);
+            _backgroundColorDisabledDropDown = FindViewById<EOSSandboxDropDown>(Resource.Id.disabledBackgroundDropDown);
+            _backgroundColorPressedDropDown = FindViewById<EOSSandboxDropDown>(Resource.Id.pressedBackgroundDropDown);
+            _cornerRadiusDropDown = FindViewById<EOSSandboxDropDown>(Resource.Id.cornerRadiusDropDown);
             var resetButton = FindViewById<Button>(Resource.Id.buttonResetCustomization);
             var disableSwitch = FindViewById<Switch>(Resource.Id.switchDisabled);
 
@@ -111,6 +111,7 @@ namespace EOS.UI.Android.Sandbox.Activities
             {
                 _simpleButton.GetThemeProvider().SetCurrentTheme(ThemeTypes.ThemeCollection.ElementAt(position).Value);
                 ResetCustomValues();
+                UpdateApperaence();
             }
         }
 

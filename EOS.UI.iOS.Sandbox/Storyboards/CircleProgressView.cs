@@ -16,7 +16,7 @@ namespace EOS.UI.iOS.Sandbox
         private CircleProgress _circleProgress;
         private PlatformTimer _timer;
         private int _percents = 0;
-        private List<CustomDropDown> _dropDowns;
+        private List<EOSSandboxDropDown> _dropDowns;
 
         public CircleProgressView(IntPtr handle) : base(handle)
         {
@@ -48,7 +48,7 @@ namespace EOS.UI.iOS.Sandbox
             };
             containerView.AddSubview(_circleProgress);
 
-            _dropDowns = new List<CustomDropDown>()
+            _dropDowns = new List<EOSSandboxDropDown>()
             {
                 themeDropDown,
                 fontDropDown,
@@ -73,6 +73,7 @@ namespace EOS.UI.iOS.Sandbox
                     _circleProgress.GetThemeProvider().SetCurrentTheme(theme);
                     _circleProgress.ResetCustomization();
                     _dropDowns.Except(new[] { themeDropDown }).ToList().ForEach(dropDown => dropDown.ResetValue());
+                    UpdateApperaence();
                 },
                 Fields.Theme,
                 rect);

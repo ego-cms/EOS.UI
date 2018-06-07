@@ -17,30 +17,30 @@ using static EOS.UI.Android.Sandbox.Helpers.Constants;
 
 namespace EOS.UI.Android.Sandbox.Activities
 {
-    [Activity(Label = ControlNames.Section)]
+    [Activity(Label = ControlNames.Section, Theme = "@style/Sandbox.Main")]
     public class SectionActivity : BaseActivity
     {
         private RecyclerView _sectionRecyclerView;
         private List<object> _dataSource;
         
-        private SandboxDropDown _themeDropDown;
-        private SandboxDropDown _sectionNameDropDown;
-        private SandboxDropDown _buttonTextDropDown;
-        private SandboxDropDown _sectionFontDropDown;
-        private SandboxDropDown _buttonFontDropDown;
-        private SandboxDropDown _sectionNameLetterSpacingDropDown;
-        private SandboxDropDown _buttonTextLetterSpacingDropDown;
-        private SandboxDropDown _sectionTextSizeDropDown;
-        private SandboxDropDown _buttonTextSizeDropDown;
-        private SandboxDropDown _sectionTextColorDropDown;
-        private SandboxDropDown _buttonTextColorDropDown;
-        private SandboxDropDown _backgroundColorDropDown;
-        private SandboxDropDown _borderColorDropDown;
-        private SandboxDropDown _borderWidthDropDown;
-        private SandboxDropDown _paddingTopDropDown;
-        private SandboxDropDown _paddingBottomDropDown;
-        private SandboxDropDown _paddingLeftDropDown;
-        private SandboxDropDown _paddingRightDropDown;
+        private EOSSandboxDropDown _themeDropDown;
+        private EOSSandboxDropDown _sectionNameDropDown;
+        private EOSSandboxDropDown _buttonTextDropDown;
+        private EOSSandboxDropDown _sectionFontDropDown;
+        private EOSSandboxDropDown _buttonFontDropDown;
+        private EOSSandboxDropDown _sectionNameLetterSpacingDropDown;
+        private EOSSandboxDropDown _buttonTextLetterSpacingDropDown;
+        private EOSSandboxDropDown _sectionTextSizeDropDown;
+        private EOSSandboxDropDown _buttonTextSizeDropDown;
+        private EOSSandboxDropDown _sectionTextColorDropDown;
+        private EOSSandboxDropDown _buttonTextColorDropDown;
+        private EOSSandboxDropDown _backgroundColorDropDown;
+        private EOSSandboxDropDown _borderColorDropDown;
+        private EOSSandboxDropDown _borderWidthDropDown;
+        private EOSSandboxDropDown _paddingTopDropDown;
+        private EOSSandboxDropDown _paddingBottomDropDown;
+        private EOSSandboxDropDown _paddingLeftDropDown;
+        private EOSSandboxDropDown _paddingRightDropDown;
         private Switch _hasBorderSwitch;
         private Switch _hasButtonSwitch;
         private Button _resetCustomizationButton;
@@ -72,24 +72,24 @@ namespace EOS.UI.Android.Sandbox.Activities
             var adapter = new SectionAdapter(_dataSource);
             _sectionRecyclerView.SetAdapter(adapter);
 
-            _themeDropDown = FindViewById<SandboxDropDown>(Resource.Id.themeDropDown);
-            _sectionNameDropDown = FindViewById<SandboxDropDown>(Resource.Id.sectionNameDropDown);
-            _buttonTextDropDown = FindViewById<SandboxDropDown>(Resource.Id.buttonTextDropDown);
-            _sectionFontDropDown = FindViewById<SandboxDropDown>(Resource.Id.sectionNameFontDropDown);
-            _buttonFontDropDown = FindViewById<SandboxDropDown>(Resource.Id.buttonTextFontDropDown);
-            _sectionNameLetterSpacingDropDown = FindViewById<SandboxDropDown>(Resource.Id.sectionNameLetterSpacingDropDown);
-            _buttonTextLetterSpacingDropDown = FindViewById<SandboxDropDown>(Resource.Id.buttonTextLetterSpacingDropDown);
-            _sectionTextSizeDropDown = FindViewById<SandboxDropDown>(Resource.Id.sectionTextSizeDropDown);
-            _buttonTextSizeDropDown = FindViewById<SandboxDropDown>(Resource.Id.buttonTextSizeDropDown);
-            _sectionTextColorDropDown = FindViewById<SandboxDropDown>(Resource.Id.sectionTextColorDropDown);
-            _buttonTextColorDropDown = FindViewById<SandboxDropDown>(Resource.Id.buttonTextColorDropDown);
-            _backgroundColorDropDown = FindViewById<SandboxDropDown>(Resource.Id.backgroundColorDropDown);
-            _borderColorDropDown = FindViewById<SandboxDropDown>(Resource.Id.borderColorDropDown);
-            _borderWidthDropDown = FindViewById<SandboxDropDown>(Resource.Id.borderWidthDropDown);
-            _paddingTopDropDown = FindViewById<SandboxDropDown>(Resource.Id.paddingTopDropDown);
-            _paddingBottomDropDown = FindViewById<SandboxDropDown>(Resource.Id.paddingBottomDropDown);
-            _paddingLeftDropDown = FindViewById<SandboxDropDown>(Resource.Id.paddingLeftDropDown);
-            _paddingRightDropDown = FindViewById<SandboxDropDown>(Resource.Id.paddingRightDropDown);
+            _themeDropDown = FindViewById<EOSSandboxDropDown>(Resource.Id.themeDropDown);
+            _sectionNameDropDown = FindViewById<EOSSandboxDropDown>(Resource.Id.sectionNameDropDown);
+            _buttonTextDropDown = FindViewById<EOSSandboxDropDown>(Resource.Id.buttonTextDropDown);
+            _sectionFontDropDown = FindViewById<EOSSandboxDropDown>(Resource.Id.sectionNameFontDropDown);
+            _buttonFontDropDown = FindViewById<EOSSandboxDropDown>(Resource.Id.buttonTextFontDropDown);
+            _sectionNameLetterSpacingDropDown = FindViewById<EOSSandboxDropDown>(Resource.Id.sectionNameLetterSpacingDropDown);
+            _buttonTextLetterSpacingDropDown = FindViewById<EOSSandboxDropDown>(Resource.Id.buttonTextLetterSpacingDropDown);
+            _sectionTextSizeDropDown = FindViewById<EOSSandboxDropDown>(Resource.Id.sectionTextSizeDropDown);
+            _buttonTextSizeDropDown = FindViewById<EOSSandboxDropDown>(Resource.Id.buttonTextSizeDropDown);
+            _sectionTextColorDropDown = FindViewById<EOSSandboxDropDown>(Resource.Id.sectionTextColorDropDown);
+            _buttonTextColorDropDown = FindViewById<EOSSandboxDropDown>(Resource.Id.buttonTextColorDropDown);
+            _backgroundColorDropDown = FindViewById<EOSSandboxDropDown>(Resource.Id.backgroundColorDropDown);
+            _borderColorDropDown = FindViewById<EOSSandboxDropDown>(Resource.Id.borderColorDropDown);
+            _borderWidthDropDown = FindViewById<EOSSandboxDropDown>(Resource.Id.borderWidthDropDown);
+            _paddingTopDropDown = FindViewById<EOSSandboxDropDown>(Resource.Id.paddingTopDropDown);
+            _paddingBottomDropDown = FindViewById<EOSSandboxDropDown>(Resource.Id.paddingBottomDropDown);
+            _paddingLeftDropDown = FindViewById<EOSSandboxDropDown>(Resource.Id.paddingLeftDropDown);
+            _paddingRightDropDown = FindViewById<EOSSandboxDropDown>(Resource.Id.paddingRightDropDown);
             _hasBorderSwitch = FindViewById<Switch>(Resource.Id.switchHasBorder);
             _hasButtonSwitch = FindViewById<Switch>(Resource.Id.switchHasButton);
             _resetCustomizationButton = FindViewById<Button>(Resource.Id.buttonResetCustomization);
@@ -471,6 +471,7 @@ namespace EOS.UI.Android.Sandbox.Activities
             {
                 EOSThemeProvider.Instance.SetCurrentTheme(ThemeTypes.ThemeCollection.ElementAt(position).Value);
                 ResetCustomValues();
+                UpdateApperaence();
             }
         }
     }

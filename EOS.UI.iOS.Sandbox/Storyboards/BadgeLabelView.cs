@@ -16,7 +16,7 @@ namespace EOS.UI.iOS.Sandbox
     {
         public const string Identifier = "BadgeLabelView";
 
-        private List<CustomDropDown> _dropDowns;
+        private List<EOSSandboxDropDown> _dropDowns;
 
         public BadgeLabelView(IntPtr handle) : base(handle)
         {
@@ -26,10 +26,12 @@ namespace EOS.UI.iOS.Sandbox
         {
             base.ViewDidLoad();
 
+            UpdateApperaence();
+
             var label = new BadgeLabel();
             label.Text = "Default Text";
 
-            _dropDowns = new List<CustomDropDown>()
+            _dropDowns = new List<EOSSandboxDropDown>()
             {
                 backgroundColorDropDown,
                 letterSpaceDropDown,
@@ -57,6 +59,7 @@ namespace EOS.UI.iOS.Sandbox
                     label.GetThemeProvider().SetCurrentTheme(theme);
                     label.ResetCustomization();
                     _dropDowns.Except(new[] { themeDropDown }).ToList().ForEach(dropDown => dropDown.ResetValue());
+                    UpdateApperaence();
                 },
                 Fields.Theme,
                 rect);

@@ -1,11 +1,8 @@
 ﻿<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="205">
-    <device id="retina4_7" orientation="portrait">
-        <adaptation id="fullscreen"/>
-    </device>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="205">
     <dependencies>
-        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -17,126 +14,126 @@
                         <viewControllerLayoutGuide type="top" id="202"/>
                         <viewControllerLayoutGuide type="bottom" id="203"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="206">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                    <view key="view" contentMode="scaleToFill" id="206" customClass="EOSSandboxView">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3tm-k0-jzs">
-                                <rect key="frame" x="16" y="40" width="343" height="70"/>
+                                <rect key="frame" x="16" y="40" width="382" height="70"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="70" id="Zvh-ao-v2w"/>
                                 </constraints>
                             </view>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JWS-tC-smw">
-                                <rect key="frame" x="168" y="605" width="39" height="30"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JWS-tC-smw" customClass="EOSSandboxButton">
+                                <rect key="frame" x="187.5" y="674" width="39" height="30"/>
                                 <state key="normal" title="Reset"/>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Enabled" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gZj-0n-rUa">
-                                <rect key="frame" x="16" y="440.5" width="62" height="20.5"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Enabled" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gZj-0n-rUa" customClass="EOSSandboxLabel">
+                                <rect key="frame" x="20" y="440.5" width="62" height="20.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="BWn-Xd-vNd">
-                                <rect key="frame" x="305" y="435" width="51" height="31"/>
+                                <rect key="frame" x="340" y="435" width="51" height="31"/>
                             </switch>
-                            <view contentMode="scaleToFill" id="1531" translatesAutoresizingMaskIntoConstraints="NO" customClass="CustomDropDown">
-                                <rect key="frame" x="16" y="120" width="343" height="40"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1531" customClass="CustomDropDown">
+                                <rect key="frame" x="20" y="120" width="374" height="40"/>
+                                <color key="backgroundColor" red="0.89411764705882357" green="0.51372549019607838" blue="0.51372549019607838" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
-                                    <constraint id="1532" firstItem="1531" firstAttribute="height" constant="40"/>
+                                    <constraint firstAttribute="height" constant="40" id="1532"/>
                                 </constraints>
-                                <color key="backgroundColor" colorSpace="calibratedRGB" red="0.89411764705882357" green="0.51372549019607838" blue="0.51372549019607838" alpha="1"/>
                             </view>
-                            <view contentMode="scaleToFill" id="1538" translatesAutoresizingMaskIntoConstraints="NO" customClass="CustomDropDown">
-                                <rect key="frame" x="16" y="165" width="343" height="40"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1538" customClass="CustomDropDown">
+                                <rect key="frame" x="20" y="165" width="374" height="40"/>
+                                <color key="backgroundColor" red="0.89411764705882357" green="0.51372549019607838" blue="0.51372549019607838" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
-                                    <constraint id="1539" firstItem="1538" firstAttribute="height" constant="40"/>
+                                    <constraint firstAttribute="height" constant="40" id="1539"/>
                                 </constraints>
-                                <color key="backgroundColor" colorSpace="calibratedRGB" red="0.89411764705882357" green="0.51372549019607838" blue="0.51372549019607838" alpha="1"/>
                             </view>
-                            <view contentMode="scaleToFill" id="1543" translatesAutoresizingMaskIntoConstraints="NO" customClass="CustomDropDown">
-                                <rect key="frame" x="16" y="210" width="343" height="40"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1543" customClass="CustomDropDown">
+                                <rect key="frame" x="20" y="210" width="374" height="40"/>
+                                <color key="backgroundColor" red="0.89411764705882357" green="0.51372549019607838" blue="0.51372549019607838" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
-                                    <constraint id="1544" firstItem="1543" firstAttribute="height" constant="40"/>
+                                    <constraint firstAttribute="height" constant="40" id="1544"/>
                                 </constraints>
-                                <color key="backgroundColor" colorSpace="calibratedRGB" red="0.89411764705882357" green="0.51372549019607838" blue="0.51372549019607838" alpha="1"/>
                             </view>
-                            <view contentMode="scaleToFill" id="1550" translatesAutoresizingMaskIntoConstraints="NO" customClass="CustomDropDown">
-                                <rect key="frame" x="16" y="255" width="343" height="40"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1550" customClass="CustomDropDown">
+                                <rect key="frame" x="20" y="255" width="374" height="40"/>
+                                <color key="backgroundColor" red="0.89411764705882357" green="0.51372549019607838" blue="0.51372549019607838" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
-                                    <constraint id="1551" firstItem="1550" firstAttribute="height" constant="40"/>
+                                    <constraint firstAttribute="height" constant="40" id="1551"/>
                                 </constraints>
-                                <color key="backgroundColor" colorSpace="calibratedRGB" red="0.89411764705882357" green="0.51372549019607838" blue="0.51372549019607838" alpha="1"/>
                             </view>
-                            <view contentMode="scaleToFill" id="1556" translatesAutoresizingMaskIntoConstraints="NO" customClass="CustomDropDown">
-                                <rect key="frame" x="16" y="300" width="343" height="40"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1556" customClass="CustomDropDown">
+                                <rect key="frame" x="20" y="300" width="374" height="40"/>
+                                <color key="backgroundColor" red="0.89411764705882357" green="0.51372549019607838" blue="0.51372549019607838" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
-                                    <constraint id="1557" firstItem="1556" firstAttribute="height" constant="40"/>
+                                    <constraint firstAttribute="height" constant="40" id="1557"/>
                                 </constraints>
-                                <color key="backgroundColor" colorSpace="calibratedRGB" red="0.89411764705882357" green="0.51372549019607838" blue="0.51372549019607838" alpha="1"/>
                             </view>
-                            <view contentMode="scaleToFill" id="1562" translatesAutoresizingMaskIntoConstraints="NO" customClass="CustomDropDown">
-                                <rect key="frame" x="16" y="345" width="343" height="40"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1562" customClass="CustomDropDown">
+                                <rect key="frame" x="20" y="345" width="374" height="40"/>
+                                <color key="backgroundColor" red="0.89411764705882357" green="0.51372549019607838" blue="0.51372549019607838" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
-                                    <constraint id="1563" firstItem="1562" firstAttribute="height" constant="40"/>
+                                    <constraint firstAttribute="height" constant="40" id="1563"/>
                                 </constraints>
-                                <color key="backgroundColor" colorSpace="calibratedRGB" red="0.89411764705882357" green="0.51372549019607838" blue="0.51372549019607838" alpha="1"/>
                             </view>
-                            <view contentMode="scaleToFill" id="1568" translatesAutoresizingMaskIntoConstraints="NO" customClass="CustomDropDown">
-                                <rect key="frame" x="16" y="390" width="343" height="40"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1568" customClass="CustomDropDown">
+                                <rect key="frame" x="20" y="390" width="374" height="40"/>
+                                <color key="backgroundColor" red="0.89411764705882357" green="0.51372549019607838" blue="0.51372549019607838" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
-                                    <constraint id="1569" firstItem="1568" firstAttribute="height" constant="40"/>
+                                    <constraint firstAttribute="height" constant="40" id="1569"/>
                                 </constraints>
-                                <color key="backgroundColor" colorSpace="calibratedRGB" red="0.89411764705882357" green="0.51372549019607838" blue="0.51372549019607838" alpha="1"/>
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="1531" firstAttribute="top" secondItem="3tm-k0-jzs" secondAttribute="bottom" constant="10" id="1534"/>
+                            <constraint firstItem="1531" firstAttribute="leading" secondItem="206" secondAttribute="leadingMargin" id="1535"/>
+                            <constraint firstItem="1531" firstAttribute="trailing" secondItem="206" secondAttribute="trailingMargin" id="1536"/>
+                            <constraint firstItem="1538" firstAttribute="top" secondItem="1531" secondAttribute="bottom" constant="5" id="1540"/>
+                            <constraint firstItem="1538" firstAttribute="leading" secondItem="206" secondAttribute="leadingMargin" id="1541"/>
+                            <constraint firstItem="1538" firstAttribute="trailing" secondItem="206" secondAttribute="trailingMargin" id="1542"/>
+                            <constraint firstItem="1543" firstAttribute="top" secondItem="1538" secondAttribute="bottom" constant="5" id="1545"/>
+                            <constraint firstItem="1543" firstAttribute="leading" secondItem="206" secondAttribute="leadingMargin" id="1546"/>
+                            <constraint firstItem="1543" firstAttribute="leading" secondItem="206" secondAttribute="leadingMargin" id="1547"/>
+                            <constraint firstItem="1543" firstAttribute="trailing" secondItem="206" secondAttribute="trailingMargin" id="1548"/>
+                            <constraint firstItem="1550" firstAttribute="top" secondItem="1543" secondAttribute="bottom" constant="5" id="1552"/>
+                            <constraint firstItem="1550" firstAttribute="leading" secondItem="206" secondAttribute="leadingMargin" id="1553"/>
+                            <constraint firstItem="1550" firstAttribute="trailing" secondItem="206" secondAttribute="trailingMargin" id="1554"/>
+                            <constraint firstItem="1556" firstAttribute="top" secondItem="1550" secondAttribute="bottom" constant="5" id="1558"/>
+                            <constraint firstItem="1556" firstAttribute="leading" secondItem="206" secondAttribute="leadingMargin" id="1559"/>
+                            <constraint firstItem="1556" firstAttribute="trailing" secondItem="206" secondAttribute="trailingMargin" id="1560"/>
+                            <constraint firstItem="1562" firstAttribute="top" secondItem="1556" secondAttribute="bottom" constant="5" id="1564"/>
+                            <constraint firstItem="1562" firstAttribute="leading" secondItem="206" secondAttribute="leadingMargin" id="1565"/>
+                            <constraint firstItem="1562" firstAttribute="trailing" secondItem="206" secondAttribute="trailingMargin" id="1566"/>
+                            <constraint firstItem="1568" firstAttribute="top" secondItem="1562" secondAttribute="bottom" constant="5" id="1570"/>
+                            <constraint firstItem="1568" firstAttribute="leading" secondItem="206" secondAttribute="leadingMargin" id="1571"/>
+                            <constraint firstItem="1568" firstAttribute="trailing" secondItem="206" secondAttribute="trailingMargin" id="1572"/>
+                            <constraint firstItem="BWn-Xd-vNd" firstAttribute="top" secondItem="1568" secondAttribute="bottom" constant="5" id="1574"/>
+                            <constraint firstItem="BWn-Xd-vNd" firstAttribute="trailing" secondItem="206" secondAttribute="trailingMargin" constant="-5" id="1576"/>
+                            <constraint firstItem="gZj-0n-rUa" firstAttribute="leading" secondItem="206" secondAttribute="leadingMargin" id="1579"/>
+                            <constraint firstItem="gZj-0n-rUa" firstAttribute="centerY" secondItem="BWn-Xd-vNd" secondAttribute="centerY" id="1580"/>
                             <constraint firstItem="JWS-tC-smw" firstAttribute="centerX" secondItem="206" secondAttribute="centerX" id="1kg-Uz-FgZ"/>
                             <constraint firstAttribute="trailing" secondItem="3tm-k0-jzs" secondAttribute="trailing" constant="16" id="2RW-ke-3nq"/>
                             <constraint firstItem="203" firstAttribute="top" secondItem="JWS-tC-smw" secondAttribute="bottom" constant="32" id="IOX-da-1dv"/>
                             <constraint firstItem="3tm-k0-jzs" firstAttribute="top" secondItem="202" secondAttribute="bottom" constant="20" id="buU-wo-kAg"/>
                             <constraint firstItem="3tm-k0-jzs" firstAttribute="leading" secondItem="206" secondAttribute="leading" constant="16" id="yiS-om-QRu"/>
-                            <constraint id="1534" firstItem="1531" firstAttribute="top" secondItem="3tm-k0-jzs" secondAttribute="bottom" constant="10"/>
-                            <constraint id="1535" firstItem="1531" firstAttribute="leading" secondItem="206" secondAttribute="leadingMargin"/>
-                            <constraint id="1536" firstItem="1531" firstAttribute="trailing" secondItem="206" secondAttribute="trailingMargin"/>
-                            <constraint id="1540" firstItem="1538" firstAttribute="top" secondItem="1531" secondAttribute="bottom" constant="5"/>
-                            <constraint id="1541" firstItem="1538" firstAttribute="leading" secondItem="206" secondAttribute="leadingMargin"/>
-                            <constraint id="1542" firstItem="1538" firstAttribute="trailing" secondItem="206" secondAttribute="trailingMargin"/>
-                            <constraint id="1545" firstItem="1543" firstAttribute="top" secondItem="1538" secondAttribute="bottom" constant="5"/>
-                            <constraint id="1546" firstItem="1543" firstAttribute="leading" secondItem="206" secondAttribute="leadingMargin"/>
-                            <constraint id="1547" firstItem="1543" firstAttribute="leading" secondItem="206" secondAttribute="leadingMargin"/>
-                            <constraint id="1548" firstItem="1543" firstAttribute="trailing" secondItem="206" secondAttribute="trailingMargin"/>
-                            <constraint id="1552" firstItem="1550" firstAttribute="top" secondItem="1543" secondAttribute="bottom" constant="5"/>
-                            <constraint id="1553" firstItem="1550" firstAttribute="leading" secondItem="206" secondAttribute="leadingMargin"/>
-                            <constraint id="1554" firstItem="1550" firstAttribute="trailing" secondItem="206" secondAttribute="trailingMargin"/>
-                            <constraint id="1558" firstItem="1556" firstAttribute="top" secondItem="1550" secondAttribute="bottom" constant="5"/>
-                            <constraint id="1559" firstItem="1556" firstAttribute="leading" secondItem="206" secondAttribute="leadingMargin"/>
-                            <constraint id="1560" firstItem="1556" firstAttribute="trailing" secondItem="206" secondAttribute="trailingMargin"/>
-                            <constraint id="1564" firstItem="1562" firstAttribute="top" secondItem="1556" secondAttribute="bottom" constant="5"/>
-                            <constraint id="1565" firstItem="1562" firstAttribute="leading" secondItem="206" secondAttribute="leadingMargin"/>
-                            <constraint id="1566" firstItem="1562" firstAttribute="trailing" secondItem="206" secondAttribute="trailingMargin"/>
-                            <constraint id="1570" firstItem="1568" firstAttribute="top" secondItem="1562" secondAttribute="bottom" constant="5"/>
-                            <constraint id="1571" firstItem="1568" firstAttribute="leading" secondItem="206" secondAttribute="leadingMargin"/>
-                            <constraint id="1572" firstItem="1568" firstAttribute="trailing" secondItem="206" secondAttribute="trailingMargin"/>
-                            <constraint id="1574" firstItem="BWn-Xd-vNd" firstAttribute="top" secondItem="1568" secondAttribute="bottom" constant="5"/>
-                            <constraint id="1576" firstItem="BWn-Xd-vNd" firstAttribute="trailing" secondItem="206" secondAttribute="trailingMargin" constant="-5"/>
-                            <constraint id="1579" firstItem="gZj-0n-rUa" firstAttribute="leading" secondItem="206" secondAttribute="leadingMargin"/>
-                            <constraint id="1580" firstItem="gZj-0n-rUa" firstAttribute="centerY" secondItem="BWn-Xd-vNd" secondAttribute="centerY"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="containerView" destination="3tm-k0-jzs" id="Jxg-Lu-Bqi"/>
+                        <outlet property="disabledTextColorDropDown" destination="1550" id="name-outlet-1550"/>
+                        <outlet property="enabledTextColorDropDown" destination="1543" id="name-outlet-1543"/>
+                        <outlet property="fontDropDown" destination="1538" id="name-outlet-1538"/>
+                        <outlet property="letterSpacingDropDown" destination="1562" id="name-outlet-1562"/>
+                        <outlet property="pressedTextColorDropDown" destination="1556" id="name-outlet-1556"/>
                         <outlet property="resetButton" destination="JWS-tC-smw" id="vya-F2-Cc7"/>
                         <outlet property="stateSwitch" destination="BWn-Xd-vNd" id="1sn-z1-bKs"/>
-                        <outlet property="themeDropDown" destination="1531" id="name-outlet-1531"/>
-                        <outlet property="fontDropDown" destination="1538" id="name-outlet-1538"/>
-                        <outlet property="enabledTextColorDropDown" destination="1543" id="name-outlet-1543"/>
-                        <outlet property="disabledTextColorDropDown" destination="1550" id="name-outlet-1550"/>
-                        <outlet property="pressedTextColorDropDown" destination="1556" id="name-outlet-1556"/>
-                        <outlet property="letterSpacingDropDown" destination="1562" id="name-outlet-1562"/>
                         <outlet property="textSizeDropDown" destination="1568" id="name-outlet-1568"/>
+                        <outlet property="themeDropDown" destination="1531" id="name-outlet-1531"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="207" userLabel="First Responder" sceneMemberID="firstResponder"/>

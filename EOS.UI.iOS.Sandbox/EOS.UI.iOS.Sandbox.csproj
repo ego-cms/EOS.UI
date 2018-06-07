@@ -27,6 +27,7 @@
     <MtouchArch>x86_64</MtouchArch>
     <MtouchHttpClientHandler>HttpClientHandler</MtouchHttpClientHandler>
     <PlatformTarget>x86</PlatformTarget>
+    <LangVersion>7.1</LangVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|iPhone' ">
     <DebugType>pdbonly</DebugType>
@@ -54,6 +55,7 @@
     <MtouchArch>x86_64</MtouchArch>
     <MtouchHttpClientHandler>HttpClientHandler</MtouchHttpClientHandler>
     <PlatformTarget>x86</PlatformTarget>
+    <LangVersion>7.1</LangVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|iPhone' ">
     <DebugSymbols>true</DebugSymbols>
@@ -169,28 +171,36 @@
     <InterfaceDefinition Include="Storyboards\CTAButtonView.storyboard" />
   </ItemGroup>
   <ItemGroup>
-    <InterfaceDefinition Include="Controls\CustomDropDown.xib" />
+    <InterfaceDefinition Include="Controls\EOSSandboxDropDown.xib" />
     <None Include="Info.plist" />
     <None Include="Entitlements.plist" />
     <InterfaceDefinition Include="Storyboards\SimpleLabelView.storyboard" />
     <InterfaceDefinition Include="Storyboards\SectionView.storyboard" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Controls\CustomDropDown.cs" />
-    <Compile Include="Controls\CustomDropDown.designer.cs">
-      <DependentUpon>CustomDropDown.cs</DependentUpon>
+    <Compile Include="Controls\EOSSandboxDropDown.cs" />
+    <Compile Include="Controls\EOSSandboxDropDown.designer.cs">
+      <DependentUpon>EOSSandboxDropDown.cs</DependentUpon>
     </Compile>
+    <Compile Include="Controls\EOSSandboxButton.cs" />
+    <Compile Include="Controls\EOSSandboxNavigationBar.cs" />
+    <Compile Include="Controls\EOSSandboxTableView.cs" />
+    <Compile Include="Controls\EOSSandboxView.cs" />
+    <Compile Include="Controls\EOSSandboxLabel.cs" />
     <Compile Include="Main.cs" />
     <Compile Include="AppDelegate.cs" />
     <Compile Include="Storyboards\SectionComponentView.cs" />
     <Compile Include="Storyboards\SectionComponentView.designer.cs">
       <DependentUpon>SectionComponentView.cs</DependentUpon>
     </Compile>
+    <Compile Include="Styles\EOSSandboxDarkStyle.cs" />
+    <Compile Include="Styles\EOSSandboxLightStyle.cs" />
+    <Compile Include="Styles\EOSSandboxStyleProvider.cs" />
     <Compile Include="TableSources\SectionTableSource.cs" />
     <Compile Include="TableSources\ControlTableSource.cs" />
-    <Compile Include="Storyboards\ViewController.cs" />
-    <Compile Include="Storyboards\ViewController.designer.cs">
-      <DependentUpon>ViewController.cs</DependentUpon>
+    <Compile Include="Storyboards\MainViewController.cs" />
+    <Compile Include="Storyboards\MainViewController.designer.cs">
+      <DependentUpon>MainViewController.cs</DependentUpon>
     </Compile>
     <Compile Include="Storyboards\BaseViewController.cs" />
     <Compile Include="Storyboards\SimpleButtonView.cs" />

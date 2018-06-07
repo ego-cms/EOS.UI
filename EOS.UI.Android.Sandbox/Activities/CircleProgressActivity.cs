@@ -6,17 +6,15 @@ using Android.Graphics;
 using Android.OS;
 using Android.Widget;
 using EOS.UI.Android.Controls;
-using EOS.UI.Android.Sandbox.Adapters;
 using EOS.UI.Android.Sandbox.Controls;
 using EOS.UI.Android.Sandbox.Helpers;
 using EOS.UI.Shared.Themes.Themes;
 using UIFrameworks.Shared.Themes.Helpers;
 using static EOS.UI.Android.Sandbox.Helpers.Constants;
-using R = Android.Resource;
 
 namespace EOS.UI.Android.Sandbox.Activities
 {
-    [Activity(Label = ControlNames.CircleProgress)]
+    [Activity(Label = ControlNames.CircleProgress, Theme = "@style/Sandbox.Main")]
     public class CircleProgressActivity : BaseActivity
     {
 
@@ -25,15 +23,15 @@ namespace EOS.UI.Android.Sandbox.Activities
             base.OnCreate(savedInstanceState);
             SetContentView(Resource.Layout.CircleProgressLayout);
             var circleProgressFragment = FindViewById<CircleProgress>(Resource.Id.circleProgress);
-            var themeDropDown = FindViewById<SandboxDropDown>(Resource.Id.themeDropDown);
-            var colorDropDown = FindViewById<SandboxDropDown>(Resource.Id.colorDropDown);
-            var alternativeColorDropDown = FindViewById<SandboxDropDown>(Resource.Id.alternativeColorDropDown);
-            var backgroundColorDropDown = FindViewById<SandboxDropDown>(Resource.Id.backgroundColorDropDown);
-            var fontDropDown = FindViewById<SandboxDropDown>(Resource.Id.fontDropDown);
-            var textSizeDropDown = FindViewById<SandboxDropDown>(Resource.Id.textSizeDropDown);
+            var themeDropDown = FindViewById<EOSSandboxDropDown>(Resource.Id.themeDropDown);
+            var colorDropDown = FindViewById<EOSSandboxDropDown>(Resource.Id.colorDropDown);
+            var alternativeColorDropDown = FindViewById<EOSSandboxDropDown>(Resource.Id.alternativeColorDropDown);
+            var fontDropDown = FindViewById<EOSSandboxDropDown>(Resource.Id.fontDropDown);
+            var textSizeDropDown = FindViewById<EOSSandboxDropDown>(Resource.Id.textSizeDropDown);
+            var backgroundColorDropDown = FindViewById<EOSSandboxDropDown>(Resource.Id.backgroundColorDropDown);
             var showProgressSwitch = FindViewById<Switch>(Resource.Id.showProgressSwitch);
             var resetButton = FindViewById<Button>(Resource.Id.buttonResetCustomization);
-            var spinners = new List<SandboxDropDown>()
+            var spinners = new List<EOSSandboxDropDown>()
             {
                 themeDropDown,
                 colorDropDown,
@@ -74,6 +72,7 @@ namespace EOS.UI.Android.Sandbox.Activities
                     circleProgressFragment.GetThemeProvider().SetCurrentTheme(ThemeTypes.ThemeCollection.ElementAt(position).Value);
                     circleProgressFragment.ResetCustomization();
                     spinners.Except(new[] { themeDropDown }).ToList().ForEach(s => s.SetSpinnerSelection(0));
+                    UpdateApperaence();
                 }
             };
 

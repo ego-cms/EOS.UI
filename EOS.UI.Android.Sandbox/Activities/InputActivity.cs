@@ -14,25 +14,25 @@ using A = Android;
 
 namespace EOS.UI.Android.Sandbox.Activities
 {
-    [Activity(Label = ControlNames.Input)]
+    [Activity(Label = ControlNames.Input, Theme = "@style/Sandbox.Main")]
     public class InputActivity : BaseActivity, IOnCheckedChangeListener
     {
         private Input _inputTop;
         private Input _inputBottom;
-        private SandboxDropDown _themeDropDown;
-        private SandboxDropDown _fontDropDown;
-        private SandboxDropDown _letterSpacingDropDown;
-        private SandboxDropDown _textSizeDropDown;
-        private SandboxDropDown _textColorDropDown;
-        private SandboxDropDown _textColorDisabledDropDown;
-        private SandboxDropDown _hintTextColorDropDown;
-        private SandboxDropDown _hintTextColorDisabledDropDown;
-        private SandboxDropDown _leftDrawableFocusedDropDown;
-        private SandboxDropDown _leftDrawableUnfocusedDropDown;
-        private SandboxDropDown _leftDrawableDisabledDropDown;
-        private SandboxDropDown _underlineColorFocusedDropDown;
-        private SandboxDropDown _underlineColorUnfocusedDropDown;
-        private SandboxDropDown _underlineColorDisabledDropDown;
+        private EOSSandboxDropDown _themeDropDown;
+        private EOSSandboxDropDown _fontDropDown;
+        private EOSSandboxDropDown _letterSpacingDropDown;
+        private EOSSandboxDropDown _textSizeDropDown;
+        private EOSSandboxDropDown _textColorDropDown;
+        private EOSSandboxDropDown _textColorDisabledDropDown;
+        private EOSSandboxDropDown _hintTextColorDropDown;
+        private EOSSandboxDropDown _hintTextColorDisabledDropDown;
+        private EOSSandboxDropDown _leftDrawableFocusedDropDown;
+        private EOSSandboxDropDown _leftDrawableUnfocusedDropDown;
+        private EOSSandboxDropDown _leftDrawableDisabledDropDown;
+        private EOSSandboxDropDown _underlineColorFocusedDropDown;
+        private EOSSandboxDropDown _underlineColorUnfocusedDropDown;
+        private EOSSandboxDropDown _underlineColorDisabledDropDown;
         private Switch _disabledSwitch;
 
         protected override void OnCreate(Bundle savedInstanceState)
@@ -45,20 +45,20 @@ namespace EOS.UI.Android.Sandbox.Activities
             _inputBottom = FindViewById<Input>(Resource.Id.inputBottom);
             _inputBottom.UpdateAppearance();
 
-            _themeDropDown = FindViewById<SandboxDropDown>(Resource.Id.themeDropDown);
-            _fontDropDown = FindViewById<SandboxDropDown>(Resource.Id.fontDropDown);
-            _letterSpacingDropDown = FindViewById<SandboxDropDown>(Resource.Id.letterSpacingDropDown);
-            _textSizeDropDown = FindViewById<SandboxDropDown>(Resource.Id.textSizeDropDown);
-            _textColorDropDown = FindViewById<SandboxDropDown>(Resource.Id.textColorDropDown);
-            _textColorDisabledDropDown = FindViewById<SandboxDropDown>(Resource.Id.disabledTextColorDropDown);
-            _hintTextColorDropDown = FindViewById<SandboxDropDown>(Resource.Id.hintTextColorDropDown);
-            _hintTextColorDisabledDropDown = FindViewById<SandboxDropDown>(Resource.Id.disabledHintTextColorDropDown);
-            _leftDrawableFocusedDropDown = FindViewById<SandboxDropDown>(Resource.Id.focusedIconDropDown);
-            _leftDrawableUnfocusedDropDown = FindViewById<SandboxDropDown>(Resource.Id.unfocusedIconDropDown);
-            _leftDrawableDisabledDropDown = FindViewById<SandboxDropDown>(Resource.Id.disabledIconDropDown);
-            _underlineColorFocusedDropDown = FindViewById<SandboxDropDown>(Resource.Id.focusedUnderlineColorDropDown);
-            _underlineColorUnfocusedDropDown = FindViewById<SandboxDropDown>(Resource.Id.unfocusedUnderlineColorDropDown);
-            _underlineColorDisabledDropDown = FindViewById<SandboxDropDown>(Resource.Id.disabledUnderlineColorDropDown);
+            _themeDropDown = FindViewById<EOSSandboxDropDown>(Resource.Id.themeDropDown);
+            _fontDropDown = FindViewById<EOSSandboxDropDown>(Resource.Id.fontDropDown);
+            _letterSpacingDropDown = FindViewById<EOSSandboxDropDown>(Resource.Id.letterSpacingDropDown);
+            _textSizeDropDown = FindViewById<EOSSandboxDropDown>(Resource.Id.textSizeDropDown);
+            _textColorDropDown = FindViewById<EOSSandboxDropDown>(Resource.Id.textColorDropDown);
+            _textColorDisabledDropDown = FindViewById<EOSSandboxDropDown>(Resource.Id.disabledTextColorDropDown);
+            _hintTextColorDropDown = FindViewById<EOSSandboxDropDown>(Resource.Id.hintTextColorDropDown);
+            _hintTextColorDisabledDropDown = FindViewById<EOSSandboxDropDown>(Resource.Id.disabledHintTextColorDropDown);
+            _leftDrawableFocusedDropDown = FindViewById<EOSSandboxDropDown>(Resource.Id.focusedIconDropDown);
+            _leftDrawableUnfocusedDropDown = FindViewById<EOSSandboxDropDown>(Resource.Id.unfocusedIconDropDown);
+            _leftDrawableDisabledDropDown = FindViewById<EOSSandboxDropDown>(Resource.Id.disabledIconDropDown);
+            _underlineColorFocusedDropDown = FindViewById<EOSSandboxDropDown>(Resource.Id.focusedUnderlineColorDropDown);
+            _underlineColorUnfocusedDropDown = FindViewById<EOSSandboxDropDown>(Resource.Id.unfocusedUnderlineColorDropDown);
+            _underlineColorDisabledDropDown = FindViewById<EOSSandboxDropDown>(Resource.Id.disabledUnderlineColorDropDown);
             var resetButton = FindViewById<Button>(Resource.Id.buttonResetCustomization);
             _disabledSwitch = FindViewById<Switch>(Resource.Id.switchDisabled);
 
@@ -144,6 +144,7 @@ namespace EOS.UI.Android.Sandbox.Activities
             {
                 _inputTop.GetThemeProvider().SetCurrentTheme(ThemeTypes.ThemeCollection.ElementAt(position).Value);
                 ResetCustomValues();
+                UpdateApperaence();
             }
         }
 

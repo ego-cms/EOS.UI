@@ -12,7 +12,7 @@ using static EOS.UI.Android.Sandbox.Helpers.Constants;
 
 namespace EOS.UI.Android.Sandbox.Activities
 {
-    [Activity(Label = ControlNames.FabProgress)]
+    [Activity(Label = ControlNames.FabProgress, Theme = "@style/Sandbox.Main")]
     public class FabProgressActivity : BaseActivity
     {
         protected override void OnCreate(Bundle savedInstanceState)
@@ -21,11 +21,11 @@ namespace EOS.UI.Android.Sandbox.Activities
             SetContentView(Resource.Layout.FabProgressLayout);
 
             var fab = FindViewById<FabProgress>(Resource.Id.fabProgress);
-            var themeDropDown = FindViewById<SandboxDropDown>(Resource.Id.themeDropDown);
-            var backgroundColorDropDown = FindViewById<SandboxDropDown>(Resource.Id.backgroundDropDown);
-            var disabledColorDropDown = FindViewById<SandboxDropDown>(Resource.Id.disabledColorDropDown);
-            var pressedColorDropDown = FindViewById<SandboxDropDown>(Resource.Id.pressedColorDropDown);
-            var sizeDropDown = FindViewById<SandboxDropDown>(Resource.Id.sizeDropDown);
+            var themeDropDown = FindViewById<EOSSandboxDropDown>(Resource.Id.themeDropDown);
+            var backgroundColorDropDown = FindViewById<EOSSandboxDropDown>(Resource.Id.backgroundDropDown);
+            var disabledColorDropDown = FindViewById<EOSSandboxDropDown>(Resource.Id.disabledColorDropDown);
+            var pressedColorDropDown = FindViewById<EOSSandboxDropDown>(Resource.Id.pressedColorDropDown);
+            var sizeDropDown = FindViewById<EOSSandboxDropDown>(Resource.Id.sizeDropDown);
             var stateSwitch = FindViewById<Switch>(Resource.Id.stateSwitch);
             var resetButton = FindViewById<Button>(Resource.Id.buttonResetCustomization);
             fab.Click += async (sender, e) =>
@@ -41,7 +41,7 @@ namespace EOS.UI.Android.Sandbox.Activities
                 resetButton.Enabled = true;
             };
 
-            var spinners = new List<SandboxDropDown>()
+            var spinners = new List<EOSSandboxDropDown>()
             {
                 themeDropDown,
                 disabledColorDropDown,
@@ -59,6 +59,7 @@ namespace EOS.UI.Android.Sandbox.Activities
                     fab.GetThemeProvider().SetCurrentTheme(ThemeTypes.ThemeCollection.ElementAt(position).Value);
                     fab.ResetCustomization();
                     spinners.Except(new[] { themeDropDown }).ToList().ForEach(s => s.SetSpinnerSelection(0));
+                    UpdateApperaence();
                 }
             };
             var theme = fab.GetThemeProvider().GetCurrentTheme();

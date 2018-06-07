@@ -19,7 +19,7 @@ namespace EOS.UI.iOS.Sandbox
         private Input _inputTop;
         private Input _inputBotton;
 
-        private List<CustomDropDown> _dropDowns;
+        private List<EOSSandboxDropDown> _dropDowns;
 
         public InputControlView (IntPtr handle) : base (handle)
         {
@@ -38,7 +38,7 @@ namespace EOS.UI.iOS.Sandbox
             _inputBotton.Placeholder = "Enter text";
             _inputBotton.UpdateAppearance();
 
-            _dropDowns = new List<CustomDropDown>()
+            _dropDowns = new List<EOSSandboxDropDown>()
             {
                 themeDropDown,
                 fontDropDown,
@@ -118,6 +118,7 @@ namespace EOS.UI.iOS.Sandbox
                     _inputTop.ResetCustomization();
                     _inputBotton.ResetCustomization();
                     _dropDowns.Except(new[] { themeDropDown }).ToList().ForEach(dropDown => dropDown.ResetValue());
+                    UpdateApperaence();
                 },
                 Fields.Theme,
                 rect);
