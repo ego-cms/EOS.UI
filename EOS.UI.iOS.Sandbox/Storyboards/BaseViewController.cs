@@ -5,17 +5,15 @@ using UIKit;
 
 namespace EOS.UI.iOS.Sandbox.Storyboards
 {
-    public abstract class BaseViewController: UIViewController
+    public abstract class BaseViewController : UIViewController
     {
-        public BaseViewController(IntPtr intPtr): base(intPtr) { }
+        public BaseViewController(IntPtr intPtr) : base(intPtr) { }
 
-		public override void ViewWillAppear(bool animated)
-		{
+        public override void ViewWillAppear(bool animated)
+        {
             base.ViewWillAppear(animated);
             NavigationController.SetNavigationBarHidden(false, false);
-
-
             View.BackgroundColor = Constants.BackgroundColor;
-		}
-	}
+        }
+    }
 }

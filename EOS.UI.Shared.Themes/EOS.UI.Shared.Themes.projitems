@@ -19,9 +19,11 @@
     <Compile Include="$(MSBuildThisFileDirectory)Helpers\ShadowConfig.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Themes\DarkEOSTheme.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Extensions\ColorExtension.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)DataModels\WorkTimeCalendarItem.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="$(MSBuildThisFileDirectory)Themes\" />
     <Folder Include="$(MSBuildThisFileDirectory)Extensions\" />
+    <Folder Include="$(MSBuildThisFileDirectory)DataModels\" />
   </ItemGroup>
 </Project>

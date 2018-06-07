@@ -52,5 +52,6 @@
         public const string CircleProgress = "Circle progress";
         public const string Section = "Section";
         public const string CTAButton = "CTA Button";
+        public const string WorkTimeCalendar = "Work time calendar";
     }
 }
