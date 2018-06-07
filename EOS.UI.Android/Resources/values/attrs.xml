@@ -3,17 +3,71 @@
     <declare-styleable name="BadgeLabel">
         <attr name="eos_background" format="reference|color"/>
         <attr name="eos_font" format="string"/>
-        <attr name="eos_letter_spacing" format="integer"/>
+        <attr name="eos_letter_spacing" format="float"/>
         <attr name="eos_text_color" format="reference|color"/>
-        <attr name="eos_text_size" format="integer"/>
-        <attr name="eos_corner_radius" format="integer"/>
+        <attr name="eos_text_size" format="float"/>
+        <attr name="eos_corner_radius" format="float"/>
+    </declare-styleable>
+    <declare-styleable name="SimpleLabel">
+        <attr name="eos_font" format="string"/>
+        <attr name="eos_letter_spacing" format="float"/>
+        <attr name="eos_text_color" format="reference|color"/>
+        <attr name="eos_text_size" format="float"/>
     </declare-styleable>
     <declare-styleable name="CircleProgress">
         <attr name="eos_color" format="reference|color"/>
         <attr name="eos_alternative_color" format="reference|color"/>
         <attr name="eos_fill_color" format="reference|color"/>
-        <attr name="eos_show_progress" format="integer"/>
+        <attr name="eos_show_progress" format="boolean"/>
         <attr name="eos_font" format="string"/>
-        <attr name="eos_text_size" format="integer"/>
+        <attr name="eos_text_size" format="float"/>
+    </declare-styleable>
+    <declare-styleable name="FabProgress">
+        <attr name="eos_enabled" format="boolean"/>
+        <attr name="eos_background_color" format="reference|color"/>
+        <attr name="eos_disabled_background_color" format="reference|color"/>
+        <attr name="eos_pressed_background_color" format="reference|color"/>
+        <attr name="eos_button_size" format="integer"/>
+        <attr name="eos_image" format="reference"/>
+        <attr name="eos_preloader_image" format="reference"/>
+    </declare-styleable>
+    <declare-styleable name="SimpleButton">
+        <attr name="eos_background" format="reference|color"/>
+        <attr name="eos_disabled_background_color" format="reference|color"/>
+        <attr name="eos_pressed_background_color" format="reference|color"/>
+        <attr name="eos_font" format="string"/>
+        <attr name="eos_letter_spacing" format="float"/>
+        <attr name="eos_text_color" format="reference|color"/>
+        <attr name="eos_disabled_text_color" format="reference|color"/>
+        <attr name="eos_pressed_text_color" format="reference|color"/>
+        <attr name="eos_text_size" format="float"/>
+        <attr name="eos_corner_radius" format="float"/>
+        <attr name="eos_enabled" format="boolean"/>
+        <attr name="eos_preloader_image" format="reference"/>
+    </declare-styleable>
+    <declare-styleable name="GhostButton">
+        <attr name="eos_font" format="string"/>
+        <attr name="eos_letter_spacing" format="float"/>
+        <attr name="eos_text_color" format="reference|color"/>
+        <attr name="eos_disabled_text_color" format="reference|color"/>
+        <attr name="eos_pressed_text_color" format="reference|color"/>
+        <attr name="eos_text_size" format="float"/>
+        <attr name="eos_enabled" format="boolean"/>
+    </declare-styleable>
+    <declare-styleable name="Input">
+        <attr name="eos_underline_color_focused" format="reference|color"/>
+        <attr name="eos_underline_color_unfocused" format="reference|color"/>
+        <attr name="eos_underline_color_disabled" format="reference|color"/>
+        <attr name="eos_text_color" format="reference|color"/>
+        <attr name="eos_disabled_text_color" format="reference|color"/>
+        <attr name="eos_hint_text_color" format="reference|color"/>
+        <attr name="eos_disabled_hint_text_color" format="reference|color"/>
+        <attr name="eos_left_image_focused" format="reference"/>
+        <attr name="eos_left_image_unfocused" format="reference"/>
+        <attr name="eos_left_image_disabled" format="reference"/>
+        <attr name="eos_font" format="string"/>
+        <attr name="eos_letter_spacing" format="float"/>
+        <attr name="eos_text_size" format="float"/>
+        <attr name="eos_enabled" format="boolean"/>
     </declare-styleable>
 </resources>

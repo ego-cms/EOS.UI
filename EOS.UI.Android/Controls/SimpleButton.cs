@@ -216,14 +216,64 @@ namespace EOS.UI.Android.Controls
             Background = CreateRippleDrawable(BackgroundColor);
             SetLines(1);
             Ellipsize = TextUtils.TruncateAt.End;
-            UpdateAppearance();
+
             if(attrs != null)
                 InitializeAttributes(attrs);
+
+            UpdateAppearance();
         }
 
         private void InitializeAttributes(IAttributeSet attrs)
         {
-            //TODO: Implement set attrs logic
+            var styledAttributes = Context.ObtainStyledAttributes(attrs, Resource.Styleable.SimpleButton, 0, 0);
+
+            var backgroundColor = styledAttributes.GetColor(Resource.Styleable.SimpleButton_eos_background, Color.Transparent);
+            if(backgroundColor != Color.Transparent)
+                BackgroundColor = backgroundColor;
+
+            var disabledBackgroundColor = styledAttributes.GetColor(Resource.Styleable.SimpleButton_eos_disabled_background_color, Color.Transparent);
+            if(disabledBackgroundColor != Color.Transparent)
+                DisabledBackgroundColor = disabledBackgroundColor;
+
+            var pressedBackgroundColor = styledAttributes.GetColor(Resource.Styleable.SimpleButton_eos_pressed_background_color, Color.Transparent);
+            if(pressedBackgroundColor != Color.Transparent)
+                PressedBackgroundColor = pressedBackgroundColor;
+
+            var font = styledAttributes.GetString(Resource.Styleable.SimpleButton_eos_font);
+            if(!string.IsNullOrEmpty(font))
+                Typeface = Typeface.CreateFromAsset(Context.Assets, font);
+
+            var letterSpacing = styledAttributes.GetFloat(Resource.Styleable.SimpleButton_eos_letter_spacing, -1);
+            if(letterSpacing > 0)
+                LetterSpacing = letterSpacing;
+
+            var textColor = styledAttributes.GetColor(Resource.Styleable.SimpleButton_eos_text_color, Color.Transparent);
+            if(textColor != Color.Transparent)
+                TextColor = textColor;
+
+            var disabledTextColor = styledAttributes.GetColor(Resource.Styleable.SimpleButton_eos_disabled_text_color, Color.Transparent);
+            if(disabledTextColor != Color.Transparent)
+                DisabledTextColor = disabledTextColor;
+
+            var pressedTextColor = styledAttributes.GetColor(Resource.Styleable.SimpleButton_eos_pressed_text_color, Color.Transparent);
+            if(pressedTextColor != Color.Transparent)
+                PressedTextColor = pressedTextColor;
+
+            var textSize = styledAttributes.GetFloat(Resource.Styleable.SimpleButton_eos_text_size, -1);
+            if(textSize > 0)
+                TextSize = textSize;
+
+            var cornerRadius = styledAttributes.GetFloat(Resource.Styleable.SimpleButton_eos_corner_radius, -1);
+            if(cornerRadius > 0)
+                CornerRadius = cornerRadius;
+
+            var preloaderImage = styledAttributes.GetDrawable(Resource.Styleable.SimpleButton_eos_preloader_image);
+            if(preloaderImage != null)
+                PreloaderImage = preloaderImage;
+
+            var enabled = styledAttributes.GetBoolean(Resource.Styleable.SimpleButton_eos_enabled, true);
+            if(!enabled)
+                Enabled = enabled;
         }
 
         private Drawable CreateRippleDrawable(Color contentColor)

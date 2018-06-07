@@ -226,7 +226,6 @@ namespace EOS.UI.Android.Controls
             }
         }
 
-
         public override void SetTextColor(Color color)
         {
             TextColor = color;
@@ -264,9 +263,64 @@ namespace EOS.UI.Android.Controls
 
         private void InitializeAttributes(IAttributeSet attrs)
         {
-            //TODO: Implement set attrs logic
-        }
+            var styledAttributes = Context.ObtainStyledAttributes(attrs, Resource.Styleable.Input, 0, 0);
 
+            var underLineColorFocused = styledAttributes.GetColor(Resource.Styleable.Input_eos_underline_color_focused, Color.Transparent);
+            if(underLineColorFocused != Color.Transparent)
+                UnderlineColorFocused = underLineColorFocused;
+
+            var underLineColorUnfocused = styledAttributes.GetColor(Resource.Styleable.Input_eos_underline_color_unfocused, Color.Transparent);
+            if(underLineColorUnfocused != Color.Transparent)
+                UnderlineColorUnfocused = underLineColorUnfocused;
+
+            var underLineColorDisabled = styledAttributes.GetColor(Resource.Styleable.Input_eos_underline_color_disabled, Color.Transparent);
+            if(underLineColorDisabled != Color.Transparent)
+                UnderlineColorDisabled = underLineColorDisabled;
+
+            var textColor = styledAttributes.GetColor(Resource.Styleable.Input_eos_text_color, Color.Transparent);
+            if(textColor != Color.Transparent)
+                TextColor = textColor;
+
+            var disabledTextColor = styledAttributes.GetColor(Resource.Styleable.Input_eos_disabled_text_color, Color.Transparent);
+            if(disabledTextColor != Color.Transparent)
+                TextColorDisabled = disabledTextColor;
+
+            var hintTextColor = styledAttributes.GetColor(Resource.Styleable.Input_eos_hint_text_color, Color.Transparent);
+            if(hintTextColor != Color.Transparent)
+                HintTextColor = hintTextColor;
+
+            var disabledHintTextColor = styledAttributes.GetColor(Resource.Styleable.Input_eos_disabled_hint_text_color, Color.Transparent);
+            if(disabledHintTextColor != Color.Transparent)
+                HintTextColorDisabled = disabledHintTextColor;
+
+            var imageFocused = styledAttributes.GetDrawable(Resource.Styleable.Input_eos_left_image_focused);
+            if(imageFocused != null)
+                LeftImageFocused = imageFocused;
+
+            var imageUnfocused = styledAttributes.GetDrawable(Resource.Styleable.Input_eos_left_image_unfocused);
+            if(imageUnfocused != null)
+                LeftImageUnfocused = imageUnfocused;
+
+            var imageDisabled = styledAttributes.GetDrawable(Resource.Styleable.Input_eos_left_image_disabled);
+            if(imageDisabled != null)
+                LeftImageDisabled = imageDisabled;
+
+            var font = styledAttributes.GetString(Resource.Styleable.Input_eos_font);
+            if(!string.IsNullOrEmpty(font))
+                Typeface = Typeface.CreateFromAsset(Context.Assets, font);
+
+            var letterSpacing = styledAttributes.GetFloat(Resource.Styleable.Input_eos_letter_spacing, -1);
+            if(letterSpacing > 0)
+                LetterSpacing = letterSpacing;
+
+            var textSize = styledAttributes.GetFloat(Resource.Styleable.Input_eos_text_size, -1);
+            if(textSize > 0)
+                TextSize = textSize;
+
+            var enabled = styledAttributes.GetBoolean(Resource.Styleable.Input_eos_enabled, true);
+            if(!enabled)
+                Enabled = enabled;
+        }
 
         private void UpdateEnabledState(bool enabled)
         {

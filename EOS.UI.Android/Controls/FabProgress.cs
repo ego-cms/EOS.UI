@@ -141,11 +141,48 @@ namespace EOS.UI.Android.Controls
             Initialize();
         }
 
-        private void Initialize()
+        private void Initialize(IAttributeSet attrs = null)
         {
             _rotationAnimation = AnimationUtils.LoadAnimation(Application.Context, Resource.Animation.FabRotationAnimation);
+
+            if(attrs != null)
+                InitializeAttributes(attrs);
+
             UpdateAppearance();
             Elevation = 10f;
+        }
+
+        private void InitializeAttributes(IAttributeSet attrs)
+        {
+            var styledAttributes = Context.ObtainStyledAttributes(attrs, Resource.Styleable.FabProgress, 0, 0);
+
+            var backgroundColor = styledAttributes.GetColor(Resource.Styleable.FabProgress_eos_background_color, Color.Transparent);
+            if(backgroundColor != Color.Transparent)
+                BackgroundColor = backgroundColor;
+
+            var disabledBackgroundColor = styledAttributes.GetColor(Resource.Styleable.FabProgress_eos_disabled_background_color, Color.Transparent);
+            if(disabledBackgroundColor != Color.Transparent)
+                DisabledBackgroundColor = disabledBackgroundColor;
+
+            var pressedBackgroundColor = styledAttributes.GetColor(Resource.Styleable.FabProgress_eos_pressed_background_color, Color.Transparent);
+            if(pressedBackgroundColor != Color.Transparent)
+                PressedBackgroundColor = pressedBackgroundColor;
+
+            var buttonSize = styledAttributes.GetInt(Resource.Styleable.FabProgress_eos_button_size, -1);
+            if(buttonSize > 0)
+                ButtonSize = buttonSize;
+
+            var image = styledAttributes.GetDrawable(Resource.Styleable.FabProgress_eos_image);
+            if(image != null)
+                Image = image;
+
+            var preloaderImage = styledAttributes.GetDrawable(Resource.Styleable.FabProgress_eos_preloader_image);
+            if(preloaderImage != null)
+                PreloaderImage = preloaderImage;
+
+            var enabled = styledAttributes.GetBoolean(Resource.Styleable.FabProgress_eos_enabled, true);
+            if(!enabled)
+                Enabled = enabled;
         }
 
         public IEOSStyle GetCurrentEOSStyle()
