@@ -15,7 +15,7 @@ namespace EOS.UI.iOS.Sandbox
     public partial class FabProgressView : BaseViewController
     {
         public const string Identifier = "FabProgressView";
-        private List<CustomDropDown> _dropDowns;
+        private List<EOSSandboxDropDown> _dropDowns;
         private FabProgress _fab;
 
         public FabProgressView(IntPtr handle) : base(handle)
@@ -42,7 +42,7 @@ namespace EOS.UI.iOS.Sandbox
             UpdateFrame();
             containerView.AddSubview(_fab);
 
-            _dropDowns = new List<CustomDropDown>()
+            _dropDowns = new List<EOSSandboxDropDown>()
             {
                 backgroundDropDown,
                 themeDropDown,
@@ -65,6 +65,7 @@ namespace EOS.UI.iOS.Sandbox
                     _fab.GetThemeProvider().SetCurrentTheme(theme);
                     _fab.ResetCustomization();
                     _dropDowns.Except(new[] { themeDropDown }).ToList().ForEach(dropDown => dropDown.ResetValue());
+                    UpdateApperaence();
                 },
                 Fields.Theme,
                 rect);

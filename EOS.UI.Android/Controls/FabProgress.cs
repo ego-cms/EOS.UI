@@ -280,7 +280,7 @@ namespace EOS.UI.Android.Controls
         {
             if (LayoutParameters == null)
                 return;
-            
+
             SetImageDrawable(null);
 
             var paddings = _initialWidth / 2;
@@ -291,12 +291,27 @@ namespace EOS.UI.Android.Controls
             layers[_backgroundLayerIndex] = CreateBackgroundDrawable();
             layers[_imageLayerIndex] = Image;
 
-            LayerDrawable layerList = new LayerDrawable(layers);
+            var densityOffsetX = (int)Helpers.Helpers.DpToPx(config.Offset.X);
+            var densityOffsetY = (int)Helpers.Helpers.DpToPx(config.Offset.Y);
+            var densityOffsetBlur = config.Blur;//(int)Helpers.Helpers.DpToPx(config.Blur);
+
+            var layerList = CreateLayerList(layers);
             layerList.SetLayerInset(_shadowLayerIndex, 0, 0, 0, 0);
-            layerList.SetLayerInset(_backgroundLayerIndex, 0 - config.Offset.X + config.Blur, config.Offset.Y + config.Blur, config.Offset.X + config.Blur, 0 - config.Offset.Y + config.Blur);
+            //layerList.SetLayerInset(_backgroundLayerIndex, 0 - config.Offset.X + config.Blur, config.Offset.Y + config.Blur, config.Offset.X + config.Blur, 0 - config.Offset.Y + config.Blur);
+            layerList.SetLayerInset(_backgroundLayerIndex, 0 - densityOffsetX + densityOffsetBlur, densityOffsetY + densityOffsetBlur, densityOffsetX + densityOffsetBlur, 0 - densityOffsetY + densityOffsetBlur);
             SetInsetForImageLayer(layerList, Image, paddings, config.Offset);
 
             Background = layerList;
+        }
+
+        private LayerDrawable CreateLayerList(Drawable[] layers)
+        {
+            //Should add ids for compatibility with API <21
+            var ls = new LayerDrawable(layers);
+            ls.SetId(_shadowLayerIndex, _shadowLayerIndex);
+            ls.SetId(_backgroundLayerIndex, _backgroundLayerIndex);
+            ls.SetId(_imageLayerIndex, _imageLayerIndex);
+            return ls;
         }
 
         private GradientDrawable CreateBackgroundDrawable()
@@ -347,8 +362,8 @@ namespace EOS.UI.Android.Controls
             var layer = Background as LayerDrawable;
             if (HasShadowDrawable(layer))
             {
-                layer.SetDrawable(_imageLayerIndex, drawable);
-                layer.SetLayerSize(_imageLayerIndex, drawable.IntrinsicWidth, drawable.IntrinsicHeight);
+                //Should use this method instead of GetDrawable for compatibility with API <23
+                layer.SetDrawableByLayerId(_imageLayerIndex, drawable);
                 SetInsetForImageLayer(layer, drawable, Width / 2, ShadowConfig.Offset);
                 layer.Mutate();
                 layer.InvalidateSelf();

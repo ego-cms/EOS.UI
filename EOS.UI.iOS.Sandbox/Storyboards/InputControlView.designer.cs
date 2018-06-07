@@ -23,47 +23,47 @@ namespace EOS.UI.iOS.Sandbox
 
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
-        EOS.UI.iOS.Sandbox.CustomDropDown disabledHintTextColorDropDown { get; set; }
+        EOS.UI.iOS.Sandbox.EOSSandboxDropDown disabledHintTextColorDropDown { get; set; }
 
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
-        EOS.UI.iOS.Sandbox.CustomDropDown disabledIconDropDown { get; set; }
+        EOS.UI.iOS.Sandbox.EOSSandboxDropDown disabledIconDropDown { get; set; }
 
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
-        EOS.UI.iOS.Sandbox.CustomDropDown disabledTextColorDropDown { get; set; }
+        EOS.UI.iOS.Sandbox.EOSSandboxDropDown disabledTextColorDropDown { get; set; }
 
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
-        EOS.UI.iOS.Sandbox.CustomDropDown disabledUnderlineColorDropDown { get; set; }
+        EOS.UI.iOS.Sandbox.EOSSandboxDropDown disabledUnderlineColorDropDown { get; set; }
 
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
-        EOS.UI.iOS.Sandbox.CustomDropDown focusedIconDropDown { get; set; }
+        EOS.UI.iOS.Sandbox.EOSSandboxDropDown focusedIconDropDown { get; set; }
 
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
-        EOS.UI.iOS.Sandbox.CustomDropDown focusedUnderlineColorDropDown { get; set; }
+        EOS.UI.iOS.Sandbox.EOSSandboxDropDown focusedUnderlineColorDropDown { get; set; }
 
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
-        EOS.UI.iOS.Sandbox.CustomDropDown fontDropDown { get; set; }
+        EOS.UI.iOS.Sandbox.EOSSandboxDropDown fontDropDown { get; set; }
 
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
-        EOS.UI.iOS.Sandbox.CustomDropDown hintTextColorDropDown { get; set; }
+        EOS.UI.iOS.Sandbox.EOSSandboxDropDown hintTextColorDropDown { get; set; }
 
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
-        EOS.UI.iOS.Sandbox.CustomDropDown letterSpacingDropDown { get; set; }
+        EOS.UI.iOS.Sandbox.EOSSandboxDropDown letterSpacingDropDown { get; set; }
 
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
-        UIKit.UIView propertiesContainer { get; set; }
+        EOS.UI.iOS.Sandbox.Controls.EOSSandboxView propertiesContainer { get; set; }
 
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
-        UIKit.UIButton resetButton { get; set; }
+        EOS.UI.iOS.Sandbox.Controls.EOSSandboxButton resetButton { get; set; }
 
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
@@ -75,23 +75,23 @@ namespace EOS.UI.iOS.Sandbox
 
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
-        EOS.UI.iOS.Sandbox.CustomDropDown textColorDropDown { get; set; }
+        EOS.UI.iOS.Sandbox.EOSSandboxDropDown textColorDropDown { get; set; }
 
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
-        EOS.UI.iOS.Sandbox.CustomDropDown textSizeDropDown { get; set; }
+        EOS.UI.iOS.Sandbox.EOSSandboxDropDown textSizeDropDown { get; set; }
 
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
-        EOS.UI.iOS.Sandbox.CustomDropDown themeDropDown { get; set; }
+        EOS.UI.iOS.Sandbox.EOSSandboxDropDown themeDropDown { get; set; }
 
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
-        EOS.UI.iOS.Sandbox.CustomDropDown unfocusedIconDropDown { get; set; }
+        EOS.UI.iOS.Sandbox.EOSSandboxDropDown unfocusedIconDropDown { get; set; }
 
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
-        EOS.UI.iOS.Sandbox.CustomDropDown unfocusedUnderlineColorDropDown { get; set; }
+        EOS.UI.iOS.Sandbox.EOSSandboxDropDown unfocusedUnderlineColorDropDown { get; set; }
 
         void ReleaseDesignerOutlets ()
         {

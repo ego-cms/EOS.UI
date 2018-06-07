@@ -41,13 +41,20 @@ namespace UIFrameworks.Android.Themes
             }
         }
 
-
         public T GetEOSProperty<T>(IEOSThemeControl control, string propertyName)
         {
+            if(control == null)
+                throw new ArgumentNullException(nameof(control));
+
             var currentStyle = control.GetCurrentEOSStyle();
             Object val = null;
             currentStyle?.ThemeValues?.TryGetValue(propertyName, out val);
             return (T)(val ?? _theme.ThemeValues[propertyName]);
+        }
+
+        public T GetEOSProperty<T>(string propertyName)
+        {
+            return (T)_theme.ThemeValues[propertyName];
         }
     }
 }

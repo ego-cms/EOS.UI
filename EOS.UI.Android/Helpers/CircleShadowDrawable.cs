@@ -16,6 +16,7 @@ namespace EOS.UI.Android.Helpers
         private bool _mutated;
         //Number of 'circles' for blurring. Depends on blur value in points. And device pixel density.
         private int _iterations;
+        Paint _paint = new Paint();
         private IDictionary<int, byte> _alphas = new Dictionary<int, byte>();
 
         public override int Opacity => 255;
@@ -45,11 +46,26 @@ namespace EOS.UI.Android.Helpers
 
         public override void Draw(Canvas canvas)
         {
-            var p = new Paint();
-            p.SetStyle(Paint.Style.Stroke);
-            p.Dither = true;
-            DrawShadowsOutsideBackground(canvas, p, _iterations);
-            DrawShadowsBehindBackground(canvas, p, _iterations);
+            _paint.SetStyle(Paint.Style.Stroke);
+            DrawShadowsOutsideBackground(canvas, _paint, _iterations);
+            DrawShadowsBehindBackground(canvas, _paint, _iterations);
+            //var p = new Paint() { Color = Color.Red };
+            //p.SetStyle(Paint.Style.Fill);
+            //for (int i = canvas.Width / 2; i >0; i--)
+            //{
+            //    var alpha = 255 - i*2;
+            //    var color = GetColor(alpha, Color.Black);
+            //    p.Color = color;
+            //    canvas.DrawCircle(canvas.Width / 2, canvas.Width / 2, i, p);
+            //}
+        }
+
+        private Color GetColor(int alpha, Color color)
+        {
+            var r = color.R * (alpha / (float)255) + 255 * (1 - (alpha / (float)255));
+            var g = color.G * (alpha / (float)255) + 255 * (1 - (alpha / (float)255));
+            var b = color.B * (alpha / (float)255) + 255 * (1 - (alpha / (float)255));
+            return new Color((byte)r, (byte)g, (byte)b);
         }
 
         private void DrawShadowsBehindBackground(Canvas canvas, Paint p, int iterations)
@@ -58,12 +74,12 @@ namespace EOS.UI.Android.Helpers
             {
                 var color = _config.Color;
                 //'Inside' shadow will be with negative index
-                color.A = GetAlphaValue(i * -1);
+                color.A = GetAlphaValue((i - iterations) * -1);
                 p.Color = color;
                 //If Alpha = 255 for 'inside' shadow, then we can draw solid circle and break the loop
                 if (color.A >= 255)
                 {
-                    DrawSolidCircle(canvas, i, p);
+                    DrawSolidCircle(canvas, i , p);
                     break;
                 }
 
@@ -103,10 +119,11 @@ namespace EOS.UI.Android.Helpers
 
         private byte GetAlpha(Func<float> getXFunc)
         {
-            // Second degree polynom - y(x) = 132 + (-4.64 * x ) + 0.0411*x^2
+            // Second degree polynom - y(x) = 127 + (-4.56 * x ) + 0.0411*x^2
             // Can be substituted with 10th degree polynom
-            var alpha = 127 + (-4.56 * getXFunc()) + 0.0411 * Math.Pow(getXFunc(), 2);
-            return (byte)(alpha > 255 ? 255 : alpha);
+            var x = getXFunc();
+            var alpha = 127 + (-4.56 * x) + 0.0411 * Math.Pow(x, 2);
+            return (byte)(alpha > 255 ? 255 : Math.Round(alpha));
         }
 
         public override void SetAlpha(int alpha)
@@ -119,7 +136,7 @@ namespace EOS.UI.Android.Helpers
 
         float GetEquationX(int i, int total)
         {
-            return i * 50 / total;
+            return i * 50 / (float)total;
         }
 
         public override Drawable Mutate()
