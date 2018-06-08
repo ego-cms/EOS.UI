@@ -62,6 +62,7 @@ namespace EOS.UI.Android.Controls
             {
                 IsEOSCustomizationIgnored = true;
                 _underlineColorFocused = value;
+                LeftImageFocused?.SetColorFilter(value, PorterDuff.Mode.SrcIn);
                 if(Enabled && FindFocus() == this)
                     Background.SetColorFilter(value, PorterDuff.Mode.SrcIn);
             }
@@ -75,6 +76,7 @@ namespace EOS.UI.Android.Controls
             {
                 IsEOSCustomizationIgnored = true;
                 _underlineColorUnfocused = value;
+                LeftImageUnfocused?.SetColorFilter(value, PorterDuff.Mode.SrcIn);
                 if(Enabled && FindFocus() != this)
                     Background.SetColorFilter(value, PorterDuff.Mode.SrcIn);
             }
@@ -88,6 +90,7 @@ namespace EOS.UI.Android.Controls
             {
                 IsEOSCustomizationIgnored = true;
                 _underlineColorDisabled = value;
+                LeftImageDisabled?.SetColorFilter(value, PorterDuff.Mode.SrcIn);
                 if(!Enabled)
                     Background.SetColorFilter(value, PorterDuff.Mode.SrcIn);
             }
@@ -101,6 +104,7 @@ namespace EOS.UI.Android.Controls
             {
                 IsEOSCustomizationIgnored = true;
                 _leftImageUnfocused = value;
+                _leftImageUnfocused.SetColorFilter(UnderlineColorUnfocused, PorterDuff.Mode.SrcIn);
                 if(Enabled && FindFocus() != this)
                     base.SetCompoundDrawablesWithIntrinsicBounds(_leftImageUnfocused, null, null, null);
             }
@@ -114,6 +118,7 @@ namespace EOS.UI.Android.Controls
             {
                 IsEOSCustomizationIgnored = true;
                 _leftImageFocused = value;
+                _leftImageFocused.SetColorFilter(UnderlineColorFocused, PorterDuff.Mode.SrcIn);
                 if(Enabled && FindFocus() == this)
                     base.SetCompoundDrawablesWithIntrinsicBounds(_leftImageFocused, null, null, null);
             }
@@ -127,6 +132,7 @@ namespace EOS.UI.Android.Controls
             {
                 IsEOSCustomizationIgnored = true;
                 _leftImageDisabled = value;
+                _leftImageDisabled.SetColorFilter(UnderlineColorDisabled, PorterDuff.Mode.SrcIn);
                 if(!Enabled)
                     base.SetCompoundDrawablesWithIntrinsicBounds(_leftImageDisabled, null, null, null);
             }
@@ -365,12 +371,12 @@ namespace EOS.UI.Android.Controls
                 TextColorDisabled = GetThemeProvider().GetEOSProperty<Color>(this, EOSConstants.NeutralColor3);
                 HintTextColor = GetThemeProvider().GetEOSProperty<Color>(this, EOSConstants.NeutralColor2);
                 HintTextColorDisabled = GetThemeProvider().GetEOSProperty<Color>(this, EOSConstants.NeutralColor3);
+                UnderlineColorFocused = GetThemeProvider().GetEOSProperty<Color>(this, EOSConstants.BrandPrimaryColor);
+                UnderlineColorUnfocused = GetThemeProvider().GetEOSProperty<Color>(this, EOSConstants.NeutralColor2);
+                UnderlineColorDisabled = GetThemeProvider().GetEOSProperty<Color>(this, EOSConstants.NeutralColor3);
                 LeftImageFocused = Context.Resources.GetDrawable(GetThemeProvider().GetEOSProperty<int>(this, EOSConstants.LeftImageFocused));
                 LeftImageUnfocused = Context.Resources.GetDrawable(GetThemeProvider().GetEOSProperty<int>(this, EOSConstants.LeftImageUnfocused));
                 LeftImageDisabled = Context.Resources.GetDrawable(GetThemeProvider().GetEOSProperty<int>(this, EOSConstants.LeftImageDisabled));
-                UnderlineColorFocused = GetThemeProvider().GetEOSProperty<Color>(this, EOSConstants.BrandPrimaryColor);
-                UnderlineColorUnfocused = GetThemeProvider().GetEOSProperty<Color>(this, EOSConstants.NeutralColor3);
-                UnderlineColorDisabled = GetThemeProvider().GetEOSProperty<Color>(this, EOSConstants.NeutralColor3);
                 IsEOSCustomizationIgnored = false;
                 UpdateEnabledState(Enabled);
             }
