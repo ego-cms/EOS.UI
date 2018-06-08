@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using Android.Support.V7.Widget;
 using Android.Views;
 

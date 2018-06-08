@@ -1,8 +1,8 @@
 using System;
 using Android.Content;
 using Android.Runtime;
-using Android.Support.V7.Widget;
 using Android.Util;
+using Android.Widget;
 using EOS.UI.Shared.Themes.Helpers;
 using EOS.UI.Shared.Themes.Interfaces;
 using UIFrameworks.Android.Themes;
@@ -10,46 +10,28 @@ using UIFrameworks.Shared.Themes.Interfaces;
 
 namespace EOS.UI.Android.Components
 {
-    public class WorkTime : RecyclerView, IEOSThemeControl
+    public class EOSTimeLabel : TextView, IEOSThemeControl
     {
         #region constructors
 
-        public WorkTime(Context context) : base(context)
+        public EOSTimeLabel(Context context) : base(context)
         {
-            Initialize();
         }
 
-        public WorkTime(Context context, IAttributeSet attrs) : base(context, attrs)
+        public EOSTimeLabel(Context context, IAttributeSet attrs) : base(context, attrs)
         {
-            Initialize(attrs);
         }
 
-        public WorkTime(Context context, IAttributeSet attrs, int defStyle) : base(context, attrs, defStyle)
+        public EOSTimeLabel(Context context, IAttributeSet attrs, int defStyleAttr) : base(context, attrs, defStyleAttr)
         {
-            Initialize(attrs);
         }
 
-        protected WorkTime(IntPtr javaReference, JniHandleOwnership transfer) : base(javaReference, transfer)
+        public EOSTimeLabel(Context context, IAttributeSet attrs, int defStyleAttr, int defStyleRes) : base(context, attrs, defStyleAttr, defStyleRes)
         {
-            Initialize();
         }
 
-        #endregion
-
-        #region utility method
-
-        private void Initialize(IAttributeSet attrs = null)
+        protected EOSTimeLabel(IntPtr javaReference, JniHandleOwnership transfer) : base(javaReference, transfer)
         {
-            SetLayoutManager(new LinearLayoutManager(Context, LinearLayoutManager.Horizontal, false));
-            SetAdapter(new WorkTimeAdapter());
-
-            if(attrs != null)
-                InitializeAttributes(attrs);
-        }
-
-        private void InitializeAttributes(IAttributeSet attrs)
-        {
-            //TODO: Implement set attrs logic
         }
 
         #endregion
