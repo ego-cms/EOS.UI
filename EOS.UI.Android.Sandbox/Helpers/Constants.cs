@@ -245,6 +245,7 @@ namespace EOS.UI.Android.Sandbox.Helpers
             public const string Shadow7 = "No shadow";
             public const string Shadow8 = "Normal shadow";
             public const string Shadow9 = "Big shadow";
+            public const string Shadow10 = "Medium shadow";
 
             public static Dictionary<string, ShadowConfig> ShadowsCollection = new Dictionary<string, ShadowConfig>()
             {
@@ -258,6 +259,7 @@ namespace EOS.UI.Android.Sandbox.Helpers
                 { Shadow7, null },
                 { Shadow8, new ShadowConfig{ Color = Color.Black, Offset = new Offset(0,0), Blur = 5, Spread = 200}  },
                 { Shadow9, new ShadowConfig{ Color = Color.Black, Offset = new Offset(0,0), Blur = 25, Spread = 200}  },
+                { Shadow10, new ShadowConfig{ Color = Color.Black, Offset = new Offset(0,0), Blur = 15, Spread = 200}  },
             };
         }
 

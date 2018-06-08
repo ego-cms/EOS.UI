@@ -100,6 +100,7 @@
     <AndroidResource Include="Resources\drawable\success.xml" />
     <AndroidResource Include="Resources\drawable\Circular.xml" />
     <AndroidResource Include="Resources\layout\CircleProgress.axml" />
+    <AndroidResource Include="Resources\drawable\RotateDrawable.xml" />
   </ItemGroup>
   <ItemGroup>
     <AndroidAsset Include="Assets\Fonts\OpenSansRegular.ttf" />

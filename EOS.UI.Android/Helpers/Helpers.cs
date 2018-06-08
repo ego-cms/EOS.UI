@@ -8,19 +8,19 @@ namespace EOS.UI.Android.Helpers
         public static float PxToDp(int px)
         {
             var displayMetrics = Application.Context.Resources.DisplayMetrics;
-            return px / ((int)displayMetrics.DensityDpi / (int)DisplayMetricsDensity.Default);
+            return px / ((int)displayMetrics.DensityDpi / (float)DisplayMetricsDensity.Default);
         }
 
         public static float DpToPx(float dp)
         {
             var displayMetrics = Application.Context.Resources.DisplayMetrics;
-            return dp * ((int)displayMetrics.DensityDpi / (int)DisplayMetricsDensity.Default);
+            return dp * ((int)displayMetrics.DensityDpi / (float)DisplayMetricsDensity.Default);
         }
 
         public static float GetScaleFactor()
         {
             var displayMetrics = Application.Context.Resources.DisplayMetrics;
-            return (int)displayMetrics.DensityDpi / (int)DisplayMetricsDensity.Default;
+            return (int)displayMetrics.DensityDpi / (float)DisplayMetricsDensity.Default;
         }
     }
 }

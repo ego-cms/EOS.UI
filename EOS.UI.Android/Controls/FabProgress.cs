@@ -1,9 +1,9 @@
 using System;
 using Android.Animation;
-using Android.App;
 using Android.Content;
 using Android.Graphics;
 using Android.Graphics.Drawables;
+using Android.OS;
 using Android.Runtime;
 using Android.Util;
 using Android.Views;
@@ -25,7 +25,6 @@ namespace EOS.UI.Android.Controls
         private const float _endScale = 1.0f;
         private const int _startPadding = 30;
         private const double _paddingRatio = 0.24;
-        private Animation _rotationAnimation;
         private const int _cornerRadius = 200;
         private const int _shadowLayerIndex = 0;
         private const int _backgroundLayerIndex = 1;
@@ -82,23 +81,6 @@ namespace EOS.UI.Android.Controls
                 IsEOSCustomizationIgnored = true;
             }
         }
-
-        //private int _buttonSize;
-        //public int ButtonSize
-        //{
-        //    get => _buttonSize;
-        //    set
-        //    {
-        //        _buttonSize = value;
-        //        LayoutParameters.Width = value;
-        //        LayoutParameters.Height = value;
-        //        SetScaleType(ScaleType.FitCenter);
-        //        RequestLayout();
-        //        var padding = (int)System.Math.Round(_paddingRatio * _buttonSize);
-        //        SetPadding(padding, padding, padding, padding);
-        //        IsEOSCustomizationIgnored = true;
-        //    }
-        //}
 
         private Drawable _image;
         public Drawable Image
@@ -173,7 +155,6 @@ namespace EOS.UI.Android.Controls
 
         private void Initialize()
         {
-            _rotationAnimation = AnimationUtils.LoadAnimation(Application.Context, Resource.Animation.FabRotationAnimation);
             UpdateAppearance();
         }
 
@@ -207,8 +188,6 @@ namespace EOS.UI.Android.Controls
                 var provider = GetThemeProvider();
                 Image = Resources.GetDrawable(provider.GetEOSProperty<int>(this, EOSConstants.CalendarImage), null);
                 PreloaderImage = Resources.GetDrawable(provider.GetEOSProperty<int>(this, EOSConstants.FabProgressPreloaderImage), null);
-                //var roundedDrawable = (GradientDrawable)Resources.GetDrawable(Resource.Drawable.FabButton);
-                //SetBackgroundDrawable(roundedDrawable);
                 DisabledBackgroundColor = provider.GetEOSProperty<Color>(this, EOSConstants.NeutralColor4);
                 PressedBackgroundColor = provider.GetEOSProperty<Color>(this, EOSConstants.BrandPrimaryColorVariant1);
                 ShadowConfig = provider.GetEOSProperty<ShadowConfig>(this, EOSConstants.FabShadow);
@@ -252,8 +231,7 @@ namespace EOS.UI.Android.Controls
             }
             else
             {
-                SetImageDrawable(PreloaderImage);
-                StartAnimation(_rotationAnimation);
+                CreateAndAnimateRotationDrawable();
             }
             InProgress = true;
         }
@@ -262,9 +240,9 @@ namespace EOS.UI.Android.Controls
         {
             if (!InProgress)
                 return;
+            
             SetImageDrawable(Image);
             ClearAnimation();
-            _rotationAnimation.Cancel();
             InProgress = false;
         }
 
@@ -293,7 +271,7 @@ namespace EOS.UI.Android.Controls
 
             var densityOffsetX = (int)Helpers.Helpers.DpToPx(config.Offset.X);
             var densityOffsetY = (int)Helpers.Helpers.DpToPx(config.Offset.Y);
-            var densityOffsetBlur = config.Blur;//(int)Helpers.Helpers.DpToPx(config.Blur);
+            var densityOffsetBlur = (int)Helpers.Helpers.DpToPx(config.Blur);
 
             var layerList = CreateLayerList(layers);
             layerList.SetLayerInset(_shadowLayerIndex, 0, 0, 0, 0);
@@ -395,12 +373,30 @@ namespace EOS.UI.Android.Controls
 
         private Drawable CreateRotateDrawable(Drawable childDrawable)
         {
+            if (Build.VERSION.SdkInt >= BuildVersionCodes.M)
+                return CreateRotateDrawableAPI23(childDrawable);
+            else
+                return CreateRotateDrawableAPI21(childDrawable);
+        }
+
+        private Drawable CreateRotateDrawableAPI23(Drawable childDrawable)
+        {
             var drawable = new RotateDrawable();
             drawable.Drawable = childDrawable;
             drawable.PivotXRelative = true;
             drawable.PivotX = _pivot;
             drawable.PivotYRelative = true;
             drawable.PivotY = _pivot;
+            return drawable;
+        }
+
+        private Drawable CreateRotateDrawableAPI21(Drawable childDrawable)
+        {
+            //It's impossible adequate creation from code due
+            //https://github.com/aosp-mirror/platform_frameworks_base/blob/lollipop-dev/graphics/java/android/graphics/drawable/RotateDrawable.java#L218
+            //use creation from xml hack
+            var drawable = (RotateDrawable)Drawable.CreateFromXml(Resources, Resources.GetXml(Resource.Drawable.RotateDrawable));
+            drawable.Drawable = childDrawable;
             return drawable;
         }
     }
