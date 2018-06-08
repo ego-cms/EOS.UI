@@ -23,6 +23,8 @@ namespace EOS.UI.Android.Helpers
 
         public CircleShadowDrawable(ShadowConfig config)
         {
+            _paint.StrokeWidth = 2f;
+
             _circleShadowState = new CircleShadowState(config);
             _config = config;
             _iterations = (int)Helpers.DpToPx(_config.Blur);
@@ -35,31 +37,24 @@ namespace EOS.UI.Android.Helpers
             for (int i = 0; i <= _iterations; i++)
             {
                 var a = GetAlpha(() => GetEquationX(i, _iterations));
-                _colors.Add(i, GetColorWithoutAlpha(a, _config.Color));
+                var c = _config.Color;
+                c.A = a;
+                _colors.Add(i, c);
                 //formula doesn't work well with 'inside' blurring, just invert indexes and alpha values
                 if (i == 0)
                     continue;
                 
-                _colors.Add(i * -1, GetColorWithoutAlpha(255 - a, _config.Color));
+                c = _config.Color;
+                c.A = (byte)(255 - a);
+                _colors.Add(i * -1, c);
             }
         }
 
         public override void Draw(Canvas canvas)
         {
-            _paint.SetStyle(Paint.Style.Fill);
+            _paint.SetStyle(Paint.Style.Stroke);
             DrawShadowsOutsideBackground(canvas, _paint, _iterations);
             DrawShadowsBehindBackground(canvas, _paint, _iterations);
-        }
-
-        private Color GetColorWithoutAlpha(int alpha, Color color)
-        {
-            if (alpha == 255)
-                return color;
-
-            var r = color.R * (alpha / (float)255) + 255 * (1 - (alpha / (float)255));
-            var g = color.G * (alpha / (float)255) + 255 * (1 - (alpha / (float)255));
-            var b = color.B * (alpha / (float)255) + 255 * (1 - (alpha / (float)255));
-            return new Color((byte)r, (byte)g, (byte)b);
         }
 
         private void DrawShadowsBehindBackground(Canvas canvas, Paint p, int iterations)
@@ -67,27 +62,31 @@ namespace EOS.UI.Android.Helpers
             for (int i = iterations + 1; i < canvas.Width / 2; i++)
             {
                 //'Inside' shadow will be with negative index
-                p.Color= GetColorValue((i - iterations) * -1);
+                p.Color = GetColorValue((i - iterations) * -1);
+                //If Alpha = 255 for 'inside' shadow, then we can draw solid circle and break the loop
                 if (p.Color == _config.Color)
                 {
-                    DrawCircle(canvas, p, i);
+                    DrawSolidCircle(canvas, i , p);
                     break;
                 }
-                DrawCircle(canvas, p, i);
+
+                var radius = canvas.Width / 2 - i;
+                canvas.DrawCircle(canvas.Width / 2, canvas.Width / 2, radius, p);
             }
         }
 
-        private void DrawCircle(Canvas canvas, Paint p, int i)
+        private void DrawSolidCircle(Canvas canvas, int i, Paint p)
         {
+            p.SetStyle(Paint.Style.FillAndStroke);
             var radius = canvas.Width / 2 - i;
             canvas.DrawCircle(canvas.Width / 2, canvas.Width / 2, radius, p);
         }
 
         private void DrawShadowsOutsideBackground(Canvas canvas, Paint p, int iterations)
         {
-            for (int i = iterations; i > 0; i--)
+            for (int i = 0; i < iterations; i++)
             {
-                p.Color = _colors[i];
+                p.Color= _colors[i];
                 var radius = canvas.Width / 2 - (iterations - i);
 
                 canvas.DrawCircle(canvas.Width / 2, canvas.Width / 2, radius, p);
