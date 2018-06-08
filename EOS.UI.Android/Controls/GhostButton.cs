@@ -127,9 +127,46 @@ namespace EOS.UI.Android.Controls
         {
             SetOnTouchListener(this);
             Background = CreateRippleDrawable();
+
+            if(attributeSet != null)
+                InitializeAttributes(attributeSet);
+
             UpdateAppearance();
             SetLines(1);
             Ellipsize = TextUtils.TruncateAt.End;
+        }
+
+        private void InitializeAttributes(IAttributeSet attrs)
+        {
+            var styledAttributes = Context.ObtainStyledAttributes(attrs, Resource.Styleable.GhostButton, 0, 0);
+
+            var font = styledAttributes.GetString(Resource.Styleable.GhostButton_eos_font);
+            if(!string.IsNullOrEmpty(font))
+                Typeface = Typeface.CreateFromAsset(Context.Assets, font);
+
+            var letterSpacing = styledAttributes.GetFloat(Resource.Styleable.GhostButton_eos_letterspacing, -1);
+            if(letterSpacing > 0)
+                LetterSpacing = letterSpacing;
+
+            var textColor = styledAttributes.GetColor(Resource.Styleable.GhostButton_eos_textcolor, Color.Transparent);
+            if(textColor != Color.Transparent)
+                EnabledTextColor = textColor;
+
+            var disabledTextColor = styledAttributes.GetColor(Resource.Styleable.GhostButton_eos_textcolor_disabled, Color.Transparent);
+            if(disabledTextColor != Color.Transparent)
+                DisabledTextColor = disabledTextColor;
+
+            var pressedTextColor = styledAttributes.GetColor(Resource.Styleable.GhostButton_eos_textcolor_pressed, Color.Transparent);
+            if(pressedTextColor != Color.Transparent)
+                PressedStateTextColor = pressedTextColor;
+
+            var textSize = styledAttributes.GetFloat(Resource.Styleable.GhostButton_eos_textsize, -1);
+            if(textSize > 0)
+                TextSize = textSize;
+
+            var enabled = styledAttributes.GetBoolean(Resource.Styleable.GhostButton_eos_enabled, true);
+            if(!enabled)
+                Enabled = enabled;
         }
 
         private void UpdateEnabledState(bool enabled)
