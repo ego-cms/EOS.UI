@@ -16,6 +16,9 @@ namespace EOS.UI.iOS.Components
 		UIKit.UILabel dayLabel { get; set; }
 
 		[Outlet]
+		UIKit.UIView dayOffDevider { get; set; }
+
+		[Outlet]
 		UIKit.UILabel startBreakLabel { get; set; }
 
 		[Outlet]
@@ -34,9 +37,19 @@ namespace EOS.UI.iOS.Components
 				dayLabel = null;
 			}
 
+			if (startBreakLabel != null) {
+				startBreakLabel.Dispose ();
+				startBreakLabel = null;
+			}
+
 			if (startWorkLabel != null) {
 				startWorkLabel.Dispose ();
 				startWorkLabel = null;
+			}
+
+			if (stopBreakLabel != null) {
+				stopBreakLabel.Dispose ();
+				stopBreakLabel = null;
 			}
 
 			if (stopWorkLabel != null) {
@@ -44,14 +57,9 @@ namespace EOS.UI.iOS.Components
 				stopWorkLabel = null;
 			}
 
-			if (startBreakLabel != null) {
-				startBreakLabel.Dispose ();
-				startBreakLabel = null;
-			}
-
-			if (stopBreakLabel != null) {
-				stopBreakLabel.Dispose ();
-				stopBreakLabel = null;
+			if (dayOffDevider != null) {
+				dayOffDevider.Dispose ();
+				dayOffDevider = null;
 			}
 		}
 	}

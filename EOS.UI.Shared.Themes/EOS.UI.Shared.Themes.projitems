@@ -9,6 +9,7 @@
     <Import_RootNamespace>EOS.UI.Shared.Themes</Import_RootNamespace>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)Extensions\TimeSpanExtension.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Helpers\EOSConstants.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Interfaces\IEOSTheme.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Interfaces\IEOSThemeControl.cs" />
@@ -23,7 +24,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="$(MSBuildThisFileDirectory)Themes\" />
-    <Folder Include="$(MSBuildThisFileDirectory)Extensions\" />
     <Folder Include="$(MSBuildThisFileDirectory)DataModels\" />
   </ItemGroup>
 </Project>
