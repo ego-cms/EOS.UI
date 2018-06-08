@@ -44,6 +44,10 @@ namespace EOS.UI.iOS.Sandbox
                 _percents = 0;
                 _circleProgress.Progress = 0;
             };
+            _circleProgress.Finished += (sender, e) =>
+            {
+                _timer.Stop();
+            };
             containerView.AddSubview(_circleProgress);
 
             _dropDowns = new List<EOSSandboxDropDown>()

@@ -60,6 +60,10 @@ namespace EOS.UI.Android.Sandbox.Activities
                 percents = 0;
                 circleProgress.Progress = 0;
             };
+            circleProgress.Finished += (sender, e) =>
+            {
+                timer.Stop();
+            };
 
             themeDropDown.Name = Fields.Theme;
             themeDropDown.SetupAdapter(ThemeTypes.ThemeCollection.Select(item => item.Key).ToList());

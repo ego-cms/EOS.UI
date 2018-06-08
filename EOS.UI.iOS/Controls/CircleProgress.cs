@@ -25,6 +25,7 @@ namespace EOS.UI.iOS
 
         public event EventHandler Started;
         public event EventHandler Stopped;
+        public event EventHandler Finished;
 
         public bool IsEOSCustomizationIgnored { get; private set; }
 
@@ -235,7 +236,7 @@ namespace EOS.UI.iOS
 
         private void ShowCheckmark()
         {
-            Stopped?.Invoke(this, EventArgs.Empty);
+            Finished?.Invoke(this, EventArgs.Empty);
             imageView.Hidden = false;
             _circleLayer.Path = null;
             _isRunnung = false;
