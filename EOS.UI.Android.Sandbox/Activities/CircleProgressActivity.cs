@@ -22,7 +22,7 @@ namespace EOS.UI.Android.Sandbox.Activities
         {
             base.OnCreate(savedInstanceState);
             SetContentView(Resource.Layout.CircleProgressLayout);
-            var circleProgressFragment = FindViewById<CircleProgress>(Resource.Id.circleProgress);
+            var circleProgress = FindViewById<CircleProgress>(Resource.Id.circleProgress);
             var themeDropDown = FindViewById<EOSSandboxDropDown>(Resource.Id.themeDropDown);
             var colorDropDown = FindViewById<EOSSandboxDropDown>(Resource.Id.colorDropDown);
             var alternativeColorDropDown = FindViewById<EOSSandboxDropDown>(Resource.Id.alternativeColorDropDown);
@@ -46,21 +46,19 @@ namespace EOS.UI.Android.Sandbox.Activities
             timer.Setup(TimeSpan.FromMilliseconds(100), () =>
             {
                 percents += 1;
-                circleProgressFragment.Progress = percents;
+                circleProgress.Progress = percents;
             });
-            circleProgressFragment.Started += (sender, e) =>
+            circleProgress.Started += (sender, e) =>
             {
                 if(percents == 100)
                     percents = 0;
                 timer.Start();
             };
-            circleProgressFragment.Stopped += (sender, e) =>
+            circleProgress.Stopped += (sender, e) =>
             {
                 timer.Stop();
-            };
-            circleProgressFragment.Finished += (sender, e) =>
-            {
-                timer.Stop();
+                percents = 0;
+                circleProgress.Progress = 0;
             };
 
             themeDropDown.Name = Fields.Theme;
@@ -69,14 +67,14 @@ namespace EOS.UI.Android.Sandbox.Activities
             {
                 if(position > 0)
                 {
-                    circleProgressFragment.GetThemeProvider().SetCurrentTheme(ThemeTypes.ThemeCollection.ElementAt(position).Value);
-                    circleProgressFragment.ResetCustomization();
+                    circleProgress.GetThemeProvider().SetCurrentTheme(ThemeTypes.ThemeCollection.ElementAt(position).Value);
+                    circleProgress.ResetCustomization();
                     spinners.Except(new[] { themeDropDown }).ToList().ForEach(s => s.SetSpinnerSelection(0));
                     UpdateApperaence();
                 }
             };
 
-            var theme = circleProgressFragment.GetThemeProvider().GetCurrentTheme();
+            var theme = circleProgress.GetThemeProvider().GetCurrentTheme();
             if(theme is LightEOSTheme)
                 themeDropDown.SetSpinnerSelection(1);
             if(theme is DarkEOSTheme)
@@ -87,7 +85,7 @@ namespace EOS.UI.Android.Sandbox.Activities
             fontDropDown.ItemSelected += (position) =>
             {
                 if(position > 0)
-                    circleProgressFragment.Typeface = Typeface.CreateFromAsset(Assets, Fonts.FontsCollection.ElementAt(position).Value);
+                    circleProgress.Typeface = Typeface.CreateFromAsset(Assets, Fonts.FontsCollection.ElementAt(position).Value);
             };
 
             colorDropDown.Name = Fields.Color;
@@ -95,7 +93,7 @@ namespace EOS.UI.Android.Sandbox.Activities
             colorDropDown.ItemSelected += (position) =>
             {
                 if(position > 0)
-                    circleProgressFragment.Color = Colors.ColorsCollection.ElementAt(position).Value;
+                    circleProgress.Color = Colors.ColorsCollection.ElementAt(position).Value;
             };
 
             alternativeColorDropDown.Name = Fields.AlternativeColor;
@@ -103,7 +101,7 @@ namespace EOS.UI.Android.Sandbox.Activities
             alternativeColorDropDown.ItemSelected += (position) =>
             {
                 if(position > 0)
-                    circleProgressFragment.AlternativeColor = Colors.ColorsCollection.ElementAt(position).Value;
+                    circleProgress.AlternativeColor = Colors.ColorsCollection.ElementAt(position).Value;
             };
 
             backgroundColorDropDown.Name = Fields.FillColor;
@@ -111,7 +109,7 @@ namespace EOS.UI.Android.Sandbox.Activities
             backgroundColorDropDown.ItemSelected += (position) =>
             {
                 if(position > 0)
-                    circleProgressFragment.FillColor = Colors.ColorsCollection.ElementAt(position).Value;
+                    circleProgress.FillColor = Colors.ColorsCollection.ElementAt(position).Value;
             };
 
             textSizeDropDown.Name = Fields.TextSize;
@@ -119,19 +117,19 @@ namespace EOS.UI.Android.Sandbox.Activities
             textSizeDropDown.ItemSelected += (position) =>
             {
                 if(position > 0)
-                    circleProgressFragment.TextSize = Sizes.TextSizeCollection.ElementAt(position).Value;
+                    circleProgress.TextSize = Sizes.TextSizeCollection.ElementAt(position).Value;
             };
 
             showProgressSwitch.CheckedChange += (sender, e) =>
             {
-                circleProgressFragment.ShowProgress = showProgressSwitch.Checked;
+                circleProgress.ShowProgress = showProgressSwitch.Checked;
             };
 
             resetButton.Click += delegate
             {
                 spinners.Except(new[] { themeDropDown }).ToList().ForEach(s => s.SetSpinnerSelection(0));
                 showProgressSwitch.Checked = true;
-                circleProgressFragment.ResetCustomization();
+                circleProgress.ResetCustomization();
             };
         }
     }

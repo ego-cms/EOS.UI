@@ -28,7 +28,6 @@ namespace EOS.UI.Android.Controls
 
         public event EventHandler Started;
         public event EventHandler Stopped;
-        public event EventHandler Finished;
 
         public bool IsEOSCustomizationIgnored { get; private set; }
 
@@ -207,7 +206,7 @@ namespace EOS.UI.Android.Controls
 
         private void ShowCheckmark()
         {
-            Finished?.Invoke(this, EventArgs.Empty);
+            Stopped?.Invoke(this, EventArgs.Empty);
             _checkmarkImage.Visibility = ViewStates.Visible;
             _isRunning = false;
         }

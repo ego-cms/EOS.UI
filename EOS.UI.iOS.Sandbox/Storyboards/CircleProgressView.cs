@@ -41,10 +41,8 @@ namespace EOS.UI.iOS.Sandbox
             _circleProgress.Stopped += (sender, e) =>
             {
                 _timer.Stop();
-            };
-            _circleProgress.Finished += (sender, e) =>
-            {
-                _timer.Stop();
+                _percents = 0;
+                _circleProgress.Progress = 0;
             };
             containerView.AddSubview(_circleProgress);
 
