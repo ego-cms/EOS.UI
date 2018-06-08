@@ -17,7 +17,7 @@ namespace EOS.UI.Android.Helpers
         //Number of 'circles' for blurring. Depends on blur value in points. And device pixel density.
         private int _iterations;
         Paint _paint = new Paint();
-        private IDictionary<int, byte> _alphas = new Dictionary<int, byte>();
+        private IDictionary<int, Color> _colors = new Dictionary<int, Color>();
 
         public override int Opacity => 255;
 
@@ -27,20 +27,20 @@ namespace EOS.UI.Android.Helpers
             _config = config;
             _iterations = (int)Helpers.DpToPx(_config.Blur);
 
-            CalculateAlphas();
+            CalculateColors();
         }
 
-        private void CalculateAlphas()
+        private void CalculateColors()
         {
             for (int i = 0; i <= _iterations; i++)
             {
                 var a = GetAlpha(() => GetEquationX(i, _iterations));
-                _alphas.Add(i, a);
+                _colors.Add(i, GetColorWithoutAlpha(a, _config.Color));
                 //formula doesn't work well with 'inside' blurring, just invert indexes and alpha values
                 if (i == 0)
                     continue;
                 
-                _alphas.Add(i * -1, (byte)(255 - a));
+                _colors.Add(i * -1, GetColorWithoutAlpha(255 - a, _config.Color));
             }
         }
 
@@ -49,19 +49,13 @@ namespace EOS.UI.Android.Helpers
             _paint.SetStyle(Paint.Style.Fill);
             DrawShadowsOutsideBackground(canvas, _paint, _iterations);
             DrawShadowsBehindBackground(canvas, _paint, _iterations);
-            //var p = new Paint() { Color = Color.Red };
-            //p.SetStyle(Paint.Style.Fill);
-            //for (int i = canvas.Width / 2; i >0; i--)
-            //{
-            //    var alpha = 255 - i*2;
-            //    var color = GetColor(alpha, Color.Black);
-            //    p.Color = color;
-            //    canvas.DrawCircle(canvas.Width / 2, canvas.Width / 2, i, p);
-            //}
         }
 
-        private Color GetColor(int alpha, Color color)
+        private Color GetColorWithoutAlpha(int alpha, Color color)
         {
+            if (alpha == 255)
+                return color;
+
             var r = color.R * (alpha / (float)255) + 255 * (1 - (alpha / (float)255));
             var g = color.G * (alpha / (float)255) + 255 * (1 - (alpha / (float)255));
             var b = color.B * (alpha / (float)255) + 255 * (1 - (alpha / (float)255));
@@ -72,26 +66,19 @@ namespace EOS.UI.Android.Helpers
         {
             for (int i = iterations + 1; i < canvas.Width / 2; i++)
             {
-                var color = _config.Color;
                 //'Inside' shadow will be with negative index
-                var alpha = GetAlphaValue((i - iterations) * -1);
-                //If Alpha = 255 for 'inside' shadow, then we can draw solid circle and break the loop
-                if (alpha >= 255)
+                p.Color= GetColorValue((i - iterations) * -1);
+                if (p.Color == _config.Color)
                 {
-                    DrawSolidCircle(canvas, i , p);
+                    DrawCircle(canvas, p, i);
                     break;
                 }
-                p.Color = GetColor(alpha, color);
-
-                var radius = canvas.Width / 2 - i;
-                canvas.DrawCircle(canvas.Width / 2, canvas.Width / 2, radius, p);
+                DrawCircle(canvas, p, i);
             }
         }
 
-        private void DrawSolidCircle(Canvas canvas, int i, Paint p)
+        private void DrawCircle(Canvas canvas, Paint p, int i)
         {
-            p.SetStyle(Paint.Style.FillAndStroke);
-            p.Color = _config.Color;
             var radius = canvas.Width / 2 - i;
             canvas.DrawCircle(canvas.Width / 2, canvas.Width / 2, radius, p);
         }
@@ -100,21 +87,20 @@ namespace EOS.UI.Android.Helpers
         {
             for (int i = iterations; i > 0; i--)
             {
-                var color = _config.Color;
-                p.Color = GetColor(_alphas[i], color);
+                p.Color = _colors[i];
                 var radius = canvas.Width / 2 - (iterations - i);
 
                 canvas.DrawCircle(canvas.Width / 2, canvas.Width / 2, radius, p);
             }
         }
 
-        private byte GetAlphaValue(int i)
+        private Color GetColorValue(int i)
         {
-            if (_alphas.ContainsKey(i))
+            if (_colors.ContainsKey(i))
             {
-                return _alphas[i];
+                return _colors[i];
             }
-            return (byte)255;
+            return _config.Color;
         }
 
         private byte GetAlpha(Func<float> getXFunc)
