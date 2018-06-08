@@ -99,8 +99,11 @@ namespace EOS.UI.Android.Sandbox.Activities
             shadowDropDown.SetupAdapter(Shadows.ShadowsCollection.Select(i => i.Key).ToList());
             shadowDropDown.ItemSelected += (position) =>
             {
-                if(position > 0)
+                if (position > 0)
+                {
                     fab.ShadowConfig = Shadows.ShadowsCollection.ElementAt(position).Value;
+                    fab.StopProgressAnimation();
+                }
             };
 
 
