@@ -91,12 +91,9 @@ namespace EOS.UI.iOS.Sandbox.Helpers
 
         public static List<string> Icons = new List<string>()
         {
-            { "account-circle"},
-            { "account-key"},
-            { "account-off"},
-            { "airbaloon"},
-            { "android"},
-            { "apple"}
+            { "icAccountCircle"},
+            { "icAccountKey"},
+            { "icAccountOff"},
         };
 
         public static Dictionary<string, bool> States = new Dictionary<string, bool>()

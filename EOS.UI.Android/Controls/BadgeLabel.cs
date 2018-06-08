@@ -39,7 +39,7 @@ namespace EOS.UI.Android.Controls
         }
 
         #endregion
-
+        
         #region customization
 
         private Color _backgroundColor;
@@ -146,7 +146,31 @@ namespace EOS.UI.Android.Controls
 
         private void InitializeAttributes(IAttributeSet attrs)
         {
-            //TODO: Implement set attrs logic
+            var styledAttributes = Context.ObtainStyledAttributes(attrs, Resource.Styleable.BadgeLabel, 0, 0);
+
+            var backgroundColor = styledAttributes.GetColor(Resource.Styleable.BadgeLabel_eos_background, Color.Transparent);
+            if(backgroundColor != Color.Transparent)
+                BackgroundColor = backgroundColor;
+
+            var font = styledAttributes.GetString(Resource.Styleable.BadgeLabel_eos_font);
+            if(!string.IsNullOrEmpty(font))
+                Typeface = Typeface.CreateFromAsset(Context.Assets, font);
+
+            var letterSpacing = styledAttributes.GetFloat(Resource.Styleable.BadgeLabel_eos_letterspacing, -1);
+            if(letterSpacing > 0)
+                LetterSpacing = letterSpacing;
+
+            var textColor = styledAttributes.GetColor(Resource.Styleable.BadgeLabel_eos_textcolor, Color.Transparent);
+            if(textColor != Color.Transparent)
+                TextColor = textColor;
+
+            var textSize = styledAttributes.GetFloat(Resource.Styleable.BadgeLabel_eos_textsize, -1);
+            if(textSize > 0)
+                TextSize = textSize;
+
+            var cornerRadius = styledAttributes.GetFloat(Resource.Styleable.BadgeLabel_eos_cornerradius, -1);
+            if(cornerRadius > 0)
+                CornerRadius = cornerRadius;
         }
 
         #endregion

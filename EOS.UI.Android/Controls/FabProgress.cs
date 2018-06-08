@@ -153,9 +153,41 @@ namespace EOS.UI.Android.Controls
             Initialize();
         }
 
-        private void Initialize()
+        private void Initialize(IAttributeSet attrs = null)
         {
+            if(attrs != null)
+                InitializeAttributes(attrs);
+
             UpdateAppearance();
+        }
+
+        private void InitializeAttributes(IAttributeSet attrs)
+        {
+            var styledAttributes = Context.ObtainStyledAttributes(attrs, Resource.Styleable.FabProgress, 0, 0);
+
+            var backgroundColor = styledAttributes.GetColor(Resource.Styleable.FabProgress_eos_backgroundcolor, Color.Transparent);
+            if(backgroundColor != Color.Transparent)
+                BackgroundColor = backgroundColor;
+
+            var disabledBackgroundColor = styledAttributes.GetColor(Resource.Styleable.FabProgress_eos_backgroundcolor_disabled, Color.Transparent);
+            if(disabledBackgroundColor != Color.Transparent)
+                DisabledBackgroundColor = disabledBackgroundColor;
+
+            var pressedBackgroundColor = styledAttributes.GetColor(Resource.Styleable.FabProgress_eos_backgroundcolor_pressed, Color.Transparent);
+            if(pressedBackgroundColor != Color.Transparent)
+                PressedBackgroundColor = pressedBackgroundColor;
+
+            var image = styledAttributes.GetDrawable(Resource.Styleable.FabProgress_eos_image);
+            if(image != null)
+                Image = image;
+
+            var preloaderImage = styledAttributes.GetDrawable(Resource.Styleable.FabProgress_eos_preloaderimage);
+            if(preloaderImage != null)
+                PreloaderImage = preloaderImage;
+
+            var enabled = styledAttributes.GetBoolean(Resource.Styleable.FabProgress_eos_enabled, true);
+            if(!enabled)
+                Enabled = enabled;
         }
 
         public IEOSStyle GetCurrentEOSStyle()

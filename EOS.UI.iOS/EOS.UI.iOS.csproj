@@ -56,46 +56,16 @@
     <Reference Include="Xamarin.iOS" />
   </ItemGroup>
   <ItemGroup>
-    <ImageAsset Include="Assets.xcassets\AccountCircle.imageset\account_circle@2x.png">
-      <Visible>false</Visible>
-    </ImageAsset>
-    <ImageAsset Include="Assets.xcassets\AccountCircle.imageset\account_circle@3x.png">
-      <Visible>false</Visible>
-    </ImageAsset>
-    <ImageAsset Include="Assets.xcassets\AccountKey.imageset\account-off@2x.png">
-      <Visible>false</Visible>
-    </ImageAsset>
-    <ImageAsset Include="Assets.xcassets\AccountKey.imageset\account-off@3x.png">
-      <Visible>false</Visible>
-    </ImageAsset>
-    <ImageAsset Include="Assets.xcassets\AccountOff.imageset\account-off@2x.png">
-      <Visible>false</Visible>
-    </ImageAsset>
-    <ImageAsset Include="Assets.xcassets\AccountOff.imageset\account-off@3x.png">
-      <Visible>false</Visible>
-    </ImageAsset>
     <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Contents.json">
       <Visible>false</Visible>
     </ImageAsset>
     <ImageAsset Include="Assets.xcassets\Contents.json">
       <Visible>false</Visible>
     </ImageAsset>
-    <ImageAsset Include="Assets.xcassets\AccountCircle.imageset\Contents.json">
-      <Visible>false</Visible>
-    </ImageAsset>
-    <ImageAsset Include="Assets.xcassets\AccountKey.imageset\Contents.json">
-      <Visible>false</Visible>
-    </ImageAsset>
-    <ImageAsset Include="Assets.xcassets\AccountOff.imageset\Contents.json">
-      <Visible>false</Visible>
-    </ImageAsset>
     <ImageAsset Include="Assets.xcassets\icCalendar.imageset\Contents.json">
       <Visible>false</Visible>
     </ImageAsset>
     <ImageAsset Include="Assets.xcassets\icPreloader.imageset\Contents.json">
-      <Visible>false</Visible>
-    </ImageAsset>
-    <ImageAsset Include="Assets.xcassets\icPreloader.imageset\preloader.pdf">
       <Visible>false</Visible>
     </ImageAsset>
     <ImageAsset Include="Assets.xcassets\icCalendar.imageset\icCalendar.pdf">
@@ -110,6 +80,12 @@
     <ImageAsset Include="Assets.xcassets\icSuccess.imageset\icSuccess.pdf">
       <Visible>false</Visible>
     </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\icAccountCircle.imageset\Contents.json" />
+    <ImageAsset Include="Assets.xcassets\icAccountCircle.imageset\icAccountCircle.pdf" />
+    <ImageAsset Include="Assets.xcassets\icAccountOff.imageset\Contents.json" />
+    <ImageAsset Include="Assets.xcassets\icAccountOff.imageset\icAccountOff.pdf" />
+    <ImageAsset Include="Assets.xcassets\icAccountKey.imageset\Contents.json" />
+    <ImageAsset Include="Assets.xcassets\icAccountKey.imageset\icAccountKey.pdf" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
@@ -154,6 +130,9 @@
     <Folder Include="Assets.xcassets\icCalendar.imageset\" />
     <Folder Include="Assets.xcassets\icPreloader.imageset\" />
     <Folder Include="Assets.xcassets\icSuccess.imageset\" />
+    <Folder Include="Assets.xcassets\icAccountCircle.imageset\" />
+    <Folder Include="Assets.xcassets\icAccountOff.imageset\" />
+    <Folder Include="Assets.xcassets\icAccountKey.imageset\" />
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="Controls\CircleProgress.xib" />
