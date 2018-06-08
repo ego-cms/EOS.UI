@@ -68,9 +68,6 @@
     <ImageAsset Include="Assets.xcassets\icPreloader.imageset\Contents.json">
       <Visible>false</Visible>
     </ImageAsset>
-    <ImageAsset Include="Assets.xcassets\icPreloader.imageset\preloader.pdf">
-      <Visible>false</Visible>
-    </ImageAsset>
     <ImageAsset Include="Assets.xcassets\icCalendar.imageset\icCalendar.pdf">
       <Visible>false</Visible>
     </ImageAsset>
