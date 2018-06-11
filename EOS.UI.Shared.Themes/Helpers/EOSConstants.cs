@@ -1,4 +1,4 @@
-﻿namespace UIFrameworks.Shared.Themes.Helpers
+namespace UIFrameworks.Shared.Themes.Helpers
 {
     public static class EOSConstants
     {
@@ -39,6 +39,11 @@
         public const string RightPadding = "rightPadding";
         public const string HasSectionBorder = "hasSectionBorder";
         public const string HasSectionAction = "hasSectionAction";
+        //work time
+        public const string TitleFont = "titleFont";
+        public const string DayTimeFont = "dayTimeFont";
+        public const string TitleTextSize = "titleTextSize";
+        public const string DayTimeTextSize = "dayTimeTextSize";
     }
 
     public static class ControlNames

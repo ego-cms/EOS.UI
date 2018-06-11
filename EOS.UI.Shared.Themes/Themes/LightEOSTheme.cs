@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using EOS.UI.Shared.Helpers;
 using UIFrameworks.Shared.Themes.Helpers;
@@ -110,7 +110,11 @@ namespace EOS.UI.Shared.Themes.Themes
             { EOSConstants.RightPadding, 7 },
             { EOSConstants.BottomPadding, 5 },
             { EOSConstants.HasSectionBorder, true },
-            { EOSConstants.HasSectionAction, true }
+            { EOSConstants.HasSectionAction, true },
+            { EOSConstants.TitleFont, "Fonts/OpenSansRegular.ttf" },
+            { EOSConstants.DayTimeFont, "Fonts/OpenSansRegular.ttf" },
+            { EOSConstants.TitleTextSize, 17 },
+            { EOSConstants.DayTimeTextSize, 15 },
 #endif
         };
     }

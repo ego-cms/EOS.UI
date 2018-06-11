@@ -1,8 +1,11 @@
 using System;
+using System.Collections.Generic;
 using Android.Content;
+using Android.Graphics;
 using Android.Runtime;
 using Android.Support.V7.Widget;
 using Android.Util;
+using EOS.UI.Shared.Themes.DataModels;
 using EOS.UI.Shared.Themes.Helpers;
 using EOS.UI.Shared.Themes.Interfaces;
 using UIFrameworks.Android.Themes;
@@ -12,6 +15,12 @@ namespace EOS.UI.Android.Components
 {
     public class WorkTime : RecyclerView, IEOSThemeControl
     {
+        #region properties
+
+        private WorkTimeAdapter WorkTimeAdapter => GetAdapter() as WorkTimeAdapter;
+
+        #endregion
+
         #region constructors
 
         public WorkTime(Context context) : base(context)
@@ -32,6 +41,88 @@ namespace EOS.UI.Android.Components
         protected WorkTime(IntPtr javaReference, JniHandleOwnership transfer) : base(javaReference, transfer)
         {
             Initialize();
+        }
+
+        #endregion
+
+        #region customization
+
+        public WeekStartEnum WeekStart
+        {
+            get => WorkTimeAdapter.WeekStart;
+            set => WorkTimeAdapter.WeekStart = value;
+        }
+
+        public Typeface TitleFont
+        {
+            get => WorkTimeAdapter.TitleFont;
+            set => WorkTimeAdapter.TitleFont = value;
+        }
+
+        public Typeface DayTextFont
+        {
+            get => WorkTimeAdapter.DayTextFont;
+            set => WorkTimeAdapter.DayTextFont = value;
+        }
+
+        public int TitleTextSize
+        {
+            get => WorkTimeAdapter.TitleTextSize;
+            set => WorkTimeAdapter.TitleTextSize = value;
+        }
+
+        public int DayTextSize
+        {
+            get => WorkTimeAdapter.DayTextSize;
+            set => WorkTimeAdapter.DayTextSize = value;
+        }
+
+        public Color TitleColor
+        {
+            get => WorkTimeAdapter.TitleColor;
+            set => WorkTimeAdapter.TitleColor = value;
+        }
+
+        public Color DayTextColor
+        {
+            get => WorkTimeAdapter.DayTextColor;
+            set => WorkTimeAdapter.DayTextColor = value;
+        }
+
+        public Color CurrentDayBackgroundColor
+        {
+            get => WorkTimeAdapter.CurrentDayBackgroundColor;
+            set => WorkTimeAdapter.CurrentDayBackgroundColor = value;
+        }
+
+        public Color CurrentDayTextColor
+        {
+            get => WorkTimeAdapter.CurrentDayTextColor;
+            set => WorkTimeAdapter.CurrentDayTextColor = value;
+        }
+
+        public Color DividerColor
+        {
+            get => WorkTimeAdapter.DividerColor;
+            set => WorkTimeAdapter.DividerColor = value;
+        }
+
+        public Color CurrentDividerColor
+        {
+            get => WorkTimeAdapter.CurrentDividerColor;
+            set => WorkTimeAdapter.CurrentDividerColor = value;
+        }
+
+        public Color DayEvenBackgroundColor
+        {
+            get => WorkTimeAdapter.DayEvenBackgroundColor;
+            set => WorkTimeAdapter.DayEvenBackgroundColor = value;
+        }
+
+        public List<WorkTimeCalendarItem> Items
+        {
+            get => WorkTimeAdapter.Items;
+            set => WorkTimeAdapter.Items = value;
         }
 
         #endregion
@@ -65,16 +156,12 @@ namespace EOS.UI.Android.Components
 
         public void UpdateAppearance()
         {
-            if(!IsEOSCustomizationIgnored)
-            {
-
-            }
+            WorkTimeAdapter.UpdateAppearance();
         }
 
         public void ResetCustomization()
         {
-            IsEOSCustomizationIgnored = false;
-            UpdateAppearance();
+            WorkTimeAdapter.ResetCustomization();
         }
 
         public IEOSStyle GetCurrentEOSStyle()
