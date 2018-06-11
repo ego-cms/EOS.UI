@@ -39,11 +39,11 @@ namespace UIFrameworks.Shared.Themes.Helpers
         public const string RightPadding = "rightPadding";
         public const string HasSectionBorder = "hasSectionBorder";
         public const string HasSectionAction = "hasSectionAction";
-        //work time
-        public const string TitleFont = "titleFont";
-        public const string DayTimeFont = "dayTimeFont";
-        public const string TitleTextSize = "titleTextSize";
-        public const string DayTimeTextSize = "dayTimeTextSize";
+        //worktime control
+        public const string WorkTimeTitleSize = "workTimeTitleSize";
+        public const string WorkTimeDayTextSize = "workTimeDayTextSize";
+        public const string WorkTimeTitleFont = "workTimeTitleFont";
+        public const string WorkTimeDayTextFont = "workTimeDayFont";
     }
 
     public static class ControlNames

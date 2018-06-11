@@ -143,6 +143,7 @@
     </Compile>
     <Compile Include="CollectionViewSources\WorkTimeCalendarCollectionSource.cs" />
     <Compile Include="CollectionViewSources\WorkTimeCalendarFlowLayout.cs" />
+    <Compile Include="Models\WorkTimeCalendarModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets.tt">

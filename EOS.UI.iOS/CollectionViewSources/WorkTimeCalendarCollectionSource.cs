@@ -1,33 +1,37 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using CoreGraphics;
 using EOS.UI.iOS.Components;
+using EOS.UI.iOS.Models;
 using EOS.UI.Shared.Themes.DataModels;
+using EOS.UI.Shared.Themes.Extensions;
 using Foundation;
 using UIKit;
 
 namespace EOS.UI.iOS.CollectionViewSources
 {
-    public class WorkTimeCalendarCollectionSource: UICollectionViewSource
+    public class WorkTimeCalendarCollectionSource : UICollectionViewSource
     {
         //by default longest string fills 70% of the cell width
-        private readonly nfloat cellWidthRatio = 1.4f;
-        private IEnumerable<WorkTimeCalendarItem> _dataSource;
-        private UICollectionView _collectionView;
-        
-        public WorkTimeCalendarCollectionSource(IEnumerable<WorkTimeCalendarItem> dataSource, UICollectionView collectionView)
-        {
-            if (dataSource.Count() != 7)
-                throw new Exception("datasource must contain 7 week days");
+        private readonly nfloat _cellWidthRatio = 1.4f;
+        private readonly UICollectionView _collectionView;
 
-            _dataSource = dataSource;
+        public WorkTimeCalendarModel CalendarModel { get; }
+
+        public WorkTimeCalendarCollectionSource(UICollectionView collectionView)
+        {
             _collectionView = collectionView;
             _collectionView.RegisterNibForCell(WorkTimeCalendarCell.Nib, WorkTimeCalendarCell.Key);
-            //_collectionView.PagingEnabled = true;
-            InitFlowLayout();
+            CalendarModel = new WorkTimeCalendarModel();
+            CalendarModel.UpdateAppearance();
+            
+            var layout = new WorkTimeCalendarFlowLayout();
+            layout.ItemSize = new CGSize((_collectionView.Frame.Width-layout.SectionInset.Left-layout.SectionInset.Right) / 7,
+                                         _collectionView.Frame.Height - layout.SectionInset.Top - layout.SectionInset.Bottom);
+            _collectionView.CollectionViewLayout = layout;
         }
+
 
         public override nint NumberOfSections(UICollectionView collectionView)
         {
@@ -36,37 +40,38 @@ namespace EOS.UI.iOS.CollectionViewSources
 
         public override nint GetItemsCount(UICollectionView collectionView, nint section)
         {
-            return _dataSource.Count();
+            return CalendarModel.Items.Count();
         }
 
         public override UICollectionViewCell GetCell(UICollectionView collectionView, NSIndexPath indexPath)
         {
             var cell = (WorkTimeCalendarCell) collectionView.DequeueReusableCell(WorkTimeCalendarCell.Key, indexPath);
-            cell.SetFont(UIFont.SystemFontOfSize(37));
+            InitCell(ref cell, CalendarModel.Items.ElementAt(indexPath.Row));
             return cell;
         }
-        
-        private void InitFlowLayout()
+
+        private void InitCell(ref WorkTimeCalendarCell cell, WorkTimeCalendarItem item)
         {
-            var layout = new WorkTimeCalendarFlowLayout();
-            layout.ItemSize = CalculateCellSize();
-            //layout.ItemSize = new CGSize(_collectionView.Frame.Width/_dataSource.Count(), _collectionView.Frame.Height);
-            _collectionView.CollectionViewLayout = layout;
-        }
-        
-        private CGSize CalculateCellSize()
-        {
-            nfloat requiredWidth = 0;
-            foreach(WorkTimeCalendarItem item in _dataSource)
+            cell.Init(item);
+            cell.DayTextSize = CalendarModel.DayTextSize;
+            cell.TitleTextSize = CalendarModel.TitleTextSize;
+            cell.DayTextFont = CalendarModel.DayTextFont;
+            cell.TitleFont = CalendarModel.TitleFont;
+
+            if(item.WeekDay == DateTime.Now.DayOfWeek)
             {
-                var timeString = item.StartTime.ToString(@"hh\:mm");
-                var nsString = new NSString(timeString);
-                var size = nsString.StringSize(UIFont.SystemFontOfSize(37));
-                if (size.Width > requiredWidth)
-                    requiredWidth = size.Width;
+                cell.CellBackgroundColor = CalendarModel.CurrentDayBackgroundColor;
+                cell.DayTextColor = CalendarModel.CurrentDayTextColor;
+                cell.TitleColor = CalendarModel.CurrentDayTextColor;
+                cell.WeekDayDeviderColor = UIColor.White;
             }
-            requiredWidth *= cellWidthRatio;
-            return new CGSize(requiredWidth, _collectionView.Frame.Height);
+            else
+            {
+                cell.CellBackgroundColor = (int)item.WeekDay % 2 == 0 ? CalendarModel.DayEvenBackgroundColor : CalendarModel.DayUnevenBackgroundColor;
+                cell.DayTextColor = CalendarModel.DayTextColor;
+                cell.TitleColor = CalendarModel.TitleColor;
+                cell.WeekDayDeviderColor = UIColor.LightGray;
+            }
         }
     }
 }
