@@ -25,7 +25,11 @@ namespace EOS.UI.iOS.CollectionViewSources
             _collectionView.RegisterNibForCell(WorkTimeCalendarCell.Nib, WorkTimeCalendarCell.Key);
             CalendarModel = new WorkTimeCalendarModel();
             CalendarModel.UpdateAppearance();
-            CalendarModel.ItemsChanged += (sender, e) => InitFlowLayout();
+            
+            var layout = new WorkTimeCalendarFlowLayout();
+            layout.ItemSize = new CGSize((_collectionView.Frame.Width-layout.SectionInset.Left-layout.SectionInset.Right) / 7,
+                                         _collectionView.Frame.Height - layout.SectionInset.Top - layout.SectionInset.Bottom);
+            _collectionView.CollectionViewLayout = layout;
         }
 
 
@@ -46,38 +50,28 @@ namespace EOS.UI.iOS.CollectionViewSources
             return cell;
         }
 
-        private void InitFlowLayout()
-        {
-            var layout = new WorkTimeCalendarFlowLayout();
-            layout.ItemSize = CalculateCellSize();
-            _collectionView.CollectionViewLayout = layout;
-        }
-
-        private CGSize CalculateCellSize()
-        {
-            nfloat requiredWidth = 0;
-            foreach (var item in CalendarModel.Items)
-            {
-                var endWorkTime = new NSString(item.EndTime.ToShortString());
-                var dayTitle = new NSString(item.ShortWeekDay);
-
-                var endWorkWidth = endWorkTime.StringSize(CalendarModel.DayTextFont.WithSize(CalendarModel.DayTextSize)).Width;
-                var dayTitleWidth = dayTitle.StringSize(CalendarModel.TitleFont.WithSize(CalendarModel.TitleTextSize)).Width;
-                var biggerWidth = Math.Max(endWorkWidth, dayTitleWidth);
-                if (biggerWidth > requiredWidth)
-                    requiredWidth = (nfloat) biggerWidth;
-            }
-            requiredWidth *= _cellWidthRatio;
-            return new CGSize(requiredWidth, _collectionView.Frame.Height);
-        }
-
         private void InitCell(ref WorkTimeCalendarCell cell, WorkTimeCalendarItem item)
         {
             cell.Init(item);
             cell.DayTextSize = CalendarModel.DayTextSize;
             cell.TitleTextSize = CalendarModel.TitleTextSize;
-            cell.DayTextColor = CalendarModel.DayTextColor;
-            cell.TitleColor = CalendarModel.TitleColor;
+            cell.DayTextFont = CalendarModel.DayTextFont;
+            cell.TitleFont = CalendarModel.TitleFont;
+
+            if(item.WeekDay == DateTime.Now.DayOfWeek)
+            {
+                cell.CellBackgroundColor = CalendarModel.CurrentDayBackgroundColor;
+                cell.DayTextColor = CalendarModel.CurrentDayTextColor;
+                cell.TitleColor = CalendarModel.CurrentDayTextColor;
+                cell.WeekDayDeviderColor = UIColor.White;
+            }
+            else
+            {
+                cell.CellBackgroundColor = (int)item.WeekDay % 2 == 0 ? CalendarModel.DayEvenBackgroundColor : CalendarModel.DayUnevenBackgroundColor;
+                cell.DayTextColor = CalendarModel.DayTextColor;
+                cell.TitleColor = CalendarModel.TitleColor;
+                cell.WeekDayDeviderColor = UIColor.LightGray;
+            }
         }
     }
 }

@@ -26,13 +26,33 @@ namespace EOS.UI.iOS.Models
             {
                 if (value.Count() != 7)
                     throw new Exception("datasource must contain 7 week days");
-                _items = value;
+                _items = value.OrderBy(i => i.WeekDay);
+                if(WeekStart != null)
+                {
+                    SortDays();
+                }
                 ItemsChanged?.Invoke(this, EventArgs.Empty);
             }
         }
 
-        public DayOfWeek WeekStart { get; set; }
-        
+        private DayOfWeek? _weekStart;
+        public DayOfWeek? WeekStart
+        {
+            get => _weekStart;
+            set
+            {
+                if (value == DayOfWeek.Monday || value == DayOfWeek.Sunday)
+                {
+                    _weekStart = value;
+                    SortDays();
+                }
+                else
+                {
+                    throw new ArgumentException("week must starts from Sunday or Monday");
+                }
+            }
+        }
+
         private UIFont _titleFont;
         public UIFont TitleFont
         {
@@ -98,7 +118,7 @@ namespace EOS.UI.iOS.Models
                 IsEOSCustomizationIgnored = true;
             }
         }
-
+        
         private UIColor _dayUnevenBackgroundColor;
         public UIColor DayUnevenBackgroundColor
         {
@@ -170,16 +190,33 @@ namespace EOS.UI.iOS.Models
             if (!IsEOSCustomizationIgnored)
             {
                 var provider = EOSThemeProvider.Instance;
-                TitleColor = provider.GetEOSProperty<UIColor>(this, EOSConstants.NeutralColor6);
-                TitleFont = provider.GetEOSProperty<UIFont>(this, EOSConstants.Font);
-                DayTextColor = provider.GetEOSProperty<UIColor>(this, EOSConstants.NeutralColor5);
-                DayTextFont = provider.GetEOSProperty<UIFont>(this, EOSConstants.Font);
+                TitleColor = provider.GetEOSProperty<UIColor>(this, EOSConstants.NeutralColor1);
+                TitleFont = provider.GetEOSProperty<UIFont>(this, EOSConstants.WorkTimeTitleFont);
+                DayTextColor = provider.GetEOSProperty<UIColor>(this, EOSConstants.NeutralColor2);
+                DayTextFont = provider.GetEOSProperty<UIFont>(this, EOSConstants.WorkTimeDayTextFont);
                 CurrentDayBackgroundColor = provider.GetEOSProperty<UIColor>(this, EOSConstants.BrandPrimaryColor);
-                
-                    
-                
+                CurrentDayTextColor = provider.GetEOSProperty<UIColor>(this, EOSConstants.NeutralColor6);
+                TitleTextSize = provider.GetEOSProperty<int>(this, EOSConstants.WorkTimeTitleSize);
+                DayTextSize = provider.GetEOSProperty<int>(this, EOSConstants.WorkTimeDayTextSize);
+                DayEvenBackgroundColor = provider.GetEOSProperty<UIColor>(this, EOSConstants.NeutralColor6);
+                DayUnevenBackgroundColor = provider.GetEOSProperty<UIColor>(this, EOSConstants.NeutralColor4);
             }
         }
         
+        private void SortDays()
+        {
+            if (WeekStart == DayOfWeek.Monday)
+            {
+                var monday = _items.Single(i => i.WeekDay == DayOfWeek.Monday);
+                var sunday = _items.Single(i => i.WeekDay == DayOfWeek.Sunday);
+                _items = _items.Except(new[] { monday, sunday }).OrderBy(i => i.WeekDay);
+                _items = _items.Prepend(monday);
+                _items = _items.Append(sunday);
+            }
+            else
+            {
+                _items = _items.OrderBy(i => i.WeekDay);
+            }
+        }
     }
 }

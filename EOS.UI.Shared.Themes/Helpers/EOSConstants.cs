@@ -39,6 +39,11 @@
         public const string RightPadding = "rightPadding";
         public const string HasSectionBorder = "hasSectionBorder";
         public const string HasSectionAction = "hasSectionAction";
+        //worktime control
+        public const string WorkTimeTitleSize = "workTimeTitleSize";
+        public const string WorkTimeDayTextSize = "workTimeDayTextSize";
+        public const string WorkTimeTitleFont = "workTimeTitleFont";
+        public const string WorkTimeDayTextFont = "workTimeDayFont";
     }
 
     public static class ControlNames

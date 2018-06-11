@@ -5,7 +5,7 @@ namespace EOS.UI.Shared.Themes.DataModels
     {
         public DayOfWeek WeekDay { get; set; }
 
-        public string ShortWeekDay => WeekDay.ToString().Substring(0, 3);
+        public string ShortWeekDay => WeekDay.ToString().Substring(0, 2);
         
         public TimeSpan StartTime { get; set; }
 

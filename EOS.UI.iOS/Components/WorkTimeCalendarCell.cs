@@ -53,8 +53,6 @@ namespace EOS.UI.iOS.Components
         }
 
         public UIColor CurrentDayTextColor { get; set; }
-        public UIColor DayUnevenBackgroundColor { get; set; }
-        public UIColor DayEvenBackgroundColor { get; set; }
 
         public int TitleTextSize
         {
@@ -73,7 +71,7 @@ namespace EOS.UI.iOS.Components
                 stopBreakLabel.Font = DayTextFont.WithSize(value);
             }
         }
-
+        
         private bool TimeVisible
         {
             set
@@ -84,6 +82,18 @@ namespace EOS.UI.iOS.Components
                 stopBreakLabel.Hidden = !value;
                 dayOffDevider.Hidden = value;
             }
+        }
+        
+        public UIColor CellBackgroundColor
+        {
+            get => cellContentView.BackgroundColor;
+            set => cellContentView.BackgroundColor = value;
+        }
+        
+        public UIColor WeekDayDeviderColor
+        {
+            get => weekDayDevider.BackgroundColor;
+            set => weekDayDevider.BackgroundColor = value;
         }
 
         static WorkTimeCalendarCell()

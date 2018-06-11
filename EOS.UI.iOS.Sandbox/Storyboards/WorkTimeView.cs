@@ -24,12 +24,13 @@ namespace EOS.UI.iOS.Sandbox
 
             var dataSource = CreateSchedule();
             var source = new WorkTimeCalendarCollectionSource(workTimeCollection);
-            source.CalendarModel.DayTextSize = 25;
-            source.CalendarModel.TitleTextSize = 35;
-            source.CalendarModel.DayTextColor = UIColor.Blue;
-            source.CalendarModel.TitleColor = UIColor.Green;
-            source.CalendarModel.CurrentDayBackgroundColor = UIColor.Yellow;
+            //source.CalendarModel.DayTextSize = 25;
+            //source.CalendarModel.TitleTextSize = 35;
+            //source.CalendarModel.DayTextColor = UIColor.Blue;
+            //source.CalendarModel.TitleColor = UIColor.Green;
+            //source.CalendarModel.CurrentDayBackgroundColor = UIColor.Yellow;
             source.CalendarModel.Items = dataSource;
+            source.CalendarModel.WeekStart = DayOfWeek.Sunday;
             workTimeCollection.Source = source;
         }
 
