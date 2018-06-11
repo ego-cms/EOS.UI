@@ -16,6 +16,8 @@ namespace EOS.UI.Android.Sandbox.Activities
     [Activity(Label = ControlNames.FabProgress, Theme = "@style/Sandbox.Main")]
     public class FabProgressActivity : BaseActivity
     {
+        int _fabInitialSize = 0;
+
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
@@ -111,12 +113,12 @@ namespace EOS.UI.Android.Sandbox.Activities
             sizeDropDown.SetupAdapter(Sizes.FabProgressSizes.Select(i => i.Key).ToList());
             sizeDropDown.ItemSelected += (position) =>
             {
+                if (_fabInitialSize == 0)
+                    _fabInitialSize = fab.Width;
+                
                 if (position > 0)
                 {
-                    var lp = fab.LayoutParameters;
-                    lp.Width = Sizes.FabProgressSizes.ElementAt(position).Value;
-                    lp.Height = Sizes.FabProgressSizes.ElementAt(position).Value;
-                    fab.LayoutParameters = lp;
+                    ChangeFabLayoutParameters(Sizes.FabProgressSizes.ElementAt(position).Value, fab);
                     ResetCustomization(fab, themeDropDown, spinners);
                 }
             };
@@ -128,14 +130,27 @@ namespace EOS.UI.Android.Sandbox.Activities
 
             resetButton.Click += delegate
             {
+                if (_fabInitialSize != 0)
+                {
+                    ChangeFabLayoutParameters(_fabInitialSize, fab);
+                }
                 ResetCustomization(fab, themeDropDown, spinners);
             };
         }
 
-        private static void ResetCustomization(FabProgress fab, EOSSandboxDropDown themeDropDown, List<EOSSandboxDropDown> spinners)
+        private void ChangeFabLayoutParameters(int width, FabProgress fab)
+        {
+            var lp = fab.LayoutParameters;
+            lp.Width = width;
+            lp.Height = width;;
+            fab.LayoutParameters = lp;
+        }
+
+        private void ResetCustomization(FabProgress fab, EOSSandboxDropDown themeDropDown, List<EOSSandboxDropDown> spinners)
         {
             spinners.Except(new[] { themeDropDown }).ToList().ForEach(s => s.SetSpinnerSelection(0));
             fab.ResetCustomization();
+
         }
     }
 }
