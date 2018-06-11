@@ -115,10 +115,10 @@ namespace EOS.UI.Shared.Themes.Themes
             { EOSConstants.BottomPadding, 5 },
             { EOSConstants.HasSectionBorder, true },
             { EOSConstants.HasSectionAction, true },
-            { EOSConstants.TitleFont, "Fonts/OpenSansRegular.ttf" },
-            { EOSConstants.DayTimeFont, "Fonts/OpenSansRegular.ttf" },
-            { EOSConstants.TitleTextSize, 17 },
-            { EOSConstants.DayTimeTextSize, 15 },
+            { EOSConstants.WorkTimeTitleFont, "Fonts/OpenSansRegular.ttf" },
+            { EOSConstants.WorkTimeDayTextFont, "Fonts/OpenSansRegular.ttf" },
+            { EOSConstants.WorkTimeTitleSize, 16 },
+            { EOSConstants.WorkTimeDayTextSize, 14 },
 #endif
         };
     }
