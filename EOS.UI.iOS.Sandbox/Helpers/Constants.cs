@@ -59,6 +59,17 @@ namespace EOS.UI.iOS.Sandbox.Helpers
             public static string PaddingLeft = "Padding left";
             public static string PaddingRight = "Padding right";
             public static string RippleColor = "Ripple color";
+            public static string TitleFont = "Title font";
+            public static string DayTextFont = "Day text font";
+            public static string TitleTextSize = "Title size";
+            public static string DayTextSize = "Day text size";
+            public static string DayTextColor = "Day text color";
+            public static string CurrentDayTextColor = "Current day text color";
+            public static string CurrentDayBackgroundColor = "Current day background color";
+            public static string ColorDeviders = "Devider's color";
+            public static string CurrentColorDeviders = "Current day devider's color";
+            public static string DayEvenBackgroundColor = "Even day background color";
+            public static string WeekStartDay = "Week start day";
         };
 
         public static UIColor BackgroundColor = UIColor.FromRGB(224, 224, 224);
@@ -101,6 +112,12 @@ namespace EOS.UI.iOS.Sandbox.Helpers
         {
             { "Enabled", true },
             { "Disabled", false },
+        };
+
+        public static List<DayOfWeek> WeekStartDays = new List<DayOfWeek>()
+        {
+            DayOfWeek.Monday,
+            DayOfWeek.Sunday
         };
 
         public static Dictionary<string, ShadowConfig> ShadowConfigs = new Dictionary<string, ShadowConfig>()

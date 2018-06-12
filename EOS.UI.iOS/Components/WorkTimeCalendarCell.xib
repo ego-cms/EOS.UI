@@ -133,7 +133,7 @@
                     </view>
                 </subviews>
             </view>
-            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
                 <constraint firstAttribute="bottom" secondItem="kYD-aL-A3E" secondAttribute="bottom" id="2wr-Oo-BwA"/>
                 <constraint firstAttribute="trailing" secondItem="kYD-aL-A3E" secondAttribute="trailing" id="E5y-Q3-wlk"/>
@@ -143,6 +143,7 @@
             <size key="customSize" width="137" height="419"/>
             <connections>
                 <outlet property="cellContentView" destination="pyu-Ua-4FT" id="zxX-va-QBO"/>
+                <outlet property="circleDevider" destination="2jb-eO-heK" id="0Xc-oM-MHa"/>
                 <outlet property="dayLabel" destination="Y68-Wt-e0w" id="8gN-zo-HJA"/>
                 <outlet property="dayOffDevider" destination="bVD-vu-xgp" id="2tG-ZS-Gxw"/>
                 <outlet property="startBreakLabel" destination="78h-FV-JCD" id="aZS-sd-w1L"/>

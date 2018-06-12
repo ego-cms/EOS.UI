@@ -95,6 +95,12 @@ namespace EOS.UI.iOS.Components
             get => weekDayDevider.BackgroundColor;
             set => weekDayDevider.BackgroundColor = value;
         }
+        
+        public UIColor CircleDeviderColor
+        {
+            get => circleDevider.BackgroundColor;
+            set => circleDevider.BackgroundColor = value;
+        }
 
         static WorkTimeCalendarCell()
         {
