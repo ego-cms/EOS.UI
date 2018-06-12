@@ -74,7 +74,6 @@ namespace EOS.UI.Android.Components
 
         #endregion
 
-
         #region utility method
 
         private void Initialize(IAttributeSet attrs = null)
@@ -99,7 +98,7 @@ namespace EOS.UI.Android.Components
             set
             {
                 _isSelected = value;
-                (Background as VectorDrawable).SetColorFilter(IsSelected ? CurrentDividerColor : DividerColor, PorterDuff.Mode.SrcIn);
+                (Background as VectorDrawable).SetColorFilter(_isSelected ?  DividerColor : CurrentDividerColor, PorterDuff.Mode.SrcIn);
             }
         }
 
@@ -119,7 +118,7 @@ namespace EOS.UI.Android.Components
             if(!IsEOSCustomizationIgnored)
             {
                 DividerColor = GetThemeProvider().GetEOSProperty<Color>(this, EOSConstants.NeutralColor3);
-                CurrentDividerColor = GetThemeProvider().GetEOSProperty<Color>(this, EOSConstants.NeutralColor1);
+                CurrentDividerColor = GetThemeProvider().GetEOSProperty<Color>(this, EOSConstants.NeutralColor6);
             }
         }
 

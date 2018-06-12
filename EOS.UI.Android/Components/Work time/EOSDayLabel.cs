@@ -140,10 +140,10 @@ namespace EOS.UI.Android.Components
         {
             if(!IsEOSCustomizationIgnored)
             {
-                TitleFont = Typeface.CreateFromAsset(Context.Assets, GetThemeProvider().GetEOSProperty<string>(this, EOSConstants.TitleFont));
-                TitleTextSize = GetThemeProvider().GetEOSProperty<int>(this, EOSConstants.TitleTextSize);
-                TitleColor = GetThemeProvider().GetEOSProperty<Color>(this, EOSConstants.NeutralColor6);
-                CurrentDayTextColor = GetThemeProvider().GetEOSProperty<Color>(this, EOSConstants.NeutralColor1);
+                TitleFont = Typeface.CreateFromAsset(Context.Assets, GetThemeProvider().GetEOSProperty<string>(this, EOSConstants.WorkTimeTitleFont));
+                TitleTextSize = GetThemeProvider().GetEOSProperty<int>(this, EOSConstants.WorkTimeTitleSize);
+                TitleColor = GetThemeProvider().GetEOSProperty<Color>(this, EOSConstants.NeutralColor2);
+                CurrentDayTextColor = GetThemeProvider().GetEOSProperty<Color>(this, EOSConstants.NeutralColor6);
             }
         }
 

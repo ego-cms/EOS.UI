@@ -10,6 +10,7 @@ using EOS.UI.Shared.Themes.Helpers;
 using EOS.UI.Shared.Themes.Interfaces;
 using UIFrameworks.Android.Themes;
 using UIFrameworks.Shared.Themes.Interfaces;
+using static EOS.UI.Android.Helpers.Constants;
 
 namespace EOS.UI.Android.Components
 {
@@ -131,8 +132,13 @@ namespace EOS.UI.Android.Components
 
         private void Initialize(IAttributeSet attrs = null)
         {
+            var padding = (int)(WorkTimeConstants.Padding * Resources.DisplayMetrics.Density);
+            SetPadding(padding, padding, padding, padding);
             SetLayoutManager(new LinearLayoutManager(Context, LinearLayoutManager.Horizontal, false));
-            SetAdapter(new WorkTimeAdapter());
+
+            var sectionWidth = (Resources.DisplayMetrics.WidthPixels - 2 * padding) / WorkTimeConstants.DaysCount;
+
+            SetAdapter(new WorkTimeAdapter(sectionWidth));
 
             if(attrs != null)
                 InitializeAttributes(attrs);

@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using Android.Graphics;
-using Android.Graphics.Drawables;
 using Android.Support.V7.Widget;
 using Android.Views;
 using EOS.UI.Android.Helpers;
@@ -10,6 +9,7 @@ using EOS.UI.Shared.Themes.Helpers;
 using EOS.UI.Shared.Themes.Interfaces;
 using UIFrameworks.Android.Themes;
 using UIFrameworks.Shared.Themes.Interfaces;
+using static EOS.UI.Android.Helpers.Constants;
 
 namespace EOS.UI.Android.Components
 {
@@ -17,18 +17,32 @@ namespace EOS.UI.Android.Components
     {
         #region fields
 
-        private const string Dash = "�";
+        private const string Dash = "-";
         private int _selectedWorkDay = -1;
+        private int _sectionWidth;
+
+        #endregion
+
+        #region conastructors
+
+        public WorkTimeAdapter(int sectionWidth)
+        {
+            _sectionWidth = sectionWidth;
+        }
 
         #endregion
 
         #region RecyclerView.Adapter implementation
 
-        public override int ItemCount => 7;
+        public override int ItemCount => WorkTimeConstants.DaysCount;
 
         public override void OnBindViewHolder(RecyclerView.ViewHolder holder, int position)
         {
             var workTimeItem = holder as WorkTimeItem;
+
+            if(Items == null)
+                _items = GenerateDefaultItems();
+
             var workDayModel = Items[position];
 
             workTimeItem.StartDayTimeLabel.IsEmpty = false;
@@ -124,6 +138,7 @@ namespace EOS.UI.Android.Components
         {
             View itemView = LayoutInflater.From(parent.Context).Inflate(Resource.Layout.WorkTimeItemLayout, parent, false);
             var viewHolder = new WorkTimeItem(itemView, SetSelectedDay);
+            itemView.LayoutParameters.Width = _sectionWidth;
             return viewHolder;
         }
 
@@ -337,6 +352,15 @@ namespace EOS.UI.Android.Components
             foreach(var view in views)
                 if(view is IEOSThemeControl themeControl)
                     themeControl.ResetCustomization();
+        }
+
+        private List<WorkTimeCalendarItem> GenerateDefaultItems()
+        {
+            var list = new List<WorkTimeCalendarItem>();
+            for(int i = 0; i < 7; i++)
+                list.Add(new WorkTimeCalendarItem() { WeekDay = (DayOfWeek)i });
+
+            return list;
         }
 
         #endregion

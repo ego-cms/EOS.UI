@@ -132,7 +132,7 @@ namespace EOS.UI.Android.Components
             if(!IsEOSCustomizationIgnored)
             {
                 CurrentDayBackgroundColor = GetThemeProvider().GetEOSProperty<Color>(this, EOSConstants.BrandPrimaryColor);
-                DayEvenBackgroundColor = GetThemeProvider().GetEOSProperty<Color>(this, EOSConstants.NeutralColor1);
+                DayEvenBackgroundColor = GetThemeProvider().GetEOSProperty<Color>(this, EOSConstants.NeutralColor4);
                 IsEOSCustomizationIgnored = false;
             }
         }

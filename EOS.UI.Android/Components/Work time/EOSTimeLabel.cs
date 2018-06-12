@@ -7,6 +7,7 @@ using Android.Widget;
 using EOS.UI.Shared.Themes.Helpers;
 using EOS.UI.Shared.Themes.Interfaces;
 using UIFrameworks.Android.Themes;
+using UIFrameworks.Shared.Themes.Helpers;
 using UIFrameworks.Shared.Themes.Interfaces;
 
 namespace EOS.UI.Android.Components
@@ -91,7 +92,7 @@ namespace EOS.UI.Android.Components
 
                 if(IsEmpty)
                     SetTextColor(Color.Transparent);
-                if(!IsSelected)
+                else if(!IsSelected)
                     SetTextColor(value);
             }
         }
@@ -107,7 +108,7 @@ namespace EOS.UI.Android.Components
 
                 if(IsEmpty)
                     SetTextColor(Color.Transparent);
-                if(IsSelected)
+                else if(IsSelected)
                     SetTextColor(value);
             }
         }
@@ -157,7 +158,10 @@ namespace EOS.UI.Android.Components
         {
             if(!IsEOSCustomizationIgnored)
             {
-
+                DayTextFont = Typeface.CreateFromAsset(Context.Assets, GetThemeProvider().GetEOSProperty<string>(this, EOSConstants.WorkTimeDayTextFont));
+                DayTextSize = GetThemeProvider().GetEOSProperty<int>(this, EOSConstants.WorkTimeDayTextSize);
+                DayTextColor = GetThemeProvider().GetEOSProperty<Color>(this, EOSConstants.NeutralColor3);
+                CurrentDayTextColor = GetThemeProvider().GetEOSProperty<Color>(this, EOSConstants.NeutralColor6);
             }
         }
 
