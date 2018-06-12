@@ -28,6 +28,7 @@ namespace EOS.UI.Android.Sandbox.Activities
         private EOSSandboxDropDown _backgroundColorDisabledDropDown;
         private EOSSandboxDropDown _backgroundColorPressedDropDown;
         private EOSSandboxDropDown _cornerRadiusDropDown;
+        private EOSSandboxDropDown _rippleColorDropDown;
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
@@ -48,6 +49,7 @@ namespace EOS.UI.Android.Sandbox.Activities
             _backgroundColorDisabledDropDown = FindViewById<EOSSandboxDropDown>(Resource.Id.disabledBackgroundDropDown);
             _backgroundColorPressedDropDown = FindViewById<EOSSandboxDropDown>(Resource.Id.pressedBackgroundDropDown);
             _cornerRadiusDropDown = FindViewById<EOSSandboxDropDown>(Resource.Id.cornerRadiusDropDown);
+            _rippleColorDropDown = FindViewById<EOSSandboxDropDown>(Resource.Id.rippleColorDropDown);
             var resetButton = FindViewById<Button>(Resource.Id.buttonResetCustomization);
             var disableSwitch = FindViewById<Switch>(Resource.Id.switchDisabled);
 
@@ -95,6 +97,10 @@ namespace EOS.UI.Android.Sandbox.Activities
             _cornerRadiusDropDown.SetupAdapter(Sizes.CornerRadusCollection.Select(item => item.Key).ToList());
             _cornerRadiusDropDown.ItemSelected += CornerRadiurSpinner_ItemSelected;
 
+            _rippleColorDropDown.Name = Fields.RippleColor;
+            _rippleColorDropDown.SetupAdapter(Colors.ColorsCollection.Select(item => item.Key).ToList());
+            _rippleColorDropDown.ItemSelected += RippleColorItemSelected;
+
             resetButton.Click += delegate
             {
                 ResetCustomValues();
@@ -107,7 +113,7 @@ namespace EOS.UI.Android.Sandbox.Activities
 
         private void ThemeItemSelected(int position)
         {
-            if(position > 0)
+            if (position > 0)
             {
                 _simpleButton.GetThemeProvider().SetCurrentTheme(ThemeTypes.ThemeCollection.ElementAt(position).Value);
                 ResetCustomValues();
@@ -117,69 +123,75 @@ namespace EOS.UI.Android.Sandbox.Activities
 
         private void FontSpinner_ItemSelected(int position)
         {
-            if(position > 0)
+            if (position > 0)
                 _simpleButton.Typeface = Typeface.CreateFromAsset(Assets, Fonts.FontsCollection.ElementAt(position).Value);
         }
 
         private void LetterSpacingView_ItemSelected(int position)
         {
-            if(position > 0)
+            if (position > 0)
                 _simpleButton.LetterSpacing = Sizes.LetterSpacingCollection.ElementAt(position).Value;
         }
 
         private void TextSizeItemSelected(int position)
         {
-            if(position > 0)
+            if (position > 0)
                 _simpleButton.TextSize = Sizes.TextSizeCollection.ElementAt(position).Value;
         }
 
         private void TextColorEnabledItemSelected(int position)
         {
-            if(position > 0)
+            if (position > 0)
                 _simpleButton.TextColor = Colors.ColorsCollection.ElementAt(position).Value;
         }
 
         private void TextColorDisabledItemSelected(int position)
         {
-            if(position > 0)
+            if (position > 0)
                 _simpleButton.DisabledTextColor = Colors.ColorsCollection.ElementAt(position).Value;
         }
 
         private void TextColorPressedItemSelected(int position)
         {
-            if(position > 0)
+            if (position > 0)
                 _simpleButton.PressedTextColor = Colors.ColorsCollection.ElementAt(position).Value;
         }
 
         private void BackgroundColorEnabledItemSelected(int position)
         {
-            if(position > 0)
+            if (position > 0)
                 _simpleButton.BackgroundColor = Colors.ColorsCollection.ElementAt(position).Value;
         }
 
         private void BackgroundColorDisabledItemSelected(int position)
         {
-            if(position > 0)
+            if (position > 0)
                 _simpleButton.DisabledBackgroundColor = Colors.ColorsCollection.ElementAt(position).Value;
         }
 
         private void BackgroundColorPressedItemSelected(int position)
         {
-            if(position > 0)
+            if (position > 0)
                 _simpleButton.PressedBackgroundColor = Colors.ColorsCollection.ElementAt(position).Value;
         }
 
         private void CornerRadiurSpinner_ItemSelected(int position)
         {
-            if(position > 0)
+            if (position > 0)
                 _simpleButton.CornerRadius = Sizes.CornerRadusCollection.ElementAt(position).Value;
+        }
+
+        private void RippleColorItemSelected(int position)
+        {
+            if (position > 0)
+                _simpleButton.RippleColor = Colors.ColorsCollection.ElementAt(position).Value;
         }
 
         private void SetCurrenTheme(IEOSTheme iEOSTheme)
         {
-            if(iEOSTheme is LightEOSTheme)
+            if (iEOSTheme is LightEOSTheme)
                 _themeDropDown.SetSpinnerSelection(1);
-            if(iEOSTheme is DarkEOSTheme)
+            if (iEOSTheme is DarkEOSTheme)
                 _themeDropDown.SetSpinnerSelection(2);
         }
 
@@ -196,6 +208,7 @@ namespace EOS.UI.Android.Sandbox.Activities
             _backgroundColorDisabledDropDown.SetSpinnerSelection(0);
             _backgroundColorPressedDropDown.SetSpinnerSelection(0);
             _cornerRadiusDropDown.SetSpinnerSelection(0);
+            _rippleColorDropDown.SetSpinnerSelection(0);
         }
 
         public void OnCheckedChanged(CompoundButton buttonView, bool isChecked)
