@@ -64,7 +64,7 @@ namespace EOS.UI.Shared.Themes.Themes
             { EOSConstants.CircleProgressShown, true},
             { EOSConstants.FabShadow, new ShadowConfig(){
                         Color = UIColor.Black.CGColor,
-                        Offset = new CGSize(0,0),
+                        Offset = new CGPoint(0,0),
                         Radius = 2,
                         Opacity = 0.9f
             }},
@@ -76,8 +76,7 @@ namespace EOS.UI.Shared.Themes.Themes
             { EOSConstants.RightPadding, 7 },
             { EOSConstants.BottomPadding, 5 },
             { EOSConstants.HasSectionBorder, true },
-            { EOSConstants.HasSectionAction, true },
-            { EOSConstants.FabShadow, null }
+            { EOSConstants.HasSectionAction, true }
 #endif
 
 #if __ANDROID__

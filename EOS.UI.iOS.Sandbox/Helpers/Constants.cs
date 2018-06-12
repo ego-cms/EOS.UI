@@ -107,16 +107,24 @@ namespace EOS.UI.iOS.Sandbox.Helpers
             {
                 {"Shadow 1", new ShadowConfig(){
                         Color = UIColor.Black.CGColor,
-                        Offset = new CGSize(0,0),
+                        Offset = new CGPoint(0,0),
                         Radius = 4,
                         Opacity = 0.7f
                     }},
                 {"Shadow 2", new ShadowConfig(){
                         Color = UIColor.Black.CGColor,
-                        Offset = new CGSize(0,0),
+                        Offset = new CGPoint(0,0),
                         Radius = 8,
                         Opacity = 0.9f
-                    }}
+                    }},
+                { "Shadow 3", new ShadowConfig{ Color = UIColor.Blue.CGColor, Offset = new CGPoint(-5,5), Radius = 5, Opacity = 1.0f} },
+                { "Shadow 4", new ShadowConfig{ Color = UIColor.Yellow.CGColor, Offset = new CGPoint(5,-5), Radius = 5, Opacity = 1.0f} },
+                { "Shadow 5", new ShadowConfig{ Color = UIColor.Purple.CGColor, Offset = new CGPoint(-5,-5), Radius = 5, Opacity = 1.0f} },
+                { "Shadow 6", new ShadowConfig{ Color = UIColor.Purple.CGColor, Offset = new CGPoint(-25,-25), Radius = 15, Opacity = 1.0f} },
+                { "Shadow 7", null },
+                { "Shadow 8", new ShadowConfig{ Color = UIColor.Black.CGColor, Offset = new CGPoint(0,0), Radius = 5, Opacity = 1.0f}  },
+                { "Shadow 9", new ShadowConfig{ Color = UIColor.Black.CGColor, Offset = new CGPoint(0,0), Radius = 25, Opacity = 1.0f}  },
+                { "Shadow 10", new ShadowConfig{ Color = UIColor.Black.CGColor, Offset = new CGPoint(0,0), Radius = 15, Opacity = 1.0f}  },
             };
 
         public static List<string> Titles = new List<string>()

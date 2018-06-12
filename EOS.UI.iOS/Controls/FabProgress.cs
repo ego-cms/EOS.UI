@@ -166,10 +166,17 @@ namespace EOS.UI.iOS.Controls
 
         private void SetShadowConfig(ShadowConfig config)
         {
-            Layer.ShadowColor = config.Color;
-            Layer.ShadowOffset = config.Offset;
-            Layer.ShadowRadius = config.Radius;
-            Layer.ShadowOpacity = config.Opacity;
+            if (config != null)
+            {
+                Layer.ShadowColor = config.Color;
+                Layer.ShadowOffset = new CGSize(config.Offset);
+                Layer.ShadowRadius = config.Radius;
+                Layer.ShadowOpacity = config.Opacity;
+            }
+            else
+            {
+                Layer.ShadowOpacity = 0.0f;
+            }
         }
 
         public IEOSStyle GetCurrentEOSStyle()

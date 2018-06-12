@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Android.Content.PM;
 using Android.Graphics;
 using Android.Graphics.Drawables;
+using EOS.UI.Shared.Helpers;
 
 namespace EOS.UI.Android.Helpers
 {

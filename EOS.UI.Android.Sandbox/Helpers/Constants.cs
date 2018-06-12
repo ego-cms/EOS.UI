@@ -3,6 +3,7 @@ using System.Linq;
 using Android.Graphics;
 using EOS.UI.Shared.Themes.Helpers;
 using EOS.UI.Android.Helpers;
+using EOS.UI.Shared.Helpers;
 
 namespace EOS.UI.Android.Sandbox.Helpers
 {
@@ -251,16 +252,16 @@ namespace EOS.UI.Android.Sandbox.Helpers
             public static Dictionary<string, ShadowConfig> ShadowsCollection = new Dictionary<string, ShadowConfig>()
             {
                 { string.Empty, null },
-                { Shadow1, new ShadowConfig{ Color = Color.Red, Offset = new Offset(0,0), Blur = 5, Spread = 200} },
-                { Shadow2, new ShadowConfig{ Color = Color.Green, Offset = new Offset(5,5), Blur = 5, Spread = 200} },
-                { Shadow3, new ShadowConfig{ Color = Color.Blue, Offset = new Offset(-5,5), Blur = 5, Spread = 200} },
-                { Shadow4, new ShadowConfig{ Color = Color.Yellow, Offset = new Offset(5,-5), Blur = 5, Spread = 200} },
-                { Shadow5, new ShadowConfig{ Color = Color.Purple, Offset = new Offset(-5,-5), Blur = 5, Spread = 200} },
-                { Shadow6, new ShadowConfig{ Color = Color.Purple, Offset = new Offset(-25,-25), Blur = 15, Spread = 200} },
+                { Shadow1, new ShadowConfig{ Color = Color.Red, Offset = new Point(0,0), Blur = 5, Spread = 200} },
+                { Shadow2, new ShadowConfig{ Color = Color.Green, Offset = new Point(5,5), Blur = 5, Spread = 200} },
+                { Shadow3, new ShadowConfig{ Color = Color.Blue, Offset = new Point(-5,5), Blur = 5, Spread = 200} },
+                { Shadow4, new ShadowConfig{ Color = Color.Yellow, Offset = new Point(5,-5), Blur = 5, Spread = 200} },
+                { Shadow5, new ShadowConfig{ Color = Color.Purple, Offset = new Point(-5,-5), Blur = 5, Spread = 200} },
+                { Shadow6, new ShadowConfig{ Color = Color.Purple, Offset = new Point(-25,-25), Blur = 15, Spread = 200} },
                 { Shadow7, null },
-                { Shadow8, new ShadowConfig{ Color = Color.Black, Offset = new Offset(0,0), Blur = 5, Spread = 200}  },
-                { Shadow9, new ShadowConfig{ Color = Color.Black, Offset = new Offset(0,0), Blur = 25, Spread = 200}  },
-                { Shadow10, new ShadowConfig{ Color = Color.Black, Offset = new Offset(0,0), Blur = 15, Spread = 200}  },
+                { Shadow8, new ShadowConfig{ Color = Color.Black, Offset = new Point(0,0), Blur = 5, Spread = 200}  },
+                { Shadow9, new ShadowConfig{ Color = Color.Black, Offset = new Point(0,0), Blur = 25, Spread = 200}  },
+                { Shadow10, new ShadowConfig{ Color = Color.Black, Offset = new Point(0,0), Blur = 15, Spread = 200}  },
             };
         }
 

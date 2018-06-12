@@ -10,6 +10,7 @@ using Android.Views;
 using Android.Views.Animations;
 using Android.Widget;
 using EOS.UI.Android.Helpers;
+using EOS.UI.Shared.Helpers;
 using EOS.UI.Shared.Themes.Helpers;
 using EOS.UI.Shared.Themes.Interfaces;
 using UIFrameworks.Android.Themes;
@@ -332,7 +333,7 @@ namespace EOS.UI.Android.Controls
             return backColor;
         }
 
-        private void SetInsetForImageLayer(LayerDrawable layerList, Drawable drawable, int halfWidth, Offset offset)
+        private void SetInsetForImageLayer(LayerDrawable layerList, Drawable drawable, int halfWidth, Point offset)
         {
             var xOffset = halfWidth - drawable.IntrinsicWidth / 2 - (int)Helpers.Helpers.DpToPx(offset.X);
             var yOffset = halfWidth - drawable.IntrinsicWidth / 2 + (int)Helpers.Helpers.DpToPx(offset.Y);
