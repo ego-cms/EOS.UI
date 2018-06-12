@@ -11,7 +11,7 @@ namespace EOS.UI.Android.Helpers
         public static class WorkTimeConstants
         {
             public const int Padding = 15;
-            public const int DaysCount = 15;
+            public const int DaysCount = 7;
         }
     }
 }

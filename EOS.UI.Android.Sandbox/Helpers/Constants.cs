@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.Linq;
 using Android.Graphics;
 using EOS.UI.Shared.Themes.Helpers;
@@ -53,6 +53,17 @@ namespace EOS.UI.Android.Sandbox.Helpers
             public static string PaddingBottom = "Padding bottom";
             public static string PaddingLeft = "Padding left";
             public static string PaddingRight = "Padding right";
+            public static string TitleFont = "Title font";
+            public static string DayTextFont = "Day text font";
+            public static string TitleTextSize = "Title text size";
+            public static string DayTextSize = "Day text size";
+            public static string TitleColor = "Title color";
+            public static string DayTextColor = "Day text color";
+            public static string CurrentDayBackgroundColor = "Current day background color";
+            public static string CurrentDayTextColor = "Current day text color";
+            public static string DayEvenBackgroundColor = "Day even background color";
+            public static string DividerColor = "Divider color";
+            public static string CurrentDividerColor = "Current divider color";
         };
 
         public static class Colors

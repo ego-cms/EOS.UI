@@ -15,8 +15,81 @@
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:background="@android:color/darker_gray" />
-    <EOS.UI.Android.Components.WorkTime
-        android:id="@+id/workTime"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+    <EOS.UI.Android.Sandbox.Controls.EOSSandboxLinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_gravity="center"
+        android:background="@android:color/white">
+        <EOS.UI.Android.Components.WorkTime
+            android:id="@+id/workTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </EOS.UI.Android.Sandbox.Controls.EOSSandboxLinearLayout>
+    <EOS.UI.Android.Sandbox.Controls.EOSSandboxDivider
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@android:color/darker_gray" />
+    <EOS.UI.Android.Sandbox.Controls.EOSSandboxScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <EOS.UI.Android.Sandbox.Controls.EOSSandboxDropDown
+                android:id="@+id/themeDropDown"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+            <EOS.UI.Android.Sandbox.Controls.EOSSandboxDropDown
+                android:id="@+id/titleFontDropDown"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+            <EOS.UI.Android.Sandbox.Controls.EOSSandboxDropDown
+                android:id="@+id/dayTextFontDropDown"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+            <EOS.UI.Android.Sandbox.Controls.EOSSandboxDropDown
+                android:id="@+id/titleTextSizeDropDown"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+            <EOS.UI.Android.Sandbox.Controls.EOSSandboxDropDown
+                android:id="@+id/dayTextSizeDropDown"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+            <EOS.UI.Android.Sandbox.Controls.EOSSandboxDropDown
+                android:id="@+id/titleColorDropDown"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+            <EOS.UI.Android.Sandbox.Controls.EOSSandboxDropDown
+                android:id="@+id/dayTextColorDropDown"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+            <EOS.UI.Android.Sandbox.Controls.EOSSandboxDropDown
+                android:id="@+id/currentDayBackgroundColorDropDown"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+            <EOS.UI.Android.Sandbox.Controls.EOSSandboxDropDown
+                android:id="@+id/currentDayTextColorDropDown"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+            <EOS.UI.Android.Sandbox.Controls.EOSSandboxDropDown
+                android:id="@+id/dayEvenBackgroundColorDropDown"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+            <EOS.UI.Android.Sandbox.Controls.EOSSandboxDropDown
+                android:id="@+id/dividerColorDropDown"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+            <EOS.UI.Android.Sandbox.Controls.EOSSandboxDropDown
+                android:id="@+id/currentDividerColorDropDown"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+            <EOS.UI.Android.Sandbox.Controls.EOSSandboxButton
+                android:text="Reset customization"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/buttonResetCustomization" />
+        </LinearLayout>
+    </EOS.UI.Android.Sandbox.Controls.EOSSandboxScrollView>
 </LinearLayout>

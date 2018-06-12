@@ -119,6 +119,7 @@ namespace EOS.UI.Android.Components
             {
                 DividerColor = GetThemeProvider().GetEOSProperty<Color>(this, EOSConstants.NeutralColor3);
                 CurrentDividerColor = GetThemeProvider().GetEOSProperty<Color>(this, EOSConstants.NeutralColor6);
+                IsEOSCustomizationIgnored = false;
             }
         }
 

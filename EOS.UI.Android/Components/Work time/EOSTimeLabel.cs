@@ -65,7 +65,7 @@ namespace EOS.UI.Android.Components
             {
                 _dayTextFont = value;
                 Typeface = value;
-                IsEOSCustomizationIgnored = false;
+                IsEOSCustomizationIgnored = true;
             }
         }
 
@@ -77,7 +77,7 @@ namespace EOS.UI.Android.Components
             {
                 _dayTextSize = value;
                 TextSize = value;
-                IsEOSCustomizationIgnored = false;
+                IsEOSCustomizationIgnored = true;
             }
         }
 
@@ -88,7 +88,7 @@ namespace EOS.UI.Android.Components
             set
             {
                 _dayTextColor = value;
-                IsEOSCustomizationIgnored = false;
+                IsEOSCustomizationIgnored = true;
 
                 if(IsEmpty)
                     SetTextColor(Color.Transparent);
@@ -104,7 +104,7 @@ namespace EOS.UI.Android.Components
             set
             {
                 _currentDayTextColor = value;
-                IsEOSCustomizationIgnored = false;
+                IsEOSCustomizationIgnored = true;
 
                 if(IsEmpty)
                     SetTextColor(Color.Transparent);
@@ -162,6 +162,7 @@ namespace EOS.UI.Android.Components
                 DayTextSize = GetThemeProvider().GetEOSProperty<int>(this, EOSConstants.WorkTimeDayTextSize);
                 DayTextColor = GetThemeProvider().GetEOSProperty<Color>(this, EOSConstants.NeutralColor3);
                 CurrentDayTextColor = GetThemeProvider().GetEOSProperty<Color>(this, EOSConstants.NeutralColor6);
+                IsEOSCustomizationIgnored = false;
             }
         }
 

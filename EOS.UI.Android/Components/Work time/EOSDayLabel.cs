@@ -53,7 +53,7 @@ namespace EOS.UI.Android.Components
             {
                 _titleFont = value;
                 Typeface = value;
-                IsEOSCustomizationIgnored = false;
+                IsEOSCustomizationIgnored = true;
             }
         }
 
@@ -65,7 +65,7 @@ namespace EOS.UI.Android.Components
             {
                 _titleTextSize = value;
                 TextSize = value;
-                IsEOSCustomizationIgnored = false;
+                IsEOSCustomizationIgnored = true;
             }
         }
 
@@ -76,7 +76,7 @@ namespace EOS.UI.Android.Components
             set
             {
                 _titleColor = value;
-                IsEOSCustomizationIgnored = false;
+                IsEOSCustomizationIgnored = true;
                 if(!IsSelected)
                     SetTextColor(value);
             }
@@ -89,7 +89,7 @@ namespace EOS.UI.Android.Components
             set
             {
                 _currentDayTextColor = value;
-                IsEOSCustomizationIgnored = false;
+                IsEOSCustomizationIgnored = true;
                 if(IsSelected)
                     SetTextColor(value);
             }
@@ -144,6 +144,7 @@ namespace EOS.UI.Android.Components
                 TitleTextSize = GetThemeProvider().GetEOSProperty<int>(this, EOSConstants.WorkTimeTitleSize);
                 TitleColor = GetThemeProvider().GetEOSProperty<Color>(this, EOSConstants.NeutralColor2);
                 CurrentDayTextColor = GetThemeProvider().GetEOSProperty<Color>(this, EOSConstants.NeutralColor6);
+                IsEOSCustomizationIgnored = false;
             }
         }
 

@@ -20,6 +20,7 @@ namespace EOS.UI.Android.Components
         private const string Dash = "-";
         private int _selectedWorkDay = -1;
         private int _sectionWidth;
+        private bool _resetCustomization;
 
         #endregion
 
@@ -113,6 +114,15 @@ namespace EOS.UI.Android.Components
             if(CurrentDayBackgroundColor != Color.Transparent)
                 workTimeItem.Container.CurrentDayBackgroundColor = CurrentDayBackgroundColor;
 
+            if(CurrentDayTextColor != Color.Transparent)
+            {
+                workTimeItem.DayLabel.CurrentDayTextColor = CurrentDayTextColor;
+                workTimeItem.StartDayTimeLabel.CurrentDayTextColor = CurrentDayTextColor;
+                workTimeItem.EndDayTimeLabel.CurrentDayTextColor = CurrentDayTextColor;
+                workTimeItem.StartBreakTimeLabel.CurrentDayTextColor = CurrentDayTextColor;
+                workTimeItem.EndBreakTimeLabel.CurrentDayTextColor = CurrentDayTextColor;
+            }
+
             if(DayEvenBackgroundColor != Color.Transparent)
                 workTimeItem.Container.DayEvenBackgroundColor = DayEvenBackgroundColor;
 
@@ -128,10 +138,13 @@ namespace EOS.UI.Android.Components
                 workTimeItem.CircleDivider.CurrentDividerColor = CurrentDividerColor;
             }
 
-            if(IsEOSCustomizationIgnored)
-                UpdateAppearance(workTimeItem.Container);
-            else
+            UpdateAppearance(workTimeItem.Container);
+
+            if(_resetCustomization)
+            {
                 ResetCustomization(workTimeItem.Container);
+                _resetCustomization = false;
+            }
         }
 
         public override RecyclerView.ViewHolder OnCreateViewHolder(ViewGroup parent, int viewType)
@@ -166,7 +179,7 @@ namespace EOS.UI.Android.Components
             set
             {
                 _titleFont = value;
-                IsEOSCustomizationIgnored = false;
+                IsEOSCustomizationIgnored = true;
                 NotifyDataSetChanged();
             }
         }
@@ -178,7 +191,7 @@ namespace EOS.UI.Android.Components
             set
             {
                 _dayTextFont = value;
-                IsEOSCustomizationIgnored = false;
+                IsEOSCustomizationIgnored = true;
                 NotifyDataSetChanged();
             }
         }
@@ -190,7 +203,7 @@ namespace EOS.UI.Android.Components
             set
             {
                 _titleTextSize = value;
-                IsEOSCustomizationIgnored = false;
+                IsEOSCustomizationIgnored = true;
                 NotifyDataSetChanged();
             }
         }
@@ -202,7 +215,7 @@ namespace EOS.UI.Android.Components
             set
             {
                 _dayTextSize = value;
-                IsEOSCustomizationIgnored = false;
+                IsEOSCustomizationIgnored = true;
                 NotifyDataSetChanged();
             }
         }
@@ -214,7 +227,7 @@ namespace EOS.UI.Android.Components
             set
             {
                 _titleColor = value;
-                IsEOSCustomizationIgnored = false;
+                IsEOSCustomizationIgnored = true;
                 NotifyDataSetChanged();
             }
         }
@@ -226,7 +239,7 @@ namespace EOS.UI.Android.Components
             set
             {
                 _dayTextColor = value;
-                IsEOSCustomizationIgnored = false;
+                IsEOSCustomizationIgnored = true;
                 NotifyDataSetChanged();
             }
         }
@@ -238,7 +251,7 @@ namespace EOS.UI.Android.Components
             set
             {
                 _currentDayBackgroundColor = value;
-                IsEOSCustomizationIgnored = false;
+                IsEOSCustomizationIgnored = true;
                 NotifyDataSetChanged();
             }
         }
@@ -250,7 +263,7 @@ namespace EOS.UI.Android.Components
             set
             {
                 _currentDayTextColor = value;
-                IsEOSCustomizationIgnored = false;
+                IsEOSCustomizationIgnored = true;
                 NotifyDataSetChanged();
             }
         }
@@ -262,7 +275,7 @@ namespace EOS.UI.Android.Components
             set
             {
                 _dayEvenBackgroundColor = value;
-                IsEOSCustomizationIgnored = false;
+                IsEOSCustomizationIgnored = true;
                 NotifyDataSetChanged();
             }
         }
@@ -274,7 +287,7 @@ namespace EOS.UI.Android.Components
             set
             {
                 _dividerColor = value;
-                IsEOSCustomizationIgnored = false;
+                IsEOSCustomizationIgnored = true;
                 NotifyDataSetChanged();
             }
         }
@@ -286,7 +299,7 @@ namespace EOS.UI.Android.Components
             set
             {
                 _currentDividerColor = value;
-                IsEOSCustomizationIgnored = false;
+                IsEOSCustomizationIgnored = true;
                 NotifyDataSetChanged();
             }
         }
@@ -301,7 +314,7 @@ namespace EOS.UI.Android.Components
                     throw new ArgumentOutOfRangeException(nameof(Items), "Days of the week should be 7!");
 
                 _items = value.SortByDayOfWeek(WeekStart);
-                IsEOSCustomizationIgnored = false;
+                IsEOSCustomizationIgnored = true;
                 NotifyDataSetChanged();
             }
         }
@@ -381,7 +394,21 @@ namespace EOS.UI.Android.Components
 
         public void ResetCustomization()
         {
+            Items = GenerateDefaultItems();
+            WeekStart = 0;
+            TitleFont = null;
+            DayTextFont = null;
+            DayTextSize = 0;
+            TitleTextSize = 0;
+            TitleColor = Color.Transparent;
+            DayTextColor = Color.Transparent;
+            CurrentDayBackgroundColor = Color.Transparent;
+            CurrentDayTextColor = Color.Transparent;
+            DayEvenBackgroundColor = Color.Transparent;
+            DividerColor = Color.Transparent;
+            CurrentDividerColor = Color.Transparent;
             IsEOSCustomizationIgnored = false;
+            _resetCustomization = true;
             UpdateAppearance();
         }
 

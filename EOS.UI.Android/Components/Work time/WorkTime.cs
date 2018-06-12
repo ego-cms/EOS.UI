@@ -16,6 +16,12 @@ namespace EOS.UI.Android.Components
 {
     public class WorkTime : RecyclerView, IEOSThemeControl
     {
+        #region fields
+
+        private int _sectionWidth;
+
+        #endregion
+
         #region properties
 
         private WorkTimeAdapter WorkTimeAdapter => GetAdapter() as WorkTimeAdapter;
@@ -136,9 +142,9 @@ namespace EOS.UI.Android.Components
             SetPadding(padding, padding, padding, padding);
             SetLayoutManager(new LinearLayoutManager(Context, LinearLayoutManager.Horizontal, false));
 
-            var sectionWidth = (Resources.DisplayMetrics.WidthPixels - 2 * padding) / WorkTimeConstants.DaysCount;
+            _sectionWidth = (Resources.DisplayMetrics.WidthPixels - 2 * padding) / WorkTimeConstants.DaysCount;
 
-            SetAdapter(new WorkTimeAdapter(sectionWidth));
+            SetAdapter(new WorkTimeAdapter(_sectionWidth));
 
             if(attrs != null)
                 InitializeAttributes(attrs);
@@ -162,11 +168,13 @@ namespace EOS.UI.Android.Components
 
         public void UpdateAppearance()
         {
+            SetAdapter(new WorkTimeAdapter(_sectionWidth));
             WorkTimeAdapter.UpdateAppearance();
         }
 
         public void ResetCustomization()
         {
+            SetAdapter(new WorkTimeAdapter(_sectionWidth));
             WorkTimeAdapter.ResetCustomization();
         }
 
