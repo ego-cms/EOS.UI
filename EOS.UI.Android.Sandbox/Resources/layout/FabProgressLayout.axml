@@ -19,7 +19,8 @@
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:clipChildren="false">
         <EOS.UI.Android.Controls.FabProgress
             android:id="@+id/fabProgress"
             android:layout_marginTop="10dp"

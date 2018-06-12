@@ -27,9 +27,9 @@ namespace EOS.UI.Android.Controls
         private const int _startPadding = 30;
         private const double _paddingRatio = 0.24;
         private const int _cornerRadius = 200;
-        private const int _shadowLayerIndex = 0;
-        private const int _backgroundLayerIndex = 1;
-        private const int _imageLayerIndex = 2;
+        private const int _shadowLayerIndex = 1;
+        private const int _backgroundLayerIndex = 2;
+        private const int _imageLayerIndex = 3;
         private const int _rotationAnimationDuration = 1000;
         private const float _pivot = 0.5f;
         private int _initialWidth = -1;
@@ -282,7 +282,7 @@ namespace EOS.UI.Android.Controls
         public override void Layout(int l, int t, int r, int b)
         {
             base.Layout(l, t, r, b);
-            if(_initialWidth<=0 || _initialWidth != Width)
+            if(_initialWidth<=0)// || _initialWidth != Width)
                 _initialWidth = Width;
         }
 
@@ -294,25 +294,74 @@ namespace EOS.UI.Android.Controls
 
             SetImageDrawable(null);
 
-            var paddings = _initialWidth / 2;
+            var densityOffsetX = (int)Helpers.Helpers.DpToPx(config.Offset.X);
+            var densityOffsetY = (int)Helpers.Helpers.DpToPx(config.Offset.Y);
+            var densityBlur = (int)Helpers.Helpers.DpToPx(config.Blur);
+
+            var newWidth = RecalculateWidth(densityOffsetX, densityOffsetY, densityBlur);
+
+            var paddings = newWidth / 2;
             SetPadding(paddings, paddings, paddings, paddings);
 
-            Drawable[] layers = new Drawable[3];
+            Drawable[] layers = new Drawable[4];
+            layers[0] = new GradientDrawable(GradientDrawable.Orientation.BlTr, new int[] { Color.Black.ToArgb(), Color.Black.ToArgb() });
             layers[_shadowLayerIndex] = new CircleShadowDrawable(config);
             layers[_backgroundLayerIndex] = CreateBackgroundDrawable();
             layers[_imageLayerIndex] = Image;
 
-            var densityOffsetX = (int)Helpers.Helpers.DpToPx(config.Offset.X);
-            var densityOffsetY = (int)Helpers.Helpers.DpToPx(config.Offset.Y);
-            var densityOffsetBlur = (int)Helpers.Helpers.DpToPx(config.Blur);
+            //var densityOffsetX = (int)Helpers.Helpers.DpToPx(config.Offset.X);
+            //var densityOffsetY = (int)Helpers.Helpers.DpToPx(config.Offset.Y);
+            //var densityOffsetBlur = (int)Helpers.Helpers.DpToPx(config.Blur);
 
             var layerList = CreateLayerList(layers);
+            layerList.SetLayerInset(0, 0, 0, 0, 0);
             layerList.SetLayerInset(_shadowLayerIndex, 0, 0, 0, 0);
             //layerList.SetLayerInset(_backgroundLayerIndex, 0 - config.Offset.X + config.Blur, config.Offset.Y + config.Blur, config.Offset.X + config.Blur, 0 - config.Offset.Y + config.Blur);
-            layerList.SetLayerInset(_backgroundLayerIndex, 0 - densityOffsetX + densityOffsetBlur, densityOffsetY + densityOffsetBlur, densityOffsetX + densityOffsetBlur, 0 - densityOffsetY + densityOffsetBlur);
-            SetInsetForImageLayer(layerList, Image, paddings, config.Offset);
+            //layerList.SetLayerInset(_backgroundLayerIndex, 0 - densityOffsetX + densityOffsetBlur, densityOffsetY + densityOffsetBlur, densityOffsetX + densityOffsetBlur, 0 - densityOffsetY + densityOffsetBlur);
+            var insetL = densityOffsetX > 0? 0 : Math.Abs(densityOffsetX) + densityBlur;
+            var insetB = densityOffsetY > 0 ? 0 : Math.Abs(densityOffsetY) + densityBlur;
+            var insetR = densityOffsetX > 0 ? Math.Abs(densityOffsetX) + densityBlur : 0;
+            var insetT = densityOffsetY > 0 ? Math.Abs(densityOffsetY) + densityBlur : 0;
+
+
+            Console.WriteLine($"l - {insetL}\nt - {insetT}\nr - {insetR}\nb - {insetB}\n");
+
+            layerList.SetLayerInset(_backgroundLayerIndex, insetL, insetT, insetR, insetB);
+            SetInsetForImageLayer(layerList, Image, _initialWidth/2, densityOffsetX, densityOffsetY, densityBlur);
 
             Background = layerList;
+        }
+
+        private int RecalculateWidth(int offsetX, int offsetY, int blur)
+        {
+            if (blur == 0)
+                return _initialWidth;
+
+            Console.WriteLine($"Initial:\nWidth - {_initialWidth}\nHeight - {_initialWidth}");
+
+            var lp = LayoutParameters;
+            lp.Width = _initialWidth + Math.Abs(offsetX) + blur;
+            lp.Height = _initialWidth + Math.Abs(offsetY) + blur;
+            LayoutParameters = lp;
+            if (offsetX > 0)
+            {
+                SetX(GetX() + (offsetX + blur) / 2);
+            }
+            else
+            {
+                SetX(GetX() + (offsetX + blur * -1) / 2);
+            }
+            if (offsetY > 0)
+            {
+                SetY(GetY() - (offsetY + blur));
+            }
+            else
+            {
+                //SetY(GetY() - (offsetY + blur * -1) / 2);
+            }
+            Console.WriteLine($"After:\nWidth - {lp.Width}\nHeight - {lp.Height}");
+
+            return lp.Width;
         }
 
         private LayerDrawable CreateLayerList(Drawable[] layers)
@@ -333,13 +382,20 @@ namespace EOS.UI.Android.Controls
             return backColor;
         }
 
-        private void SetInsetForImageLayer(LayerDrawable layerList, Drawable drawable, int halfWidth, Point offset)
+        private void SetInsetForImageLayer(LayerDrawable layerList, Drawable drawable, int halfWidth, int offsetX, int offsetY, int blur)
         {
-            var xOffset = halfWidth - drawable.IntrinsicWidth / 2 - (int)Helpers.Helpers.DpToPx(offset.X);
-            var yOffset = halfWidth - drawable.IntrinsicWidth / 2 + (int)Helpers.Helpers.DpToPx(offset.Y);
-            var rightOffset = halfWidth - drawable.IntrinsicWidth / 2 + (int)Helpers.Helpers.DpToPx(offset.X);
-            var bottomOffset = halfWidth - drawable.IntrinsicWidth / 2 - (int)Helpers.Helpers.DpToPx(offset.Y);
-            layerList.SetLayerInset(_imageLayerIndex, xOffset, yOffset, rightOffset, bottomOffset);
+            //var xOffset = halfWidth - drawable.IntrinsicWidth / 2 + (int)Helpers.Helpers.DpToPx(offset.X);
+            //var yOffset = halfWidth - drawable.IntrinsicWidth / 2 + (int)Helpers.Helpers.DpToPx(offset.Y);
+            //var rightOffset = halfWidth - drawable.IntrinsicWidth / 2 - (int)Helpers.Helpers.DpToPx(offset.X);
+            //var bottomOffset = halfWidth - drawable.IntrinsicWidth / 2 - (int)Helpers.Helpers.DpToPx(offset.Y);
+            //layerList.SetLayerInset(_imageLayerIndex, xOffset, yOffset, rightOffset, bottomOffset);
+            var imagePosition = halfWidth - drawable.IntrinsicWidth / 2;
+
+            var insetL = offsetX > 0 ? imagePosition : Math.Abs(offsetX) + blur + imagePosition;
+            var insetB = offsetY > 0 ? imagePosition : Math.Abs(offsetY) + blur + imagePosition;
+            var insetR = offsetX > 0 ? Math.Abs(offsetX) + blur + imagePosition : imagePosition;
+            var insetT = offsetY > 0 ? Math.Abs(offsetY) + blur + imagePosition : imagePosition;
+            layerList.SetLayerInset(_imageLayerIndex, insetL, insetT, insetR, insetB);
         }
 
         public override void SetBackgroundColor(Color color)
@@ -375,7 +431,11 @@ namespace EOS.UI.Android.Controls
             {
                 //Should use this method instead of GetDrawable for compatibility with API <23
                 layer.SetDrawableByLayerId(_imageLayerIndex, drawable);
-                SetInsetForImageLayer(layer, drawable, Width / 2, ShadowConfig.Offset);
+
+                var densityOffsetX = (int)Helpers.Helpers.DpToPx(ShadowConfig.Offset.X);
+                var densityOffsetY = (int)Helpers.Helpers.DpToPx(ShadowConfig.Offset.Y);
+                var densityBlur = (int)Helpers.Helpers.DpToPx(ShadowConfig.Blur);
+                SetInsetForImageLayer(layer, drawable, _initialWidth/2, densityOffsetX, densityOffsetY, densityBlur);
                 layer.Mutate();
                 layer.InvalidateSelf();
             }
@@ -389,7 +449,7 @@ namespace EOS.UI.Android.Controls
         {
             //By default android has ripple drawable which extended from LayerDrawable.
             //Should check number of layers also.
-            return layer != null && layer.NumberOfLayers == 3;
+            return layer != null && layer.NumberOfLayers == 4;
         }
 
 

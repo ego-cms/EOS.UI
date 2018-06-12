@@ -239,6 +239,10 @@ namespace EOS.UI.Android.Sandbox.Helpers
         public static class Shadows
         {
             public const string Shadow1 = "Shadow1";
+            public const string Shadow1n5 = "Shadow1.5";
+            public const string Shadow1n58 = "Shadow1.58";
+            public const string Shadow1n5y = "Shadow1.5y";
+            public const string Shadow1n58y = "Shadow1.58y";
             public const string Shadow2 = "Shadow2";
             public const string Shadow3 = "Shadow3";
             public const string Shadow4 = "Shadow4";
@@ -253,6 +257,10 @@ namespace EOS.UI.Android.Sandbox.Helpers
             {
                 { string.Empty, null },
                 { Shadow1, new ShadowConfig{ Color = Color.Red, Offset = new Point(0,0), Blur = 5, Spread = 200} },
+                { Shadow1n5, new ShadowConfig{ Color = Color.Red, Offset = new Point(25,0), Blur = 5, Spread = 200} },
+                { Shadow1n58, new ShadowConfig{ Color = Color.Red, Offset = new Point(-25,0), Blur = 5, Spread = 200} },
+                { Shadow1n5y, new ShadowConfig{ Color = Color.Red, Offset = new Point(0,25), Blur = 5, Spread = 200} },
+                { Shadow1n58y, new ShadowConfig{ Color = Color.Red, Offset = new Point(0,-25), Blur = 5, Spread = 200} },
                 { Shadow2, new ShadowConfig{ Color = Color.Green, Offset = new Point(5,5), Blur = 5, Spread = 200} },
                 { Shadow3, new ShadowConfig{ Color = Color.Blue, Offset = new Point(-5,5), Blur = 5, Spread = 200} },
                 { Shadow4, new ShadowConfig{ Color = Color.Yellow, Offset = new Point(5,-5), Blur = 5, Spread = 200} },
