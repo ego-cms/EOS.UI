@@ -145,6 +145,17 @@ namespace EOS.UI.iOS.Controls
                 IsEOSCustomizationIgnored = true;
             }
         }
+        
+        private UIColor _rippleColor;
+        public UIColor RippleColor
+        {
+            get => _rippleColor;
+            set
+            {
+                _rippleColor = value;
+                IsEOSCustomizationIgnored = true;
+            }
+        }
 
         public override bool Enabled
         {
@@ -303,7 +314,7 @@ namespace EOS.UI.iOS.Controls
             base.TouchesBegan(touches, evt);
             var tapLocation = (touches.AnyObject as UITouch).LocationInView(this);
             _rippleAnimations = this.CreateRippleAnimations(tapLocation);
-            _rippleLayer = this.CrateAnimationLayer(tapLocation);
+            _rippleLayer = this.CrateRippleAnimationLayer(tapLocation, RippleColor);
             _rippleAnimations.SetValueForKey(_rippleLayer, new NSString("animationLayer"));
             _rippleLayer.AddAnimation(_rippleAnimations, _rippleAnimationKey);
         }
@@ -357,6 +368,7 @@ namespace EOS.UI.iOS.Controls
                 DisabledBackgroundColor = provider.GetEOSProperty<UIColor>(this, EOSConstants.NeutralColor4);
                 PressedBackgroundColor = provider.GetEOSProperty<UIColor>(this, EOSConstants.BrandPrimaryColorVariant1);
                 CornerRadius = provider.GetEOSProperty<int>(this, EOSConstants.CornerRadius);
+                RippleColor = provider.GetEOSProperty<UIColor>(this, EOSConstants.RippleColor);
                 Enabled = base.Enabled;
                 PreloaderImage = UIImage.FromBundle(provider.GetEOSProperty<string>(this, EOSConstants.FabProgressPreloaderImage));
                 IsEOSCustomizationIgnored = false;
