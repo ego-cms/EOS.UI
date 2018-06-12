@@ -170,7 +170,7 @@ namespace EOS.UI.iOS.Controls
             {
                 Layer.ShadowColor = config.Color;
                 Layer.ShadowOffset = new CGSize(config.Offset);
-                Layer.ShadowRadius = config.Radius;
+                Layer.ShadowRadius = config.Radius / 2 ;
                 Layer.ShadowOpacity = config.Opacity;
             }
             else
