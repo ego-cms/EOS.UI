@@ -13,8 +13,6 @@ namespace EOS.UI.iOS.CollectionViewSources
 {
     public class WorkTimeCalendarCollectionSource : UICollectionViewSource
     {
-        //by default longest string fills 70% of the cell width
-        private readonly nfloat _cellWidthRatio = 1.4f;
         private readonly UICollectionView _collectionView;
 
         public WorkTimeCalendarModel CalendarModel { get; }
@@ -25,9 +23,10 @@ namespace EOS.UI.iOS.CollectionViewSources
             _collectionView.RegisterNibForCell(WorkTimeCalendarCell.Nib, WorkTimeCalendarCell.Key);
             CalendarModel = new WorkTimeCalendarModel();
             CalendarModel.UpdateAppearance();
-            
+            CalendarModel.PropertyChanged += (sender, e) => this._collectionView.ReloadData();
+
             var layout = new WorkTimeCalendarFlowLayout();
-            layout.ItemSize = new CGSize((_collectionView.Frame.Width-layout.SectionInset.Left-layout.SectionInset.Right) / 7,
+            layout.ItemSize = new CGSize((_collectionView.Frame.Width - layout.SectionInset.Left - layout.SectionInset.Right) / 7,
                                          _collectionView.Frame.Height - layout.SectionInset.Top - layout.SectionInset.Bottom);
             _collectionView.CollectionViewLayout = layout;
         }
@@ -45,12 +44,12 @@ namespace EOS.UI.iOS.CollectionViewSources
 
         public override UICollectionViewCell GetCell(UICollectionView collectionView, NSIndexPath indexPath)
         {
-            var cell = (WorkTimeCalendarCell) collectionView.DequeueReusableCell(WorkTimeCalendarCell.Key, indexPath);
-            InitCell(ref cell, CalendarModel.Items.ElementAt(indexPath.Row));
+            var cell = (WorkTimeCalendarCell)collectionView.DequeueReusableCell(WorkTimeCalendarCell.Key, indexPath);
+            InitCell(ref cell, indexPath, CalendarModel.Items.ElementAt(indexPath.Row));
             return cell;
         }
 
-        private void InitCell(ref WorkTimeCalendarCell cell, WorkTimeCalendarItem item)
+        private void InitCell(ref WorkTimeCalendarCell cell, NSIndexPath indexPath, WorkTimeCalendarItem item)
         {
             cell.Init(item);
             cell.DayTextSize = CalendarModel.DayTextSize;
@@ -58,19 +57,23 @@ namespace EOS.UI.iOS.CollectionViewSources
             cell.DayTextFont = CalendarModel.DayTextFont;
             cell.TitleFont = CalendarModel.TitleFont;
 
-            if(item.WeekDay == DateTime.Now.DayOfWeek)
+            if (item.WeekDay == DateTime.Now.DayOfWeek)
             {
                 cell.CellBackgroundColor = CalendarModel.CurrentDayBackgroundColor;
                 cell.DayTextColor = CalendarModel.CurrentDayTextColor;
                 cell.TitleColor = CalendarModel.CurrentDayTextColor;
                 cell.WeekDayDeviderColor = UIColor.White;
+                cell.CircleDeviderColor = CalendarModel.CurrentColorDeviders;
+                cell.WeekDayDeviderColor = CalendarModel.CurrentColorDeviders;
             }
             else
             {
-                cell.CellBackgroundColor = (int)item.WeekDay % 2 == 0 ? CalendarModel.DayEvenBackgroundColor : CalendarModel.DayUnevenBackgroundColor;
+                cell.CellBackgroundColor = indexPath.Row % 2 == 0 ? UIColor.Clear : CalendarModel.DayEvenBackgroundColor;
                 cell.DayTextColor = CalendarModel.DayTextColor;
                 cell.TitleColor = CalendarModel.TitleColor;
                 cell.WeekDayDeviderColor = UIColor.LightGray;
+                cell.CircleDeviderColor = CalendarModel.ColorDeviders;
+                cell.WeekDayDeviderColor = CalendarModel.ColorDeviders;
             }
         }
     }

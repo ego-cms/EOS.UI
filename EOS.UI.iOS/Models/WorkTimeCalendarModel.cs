@@ -16,7 +16,7 @@ namespace EOS.UI.iOS.Models
     {
         public bool IsEOSCustomizationIgnored { get; private set; }
 
-        public EventHandler ItemsChanged;
+        public EventHandler PropertyChanged;
 
         private IEnumerable<WorkTimeCalendarItem> _items;
         public IEnumerable<WorkTimeCalendarItem> Items
@@ -31,7 +31,7 @@ namespace EOS.UI.iOS.Models
                 {
                     SortDays();
                 }
-                ItemsChanged?.Invoke(this, EventArgs.Empty);
+                PropertyChanged?.Invoke(this, EventArgs.Empty);
             }
         }
 
@@ -45,6 +45,7 @@ namespace EOS.UI.iOS.Models
                 {
                     _weekStart = value;
                     SortDays();
+                    PropertyChanged?.Invoke(this, EventArgs.Empty);
                 }
                 else
                 {
@@ -61,6 +62,7 @@ namespace EOS.UI.iOS.Models
             {
                 _titleFont = value;
                 IsEOSCustomizationIgnored = true;
+                PropertyChanged?.Invoke(this, EventArgs.Empty);
             }
         }
 
@@ -72,6 +74,7 @@ namespace EOS.UI.iOS.Models
             {
                 _dayTextFont = value;
                 IsEOSCustomizationIgnored = true;
+                PropertyChanged?.Invoke(this, EventArgs.Empty);
             }
         }
 
@@ -83,6 +86,7 @@ namespace EOS.UI.iOS.Models
             {
                 _titleColor = value;
                 IsEOSCustomizationIgnored = true;
+                PropertyChanged?.Invoke(this, EventArgs.Empty);
             }
         }
 
@@ -94,6 +98,7 @@ namespace EOS.UI.iOS.Models
             {
                 _dayTextColor = value;
                 IsEOSCustomizationIgnored = true;
+                PropertyChanged?.Invoke(this, EventArgs.Empty);
             }
         }
 
@@ -105,6 +110,7 @@ namespace EOS.UI.iOS.Models
             {
                 _currentDayBackgroundColor = value;
                 IsEOSCustomizationIgnored = true;
+                PropertyChanged?.Invoke(this, EventArgs.Empty);
             }
         }
 
@@ -116,20 +122,10 @@ namespace EOS.UI.iOS.Models
             {
                 _currentDayTextColor = value;
                 IsEOSCustomizationIgnored = true;
+                PropertyChanged?.Invoke(this, EventArgs.Empty);
             }
         }
         
-        private UIColor _dayUnevenBackgroundColor;
-        public UIColor DayUnevenBackgroundColor
-        {
-            get => _dayUnevenBackgroundColor;
-            set
-            {
-                _dayUnevenBackgroundColor = value;
-                IsEOSCustomizationIgnored = true;
-            }
-        }
-
         private UIColor _dayEvenBackgroundColor;
         public UIColor DayEvenBackgroundColor
         {
@@ -138,6 +134,7 @@ namespace EOS.UI.iOS.Models
             {
                 _dayEvenBackgroundColor = value;
                 IsEOSCustomizationIgnored = true;
+                PropertyChanged?.Invoke(this, EventArgs.Empty);
             }
         }
 
@@ -149,6 +146,7 @@ namespace EOS.UI.iOS.Models
             {
                 _titleTextSize = value;
                 IsEOSCustomizationIgnored = true;
+                PropertyChanged?.Invoke(this, EventArgs.Empty);
             }
         }
 
@@ -160,6 +158,31 @@ namespace EOS.UI.iOS.Models
             {
                 _dayTextSize = value;
                 IsEOSCustomizationIgnored = true;
+                PropertyChanged?.Invoke(this, EventArgs.Empty);
+            }
+        }
+
+        private UIColor _colorDeviders;
+        public UIColor ColorDeviders
+        {
+            get => _colorDeviders;
+            set
+            {
+                _colorDeviders = value;
+                IsEOSCustomizationIgnored = true;
+                PropertyChanged?.Invoke(this, EventArgs.Empty);
+            }
+        }
+
+        private UIColor _currentColorDeviders;
+        public UIColor CurrentColorDeviders
+        {
+            get => _currentColorDeviders;
+            set
+            {
+                _currentColorDeviders = value;
+                IsEOSCustomizationIgnored = true;
+                PropertyChanged?.Invoke(this, EventArgs.Empty);
             }
         }
 
@@ -198,8 +221,9 @@ namespace EOS.UI.iOS.Models
                 CurrentDayTextColor = provider.GetEOSProperty<UIColor>(this, EOSConstants.NeutralColor6);
                 TitleTextSize = provider.GetEOSProperty<int>(this, EOSConstants.WorkTimeTitleSize);
                 DayTextSize = provider.GetEOSProperty<int>(this, EOSConstants.WorkTimeDayTextSize);
-                DayEvenBackgroundColor = provider.GetEOSProperty<UIColor>(this, EOSConstants.NeutralColor6);
-                DayUnevenBackgroundColor = provider.GetEOSProperty<UIColor>(this, EOSConstants.NeutralColor4);
+                DayEvenBackgroundColor = provider.GetEOSProperty<UIColor>(this, EOSConstants.NeutralColor5);
+                ColorDeviders = provider.GetEOSProperty<UIColor>(this, EOSConstants.NeutralColor4);
+                CurrentColorDeviders = provider.GetEOSProperty<UIColor>(this, EOSConstants.NeutralColor4);
             }
         }
         

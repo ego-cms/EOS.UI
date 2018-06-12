@@ -160,6 +160,7 @@ namespace EOS.UI.iOS.Controls
                 _underlineColorFocused = value;
                 if(Enabled && Focused && _underlineLayer != null)
                 {
+                    _leftImageView.TintColor = value;
                     _underlineLayer.BorderWidth = InputConstants.UnderlineHeight;
                     _underlineLayer.BorderColor = value.CGColor;
                 }
@@ -176,6 +177,7 @@ namespace EOS.UI.iOS.Controls
                 _underlineColorUnfocused = value;
                 if(Enabled && !Focused && _underlineLayer != null)
                 {
+                    _leftImageView.TintColor = value;
                     _underlineLayer.BorderWidth = InputConstants.UnderlineHeight;
                     _underlineLayer.BorderColor = value.CGColor;
                 }
@@ -192,6 +194,7 @@ namespace EOS.UI.iOS.Controls
                 _underlineColorDisabled = value;
                 if(!Enabled && _underlineLayer != null)
                 {
+                    _leftImageView.TintColor = value;
                     _underlineLayer.BorderWidth = InputConstants.UnderlineHeight;
                     _underlineLayer.BorderColor = value.CGColor;
                 }
@@ -206,8 +209,11 @@ namespace EOS.UI.iOS.Controls
             {
                 IsEOSCustomizationIgnored = true;
                 _leftImageFocused = value;
-                if(Enabled && Focused)
+                if (Enabled && Focused)
+                {
                     _leftImageView.Image = value;
+                    _leftImageView.TintColor = UnderlineColorFocused;
+                }
             }
         }
 
@@ -219,8 +225,12 @@ namespace EOS.UI.iOS.Controls
             {
                 IsEOSCustomizationIgnored = true;
                 _leftImageUnfocused = value;
-                if(Enabled && !Focused)
+                if (Enabled && !Focused)
+                {
                     _leftImageView.Image = value;
+                    _leftImageView.TintColor = UnderlineColorUnfocused;
+                }
+                
             }
         }
 
@@ -232,8 +242,11 @@ namespace EOS.UI.iOS.Controls
             {
                 IsEOSCustomizationIgnored = true;
                 _leftImageDisabled = value;
-                if(!Enabled)
+                if (!Enabled)
+                {
                     _leftImageView.Image = value;
+                    _leftImageView.TintColor = UnderlineColorDisabled;
+                }
             }
         }
 
@@ -303,6 +316,7 @@ namespace EOS.UI.iOS.Controls
         private void Input_Ended(object sender, EventArgs e)
         {
             _leftImageView.Image = LeftImageUnfocused;
+            _leftImageView.TintColor = UnderlineColorUnfocused;
             _underlineLayer.BorderWidth = InputConstants.UnderlineHeight;
             _underlineLayer.BorderColor = UnderlineColorUnfocused.CGColor;
         }
@@ -310,6 +324,7 @@ namespace EOS.UI.iOS.Controls
         private void Input_Started(object sender, EventArgs e)
         {
             _leftImageView.Image = LeftImageFocused;
+            _leftImageView.TintColor = UnderlineColorFocused;
             _underlineLayer.BorderWidth = InputConstants.UnderlineHeight;
             _underlineLayer.BorderColor = UnderlineColorFocused.CGColor;
         }
@@ -320,23 +335,29 @@ namespace EOS.UI.iOS.Controls
             if(Placeholder != null)
                 base.AttributedPlaceholder = new NSAttributedString(Placeholder, null, enabled ? PlaceholderColor : PlaceholderColorDisabled);
 
-            if(!enabled)
+            if (!enabled)
             {
                 _leftImageView.Image = LeftImageDisabled;
+                _leftImageView.TintColor = UnderlineColorDisabled;
                 _underlineLayer.BorderWidth = InputConstants.UnderlineHeight;
                 _underlineLayer.BorderColor = UnderlineColorDisabled.CGColor;
             }
-            else if(Focused)
-            {
-                _leftImageView.Image = LeftImageFocused;
-                _underlineLayer.BorderWidth = InputConstants.UnderlineHeight;
-                _underlineLayer.BorderColor = UnderlineColorFocused.CGColor;
-            }
             else
             {
-                _leftImageView.Image = LeftImageUnfocused;
-                _underlineLayer.BorderWidth = InputConstants.UnderlineHeight;
-                _underlineLayer.BorderColor = UnderlineColorUnfocused.CGColor;
+                if (Focused)
+                {
+                    _leftImageView.Image = LeftImageFocused;
+                    _leftImageView.TintColor = UnderlineColorFocused;
+                    _underlineLayer.BorderWidth = InputConstants.UnderlineHeight;
+                    _underlineLayer.BorderColor = UnderlineColorFocused.CGColor;
+                }
+                else
+                {
+                    _leftImageView.Image = LeftImageUnfocused;
+                    _leftImageView.TintColor = UnderlineColorUnfocused;
+                    _underlineLayer.BorderWidth = InputConstants.UnderlineHeight;
+                    _underlineLayer.BorderColor = UnderlineColorUnfocused.CGColor;
+                }
             }
         }
 

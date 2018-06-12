@@ -16,6 +16,9 @@ namespace EOS.UI.iOS.Components
 		UIKit.UIView cellContentView { get; set; }
 
 		[Outlet]
+		UIKit.UIView circleDevider { get; set; }
+
+		[Outlet]
 		UIKit.UILabel dayLabel { get; set; }
 
 		[Outlet]
@@ -38,6 +41,11 @@ namespace EOS.UI.iOS.Components
 		
 		void ReleaseDesignerOutlets ()
 		{
+			if (cellContentView != null) {
+				cellContentView.Dispose ();
+				cellContentView = null;
+			}
+
 			if (dayLabel != null) {
 				dayLabel.Dispose ();
 				dayLabel = null;
@@ -68,14 +76,14 @@ namespace EOS.UI.iOS.Components
 				stopWorkLabel = null;
 			}
 
-			if (cellContentView != null) {
-				cellContentView.Dispose ();
-				cellContentView = null;
-			}
-
 			if (weekDayDevider != null) {
 				weekDayDevider.Dispose ();
 				weekDayDevider = null;
+			}
+
+			if (circleDevider != null) {
+				circleDevider.Dispose ();
+				circleDevider = null;
 			}
 		}
 	}

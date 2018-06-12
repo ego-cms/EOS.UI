@@ -60,6 +60,10 @@
             android:id="@+id/textSizeDropDown"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
+        <EOS.UI.Android.Sandbox.Controls.EOSSandboxDropDown
+            android:id="@+id/rippleColorDropDown"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
         <LinearLayout
             android:orientation="horizontal"
             android:layout_width="match_parent"

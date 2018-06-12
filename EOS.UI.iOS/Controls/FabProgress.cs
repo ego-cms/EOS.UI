@@ -161,6 +161,7 @@ namespace EOS.UI.iOS.Controls
             _rotationAnimation.Cumulative = true;
             _rotationAnimation.RepeatCount = Int32.MaxValue;
             UpdateAppearance();
+            ImageView.TintColor = UIColor.White;
         }
 
         private void SetShadowConfig(ShadowConfig config)

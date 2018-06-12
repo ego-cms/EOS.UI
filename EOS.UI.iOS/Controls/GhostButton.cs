@@ -17,7 +17,7 @@ namespace EOS.UI.iOS.Controls
         private CAAnimationGroup _rippleAnimations;
         private CALayer _rippleLayer;
         private const string _rippleAnimationKey = "rippleAnimation";
-        
+
         public bool IsEOSCustomizationIgnored { get; private set; }
 
         private UIFont _font;
@@ -65,6 +65,17 @@ namespace EOS.UI.iOS.Controls
             {
                 _disabledTextColor = value;
                 SetTitleColor(_disabledTextColor, UIControlState.Disabled);
+                IsEOSCustomizationIgnored = true;
+            }
+        }
+
+        private UIColor _rippleColor;
+        public UIColor RippleColor
+        {
+            get => _rippleColor;
+            set
+            {
+                _rippleColor = value;
                 IsEOSCustomizationIgnored = true;
             }
         }
@@ -206,6 +217,7 @@ namespace EOS.UI.iOS.Controls
                 EnabledTextColor = provider.GetEOSProperty<UIColor>(this, EOSConstants.BrandPrimaryColor);
                 DisabledTextColor = provider.GetEOSProperty<UIColor>(this, EOSConstants.NeutralColor3);
                 PressedStateTextColor = provider.GetEOSProperty<UIColor>(this, EOSConstants.NeutralColor6);
+                RippleColor = provider.GetEOSProperty<UIColor>(this, EOSConstants.RippleColor);
                 TextSize = provider.GetEOSProperty<int>(this, EOSConstants.TextSize);
                 LetterSpacing = provider.GetEOSProperty<int>(this, EOSConstants.LetterSpacing);
                 Enabled = base.Enabled;
@@ -219,7 +231,7 @@ namespace EOS.UI.iOS.Controls
             var touch = touches.AnyObject as UITouch;
             var location = touch.LocationInView(this);
             _rippleAnimations = this.CreateRippleAnimations(location);
-            _rippleLayer = this.CrateAnimationLayer(location);
+            _rippleLayer = this.CrateRippleAnimationLayer(location, RippleColor);
             _rippleAnimations.SetValueForKey(_rippleLayer, new NSString("animationLayer"));
             _rippleLayer.AddAnimation(_rippleAnimations, _rippleAnimationKey);
         }

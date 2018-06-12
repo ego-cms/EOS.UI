@@ -513,9 +513,8 @@ namespace EOS.UI.iOS.Extensions
         /// <param name="scaleDuration">Scale duration.</param>
         /// <param name="fadeDuration">Fade duration.</param>
         /// <param name="completitionHandler">Completition handler.</param>
-        internal static CAAnimationGroup CreateRippleAnimations(this UIButton button, CGPoint startLocation, UIColor rippleColor = null, nfloat? scaleDuration = null, nfloat? fadeDuration = null, Action completitionHandler = null)
+        internal static CAAnimationGroup CreateRippleAnimations(this UIButton button, CGPoint startLocation, nfloat? scaleDuration = null, nfloat? fadeDuration = null, Action completitionHandler = null)
         {
-            var color = rippleColor ?? UIColor.White.ColorWithAlpha(0.1f);
             var scaleTime = scaleDuration ?? 1.5f;
             var fadeTime = fadeDuration ?? 1.5f;
             nfloat initialSize = 10.0f;
@@ -527,13 +526,41 @@ namespace EOS.UI.iOS.Extensions
 
             CABasicAnimation animation = CreateScaleAnimation(button, initialSize, scaleTime);
             CAKeyFrameAnimation fade = SetupFadeAnimation(fadeTime);
-            
+
             var animGroup = new CAAnimationGroup();
             animGroup.Duration = 0.5;
             animGroup.Delegate = new RippleAnimationDelegate();
             animGroup.Animations = new[] { (CAAnimation)animation, fade };
             return animGroup;
         }
+        
+        
+        internal static CALayer CrateRippleAnimationLayer(this UIButton button, CGPoint tapLocation, UIColor color = null, double initialSize = 10)
+        {
+            var aLayer = new CALayer();
+
+            if (color != null)
+            {
+                nfloat red = 1;
+                nfloat green = 0;
+                nfloat blue = 0;
+                nfloat alpha = 0;
+                color.GetRGBA(out red, out green, out blue, out alpha);
+                aLayer.BackgroundColor = alpha == 1 ? color.ColorWithAlpha(0.10f).CGColor : color.CGColor;
+            }
+            else
+            {
+                aLayer.BackgroundColor = UIColor.White.ColorWithAlpha(0.10f).CGColor;
+            }
+
+            aLayer.Frame = new CGRect(0, 0, initialSize, initialSize);
+            aLayer.CornerRadius = (nfloat)initialSize / 2;
+            aLayer.MasksToBounds = true;
+            aLayer.Position = tapLocation;
+            button.Layer.InsertSublayer(aLayer, button.Layer.Sublayers.Length);
+            return aLayer;
+        }
+
 
         private static CAKeyFrameAnimation SetupFadeAnimation(nfloat fadeTime)
         {
@@ -541,18 +568,6 @@ namespace EOS.UI.iOS.Extensions
             fade.Values = new[] { NSObject.FromObject(1.0), NSObject.FromObject(1.0), NSObject.FromObject(0.5), NSObject.FromObject(0.5), NSObject.FromObject(0.0) };
             fade.Duration = fadeTime;
             return fade;
-        }
-
-        internal static CALayer CrateAnimationLayer(this UIButton button, CGPoint tapLocation, double initialSize = 10,  UIColor color = null)
-        {
-            var aLayer = new CALayer();
-            aLayer.BackgroundColor = color?.CGColor ?? UIColor.White.ColorWithAlpha(0.1f).CGColor;
-            aLayer.Frame = new CGRect(0, 0, initialSize, initialSize);
-            aLayer.CornerRadius = (nfloat)initialSize / 2;
-            aLayer.MasksToBounds = true;
-            aLayer.Position = tapLocation;
-            button.Layer.InsertSublayer(aLayer, button.Layer.Sublayers.Length);
-            return aLayer;
         }
 
         private static CABasicAnimation CreateScaleAnimation(UIButton button, double initialSize, double scaleTime)

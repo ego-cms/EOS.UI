@@ -1,7 +1,7 @@
 {
   "images": [
     {
-      "filename": "icSuccess.pdf",
+      "filename": "icAccountCircle.pdf",
       "idiom": "universal"
     },
     {
@@ -83,7 +83,7 @@
   },
   "properties": {
     "on-demand-resource-tags": [
-      "icSuccess"
+      "icAccountCircle"
     ]
   }
 }
