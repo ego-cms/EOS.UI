@@ -51,7 +51,16 @@ namespace EOS.UI.Android.Components
         private Color _currentDayBackgroundColor;
         public Color CurrentDayBackgroundColor
         {
-            get => _currentDayBackgroundColor;
+            get
+            {
+                if(_currentDayBackgroundColor == default(Color))
+                {
+                    _currentDayBackgroundColor = GetThemeProvider().GetEOSProperty<Color>(this, EOSConstants.BrandPrimaryColor);
+                    if(IsSelected)
+                        Background = CreateGradientDrawable(_currentDayBackgroundColor);
+                }
+                return _currentDayBackgroundColor;
+            }
             set
             {
                 _currentDayBackgroundColor = value;
@@ -64,7 +73,16 @@ namespace EOS.UI.Android.Components
         private Color _dayEvenBackgroundColor;
         public Color DayEvenBackgroundColor
         {
-            get => _dayEvenBackgroundColor;
+            get
+            {
+                if(_dayEvenBackgroundColor == default(Color))
+                {
+                    _dayEvenBackgroundColor = GetThemeProvider().GetEOSProperty<Color>(this, EOSConstants.NeutralColor4);
+                    if(!IsSelected)
+                        Background = CreateGradientDrawable(!IsEven ? _dayEvenBackgroundColor : Color.Transparent);
+                }
+                return _dayEvenBackgroundColor;
+            }
             set
             {
                 _dayEvenBackgroundColor = value;

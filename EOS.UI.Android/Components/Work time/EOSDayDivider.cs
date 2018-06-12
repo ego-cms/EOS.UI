@@ -49,7 +49,16 @@ namespace EOS.UI.Android.Components
         private Color _dividerColor;
         public Color DividerColor
         {
-            get => _dividerColor;
+            get
+            {
+                if(_dividerColor == default(Color))
+                {
+                    _dividerColor = GetThemeProvider().GetEOSProperty<Color>(this, EOSConstants.NeutralColor3);
+                    if(!IsSelected)
+                        (Background as VectorDrawable)?.SetColorFilter(_dividerColor, PorterDuff.Mode.SrcIn);
+                }
+                return _dividerColor;
+            }
             set
             {
                 _dividerColor = value;
@@ -62,7 +71,16 @@ namespace EOS.UI.Android.Components
         private Color _currentDividerColor;
         public Color CurrentDividerColor
         {
-            get => _currentDividerColor;
+            get
+            {
+                if(_currentDividerColor == default(Color))
+                {
+                    _currentDividerColor = GetThemeProvider().GetEOSProperty<Color>(this, EOSConstants.NeutralColor6);
+                    if(IsSelected)
+                        Background = new ColorDrawable(_currentDividerColor);
+                }
+                return _currentDividerColor;
+            }
             set
             {
                 _currentDividerColor = value;

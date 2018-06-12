@@ -100,10 +100,10 @@ namespace EOS.UI.Android.Components
                 workTimeItem.EndBreakTimeLabel.DayTextSize = DayTextSize;
             }
 
-            if(TitleColor != Color.Transparent)
+            if(TitleColor != default(Color))
                 workTimeItem.DayLabel.TitleColor = TitleColor;
 
-            if(DayTextColor != Color.Transparent)
+            if(DayTextColor != default(Color))
             {
                 workTimeItem.StartDayTimeLabel.DayTextColor = DayTextColor;
                 workTimeItem.EndDayTimeLabel.DayTextColor = DayTextColor;
@@ -111,10 +111,10 @@ namespace EOS.UI.Android.Components
                 workTimeItem.EndBreakTimeLabel.DayTextColor = DayTextColor;
             }
 
-            if(CurrentDayBackgroundColor != Color.Transparent)
+            if(CurrentDayBackgroundColor != default(Color))
                 workTimeItem.Container.CurrentDayBackgroundColor = CurrentDayBackgroundColor;
 
-            if(CurrentDayTextColor != Color.Transparent)
+            if(CurrentDayTextColor != default(Color))
             {
                 workTimeItem.DayLabel.CurrentDayTextColor = CurrentDayTextColor;
                 workTimeItem.StartDayTimeLabel.CurrentDayTextColor = CurrentDayTextColor;
@@ -123,16 +123,16 @@ namespace EOS.UI.Android.Components
                 workTimeItem.EndBreakTimeLabel.CurrentDayTextColor = CurrentDayTextColor;
             }
 
-            if(DayEvenBackgroundColor != Color.Transparent)
+            if(DayEvenBackgroundColor != default(Color))
                 workTimeItem.Container.DayEvenBackgroundColor = DayEvenBackgroundColor;
 
-            if(DividerColor != Color.Transparent)
+            if(DividerColor != default(Color))
             {
                 workTimeItem.DayDivider.DividerColor = DividerColor;
                 workTimeItem.CircleDivider.DividerColor = DividerColor;
             }
 
-            if(CurrentDividerColor != Color.Transparent)
+            if(CurrentDividerColor != default(Color))
             {
                 workTimeItem.DayDivider.CurrentDividerColor = CurrentDividerColor;
                 workTimeItem.CircleDivider.CurrentDividerColor = CurrentDividerColor;

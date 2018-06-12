@@ -90,7 +90,7 @@ namespace EOS.UI.Android.Components
         {
             get
             {
-                if(_titleColor == Color.Transparent)
+                if(_titleColor == default(Color))
                 {
                     _titleColor = GetThemeProvider().GetEOSProperty<Color>(this, EOSConstants.NeutralColor2);
                     if(!IsSelected)
@@ -112,7 +112,7 @@ namespace EOS.UI.Android.Components
         {
             get
             {
-                if(_currentDayTextColor == Color.Transparent)
+                if(_currentDayTextColor == default(Color))
                 {
                     _currentDayTextColor = GetThemeProvider().GetEOSProperty<Color>(this, EOSConstants.NeutralColor6);
                     if(IsSelected)
