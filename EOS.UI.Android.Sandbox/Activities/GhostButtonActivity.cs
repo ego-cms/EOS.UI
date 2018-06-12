@@ -28,6 +28,7 @@ namespace EOS.UI.Android.Sandbox.Activities
             var fontDropDown = FindViewById<EOSSandboxDropDown>(Resource.Id.fontDropDown);
             var letterSpacingDropDown = FindViewById<EOSSandboxDropDown>(Resource.Id.letterSpacingDropDown);
             var textSizeDropDown = FindViewById<EOSSandboxDropDown>(Resource.Id.textSizeDropDown);
+            var rippleColorDropDown = FindViewById<EOSSandboxDropDown>(Resource.Id.rippleColorDropDown);
             var stateSwitch = FindViewById<Switch>(Resource.Id.stateSwitch);
             ghostButton.ResetCustomization();
 
@@ -40,14 +41,15 @@ namespace EOS.UI.Android.Sandbox.Activities
                 enabledColorDropDown,
                 fontDropDown,
                 letterSpacingDropDown,
-                textSizeDropDown
+                textSizeDropDown,
+                rippleColorDropDown
             };
 
             themeDropDown.Name = Fields.Theme;
             themeDropDown.SetupAdapter(ThemeTypes.ThemeCollection.Select(item => item.Key).ToList());
             themeDropDown.ItemSelected += (position) =>
             {
-                if(position > 0)
+                if (position > 0)
                 {
                     ghostButton.GetThemeProvider().SetCurrentTheme(ThemeTypes.ThemeCollection.ElementAt(position).Value);
                     ghostButton.ResetCustomization();
@@ -57,16 +59,16 @@ namespace EOS.UI.Android.Sandbox.Activities
             };
 
             var theme = ghostButton.GetThemeProvider().GetCurrentTheme();
-            if(theme is LightEOSTheme)
+            if (theme is LightEOSTheme)
                 themeDropDown.SetSpinnerSelection(1);
-            if(theme is DarkEOSTheme)
+            if (theme is DarkEOSTheme)
                 themeDropDown.SetSpinnerSelection(2);
 
             fontDropDown.Name = Fields.Font;
             fontDropDown.SetupAdapter(Fonts.FontsCollection.Select(item => item.Key).ToList());
             fontDropDown.ItemSelected += (position) =>
             {
-                if(position > 0)
+                if (position > 0)
                     ghostButton.Typeface = Typeface.CreateFromAsset(Assets, Fonts.FontsCollection.ElementAt(position).Value);
             };
 
@@ -74,7 +76,7 @@ namespace EOS.UI.Android.Sandbox.Activities
             letterSpacingDropDown.SetupAdapter(Sizes.LetterSpacingCollection.Select(item => item.Key).ToList());
             letterSpacingDropDown.ItemSelected += (position) =>
             {
-                if(position > 0)
+                if (position > 0)
                     ghostButton.LetterSpacing = Sizes.LetterSpacingCollection.ElementAt(position).Value;
             };
 
@@ -82,7 +84,7 @@ namespace EOS.UI.Android.Sandbox.Activities
             enabledColorDropDown.SetupAdapter(Colors.ColorsCollection.Select(item => item.Key).ToList());
             enabledColorDropDown.ItemSelected += (position) =>
             {
-                if(position > 0)
+                if (position > 0)
                     ghostButton.EnabledTextColor = Colors.ColorsCollection.ElementAt(position).Value;
             };
 
@@ -90,7 +92,7 @@ namespace EOS.UI.Android.Sandbox.Activities
             disabledColorDropDown.SetupAdapter(Colors.ColorsCollection.Select(item => item.Key).ToList());
             disabledColorDropDown.ItemSelected += (position) =>
             {
-                if(position > 0)
+                if (position > 0)
                     ghostButton.DisabledTextColor = Colors.ColorsCollection.ElementAt(position).Value;
             };
 
@@ -98,7 +100,7 @@ namespace EOS.UI.Android.Sandbox.Activities
             pressedColorDropDown.SetupAdapter(Colors.ColorsCollection.Select(item => item.Key).ToList());
             pressedColorDropDown.ItemSelected += (position) =>
             {
-                if(position > 0)
+                if (position > 0)
                     ghostButton.PressedStateTextColor = Colors.ColorsCollection.ElementAt(position).Value;
             };
 
@@ -106,10 +108,17 @@ namespace EOS.UI.Android.Sandbox.Activities
             textSizeDropDown.SetupAdapter(Sizes.TextSizeCollection.Select(item => item.Key).ToList());
             textSizeDropDown.ItemSelected += (position) =>
             {
-                if(position > 0)
+                if (position > 0)
                     ghostButton.TextSize = Sizes.TextSizeCollection.ElementAt(position).Value;
             };
-            ;
+
+            rippleColorDropDown.Name = Fields.RippleColor;
+            rippleColorDropDown.SetupAdapter(Colors.ColorsCollection.Select(item => item.Key).ToList());
+            rippleColorDropDown.ItemSelected += (position) =>
+            {
+                if (position > 0)
+                    ghostButton.RippleColor = Colors.ColorsCollection.ElementAt(position).Value;
+            };
 
             stateSwitch.CheckedChange += (sender, e) =>
             {

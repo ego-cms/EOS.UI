@@ -32,6 +32,7 @@ namespace EOS.UI.Android.Sandbox.Activities
         private EOSSandboxDropDown _backgroundColorDisabledDropDown;
         private EOSSandboxDropDown _backgroundColorPressedDropDown;
         private EOSSandboxDropDown _cornerRadiusDropDown;
+        private EOSSandboxDropDown _rippleColorDropDown;
         private Button _resetButton;
         private Switch _disableSwitch;
         private List<EOSSandboxDropDown> _dropDowns;
@@ -44,7 +45,7 @@ namespace EOS.UI.Android.Sandbox.Activities
             _CTAButton = FindViewById<SimpleButton>(Resource.Id.simpleButton);
             _CTAButton.UpdateAppearance();
             _CTAButton.Text = "CTA button";
-            _CTAButton.Click += async (s, e) => 
+            _CTAButton.Click += async (s, e) =>
             {
                 _CTAButton.StartProgressAnimation();
                 ToggleEnableState();
@@ -64,6 +65,7 @@ namespace EOS.UI.Android.Sandbox.Activities
             _backgroundColorDisabledDropDown = FindViewById<EOSSandboxDropDown>(Resource.Id.disabledBackgroundDropDown);
             _backgroundColorPressedDropDown = FindViewById<EOSSandboxDropDown>(Resource.Id.pressedBackgroundDropDown);
             _cornerRadiusDropDown = FindViewById<EOSSandboxDropDown>(Resource.Id.cornerRadiusDropDown);
+            _rippleColorDropDown = FindViewById<EOSSandboxDropDown>(Resource.Id.rippleColorDropDown);
             _resetButton = FindViewById<Button>(Resource.Id.buttonResetCustomization);
             _disableSwitch = FindViewById<Switch>(Resource.Id.switchDisabled);
 
@@ -80,6 +82,7 @@ namespace EOS.UI.Android.Sandbox.Activities
                 _backgroundColorDisabledDropDown,
                 _backgroundColorPressedDropDown,
                 _cornerRadiusDropDown,
+                _rippleColorDropDown
             };
 
             _themeDropDown.Name = Fields.Theme;
@@ -126,6 +129,11 @@ namespace EOS.UI.Android.Sandbox.Activities
             _cornerRadiusDropDown.SetupAdapter(Sizes.CornerRadusCollection.Select(item => item.Key).ToList());
             _cornerRadiusDropDown.ItemSelected += CornerRadiusItemSelected;
 
+
+            _rippleColorDropDown.Name = Fields.RippleColor;
+            _rippleColorDropDown.SetupAdapter(Colors.ColorsCollection.Select(item => item.Key).ToList());
+            _rippleColorDropDown.ItemSelected += RippleColorItemSelected;
+
             _resetButton.Click += delegate
             {
                 ResetCustomValues();
@@ -145,7 +153,7 @@ namespace EOS.UI.Android.Sandbox.Activities
 
         private void ThemeItemSelected(int position)
         {
-            if(position > 0)
+            if (position > 0)
             {
                 _CTAButton.GetThemeProvider().SetCurrentTheme(ThemeTypes.ThemeCollection.ElementAt(position).Value);
                 ResetCustomValues();
@@ -155,69 +163,75 @@ namespace EOS.UI.Android.Sandbox.Activities
 
         private void FontItemSelected(int position)
         {
-            if(position > 0)
+            if (position > 0)
                 _CTAButton.Typeface = Typeface.CreateFromAsset(Assets, Fonts.FontsCollection.ElementAt(position).Value);
         }
 
         private void LetterSpacingItemSelected(int position)
         {
-            if(position > 0)
+            if (position > 0)
                 _CTAButton.LetterSpacing = Sizes.LetterSpacingCollection.ElementAt(position).Value;
         }
 
         private void TextSizeItemSelected(int position)
         {
-            if(position > 0)
+            if (position > 0)
                 _CTAButton.TextSize = Sizes.TextSizeCollection.ElementAt(position).Value;
         }
 
         private void TextColorEnabledItemSelected(int position)
         {
-            if(position > 0)
+            if (position > 0)
                 _CTAButton.TextColor = Colors.ColorsCollection.ElementAt(position).Value;
         }
 
         private void TextColorDisabledItemSelected(int position)
         {
-            if(position > 0)
+            if (position > 0)
                 _CTAButton.DisabledTextColor = Colors.ColorsCollection.ElementAt(position).Value;
         }
 
         private void TextColorPressedItemSelected(int position)
         {
-            if(position > 0)
+            if (position > 0)
                 _CTAButton.PressedTextColor = Colors.ColorsCollection.ElementAt(position).Value;
         }
 
         private void BackgroundColorEnabledItemSelected(int position)
         {
-            if(position > 0)
+            if (position > 0)
                 _CTAButton.BackgroundColor = Colors.ColorsCollection.ElementAt(position).Value;
         }
 
         private void BackgroundColorDisabledItemSelected(int position)
         {
-            if(position > 0)
+            if (position > 0)
                 _CTAButton.DisabledBackgroundColor = Colors.ColorsCollection.ElementAt(position).Value;
         }
 
         private void BackgroundColorPressedItemSelected(int position)
         {
-            if(position > 0)
+            if (position > 0)
                 _CTAButton.PressedBackgroundColor = Colors.ColorsCollection.ElementAt(position).Value;
         }
 
         private void CornerRadiusItemSelected(int position)
         {
-            if(position > 0)
+            if (position > 0)
                 _CTAButton.CornerRadius = Sizes.CornerRadusCollection.ElementAt(position).Value;
+        }
+
+        private void RippleColorItemSelected(int position)
+        {
+            if (position > 0)
+                _CTAButton.RippleColor = Colors.ColorsCollection.ElementAt(position).Value;
         }
 
         private void SetCurrenTheme(IEOSTheme iEOSTheme)
         {
-            if(iEOSTheme is LightEOSTheme)
+            if (iEOSTheme is LightEOSTheme)
                 _themeDropDown.SetSpinnerSelection(1);
-            if(iEOSTheme is DarkEOSTheme)
+            if (iEOSTheme is DarkEOSTheme)
                 _themeDropDown.SetSpinnerSelection(2);
         }
 
