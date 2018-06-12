@@ -31,7 +31,8 @@ namespace EOS.UI.Shared.Themes.Themes
         private const string neutralColor4 = "#EAEAEA";
         private const string neutralColor5 = "#F6F6F6";
         private const string neutralColor6 = "#FFFFFF";
-        
+        private const string rippleColor = "#1AFFFFFF";
+
         public Dictionary<string, object> ThemeValues => new Dictionary<string, object>()
         {
 #if __IOS__
@@ -46,6 +47,7 @@ namespace EOS.UI.Shared.Themes.Themes
             { EOSConstants.NeutralColor4, ColorExtension.FromHex(neutralColor4) },
             { EOSConstants.NeutralColor5, ColorExtension.FromHex(neutralColor5) },
             { EOSConstants.NeutralColor6, ColorExtension.FromHex(neutralColor6) },
+            { EOSConstants.RippleColor, ColorExtension.FromHex(rippleColor) },
             { EOSConstants.TextSize, 17 },
             { EOSConstants.SecondaryTextSize, 17 },
             { EOSConstants.Font, UIFont.SystemFontOfSize(17)},
@@ -89,6 +91,7 @@ namespace EOS.UI.Shared.Themes.Themes
             { EOSConstants.NeutralColor4, Color.ParseColor(neutralColor4)},
             { EOSConstants.NeutralColor5, Color.ParseColor(neutralColor5)},
             { EOSConstants.NeutralColor6, Color.ParseColor(neutralColor6)},
+            { EOSConstants.RippleColor, Color.ParseColor(rippleColor) },
             { EOSConstants.TextSize, 17f },
             { EOSConstants.SecondaryTextSize, 17f },
             { EOSConstants.Font, "Fonts/OpenSansRegular.ttf" },

@@ -58,6 +58,7 @@ namespace EOS.UI.iOS.Sandbox.Helpers
             public static string PaddingBottom = "Padding bottom";
             public static string PaddingLeft = "Padding left";
             public static string PaddingRight = "Padding right";
+            public static string RippleColor = "Ripple color";
         };
 
         public static UIColor BackgroundColor = UIColor.FromRGB(224, 224, 224);
