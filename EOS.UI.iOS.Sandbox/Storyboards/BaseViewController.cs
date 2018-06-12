@@ -62,7 +62,7 @@ namespace EOS.UI.iOS.Sandbox.Storyboards
 
         private void SetStyle()
         {
-            IEOSStyle style = default;
+            IEOSStyle style = null;
 
             if(EOSThemeProvider.Instance.GetCurrentTheme() is LightEOSTheme)
                 style = new EOSSandboxLightStyle();
