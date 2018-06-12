@@ -8,6 +8,7 @@ using Android.OS;
 using Android.Widget;
 using EOS.UI.Android.Components;
 using EOS.UI.Android.Sandbox.Controls;
+using EOS.UI.Shared.Themes.DataModels;
 using EOS.UI.Shared.Themes.Themes;
 using UIFrameworks.Shared.Themes.Helpers;
 using UIFrameworks.Shared.Themes.Interfaces;
@@ -31,6 +32,7 @@ namespace EOS.UI.Android.Sandbox.Activities
         private EOSSandboxDropDown _dayEvenBackgroundColorDropDown;
         private EOSSandboxDropDown _dividerColorDropDown;
         private EOSSandboxDropDown _currentDividerColorDropDown;
+        private EOSSandboxDropDown _firstDayOfWeekDropDown;
         private List<EOSSandboxDropDown> _customFields;
 
         protected override void OnCreate(Bundle savedInstanceState)
@@ -51,6 +53,7 @@ namespace EOS.UI.Android.Sandbox.Activities
             _dayEvenBackgroundColorDropDown = FindViewById<EOSSandboxDropDown>(Resource.Id.dayEvenBackgroundColorDropDown);
             _dividerColorDropDown = FindViewById<EOSSandboxDropDown>(Resource.Id.dividerColorDropDown);
             _currentDividerColorDropDown = FindViewById<EOSSandboxDropDown>(Resource.Id.currentDividerColorDropDown);
+            _firstDayOfWeekDropDown = FindViewById<EOSSandboxDropDown>(Resource.Id.firstDayOfWeek);
             var resetButton = FindViewById<EOSSandboxButton>(Resource.Id.buttonResetCustomization);
 
             _customFields = new List<EOSSandboxDropDown>
@@ -65,7 +68,8 @@ namespace EOS.UI.Android.Sandbox.Activities
                 _currentDayTextColorDropDown,
                 _dayEvenBackgroundColorDropDown,
                 _dividerColorDropDown,
-                _currentDividerColorDropDown
+                _currentDividerColorDropDown,
+                _firstDayOfWeekDropDown
             };
 
             _themeDropDown.Name = Fields.Theme;
@@ -116,12 +120,24 @@ namespace EOS.UI.Android.Sandbox.Activities
             _currentDividerColorDropDown.SetupAdapter(Colors.ColorsCollection.Select(item => item.Key).ToList());
             _currentDividerColorDropDown.ItemSelected += CurrentDividerColorItemSelected;
 
+            _firstDayOfWeekDropDown.Name = Fields.FirstDayOfWeek;
+            _firstDayOfWeekDropDown.SetupAdapter(Days.DaysCollection.Select(item => item.Key).ToList());
+            _firstDayOfWeekDropDown.ItemSelected += FirstDayOfWeekItemSelected;
+
+            _workTime.Items = GenerateDaysOfWeekSource();
+
             SetCurrenTheme(_workTime.GetThemeProvider().GetCurrentTheme());
 
             resetButton.Click += delegate
             {
                 ResetCustomValues();
             };
+        }
+
+        private void FirstDayOfWeekItemSelected(int position)
+        {
+            if(position > 0)
+                _workTime.WeekStart = Days.DaysCollection.ElementAt(position).Value;
         }
 
         private void CurrentDividerColorItemSelected(int position)
@@ -212,6 +228,73 @@ namespace EOS.UI.Android.Sandbox.Activities
         {
             _workTime.ResetCustomization();
             _customFields.ForEach(item => item.SetSpinnerSelection(0));
+        }
+
+        private List<WorkTimeCalendarItem> GenerateDaysOfWeekSource()
+        {
+            return new List<WorkTimeCalendarItem>()
+            {
+                new WorkTimeCalendarItem()
+                {
+                    WeekDay = DayOfWeek.Sunday,
+                    IsDayOff = true
+                },
+                new WorkTimeCalendarItem()
+                {
+                    WeekDay = DayOfWeek.Monday,
+                    IsDayOff = false,
+                    HasBreak = true,
+                    StartTime = new TimeSpan(9, 0, 0),
+                    EndTime = new TimeSpan(18, 0, 0),
+                    BreakStartTime = new TimeSpan(13, 0, 0),
+                    BreakEndTime = new TimeSpan(14, 0, 0)
+                },
+                new WorkTimeCalendarItem()
+                {
+                    WeekDay = DayOfWeek.Tuesday,
+                    IsDayOff = false,
+                    HasBreak = true,
+                    StartTime = new TimeSpan(9, 0, 0),
+                    EndTime = new TimeSpan(18, 0, 0),
+                    BreakStartTime = new TimeSpan(13, 0, 0),
+                    BreakEndTime = new TimeSpan(14, 0, 0)
+                },
+                new WorkTimeCalendarItem()
+                {
+                    WeekDay = DayOfWeek.Wednesday,
+                    IsDayOff = false,
+                    HasBreak = true,
+                    StartTime = new TimeSpan(9, 0, 0),
+                    EndTime = new TimeSpan(18, 0, 0),
+                    BreakStartTime = new TimeSpan(13, 0, 0),
+                    BreakEndTime = new TimeSpan(14, 0, 0)
+                },
+                new WorkTimeCalendarItem()
+                {
+                    WeekDay = DayOfWeek.Thursday,
+                    IsDayOff = false,
+                    HasBreak = true,
+                    StartTime = new TimeSpan(9, 0, 0),
+                    EndTime = new TimeSpan(18, 0, 0),
+                    BreakStartTime = new TimeSpan(13, 0, 0),
+                    BreakEndTime = new TimeSpan(14, 0, 0)
+                },
+                new WorkTimeCalendarItem()
+                {
+                    WeekDay = DayOfWeek.Friday,
+                    IsDayOff = false,
+                    HasBreak = true,
+                    StartTime = new TimeSpan(9, 0, 0),
+                    EndTime = new TimeSpan(18, 0, 0),
+                    BreakStartTime = new TimeSpan(13, 0, 0),
+                    BreakEndTime = new TimeSpan(14, 0, 0)
+                },
+                new WorkTimeCalendarItem()
+                {
+                    WeekDay = DayOfWeek.Saturday,
+                    IsDayOff = true,
+                }
+            };
         }
     }
 }

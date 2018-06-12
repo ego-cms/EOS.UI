@@ -85,6 +85,10 @@
                 android:id="@+id/currentDividerColorDropDown"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
+            <EOS.UI.Android.Sandbox.Controls.EOSSandboxDropDown
+                android:id="@+id/firstDayOfWeek"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
             <EOS.UI.Android.Sandbox.Controls.EOSSandboxButton
                 android:text="Reset customization"
                 android:layout_width="match_parent"

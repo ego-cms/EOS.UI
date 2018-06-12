@@ -168,13 +168,17 @@ namespace EOS.UI.Android.Components
 
         public void UpdateAppearance()
         {
+            var items = WorkTimeAdapter.Items;
             SetAdapter(new WorkTimeAdapter(_sectionWidth));
+            WorkTimeAdapter.Items = items;
             WorkTimeAdapter.UpdateAppearance();
         }
 
         public void ResetCustomization()
         {
+            var items = WorkTimeAdapter.Items;
             SetAdapter(new WorkTimeAdapter(_sectionWidth));
+            WorkTimeAdapter.Items = items;
             WorkTimeAdapter.ResetCustomization();
         }
 

@@ -394,7 +394,8 @@ namespace EOS.UI.Android.Components
 
         public void ResetCustomization()
         {
-            Items = GenerateDefaultItems();
+            if(Items == null)
+                Items = GenerateDefaultItems();
             WeekStart = 0;
             TitleFont = null;
             DayTextFont = null;

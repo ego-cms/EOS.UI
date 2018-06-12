@@ -65,6 +65,7 @@ namespace EOS.UI.Android.Sandbox.Helpers
             public static string DividerColor = "Divider color";
             public static string CurrentDividerColor = "Current divider color";
             public static string RippleColor = "Ripple color";
+            public static string FirstDayOfWeek = "First day of week";
         };
 
         public static class Colors
@@ -275,6 +276,19 @@ namespace EOS.UI.Android.Sandbox.Helpers
                 { FirstTitle, "First" },
                 { SecondTitle, "Second" },
                 { ThirdTitle, "Third" },
+            };
+        }
+
+        public static class Days
+        {
+            public const string Sunday = "Sunday";
+            public const string Monday = "Monday";
+
+            public static Dictionary<string, WeekStartEnum> DaysCollection = new Dictionary<string, WeekStartEnum>()
+            {
+                { string.Empty, WeekStartEnum.Sunday },
+                { Sunday, WeekStartEnum.Sunday },
+                { Monday, WeekStartEnum.Monday },
             };
         }
     }
