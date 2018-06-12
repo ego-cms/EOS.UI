@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Timers;
@@ -128,7 +128,6 @@ namespace EOS.UI.Android.Sandbox.Activities
             _cornerRadiusDropDown.Name = Fields.ConerRadius;
             _cornerRadiusDropDown.SetupAdapter(Sizes.CornerRadusCollection.Select(item => item.Key).ToList());
             _cornerRadiusDropDown.ItemSelected += CornerRadiusItemSelected;
-
 
             _rippleColorDropDown.Name = Fields.RippleColor;
             _rippleColorDropDown.SetupAdapter(Colors.ColorsCollection.Select(item => item.Key).ToList());

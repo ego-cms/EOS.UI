@@ -48,7 +48,15 @@ namespace EOS.UI.Android.Components
         private Typeface _titleFont;
         public Typeface TitleFont
         {
-            get => _titleFont;
+            get
+            {
+                if(_titleFont == null)
+                {
+                    _titleFont = Typeface.CreateFromAsset(Context.Assets, GetThemeProvider().GetEOSProperty<string>(this, EOSConstants.WorkTimeTitleFont));
+                    Typeface = _titleFont;
+                }
+                return _titleFont;
+            }
             set
             {
                 _titleFont = value;
@@ -60,7 +68,15 @@ namespace EOS.UI.Android.Components
         private int _titleTextSize;
         public int TitleTextSize
         {
-            get => _titleTextSize;
+            get
+            {
+                if(_titleTextSize == 0)
+                {
+                    _titleTextSize = GetThemeProvider().GetEOSProperty<int>(this, EOSConstants.WorkTimeTitleSize);
+                    TextSize = _titleTextSize;
+                }
+                return _titleTextSize;
+            }
             set
             {
                 _titleTextSize = value;
@@ -72,7 +88,16 @@ namespace EOS.UI.Android.Components
         private Color _titleColor;
         public Color TitleColor
         {
-            get => _titleColor;
+            get
+            {
+                if(_titleColor == Color.Transparent)
+                {
+                    _titleColor = GetThemeProvider().GetEOSProperty<Color>(this, EOSConstants.NeutralColor2);
+                    if(!IsSelected)
+                        SetTextColor(_titleColor);
+                }
+                return _titleColor;
+            }
             set
             {
                 _titleColor = value;
@@ -85,7 +110,16 @@ namespace EOS.UI.Android.Components
         private Color _currentDayTextColor;
         public Color CurrentDayTextColor
         {
-            get => _currentDayTextColor;
+            get
+            {
+                if(_currentDayTextColor == Color.Transparent)
+                {
+                    _currentDayTextColor = GetThemeProvider().GetEOSProperty<Color>(this, EOSConstants.NeutralColor6);
+                    if(IsSelected)
+                        SetTextColor(_currentDayTextColor);
+                }
+                return _currentDayTextColor;
+            }
             set
             {
                 _currentDayTextColor = value;
