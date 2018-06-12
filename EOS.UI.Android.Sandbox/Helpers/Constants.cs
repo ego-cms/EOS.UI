@@ -55,6 +55,7 @@ namespace EOS.UI.Android.Sandbox.Helpers
             public static string PaddingBottom = "Padding bottom";
             public static string PaddingLeft = "Padding left";
             public static string PaddingRight = "Padding right";
+            public static string RippleColor = "Ripple color";
         };
 
         public static class Colors

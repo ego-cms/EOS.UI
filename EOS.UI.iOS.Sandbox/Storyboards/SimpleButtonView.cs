@@ -45,7 +45,9 @@ namespace EOS.UI.iOS.Sandbox
                 enabledBackgrDropDown,
                 disabledBackgroundDropDown,
                 pressedTextColorDropDown,
-                cornerRadiusDropDown
+                pressedBackgroundDropDown,
+                cornerRadiusDropDown,
+                rippleColorDropDown
             };
 
             View.AddGestureRecognizer(new UITapGestureRecognizer(() =>
@@ -74,6 +76,7 @@ namespace EOS.UI.iOS.Sandbox
             InitCornerRadiusDropDown(rect);
             InitDisabledSwitch();
             InitResetButton();
+            InitRippleColorDropDown(rect);
         }
 
         private void InitThemeDropDown(CGRect rect)
@@ -173,6 +176,14 @@ namespace EOS.UI.iOS.Sandbox
                 CornerRadiusValues,
                 radius => _simpleButton.CornerRadius = radius,
                 Fields.ConerRadius,
+                rect);
+        }
+        
+        private void InitRippleColorDropDown(CGRect rect)
+        {
+            rippleColorDropDown.InitSource(
+                color => _simpleButton.RippleColor = color,
+                Fields.RippleColor,
                 rect);
         }
 

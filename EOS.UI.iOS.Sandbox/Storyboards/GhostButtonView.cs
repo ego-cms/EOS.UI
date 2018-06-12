@@ -41,6 +41,7 @@ namespace EOS.UI.iOS.Sandbox
                 disabledTextColorDropDown,
                 pressedTextColorDropDown,
                 textSizeDropDown,
+                rippleColorDropDown
             };
 
             View.AddGestureRecognizer(new UITapGestureRecognizer(() =>
@@ -95,6 +96,11 @@ namespace EOS.UI.iOS.Sandbox
                 size => ghostButton.TextSize = size,
                 Fields.TextSize,
                 rect);
+            
+            rippleColorDropDown.InitSource(
+               color => ghostButton.RippleColor = color,
+               Fields.RippleColor,
+               rect);
 
             stateSwitch.ValueChanged += (sender, e) =>
             {
