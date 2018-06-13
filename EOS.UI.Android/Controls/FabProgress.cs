@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using Android.App;
 using Android.Content;
 using Android.Graphics;
@@ -34,6 +34,10 @@ namespace EOS.UI.Android.Controls
             {
                 base.Enabled = value;
                 (Background as GradientDrawable).SetColor(value ? BackgroundColor : DisabledBackgroundColor);
+                Image.SetColorFilter(value ? 
+                    GetThemeProvider().GetEOSProperty<Color>(this, EOSConstants.NeutralColor6) :
+                    GetThemeProvider().GetEOSProperty<Color>(this, EOSConstants.NeutralColor3), 
+                    PorterDuff.Mode.SrcIn);
             }
         }
 
@@ -44,8 +48,11 @@ namespace EOS.UI.Android.Controls
             set
             {
                 _backgroundColor = value;
-                if (Enabled)
+                if(Enabled)
+                {
                     (Background as GradientDrawable).SetColor(value);
+                    Image.SetColorFilter(GetThemeProvider().GetEOSProperty<Color>(this, EOSConstants.NeutralColor6), PorterDuff.Mode.SrcIn);
+                }
                 IsEOSCustomizationIgnored = true;
             }
         }
@@ -57,8 +64,11 @@ namespace EOS.UI.Android.Controls
             set
             {
                 _disabledBackgroundColor = value;
-                if (!Enabled)
+                if(!Enabled)
+                {
                     (Background as GradientDrawable).SetColor(DisabledBackgroundColor);
+                    Image.SetColorFilter(GetThemeProvider().GetEOSProperty<Color>(this, EOSConstants.NeutralColor3), PorterDuff.Mode.SrcIn);
+                }
                 IsEOSCustomizationIgnored = true;
             }
         }

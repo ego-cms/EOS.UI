@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using EOS.UI.Shared.Helpers;
 using UIFrameworks.Shared.Themes.Helpers;
@@ -64,9 +64,9 @@ namespace EOS.UI.Shared.Themes.Themes
             { EOSConstants.CircleProgressShown, true},
             { EOSConstants.FabShadow, new ShadowConfig(){
                         Color = UIColor.Black.CGColor,
-                        Offset = new CGSize(0,0),
+                        Offset = new CGSize(0, 0),
                         Radius = 2,
-                        Opacity = 0.9f
+                        Opacity = 0.4f
             }},
             { EOSConstants.BorderWidth, 2 },
             { EOSConstants.SectionTitle, "Light section" },
