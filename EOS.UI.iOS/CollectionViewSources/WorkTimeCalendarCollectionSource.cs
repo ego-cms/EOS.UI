@@ -62,18 +62,14 @@ namespace EOS.UI.iOS.CollectionViewSources
                 cell.CellBackgroundColor = CalendarModel.CurrentDayBackgroundColor;
                 cell.DayTextColor = CalendarModel.CurrentDayTextColor;
                 cell.TitleColor = CalendarModel.CurrentDayTextColor;
-                cell.WeekDayDeviderColor = UIColor.White;
-                cell.CircleDeviderColor = CalendarModel.CurrentColorDeviders;
-                cell.WeekDayDeviderColor = CalendarModel.CurrentColorDeviders;
+                cell.DividersColor = CalendarModel.CurrentColorDeviders;
             }
             else
             {
                 cell.CellBackgroundColor = indexPath.Row % 2 == 0 ? UIColor.Clear : CalendarModel.DayEvenBackgroundColor;
                 cell.DayTextColor = CalendarModel.DayTextColor;
                 cell.TitleColor = CalendarModel.TitleColor;
-                cell.WeekDayDeviderColor = UIColor.LightGray;
-                cell.CircleDeviderColor = CalendarModel.ColorDividers;
-                cell.WeekDayDeviderColor = CalendarModel.ColorDividers;
+                cell.DividersColor = CalendarModel.ColorDividers;
             }
         }
     }

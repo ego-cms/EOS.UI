@@ -160,6 +160,7 @@ namespace EOS.UI.iOS.Sandbox
                 day.EndTime = TimeSpan.FromHours(18);
                 day.BreakStartTime = TimeSpan.FromHours(13);
                 day.BreakEndTime = TimeSpan.FromHours(14);
+                day.HasBreak = false;
                 schedule.Add(day);
             }
 

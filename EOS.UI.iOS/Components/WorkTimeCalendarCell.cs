@@ -52,8 +52,6 @@ namespace EOS.UI.iOS.Components
             }
         }
 
-        public UIColor CurrentDayTextColor { get; set; }
-
         public int TitleTextSize
         {
             get => (int)dayLabel.Font.PointSize;
@@ -72,15 +70,23 @@ namespace EOS.UI.iOS.Components
             }
         }
         
-        private bool TimeVisible
+        private bool WorkTimeVisible
         {
             set
             {
-                startWorkLabel.Hidden = !value;
-                stopWorkLabel.Hidden = !value;
+                startWorkLabel.Hidden = value;
+                stopWorkLabel.Hidden = value;
+                dayOffDevider.Hidden = !value;
+            }
+        }
+        
+        private bool BreakTimeVisible
+        {
+            set
+            {
                 startBreakLabel.Hidden = !value;
                 stopBreakLabel.Hidden = !value;
-                dayOffDevider.Hidden = value;
+                breakDevider.Hidden = value;
             }
         }
         
@@ -89,19 +95,21 @@ namespace EOS.UI.iOS.Components
             get => cellContentView.BackgroundColor;
             set => cellContentView.BackgroundColor = value;
         }
-        
-        public UIColor WeekDayDeviderColor
-        {
-            get => weekDayDevider.BackgroundColor;
-            set => weekDayDevider.BackgroundColor = value;
-        }
-        
-        public UIColor CircleDeviderColor
-        {
-            get => circleDevider.BackgroundColor;
-            set => circleDevider.BackgroundColor = value;
-        }
 
+        private UIColor _dividersColor;
+        public UIColor DividersColor
+        {
+            get => _dividersColor;
+            set
+            {
+                _dividersColor = value;
+                dayOffDevider.BackgroundColor = value;
+                weekDayDevider.BackgroundColor = value;
+                breakDevider.BackgroundColor = value;
+                circleDevider.BackgroundColor = value;
+            }
+        }
+        
         static WorkTimeCalendarCell()
         {
             Nib = UINib.FromName("WorkTimeCalendarCell", NSBundle.MainBundle);
@@ -112,15 +120,26 @@ namespace EOS.UI.iOS.Components
             // Note: this .ctor should not contain any initialization logic.
         }
 
-        public void Init(WorkTimeCalendarItem data)
+        public void Init(WorkTimeCalendarItem day)
         {
-            dayLabel.Text = data.ShortWeekDay;
-            TimeVisible = !data.IsDayOff;
+            dayLabel.Text = day.ShortWeekDay;
+            WorkTimeVisible = day.IsDayOff;
+            if(day.IsDayOff)
+            {
+                startBreakLabel.Hidden = true;
+                stopBreakLabel.Hidden = true;
+                breakDevider.Hidden = true;
+            }
+            else
+            {
+                BreakTimeVisible = day.HasBreak;
+            }
             
-            startWorkLabel.Text = data.StartTime.ToShortString();
-            stopWorkLabel.Text = data.EndTime.ToShortString();
-            startBreakLabel.Text = data.BreakStartTime.ToShortString();
-            stopBreakLabel.Text = data.BreakEndTime.ToShortString();
+            
+            startWorkLabel.Text = day.StartTime.ToShortString();
+            stopWorkLabel.Text = day.EndTime.ToShortString();
+            startBreakLabel.Text = day.BreakStartTime.ToShortString();
+            stopBreakLabel.Text = day.BreakEndTime.ToShortString();
         }
     }
 }

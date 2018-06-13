@@ -92,6 +92,13 @@
                                             <constraint firstItem="2jb-eO-heK" firstAttribute="centerY" secondItem="aYN-zY-hso" secondAttribute="centerY" id="aLX-c6-bzH"/>
                                         </constraints>
                                     </view>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JVV-fb-Crf">
+                                        <rect key="frame" x="44" y="381" width="47" height="2"/>
+                                        <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="2" id="132-o2-qum"/>
+                                        </constraints>
+                                    </view>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
@@ -101,8 +108,10 @@
                                     <constraint firstItem="aYN-zY-hso" firstAttribute="leading" secondItem="pyu-Ua-4FT" secondAttribute="leading" id="3DY-vC-CeQ"/>
                                     <constraint firstItem="JUk-VY-AGd" firstAttribute="centerX" secondItem="pyu-Ua-4FT" secondAttribute="centerX" id="82m-al-CRZ"/>
                                     <constraint firstItem="cwZ-FA-7CE" firstAttribute="top" secondItem="Dcm-6f-bRJ" secondAttribute="bottom" constant="15" id="A6D-Jw-54m"/>
+                                    <constraint firstAttribute="bottom" secondItem="JVV-fb-Crf" secondAttribute="bottom" constant="34" id="BwA-Xs-JRM"/>
                                     <constraint firstItem="2lb-Sv-ucH" firstAttribute="top" secondItem="cwZ-FA-7CE" secondAttribute="bottom" constant="1" id="I4l-Lz-p2l"/>
                                     <constraint firstItem="Y68-Wt-e0w" firstAttribute="top" secondItem="pyu-Ua-4FT" secondAttribute="top" constant="20" id="LDH-P6-wkD"/>
+                                    <constraint firstItem="JVV-fb-Crf" firstAttribute="centerX" secondItem="pyu-Ua-4FT" secondAttribute="centerX" id="S5A-yn-jE8"/>
                                     <constraint firstItem="2lb-Sv-ucH" firstAttribute="centerX" secondItem="pyu-Ua-4FT" secondAttribute="centerX" id="T4n-tn-ZWm"/>
                                     <constraint firstAttribute="trailing" secondItem="Dcm-6f-bRJ" secondAttribute="trailing" constant="6" id="Uui-EA-iYh"/>
                                     <constraint firstItem="78h-FV-JCD" firstAttribute="centerX" secondItem="pyu-Ua-4FT" secondAttribute="centerX" id="VU8-Yu-Bb2"/>
@@ -111,6 +120,7 @@
                                     <constraint firstAttribute="bottom" secondItem="JUk-VY-AGd" secondAttribute="bottom" constant="15" id="r2J-ZS-a6h"/>
                                     <constraint firstItem="cwZ-FA-7CE" firstAttribute="centerX" secondItem="pyu-Ua-4FT" secondAttribute="centerX" id="r9x-L5-rLB"/>
                                     <constraint firstItem="bVD-vu-xgp" firstAttribute="top" secondItem="Dcm-6f-bRJ" secondAttribute="top" constant="30" id="smo-Zs-sgl"/>
+                                    <constraint firstItem="JVV-fb-Crf" firstAttribute="width" secondItem="bVD-vu-xgp" secondAttribute="width" id="tfn-KS-lxB"/>
                                     <constraint firstItem="78h-FV-JCD" firstAttribute="top" secondItem="aYN-zY-hso" secondAttribute="bottom" id="tgN-9P-AP6"/>
                                     <constraint firstAttribute="trailing" secondItem="aYN-zY-hso" secondAttribute="trailing" id="wrY-1k-Z7j"/>
                                     <constraint firstItem="bVD-vu-xgp" firstAttribute="centerX" secondItem="Dcm-6f-bRJ" secondAttribute="centerX" id="y85-Fu-CHl"/>
@@ -142,6 +152,7 @@
             </constraints>
             <size key="customSize" width="137" height="419"/>
             <connections>
+                <outlet property="breakDevider" destination="JVV-fb-Crf" id="CF0-0Q-ekf"/>
                 <outlet property="cellContentView" destination="pyu-Ua-4FT" id="zxX-va-QBO"/>
                 <outlet property="circleDevider" destination="2jb-eO-heK" id="0Xc-oM-MHa"/>
                 <outlet property="dayLabel" destination="Y68-Wt-e0w" id="8gN-zo-HJA"/>

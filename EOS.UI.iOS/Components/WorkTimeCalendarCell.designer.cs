@@ -13,6 +13,9 @@ namespace EOS.UI.iOS.Components
 	partial class WorkTimeCalendarCell
 	{
 		[Outlet]
+		UIKit.UIView breakDevider { get; set; }
+
+		[Outlet]
 		UIKit.UIView cellContentView { get; set; }
 
 		[Outlet]
@@ -44,6 +47,11 @@ namespace EOS.UI.iOS.Components
 			if (cellContentView != null) {
 				cellContentView.Dispose ();
 				cellContentView = null;
+			}
+
+			if (circleDevider != null) {
+				circleDevider.Dispose ();
+				circleDevider = null;
 			}
 
 			if (dayLabel != null) {
@@ -81,9 +89,9 @@ namespace EOS.UI.iOS.Components
 				weekDayDevider = null;
 			}
 
-			if (circleDevider != null) {
-				circleDevider.Dispose ();
-				circleDevider = null;
+			if (breakDevider != null) {
+				breakDevider.Dispose ();
+				breakDevider = null;
 			}
 		}
 	}
