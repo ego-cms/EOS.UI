@@ -114,7 +114,7 @@ namespace EOS.UI.Shared.Themes.Themes
             { EOSConstants.TopPadding, 5 },
             { EOSConstants.RightPadding, 5 },
             { EOSConstants.BottomPadding, 5 },
-            { EOSConstants.HasSectionBorder, false },
+            { EOSConstants.HasSectionBorder, true },
             { EOSConstants.HasSectionAction, true }
 #endif
         };
