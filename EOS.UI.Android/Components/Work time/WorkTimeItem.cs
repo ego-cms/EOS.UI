@@ -1,32 +1,33 @@
 using System;
 using Android.Support.V7.Widget;
 using Android.Views;
+using Android.Widget;
 
 namespace EOS.UI.Android.Components
 {
     internal class WorkTimeItem : RecyclerView.ViewHolder, View.IOnTouchListener
     {
-        public EOSWorkTimeContainer Container { get; private set; }
-        public EOSDayLabel DayLabel { get; private set; }
-        public EOSDayDivider DayDivider { get; private set; }
-        public EOSTimeLabel StartDayTimeLabel { get; private set; }
-        public EOSTimeLabel EndDayTimeLabel { get; private set; }
-        public EOSDayCircleDivider CircleDivider { get; private set; }
-        public EOSTimeLabel StartBreakTimeLabel { get; private set; }
-        public EOSTimeLabel EndBreakTimeLabel { get; private set; }
+        public LinearLayout Container { get; private set; }
+        public TextView DayLabel { get; private set; }
+        public View DayDivider { get; private set; }
+        public TextView StartDayTimeLabel { get; private set; }
+        public TextView EndDayTimeLabel { get; private set; }
+        public View CircleDivider { get; private set; }
+        public TextView StartBreakTimeLabel { get; private set; }
+        public TextView EndBreakTimeLabel { get; private set; }
 
         private Action<int> _setSelectedDay;
 
         public WorkTimeItem(View itemView, Action<int> setSelectedDay) : base(itemView)
         {
-            Container = itemView.FindViewById<EOSWorkTimeContainer>(Resource.Id.dayContainer);
-            DayLabel = itemView.FindViewById<EOSDayLabel>(Resource.Id.dayOfWeekLabel);
-            DayDivider = itemView.FindViewById<EOSDayDivider>(Resource.Id.dayTimeDivider);
-            StartDayTimeLabel = itemView.FindViewById<EOSTimeLabel>(Resource.Id.startDayTimeLabel);
-            EndDayTimeLabel = itemView.FindViewById<EOSTimeLabel>(Resource.Id.endDayTimeLabel);
-            CircleDivider = itemView.FindViewById<EOSDayCircleDivider>(Resource.Id.circleDivider);
-            StartBreakTimeLabel = itemView.FindViewById<EOSTimeLabel>(Resource.Id.startBreakTimeLabel);
-            EndBreakTimeLabel = itemView.FindViewById<EOSTimeLabel>(Resource.Id.endBreakTimeLabel);
+            Container = itemView.FindViewById<LinearLayout>(Resource.Id.dayContainer);
+            DayLabel = itemView.FindViewById<TextView>(Resource.Id.dayOfWeekLabel);
+            DayDivider = itemView.FindViewById<View>(Resource.Id.dayTimeDivider);
+            StartDayTimeLabel = itemView.FindViewById<TextView>(Resource.Id.startDayTimeLabel);
+            EndDayTimeLabel = itemView.FindViewById<TextView>(Resource.Id.endDayTimeLabel);
+            CircleDivider = itemView.FindViewById<View>(Resource.Id.circleDivider);
+            StartBreakTimeLabel = itemView.FindViewById<TextView>(Resource.Id.startBreakTimeLabel);
+            EndBreakTimeLabel = itemView.FindViewById<TextView>(Resource.Id.endBreakTimeLabel);
 
             _setSelectedDay = setSelectedDay;
 

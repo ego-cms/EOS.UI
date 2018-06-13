@@ -68,13 +68,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Components\Section.cs" />
-    <Compile Include="Components\Work time\EOSDayCircleDivider.cs" />
-    <Compile Include="Components\Work time\EOSDayDivider.cs" />
-    <Compile Include="Components\Work time\EOSTimeLabel.cs" />
-    <Compile Include="Components\Work time\EOSWorkTimeContainer.cs" />
-    <Compile Include="Components\Work time\ISelectable.cs" />
     <Compile Include="Components\Work time\WorkTime.cs" />
-    <Compile Include="Components\Work time\EOSDayLabel.cs" />
     <Compile Include="Components\Work time\WorkTimeItem.cs" />
     <Compile Include="Components\Work time\WorkTimeAdapter.cs" />
     <Compile Include="Controls\SimpleButton.cs" />
