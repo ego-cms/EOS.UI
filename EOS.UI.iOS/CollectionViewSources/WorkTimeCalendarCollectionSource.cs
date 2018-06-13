@@ -72,8 +72,8 @@ namespace EOS.UI.iOS.CollectionViewSources
                 cell.DayTextColor = CalendarModel.DayTextColor;
                 cell.TitleColor = CalendarModel.TitleColor;
                 cell.WeekDayDeviderColor = UIColor.LightGray;
-                cell.CircleDeviderColor = CalendarModel.ColorDeviders;
-                cell.WeekDayDeviderColor = CalendarModel.ColorDeviders;
+                cell.CircleDeviderColor = CalendarModel.ColorDividers;
+                cell.WeekDayDeviderColor = CalendarModel.ColorDividers;
             }
         }
     }

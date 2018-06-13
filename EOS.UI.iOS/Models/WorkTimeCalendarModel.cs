@@ -26,17 +26,14 @@ namespace EOS.UI.iOS.Models
             {
                 if (value.Count() != 7)
                     throw new Exception("datasource must contain 7 week days");
-                _items = value.OrderBy(i => i.WeekDay);
-                if(WeekStart != null)
-                {
-                    SortDays();
-                }
+                _items = value;
+                SortDays();
                 PropertyChanged?.Invoke(this, EventArgs.Empty);
             }
         }
 
-        private DayOfWeek? _weekStart;
-        public DayOfWeek? WeekStart
+        private DayOfWeek _weekStart = DayOfWeek.Sunday;
+        public DayOfWeek WeekStart
         {
             get => _weekStart;
             set
@@ -125,7 +122,7 @@ namespace EOS.UI.iOS.Models
                 PropertyChanged?.Invoke(this, EventArgs.Empty);
             }
         }
-        
+
         private UIColor _dayEvenBackgroundColor;
         public UIColor DayEvenBackgroundColor
         {
@@ -162,13 +159,13 @@ namespace EOS.UI.iOS.Models
             }
         }
 
-        private UIColor _colorDeviders;
-        public UIColor ColorDeviders
+        private UIColor _colorDividers;
+        public UIColor ColorDividers
         {
-            get => _colorDeviders;
+            get => _colorDividers;
             set
             {
-                _colorDeviders = value;
+                _colorDividers = value;
                 IsEOSCustomizationIgnored = true;
                 PropertyChanged?.Invoke(this, EventArgs.Empty);
             }
@@ -222,11 +219,11 @@ namespace EOS.UI.iOS.Models
                 TitleTextSize = provider.GetEOSProperty<int>(this, EOSConstants.WorkTimeTitleSize);
                 DayTextSize = provider.GetEOSProperty<int>(this, EOSConstants.WorkTimeDayTextSize);
                 DayEvenBackgroundColor = provider.GetEOSProperty<UIColor>(this, EOSConstants.NeutralColor5);
-                ColorDeviders = provider.GetEOSProperty<UIColor>(this, EOSConstants.NeutralColor4);
+                ColorDividers = provider.GetEOSProperty<UIColor>(this, EOSConstants.NeutralColor4);
                 CurrentColorDeviders = provider.GetEOSProperty<UIColor>(this, EOSConstants.NeutralColor4);
             }
         }
-        
+
         private void SortDays()
         {
             if (WeekStart == DayOfWeek.Monday)

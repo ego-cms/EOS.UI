@@ -115,7 +115,7 @@ namespace EOS.UI.iOS.Sandbox
                rect);
             
             devidersColor.InitSource(
-                color => source.CalendarModel.ColorDeviders = color,
+                color => source.CalendarModel.ColorDividers = color,
                 Fields.ColorDeviders,
                 rect);
             
