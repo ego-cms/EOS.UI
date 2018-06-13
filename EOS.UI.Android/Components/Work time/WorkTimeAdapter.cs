@@ -57,12 +57,12 @@ namespace EOS.UI.Android.Components
             workTimeItem.DayLabel.Text = workDayModel.ShortWeekDay;
             if(!workDayModel.IsDayOff)
             {
-                workTimeItem.StartDayTimeLabel.Text = workDayModel.StartTime.GetString();
-                workTimeItem.EndDayTimeLabel.Text = workDayModel.EndTime.GetString();
+                workTimeItem.StartDayTimeLabel.Text = workDayModel.StartTime.ToShortString();
+                workTimeItem.EndDayTimeLabel.Text = workDayModel.EndTime.ToShortString();
                 if(workDayModel.HasBreak)
                 {
-                    workTimeItem.StartBreakTimeLabel.Text = workDayModel.BreakStartTime.GetString();
-                    workTimeItem.EndBreakTimeLabel.Text = workDayModel.BreakEndTime.GetString();
+                    workTimeItem.StartBreakTimeLabel.Text = workDayModel.BreakStartTime.ToShortString();
+                    workTimeItem.EndBreakTimeLabel.Text = workDayModel.BreakEndTime.ToShortString();
                 }
                 else
                 {

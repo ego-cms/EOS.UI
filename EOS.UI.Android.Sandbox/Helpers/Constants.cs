@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Android.Graphics;
+using EOS.UI.Shared.Themes.Enums;
 using EOS.UI.Shared.Themes.Helpers;
 
 namespace EOS.UI.Android.Sandbox.Helpers
