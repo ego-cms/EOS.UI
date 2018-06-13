@@ -4,6 +4,7 @@ using EOS.UI.iOS.Models;
 using EOS.UI.iOS.Sandbox.Helpers;
 using EOS.UI.iOS.Sandbox.Storyboards;
 using EOS.UI.Shared.Themes.DataModels;
+using EOS.UI.Shared.Themes.Enums;
 using EOS.UI.Shared.Themes.Themes;
 using Foundation;
 using System;
@@ -29,13 +30,8 @@ namespace EOS.UI.iOS.Sandbox
 
             var dataSource = CreateSchedule();
             var source = new WorkTimeCalendarCollectionSource(workTimeCollection);
-            //source.CalendarModel.DayTextSize = 25;
-            //source.CalendarModel.TitleTextSize = 35;
-            //source.CalendarModel.DayTextColor = UIColor.Blue;
-            //source.CalendarModel.TitleColor = UIColor.Green;
-            //source.CalendarModel.CurrentDayBackgroundColor = UIColor.Yellow;
             source.CalendarModel.Items = dataSource;
-            source.CalendarModel.WeekStart = DayOfWeek.Monday;
+            source.CalendarModel.WeekStart = WeekStartEnum.Sunday;
             workTimeCollection.Source = source;
 
 
@@ -116,12 +112,12 @@ namespace EOS.UI.iOS.Sandbox
             
             devidersColor.InitSource(
                 color => source.CalendarModel.ColorDividers = color,
-                Fields.ColorDeviders,
+                Fields.ColorDividers,
                 rect);
             
             currentDayDevidersColor.InitSource(
                 color => source.CalendarModel.CurrentColorDeviders = color,
-                Fields.CurrentColorDeviders,
+                Fields.CurrentColorDividers,
                 rect);
             
             dayEvenBackgroundColor.InitSource(

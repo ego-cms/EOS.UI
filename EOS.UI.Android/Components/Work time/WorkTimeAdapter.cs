@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using Android.Content;
 using Android.Graphics;
 using Android.Graphics.Drawables;
@@ -7,6 +8,8 @@ using Android.Support.V7.Widget;
 using Android.Views;
 using EOS.UI.Android.Helpers;
 using EOS.UI.Shared.Themes.DataModels;
+using EOS.UI.Shared.Themes.Enums;
+using EOS.UI.Shared.Themes.Extensions;
 using EOS.UI.Shared.Themes.Helpers;
 using EOS.UI.Shared.Themes.Interfaces;
 using UIFrameworks.Android.Themes;
@@ -61,12 +64,12 @@ namespace EOS.UI.Android.Components
             workTimeItem.DayLabel.Text = workDayModel.ShortWeekDay;
             if(!workDayModel.IsDayOff)
             {
-                workTimeItem.StartDayTimeLabel.Text = workDayModel.StartTime.GetString();
-                workTimeItem.EndDayTimeLabel.Text = workDayModel.EndTime.GetString();
+                workTimeItem.StartDayTimeLabel.Text = workDayModel.StartTime.ToShortString();
+                workTimeItem.EndDayTimeLabel.Text = workDayModel.EndTime.ToShortString();
                 if(workDayModel.HasBreak)
                 {
-                    workTimeItem.StartBreakTimeLabel.Text = workDayModel.BreakStartTime.GetString();
-                    workTimeItem.EndBreakTimeLabel.Text = workDayModel.BreakEndTime.GetString();
+                    workTimeItem.StartBreakTimeLabel.Text = workDayModel.BreakStartTime.ToShortString();
+                    workTimeItem.EndBreakTimeLabel.Text = workDayModel.BreakEndTime.ToShortString();
                 }
                 else
                 {
@@ -165,7 +168,7 @@ namespace EOS.UI.Android.Components
             set
             {
                 _weekStart = value;
-                Items = Items.SetFirstDayOfWeek(_weekStart);
+                Items = Items.SortWeekByFirstDay(_weekStart).ToList();
                 IsEOSCustomizationIgnored = false;
                 NotifyDataSetChanged();
             }
@@ -312,7 +315,7 @@ namespace EOS.UI.Android.Components
                 if(value.Count != 7)
                     throw new ArgumentOutOfRangeException(nameof(Items), "Days of the week should be 7!");
 
-                _items = value.SortByDayOfWeek(WeekStart);
+                _items = value.SortWeekByFirstDay(WeekStart).ToList();
                 IsEOSCustomizationIgnored = true;
                 NotifyDataSetChanged();
             }

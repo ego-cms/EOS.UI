@@ -21,9 +21,12 @@
     <Compile Include="$(MSBuildThisFileDirectory)Themes\DarkEOSTheme.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Extensions\ColorExtension.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)DataModels\WorkTimeCalendarItem.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Enums\WeekStartEnum.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Extensions\WorkTimeCalendarExtension.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="$(MSBuildThisFileDirectory)Themes\" />
     <Folder Include="$(MSBuildThisFileDirectory)DataModels\" />
+    <Folder Include="$(MSBuildThisFileDirectory)Enums\" />
   </ItemGroup>
 </Project>

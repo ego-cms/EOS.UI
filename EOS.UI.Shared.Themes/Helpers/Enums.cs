@@ -20,10 +20,4 @@ namespace EOS.UI.Shared.Themes.Helpers
         Failed,
         Success
     }
-
-    public enum WeekStartEnum
-    {
-        Sunday,
-        Monday
-    }
 }

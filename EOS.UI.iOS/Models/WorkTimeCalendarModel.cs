@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using System.Linq;
 using EOS.UI.iOS.Themes;
 using EOS.UI.Shared.Themes.DataModels;
+using EOS.UI.Shared.Themes.Enums;
+using EOS.UI.Shared.Themes.Extensions;
 using EOS.UI.Shared.Themes.Helpers;
 using EOS.UI.Shared.Themes.Interfaces;
 using UIFrameworks.Shared.Themes.Helpers;
@@ -26,28 +28,20 @@ namespace EOS.UI.iOS.Models
             {
                 if (value.Count() != 7)
                     throw new Exception("datasource must contain 7 week days");
-                _items = value;
-                SortDays();
+                _items = value.SortWeekByFirstDay(WeekStart);
                 PropertyChanged?.Invoke(this, EventArgs.Empty);
             }
         }
 
-        private DayOfWeek _weekStart = DayOfWeek.Sunday;
-        public DayOfWeek WeekStart
+        private WeekStartEnum _weekStart = WeekStartEnum.Sunday;
+        public WeekStartEnum WeekStart
         {
             get => _weekStart;
             set
             {
-                if (value == DayOfWeek.Monday || value == DayOfWeek.Sunday)
-                {
-                    _weekStart = value;
-                    SortDays();
-                    PropertyChanged?.Invoke(this, EventArgs.Empty);
-                }
-                else
-                {
-                    throw new ArgumentException("week must starts from Sunday or Monday");
-                }
+                _weekStart = value;
+                _items = _items.SortWeekByFirstDay(value);
+                PropertyChanged?.Invoke(this, EventArgs.Empty);
             }
         }
 
@@ -221,22 +215,6 @@ namespace EOS.UI.iOS.Models
                 DayEvenBackgroundColor = provider.GetEOSProperty<UIColor>(this, EOSConstants.NeutralColor5);
                 ColorDividers = provider.GetEOSProperty<UIColor>(this, EOSConstants.NeutralColor4);
                 CurrentColorDeviders = provider.GetEOSProperty<UIColor>(this, EOSConstants.NeutralColor4);
-            }
-        }
-
-        private void SortDays()
-        {
-            if (WeekStart == DayOfWeek.Monday)
-            {
-                var monday = _items.Single(i => i.WeekDay == DayOfWeek.Monday);
-                var sunday = _items.Single(i => i.WeekDay == DayOfWeek.Sunday);
-                _items = _items.Except(new[] { monday, sunday }).OrderBy(i => i.WeekDay);
-                _items = _items.Prepend(monday);
-                _items = _items.Append(sunday);
-            }
-            else
-            {
-                _items = _items.OrderBy(i => i.WeekDay);
             }
         }
     }

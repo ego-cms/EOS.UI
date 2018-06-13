@@ -6,6 +6,7 @@ using Android.Runtime;
 using Android.Support.V7.Widget;
 using Android.Util;
 using EOS.UI.Shared.Themes.DataModels;
+using EOS.UI.Shared.Themes.Enums;
 using EOS.UI.Shared.Themes.Helpers;
 using EOS.UI.Shared.Themes.Interfaces;
 using UIFrameworks.Android.Themes;

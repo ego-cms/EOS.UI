@@ -6,6 +6,7 @@ using System.Linq;
 using EOS.UI.iOS.Helpers;
 using CoreGraphics;
 using EOS.UI.Shared.Helpers;
+using EOS.UI.Shared.Themes.Enums;
 
 namespace EOS.UI.iOS.Sandbox.Helpers
 {
@@ -66,8 +67,8 @@ namespace EOS.UI.iOS.Sandbox.Helpers
             public static string DayTextColor = "Day text color";
             public static string CurrentDayTextColor = "Current day text color";
             public static string CurrentDayBackgroundColor = "Current day background color";
-            public static string ColorDeviders = "Devider's color";
-            public static string CurrentColorDeviders = "Current day devider's color";
+            public static string ColorDividers = "Divider's color";
+            public static string CurrentColorDividers = "Current day divider's color";
             public static string DayEvenBackgroundColor = "Even day background color";
             public static string WeekStartDay = "Week start day";
         };
@@ -114,10 +115,10 @@ namespace EOS.UI.iOS.Sandbox.Helpers
             { "Disabled", false },
         };
 
-        public static List<DayOfWeek> WeekStartDays = new List<DayOfWeek>()
+        public static List<WeekStartEnum> WeekStartDays = new List<WeekStartEnum>()
         {
-            DayOfWeek.Monday,
-            DayOfWeek.Sunday
+            WeekStartEnum.Monday,
+            WeekStartEnum.Sunday
         };
 
         public static Dictionary<string, ShadowConfig> ShadowConfigs = new Dictionary<string, ShadowConfig>()
