@@ -144,7 +144,7 @@ namespace EOS.UI.Android.Components
 
             _sectionWidth = (Resources.DisplayMetrics.WidthPixels - 2 * padding) / WorkTimeConstants.DaysCount;
 
-            SetAdapter(new WorkTimeAdapter(_sectionWidth));
+            SetAdapter(new WorkTimeAdapter(Context, _sectionWidth));
 
             if(attrs != null)
                 InitializeAttributes(attrs);
@@ -168,17 +168,12 @@ namespace EOS.UI.Android.Components
 
         public void UpdateAppearance()
         {
-            var items = WorkTimeAdapter.Items;
-            SetAdapter(new WorkTimeAdapter(_sectionWidth));
-            WorkTimeAdapter.Items = items;
             WorkTimeAdapter.UpdateAppearance();
         }
 
         public void ResetCustomization()
         {
-            var items = WorkTimeAdapter.Items;
-            SetAdapter(new WorkTimeAdapter(_sectionWidth));
-            WorkTimeAdapter.Items = items;
+
             WorkTimeAdapter.ResetCustomization();
         }
 

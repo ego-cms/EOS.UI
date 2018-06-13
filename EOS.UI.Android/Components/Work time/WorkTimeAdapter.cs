@@ -1,6 +1,8 @@
 using System;
 using System.Collections.Generic;
+using Android.Content;
 using Android.Graphics;
+using Android.Graphics.Drawables;
 using Android.Support.V7.Widget;
 using Android.Views;
 using EOS.UI.Android.Helpers;
@@ -8,6 +10,7 @@ using EOS.UI.Shared.Themes.DataModels;
 using EOS.UI.Shared.Themes.Helpers;
 using EOS.UI.Shared.Themes.Interfaces;
 using UIFrameworks.Android.Themes;
+using UIFrameworks.Shared.Themes.Helpers;
 using UIFrameworks.Shared.Themes.Interfaces;
 using static EOS.UI.Android.Helpers.Constants;
 
@@ -18,16 +21,20 @@ namespace EOS.UI.Android.Components
         #region fields
 
         private const string Dash = "-";
+        private const string EmptyTime = "00:00";
         private int _selectedWorkDay = -1;
         private int _sectionWidth;
-        private bool _resetCustomization;
+        private Context _context;
+        private bool _isEven;
+        private bool _isSelected;
 
         #endregion
 
         #region conastructors
 
-        public WorkTimeAdapter(int sectionWidth)
+        public WorkTimeAdapter(Context context, int sectionWidth)
         {
+            _context = context;
             _sectionWidth = sectionWidth;
         }
 
@@ -46,10 +53,10 @@ namespace EOS.UI.Android.Components
 
             var workDayModel = Items[position];
 
-            workTimeItem.StartDayTimeLabel.IsEmpty = false;
-            workTimeItem.EndDayTimeLabel.IsEmpty = false;
-            workTimeItem.StartBreakTimeLabel.IsEmpty = false;
-            workTimeItem.EndBreakTimeLabel.IsEmpty = false;
+            workTimeItem.StartDayTimeLabel.Text = EmptyTime;
+            workTimeItem.EndDayTimeLabel.Text = EmptyTime;
+            workTimeItem.StartBreakTimeLabel.Text = EmptyTime;
+            workTimeItem.EndBreakTimeLabel.Text = EmptyTime;
 
             workTimeItem.DayLabel.Text = workDayModel.ShortWeekDay;
             if(!workDayModel.IsDayOff)
@@ -64,86 +71,78 @@ namespace EOS.UI.Android.Components
                 else
                 {
                     workTimeItem.StartBreakTimeLabel.Text = Dash;
-                    workTimeItem.EndBreakTimeLabel.IsEmpty = true;
+                    workTimeItem.EndBreakTimeLabel.Text = EmptyTime;
                 }
             }
             else
             {
                 workTimeItem.StartDayTimeLabel.Text = Dash;
-                workTimeItem.EndDayTimeLabel.IsEmpty = true;
-                workTimeItem.StartBreakTimeLabel.IsEmpty = true;
-                workTimeItem.EndBreakTimeLabel.IsEmpty = true;
+                workTimeItem.EndDayTimeLabel.Text = EmptyTime;
+                workTimeItem.StartBreakTimeLabel.Text = EmptyTime;
+                workTimeItem.EndBreakTimeLabel.Text = EmptyTime;
             }
 
-            workTimeItem.Container.IsEven = position % 2 == 0;
-            UpdateISelectableViews(workTimeItem.Container, _selectedWorkDay == position);
+            _isEven = position % 2 == 0;
+            _isSelected = _selectedWorkDay == position;
 
             if(TitleFont != null)
-                workTimeItem.DayLabel.TitleFont = TitleFont;
+                workTimeItem.DayLabel.Typeface = TitleFont;
 
             if(DayTextFont != null)
             {
-                workTimeItem.StartDayTimeLabel.DayTextFont = DayTextFont;
-                workTimeItem.EndDayTimeLabel.DayTextFont = DayTextFont;
-                workTimeItem.StartBreakTimeLabel.DayTextFont = DayTextFont;
-                workTimeItem.EndBreakTimeLabel.DayTextFont = DayTextFont;
+                workTimeItem.StartDayTimeLabel.Typeface = DayTextFont;
+                workTimeItem.EndDayTimeLabel.Typeface = DayTextFont;
+                workTimeItem.StartBreakTimeLabel.Typeface = DayTextFont;
+                workTimeItem.EndBreakTimeLabel.Typeface = DayTextFont;
             }
 
             if(TitleTextSize != 0)
-                workTimeItem.DayLabel.TitleTextSize = TitleTextSize;
+                workTimeItem.DayLabel.TextSize = TitleTextSize;
 
             if(DayTextSize != 0)
             {
-                workTimeItem.StartDayTimeLabel.DayTextSize = DayTextSize;
-                workTimeItem.EndDayTimeLabel.DayTextSize = DayTextSize;
-                workTimeItem.StartBreakTimeLabel.DayTextSize = DayTextSize;
-                workTimeItem.EndBreakTimeLabel.DayTextSize = DayTextSize;
+                workTimeItem.StartDayTimeLabel.TextSize =  DayTextSize;
+                workTimeItem.EndDayTimeLabel.TextSize = DayTextSize;
+                workTimeItem.StartBreakTimeLabel.TextSize = DayTextSize;
+                workTimeItem.EndBreakTimeLabel.TextSize = DayTextSize;
             }
 
             if(TitleColor != default(Color))
-                workTimeItem.DayLabel.TitleColor = TitleColor;
+                workTimeItem.DayLabel.SetTextColor(TitleColor);
 
             if(DayTextColor != default(Color))
             {
-                workTimeItem.StartDayTimeLabel.DayTextColor = DayTextColor;
-                workTimeItem.EndDayTimeLabel.DayTextColor = DayTextColor;
-                workTimeItem.StartBreakTimeLabel.DayTextColor = DayTextColor;
-                workTimeItem.EndBreakTimeLabel.DayTextColor = DayTextColor;
+                workTimeItem.StartDayTimeLabel.SetTextColor(workTimeItem.StartDayTimeLabel.Text == EmptyTime ? Color.Transparent : DayTextColor);
+                workTimeItem.EndDayTimeLabel.SetTextColor(workTimeItem.EndDayTimeLabel.Text == EmptyTime ? Color.Transparent : DayTextColor);
+                workTimeItem.StartBreakTimeLabel.SetTextColor(workTimeItem.StartBreakTimeLabel.Text == EmptyTime ? Color.Transparent : DayTextColor);
+                workTimeItem.EndBreakTimeLabel.SetTextColor(workTimeItem.EndBreakTimeLabel.Text == EmptyTime ? Color.Transparent : DayTextColor);
             }
 
-            if(CurrentDayBackgroundColor != default(Color))
-                workTimeItem.Container.CurrentDayBackgroundColor = CurrentDayBackgroundColor;
+            if(CurrentDayBackgroundColor != default(Color) && _isSelected)
+                workTimeItem.Container.Background = CreateGradientDrawable(CurrentDayBackgroundColor);
 
-            if(CurrentDayTextColor != default(Color))
+            if(CurrentDayTextColor != default(Color) && _isSelected)
             {
-                workTimeItem.DayLabel.CurrentDayTextColor = CurrentDayTextColor;
-                workTimeItem.StartDayTimeLabel.CurrentDayTextColor = CurrentDayTextColor;
-                workTimeItem.EndDayTimeLabel.CurrentDayTextColor = CurrentDayTextColor;
-                workTimeItem.StartBreakTimeLabel.CurrentDayTextColor = CurrentDayTextColor;
-                workTimeItem.EndBreakTimeLabel.CurrentDayTextColor = CurrentDayTextColor;
+                workTimeItem.DayLabel.SetTextColor(CurrentDayTextColor);
+                workTimeItem.StartDayTimeLabel.SetTextColor(workTimeItem.StartDayTimeLabel.Text == EmptyTime ? Color.Transparent : CurrentDayTextColor);
+                workTimeItem.EndDayTimeLabel.SetTextColor(workTimeItem.EndDayTimeLabel.Text == EmptyTime ? Color.Transparent : CurrentDayTextColor);
+                workTimeItem.StartBreakTimeLabel.SetTextColor(workTimeItem.StartBreakTimeLabel.Text == EmptyTime ? Color.Transparent : CurrentDayTextColor);
+                workTimeItem.EndBreakTimeLabel.SetTextColor(workTimeItem.EndBreakTimeLabel.Text == EmptyTime ? Color.Transparent : CurrentDayTextColor);
             }
 
-            if(DayEvenBackgroundColor != default(Color))
-                workTimeItem.Container.DayEvenBackgroundColor = DayEvenBackgroundColor;
+            if(DayEvenBackgroundColor != default(Color) && !_isSelected)
+                workTimeItem.Container.Background = CreateGradientDrawable(_isEven ? Color.Transparent : DayEvenBackgroundColor);
 
-            if(DividerColor != default(Color))
+            if(DividerColor != default(Color) && !_isSelected)
             {
-                workTimeItem.DayDivider.DividerColor = DividerColor;
-                workTimeItem.CircleDivider.DividerColor = DividerColor;
+                workTimeItem.DayDivider.Background = new ColorDrawable(DividerColor);
+                workTimeItem.CircleDivider.Background = new ColorDrawable(DividerColor);
             }
 
-            if(CurrentDividerColor != default(Color))
+            if(CurrentDividerColor != default(Color) && _isSelected)
             {
-                workTimeItem.DayDivider.CurrentDividerColor = CurrentDividerColor;
-                workTimeItem.CircleDivider.CurrentDividerColor = CurrentDividerColor;
-            }
-
-            UpdateAppearance(workTimeItem.Container);
-
-            if(_resetCustomization)
-            {
-                ResetCustomization(workTimeItem.Container);
-                _resetCustomization = false;
+                workTimeItem.DayDivider.Background = new ColorDrawable(CurrentDividerColor);
+                workTimeItem.CircleDivider.Background = new ColorDrawable(CurrentDividerColor);
             }
         }
 
@@ -343,30 +342,6 @@ namespace EOS.UI.Android.Components
             return result;
         }
 
-        private void UpdateISelectableViews(View parent, bool isSelected)
-        {
-            var views = GetAllChildren(parent);
-            foreach(var view in views)
-                if(view is ISelectable selectable)
-                    selectable.IsSelected = isSelected;
-        }
-
-        private void UpdateAppearance(View parent)
-        {
-            var views = GetAllChildren(parent);
-            foreach(var view in views)
-                if(view is IEOSThemeControl themeControl)
-                    themeControl.UpdateAppearance();
-        }
-
-        private void ResetCustomization(View parent)
-        {
-            var views = GetAllChildren(parent);
-            foreach(var view in views)
-                if(view is IEOSThemeControl themeControl)
-                    themeControl.ResetCustomization();
-        }
-
         private List<WorkTimeCalendarItem> GenerateDefaultItems()
         {
             var list = new List<WorkTimeCalendarItem>();
@@ -374,6 +349,15 @@ namespace EOS.UI.Android.Components
                 list.Add(new WorkTimeCalendarItem() { WeekDay = (DayOfWeek)i });
 
             return list;
+        }
+
+        private GradientDrawable CreateGradientDrawable(Color color)
+        {
+            var drawable = new GradientDrawable();
+            drawable.SetShape(ShapeType.Rectangle);
+            drawable.SetColor(color);
+            drawable.SetCornerRadius(7f);
+            return drawable;
         }
 
         #endregion
@@ -389,6 +373,23 @@ namespace EOS.UI.Android.Components
 
         public void UpdateAppearance()
         {
+            if(!IsEOSCustomizationIgnored)
+            {
+                TitleFont = Typeface.CreateFromAsset(_context.Assets, GetThemeProvider().GetEOSProperty<string>(this, EOSConstants.WorkTimeTitleFont));
+                TitleTextSize = GetThemeProvider().GetEOSProperty<int>(this, EOSConstants.WorkTimeTitleSize);
+                TitleColor = GetThemeProvider().GetEOSProperty<Color>(this, EOSConstants.NeutralColor2);
+                CurrentDayTextColor = GetThemeProvider().GetEOSProperty<Color>(this, EOSConstants.NeutralColor6);
+
+                DayTextFont = Typeface.CreateFromAsset(_context.Assets, GetThemeProvider().GetEOSProperty<string>(this, EOSConstants.WorkTimeDayTextFont));
+                DayTextSize = GetThemeProvider().GetEOSProperty<int>(this, EOSConstants.WorkTimeDayTextSize);
+                DayTextColor = GetThemeProvider().GetEOSProperty<Color>(this, EOSConstants.NeutralColor3);
+
+                CurrentDayBackgroundColor = GetThemeProvider().GetEOSProperty<Color>(this, EOSConstants.BrandPrimaryColor);
+                DayEvenBackgroundColor = GetThemeProvider().GetEOSProperty<Color>(this, EOSConstants.NeutralColor4);
+
+                DividerColor = GetThemeProvider().GetEOSProperty<Color>(this, EOSConstants.NeutralColor3);
+                CurrentDividerColor = GetThemeProvider().GetEOSProperty<Color>(this, EOSConstants.NeutralColor6);
+            }
             NotifyDataSetChanged();
         }
 
@@ -397,19 +398,8 @@ namespace EOS.UI.Android.Components
             if(Items == null)
                 Items = GenerateDefaultItems();
             WeekStart = 0;
-            TitleFont = null;
-            DayTextFont = null;
-            DayTextSize = 0;
-            TitleTextSize = 0;
-            TitleColor = Color.Transparent;
-            DayTextColor = Color.Transparent;
-            CurrentDayBackgroundColor = Color.Transparent;
-            CurrentDayTextColor = Color.Transparent;
-            DayEvenBackgroundColor = Color.Transparent;
-            DividerColor = Color.Transparent;
-            CurrentDividerColor = Color.Transparent;
+            _selectedWorkDay = -1;
             IsEOSCustomizationIgnored = false;
-            _resetCustomization = true;
             UpdateAppearance();
         }
 

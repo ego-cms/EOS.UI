@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<EOS.UI.Android.Components.EOSWorkTimeContainer xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:id="@+id/dayContainer"
     android:minWidth="25px"
     android:minHeight="25px">
-    <EOS.UI.Android.Components.EOSDayLabel
+    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/dayOfWeekLabel"
@@ -17,14 +17,14 @@
         android:layout_gravity="center"
         android:layout_marginLeft="4dp"
         android:layout_marginRight="4dp" />
-    <EOS.UI.Android.Components.EOSDayDivider
+    <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:id="@+id/dayTimeDivider"
         android:background="#ff9c9c9c"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp" />
-    <EOS.UI.Android.Components.EOSTimeLabel
+    <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/startDayTimeLabel"
@@ -35,7 +35,7 @@
         android:layout_marginLeft="4dp"
         android:layout_marginRight="4dp"
         android:paddingBottom="0dp" />
-    <EOS.UI.Android.Components.EOSTimeLabel
+    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/endDayTimeLabel"
@@ -46,7 +46,7 @@
         android:layout_marginLeft="4dp"
         android:layout_marginRight="4dp"
         android:paddingTop="0dp" />
-    <EOS.UI.Android.Components.EOSDayCircleDivider
+    <View
         android:layout_width="4dp"
         android:layout_height="4dp"
         android:id="@+id/circleDivider"
@@ -54,7 +54,7 @@
         android:layout_gravity="center"
         android:layout_marginTop="10dp"
         android:layout_marginBottom="10dp" />
-    <EOS.UI.Android.Components.EOSTimeLabel
+    <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/startBreakTimeLabel"
@@ -64,7 +64,7 @@
         android:layout_gravity="center"
         android:layout_marginLeft="4dp"
         android:layout_marginRight="4dp" />
-    <EOS.UI.Android.Components.EOSTimeLabel
+    <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/endBreakTimeLabel"
@@ -74,4 +74,4 @@
         android:layout_gravity="center"
         android:layout_marginLeft="4dp"
         android:layout_marginRight="4dp" />
-</EOS.UI.Android.Components.EOSWorkTimeContainer>
+</LinearLayout>
