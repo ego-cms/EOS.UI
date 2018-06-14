@@ -244,7 +244,7 @@ namespace EOS.UI.Android.Sandbox.Activities
                     WeekDay = DayOfWeek.Monday,
                     IsDayOff = false,
                     HasBreak = true,
-                    StartTime = new TimeSpan(9, 0, 0),
+                    StartTime = new TimeSpan(8, 0, 0),
                     EndTime = new TimeSpan(18, 0, 0),
                     BreakStartTime = new TimeSpan(13, 0, 0),
                     BreakEndTime = new TimeSpan(14, 0, 0)
@@ -254,7 +254,7 @@ namespace EOS.UI.Android.Sandbox.Activities
                     WeekDay = DayOfWeek.Tuesday,
                     IsDayOff = false,
                     HasBreak = true,
-                    StartTime = new TimeSpan(9, 0, 0),
+                    StartTime = new TimeSpan(8, 0, 0),
                     EndTime = new TimeSpan(18, 0, 0),
                     BreakStartTime = new TimeSpan(13, 0, 0),
                     BreakEndTime = new TimeSpan(14, 0, 0)
@@ -264,7 +264,7 @@ namespace EOS.UI.Android.Sandbox.Activities
                     WeekDay = DayOfWeek.Wednesday,
                     IsDayOff = false,
                     HasBreak = true,
-                    StartTime = new TimeSpan(9, 0, 0),
+                    StartTime = new TimeSpan(8, 0, 0),
                     EndTime = new TimeSpan(18, 0, 0),
                     BreakStartTime = new TimeSpan(13, 0, 0),
                     BreakEndTime = new TimeSpan(14, 0, 0)
@@ -274,7 +274,7 @@ namespace EOS.UI.Android.Sandbox.Activities
                     WeekDay = DayOfWeek.Thursday,
                     IsDayOff = false,
                     HasBreak = true,
-                    StartTime = new TimeSpan(9, 0, 0),
+                    StartTime = new TimeSpan(8, 0, 0),
                     EndTime = new TimeSpan(18, 0, 0),
                     BreakStartTime = new TimeSpan(13, 0, 0),
                     BreakEndTime = new TimeSpan(14, 0, 0)
@@ -283,11 +283,9 @@ namespace EOS.UI.Android.Sandbox.Activities
                 {
                     WeekDay = DayOfWeek.Friday,
                     IsDayOff = false,
-                    HasBreak = true,
-                    StartTime = new TimeSpan(9, 0, 0),
+                    HasBreak = false,
+                    StartTime = new TimeSpan(8, 0, 0),
                     EndTime = new TimeSpan(18, 0, 0),
-                    BreakStartTime = new TimeSpan(13, 0, 0),
-                    BreakEndTime = new TimeSpan(14, 0, 0)
                 },
                 new WorkTimeCalendarItem()
                 {

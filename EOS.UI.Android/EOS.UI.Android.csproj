@@ -104,6 +104,8 @@
     <AndroidAsset Include="Assets\Fonts\OpenSansRegular.ttf" />
   </ItemGroup>
   <ItemGroup>
+    <AndroidAsset Include="Assets\Fonts\SFUITextBold.ttf" />
+    <AndroidAsset Include="Assets\Fonts\SFUITextSemibold.ttf" />
     <None Include="packages.config" />
     <AndroidResource Include="Resources\layout\Section.axml">
       <SubType>Designer</SubType>
