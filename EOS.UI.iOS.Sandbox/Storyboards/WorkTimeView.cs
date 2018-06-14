@@ -133,7 +133,7 @@ namespace EOS.UI.iOS.Sandbox
             weekStartDropdown.InitSource(
                 WeekStartDays,
                 weekStart => source.CalendarModel.WeekStart = weekStart,
-               Fields.WeekStartDay,
+               Fields.FirstDayOfWeek,
                rect);
             
             resetButton.TouchUpInside += (sender, e) =>
@@ -141,12 +141,6 @@ namespace EOS.UI.iOS.Sandbox
                 _dropDowns.Except(new[] { themesDropDown }).ToList().ForEach(dropDown => dropDown.ResetValue());
                 source.CalendarModel.ResetCustomization();
             };
-        }
-
-        public override void ViewDidAppear(bool animated)
-        {
-            base.ViewDidAppear(animated);
-            (workTimeCollection.Source as WorkTimeCalendarCollectionSource).InitFlowLayout();
         }
 
         private List<WorkTimeCalendarItem> CreateSchedule()
@@ -167,7 +161,7 @@ namespace EOS.UI.iOS.Sandbox
                 day.EndTime = TimeSpan.FromHours(18);
                 day.BreakStartTime = TimeSpan.FromHours(13);
                 day.BreakEndTime = TimeSpan.FromHours(14);
-                day.HasBreak = i % 2 == 0;
+                day.HasBreak = day.WeekDay != DayOfWeek.Friday;
                 schedule.Add(day);
             }
 

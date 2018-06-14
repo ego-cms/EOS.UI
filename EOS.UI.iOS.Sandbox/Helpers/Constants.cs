@@ -63,7 +63,7 @@ namespace EOS.UI.iOS.Sandbox.Helpers
             public static string TitleFont = "Title font";
             public static string TitleColor = "Title color";
             public static string DayTextFont = "Day text font";
-            public static string TitleTextSize = "Title size";
+            public static string TitleTextSize = "Title text size";
             public static string DayTextSize = "Day text size";
             public static string DayTextColor = "Day text color";
             public static string CurrentDayTextColor = "Current day text color";
