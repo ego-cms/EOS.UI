@@ -61,6 +61,7 @@ namespace EOS.UI.iOS.Sandbox.Helpers
             public static string PaddingRight = "Padding right";
             public static string RippleColor = "Ripple color";
             public static string TitleFont = "Title font";
+            public static string TitleColor = "Title color";
             public static string DayTextFont = "Day text font";
             public static string TitleTextSize = "Title size";
             public static string DayTextSize = "Day text size";

@@ -47,7 +47,8 @@ namespace EOS.UI.iOS.Sandbox
                 weekStartDropdown,
                 dayEvenBackgroundColor,
                 devidersColor,
-                currentDayDevidersColor
+                currentDayDevidersColor,
+                titleColorDropDown
             };
 
             View.AddGestureRecognizer(new UITapGestureRecognizer(() =>
@@ -104,6 +105,11 @@ namespace EOS.UI.iOS.Sandbox
                Fields.CurrentDayTextColor,
                rect);
             
+            titleColorDropDown.InitSource(
+              color => source.CalendarModel.TitleColor = color,
+              Fields.TitleColor,
+              rect);
+            
             currentDayBackgroundColorDropDown.InitSource(
                 color => source.CalendarModel.CurrentDayBackgroundColor = color,
                 Fields.CurrentDayBackgroundColor,
@@ -135,6 +141,12 @@ namespace EOS.UI.iOS.Sandbox
                 _dropDowns.Except(new[] { themesDropDown }).ToList().ForEach(dropDown => dropDown.ResetValue());
                 source.CalendarModel.ResetCustomization();
             };
+        }
+
+        public override void ViewDidAppear(bool animated)
+        {
+            base.ViewDidAppear(animated);
+            (workTimeCollection.Source as WorkTimeCalendarCollectionSource).InitFlowLayout();
         }
 
         private List<WorkTimeCalendarItem> CreateSchedule()
