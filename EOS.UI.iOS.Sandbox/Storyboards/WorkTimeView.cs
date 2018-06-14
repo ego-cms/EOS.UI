@@ -29,11 +29,10 @@ namespace EOS.UI.iOS.Sandbox
             base.ViewDidLoad();
 
             var dataSource = CreateSchedule();
-            var source = new WorkTimeCalendarCollectionSource(workTimeCollection);
+            var source = (WorkTimeCalendarCollectionSource) workTimeCollection.Source;
             source.CalendarModel.Items = dataSource;
             source.CalendarModel.WeekStart = WeekStartEnum.Sunday;
             workTimeCollection.Source = source;
-
 
             _dropDowns = new List<EOSSandboxDropDown>()
             {
@@ -156,7 +155,7 @@ namespace EOS.UI.iOS.Sandbox
                 day.EndTime = TimeSpan.FromHours(18);
                 day.BreakStartTime = TimeSpan.FromHours(13);
                 day.BreakEndTime = TimeSpan.FromHours(14);
-                day.HasBreak = false;
+                day.HasBreak = i % 2 == 0;
                 schedule.Add(day);
             }
 
