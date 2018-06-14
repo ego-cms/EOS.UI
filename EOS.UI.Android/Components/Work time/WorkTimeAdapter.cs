@@ -140,13 +140,13 @@ namespace EOS.UI.Android.Components
             if(DividerColor != default(Color) && !_isCurrentDay)
             {
                 workTimeItem.DayDivider.Background = new ColorDrawable(DividerColor);
-                workTimeItem.CircleDivider.Background = new ColorDrawable(DividerColor);
+                workTimeItem.CircleDivider.Background = CreateGradientDrawable(DividerColor);
             }
 
             if(CurrentDividerColor != default(Color) && _isCurrentDay)
             {
                 workTimeItem.DayDivider.Background = new ColorDrawable(CurrentDividerColor);
-                workTimeItem.CircleDivider.Background = new ColorDrawable(CurrentDividerColor);
+                workTimeItem.CircleDivider.Background = CreateGradientDrawable(CurrentDividerColor);
             }
         }
 
