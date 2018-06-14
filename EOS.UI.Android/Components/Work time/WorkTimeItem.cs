@@ -5,7 +5,7 @@ using Android.Widget;
 
 namespace EOS.UI.Android.Components
 {
-    internal class WorkTimeItem : RecyclerView.ViewHolder, View.IOnTouchListener
+    internal class WorkTimeItem : RecyclerView.ViewHolder
     {
         public LinearLayout Container { get; private set; }
         public TextView DayLabel { get; private set; }
@@ -16,9 +16,7 @@ namespace EOS.UI.Android.Components
         public TextView StartBreakTimeLabel { get; private set; }
         public TextView EndBreakTimeLabel { get; private set; }
 
-        private Action<int> _setSelectedDay;
-
-        public WorkTimeItem(View itemView, Action<int> setSelectedDay) : base(itemView)
+        public WorkTimeItem(View itemView) : base(itemView)
         {
             Container = itemView.FindViewById<LinearLayout>(Resource.Id.dayContainer);
             DayLabel = itemView.FindViewById<TextView>(Resource.Id.dayOfWeekLabel);
@@ -28,16 +26,6 @@ namespace EOS.UI.Android.Components
             CircleDivider = itemView.FindViewById<View>(Resource.Id.circleDivider);
             StartBreakTimeLabel = itemView.FindViewById<TextView>(Resource.Id.startBreakTimeLabel);
             EndBreakTimeLabel = itemView.FindViewById<TextView>(Resource.Id.endBreakTimeLabel);
-
-            _setSelectedDay = setSelectedDay;
-
-            Container.SetOnTouchListener(this);
-        }
-
-        public bool OnTouch(View v, MotionEvent e)
-        {
-            _setSelectedDay?.Invoke(Position);
-            return false;
         }
     }
 }

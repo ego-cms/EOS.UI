@@ -122,8 +122,8 @@ namespace EOS.UI.Shared.Themes.Themes
             { EOSConstants.HasSectionAction, true },
             { EOSConstants.WorkTimeTitleFont, "Fonts/OpenSansRegular.ttf" },
             { EOSConstants.WorkTimeDayTextFont, "Fonts/OpenSansRegular.ttf" },
-            { EOSConstants.WorkTimeTitleSize, 16 },
-            { EOSConstants.WorkTimeDayTextSize, 14 },
+            { EOSConstants.WorkTimeTitleSize, 13 },
+            { EOSConstants.WorkTimeDayTextSize, 11 },
 #endif
         };
     }

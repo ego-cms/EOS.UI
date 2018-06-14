@@ -1,12 +1,12 @@
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using Android.Content;
 using Android.Graphics;
 using Android.Graphics.Drawables;
 using Android.Support.V7.Widget;
 using Android.Views;
-using EOS.UI.Android.Helpers;
 using EOS.UI.Shared.Themes.DataModels;
 using EOS.UI.Shared.Themes.Enums;
 using EOS.UI.Shared.Themes.Extensions;
@@ -25,11 +25,11 @@ namespace EOS.UI.Android.Components
 
         private const string Dash = "-";
         private const string EmptyTime = "00:00";
-        private int _selectedWorkDay = -1;
         private int _sectionWidth;
         private Context _context;
         private bool _isEven;
-        private bool _isSelected;
+        private bool _isCurrentDay;
+        private DayOfWeek _startDayOfweek;
 
         #endregion
 
@@ -39,6 +39,7 @@ namespace EOS.UI.Android.Components
         {
             _context = context;
             _sectionWidth = sectionWidth;
+            _startDayOfweek = CultureInfo.CurrentCulture.DateTimeFormat.FirstDayOfWeek;
         }
 
         #endregion
@@ -86,7 +87,7 @@ namespace EOS.UI.Android.Components
             }
 
             _isEven = position % 2 == 0;
-            _isSelected = _selectedWorkDay == position;
+            _isCurrentDay = IsThisCurrentDay(Items[position].WeekDay);
 
             if(TitleFont != null)
                 workTimeItem.DayLabel.Typeface = TitleFont;
@@ -121,10 +122,10 @@ namespace EOS.UI.Android.Components
                 workTimeItem.EndBreakTimeLabel.SetTextColor(workTimeItem.EndBreakTimeLabel.Text == EmptyTime ? Color.Transparent : DayTextColor);
             }
 
-            if(CurrentDayBackgroundColor != default(Color) && _isSelected)
+            if(CurrentDayBackgroundColor != default(Color) && _isCurrentDay)
                 workTimeItem.Container.Background = CreateGradientDrawable(CurrentDayBackgroundColor);
 
-            if(CurrentDayTextColor != default(Color) && _isSelected)
+            if(CurrentDayTextColor != default(Color) && _isCurrentDay)
             {
                 workTimeItem.DayLabel.SetTextColor(CurrentDayTextColor);
                 workTimeItem.StartDayTimeLabel.SetTextColor(workTimeItem.StartDayTimeLabel.Text == EmptyTime ? Color.Transparent : CurrentDayTextColor);
@@ -133,16 +134,16 @@ namespace EOS.UI.Android.Components
                 workTimeItem.EndBreakTimeLabel.SetTextColor(workTimeItem.EndBreakTimeLabel.Text == EmptyTime ? Color.Transparent : CurrentDayTextColor);
             }
 
-            if(DayEvenBackgroundColor != default(Color) && !_isSelected)
+            if(DayEvenBackgroundColor != default(Color) && !_isCurrentDay)
                 workTimeItem.Container.Background = CreateGradientDrawable(_isEven ? Color.Transparent : DayEvenBackgroundColor);
 
-            if(DividerColor != default(Color) && !_isSelected)
+            if(DividerColor != default(Color) && !_isCurrentDay)
             {
                 workTimeItem.DayDivider.Background = new ColorDrawable(DividerColor);
                 workTimeItem.CircleDivider.Background = new ColorDrawable(DividerColor);
             }
 
-            if(CurrentDividerColor != default(Color) && _isSelected)
+            if(CurrentDividerColor != default(Color) && _isCurrentDay)
             {
                 workTimeItem.DayDivider.Background = new ColorDrawable(CurrentDividerColor);
                 workTimeItem.CircleDivider.Background = new ColorDrawable(CurrentDividerColor);
@@ -152,7 +153,7 @@ namespace EOS.UI.Android.Components
         public override RecyclerView.ViewHolder OnCreateViewHolder(ViewGroup parent, int viewType)
         {
             View itemView = LayoutInflater.From(parent.Context).Inflate(Resource.Layout.WorkTimeItemLayout, parent, false);
-            var viewHolder = new WorkTimeItem(itemView, SetSelectedDay);
+            var viewHolder = new WorkTimeItem(itemView);
             itemView.LayoutParameters.Width = _sectionWidth;
             return viewHolder;
         }
@@ -325,10 +326,9 @@ namespace EOS.UI.Android.Components
 
         #region utility methods
 
-        private void SetSelectedDay(int position)
+        private bool IsThisCurrentDay(DayOfWeek day)
         {
-            _selectedWorkDay = position;
-            NotifyDataSetChanged();
+            return day == CultureInfo.CurrentCulture.Calendar.GetDayOfWeek(DateTime.Now);
         }
 
         private List<View> GetAllChildren(View view)
@@ -400,8 +400,7 @@ namespace EOS.UI.Android.Components
         {
             if(Items == null)
                 Items = GenerateDefaultItems();
-            WeekStart = 0;
-            _selectedWorkDay = -1;
+            WeekStart = _startDayOfweek == DayOfWeek.Sunday ? (WeekStartEnum)0 : (WeekStartEnum)1;
             IsEOSCustomizationIgnored = false;
             UpdateAppearance();
         }
