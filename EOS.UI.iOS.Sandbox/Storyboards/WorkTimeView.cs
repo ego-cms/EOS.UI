@@ -47,7 +47,8 @@ namespace EOS.UI.iOS.Sandbox
                 weekStartDropdown,
                 dayEvenBackgroundColor,
                 devidersColor,
-                currentDayDevidersColor
+                currentDayDevidersColor,
+                titleColorDropDown
             };
 
             View.AddGestureRecognizer(new UITapGestureRecognizer(() =>
@@ -103,6 +104,11 @@ namespace EOS.UI.iOS.Sandbox
                color => source.CalendarModel.CurrentDayTextColor = color,
                Fields.CurrentDayTextColor,
                rect);
+            
+            titleColorDropDown.InitSource(
+              color => source.CalendarModel.TitleColor = color,
+              Fields.TitleColor,
+              rect);
             
             currentDayBackgroundColorDropDown.InitSource(
                 color => source.CalendarModel.CurrentDayBackgroundColor = color,

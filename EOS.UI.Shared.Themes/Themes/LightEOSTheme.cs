@@ -77,9 +77,9 @@ namespace EOS.UI.Shared.Themes.Themes
             { EOSConstants.BottomPadding, 5 },
             { EOSConstants.HasSectionBorder, true },
             { EOSConstants.HasSectionAction, true },
-            { EOSConstants.WorkTimeTitleSize, 16 },
+            { EOSConstants.WorkTimeTitleSize, 14 },
             { EOSConstants.WorkTimeTitleFont, UIFont.BoldSystemFontOfSize(16) },
-            { EOSConstants.WorkTimeDayTextSize, 14 },
+            { EOSConstants.WorkTimeDayTextSize, 11 },
             { EOSConstants.WorkTimeDayTextFont, UIFont.BoldSystemFontOfSize(14) }
 #endif
 

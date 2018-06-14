@@ -1,13 +1,16 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
+using EOS.UI.iOS.Extensions;
 using EOS.UI.iOS.Themes;
 using EOS.UI.Shared.Themes.DataModels;
 using EOS.UI.Shared.Themes.Enums;
 using EOS.UI.Shared.Themes.Extensions;
 using EOS.UI.Shared.Themes.Helpers;
 using EOS.UI.Shared.Themes.Interfaces;
+using Foundation;
 using UIFrameworks.Shared.Themes.Helpers;
 using UIFrameworks.Shared.Themes.Interfaces;
 using UIKit;
@@ -33,14 +36,14 @@ namespace EOS.UI.iOS.Models
             }
         }
 
-        private WeekStartEnum _weekStart = WeekStartEnum.Sunday;
+        private WeekStartEnum _weekStart;
         public WeekStartEnum WeekStart
         {
             get => _weekStart;
             set
             {
                 _weekStart = value;
-                _items = _items.SortWeekByFirstDay(value);
+                _items = _items?.SortWeekByFirstDay(value);
                 PropertyChanged?.Invoke(this, EventArgs.Empty);
             }
         }
@@ -201,6 +204,7 @@ namespace EOS.UI.iOS.Models
 
         public void UpdateAppearance()
         {
+            WeekStart = GetDefaultWeekStartDay();
             if (!IsEOSCustomizationIgnored)
             {
                 var provider = EOSThemeProvider.Instance;
@@ -216,6 +220,16 @@ namespace EOS.UI.iOS.Models
                 ColorDividers = provider.GetEOSProperty<UIColor>(this, EOSConstants.NeutralColor4);
                 CurrentColorDeviders = provider.GetEOSProperty<UIColor>(this, EOSConstants.NeutralColor4);
             }
+        }
+
+        private WeekStartEnum GetDefaultWeekStartDay()
+        {
+            var calendar = NSCalendar.CurrentCalendar;
+            double intervel = 0.0;
+            NSDate startOfWeek = null;
+            calendar.Range(NSCalendarUnit.WeekOfMonth, out startOfWeek, out intervel, new NSDate());
+            var weekDay = startOfWeek.ToDateTime().DayOfWeek;
+            return (WeekStartEnum)weekDay;
         }
     }
 }

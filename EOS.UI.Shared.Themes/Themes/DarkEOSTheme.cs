@@ -79,10 +79,10 @@ namespace EOS.UI.Shared.Themes.Themes
             { EOSConstants.BottomPadding, 5 },
             { EOSConstants.HasSectionBorder, false },
             { EOSConstants.HasSectionAction, true },
-            { EOSConstants.WorkTimeTitleSize, 16 },
-            { EOSConstants.WorkTimeTitleFont, UIFont.BoldSystemFontOfSize(16) },
-            { EOSConstants.WorkTimeDayTextSize, 14 },
-            { EOSConstants.WorkTimeDayTextFont, UIFont.BoldSystemFontOfSize(14) }
+            { EOSConstants.WorkTimeTitleSize, 14 },
+            { EOSConstants.WorkTimeTitleFont, UIFont.BoldSystemFontOfSize(14) },
+            { EOSConstants.WorkTimeDayTextSize, 11 },
+            { EOSConstants.WorkTimeDayTextFont, UIFont.BoldSystemFontOfSize(11) }
 #endif
 
 #if __ANDROID__

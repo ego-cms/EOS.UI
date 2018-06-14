@@ -56,14 +56,14 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Dcm-6f-bRJ">
-                                        <rect key="frame" x="6" y="51" width="123" height="1"/>
+                                        <rect key="frame" x="8" y="51" width="119" height="1"/>
                                         <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="1" id="Wvy-KB-Cth"/>
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bVD-vu-xgp">
-                                        <rect key="frame" x="44" y="81" width="47" height="2"/>
+                                        <rect key="frame" x="45" y="81" width="45" height="2"/>
                                         <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="2" id="8FB-E0-b2K"/>
@@ -93,7 +93,7 @@
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JVV-fb-Crf">
-                                        <rect key="frame" x="44" y="381" width="47" height="2"/>
+                                        <rect key="frame" x="45" y="381" width="45" height="2"/>
                                         <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="2" id="132-o2-qum"/>
@@ -113,7 +113,7 @@
                                     <constraint firstItem="Y68-Wt-e0w" firstAttribute="top" secondItem="pyu-Ua-4FT" secondAttribute="top" constant="20" id="LDH-P6-wkD"/>
                                     <constraint firstItem="JVV-fb-Crf" firstAttribute="centerX" secondItem="pyu-Ua-4FT" secondAttribute="centerX" id="S5A-yn-jE8"/>
                                     <constraint firstItem="2lb-Sv-ucH" firstAttribute="centerX" secondItem="pyu-Ua-4FT" secondAttribute="centerX" id="T4n-tn-ZWm"/>
-                                    <constraint firstAttribute="trailing" secondItem="Dcm-6f-bRJ" secondAttribute="trailing" constant="6" id="Uui-EA-iYh"/>
+                                    <constraint firstAttribute="trailing" secondItem="Dcm-6f-bRJ" secondAttribute="trailing" constant="8" id="Uui-EA-iYh"/>
                                     <constraint firstItem="78h-FV-JCD" firstAttribute="centerX" secondItem="pyu-Ua-4FT" secondAttribute="centerX" id="VU8-Yu-Bb2"/>
                                     <constraint firstItem="Dcm-6f-bRJ" firstAttribute="top" secondItem="Y68-Wt-e0w" secondAttribute="bottom" constant="10" id="b13-3Z-ceK"/>
                                     <constraint firstItem="aYN-zY-hso" firstAttribute="top" secondItem="2lb-Sv-ucH" secondAttribute="bottom" id="lbw-r4-L6A"/>
@@ -124,7 +124,7 @@
                                     <constraint firstItem="78h-FV-JCD" firstAttribute="top" secondItem="aYN-zY-hso" secondAttribute="bottom" id="tgN-9P-AP6"/>
                                     <constraint firstAttribute="trailing" secondItem="aYN-zY-hso" secondAttribute="trailing" id="wrY-1k-Z7j"/>
                                     <constraint firstItem="bVD-vu-xgp" firstAttribute="centerX" secondItem="Dcm-6f-bRJ" secondAttribute="centerX" id="y85-Fu-CHl"/>
-                                    <constraint firstItem="Dcm-6f-bRJ" firstAttribute="leading" secondItem="pyu-Ua-4FT" secondAttribute="leading" constant="6" id="zAr-Lg-X2F"/>
+                                    <constraint firstItem="Dcm-6f-bRJ" firstAttribute="leading" secondItem="pyu-Ua-4FT" secondAttribute="leading" constant="8" id="zAr-Lg-X2F"/>
                                 </constraints>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
