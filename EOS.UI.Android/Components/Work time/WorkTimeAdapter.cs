@@ -23,7 +23,7 @@ namespace EOS.UI.Android.Components
     {
         #region fields
 
-        private const string Dash = "—";
+        private const string Dash = "----";
         private const string EmptyTime = "00:00";
         private int _sectionWidth;
         private Context _context;
@@ -62,6 +62,9 @@ namespace EOS.UI.Android.Components
             workTimeItem.StartBreakTimeLabel.Text = EmptyTime;
             workTimeItem.EndBreakTimeLabel.Text = EmptyTime;
 
+            workTimeItem.StartDayTimeLabel.LetterSpacing = 0;
+            workTimeItem.StartBreakTimeLabel.LetterSpacing = 0;
+
             workTimeItem.DayLabel.Text = workDayModel.ShortWeekDay;
             if(!workDayModel.IsDayOff)
             {
@@ -75,12 +78,14 @@ namespace EOS.UI.Android.Components
                 else
                 {
                     workTimeItem.StartBreakTimeLabel.Text = Dash;
+                    workTimeItem.StartBreakTimeLabel.LetterSpacing = -0.2f;
                     workTimeItem.EndBreakTimeLabel.Text = EmptyTime;
                 }
             }
             else
             {
                 workTimeItem.StartDayTimeLabel.Text = Dash;
+                workTimeItem.StartDayTimeLabel.LetterSpacing = -0.2f;
                 workTimeItem.EndDayTimeLabel.Text = EmptyTime;
                 workTimeItem.StartBreakTimeLabel.Text = EmptyTime;
                 workTimeItem.EndBreakTimeLabel.Text = EmptyTime;
@@ -105,7 +110,7 @@ namespace EOS.UI.Android.Components
 
             if(DayTextSize != 0)
             {
-                workTimeItem.StartDayTimeLabel.TextSize =  DayTextSize;
+                workTimeItem.StartDayTimeLabel.TextSize = DayTextSize;
                 workTimeItem.EndDayTimeLabel.TextSize = DayTextSize;
                 workTimeItem.StartBreakTimeLabel.TextSize = DayTextSize;
                 workTimeItem.EndBreakTimeLabel.TextSize = DayTextSize;
