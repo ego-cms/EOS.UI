@@ -63,15 +63,15 @@ namespace EOS.UI.iOS.Sandbox.Helpers
             public static string TitleFont = "Title font";
             public static string TitleColor = "Title color";
             public static string DayTextFont = "Day text font";
-            public static string TitleTextSize = "Title size";
+            public static string TitleTextSize = "Title text size";
             public static string DayTextSize = "Day text size";
             public static string DayTextColor = "Day text color";
             public static string CurrentDayTextColor = "Current day text color";
             public static string CurrentDayBackgroundColor = "Current day background color";
             public static string ColorDividers = "Divider's color";
-            public static string CurrentColorDividers = "Current day divider's color";
-            public static string DayEvenBackgroundColor = "Even day background color";
-            public static string WeekStartDay = "Week start day";
+            public static string CurrentColorDividers = "Current divider's color";
+            public static string DayEvenBackgroundColor = "Day even background color";
+            public static string FirstDayOfWeek = "First day of week";
         };
 
         public static UIColor BackgroundColor = UIColor.FromRGB(224, 224, 224);

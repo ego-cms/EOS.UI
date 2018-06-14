@@ -63,7 +63,7 @@
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bVD-vu-xgp">
-                                        <rect key="frame" x="45" y="57" width="45" height="2"/>
+                                        <rect key="frame" x="45" y="61.5" width="45" height="2"/>
                                         <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="2" id="8FB-E0-b2K"/>
@@ -73,15 +73,15 @@
                                         <rect key="frame" x="0.0" y="95" width="135" height="263"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2jb-eO-heK">
-                                                <rect key="frame" x="64" y="128" width="6" height="6"/>
+                                                <rect key="frame" x="65" y="129" width="4" height="4"/>
                                                 <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="width" constant="6" id="Pc8-ui-dNy"/>
-                                                    <constraint firstAttribute="height" constant="6" id="syX-hR-Q0S"/>
+                                                    <constraint firstAttribute="width" constant="4" id="Pc8-ui-dNy"/>
+                                                    <constraint firstAttribute="height" constant="4" id="syX-hR-Q0S"/>
                                                 </constraints>
                                                 <userDefinedRuntimeAttributes>
                                                     <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                                        <integer key="value" value="3"/>
+                                                        <integer key="value" value="2"/>
                                                     </userDefinedRuntimeAttribute>
                                                 </userDefinedRuntimeAttributes>
                                             </view>
@@ -93,7 +93,7 @@
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JVV-fb-Crf">
-                                        <rect key="frame" x="45" y="395" width="45" height="2"/>
+                                        <rect key="frame" x="45" y="367.5" width="45" height="2"/>
                                         <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="2" id="132-o2-qum"/>
@@ -108,9 +108,10 @@
                                     <constraint firstItem="aYN-zY-hso" firstAttribute="leading" secondItem="pyu-Ua-4FT" secondAttribute="leading" id="3DY-vC-CeQ"/>
                                     <constraint firstItem="JUk-VY-AGd" firstAttribute="centerX" secondItem="pyu-Ua-4FT" secondAttribute="centerX" id="82m-al-CRZ"/>
                                     <constraint firstItem="cwZ-FA-7CE" firstAttribute="top" secondItem="Dcm-6f-bRJ" secondAttribute="bottom" constant="14" id="A6D-Jw-54m"/>
-                                    <constraint firstAttribute="bottom" secondItem="JVV-fb-Crf" secondAttribute="bottom" constant="20" id="BwA-Xs-JRM"/>
                                     <constraint firstItem="2lb-Sv-ucH" firstAttribute="top" secondItem="cwZ-FA-7CE" secondAttribute="bottom" constant="1" id="I4l-Lz-p2l"/>
+                                    <constraint firstItem="bVD-vu-xgp" firstAttribute="centerY" secondItem="cwZ-FA-7CE" secondAttribute="centerY" id="KNG-uS-UyX"/>
                                     <constraint firstItem="Y68-Wt-e0w" firstAttribute="top" secondItem="pyu-Ua-4FT" secondAttribute="top" constant="9" id="LDH-P6-wkD"/>
+                                    <constraint firstItem="JVV-fb-Crf" firstAttribute="centerY" secondItem="78h-FV-JCD" secondAttribute="centerY" id="OHS-Yg-2TB"/>
                                     <constraint firstItem="JVV-fb-Crf" firstAttribute="centerX" secondItem="pyu-Ua-4FT" secondAttribute="centerX" id="S5A-yn-jE8"/>
                                     <constraint firstItem="2lb-Sv-ucH" firstAttribute="centerX" secondItem="pyu-Ua-4FT" secondAttribute="centerX" id="T4n-tn-ZWm"/>
                                     <constraint firstAttribute="trailing" secondItem="Dcm-6f-bRJ" secondAttribute="trailing" constant="8" id="Uui-EA-iYh"/>
@@ -119,7 +120,6 @@
                                     <constraint firstItem="aYN-zY-hso" firstAttribute="top" secondItem="2lb-Sv-ucH" secondAttribute="bottom" id="lbw-r4-L6A"/>
                                     <constraint firstAttribute="bottom" secondItem="JUk-VY-AGd" secondAttribute="bottom" constant="16" id="r2J-ZS-a6h"/>
                                     <constraint firstItem="cwZ-FA-7CE" firstAttribute="centerX" secondItem="pyu-Ua-4FT" secondAttribute="centerX" id="r9x-L5-rLB"/>
-                                    <constraint firstItem="bVD-vu-xgp" firstAttribute="top" secondItem="Dcm-6f-bRJ" secondAttribute="top" constant="20" id="smo-Zs-sgl"/>
                                     <constraint firstItem="JVV-fb-Crf" firstAttribute="width" secondItem="bVD-vu-xgp" secondAttribute="width" id="tfn-KS-lxB"/>
                                     <constraint firstItem="78h-FV-JCD" firstAttribute="top" secondItem="aYN-zY-hso" secondAttribute="bottom" id="tgN-9P-AP6"/>
                                     <constraint firstAttribute="trailing" secondItem="aYN-zY-hso" secondAttribute="trailing" id="wrY-1k-Z7j"/>
