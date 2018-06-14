@@ -133,7 +133,7 @@ namespace EOS.UI.iOS.Sandbox
             weekStartDropdown.InitSource(
                 WeekStartDays,
                 weekStart => source.CalendarModel.WeekStart = weekStart,
-               Fields.FirstDayOfWeek,
+               Fields.WeekStartDay,
                rect);
             
             resetButton.TouchUpInside += (sender, e) =>
