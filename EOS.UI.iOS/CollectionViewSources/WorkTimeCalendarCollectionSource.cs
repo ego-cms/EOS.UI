@@ -24,14 +24,9 @@ namespace EOS.UI.iOS.CollectionViewSources
             CalendarModel = new WorkTimeCalendarModel();
             CalendarModel.UpdateAppearance();
             CalendarModel.PropertyChanged += (sender, e) => this._collectionView.ReloadData();
-
-            var layout = new WorkTimeCalendarFlowLayout();
-            layout.ItemSize = new CGSize((_collectionView.Frame.Width - layout.SectionInset.Left - layout.SectionInset.Right) / 7,
-                                         _collectionView.Frame.Height - layout.SectionInset.Top - layout.SectionInset.Bottom);
-            _collectionView.CollectionViewLayout = layout;
+            InitFlowLayout();
         }
-
-
+        
         public override nint NumberOfSections(UICollectionView collectionView)
         {
             return 1;
@@ -71,6 +66,14 @@ namespace EOS.UI.iOS.CollectionViewSources
                 cell.TitleColor = CalendarModel.TitleColor;
                 cell.DividersColor = CalendarModel.ColorDividers;
             }
+        }
+        
+        public void InitFlowLayout()
+        {
+            var layout = new WorkTimeCalendarFlowLayout();
+            layout.ItemSize = new CGSize((_collectionView.Frame.Width - layout.SectionInset.Left - layout.SectionInset.Right) / 7,
+                                         _collectionView.Frame.Height - layout.SectionInset.Top - layout.SectionInset.Bottom);
+            _collectionView.CollectionViewLayout = layout;
         }
     }
 }

@@ -143,6 +143,12 @@ namespace EOS.UI.iOS.Sandbox
             };
         }
 
+        public override void ViewDidAppear(bool animated)
+        {
+            base.ViewDidAppear(animated);
+            (workTimeCollection.Source as WorkTimeCalendarCollectionSource).InitFlowLayout();
+        }
+
         private List<WorkTimeCalendarItem> CreateSchedule()
         {
             var schedule = new List<WorkTimeCalendarItem>();
@@ -161,7 +167,7 @@ namespace EOS.UI.iOS.Sandbox
                 day.EndTime = TimeSpan.FromHours(18);
                 day.BreakStartTime = TimeSpan.FromHours(13);
                 day.BreakEndTime = TimeSpan.FromHours(14);
-                day.HasBreak = i % 2 == 0;
+                day.HasBreak = day.WeekDay != DayOfWeek.Friday;
                 schedule.Add(day);
             }
 
