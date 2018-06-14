@@ -143,6 +143,12 @@ namespace EOS.UI.iOS.Sandbox
             };
         }
 
+        public override void ViewDidAppear(bool animated)
+        {
+            base.ViewDidAppear(animated);
+            (workTimeCollection.Source as WorkTimeCalendarCollectionSource).InitFlowLayout();
+        }
+
         private List<WorkTimeCalendarItem> CreateSchedule()
         {
             var schedule = new List<WorkTimeCalendarItem>();
