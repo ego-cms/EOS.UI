@@ -62,11 +62,11 @@ namespace EOS.UI.Android.Sandbox.Helpers
             public static string DayTextColor = "Day text color";
             public static string CurrentDayBackgroundColor = "Current day background color";
             public static string CurrentDayTextColor = "Current day text color";
-            public static string DayEvenBackgroundColor = "Day even background color";
+            public static string DayEvenBackgroundColor = "Even day background color";
             public static string DividerColor = "Divider color";
-            public static string CurrentDividerColor = "Current divider color";
+            public static string CurrentDividerColor = "Current day divider color";
             public static string RippleColor = "Ripple color";
-            public static string FirstDayOfWeek = "First day of week";
+            public static string FirstDayOfWeek = "Week start day";
         };
 
         public static class Colors

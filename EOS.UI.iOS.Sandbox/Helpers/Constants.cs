@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using EOS.UI.Shared.Themes.Helpers;
 using UIKit;
@@ -68,8 +68,8 @@ namespace EOS.UI.iOS.Sandbox.Helpers
             public static string DayTextColor = "Day text color";
             public static string CurrentDayTextColor = "Current day text color";
             public static string CurrentDayBackgroundColor = "Current day background color";
-            public static string ColorDividers = "Divider's color";
-            public static string CurrentColorDividers = "Current day divider's color";
+            public static string ColorDividers = "Divider color";
+            public static string CurrentColorDividers = "Current day divider color";
             public static string DayEvenBackgroundColor = "Even day background color";
             public static string WeekStartDay = "Week start day";
         };

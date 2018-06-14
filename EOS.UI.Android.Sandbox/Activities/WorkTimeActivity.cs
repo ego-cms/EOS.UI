@@ -1,11 +1,9 @@
-
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using Android.App;
 using Android.Graphics;
 using Android.OS;
-using Android.Widget;
 using EOS.UI.Android.Components;
 using EOS.UI.Android.Sandbox.Controls;
 using EOS.UI.Shared.Themes.DataModels;

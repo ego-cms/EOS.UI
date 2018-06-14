@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="811">
     <device id="retina5_5" orientation="portrait">
         <adaptation id="fullscreen"/>
@@ -49,7 +49,7 @@
                                 <rect key="frame" x="16" y="200" width="343" height="741"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7rN-uO-G11">
-                                        <rect key="frame" x="0.0" y="0.0" width="343" height="700"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="343" height="660"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mte-eY-7po" customClass="CustomDropDown">
                                                 <rect key="frame" x="0.0" y="0.0" width="343" height="40"/>
@@ -108,42 +108,42 @@
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="t2w-He-iwD" customClass="CustomDropDown">
-                                                <rect key="frame" x="0.0" y="370" width="343" height="40"/>
+                                                <rect key="frame" x="0.0" y="360" width="343" height="40"/>
                                                 <color key="backgroundColor" red="0.89411764709999997" green="0.51372549020000002" blue="0.51372549020000002" alpha="1" colorSpace="calibratedRGB"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="40" id="xdm-OX-Sl3"/>
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GGs-Ng-Eqf" customClass="CustomDropDown">
-                                                <rect key="frame" x="0.0" y="425" width="343" height="40"/>
+                                                <rect key="frame" x="0.0" y="405" width="343" height="40"/>
                                                 <color key="backgroundColor" red="0.89411764709999997" green="0.51372549020000002" blue="0.51372549020000002" alpha="1" colorSpace="calibratedRGB"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="40" id="0KE-Hc-EaO"/>
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NtG-nE-XYH" customClass="CustomDropDown">
-                                                <rect key="frame" x="0.0" y="525" width="343" height="40"/>
+                                                <rect key="frame" x="0.0" y="495" width="343" height="40"/>
                                                 <color key="backgroundColor" red="0.89411764709999997" green="0.51372549020000002" blue="0.51372549020000002" alpha="1" colorSpace="calibratedRGB"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="40" id="n2J-XR-Riw"/>
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="c9p-kA-P1a" customClass="CustomDropDown">
-                                                <rect key="frame" x="0.0" y="580" width="343" height="40"/>
+                                                <rect key="frame" x="0.0" y="540" width="343" height="40"/>
                                                 <color key="backgroundColor" red="0.89411764709999997" green="0.51372549020000002" blue="0.51372549020000002" alpha="1" colorSpace="calibratedRGB"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="40" id="N59-vT-xzX"/>
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="U84-qH-Mcp" customClass="CustomDropDown">
-                                                <rect key="frame" x="0.0" y="470" width="343" height="40"/>
+                                                <rect key="frame" x="0.0" y="450" width="343" height="40"/>
                                                 <color key="backgroundColor" red="0.89411764709999997" green="0.51372549020000002" blue="0.51372549020000002" alpha="1" colorSpace="calibratedRGB"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="40" id="yc7-GA-ehj"/>
                                                 </constraints>
                                             </view>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="A2w-S8-8pF">
-                                                <rect key="frame" x="152" y="650" width="39" height="30"/>
+                                                <rect key="frame" x="152" y="610" width="39" height="30"/>
                                                 <state key="normal" title="Reset"/>
                                             </button>
                                         </subviews>
@@ -151,7 +151,7 @@
                                         <constraints>
                                             <constraint firstAttribute="trailing" secondItem="NtG-nE-XYH" secondAttribute="trailing" id="08t-Lz-L1F"/>
                                             <constraint firstItem="EWK-e2-ciW" firstAttribute="leading" secondItem="7rN-uO-G11" secondAttribute="leading" id="0tg-bI-ulL"/>
-                                            <constraint firstItem="t2w-He-iwD" firstAttribute="top" secondItem="6Nw-vL-PEb" secondAttribute="bottom" constant="15" id="1Dd-ya-vZD"/>
+                                            <constraint firstItem="t2w-He-iwD" firstAttribute="top" secondItem="6Nw-vL-PEb" secondAttribute="bottom" constant="5" id="1Dd-ya-vZD"/>
                                             <constraint firstItem="KfQ-3s-eJ7" firstAttribute="leading" secondItem="7rN-uO-G11" secondAttribute="leading" id="1YY-gG-VPA"/>
                                             <constraint firstItem="Uuj-RD-MFv" firstAttribute="top" secondItem="mte-eY-7po" secondAttribute="bottom" constant="5" id="1uC-Wx-Ieq"/>
                                             <constraint firstAttribute="trailing" secondItem="5Vj-Pf-fbL" secondAttribute="trailing" id="2bb-7O-kiE"/>
@@ -162,7 +162,7 @@
                                             <constraint firstItem="c9p-kA-P1a" firstAttribute="leading" secondItem="7rN-uO-G11" secondAttribute="leading" id="Ffs-ja-i4q"/>
                                             <constraint firstAttribute="trailing" secondItem="U84-qH-Mcp" secondAttribute="trailing" id="Fta-52-h8A"/>
                                             <constraint firstItem="mte-eY-7po" firstAttribute="leading" secondItem="7rN-uO-G11" secondAttribute="leading" id="JlK-WD-F9h"/>
-                                            <constraint firstItem="c9p-kA-P1a" firstAttribute="top" secondItem="NtG-nE-XYH" secondAttribute="bottom" constant="15" id="Jsw-Kq-rHy"/>
+                                            <constraint firstItem="c9p-kA-P1a" firstAttribute="top" secondItem="NtG-nE-XYH" secondAttribute="bottom" constant="5" id="Jsw-Kq-rHy"/>
                                             <constraint firstItem="Uuj-RD-MFv" firstAttribute="leading" secondItem="7rN-uO-G11" secondAttribute="leading" id="Keh-ui-BUM"/>
                                             <constraint firstAttribute="trailing" secondItem="t2w-He-iwD" secondAttribute="trailing" id="Khy-Tf-1Yb"/>
                                             <constraint firstItem="6Nw-vL-PEb" firstAttribute="leading" secondItem="7rN-uO-G11" secondAttribute="leading" id="PDv-zx-vfq"/>
@@ -180,13 +180,13 @@
                                             <constraint firstItem="R4f-uq-Twj" firstAttribute="leading" secondItem="7rN-uO-G11" secondAttribute="leading" id="djT-TA-3n0"/>
                                             <constraint firstItem="GGs-Ng-Eqf" firstAttribute="leading" secondItem="7rN-uO-G11" secondAttribute="leading" id="fcd-NZ-owd"/>
                                             <constraint firstAttribute="trailing" secondItem="Uuj-RD-MFv" secondAttribute="trailing" id="gbr-o2-NZI"/>
-                                            <constraint firstItem="GGs-Ng-Eqf" firstAttribute="top" secondItem="t2w-He-iwD" secondAttribute="bottom" constant="15" id="hBk-Tx-gwD"/>
+                                            <constraint firstItem="GGs-Ng-Eqf" firstAttribute="top" secondItem="t2w-He-iwD" secondAttribute="bottom" constant="5" id="hBk-Tx-gwD"/>
                                             <constraint firstItem="5Vj-Pf-fbL" firstAttribute="leading" secondItem="7rN-uO-G11" secondAttribute="leading" id="khx-e7-9kx"/>
                                             <constraint firstItem="u34-Rl-0pt" firstAttribute="top" secondItem="KfQ-3s-eJ7" secondAttribute="bottom" constant="5" id="lir-3j-GKe"/>
                                             <constraint firstItem="KfQ-3s-eJ7" firstAttribute="top" secondItem="EWK-e2-ciW" secondAttribute="bottom" constant="5" id="nLd-mY-aPg"/>
                                             <constraint firstItem="t2w-He-iwD" firstAttribute="leading" secondItem="7rN-uO-G11" secondAttribute="leading" id="nsR-LN-DEi"/>
                                             <constraint firstAttribute="bottom" secondItem="A2w-S8-8pF" secondAttribute="bottom" constant="20" id="pZ9-bk-cvd"/>
-                                            <constraint firstItem="NtG-nE-XYH" firstAttribute="top" secondItem="U84-qH-Mcp" secondAttribute="bottom" constant="15" id="pau-4m-PlU"/>
+                                            <constraint firstItem="NtG-nE-XYH" firstAttribute="top" secondItem="U84-qH-Mcp" secondAttribute="bottom" constant="5" id="pau-4m-PlU"/>
                                             <constraint firstItem="A2w-S8-8pF" firstAttribute="centerX" secondItem="7rN-uO-G11" secondAttribute="centerX" id="rfa-fG-2wL"/>
                                             <constraint firstItem="U84-qH-Mcp" firstAttribute="leading" secondItem="7rN-uO-G11" secondAttribute="leading" id="ssG-Jg-g1N"/>
                                             <constraint firstAttribute="trailing" secondItem="c9p-kA-P1a" secondAttribute="trailing" id="vxO-MX-LCm"/>
@@ -216,26 +216,26 @@
                     </view>
                     <size key="freeformSize" width="375" height="941"/>
                     <connections>
-                        <outlet property="currentDayBackgroundColorDropDown" destination="t2w-He-iwD" id="mPM-Wo-A1r"/>
-                        <outlet property="currentDayDevidersColor" destination="U84-qH-Mcp" id="180-iS-z33"/>
-                        <outlet property="currentDayTextColorDropDown" destination="6Nw-vL-PEb" id="8Cm-Cu-t0h"/>
-                        <outlet property="dayEvenBackgroundColor" destination="NtG-nE-XYH" id="vff-7q-Z2E"/>
-                        <outlet property="dayFontDropDown" destination="5Vj-Pf-fbL" id="6fd-wg-al5"/>
-                        <outlet property="dayTextColorDropDown" destination="u34-Rl-0pt" id="Hjd-iO-o8h"/>
-                        <outlet property="dayTextSizeDropDown" destination="EWK-e2-ciW" id="AhE-YC-Cla"/>
-                        <outlet property="devidersColor" destination="GGs-Ng-Eqf" id="TDT-2d-Qqg"/>
+                        <outlet property="currentDayTextColorDropDown" destination="t2w-He-iwD" id="name-outlet-t2w-He-iwD"/>
+                        <outlet property="dayEvenBackgroundColor" destination="U84-qH-Mcp" id="name-outlet-U84-qH-Mcp"/>
+                        <outlet property="titleFontDropDown" destination="5Vj-Pf-fbL" id="name-outlet-5Vj-Pf-fbL"/>
+                        <outlet property="titleSizeDropDown" destination="EWK-e2-ciW" id="name-outlet-EWK-e2-ciW"/>
+                        <outlet property="dayTextColorDropDown" destination="GGs-Ng-Eqf" id="name-outlet-GGs-Ng-Eqf"/>
                         <outlet property="resetButton" destination="A2w-S8-8pF" id="QP0-KE-HlL"/>
                         <outlet property="themesDropDown" destination="mte-eY-7po" id="5TY-ws-h7m"/>
-                        <outlet property="titleColorDropDown" destination="KfQ-3s-eJ7" id="Ftr-Or-Al5"/>
-                        <outlet property="titleFontDropDown" destination="Uuj-RD-MFv" id="bSB-wa-gsU"/>
-                        <outlet property="titleSizeDropDown" destination="R4f-uq-Twj" id="ZZP-75-1HZ"/>
-                        <outlet property="weekStartDropdown" destination="c9p-kA-P1a" id="Fqv-pu-k7D"/>
+                        <outlet property="dayTextSizeDropDown" destination="KfQ-3s-eJ7" id="name-outlet-KfQ-3s-eJ7"/>
+                        <outlet property="weekStartDropdown" destination="Uuj-RD-MFv" id="name-outlet-Uuj-RD-MFv"/>
+                        <outlet property="titleColorDropDown" destination="R4f-uq-Twj" id="name-outlet-R4f-uq-Twj"/>
+                        <outlet property="currentDayDevidersColor" destination="c9p-kA-P1a" id="name-outlet-c9p-kA-P1a"/>
                         <outlet property="workTimeCollection" destination="jtO-SP-kHP" id="GdC-9n-IpM"/>
+                        <outlet property="devidersColor" destination="NtG-nE-XYH" id="name-outlet-NtG-nE-XYH"/>
+                        <outlet property="dayFontDropDown" destination="u34-Rl-0pt" id="name-outlet-u34-Rl-0pt"/>
+                        <outlet property="currentDayBackgroundColorDropDown" destination="6Nw-vL-PEb" id="name-outlet-6Nw-vL-PEb"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="813" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="472.80000000000001" y="-18.44078"/>
+            <point key="canvasLocation" x="472.8" y="-18.44078"/>
         </scene>
     </scenes>
 </document>
