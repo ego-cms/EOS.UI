@@ -23,7 +23,7 @@ namespace EOS.UI.Android.Components
     {
         #region fields
 
-        private const string Dash = "-";
+        private const string Dash = "—";
         private const string EmptyTime = "00:00";
         private int _sectionWidth;
         private Context _context;
@@ -140,13 +140,13 @@ namespace EOS.UI.Android.Components
             if(DividerColor != default(Color) && !_isCurrentDay)
             {
                 workTimeItem.DayDivider.Background = new ColorDrawable(DividerColor);
-                workTimeItem.CircleDivider.Background = new ColorDrawable(DividerColor);
+                workTimeItem.CircleDivider.Background = CreateGradientDrawable(DividerColor);
             }
 
             if(CurrentDividerColor != default(Color) && _isCurrentDay)
             {
                 workTimeItem.DayDivider.Background = new ColorDrawable(CurrentDividerColor);
-                workTimeItem.CircleDivider.Background = new ColorDrawable(CurrentDividerColor);
+                workTimeItem.CircleDivider.Background = CreateGradientDrawable(CurrentDividerColor);
             }
         }
 
@@ -380,7 +380,7 @@ namespace EOS.UI.Android.Components
             {
                 TitleFont = Typeface.CreateFromAsset(_context.Assets, GetThemeProvider().GetEOSProperty<string>(this, EOSConstants.WorkTimeTitleFont));
                 TitleTextSize = GetThemeProvider().GetEOSProperty<int>(this, EOSConstants.WorkTimeTitleSize);
-                TitleColor = GetThemeProvider().GetEOSProperty<Color>(this, EOSConstants.NeutralColor2);
+                TitleColor = GetThemeProvider().GetEOSProperty<Color>(this, EOSConstants.NeutralColor1);
                 CurrentDayTextColor = GetThemeProvider().GetEOSProperty<Color>(this, EOSConstants.NeutralColor6);
 
                 DayTextFont = Typeface.CreateFromAsset(_context.Assets, GetThemeProvider().GetEOSProperty<string>(this, EOSConstants.WorkTimeDayTextFont));
