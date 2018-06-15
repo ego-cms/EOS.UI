@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using EOS.UI.Shared.Helpers;
 using UIFrameworks.Shared.Themes.Helpers;
@@ -65,10 +65,10 @@ namespace EOS.UI.Shared.Themes.Themes
             { EOSConstants.FabProgressSize, 50},
             { EOSConstants.CircleProgressShown, true},
             { EOSConstants.FabShadow,  new ShadowConfig(){
-                        Color = UIColor.Black.CGColor,
-                        Offset = new CGPoint(0,0),
+                        Color = UIColor.White.CGColor,
+                        Offset = new CGSize(0, 0),
                         Radius = 1,
-                        Opacity = 0.7f
+                        Opacity = 0.4f
             }},
             { EOSConstants.BorderWidth, 2 },
             { EOSConstants.SectionTitle, "Dark section" },
@@ -78,7 +78,11 @@ namespace EOS.UI.Shared.Themes.Themes
             { EOSConstants.RightPadding, 5 },
             { EOSConstants.BottomPadding, 5 },
             { EOSConstants.HasSectionBorder, false },
-            { EOSConstants.HasSectionAction, true }
+            { EOSConstants.HasSectionAction, true },
+            { EOSConstants.WorkTimeTitleSize, 13 },
+            { EOSConstants.WorkTimeTitleFont, UIFont.BoldSystemFontOfSize(13) },
+            { EOSConstants.WorkTimeDayTextSize, 11 },
+            { EOSConstants.WorkTimeDayTextFont, UIFont.BoldSystemFontOfSize(13) }
 #endif
 
 #if __ANDROID__
@@ -114,9 +118,18 @@ namespace EOS.UI.Shared.Themes.Themes
             { EOSConstants.TopPadding, 5 },
             { EOSConstants.RightPadding, 5 },
             { EOSConstants.BottomPadding, 5 },
-            { EOSConstants.HasSectionBorder, false },
+            { EOSConstants.HasSectionBorder, true },
             { EOSConstants.HasSectionAction, true },
-            { EOSConstants.FabShadow, null }
+            { EOSConstants.WorkTimeTitleFont, "Fonts/SFUITextSemibold.ttf" },
+            { EOSConstants.WorkTimeDayTextFont, "Fonts/SFUITextBold.ttf"},
+            { EOSConstants.WorkTimeTitleSize, 13 },
+            { EOSConstants.WorkTimeDayTextSize, 11 },
+            { EOSConstants.FabShadow,  new ShadowConfig(){
+                        Color = Color.White,
+                        Offset = new Point(0, 0),
+                        Blur = 1,
+                        Spread = 200
+            }},
 #endif
         };
     }

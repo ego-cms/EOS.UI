@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using CoreGraphics;
@@ -59,6 +59,8 @@ namespace EOS.UI.iOS.Sandbox
             View.AddGestureRecognizer(new UITapGestureRecognizer(() =>
             {
                 _dropDowns.ForEach(dropDown => dropDown.CloseInputControl());
+                _inputTop.ResignFirstResponder();
+                _inputBotton.ResignFirstResponder();
             }));
 
             containerTopView.ConstrainLayout(() => _inputTop.Frame.GetCenterX() == containerTopView.Frame.GetCenterX() &&

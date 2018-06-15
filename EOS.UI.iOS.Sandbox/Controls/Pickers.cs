@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using EOS.UI.iOS.Sandbox.Helpers;
@@ -32,6 +32,7 @@ namespace EOS.UI.iOS.Sandbox.Controls.Pickers
             var pair = Constants.Colors.ElementAt((int)row);
             var attributedString = new NSMutableAttributedString(pair.Key);
             attributedString.AddAttribute(UIStringAttributeKey.ForegroundColor, pair.Value, new NSRange(0, attributedString.Length));
+            attributedString.AddAttribute(UIStringAttributeKey.Shadow, new NSShadow() { ShadowOffset = new CoreGraphics.CGSize(2, 2), ShadowBlurRadius = 3 }, new NSRange(0, attributedString.Length));
             return attributedString;
         }
 

@@ -1,5 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+﻿<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">iPhoneSimulator</Platform>
@@ -169,6 +168,7 @@
     <InterfaceDefinition Include="Storyboards\SimpleButtonView.storyboard" />
     <InterfaceDefinition Include="Storyboards\CircleProgressView.storyboard" />
     <InterfaceDefinition Include="Storyboards\CTAButtonView.storyboard" />
+    <InterfaceDefinition Include="Storyboards\WorkTimeView.storyboard" />
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="Controls\EOSSandboxDropDown.xib" />
@@ -238,6 +238,10 @@
     <Compile Include="Storyboards\CTAButtonView.cs" />
     <Compile Include="Storyboards\CTAButtonView.designer.cs">
       <DependentUpon>CTAButtonView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Storyboards\WorkTimeView.cs" />
+    <Compile Include="Storyboards\WorkTimeView.designer.cs">
+      <DependentUpon>WorkTimeView.cs</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>

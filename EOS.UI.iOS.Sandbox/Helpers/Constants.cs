@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using EOS.UI.Shared.Themes.Helpers;
 using UIKit;
@@ -6,6 +6,7 @@ using System.Linq;
 using EOS.UI.iOS.Helpers;
 using CoreGraphics;
 using EOS.UI.Shared.Helpers;
+using EOS.UI.Shared.Themes.Enums;
 
 namespace EOS.UI.iOS.Sandbox.Helpers
 {
@@ -59,6 +60,18 @@ namespace EOS.UI.iOS.Sandbox.Helpers
             public static string PaddingLeft = "Padding left";
             public static string PaddingRight = "Padding right";
             public static string RippleColor = "Ripple color";
+            public static string TitleFont = "Title font";
+            public static string TitleColor = "Title color";
+            public static string DayTextFont = "Day text font";
+            public static string TitleTextSize = "Title text size";
+            public static string DayTextSize = "Day text size";
+            public static string DayTextColor = "Day text color";
+            public static string CurrentDayTextColor = "Current day text color";
+            public static string CurrentDayBackgroundColor = "Current day background color";
+            public static string ColorDividers = "Divider color";
+            public static string CurrentColorDividers = "Current day divider color";
+            public static string DayEvenBackgroundColor = "Even day background color";
+            public static string WeekStartDay = "Week start day";
         };
 
         public static UIColor BackgroundColor = UIColor.FromRGB(224, 224, 224);
@@ -101,6 +114,12 @@ namespace EOS.UI.iOS.Sandbox.Helpers
         {
             { "Enabled", true },
             { "Disabled", false },
+        };
+
+        public static List<WeekStartEnum> WeekStartDays = new List<WeekStartEnum>()
+        {
+            WeekStartEnum.Monday,
+            WeekStartEnum.Sunday
         };
 
         public static Dictionary<string, ShadowConfig> ShadowConfigs = new Dictionary<string, ShadowConfig>()

@@ -1,6 +1,7 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.Linq;
 using Android.Graphics;
+using EOS.UI.Shared.Themes.Enums;
 using EOS.UI.Shared.Themes.Helpers;
 using EOS.UI.Android.Helpers;
 using EOS.UI.Shared.Helpers;
@@ -56,7 +57,19 @@ namespace EOS.UI.Android.Sandbox.Helpers
             public static string PaddingBottom = "Padding bottom";
             public static string PaddingLeft = "Padding left";
             public static string PaddingRight = "Padding right";
+            public static string TitleFont = "Title font";
+            public static string DayTextFont = "Day text font";
+            public static string TitleTextSize = "Title text size";
+            public static string DayTextSize = "Day text size";
+            public static string TitleColor = "Title color";
+            public static string DayTextColor = "Day text color";
+            public static string CurrentDayBackgroundColor = "Current day background color";
+            public static string CurrentDayTextColor = "Current day text color";
+            public static string DayEvenBackgroundColor = "Even day background color";
+            public static string DividerColor = "Divider color";
+            public static string CurrentDividerColor = "Current day divider color";
             public static string RippleColor = "Ripple color";
+            public static string FirstDayOfWeek = "Week start day";
         };
 
         public static class Colors
@@ -306,6 +319,19 @@ namespace EOS.UI.Android.Sandbox.Helpers
                 { FirstTitle, "First" },
                 { SecondTitle, "Second" },
                 { ThirdTitle, "Third" },
+            };
+        }
+
+        public static class Days
+        {
+            public const string Sunday = "Sunday";
+            public const string Monday = "Monday";
+
+            public static Dictionary<string, WeekStartEnum> DaysCollection = new Dictionary<string, WeekStartEnum>()
+            {
+                { string.Empty, WeekStartEnum.Sunday },
+                { Sunday, WeekStartEnum.Sunday },
+                { Monday, WeekStartEnum.Monday },
             };
         }
     }

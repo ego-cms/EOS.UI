@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using EOS.UI.Shared.Helpers;
 using UIFrameworks.Shared.Themes.Helpers;
@@ -64,9 +64,9 @@ namespace EOS.UI.Shared.Themes.Themes
             { EOSConstants.CircleProgressShown, true},
             { EOSConstants.FabShadow, new ShadowConfig(){
                         Color = UIColor.Black.CGColor,
-                        Offset = new CGPoint(0,0),
+                        Offset = new CGSize(0, 0),
                         Radius = 2,
-                        Opacity = 0.9f
+                        Opacity = 0.4f
             }},
             { EOSConstants.BorderWidth, 2 },
             { EOSConstants.SectionTitle, "Light section" },
@@ -76,7 +76,11 @@ namespace EOS.UI.Shared.Themes.Themes
             { EOSConstants.RightPadding, 7 },
             { EOSConstants.BottomPadding, 5 },
             { EOSConstants.HasSectionBorder, true },
-            { EOSConstants.HasSectionAction, true }
+            { EOSConstants.HasSectionAction, true },
+            { EOSConstants.WorkTimeTitleSize, 13 },
+            { EOSConstants.WorkTimeTitleFont, UIFont.BoldSystemFontOfSize(13) },
+            { EOSConstants.WorkTimeDayTextSize, 11 },
+            { EOSConstants.WorkTimeDayTextFont, UIFont.BoldSystemFontOfSize(13) }
 #endif
 
 #if __ANDROID__
@@ -114,7 +118,11 @@ namespace EOS.UI.Shared.Themes.Themes
             { EOSConstants.BottomPadding, 5 },
             { EOSConstants.HasSectionBorder, true },
             { EOSConstants.HasSectionAction, true },
-            { EOSConstants.FabShadow, null }
+            { EOSConstants.WorkTimeTitleFont, "Fonts/SFUITextSemibold.ttf" },
+            { EOSConstants.WorkTimeDayTextFont, "Fonts/SFUITextBold.ttf"},
+            { EOSConstants.WorkTimeTitleSize,  13 },
+            { EOSConstants.WorkTimeDayTextSize, 11 },
+            { EOSConstants.FabShadow,  null},
 #endif
         };
     }

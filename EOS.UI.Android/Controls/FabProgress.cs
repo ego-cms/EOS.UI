@@ -33,6 +33,9 @@ namespace EOS.UI.Android.Controls
         private const int _rotationAnimationDuration = 1000;
         private const float _pivot = 0.5f;
         private int _initialWidth = -1;
+        private const float _normalElevation = 10f;
+        private const float _disabledElevation = 0;
+        private Animation _rotationAnimation;
 
         public bool IsEOSCustomizationIgnored { get; private set; }
 
@@ -43,6 +46,11 @@ namespace EOS.UI.Android.Controls
             {
                 base.Enabled = value;
                 SetBackgroundColor(value ? BackgroundColor : DisabledBackgroundColor);
+                Image.SetColorFilter(value ? 
+                    GetThemeProvider().GetEOSProperty<Color>(this, EOSConstants.NeutralColor6) :
+                    GetThemeProvider().GetEOSProperty<Color>(this, EOSConstants.NeutralColor3), 
+                    PorterDuff.Mode.SrcIn);
+                Elevation = Enabled ? _normalElevation : _disabledElevation;
             }
         }
 
@@ -53,8 +61,11 @@ namespace EOS.UI.Android.Controls
             set
             {
                 _backgroundColor = value;
-                if (Enabled)
+                if(Enabled)
+                {
                     SetBackgroundColor(value);
+                    Image.SetColorFilter(GetThemeProvider().GetEOSProperty<Color>(this, EOSConstants.NeutralColor6), PorterDuff.Mode.SrcIn);
+                }
                 IsEOSCustomizationIgnored = true;
             }
         }
@@ -66,8 +77,11 @@ namespace EOS.UI.Android.Controls
             set
             {
                 _disabledBackgroundColor = value;
-                if (!Enabled)
-                    SetBackgroundColor(DisabledBackgroundColor);
+                if(!Enabled)
+                {
+                    SetBackgroundColor(value);
+                    Image.SetColorFilter(GetThemeProvider().GetEOSProperty<Color>(this, EOSConstants.NeutralColor3), PorterDuff.Mode.SrcIn);
+                }
                 IsEOSCustomizationIgnored = true;
             }
         }
@@ -160,6 +174,7 @@ namespace EOS.UI.Android.Controls
                 InitializeAttributes(attrs);
 
             UpdateAppearance();
+            Elevation = Enabled? _normalElevation : _disabledElevation;
         }
 
         private void InitializeAttributes(IAttributeSet attrs)
@@ -205,8 +220,6 @@ namespace EOS.UI.Android.Controls
         {
             IsEOSCustomizationIgnored = false;
             UpdateAppearance();
-            //LayoutParameters.Width = ViewGroup.LayoutParams.WrapContent;
-            //LayoutParameters.Height = ViewGroup.LayoutParams.WrapContent;
             RequestLayout();
         }
 
