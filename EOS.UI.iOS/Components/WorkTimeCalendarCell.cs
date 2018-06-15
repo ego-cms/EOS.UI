@@ -49,6 +49,8 @@ namespace EOS.UI.iOS.Components
                 stopWorkLabel.TextColor = value;
                 startBreakLabel.TextColor = value;
                 stopBreakLabel.TextColor = value;
+                dayOffDevider.BackgroundColor = value;
+                breakDevider.BackgroundColor = value;
             }
         }
 
@@ -69,7 +71,7 @@ namespace EOS.UI.iOS.Components
                 stopBreakLabel.Font = DayTextFont.WithSize(value);
             }
         }
-        
+
         private bool WorkTimeVisible
         {
             set
@@ -79,7 +81,7 @@ namespace EOS.UI.iOS.Components
                 dayOffDevider.Hidden = !value;
             }
         }
-        
+
         private bool BreakTimeVisible
         {
             set
@@ -89,7 +91,7 @@ namespace EOS.UI.iOS.Components
                 breakDevider.Hidden = value;
             }
         }
-        
+
         public UIColor CellBackgroundColor
         {
             get => cellContentView.BackgroundColor;
@@ -103,13 +105,11 @@ namespace EOS.UI.iOS.Components
             set
             {
                 _dividersColor = value;
-                dayOffDevider.BackgroundColor = value;
                 weekDayDevider.BackgroundColor = value;
-                breakDevider.BackgroundColor = value;
                 circleDevider.BackgroundColor = value;
             }
         }
-        
+
         static WorkTimeCalendarCell()
         {
             Nib = UINib.FromName("WorkTimeCalendarCell", NSBundle.MainBundle);
@@ -124,7 +124,7 @@ namespace EOS.UI.iOS.Components
         {
             dayLabel.Text = day.ShortWeekDay;
             WorkTimeVisible = day.IsDayOff;
-            if(day.IsDayOff)
+            if (day.IsDayOff)
             {
                 startBreakLabel.Hidden = true;
                 stopBreakLabel.Hidden = true;
@@ -134,8 +134,7 @@ namespace EOS.UI.iOS.Components
             {
                 BreakTimeVisible = day.HasBreak;
             }
-            
-            
+
             startWorkLabel.Text = day.StartTime.ToShortString();
             stopWorkLabel.Text = day.EndTime.ToShortString();
             startBreakLabel.Text = day.BreakStartTime.ToShortString();

@@ -29,9 +29,8 @@ namespace EOS.UI.iOS.Sandbox
             base.ViewDidLoad();
 
             var dataSource = CreateSchedule();
-            var source = (WorkTimeCalendarCollectionSource) workTimeCollection.Source;
+            var source = (WorkTimeCalendarCollectionSource)workTimeCollection.Source;
             source.CalendarModel.Items = dataSource;
-            source.CalendarModel.WeekStart = WeekStartEnum.Sunday;
             workTimeCollection.Source = source;
 
             _dropDowns = new List<EOSSandboxDropDown>()
@@ -82,60 +81,60 @@ namespace EOS.UI.iOS.Sandbox
                 font => source.CalendarModel.DayTextFont = font,
                 Fields.DayTextFont,
                 rect);
-            
+
             titleSizeDropDown.InitSource(
                FontSizeValues,
                 size => source.CalendarModel.TitleTextSize = size,
                 Fields.TitleTextSize,
                rect);
-            
+
             dayTextSizeDropDown.InitSource(
                FontSizeValues,
                 size => source.CalendarModel.DayTextSize = size,
                 Fields.DayTextSize,
                rect);
-            
+
             dayTextColorDropDown.InitSource(
                 color => source.CalendarModel.DayTextColor = color,
                 Fields.DayTextColor,
                 rect);
-            
+
             currentDayTextColorDropDown.InitSource(
                color => source.CalendarModel.CurrentDayTextColor = color,
                Fields.CurrentDayTextColor,
                rect);
-            
+
             titleColorDropDown.InitSource(
               color => source.CalendarModel.TitleColor = color,
               Fields.TitleColor,
               rect);
-            
+
             currentDayBackgroundColorDropDown.InitSource(
                 color => source.CalendarModel.CurrentDayBackgroundColor = color,
                 Fields.CurrentDayBackgroundColor,
                rect);
-            
+
             devidersColor.InitSource(
                 color => source.CalendarModel.ColorDividers = color,
                 Fields.ColorDividers,
                 rect);
-            
+
             currentDayDevidersColor.InitSource(
                 color => source.CalendarModel.CurrentColorDeviders = color,
                 Fields.CurrentColorDividers,
                 rect);
-            
+
             dayEvenBackgroundColor.InitSource(
                 color => source.CalendarModel.DayEvenBackgroundColor = color,
                 Fields.DayEvenBackgroundColor,
                 rect);
-            
+
             weekStartDropdown.InitSource(
                 WeekStartDays,
                 weekStart => source.CalendarModel.WeekStart = weekStart,
                Fields.WeekStartDay,
                rect);
-            
+
             resetButton.TouchUpInside += (sender, e) =>
             {
                 _dropDowns.Except(new[] { themesDropDown }).ToList().ForEach(dropDown => dropDown.ResetValue());
