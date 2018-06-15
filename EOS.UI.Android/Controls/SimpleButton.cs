@@ -1,12 +1,12 @@
-﻿using System;
+using System;
 using Android.Animation;
 using Android.Content;
 using Android.Content.Res;
 using Android.Graphics;
 using Android.Graphics.Drawables;
 using Android.Graphics.Drawables.Shapes;
+using Android.OS;
 using Android.Runtime;
-using Android.Support.V4.Content;
 using Android.Text;
 using Android.Util;
 using Android.Views;
@@ -26,9 +26,10 @@ namespace EOS.UI.Android.Controls
     {
         #region fields
 
+        private float _pivot = 0.5f;
         private ObjectAnimator _animator;
-        private RotateDrawable _rotateDrawable = new RotateDrawable();
-
+        private RotateDrawable _rotateDrawable;
+        
         public bool InProgress { get; private set; }
 
         #endregion
@@ -224,6 +225,7 @@ namespace EOS.UI.Android.Controls
 
         private void Initialize(IAttributeSet attrs = null)
         {
+            _rotateDrawable = CreateRotateDrawable();
             SetOnTouchListener(this);
             SetLines(1);
             Ellipsize = TextUtils.TruncateAt.End;
@@ -386,7 +388,7 @@ namespace EOS.UI.Android.Controls
                 PressedBackgroundColor = GetThemeProvider().GetEOSProperty<Color>(this, EOSConstants.BrandPrimaryColorVariant1);
                 RippleColor = GetThemeProvider().GetEOSProperty<Color>(this, EOSConstants.RippleColor);
                 CornerRadius = GetThemeProvider().GetEOSProperty<float>(this, EOSConstants.CornerRadius);
-                PreloaderImage = Resources.GetDrawable(GetThemeProvider().GetEOSProperty<int>(this, EOSConstants.FabProgressPreloaderImage));
+                PreloaderImage = Resources.GetDrawable(GetThemeProvider().GetEOSProperty<int>(this, EOSConstants.FabProgressPreloaderImage), null);
                 IsEOSCustomizationIgnored = false;
             }
         }
@@ -405,6 +407,33 @@ namespace EOS.UI.Android.Controls
         public void SetEOSStyle(EOSStyleEnumeration style)
         {
 
+        }
+
+        private RotateDrawable CreateRotateDrawable()
+        {
+            if (Build.VERSION.SdkInt >= BuildVersionCodes.M)
+                return CreateRotateDrawableAPI23();
+            else
+                return CreateRotateDrawableAPI21();
+        }
+
+        private RotateDrawable CreateRotateDrawableAPI23()
+        {
+            var drawable = new RotateDrawable();
+            drawable.PivotXRelative = true;
+            drawable.PivotX = _pivot;
+            drawable.PivotYRelative = true;
+            drawable.PivotY = _pivot;
+            return drawable;
+        }
+
+        private RotateDrawable CreateRotateDrawableAPI21()
+        {
+            //It's impossible adequate creation from code due
+            //https://github.com/aosp-mirror/platform_frameworks_base/blob/lollipop-dev/graphics/java/android/graphics/drawable/RotateDrawable.java#L218
+            //use creation from xml hack
+            var drawable = (RotateDrawable)Drawable.CreateFromXml(Resources, Resources.GetXml(Resource.Drawable.RotateDrawable));
+            return drawable;
         }
 
         #endregion
