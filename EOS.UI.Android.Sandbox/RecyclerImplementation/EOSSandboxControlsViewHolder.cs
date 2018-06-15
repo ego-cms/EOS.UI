@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using Android.Graphics;
 using Android.Support.V7.Widget;
 using Android.Views;
@@ -12,7 +12,7 @@ using UIFrameworks.Shared.Themes.Interfaces;
 
 namespace EOS.UI.Android.Sandbox.RecyclerImplementation
 {
-    public class EOSSandboxControlsViewHolder : RecyclerView.ViewHolder, View.IOnTouchListener, IEOSThemeControl
+    public class EOSSandboxControlsViewHolder : RecyclerView.ViewHolder, IEOSThemeControl
     {
         private Color _normalBackground = Color.Transparent;
         private Color _selectedBackground = Color.Gray;
@@ -20,6 +20,7 @@ namespace EOS.UI.Android.Sandbox.RecyclerImplementation
         private ImageView _arrowImage;
         private EOSSandboxDivider _divider;
         private Action<int> _clickAction;
+        private float _xPosition;
 
         public TextView ControlTitle { get; private set; }
              
@@ -30,21 +31,22 @@ namespace EOS.UI.Android.Sandbox.RecyclerImplementation
             ControlTitle = itemView.FindViewById<TextView>(Resource.Id.titleTextView);
             _arrowImage = itemView.FindViewById<ImageView>(Resource.Id.imageArrow);
             _divider = itemView.FindViewById<EOSSandboxDivider>(Resource.Id.dropDownDivider);
-            _container.SetOnTouchListener(this);
+            _container.Touch += ContainerTouch;
         }
 
-        public bool OnTouch(View v, MotionEvent e)
+        private void ContainerTouch(object sender, View.TouchEventArgs e)
         {
-            if(e.Action == MotionEventActions.Down)
+            if(e.Event.Action == MotionEventActions.Down)
             {
                 _container.SetBackgroundColor(_selectedBackground);
+                _xPosition = e.Event.RawX;
             }
-            else if(e.Action == MotionEventActions.Up || e.Action == MotionEventActions.Cancel)
+            else if(e.Event.Action == MotionEventActions.Up || e.Event.Action == MotionEventActions.Cancel)
             {
                 _container.SetBackgroundColor(_normalBackground);
-                _clickAction?.Invoke(Position);
+                if(_xPosition == e.Event.RawX && e.Event.Action == MotionEventActions.Up)
+                    _clickAction?.Invoke(Position);
             }
-            return true;
         }
 
         #region IEOSThemeControl implementation
