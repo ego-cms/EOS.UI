@@ -65,10 +65,10 @@ namespace EOS.UI.Shared.Themes.Themes
             { EOSConstants.FabProgressSize, 50},
             { EOSConstants.CircleProgressShown, true},
             { EOSConstants.FabShadow,  new ShadowConfig(){
-                        Color = UIColor.Black.CGColor,
-                        Offset = new CGSize(0,0),
+                        Color = UIColor.White.CGColor,
+                        Offset = new CGSize(0, 0),
                         Radius = 1,
-                        Opacity = 0.7f
+                        Opacity = 0.4f
             }},
             { EOSConstants.BorderWidth, 2 },
             { EOSConstants.SectionTitle, "Dark section" },
@@ -118,7 +118,7 @@ namespace EOS.UI.Shared.Themes.Themes
             { EOSConstants.TopPadding, 5 },
             { EOSConstants.RightPadding, 5 },
             { EOSConstants.BottomPadding, 5 },
-            { EOSConstants.HasSectionBorder, false },
+            { EOSConstants.HasSectionBorder, true },
             { EOSConstants.HasSectionAction, true },
             { EOSConstants.WorkTimeTitleFont, "Fonts/SFUITextSemibold.ttf" },
             { EOSConstants.WorkTimeDayTextFont, "Fonts/SFUITextBold.ttf"},

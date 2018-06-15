@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using CoreAnimation;
 using CoreGraphics;
 using EOS.UI.iOS.Extensions;
@@ -73,6 +73,9 @@ namespace EOS.UI.iOS.Controls
             {
                 base.Enabled = value;
                 base.BackgroundColor = value ? BackgroundColor : DisabledBackgroundColor;
+                base.ImageView.TintColor = value ? 
+                    GetThemeProvider().GetEOSProperty<UIColor>(this, EOSConstants.NeutralColor6) :
+                    GetThemeProvider().GetEOSProperty<UIColor>(this, EOSConstants.NeutralColor3);
             }
         }
 
@@ -81,7 +84,7 @@ namespace EOS.UI.iOS.Controls
             get => base.Highlighted;
             set
             {
-                base.Highlighted = value;
+                base.Highlighted = false;
                 base.BackgroundColor = value ? PressedBackgroundColor : BackgroundColor;
             }
         }
@@ -205,6 +208,7 @@ namespace EOS.UI.iOS.Controls
                 PreloaderImage = UIImage.FromBundle(provider.GetEOSProperty<string>(this, EOSConstants.FabProgressPreloaderImage));
                 ButtonSize = provider.GetEOSProperty<int>(this, EOSConstants.FabProgressSize);
                 ShadowConfig = provider.GetEOSProperty<ShadowConfig>(this, EOSConstants.FabShadow);
+                Enabled = Enabled;
                 IsEOSCustomizationIgnored = false;
             }
         }

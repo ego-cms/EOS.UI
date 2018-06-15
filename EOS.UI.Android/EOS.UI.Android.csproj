@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -99,6 +99,7 @@
     <AndroidResource Include="Resources\drawable\success.xml" />
     <AndroidResource Include="Resources\drawable\Circular.xml" />
     <AndroidResource Include="Resources\layout\CircleProgress.axml" />
+    <AndroidResource Include="Resources\drawable\RotateDrawable.xml" />
   </ItemGroup>
   <ItemGroup>
     <AndroidAsset Include="Assets\Fonts\OpenSansRegular.ttf" />
