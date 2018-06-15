@@ -13,7 +13,7 @@ using UIKit;
 
 namespace EOS.UI.iOS.Sandbox.Storyboards
 {
-    public abstract class BaseViewController: UIViewController
+    public abstract class BaseViewController : UIViewController
     {
         private List<UIView> _children;
         private List<UIView> Children => _children = _children ?? GetChildren();

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Android.App;
@@ -27,6 +27,7 @@ namespace EOS.UI.Android.Sandbox
             { ControlNames.CircleProgress, typeof(CircleProgressActivity) },
             { ControlNames.Section, typeof(SectionActivity) },
             { ControlNames.CTAButton, typeof(CTAActivity) },
+            { ControlNames.WorkTimeCalendar, typeof(WorkTimeActivity) },
         };
 
         protected override void OnCreate(Bundle savedInstanceState)

@@ -125,6 +125,15 @@
     <Compile Include="Controls\CircleProgress.designer.cs">
       <DependentUpon>CircleProgress.cs</DependentUpon>
     </Compile>
+    <Compile Include="Components\WorkTimeCalendarCell.cs" />
+    <Compile Include="Components\WorkTimeCalendarCell.designer.cs">
+      <DependentUpon>WorkTimeCalendarCell.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CollectionViewSources\WorkTimeCalendarCollectionSource.cs" />
+    <Compile Include="CollectionViewSources\WorkTimeCalendarFlowLayout.cs" />
+    <Compile Include="Models\WorkTimeCalendarModel.cs" />
+    <Compile Include="Components\WorkTimeCalendarCollection.cs" />
+    <Compile Include="Extensions\DateTimeExtensions.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets.tt">
@@ -135,6 +144,7 @@
     <None Include="Info.plist" />
     <BundleResource Include="Resources\Fonts\capture_it_dark.ttf" />
     <BundleResource Include="Resources\Fonts\capture_it_light.ttf" />
+    <InterfaceDefinition Include="Components\WorkTimeCalendarCell.xib" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
@@ -145,6 +155,7 @@
     <Folder Include="Assets.xcassets\icAccountCircle.imageset\" />
     <Folder Include="Assets.xcassets\icAccountOff.imageset\" />
     <Folder Include="Assets.xcassets\icAccountKey.imageset\" />
+    <Folder Include="CollectionViewSources\" />
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="Controls\CircleProgress.xib" />

@@ -76,7 +76,11 @@ namespace EOS.UI.Shared.Themes.Themes
             { EOSConstants.RightPadding, 7 },
             { EOSConstants.BottomPadding, 5 },
             { EOSConstants.HasSectionBorder, true },
-            { EOSConstants.HasSectionAction, true }
+            { EOSConstants.HasSectionAction, true },
+            { EOSConstants.WorkTimeTitleSize, 13 },
+            { EOSConstants.WorkTimeTitleFont, UIFont.BoldSystemFontOfSize(13) },
+            { EOSConstants.WorkTimeDayTextSize, 11 },
+            { EOSConstants.WorkTimeDayTextFont, UIFont.BoldSystemFontOfSize(13) }
 #endif
 
 #if __ANDROID__
@@ -113,7 +117,11 @@ namespace EOS.UI.Shared.Themes.Themes
             { EOSConstants.RightPadding, 7 },
             { EOSConstants.BottomPadding, 5 },
             { EOSConstants.HasSectionBorder, true },
-            { EOSConstants.HasSectionAction, true }
+            { EOSConstants.HasSectionAction, true },
+            { EOSConstants.WorkTimeTitleFont, "Fonts/SFUITextSemibold.ttf" },
+            { EOSConstants.WorkTimeDayTextFont, "Fonts/SFUITextBold.ttf"},
+            { EOSConstants.WorkTimeTitleSize,  13 },
+            { EOSConstants.WorkTimeDayTextSize, 11 },
 #endif
         };
     }
