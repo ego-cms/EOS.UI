@@ -23,6 +23,8 @@ namespace EOS.UI.Android.Controls
         private const float _endScale = 1.0f;
         private const int _startPadding = 30;
         private const double _paddingRation = 0.24;
+        private const float _normalElevation = 10f;
+        private const float _disabledElevation = 0;
         private Animation _rotationAnimation;
 
         public bool IsEOSCustomizationIgnored { get; private set; }
@@ -38,6 +40,7 @@ namespace EOS.UI.Android.Controls
                     GetThemeProvider().GetEOSProperty<Color>(this, EOSConstants.NeutralColor6) :
                     GetThemeProvider().GetEOSProperty<Color>(this, EOSConstants.NeutralColor3), 
                     PorterDuff.Mode.SrcIn);
+                Elevation = Enabled ? _normalElevation : _disabledElevation;
             }
         }
 
@@ -159,7 +162,7 @@ namespace EOS.UI.Android.Controls
                 InitializeAttributes(attrs);
 
             UpdateAppearance();
-            Elevation = 10f;
+            Elevation = Enabled? _normalElevation : _disabledElevation;
         }
 
         private void InitializeAttributes(IAttributeSet attrs)

@@ -76,6 +76,8 @@ namespace EOS.UI.iOS.Controls
                 base.ImageView.TintColor = value ? 
                     GetThemeProvider().GetEOSProperty<UIColor>(this, EOSConstants.NeutralColor6) :
                     GetThemeProvider().GetEOSProperty<UIColor>(this, EOSConstants.NeutralColor3);
+
+                SetShadowConfig(Enabled ? _shadowConfig : null);
             }
         }
 
@@ -133,7 +135,7 @@ namespace EOS.UI.iOS.Controls
             {
                 _shadowConfig = value;
                 IsEOSCustomizationIgnored = true;
-                SetShadowConfig(_shadowConfig);
+                SetShadowConfig(Enabled ? _shadowConfig : null);
             }
         }
         
@@ -169,10 +171,20 @@ namespace EOS.UI.iOS.Controls
 
         private void SetShadowConfig(ShadowConfig config)
         {
-            Layer.ShadowColor = config.Color;
-            Layer.ShadowOffset = config.Offset;
-            Layer.ShadowRadius = config.Radius;
-            Layer.ShadowOpacity = config.Opacity;
+            if(config != null)
+            {
+                Layer.ShadowColor = config.Color;
+                Layer.ShadowOffset = config.Offset;
+                Layer.ShadowRadius = config.Radius;
+                Layer.ShadowOpacity = config.Opacity;
+            }
+            else
+            {
+                Layer.ShadowColor = UIColor.Clear.CGColor;
+                Layer.ShadowOffset = new CGSize();
+                Layer.ShadowRadius = 0;
+                Layer.ShadowOpacity = 0;
+            }
         }
 
         public IEOSStyle GetCurrentEOSStyle()
