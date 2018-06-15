@@ -24,6 +24,7 @@ namespace EOS.UI.Android.Components
         #region fields
 
         private const string Dash = "----";
+        private const float DashLetterSpacing = -0.2f; 
         private const string EmptyTime = "00:00";
         private int _sectionWidth;
         private Context _context;
@@ -55,104 +56,22 @@ namespace EOS.UI.Android.Components
             if(Items == null)
                 _items = GenerateDefaultItems();
 
-            var workDayModel = Items[position];
-
-            workTimeItem.StartDayTimeLabel.Text = EmptyTime;
-            workTimeItem.EndDayTimeLabel.Text = EmptyTime;
-            workTimeItem.StartBreakTimeLabel.Text = EmptyTime;
-            workTimeItem.EndBreakTimeLabel.Text = EmptyTime;
-
-            workTimeItem.StartDayTimeLabel.LetterSpacing = 0;
-            workTimeItem.StartBreakTimeLabel.LetterSpacing = 0;
-
-            workTimeItem.DayLabel.Text = workDayModel.ShortWeekDay;
-            if(!workDayModel.IsDayOff)
-            {
-                workTimeItem.StartDayTimeLabel.Text = workDayModel.StartTime.ToShortString();
-                workTimeItem.EndDayTimeLabel.Text = workDayModel.EndTime.ToShortString();
-                if(workDayModel.HasBreak)
-                {
-                    workTimeItem.StartBreakTimeLabel.Text = workDayModel.BreakStartTime.ToShortString();
-                    workTimeItem.EndBreakTimeLabel.Text = workDayModel.BreakEndTime.ToShortString();
-                }
-                else
-                {
-                    workTimeItem.StartBreakTimeLabel.Text = Dash;
-                    workTimeItem.StartBreakTimeLabel.LetterSpacing = -0.2f;
-                    workTimeItem.EndBreakTimeLabel.Text = EmptyTime;
-                }
-            }
-            else
-            {
-                workTimeItem.StartDayTimeLabel.Text = Dash;
-                workTimeItem.StartDayTimeLabel.LetterSpacing = -0.2f;
-                workTimeItem.EndDayTimeLabel.Text = EmptyTime;
-                workTimeItem.StartBreakTimeLabel.Text = EmptyTime;
-                workTimeItem.EndBreakTimeLabel.Text = EmptyTime;
-            }
+            SetDataFromModel(workTimeItem, Items[position]);
 
             _isEven = position % 2 == 0;
             _isCurrentDay = IsThisCurrentDay(Items[position].WeekDay);
 
-            if(TitleFont != null)
-                workTimeItem.DayLabel.Typeface = TitleFont;
-
-            if(DayTextFont != null)
-            {
-                workTimeItem.StartDayTimeLabel.Typeface = DayTextFont;
-                workTimeItem.EndDayTimeLabel.Typeface = DayTextFont;
-                workTimeItem.StartBreakTimeLabel.Typeface = DayTextFont;
-                workTimeItem.EndBreakTimeLabel.Typeface = DayTextFont;
-            }
-
-            if(TitleTextSize != 0)
-                workTimeItem.DayLabel.TextSize = TitleTextSize;
-
-            if(DayTextSize != 0)
-            {
-                workTimeItem.StartDayTimeLabel.TextSize = DayTextSize;
-                workTimeItem.EndDayTimeLabel.TextSize = DayTextSize;
-                workTimeItem.StartBreakTimeLabel.TextSize = DayTextSize;
-                workTimeItem.EndBreakTimeLabel.TextSize = DayTextSize;
-            }
-
-            if(TitleColor != default(Color))
-                workTimeItem.DayLabel.SetTextColor(TitleColor);
-
-            if(DayTextColor != default(Color))
-            {
-                workTimeItem.StartDayTimeLabel.SetTextColor(workTimeItem.StartDayTimeLabel.Text == EmptyTime ? Color.Transparent : DayTextColor);
-                workTimeItem.EndDayTimeLabel.SetTextColor(workTimeItem.EndDayTimeLabel.Text == EmptyTime ? Color.Transparent : DayTextColor);
-                workTimeItem.StartBreakTimeLabel.SetTextColor(workTimeItem.StartBreakTimeLabel.Text == EmptyTime ? Color.Transparent : DayTextColor);
-                workTimeItem.EndBreakTimeLabel.SetTextColor(workTimeItem.EndBreakTimeLabel.Text == EmptyTime ? Color.Transparent : DayTextColor);
-            }
-
-            if(CurrentDayBackgroundColor != default(Color) && _isCurrentDay)
-                workTimeItem.Container.Background = CreateGradientDrawable(CurrentDayBackgroundColor);
-
-            if(CurrentDayTextColor != default(Color) && _isCurrentDay)
-            {
-                workTimeItem.DayLabel.SetTextColor(CurrentDayTextColor);
-                workTimeItem.StartDayTimeLabel.SetTextColor(workTimeItem.StartDayTimeLabel.Text == EmptyTime ? Color.Transparent : CurrentDayTextColor);
-                workTimeItem.EndDayTimeLabel.SetTextColor(workTimeItem.EndDayTimeLabel.Text == EmptyTime ? Color.Transparent : CurrentDayTextColor);
-                workTimeItem.StartBreakTimeLabel.SetTextColor(workTimeItem.StartBreakTimeLabel.Text == EmptyTime ? Color.Transparent : CurrentDayTextColor);
-                workTimeItem.EndBreakTimeLabel.SetTextColor(workTimeItem.EndBreakTimeLabel.Text == EmptyTime ? Color.Transparent : CurrentDayTextColor);
-            }
-
-            if(DayEvenBackgroundColor != default(Color) && !_isCurrentDay)
-                workTimeItem.Container.Background = CreateGradientDrawable(_isEven ? Color.Transparent : DayEvenBackgroundColor);
-
-            if(DividerColor != default(Color) && !_isCurrentDay)
-            {
-                workTimeItem.DayDivider.Background = new ColorDrawable(DividerColor);
-                workTimeItem.CircleDivider.Background = CreateGradientDrawable(DividerColor);
-            }
-
-            if(CurrentDividerColor != default(Color) && _isCurrentDay)
-            {
-                workTimeItem.DayDivider.Background = new ColorDrawable(CurrentDividerColor);
-                workTimeItem.CircleDivider.Background = CreateGradientDrawable(CurrentDividerColor);
-            }
+            SetTitleFont(workTimeItem);
+            SetDayTextFont(workTimeItem);
+            SetTitleTextSize(workTimeItem);
+            SetDayTextSize(workTimeItem);
+            SetTitleColor(workTimeItem);
+            SetDayTextColor(workTimeItem);
+            SetCurrentDayBackgroundColor(workTimeItem);
+            SetCurrentDayTextColor(workTimeItem);
+            SetDayEvenBackgroundColor(workTimeItem);
+            SetDividerColor(workTimeItem);
+            SetCurrentDividerColor(workTimeItem);
         }
 
         public override RecyclerView.ViewHolder OnCreateViewHolder(ViewGroup parent, int viewType)
@@ -330,6 +249,136 @@ namespace EOS.UI.Android.Components
         #endregion
 
         #region utility methods
+
+        private void SetDataFromModel(WorkTimeItem workTimeItem, WorkTimeCalendarItem workDayModel)
+        {
+            workTimeItem.StartDayTimeLabel.Text = EmptyTime;
+            workTimeItem.EndDayTimeLabel.Text = EmptyTime;
+            workTimeItem.StartBreakTimeLabel.Text = EmptyTime;
+            workTimeItem.EndBreakTimeLabel.Text = EmptyTime;
+
+            workTimeItem.StartDayTimeLabel.LetterSpacing = 0;
+            workTimeItem.StartBreakTimeLabel.LetterSpacing = 0;
+
+            workTimeItem.DayLabel.Text = workDayModel.ShortWeekDay;
+            if(!workDayModel.IsDayOff)
+            {
+                workTimeItem.StartDayTimeLabel.Text = workDayModel.StartTime.ToShortString();
+                workTimeItem.EndDayTimeLabel.Text = workDayModel.EndTime.ToShortString();
+                if(workDayModel.HasBreak)
+                {
+                    workTimeItem.StartBreakTimeLabel.Text = workDayModel.BreakStartTime.ToShortString();
+                    workTimeItem.EndBreakTimeLabel.Text = workDayModel.BreakEndTime.ToShortString();
+                }
+                else
+                {
+                    workTimeItem.StartBreakTimeLabel.Text = Dash;
+                    workTimeItem.StartBreakTimeLabel.LetterSpacing = DashLetterSpacing;
+                    workTimeItem.EndBreakTimeLabel.Text = EmptyTime;
+                }
+            }
+            else
+            {
+                workTimeItem.StartDayTimeLabel.Text = Dash;
+                workTimeItem.StartDayTimeLabel.LetterSpacing = DashLetterSpacing;
+                workTimeItem.EndDayTimeLabel.Text = EmptyTime;
+                workTimeItem.StartBreakTimeLabel.Text = EmptyTime;
+                workTimeItem.EndBreakTimeLabel.Text = EmptyTime;
+            }
+        }
+
+        private void SetDayTextFont(WorkTimeItem workTimeItem)
+        {
+            if(DayTextFont != null)
+            {
+                workTimeItem.StartDayTimeLabel.Typeface = DayTextFont;
+                workTimeItem.EndDayTimeLabel.Typeface = DayTextFont;
+                workTimeItem.StartBreakTimeLabel.Typeface = DayTextFont;
+                workTimeItem.EndBreakTimeLabel.Typeface = DayTextFont;
+            }
+        }
+
+        private void SetTitleFont(WorkTimeItem workTimeItem)
+        {
+            if(TitleFont != null)
+                workTimeItem.DayLabel.Typeface = TitleFont;
+        }
+
+        private void SetTitleTextSize(WorkTimeItem workTimeItem)
+        {
+            if(TitleTextSize != 0)
+                workTimeItem.DayLabel.TextSize = TitleTextSize;
+        }
+
+        private void SetDayTextSize(WorkTimeItem workTimeItem)
+        {
+            if(DayTextSize != 0)
+            {
+                workTimeItem.StartDayTimeLabel.TextSize = DayTextSize;
+                workTimeItem.EndDayTimeLabel.TextSize = DayTextSize;
+                workTimeItem.StartBreakTimeLabel.TextSize = DayTextSize;
+                workTimeItem.EndBreakTimeLabel.TextSize = DayTextSize;
+            }
+        }
+
+        private void SetTitleColor(WorkTimeItem workTimeItem)
+        {
+            if(TitleColor != default(Color))
+                workTimeItem.DayLabel.SetTextColor(TitleColor);
+        }
+
+        private void SetDayTextColor(WorkTimeItem workTimeItem)
+        {
+            if(DayTextColor != default(Color))
+            {
+                workTimeItem.StartDayTimeLabel.SetTextColor(workTimeItem.StartDayTimeLabel.Text == EmptyTime ? Color.Transparent : DayTextColor);
+                workTimeItem.EndDayTimeLabel.SetTextColor(workTimeItem.EndDayTimeLabel.Text == EmptyTime ? Color.Transparent : DayTextColor);
+                workTimeItem.StartBreakTimeLabel.SetTextColor(workTimeItem.StartBreakTimeLabel.Text == EmptyTime ? Color.Transparent : DayTextColor);
+                workTimeItem.EndBreakTimeLabel.SetTextColor(workTimeItem.EndBreakTimeLabel.Text == EmptyTime ? Color.Transparent : DayTextColor);
+            }
+        }
+
+        private void SetCurrentDayBackgroundColor(WorkTimeItem workTimeItem)
+        {
+            if(CurrentDayBackgroundColor != default(Color) && _isCurrentDay)
+                workTimeItem.Container.Background = CreateGradientDrawable(CurrentDayBackgroundColor);
+        }
+
+        private void SetCurrentDayTextColor(WorkTimeItem workTimeItem)
+        {
+            if(CurrentDayTextColor != default(Color) && _isCurrentDay)
+            {
+                workTimeItem.DayLabel.SetTextColor(CurrentDayTextColor);
+                workTimeItem.StartDayTimeLabel.SetTextColor(workTimeItem.StartDayTimeLabel.Text == EmptyTime ? Color.Transparent : CurrentDayTextColor);
+                workTimeItem.EndDayTimeLabel.SetTextColor(workTimeItem.EndDayTimeLabel.Text == EmptyTime ? Color.Transparent : CurrentDayTextColor);
+                workTimeItem.StartBreakTimeLabel.SetTextColor(workTimeItem.StartBreakTimeLabel.Text == EmptyTime ? Color.Transparent : CurrentDayTextColor);
+                workTimeItem.EndBreakTimeLabel.SetTextColor(workTimeItem.EndBreakTimeLabel.Text == EmptyTime ? Color.Transparent : CurrentDayTextColor);
+            }
+        }
+
+        private void SetDayEvenBackgroundColor(WorkTimeItem workTimeItem)
+        {
+            if(DayEvenBackgroundColor != default(Color) && !_isCurrentDay)
+                workTimeItem.Container.Background = CreateGradientDrawable(_isEven ? Color.Transparent : DayEvenBackgroundColor);
+        }
+
+        private void SetDividerColor(WorkTimeItem workTimeItem)
+        {
+            if(DividerColor != default(Color) && !_isCurrentDay)
+            {
+                workTimeItem.DayDivider.Background = new ColorDrawable(DividerColor);
+                workTimeItem.CircleDivider.Background = CreateGradientDrawable(DividerColor);
+            }
+        }
+
+        private void SetCurrentDividerColor(WorkTimeItem workTimeItem)
+        {
+            if(CurrentDividerColor != default(Color) && _isCurrentDay)
+            {
+                workTimeItem.DayDivider.Background = new ColorDrawable(CurrentDividerColor);
+                workTimeItem.CircleDivider.Background = CreateGradientDrawable(CurrentDividerColor);
+            }
+        }
 
         private bool IsThisCurrentDay(DayOfWeek day)
         {
