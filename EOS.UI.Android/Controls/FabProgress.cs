@@ -33,9 +33,11 @@ namespace EOS.UI.Android.Controls
         private const int _rotationAnimationDuration = 1000;
         private const float _pivot = 0.5f;
         private int _initialWidth = -1;
-        private const float _normalElevation = 10f;
-        private const float _disabledElevation = 0;
-        private Animation _rotationAnimation;
+        //flag set when width recalculated for including shadows
+        private bool _shadowRecalculatedWidth;
+        //Initial x-y position of control. Altered by shadow property
+        private float? _initialXPosition;
+        private float? _initialYPosition;
 
         public bool IsEOSCustomizationIgnored { get; private set; }
 
@@ -44,13 +46,17 @@ namespace EOS.UI.Android.Controls
             get => base.Enabled;
             set
             {
+                if (base.Enabled != value)
+                {
+                    SetShadowOrBackground(value, ShadowConfig);
+                    SetBackgroundColor(value ? BackgroundColor : DisabledBackgroundColor);
+                    Image.SetColorFilter(value ?
+                        GetThemeProvider().GetEOSProperty<Color>(this, EOSConstants.NeutralColor6) :
+                        GetThemeProvider().GetEOSProperty<Color>(this, EOSConstants.NeutralColor3),
+                        PorterDuff.Mode.SrcIn);
+                }
+
                 base.Enabled = value;
-                SetBackgroundColor(value ? BackgroundColor : DisabledBackgroundColor);
-                Image.SetColorFilter(value ? 
-                    GetThemeProvider().GetEOSProperty<Color>(this, EOSConstants.NeutralColor6) :
-                    GetThemeProvider().GetEOSProperty<Color>(this, EOSConstants.NeutralColor3), 
-                    PorterDuff.Mode.SrcIn);
-                Elevation = Enabled ? _normalElevation : _disabledElevation;
             }
         }
 
@@ -128,19 +134,33 @@ namespace EOS.UI.Android.Controls
             get => _shadowConfig;
             set
             {
-                _shadowConfig = value;
                 IsEOSCustomizationIgnored = true;
-                if (value != null)
-                {
-                    SetShadow(value);
-                }
-                else
-                {
-                    Background = CreateBackgroundDrawable();
-                    SetImageDrawable(Image);
-                    SetPadding(_startPadding, _startPadding, _startPadding, _startPadding);
-                }
+                SetShadowOrBackground(value != null, value);
+                _shadowConfig = value;
             }
+        }
+
+        private void SetShadowOrBackground(bool condition, ShadowConfig config)
+        {
+            if (condition)
+            {
+                SetShadow(config);
+            }
+            else
+            {
+                SetBackground();
+            }
+        }
+
+        private void SetBackground()
+        {
+            if (_shadowConfig != null)
+            {
+                ResetShadowParameters();
+            }
+            Background = CreateBackgroundDrawable();
+            SetImageDrawable(Image);
+            SetPadding(_startPadding, _startPadding, _startPadding, _startPadding);
         }
 
         public FabProgress(Context context) : base(context)
@@ -174,7 +194,6 @@ namespace EOS.UI.Android.Controls
                 InitializeAttributes(attrs);
 
             UpdateAppearance();
-            Elevation = Enabled? _normalElevation : _disabledElevation;
         }
 
         private void InitializeAttributes(IAttributeSet attrs)
@@ -237,7 +256,6 @@ namespace EOS.UI.Android.Controls
                 DisabledBackgroundColor = provider.GetEOSProperty<Color>(this, EOSConstants.NeutralColor4);
                 PressedBackgroundColor = provider.GetEOSProperty<Color>(this, EOSConstants.BrandPrimaryColorVariant1);
                 ShadowConfig = provider.GetEOSProperty<ShadowConfig>(this, EOSConstants.FabShadow);
-                //SetPadding(_startPadding, _startPadding, _startPadding, _startPadding);
 
                 //Should initialize after ShadowConfig
                 //ShadowConfig method checks and background drawable which should be used for color.
@@ -295,7 +313,13 @@ namespace EOS.UI.Android.Controls
         public override void Layout(int l, int t, int r, int b)
         {
             base.Layout(l, t, r, b);
-            if(_initialWidth<=0)// || _initialWidth != Width)
+
+            if (_shadowRecalculatedWidth)
+            {
+                return;
+            }
+
+            if(_initialWidth<=0 || _initialWidth != Width)
                 _initialWidth = Width;
         }
 
@@ -322,27 +346,67 @@ namespace EOS.UI.Android.Controls
             layers[_backgroundLayerIndex] = CreateBackgroundDrawable();
             layers[_imageLayerIndex] = Image;
 
-            //var densityOffsetX = (int)Helpers.Helpers.DpToPx(config.Offset.X);
-            //var densityOffsetY = (int)Helpers.Helpers.DpToPx(config.Offset.Y);
-            //var densityOffsetBlur = (int)Helpers.Helpers.DpToPx(config.Blur);
-
             var layerList = CreateLayerList(layers);
             layerList.SetLayerInset(0, 0, 0, 0, 0);
             layerList.SetLayerInset(_shadowLayerIndex, 0, 0, 0, 0);
-            //layerList.SetLayerInset(_backgroundLayerIndex, 0 - config.Offset.X + config.Blur, config.Offset.Y + config.Blur, config.Offset.X + config.Blur, 0 - config.Offset.Y + config.Blur);
-            //layerList.SetLayerInset(_backgroundLayerIndex, 0 - densityOffsetX + densityOffsetBlur, densityOffsetY + densityOffsetBlur, densityOffsetX + densityOffsetBlur, 0 - densityOffsetY + densityOffsetBlur);
-            var insetL = densityOffsetX > 0? 0 : Math.Abs(densityOffsetX) + densityBlur;
-            var insetB = densityOffsetY > 0 ? 0 : Math.Abs(densityOffsetY) + densityBlur;
-            var insetR = densityOffsetX > 0 ? Math.Abs(densityOffsetX) + densityBlur : 0;
-            var insetT = densityOffsetY > 0 ? Math.Abs(densityOffsetY) + densityBlur : 0;
-
-
-            Console.WriteLine($"l - {insetL}\nt - {insetT}\nr - {insetR}\nb - {insetB}\n");
-
-            layerList.SetLayerInset(_backgroundLayerIndex, insetL, insetT, insetR, insetB);
-            SetInsetForImageLayer(layerList, Image, _initialWidth/2, densityOffsetX, densityOffsetY, densityBlur);
+            SetInsetForBackgroundLayer(densityOffsetX, densityOffsetY, densityBlur, layerList);
+            SetInsetForImageLayer(layerList, Image, _initialWidth / 2, densityOffsetX, densityOffsetY, densityBlur);
 
             Background = layerList;
+        }
+
+        private void SetInsetForBackgroundLayer(int densityOffsetX, int densityOffsetY, int densityBlur, LayerDrawable layerList)
+        {
+            int insetL = GetInsetLeft(densityOffsetX, densityBlur);
+            var insetT = GetInsetTop(densityOffsetY, densityBlur);
+            var insetR = GetInsetRight(densityOffsetX, densityBlur);
+            var insetB = GetInsetBottom(densityOffsetY, densityBlur);
+
+            layerList.SetLayerInset(_backgroundLayerIndex, insetL, insetT, insetR, insetB);
+        }
+
+        private int GetInsetLeft(int densityOffsetX, int densityBlur)
+        {
+            if (densityOffsetX == 0)
+                return densityBlur;
+
+            if (densityOffsetX < 0)
+                return densityBlur + Math.Abs(densityOffsetX);
+            else
+                return densityBlur > densityOffsetX ? densityBlur - densityOffsetX : 0;
+        }
+
+        private int GetInsetRight(int densityOffsetX, int densityBlur)
+        {
+            if (densityOffsetX == 0)
+                return densityBlur;
+            
+            if (densityOffsetX > 0)
+                return densityBlur + Math.Abs(densityOffsetX);
+            else
+                return densityBlur > Math.Abs(densityOffsetX) ? densityBlur - Math.Abs(densityOffsetX) : 0;
+        }
+
+        private int GetInsetBottom(int densityOffsetY, int densityBlur)
+        {
+            if (densityOffsetY == 0)
+                return densityBlur;
+            
+            if (densityOffsetY < 0)
+                return densityBlur + Math.Abs(densityOffsetY);
+            else
+                return densityBlur > densityOffsetY ? densityBlur - Math.Abs(densityOffsetY) : 0;
+        }
+
+        private int GetInsetTop(int densityOffsetY, int densityBlur)
+        {
+            if (densityOffsetY == 0)
+                return densityBlur;
+            
+            if (densityOffsetY > 0)
+                return densityBlur + Math.Abs(densityOffsetY);
+            else
+                return densityBlur > Math.Abs(densityOffsetY) ? densityBlur - Math.Abs(densityOffsetY) : 0;
         }
 
         private int RecalculateWidth(int offsetX, int offsetY, int blur)
@@ -350,31 +414,78 @@ namespace EOS.UI.Android.Controls
             if (blur == 0)
                 return _initialWidth;
 
-            Console.WriteLine($"Initial:\nWidth - {_initialWidth}\nHeight - {_initialWidth}");
+            _shadowRecalculatedWidth = true;
 
-            var lp = LayoutParameters;
-            lp.Width = _initialWidth + Math.Abs(offsetX) + blur;
-            lp.Height = _initialWidth + Math.Abs(offsetY) + blur;
-            LayoutParameters = lp;
+            var newWidth = _initialWidth + GetOffsetWithBlur(offsetX, blur) + blur * 2;
+            var newHeight = _initialWidth + GetOffsetWithBlur(offsetY, blur) + blur * 2;
+            this.SetLayoutParameters(newWidth, newHeight);
+
             if (offsetX > 0)
             {
-                SetX(GetX() + (offsetX + blur) / 2);
+                SetX(GetInitialX() + (GetOffsetForViewPosition(offsetX, blur) + blur * 2) / 2);
             }
-            else
+            if (offsetX < 0)
             {
-                SetX(GetX() + (offsetX + blur * -1) / 2);
+                SetX(GetInitialX() + ((GetOffsetForViewPosition(offsetX, blur) + blur * 2) * -1) / 2);
+            }
+            if (offsetX == 0)
+            {
+                SetX(GetInitialX());
             }
             if (offsetY > 0)
             {
-                SetY(GetY() - (offsetY + blur));
+                SetY(GetInitialY() + (Math.Abs(offsetY) + blur) * -1);
             }
-            else
+            if (offsetY < 0)
             {
-                //SetY(GetY() - (offsetY + blur * -1) / 2);
+                if (blur > Math.Abs(offsetY))
+                {
+                    SetY(GetInitialY() + (offsetY + blur) * -1);
+                }
+                else
+                {
+                    SetY(GetInitialY());
+                }
             }
-            Console.WriteLine($"After:\nWidth - {lp.Width}\nHeight - {lp.Height}");
+            if (offsetY == 0)
+            {
+                SetY(GetInitialY() - blur);
+            }
 
-            return lp.Width;
+            return newWidth;
+        }
+
+        private float GetInitialX()
+        {
+            _initialXPosition = _initialXPosition ?? GetX();
+            return _initialXPosition.Value;
+        }
+
+        private float GetInitialY()
+        {
+            _initialYPosition = _initialYPosition ?? GetY();
+            return _initialYPosition.Value;
+        }
+
+        private void ResetShadowParameters()
+        {
+            this.SetLayoutParameters(_initialWidth, _initialWidth);
+
+            TranslationX = 0;
+            TranslationY = 0;
+            _initialXPosition = null;
+            _initialYPosition = null;
+            _shadowRecalculatedWidth = false;
+        }
+
+        private int GetOffsetForViewPosition(int offset, int blur)
+        {
+            return Math.Abs(offset) >= blur ? Math.Abs(offset) - blur : (blur + Math.Abs(offset)) * -1;
+        }
+
+        private int GetOffsetWithBlur(int offset, int blur)
+        {
+            return Math.Abs(offset) > blur ? Math.Abs(offset) - blur : 0;
         }
 
         private LayerDrawable CreateLayerList(Drawable[] layers)
@@ -397,17 +508,12 @@ namespace EOS.UI.Android.Controls
 
         private void SetInsetForImageLayer(LayerDrawable layerList, Drawable drawable, int halfWidth, int offsetX, int offsetY, int blur)
         {
-            //var xOffset = halfWidth - drawable.IntrinsicWidth / 2 + (int)Helpers.Helpers.DpToPx(offset.X);
-            //var yOffset = halfWidth - drawable.IntrinsicWidth / 2 + (int)Helpers.Helpers.DpToPx(offset.Y);
-            //var rightOffset = halfWidth - drawable.IntrinsicWidth / 2 - (int)Helpers.Helpers.DpToPx(offset.X);
-            //var bottomOffset = halfWidth - drawable.IntrinsicWidth / 2 - (int)Helpers.Helpers.DpToPx(offset.Y);
-            //layerList.SetLayerInset(_imageLayerIndex, xOffset, yOffset, rightOffset, bottomOffset);
             var imagePosition = halfWidth - drawable.IntrinsicWidth / 2;
 
-            var insetL = offsetX > 0 ? imagePosition : Math.Abs(offsetX) + blur + imagePosition;
-            var insetB = offsetY > 0 ? imagePosition : Math.Abs(offsetY) + blur + imagePosition;
-            var insetR = offsetX > 0 ? Math.Abs(offsetX) + blur + imagePosition : imagePosition;
-            var insetT = offsetY > 0 ? Math.Abs(offsetY) + blur + imagePosition : imagePosition;
+            var insetL = GetInsetLeft(offsetX, blur) + imagePosition;
+            var insetT = GetInsetTop(offsetY, blur) + imagePosition;
+            var insetR = GetInsetRight(offsetX, blur) + imagePosition;
+            var insetB = GetInsetBottom(offsetY, blur) + imagePosition;
             layerList.SetLayerInset(_imageLayerIndex, insetL, insetT, insetR, insetB);
         }
 

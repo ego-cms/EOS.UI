@@ -103,6 +103,10 @@ namespace EOS.UI.Android.Sandbox.Activities
             {
                 if (position > 0)
                 {
+                    if (fab.ShadowConfig != null)
+                    {
+                        fab.ShadowConfig = null;
+                    }
                     fab.ShadowConfig = Shadows.ShadowsCollection.ElementAt(position).Value;
                     fab.StopProgressAnimation();
                 }
@@ -119,7 +123,6 @@ namespace EOS.UI.Android.Sandbox.Activities
                 if (position > 0)
                 {
                     ChangeFabLayoutParameters(Sizes.FabProgressSizes.ElementAt(position).Value, fab);
-                    ResetCustomization(fab, themeDropDown, spinners);
                 }
             };
 
@@ -140,6 +143,7 @@ namespace EOS.UI.Android.Sandbox.Activities
 
         private void ChangeFabLayoutParameters(int width, FabProgress fab)
         {
+            fab.ShadowConfig = null;
             var lp = fab.LayoutParameters;
             lp.Width = width;
             lp.Height = width;;

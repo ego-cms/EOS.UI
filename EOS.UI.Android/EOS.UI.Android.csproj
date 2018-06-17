@@ -87,6 +87,7 @@
     <Compile Include="Controls\CircleProgress.cs" />
     <Compile Include="Helpers\CircleShadowDrawable.cs" />
     <Compile Include="Helpers\Helpers.cs" />
+    <Compile Include="Helpers\Extensions.cs" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\values\Strings.xml" />
