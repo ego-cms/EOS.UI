@@ -251,50 +251,48 @@ namespace EOS.UI.Android.Sandbox.Helpers
 
         public static class Shadows
         {
-            public const string Shadow1 = "Shadow1";
-            public const string ShadowOffsetLargerBlur1 = "ShadowOffsetLargerBlur1";
-            public const string ShadowOffsetLargerBlur2 = "ShadowOffsetLargerBlur2";
-            public const string ShadowOffsetLargerBlur3 = "ShadowOffsetLargerBlur3";
-            public const string ShadowOffsetLargerBlur4 = "ShadowOffsetLargerBlur4";
-            public const string Shadow1n5 = "Shadow1.5";
-            public const string Shadow1n58 = "Shadow1.58";
-            public const string Shadow1n5y = "Shadow1.5y";
-            public const string Shadow1n58y = "Shadow1.58y";
-            public const string Shadow2 = "Shadow2";
-            public const string Shadow22 = "Shadow22";
-            public const string Shadow3 = "Shadow3";
-            public const string Shadow4 = "Shadow4";
-            public const string Shadow5 = "Shadow5";
-            public const string Shadow6 = "Ugly shadow";
-            public const string Shadow66 = "Ugly shadow 2";
-            public const string Shadow7 = "No shadow";
-            public const string Shadow8 = "Normal shadow";
-            public const string Shadow9 = "Big shadow";
-            public const string Shadow10 = "Medium shadow";
+            public const string Shadow1 = "ShadowOffsetXPositiveLargerBlur";
+            public const string Shadow2 = "ShadowOffsetXNegativeLargerBlur";
+            public const string Shadow3 = "ShadowOffsetYPositiveLargerBlur";
+            public const string Shadow4 = "ShadowOffsetYNegativeLargerBlur";
+            public const string Shadow5 = "ShadowBlurLargerOffsetXPositive";
+            public const string Shadow6 = "ShadowBlurLargerOffsetXNegative";
+            public const string Shadow7 = "ShadowBlurLargerOffsetYPositive";
+            public const string Shadow8 = "ShadowBlurLargerOffsetYNegative";
+            public const string Shadow9 = "ShadowOffsetXYPositiveEqualBlur";
+            public const string Shadow10 = "ShadowOffsetXPositiveEqualBlur";
+            public const string Shadow11 = "ShadowOffsetXNegativeYPositiveEqualBlur";
+            public const string Shadow12 = "ShadowOffsetXPositiveYNegativeEqualBlur";
+            public const string Shadow13 = "ShadowOffsetXNegativeYNegativeEqualBlur";
+            public const string Shadow14 = "ShadowBlurLargerOffsetXPositiveYNegative";
+            public const string Shadow15 = "ShadowOffsetXPositiveYNegativeTinyBlur";
+            public const string Shadow16 = "Medium shadow";
+            public const string Shadow17 = "Normal shadow";
+            public const string Shadow18 = "Big shadow";
+            public const string Shadow19 = "No shadow";
 
             public static Dictionary<string, ShadowConfig> ShadowsCollection = new Dictionary<string, ShadowConfig>()
             {
                 { string.Empty, null },
-                { Shadow1, new ShadowConfig{ Color = Color.Red, Offset = new Point(0,0), Blur = 5, Spread = 200} },
-                { ShadowOffsetLargerBlur1, new ShadowConfig{ Color = Color.Red, Offset = new Point(15,0), Blur = 5, Spread = 200} },
-                { ShadowOffsetLargerBlur2, new ShadowConfig{ Color = Color.Red, Offset = new Point(-15,0), Blur = 5, Spread = 200} },
-                { ShadowOffsetLargerBlur3, new ShadowConfig{ Color = Color.Red, Offset = new Point(0,15), Blur = 5, Spread = 200} },
-                { ShadowOffsetLargerBlur4, new ShadowConfig{ Color = Color.Red, Offset = new Point(0,-15), Blur = 5, Spread = 200} },
-                { Shadow1n5, new ShadowConfig{ Color = Color.Red, Offset = new Point(5,0), Blur = 15, Spread = 200} },
-                { Shadow1n58, new ShadowConfig{ Color = Color.Red, Offset = new Point(-5,0), Blur = 15, Spread = 200} },
-                { Shadow1n5y, new ShadowConfig{ Color = Color.Red, Offset = new Point(0,5), Blur = 25, Spread = 200} },
-                { Shadow1n58y, new ShadowConfig{ Color = Color.Red, Offset = new Point(0,-5), Blur = 25, Spread = 200} },
-                { Shadow2, new ShadowConfig{ Color = Color.Green, Offset = new Point(5,5), Blur = 5, Spread = 200} },
-                { Shadow22, new ShadowConfig{ Color = Color.Green, Offset = new Point(5,0), Blur = 5, Spread = 200} },
-                { Shadow3, new ShadowConfig{ Color = Color.Blue, Offset = new Point(-5,5), Blur = 5, Spread = 200} },
-                { Shadow4, new ShadowConfig{ Color = Color.Yellow, Offset = new Point(5,-5), Blur = 5, Spread = 200} },
-                { Shadow5, new ShadowConfig{ Color = Color.Purple, Offset = new Point(-5,-5), Blur = 5, Spread = 200} },
-                { Shadow6, new ShadowConfig{ Color = Color.Purple, Offset = new Point(25,-25), Blur = 15, Spread = 200} },
-                { Shadow66, new ShadowConfig{ Color = Color.Purple, Offset = new Point(6,-6), Blur = 1, Spread = 200} },
-                { Shadow7, null },
-                { Shadow8, new ShadowConfig{ Color = Color.Black, Offset = new Point(0,0), Blur = 5, Spread = 200}  },
-                { Shadow9, new ShadowConfig{ Color = Color.Black, Offset = new Point(0,0), Blur = 25, Spread = 200}  },
-                { Shadow10, new ShadowConfig{ Color = Color.Black, Offset = new Point(0,0), Blur = 15, Spread = 200}  },
+                { Shadow1, new ShadowConfig{ Color = Color.Red, Offset = new Point(15,0), Blur = 5, Spread = 200} },
+                { Shadow2, new ShadowConfig{ Color = Color.Red, Offset = new Point(-15,0), Blur = 5, Spread = 200} },
+                { Shadow3, new ShadowConfig{ Color = Color.Red, Offset = new Point(0,15), Blur = 5, Spread = 200} },
+                { Shadow4, new ShadowConfig{ Color = Color.Red, Offset = new Point(0,-15), Blur = 5, Spread = 200} },
+                { Shadow5, new ShadowConfig{ Color = Color.Red, Offset = new Point(5,0), Blur = 15, Spread = 200} },
+                { Shadow6, new ShadowConfig{ Color = Color.Red, Offset = new Point(-5,0), Blur = 15, Spread = 200} },
+                { Shadow7, new ShadowConfig{ Color = Color.Red, Offset = new Point(0,5), Blur = 25, Spread = 200} },
+                { Shadow8, new ShadowConfig{ Color = Color.Red, Offset = new Point(0,-5), Blur = 25, Spread = 200} },
+                { Shadow9, new ShadowConfig{ Color = Color.Green, Offset = new Point(5,5), Blur = 5, Spread = 200} },
+                { Shadow10, new ShadowConfig{ Color = Color.Green, Offset = new Point(5,0), Blur = 5, Spread = 200} },
+                { Shadow11, new ShadowConfig{ Color = Color.Blue, Offset = new Point(-5,5), Blur = 5, Spread = 200} },
+                { Shadow12, new ShadowConfig{ Color = Color.Yellow, Offset = new Point(5,-5), Blur = 5, Spread = 200} },
+                { Shadow13, new ShadowConfig{ Color = Color.Purple, Offset = new Point(-5,-5), Blur = 5, Spread = 200} },
+                { Shadow14, new ShadowConfig{ Color = Color.Purple, Offset = new Point(25,-25), Blur = 15, Spread = 200} },
+                { Shadow15, new ShadowConfig{ Color = Color.Purple, Offset = new Point(6,-6), Blur = 1, Spread = 200} },
+                { Shadow16, new ShadowConfig{ Color = Color.Black, Offset = new Point(0,0), Blur = 15, Spread = 200}  },
+                { Shadow17, new ShadowConfig{ Color = Color.Black, Offset = new Point(0,0), Blur = 5, Spread = 200}  },
+                { Shadow18, new ShadowConfig{ Color = Color.Black, Offset = new Point(0,0), Blur = 25, Spread = 200}  },
+                { Shadow19, null },
             };
         }
 
