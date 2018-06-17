@@ -27,9 +27,9 @@ namespace EOS.UI.Android.Controls
         private const int _startPadding = 30;
         private const double _paddingRatio = 0.24;
         private const int _cornerRadius = 200;
-        private const int _shadowLayerIndex = 1;
-        private const int _backgroundLayerIndex = 2;
-        private const int _imageLayerIndex = 3;
+        private const int _shadowLayerIndex = 0;
+        private const int _backgroundLayerIndex = 1;
+        private const int _imageLayerIndex = 2;
         private const int _rotationAnimationDuration = 1000;
         private const float _pivot = 0.5f;
         private int _initialWidth = -1;
@@ -380,8 +380,7 @@ namespace EOS.UI.Android.Controls
             var paddings = newWidth / 2;
             SetPadding(paddings, paddings, paddings, paddings);
 
-            Drawable[] layers = new Drawable[4];
-            layers[0] = new GradientDrawable(GradientDrawable.Orientation.BlTr, new int[] { Color.Black.ToArgb(), Color.Black.ToArgb() });
+            Drawable[] layers = new Drawable[3];
             layers[_shadowLayerIndex] = new CircleShadowDrawable(config);
             layers[_backgroundLayerIndex] = CreateBackgroundDrawable();
             layers[_imageLayerIndex] = Image;
@@ -615,7 +614,7 @@ namespace EOS.UI.Android.Controls
         {
             //By default android has ripple drawable which extended from LayerDrawable.
             //Should check number of layers also.
-            return layer != null && layer.NumberOfLayers == 4;
+            return layer != null && layer.NumberOfLayers == 3;
         }
 
 
