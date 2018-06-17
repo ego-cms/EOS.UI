@@ -33,7 +33,8 @@ namespace EOS.UI.Android.Controls
         private const int _rotationAnimationDuration = 1000;
         private const float _pivot = 0.5f;
         private int _initialWidth = -1;
-        //flag set when width recalculated for including shadows
+        //flag set when width recalculated to including shadows. 
+        //When flag is set button will ignore setting new width and will biuld it's shadow based on an old one.
         private bool _shadowRecalculatedWidth;
         //Initial x-y position of control. Altered by shadow property
         private float? _initialXPosition;
@@ -323,6 +324,8 @@ namespace EOS.UI.Android.Controls
                 _initialWidth = Width;
         }
 
+        #region Shadow methods
+
         //Will fail if config = null.
         private void SetShadow(ShadowConfig config)
         {
@@ -409,27 +412,30 @@ namespace EOS.UI.Android.Controls
                 return densityBlur > Math.Abs(densityOffsetY) ? densityBlur - Math.Abs(densityOffsetY) : 0;
         }
 
+        //Recalculates width of the view to include shadow
+        //Set translation XY for visual feeling that image hasn't change its place
         private int RecalculateWidth(int offsetX, int offsetY, int blur)
         {
             if (blur == 0)
                 return _initialWidth;
-
+            
             _shadowRecalculatedWidth = true;
 
-            var newWidth = _initialWidth + GetOffsetWithBlur(offsetX, blur) + blur * 2;
-            var newHeight = _initialWidth + GetOffsetWithBlur(offsetY, blur) + blur * 2;
+            var newWidth = ShadowHelpers.GetNewWidth(_initialWidth, offsetX, blur);
+            var newHeight = ShadowHelpers.GetNewWidth(_initialWidth, offsetY, blur);
             this.SetLayoutParameters(newWidth, newHeight);
 
             if (offsetX > 0)
             {
-                SetX(GetInitialX() + (GetOffsetForViewPosition(offsetX, blur) + blur * 2) / 2);
+                SetX(GetInitialX() + (GetOffsetForViewXPosition(offsetX, blur) + blur * 2) / 2);
             }
             if (offsetX < 0)
             {
-                SetX(GetInitialX() + ((GetOffsetForViewPosition(offsetX, blur) + blur * 2) * -1) / 2);
+                SetX(GetInitialX() + ((GetOffsetForViewXPosition(offsetX, blur) + blur * 2) * -1) / 2);
             }
             if (offsetX == 0)
             {
+                //won't do anything when shadow applies at the first time
                 SetX(GetInitialX());
             }
             if (offsetY > 0)
@@ -467,6 +473,7 @@ namespace EOS.UI.Android.Controls
             return _initialYPosition.Value;
         }
 
+        //return view to it's initial state
         private void ResetShadowParameters()
         {
             this.SetLayoutParameters(_initialWidth, _initialWidth);
@@ -478,14 +485,9 @@ namespace EOS.UI.Android.Controls
             _shadowRecalculatedWidth = false;
         }
 
-        private int GetOffsetForViewPosition(int offset, int blur)
+        private int GetOffsetForViewXPosition(int offset, int blur)
         {
             return Math.Abs(offset) >= blur ? Math.Abs(offset) - blur : (blur + Math.Abs(offset)) * -1;
-        }
-
-        private int GetOffsetWithBlur(int offset, int blur)
-        {
-            return Math.Abs(offset) > blur ? Math.Abs(offset) - blur : 0;
         }
 
         private LayerDrawable CreateLayerList(Drawable[] layers)
@@ -516,6 +518,8 @@ namespace EOS.UI.Android.Controls
             var insetB = GetInsetBottom(offsetY, blur) + imagePosition;
             layerList.SetLayerInset(_imageLayerIndex, insetL, insetT, insetR, insetB);
         }
+
+        #endregion
 
         public override void SetBackgroundColor(Color color)
         {
@@ -572,6 +576,8 @@ namespace EOS.UI.Android.Controls
         }
 
 
+        #region Rotation animation
+
         private void CreateAndAnimateRotationDrawable()
         {
             var d = CreateRotateDrawable(PreloaderImage);
@@ -611,5 +617,7 @@ namespace EOS.UI.Android.Controls
             drawable.Drawable = childDrawable;
             return drawable;
         }
+
+        #endregion
     }
 }

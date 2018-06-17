@@ -5,11 +5,11 @@ using Android.App;
 using Android.OS;
 using Android.Widget;
 using EOS.UI.Android.Controls;
+using EOS.UI.Android.Helpers;
 using EOS.UI.Android.Sandbox.Controls;
 using EOS.UI.Shared.Themes.Themes;
 using UIFrameworks.Shared.Themes.Helpers;
 using static EOS.UI.Android.Sandbox.Helpers.Constants;
-using System;
 
 namespace EOS.UI.Android.Sandbox.Activities
 {
@@ -123,6 +123,7 @@ namespace EOS.UI.Android.Sandbox.Activities
                 if (position > 0)
                 {
                     ChangeFabLayoutParameters(Sizes.FabProgressSizes.ElementAt(position).Value, fab);
+                    shadowDropDown.SetSpinnerSelection(0);
                 }
             };
 
@@ -144,10 +145,7 @@ namespace EOS.UI.Android.Sandbox.Activities
         private void ChangeFabLayoutParameters(int width, FabProgress fab)
         {
             fab.ShadowConfig = null;
-            var lp = fab.LayoutParameters;
-            lp.Width = width;
-            lp.Height = width;;
-            fab.LayoutParameters = lp;
+            fab.SetLayoutParameters(width, width);
         }
 
         private void ResetCustomization(FabProgress fab, EOSSandboxDropDown themeDropDown, List<EOSSandboxDropDown> spinners)

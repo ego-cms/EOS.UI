@@ -1,12 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using Android.App;
 using Android.Content.PM;
 using Android.Graphics;
 using Android.Graphics.Drawables;
 using EOS.UI.Shared.Helpers;
-using Android.Util;
-using Android.Content.Res;
-using Android.App;
 
 namespace EOS.UI.Android.Helpers
 {
@@ -22,9 +20,10 @@ namespace EOS.UI.Android.Helpers
         private int _iterations;
         private float _densityOffsetX;
         private float _densityOffsetY;
+        //When offset larger than blur width of canvas larger than when it's lesser 
         private float _offsetWithBlurX;
         private float _offsetWithBlurY;
-        Paint _paint = new Paint();
+        private Paint _paint = new Paint();
         private IDictionary<int, Color> _colors = new Dictionary<int, Color>();
 
         public override int Opacity => 255;
@@ -34,19 +33,23 @@ namespace EOS.UI.Android.Helpers
             if (config == null)
                 throw new ArgumentNullException(nameof(config));
 
-            _paint.StrokeWidth = (float)(Math.Round(Application.Context.Resources.DisplayMetrics.Density) +1);
+            //Stroke width sgould be device density, to avoid broken pixels
+            _paint.StrokeWidth = (float)(Math.Round(Application.Context.Resources.DisplayMetrics.Density));
 
             _circleShadowState = new CircleShadowState(config);
             _config = config;
             _iterations = (int)Helpers.DpToPx(_config.Blur);
             _densityOffsetX = Helpers.DpToPx(_config.Offset.X);
             _densityOffsetY = Helpers.DpToPx(_config.Offset.Y);
-            _offsetWithBlurX = GetOffsetWithBlur(_densityOffsetX, _iterations);
-            _offsetWithBlurY = GetOffsetWithBlur(_densityOffsetY, _iterations);
+            _offsetWithBlurX = ShadowHelpers.GetOffsetWithBlur((int)_densityOffsetX, _iterations);
+            _offsetWithBlurY = ShadowHelpers.GetOffsetWithBlur((int)_densityOffsetY, _iterations);
 
             CalculateColors();
         }
 
+        /// <summary>
+        /// Calculates alphas for each circle
+        /// </summary>
         private void CalculateColors()
         {
             for (int i = 0; i <= _iterations; i++)
@@ -86,7 +89,7 @@ namespace EOS.UI.Android.Helpers
                     break;
                 }
 
-                var radius = GetInitialWidth(canvas) - (i - iterations);
+                var radius = ShadowHelpers.GetOldWidth(canvas.Width, (int)_offsetWithBlurX, _iterations)  - (i - iterations);
                 DrawCircle(canvas, p, radius);
             }
         }
@@ -100,7 +103,7 @@ namespace EOS.UI.Android.Helpers
         private void DrawSolidCircle(Canvas canvas, int i, int iterations, Paint p)
         {
             p.SetStyle(Paint.Style.FillAndStroke);
-            var radius = GetInitialWidth(canvas) - (i - iterations);
+            var radius = ShadowHelpers.GetOldWidth(canvas.Width, (int)_offsetWithBlurX, _iterations) - (i - iterations);
             DrawCircle(canvas, p, radius);
         }
 
@@ -109,20 +112,10 @@ namespace EOS.UI.Android.Helpers
             for (int i = 0; i < iterations; i++)
             {
                 p.Color = _colors[i];
-                var radius = GetInitialWidth(canvas) +i;
+                var radius = ShadowHelpers.GetOldWidth(canvas.Width, (int)_offsetWithBlurX, _iterations) +i;
 
                 DrawCircle(canvas, p, radius);
             }
-        }
-
-        private int GetInitialWidth(Canvas canvas)
-        {
-            return (canvas.Width - (int)_offsetWithBlurX - _iterations * 2)/2;
-        }
-
-        private int GetInitialHeight(Canvas canvas)
-        {
-            return (canvas.Height - (int)_offsetWithBlurY - _iterations * 2) / 2;
         }
 
         private Color GetColorValue(int i)
@@ -148,6 +141,8 @@ namespace EOS.UI.Android.Helpers
             return i * 50 / (float)total;
         }
 
+        //Get center point for drawing shadow circle, 
+        //Take into account offset, blur, view translations, etc.
         private PointF GetCanvasCenter(Canvas canvas)
         {
             float x = 0;
@@ -160,7 +155,7 @@ namespace EOS.UI.Android.Helpers
                 }
                 else
                 {
-                    x = GetInitialWidth(canvas) + _densityOffsetX;
+                    x = ShadowHelpers.GetOldWidth(canvas.Width, (int)_offsetWithBlurX, _iterations) + _densityOffsetX;
                 }
             }
             else
@@ -181,23 +176,18 @@ namespace EOS.UI.Android.Helpers
                 }
                 else
                 {
-                    y = GetInitialHeight(canvas) - _densityOffsetY;
+                    y = ShadowHelpers.GetOldWidth(canvas.Width, (int)_offsetWithBlurY, _iterations) - _densityOffsetY;
                 }
             }
             return new PointF(x, y);
         }
 
         //Radius depend on canvas width and height.
-        //When there is some offset x or offset y, canvas size will have larger width or height
+        //When there is some offset x or offset y, canvas size will have larger width(when x) or height(when y)
         //To find radius should select lesser parameter
         private int GetPivotParameter(Canvas canvas)
         {
             return Math.Min(canvas.Width, canvas.Height);
-        }
-
-        private float GetOffsetWithBlur(float offset, int blur)
-        {
-            return Math.Abs(offset) > blur ? Math.Abs(offset) - blur : 0;
         }
 
         #region overrides
