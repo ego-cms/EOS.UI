@@ -1,4 +1,6 @@
 using System;
+using System.Threading.Tasks;
+using Android.App;
 using Android.Graphics;
 using Android.Support.V7.Widget;
 using Android.Views;
@@ -12,7 +14,7 @@ using UIFrameworks.Shared.Themes.Interfaces;
 
 namespace EOS.UI.Android.Sandbox.RecyclerImplementation
 {
-    public class EOSSandboxControlsViewHolder : RecyclerView.ViewHolder, IEOSThemeControl
+    public class EOSSandboxControlsViewHolder : RecyclerView.ViewHolder, IEOSThemeControl, View.IOnTouchListener
     {
         private Color _normalBackground = Color.Transparent;
         private Color _selectedBackground = Color.Gray;
@@ -20,33 +22,62 @@ namespace EOS.UI.Android.Sandbox.RecyclerImplementation
         private ImageView _arrowImage;
         private EOSSandboxDivider _divider;
         private Action<int> _clickAction;
-        private float _xPosition;
+        private bool _scrolled;
+        private bool _released; 
 
         public TextView ControlTitle { get; private set; }
              
-        public EOSSandboxControlsViewHolder(View itemView, Action<int> clickAction) : base(itemView)
+        public EOSSandboxControlsViewHolder(View itemView, Action<int> clickAction, RecyclerView recycler) : base(itemView)
         {
+            recycler.SetOnTouchListener(this);
             _clickAction = clickAction;
             _container = itemView.FindViewById<LinearLayout>(Resource.Id.holderContainer);
             ControlTitle = itemView.FindViewById<TextView>(Resource.Id.titleTextView);
             _arrowImage = itemView.FindViewById<ImageView>(Resource.Id.imageArrow);
             _divider = itemView.FindViewById<EOSSandboxDivider>(Resource.Id.dropDownDivider);
-            _container.Touch += ContainerTouch;
+            _container.SetOnTouchListener(this);
+            _container.Click += (s, e) => { };
         }
 
-        private void ContainerTouch(object sender, View.TouchEventArgs e)
+        public bool OnTouch(View v, MotionEvent e)
         {
-            if(e.Event.Action == MotionEventActions.Down)
+            bool isDown = false;
+
+            if(e.Action == MotionEventActions.Down)
             {
-                _container.SetBackgroundColor(_selectedBackground);
-                _xPosition = e.Event.RawX;
+                Task.Run(() =>
+                {
+                    Task.Delay(50).GetAwaiter().GetResult();
+                    (v.Context as Activity).RunOnUiThread(() =>
+                    {
+                        if(!_scrolled && !_released)
+                            _container.SetBackgroundColor(_selectedBackground);
+                        else
+                            _container.SetBackgroundColor(_normalBackground);
+
+                        _scrolled = false;
+                    });
+                });
+                isDown = true;
+                _released = false;
             }
-            else if(e.Event.Action == MotionEventActions.Up || e.Event.Action == MotionEventActions.Cancel)
+
+            if(e.Action == MotionEventActions.Move)
+                _scrolled = true;
+
+            if(e.Action == MotionEventActions.Cancel)
+                _released = true;
+
+            if((v as RecyclerView) == null && e.Action == MotionEventActions.Up)
             {
+                _released = true;
+                _clickAction?.Invoke(Position);
+            }
+
+            if(!isDown)
                 _container.SetBackgroundColor(_normalBackground);
-                if(_xPosition == e.Event.RawX && e.Event.Action == MotionEventActions.Up)
-                    _clickAction?.Invoke(Position);
-            }
+
+            return false;
         }
 
         #region IEOSThemeControl implementation
@@ -86,6 +117,5 @@ namespace EOS.UI.Android.Sandbox.RecyclerImplementation
         }
 
         #endregion
-
     }
 }

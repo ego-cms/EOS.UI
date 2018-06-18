@@ -39,7 +39,7 @@ namespace EOS.UI.Android.Sandbox
             var layoutManager = new LinearLayoutManager(BaseContext);
             _recyclerView.SetLayoutManager(layoutManager);
 
-            var adapter = new ControlsAdapter(_controlDictionary.Select(item => item.Key).ToList());
+            var adapter = new ControlsAdapter(_controlDictionary.Select(item => item.Key).ToList(), _recyclerView);
 
             adapter.ItemClick += ItemClick;
             _recyclerView.SetAdapter(adapter);
