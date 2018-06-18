@@ -63,6 +63,7 @@ namespace EOS.UI.iOS.Sandbox
                 action?.Invoke(item.Value);
                 textField.Text = item.Key.ToString();
             };
+            textField.Text = Constants.Fields.Default;
             picker.Delegate = pickerDelegate;
             textField.InputView = picker;
             UpdateAppearance();
@@ -88,6 +89,7 @@ namespace EOS.UI.iOS.Sandbox
                 action?.Invoke(item.Value);
                 textField.Text = item.Key.ToString();
             };
+            textField.Text = Constants.Fields.Default;
             picker.Delegate = pickerDelegate;
             textField.InputView = picker;
             UpdateAppearance();
@@ -95,7 +97,7 @@ namespace EOS.UI.iOS.Sandbox
 
         public void ResetValue()
         {
-            textField.Text = string.Empty;
+            textField.Text = Constants.Fields.Default;
         }
 
         public void CloseInputControl()
