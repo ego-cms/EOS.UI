@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using Android.Content;
 using Android.Graphics;
 using Android.Runtime;
@@ -145,7 +145,7 @@ namespace EOS.UI.Android.Controls
                 base.SetTypeface(Typeface.CreateFromAsset(Context.Assets, GetThemeProvider().GetEOSProperty<string>(this, EOSConstants.Font)), TypefaceStyle.Normal);
                 base.LetterSpacing = GetThemeProvider().GetEOSProperty<float>(this, EOSConstants.LetterSpacing);
                 base.SetTextColor(GetThemeProvider().GetEOSProperty<Color>(this, EOSConstants.BrandPrimaryColor));
-                base.TextSize = GetThemeProvider().GetEOSProperty<float>(this, EOSConstants.TextSize);
+                base.TextSize = GetThemeProvider().GetEOSProperty<float>(this, EOSConstants.LabelTextSize);
             }
         }
 

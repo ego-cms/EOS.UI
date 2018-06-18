@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using Android.Content;
 using Android.Graphics;
 using Android.Graphics.Drawables;
@@ -129,7 +129,8 @@ namespace EOS.UI.Android.Controls
         private void Initialize(IAttributeSet attrs = null)
         {
             Background = CreateDefaultDrawable();
-            SetPadding(15, 0, 15, 0);
+            var denisty = Resources.DisplayMetrics.Density;
+            SetPadding((int)(10 * denisty), (int)(2 * denisty), (int)(10 * denisty), (int)(3 * denisty));
             SetMaxLines(1);
             Ellipsize = A.Text.TextUtils.TruncateAt.End;
             if(attrs != null)
@@ -192,8 +193,8 @@ namespace EOS.UI.Android.Controls
                 base.SetTypeface(Typeface.CreateFromAsset(Context.Assets, GetThemeProvider().GetEOSProperty<string>(this, EOSConstants.Font)), TypefaceStyle.Normal);
                 base.LetterSpacing = GetThemeProvider().GetEOSProperty<float>(this, EOSConstants.LetterSpacing);
                 base.SetTextColor(GetThemeProvider().GetEOSProperty<Color>(this, EOSConstants.NeutralColor6));
-                base.TextSize = GetThemeProvider().GetEOSProperty<float>(this, EOSConstants.TextSize);
-                (Background as GradientDrawable).SetCornerRadius(GetThemeProvider().GetEOSProperty<float>(this, EOSConstants.CornerRadius));
+                base.TextSize = GetThemeProvider().GetEOSProperty<float>(this, EOSConstants.LabelTextSize);
+                (Background as GradientDrawable).SetCornerRadius(GetThemeProvider().GetEOSProperty<float>(this, EOSConstants.LabelCornerRadius));
             }
         }
 
