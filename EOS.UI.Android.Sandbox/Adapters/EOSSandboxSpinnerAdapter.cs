@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using Android.Content;
 using Android.Graphics;
 using Android.Views;
@@ -13,6 +13,7 @@ namespace EOS.UI.Android.Sandbox.Adapters
 {
     public class EOSSandboxSpinnerAdapter : ArrayAdapter, IEOSThemeControl
     {
+        private const string DefaultText = "default";
         private int _resourseId;
         private Color _backgroundColor;
         private Color _textColor;
@@ -27,6 +28,10 @@ namespace EOS.UI.Android.Sandbox.Adapters
             var view = base.GetView(position, convertView, parent);
             if(_textColor != Color.Transparent)
                 (view as TextView).SetTextColor(_textColor);
+
+            if(position == 0)
+                (view as TextView).Text = DefaultText;
+
             return view;
         }
 
@@ -39,6 +44,7 @@ namespace EOS.UI.Android.Sandbox.Adapters
             text.SetText(item.ToString(), TextView.BufferType.Normal);
             var parameters = text.LayoutParameters;
             parameters.Height = position == 0 ? parameters.Height = 1 : parameters.Height = (int)(35 * Context.Resources.DisplayMetrics.Density);
+
             text.LayoutParameters = parameters;
 
             if(_backgroundColor != Color.Transparent)
