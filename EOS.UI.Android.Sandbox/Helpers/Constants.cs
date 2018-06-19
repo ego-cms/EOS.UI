@@ -292,7 +292,7 @@ namespace EOS.UI.Android.Sandbox.Helpers
                 { Shadow12, new ShadowConfig{ Color = Color.Yellow, Offset = new Point(5,-5), Blur = 5, Spread = 200} },
                 { Shadow13, new ShadowConfig{ Color = Color.Purple, Offset = new Point(-5,-5), Blur = 5, Spread = 200} },
                 { Shadow14, new ShadowConfig{ Color = Color.Purple, Offset = new Point(25,-25), Blur = 15, Spread = 200} },
-                { Shadow15, new ShadowConfig{ Color = Color.Purple, Offset = new Point(6,-6), Blur = 1, Spread = 200} },
+                { Shadow15, new ShadowConfig{ Color = Color.Purple, Offset = new Point(6,6), Blur = 1, Spread = 200} },
                 { Shadow16, new ShadowConfig{ Color = Color.Argb(230,255,0,0), Offset = new Point(15,0), Blur = 5, Spread = 200} },
                 { Shadow17, new ShadowConfig{ Color = Color.Argb(178,255,0,0), Offset = new Point(15,0), Blur = 5, Spread = 200} },
                 { Shadow18, new ShadowConfig{ Color = Color.Argb(127,255,0,0), Offset = new Point(15,0), Blur = 5, Spread = 200} },

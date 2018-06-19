@@ -1,7 +1,5 @@
 ﻿using System;
 
-
-
 namespace EOS.UI.Shared.Themes.Extensions
 {
 #if __IOS__
@@ -32,6 +30,19 @@ namespace EOS.UI.Shared.Themes.Extensions
             }
             return color;
         }
+
+        public static UIKit.UIColor FromHex(string hexString, float withAlpha)
+        {
+            hexString = hexString.ToUpper();
+            var hex = hexString.StartsWith("#") ? hexString.Remove(0, 1) : hexString;
+
+            int value = Int32.Parse(hex, System.Globalization.NumberStyles.HexNumber);
+            var red = (nfloat)(((value & 0xFF0000) >> 16) / 255.0);
+            var green = (nfloat)(((value & 0x00FF00) >> 8) / 255.0);
+            var blue = (nfloat)((value & 0x0000FF) / 255.0);
+            return new UIKit.UIColor(red, green, blue, withAlpha);
+        }
+
     }
 #endif
 }

@@ -34,6 +34,7 @@ namespace EOS.UI.Shared.Themes.Themes
         private const string neutralColor5 = "#777677";
         private const string neutralColor6 = "#343334";
         private const string rippleColor = "#1AFFFFFF";
+        private const string shadowColor = "#A3EAEAEA";
 
         public Dictionary<string, object> ThemeValues => new Dictionary<string, object>()
         {
@@ -65,10 +66,10 @@ namespace EOS.UI.Shared.Themes.Themes
             { EOSConstants.FabProgressSize, 50},
             { EOSConstants.CircleProgressShown, true},
             { EOSConstants.FabShadow,  new ShadowConfig(){
-                        Color = UIColor.White.CGColor,
-                        Offset = new CGPoint(0, 0),
-                        Radius = 1,
-                        Opacity = 0.4f
+                Color = ColorExtension.FromHex(neutralColor3, 0.64f),
+                Offset = new CGPoint(0, 6),
+                Blur = 12,
+                Spread = 1
             }},
             { EOSConstants.BorderWidth, 2 },
             { EOSConstants.SectionTitle, "Dark section" },
@@ -125,10 +126,10 @@ namespace EOS.UI.Shared.Themes.Themes
             { EOSConstants.WorkTimeTitleSize, 13 },
             { EOSConstants.WorkTimeDayTextSize, 11 },
             { EOSConstants.FabShadow,  new ShadowConfig(){
-                        Color = Color.White,
-                        Offset = new Point(0, 0),
-                        Blur = 1,
-                        Spread = 200
+                Color = Color.ParseColor(shadowColor),
+                Offset = new Point(0, 6),
+                Blur = 12,
+                Spread = 200
             }},
 #endif
         };

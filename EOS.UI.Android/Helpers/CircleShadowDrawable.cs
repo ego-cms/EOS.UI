@@ -40,7 +40,9 @@ namespace EOS.UI.Android.Helpers
             _config = config;
             _iterations = (int)Helpers.DpToPx(_config.Blur);
             _densityOffsetX = Helpers.DpToPx(_config.Offset.X);
-            _densityOffsetY = Helpers.DpToPx(_config.Offset.Y);
+            //Wrong implementation for y offset should be inverted
+            //TODO need to fix
+            _densityOffsetY = Helpers.DpToPx(_config.Offset.Y) *-1;
             _offsetWithBlurX = ShadowHelpers.GetOffsetWithBlur((int)_densityOffsetX, _iterations);
             _offsetWithBlurY = ShadowHelpers.GetOffsetWithBlur((int)_densityOffsetY, _iterations);
 

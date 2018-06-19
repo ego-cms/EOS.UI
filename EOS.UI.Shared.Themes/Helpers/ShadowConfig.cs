@@ -11,10 +11,10 @@ namespace EOS.UI.Shared.Helpers
     public class ShadowConfig
     {
 #if __IOS__
-        public CGColor Color { get; set; }
+        public UIColor Color { get; set; }
         public CGPoint Offset { get; set; }
-        public nfloat Radius { get; set; }
-        public float Opacity { get; set; }
+        public nfloat Blur { get; set; }
+        public int Spread { get; set; }
 #else
         public Color Color { get; set; }
         public Point Offset { get; set; }

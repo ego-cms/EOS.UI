@@ -155,7 +155,7 @@ namespace EOS.UI.Android.Controls
 
         private void SetBackground()
         {
-            if (_shadowConfig != null)
+            if (_shadowConfig != null && _initialWidth>0)
             {
                 ResetShadowParameters();
             }
@@ -329,13 +329,18 @@ namespace EOS.UI.Android.Controls
         //Will fail if config = null.
         private void SetShadow(ShadowConfig config)
         {
-            if (LayoutParameters == null)
+            if (LayoutParameters == null || Width ==0)
+            {
+                SetBackground();
                 return;
-
+            }
+            
             SetImageDrawable(null);
 
             var densityOffsetX = (int)Helpers.Helpers.DpToPx(config.Offset.X);
-            var densityOffsetY = (int)Helpers.Helpers.DpToPx(config.Offset.Y);
+            //Wrong implementation for y offset should be inverted
+            //TODO need to fix
+            var densityOffsetY = (int)Helpers.Helpers.DpToPx(config.Offset.Y) *-1;
             var densityBlur = (int)Helpers.Helpers.DpToPx(config.Blur);
 
             var newWidth = RecalculateWidth(densityOffsetX, densityOffsetY, densityBlur);
@@ -440,7 +445,7 @@ namespace EOS.UI.Android.Controls
             }
             if (offsetY > 0)
             {
-                SetY(GetInitialY() + (Math.Abs(offsetY) + blur) * -1);
+                SetY(GetInitialY() + (offsetY + blur) * -1);
             }
             if (offsetY < 0)
             {
@@ -556,7 +561,9 @@ namespace EOS.UI.Android.Controls
                 layer.SetDrawableByLayerId(_imageLayerIndex, drawable);
 
                 var densityOffsetX = (int)Helpers.Helpers.DpToPx(ShadowConfig.Offset.X);
-                var densityOffsetY = (int)Helpers.Helpers.DpToPx(ShadowConfig.Offset.Y);
+                //Wrong implementation for y offset should be inverted
+                //TODO need to fix
+                var densityOffsetY = (int)Helpers.Helpers.DpToPx(ShadowConfig.Offset.Y) *-1;
                 var densityBlur = (int)Helpers.Helpers.DpToPx(ShadowConfig.Blur);
                 SetInsetForImageLayer(layer, drawable, _initialWidth/2, densityOffsetX, densityOffsetY, densityBlur);
                 layer.Mutate();

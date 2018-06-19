@@ -122,28 +122,57 @@ namespace EOS.UI.iOS.Sandbox.Helpers
             WeekStartEnum.Sunday
         };
 
+
+        public const string Shadow1 = "ShadowOffsetXPositiveLargerBlur";
+        public const string Shadow2 = "ShadowOffsetXNegativeLargerBlur";
+        public const string Shadow3 = "ShadowOffsetYPositiveLargerBlur";
+        public const string Shadow4 = "ShadowOffsetYNegativeLargerBlur";
+        public const string Shadow5 = "ShadowBlurLargerOffsetXPositive";
+        public const string Shadow6 = "ShadowBlurLargerOffsetXNegative";
+        public const string Shadow7 = "ShadowBlurLargerOffsetYPositive";
+        public const string Shadow8 = "ShadowBlurLargerOffsetYNegative";
+        public const string Shadow9 = "ShadowOffsetXYPositiveEqualBlur";
+        public const string Shadow10 = "ShadowOffsetXPositiveEqualBlur";
+        public const string Shadow11 = "ShadowOffsetXNegativeYPositiveEqualBlur";
+        public const string Shadow12 = "ShadowOffsetXPositiveYNegativeEqualBlur";
+        public const string Shadow13 = "ShadowOffsetXNegativeYNegativeEqualBlur";
+        public const string Shadow14 = "ShadowBlurLargerOffsetXPositiveYNegative";
+        public const string Shadow15 = "ShadowOffsetXPositiveYNegativeTinyBlur";
+        public const string Shadow16 = "ShadowWithAlpha09";
+        public const string Shadow17 = "ShadowWithAlpha07";
+        public const string Shadow18 = "ShadowWithAlpha05";
+        public const string Shadow19 = "ShadowWithAlpha03";
+        public const string Shadow20 = "Medium shadow";
+        public const string Shadow21 = "Normal shadow";
+        public const string Shadow22 = "Big shadow";
+        public const string Shadow23 = "No shadow";
+
         public static Dictionary<string, ShadowConfig> ShadowConfigs = new Dictionary<string, ShadowConfig>()
-            {
-                {"Shadow 1", new ShadowConfig(){
-                        Color = UIColor.Black.CGColor,
-                        Offset = new CGPoint(0,0),
-                        Radius = 4,
-                        Opacity = 0.7f
-                    }},
-                {"Shadow 2", new ShadowConfig(){
-                        Color = UIColor.Black.CGColor,
-                        Offset = new CGPoint(0,0),
-                        Radius = 8,
-                        Opacity = 0.9f
-                    }},
-                { "Shadow 3", new ShadowConfig{ Color = UIColor.Blue.CGColor, Offset = new CGPoint(-5,5), Radius = 5, Opacity = 1.0f} },
-                { "Shadow 4", new ShadowConfig{ Color = UIColor.Yellow.CGColor, Offset = new CGPoint(5,-5), Radius = 5, Opacity = 1.0f} },
-                { "Shadow 5", new ShadowConfig{ Color = UIColor.Purple.CGColor, Offset = new CGPoint(-5,-5), Radius = 5, Opacity = 1.0f} },
-                { "Shadow 6", new ShadowConfig{ Color = UIColor.Purple.CGColor, Offset = new CGPoint(-25,-25), Radius = 15, Opacity = 1.0f} },
-                { "Shadow 7", null },
-                { "Shadow 8", new ShadowConfig{ Color = UIColor.Black.CGColor, Offset = new CGPoint(0,0), Radius = 5, Opacity = 1.0f}  },
-                { "Shadow 9", new ShadowConfig{ Color = UIColor.Black.CGColor, Offset = new CGPoint(0,0), Radius = 25, Opacity = 1.0f}  },
-                { "Shadow 10", new ShadowConfig{ Color = UIColor.Black.CGColor, Offset = new CGPoint(0,0), Radius = 15, Opacity = 1.0f}  },
+        {
+                { string.Empty, null },
+                { Shadow1, new ShadowConfig{ Color = UIColor.Red, Offset = new CGPoint(15,0), Blur = 5, Spread = 200} },
+                { Shadow2, new ShadowConfig{ Color = UIColor.Red, Offset = new CGPoint(-15,0), Blur = 5, Spread = 200} },
+                { Shadow3, new ShadowConfig{ Color = UIColor.Red, Offset = new CGPoint(0,15), Blur = 5, Spread = 200} },
+                { Shadow4, new ShadowConfig{ Color = UIColor.Red, Offset = new CGPoint(0,-15), Blur = 5, Spread = 200} },
+                { Shadow5, new ShadowConfig{ Color = UIColor.Red, Offset = new CGPoint(5,0), Blur = 15, Spread = 200} },
+                { Shadow6, new ShadowConfig{ Color = UIColor.Red, Offset = new CGPoint(-5,0), Blur = 15, Spread = 200} },
+                { Shadow7, new ShadowConfig{ Color = UIColor.Red, Offset = new CGPoint(0,5), Blur = 25, Spread = 200} },
+                { Shadow8, new ShadowConfig{ Color = UIColor.Red, Offset = new CGPoint(0,-5), Blur = 25, Spread = 200} },
+                { Shadow9, new ShadowConfig{ Color = UIColor.Green, Offset = new CGPoint(5,5), Blur = 5, Spread = 200} },
+                { Shadow10, new ShadowConfig{ Color = UIColor.Green, Offset = new CGPoint(5,0), Blur = 5, Spread = 200} },
+                { Shadow11, new ShadowConfig{ Color = UIColor.Blue, Offset = new CGPoint(-5,5), Blur = 5, Spread = 200} },
+                { Shadow12, new ShadowConfig{ Color = UIColor.Yellow, Offset = new CGPoint(5,-5), Blur = 5, Spread = 200} },
+                { Shadow13, new ShadowConfig{ Color = UIColor.Purple, Offset = new CGPoint(-5,-5), Blur = 5, Spread = 200} },
+                { Shadow14, new ShadowConfig{ Color = UIColor.Purple, Offset = new CGPoint(25,-25), Blur = 15, Spread = 200} },
+                { Shadow15, new ShadowConfig{ Color = UIColor.Purple, Offset = new CGPoint(6,-6), Blur = 1, Spread = 200} },
+                { Shadow16, new ShadowConfig{ Color = UIColor.FromRGBA(255,0,0,230), Offset = new CGPoint(15,0), Blur = 5, Spread = 200} },
+                { Shadow17, new ShadowConfig{ Color = UIColor.FromRGBA(255,0,0,178), Offset = new CGPoint(15,0), Blur = 5, Spread = 200} },
+                { Shadow18, new ShadowConfig{ Color = UIColor.FromRGBA(255,0,0, 127), Offset = new CGPoint(15,0), Blur = 5, Spread = 200} },
+                { Shadow19, new ShadowConfig{ Color = UIColor.FromRGBA(255,0,0,77), Offset = new CGPoint(15,0), Blur = 5, Spread = 200} },
+                { Shadow20, new ShadowConfig{ Color = UIColor.Black, Offset = new CGPoint(0,0), Blur = 15, Spread = 200}  },
+                { Shadow21, new ShadowConfig{ Color = UIColor.Black, Offset = new CGPoint(0,0), Blur = 5, Spread = 200}  },
+                { Shadow22, new ShadowConfig{ Color = UIColor.Black, Offset = new CGPoint(0,0), Blur = 25, Spread = 200}  },
+                { Shadow23, null },
             };
 
         public static List<string> Titles = new List<string>()
