@@ -13,7 +13,6 @@ namespace EOS.UI.Android.Sandbox.Adapters
 {
     public class EOSSandboxSpinnerAdapter : ArrayAdapter, IEOSThemeControl
     {
-        private const string DefaultText = "default";
         private int _resourseId;
         private Color _backgroundColor;
         private Color _textColor;
@@ -30,7 +29,7 @@ namespace EOS.UI.Android.Sandbox.Adapters
                 (view as TextView).SetTextColor(_textColor);
 
             if(position == 0)
-                (view as TextView).Text = DefaultText;
+                (view as TextView).Text = EOSConstants.DefaultText;
 
             return view;
         }
