@@ -34,7 +34,7 @@ namespace EOS.UI.Android.Helpers
                 throw new ArgumentNullException(nameof(config));
 
             //Stroke width sgould be device density, to avoid broken pixels
-            _paint.StrokeWidth = (float)(Math.Round(Application.Context.Resources.DisplayMetrics.Density));
+            _paint.StrokeWidth = 1f;//(float)(Math.Round(Application.Context.Resources.DisplayMetrics.Density));
 
             _circleShadowState = new CircleShadowState(config);
             _config = config;
@@ -56,14 +56,16 @@ namespace EOS.UI.Android.Helpers
             {
                 var a = GetAlpha(() => GetEquationX(i, _iterations));
                 var c = _config.Color;
-                c.A = a;
+                var alpha = (byte)(a / (double)255 * _config.Color.A);
+                c.A = alpha;
+
                 _colors.Add(i, c);
                 //formula doesn't work well with 'inside' blurring, just invert indexes and alpha values
                 if (i == 0)
                     continue;
                 
                 c = _config.Color;
-                c.A = (byte)(255 - a);
+                c.A = (byte)(255 - alpha > _config.Color.A ? _config.Color.A : 255 - alpha);
                 _colors.Add(i * -1, c);
             }
         }
