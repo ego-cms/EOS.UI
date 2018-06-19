@@ -1,4 +1,5 @@
-﻿using System.Linq;
+using System.Collections.Generic;
+using System.Linq;
 using Android.App;
 using Android.Graphics;
 using Android.OS;
@@ -17,6 +18,10 @@ namespace EOS.UI.Android.Sandbox.Activities
     public class SimpleButtonActivity : BaseActivity, IOnCheckedChangeListener
     {
         private SimpleButton _simpleButton;
+        private SimpleButton _simpleButton1;
+        private SimpleButton _simpleButton2;
+        private SimpleButton _simpleButton3;
+        private List<SimpleButton> _buttons;
         private EOSSandboxDropDown _themeDropDown;
         private EOSSandboxDropDown _fontDropDown;
         private EOSSandboxDropDown _letterSpacingDropDown;
@@ -36,7 +41,18 @@ namespace EOS.UI.Android.Sandbox.Activities
             SetContentView(Resource.Layout.SimpleButtonLayout);
 
             _simpleButton = FindViewById<SimpleButton>(Resource.Id.simpleButton);
+            _simpleButton1 = FindViewById<SimpleButton>(Resource.Id.simpleButton1);
+            _simpleButton2 = FindViewById<SimpleButton>(Resource.Id.simpleButton2);
+            _simpleButton3 = FindViewById<SimpleButton>(Resource.Id.simpleButton3);
             _simpleButton.UpdateAppearance();
+
+            _buttons = new List<SimpleButton>()
+            {
+                _simpleButton,
+                _simpleButton1,
+                _simpleButton2,
+                _simpleButton3
+            };
 
             _themeDropDown = FindViewById<EOSSandboxDropDown>(Resource.Id.themeDropDown);
             _fontDropDown = FindViewById<EOSSandboxDropDown>(Resource.Id.fontDropDown);
@@ -113,7 +129,7 @@ namespace EOS.UI.Android.Sandbox.Activities
 
         private void ThemeItemSelected(int position)
         {
-            if (position > 0)
+            if(position > 0)
             {
                 _simpleButton.GetThemeProvider().SetCurrentTheme(ThemeTypes.ThemeCollection.ElementAt(position).Value);
                 ResetCustomValues();
@@ -123,81 +139,94 @@ namespace EOS.UI.Android.Sandbox.Activities
 
         private void FontSpinner_ItemSelected(int position)
         {
-            if (position > 0)
-                _simpleButton.Typeface = Typeface.CreateFromAsset(Assets, Fonts.FontsCollection.ElementAt(position).Value);
+            if(position > 0)
+                foreach(var button in _buttons)
+                    button.Typeface = Typeface.CreateFromAsset(Assets, Fonts.FontsCollection.ElementAt(position).Value);
         }
 
         private void LetterSpacingView_ItemSelected(int position)
         {
-            if (position > 0)
-                _simpleButton.LetterSpacing = Sizes.LetterSpacingCollection.ElementAt(position).Value;
+            if(position > 0)
+                foreach(var button in _buttons)
+                    button.LetterSpacing = Sizes.LetterSpacingCollection.ElementAt(position).Value;
         }
 
         private void TextSizeItemSelected(int position)
         {
-            if (position > 0)
-                _simpleButton.TextSize = Sizes.TextSizeCollection.ElementAt(position).Value;
+            if(position > 0)
+                foreach(var button in _buttons)
+                    button.TextSize = Sizes.TextSizeCollection.ElementAt(position).Value;
         }
 
         private void TextColorEnabledItemSelected(int position)
         {
-            if (position > 0)
-                _simpleButton.TextColor = Colors.ColorsCollection.ElementAt(position).Value;
+            if(position > 0)
+                foreach(var button in _buttons)
+                    button.TextColor = Colors.ColorsCollection.ElementAt(position).Value;
         }
 
         private void TextColorDisabledItemSelected(int position)
         {
-            if (position > 0)
-                _simpleButton.DisabledTextColor = Colors.ColorsCollection.ElementAt(position).Value;
+            if(position > 0)
+                foreach(var button in _buttons)
+                    button.DisabledTextColor = Colors.ColorsCollection.ElementAt(position).Value;
         }
 
         private void TextColorPressedItemSelected(int position)
         {
-            if (position > 0)
-                _simpleButton.PressedTextColor = Colors.ColorsCollection.ElementAt(position).Value;
+            if(position > 0)
+                foreach(var button in _buttons)
+                    button.PressedTextColor = Colors.ColorsCollection.ElementAt(position).Value;
         }
 
         private void BackgroundColorEnabledItemSelected(int position)
         {
-            if (position > 0)
-                _simpleButton.BackgroundColor = Colors.ColorsCollection.ElementAt(position).Value;
+            if(position > 0)
+                foreach(var button in _buttons)
+                    button.BackgroundColor = Colors.ColorsCollection.ElementAt(position).Value;
         }
 
         private void BackgroundColorDisabledItemSelected(int position)
         {
-            if (position > 0)
-                _simpleButton.DisabledBackgroundColor = Colors.ColorsCollection.ElementAt(position).Value;
+            if(position > 0)
+                foreach(var button in _buttons)
+                    button.DisabledBackgroundColor = Colors.ColorsCollection.ElementAt(position).Value;
         }
 
         private void BackgroundColorPressedItemSelected(int position)
         {
-            if (position > 0)
-                _simpleButton.PressedBackgroundColor = Colors.ColorsCollection.ElementAt(position).Value;
+            if(position > 0)
+                foreach(var button in _buttons)
+                    button.PressedBackgroundColor = Colors.ColorsCollection.ElementAt(position).Value;
         }
 
         private void CornerRadiurSpinner_ItemSelected(int position)
         {
-            if (position > 0)
-                _simpleButton.CornerRadius = Sizes.CornerRadusCollection.ElementAt(position).Value;
+            if(position > 0)
+                foreach(var button in _buttons)
+                    button.CornerRadius = Sizes.CornerRadusCollection.ElementAt(position).Value;
         }
 
         private void RippleColorItemSelected(int position)
         {
-            if (position > 0)
-                _simpleButton.RippleColor = Colors.ColorsCollection.ElementAt(position).Value;
+            if(position > 0)
+                foreach(var button in _buttons)
+                    button.RippleColor = Colors.ColorsCollection.ElementAt(position).Value;
         }
 
         private void SetCurrenTheme(IEOSTheme iEOSTheme)
         {
-            if (iEOSTheme is LightEOSTheme)
+            if(iEOSTheme is LightEOSTheme)
                 _themeDropDown.SetSpinnerSelection(1);
-            if (iEOSTheme is DarkEOSTheme)
+            if(iEOSTheme is DarkEOSTheme)
                 _themeDropDown.SetSpinnerSelection(2);
         }
 
         private void ResetCustomValues()
         {
-            _simpleButton.ResetCustomization();
+            foreach(var button in _buttons)
+                button.ResetCustomization();
+
             _fontDropDown.SetSpinnerSelection(0);
             _letterSpacingDropDown.SetSpinnerSelection(0);
             _textSizeDropDown.SetSpinnerSelection(0);

@@ -3,11 +3,13 @@ using Android.Content;
 using Android.Content.Res;
 using Android.Graphics;
 using Android.Graphics.Drawables;
+using Android.Graphics.Drawables.Shapes;
 using Android.Runtime;
 using Android.Util;
 using Android.Widget;
 using EOS.UI.Shared.Themes.Helpers;
 using EOS.UI.Shared.Themes.Interfaces;
+using Java.Util;
 using UIFrameworks.Android.Themes;
 using UIFrameworks.Shared.Themes.Helpers;
 using UIFrameworks.Shared.Themes.Interfaces;
@@ -145,9 +147,10 @@ namespace EOS.UI.Android.Controls
 
         private void Initialize(IAttributeSet attributeSet = null)
         {
-            if (attributeSet != null)
+            if(attributeSet != null)
                 InitializeAttributes(attributeSet);
 
+            SetAllCaps(false);
             UpdateAppearance();
             Background = CreateRippleDrawable();
             SetLines(1);
@@ -159,31 +162,31 @@ namespace EOS.UI.Android.Controls
             var styledAttributes = Context.ObtainStyledAttributes(attrs, Resource.Styleable.GhostButton, 0, 0);
 
             var font = styledAttributes.GetString(Resource.Styleable.GhostButton_eos_font);
-            if (!string.IsNullOrEmpty(font))
+            if(!string.IsNullOrEmpty(font))
                 Typeface = Typeface.CreateFromAsset(Context.Assets, font);
 
             var letterSpacing = styledAttributes.GetFloat(Resource.Styleable.GhostButton_eos_letterspacing, -1);
-            if (letterSpacing > 0)
+            if(letterSpacing > 0)
                 LetterSpacing = letterSpacing;
 
             var textColor = styledAttributes.GetColor(Resource.Styleable.GhostButton_eos_textcolor, Color.Transparent);
-            if (textColor != Color.Transparent)
+            if(textColor != Color.Transparent)
                 EnabledTextColor = textColor;
 
             var disabledTextColor = styledAttributes.GetColor(Resource.Styleable.GhostButton_eos_textcolor_disabled, Color.Transparent);
-            if (disabledTextColor != Color.Transparent)
+            if(disabledTextColor != Color.Transparent)
                 DisabledTextColor = disabledTextColor;
 
             var pressedTextColor = styledAttributes.GetColor(Resource.Styleable.GhostButton_eos_textcolor_pressed, Color.Transparent);
-            if (pressedTextColor != Color.Transparent)
+            if(pressedTextColor != Color.Transparent)
                 PressedStateTextColor = pressedTextColor;
 
             var textSize = styledAttributes.GetFloat(Resource.Styleable.GhostButton_eos_textsize, -1);
-            if (textSize > 0)
+            if(textSize > 0)
                 TextSize = textSize;
 
             var enabled = styledAttributes.GetBoolean(Resource.Styleable.GhostButton_eos_enabled, true);
-            if (!enabled)
+            if(!enabled)
                 Enabled = enabled;
         }
 
@@ -198,7 +201,28 @@ namespace EOS.UI.Android.Controls
                 {
                     RippleColor
                 }),
-                new ColorDrawable(Color.Transparent), new ColorDrawable(Color.White));
+                CreateGradientDrawable(),
+                CreateRoundedMaskDrawable());
+        }
+
+        private ShapeDrawable CreateRoundedMaskDrawable()
+        {
+            var outerRadii = new float[8];
+            Arrays.Fill(outerRadii, 10);
+            var shapeDrawable = new ShapeDrawable(new RoundRectShape(outerRadii, null, null));
+            shapeDrawable.Paint.Color = Color.White;
+            shapeDrawable.Paint.StrokeWidth = 0;
+            shapeDrawable.SetState(new int[] { });
+            return shapeDrawable;
+        }
+
+        private GradientDrawable CreateGradientDrawable()
+        {
+            var drawable = new GradientDrawable();
+            drawable.SetShape(ShapeType.Rectangle);
+            drawable.SetColor(Color.Transparent);
+            drawable.SetCornerRadius(10);
+            return drawable;
         }
 
         public override void SetTypeface(Typeface tf, [GeneratedEnum] TypefaceStyle style)
@@ -230,15 +254,15 @@ namespace EOS.UI.Android.Controls
 
         public void UpdateAppearance()
         {
-            if (!IsEOSCustomizationIgnored)
+            if(!IsEOSCustomizationIgnored)
             {
                 var provider = GetThemeProvider();
                 base.SetTypeface(Typeface.CreateFromAsset(Context.Assets, provider.GetEOSProperty<string>(this, EOSConstants.Font)), TypefaceStyle.Normal);
                 base.LetterSpacing = provider.GetEOSProperty<float>(this, EOSConstants.LetterSpacing);
                 EnabledTextColor = provider.GetEOSProperty<Color>(this, EOSConstants.BrandPrimaryColor);
                 DisabledTextColor = provider.GetEOSProperty<Color>(this, EOSConstants.NeutralColor3);
-                PressedStateTextColor = provider.GetEOSProperty<Color>(this, EOSConstants.NeutralColor6);
-                RippleColor = GetThemeProvider().GetEOSProperty<Color>(this, EOSConstants.RippleColor);
+                PressedStateTextColor = provider.GetEOSProperty<Color>(this, EOSConstants.BrandPrimaryColor);
+                RippleColor = GetThemeProvider().GetEOSProperty<Color>(this, EOSConstants.BrandPrimaryColorVariant1);
                 base.TextSize = provider.GetEOSProperty<float>(this, EOSConstants.TextSize);
                 IsEOSCustomizationIgnored = false;
             }

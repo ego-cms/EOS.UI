@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using EOS.UI.Shared.Helpers;
 using UIFrameworks.Shared.Themes.Helpers;
@@ -98,15 +98,15 @@ namespace EOS.UI.Shared.Themes.Themes
             { EOSConstants.NeutralColor5, Color.ParseColor(neutralColor5)},
             { EOSConstants.NeutralColor6, Color.ParseColor(neutralColor6)},
             { EOSConstants.RippleColor, Color.ParseColor(rippleColor) },
-            { EOSConstants.TextSize, 22f },
-            { EOSConstants.LabelTextSize, 13f },
-            { EOSConstants.SecondaryTextSize, 22f },
+            { EOSConstants.TextSize, 13f },
+            { EOSConstants.SecondaryTextSize, 13f },
             { EOSConstants.Font, "Fonts/Roboto.ttf" },
             { EOSConstants.SecondaryFont, "Fonts/Roboto.ttf" },
             { EOSConstants.CornerRadius, 20f },
-            { EOSConstants.LabelCornerRadius, 5f },
+            { EOSConstants.LabelCornerRadius, 4f },
+            { EOSConstants.ButtonCornerRadius, 40f },
             { EOSConstants.LetterSpacing, 0f },
-            { EOSConstants.SecondaryLetterSpacing, 0.5f },
+            { EOSConstants.SecondaryLetterSpacing, 0f },
             { EOSConstants.LeftImageFocused, Resource.Drawable.AccountCircle },
             { EOSConstants.LeftImageUnfocused, Resource.Drawable.AccountKey },
             { EOSConstants.LeftImageDisabled, Resource.Drawable.AccountOff },
@@ -116,10 +116,10 @@ namespace EOS.UI.Shared.Themes.Themes
             { EOSConstants.BorderWidth, 2 },
             { EOSConstants.SectionTitle, "Dark section" },
             { EOSConstants.SectionActionTitle, "View All" },
-            { EOSConstants.LeftPadding, 5 },
-            { EOSConstants.TopPadding, 5 },
-            { EOSConstants.RightPadding, 5 },
-            { EOSConstants.BottomPadding, 5 },
+            { EOSConstants.LeftPadding, 16 },
+            { EOSConstants.TopPadding, 10 },
+            { EOSConstants.RightPadding, 16 },
+            { EOSConstants.BottomPadding, 10 },
             { EOSConstants.HasSectionBorder, true },
             { EOSConstants.HasSectionAction, true },
             { EOSConstants.WorkTimeTitleFont, "Fonts/SFUITextSemibold.ttf" },

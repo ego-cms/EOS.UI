@@ -45,6 +45,10 @@ namespace EOS.UI.Android.Sandbox.Activities
             _CTAButton = FindViewById<SimpleButton>(Resource.Id.simpleButton);
             _CTAButton.UpdateAppearance();
             _CTAButton.Text = "CTA button";
+            FindViewById<SimpleButton>(Resource.Id.simpleButton1).Text = "CTA button";
+            FindViewById<SimpleButton>(Resource.Id.simpleButton2).Text = "CTA button";
+            FindViewById<SimpleButton>(Resource.Id.simpleButton3).Text = "CTA button";
+
             _CTAButton.Click += async (s, e) =>
             {
                 _CTAButton.StartProgressAnimation();

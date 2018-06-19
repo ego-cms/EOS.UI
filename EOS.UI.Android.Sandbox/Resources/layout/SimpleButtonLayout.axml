@@ -29,6 +29,27 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:text="Simple Button" />
+        <EOS.UI.Android.Controls.SimpleButton
+            android:id="@+id/simpleButton1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="Simple Button"
+            android:layout_marginTop="10dp" />
+        <EOS.UI.Android.Controls.SimpleButton
+            android:id="@+id/simpleButton2"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="Simple Button"
+            android:layout_marginTop="10dp" />
+        <EOS.UI.Android.Controls.SimpleButton
+            android:id="@+id/simpleButton3"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="Simple Button"
+            android:layout_marginTop="10dp" />
     </EOS.UI.Android.Sandbox.Controls.EOSSandboxLinearLayout>
     <EOS.UI.Android.Sandbox.Controls.EOSSandboxDivider
         android:layout_width="match_parent"
