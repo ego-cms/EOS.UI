@@ -151,6 +151,7 @@ namespace EOS.UI.Android.Controls
                 InitializeAttributes(attributeSet);
 
             SetAllCaps(false);
+            SetMinimumHeight(0);
             UpdateAppearance();
             Background = CreateRippleDrawable();
             SetLines(1);
@@ -208,7 +209,7 @@ namespace EOS.UI.Android.Controls
         private ShapeDrawable CreateRoundedMaskDrawable()
         {
             var outerRadii = new float[8];
-            Arrays.Fill(outerRadii, 10);
+            Arrays.Fill(outerRadii, 15);
             var shapeDrawable = new ShapeDrawable(new RoundRectShape(outerRadii, null, null));
             shapeDrawable.Paint.Color = Color.White;
             shapeDrawable.Paint.StrokeWidth = 0;
@@ -221,7 +222,7 @@ namespace EOS.UI.Android.Controls
             var drawable = new GradientDrawable();
             drawable.SetShape(ShapeType.Rectangle);
             drawable.SetColor(Color.Transparent);
-            drawable.SetCornerRadius(10);
+            drawable.SetCornerRadius(15);
             return drawable;
         }
 
