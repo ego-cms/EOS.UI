@@ -33,7 +33,7 @@
                                 <rect key="frame" x="16" y="194" width="343" height="618"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="11167" customClass="EOSSandboxView">
-                                        <rect key="frame" x="0.0" y="0.0" width="343" height="590"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="343" height="640"/>
                                         <subviews>
                                             <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="33690">
                                                 <rect key="frame" x="284" y="545" width="51" height="31"/>
@@ -46,7 +46,7 @@
                                                 <size key="shadowOffset" width="0.0" height="0.0"/>
                                             </label>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="44692" customClass="EOSSandboxButton">
-                                                <rect key="frame" x="152" y="552" width="39" height="30"/>
+                                                <rect key="frame" x="152" y="602" width="39" height="30"/>
                                                 <state key="normal" title="Reset"/>
                                             </button>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="55645" customClass="CustomDropDown">
@@ -135,7 +135,7 @@
                                             </view>
                                         </subviews>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="590" id="12383"/>
+                                            <constraint firstAttribute="height" constant="640" id="12383"/>
                                             <constraint firstAttribute="trailing" secondItem="33690" secondAttribute="trailing" constant="10" id="53721"/>
                                             <constraint firstItem="44692" firstAttribute="centerX" secondItem="11167" secondAttribute="centerX" id="53816"/>
                                             <constraint firstItem="33689" firstAttribute="leading" secondItem="11167" secondAttribute="leading" id="54501"/>

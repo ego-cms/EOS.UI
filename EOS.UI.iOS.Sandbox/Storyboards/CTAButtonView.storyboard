@@ -33,7 +33,7 @@
                                 <rect key="frame" x="16" y="194" width="343" height="618"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="df6-bg-syM" customClass="EOSSandboxView">
-                                        <rect key="frame" x="0.0" y="0.0" width="343" height="590"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="343" height="640"/>
                                         <subviews>
                                             <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="mqn-fE-ewJ">
                                                 <rect key="frame" x="284" y="545" width="51" height="31"/>
@@ -46,7 +46,7 @@
                                                 <size key="shadowOffset" width="0.0" height="0.0"/>
                                             </label>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Inr-Im-nuF" customClass="EOSSandboxButton">
-                                                <rect key="frame" x="152" y="552" width="39" height="30"/>
+                                                <rect key="frame" x="152" y="602" width="39" height="30"/>
                                                 <state key="normal" title="Reset"/>
                                             </button>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hYj-ZH-eGj" customClass="CustomDropDown">
@@ -160,7 +160,7 @@
                                             <constraint firstItem="owx-AG-S0h" firstAttribute="centerY" secondItem="mqn-fE-ewJ" secondAttribute="centerY" id="S2w-Gx-SwK"/>
                                             <constraint firstItem="hMF-hm-a4s" firstAttribute="trailing" secondItem="df6-bg-syM" secondAttribute="trailing" id="UDA-Qq-YdV"/>
                                             <constraint firstItem="PHa-El-l6T" firstAttribute="leading" secondItem="df6-bg-syM" secondAttribute="leading" id="Uq9-5m-nLm"/>
-                                            <constraint firstAttribute="height" constant="590" id="WWT-gP-rjx"/>
+                                            <constraint firstAttribute="height" constant="640" id="WWT-gP-rjx"/>
                                             <constraint firstItem="bz3-aT-k7e" firstAttribute="trailing" secondItem="df6-bg-syM" secondAttribute="trailing" id="Z4w-AE-mE0"/>
                                             <constraint firstItem="jgs-qy-fiR" firstAttribute="top" secondItem="hMF-hm-a4s" secondAttribute="bottom" constant="5" id="cLQ-7p-dkf"/>
                                             <constraint firstItem="7mK-i5-zsH" firstAttribute="leading" secondItem="df6-bg-syM" secondAttribute="leading" id="d24-EQ-BzX"/>
