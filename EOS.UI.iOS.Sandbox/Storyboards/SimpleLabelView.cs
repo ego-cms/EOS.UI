@@ -45,7 +45,7 @@ namespace EOS.UI.iOS.Sandbox
 
             View.AddGestureRecognizer(new UITapGestureRecognizer(() =>
             {
-                _dropDowns.ForEach(field => field.ResignFirstResponder());
+                _dropDowns.ForEach(field => field.CloseInputControl());
             }));
             _simpleLabel.TextAlignment = UITextAlignment.Center;
             containerView.ConstrainLayout(() => _simpleLabel.Frame.GetCenterY() == containerView.Frame.GetCenterY() &&
