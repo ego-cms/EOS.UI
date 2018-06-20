@@ -30,8 +30,6 @@ namespace EOS.UI.iOS.Sandbox.Helpers
             public const string HintTextColor = "Hint text color";
             public const string HintTextColorDisabled = "Hint text color disabled";
             public const string IconFocused = "Icon focused";
-            public const string IconUnfocused = "Icon unfocused";
-            public const string IconDisabled = "Icon disabled";
             public const string UnderlineColorFocused = "Underline color focused";
             public const string UnderlineColorUnfocused = "Underline color unfocused";
             public const string UnderlineColorDisabled = "Underline color disabled";

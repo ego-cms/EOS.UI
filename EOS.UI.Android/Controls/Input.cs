@@ -374,7 +374,7 @@ namespace EOS.UI.Android.Controls
                 UnderlineColorFocused = GetThemeProvider().GetEOSProperty<Color>(this, EOSConstants.BrandPrimaryColor);
                 UnderlineColorUnfocused = GetThemeProvider().GetEOSProperty<Color>(this, EOSConstants.NeutralColor2);
                 UnderlineColorDisabled = GetThemeProvider().GetEOSProperty<Color>(this, EOSConstants.NeutralColor3);
-                LeftImageFocused = Context.Resources.GetDrawable(GetThemeProvider().GetEOSProperty<int>(this, EOSConstants.LeftImageFocused));
+                LeftImageFocused = Context.Resources.GetDrawable(GetThemeProvider().GetEOSProperty<int>(this, EOSConstants.LeftImage));
                 LeftImageUnfocused = Context.Resources.GetDrawable(GetThemeProvider().GetEOSProperty<int>(this, EOSConstants.LeftImageUnfocused));
                 LeftImageDisabled = Context.Resources.GetDrawable(GetThemeProvider().GetEOSProperty<int>(this, EOSConstants.LeftImageDisabled));
                 IsEOSCustomizationIgnored = false;

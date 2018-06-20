@@ -49,8 +49,6 @@ namespace EOS.UI.iOS.Sandbox
                 hintTextColorDropDown,
                 disabledHintTextColorDropDown,
                 focusedIconDropDown,
-                unfocusedIconDropDown,
-                disabledIconDropDown,
                 focusedUnderlineColorDropDown,
                 unfocusedUnderlineColorDropDown,
                 disabledUnderlineColorDropDown
@@ -96,8 +94,6 @@ namespace EOS.UI.iOS.Sandbox
             InitPlaceholderTextField(rect);
             InitPlaceholderDisabledTextField(rect);
             InitIconFocusedTextField(rect);
-            InitIconUnfocusedTextField(rect);
-            InitIconDisabledTextField(rect);
             InitUnderlineFocusedColorTextField(rect);
             InitUnderlineUnfocusedColorTextField(rect);
             InitUnderlineDisabledColorTextField(rect);
@@ -221,36 +217,10 @@ namespace EOS.UI.iOS.Sandbox
                 Icons,
                 icon =>
                 {
-                    _inputTop.LeftImageFocused = UIImage.FromBundle(icon);
-                    _inputBotton.LeftImageFocused = UIImage.FromBundle(icon);
+                    _inputTop.LeftImage = UIImage.FromBundle(icon);
+                    _inputBotton.LeftImage = UIImage.FromBundle(icon);
                 },
                 Fields.IconFocused,
-                rect);
-        }
-
-        private void InitIconUnfocusedTextField(CGRect rect)
-        {
-            unfocusedIconDropDown.InitSource(
-                Icons,
-                icon =>
-                {
-                    _inputTop.LeftImageUnfocused = UIImage.FromBundle(icon);
-                    _inputBotton.LeftImageUnfocused = UIImage.FromBundle(icon);
-                },
-                Fields.IconUnfocused,
-                rect);
-        }
-
-        private void InitIconDisabledTextField(CGRect rect)
-        {
-            disabledIconDropDown.InitSource(
-                Icons,
-                icon =>
-                {
-                    _inputTop.LeftImageDisabled = UIImage.FromBundle(icon);
-                    _inputBotton.LeftImageDisabled = UIImage.FromBundle(icon);
-                },
-                Fields.IconDisabled,
                 rect);
         }
 

@@ -29,10 +29,6 @@ namespace EOS.UI.iOS.Sandbox
 
 		[Outlet]
 		[GeneratedCode ("iOS Designer", "1.0")]
-		EOS.UI.iOS.Sandbox.EOSSandboxDropDown disabledIconDropDown { get; set; }
-
-		[Outlet]
-		[GeneratedCode ("iOS Designer", "1.0")]
 		EOS.UI.iOS.Sandbox.EOSSandboxDropDown disabledTextColorDropDown { get; set; }
 
 		[Outlet]
@@ -92,14 +88,15 @@ namespace EOS.UI.iOS.Sandbox
 
 		[Outlet]
 		[GeneratedCode ("iOS Designer", "1.0")]
-		EOS.UI.iOS.Sandbox.EOSSandboxDropDown unfocusedIconDropDown { get; set; }
-
-		[Outlet]
-		[GeneratedCode ("iOS Designer", "1.0")]
 		EOS.UI.iOS.Sandbox.EOSSandboxDropDown unfocusedUnderlineColorDropDown { get; set; }
 		
 		void ReleaseDesignerOutlets ()
 		{
+			if (bottomInputValidSwitch != null) {
+				bottomInputValidSwitch.Dispose ();
+				bottomInputValidSwitch = null;
+			}
+
 			if (containerBottomView != null) {
 				containerBottomView.Dispose ();
 				containerBottomView = null;
@@ -113,11 +110,6 @@ namespace EOS.UI.iOS.Sandbox
 			if (disabledHintTextColorDropDown != null) {
 				disabledHintTextColorDropDown.Dispose ();
 				disabledHintTextColorDropDown = null;
-			}
-
-			if (disabledIconDropDown != null) {
-				disabledIconDropDown.Dispose ();
-				disabledIconDropDown = null;
 			}
 
 			if (disabledTextColorDropDown != null) {
@@ -190,24 +182,14 @@ namespace EOS.UI.iOS.Sandbox
 				themeDropDown = null;
 			}
 
-			if (unfocusedIconDropDown != null) {
-				unfocusedIconDropDown.Dispose ();
-				unfocusedIconDropDown = null;
-			}
-
-			if (unfocusedUnderlineColorDropDown != null) {
-				unfocusedUnderlineColorDropDown.Dispose ();
-				unfocusedUnderlineColorDropDown = null;
-			}
-
 			if (topInputValidSwitch != null) {
 				topInputValidSwitch.Dispose ();
 				topInputValidSwitch = null;
 			}
 
-			if (bottomInputValidSwitch != null) {
-				bottomInputValidSwitch.Dispose ();
-				bottomInputValidSwitch = null;
+			if (unfocusedUnderlineColorDropDown != null) {
+				unfocusedUnderlineColorDropDown.Dispose ();
+				unfocusedUnderlineColorDropDown = null;
 			}
 		}
 	}

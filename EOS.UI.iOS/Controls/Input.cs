@@ -206,52 +206,20 @@ namespace EOS.UI.iOS.Controls
             }
         }
 
-        private UIImage _leftImageFocused;
-        public UIImage LeftImageFocused
+        private UIImage _leftImage;
+        public UIImage LeftImage
         {
-            get => _leftImageFocused;
+            get => _leftImage;
             set
             {
                 IsEOSCustomizationIgnored = true;
-                _leftImageFocused = value;
-                if (Enabled && Focused)
+                _leftImage = value;
+                _leftImageView.Image = value;
+                if(Enabled)
                 {
-                    _leftImageView.Image = value;
-                    _leftImageView.TintColor = UnderlineColorFocused;
+                    _leftImageView.TintColor = Focused ? UnderlineColorFocused : UnderlineColorUnfocused;
                 }
-            }
-        }
-
-        private UIImage _leftImageUnfocused;
-        public UIImage LeftImageUnfocused
-        {
-            get => _leftImageUnfocused;
-            set
-            {
-                IsEOSCustomizationIgnored = true;
-                _leftImageUnfocused = value;
-                if (Enabled && !Focused)
-                {
-                    _leftImageView.Image = value;
-                    _leftImageView.TintColor = UnderlineColorUnfocused;
-                }
-                
-            }
-        }
-
-        private UIImage _leftImageDisabled;
-        public UIImage LeftImageDisabled
-        {
-            get => _leftImageDisabled;
-            set
-            {
-                IsEOSCustomizationIgnored = true;
-                _leftImageDisabled = value;
-                if (!Enabled)
-                {
-                    _leftImageView.Image = value;
-                    _leftImageView.TintColor = UnderlineColorDisabled;
-                }
+                _leftImageView.TintColor = UnderlineColorDisabled;
             }
         }
 
@@ -350,7 +318,6 @@ namespace EOS.UI.iOS.Controls
 
         private void Input_Ended(object sender, EventArgs e)
         {
-            _leftImageView.Image = LeftImageUnfocused;
             _leftImageView.TintColor = IsValid ? UnderlineColorUnfocused : _warningColor;
             _underlineLayer.BorderWidth = InputConstants.UnderlineHeight;
             _underlineLayer.BorderColor = IsValid ? UnderlineColorUnfocused.CGColor : _warningColor.CGColor;
@@ -358,7 +325,6 @@ namespace EOS.UI.iOS.Controls
 
         private void Input_Started(object sender, EventArgs e)
         {
-            _leftImageView.Image = LeftImageFocused;
             _leftImageView.TintColor = IsValid ? UnderlineColorFocused : _warningColor;
             _underlineLayer.BorderWidth = InputConstants.UnderlineHeight;
             _underlineLayer.BorderColor = IsValid ? UnderlineColorFocused.CGColor : _warningColor.CGColor;
@@ -373,7 +339,6 @@ namespace EOS.UI.iOS.Controls
             if (!enabled)
             {
                 RightViewMode = UITextFieldViewMode.Never;
-                _leftImageView.Image = LeftImageDisabled;
                 _leftImageView.TintColor = UnderlineColorDisabled;
                 _underlineLayer.BorderWidth = InputConstants.UnderlineHeight;
                 _underlineLayer.BorderColor = UnderlineColorDisabled.CGColor;
@@ -383,14 +348,12 @@ namespace EOS.UI.iOS.Controls
                 RightViewMode = IsValid ? UITextFieldViewMode.Never : UITextFieldViewMode.Always;
                 if (Focused)
                 {
-                    _leftImageView.Image = LeftImageFocused;
                     _leftImageView.TintColor = IsValid ? UnderlineColorFocused : _warningColor;
                     _underlineLayer.BorderWidth = InputConstants.UnderlineHeight;
                     _underlineLayer.BorderColor = IsValid ? UnderlineColorFocused.CGColor : _warningColor.CGColor;
                 }
                 else
                 {
-                    _leftImageView.Image = LeftImageUnfocused;
                     _leftImageView.TintColor = IsValid ? UnderlineColorUnfocused : _warningColor;
                     _underlineLayer.BorderWidth = InputConstants.UnderlineHeight;
                     _underlineLayer.BorderColor = IsValid ? UnderlineColorUnfocused.CGColor : _warningColor.CGColor;
@@ -531,9 +494,7 @@ namespace EOS.UI.iOS.Controls
                 TextColorDisabled = provider.GetEOSProperty<UIColor>(this, EOSConstants.NeutralColor3);
                 PlaceholderColor = provider.GetEOSProperty<UIColor>(this, EOSConstants.NeutralColor2);
                 PlaceholderColorDisabled = provider.GetEOSProperty<UIColor>(this, EOSConstants.NeutralColor3);
-                LeftImageFocused = UIImage.FromBundle(provider.GetEOSProperty<string>(this, EOSConstants.LeftImageFocused));
-                LeftImageUnfocused = UIImage.FromBundle(provider.GetEOSProperty<string>(this, EOSConstants.LeftImageFocused));
-                LeftImageDisabled = UIImage.FromBundle(provider.GetEOSProperty<string>(this, EOSConstants.LeftImageFocused));
+                LeftImage = UIImage.FromBundle(provider.GetEOSProperty<string>(this, EOSConstants.LeftImage));
                 UnderlineColorFocused = provider.GetEOSProperty<UIColor>(this, EOSConstants.BrandPrimaryColor);
                 UnderlineColorUnfocused = provider.GetEOSProperty<UIColor>(this, EOSConstants.NeutralColor3);
                 UnderlineColorDisabled = provider.GetEOSProperty<UIColor>(this, EOSConstants.NeutralColor3);
