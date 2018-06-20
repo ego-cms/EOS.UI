@@ -1,6 +1,4 @@
 using System;
-using System.Threading.Tasks;
-using Android.App;
 using Android.Graphics;
 using Android.Support.V7.Widget;
 using Android.Views;
@@ -14,28 +12,29 @@ using UIFrameworks.Shared.Themes.Interfaces;
 
 namespace EOS.UI.Android.Sandbox.RecyclerImplementation
 {
-    public class EOSSandboxControlsViewHolder : RecyclerView.ViewHolder, IEOSThemeControl/*, View.IOnTouchListener*/
+    public class EOSSandboxControlsViewHolder : RecyclerView.ViewHolder, IEOSThemeControl, View.IOnClickListener
     {
-        private Color _normalBackground = Color.Transparent;
-        private Color _selectedBackground = Color.Gray;
         private LinearLayout _container;
         private ImageView _arrowImage;
         private EOSSandboxDivider _divider;
         private Action<int> _clickAction;
-        private bool _scrolled;
-        private bool _released; 
 
         public TextView ControlTitle { get; private set; }
              
         public EOSSandboxControlsViewHolder(View itemView, Action<int> clickAction) : base(itemView)
         {
+            itemView.Clickable = true;
+            itemView.SetOnClickListener(this);
             _clickAction = clickAction;
             _container = itemView.FindViewById<LinearLayout>(Resource.Id.holderContainer);
             ControlTitle = itemView.FindViewById<TextView>(Resource.Id.titleTextView);
             _arrowImage = itemView.FindViewById<ImageView>(Resource.Id.imageArrow);
             _divider = itemView.FindViewById<EOSSandboxDivider>(Resource.Id.dropDownDivider);
-            _container.Clickable = true;
-            _container.Click += (s, e) => _clickAction?.Invoke(Position);
+        }
+
+        public void OnClick(View v)
+        {
+            _clickAction?.Invoke(Position);
         }
 
         #region IEOSThemeControl implementation
@@ -51,7 +50,6 @@ namespace EOS.UI.Android.Sandbox.RecyclerImplementation
         {
             if(!IsEOSCustomizationIgnored)
             {
-                _selectedBackground = GetThemeProvider().GetEOSProperty<Color>(this, EOSConstants.NeutralColor3);
                 ControlTitle.SetTextColor(GetThemeProvider().GetEOSProperty<Color>(this, EOSConstants.NeutralColor1));
                 _arrowImage.Drawable.SetColorFilter(GetThemeProvider().GetEOSProperty<Color>(this, EOSConstants.NeutralColor3), PorterDuff.Mode.SrcIn);
                 _divider.UpdateAppearance();
