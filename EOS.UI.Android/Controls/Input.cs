@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using Android.Content;
 using Android.Graphics;
 using Android.Graphics.Drawables;
@@ -244,6 +244,23 @@ namespace EOS.UI.Android.Controls
             {
                 IsEOSCustomizationIgnored = true;
                 base.TextSize = value;
+            }
+        }
+
+        private bool _valid;
+        public bool Valid
+        {
+            get => _valid;
+            set
+            {
+                _valid = value;
+                if(value)
+                {
+                    if(Enabled)
+                    {
+
+                    }
+                }
             }
         }
 
