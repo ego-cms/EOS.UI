@@ -1,4 +1,6 @@
 using System;
+using System.Threading.Tasks;
+using Android.App;
 using Android.Graphics;
 using Android.Support.V7.Widget;
 using Android.Views;
@@ -12,7 +14,7 @@ using UIFrameworks.Shared.Themes.Interfaces;
 
 namespace EOS.UI.Android.Sandbox.RecyclerImplementation
 {
-    public class EOSSandboxControlsViewHolder : RecyclerView.ViewHolder, IEOSThemeControl
+    public class EOSSandboxControlsViewHolder : RecyclerView.ViewHolder, IEOSThemeControl/*, View.IOnTouchListener*/
     {
         private Color _normalBackground = Color.Transparent;
         private Color _selectedBackground = Color.Gray;
@@ -20,7 +22,8 @@ namespace EOS.UI.Android.Sandbox.RecyclerImplementation
         private ImageView _arrowImage;
         private EOSSandboxDivider _divider;
         private Action<int> _clickAction;
-        private float _xPosition;
+        private bool _scrolled;
+        private bool _released; 
 
         public TextView ControlTitle { get; private set; }
              
@@ -31,22 +34,8 @@ namespace EOS.UI.Android.Sandbox.RecyclerImplementation
             ControlTitle = itemView.FindViewById<TextView>(Resource.Id.titleTextView);
             _arrowImage = itemView.FindViewById<ImageView>(Resource.Id.imageArrow);
             _divider = itemView.FindViewById<EOSSandboxDivider>(Resource.Id.dropDownDivider);
-            _container.Touch += ContainerTouch;
-        }
-
-        private void ContainerTouch(object sender, View.TouchEventArgs e)
-        {
-            if(e.Event.Action == MotionEventActions.Down)
-            {
-                _container.SetBackgroundColor(_selectedBackground);
-                _xPosition = e.Event.RawX;
-            }
-            else if(e.Event.Action == MotionEventActions.Up || e.Event.Action == MotionEventActions.Cancel)
-            {
-                _container.SetBackgroundColor(_normalBackground);
-                if(_xPosition == e.Event.RawX && e.Event.Action == MotionEventActions.Up)
-                    _clickAction?.Invoke(Position);
-            }
+            _container.Clickable = true;
+            _container.Click += (s, e) => _clickAction?.Invoke(Position);
         }
 
         #region IEOSThemeControl implementation
@@ -86,6 +75,5 @@ namespace EOS.UI.Android.Sandbox.RecyclerImplementation
         }
 
         #endregion
-
     }
 }
