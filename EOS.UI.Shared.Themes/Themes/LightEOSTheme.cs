@@ -102,7 +102,7 @@ namespace EOS.UI.Shared.Themes.Themes
             { EOSConstants.SecondaryFont, "Fonts/Roboto.ttf" },
             { EOSConstants.CornerRadius, 5f },
             { EOSConstants.LabelCornerRadius, 4f },
-            { EOSConstants.ButtonCornerRadius, 40f },
+            { EOSConstants.ButtonCornerRadius, 60f },
             { EOSConstants.LetterSpacing, 0f },
             { EOSConstants.SecondaryLetterSpacing, 0f },
             { EOSConstants.LeftImageFocused, Resource.Drawable.AccountCircle },
