@@ -14,7 +14,7 @@ using UIFrameworks.Shared.Themes.Interfaces;
 
 namespace EOS.UI.Android.Sandbox.RecyclerImplementation
 {
-    public class EOSSandboxControlsViewHolder : RecyclerView.ViewHolder, IEOSThemeControl, View.IOnTouchListener
+    public class EOSSandboxControlsViewHolder : RecyclerView.ViewHolder, IEOSThemeControl/*, View.IOnTouchListener*/
     {
         private Color _normalBackground = Color.Transparent;
         private Color _selectedBackground = Color.Gray;
@@ -29,14 +29,15 @@ namespace EOS.UI.Android.Sandbox.RecyclerImplementation
              
         public EOSSandboxControlsViewHolder(View itemView, Action<int> clickAction, RecyclerView recycler) : base(itemView)
         {
-            recycler.SetOnTouchListener(this);
+            //recycler.SetOnTouchListener(this);
             _clickAction = clickAction;
             _container = itemView.FindViewById<LinearLayout>(Resource.Id.holderContainer);
             ControlTitle = itemView.FindViewById<TextView>(Resource.Id.titleTextView);
             _arrowImage = itemView.FindViewById<ImageView>(Resource.Id.imageArrow);
             _divider = itemView.FindViewById<EOSSandboxDivider>(Resource.Id.dropDownDivider);
-            _container.SetOnTouchListener(this);
-            _container.Click += (s, e) => { };
+            //_container.SetOnTouchListener(this);
+            _container.Clickable = true;
+            //_container.Click += (s, e) => { };
         }
 
         public bool OnTouch(View v, MotionEvent e)
