@@ -27,58 +27,15 @@ namespace EOS.UI.Android.Sandbox.RecyclerImplementation
 
         public TextView ControlTitle { get; private set; }
              
-        public EOSSandboxControlsViewHolder(View itemView, Action<int> clickAction, RecyclerView recycler) : base(itemView)
+        public EOSSandboxControlsViewHolder(View itemView, Action<int> clickAction) : base(itemView)
         {
-            //recycler.SetOnTouchListener(this);
             _clickAction = clickAction;
             _container = itemView.FindViewById<LinearLayout>(Resource.Id.holderContainer);
             ControlTitle = itemView.FindViewById<TextView>(Resource.Id.titleTextView);
             _arrowImage = itemView.FindViewById<ImageView>(Resource.Id.imageArrow);
             _divider = itemView.FindViewById<EOSSandboxDivider>(Resource.Id.dropDownDivider);
-            //_container.SetOnTouchListener(this);
             _container.Clickable = true;
-            //_container.Click += (s, e) => { };
-        }
-
-        public bool OnTouch(View v, MotionEvent e)
-        {
-            bool isDown = false;
-
-            if(e.Action == MotionEventActions.Down)
-            {
-                Task.Run(() =>
-                {
-                    Task.Delay(50).GetAwaiter().GetResult();
-                    (v.Context as Activity).RunOnUiThread(() =>
-                    {
-                        if(!_scrolled && !_released)
-                            _container.SetBackgroundColor(_selectedBackground);
-                        else
-                            _container.SetBackgroundColor(_normalBackground);
-
-                        _scrolled = false;
-                    });
-                });
-                isDown = true;
-                _released = false;
-            }
-
-            if(e.Action == MotionEventActions.Move)
-                _scrolled = true;
-
-            if(e.Action == MotionEventActions.Cancel)
-                _released = true;
-
-            if((v as RecyclerView) == null && e.Action == MotionEventActions.Up)
-            {
-                _released = true;
-                _clickAction?.Invoke(Position);
-            }
-
-            if(!isDown)
-                _container.SetBackgroundColor(_normalBackground);
-
-            return false;
+            _container.Click += (s, e) => _clickAction?.Invoke(Position);
         }
 
         #region IEOSThemeControl implementation

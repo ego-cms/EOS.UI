@@ -9,13 +9,11 @@ namespace EOS.UI.Android.Sandbox.RecyclerImplementation
     {
         public event EventHandler<int> ItemClick;
         private List<string> _controlNames;
-        private RecyclerView _recycler;
 
         public override int ItemCount => _controlNames != null ? _controlNames.Count : 0;
 
-        public ControlsAdapter(List<string> names, RecyclerView recycler)
+        public ControlsAdapter(List<string> names)
         {
-            _recycler = recycler;
             _controlNames = names;
         }
 
@@ -29,7 +27,7 @@ namespace EOS.UI.Android.Sandbox.RecyclerImplementation
         public override RecyclerView.ViewHolder OnCreateViewHolder(ViewGroup parent, int viewType)
         {
             View itemView = LayoutInflater.From(parent.Context).Inflate(Resource.Layout.ControlsItemCell, parent, false);
-            var viewHolder = new EOSSandboxControlsViewHolder(itemView, OnClick, _recycler);
+            var viewHolder = new EOSSandboxControlsViewHolder(itemView, OnClick);
             return viewHolder;
         }
 
