@@ -102,6 +102,7 @@ namespace EOS.UI.iOS.Sandbox
             InitUnderlineUnfocusedColorTextField(rect);
             InitUnderlineDisabledColorTextField(rect);
             InitDisabledSwitch();
+            InitValidationSwitches();
             InitResetButton();
         }
 
@@ -295,7 +296,23 @@ namespace EOS.UI.iOS.Sandbox
             switchDisabled.ValueChanged += (sender, e) => 
             {
                 _inputBotton.Enabled = switchDisabled.On;
+                _inputBotton.ResignFirstResponder();
                 _inputTop.Enabled = switchDisabled.On;
+                _inputTop.ResignFirstResponder();
+            };
+        }
+        
+        private void InitValidationSwitches()
+        {
+            topInputValidSwitch.On = true;
+            bottomInputValidSwitch.On = true;
+            topInputValidSwitch.ValueChanged += (sender, e) => 
+            {
+                _inputTop.IsValid = topInputValidSwitch.On;
+            };
+            bottomInputValidSwitch.ValueChanged += (sender, e) =>
+            {
+                _inputBotton.IsValid = bottomInputValidSwitch.On;
             };
         }
 
