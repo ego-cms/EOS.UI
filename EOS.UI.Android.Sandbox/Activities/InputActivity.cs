@@ -166,8 +166,8 @@ namespace EOS.UI.Android.Sandbox.Activities
                     _inputBottom.IsValid = _inputBottom.Text.Contains("@");
                     break;
                 case 3:
-                    _inputTop.IsValid = !string.IsNullOrWhiteSpace(_inputTop.Text);
-                    _inputBottom.IsValid = !string.IsNullOrWhiteSpace(_inputBottom.Text);
+                    _inputTop.IsValid = !string.IsNullOrEmpty(_inputTop.Text);
+                    _inputBottom.IsValid = !string.IsNullOrEmpty(_inputBottom.Text);
                     break;
             }
         }
