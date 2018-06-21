@@ -105,8 +105,6 @@ namespace EOS.UI.Shared.Themes.Themes
             { EOSConstants.LetterSpacing, 0f },
             { EOSConstants.SecondaryLetterSpacing, 0.1f },
             { EOSConstants.LeftImage, Resource.Drawable.icCalendar },
-            { EOSConstants.LeftImageUnfocused, Resource.Drawable.icCalendar },
-            { EOSConstants.LeftImageDisabled, Resource.Drawable.icCalendar },
             { EOSConstants.CalendarImage, Resource.Drawable.icCalendar },
             { EOSConstants.FabProgressPreloaderImage, Resource.Drawable.icPreloader },
             { EOSConstants.CircleProgressShown, true},
