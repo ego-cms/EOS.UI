@@ -494,7 +494,7 @@ namespace EOS.UI.iOS.Controls
                 TextColorDisabled = provider.GetEOSProperty<UIColor>(this, EOSConstants.NeutralColor3);
                 PlaceholderColor = provider.GetEOSProperty<UIColor>(this, EOSConstants.NeutralColor2);
                 PlaceholderColorDisabled = provider.GetEOSProperty<UIColor>(this, EOSConstants.NeutralColor3);
-                LeftImageFocused = UIImage.FromBundle(provider.GetEOSProperty<string>(this, EOSConstants.LeftImageFocused));
+                LeftImageFocused = UIImage.FromBundle(provider.GetEOSProperty<string>(this, EOSConstants.LeftImage));
                 LeftImageUnfocused = UIImage.FromBundle(provider.GetEOSProperty<string>(this, EOSConstants.LeftImageUnfocused));
                 LeftImageDisabled = UIImage.FromBundle(provider.GetEOSProperty<string>(this, EOSConstants.LeftImageDisabled));
                 UnderlineColorFocused = provider.GetEOSProperty<UIColor>(this, EOSConstants.BrandPrimaryColor);

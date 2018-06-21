@@ -24,7 +24,7 @@ namespace UIFrameworks.Shared.Themes.Helpers
         public const string LetterSpacing = "letterSpacing";
         public const string SecondaryLetterSpacing = "secondaryLetterSpacing";
         public const string LeftImageUnfocused = "leftImageUnfocused";
-        public const string LeftImageFocused = "leftImageFocused";
+        public const string LeftImage = "leftImage";
         public const string LeftImageDisabled = "leftImageDisabled";
         //fab progress constans
         public const string CalendarImage = "calendarImage";
