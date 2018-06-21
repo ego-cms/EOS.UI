@@ -19,7 +19,7 @@
                         <viewControllerLayoutGuide type="bottom" id="203"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="206" customClass="EOSSandboxView">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="900"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="1200"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="649">
@@ -29,33 +29,23 @@
                                 </constraints>
                             </view>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4430">
-                                <rect key="frame" x="20" y="140" width="374" height="760"/>
+                                <rect key="frame" x="20" y="140" width="374" height="1060"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7673" customClass="EOSSandboxView">
-                                        <rect key="frame" x="5" y="0.0" width="364" height="765"/>
+                                        <rect key="frame" x="5" y="0.0" width="364" height="870"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Enabled" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="13879" customClass="EOSSandboxLabel">
-                                                <rect key="frame" x="0.0" y="560" width="58.5" height="19.5"/>
+                                                <rect key="frame" x="0.0" y="776" width="58.5" height="19.5"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                                 <size key="shadowOffset" width="0.0" height="0.0"/>
                                             </label>
                                             <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="13880">
-                                                <rect key="frame" x="313" y="554" width="51" height="31"/>
-                                            </switch>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Top input valid" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JdK-oy-Dvr" customClass="EOSSandboxLabel">
-                                                <rect key="frame" x="0.0" y="606" width="106" height="20"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                                <nil key="textColor"/>
-                                                <nil key="highlightedColor"/>
-                                                <size key="shadowOffset" width="0.0" height="0.0"/>
-                                            </label>
-                                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="URi-Mw-PAa">
-                                                <rect key="frame" x="315" y="600" width="51" height="31"/>
+                                                <rect key="frame" x="313" y="770" width="51" height="31"/>
                                             </switch>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="22179" customClass="EOSSandboxButton">
-                                                <rect key="frame" x="162.5" y="715" width="39" height="30"/>
+                                                <rect key="frame" x="162.5" y="820" width="39" height="30"/>
                                                 <state key="normal" title="Reset"/>
                                             </button>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="27161" customClass="CustomDropDown">
@@ -128,30 +118,48 @@
                                                     <constraint firstAttribute="height" constant="40" id="28995"/>
                                                 </constraints>
                                             </view>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="29001" customClass="CustomDropDown">
-                                                <rect key="frame" x="0.0" y="450" width="364" height="40"/>
-                                                <color key="backgroundColor" red="0.89411764705882357" green="0.51372549019607838" blue="0.51372549019607838" alpha="1" colorSpace="calibratedRGB"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="height" constant="40" id="29002"/>
-                                                </constraints>
-                                            </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="29008" customClass="CustomDropDown">
-                                                <rect key="frame" x="0.0" y="495" width="364" height="40"/>
+                                                <rect key="frame" x="0.0" y="450" width="364" height="40"/>
                                                 <color key="backgroundColor" red="0.89411764705882357" green="0.51372549019607838" blue="0.51372549019607838" alpha="1" colorSpace="calibratedRGB"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="40" id="29009"/>
                                                 </constraints>
                                             </view>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Bottom input valid" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cct-54-lKa" customClass="EOSSandboxLabel">
-                                                <rect key="frame" x="0.0" y="652" width="132" height="20"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                                <nil key="textColor"/>
-                                                <nil key="highlightedColor"/>
-                                                <size key="shadowOffset" width="0.0" height="0.0"/>
-                                            </label>
-                                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="GzX-RK-RIi">
-                                                <rect key="frame" x="315" y="646" width="51" height="31"/>
-                                            </switch>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wzu-Aa-scM" customClass="CustomDropDown">
+                                                <rect key="frame" x="0.0" y="495" width="364" height="40"/>
+                                                <color key="backgroundColor" red="0.89411764709999997" green="0.51372549020000002" blue="0.51372549020000002" alpha="1" colorSpace="calibratedRGB"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="40" id="tue-W3-YSt"/>
+                                                </constraints>
+                                            </view>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="w6D-cX-lEH" customClass="CustomDropDown">
+                                                <rect key="frame" x="0.0" y="540" width="364" height="40"/>
+                                                <color key="backgroundColor" red="0.89411764709999997" green="0.51372549020000002" blue="0.51372549020000002" alpha="1" colorSpace="calibratedRGB"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="40" id="yb1-ni-Fjv"/>
+                                                </constraints>
+                                            </view>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zfB-Qs-rFh" customClass="CustomDropDown">
+                                                <rect key="frame" x="0.0" y="585" width="364" height="40"/>
+                                                <color key="backgroundColor" red="0.89411764709999997" green="0.51372549020000002" blue="0.51372549020000002" alpha="1" colorSpace="calibratedRGB"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="40" id="meC-Nv-DZ7"/>
+                                                </constraints>
+                                            </view>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Py1-2C-3r1" customClass="CustomDropDown">
+                                                <rect key="frame" x="0.0" y="630" width="364" height="40"/>
+                                                <color key="backgroundColor" red="0.89411764709999997" green="0.51372549020000002" blue="0.51372549020000002" alpha="1" colorSpace="calibratedRGB"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="40" id="EWA-AS-IdW"/>
+                                                </constraints>
+                                            </view>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SNP-zf-ATr" customClass="CustomDropDown">
+                                                <rect key="frame" x="0.0" y="675" width="364" height="40"/>
+                                                <color key="backgroundColor" red="0.89411764709999997" green="0.51372549020000002" blue="0.51372549020000002" alpha="1" colorSpace="calibratedRGB"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="40" id="roT-HO-toV"/>
+                                                </constraints>
+                                            </view>
                                         </subviews>
                                         <constraints>
                                             <constraint firstAttribute="trailing" secondItem="13880" secondAttribute="trailing" constant="2" id="13882"/>
@@ -187,24 +195,28 @@
                                             <constraint firstItem="28973" firstAttribute="trailing" secondItem="7673" secondAttribute="trailing" id="28978"/>
                                             <constraint firstItem="28994" firstAttribute="trailing" secondItem="7673" secondAttribute="trailing" id="28998"/>
                                             <constraint firstItem="28994" firstAttribute="leading" secondItem="7673" secondAttribute="leading" id="28999"/>
-                                            <constraint firstItem="29001" firstAttribute="top" secondItem="28994" secondAttribute="bottom" constant="5" id="29004"/>
-                                            <constraint firstItem="29001" firstAttribute="leading" secondItem="7673" secondAttribute="leading" id="29005"/>
-                                            <constraint firstItem="29001" firstAttribute="trailing" secondItem="7673" secondAttribute="trailing" id="29006"/>
-                                            <constraint firstItem="29008" firstAttribute="top" secondItem="29001" secondAttribute="bottom" constant="5" id="29011"/>
                                             <constraint firstItem="29008" firstAttribute="leading" secondItem="7673" secondAttribute="leading" id="29012"/>
                                             <constraint firstItem="29008" firstAttribute="trailing" secondItem="7673" secondAttribute="trailing" id="29013"/>
-                                            <constraint firstItem="13880" firstAttribute="top" secondItem="29008" secondAttribute="bottom" constant="19" id="29014"/>
-                                            <constraint firstItem="JdK-oy-Dvr" firstAttribute="leading" secondItem="7673" secondAttribute="leading" id="FTJ-lC-IA8"/>
-                                            <constraint firstItem="22179" firstAttribute="top" secondItem="29008" secondAttribute="bottom" constant="180" id="Hti-Zr-t4j"/>
-                                            <constraint firstItem="GzX-RK-RIi" firstAttribute="top" secondItem="URi-Mw-PAa" secondAttribute="bottom" constant="15" id="NeA-Fu-MuM"/>
-                                            <constraint firstItem="cct-54-lKa" firstAttribute="centerY" secondItem="GzX-RK-RIi" secondAttribute="centerY" id="PF1-xo-Llr"/>
+                                            <constraint firstItem="zfB-Qs-rFh" firstAttribute="leading" secondItem="7673" secondAttribute="leading" id="2Xt-Em-Rbh"/>
+                                            <constraint firstAttribute="trailing" secondItem="Py1-2C-3r1" secondAttribute="trailing" id="2eU-jV-ezU"/>
+                                            <constraint firstAttribute="trailing" secondItem="w6D-cX-lEH" secondAttribute="trailing" id="42P-wv-8ia"/>
+                                            <constraint firstItem="13880" firstAttribute="top" secondItem="Py1-2C-3r1" secondAttribute="bottom" constant="100" id="ESB-St-JE3"/>
+                                            <constraint firstItem="Py1-2C-3r1" firstAttribute="leading" secondItem="7673" secondAttribute="leading" id="I2l-AS-ykL"/>
+                                            <constraint firstItem="w6D-cX-lEH" firstAttribute="leading" secondItem="7673" secondAttribute="leading" id="ICe-VG-7Gq"/>
+                                            <constraint firstItem="Py1-2C-3r1" firstAttribute="top" secondItem="zfB-Qs-rFh" secondAttribute="bottom" constant="5" id="Lih-Mi-rAB"/>
+                                            <constraint firstItem="SNP-zf-ATr" firstAttribute="leading" secondItem="7673" secondAttribute="leading" id="MQd-yY-ejb"/>
+                                            <constraint firstItem="22179" firstAttribute="top" secondItem="13880" secondAttribute="top" constant="50" id="Plm-NR-3b4"/>
+                                            <constraint firstItem="w6D-cX-lEH" firstAttribute="top" secondItem="wzu-Aa-scM" secondAttribute="bottom" constant="5" id="dQv-IQ-fB9"/>
+                                            <constraint firstItem="29008" firstAttribute="top" secondItem="28994" secondAttribute="bottom" constant="5" id="el3-gg-DdB"/>
                                             <constraint firstItem="28994" firstAttribute="top" secondItem="28973" secondAttribute="bottom" constant="5" id="eu7-yo-s88"/>
-                                            <constraint firstItem="URi-Mw-PAa" firstAttribute="top" secondItem="13880" secondAttribute="bottom" constant="15" id="fmd-H9-zDx"/>
                                             <constraint firstAttribute="bottom" secondItem="22179" secondAttribute="bottom" constant="20" id="gKm-Kb-6Q8"/>
-                                            <constraint firstAttribute="trailing" secondItem="GzX-RK-RIi" secondAttribute="trailing" id="nhL-Ya-a4T"/>
-                                            <constraint firstItem="cct-54-lKa" firstAttribute="leading" secondItem="7673" secondAttribute="leading" id="trJ-0W-p2J"/>
-                                            <constraint firstAttribute="trailing" secondItem="URi-Mw-PAa" secondAttribute="trailing" id="xbJ-V7-4Zc"/>
-                                            <constraint firstItem="JdK-oy-Dvr" firstAttribute="centerY" secondItem="URi-Mw-PAa" secondAttribute="centerY" id="yrY-yk-bgP"/>
+                                            <constraint firstItem="SNP-zf-ATr" firstAttribute="top" secondItem="Py1-2C-3r1" secondAttribute="bottom" constant="5" id="p0H-Hs-QeN"/>
+                                            <constraint firstItem="zfB-Qs-rFh" firstAttribute="top" secondItem="w6D-cX-lEH" secondAttribute="bottom" constant="5" id="pGo-Bm-oS6"/>
+                                            <constraint firstItem="wzu-Aa-scM" firstAttribute="leading" secondItem="7673" secondAttribute="leading" id="r1Q-S4-ZJL"/>
+                                            <constraint firstAttribute="trailing" secondItem="zfB-Qs-rFh" secondAttribute="trailing" id="sof-jX-FfA"/>
+                                            <constraint firstItem="wzu-Aa-scM" firstAttribute="top" secondItem="29008" secondAttribute="bottom" constant="5" id="yNc-7I-kgC"/>
+                                            <constraint firstAttribute="trailing" secondItem="SNP-zf-ATr" secondAttribute="trailing" id="yWR-Bb-9A6"/>
+                                            <constraint firstAttribute="trailing" secondItem="wzu-Aa-scM" secondAttribute="trailing" id="zHi-5E-Iq5"/>
                                         </constraints>
                                     </view>
                                 </subviews>
@@ -238,9 +250,8 @@
                             <constraint firstItem="649" firstAttribute="top" secondItem="22689" secondAttribute="bottom" id="22695"/>
                         </constraints>
                     </view>
-                    <size key="freeformSize" width="414" height="900"/>
+                    <size key="freeformSize" width="414" height="1200"/>
                     <connections>
-                        <outlet property="bottomInputValidSwitch" destination="GzX-RK-RIi" id="22h-5Z-QoU"/>
                         <outlet property="containerBottomView" destination="649" id="name-outlet-649"/>
                         <outlet property="containerTopView" destination="22689" id="name-outlet-22689"/>
                         <outlet property="disabledHintTextColorDropDown" destination="28966" id="name-outlet-28966"/>
@@ -251,15 +262,18 @@
                         <outlet property="fontDropDown" destination="27743" id="name-outlet-27743"/>
                         <outlet property="hintTextColorDropDown" destination="28959" id="name-outlet-28959"/>
                         <outlet property="letterSpacingDropDown" destination="28072" id="name-outlet-28072"/>
+                        <outlet property="normalIconColorDropDown" destination="wzu-Aa-scM" id="ekG-qK-8oo"/>
+                        <outlet property="normalUnderlineColorDropDown" destination="w6D-cX-lEH" id="Vov-8Q-UIT"/>
+                        <outlet property="populatedIconColorDropDown" destination="zfB-Qs-rFh" id="TND-Cg-ku6"/>
+                        <outlet property="populatedUnderlineColorDropDown" destination="Py1-2C-3r1" id="hBo-o2-QQU"/>
                         <outlet property="propertiesContainer" destination="7673" id="name-outlet-7673"/>
                         <outlet property="resetButton" destination="22179" id="name-outlet-22179"/>
                         <outlet property="scrollView" destination="4430" id="name-outlet-4430"/>
-                        <outlet property="switchDisabled" destination="13880" id="name-outlet-13880"/>
+                        <outlet property="switchDisabled" destination="13880" id="ktF-0F-cxF"/>
                         <outlet property="textColorDropDown" destination="28890" id="name-outlet-28890"/>
                         <outlet property="textSizeDropDown" destination="28883" id="name-outlet-28883"/>
                         <outlet property="themeDropDown" destination="27161" id="name-outlet-27161"/>
-                        <outlet property="topInputValidSwitch" destination="URi-Mw-PAa" id="9sp-CG-nCS"/>
-                        <outlet property="unfocusedUnderlineColorDropDown" destination="29001" id="name-outlet-29001"/>
+                        <outlet property="validatingRulesDropDown" destination="SNP-zf-ATr" id="mag-0V-Fjf"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="207" userLabel="First Responder" sceneMemberID="firstResponder"/>

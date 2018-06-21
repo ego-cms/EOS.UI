@@ -18,12 +18,13 @@ namespace EOS.UI.iOS.Sandbox
 
         private Input _inputTop;
         private Input _inputBotton;
+        private Predicate<String> _validateRule;
 
         private List<EOSSandboxDropDown> _dropDowns;
 
-        public InputControlView (IntPtr handle) : base (handle)
+        public InputControlView(IntPtr handle) : base(handle)
         {
-            
+
         }
 
         public override void ViewDidLoad()
@@ -50,8 +51,12 @@ namespace EOS.UI.iOS.Sandbox
                 disabledHintTextColorDropDown,
                 focusedIconDropDown,
                 focusedUnderlineColorDropDown,
-                unfocusedUnderlineColorDropDown,
-                disabledUnderlineColorDropDown
+                disabledUnderlineColorDropDown,
+                normalIconColorDropDown,
+                normalUnderlineColorDropDown,
+                populatedIconColorDropDown,
+                populatedUnderlineColorDropDown,
+                validatingRulesDropDown
             };
 
             View.AddGestureRecognizer(new UITapGestureRecognizer(() =>
@@ -83,6 +88,12 @@ namespace EOS.UI.iOS.Sandbox
                 return true;
             };
 
+            _inputTop.EditingChanged += (sender, e) =>
+            {
+                var result = _validateRule?.Invoke(_inputTop.Text);
+                _inputTop.IsValid = result ?? true;// !text.Any(c => char.IsDigit(c));
+            };
+
             var rect = new CGRect(0, 0, 100, 150);
 
             InitThemeTextField(rect);
@@ -94,11 +105,15 @@ namespace EOS.UI.iOS.Sandbox
             InitPlaceholderTextField(rect);
             InitPlaceholderDisabledTextField(rect);
             InitIconFocusedTextField(rect);
-            InitUnderlineFocusedColorTextField(rect);
-            InitUnderlineUnfocusedColorTextField(rect);
-            InitUnderlineDisabledColorTextField(rect);
+            InitFocusedColorTextField(rect);
+            InitPopulatedUndrlineColorTextField(rect);
+            InitDisabledColorTextField(rect);
+            InitNormalIconColorTextField(rect);
+            InitNormalUnderlineColorTextField(rect);
+            InitPopulatedIconColorTextField(rect);
+            InitPopulatedUndrlineColorTextField(rect);
+            InitValidatingRulesTextField(rect);
             InitDisabledSwitch();
-            InitValidationSwitches();
             InitResetButton();
         }
 
@@ -121,14 +136,14 @@ namespace EOS.UI.iOS.Sandbox
                 },
                 Fields.Theme,
                 rect);
-            themeDropDown.SetTextFieldText(_inputTop.GetThemeProvider().GetCurrentTheme() is LightEOSTheme  ? "Light" : "Dark");
+            themeDropDown.SetTextFieldText(_inputTop.GetThemeProvider().GetCurrentTheme() is LightEOSTheme ? "Light" : "Dark");
         }
 
         private void InitFontTextField(CGRect rect)
         {
             fontDropDown.InitSource(
                 Fonts,
-                font => 
+                font =>
                 {
                     _inputTop.Font = font;
                     _inputBotton.Font = font;
@@ -141,7 +156,7 @@ namespace EOS.UI.iOS.Sandbox
         {
             letterSpacingDropDown.InitSource(
                 LetterSpacingValues,
-                spacing => 
+                spacing =>
                 {
                     _inputTop.LetterSpacing = spacing;
                     _inputBotton.LetterSpacing = spacing;
@@ -154,7 +169,7 @@ namespace EOS.UI.iOS.Sandbox
         {
             textSizeDropDown.InitSource(
                 FontSizeValues,
-                size => 
+                size =>
                 {
                     _inputTop.TextSize = size;
                     _inputBotton.TextSize = size;
@@ -220,69 +235,102 @@ namespace EOS.UI.iOS.Sandbox
                     _inputTop.LeftImage = UIImage.FromBundle(icon);
                     _inputBotton.LeftImage = UIImage.FromBundle(icon);
                 },
-                Fields.IconFocused,
+                Fields.Icon,
                 rect);
         }
 
-        private void InitUnderlineFocusedColorTextField(CGRect rect)
+        private void InitFocusedColorTextField(CGRect rect)
         {
             focusedUnderlineColorDropDown.InitSource(
                 color =>
                 {
-                    _inputTop.UnderlineColorFocused = color;
-                    _inputBotton.UnderlineColorFocused = color;
+                    _inputTop.FocusedColor = color;
+                    _inputBotton.FocusedColor = color;
                 },
-                Fields.UnderlineColorFocused,
+                Fields.FocusedColor,
                 rect);
         }
 
-        private void InitUnderlineUnfocusedColorTextField(CGRect rect)
-        {
-            unfocusedUnderlineColorDropDown.InitSource(
-                color =>
-                {
-                    _inputTop.UnderlineColorUnfocused = color;
-                    _inputBotton.UnderlineColorUnfocused = color;
-                },
-                Fields.UnderlineColorUnfocused,
-                rect);
-        }
-
-        private void InitUnderlineDisabledColorTextField(CGRect rect)
+        private void InitDisabledColorTextField(CGRect rect)
         {
             disabledUnderlineColorDropDown.InitSource(
                 color =>
                 {
-                    _inputTop.UnderlineColorDisabled = color;
-                    _inputBotton.UnderlineColorDisabled = color;
+                    _inputTop.DisabledColor = color;
+                    _inputBotton.DisabledColor = color;
                 },
-                Fields.UnderlineColorDisabled,
+                Fields.DisabledColor,
+                rect);
+        }
+
+        private void InitNormalIconColorTextField(CGRect rect)
+        {
+            normalIconColorDropDown.InitSource(
+                color =>
+                {
+                    _inputTop.NormalIconColor = color;
+                    _inputBotton.NormalIconColor = color;
+                },
+                Fields.NormalIconColor,
+                rect);
+        }
+
+        private void InitNormalUnderlineColorTextField(CGRect rect)
+        {
+            normalUnderlineColorDropDown.InitSource(
+                color =>
+                {
+                    _inputTop.NormalUnderlineColor = color;
+                    _inputBotton.NormalUnderlineColor = color;
+                },
+                Fields.NormalUnderlineColor,
+                rect);
+        }
+
+        private void InitPopulatedIconColorTextField(CGRect rect)
+        {
+            populatedIconColorDropDown.InitSource(
+                color =>
+                {
+                    _inputTop.PopulatedIconColor = color;
+                    _inputBotton.PopulatedIconColor = color;
+                },
+                Fields.PopulatedIconColor,
+                rect);
+        }
+
+        private void InitPopulatedUndrlineColorTextField(CGRect rect)
+        {
+            populatedUnderlineColorDropDown.InitSource(
+                color =>
+                {
+                    _inputTop.PopulatedUnderlineColor = color;
+                    _inputBotton.PopulatedUnderlineColor = color;
+                },
+                Fields.PopulatedUnderlineColor,
+                rect);
+        }
+
+        private void InitValidatingRulesTextField(CGRect rect)
+        {
+            validatingRulesDropDown.InitSource(Validations,
+                rule =>
+                {
+                    _validateRule = rule;
+                    _inputTop.IsValid = _validateRule?.Invoke(_inputTop.Text) ?? true;
+                    _inputBotton.IsValid = _validateRule?.Invoke(_inputBotton.Text) ?? true;
+                },
+                Fields.ValidationRules,
                 rect);
         }
 
         private void InitDisabledSwitch()
         {
             switchDisabled.On = true;
-            switchDisabled.ValueChanged += (sender, e) => 
+            switchDisabled.ValueChanged += (sender, e) =>
             {
                 _inputBotton.Enabled = switchDisabled.On;
-                _inputBotton.ResignFirstResponder();
                 _inputTop.Enabled = switchDisabled.On;
-                _inputTop.ResignFirstResponder();
-            };
-        }
-        
-        private void InitValidationSwitches()
-        {
-            topInputValidSwitch.On = true;
-            bottomInputValidSwitch.On = true;
-            topInputValidSwitch.ValueChanged += (sender, e) => 
-            {
-                _inputTop.IsValid = topInputValidSwitch.On;
-            };
-            bottomInputValidSwitch.ValueChanged += (sender, e) =>
-            {
-                _inputBotton.IsValid = bottomInputValidSwitch.On;
             };
         }
 
@@ -297,5 +345,5 @@ namespace EOS.UI.iOS.Sandbox
                 ResetFields();
             };
         }
-	}
+    }
 }
