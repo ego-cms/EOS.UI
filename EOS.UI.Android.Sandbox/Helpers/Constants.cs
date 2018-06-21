@@ -28,9 +28,12 @@ namespace EOS.UI.Android.Sandbox.Helpers
             public static string IconFocused = "Icon focused";
             public static string IconUnocused = "Icon unfocused";
             public static string IconDisabled = "Icon disabled";
-            public static string UnderlineColorFocused = "Underline color focused";
-            public static string UnderlineColorUnocused = "Underline color unfocused";
-            public static string UnderlineColorDisabled = "Underline color disabled";
+            public static string FocusedColor = "Focused color";
+            public static string NormalUnderlineColor = "Normal underline color";
+            public static string NormalIconColor = "Normal icon color";
+            public static string PopulatedUnderlineColor = "Populated underline color";
+            public static string ValidationRules = "Validation rules";
+            public static string PopulatedIconColor = "Populated icon color";
             public static string DisabledColor = "Disabled color";
             public static string PressedColor = "Pressed color";
             public static string Size = "Size";
@@ -108,6 +111,21 @@ namespace EOS.UI.Android.Sandbox.Helpers
                 { Berkshireswash, "Fonts/Berkshireswash.ttf" },
                 { Amita, "Fonts/Amita.ttf" },
                 { AcademyEngraved, "Fonts/academyEngraved.ttf" },
+            };
+        }
+
+        public static class Validation
+        {
+            public const string Without = "without validation";
+            public const string Email = "e-mail validation";
+            public const string Empty = "empty validation";
+
+            public static readonly Dictionary<string, int> ValidationCollection = new Dictionary<string, int>()
+            {
+                { string.Empty, 0 },
+                { Without, 1 },
+                { Email, 2 },
+                { Empty, 3 }
             };
         }
 

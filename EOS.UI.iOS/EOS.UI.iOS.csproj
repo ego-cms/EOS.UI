@@ -98,8 +98,12 @@
     <ImageAsset Include="Assets.xcassets\icAccountKey.imageset\icAccountKey.pdf">
       <Visible>false</Visible>
     </ImageAsset>
-    <ImageAsset Include="Assets.xcassets\icWarning.imageset\Contents.json" />
-    <ImageAsset Include="Assets.xcassets\icWarning.imageset\icWarning.pdf" />
+    <ImageAsset Include="Assets.xcassets\icWarning.imageset\Contents.json">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\icWarning.imageset\icWarning.pdf">
+      <Visible>false</Visible>
+    </ImageAsset>
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
