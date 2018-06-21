@@ -13,9 +13,6 @@ namespace EOS.UI.iOS.Sandbox
 	partial class InputControlView
 	{
 		[Outlet]
-		UIKit.UISwitch bottomInputValidSwitch { get; set; }
-
-		[Outlet]
 		[GeneratedCode ("iOS Designer", "1.0")]
 		UIKit.UIView containerBottomView { get; set; }
 
@@ -56,6 +53,18 @@ namespace EOS.UI.iOS.Sandbox
 		EOS.UI.iOS.Sandbox.EOSSandboxDropDown letterSpacingDropDown { get; set; }
 
 		[Outlet]
+		EOS.UI.iOS.Sandbox.EOSSandboxDropDown normalIconColorDropDown { get; set; }
+
+		[Outlet]
+		EOS.UI.iOS.Sandbox.EOSSandboxDropDown normalUnderlineColorDropDown { get; set; }
+
+		[Outlet]
+		EOS.UI.iOS.Sandbox.EOSSandboxDropDown populatedIconColorDropDown { get; set; }
+
+		[Outlet]
+		EOS.UI.iOS.Sandbox.EOSSandboxDropDown populatedUnderlineColorDropDown { get; set; }
+
+		[Outlet]
 		[GeneratedCode ("iOS Designer", "1.0")]
 		EOS.UI.iOS.Sandbox.Controls.EOSSandboxView propertiesContainer { get; set; }
 
@@ -84,19 +93,10 @@ namespace EOS.UI.iOS.Sandbox
 		EOS.UI.iOS.Sandbox.EOSSandboxDropDown themeDropDown { get; set; }
 
 		[Outlet]
-		UIKit.UISwitch topInputValidSwitch { get; set; }
-
-		[Outlet]
-		[GeneratedCode ("iOS Designer", "1.0")]
-		EOS.UI.iOS.Sandbox.EOSSandboxDropDown unfocusedUnderlineColorDropDown { get; set; }
+		EOS.UI.iOS.Sandbox.EOSSandboxDropDown validatingRulesDropDown { get; set; }
 		
 		void ReleaseDesignerOutlets ()
 		{
-			if (bottomInputValidSwitch != null) {
-				bottomInputValidSwitch.Dispose ();
-				bottomInputValidSwitch = null;
-			}
-
 			if (containerBottomView != null) {
 				containerBottomView.Dispose ();
 				containerBottomView = null;
@@ -162,11 +162,6 @@ namespace EOS.UI.iOS.Sandbox
 				scrollView = null;
 			}
 
-			if (switchDisabled != null) {
-				switchDisabled.Dispose ();
-				switchDisabled = null;
-			}
-
 			if (textColorDropDown != null) {
 				textColorDropDown.Dispose ();
 				textColorDropDown = null;
@@ -182,14 +177,34 @@ namespace EOS.UI.iOS.Sandbox
 				themeDropDown = null;
 			}
 
-			if (topInputValidSwitch != null) {
-				topInputValidSwitch.Dispose ();
-				topInputValidSwitch = null;
+			if (normalIconColorDropDown != null) {
+				normalIconColorDropDown.Dispose ();
+				normalIconColorDropDown = null;
 			}
 
-			if (unfocusedUnderlineColorDropDown != null) {
-				unfocusedUnderlineColorDropDown.Dispose ();
-				unfocusedUnderlineColorDropDown = null;
+			if (normalUnderlineColorDropDown != null) {
+				normalUnderlineColorDropDown.Dispose ();
+				normalUnderlineColorDropDown = null;
+			}
+
+			if (populatedIconColorDropDown != null) {
+				populatedIconColorDropDown.Dispose ();
+				populatedIconColorDropDown = null;
+			}
+
+			if (populatedUnderlineColorDropDown != null) {
+				populatedUnderlineColorDropDown.Dispose ();
+				populatedUnderlineColorDropDown = null;
+			}
+
+			if (validatingRulesDropDown != null) {
+				validatingRulesDropDown.Dispose ();
+				validatingRulesDropDown = null;
+			}
+
+			if (switchDisabled != null) {
+				switchDisabled.Dispose ();
+				switchDisabled = null;
 			}
 		}
 	}
