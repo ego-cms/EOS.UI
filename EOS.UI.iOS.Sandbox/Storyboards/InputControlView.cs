@@ -91,7 +91,13 @@ namespace EOS.UI.iOS.Sandbox
             _inputTop.EditingChanged += (sender, e) =>
             {
                 var result = _validateRule?.Invoke(_inputTop.Text);
-                _inputTop.IsValid = result ?? true;// !text.Any(c => char.IsDigit(c));
+                _inputTop.IsValid = result ?? true;
+            };
+
+            _inputBotton.EditingChanged += (sender, e) =>
+            {
+                var result = _validateRule?.Invoke(_inputBotton.Text);
+                _inputBotton.IsValid = result ?? true;
             };
 
             var rect = new CGRect(0, 0, 100, 150);
@@ -342,6 +348,9 @@ namespace EOS.UI.iOS.Sandbox
                 _inputBotton.Text = string.Empty;
                 _inputTop.ResetCustomization();
                 _inputBotton.ResetCustomization();
+                _validateRule = null;
+                _inputTop.IsValid = true;
+                _inputBotton.IsValid = true;
                 ResetFields();
             };
         }
