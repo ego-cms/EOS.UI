@@ -56,10 +56,9 @@ namespace EOS.UI.Shared.Themes.Themes
             { EOSConstants.LetterSpacing, 1 },
             { EOSConstants.SecondaryLetterSpacing, 1 },
             { EOSConstants.LeftImage, "icAccountCircle" },
-            { EOSConstants.LeftImageUnfocused, "icAccountKey" },
-            { EOSConstants.LeftImageDisabled, "icAccountOff" },
             { EOSConstants.CalendarImage, "icCalendar"},
             { EOSConstants.FabProgressPreloaderImage, "icPreloader"},
+            { EOSConstants.WarningInputImage, "icWarning"},
             { EOSConstants.FabProgressSize, 50},
             { EOSConstants.CircleProgressShown, true},
             { EOSConstants.FabShadow, new ShadowConfig(){
