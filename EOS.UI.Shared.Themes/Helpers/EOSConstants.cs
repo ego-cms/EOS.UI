@@ -62,4 +62,13 @@ namespace UIFrameworks.Shared.Themes.Helpers
         public const string CTAButton = "CTA Button";
         public const string WorkTimeCalendar = "Work time calendar";
     }
+
+    public static class SimpleButtonConstants
+    {
+        public const int LeftPadding = 110;
+        public const int RightPadding = 110;
+        public const int TopPadding = 14;
+        public const int BottomPadding = 17;
+    }
+
 }
