@@ -77,7 +77,7 @@ namespace EOS.UI.Android.Controls
                 if(Enabled && FindFocus() == this && IsValid)
                 {
                     LeftImage?.Mutate().SetColorFilter(value, PorterDuff.Mode.SrcIn);
-                    Background.SetColorFilter(value, PorterDuff.Mode.SrcIn);
+                    Background.Mutate().SetColorFilter(value, PorterDuff.Mode.SrcIn);
                 }
             }
         }
@@ -104,7 +104,7 @@ namespace EOS.UI.Android.Controls
                 IsEOSCustomizationIgnored = true;
                 _normalUnderlineColor = value;
                 if(Enabled && FindFocus() != this && !Populated && IsValid)
-                    Background.SetColorFilter(value, PorterDuff.Mode.SrcIn);
+                    Background.Mutate().SetColorFilter(value, PorterDuff.Mode.SrcIn);
             }
         }
 
@@ -117,7 +117,7 @@ namespace EOS.UI.Android.Controls
                 IsEOSCustomizationIgnored = true;
                 _populatedUnderlineColor = value;
                 if(Enabled && FindFocus() != this && Populated && IsValid)
-                    Background.SetColorFilter(value, PorterDuff.Mode.SrcIn);
+                    Background.Mutate().SetColorFilter(value, PorterDuff.Mode.SrcIn);
             }
         }
 
@@ -145,7 +145,7 @@ namespace EOS.UI.Android.Controls
                 if(!Enabled)
                 {
                     LeftImage?.Mutate().SetColorFilter(value, PorterDuff.Mode.SrcIn);
-                    Background.SetColorFilter(value, PorterDuff.Mode.SrcIn);
+                    Background.Mutate().SetColorFilter(value, PorterDuff.Mode.SrcIn);
                 }
             }
         }
@@ -292,22 +292,23 @@ namespace EOS.UI.Android.Controls
                 {
                     if(Enabled)
                     {
-                        var color = FindFocus() == this ? FocusedColor : Populated ? PopulatedIconColor : NormalIconColor;
-                        LeftImage.Mutate().SetColorFilter(color, PorterDuff.Mode.SrcIn);
-                        Background.SetColorFilter(color, PorterDuff.Mode.SrcIn);
+                        var imageColor = FindFocus() == this ? FocusedColor : Populated ? PopulatedIconColor : NormalIconColor;
+                        LeftImage.Mutate().SetColorFilter(imageColor, PorterDuff.Mode.SrcIn);
+                        var underlineColor = FindFocus() == this ? FocusedColor : Populated ? PopulatedUnderlineColor : NormalIconColor;
+                        Background.Mutate().SetColorFilter(underlineColor, PorterDuff.Mode.SrcIn);
                         base.SetCompoundDrawablesWithIntrinsicBounds(LeftImage, null, FindFocus() == this && Populated ?_closeImage : null, null);
                     }
                     else
                     {
                         LeftImage.Mutate().SetColorFilter(DisabledColor, PorterDuff.Mode.SrcIn);
-                        Background.SetColorFilter(DisabledColor, PorterDuff.Mode.SrcIn);
+                        Background.Mutate().SetColorFilter(DisabledColor, PorterDuff.Mode.SrcIn);
                         base.SetCompoundDrawablesWithIntrinsicBounds(LeftImage, null, null, null);
                     }
                 }
                 else
                 {
                     LeftImage.Mutate().SetColorFilter(_notValidColor, PorterDuff.Mode.SrcIn);
-                    Background.SetColorFilter(_notValidColor, PorterDuff.Mode.SrcIn);
+                    Background.Mutate().SetColorFilter(_notValidColor, PorterDuff.Mode.SrcIn);
                     base.SetCompoundDrawablesWithIntrinsicBounds(LeftImage, null, FindFocus() == this && Populated ? _closeImage : _notValidImage, null);
                 }
             }
@@ -439,7 +440,7 @@ namespace EOS.UI.Android.Controls
             }
             else
             {
-                Background.SetColorFilter(DisabledColor, PorterDuff.Mode.SrcIn);
+                Background.Mutate().SetColorFilter(DisabledColor, PorterDuff.Mode.SrcIn);
                 LeftImage.SetColorFilter(DisabledColor, PorterDuff.Mode.SrcIn);
                 base.SetCompoundDrawablesWithIntrinsicBounds(LeftImage, null, null, null);
             }
@@ -513,7 +514,7 @@ namespace EOS.UI.Android.Controls
             LeftImage.Mutate().SetColorFilter(IsValid ?  iconColor : _notValidColor, PorterDuff.Mode.SrcIn);
 
             var underlineColor = hasFocus ? FocusedColor : Populated ? PopulatedUnderlineColor : NormalIconColor;
-            Background.SetColorFilter(IsValid ? underlineColor : _notValidColor, PorterDuff.Mode.SrcIn);
+            Background.Mutate().SetColorFilter(IsValid ? underlineColor : _notValidColor, PorterDuff.Mode.SrcIn);
 
             if(hasFocus)
                 base.SetCompoundDrawablesWithIntrinsicBounds(LeftImage, null, !string.IsNullOrEmpty(Text)? _closeImage : null, null);
@@ -525,7 +526,7 @@ namespace EOS.UI.Android.Controls
         {
             if(FindFocus() == this && !string.IsNullOrEmpty(Text))
             {
-                if(Width - e.GetX() <= IconWidth)
+                if(Width - e.GetX() <= IconWidth * Resources.DisplayMetrics.Density)
                     Text = string.Empty;
             }
 
