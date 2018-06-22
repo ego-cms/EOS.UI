@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections;
 using Android.Content;
 using Android.Graphics;
@@ -89,6 +89,7 @@ namespace EOS.UI.Android.Sandbox.Controls
         public void SetupAdapter(IList source)
         {
             _spinner.Adapter = new EOSSandboxSpinnerAdapter(_context, R.Layout.SimpleSpinnerItem, source);
+            _spinner.SetSelection(0);
         }
 
         private void Initialize(Context context = null, IAttributeSet attrs = null)

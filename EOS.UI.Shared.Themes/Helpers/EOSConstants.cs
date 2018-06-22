@@ -47,6 +47,8 @@ namespace UIFrameworks.Shared.Themes.Helpers
         public const string WorkTimeDayTextSize = "workTimeDayTextSize";
         public const string WorkTimeTitleFont = "workTimeTitleFont";
         public const string WorkTimeDayTextFont = "workTimeDayFont";
+        //Sandbox
+        public const string DefaultText = "default";
     }
 
     public static class ControlNames
