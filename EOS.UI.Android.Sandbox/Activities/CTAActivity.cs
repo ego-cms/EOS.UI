@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using System.Timers;
 using Android.App;
 using Android.Graphics;
 using Android.OS;
@@ -13,7 +12,6 @@ using UIFrameworks.Shared.Themes.Helpers;
 using UIFrameworks.Shared.Themes.Interfaces;
 using static Android.Widget.CompoundButton;
 using static EOS.UI.Android.Sandbox.Helpers.Constants;
-using A = Android;
 
 namespace EOS.UI.Android.Sandbox.Activities
 {
@@ -45,9 +43,6 @@ namespace EOS.UI.Android.Sandbox.Activities
             _CTAButton = FindViewById<SimpleButton>(Resource.Id.simpleButton);
             _CTAButton.UpdateAppearance();
             _CTAButton.Text = "CTA button";
-            FindViewById<SimpleButton>(Resource.Id.simpleButton1).Text = "CTA button";
-            FindViewById<SimpleButton>(Resource.Id.simpleButton2).Text = "CTA button";
-            FindViewById<SimpleButton>(Resource.Id.simpleButton3).Text = "CTA button";
 
             _CTAButton.Click += async (s, e) =>
             {

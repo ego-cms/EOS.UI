@@ -130,7 +130,6 @@ namespace EOS.UI.Android.Controls
         {
             Background = CreateDefaultDrawable();
             var denisty = Resources.DisplayMetrics.Density;
-            SetPadding((int)(15 * denisty), 0, (int)(15 * denisty), (int)(3 * denisty));
             SetMaxLines(1);
             Ellipsize = A.Text.TextUtils.TruncateAt.End;
             if(attrs != null)

@@ -18,10 +18,6 @@ namespace EOS.UI.Android.Sandbox.Activities
     public class SimpleButtonActivity : BaseActivity, IOnCheckedChangeListener
     {
         private SimpleButton _simpleButton;
-        private SimpleButton _simpleButton1;
-        private SimpleButton _simpleButton2;
-        private SimpleButton _simpleButton3;
-        private List<SimpleButton> _buttons;
         private EOSSandboxDropDown _themeDropDown;
         private EOSSandboxDropDown _fontDropDown;
         private EOSSandboxDropDown _letterSpacingDropDown;
@@ -41,19 +37,6 @@ namespace EOS.UI.Android.Sandbox.Activities
             SetContentView(Resource.Layout.SimpleButtonLayout);
 
             _simpleButton = FindViewById<SimpleButton>(Resource.Id.simpleButton);
-            _simpleButton1 = FindViewById<SimpleButton>(Resource.Id.simpleButton1);
-            _simpleButton2 = FindViewById<SimpleButton>(Resource.Id.simpleButton2);
-            _simpleButton3 = FindViewById<SimpleButton>(Resource.Id.simpleButton3);
-            _simpleButton.UpdateAppearance();
-
-            _buttons = new List<SimpleButton>()
-            {
-                _simpleButton,
-                _simpleButton1,
-                _simpleButton2,
-                _simpleButton3
-            };
-
             _themeDropDown = FindViewById<EOSSandboxDropDown>(Resource.Id.themeDropDown);
             _fontDropDown = FindViewById<EOSSandboxDropDown>(Resource.Id.fontDropDown);
             _letterSpacingDropDown = FindViewById<EOSSandboxDropDown>(Resource.Id.letterSpacingDropDown);
@@ -140,78 +123,67 @@ namespace EOS.UI.Android.Sandbox.Activities
         private void FontSpinner_ItemSelected(int position)
         {
             if(position > 0)
-                foreach(var button in _buttons)
-                    button.Typeface = Typeface.CreateFromAsset(Assets, Fonts.FontsCollection.ElementAt(position).Value);
+                _simpleButton.Typeface = Typeface.CreateFromAsset(Assets, Fonts.FontsCollection.ElementAt(position).Value);
         }
 
         private void LetterSpacingView_ItemSelected(int position)
         {
             if(position > 0)
-                foreach(var button in _buttons)
-                    button.LetterSpacing = Sizes.LetterSpacingCollection.ElementAt(position).Value;
+                _simpleButton.LetterSpacing = Sizes.LetterSpacingCollection.ElementAt(position).Value;
         }
 
         private void TextSizeItemSelected(int position)
         {
             if(position > 0)
-                foreach(var button in _buttons)
-                    button.TextSize = Sizes.TextSizeCollection.ElementAt(position).Value;
+                _simpleButton.TextSize = Sizes.TextSizeCollection.ElementAt(position).Value;
         }
 
         private void TextColorEnabledItemSelected(int position)
         {
             if(position > 0)
-                foreach(var button in _buttons)
-                    button.TextColor = Colors.ColorsCollection.ElementAt(position).Value;
+                _simpleButton.TextColor = Colors.ColorsCollection.ElementAt(position).Value;
         }
 
         private void TextColorDisabledItemSelected(int position)
         {
             if(position > 0)
-                foreach(var button in _buttons)
-                    button.DisabledTextColor = Colors.ColorsCollection.ElementAt(position).Value;
+                _simpleButton.DisabledTextColor = Colors.ColorsCollection.ElementAt(position).Value;
         }
 
         private void TextColorPressedItemSelected(int position)
         {
             if(position > 0)
-                foreach(var button in _buttons)
-                    button.PressedTextColor = Colors.ColorsCollection.ElementAt(position).Value;
+                _simpleButton.PressedTextColor = Colors.ColorsCollection.ElementAt(position).Value;
         }
 
         private void BackgroundColorEnabledItemSelected(int position)
         {
             if(position > 0)
-                foreach(var button in _buttons)
-                    button.BackgroundColor = Colors.ColorsCollection.ElementAt(position).Value;
+                _simpleButton.BackgroundColor = Colors.ColorsCollection.ElementAt(position).Value;
         }
 
         private void BackgroundColorDisabledItemSelected(int position)
         {
             if(position > 0)
-                foreach(var button in _buttons)
-                    button.DisabledBackgroundColor = Colors.ColorsCollection.ElementAt(position).Value;
+                _simpleButton.DisabledBackgroundColor = Colors.ColorsCollection.ElementAt(position).Value;
         }
 
         private void BackgroundColorPressedItemSelected(int position)
         {
             if(position > 0)
-                foreach(var button in _buttons)
-                    button.PressedBackgroundColor = Colors.ColorsCollection.ElementAt(position).Value;
+                _simpleButton.PressedBackgroundColor = Colors.ColorsCollection.ElementAt(position).Value;
         }
 
         private void CornerRadiurSpinner_ItemSelected(int position)
         {
             if(position > 0)
-                foreach(var button in _buttons)
-                    button.CornerRadius = Sizes.CornerRadusCollection.ElementAt(position).Value;
+                _simpleButton.CornerRadius = Sizes.CornerRadusCollection.ElementAt(position).Value;
         }
 
         private void RippleColorItemSelected(int position)
         {
             if(position > 0)
-                foreach(var button in _buttons)
-                    button.RippleColor = Colors.ColorsCollection.ElementAt(position).Value;
+                _simpleButton.RippleColor = Colors.ColorsCollection.ElementAt(position).Value;
         }
 
         private void SetCurrenTheme(IEOSTheme iEOSTheme)
@@ -224,9 +196,7 @@ namespace EOS.UI.Android.Sandbox.Activities
 
         private void ResetCustomValues()
         {
-            foreach(var button in _buttons)
-                button.ResetCustomization();
-
+            _simpleButton.ResetCustomization();
             _fontDropDown.SetSpinnerSelection(0);
             _letterSpacingDropDown.SetSpinnerSelection(0);
             _textSizeDropDown.SetSpinnerSelection(0);

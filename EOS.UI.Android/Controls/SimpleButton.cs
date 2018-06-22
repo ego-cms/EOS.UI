@@ -227,7 +227,6 @@ namespace EOS.UI.Android.Controls
         {
             _rotateDrawable = CreateRotateDrawable();
             var denisty = Resources.DisplayMetrics.Density;
-            SetPadding((int)(110 * denisty), (int)(14 * denisty), (int)(110 * denisty), (int)(17 * denisty));
             SetAllCaps(false);
             SetOnTouchListener(this);
             SetLines(1);
@@ -236,6 +235,7 @@ namespace EOS.UI.Android.Controls
                 InitializeAttributes(attrs);
             UpdateAppearance();
             Background = CreateRippleDrawable(BackgroundColor);
+            Elevation = 20;
         }
 
         private void InitializeAttributes(IAttributeSet attrs)
