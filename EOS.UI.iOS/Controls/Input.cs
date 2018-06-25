@@ -299,7 +299,7 @@ namespace EOS.UI.iOS.Controls
                 {
                     RightViewMode = UITextFieldViewMode.Never;
                     _leftImageView.TintColor =
-                        IsFirstResponder ? FocusedColor : (String.IsNullOrEmpty(Text) ? NormalIconColor : PopulatedUnderlineColor);
+                                      IsFirstResponder ? FocusedColor : (String.IsNullOrEmpty(Text) ? NormalIconColor : PopulatedIconColor);
                     _underlineLayer.BorderColor =
                         IsFirstResponder ? FocusedColor.CGColor : (String.IsNullOrEmpty(Text) ? NormalIconColor.CGColor : PopulatedUnderlineColor.CGColor);
                 }

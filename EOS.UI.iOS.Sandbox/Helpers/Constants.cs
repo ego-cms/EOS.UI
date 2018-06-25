@@ -29,7 +29,7 @@ namespace EOS.UI.iOS.Sandbox.Helpers
             public const string PressedBackground = "Pressed background";
             public const string HintTextColor = "Hint text color";
             public const string HintTextColorDisabled = "Hint text color disabled";
-            public const string Icon = "Icon";
+            public const string IconFocused = "Icon focused";
             public const string FocusedColor = "Focused color";
             public const string PopulatedUnderlineColor = "Populated underline color";
             public const string ValidationRules = "Validation rules";
@@ -149,8 +149,9 @@ namespace EOS.UI.iOS.Sandbox.Helpers
 
         public static Dictionary<String, Predicate<string>> Validations = new Dictionary<string, Predicate<string>>()
         {
-            {"By Email", (s) => s.Contains("@") && !String.IsNullOrEmpty(s)},
-            {"By empty string", (s) => !String.IsNullOrEmpty(s) }
+            {"without validation", null },
+            {"e-mail validation", (s) => s.Contains("@") && !String.IsNullOrEmpty(s)},
+            {"empty validation", (s) => !String.IsNullOrEmpty(s) },
         };
 
         public static List<int> WidthValues;

@@ -137,6 +137,9 @@ namespace EOS.UI.iOS.Sandbox
                     _inputTop.GetThemeProvider().SetCurrentTheme(theme);
                     _inputTop.ResetCustomization();
                     _inputBotton.ResetCustomization();
+                    _inputTop.IsValid = true;
+                    _inputBotton.IsValid = true;
+                    _validateRule = null;
                     _dropDowns.Except(new[] { themeDropDown }).ToList().ForEach(dropDown => dropDown.ResetValue());
                     UpdateApperaence();
                 },
@@ -192,7 +195,7 @@ namespace EOS.UI.iOS.Sandbox
                     _inputTop.TextColor = color;
                     _inputBotton.TextColor = color;
                 },
-                Fields.EnabledTextColor,
+                Fields.TextColor,
                 rect);
         }
 
@@ -241,7 +244,7 @@ namespace EOS.UI.iOS.Sandbox
                     _inputTop.LeftImage = UIImage.FromBundle(icon);
                     _inputBotton.LeftImage = UIImage.FromBundle(icon);
                 },
-                Fields.Icon,
+                Fields.IconFocused,
                 rect);
         }
 
