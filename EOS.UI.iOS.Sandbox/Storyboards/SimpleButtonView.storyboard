@@ -23,7 +23,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="785">
-                                <rect key="frame" x="16" y="44" width="343" height="150"/>
+                                <rect key="frame" x="2" y="44" width="371" height="150"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="150" id="905"/>
@@ -258,8 +258,8 @@
                             <constraint firstItem="9588" firstAttribute="trailing" secondItem="206" secondAttribute="trailingMargin" id="40269"/>
                             <constraint firstItem="9588" firstAttribute="bottom" secondItem="206" secondAttribute="bottom" id="40391"/>
                             <constraint firstItem="9588" firstAttribute="centerX" secondItem="206" secondAttribute="centerX" id="40513"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="785" secondAttribute="trailing" id="HjK-ql-EqX"/>
-                            <constraint firstItem="785" firstAttribute="leading" secondItem="206" secondAttribute="leadingMargin" id="fHp-1d-Z7O"/>
+                            <constraint firstItem="785" firstAttribute="leading" secondItem="206" secondAttribute="leading" constant="2" id="QTl-Db-HxK"/>
+                            <constraint firstAttribute="trailing" secondItem="785" secondAttribute="trailing" constant="2" id="fFA-PD-iY1"/>
                         </constraints>
                     </view>
                     <size key="freeformSize" width="375" height="1500"/>

@@ -223,7 +223,6 @@ namespace EOS.UI.iOS.Controls
         private void Initialization()
         {
             Layer.MasksToBounds = true;
-            Layer.CornerRadius = 5;
             TitleLabel.Lines = 1;
             TitleLabel.LineBreakMode = UILineBreakMode.TailTruncation;
             ContentEdgeInsets = new UIEdgeInsets(ContentEdgeInsets.Top, 10, ContentEdgeInsets.Bottom, 10);

@@ -243,6 +243,7 @@
     <Compile Include="Storyboards\WorkTimeView.designer.cs">
       <DependentUpon>WorkTimeView.cs</DependentUpon>
     </Compile>
+    <Compile Include="Enums\SimpleButtonTypeEnum.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\EOS.UI.iOS\EOS.UI.iOS.csproj">
@@ -252,6 +253,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Resources\" />
+    <Folder Include="Enums\" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
 </Project>

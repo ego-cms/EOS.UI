@@ -4,6 +4,7 @@ using System.Linq;
 using CoreGraphics;
 using EOS.UI.iOS.Controls;
 using EOS.UI.iOS.Extensions;
+using EOS.UI.iOS.Sandbox.Enums;
 using EOS.UI.iOS.Sandbox.Helpers;
 using EOS.UI.iOS.Sandbox.Storyboards;
 using EOS.UI.Shared.Themes.Themes;
@@ -18,6 +19,7 @@ namespace EOS.UI.iOS.Sandbox
 
         private SimpleButton _simpleButton;
         private List<EOSSandboxDropDown> _dropDowns;
+        private NSLayoutConstraint[] _defaultConstraints;
 
         public SimpleButtonView(IntPtr handle) : base(handle)
         {
@@ -50,7 +52,8 @@ namespace EOS.UI.iOS.Sandbox
                 shadowRadiusDropDown,
                 shadowOffsetXDropDown,
                 shadowOffsetYDropDown,
-                shadowOpacityDropDown
+                shadowOpacityDropDown,
+                buttonTypeDropDown
             };
 
             View.AddGestureRecognizer(new UITapGestureRecognizer(() =>
@@ -60,6 +63,7 @@ namespace EOS.UI.iOS.Sandbox
 
             containerView.ConstrainLayout(() => _simpleButton.Frame.GetCenterX() == containerView.Frame.GetCenterX() &&
                               _simpleButton.Frame.GetCenterY() == containerView.Frame.GetCenterY(), _simpleButton);
+            _defaultConstraints = containerView.Constraints;
 
 
             var rect = new CGRect(0, 0, 100, 150);
@@ -89,9 +93,8 @@ namespace EOS.UI.iOS.Sandbox
 
         private void SandboxCustomization()
         {
-            _simpleButton.ResetCustomization();
-            _simpleButton.ContentEdgeInsets = new UIEdgeInsets(14, 110, 14, 110);
-            _simpleButton.CornerRadius = cornerRadiusForType;
+            _simpleButton.ContentEdgeInsets = new UIEdgeInsets(14, 100, 14, 100);
+            _simpleButton.CornerRadius = 24;
         }
 
         private void InitThemeDropDown(CGRect rect)
@@ -206,10 +209,28 @@ namespace EOS.UI.iOS.Sandbox
         {
             buttonTypeDropDown.InitSource(
                 ButtonTypes,
-                cornerRadiusForType =>
+                type =>
                 {
                     ResetFields();
-                    SandboxCustomization();
+                    _simpleButton.ResetCustomization();
+                    switch (type)
+                    {
+                        case SimpleButtonTypeEnum.Simple:
+                            containerView.RemoveConstraints(containerView.Constraints);
+                            containerView.AddConstraints(_defaultConstraints);
+                            SandboxCustomization();
+                            break;
+                        case SimpleButtonTypeEnum.FullBleed:
+                            containerView.RemoveConstraints(containerView.Constraints);
+                            View.ConstrainLayout(() => containerView.Frame.Height == 150);
+                            containerView.ConstrainLayout(() => _simpleButton.Frame.GetCenterX() == containerView.Frame.GetCenterX() &&
+                                                                _simpleButton.Frame.GetCenterY() == containerView.Frame.GetCenterY() &&
+                                                                _simpleButton.Frame.Left == containerView.Frame.Left &&
+                                                                _simpleButton.Frame.Right == containerView.Frame.Right);
+                            _simpleButton.ContentEdgeInsets = new UIEdgeInsets();
+                            _simpleButton.CornerRadius = 0;
+                            break;
+                    }
                 },
                 Fields.ButtonType,
                 rect);

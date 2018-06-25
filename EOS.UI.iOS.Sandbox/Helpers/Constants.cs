@@ -7,6 +7,7 @@ using EOS.UI.iOS.Helpers;
 using CoreGraphics;
 using EOS.UI.Shared.Helpers;
 using EOS.UI.Shared.Themes.Enums;
+using EOS.UI.iOS.Sandbox.Enums;
 
 namespace EOS.UI.iOS.Sandbox.Helpers
 {
@@ -110,10 +111,10 @@ namespace EOS.UI.iOS.Sandbox.Helpers
             { "Dark", EOSThemeEnumeration.Dark },
         };
         
-        public static Dictionary<string, int> ButtonTypes = new Dictionary<string, int>()
+        public static Dictionary<string, SimpleButtonTypeEnum> ButtonTypes = new Dictionary<string, SimpleButtonTypeEnum>()
         {
-            { "Simple button", 24 },
-            { "Full-bleed button", 0 },
+            { "Simple button", SimpleButtonTypeEnum.Simple },
+            { "Full-bleed button", SimpleButtonTypeEnum.FullBleed },
         };
 
         public static List<string> Icons = new List<string>()
