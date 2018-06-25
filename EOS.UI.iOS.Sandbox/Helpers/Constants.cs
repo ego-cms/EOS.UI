@@ -149,13 +149,8 @@ namespace EOS.UI.iOS.Sandbox.Helpers
 
         public static Dictionary<String, Predicate<string>> Validations = new Dictionary<string, Predicate<string>>()
         {
-            {"By Email", (s) => !s.Contains("@") },
-            {"By empty string", (s) =>
-                {
-                    s = s.Replace(" ", String.Empty);
-                    return !String.IsNullOrEmpty(s);
-                }
-            }
+            {"By Email", (s) => s.Contains("@") && !String.IsNullOrEmpty(s)},
+            {"By empty string", (s) => !String.IsNullOrEmpty(s) }
         };
 
         public static List<int> WidthValues;
