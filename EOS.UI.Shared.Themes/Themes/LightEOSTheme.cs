@@ -52,7 +52,7 @@ namespace EOS.UI.Shared.Themes.Themes
             { EOSConstants.SecondaryTextSize, 17 },
             { EOSConstants.Font, UIFont.SystemFontOfSize(17)},
             { EOSConstants.SecondaryFont, UIFont.SystemFontOfSize(17) },
-            { EOSConstants.CornerRadius, 3 },
+            { EOSConstants.CornerRadius, 24 },
             { EOSConstants.LetterSpacing, 1 },
             { EOSConstants.SecondaryLetterSpacing, 1 },
             { EOSConstants.LeftImageFocused, "icAccountCircle" },

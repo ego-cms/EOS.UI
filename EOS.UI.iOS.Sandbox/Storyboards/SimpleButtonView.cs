@@ -29,9 +29,7 @@ namespace EOS.UI.iOS.Sandbox
             base.ViewDidLoad();
 
             _simpleButton = new SimpleButton();
-            _simpleButton.SetTitle("Simple button", UIControlState.Normal);
-
-            _simpleButton.UpdateAppearance();
+            _simpleButton.SetTitle("Normal", UIControlState.Normal);
 
             _dropDowns = new List<EOSSandboxDropDown>()
             {
@@ -56,9 +54,7 @@ namespace EOS.UI.iOS.Sandbox
             }));
 
             containerView.ConstrainLayout(() => _simpleButton.Frame.GetCenterX() == containerView.Frame.GetCenterX() &&
-                              _simpleButton.Frame.GetCenterY() == containerView.Frame.GetCenterY() &&
-                              _simpleButton.Frame.Left == containerView.Frame.Left &&
-                              _simpleButton.Frame.Right == containerView.Frame.Right, _simpleButton);
+                              _simpleButton.Frame.GetCenterY() == containerView.Frame.GetCenterY(), _simpleButton);
 
 
             var rect = new CGRect(0, 0, 100, 150);
@@ -77,6 +73,14 @@ namespace EOS.UI.iOS.Sandbox
             InitDisabledSwitch();
             InitResetButton();
             InitRippleColorDropDown(rect);
+            InitButtonTypeDropDown(rect);
+
+            SandboxCustomization();
+        }
+        
+        private void SandboxCustomization()
+        {
+            _simpleButton.ContentEdgeInsets = new UIEdgeInsets(14, 110, 14, 110);
         }
 
         private void InitThemeDropDown(CGRect rect)
@@ -186,6 +190,21 @@ namespace EOS.UI.iOS.Sandbox
                 Fields.RippleColor,
                 rect);
         }
+        
+        private void InitButtonTypeDropDown(CGRect rect)
+        {
+            buttonTypeDropDown.InitSource(
+                ButtonTypes,
+                cornerRadiusForType =>
+                {
+                    ResetFields();
+                    _simpleButton.ResetCustomization();
+                    SandboxCustomization();
+                    _simpleButton.CornerRadius = cornerRadiusForType;
+                },
+                Fields.ButtonType, 
+                rect);
+        }
 
         private void InitDisabledSwitch()
         {
@@ -209,6 +228,5 @@ namespace EOS.UI.iOS.Sandbox
         {
             _dropDowns.Except(new[] { themeDropDown }).ToList().ForEach(dropDown => dropDown.ResetValue());
         }
-
     }
 }

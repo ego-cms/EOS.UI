@@ -48,8 +48,8 @@ namespace EOS.UI.iOS.Controls
             }
         }
 
-        private int _letterSpacing;
-        public int LetterSpacing
+        private float _letterSpacing;
+        public float LetterSpacing
         {
             get => _letterSpacing;
             set
@@ -60,8 +60,8 @@ namespace EOS.UI.iOS.Controls
             }
         }
 
-        private int _textSize;
-        public int TextSize
+        private float _textSize;
+        public float TextSize
         {
             get => _textSize == 0 ? (int)base.Font.PointSize : _textSize;
             set

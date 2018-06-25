@@ -73,6 +73,7 @@ namespace EOS.UI.iOS.Sandbox.Helpers
             public const string DayEvenBackgroundColor = "Even day background color";
             public const string WeekStartDay = "Week start day";
             public const string Default = "Default";
+            public const string ButtonType = "Button type";
         };
 
         public static UIColor BackgroundColor = UIColor.FromRGB(224, 224, 224);
@@ -102,6 +103,12 @@ namespace EOS.UI.iOS.Sandbox.Helpers
         {
             { "Light", EOSThemeEnumeration.Light },
             { "Dark", EOSThemeEnumeration.Dark },
+        };
+        
+        public static Dictionary<string, int> ButtonTypes = new Dictionary<string, int>()
+        {
+            { "Simple button", 24 },
+            { "Full-bleed button", 0 },
         };
 
         public static List<string> Icons = new List<string>()
