@@ -75,6 +75,21 @@ namespace EOS.UI.iOS.Sandbox
 		UIKit.UIScrollView scrollView { get; set; }
 
 		[Outlet]
+		EOS.UI.iOS.Sandbox.EOSSandboxDropDown shadowColorDropDown { get; set; }
+
+		[Outlet]
+		EOS.UI.iOS.Sandbox.EOSSandboxDropDown shadowOffsetXDropDown { get; set; }
+
+		[Outlet]
+		EOS.UI.iOS.Sandbox.EOSSandboxDropDown shadowOffsetYDropDown { get; set; }
+
+		[Outlet]
+		EOS.UI.iOS.Sandbox.EOSSandboxDropDown shadowOpacityDropDown { get; set; }
+
+		[Outlet]
+		EOS.UI.iOS.Sandbox.EOSSandboxDropDown shadowRadiusDropDown { get; set; }
+
+		[Outlet]
 		[GeneratedCode ("iOS Designer", "1.0")]
 		EOS.UI.iOS.Sandbox.EOSSandboxDropDown textSizeDropDown { get; set; }
 
@@ -172,6 +187,31 @@ namespace EOS.UI.iOS.Sandbox
 			if (themeDropDown != null) {
 				themeDropDown.Dispose ();
 				themeDropDown = null;
+			}
+
+			if (shadowColorDropDown != null) {
+				shadowColorDropDown.Dispose ();
+				shadowColorDropDown = null;
+			}
+
+			if (shadowOffsetXDropDown != null) {
+				shadowOffsetXDropDown.Dispose ();
+				shadowOffsetXDropDown = null;
+			}
+
+			if (shadowOffsetYDropDown != null) {
+				shadowOffsetYDropDown.Dispose ();
+				shadowOffsetYDropDown = null;
+			}
+
+			if (shadowRadiusDropDown != null) {
+				shadowRadiusDropDown.Dispose ();
+				shadowRadiusDropDown = null;
+			}
+
+			if (shadowOpacityDropDown != null) {
+				shadowOpacityDropDown.Dispose ();
+				shadowOpacityDropDown = null;
 			}
 		}
 	}

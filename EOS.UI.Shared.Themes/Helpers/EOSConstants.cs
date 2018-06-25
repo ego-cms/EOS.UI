@@ -26,6 +26,7 @@ namespace UIFrameworks.Shared.Themes.Helpers
         public const string LeftImageUnfocused = "leftImageUnfocused";
         public const string LeftImageFocused = "leftImageFocused";
         public const string LeftImageDisabled = "leftImageDisabled";
+        public const string SimpleButtonShadow = "simpleButtonShadow";
         //fab progress constans
         public const string CalendarImage = "calendarImage";
         public const string FabProgressPreloaderImage = "fabProgressPreloaderImage";

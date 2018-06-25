@@ -74,6 +74,11 @@ namespace EOS.UI.iOS.Sandbox.Helpers
             public const string WeekStartDay = "Week start day";
             public const string Default = "Default";
             public const string ButtonType = "Button type";
+            public const string ShadowColor = "Shadow color";
+            public const string ShadowOffsetX = "Shadow offset X";
+            public const string ShadowOffsetY = "Shadow offset Y";
+            public const string ShadowRadius = "Shadow radius";
+            public const string ShadowOpacity = "Shadow opacity";
         };
 
         public static UIColor BackgroundColor = UIColor.FromRGB(224, 224, 224);
@@ -155,6 +160,9 @@ namespace EOS.UI.iOS.Sandbox.Helpers
 
         public static List<int> WidthValues;
         public static List<int> PaddingValues;
+        public static List<int> ShadowOffsetValues;
+        public static List<int> ShadowRadiusValues;
+        public static List<double> ShadowOpacityValues;
 
         static Constants()
         {
@@ -176,6 +184,9 @@ namespace EOS.UI.iOS.Sandbox.Helpers
             FabProgressSizes = Enumerable.Range(40, 50).Where(i => i % 10 == 0).ToList();
             WidthValues = Enumerable.Range(1, 10).ToList();
             PaddingValues = Enumerable.Range(1, 10).ToList();
+            ShadowOffsetValues = Enumerable.Range(1, 40).ToList();
+            ShadowRadiusValues = Enumerable.Range(1, 20).ToList();
+            ShadowOpacityValues = new List<double>() { 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0 };
         }
     }
 }

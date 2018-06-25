@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using CoreAnimation;
+using CoreGraphics;
 using EOS.UI.iOS.Extensions;
 using EOS.UI.iOS.Themes;
+using EOS.UI.Shared.Helpers;
 using EOS.UI.Shared.Themes.Helpers;
 using EOS.UI.Shared.Themes.Interfaces;
 using Foundation;
@@ -191,19 +193,17 @@ namespace EOS.UI.iOS.Controls
             }
         }
 
-        public bool Success { get; set; }
-
-        public bool Failed { get; set; }
-
-        public bool DisableDefaultAfterProgress { get; set; }
-
-        public UIColor SuccessColor { get; set; }
-
-        public UIColor FailedColor { get; set; }
-
-        public string SuccessText { get; set; }
-
-        public string FailedText { get; set; }
+        private ShadowConfig _shadowConfig;
+        public ShadowConfig ShadowConfig
+        {
+            get => _shadowConfig;
+            set
+            {
+                _shadowConfig = value;
+                IsEOSCustomizationIgnored = true;
+                SetShadowConfig(Enabled ? _shadowConfig : null);
+            }
+        }
 
         private UIImage _preloaderImage;
         public UIImage PreloaderImage
@@ -369,6 +369,7 @@ namespace EOS.UI.iOS.Controls
                 PressedBackgroundColor = provider.GetEOSProperty<UIColor>(this, EOSConstants.BrandPrimaryColorVariant1);
                 CornerRadius = provider.GetEOSProperty<int>(this, EOSConstants.CornerRadius);
                 RippleColor = provider.GetEOSProperty<UIColor>(this, EOSConstants.RippleColor);
+                ShadowConfig = provider.GetEOSProperty<ShadowConfig>(this, EOSConstants.SimpleButtonShadow);
                 Enabled = base.Enabled;
                 PreloaderImage = UIImage.FromBundle(provider.GetEOSProperty<string>(this, EOSConstants.FabProgressPreloaderImage));
                 IsEOSCustomizationIgnored = false;
@@ -422,7 +423,24 @@ namespace EOS.UI.iOS.Controls
             SetAttributedTitle(_attributedTitles[UIControlState.Disabled], UIControlState.Disabled);
             SetAttributedTitle(_attributedTitles[UIControlState.Highlighted], UIControlState.Highlighted);
         }
-
+        
+        private void SetShadowConfig(ShadowConfig config)
+        {
+            if (config != null)
+            {
+                Layer.ShadowColor = config.Color;
+                Layer.ShadowOffset = config.Offset;
+                Layer.ShadowRadius = config.Radius;
+                Layer.ShadowOpacity = config.Opacity;
+            }
+            else
+            {
+                Layer.ShadowColor = UIColor.Clear.CGColor;
+                Layer.ShadowOffset = new CGSize();
+                Layer.ShadowRadius = 0;
+                Layer.ShadowOpacity = 0;
+            }
+        }
         #endregion
     }
 }
