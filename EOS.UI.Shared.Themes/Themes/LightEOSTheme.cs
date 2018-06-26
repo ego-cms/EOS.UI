@@ -101,13 +101,6 @@ namespace EOS.UI.Shared.Themes.Themes
                     Size = 16f,
                     LetterSpacing = -0.2f,
                     LineHeight = 19f
-            }},
-            { EOSConstants.R3C5, new FontStyleItem() {
-                    Color = ColorExtension.FromHex(neutralColor6),
-                    Font = UIFont.SystemFontOfSize(16f, UIFontWeight.Medium),
-                    Size = 16f,
-                    LetterSpacing = -0.2f,
-                    LineHeight = 19f
             }}
 #endif
 

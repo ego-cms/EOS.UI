@@ -4,6 +4,7 @@ using EOS.UI.Shared.Helpers;
 using UIFrameworks.Shared.Themes.Helpers;
 using UIFrameworks.Shared.Themes.Interfaces;
 using EOS.UI.Shared.Themes.Extensions;
+using EOS.UI.Shared.Themes.DataModels;
 
 #if __IOS__
 using CoreGraphics;
@@ -70,6 +71,12 @@ namespace EOS.UI.Shared.Themes.Themes
                         Radius = 1,
                         Opacity = 0.4f
             }},
+            { EOSConstants.SimpleButtonShadow, new ShadowConfig(){
+                        Color = UIColor.Black.CGColor,
+                        Offset = new CGSize(50, 50),
+                        Radius = 50,
+                        Opacity = 1f
+            }},
             { EOSConstants.BorderWidth, 2 },
             { EOSConstants.SectionTitle, "Dark section" },
             { EOSConstants.SectionActionTitle, "View All" },
@@ -82,7 +89,21 @@ namespace EOS.UI.Shared.Themes.Themes
             { EOSConstants.WorkTimeTitleSize, 13 },
             { EOSConstants.WorkTimeTitleFont, UIFont.BoldSystemFontOfSize(13) },
             { EOSConstants.WorkTimeDayTextSize, 11 },
-            { EOSConstants.WorkTimeDayTextFont, UIFont.BoldSystemFontOfSize(13) }
+            { EOSConstants.WorkTimeDayTextFont, UIFont.BoldSystemFontOfSize(13) },
+            { EOSConstants.R3C1, new FontStyleItem() {
+                    Color = ColorExtension.FromHex(neutralColor6),
+                    Font = UIFont.SystemFontOfSize(16f, UIFontWeight.Medium),
+                    Size = 16f,
+                    LetterSpacing = -0.2f,
+                    LineHeight = 19f
+            }},
+            { EOSConstants.R3C4, new FontStyleItem() {
+                    Color = ColorExtension.FromHex(neutralColor3),
+                    Font = UIFont.SystemFontOfSize(16f, UIFontWeight.Medium),
+                    Size = 16f,
+                    LetterSpacing = -0.2f,
+                    LineHeight = 19f
+            }}
 #endif
 
 #if __ANDROID__

@@ -49,7 +49,7 @@ namespace EOS.UI.iOS.Controls
                 IsEOSCustomizationIgnored = true;
             }
         }
-        
+
         private FontStyleItem _disabledFontStyle;
         public FontStyleItem DisabledFontStyle
         {
@@ -58,18 +58,6 @@ namespace EOS.UI.iOS.Controls
             {
                 _disabledFontStyle = value;
                 SetDisabledFontStyle();
-                IsEOSCustomizationIgnored = true;
-            }
-        }
-        
-        private FontStyleItem _pressedFontStyle;
-        public FontStyleItem PressedFontStyle
-        {
-            get => _pressedFontStyle;
-            set
-            {
-                _pressedFontStyle = value;
-                SetPressedFontStyle();
                 IsEOSCustomizationIgnored = true;
             }
         }
@@ -125,17 +113,6 @@ namespace EOS.UI.iOS.Controls
             {
                 DisabledFontStyle.Color = value;
                 SetDisabledFontStyle();
-                IsEOSCustomizationIgnored = true;
-            }
-        }
-
-        public UIColor PressedTextColor
-        {
-            get => PressedFontStyle.Color;
-            set
-            {
-                PressedFontStyle.Color = value;
-                SetPressedFontStyle();
                 IsEOSCustomizationIgnored = true;
             }
         }
@@ -319,20 +296,11 @@ namespace EOS.UI.iOS.Controls
                     resultString = new NSMutableAttributedString(attrString);
                     resultString.AddAttribute(UIStringAttributeKey.ForegroundColor, DisabledTextColor, range);
                     SetAttributedTitle(resultString, UIControlState.Disabled);
-
-                    resultString = new NSMutableAttributedString(attrString);
-                    resultString.AddAttribute(UIStringAttributeKey.ForegroundColor, PressedTextColor, range);
-                    SetAttributedTitle(resultString, UIControlState.Highlighted);
                     break;
                 case UIControlState.Disabled:
                     resultString = new NSMutableAttributedString(attrString);
                     resultString.AddAttribute(UIStringAttributeKey.ForegroundColor, DisabledTextColor, range);
-                    SetAttributedTitle(resultString, forState);
-                    break;
-                case UIControlState.Highlighted:
-                    resultString = new NSMutableAttributedString(attrString);
-                    resultString.AddAttribute(UIStringAttributeKey.ForegroundColor, PressedTextColor, range);
-                    SetAttributedTitle(resultString, forState);
+                    SetAttributedTitle(resultString, UIControlState.Disabled);
                     break;
             }
         }
@@ -388,7 +356,6 @@ namespace EOS.UI.iOS.Controls
                 var provider = GetThemeProvider();
                 FontStyle = provider.GetEOSProperty<FontStyleItem>(this, EOSConstants.R3C1);
                 DisabledFontStyle = provider.GetEOSProperty<FontStyleItem>(this, EOSConstants.R3C4);
-                PressedFontStyle = provider.GetEOSProperty<FontStyleItem>(this, EOSConstants.R3C5);
                 BackgroundColor = provider.GetEOSProperty<UIColor>(this, EOSConstants.BrandPrimaryColor);
                 DisabledBackgroundColor = provider.GetEOSProperty<UIColor>(this, EOSConstants.NeutralColor4);
                 PressedBackgroundColor = provider.GetEOSProperty<UIColor>(this, EOSConstants.BrandPrimaryColorVariant1);
@@ -480,19 +447,13 @@ namespace EOS.UI.iOS.Controls
             //letter spacing
             this.SetLetterSpacing(FontStyle.LetterSpacing);
         }
-        
+
         private void SetDisabledFontStyle()
         {
             //text color
             SetTitleColor(DisabledFontStyle.Color, UIControlState.Disabled);
         }
-        
-        private void SetPressedFontStyle()
-        {
-            //text color
-            SetTitleColor(PressedFontStyle.Color, UIControlState.Highlighted);
-        }
-        
+
         #endregion
     }
 }

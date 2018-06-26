@@ -50,10 +50,8 @@ namespace EOS.UI.iOS.Sandbox
                 textSizeDropDown,
                 enabledTextColorDropDown,
                 disabledTextColorDropDown,
-                pressedTextColorDropDown,
                 enabledBackgroundDropDown,
                 disabledBackgroundDropDown,
-                pressedTextColorDropDown,
                 pressedBackgroundDropdown,
                 cornerRadiusDropDown,
                 rippleColorDropDown,
@@ -71,7 +69,6 @@ namespace EOS.UI.iOS.Sandbox
             InitTextSizeDropDown(rect);
             InitTextColorEnabledDropDown(rect);
             InitTextColorDisabledDropDown(rect);
-            InitTextColorPressedDropDown(rect);
             InitBackgroundColorEnabledDropDown(rect);
             InitBackgroundColorDisabledDropDown(rect);
             InitBackgroundColorPressedDropDown(rect);
@@ -137,14 +134,6 @@ namespace EOS.UI.iOS.Sandbox
             disabledTextColorDropDown.InitSource(
                 color => _simpleButton.DisabledTextColor = color,
                 Fields.DisabledTextColor,
-                rect);
-        }
-
-        private void InitTextColorPressedDropDown(CGRect rect)
-        {
-            pressedTextColorDropDown.InitSource(
-                color => _simpleButton.PressedTextColor = color,
-                Fields.PressedTextColor,
                 rect);
         }
 

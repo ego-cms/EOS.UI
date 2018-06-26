@@ -37,10 +37,6 @@ namespace EOS.UI.iOS.Sandbox
 
 		[Outlet]
 		[GeneratedCode ("iOS Designer", "1.0")]
-		UIKit.NSLayoutConstraint enabledBackgroundDropDown { get; set; }
-
-		[Outlet]
-		[GeneratedCode ("iOS Designer", "1.0")]
 		EOS.UI.iOS.Sandbox.EOSSandboxDropDown enabledTextColorDropDown { get; set; }
 
 		[Outlet]
@@ -58,10 +54,6 @@ namespace EOS.UI.iOS.Sandbox
 		[Outlet]
 		[GeneratedCode ("iOS Designer", "1.0")]
 		EOS.UI.iOS.Sandbox.EOSSandboxDropDown pressedBackgroundDropDown { get; set; }
-
-		[Outlet]
-		[GeneratedCode ("iOS Designer", "1.0")]
-		EOS.UI.iOS.Sandbox.EOSSandboxDropDown pressedTextColorDropDown { get; set; }
 
 		[Outlet]
 		[GeneratedCode ("iOS Designer", "1.0")]
@@ -129,11 +121,6 @@ namespace EOS.UI.iOS.Sandbox
 				enabledBackgrDropDown = null;
 			}
 
-			if (enabledBackgroundDropDown != null) {
-				enabledBackgroundDropDown.Dispose ();
-				enabledBackgroundDropDown = null;
-			}
-
 			if (enabledTextColorDropDown != null) {
 				enabledTextColorDropDown.Dispose ();
 				enabledTextColorDropDown = null;
@@ -159,11 +146,6 @@ namespace EOS.UI.iOS.Sandbox
 				pressedBackgroundDropDown = null;
 			}
 
-			if (pressedTextColorDropDown != null) {
-				pressedTextColorDropDown.Dispose ();
-				pressedTextColorDropDown = null;
-			}
-
 			if (resetButton != null) {
 				resetButton.Dispose ();
 				resetButton = null;
@@ -177,16 +159,6 @@ namespace EOS.UI.iOS.Sandbox
 			if (scrollView != null) {
 				scrollView.Dispose ();
 				scrollView = null;
-			}
-
-			if (textSizeDropDown != null) {
-				textSizeDropDown.Dispose ();
-				textSizeDropDown = null;
-			}
-
-			if (themeDropDown != null) {
-				themeDropDown.Dispose ();
-				themeDropDown = null;
 			}
 
 			if (shadowColorDropDown != null) {
@@ -204,14 +176,24 @@ namespace EOS.UI.iOS.Sandbox
 				shadowOffsetYDropDown = null;
 			}
 
+			if (shadowOpacityDropDown != null) {
+				shadowOpacityDropDown.Dispose ();
+				shadowOpacityDropDown = null;
+			}
+
 			if (shadowRadiusDropDown != null) {
 				shadowRadiusDropDown.Dispose ();
 				shadowRadiusDropDown = null;
 			}
 
-			if (shadowOpacityDropDown != null) {
-				shadowOpacityDropDown.Dispose ();
-				shadowOpacityDropDown = null;
+			if (textSizeDropDown != null) {
+				textSizeDropDown.Dispose ();
+				textSizeDropDown = null;
+			}
+
+			if (themeDropDown != null) {
+				themeDropDown.Dispose ();
+				themeDropDown = null;
 			}
 		}
 	}
