@@ -104,6 +104,8 @@
     <ImageAsset Include="Assets.xcassets\icWarning.imageset\icWarning.pdf">
       <Visible>false</Visible>
     </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\icClear.imageset\Contents.json" />
+    <ImageAsset Include="Assets.xcassets\icClear.imageset\icClear.pdf" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
@@ -163,6 +165,7 @@
     <Folder Include="Assets.xcassets\icAccountKey.imageset\" />
     <Folder Include="CollectionViewSources\" />
     <Folder Include="Assets.xcassets\icWarning.imageset\" />
+    <Folder Include="Assets.xcassets\icClear.imageset\" />
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="Controls\CircleProgress.xib" />

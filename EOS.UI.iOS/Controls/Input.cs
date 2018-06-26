@@ -28,6 +28,8 @@ namespace EOS.UI.iOS.Controls
         private UIView _leftImageContainer;
         private UIView _rightImageContainer;
         private CALayer _underlineLayer;
+        private UIImage _clearImage;
+        private UIColor _clearImageColor;
         private readonly UIColor _warningColor = ColorExtension.FromHex("#FF5C49");
 
         #endregion
@@ -478,6 +480,7 @@ namespace EOS.UI.iOS.Controls
                 }
             }
             UpdateUnderline();
+            UpdateClearButtonColor();
         }
 
         private void UpdateUnderline()
@@ -551,10 +554,22 @@ namespace EOS.UI.iOS.Controls
                 PopulatedUnderlineColor = provider.GetEOSProperty<UIColor>(this, EOSConstants.NeutralColor3);
                 FocusedColor = provider.GetEOSProperty<UIColor>(this, EOSConstants.BrandPrimaryColor);
                 DisabledColor = provider.GetEOSProperty<UIColor>(this, EOSConstants.NeutralColor3);
-                _rightImageView.Image = UIImage.FromBundle(provider.GetEOSProperty<string>(this, EOSConstants.WarningInputImage));
+                _clearImage = UIImage.FromBundle(provider.GetEOSProperty<string>(this, EOSConstants.ClearInputImage));
+                _rightImageView.Image = UIImage.FromBundle(provider.GetEOSProperty<string>(this, EOSConstants.WarningInputImage));;
                 _rightImageView.TintColor = _warningColor;
+                _clearImageColor = provider.GetEOSProperty<UIColor>(this, EOSConstants.NeutralColor3);
                 IsEOSCustomizationIgnored = false;
             }
+        }
+        
+        private void UpdateClearButtonColor()
+        {
+            var button = (UIButton) Subviews.SingleOrDefault(s => s is UIButton);
+            if (button == null || button.ImageView.Image == _clearImage)
+                return;
+            button.SetImage(_clearImage, UIControlState.Normal);
+            button.SetImage(_clearImage, UIControlState.Highlighted);
+            button.ImageView.TintColor = _clearImageColor;
         }
 
         #endregion

@@ -61,6 +61,7 @@ namespace EOS.UI.Shared.Themes.Themes
             { EOSConstants.CalendarImage, "icCalendar"},
             { EOSConstants.FabProgressPreloaderImage, "icPreloader"},
             { EOSConstants.WarningInputImage, "icWarning"},
+            { EOSConstants.ClearInputImage, "icClear"},
             { EOSConstants.FabProgressSize, 50},
             { EOSConstants.CircleProgressShown, true},
             { EOSConstants.FabShadow,  new ShadowConfig(){

@@ -25,6 +25,7 @@ namespace UIFrameworks.Shared.Themes.Helpers
         public const string SecondaryLetterSpacing = "secondaryLetterSpacing";
         public const string LeftImage = "leftImage";
         public const string WarningInputImage = "warningInputImage";
+        public const string ClearInputImage = "clearInputImage";
         //fab progress constans
         public const string CalendarImage = "calendarImage";
         public const string FabProgressPreloaderImage = "fabProgressPreloaderImage";
