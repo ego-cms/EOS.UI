@@ -5,6 +5,7 @@ using CoreGraphics;
 using EOS.UI.iOS.Extensions;
 using EOS.UI.iOS.Themes;
 using EOS.UI.Shared.Helpers;
+using EOS.UI.Shared.Themes.DataModels;
 using EOS.UI.Shared.Themes.Helpers;
 using EOS.UI.Shared.Themes.Interfaces;
 using Foundation;
@@ -25,7 +26,7 @@ namespace EOS.UI.iOS.Controls
         private const double _verticalPaddingRatio = 0.25;
         private CAAnimationGroup _rippleAnimations;
         private CALayer _rippleLayer;
-        
+
         #region constructor
 
         public SimpleButton()
@@ -37,76 +38,104 @@ namespace EOS.UI.iOS.Controls
 
         #region customization
 
-        private UIFont _font;
+        private FontStyleItem _fontStyle;
+        public FontStyleItem FontStyle
+        {
+            get => _fontStyle;
+            set
+            {
+                _fontStyle = value;
+                SetFontStyle();
+                IsEOSCustomizationIgnored = true;
+            }
+        }
+        
+        private FontStyleItem _disabledFontStyle;
+        public FontStyleItem DisabledFontStyle
+        {
+            get => _disabledFontStyle;
+            set
+            {
+                _disabledFontStyle = value;
+                SetDisabledFontStyle();
+                IsEOSCustomizationIgnored = true;
+            }
+        }
+        
+        private FontStyleItem _pressedFontStyle;
+        public FontStyleItem PressedFontStyle
+        {
+            get => _pressedFontStyle;
+            set
+            {
+                _pressedFontStyle = value;
+                SetPressedFontStyle();
+                IsEOSCustomizationIgnored = true;
+            }
+        }
+
         public override UIFont Font
         {
-            get => _font ?? base.Font;
+            get => FontStyle?.Font ?? base.Font;
             set
             {
-                _font = value.WithSize(TextSize);
-                this.SetFont(_font);
-                base.Font = _font;
+                FontStyle.Font = value.WithSize(FontStyle.Size);
+                SetFontStyle();
                 IsEOSCustomizationIgnored = true;
             }
         }
 
-        private float _letterSpacing;
         public float LetterSpacing
         {
-            get => _letterSpacing;
+            get => FontStyle.LetterSpacing;
             set
             {
-                _letterSpacing = value;
-                this.SetLetterSpacing(_letterSpacing);
+                FontStyle.LetterSpacing = value;
+                SetFontStyle();
                 IsEOSCustomizationIgnored = true;
             }
         }
 
-        private float _textSize;
         public float TextSize
         {
-            get => _textSize == 0 ? (int)base.Font.PointSize : _textSize;
+            get => FontStyle?.Size ?? (int)base.Font.PointSize;
             set
             {
-                _textSize = value;
-                this.SetTextSize(_textSize);
+                FontStyle.Size = value;
+                SetFontStyle();
                 IsEOSCustomizationIgnored = true;
             }
         }
 
-        private UIColor _textColor;
         public UIColor TextColor
         {
-            get => _textColor;
+            get => FontStyle?.Color;
             set
             {
-                _textColor = value;
-                SetTitleColor(_textColor, UIControlState.Normal);
-                ImageView.TintColor = _textColor;
+                FontStyle.Color = value;
+                SetFontStyle();
                 IsEOSCustomizationIgnored = true;
             }
         }
 
-        private UIColor _disabledTextColor;
         public UIColor DisabledTextColor
         {
-            get => _disabledTextColor;
+            get => DisabledFontStyle.Color;
             set
             {
-                _disabledTextColor = value;
-                SetTitleColor(_disabledTextColor, UIControlState.Disabled);
+                DisabledFontStyle.Color = value;
+                SetDisabledFontStyle();
                 IsEOSCustomizationIgnored = true;
             }
         }
 
-        private UIColor _pressedTextColor;
         public UIColor PressedTextColor
         {
-            get => _pressedTextColor;
+            get => PressedFontStyle.Color;
             set
             {
-                _pressedTextColor = value;
-                SetTitleColor(_pressedTextColor, UIControlState.Highlighted);
+                PressedFontStyle.Color = value;
+                SetPressedFontStyle();
                 IsEOSCustomizationIgnored = true;
             }
         }
@@ -118,7 +147,7 @@ namespace EOS.UI.iOS.Controls
             set
             {
                 _backgroundColor = value;
-                if(Enabled)
+                if (Enabled)
                     base.BackgroundColor = value;
                 IsEOSCustomizationIgnored = true;
             }
@@ -131,7 +160,7 @@ namespace EOS.UI.iOS.Controls
             set
             {
                 _disabledBackgroundColor = value;
-                if(!Enabled)
+                if (!Enabled)
                     base.BackgroundColor = value;
                 IsEOSCustomizationIgnored = true;
             }
@@ -147,7 +176,7 @@ namespace EOS.UI.iOS.Controls
                 IsEOSCustomizationIgnored = true;
             }
         }
-        
+
         private UIColor _rippleColor;
         public UIColor RippleColor
         {
@@ -164,7 +193,7 @@ namespace EOS.UI.iOS.Controls
             get => base.Enabled;
             set
             {
-                if(Enabled != value)
+                if (Enabled != value)
                     ToggleState(value);
                 base.Enabled = value;
             }
@@ -179,7 +208,7 @@ namespace EOS.UI.iOS.Controls
                 IsEOSCustomizationIgnored = true;
             }
         }
-        
+
         public StateEnum ButtonState { get; set; }
 
         private bool _inProgress;
@@ -354,15 +383,12 @@ namespace EOS.UI.iOS.Controls
 
         public virtual void UpdateAppearance()
         {
-            if(!IsEOSCustomizationIgnored)
+            if (!IsEOSCustomizationIgnored)
             {
                 var provider = GetThemeProvider();
-                Font = provider.GetEOSProperty<UIFont>(this, EOSConstants.Font);
-                TextColor = provider.GetEOSProperty<UIColor>(this, EOSConstants.NeutralColor6);
-                DisabledTextColor = provider.GetEOSProperty<UIColor>(this, EOSConstants.NeutralColor3);
-                PressedTextColor = provider.GetEOSProperty<UIColor>(this, EOSConstants.NeutralColor6);
-                TextSize = provider.GetEOSProperty<int>(this, EOSConstants.TextSize);
-                LetterSpacing = provider.GetEOSProperty<int>(this, EOSConstants.LetterSpacing);
+                FontStyle = provider.GetEOSProperty<FontStyleItem>(this, EOSConstants.R3C1);
+                DisabledFontStyle = provider.GetEOSProperty<FontStyleItem>(this, EOSConstants.R3C4);
+                PressedFontStyle = provider.GetEOSProperty<FontStyleItem>(this, EOSConstants.R3C5);
                 BackgroundColor = provider.GetEOSProperty<UIColor>(this, EOSConstants.BrandPrimaryColor);
                 DisabledBackgroundColor = provider.GetEOSProperty<UIColor>(this, EOSConstants.NeutralColor4);
                 PressedBackgroundColor = provider.GetEOSProperty<UIColor>(this, EOSConstants.BrandPrimaryColorVariant1);
@@ -374,7 +400,7 @@ namespace EOS.UI.iOS.Controls
                 IsEOSCustomizationIgnored = false;
             }
         }
-        
+
         public void StartProgressAnimation()
         {
             InProgress = true;
@@ -422,7 +448,7 @@ namespace EOS.UI.iOS.Controls
             SetAttributedTitle(_attributedTitles[UIControlState.Disabled], UIControlState.Disabled);
             SetAttributedTitle(_attributedTitles[UIControlState.Highlighted], UIControlState.Highlighted);
         }
-        
+
         private void SetShadowConfig(ShadowConfig config)
         {
             if (config != null)
@@ -440,6 +466,33 @@ namespace EOS.UI.iOS.Controls
                 Layer.ShadowOpacity = 0;
             }
         }
+
+        private void SetFontStyle()
+        {
+            //set font
+            this.SetFont(FontStyle.Font);
+            base.Font = FontStyle.Font;
+            //size
+            this.SetTextSize(FontStyle.Size);
+            //text color
+            SetTitleColor(FontStyle.Color, UIControlState.Normal);
+            ImageView.TintColor = FontStyle.Color;
+            //letter spacing
+            this.SetLetterSpacing(FontStyle.LetterSpacing);
+        }
+        
+        private void SetDisabledFontStyle()
+        {
+            //text color
+            SetTitleColor(DisabledFontStyle.Color, UIControlState.Disabled);
+        }
+        
+        private void SetPressedFontStyle()
+        {
+            //text color
+            SetTitleColor(PressedFontStyle.Color, UIControlState.Highlighted);
+        }
+        
         #endregion
     }
 }

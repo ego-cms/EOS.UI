@@ -1,4 +1,5 @@
 using System;
+
 namespace EOS.UI.Shared.Themes.DataModels
 {
     public class WorkTimeCalendarItem
