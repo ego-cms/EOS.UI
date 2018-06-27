@@ -569,6 +569,7 @@ namespace EOS.UI.iOS.Controls
                 return;
             button.SetImage(_clearImage, UIControlState.Normal);
             button.SetImage(_clearImage, UIControlState.Highlighted);
+            button.ImageEdgeInsets = new UIEdgeInsets(-1,-1,-1,-1);
             button.ImageView.TintColor = _clearImageColor;
         }
 
