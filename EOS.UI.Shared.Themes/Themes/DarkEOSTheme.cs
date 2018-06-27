@@ -106,7 +106,7 @@ namespace EOS.UI.Shared.Themes.Themes
                     LetterSpacing = -0.2f,
                     LineHeight = 19f
             }},
-            //ghostbutton enabled
+            //ghostbutton enabled, simple label
             { EOSConstants.R2C1, new FontStyleItem() {
                     Color = ColorExtension.FromHex(brandPrimaryColor),
                     Font = UIFont.SystemFontOfSize(13f, UIFontWeight.Semibold),

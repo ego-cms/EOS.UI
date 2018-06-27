@@ -445,7 +445,7 @@ namespace EOS.UI.iOS.Extensions
         /// </summary>
         /// <param name="label">Label.</param>
         /// <param name="spacing">Spacing.</param>
-        internal static void SetLetterSpacing(this UILabel label, int spacing)
+        internal static void SetLetterSpacing(this UILabel label, float spacing)
         {
             var attributedString = new NSMutableAttributedString(label.AttributedText);
             attributedString.AddAttribute(UIStringAttributeKey.KerningAdjustment, new NSNumber(spacing), new NSRange(0, label.AttributedText.Length));
@@ -481,7 +481,7 @@ namespace EOS.UI.iOS.Extensions
         /// </summary>
         /// <param name="label">Label.</param>
         /// <param name="size">Size.</param>
-        internal static void SetTextSize(this UILabel label, int size)
+        internal static void SetTextSize(this UILabel label, float size)
         {
             var attributedString = new NSMutableAttributedString(label.AttributedText);
             attributedString.AddAttribute(UIStringAttributeKey.Font, label.Font.WithSize(size), new NSRange(0, label.AttributedText.Length));
