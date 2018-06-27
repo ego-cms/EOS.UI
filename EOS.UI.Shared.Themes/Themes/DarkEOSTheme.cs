@@ -90,6 +90,7 @@ namespace EOS.UI.Shared.Themes.Themes
             { EOSConstants.WorkTimeTitleFont, UIFont.BoldSystemFontOfSize(13) },
             { EOSConstants.WorkTimeDayTextSize, 11 },
             { EOSConstants.WorkTimeDayTextFont, UIFont.BoldSystemFontOfSize(13) },
+            //simplebutton enabled
             { EOSConstants.R3C1, new FontStyleItem() {
                     Color = ColorExtension.FromHex(neutralColor6),
                     Font = UIFont.SystemFontOfSize(16f, UIFontWeight.Medium),
@@ -97,13 +98,30 @@ namespace EOS.UI.Shared.Themes.Themes
                     LetterSpacing = -0.2f,
                     LineHeight = 19f
             }},
+            //simplebutton disabled
             { EOSConstants.R3C4, new FontStyleItem() {
                     Color = ColorExtension.FromHex(neutralColor3),
                     Font = UIFont.SystemFontOfSize(16f, UIFontWeight.Medium),
                     Size = 16f,
                     LetterSpacing = -0.2f,
                     LineHeight = 19f
-            }}
+            }},
+            //ghostbutton enabled
+            { EOSConstants.R2C1, new FontStyleItem() {
+                    Color = ColorExtension.FromHex(brandPrimaryColor),
+                    Font = UIFont.SystemFontOfSize(13f, UIFontWeight.Semibold),
+                    Size = 13f,
+                    LetterSpacing = -0.6f,
+                    LineHeight = 15f
+            }},
+            //ghostbutton disabled
+            { EOSConstants.R2C4, new FontStyleItem() {
+                    Color = ColorExtension.FromHex(neutralColor3),
+                    Font = UIFont.SystemFontOfSize(13f, UIFontWeight.Semibold),
+                    Size = 13f,
+                    LetterSpacing = -0.6f,
+                    LineHeight = 15f
+            }},
 #endif
 
 #if __ANDROID__

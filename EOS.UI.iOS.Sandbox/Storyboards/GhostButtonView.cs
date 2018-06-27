@@ -26,11 +26,11 @@ namespace EOS.UI.iOS.Sandbox
             base.ViewDidLoad();
 
             var ghostButton = new GhostButton();
-            ghostButton.SetTitle("DEFAULT TEXT", UIControlState.Normal);
+            ghostButton.SetTitle("Ghost button", UIControlState.Normal);
             containerView.ConstrainLayout(() => ghostButton.Frame.GetCenterX() == containerView.Frame.GetCenterX() &&
                                           ghostButton.Frame.GetCenterY() == containerView.Frame.GetCenterY() &&
-                                          ghostButton.Frame.Left == containerView.Frame.Left &&
-                                          ghostButton.Frame.Right == containerView.Frame.Right, ghostButton);
+                                          ghostButton.Frame.Height == 28 &&
+                                          ghostButton.Frame.Width == 108, ghostButton);
 
             _dropDowns = new List<EOSSandboxDropDown>()
             {
@@ -39,7 +39,6 @@ namespace EOS.UI.iOS.Sandbox
                 letterSpacingDropDown,
                 enabledTextColorDropDown,
                 disabledTextColorDropDown,
-                pressedTextColorDropDown,
                 textSizeDropDown,
                 rippleColorDropDown
             };
@@ -84,11 +83,6 @@ namespace EOS.UI.iOS.Sandbox
             disabledTextColorDropDown.InitSource(
                 color => ghostButton.DisabledTextColor = color,
                 Fields.DisabledTextColor,
-                rect);
-
-            pressedTextColorDropDown.InitSource(
-                color => ghostButton.PressedStateTextColor = color,
-                Fields.PressedTextColor,
                 rect);
 
             textSizeDropDown.InitSource(
