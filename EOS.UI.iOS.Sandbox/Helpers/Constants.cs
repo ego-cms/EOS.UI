@@ -185,8 +185,8 @@ namespace EOS.UI.iOS.Sandbox.Helpers
             FabProgressSizes = Enumerable.Range(40, 50).Where(i => i % 10 == 0).ToList();
             WidthValues = Enumerable.Range(1, 10).ToList();
             PaddingValues = Enumerable.Range(1, 10).ToList();
-            ShadowOffsetValues = Enumerable.Range(1, 40).ToList();
-            ShadowRadiusValues = Enumerable.Range(1, 20).ToList();
+            ShadowOffsetValues = Enumerable.Range(-15, 30).ToList();
+            ShadowRadiusValues = Enumerable.Range(1, 15).ToList();
             ShadowOpacityValues = new List<double>() { 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0 };
         }
     }

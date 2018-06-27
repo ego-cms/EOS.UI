@@ -228,7 +228,6 @@ namespace EOS.UI.iOS.Controls
 
         private void Initialization()
         {
-            Layer.MasksToBounds = true;
             TitleLabel.Lines = 1;
             TitleLabel.LineBreakMode = UILineBreakMode.TailTruncation;
             ContentEdgeInsets = new UIEdgeInsets(ContentEdgeInsets.Top, 10, ContentEdgeInsets.Bottom, 10);
@@ -294,6 +293,10 @@ namespace EOS.UI.iOS.Controls
                     SetAttributedTitle(resultString, UIControlState.Normal);
 
                     resultString = new NSMutableAttributedString(attrString);
+                    resultString.AddAttribute(UIStringAttributeKey.ForegroundColor, TextColor, range);
+                    SetAttributedTitle(resultString, UIControlState.Highlighted);
+
+                    resultString = new NSMutableAttributedString(attrString);
                     resultString.AddAttribute(UIStringAttributeKey.ForegroundColor, DisabledTextColor, range);
                     SetAttributedTitle(resultString, UIControlState.Disabled);
                     break;
@@ -301,6 +304,11 @@ namespace EOS.UI.iOS.Controls
                     resultString = new NSMutableAttributedString(attrString);
                     resultString.AddAttribute(UIStringAttributeKey.ForegroundColor, DisabledTextColor, range);
                     SetAttributedTitle(resultString, UIControlState.Disabled);
+                    break;
+                case UIControlState.Highlighted:
+                    resultString = new NSMutableAttributedString(attrString);
+                    resultString.AddAttribute(UIStringAttributeKey.ForegroundColor, TextColor, range);
+                    SetAttributedTitle(resultString, UIControlState.Highlighted);
                     break;
             }
         }
