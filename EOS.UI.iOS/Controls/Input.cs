@@ -164,7 +164,7 @@ namespace EOS.UI.iOS.Controls
                 IsEOSCustomizationIgnored = true;
                 _focusedColor = value;
                 UpdateUnderlineColor();
-                UpdateLeftImageColor();
+                UpdateIconColor();
             }
         }
 
@@ -176,7 +176,7 @@ namespace EOS.UI.iOS.Controls
             {
                 IsEOSCustomizationIgnored = true;
                 _normalIconColor = value;
-                UpdateLeftImageColor();
+                UpdateIconColor();
             }
         }
 
@@ -212,7 +212,7 @@ namespace EOS.UI.iOS.Controls
             {
                 IsEOSCustomizationIgnored = true;
                 _populatedIconColor = value;
-                UpdateLeftImageColor();
+                UpdateIconColor();
             }
         }
 
@@ -224,7 +224,7 @@ namespace EOS.UI.iOS.Controls
             {
                 IsEOSCustomizationIgnored = true;
                 _colorDisabled = value;
-                UpdateLeftImageColor();
+                UpdateIconColor();
                 UpdateUnderlineColor();
             }
         }
@@ -238,7 +238,7 @@ namespace EOS.UI.iOS.Controls
                 IsEOSCustomizationIgnored = true;
                 _leftImage = value;
                 _leftImageView.Image = value;
-                UpdateLeftImageColor();
+                UpdateIconColor();
             }
         }
 
@@ -277,7 +277,7 @@ namespace EOS.UI.iOS.Controls
                 {
                     RightViewMode = UITextFieldViewMode.Never;
                 }
-                UpdateLeftImageColor();
+                UpdateIconColor();
                 UpdateUnderlineColor();
             }
         }
@@ -323,14 +323,14 @@ namespace EOS.UI.iOS.Controls
         {
             if (!IsValid)
                 RightViewMode = UITextFieldViewMode.Always;
-            UpdateLeftImageColor();
+            UpdateIconColor();
             UpdateUnderlineColor();
         }
 
         private void Input_Started(object sender, EventArgs e)
         {
             RightViewMode = UITextFieldViewMode.Never;
-            UpdateLeftImageColor();
+            UpdateIconColor();
             UpdateUnderlineColor();
         }
 
@@ -348,7 +348,7 @@ namespace EOS.UI.iOS.Controls
             {
                 RightViewMode = IsValid ? UITextFieldViewMode.Never : UITextFieldViewMode.Always;
             }
-            UpdateLeftImageColor();
+            UpdateIconColor();
             UpdateUnderlineColor();
         }
 
@@ -505,7 +505,7 @@ namespace EOS.UI.iOS.Controls
             button.ImageView.TintColor = _clearImageColor;
         }
 
-        private void UpdateLeftImageColor()
+        private void UpdateIconColor()
         {
             if (Enabled)
             {
@@ -517,13 +517,13 @@ namespace EOS.UI.iOS.Controls
                     }
                     else
                     {
-                        if (String.IsNullOrEmpty(Text))
+                        if (!String.IsNullOrEmpty(Text) && !String.IsNullOrWhiteSpace(Text))
                         {
-                            _leftImageView.TintColor = NormalIconColor;
+                            _leftImageView.TintColor = PopulatedIconColor;
                         }
                         else
                         {
-                            _leftImageView.TintColor = PopulatedIconColor;
+                            _leftImageView.TintColor = NormalIconColor;
                         }
                     }
                 }
@@ -552,7 +552,14 @@ namespace EOS.UI.iOS.Controls
                     }
                     else
                     {
-                        _underlineLayer.BorderColor = String.IsNullOrEmpty(Text) ? NormalUnderlineColor.CGColor : PopulatedUnderlineColor.CGColor;
+                        if(!String.IsNullOrEmpty(Text) && !String.IsNullOrWhiteSpace(Text))
+                        {
+                            _underlineLayer.BorderColor = PopulatedUnderlineColor.CGColor;
+                        }
+                        else
+                        {
+                            _underlineLayer.BorderColor = NormalUnderlineColor.CGColor;
+                        }
                     }
                 }
                 else
