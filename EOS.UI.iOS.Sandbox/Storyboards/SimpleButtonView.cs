@@ -45,7 +45,6 @@ namespace EOS.UI.iOS.Sandbox
                 disabledBackgroundDropDown,
                 pressedBackgroundDropDown,
                 cornerRadiusDropDown,
-                rippleColorDropDown,
                 shadowColorDropDown,
                 shadowRadiusDropDown,
                 shadowOffsetXDropDown,
@@ -78,7 +77,6 @@ namespace EOS.UI.iOS.Sandbox
             InitCornerRadiusDropDown(rect);
             InitDisabledSwitch();
             InitResetButton();
-            InitRippleColorDropDown(rect);
             InitButtonTypeDropDown(rect);
             InitShadowColorDropDown(rect);
             InitShadowOffsetXDropDown(rect);
@@ -186,14 +184,6 @@ namespace EOS.UI.iOS.Sandbox
                 rect);
         }
 
-        private void InitRippleColorDropDown(CGRect rect)
-        {
-            rippleColorDropDown.InitSource(
-                color => _simpleButton.RippleColor = color,
-                Fields.RippleColor,
-                rect);
-        }
-
         private void InitButtonTypeDropDown(CGRect rect)
         {
             buttonTypeDropDown.InitSource(
@@ -218,6 +208,7 @@ namespace EOS.UI.iOS.Sandbox
                                                                 _simpleButton.Frame.Right == containerView.Frame.Right);
                             _simpleButton.ContentEdgeInsets = new UIEdgeInsets();
                             _simpleButton.CornerRadius = 0;
+                            _simpleButton.ShadowConfig = null;
                             break;
                     }
                 },

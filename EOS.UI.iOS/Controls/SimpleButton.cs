@@ -24,8 +24,6 @@ namespace EOS.UI.iOS.Controls
         private const double _360degrees = 6.28319;//value in radians
         private Dictionary<UIControlState, NSAttributedString> _attributedTitles = new Dictionary<UIControlState, NSAttributedString>();
         private const double _verticalPaddingRatio = 0.25;
-        private CAAnimationGroup _rippleAnimations;
-        private CALayer _rippleLayer;
 
         #region constructor
 
@@ -311,22 +309,6 @@ namespace EOS.UI.iOS.Controls
                     SetAttributedTitle(resultString, UIControlState.Highlighted);
                     break;
             }
-        }
-
-        public override void TouchesBegan(NSSet touches, UIEvent evt)
-        {
-            base.TouchesBegan(touches, evt);
-            var tapLocation = (touches.AnyObject as UITouch).LocationInView(this);
-            _rippleAnimations = this.CreateRippleAnimations(tapLocation);
-            _rippleLayer = this.CrateRippleAnimationLayer(tapLocation, RippleColor);
-            _rippleAnimations.SetValueForKey(_rippleLayer, new NSString("animationLayer"));
-            _rippleLayer.AddAnimation(_rippleAnimations, _rippleAnimationKey);
-        }
-
-        public override void TouchesEnded(NSSet touches, UIEvent evt)
-        {
-            base.TouchesEnded(touches, evt);
-            _rippleLayer.RemoveAnimation(_rippleAnimationKey);
         }
 
         #endregion

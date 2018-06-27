@@ -60,9 +60,6 @@ namespace EOS.UI.iOS.Sandbox
 		EOS.UI.iOS.Sandbox.Controls.EOSSandboxButton resetButton { get; set; }
 
 		[Outlet]
-		EOS.UI.iOS.Sandbox.EOSSandboxDropDown rippleColorDropDown { get; set; }
-
-		[Outlet]
 		[GeneratedCode ("iOS Designer", "1.0")]
 		UIKit.UIScrollView scrollView { get; set; }
 
@@ -149,11 +146,6 @@ namespace EOS.UI.iOS.Sandbox
 			if (resetButton != null) {
 				resetButton.Dispose ();
 				resetButton = null;
-			}
-
-			if (rippleColorDropDown != null) {
-				rippleColorDropDown.Dispose ();
-				rippleColorDropDown = null;
 			}
 
 			if (scrollView != null) {

@@ -73,9 +73,9 @@ namespace EOS.UI.Shared.Themes.Themes
             }},
             { EOSConstants.SimpleButtonShadow, new ShadowConfig(){
                         Color = UIColor.Black.CGColor,
-                        Offset = new CGSize(50, 50),
-                        Radius = 50,
-                        Opacity = 1f
+                        Offset = new CGSize(0, 12),
+                        Radius = 5,
+                        Opacity = 0.2f
             }},
             { EOSConstants.BorderWidth, 2 },
             { EOSConstants.SectionTitle, "Dark section" },
