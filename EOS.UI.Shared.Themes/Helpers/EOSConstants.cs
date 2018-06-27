@@ -17,7 +17,7 @@ namespace UIFrameworks.Shared.Themes.Helpers
         public const string TextSize = "textSize";
         public const string LabelTextSize = "labelTextSize";
         public const string SecondaryTextSize = "secondaryTextSize";
-        public const string CornerRadius = "cornerRadius";
+        public const string SimpleButtonCornerRadius = "simpleButtonCornerRadius";
         public const string LabelCornerRadius = "labelCornerRadius";
         public const string Font = "font";
         public const string SecondaryFont = "secondaryFont";

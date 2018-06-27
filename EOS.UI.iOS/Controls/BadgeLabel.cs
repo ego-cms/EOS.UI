@@ -138,7 +138,7 @@ namespace EOS.UI.iOS.Controls
             if (!IsEOSCustomizationIgnored)
             {
                 var provider = GetThemeProvider();
-                CornerRadius = provider.GetEOSProperty<int>(this, EOSConstants.CornerRadius);
+                CornerRadius = provider.GetEOSProperty<int>(this, EOSConstants.SimpleButtonCornerRadius);
                 BackgroundColor = provider.GetEOSProperty<UIColor>(this, EOSConstants.BrandPrimaryColor);
                 Font = provider.GetEOSProperty<UIFont>(this, EOSConstants.Font);
                 TextColor = provider.GetEOSProperty<UIColor>(this, EOSConstants.NeutralColor6);

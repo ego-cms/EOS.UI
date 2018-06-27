@@ -49,6 +49,21 @@ namespace EOS.UI.iOS.Sandbox
 		UIKit.UIButton resetButton { get; set; }
 
 		[Outlet]
+		EOS.UI.iOS.Sandbox.EOSSandboxDropDown shadowColorDropdown { get; set; }
+
+		[Outlet]
+		EOS.UI.iOS.Sandbox.EOSSandboxDropDown shadowOffsetXDropDown { get; set; }
+
+		[Outlet]
+		EOS.UI.iOS.Sandbox.EOSSandboxDropDown shadowOffsetYDropDown { get; set; }
+
+		[Outlet]
+		EOS.UI.iOS.Sandbox.EOSSandboxDropDown shadowOpacityDropDown { get; set; }
+
+		[Outlet]
+		EOS.UI.iOS.Sandbox.EOSSandboxDropDown shadowRadiusDropDown { get; set; }
+
+		[Outlet]
 		EOS.UI.iOS.Sandbox.EOSSandboxDropDown textSizeDropDown { get; set; }
 
 		[Outlet]
@@ -56,6 +71,11 @@ namespace EOS.UI.iOS.Sandbox
 		
 		void ReleaseDesignerOutlets ()
 		{
+			if (buttonTypeDropDown != null) {
+				buttonTypeDropDown.Dispose ();
+				buttonTypeDropDown = null;
+			}
+
 			if (containerView != null) {
 				containerView.Dispose ();
 				containerView = null;
@@ -96,6 +116,11 @@ namespace EOS.UI.iOS.Sandbox
 				fontDropDown = null;
 			}
 
+			if (shadowRadiusDropDown != null) {
+				shadowRadiusDropDown.Dispose ();
+				shadowRadiusDropDown = null;
+			}
+
 			if (letterSpacingDropDown != null) {
 				letterSpacingDropDown.Dispose ();
 				letterSpacingDropDown = null;
@@ -111,6 +136,16 @@ namespace EOS.UI.iOS.Sandbox
 				resetButton = null;
 			}
 
+			if (shadowOffsetYDropDown != null) {
+				shadowOffsetYDropDown.Dispose ();
+				shadowOffsetYDropDown = null;
+			}
+
+			if (shadowOpacityDropDown != null) {
+				shadowOpacityDropDown.Dispose ();
+				shadowOpacityDropDown = null;
+			}
+
 			if (textSizeDropDown != null) {
 				textSizeDropDown.Dispose ();
 				textSizeDropDown = null;
@@ -124,6 +159,16 @@ namespace EOS.UI.iOS.Sandbox
 			if (buttonTypeDropDown != null) {
 				buttonTypeDropDown.Dispose ();
 				buttonTypeDropDown = null;
+			}
+
+			if (shadowColorDropdown != null) {
+				shadowColorDropdown.Dispose ();
+				shadowColorDropdown = null;
+			}
+
+			if (shadowOffsetXDropDown != null) {
+				shadowOffsetXDropDown.Dispose ();
+				shadowOffsetXDropDown = null;
 			}
 		}
 	}

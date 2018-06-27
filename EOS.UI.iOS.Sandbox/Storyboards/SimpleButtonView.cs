@@ -59,7 +59,9 @@ namespace EOS.UI.iOS.Sandbox
             }));
 
             containerView.ConstrainLayout(() => _simpleButton.Frame.GetCenterX() == containerView.Frame.GetCenterX() &&
-                              _simpleButton.Frame.GetCenterY() == containerView.Frame.GetCenterY(), _simpleButton);
+                                               _simpleButton.Frame.GetCenterY() == containerView.Frame.GetCenterY() &&
+                                               _simpleButton.Frame.Height == 50 &&
+                                               _simpleButton.Frame.Width == 340, _simpleButton);
             _defaultConstraints = containerView.Constraints;
 
 
@@ -83,13 +85,6 @@ namespace EOS.UI.iOS.Sandbox
             InitShadowOffsetYDropDown(rect);
             InitShadowOpacityDropDown(rect);
             InitShadowRadiusDropDown(rect);
-            SandboxCustomization();
-        }
-
-        private void SandboxCustomization()
-        {
-            _simpleButton.ContentEdgeInsets = new UIEdgeInsets(14, 100, 14, 100);
-            _simpleButton.CornerRadius = 24;
         }
 
         private void InitThemeDropDown(CGRect rect)
@@ -197,7 +192,6 @@ namespace EOS.UI.iOS.Sandbox
                         case SimpleButtonTypeEnum.Simple:
                             containerView.RemoveConstraints(containerView.Constraints);
                             containerView.AddConstraints(_defaultConstraints);
-                            SandboxCustomization();
                             break;
                         case SimpleButtonTypeEnum.FullBleed:
                             containerView.RemoveConstraints(containerView.Constraints);

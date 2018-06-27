@@ -33,7 +33,9 @@ namespace EOS.UI.iOS.Sandbox
             _simpleButton.SetTitle("CTA button", UIControlState.Normal);
 
             containerView.ConstrainLayout(() => _simpleButton.Frame.GetCenterX() == containerView.Frame.GetCenterX() &&
-                             _simpleButton.Frame.GetCenterY() == containerView.Frame.GetCenterY(), _simpleButton);
+                                                _simpleButton.Frame.GetCenterY() == containerView.Frame.GetCenterY() &&
+                                                _simpleButton.Frame.Height == 50 &&
+                                                _simpleButton.Frame.Width == 340, _simpleButton);
             _defaultConstraints = containerView.Constraints;
 
             _simpleButton.TouchUpInside += async (sender, e) =>
@@ -55,6 +57,11 @@ namespace EOS.UI.iOS.Sandbox
                 disabledBackgroundDropDown,
                 pressedBackgroundDropdown,
                 cornerRadiusDropDown,
+                shadowColorDropdown,
+                shadowOffsetXDropDown,
+                shadowOffsetYDropDown,
+                shadowOpacityDropDown,
+                shadowRadiusDropDown,
                 buttonTypeDropDown
             };
 
@@ -75,15 +82,13 @@ namespace EOS.UI.iOS.Sandbox
             InitBackgroundColorPressedDropDown(rect);
             InitCornerRadiusDropDown(rect);
             InitButtonTypeDropDown(rect);
+            InitShadowColorDropDown(rect);
+            InitShadowOffsetXDropDown(rect);
+            InitShadowOffsetYDropDown(rect);
+            InitShadowOpacityDropDown(rect);
+            InitShadowRadiusDropDown(rect);
             InitDisabledSwitch();
             InitResetButton();
-            SandboxCustomization();
-        }
-
-        private void SandboxCustomization()
-        {
-            _simpleButton.ContentEdgeInsets = new UIEdgeInsets(14, 100, 14, 100);
-            _simpleButton.CornerRadius = 24;
         }
 
         private void InitThemeDropDown(CGRect rect)
@@ -192,7 +197,6 @@ namespace EOS.UI.iOS.Sandbox
                         case SimpleButtonTypeEnum.Simple:
                             containerView.RemoveConstraints(containerView.Constraints);
                             containerView.AddConstraints(_defaultConstraints);
-                            SandboxCustomization();
                             break;
                         case SimpleButtonTypeEnum.FullBleed:
                             containerView.RemoveConstraints(containerView.Constraints);
@@ -208,6 +212,75 @@ namespace EOS.UI.iOS.Sandbox
                     }
                 },
                 Fields.ButtonType,
+                rect);
+        }
+        
+        private void InitShadowColorDropDown(CGRect rect)
+        {
+            shadowColorDropdown.InitSource(
+                color =>
+                {
+                    var config = _simpleButton.ShadowConfig;
+                    config.Color = color.CGColor;
+                    _simpleButton.ShadowConfig = config;
+                },
+                Fields.ShadowColor,
+                rect);
+        }
+
+        private void InitShadowOffsetXDropDown(CGRect rect)
+        {
+            shadowOffsetXDropDown.InitSource(
+                ShadowOffsetValues,
+                offset =>
+                {
+                    var config = _simpleButton.ShadowConfig;
+                    config.Offset = new CGSize(offset, config.Offset.Height);
+                    _simpleButton.ShadowConfig = config;
+                },
+                Fields.ShadowOffsetX,
+                rect);
+        }
+
+        private void InitShadowOffsetYDropDown(CGRect rect)
+        {
+            shadowOffsetYDropDown.InitSource(
+                ShadowOffsetValues,
+                offset =>
+                {
+                    var config = _simpleButton.ShadowConfig;
+                    config.Offset = new CGSize(config.Offset.Width, offset);
+                    _simpleButton.ShadowConfig = config;
+                },
+                Fields.ShadowOffsetY,
+                rect);
+        }
+
+        private void InitShadowRadiusDropDown(CGRect rect)
+        {
+            shadowRadiusDropDown.InitSource(
+                ShadowRadiusValues,
+                radius =>
+                {
+                    var config = _simpleButton.ShadowConfig;
+                    config.Radius = radius;
+                    _simpleButton.ShadowConfig = config;
+                },
+                Fields.ShadowRadius,
+                rect);
+        }
+
+        private void InitShadowOpacityDropDown(CGRect rect)
+        {
+            shadowOpacityDropDown.InitSource(
+                ShadowOpacityValues,
+                opacity =>
+                {
+                    var config = _simpleButton.ShadowConfig;
+                    config.Opacity = (float)opacity;
+                    _simpleButton.ShadowConfig = config;
+                },
+                Fields.ShadowOpacity,
                 rect);
         }
 

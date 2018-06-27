@@ -387,7 +387,7 @@ namespace EOS.UI.Android.Controls
                 DisabledBackgroundColor = GetThemeProvider().GetEOSProperty<Color>(this, EOSConstants.NeutralColor4);
                 PressedBackgroundColor = GetThemeProvider().GetEOSProperty<Color>(this, EOSConstants.BrandPrimaryColorVariant1);
                 RippleColor = GetThemeProvider().GetEOSProperty<Color>(this, EOSConstants.RippleColor);
-                CornerRadius = GetThemeProvider().GetEOSProperty<float>(this, EOSConstants.CornerRadius);
+                CornerRadius = GetThemeProvider().GetEOSProperty<float>(this, EOSConstants.SimpleButtonCornerRadius);
                 PreloaderImage = Resources.GetDrawable(GetThemeProvider().GetEOSProperty<int>(this, EOSConstants.FabProgressPreloaderImage), null);
                 IsEOSCustomizationIgnored = false;
             }
