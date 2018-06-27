@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using CoreGraphics;
 using EOS.UI.iOS.Controls;
 using EOS.UI.iOS.Extensions;
+using EOS.UI.iOS.Sandbox.Enums;
 using EOS.UI.iOS.Sandbox.Helpers;
 using EOS.UI.iOS.Sandbox.Storyboards;
 using EOS.UI.Shared.Themes.Themes;
@@ -18,8 +19,9 @@ namespace EOS.UI.iOS.Sandbox
         public const string Identifier = "CTAButtonView";
         private SimpleButton _simpleButton;
         private List<EOSSandboxDropDown> _dropDowns;
+        private NSLayoutConstraint[] _defaultConstraints;
 
-        public CTAButtonView (IntPtr handle) : base (handle)
+        public CTAButtonView(IntPtr handle) : base(handle)
         {
         }
 
@@ -29,19 +31,18 @@ namespace EOS.UI.iOS.Sandbox
 
             _simpleButton = new SimpleButton();
             _simpleButton.SetTitle("CTA button", UIControlState.Normal);
-            
+
             containerView.ConstrainLayout(() => _simpleButton.Frame.GetCenterX() == containerView.Frame.GetCenterX() &&
-                              _simpleButton.Frame.GetCenterY() == containerView.Frame.GetCenterY() &&
-                              _simpleButton.Frame.Left == containerView.Frame.Left &&
-                              _simpleButton.Frame.Right == containerView.Frame.Right, _simpleButton);
-            
+                             _simpleButton.Frame.GetCenterY() == containerView.Frame.GetCenterY(), _simpleButton);
+            _defaultConstraints = containerView.Constraints;
+
             _simpleButton.TouchUpInside += async (sender, e) =>
             {
                 _simpleButton.StartProgressAnimation();
                 await Task.Delay(5000);
                 _simpleButton.StopProgressAnimation();
             };
-            
+
             _dropDowns = new List<EOSSandboxDropDown>()
             {
                 themeDropDown,
@@ -54,14 +55,14 @@ namespace EOS.UI.iOS.Sandbox
                 disabledBackgroundDropDown,
                 pressedBackgroundDropdown,
                 cornerRadiusDropDown,
-                rippleColorDropDown,
+                buttonTypeDropDown
             };
 
             View.AddGestureRecognizer(new UITapGestureRecognizer(() =>
             {
                 _dropDowns.ForEach(dropDown => dropDown.CloseInputControl());
             }));
-            
+
             var rect = new CGRect(0, 0, 100, 150);
             InitThemeDropDown(rect);
             InitFontDropDown(rect);
@@ -73,11 +74,18 @@ namespace EOS.UI.iOS.Sandbox
             InitBackgroundColorDisabledDropDown(rect);
             InitBackgroundColorPressedDropDown(rect);
             InitCornerRadiusDropDown(rect);
+            InitButtonTypeDropDown(rect);
             InitDisabledSwitch();
             InitResetButton();
-            InitRippleColorDropDown(rect);
+            SandboxCustomization();
         }
-        
+
+        private void SandboxCustomization()
+        {
+            _simpleButton.ContentEdgeInsets = new UIEdgeInsets(14, 100, 14, 100);
+            _simpleButton.CornerRadius = 24;
+        }
+
         private void InitThemeDropDown(CGRect rect)
         {
             themeDropDown.InitSource(
@@ -169,12 +177,37 @@ namespace EOS.UI.iOS.Sandbox
                 Fields.ConerRadius,
                 rect);
         }
-        
-        private void InitRippleColorDropDown(CGRect rect)
+
+
+        private void InitButtonTypeDropDown(CGRect rect)
         {
-            rippleColorDropDown.InitSource(
-                color => _simpleButton.RippleColor = color,
-                Fields.RippleColor,
+            buttonTypeDropDown.InitSource(
+                ButtonTypes,
+                type =>
+                {
+                    ResetFields();
+                    _simpleButton.ResetCustomization();
+                    switch (type)
+                    {
+                        case SimpleButtonTypeEnum.Simple:
+                            containerView.RemoveConstraints(containerView.Constraints);
+                            containerView.AddConstraints(_defaultConstraints);
+                            SandboxCustomization();
+                            break;
+                        case SimpleButtonTypeEnum.FullBleed:
+                            containerView.RemoveConstraints(containerView.Constraints);
+                            View.ConstrainLayout(() => containerView.Frame.Height == 150);
+                            containerView.ConstrainLayout(() => _simpleButton.Frame.GetCenterX() == containerView.Frame.GetCenterX() &&
+                                                                _simpleButton.Frame.GetCenterY() == containerView.Frame.GetCenterY() &&
+                                                                _simpleButton.Frame.Left == containerView.Frame.Left &&
+                                                                _simpleButton.Frame.Right == containerView.Frame.Right);
+                            _simpleButton.ContentEdgeInsets = new UIEdgeInsets();
+                            _simpleButton.CornerRadius = 0;
+                            _simpleButton.ShadowConfig = null;
+                            break;
+                    }
+                },
+                Fields.ButtonType,
                 rect);
         }
 

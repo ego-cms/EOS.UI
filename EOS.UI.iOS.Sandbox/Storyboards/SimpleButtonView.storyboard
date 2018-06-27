@@ -29,7 +29,7 @@
                                     <constraint firstAttribute="height" constant="150" id="905"/>
                                 </constraints>
                             </view>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="9588">
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9588">
                                 <rect key="frame" x="16" y="194" width="343" height="1306"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="11167" customClass="EOSSandboxView">
@@ -39,7 +39,7 @@
                                                 <rect key="frame" x="284" y="725" width="51" height="31"/>
                                             </switch>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Enabled" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="33689" customClass="EOSSandboxLabel">
-                                                <rect key="frame" x="0.0" y="730.66666666666663" width="58.666666666666664" height="19.666666666666629"/>
+                                                <rect key="frame" x="0.0" y="731" width="59" height="20"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
@@ -223,10 +223,11 @@
                                     </view>
                                 </subviews>
                                 <constraints>
-                                    <constraint firstItem="11167" firstAttribute="leading" secondItem="9588" secondAttribute="leading" id="40635"/>
                                     <constraint firstItem="11167" firstAttribute="top" secondItem="9588" secondAttribute="top" id="48125"/>
-                                    <constraint firstItem="11167" firstAttribute="width" secondItem="9588" secondAttribute="width" id="49890"/>
                                     <constraint firstAttribute="bottom" secondItem="11167" secondAttribute="bottom" id="53035"/>
+                                    <constraint firstItem="11167" firstAttribute="leading" secondItem="9588" secondAttribute="leading" id="KUi-jc-R72"/>
+                                    <constraint firstItem="11167" firstAttribute="width" secondItem="9588" secondAttribute="width" id="NAW-wo-qCm"/>
+                                    <constraint firstAttribute="trailing" secondItem="11167" secondAttribute="trailing" id="e5O-ER-HLr"/>
                                 </constraints>
                             </scrollView>
                         </subviews>
@@ -234,11 +235,12 @@
                         <constraints>
                             <constraint firstItem="785" firstAttribute="top" secondItem="202" secondAttribute="bottom" id="1024"/>
                             <constraint firstItem="9588" firstAttribute="top" secondItem="785" secondAttribute="bottom" id="40147"/>
-                            <constraint firstItem="9588" firstAttribute="trailing" secondItem="206" secondAttribute="trailingMargin" id="40269"/>
                             <constraint firstItem="9588" firstAttribute="bottom" secondItem="206" secondAttribute="bottom" id="40391"/>
                             <constraint firstItem="9588" firstAttribute="centerX" secondItem="206" secondAttribute="centerX" id="40513"/>
+                            <constraint firstItem="9588" firstAttribute="leading" secondItem="206" secondAttribute="leadingMargin" id="7st-Kd-seX"/>
                             <constraint firstItem="785" firstAttribute="leading" secondItem="206" secondAttribute="leading" constant="2" id="QTl-Db-HxK"/>
                             <constraint firstAttribute="trailing" secondItem="785" secondAttribute="trailing" constant="2" id="fFA-PD-iY1"/>
+                            <constraint firstItem="9588" firstAttribute="trailing" secondItem="206" secondAttribute="trailingMargin" id="yld-11-JPS"/>
                         </constraints>
                     </view>
                     <size key="freeformSize" width="375" height="1500"/>

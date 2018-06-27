@@ -13,6 +13,9 @@ namespace EOS.UI.iOS.Sandbox
 	partial class CTAButtonView
 	{
 		[Outlet]
+		EOS.UI.iOS.Sandbox.EOSSandboxDropDown buttonTypeDropDown { get; set; }
+
+		[Outlet]
 		UIKit.UIView containerView { get; set; }
 
 		[Outlet]
@@ -44,9 +47,6 @@ namespace EOS.UI.iOS.Sandbox
 
 		[Outlet]
 		UIKit.UIButton resetButton { get; set; }
-
-		[Outlet]
-		EOS.UI.iOS.Sandbox.EOSSandboxDropDown rippleColorDropDown { get; set; }
 
 		[Outlet]
 		EOS.UI.iOS.Sandbox.EOSSandboxDropDown textSizeDropDown { get; set; }
@@ -111,11 +111,6 @@ namespace EOS.UI.iOS.Sandbox
 				resetButton = null;
 			}
 
-			if (rippleColorDropDown != null) {
-				rippleColorDropDown.Dispose ();
-				rippleColorDropDown = null;
-			}
-
 			if (textSizeDropDown != null) {
 				textSizeDropDown.Dispose ();
 				textSizeDropDown = null;
@@ -124,6 +119,11 @@ namespace EOS.UI.iOS.Sandbox
 			if (themeDropDown != null) {
 				themeDropDown.Dispose ();
 				themeDropDown = null;
+			}
+
+			if (buttonTypeDropDown != null) {
+				buttonTypeDropDown.Dispose ();
+				buttonTypeDropDown = null;
 			}
 		}
 	}
