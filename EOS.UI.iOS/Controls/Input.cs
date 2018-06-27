@@ -20,9 +20,6 @@ namespace EOS.UI.iOS.Controls
     {
         #region fields
 
-        private nfloat _initX;
-        private nfloat _initY;
-        private nfloat _initWidth;
         private UIImageView _leftImageView;
         private UIImageView _rightImageView;
         private UIView _leftImageContainer;
@@ -55,11 +52,10 @@ namespace EOS.UI.iOS.Controls
             get => base.Enabled;
             set
             {
+                base.Enabled = value;
+                UpdateEnabledState();
                 if (!value)
                     ResignFirstResponder();
-                if (Enabled != value)
-                    UpdateEnabledState(value);
-                base.Enabled = value;
             }
         }
 
@@ -167,11 +163,8 @@ namespace EOS.UI.iOS.Controls
             {
                 IsEOSCustomizationIgnored = true;
                 _focusedColor = value;
-                if (Enabled && IsFirstResponder && _underlineLayer != null)
-                {
-                    _leftImageView.TintColor = value;
-                    _underlineLayer.BorderColor = value.CGColor;
-                }
+                UpdateUnderlineColor();
+                UpdateLeftImageColor();
             }
         }
 
@@ -183,8 +176,7 @@ namespace EOS.UI.iOS.Controls
             {
                 IsEOSCustomizationIgnored = true;
                 _normalIconColor = value;
-                if (String.IsNullOrEmpty(Text) && Enabled && !IsFirstResponder)
-                    _leftImageView.TintColor = _normalIconColor;
+                UpdateLeftImageColor();
             }
         }
 
@@ -196,8 +188,7 @@ namespace EOS.UI.iOS.Controls
             {
                 IsEOSCustomizationIgnored = true;
                 _normalUnderlineColor = value;
-                if (String.IsNullOrEmpty(Text) && Enabled && !IsFirstResponder && _underlineLayer != null)
-                    _underlineLayer.BorderColor = _normalUnderlineColor.CGColor;
+                UpdateUnderlineColor();
             }
         }
 
@@ -209,8 +200,7 @@ namespace EOS.UI.iOS.Controls
             {
                 IsEOSCustomizationIgnored = true;
                 _populatedUnderlineColor = value;
-                if (Enabled && !IsFirstResponder && _underlineLayer != null && !String.IsNullOrEmpty(Text))
-                    _underlineLayer.BorderColor = value.CGColor;
+                UpdateUnderlineColor();
             }
         }
 
@@ -222,8 +212,7 @@ namespace EOS.UI.iOS.Controls
             {
                 IsEOSCustomizationIgnored = true;
                 _populatedIconColor = value;
-                if (Enabled && !IsFirstResponder && !String.IsNullOrEmpty(Text))
-                    _leftImageView.TintColor = _populatedIconColor;
+                UpdateLeftImageColor();
             }
         }
 
@@ -235,11 +224,8 @@ namespace EOS.UI.iOS.Controls
             {
                 IsEOSCustomizationIgnored = true;
                 _colorDisabled = value;
-                if (!Enabled && _underlineLayer != null)
-                {
-                    _leftImageView.TintColor = value;
-                    _underlineLayer.BorderColor = value.CGColor;
-                }
+                UpdateLeftImageColor();
+                UpdateUnderlineColor();
             }
         }
 
@@ -252,15 +238,7 @@ namespace EOS.UI.iOS.Controls
                 IsEOSCustomizationIgnored = true;
                 _leftImage = value;
                 _leftImageView.Image = value;
-                if (Enabled)
-                {
-                    _leftImageView.TintColor =
-                        IsFirstResponder ? FocusedColor : (String.IsNullOrEmpty(Text) ? NormalIconColor : PopulatedUnderlineColor);
-                }
-                else
-                {
-                    _leftImageView.TintColor = DisabledColor;
-                }
+                UpdateLeftImageColor();
             }
         }
 
@@ -294,17 +272,13 @@ namespace EOS.UI.iOS.Controls
                 {
                     if (!IsFirstResponder)
                         RightViewMode = UITextFieldViewMode.Always;
-                    _leftImageView.TintColor = _warningColor;
-                    _underlineLayer.BorderColor = _warningColor.CGColor;
                 }
                 else
                 {
                     RightViewMode = UITextFieldViewMode.Never;
-                    _leftImageView.TintColor =
-                                      IsFirstResponder ? FocusedColor : (String.IsNullOrEmpty(Text) ? NormalIconColor : PopulatedIconColor);
-                    _underlineLayer.BorderColor =
-                        IsFirstResponder ? FocusedColor.CGColor : (String.IsNullOrEmpty(Text) ? NormalIconColor.CGColor : PopulatedUnderlineColor.CGColor);
                 }
+                UpdateLeftImageColor();
+                UpdateUnderlineColor();
             }
         }
 
@@ -347,48 +321,35 @@ namespace EOS.UI.iOS.Controls
 
         private void Input_Ended(object sender, EventArgs e)
         {
-            _leftImageView.TintColor = IsValid ? (String.IsNullOrEmpty(Text) ? NormalIconColor : PopulatedIconColor) : _warningColor;
-            _underlineLayer.BorderColor = IsValid ?
-                (String.IsNullOrEmpty(Text) ? NormalUnderlineColor.CGColor : PopulatedUnderlineColor.CGColor) : _warningColor.CGColor;
             if (!IsValid)
                 RightViewMode = UITextFieldViewMode.Always;
-            //IsFirstResponder = false;
+            UpdateLeftImageColor();
+            UpdateUnderlineColor();
         }
 
         private void Input_Started(object sender, EventArgs e)
         {
-            //IsFirstResponder = true;
-            _leftImageView.TintColor = IsValid ? FocusedColor : _warningColor;
-            _underlineLayer.BorderColor = IsValid ? FocusedColor.CGColor : _warningColor.CGColor;
             RightViewMode = UITextFieldViewMode.Never;
+            UpdateLeftImageColor();
+            UpdateUnderlineColor();
         }
 
-        private void UpdateEnabledState(bool enabled)
+        private void UpdateEnabledState()
         {
-            base.TextColor = (enabled ? TextColor : TextColorDisabled);
+            base.TextColor = (Enabled ? TextColor : TextColorDisabled);
             if (Placeholder != null)
-                base.AttributedPlaceholder = new NSAttributedString(Placeholder, null, enabled ? PlaceholderColor : PlaceholderColorDisabled);
+                base.AttributedPlaceholder = new NSAttributedString(Placeholder, null, Enabled ? PlaceholderColor : PlaceholderColorDisabled);
 
-            if (!enabled)
+            if (!Enabled)
             {
                 RightViewMode = UITextFieldViewMode.Never;
-                _leftImageView.TintColor = DisabledColor;
-                _underlineLayer.BorderColor = DisabledColor.CGColor;
             }
             else
             {
                 RightViewMode = IsValid ? UITextFieldViewMode.Never : UITextFieldViewMode.Always;
-                if (IsFirstResponder)
-                {
-                    _leftImageView.TintColor = IsValid ? FocusedColor : _warningColor;
-                    _underlineLayer.BorderColor = IsValid ? FocusedColor.CGColor : _warningColor.CGColor;
-                }
-                else
-                {
-                    _leftImageView.TintColor = IsValid ? (String.IsNullOrEmpty(Text) ? NormalIconColor : PopulatedIconColor) : _warningColor;
-                    _underlineLayer.BorderColor = IsValid ? (String.IsNullOrEmpty(Text) ? NormalUnderlineColor.CGColor : PopulatedUnderlineColor.CGColor) : _warningColor.CGColor;
-                }
             }
+            UpdateLeftImageColor();
+            UpdateUnderlineColor();
         }
 
         private void SetLetterSpacing(int spacing)
@@ -429,15 +390,8 @@ namespace EOS.UI.iOS.Controls
         {
             base.LayoutSubviews();
 
-            if (_initX == 0 && _initY == 0)
-            {
-                _initX = Frame.X;
-                _initY = Frame.Y;
-                _initWidth = Frame.Width;
-            }
-
             if (Frame.Height < 35)
-                Frame = new CGRect(_initX, _initY, _initWidth, 35);
+                Frame = new CGRect(Frame.X, Frame.Y, Frame.Width, 35);
 
             if (_underlineLayer == null)
             {
@@ -455,29 +409,7 @@ namespace EOS.UI.iOS.Controls
                 };
                 Layer.AddSublayer(_underlineLayer);
                 Layer.MasksToBounds = true;
-
-                if (Enabled)
-                {
-                    if (IsValid)
-                    {
-                        if (IsFirstResponder)
-                        {
-                            _underlineLayer.BorderColor = FocusedColor.CGColor;
-                        }
-                        else
-                        {
-                            _underlineLayer.BorderColor = String.IsNullOrEmpty(Text) ? NormalUnderlineColor.CGColor : PopulatedUnderlineColor.CGColor;
-                        }
-                    }
-                    else
-                    {
-                        _underlineLayer.BorderColor = _warningColor.CGColor;
-                    }
-                }
-                else
-                {
-                    _underlineLayer.BorderColor = DisabledColor.CGColor;
-                }
+                UpdateUnderlineColor();
             }
             UpdateUnderline();
             UpdateClearButtonColor();
@@ -571,6 +503,67 @@ namespace EOS.UI.iOS.Controls
             button.SetImage(_clearImage, UIControlState.Highlighted);
             button.ImageEdgeInsets = new UIEdgeInsets(-1,-1,-1,-1);
             button.ImageView.TintColor = _clearImageColor;
+        }
+
+        private void UpdateLeftImageColor()
+        {
+            if (Enabled)
+            {
+                if (IsValid)
+                {
+                    if (IsFirstResponder)
+                    {
+                        _leftImageView.TintColor = FocusedColor;
+                    }
+                    else
+                    {
+                        if (String.IsNullOrEmpty(Text))
+                        {
+                            _leftImageView.TintColor = NormalIconColor;
+                        }
+                        else
+                        {
+                            _leftImageView.TintColor = PopulatedIconColor;
+                        }
+                    }
+                }
+                else
+                {
+                    _leftImageView.TintColor = _warningColor;
+                }
+            }
+            else
+            {
+                _leftImageView.TintColor = DisabledColor;
+            }
+        }
+
+        private void UpdateUnderlineColor()
+        {
+            if (_underlineLayer == null)
+                return;
+            if (Enabled)
+            {
+                if (IsValid)
+                {
+                    if (IsFirstResponder)
+                    {
+                        _underlineLayer.BorderColor = FocusedColor.CGColor;
+                    }
+                    else
+                    {
+                        _underlineLayer.BorderColor = String.IsNullOrEmpty(Text) ? NormalUnderlineColor.CGColor : PopulatedUnderlineColor.CGColor;
+                    }
+                }
+                else
+                {
+                    _underlineLayer.BorderColor = _warningColor.CGColor;
+                }
+            }
+            else
+            {
+                _underlineLayer.BorderColor = DisabledColor.CGColor;
+            }
         }
 
         #endregion
