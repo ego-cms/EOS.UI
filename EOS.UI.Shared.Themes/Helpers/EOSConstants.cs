@@ -18,7 +18,7 @@ namespace UIFrameworks.Shared.Themes.Helpers
         public const string LabelTextSize = "labelTextSize";
         public const string SecondaryTextSize = "secondaryTextSize";
         public const string SimpleButtonCornerRadius = "simpleButtonCornerRadius";
-        public const string LabelCornerRadius = "labelCornerRadius";
+        public const string BadgeLabelCornerRadius = "badgeLabelCornerRadius";
         public const string Font = "font";
         public const string SecondaryFont = "secondaryFont";
         public const string LetterSpacing = "letterSpacing";
@@ -59,6 +59,7 @@ namespace UIFrameworks.Shared.Themes.Helpers
         public static string R2C2 = "R2C2";
         public static string R2C3 = "R2C3";
         public static string R2C4 = "R2C4";
+        public static string R2C5 = "R2C5";
         public static string R3C1 = "R3C1";
         public static string R3C2 = "R3C2";
         public static string R3C3 = "R3C3";

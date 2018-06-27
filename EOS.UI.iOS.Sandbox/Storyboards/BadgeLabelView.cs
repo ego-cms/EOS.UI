@@ -29,7 +29,7 @@ namespace EOS.UI.iOS.Sandbox
             UpdateApperaence();
 
             var label = new BadgeLabel();
-            label.Text = "Default Text";
+            label.Text = "Badge label";
 
             _dropDowns = new List<EOSSandboxDropDown>()
             {

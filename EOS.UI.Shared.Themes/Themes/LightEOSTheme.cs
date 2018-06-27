@@ -54,6 +54,7 @@ namespace EOS.UI.Shared.Themes.Themes
             { EOSConstants.Font, UIFont.SystemFontOfSize(17)},
             { EOSConstants.SecondaryFont, UIFont.SystemFontOfSize(17) },
             { EOSConstants.SimpleButtonCornerRadius, 25 },
+            { EOSConstants.BadgeLabelCornerRadius, 5 },
             { EOSConstants.LetterSpacing, 1 },
             { EOSConstants.SecondaryLetterSpacing, 1 },
             { EOSConstants.LeftImageFocused, "icAccountCircle" },
@@ -90,7 +91,7 @@ namespace EOS.UI.Shared.Themes.Themes
             { EOSConstants.WorkTimeDayTextFont, UIFont.BoldSystemFontOfSize(13) },
             //simblebutton enabled
             { EOSConstants.R3C1, new FontStyleItem() {
-                    Color = ColorExtension.FromHex(neutralColor6),
+                    Color = ColorExtension.FromHex(neutralColor6), //must be white in all themes
                     Font = UIFont.SystemFontOfSize(16f, UIFontWeight.Medium),
                     Size = 16f,
                     LetterSpacing = -0.2f,
@@ -120,6 +121,14 @@ namespace EOS.UI.Shared.Themes.Themes
                     LetterSpacing = -0.6f,
                     LineHeight = 15f
             }},
+            //badge label
+            { EOSConstants.R2C5, new FontStyleItem() {
+                    Color = ColorExtension.FromHex(neutralColor6), //must be white in all themes
+                    Font = UIFont.SystemFontOfSize(13f, UIFontWeight.Semibold),
+                    Size = 13f,
+                    LetterSpacing = -0.6f,
+                    LineHeight = 15f
+            }},
 #endif
 
 #if __ANDROID__
@@ -141,7 +150,7 @@ namespace EOS.UI.Shared.Themes.Themes
             { EOSConstants.Font, "Fonts/Roboto.ttf" },
             { EOSConstants.SecondaryFont, "Fonts/Roboto.ttf" },
             { EOSConstants.SimpleButtonCornerRadius, 25f },
-            { EOSConstants.LabelCornerRadius, 5f },
+            { EOSConstants.BadgeLabelCornerRadius, 5f },
             { EOSConstants.LetterSpacing, 0f },
             { EOSConstants.SecondaryLetterSpacing, 0.1f },
             { EOSConstants.LeftImageFocused, Resource.Drawable.AccountCircle },
