@@ -8,6 +8,7 @@ using EOS.UI.iOS.Sandbox.Enums;
 using EOS.UI.iOS.Sandbox.Helpers;
 using EOS.UI.iOS.Sandbox.Storyboards;
 using EOS.UI.Shared.Themes.Themes;
+using UIFrameworks.Shared.Themes.Helpers;
 using UIKit;
 using static EOS.UI.iOS.Sandbox.Helpers.Constants;
 
@@ -31,7 +32,7 @@ namespace EOS.UI.iOS.Sandbox
             base.ViewDidLoad();
 
             _simpleButton = new SimpleButton();
-            _simpleButton.SetTitle("Simple button", UIControlState.Normal);
+            _simpleButton.SetTitle(ControlNames.SimpleButton, UIControlState.Normal);
 
             _dropDowns = new List<EOSSandboxDropDown>()
             {
@@ -192,6 +193,7 @@ namespace EOS.UI.iOS.Sandbox
                         case SimpleButtonTypeEnum.Simple:
                             containerView.RemoveConstraints(containerView.Constraints);
                             containerView.AddConstraints(_defaultConstraints);
+                        _simpleButton.SetTitle(ControlNames.SimpleButton, UIControlState.Normal);
                             break;
                         case SimpleButtonTypeEnum.FullBleed:
                             containerView.RemoveConstraints(containerView.Constraints);
@@ -203,6 +205,7 @@ namespace EOS.UI.iOS.Sandbox
                             _simpleButton.ContentEdgeInsets = new UIEdgeInsets();
                             _simpleButton.CornerRadius = 0;
                             _simpleButton.ShadowConfig = null;
+                        _simpleButton.SetTitle(ControlNames.FullBleedButton, UIControlState.Normal);
                             break;
                     }
                 },

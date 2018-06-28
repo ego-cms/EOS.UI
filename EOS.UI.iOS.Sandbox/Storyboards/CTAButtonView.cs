@@ -9,6 +9,7 @@ using EOS.UI.iOS.Sandbox.Enums;
 using EOS.UI.iOS.Sandbox.Helpers;
 using EOS.UI.iOS.Sandbox.Storyboards;
 using EOS.UI.Shared.Themes.Themes;
+using UIFrameworks.Shared.Themes.Helpers;
 using UIKit;
 using static EOS.UI.iOS.Sandbox.Helpers.Constants;
 
@@ -30,7 +31,7 @@ namespace EOS.UI.iOS.Sandbox
             base.ViewDidLoad();
 
             _simpleButton = new SimpleButton();
-            _simpleButton.SetTitle("CTA button", UIControlState.Normal);
+            _simpleButton.SetTitle(ControlNames.CTAButton, UIControlState.Normal);
 
             containerView.ConstrainLayout(() => _simpleButton.Frame.GetCenterX() == containerView.Frame.GetCenterX() &&
                                                 _simpleButton.Frame.GetCenterY() == containerView.Frame.GetCenterY() &&

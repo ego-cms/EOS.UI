@@ -7,6 +7,7 @@ using EOS.UI.iOS.Extensions;
 using EOS.UI.iOS.Sandbox.Helpers;
 using EOS.UI.iOS.Sandbox.Storyboards;
 using EOS.UI.Shared.Themes.Themes;
+using UIFrameworks.Shared.Themes.Helpers;
 using UIKit;
 using static EOS.UI.iOS.Sandbox.Helpers.Constants;
 
@@ -26,7 +27,7 @@ namespace EOS.UI.iOS.Sandbox
             base.ViewDidLoad();
 
             var ghostButton = new GhostButton();
-            ghostButton.SetTitle("Ghost button", UIControlState.Normal);
+            ghostButton.SetTitle(ControlNames.GhostButton, UIControlState.Normal);
             containerView.ConstrainLayout(() => ghostButton.Frame.GetCenterX() == containerView.Frame.GetCenterX() &&
                                           ghostButton.Frame.GetCenterY() == containerView.Frame.GetCenterY() &&
                                           ghostButton.Frame.Height == 28 &&

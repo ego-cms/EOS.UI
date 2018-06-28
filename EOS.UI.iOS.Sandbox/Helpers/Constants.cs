@@ -110,7 +110,7 @@ namespace EOS.UI.iOS.Sandbox.Helpers
             { "Light", EOSThemeEnumeration.Light },
             { "Dark", EOSThemeEnumeration.Dark },
         };
-        
+
         public static Dictionary<string, SimpleButtonTypeEnum> ButtonTypes = new Dictionary<string, SimpleButtonTypeEnum>()
         {
             { "Simple button", SimpleButtonTypeEnum.Simple },
