@@ -137,6 +137,14 @@ namespace EOS.UI.Shared.Themes.Themes
                     LetterSpacing = -0.6f,
                     LineHeight = 15f
             }},
+            //circle progress
+            { EOSConstants.R1C1, new FontStyleItem() {
+                    Color = ColorExtension.FromHex(brandPrimaryColor),
+                    Font = UIFont.SystemFontOfSize(11f, UIFontWeight.Bold),
+                    Size = 11f,
+                    LetterSpacing = 0.06f,
+                    LineHeight = 13f
+            }},
 #endif
 
 #if __ANDROID__
