@@ -163,7 +163,6 @@
                                             </view>
                                         </subviews>
                                         <constraints>
-                                            <constraint firstAttribute="trailing" secondItem="33690" secondAttribute="trailing" constant="10" id="53721"/>
                                             <constraint firstItem="44692" firstAttribute="centerX" secondItem="11167" secondAttribute="centerX" id="53816"/>
                                             <constraint firstItem="33689" firstAttribute="leading" secondItem="11167" secondAttribute="leading" id="54501"/>
                                             <constraint firstAttribute="bottom" secondItem="44692" secondAttribute="bottom" constant="30" id="54502"/>
@@ -200,6 +199,7 @@
                                             <constraint firstItem="33690" firstAttribute="top" secondItem="FVo-4a-BIS" secondAttribute="bottom" constant="10" id="4T4-QR-SfA"/>
                                             <constraint firstAttribute="trailing" secondItem="59N-pT-bfV" secondAttribute="trailing" id="964-OR-dHy"/>
                                             <constraint firstAttribute="trailing" secondItem="fao-O2-hWA" secondAttribute="trailing" id="9Jw-wP-vRm"/>
+                                            <constraint firstAttribute="trailing" secondItem="33690" secondAttribute="trailing" constant="10" id="9wJ-wT-8dr"/>
                                             <constraint firstItem="55645" firstAttribute="top" secondItem="tJG-OJ-Xlw" secondAttribute="bottom" constant="5" id="ALb-Lq-mkX"/>
                                             <constraint firstItem="FVo-4a-BIS" firstAttribute="leading" secondItem="11167" secondAttribute="leading" id="D7o-wf-NFn"/>
                                             <constraint firstItem="tJG-OJ-Xlw" firstAttribute="leading" secondItem="11167" secondAttribute="leading" id="EOS-Hq-Gof"/>

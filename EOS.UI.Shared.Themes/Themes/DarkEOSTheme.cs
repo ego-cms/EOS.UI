@@ -64,7 +64,7 @@ namespace EOS.UI.Shared.Themes.Themes
             { EOSConstants.LeftImageDisabled, "icAccountOff" },
             { EOSConstants.CalendarImage, "icCalendar"},
             { EOSConstants.FabProgressPreloaderImage, "icPreloader"},
-            { EOSConstants.FabProgressSize, 50},
+            { EOSConstants.FabProgressSize, 52},
             { EOSConstants.CircleProgressShown, true},
             { EOSConstants.FabShadow,  new ShadowConfig(){
                         Color = UIColor.White.CGColor,
