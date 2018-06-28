@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Linq;
 using CoreAnimation;
 using CoreGraphics;
@@ -92,8 +92,8 @@ namespace EOS.UI.iOS.Components
             }
         }
 
-        private int _sectionTextLetterSpacing;
-        public int SectionTextLetterSpacing
+        private float _sectionTextLetterSpacing;
+        public float SectionTextLetterSpacing
         {
             get => _sectionTextLetterSpacing;
             set
@@ -104,8 +104,8 @@ namespace EOS.UI.iOS.Components
             }
         }
 
-        public int _buttonTextLetterSpacing;
-        public int ButtonTextLetterSpacing
+        public float _buttonTextLetterSpacing;
+        public float ButtonTextLetterSpacing
         {
             get => _buttonTextLetterSpacing;
             set
@@ -316,12 +316,12 @@ namespace EOS.UI.iOS.Components
                 ButtonText = GetThemeProvider().GetEOSProperty<string>(this, EOSConstants.SectionActionTitle);
                 SectionTextSize = GetThemeProvider().GetEOSProperty<int>(this, EOSConstants.TextSize);
                 ButtonTextSize = GetThemeProvider().GetEOSProperty<int>(this, EOSConstants.SecondaryTextSize);
-                SectionTextLetterSpacing = GetThemeProvider().GetEOSProperty<int>(this, EOSConstants.LetterSpacing);
-                ButtonTextLetterSpacing = GetThemeProvider().GetEOSProperty<int>(this, EOSConstants.SecondaryLetterSpacing);
+                SectionTextLetterSpacing = GetThemeProvider().GetEOSProperty<float>(this, EOSConstants.LetterSpacing);
+                ButtonTextLetterSpacing = GetThemeProvider().GetEOSProperty<float>(this, EOSConstants.SecondaryLetterSpacing);
                 SectionNameFont = GetThemeProvider().GetEOSProperty<UIFont>(this, EOSConstants.Font);
                 ButtonNameFont = GetThemeProvider().GetEOSProperty<UIFont>(this, EOSConstants.SecondaryFont);
-                BackgroundColor = GetThemeProvider().GetEOSProperty<UIColor>(this, EOSConstants.NeutralColor6);
-                SectionNameColor = GetThemeProvider().GetEOSProperty<UIColor>(this, EOSConstants.NeutralColor1);
+                BackgroundColor = GetThemeProvider().GetEOSProperty<UIColor>(this, EOSConstants.NeutralColor5);
+                SectionNameColor = GetThemeProvider().GetEOSProperty<UIColor>(this, EOSConstants.NeutralColor2);
                 ButtonNameColor = GetThemeProvider().GetEOSProperty<UIColor>(this, EOSConstants.BrandPrimaryColor);
                 BorderColor = GetThemeProvider().GetEOSProperty<UIColor>(this, EOSConstants.NeutralColor4);
                 BorderWidth = GetThemeProvider().GetEOSProperty<int>(this, EOSConstants.BorderWidth);
