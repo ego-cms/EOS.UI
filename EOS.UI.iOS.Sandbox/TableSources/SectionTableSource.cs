@@ -18,8 +18,8 @@ namespace EOS.UI.iOS.Sandbox.TableSources
         public SectionTableSource(UITableView table, List<object> dataSource)
         {
             SectionModel = dataSource.FirstOrDefault(item => item is SectionModel) as SectionModel;
+            SectionModel.OnPropertyChanged += (sender, e) => _tableView.ReloadData();
             _source = dataSource.FindAll(item => item is string).Select(item => (string)item).ToList();
-
             _tableView = table;
             _tableView.RegisterNibForHeaderFooterViewReuse(Section.Nib, Section.Key);
         }
@@ -43,7 +43,7 @@ namespace EOS.UI.iOS.Sandbox.TableSources
 
         public override UIView GetViewForHeader(UITableView tableView, nint section)
         {
-            var header = _tableView.DequeueReusableHeaderFooterView("Section");
+            var header = _tableView.DequeueReusableHeaderFooterView(Section.Key);
 
             var customSection = (header as Section);
 
@@ -69,8 +69,8 @@ namespace EOS.UI.iOS.Sandbox.TableSources
                 if(SectionModel.SectionNameTextSize != 0)
                     customSection.SectionTextSize = SectionModel.SectionNameTextSize;
 
-                if(SectionModel.ButtonTextTextSize != 0)
-                    customSection.ButtonTextSize = SectionModel.ButtonTextTextSize;
+                if(SectionModel.ButtonTextSize != 0)
+                    customSection.ButtonTextSize = SectionModel.ButtonTextSize;
 
                 if(SectionModel.SectionTextLetterSpacing != 0)
                     customSection.SectionTextLetterSpacing = SectionModel.SectionTextLetterSpacing;
@@ -84,19 +84,19 @@ namespace EOS.UI.iOS.Sandbox.TableSources
                 if(SectionModel.ButtonNameFont != null)
                     customSection.ButtonNameFont = SectionModel.ButtonNameFont;
 
-                if(SectionModel.BackgroundColor != UIColor.Clear)
+                if(SectionModel.BackgroundColor != null)
                     customSection.BackgroundColor = SectionModel.BackgroundColor;
 
                 if(SectionModel.BorderWidth != 0)
                     customSection.BorderWidth = SectionModel.BorderWidth;
 
-                if(SectionModel.BorderColor != UIColor.Clear)
+                if(SectionModel.BorderColor != null)
                     customSection.BorderColor = SectionModel.BorderColor;
 
-                if(SectionModel.SectionNameColor != UIColor.Clear)
+                if(SectionModel.SectionNameColor != null)
                     customSection.SectionNameColor = SectionModel.SectionNameColor;
 
-                if(SectionModel.ButtonNameColor != UIColor.Clear)
+                if(SectionModel.ButtonNameColor != null)
                     customSection.ButtonNameColor = SectionModel.ButtonNameColor;
 
                 customSection.SetPaddings(SectionModel.LeftPadding, SectionModel.TopPadding, SectionModel.RightPadding, SectionModel.BottonPadding);

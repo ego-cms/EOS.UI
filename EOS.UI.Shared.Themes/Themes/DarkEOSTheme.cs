@@ -131,6 +131,14 @@ namespace EOS.UI.Shared.Themes.Themes
                     LetterSpacing = -0.6f,
                     LineHeight = 15f
             }},
+            //section fontstyle
+            { EOSConstants.R2C3, new FontStyleItem() {
+                    Color = ColorExtension.FromHex(neutralColor2),
+                    Font = UIFont.SystemFontOfSize(13f, UIFontWeight.Semibold),
+                    Size = 13f,
+                    LetterSpacing = -0.6f,
+                    LineHeight = 15f
+            }},
 #endif
 
 #if __ANDROID__

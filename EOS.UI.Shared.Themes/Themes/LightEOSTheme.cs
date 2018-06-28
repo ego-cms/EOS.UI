@@ -105,7 +105,7 @@ namespace EOS.UI.Shared.Themes.Themes
                     LetterSpacing = -0.2f,
                     LineHeight = 19f
             }},
-            //ghostbutton enabled, simple label
+            //ghostbutton enabled, simple label, section button
             { EOSConstants.R2C1, new FontStyleItem() {
                     Color = ColorExtension.FromHex(brandPrimaryColor),
                     Font = UIFont.SystemFontOfSize(13f, UIFontWeight.Semibold),
@@ -124,6 +124,14 @@ namespace EOS.UI.Shared.Themes.Themes
             //badge label
             { EOSConstants.R2C5, new FontStyleItem() {
                     Color = ColorExtension.FromHex(neutralColor6), //must be white in all themes
+                    Font = UIFont.SystemFontOfSize(13f, UIFontWeight.Semibold),
+                    Size = 13f,
+                    LetterSpacing = -0.6f,
+                    LineHeight = 15f
+            }},
+            //section fontstyle
+            { EOSConstants.R2C3, new FontStyleItem() {
+                    Color = ColorExtension.FromHex(neutralColor2),
                     Font = UIFont.SystemFontOfSize(13f, UIFontWeight.Semibold),
                     Size = 13f,
                     LetterSpacing = -0.6f,

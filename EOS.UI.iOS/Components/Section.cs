@@ -4,6 +4,7 @@ using CoreAnimation;
 using CoreGraphics;
 using EOS.UI.iOS.Extensions;
 using EOS.UI.iOS.Themes;
+using EOS.UI.Shared.Themes.DataModels;
 using EOS.UI.Shared.Themes.Helpers;
 using EOS.UI.Shared.Themes.Interfaces;
 using Foundation;
@@ -35,7 +36,7 @@ namespace EOS.UI.iOS.Components
 
         public Section(IntPtr handle) : base(handle)
         {
-            
+
         }
 
         #endregion
@@ -44,6 +45,32 @@ namespace EOS.UI.iOS.Components
 
         public Action SectionAction { get; set; }
 
+        private FontStyleItem _sectionFontStyle;
+        public FontStyleItem SectionFontStyle
+        {
+            get => _sectionFontStyle;
+            set
+            {
+                _sectionFontStyle = value;
+                SetSectionFontStyle();
+                IsEOSCustomizationIgnored = true;
+            }
+        }
+
+
+        private FontStyleItem _buttonFontStyle;
+        public FontStyleItem ButtonFontStyle
+        {
+            get => _buttonFontStyle;
+            set
+            {
+                _buttonFontStyle = value;
+                SetButtonFontStyle();
+                IsEOSCustomizationIgnored = true;
+            }
+        }
+
+
         private string _sectionName;
         public string SectionName
         {
@@ -51,7 +78,9 @@ namespace EOS.UI.iOS.Components
             set
             {
                 _sectionName = value;
-                sectionName.AttributedText = new NSAttributedString(value ?? string.Empty);
+                var attributedString = new NSAttributedString(value ?? string.Empty);
+                sectionName.AttributedText = attributedString;
+                SetSectionFontStyle();
                 IsEOSCustomizationIgnored = true;
             }
         }
@@ -68,95 +97,90 @@ namespace EOS.UI.iOS.Components
             }
         }
 
-        private int _sectionTextSize;
-        public int SectionTextSize
+        public float SectionTextSize
         {
-            get => _sectionTextSize;
+            get => SectionFontStyle.Size;
             set
             {
-                _sectionTextSize = value;
-                sectionName.SetTextSize(value);
+                SectionFontStyle.Size = value;
+                SetSectionFontStyle();
                 IsEOSCustomizationIgnored = true;
             }
         }
 
-        private int _buttonTextSize;
-        public int ButtonTextSize
+        public float ButtonTextSize
         {
-            get => _buttonTextSize;
+            get => ButtonFontStyle.Size;
             set
             {
-                _buttonTextSize = value;
-                sectionButton.SetTextSize(value);
+                ButtonFontStyle.Size = value;
+                SetButtonFontStyle();
                 IsEOSCustomizationIgnored = true;
             }
         }
 
-        private float _sectionTextLetterSpacing;
         public float SectionTextLetterSpacing
         {
-            get => _sectionTextLetterSpacing;
+            get => SectionFontStyle.LetterSpacing;
             set
             {
-                _sectionTextLetterSpacing = value;
-                sectionName.SetLetterSpacing(value);
+                SectionFontStyle.LetterSpacing = value;
+                SetSectionFontStyle();
                 IsEOSCustomizationIgnored = true;
             }
         }
 
-        public float _buttonTextLetterSpacing;
         public float ButtonTextLetterSpacing
         {
-            get => _buttonTextLetterSpacing;
+            get => ButtonFontStyle.LetterSpacing;
             set
             {
-                _buttonTextLetterSpacing = value;
-                sectionButton.SetLetterSpacing(value);
+                ButtonFontStyle.LetterSpacing = value;
+                SetButtonFontStyle();
                 IsEOSCustomizationIgnored = true;
             }
         }
 
         public UIFont SectionNameFont
         {
-            get => sectionName.Font;
+            get => SectionFontStyle.Font;
             set
             {
-                sectionName.Font = value.WithSize(SectionTextSize);
+                SectionFontStyle.Font = value.WithSize(SectionTextSize);
+                SetSectionFontStyle();
                 IsEOSCustomizationIgnored = true;
             }
         }
 
-        private UIFont _buttonFont;
         public UIFont ButtonNameFont
         {
-            get => _buttonFont;
+            get => ButtonFontStyle.Font;
             set
             {
-                _buttonFont = value.WithSize(ButtonTextSize);
-                sectionButton.SetFont(_buttonFont);
-                sectionButton.Font = _buttonFont;
+                ButtonFontStyle.Font = value.WithSize(ButtonTextSize);
+                SetButtonFontStyle();
                 IsEOSCustomizationIgnored = true;
             }
         }
 
         public UIColor SectionNameColor
         {
-            get => sectionName.TextColor;
+            get => SectionFontStyle.Color;
             set
             {
-                sectionName.TextColor = value;
+                SectionFontStyle.Color = value;
+                SetSectionFontStyle();
                 IsEOSCustomizationIgnored = true;
             }
         }
 
-        private UIColor _buttonNameColor;
         public UIColor ButtonNameColor
         {
-            get => _buttonNameColor;
+            get => ButtonFontStyle.Color;
             set
             {
-                _buttonNameColor = value;
-                SetButtonTextColor(value);
+                ButtonFontStyle.Color = value;
+                SetButtonFontStyle();
                 IsEOSCustomizationIgnored = true;
             }
         }
@@ -231,14 +255,14 @@ namespace EOS.UI.iOS.Components
 
         public void Initialize()
         {
-            if(sectionButton != null)
+            if (sectionButton != null)
             {
                 sectionButton.SetAttributedTitle(new NSAttributedString(ButtonText ?? string.Empty), UIControlState.Normal);
                 sectionName.AttributedText = new NSAttributedString(SectionName ?? string.Empty);
 
                 sectionButton.LineBreakMode = UILineBreakMode.TailTruncation;
 
-                if(!_subscribed)
+                if (!_subscribed)
                 {
                     sectionButton.TouchDown += delegate
                     {
@@ -251,7 +275,7 @@ namespace EOS.UI.iOS.Components
 
         private void SetButtonTextColor(UIColor color)
         {
-            if(color != null)
+            if (color != null)
             {
                 var attrString = new NSMutableAttributedString(sectionButton.GetAttributedTitle(UIControlState.Normal));
                 var range = new NSRange(0, attrString.Length);
@@ -270,7 +294,7 @@ namespace EOS.UI.iOS.Components
         {
             base.LayoutSubviews();
 
-            if(_underlineLayer == null)
+            if (_underlineLayer == null)
             {
                 _underlineLayer = new CALayer
                 {
@@ -288,7 +312,7 @@ namespace EOS.UI.iOS.Components
         private void UpdateDivider(bool isVisible)
         {
             var underlineLayer = Layer.Sublayers.FirstOrDefault(item => item.Name == InputConstants.BorderName);
-            if(underlineLayer != null)
+            if (underlineLayer != null)
             {
                 underlineLayer.BackgroundColor = BorderColor == null || !isVisible ? UIColor.Clear.CGColor : BorderColor.CGColor;
                 underlineLayer.Frame = new CGRect(0, 0, Frame.Size.Width, isVisible ? BorderWidth : 0);
@@ -308,27 +332,22 @@ namespace EOS.UI.iOS.Components
 
         public void UpdateAppearance()
         {
-            if(!IsEOSCustomizationIgnored)
+            if (!IsEOSCustomizationIgnored)
             {
-                HasBorder = GetThemeProvider().GetEOSProperty<bool>(this, EOSConstants.HasSectionBorder);
-                HasButton = GetThemeProvider().GetEOSProperty<bool>(this, EOSConstants.HasSectionAction);
-                SectionName = GetThemeProvider().GetEOSProperty<string>(this, EOSConstants.SectionTitle);
-                ButtonText = GetThemeProvider().GetEOSProperty<string>(this, EOSConstants.SectionActionTitle);
-                SectionTextSize = GetThemeProvider().GetEOSProperty<int>(this, EOSConstants.TextSize);
-                ButtonTextSize = GetThemeProvider().GetEOSProperty<int>(this, EOSConstants.SecondaryTextSize);
-                SectionTextLetterSpacing = GetThemeProvider().GetEOSProperty<float>(this, EOSConstants.LetterSpacing);
-                ButtonTextLetterSpacing = GetThemeProvider().GetEOSProperty<float>(this, EOSConstants.SecondaryLetterSpacing);
-                SectionNameFont = GetThemeProvider().GetEOSProperty<UIFont>(this, EOSConstants.Font);
-                ButtonNameFont = GetThemeProvider().GetEOSProperty<UIFont>(this, EOSConstants.SecondaryFont);
-                BackgroundColor = GetThemeProvider().GetEOSProperty<UIColor>(this, EOSConstants.NeutralColor5);
-                SectionNameColor = GetThemeProvider().GetEOSProperty<UIColor>(this, EOSConstants.NeutralColor2);
-                ButtonNameColor = GetThemeProvider().GetEOSProperty<UIColor>(this, EOSConstants.BrandPrimaryColor);
-                BorderColor = GetThemeProvider().GetEOSProperty<UIColor>(this, EOSConstants.NeutralColor4);
-                BorderWidth = GetThemeProvider().GetEOSProperty<int>(this, EOSConstants.BorderWidth);
-                var leftPadding = GetThemeProvider().GetEOSProperty<int>(this, EOSConstants.LeftPadding);
-                var topPadding = GetThemeProvider().GetEOSProperty<int>(this, EOSConstants.TopPadding);
-                var rightPadding = GetThemeProvider().GetEOSProperty<int>(this, EOSConstants.RightPadding);
-                var bottomPadding = GetThemeProvider().GetEOSProperty<int>(this, EOSConstants.BottomPadding);
+                var provider = GetThemeProvider();
+                HasBorder = provider.GetEOSProperty<bool>(this, EOSConstants.HasSectionBorder);
+                HasButton = provider.GetEOSProperty<bool>(this, EOSConstants.HasSectionAction);
+                SectionName = provider.GetEOSProperty<string>(this, EOSConstants.SectionTitle);
+                ButtonText = provider.GetEOSProperty<string>(this, EOSConstants.SectionActionTitle);
+                SectionFontStyle = provider.GetEOSProperty<FontStyleItem>(this, EOSConstants.R2C3);
+                ButtonFontStyle = provider.GetEOSProperty<FontStyleItem>(this, EOSConstants.R2C1);
+                BackgroundColor = provider.GetEOSProperty<UIColor>(this, EOSConstants.NeutralColor5);
+                BorderColor = provider.GetEOSProperty<UIColor>(this, EOSConstants.NeutralColor4);
+                BorderWidth = provider.GetEOSProperty<int>(this, EOSConstants.BorderWidth);
+                var leftPadding = provider.GetEOSProperty<int>(this, EOSConstants.LeftPadding);
+                var topPadding = provider.GetEOSProperty<int>(this, EOSConstants.TopPadding);
+                var rightPadding = provider.GetEOSProperty<int>(this, EOSConstants.RightPadding);
+                var bottomPadding = provider.GetEOSProperty<int>(this, EOSConstants.BottomPadding);
                 SetPaddings(leftPadding, topPadding, rightPadding, bottomPadding);
                 IsEOSCustomizationIgnored = false;
             }
@@ -348,6 +367,26 @@ namespace EOS.UI.iOS.Components
         public void SetEOSStyle(EOSStyleEnumeration style)
         {
 
+        }
+
+        private void SetSectionFontStyle()
+        {
+            if (SectionFontStyle == null)
+                return;
+            sectionName.SetTextSize(SectionTextSize);
+            sectionName.SetLetterSpacing(SectionTextLetterSpacing);
+            sectionName.Font = SectionNameFont;
+            sectionName.TextColor = SectionNameColor;
+        }
+
+        private void SetButtonFontStyle()
+        {
+            if (ButtonFontStyle == null)
+                return;
+            sectionButton.SetTextSize(ButtonTextSize);
+            sectionButton.SetLetterSpacing(ButtonTextLetterSpacing);
+            sectionButton.Font = ButtonNameFont;
+            SetButtonTextColor(ButtonNameColor);
         }
 
         #endregion
