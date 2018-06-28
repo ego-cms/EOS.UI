@@ -194,7 +194,7 @@ namespace EOS.UI.Android.Controls
                 base.LetterSpacing = GetThemeProvider().GetEOSProperty<float>(this, EOSConstants.LetterSpacing);
                 base.SetTextColor(GetThemeProvider().GetEOSProperty<Color>(this, EOSConstants.NeutralColor6));
                 base.TextSize = GetThemeProvider().GetEOSProperty<float>(this, EOSConstants.LabelTextSize);
-                (Background as GradientDrawable).SetCornerRadius(GetThemeProvider().GetEOSProperty<float>(this, EOSConstants.LabelCornerRadius));
+                (Background as GradientDrawable).SetCornerRadius(GetThemeProvider().GetEOSProperty<float>(this, EOSConstants.BadgeLabelCornerRadius));
             }
         }
 

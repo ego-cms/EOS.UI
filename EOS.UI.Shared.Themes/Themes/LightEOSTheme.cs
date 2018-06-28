@@ -4,6 +4,7 @@ using EOS.UI.Shared.Helpers;
 using UIFrameworks.Shared.Themes.Helpers;
 using UIFrameworks.Shared.Themes.Interfaces;
 using EOS.UI.Shared.Themes.Extensions;
+using EOS.UI.Shared.Themes.DataModels;
 
 #if __IOS__
 using CoreGraphics;
@@ -52,7 +53,8 @@ namespace EOS.UI.Shared.Themes.Themes
             { EOSConstants.SecondaryTextSize, 17 },
             { EOSConstants.Font, UIFont.SystemFontOfSize(17)},
             { EOSConstants.SecondaryFont, UIFont.SystemFontOfSize(17) },
-            { EOSConstants.CornerRadius, 3 },
+            { EOSConstants.SimpleButtonCornerRadius, 25 },
+            { EOSConstants.BadgeLabelCornerRadius, 5 },
             { EOSConstants.LetterSpacing, 1 },
             { EOSConstants.SecondaryLetterSpacing, 1 },
             { EOSConstants.LeftImageFocused, "icAccountCircle" },
@@ -68,6 +70,12 @@ namespace EOS.UI.Shared.Themes.Themes
                         Radius = 2,
                         Opacity = 0.4f
             }},
+            { EOSConstants.SimpleButtonShadow, new ShadowConfig(){
+                        Color = UIColor.Black.CGColor,
+                        Offset = new CGSize(0, 12),
+                        Radius = 5,
+                        Opacity = 0.2f
+            }},
             { EOSConstants.BorderWidth, 2 },
             { EOSConstants.SectionTitle, "Light section" },
             { EOSConstants.SectionActionTitle, "View All" },
@@ -80,7 +88,47 @@ namespace EOS.UI.Shared.Themes.Themes
             { EOSConstants.WorkTimeTitleSize, 13 },
             { EOSConstants.WorkTimeTitleFont, UIFont.BoldSystemFontOfSize(13) },
             { EOSConstants.WorkTimeDayTextSize, 11 },
-            { EOSConstants.WorkTimeDayTextFont, UIFont.BoldSystemFontOfSize(13) }
+            { EOSConstants.WorkTimeDayTextFont, UIFont.BoldSystemFontOfSize(13) },
+            //simblebutton enabled
+            { EOSConstants.R3C1, new FontStyleItem() {
+                    Color = ColorExtension.FromHex(neutralColor6), //must be white in all themes
+                    Font = UIFont.SystemFontOfSize(16f, UIFontWeight.Medium),
+                    Size = 16f,
+                    LetterSpacing = -0.2f,
+                    LineHeight = 19f
+            }},
+            //simplebutton disabled
+            { EOSConstants.R3C4, new FontStyleItem() {
+                    Color = ColorExtension.FromHex(neutralColor3),
+                    Font = UIFont.SystemFontOfSize(16f, UIFontWeight.Medium),
+                    Size = 16f,
+                    LetterSpacing = -0.2f,
+                    LineHeight = 19f
+            }},
+            //ghostbutton enabled, simple label
+            { EOSConstants.R2C1, new FontStyleItem() {
+                    Color = ColorExtension.FromHex(brandPrimaryColor),
+                    Font = UIFont.SystemFontOfSize(13f, UIFontWeight.Semibold),
+                    Size = 13f,
+                    LetterSpacing = -0.6f,
+                    LineHeight = 15f
+            }},
+            //ghostbutton disabled
+            { EOSConstants.R2C4, new FontStyleItem() {
+                    Color = ColorExtension.FromHex(neutralColor3),
+                    Font = UIFont.SystemFontOfSize(13f, UIFontWeight.Semibold),
+                    Size = 13f,
+                    LetterSpacing = -0.6f,
+                    LineHeight = 15f
+            }},
+            //badge label
+            { EOSConstants.R2C5, new FontStyleItem() {
+                    Color = ColorExtension.FromHex(neutralColor6), //must be white in all themes
+                    Font = UIFont.SystemFontOfSize(13f, UIFontWeight.Semibold),
+                    Size = 13f,
+                    LetterSpacing = -0.6f,
+                    LineHeight = 15f
+            }},
 #endif
 
 #if __ANDROID__
@@ -101,8 +149,8 @@ namespace EOS.UI.Shared.Themes.Themes
             { EOSConstants.SecondaryTextSize, 17f },
             { EOSConstants.Font, "Fonts/Roboto.ttf" },
             { EOSConstants.SecondaryFont, "Fonts/Roboto.ttf" },
-            { EOSConstants.CornerRadius, 5f },
-            { EOSConstants.LabelCornerRadius, 5f },
+            { EOSConstants.SimpleButtonCornerRadius, 25f },
+            { EOSConstants.BadgeLabelCornerRadius, 5f },
             { EOSConstants.LetterSpacing, 0f },
             { EOSConstants.SecondaryLetterSpacing, 0.1f },
             { EOSConstants.LeftImageFocused, Resource.Drawable.AccountCircle },

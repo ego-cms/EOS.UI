@@ -139,7 +139,7 @@ namespace EOS.UI.iOS.Sandbox
             if(!IsEOSCustomizationIgnored)
             {
                 label.TextColor = GetThemeProvider().GetEOSProperty<UIColor>(this, EOSConstants.NeutralColor1);
-                textField.TextColor = GetThemeProvider().GetEOSProperty<UIColor>(this, EOSConstants.NeutralColor3);
+                textField.TextColor = GetThemeProvider().GetEOSProperty<UIColor>(this, EOSConstants.NeutralColor1);
                 textField.BackgroundColor = GetThemeProvider().GetEOSProperty<UIColor>(this, EOSConstants.NeutralColor6);
                 textField.Layer.BorderColor = GetThemeProvider().GetEOSProperty<UIColor>(this, EOSConstants.NeutralColor3).CGColor;
 
