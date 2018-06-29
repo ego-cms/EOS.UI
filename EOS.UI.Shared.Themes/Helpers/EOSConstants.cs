@@ -15,8 +15,10 @@ namespace UIFrameworks.Shared.Themes.Helpers
         public const string NeutralColor6 = "neutralColor6";
         public const string RippleColor = "rippleColor";
         public const string TextSize = "textSize";
+        public const string LabelTextSize = "labelTextSize";
         public const string SecondaryTextSize = "secondaryTextSize";
         public const string CornerRadius = "cornerRadius";
+        public const string LabelCornerRadius = "labelCornerRadius";
         public const string Font = "font";
         public const string SecondaryFont = "secondaryFont";
         public const string LetterSpacing = "letterSpacing";
@@ -45,6 +47,8 @@ namespace UIFrameworks.Shared.Themes.Helpers
         public const string WorkTimeDayTextSize = "workTimeDayTextSize";
         public const string WorkTimeTitleFont = "workTimeTitleFont";
         public const string WorkTimeDayTextFont = "workTimeDayFont";
+        //Sandbox
+        public const string DefaultText = "default";
     }
 
     public static class ControlNames
