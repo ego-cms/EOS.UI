@@ -28,7 +28,7 @@ namespace EOS.UI.Android.Helpers
 
         public static int GetOldWidth(int newWidth, int offset, int blur)
         {
-            return (newWidth - (int)offset - blur * 2) / 2;
+            return (newWidth - GetOffsetWithBlur(offset, blur) - blur * 2);
         }
 
         //When offset larger than blur width of canvas larger than when it's lesser 

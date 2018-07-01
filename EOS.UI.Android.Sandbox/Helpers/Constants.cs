@@ -37,6 +37,7 @@ namespace EOS.UI.Android.Sandbox.Helpers
             public static string PressedColor = "Pressed color";
             public static string Size = "Size";
             public static string Shadow = "Shadow";
+            public static string ShadowColor = "ShadowColor";
             public static string Color = "Color";
             public static string AlternativeColor = "Alternative color";
             public static string FillColor = "Fill color";

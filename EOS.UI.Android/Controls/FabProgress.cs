@@ -39,6 +39,8 @@ namespace EOS.UI.Android.Controls
         //Initial x-y position of control. Altered by shadow property
         private float? _initialXPosition;
         private float? _initialYPosition;
+        bool _shouldShadowDrawingWaitForLayout = false;
+        bool _touchIsDown;
 
         public bool IsEOSCustomizationIgnored { get; private set; }
 
@@ -267,19 +269,44 @@ namespace EOS.UI.Android.Controls
 
         public override bool OnTouchEvent(MotionEvent e)
         {
-            if (Enabled)
+            if (Enabled && IsNotShadowClick(e))
             {
                 if (e.Action == MotionEventActions.Down)
                 {
+                    _touchIsDown = true;
                     SetBackgroundColor(PressedBackgroundColor);
                     Animate().ScaleX(_startScale).ScaleY(_startScale).SetDuration(_animationDuration).Start();
                 }
                 if (e.Action == MotionEventActions.Up || e.Action == MotionEventActions.Cancel)
                 {
-                    SetBackgroundColor(BackgroundColor);
-                    Animate().ScaleX(_endScale).ScaleY(_endScale).SetDuration(_animationDuration).Start();
+                    SetActionUpUIStyle();
                     PerformClick();
                 }
+            }
+            //return in previous state if button is pressed outside its content
+            if (_touchIsDown && e.Action == MotionEventActions.Up || e.Action == MotionEventActions.Cancel)
+            {
+                SetActionUpUIStyle();
+            }
+
+            return true;
+        }
+
+        private void SetActionUpUIStyle()
+        {
+            _touchIsDown = false;
+            SetBackgroundColor(BackgroundColor);
+            Animate().ScaleX(_endScale).ScaleY(_endScale).SetDuration(_animationDuration).Start();
+        }
+
+        private bool IsNotShadowClick(MotionEvent e)
+        {
+            var layer = Background as LayerDrawable;
+            if (HasShadowDrawable(layer))
+            {
+                //Should use this method instead of GetDrawable for compatibility with API <23
+                var back = layer.GetDrawable(_backgroundLayerIndex);
+                return back.Bounds.Contains((int)e.GetX(), (int)e.GetY());
             }
             return true;
         }
@@ -322,6 +349,11 @@ namespace EOS.UI.Android.Controls
 
             if(_initialWidth<=0 || _initialWidth != Width)
                 _initialWidth = Width;
+
+            if (_shouldShadowDrawingWaitForLayout && !CheckIfShadowDrawingIsAllowed(_shadowConfig))
+            {
+                SetShadow(_shadowConfig);
+            }
         }
 
         #region Shadow methods
@@ -329,18 +361,18 @@ namespace EOS.UI.Android.Controls
         //Will fail if config = null.
         private void SetShadow(ShadowConfig config)
         {
-            if (LayoutParameters == null || Width ==0)
+            if (CheckIfShadowDrawingIsAllowed(config))
             {
                 SetBackground();
                 return;
             }
-            
+
             SetImageDrawable(null);
 
             var densityOffsetX = (int)Helpers.Helpers.DpToPx(config.Offset.X);
             //Wrong implementation for y offset should be inverted
             //TODO need to fix
-            var densityOffsetY = (int)Helpers.Helpers.DpToPx(config.Offset.Y) *-1;
+            var densityOffsetY = (int)Helpers.Helpers.DpToPx(config.Offset.Y) * -1;
             var densityBlur = (int)Helpers.Helpers.DpToPx(config.Blur);
 
             var newWidth = RecalculateWidth(densityOffsetX, densityOffsetY, densityBlur);
@@ -361,6 +393,13 @@ namespace EOS.UI.Android.Controls
             SetInsetForImageLayer(layerList, Image, _initialWidth / 2, densityOffsetX, densityOffsetY, densityBlur);
 
             Background = layerList;
+        }
+
+        private bool CheckIfShadowDrawingIsAllowed(ShadowConfig config)
+        {
+            var result = config==null || LayoutParameters == null || Width == 0 || config.Blur <= 0;
+            _shouldShadowDrawingWaitForLayout = result;
+            return result;
         }
 
         private void SetInsetForBackgroundLayer(int densityOffsetX, int densityOffsetY, int densityBlur, LayerDrawable layerList)

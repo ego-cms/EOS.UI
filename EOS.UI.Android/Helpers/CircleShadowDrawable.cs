@@ -32,7 +32,7 @@ namespace EOS.UI.Android.Helpers
         {
             if (config == null)
                 throw new ArgumentNullException(nameof(config));
-
+            
             //Stroke width sgould be device density, to avoid broken pixels
             _paint.StrokeWidth = 1f;//(float)(Math.Round(Application.Context.Resources.DisplayMetrics.Density));
 
@@ -93,7 +93,7 @@ namespace EOS.UI.Android.Helpers
                     break;
                 }
 
-                var radius = ShadowHelpers.GetOldWidth(canvas.Width, (int)_offsetWithBlurX, _iterations)  - (i - iterations);
+                var radius = ShadowHelpers.GetOldWidth(canvas.Width, (int)_densityOffsetX, _iterations)/2  - (i - iterations);
                 DrawCircle(canvas, p, radius);
             }
         }
@@ -107,7 +107,7 @@ namespace EOS.UI.Android.Helpers
         private void DrawSolidCircle(Canvas canvas, int i, int iterations, Paint p)
         {
             p.SetStyle(Paint.Style.FillAndStroke);
-            var radius = ShadowHelpers.GetOldWidth(canvas.Width, (int)_offsetWithBlurX, _iterations) - (i - iterations);
+            var radius = ShadowHelpers.GetOldWidth(canvas.Width, (int)_densityOffsetX, _iterations)/2 - (i - iterations);
             DrawCircle(canvas, p, radius);
         }
 
@@ -116,7 +116,7 @@ namespace EOS.UI.Android.Helpers
             for (int i = 0; i < iterations; i++)
             {
                 p.Color = _colors[i];
-                var radius = ShadowHelpers.GetOldWidth(canvas.Width, (int)_offsetWithBlurX, _iterations) +i;
+                var radius = ShadowHelpers.GetOldWidth(canvas.Width, (int)_densityOffsetX, _iterations)/2 +i;
 
                 DrawCircle(canvas, p, radius);
             }
@@ -159,7 +159,7 @@ namespace EOS.UI.Android.Helpers
                 }
                 else
                 {
-                    x = ShadowHelpers.GetOldWidth(canvas.Width, (int)_offsetWithBlurX, _iterations) + _densityOffsetX;
+                    x = ShadowHelpers.GetOldWidth(canvas.Width, (int)_densityOffsetX, _iterations)/2 + _densityOffsetX;
                 }
             }
             else
@@ -176,11 +176,11 @@ namespace EOS.UI.Android.Helpers
             {
                 if (_offsetWithBlurY == 0)
                 {
-                    y = GetPivotParameter(canvas) / 2 - _offsetWithBlurY * -1;
+                    y = GetPivotParameter(canvas) / 2;// + _densityOffsetY * -1;
                 }
                 else
                 {
-                    y = ShadowHelpers.GetOldWidth(canvas.Width, (int)_offsetWithBlurY, _iterations) - _densityOffsetY;
+                    y = ShadowHelpers.GetOldWidth(canvas.Height, (int)_densityOffsetY, _iterations)/2 - _densityOffsetY;
                 }
             }
             return new PointF(x, y);
