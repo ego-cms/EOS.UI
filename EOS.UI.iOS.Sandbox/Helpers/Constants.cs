@@ -107,6 +107,7 @@ namespace EOS.UI.iOS.Sandbox.Helpers
 
         public static List<string> Icons = new List<string>()
         {
+            {"icCalendar"},
             { "icAccountCircle"},
             { "icAccountKey"},
             { "icAccountOff"},

@@ -57,7 +57,7 @@ namespace EOS.UI.Shared.Themes.Themes
             { EOSConstants.CornerRadius, 3 },
             { EOSConstants.LetterSpacing, 1 },
             { EOSConstants.SecondaryLetterSpacing, 2 },
-            { EOSConstants.LeftImage, "icAccountCircle" },
+            { EOSConstants.LeftImage, "icCalendar" },
             { EOSConstants.CalendarImage, "icCalendar"},
             { EOSConstants.FabProgressPreloaderImage, "icPreloader"},
             { EOSConstants.WarningInputImage, "icWarning"},
