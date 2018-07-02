@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using Android.Graphics;
 using Android.Graphics.Drawables;
 using Android.Support.V7.Widget;
@@ -257,8 +257,8 @@ namespace EOS.UI.Android.Components
                 ButtonTextLetterSpacing = GetThemeProvider().GetEOSProperty<float>(this, EOSConstants.SecondaryLetterSpacing);
                 SectionNameFont = Typeface.CreateFromAsset(ItemView.Context.Assets, GetThemeProvider().GetEOSProperty<string>(this, EOSConstants.Font));
                 ButtonNameFont = Typeface.CreateFromAsset(ItemView.Context.Assets, GetThemeProvider().GetEOSProperty<string>(this, EOSConstants.SecondaryFont));
-                BackgroundColor = GetThemeProvider().GetEOSProperty<Color>(this, EOSConstants.NeutralColor6);
-                SectionNameColor = GetThemeProvider().GetEOSProperty<Color>(this, EOSConstants.NeutralColor1);
+                BackgroundColor = GetThemeProvider().GetEOSProperty<Color>(this, EOSConstants.NeutralColor5);
+                SectionNameColor = GetThemeProvider().GetEOSProperty<Color>(this, EOSConstants.NeutralColor2);
                 ButtonNameColor = GetThemeProvider().GetEOSProperty<Color>(this, EOSConstants.BrandPrimaryColor);
                 BorderColor = GetThemeProvider().GetEOSProperty<Color>(this, EOSConstants.NeutralColor4);
                 BorderWidth = GetThemeProvider().GetEOSProperty<int>(this, EOSConstants.BorderWidth);

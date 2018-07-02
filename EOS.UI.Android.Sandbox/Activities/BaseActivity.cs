@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using Android.App;
 using Android.Content.PM;
 using Android.OS;
@@ -17,8 +17,8 @@ namespace EOS.UI.Android.Sandbox.Activities
     [Activity(Theme = "@style/Sandbox.Main")]
     public class BaseActivity : AppCompatActivity
     {
-        private List<View> _children;
-        private List<View> Children => _children = _children ?? GetAllChildren(Window.DecorView);
+        private List<IEOSThemeControl> _children;
+        private List<IEOSThemeControl> Children => _children = _children ?? GetAllChildren(Window.DecorView);
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
@@ -49,23 +49,27 @@ namespace EOS.UI.Android.Sandbox.Activities
         {
             SetStyle();
             foreach(var view in Children)
-                if(view is IEOSThemeControl eOSTheme)
-                    eOSTheme.UpdateAppearance();
+                view.UpdateAppearance();
         }
 
         public void ResetCustomization()
         {
+            SetStyle();
             foreach(var view in Children)
-                if(view is IEOSThemeControl eOSTheme)
-                    eOSTheme.ResetCustomization();
+                view.ResetCustomization();
         }
 
-        private List<View> GetAllChildren(View view)
+        private List<IEOSThemeControl> GetAllChildren(View view)
         {
-            if(!(view is ViewGroup)) 
-                return new List<View> { view };
+            if(!(view is ViewGroup))
+                if(view is IEOSThemeControl eOSTheme)
+                    return new List<IEOSThemeControl> { eOSTheme };
+                else
+                    return new List<IEOSThemeControl>();
 
-            var result = new List<View>() { view };
+            var result = new List<IEOSThemeControl>();
+            if(view is IEOSThemeControl eos)
+                result.Add(eos);
 
             var viewGroup = (ViewGroup)view;
             for(int i = 0; i < viewGroup.ChildCount; i++)

@@ -25,8 +25,10 @@
             android:id="@+id/ghostButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:paddingLeft="24dp"
+            android:paddingRight="24dp"
             android:layout_gravity="center"
-            android:text="Default Text" />
+            android:text="Default text" />
         <EOS.UI.Android.Sandbox.Controls.EOSSandboxDivider
             android:layout_width="match_parent"
             android:layout_height="1dp"
