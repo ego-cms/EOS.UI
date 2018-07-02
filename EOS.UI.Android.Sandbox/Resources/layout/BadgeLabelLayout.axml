@@ -30,7 +30,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Label"
-                android:layout_gravity="center" />
+                android:layout_gravity="center"
+                android:paddingBottom="3dp"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp" />
             <EOS.UI.Android.Sandbox.Controls.EOSSandboxDivider
                 android:layout_width="match_parent"
                 android:layout_height="1dp"

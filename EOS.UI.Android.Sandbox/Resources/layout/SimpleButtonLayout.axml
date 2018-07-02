@@ -28,7 +28,13 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:text="Simple Button" />
+            android:text="Simple button"
+            android:paddingBottom="17dp"
+            android:paddingTop="14dp"
+            android:paddingLeft="110dp"
+            android:paddingRight="110dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp" />
     </EOS.UI.Android.Sandbox.Controls.EOSSandboxLinearLayout>
     <EOS.UI.Android.Sandbox.Controls.EOSSandboxDivider
         android:layout_width="match_parent"
@@ -41,6 +47,11 @@
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
+            <EOS.UI.Android.Sandbox.Controls.EOSSandboxDropDown
+                android:id="@+id/buttonTypeDropDown"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="gone" />
             <EOS.UI.Android.Sandbox.Controls.EOSSandboxDropDown
                 android:id="@+id/themeDropDown"
                 android:layout_width="match_parent"

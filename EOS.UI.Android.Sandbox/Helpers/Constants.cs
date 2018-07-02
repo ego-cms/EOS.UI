@@ -70,6 +70,7 @@ namespace EOS.UI.Android.Sandbox.Helpers
             public static string CurrentDividerColor = "Current day divider color";
             public static string RippleColor = "Ripple color";
             public static string FirstDayOfWeek = "Week start day";
+            public static string ButtonType = "Button type";
         };
 
         public static class Colors
@@ -310,5 +311,19 @@ namespace EOS.UI.Android.Sandbox.Helpers
                 { Monday, WeekStartEnum.Monday },
             };
         }
+
+        public static class Buttons
+        {
+            public const string Simple = "Simple button";
+            public const string FullBleed = "Full bleed button";
+
+            public static Dictionary<string, int> ButtonTypeollection = new Dictionary<string, int>()
+            {
+                { string.Empty, 0 },
+                { Simple, 1 },
+                { FullBleed, 2 },
+            };
+        }
+
     }
 }
