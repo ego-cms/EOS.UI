@@ -104,8 +104,12 @@
     <ImageAsset Include="Assets.xcassets\icWarning.imageset\icWarning.pdf">
       <Visible>false</Visible>
     </ImageAsset>
-    <ImageAsset Include="Assets.xcassets\icClear.imageset\Contents.json" />
-    <ImageAsset Include="Assets.xcassets\icClear.imageset\icClear.pdf" />
+    <ImageAsset Include="Assets.xcassets\icClear.imageset\Contents.json">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\icClear.imageset\icClear.pdf">
+      <Visible>false</Visible>
+    </ImageAsset>
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
