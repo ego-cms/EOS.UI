@@ -160,6 +160,7 @@
     <AndroidResource Include="Resources\menu\FabProgressMenu.xml" />
     <AndroidResource Include="Resources\layout\FabProgressItemLayout.axml" />
     <AndroidResource Include="Resources\layout\FabProgressSampleLayout.axml" />
+    <AndroidResource Include="Resources\drawable\FabRightArrow.xml" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\layout\Main.axml">
