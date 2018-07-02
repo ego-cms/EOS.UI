@@ -29,7 +29,7 @@ namespace EOS.UI.Android.Controls
         private float _pivot = 0.5f;
         private ObjectAnimator _animator;
         private RotateDrawable _rotateDrawable;
-        
+
         public bool InProgress { get; private set; }
 
         #endregion
@@ -65,7 +65,7 @@ namespace EOS.UI.Android.Controls
             get => base.Enabled;
             set
             {
-                if (Enabled != value)
+                if(Enabled != value)
                     UpdateEnabledState(value);
                 base.Enabled = value;
             }
@@ -79,7 +79,7 @@ namespace EOS.UI.Android.Controls
             {
                 IsEOSCustomizationIgnored = true;
                 _backgroundColor = value;
-                if (Enabled)
+                if(Enabled)
                     Background = CreateRippleDrawable(BackgroundColor);
             }
         }
@@ -92,7 +92,7 @@ namespace EOS.UI.Android.Controls
             {
                 IsEOSCustomizationIgnored = true;
                 _disabledBackgroundColor = value;
-                if (!Enabled)
+                if(!Enabled)
                     Background = CreateGradientDrawable(_disabledBackgroundColor);
             }
         }
@@ -105,7 +105,7 @@ namespace EOS.UI.Android.Controls
             {
                 IsEOSCustomizationIgnored = true;
                 _pressedBackgroundColor = value;
-                if (Enabled)
+                if(Enabled)
                     Background = CreateRippleDrawable(BackgroundColor);
             }
         }
@@ -149,7 +149,7 @@ namespace EOS.UI.Android.Controls
                 IsEOSCustomizationIgnored = true;
                 _textColor = value;
                 _rotateDrawable.Drawable?.SetColorFilter(value, PorterDuff.Mode.SrcIn);
-                if (Enabled)
+                if(Enabled)
                     base.SetTextColor(value);
             }
         }
@@ -167,7 +167,7 @@ namespace EOS.UI.Android.Controls
             {
                 IsEOSCustomizationIgnored = true;
                 _disabledTextColor = value;
-                if (!Enabled)
+                if(!Enabled)
                     base.SetTextColor(value);
             }
         }
@@ -226,13 +226,16 @@ namespace EOS.UI.Android.Controls
         private void Initialize(IAttributeSet attrs = null)
         {
             _rotateDrawable = CreateRotateDrawable();
+            var denisty = Resources.DisplayMetrics.Density;
+            SetAllCaps(false);
             SetOnTouchListener(this);
             SetLines(1);
             Ellipsize = TextUtils.TruncateAt.End;
-            if (attrs != null)
+            if(attrs != null)
                 InitializeAttributes(attrs);
             UpdateAppearance();
             Background = CreateRippleDrawable(BackgroundColor);
+            Elevation = 20;
         }
 
         private void InitializeAttributes(IAttributeSet attrs)
@@ -240,51 +243,51 @@ namespace EOS.UI.Android.Controls
             var styledAttributes = Context.ObtainStyledAttributes(attrs, Resource.Styleable.SimpleButton, 0, 0);
 
             var backgroundColor = styledAttributes.GetColor(Resource.Styleable.SimpleButton_eos_backgroundcolor, Color.Transparent);
-            if (backgroundColor != Color.Transparent)
+            if(backgroundColor != Color.Transparent)
                 BackgroundColor = backgroundColor;
 
             var disabledBackgroundColor = styledAttributes.GetColor(Resource.Styleable.SimpleButton_eos_backgroundcolor_disabled, Color.Transparent);
-            if (disabledBackgroundColor != Color.Transparent)
+            if(disabledBackgroundColor != Color.Transparent)
                 DisabledBackgroundColor = disabledBackgroundColor;
 
             var pressedBackgroundColor = styledAttributes.GetColor(Resource.Styleable.SimpleButton_eos_backgroundcolor_pressed, Color.Transparent);
-            if (pressedBackgroundColor != Color.Transparent)
+            if(pressedBackgroundColor != Color.Transparent)
                 PressedBackgroundColor = pressedBackgroundColor;
 
             var font = styledAttributes.GetString(Resource.Styleable.SimpleButton_eos_font);
-            if (!string.IsNullOrEmpty(font))
+            if(!string.IsNullOrEmpty(font))
                 Typeface = Typeface.CreateFromAsset(Context.Assets, font);
 
             var letterSpacing = styledAttributes.GetFloat(Resource.Styleable.SimpleButton_eos_letterspacing, -1);
-            if (letterSpacing > 0)
+            if(letterSpacing > 0)
                 LetterSpacing = letterSpacing;
 
             var textColor = styledAttributes.GetColor(Resource.Styleable.SimpleButton_eos_textcolor, Color.Transparent);
-            if (textColor != Color.Transparent)
+            if(textColor != Color.Transparent)
                 TextColor = textColor;
 
             var disabledTextColor = styledAttributes.GetColor(Resource.Styleable.SimpleButton_eos_textcolor_disabled, Color.Transparent);
-            if (disabledTextColor != Color.Transparent)
+            if(disabledTextColor != Color.Transparent)
                 DisabledTextColor = disabledTextColor;
 
             var pressedTextColor = styledAttributes.GetColor(Resource.Styleable.SimpleButton_eos_textcolor_pressed, Color.Transparent);
-            if (pressedTextColor != Color.Transparent)
+            if(pressedTextColor != Color.Transparent)
                 PressedTextColor = pressedTextColor;
 
             var textSize = styledAttributes.GetFloat(Resource.Styleable.SimpleButton_eos_textsize, -1);
-            if (textSize > 0)
+            if(textSize > 0)
                 TextSize = textSize;
 
             var cornerRadius = styledAttributes.GetFloat(Resource.Styleable.SimpleButton_eos_cornerradius, -1);
-            if (cornerRadius > 0)
+            if(cornerRadius > 0)
                 CornerRadius = cornerRadius;
 
             var preloaderImage = styledAttributes.GetDrawable(Resource.Styleable.SimpleButton_eos_preloaderimage);
-            if (preloaderImage != null)
+            if(preloaderImage != null)
                 PreloaderImage = preloaderImage;
 
             var enabled = styledAttributes.GetBoolean(Resource.Styleable.SimpleButton_eos_enabled, true);
-            if (!enabled)
+            if(!enabled)
                 Enabled = enabled;
         }
 
@@ -332,7 +335,7 @@ namespace EOS.UI.Android.Controls
 
         public void StartProgressAnimation()
         {
-            if (Enabled && !InProgress)
+            if(Enabled && !InProgress)
             {
                 Drawable[] layers = { CreateGradientDrawable(BackgroundColor), _rotateDrawable };
                 var layerDrawable = new LayerDrawable(layers);
@@ -362,56 +365,9 @@ namespace EOS.UI.Android.Controls
             base.SetTextColor(_textColor);
         }
 
-        #endregion
-
-        #region IEOSThemeControl implementation
-
-        public bool IsEOSCustomizationIgnored { get; private set; }
-
-        public IEOSThemeProvider GetThemeProvider()
-        {
-            return EOSThemeProvider.Instance;
-        }
-
-        public void UpdateAppearance()
-        {
-            if (!IsEOSCustomizationIgnored)
-            {
-                base.SetTypeface(Typeface.CreateFromAsset(Context.Assets, GetThemeProvider().GetEOSProperty<string>(this, EOSConstants.Font)), TypefaceStyle.Normal);
-                base.LetterSpacing = GetThemeProvider().GetEOSProperty<float>(this, EOSConstants.LetterSpacing);
-                base.TextSize = GetThemeProvider().GetEOSProperty<float>(this, EOSConstants.TextSize);
-                TextColor = GetThemeProvider().GetEOSProperty<Color>(this, EOSConstants.NeutralColor6);
-                DisabledTextColor = GetThemeProvider().GetEOSProperty<Color>(this, EOSConstants.NeutralColor3);
-                PressedTextColor = GetThemeProvider().GetEOSProperty<Color>(this, EOSConstants.NeutralColor6);
-                BackgroundColor = GetThemeProvider().GetEOSProperty<Color>(this, EOSConstants.BrandPrimaryColor);
-                DisabledBackgroundColor = GetThemeProvider().GetEOSProperty<Color>(this, EOSConstants.NeutralColor4);
-                PressedBackgroundColor = GetThemeProvider().GetEOSProperty<Color>(this, EOSConstants.BrandPrimaryColorVariant1);
-                RippleColor = GetThemeProvider().GetEOSProperty<Color>(this, EOSConstants.RippleColor);
-                CornerRadius = GetThemeProvider().GetEOSProperty<float>(this, EOSConstants.CornerRadius);
-                PreloaderImage = Resources.GetDrawable(GetThemeProvider().GetEOSProperty<int>(this, EOSConstants.FabProgressPreloaderImage), null);
-                IsEOSCustomizationIgnored = false;
-            }
-        }
-
-        public void ResetCustomization()
-        {
-            IsEOSCustomizationIgnored = false;
-            UpdateAppearance();
-        }
-
-        public IEOSStyle GetCurrentEOSStyle()
-        {
-            return null;
-        }
-
-        public void SetEOSStyle(EOSStyleEnumeration style)
-        {
-
-        }
-
         private RotateDrawable CreateRotateDrawable()
         {
-            if (Build.VERSION.SdkInt >= BuildVersionCodes.M)
+            if(Build.VERSION.SdkInt >= BuildVersionCodes.M)
                 return CreateRotateDrawableAPI23();
             else
                 return CreateRotateDrawableAPI21();
@@ -438,18 +394,65 @@ namespace EOS.UI.Android.Controls
 
         #endregion
 
+        #region IEOSThemeControl implementation
+
+        public bool IsEOSCustomizationIgnored { get; private set; }
+
+        public IEOSThemeProvider GetThemeProvider()
+        {
+            return EOSThemeProvider.Instance;
+        }
+
+        public void UpdateAppearance()
+        {
+            if(!IsEOSCustomizationIgnored)
+            {
+                base.SetTypeface(Typeface.CreateFromAsset(Context.Assets, GetThemeProvider().GetEOSProperty<string>(this, EOSConstants.Font)), TypefaceStyle.Normal);
+                base.LetterSpacing = GetThemeProvider().GetEOSProperty<float>(this, EOSConstants.LetterSpacing);
+                base.TextSize = GetThemeProvider().GetEOSProperty<float>(this, EOSConstants.TextSize);
+                TextColor = GetThemeProvider().GetEOSProperty<Color>(this, EOSConstants.NeutralColor6);
+                DisabledTextColor = GetThemeProvider().GetEOSProperty<Color>(this, EOSConstants.NeutralColor3);
+                PressedTextColor = GetThemeProvider().GetEOSProperty<Color>(this, EOSConstants.NeutralColor6);
+                BackgroundColor = GetThemeProvider().GetEOSProperty<Color>(this, EOSConstants.BrandPrimaryColor);
+                DisabledBackgroundColor = GetThemeProvider().GetEOSProperty<Color>(this, EOSConstants.NeutralColor4);
+                PressedBackgroundColor = GetThemeProvider().GetEOSProperty<Color>(this, EOSConstants.BrandPrimaryColorVariant1);
+                RippleColor = GetThemeProvider().GetEOSProperty<Color>(this, EOSConstants.BrandPrimaryColorVariant1);
+                CornerRadius = GetThemeProvider().GetEOSProperty<float>(this, EOSConstants.ButtonCornerRadius);
+                PreloaderImage = Resources.GetDrawable(GetThemeProvider().GetEOSProperty<int>(this, EOSConstants.FabProgressPreloaderImage), null);
+                IsEOSCustomizationIgnored = false;
+            }
+        }
+
+        public void ResetCustomization()
+        {
+            IsEOSCustomizationIgnored = false;
+            UpdateAppearance();
+        }
+
+        public IEOSStyle GetCurrentEOSStyle()
+        {
+            return null;
+        }
+
+        public void SetEOSStyle(EOSStyleEnumeration style)
+        {
+
+        }
+
+        #endregion
+
         #region IOnTouchListener implementation
 
         public bool OnTouch(View v, MotionEvent e)
         {
-            if (InProgress)
+            if(InProgress)
                 return true;
 
-            if (Enabled && !InProgress)
+            if(Enabled && !InProgress)
             {
-                if (e.Action == MotionEventActions.Down)
+                if(e.Action == MotionEventActions.Down)
                     base.SetTextColor(PressedTextColor);
-                if (e.Action == MotionEventActions.Up || e.Action == MotionEventActions.Cancel)
+                if(e.Action == MotionEventActions.Up || e.Action == MotionEventActions.Cancel)
                     base.SetTextColor(TextColor);
             }
             return false;

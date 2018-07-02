@@ -15,10 +15,10 @@ namespace UIFrameworks.Shared.Themes.Helpers
         public const string NeutralColor6 = "neutralColor6";
         public const string RippleColor = "rippleColor";
         public const string TextSize = "textSize";
-        public const string LabelTextSize = "labelTextSize";
         public const string SecondaryTextSize = "secondaryTextSize";
         public const string CornerRadius = "cornerRadius";
         public const string LabelCornerRadius = "labelCornerRadius";
+        public const string ButtonCornerRadius = "buttonCornerRadius";
         public const string Font = "font";
         public const string SecondaryFont = "secondaryFont";
         public const string LetterSpacing = "letterSpacing";
@@ -64,4 +64,13 @@ namespace UIFrameworks.Shared.Themes.Helpers
         public const string CTAButton = "CTA Button";
         public const string WorkTimeCalendar = "Work time calendar";
     }
+
+    public static class SimpleButtonConstants
+    {
+        public const int LeftPadding = 110;
+        public const int RightPadding = 110;
+        public const int TopPadding = 14;
+        public const int BottomPadding = 17;
+    }
+
 }
