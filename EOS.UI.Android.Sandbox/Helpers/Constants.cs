@@ -306,6 +306,5 @@ namespace EOS.UI.Android.Sandbox.Helpers
                 { FullBleed, 2 },
             };
         }
-
     }
 }

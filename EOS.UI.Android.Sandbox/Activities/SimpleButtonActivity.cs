@@ -133,14 +133,14 @@ namespace EOS.UI.Android.Sandbox.Activities
                         (int)(SimpleButtonConstants.TopPadding * denisty),
                         (int)(SimpleButtonConstants.RightPadding * denisty),
                         (int)(SimpleButtonConstants.BottomPadding * denisty));
-                    _simpleButton.Text = "Simple button";
+                    _simpleButton.Text = Buttons.Simple;
                     break;
                 case 2:
                     _simpleButton.ResetCustomization();
                     _simpleButton.CornerRadius = 0;
                     _simpleButton.SetPadding(0, 0, 0, 0);
                     _simpleButton.LayoutParameters = new LinearLayout.LayoutParams(V.ViewGroup.LayoutParams.MatchParent, V.ViewGroup.LayoutParams.WrapContent);
-                    _simpleButton.Text = "Full bleed button";
+                    _simpleButton.Text = Buttons.FullBleed;
                     break;
             }
         }
