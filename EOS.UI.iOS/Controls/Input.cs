@@ -291,7 +291,7 @@ namespace EOS.UI.iOS.Controls
             _leftImageView = new UIImageView(new CGRect(0, 0, InputConstants.IconSize, InputConstants.IconSize));
             _leftImageContainer = new UIView(new CGRect(0, 0, InputConstants.IconSize + InputConstants.IconPadding, InputConstants.IconSize));
             _leftImageContainer.AddSubview(_leftImageView);
-            _rightImageView = new UIImageView(new CGRect(0, 0, InputConstants.IconSize, InputConstants.IconSize));
+            _rightImageView = new UIImageView(new CGRect(8, 0, InputConstants.IconSize, InputConstants.IconSize));
             _rightImageContainer = new UIView(new CGRect(0, 0, InputConstants.IconSize + InputConstants.IconPadding, InputConstants.IconSize));
             _rightImageContainer.AddSubview(_rightImageView);
 
