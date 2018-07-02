@@ -99,7 +99,7 @@ namespace EOS.UI.Shared.Themes.Themes
             { EOSConstants.NeutralColor6, Color.ParseColor(neutralColor6)},
             { EOSConstants.RippleColor, Color.ParseColor(rippleColor) },
             { EOSConstants.TextSize, 16f },
-            { EOSConstants.SecondaryTextSize, 163f },
+            { EOSConstants.SecondaryTextSize, 16f },
             { EOSConstants.Font, "Fonts/Roboto.ttf" },
             { EOSConstants.SecondaryFont, "Fonts/Roboto.ttf" },
             { EOSConstants.CornerRadius, 20f },

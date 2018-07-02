@@ -194,9 +194,23 @@ namespace EOS.UI.Android.Components
             }
         }
 
+        private int _leftPadding;
+        private int _rightPadding;
+        private int _topPadding;
+        private int _bottomPadding;
+
         public void SetPaddings(int left, int top, int right, int bottom)
         {
-            _containerLayout.SetPadding(left, top, right, bottom);
+            _leftPadding = left == -1 ? _leftPadding : left;
+            _rightPadding = right == -1 ? _rightPadding : right;
+            _topPadding = top == -1 ? _topPadding : top;
+            _bottomPadding = bottom == -1 ? _bottomPadding : bottom;
+            UpdatePaddings();
+        }
+
+        private void UpdatePaddings()
+        {
+            _containerLayout.SetPadding(_leftPadding, _topPadding, _rightPadding, _bottomPadding);
         }
 
         private bool _hasButton;
