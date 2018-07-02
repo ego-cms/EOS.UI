@@ -29,7 +29,7 @@ namespace EOS.UI.iOS.Sandbox.Helpers
             public const string PressedBackground = "Pressed background";
             public const string HintTextColor = "Hint text color";
             public const string HintTextColorDisabled = "Hint text color disabled";
-            public const string IconFocused = "Icon focused";
+            public const string Icon = "Icon";
             public const string FocusedColor = "Focused color";
             public const string PopulatedUnderlineColor = "Populated underline color";
             public const string ValidationRules = "Validation rules";
@@ -105,12 +105,12 @@ namespace EOS.UI.iOS.Sandbox.Helpers
             { "Dark", EOSThemeEnumeration.Dark },
         };
 
-        public static List<string> Icons = new List<string>()
+        public static Dictionary<string, string> Icons = new Dictionary<string, string>()
         {
-            {"icCalendar"},
-            { "icAccountCircle"},
-            { "icAccountKey"},
-            { "icAccountOff"},
+            { "Calendar", "icCalendar" },
+            { "Account circle", "icAccountCircle" },
+            { "Account key", "icAccountCircle" },
+            { "Account off", "icAccountOff" },
         };
 
         public static Dictionary<string, bool> States = new Dictionary<string, bool>()

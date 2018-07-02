@@ -25,7 +25,7 @@ namespace EOS.UI.Android.Sandbox.Helpers
             public static string PressedBackground = "Pressed background";
             public static string HintTextColor = "Hint text color";
             public static string HintTextColorDisabled = "Hint text color disabled";
-            public static string IconFocused = "Icon focused";
+            public static string Icon = "Icon";
             public static string IconUnocused = "Icon unfocused";
             public static string IconDisabled = "Icon disabled";
             public static string FocusedColor = "Focused color";
@@ -265,22 +265,18 @@ namespace EOS.UI.Android.Sandbox.Helpers
 
         public static class Icons
         {
-            public const string AccountCircle = "account circle";
-            public const string AccountKey = "account key";
-            public const string AccountOff = "account off";
-            public const string AndroidIcon = "android";
-            public const string Airballoon = "air balloon";
-            public const string Apple = "apple";
+            public const string Calendar = "Calendar";
+            public const string AccountCircle = "Account circle";
+            public const string AccountKey = "Account key";
+            public const string AccountOff = "Account off";
 
             public static Dictionary<string, int> DrawableCollection = new Dictionary<string, int>()
             {
                 { string.Empty, 0 },
+                { Calendar, Resource.Drawable.icCalendar },
                 { AccountCircle, Resource.Drawable.AccountCircle },
                 { AccountKey, Resource.Drawable.AccountKey },
                 { AccountOff, Resource.Drawable.AccountOff },
-                { Airballoon, Resource.Drawable.Airballoon },
-                { AndroidIcon, Resource.Drawable.Android },
-                { Apple, Resource.Drawable.Apple },
             };
         }
 

@@ -15,7 +15,6 @@ namespace EOS.UI.iOS.Sandbox
     public partial class InputControlView : BaseViewController
     {
         public const string Identifier = "InputControlView";
-
         private Input _inputTop;
         private Input _inputBotton;
         private Predicate<String> _validateRule;
@@ -110,7 +109,7 @@ namespace EOS.UI.iOS.Sandbox
             InitTextColorDisabledTextField(rect);
             InitPlaceholderTextField(rect);
             InitPlaceholderDisabledTextField(rect);
-            InitIconFocusedTextField(rect);
+            InitIconTextField(rect);
             InitFocusedColorTextField(rect);
             InitPopulatedUndrlineColorTextField(rect);
             InitDisabledColorTextField(rect);
@@ -235,16 +234,16 @@ namespace EOS.UI.iOS.Sandbox
                 rect);
         }
 
-        private void InitIconFocusedTextField(CGRect rect)
+        private void InitIconTextField(CGRect rect)
         {
             focusedIconDropDown.InitSource(
                 Icons,
-                icon =>
+                iconName =>
                 {
-                    _inputTop.LeftImage = UIImage.FromBundle(icon);
-                    _inputBotton.LeftImage = UIImage.FromBundle(icon);
+                    _inputTop.LeftImage = UIImage.FromBundle(iconName);
+                    _inputBotton.LeftImage = UIImage.FromBundle(iconName);
                 },
-                Fields.IconFocused,
+                Fields.Icon,
                 rect);
         }
 
