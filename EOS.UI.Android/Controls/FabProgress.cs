@@ -471,11 +471,13 @@ namespace EOS.UI.Android.Controls
 
             if (offsetX > 0)
             {
-                SetX(GetInitialX() + (GetOffsetForViewXPosition(offsetX, blur) + blur * 2) / 2);
+                //doesn't understand why it offsets on that value, but still.
+                var magic = blur > Math.Abs(offsetX)? blur - Math.Abs(offsetX) : 0;
+                TranslationX = newWidth / 2 - _initialWidth/2 - magic;
             }
             if (offsetX < 0)
             {
-                SetX(GetInitialX() + ((GetOffsetForViewXPosition(offsetX, blur) + blur * 2) * -1) / 2);
+                TranslationX = newWidth / 2 - _initialWidth / 2 + offsetX - blur;
             }
             if (offsetX == 0)
             {
@@ -527,11 +529,6 @@ namespace EOS.UI.Android.Controls
             _initialXPosition = null;
             _initialYPosition = null;
             _shadowRecalculatedWidth = false;
-        }
-
-        private int GetOffsetForViewXPosition(int offset, int blur)
-        {
-            return Math.Abs(offset) >= blur ? Math.Abs(offset) - blur : (blur + Math.Abs(offset)) * -1;
         }
 
         private LayerDrawable CreateLayerList(Drawable[] layers)
