@@ -123,7 +123,7 @@ namespace EOS.UI.Android.Sandbox.Activities
             {
                 case 0:
                 case 1:
-                    _simpleButton.ResetCustomization();
+                    ResetCustomValues(true);
                     var layoutParameters = new LinearLayout.LayoutParams(V.ViewGroup.LayoutParams.WrapContent, V.ViewGroup.LayoutParams.WrapContent);
                     layoutParameters.Gravity = V.GravityFlags.Center;
                     _simpleButton.LayoutParameters = layoutParameters;
@@ -136,7 +136,7 @@ namespace EOS.UI.Android.Sandbox.Activities
                     _simpleButton.Text = Buttons.Simple;
                     break;
                 case 2:
-                    _simpleButton.ResetCustomization();
+                    ResetCustomValues(true);
                     _simpleButton.CornerRadius = 0;
                     _simpleButton.SetPadding(0, 0, 0, 0);
                     _simpleButton.LayoutParameters = new LinearLayout.LayoutParams(V.ViewGroup.LayoutParams.MatchParent, V.ViewGroup.LayoutParams.WrapContent);
@@ -229,7 +229,7 @@ namespace EOS.UI.Android.Sandbox.Activities
                 _themeDropDown.SetSpinnerSelection(2);
         }
 
-        private void ResetCustomValues()
+        private void ResetCustomValues(bool ignogeButtonType = false)
         {
             _simpleButton.ResetCustomization();
             _fontDropDown.SetSpinnerSelection(0);
@@ -243,7 +243,8 @@ namespace EOS.UI.Android.Sandbox.Activities
             _backgroundColorPressedDropDown.SetSpinnerSelection(0);
             _cornerRadiusDropDown.SetSpinnerSelection(0);
             _rippleColorDropDown.SetSpinnerSelection(0);
-            _buttonTypeDropDown.SetSpinnerSelection(1);
+            if(!ignogeButtonType)
+                _buttonTypeDropDown.SetSpinnerSelection(1);
         }
 
         public void OnCheckedChanged(CompoundButton buttonView, bool isChecked)
