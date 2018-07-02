@@ -16,9 +16,8 @@ namespace UIFrameworks.Shared.Themes.Helpers
         public const string RippleColor = "rippleColor";
         public const string TextSize = "textSize";
         public const string SecondaryTextSize = "secondaryTextSize";
-        public const string CornerRadius = "cornerRadius";
-        public const string LabelCornerRadius = "labelCornerRadius";
-        public const string ButtonCornerRadius = "buttonCornerRadius";
+        public const string SimpleButtonCornerRadius = "simpleButtonCornerRadius";
+        public const string BadgeLabelCornerRadius = "badgeLabelCornerRadius";
         public const string Font = "font";
         public const string SecondaryFont = "secondaryFont";
         public const string LetterSpacing = "letterSpacing";
@@ -26,6 +25,7 @@ namespace UIFrameworks.Shared.Themes.Helpers
         public const string LeftImageUnfocused = "leftImageUnfocused";
         public const string LeftImageFocused = "leftImageFocused";
         public const string LeftImageDisabled = "leftImageDisabled";
+        public const string SimpleButtonShadow = "simpleButtonShadow";
         //fab progress constans
         public const string CalendarImage = "calendarImage";
         public const string FabProgressPreloaderImage = "fabProgressPreloaderImage";
@@ -49,6 +49,21 @@ namespace UIFrameworks.Shared.Themes.Helpers
         public const string WorkTimeDayTextFont = "workTimeDayFont";
         //Sandbox
         public const string DefaultText = "default";
+        //themes
+        public static string R1C1 = "R1C1";
+        public static string R1C2 = "R1C2";
+        public static string R1C3 = "R1C3";
+        public static string R1C4 = "R1C4";
+        public static string R2C1 = "R2C1";
+        public static string R2C2 = "R2C2";
+        public static string R2C3 = "R2C3";
+        public static string R2C4 = "R2C4";
+        public static string R2C5 = "R2C5";
+        public static string R3C1 = "R3C1";
+        public static string R3C2 = "R3C2";
+        public static string R3C3 = "R3C3";
+        public static string R3C4 = "R3C4";
+        public static string R3C5 = "R3C5";
     }
 
     public static class ControlNames
@@ -56,6 +71,7 @@ namespace UIFrameworks.Shared.Themes.Helpers
         public const string BadgeLabel = "Badge label";
         public const string GhostButton = "Ghost button";
         public const string SimpleButton = "Simple button";
+        public const string FullBleedButton = "Full-bleed button";
         public const string SimpleLabel = "Simple label";
         public const string Input = "Input";
         public const string FabProgress = "Fab progress";

@@ -4,6 +4,7 @@ using EOS.UI.Shared.Helpers;
 using UIFrameworks.Shared.Themes.Helpers;
 using UIFrameworks.Shared.Themes.Interfaces;
 using EOS.UI.Shared.Themes.Extensions;
+using EOS.UI.Shared.Themes.DataModels;
 
 #if __IOS__
 using CoreGraphics;
@@ -52,7 +53,8 @@ namespace EOS.UI.Shared.Themes.Themes
             { EOSConstants.SecondaryTextSize, 17 },
             { EOSConstants.Font, UIFont.SystemFontOfSize(17)},
             { EOSConstants.SecondaryFont, UIFont.SystemFontOfSize(17) },
-            { EOSConstants.CornerRadius, 3 },
+            { EOSConstants.SimpleButtonCornerRadius, 25 },
+            { EOSConstants.BadgeLabelCornerRadius, 5 },
             { EOSConstants.LetterSpacing, 1 },
             { EOSConstants.SecondaryLetterSpacing, 1 },
             { EOSConstants.LeftImageFocused, "icAccountCircle" },
@@ -60,7 +62,7 @@ namespace EOS.UI.Shared.Themes.Themes
             { EOSConstants.LeftImageDisabled, "icAccountOff" },
             { EOSConstants.CalendarImage, "icCalendar"},
             { EOSConstants.FabProgressPreloaderImage, "icPreloader"},
-            { EOSConstants.FabProgressSize, 50},
+            { EOSConstants.FabProgressSize, 52},
             { EOSConstants.CircleProgressShown, true},
             { EOSConstants.FabShadow, new ShadowConfig(){
                         Color = UIColor.Black.CGColor,
@@ -68,19 +70,81 @@ namespace EOS.UI.Shared.Themes.Themes
                         Radius = 2,
                         Opacity = 0.4f
             }},
+            { EOSConstants.SimpleButtonShadow, new ShadowConfig(){
+                        Color = UIColor.Black.CGColor,
+                        Offset = new CGSize(0, 12),
+                        Radius = 5,
+                        Opacity = 0.2f
+            }},
             { EOSConstants.BorderWidth, 2 },
             { EOSConstants.SectionTitle, "Light section" },
             { EOSConstants.SectionActionTitle, "View All" },
-            { EOSConstants.LeftPadding, 5 },
-            { EOSConstants.TopPadding, 7 },
-            { EOSConstants.RightPadding, 7 },
-            { EOSConstants.BottomPadding, 5 },
+            { EOSConstants.LeftPadding, 16 },
+            { EOSConstants.TopPadding, 10 },
+            { EOSConstants.RightPadding, 16 },
+            { EOSConstants.BottomPadding, 10 },
             { EOSConstants.HasSectionBorder, true },
             { EOSConstants.HasSectionAction, true },
             { EOSConstants.WorkTimeTitleSize, 13 },
             { EOSConstants.WorkTimeTitleFont, UIFont.BoldSystemFontOfSize(13) },
             { EOSConstants.WorkTimeDayTextSize, 11 },
-            { EOSConstants.WorkTimeDayTextFont, UIFont.BoldSystemFontOfSize(13) }
+            { EOSConstants.WorkTimeDayTextFont, UIFont.BoldSystemFontOfSize(13) },
+            //simblebutton enabled
+            { EOSConstants.R3C1, new FontStyleItem() {
+                    Color = ColorExtension.FromHex(neutralColor6), //must be white in all themes
+                    Font = UIFont.SystemFontOfSize(16f, UIFontWeight.Medium),
+                    Size = 16f,
+                    LetterSpacing = -0.2f,
+                    LineHeight = 19f
+            }},
+            //simplebutton disabled
+            { EOSConstants.R3C4, new FontStyleItem() {
+                    Color = ColorExtension.FromHex(neutralColor3),
+                    Font = UIFont.SystemFontOfSize(16f, UIFontWeight.Medium),
+                    Size = 16f,
+                    LetterSpacing = -0.2f,
+                    LineHeight = 19f
+            }},
+            //ghostbutton enabled, simple label, section button
+            { EOSConstants.R2C1, new FontStyleItem() {
+                    Color = ColorExtension.FromHex(brandPrimaryColor),
+                    Font = UIFont.SystemFontOfSize(13f, UIFontWeight.Semibold),
+                    Size = 13f,
+                    LetterSpacing = -0.6f,
+                    LineHeight = 15f
+            }},
+            //ghostbutton disabled
+            { EOSConstants.R2C4, new FontStyleItem() {
+                    Color = ColorExtension.FromHex(neutralColor3),
+                    Font = UIFont.SystemFontOfSize(13f, UIFontWeight.Semibold),
+                    Size = 13f,
+                    LetterSpacing = -0.6f,
+                    LineHeight = 15f
+            }},
+            //badge label
+            { EOSConstants.R2C5, new FontStyleItem() {
+                    Color = ColorExtension.FromHex(neutralColor6), //must be white in all themes
+                    Font = UIFont.SystemFontOfSize(13f, UIFontWeight.Semibold),
+                    Size = 13f,
+                    LetterSpacing = -0.6f,
+                    LineHeight = 15f
+            }},
+            //section fontstyle
+            { EOSConstants.R2C3, new FontStyleItem() {
+                    Color = ColorExtension.FromHex(neutralColor2),
+                    Font = UIFont.SystemFontOfSize(13f, UIFontWeight.Semibold),
+                    Size = 13f,
+                    LetterSpacing = -0.6f,
+                    LineHeight = 15f
+            }},
+            //circle progress
+            { EOSConstants.R1C1, new FontStyleItem() {
+                    Color = ColorExtension.FromHex(brandPrimaryColor),
+                    Font = UIFont.SystemFontOfSize(11f, UIFontWeight.Bold),
+                    Size = 11f,
+                    LetterSpacing = 0.06f,
+                    LineHeight = 13f
+            }},
 #endif
 
 #if __ANDROID__
@@ -100,9 +164,8 @@ namespace EOS.UI.Shared.Themes.Themes
             { EOSConstants.SecondaryTextSize, 16f },
             { EOSConstants.Font, "Fonts/Roboto.ttf" },
             { EOSConstants.SecondaryFont, "Fonts/Roboto.ttf" },
-            { EOSConstants.CornerRadius, 5f },
-            { EOSConstants.LabelCornerRadius, 4f },
-            { EOSConstants.ButtonCornerRadius, 60f },
+            { EOSConstants.SimpleButtonCornerRadius, 60f },
+            { EOSConstants.BadgeLabelCornerRadius, 4f },
             { EOSConstants.LetterSpacing, 0f },
             { EOSConstants.SecondaryLetterSpacing, 0f },
             { EOSConstants.LeftImageFocused, Resource.Drawable.AccountCircle },

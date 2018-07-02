@@ -5,27 +5,229 @@ namespace EOS.UI.iOS.Models
 {
     public class SectionModel
     {
-        public bool ResetCustomization { get; set; }
-        public string SectionName { get; set; }
-        public string ButtonText { get; set; }
-        public bool HasButton { get; set; }
+        public EventHandler OnPropertyChanged;
         public Action SectionAction { get; set; }
-        public int SectionNameTextSize { get; set; }
-        public int ButtonTextTextSize { get; set; }
-        public int SectionTextLetterSpacing { get; set; }
-        public int ButtonTextLetterSpacing { get; set; }
-        public UIFont SectionNameFont { get; set; }
-        public UIFont ButtonNameFont { get; set; }
-        public UIColor SectionNameColor { get; set; }
-        public UIColor ButtonNameColor { get; set; }
-        public UIColor BackgroundColor { get; set; }
-        public bool HasBorder { get; set; }
-        public UIColor BorderColor { get; set; }
-        public int BorderWidth { get; set; }
-        public int TopPadding { get; set; }
-        public int BottonPadding { get; set; }
-        public int RightPadding { get; set; }
-        public int LeftPadding { get; set; }
+
+        private bool _resetCustomization;
+        public bool ResetCustomization
+        {
+            get => _resetCustomization;
+            set
+            {
+                _resetCustomization = value;
+                OnPropertyChanged?.Invoke(this, EventArgs.Empty);
+            }
+        }
+
+        private string _sectionName;
+        public string SectionName
+        {
+            get => _sectionName;
+            set
+            {
+                _sectionName = value;
+                OnPropertyChanged?.Invoke(this, EventArgs.Empty);
+            }
+        }
+
+        private string _buttonText;
+        public string ButtonText
+        {
+            get => _buttonText;
+            set
+            {
+                _buttonText = value;
+                OnPropertyChanged?.Invoke(this, EventArgs.Empty);
+            }
+        }
+
+        private bool _hasButton;
+        public bool HasButton
+        {
+            get => _hasButton;
+            set
+            {
+                _hasButton = value;
+                OnPropertyChanged?.Invoke(this, EventArgs.Empty);
+            }
+        }
+
+        private bool _hasBorder;
+        public bool HasBorder
+        {
+            get => _hasBorder;
+            set
+            {
+                _hasBorder = value;
+                OnPropertyChanged?.Invoke(this, EventArgs.Empty);
+            }
+        }
+
+        private float _sectionNameTextSize;
+        public float SectionNameTextSize
+        {
+            get => _sectionNameTextSize;
+            set
+            {
+                _sectionNameTextSize = value;
+                OnPropertyChanged?.Invoke(this, EventArgs.Empty);
+            }
+        }
+
+        private float _buttonTextSize;
+        public float ButtonTextSize
+        {
+            get => _buttonTextSize;
+            set
+            {
+                _buttonTextSize = value;
+                OnPropertyChanged?.Invoke(this, EventArgs.Empty);
+            }
+        }
+
+        private float _sectionTextLetterSpacing;
+        public float SectionTextLetterSpacing
+        {
+            get => _sectionTextLetterSpacing;
+            set
+            {
+                _sectionTextLetterSpacing = value;
+                OnPropertyChanged?.Invoke(this, EventArgs.Empty);
+            }
+        }
+
+        private float _buttonTextLetterSpacing;
+        public float ButtonTextLetterSpacing
+        {
+            get => _buttonTextLetterSpacing;
+            set
+            {
+                _buttonTextLetterSpacing = value;
+                OnPropertyChanged?.Invoke(this, EventArgs.Empty);
+            }
+        }
+
+        private UIFont _sectionNameFont;
+        public UIFont SectionNameFont
+        {
+            get => _sectionNameFont;
+            set
+            {
+                _sectionNameFont = value;
+                OnPropertyChanged?.Invoke(this, EventArgs.Empty);
+            }
+        }
+
+        private UIFont _buttonNameFont;
+        public UIFont ButtonNameFont
+        {
+            get => _buttonNameFont;
+            set
+            {
+                _buttonNameFont = value;
+                OnPropertyChanged?.Invoke(this, EventArgs.Empty);
+            }
+        }
+
+        private UIColor _sectionNameColor;
+        public UIColor SectionNameColor
+        {
+            get => _sectionNameColor;
+            set
+            {
+                _sectionNameColor = value;
+                OnPropertyChanged?.Invoke(this, EventArgs.Empty);
+            }
+        }
+
+        private UIColor _buttonNameColor;
+        public UIColor ButtonNameColor
+        {
+            get => _buttonNameColor;
+            set
+            {
+                _buttonNameColor = value;
+                OnPropertyChanged?.Invoke(this, EventArgs.Empty);
+            }
+        }
+
+        private UIColor _backgroundColor;
+        public UIColor BackgroundColor
+        {
+            get => _backgroundColor;
+            set
+            {
+                _backgroundColor = value;
+                OnPropertyChanged?.Invoke(this, EventArgs.Empty);
+            }
+        }
+
+
+        private UIColor _borderColor;
+        public UIColor BorderColor
+        {
+            get => _borderColor;
+            set
+            {
+                _borderColor = value;
+                OnPropertyChanged?.Invoke(this, EventArgs.Empty);
+            }
+        }
+
+        private int _borderWidth;
+        public int BorderWidth
+        {
+            get => _borderWidth;
+            set
+            {
+                _borderWidth = value;
+                OnPropertyChanged?.Invoke(this, EventArgs.Empty);
+            }
+        }
+
+        private int _topPadding;
+        public int TopPadding
+        {
+            get => _topPadding;
+            set
+            {
+                _topPadding = value;
+                OnPropertyChanged?.Invoke(this, EventArgs.Empty);
+            }
+        }
+
+        private int _bottomPadding;
+        public int BottonPadding
+        {
+            get => _bottomPadding;
+            set
+            {
+                _bottomPadding = value;
+                OnPropertyChanged?.Invoke(this, EventArgs.Empty);
+            }
+        }
+
+        private int _rightPadding;
+        public int RightPadding
+        {
+            get => _rightPadding;
+            set
+            {
+                _rightPadding = value;
+                OnPropertyChanged?.Invoke(this, EventArgs.Empty);
+            }
+        }
+
+        private int _leftPadding;
+        public int LeftPadding
+        {
+            get => _leftPadding;
+            set
+            {
+                _leftPadding = value;
+                OnPropertyChanged?.Invoke(this, EventArgs.Empty);
+            }
+        }
 
         public void CopyData(SectionModel model)
         {
@@ -35,7 +237,7 @@ namespace EOS.UI.iOS.Models
             HasButton = model.HasButton;
             SectionAction = model.SectionAction;
             SectionNameTextSize = model.SectionNameTextSize;
-            ButtonTextTextSize = model.ButtonTextTextSize;
+            ButtonTextSize = model.ButtonTextSize;
             SectionTextLetterSpacing = model.SectionTextLetterSpacing;
             ButtonTextLetterSpacing = model.ButtonTextLetterSpacing;
             SectionNameFont = model.SectionNameFont;

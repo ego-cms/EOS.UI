@@ -20,6 +20,7 @@ namespace EOS.UI.iOS.Sandbox.Storyboards
         public const string Identifier = "SectionView";
         private List<EOSSandboxDropDown> _dropDowns;
         private List<object> _dataSource;
+        private SectionTableSource _source;
 
         public SectionComponentView(IntPtr handle) : base(handle)
         {
@@ -47,8 +48,8 @@ namespace EOS.UI.iOS.Sandbox.Storyboards
                 "Second item",
                 "Third item"
             };
-
-            sectionTableView.Source = new SectionTableSource(sectionTableView, _dataSource);
+            _source = new SectionTableSource(sectionTableView, _dataSource);
+            sectionTableView.Source = _source;
 
             _dropDowns = new List<EOSSandboxDropDown>()
             {
@@ -101,8 +102,7 @@ namespace EOS.UI.iOS.Sandbox.Storyboards
             InitHasBorder();
             InitResetButton();
 
-            (sectionTableView.Source as SectionTableSource).SectionModel.ResetCustomization = true;
-            sectionTableView.ReloadData();
+            _source.SectionModel.ResetCustomization = true;
             ResetFields();
         }
 
@@ -117,9 +117,8 @@ namespace EOS.UI.iOS.Sandbox.Storyboards
                     HasButton = (bool)EOSThemeProvider.Instance.GetCurrentTheme().ThemeValues[EOSConstants.HasSectionAction]
                 };
 
-                (sectionTableView.Source as SectionTableSource).SectionModel.CopyData(defaultModel);
-                (sectionTableView.Source as SectionTableSource).SectionModel.ResetCustomization = true;
-                sectionTableView.ReloadData();
+                _source.SectionModel.CopyData(defaultModel);
+                _source.SectionModel.ResetCustomization = true;
                 ResetFields();
             };
         }
@@ -129,8 +128,7 @@ namespace EOS.UI.iOS.Sandbox.Storyboards
             hasBorderSwitch.On = true;
             hasBorderSwitch.ValueChanged += delegate
             {
-                (sectionTableView.Source as SectionTableSource).SectionModel.HasBorder = hasBorderSwitch.On;
-                sectionTableView.ReloadData();
+                _source.SectionModel.HasBorder = hasBorderSwitch.On;
             };
         }
 
@@ -139,8 +137,7 @@ namespace EOS.UI.iOS.Sandbox.Storyboards
             hasButtonSwitch.On = true;
             hasButtonSwitch.ValueChanged += delegate
             {
-                (sectionTableView.Source as SectionTableSource).SectionModel.HasButton = hasButtonSwitch.On;
-                sectionTableView.ReloadData();
+                _source.SectionModel.HasButton = hasButtonSwitch.On;
             };
         }
 
@@ -150,8 +147,7 @@ namespace EOS.UI.iOS.Sandbox.Storyboards
                 PaddingValues,
                 padding =>
                 {
-                    (sectionTableView.Source as SectionTableSource).SectionModel.RightPadding = padding;
-                    sectionTableView.ReloadData();
+                    _source.SectionModel.RightPadding = padding;
                 },
                 Fields.PaddingRight,
                 rect);
@@ -163,8 +159,7 @@ namespace EOS.UI.iOS.Sandbox.Storyboards
                 PaddingValues,
                 padding =>
                 {
-                    (sectionTableView.Source as SectionTableSource).SectionModel.LeftPadding = padding;
-                    sectionTableView.ReloadData();
+                    _source.SectionModel.LeftPadding = padding;
                 },
                 Fields.PaddingLeft,
                 rect);
@@ -176,8 +171,7 @@ namespace EOS.UI.iOS.Sandbox.Storyboards
                 PaddingValues,
                 padding =>
                 {
-                    (sectionTableView.Source as SectionTableSource).SectionModel.BottonPadding = padding;
-                    sectionTableView.ReloadData();
+                    _source.SectionModel.BottonPadding = padding;
                 },
                 Fields.PaddingBottom,
                 rect);
@@ -189,8 +183,7 @@ namespace EOS.UI.iOS.Sandbox.Storyboards
                 PaddingValues,
                 padding =>
                 {
-                    (sectionTableView.Source as SectionTableSource).SectionModel.TopPadding = padding;
-                    sectionTableView.ReloadData();
+                    _source.SectionModel.TopPadding = padding;
                 },
                 Fields.PaddingTop,
                 rect);
@@ -202,8 +195,7 @@ namespace EOS.UI.iOS.Sandbox.Storyboards
                 WidthValues,
                 width =>
                 {
-                    (sectionTableView.Source as SectionTableSource).SectionModel.BorderWidth = width;
-                    sectionTableView.ReloadData();
+                    _source.SectionModel.BorderWidth = width;
                 },
                 Fields.BorderWidth,
                 rect);
@@ -214,8 +206,7 @@ namespace EOS.UI.iOS.Sandbox.Storyboards
             borderColorDropDown.InitSource(
                 color =>
                 {
-                    (sectionTableView.Source as SectionTableSource).SectionModel.BorderColor = color;
-                    sectionTableView.ReloadData();
+                    _source.SectionModel.BorderColor = color;
                 },
                 Fields.BorderColor,
                 rect);
@@ -226,8 +217,7 @@ namespace EOS.UI.iOS.Sandbox.Storyboards
             backgoundColorDropDown.InitSource(
                 color =>
                 {
-                    (sectionTableView.Source as SectionTableSource).SectionModel.BackgroundColor = color;
-                    sectionTableView.ReloadData();
+                    _source.SectionModel.BackgroundColor = color;
                 },
                 Fields.BackgroundColor,
                 rect);
@@ -238,8 +228,7 @@ namespace EOS.UI.iOS.Sandbox.Storyboards
             buttonTextColorDropDown.InitSource(
                 color =>
                 {
-                    (sectionTableView.Source as SectionTableSource).SectionModel.ButtonNameColor = color;
-                    sectionTableView.ReloadData();
+                    _source.SectionModel.ButtonNameColor = color;
                 },
                 Fields.ButtonTextColor,
                 rect);
@@ -250,8 +239,7 @@ namespace EOS.UI.iOS.Sandbox.Storyboards
             sectionTextColorDropDown.InitSource(
                 color =>
                 {
-                    (sectionTableView.Source as SectionTableSource).SectionModel.SectionNameColor = color;
-                    sectionTableView.ReloadData();
+                    _source.SectionModel.SectionNameColor = color;
                 },
                 Fields.SectionTextColor,
                 rect);
@@ -263,8 +251,7 @@ namespace EOS.UI.iOS.Sandbox.Storyboards
                 FontSizeValues,
                 size =>
                 {
-                    (sectionTableView.Source as SectionTableSource).SectionModel.ButtonTextTextSize = size;
-                    sectionTableView.ReloadData();
+                    _source.SectionModel.ButtonTextSize = size;
                 },
                 Fields.ButtonTextSize,
                 rect);
@@ -276,8 +263,7 @@ namespace EOS.UI.iOS.Sandbox.Storyboards
                 FontSizeValues,
                 size =>
                 {
-                    (sectionTableView.Source as SectionTableSource).SectionModel.SectionNameTextSize = size;
-                    sectionTableView.ReloadData();
+                    _source.SectionModel.SectionNameTextSize = size;
                 },
                 Fields.SectionTextSize,
                 rect);
@@ -289,8 +275,7 @@ namespace EOS.UI.iOS.Sandbox.Storyboards
                 LetterSpacingValues,
                 spacing =>
                 {
-                    (sectionTableView.Source as SectionTableSource).SectionModel.ButtonTextLetterSpacing = spacing;
-                    sectionTableView.ReloadData();
+                    _source.SectionModel.ButtonTextLetterSpacing = spacing;
                 },
                 Fields.ButtonTextLetterSpacing,
                 rect);
@@ -302,8 +287,7 @@ namespace EOS.UI.iOS.Sandbox.Storyboards
                 LetterSpacingValues,
                 spacing =>
                 {
-                    (sectionTableView.Source as SectionTableSource).SectionModel.SectionTextLetterSpacing = spacing;
-                    sectionTableView.ReloadData();
+                    _source.SectionModel.SectionTextLetterSpacing = spacing;
                 },
                 Fields.SectionNameLetterSpacing,
                 rect);
@@ -315,8 +299,7 @@ namespace EOS.UI.iOS.Sandbox.Storyboards
                 Fonts,
                 font =>
                 {
-                    (sectionTableView.Source as SectionTableSource).SectionModel.ButtonNameFont = font;
-                    sectionTableView.ReloadData();
+                    _source.SectionModel.ButtonNameFont = font;
                 },
                 Fields.ButtonTextFont,
                 rect);
@@ -328,8 +311,7 @@ namespace EOS.UI.iOS.Sandbox.Storyboards
                 Fonts,
                 font =>
                 {
-                    (sectionTableView.Source as SectionTableSource).SectionModel.SectionNameFont = font;
-                    sectionTableView.ReloadData();
+                    _source.SectionModel.SectionNameFont = font;
                 },
                 Fields.SectionNameFont,
                 rect);
@@ -341,8 +323,7 @@ namespace EOS.UI.iOS.Sandbox.Storyboards
                 Titles,
                 title =>
                 {
-                    (sectionTableView.Source as SectionTableSource).SectionModel.ButtonText = title;
-                    sectionTableView.ReloadData();
+                    _source.SectionModel.ButtonText = title;
                 },
                 Fields.ButtonText,
                 rect);
@@ -354,8 +335,7 @@ namespace EOS.UI.iOS.Sandbox.Storyboards
                 Titles,
                 title =>
                 {
-                    (sectionTableView.Source as SectionTableSource).SectionModel.SectionName = title;
-                    sectionTableView.ReloadData();
+                    _source.SectionModel.SectionName = title;
                 },
                 Fields.SectionName,
                 rect);
@@ -374,9 +354,8 @@ namespace EOS.UI.iOS.Sandbox.Storyboards
                         HasBorder = (bool)EOSThemeProvider.Instance.GetCurrentTheme().ThemeValues[EOSConstants.HasSectionBorder],
                         HasButton = (bool)EOSThemeProvider.Instance.GetCurrentTheme().ThemeValues[EOSConstants.HasSectionAction]
                     };
-                    (sectionTableView.Source as SectionTableSource).SectionModel.CopyData(defaultModel);
-                    (sectionTableView.Source as SectionTableSource).SectionModel.ResetCustomization = true;
-                    sectionTableView.ReloadData();
+                    _source.SectionModel.CopyData(defaultModel);
+                    _source.SectionModel.ResetCustomization = true;
                     _dropDowns.Except(new[] { themeDropDown }).ToList().ForEach(dropDown => dropDown.ResetValue());
                     UpdateApperaence();
                 },

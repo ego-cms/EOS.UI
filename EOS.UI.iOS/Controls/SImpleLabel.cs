@@ -7,14 +7,27 @@ using EOS.UI.Shared.Themes.Interfaces;
 using UIFrameworks.Shared.Themes.Helpers;
 using UIFrameworks.Shared.Themes.Interfaces;
 using UIKit;
+using EOS.UI.Shared.Themes.DataModels;
 
 namespace EOS.UI.iOS.Controls
 {
     [Register("SimpleLabel")]
     public class SimpleLabel : UILabel, IEOSThemeControl
     {
-        private bool _isEOSCustomizationIgnored;
-        public bool IsEOSCustomizationIgnored => _isEOSCustomizationIgnored;
+        public bool IsEOSCustomizationIgnored { get; private set; }
+
+
+        private FontStyleItem _fontStyle;
+        public FontStyleItem FontStyle
+        {
+            get => _fontStyle;
+            set
+            {
+                _fontStyle = value;
+                SetFontStyle();
+                IsEOSCustomizationIgnored = true;
+            }
+        }
 
         public int CornerRadius
         {
@@ -22,49 +35,65 @@ namespace EOS.UI.iOS.Controls
             set
             {
                 Layer.CornerRadius = value;
-                _isEOSCustomizationIgnored = true;
+                IsEOSCustomizationIgnored = true;
             }
         }
 
-        private int _letterSpacing;
-        public int LetterSpacing
+        public float LetterSpacing
         {
-            get => _letterSpacing;
+            get => FontStyle.LetterSpacing;
             set
             {
-                this.SetLetterSpacing(value);
-                _letterSpacing = value;
-                _isEOSCustomizationIgnored = true;
+                FontStyle.LetterSpacing = value;
+                SetFontStyle();
+                IsEOSCustomizationIgnored = true;
             }
         }
 
-        public int TextSize
+        public float TextSize
         {
-            get => (int)Font.PointSize;
+            get => FontStyle?.Size ?? (int)base.Font.PointSize;
             set
             {
-                this.SetTextSize(value);
-                _isEOSCustomizationIgnored = true;
+                FontStyle.Size = value;
+                SetFontStyle();
+                IsEOSCustomizationIgnored = true;
             }
         }
+
 
         public override UIFont Font
         {
-            get => base.Font;
+            get => FontStyle?.Font ?? base.Font;
             set
             {
-                base.Font = value.WithSize(TextSize);
-                _isEOSCustomizationIgnored = true;
+                //overrided property, that calls in constructor
+                if(FontStyle == null)
+                {
+                    base.Font = value;
+                    return;
+                }
+                
+                FontStyle.Font = value.WithSize(FontStyle.Size);
+                SetFontStyle();
+                IsEOSCustomizationIgnored = true;
             }
         }
 
         public override UIColor TextColor
         {
-            get => base.TextColor;
+            get => FontStyle?.Color;
             set
             {
-                base.TextColor = value;
-                _isEOSCustomizationIgnored = true;
+                if(FontStyle == null)
+                {
+                    base.TextColor = value;
+                    return;
+                }
+                
+                FontStyle.Color = value;
+                SetFontStyle();
+                IsEOSCustomizationIgnored = true;
             }
         }
 
@@ -74,7 +103,7 @@ namespace EOS.UI.iOS.Controls
             get => _text;
             set
             {
-                if(_text != value)
+                if (_text != value)
                 {
                     _text = value;
                     var attributedString = AttributedText != null ?
@@ -92,7 +121,7 @@ namespace EOS.UI.iOS.Controls
             Layer.MasksToBounds = true;
             Lines = 1;
             LineBreakMode = UILineBreakMode.TailTruncation;
-            _isEOSCustomizationIgnored = false;
+            IsEOSCustomizationIgnored = false;
             UpdateAppearance();
         }
 
@@ -112,7 +141,7 @@ namespace EOS.UI.iOS.Controls
 
         public void ResetCustomization()
         {
-            _isEOSCustomizationIgnored = false;
+            IsEOSCustomizationIgnored = false;
             UpdateAppearance();
         }
 
@@ -125,12 +154,21 @@ namespace EOS.UI.iOS.Controls
             if (!IsEOSCustomizationIgnored)
             {
                 var provider = GetThemeProvider();
-                Font = provider.GetEOSProperty<UIFont>(this, EOSConstants.Font);
-                TextColor = provider.GetEOSProperty<UIColor>(this, EOSConstants.BrandPrimaryColor);
-                TextSize = provider.GetEOSProperty<int>(this, EOSConstants.TextSize);
-                LetterSpacing = provider.GetEOSProperty<int>(this, EOSConstants.LetterSpacing);
-                _isEOSCustomizationIgnored = false;
+                FontStyle = provider.GetEOSProperty<FontStyleItem>(this, EOSConstants.R2C1);
+                IsEOSCustomizationIgnored = false;
             }
+        }
+
+        private void SetFontStyle()
+        {
+            //set font
+            base.Font = this.Font.WithSize(TextSize);
+            //size
+            this.SetTextSize(TextSize);
+            //text color
+            base.TextColor = this.TextColor;
+            //letter spacing
+            this.SetLetterSpacing(LetterSpacing);
         }
     }
 }

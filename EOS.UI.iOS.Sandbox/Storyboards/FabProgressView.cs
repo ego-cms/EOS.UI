@@ -26,6 +26,7 @@ namespace EOS.UI.iOS.Sandbox
         {
             base.ViewDidLoad();
             _fab = new FabProgress();
+            var frame = _fab.Frame;
             _fab.TouchUpInside += async (sender, e) =>
             {
                 if (_fab.InProgress)
@@ -49,7 +50,12 @@ namespace EOS.UI.iOS.Sandbox
                 sizeDropDown,
                 disabledColorDropDown,
                 pressedColorDropDown,
-                shadowDropDown
+                shadowDropDown,
+                shadowColorDropDown,
+                shadowRadiusDropDown,
+                shadowOffsetXDropDown,
+                shadowOffsetYDropDown,
+                shadowOpacityDropDown,
             };
             View.AddGestureRecognizer(new UITapGestureRecognizer(() =>
             {
@@ -98,6 +104,61 @@ namespace EOS.UI.iOS.Sandbox
                 Fields.Shadow,
                 rect);
 
+            shadowColorDropDown.InitSource(
+                color =>
+                {
+                    var config = _fab.ShadowConfig;
+                    config.Color = color.CGColor;
+                    _fab.ShadowConfig = config;
+                },
+                Fields.ShadowColor,
+                rect);
+
+            shadowOffsetXDropDown.InitSource(
+                ShadowOffsetValues,
+                offset =>
+                {
+                    var config = _fab.ShadowConfig;
+                    config.Offset = new CGSize(offset, config.Offset.Height);
+                    _fab.ShadowConfig = config;
+                },
+                Fields.ShadowOffsetX,
+                rect);
+
+
+            shadowOffsetYDropDown.InitSource(
+                ShadowOffsetValues,
+                offset =>
+                {
+                    var config = _fab.ShadowConfig;
+                    config.Offset = new CGSize(config.Offset.Width, offset);
+                    _fab.ShadowConfig = config;
+                },
+                Fields.ShadowOffsetY,
+                rect);
+
+            shadowRadiusDropDown.InitSource(
+                ShadowRadiusValues,
+                radius =>
+                {
+                    var config = _fab.ShadowConfig;
+                    config.Radius = radius;
+                    _fab.ShadowConfig = config;
+                },
+                Fields.ShadowRadius,
+                rect);
+
+            shadowOpacityDropDown.InitSource(
+                ShadowOpacityValues,
+                opacity =>
+                {
+                    var config = _fab.ShadowConfig;
+                    config.Opacity = (float)opacity;
+                    _fab.ShadowConfig = config;
+                },
+                Fields.ShadowOpacity,
+                rect);
+
             enableSwitch.ValueChanged += (sender, e) =>
             {
                 _fab.Enabled = enableSwitch.On;
@@ -108,7 +169,7 @@ namespace EOS.UI.iOS.Sandbox
                 if (_fab.InProgress)
                     return;
                 _fab.ResetCustomization();
-                _dropDowns.Except(new [] { themeDropDown }).ToList().ForEach(dropDown => dropDown.ResetValue());
+                _dropDowns.Except(new[] { themeDropDown }).ToList().ForEach(dropDown => dropDown.ResetValue());
                 UpdateFrame();
             };
         }

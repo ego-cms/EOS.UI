@@ -2,6 +2,7 @@
 using CoreAnimation;
 using EOS.UI.iOS.Extensions;
 using EOS.UI.iOS.Themes;
+using EOS.UI.Shared.Themes.DataModels;
 using EOS.UI.Shared.Themes.Helpers;
 using EOS.UI.Shared.Themes.Interfaces;
 using Foundation;
@@ -19,52 +20,83 @@ namespace EOS.UI.iOS.Controls
         private const string _rippleAnimationKey = "rippleAnimation";
 
         public bool IsEOSCustomizationIgnored { get; private set; }
+        
+        
+        private FontStyleItem _fontStyle;
+        public FontStyleItem FontStyle
+        {
+            get => _fontStyle;
+            set
+            {
+                _fontStyle = value;
+                SetFontStyle();
+                IsEOSCustomizationIgnored = true;
+            }
+        }
 
-        private UIFont _font;
+        private FontStyleItem _disabledFontStyle;
+        public FontStyleItem DisabledFontStyle
+        {
+            get => _disabledFontStyle;
+            set
+            {
+                _disabledFontStyle = value;
+                SetDisabledFontStyle();
+                IsEOSCustomizationIgnored = true;
+            }
+        }
+
         public override UIFont Font
         {
-            get => _font ?? base.Font;
+            get => FontStyle?.Font ?? base.Font;
             set
             {
-                _font = value.WithSize(TextSize);
-                this.SetFont(_font);
-                base.Font = _font;
+                FontStyle.Font = value.WithSize(FontStyle.Size);
+                SetFontStyle();
                 IsEOSCustomizationIgnored = true;
             }
         }
 
-        private int _letterSpacing;
-        public int LetterSpacing
+        public float LetterSpacing
         {
-            get => _letterSpacing;
+            get => FontStyle.LetterSpacing;
             set
             {
-                _letterSpacing = value;
-                this.SetLetterSpacing(_letterSpacing);
+                FontStyle.LetterSpacing = value;
+                SetFontStyle();
                 IsEOSCustomizationIgnored = true;
             }
         }
 
-        private UIColor _enabledTextColor;
+        public float TextSize
+        {
+            get => FontStyle?.Size ?? (int)base.Font.PointSize;
+            set
+            {
+                FontStyle.Size = value;
+                SetFontStyle();
+                IsEOSCustomizationIgnored = true;
+            }
+        }
+
         public UIColor EnabledTextColor
         {
-            get => _enabledTextColor;
+            get => FontStyle?.Color;
             set
             {
-                _enabledTextColor = value;
-                SetTitleColor(_enabledTextColor, UIControlState.Normal);
+                FontStyle.Color = value;
+                SetFontStyle();
                 IsEOSCustomizationIgnored = true;
             }
         }
 
-        private UIColor _disabledTextColor;
         public UIColor DisabledTextColor
         {
-            get => _disabledTextColor;
+            get => DisabledFontStyle.Color;
             set
             {
-                _disabledTextColor = value;
-                SetTitleColor(_disabledTextColor, UIControlState.Disabled);
+                DisabledFontStyle.Color = value;
+                SetDisabledFontStyle();
                 IsEOSCustomizationIgnored = true;
             }
         }
@@ -76,30 +108,6 @@ namespace EOS.UI.iOS.Controls
             set
             {
                 _rippleColor = value;
-                IsEOSCustomizationIgnored = true;
-            }
-        }
-
-        private int _textSize;
-        public int TextSize
-        {
-            get => _textSize == 0 ? (int)base.Font.PointSize : _textSize;
-            set
-            {
-                _textSize = value;
-                this.SetTextSize(_textSize);
-                IsEOSCustomizationIgnored = true;
-            }
-        }
-
-        private UIColor _pressedStateTextColor;
-        public UIColor PressedStateTextColor
-        {
-            get => _pressedStateTextColor;
-            set
-            {
-                _pressedStateTextColor = value;
-                SetTitleColor(_pressedStateTextColor, UIControlState.Highlighted);
                 IsEOSCustomizationIgnored = true;
             }
         }
@@ -163,7 +171,7 @@ namespace EOS.UI.iOS.Controls
                     SetAttributedTitle(resultString, UIControlState.Disabled);
 
                     resultString = new NSMutableAttributedString(attrString);
-                    resultString.AddAttribute(UIStringAttributeKey.ForegroundColor, PressedStateTextColor, range);
+                    resultString.AddAttribute(UIStringAttributeKey.ForegroundColor, EnabledTextColor, range);
                     SetAttributedTitle(resultString, UIControlState.Highlighted);
                     break;
                 case UIControlState.Disabled:
@@ -173,7 +181,7 @@ namespace EOS.UI.iOS.Controls
                     break;
                 case UIControlState.Highlighted:
                     resultString = new NSMutableAttributedString(attrString);
-                    resultString.AddAttribute(UIStringAttributeKey.ForegroundColor, PressedStateTextColor, range);
+                    resultString.AddAttribute(UIStringAttributeKey.ForegroundColor, EnabledTextColor, range);
                     SetAttributedTitle(resultString, forState);
                     break;
             }
@@ -205,7 +213,6 @@ namespace EOS.UI.iOS.Controls
 
         public void SetEOSStyle(EOSStyleEnumeration style)
         {
-            throw new NotImplementedException();
         }
 
         public void UpdateAppearance()
@@ -213,13 +220,9 @@ namespace EOS.UI.iOS.Controls
             if (!IsEOSCustomizationIgnored)
             {
                 var provider = GetThemeProvider();
-                Font = provider.GetEOSProperty<UIFont>(this, EOSConstants.Font);
-                EnabledTextColor = provider.GetEOSProperty<UIColor>(this, EOSConstants.BrandPrimaryColor);
-                DisabledTextColor = provider.GetEOSProperty<UIColor>(this, EOSConstants.NeutralColor3);
-                PressedStateTextColor = provider.GetEOSProperty<UIColor>(this, EOSConstants.NeutralColor6);
+                FontStyle = provider.GetEOSProperty<FontStyleItem>(this, EOSConstants.R2C1);
+                DisabledFontStyle = provider.GetEOSProperty<FontStyleItem>(this, EOSConstants.R3C4);
                 RippleColor = provider.GetEOSProperty<UIColor>(this, EOSConstants.RippleColor);
-                TextSize = provider.GetEOSProperty<int>(this, EOSConstants.TextSize);
-                LetterSpacing = provider.GetEOSProperty<int>(this, EOSConstants.LetterSpacing);
                 Enabled = base.Enabled;
                 IsEOSCustomizationIgnored = false;
             }
@@ -234,6 +237,25 @@ namespace EOS.UI.iOS.Controls
             _rippleLayer = this.CrateRippleAnimationLayer(location, RippleColor);
             _rippleAnimations.SetValueForKey(_rippleLayer, new NSString("animationLayer"));
             _rippleLayer.AddAnimation(_rippleAnimations, _rippleAnimationKey);
+        }
+        
+        private void SetFontStyle()
+        {
+            //set font
+            this.SetFont(FontStyle.Font);
+            base.Font = FontStyle.Font;
+            //size
+            this.SetTextSize(FontStyle.Size);
+            //text color
+            SetTitleColor(FontStyle.Color, UIControlState.Normal);
+            //letter spacing
+            this.SetLetterSpacing(FontStyle.LetterSpacing);
+        }
+
+        private void SetDisabledFontStyle()
+        {
+            //text color
+            SetTitleColor(DisabledFontStyle.Color, UIControlState.Disabled);
         }
     }
 }
