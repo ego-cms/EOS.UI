@@ -167,7 +167,7 @@ namespace EOS.UI.iOS.Controls
             {
                 var provider = GetThemeProvider();
                 FontStyle = provider.GetEOSProperty<FontStyleItem>(this, EOSConstants.R2C5);
-                CornerRadius = provider.GetEOSProperty<int>(this, EOSConstants.BadgeLabelCornerRadius);
+                CornerRadius = provider.GetEOSProperty<int>(this, EOSConstants.LabelCornerRadius);
                 BackgroundColor = provider.GetEOSProperty<UIColor>(this, EOSConstants.BrandPrimaryColor);
                 IsEOSCustomizationIgnored = false;
                 SizeToFit();

@@ -16,15 +16,16 @@ namespace UIFrameworks.Shared.Themes.Helpers
         public const string RippleColor = "rippleColor";
         public const string TextSize = "textSize";
         public const string SecondaryTextSize = "secondaryTextSize";
-        public const string SimpleButtonCornerRadius = "simpleButtonCornerRadius";
-        public const string BadgeLabelCornerRadius = "badgeLabelCornerRadius";
+        public const string CornerRadius = "cornerRadius";
+        public const string LabelCornerRadius = "labelCornerRadius";
+        public const string ButtonCornerRadius = "buttonCornerRadius";
         public const string Font = "font";
         public const string SecondaryFont = "secondaryFont";
         public const string LetterSpacing = "letterSpacing";
         public const string SecondaryLetterSpacing = "secondaryLetterSpacing";
-        public const string LeftImageUnfocused = "leftImageUnfocused";
-        public const string LeftImageFocused = "leftImageFocused";
-        public const string LeftImageDisabled = "leftImageDisabled";
+        public const string LeftImage = "leftImage";
+        public const string WarningInputImage = "warningInputImage";
+        public const string ClearInputImage = "clearInputImage";
         public const string SimpleButtonShadow = "simpleButtonShadow";
         //fab progress constans
         public const string CalendarImage = "calendarImage";

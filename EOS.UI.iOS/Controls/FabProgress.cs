@@ -200,7 +200,6 @@ namespace EOS.UI.iOS.Controls
         public void ResetCustomization()
         {
             IsEOSCustomizationIgnored = false;
-
             UpdateAppearance();
         }
 

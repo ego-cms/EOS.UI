@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
+<?xml version="1.0" encoding="utf-8" ?>
 <resources>
     <declare-styleable name="BadgeLabel">
         <attr name="eos_background" format="reference|color"/>
@@ -55,16 +55,17 @@
         <attr name="eos_enabled" format="boolean"/>
     </declare-styleable>
     <declare-styleable name="Input">
-        <attr name="eos_underlinecolor_focused" format="reference|color"/>
-        <attr name="eos_underlinecolor_unfocused" format="reference|color"/>
-        <attr name="eos_underlinecolor_disabled" format="reference|color"/>
+        <attr name="eos_color_focused" format="reference|color"/>
+        <attr name="eos_color_disabled" format="reference|color"/>
+        <attr name="eos_underlinecolor_normal" format="reference|color"/>
+        <attr name="eos_underlinecolor_populated" format="reference|color"/>
+        <attr name="eos_iconcolor_normal" format="reference|color"/>
+        <attr name="eos_iconcolor_populated" format="reference|color"/>
         <attr name="eos_textcolor" format="reference|color"/>
         <attr name="eos_textcolor_disabled" format="reference|color"/>
         <attr name="eos_hintcolor" format="reference|color"/>
         <attr name="eos_hintcolor_disabled" format="reference|color"/>
-        <attr name="eos_leftimage_focused" format="reference"/>
-        <attr name="eos_leftimage_unfocused" format="reference"/>
-        <attr name="eos_leftimage_disabled" format="reference"/>
+        <attr name="eos_leftimage" format="reference"/>
         <attr name="eos_font" format="string"/>
         <attr name="eos_letterspacing" format="float"/>
         <attr name="eos_textsize" format="float"/>
