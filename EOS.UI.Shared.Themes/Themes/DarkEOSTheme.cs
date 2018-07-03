@@ -85,7 +85,7 @@ namespace EOS.UI.Shared.Themes.Themes
             { EOSConstants.TopPadding, 10 },
             { EOSConstants.RightPadding, 16 },
             { EOSConstants.BottomPadding, 10 },
-            { EOSConstants.HasSectionBorder, false },
+            { EOSConstants.HasSectionBorder, true },
             { EOSConstants.HasSectionAction, true },
             { EOSConstants.WorkTimeTitleSize, 13 },
             { EOSConstants.WorkTimeTitleFont, UIFont.BoldSystemFontOfSize(13) },

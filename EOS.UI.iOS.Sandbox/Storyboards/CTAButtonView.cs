@@ -8,6 +8,7 @@ using EOS.UI.iOS.Extensions;
 using EOS.UI.iOS.Sandbox.Enums;
 using EOS.UI.iOS.Sandbox.Helpers;
 using EOS.UI.iOS.Sandbox.Storyboards;
+using EOS.UI.Shared.Helpers;
 using EOS.UI.Shared.Themes.Themes;
 using UIFrameworks.Shared.Themes.Helpers;
 using UIKit;
@@ -21,6 +22,7 @@ namespace EOS.UI.iOS.Sandbox
         private SimpleButton _simpleButton;
         private List<EOSSandboxDropDown> _dropDowns;
         private NSLayoutConstraint[] _defaultConstraints;
+        private ShadowConfig _defaultShadow;
 
         public CTAButtonView(IntPtr handle) : base(handle)
         {
@@ -206,6 +208,7 @@ namespace EOS.UI.iOS.Sandbox
                             View.ConstrainLayout(() => containerView.Frame.Height == 150);
                             containerView.ConstrainLayout(() => _simpleButton.Frame.GetCenterX() == containerView.Frame.GetCenterX() &&
                                                                 _simpleButton.Frame.GetCenterY() == containerView.Frame.GetCenterY() &&
+                                                                _simpleButton.Frame.Height == 50 &&
                                                                 _simpleButton.Frame.Left == containerView.Frame.Left &&
                                                                 _simpleButton.Frame.Right == containerView.Frame.Right);
                             _simpleButton.ContentEdgeInsets = new UIEdgeInsets();
@@ -294,6 +297,15 @@ namespace EOS.UI.iOS.Sandbox
             enableSwitch.ValueChanged += (sender, e) =>
             {
                 _simpleButton.Enabled = enableSwitch.On;
+                if (!enableSwitch.On)
+                {
+                    _defaultShadow = _simpleButton.ShadowConfig;
+                    _simpleButton.ShadowConfig = null;
+                }
+                else
+                {
+                    _simpleButton.ShadowConfig = _defaultShadow;
+                }
             };
         }
 
@@ -302,6 +314,8 @@ namespace EOS.UI.iOS.Sandbox
             resetButton.TouchUpInside += (sender, e) =>
             {
                 _simpleButton.ResetCustomization();
+                containerView.RemoveConstraints(containerView.Constraints);
+                containerView.AddConstraints(_defaultConstraints);
                 ResetFields();
             };
         }

@@ -22,6 +22,7 @@ namespace EOS.UI.iOS
         private const string _zeroPercents = "0%";
         private CAShapeLayer _circleLayer;
         private CAShapeLayer _fillCircleLayer;
+        private CAShapeLayer _roundedLayer;
 
         public event EventHandler Started;
         public event EventHandler Stopped;
@@ -64,7 +65,11 @@ namespace EOS.UI.iOS
                 stopView.BackgroundColor = _color;
                 percentLabel.TextColor = _color;
                 if (_circleLayer != null)
+                {
                     _circleLayer.StrokeColor = _color.CGColor;
+                    _roundedLayer.StrokeColor = _color.CGColor;
+                    _roundedLayer.FillColor = _color.CGColor;
+                }
             }
         }
 
@@ -204,7 +209,6 @@ namespace EOS.UI.iOS
             UpdateAppearance();
             InitCircles();
             circleView.Layer.CornerRadius = circleView.Frame.Height / 2;
-            imageView.Layer.CornerRadius = circleView.Frame.Height / 2;
             imageView.Hidden = true;
             percentLabel.Text = _zeroPercents;
         }
@@ -230,16 +234,28 @@ namespace EOS.UI.iOS
             _fillCircleLayer.Path = circlePath.CGPath;
             circleView.Transform = CGAffineTransform.MakeRotation(_rotatienAngle);
 
+            _roundedLayer = new CAShapeLayer();
+            _roundedLayer.FillColor = UIColor.Clear.CGColor;
+            _roundedLayer.StrokeColor = UIColor.Clear.CGColor;
+            _roundedLayer.LineWidth = 1;
+
             circleView.Layer.AddSublayer(_fillCircleLayer);
             circleView.Layer.AddSublayer(_circleLayer);
+            circleView.Layer.AddSublayer(_roundedLayer);
         }
 
         private void RedrawCircle()
         {
             var endAngle = _360angle * (Progress / 100.0);
+            var radius = circleView.Frame.Width / 2;
             var circlePath = new UIBezierPath();
             var center = new CGPoint(circleView.Frame.Width / 2, circleView.Frame.Height / 2);
-            circlePath.AddArc(center, circleView.Frame.Width / 2, _startAngle, (nfloat)endAngle, true);
+            circlePath.AddArc(center, radius, _startAngle, (nfloat)endAngle, true);
+
+            var x = circlePath.CurrentPoint.X;
+            var y = circlePath.CurrentPoint.Y;
+            var roundPath = UIBezierPath.FromRoundedRect(new CGRect(x - 0.5, y - 0.5, 1, 1), 0.5f);
+            _roundedLayer.Path = roundPath.CGPath;
             _circleLayer.Path = circlePath.CGPath;
         }
 
