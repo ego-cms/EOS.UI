@@ -122,7 +122,7 @@ namespace EOS.UI.iOS.Sandbox.Helpers
         {
             { "Calendar", "icCalendar" },
             { "Account circle", "icAccountCircle" },
-            { "Account key", "icAccountCircle" },
+            { "Account key", "icAccountKey" },
             { "Account off", "icAccountOff" },
         };
 
