@@ -29,9 +29,8 @@ namespace EOS.UI.iOS.Sandbox
             var ghostButton = new GhostButton();
             ghostButton.SetTitle(ControlNames.GhostButton, UIControlState.Normal);
             containerView.ConstrainLayout(() => ghostButton.Frame.GetCenterX() == containerView.Frame.GetCenterX() &&
-                                          ghostButton.Frame.GetCenterY() == containerView.Frame.GetCenterY() &&
-                                          ghostButton.Frame.Height == 28 &&
-                                          ghostButton.Frame.Width == 108, ghostButton);
+                                          ghostButton.Frame.GetCenterY() == containerView.Frame.GetCenterY(), ghostButton);
+            ghostButton.ContentEdgeInsets = new UIEdgeInsets(6, 16, 6, 16);
 
             _dropDowns = new List<EOSSandboxDropDown>()
             {
