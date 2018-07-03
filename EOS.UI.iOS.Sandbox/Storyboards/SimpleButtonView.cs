@@ -200,6 +200,7 @@ namespace EOS.UI.iOS.Sandbox
                             View.ConstrainLayout(() => containerView.Frame.Height == 150);
                             containerView.ConstrainLayout(() => _simpleButton.Frame.GetCenterX() == containerView.Frame.GetCenterX() &&
                                                                 _simpleButton.Frame.GetCenterY() == containerView.Frame.GetCenterY() &&
+                                                                _simpleButton.Frame.Height == 50 &&
                                                                 _simpleButton.Frame.Left == containerView.Frame.Left &&
                                                                 _simpleButton.Frame.Right == containerView.Frame.Right);
                             _simpleButton.ContentEdgeInsets = new UIEdgeInsets();
@@ -296,6 +297,8 @@ namespace EOS.UI.iOS.Sandbox
             resetButton.TouchUpInside += (sender, e) =>
             {
                 _simpleButton.ResetCustomization();
+                containerView.RemoveConstraints(containerView.Constraints);
+                containerView.AddConstraints(_defaultConstraints);
                 ResetFields();
             };
         }
