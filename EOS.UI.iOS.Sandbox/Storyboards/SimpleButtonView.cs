@@ -7,6 +7,7 @@ using EOS.UI.iOS.Extensions;
 using EOS.UI.iOS.Sandbox.Enums;
 using EOS.UI.iOS.Sandbox.Helpers;
 using EOS.UI.iOS.Sandbox.Storyboards;
+using EOS.UI.Shared.Helpers;
 using EOS.UI.Shared.Themes.Themes;
 using UIFrameworks.Shared.Themes.Helpers;
 using UIKit;
@@ -21,6 +22,7 @@ namespace EOS.UI.iOS.Sandbox
         private SimpleButton _simpleButton;
         private List<EOSSandboxDropDown> _dropDowns;
         private NSLayoutConstraint[] _defaultConstraints;
+        private ShadowConfig _defaultShadow;
 
         public SimpleButtonView(IntPtr handle) : base(handle)
         {
@@ -289,6 +291,15 @@ namespace EOS.UI.iOS.Sandbox
             enableSwitch.ValueChanged += (sender, e) =>
             {
                 _simpleButton.Enabled = enableSwitch.On;
+                if (!enableSwitch.On)
+                {
+                    _defaultShadow = _simpleButton.ShadowConfig;
+                    _simpleButton.ShadowConfig = null;
+                }
+                else
+                {
+                    _simpleButton.ShadowConfig = _defaultShadow;
+                }
             };
         }
 
