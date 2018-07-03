@@ -18,7 +18,7 @@ namespace EOS.UI.iOS.Controls
     public class FabProgress : UIButton, IEOSThemeControl
     {
         //image padding percent
-        private const double _paddingRatio= 0.24;
+        private const double _paddingRatio= 0.27;
         private const string _rotationAnimationKey = "rotationAnimation";
         private const double _360degrees = 6.28319;//value in radians
         private const float _startScale = 0.85f;
@@ -200,7 +200,6 @@ namespace EOS.UI.iOS.Controls
         public void ResetCustomization()
         {
             IsEOSCustomizationIgnored = false;
-
             UpdateAppearance();
         }
 

@@ -445,7 +445,7 @@ namespace EOS.UI.iOS.Extensions
         /// </summary>
         /// <param name="label">Label.</param>
         /// <param name="spacing">Spacing.</param>
-        internal static void SetLetterSpacing(this UILabel label, int spacing)
+        internal static void SetLetterSpacing(this UILabel label, float spacing)
         {
             var attributedString = new NSMutableAttributedString(label.AttributedText);
             attributedString.AddAttribute(UIStringAttributeKey.KerningAdjustment, new NSNumber(spacing), new NSRange(0, label.AttributedText.Length));
@@ -457,7 +457,7 @@ namespace EOS.UI.iOS.Extensions
         /// </summary>
         /// <param name="button">Button.</param>
         /// <param name="spacing">Spacing.</param>
-        internal static void SetLetterSpacing(this UIButton button, int spacing)
+        internal static void SetLetterSpacing(this UIButton button, float spacing)
         {
             var existEnabledAttrString = button.GetAttributedTitle(UIControlState.Normal);
             var enabledAttrString = new NSMutableAttributedString(existEnabledAttrString);
@@ -481,7 +481,7 @@ namespace EOS.UI.iOS.Extensions
         /// </summary>
         /// <param name="label">Label.</param>
         /// <param name="size">Size.</param>
-        internal static void SetTextSize(this UILabel label, int size)
+        internal static void SetTextSize(this UILabel label, float size)
         {
             var attributedString = new NSMutableAttributedString(label.AttributedText);
             attributedString.AddAttribute(UIStringAttributeKey.Font, label.Font.WithSize(size), new NSRange(0, label.AttributedText.Length));
@@ -493,7 +493,7 @@ namespace EOS.UI.iOS.Extensions
         /// </summary>
         /// <param name="button">Button.</param>
         /// <param name="size">Size.</param>
-        internal static void SetTextSize(this UIButton button, int size)
+        internal static void SetTextSize(this UIButton button, float size)
         {
             var normalAttrString = new NSMutableAttributedString(button.GetAttributedTitle(UIControlState.Normal));
             var disabledAttrString = new NSMutableAttributedString(button.GetAttributedTitle(UIControlState.Disabled));

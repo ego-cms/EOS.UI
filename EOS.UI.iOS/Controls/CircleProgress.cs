@@ -1,6 +1,7 @@
 using CoreAnimation;
 using CoreGraphics;
 using EOS.UI.iOS.Themes;
+using EOS.UI.Shared.Themes.DataModels;
 using EOS.UI.Shared.Themes.Helpers;
 using EOS.UI.Shared.Themes.Interfaces;
 using Foundation;
@@ -15,11 +16,10 @@ namespace EOS.UI.iOS
     {
         private bool _isRunnung;
         private const int _lineWidth = 3;
-        private const int _radius = 14;
         private readonly nfloat _startAngle = 0f;
         private readonly nfloat _rotatienAngle = -1.57f;
         private readonly nfloat _360angle = 6.28319f;
-        private const string _zeroPercents = "0 %";
+        private const string _zeroPercents = "0%";
         private CAShapeLayer _circleLayer;
         private CAShapeLayer _fillCircleLayer;
 
@@ -43,7 +43,7 @@ namespace EOS.UI.iOS
                 {
                     if (imageView.Hidden == false)
                         imageView.Hidden = true;
-                    percentLabel.Text = $"{_progress.ToString()} %";
+                    percentLabel.Text = $"{_progress.ToString()}%";
                     RedrawCircle();
                     if (_progress == 100)
                     {
@@ -105,27 +105,37 @@ namespace EOS.UI.iOS
             }
         }
 
-        private UIFont _font;
-        public UIFont Font
+        private FontStyleItem _fontStyle;
+        public FontStyleItem FontStyle
         {
-            get => _font;
+            get => _fontStyle;
             set
             {
-                _font = value.WithSize(TextSize);
+                _fontStyle = value;
+                SetFontStyle();
                 IsEOSCustomizationIgnored = true;
-                percentLabel.Font = _font;
             }
         }
 
-        private float _textSize;
-        public float TextSize
+        public UIFont Font
         {
-            get => _textSize;
+            get => FontStyle.Font;
             set
             {
-                _textSize = value;
+                FontStyle.Font = value.WithSize(TextSize);
+                SetFontStyle();
                 IsEOSCustomizationIgnored = true;
-                percentLabel.Font = Font.WithSize(_textSize);
+            }
+        }
+
+        public float TextSize
+        {
+            get => FontStyle.Size;
+            set
+            {
+                FontStyle.Size = value;
+                SetFontStyle();
+                IsEOSCustomizationIgnored = true;
             }
         }
 
@@ -157,11 +167,10 @@ namespace EOS.UI.iOS
             if (!IsEOSCustomizationIgnored)
             {
                 var provider = GetThemeProvider();
+                FontStyle = provider.GetEOSProperty<FontStyleItem>(this, EOSConstants.R1C1);
                 Color = provider.GetEOSProperty<UIColor>(this, EOSConstants.BrandPrimaryColor);
                 AlternativeColor = provider.GetEOSProperty<UIColor>(this, EOSConstants.BrandPrimaryColor);
                 ShowProgress = provider.GetEOSProperty<bool>(this, EOSConstants.CircleProgressShown);
-                Font = provider.GetEOSProperty<UIFont>(this, EOSConstants.Font);
-                TextSize = provider.GetEOSProperty<int>(this, EOSConstants.TextSize);
                 FillColor = provider.GetEOSProperty<UIColor>(this, EOSConstants.NeutralColor4);
                 IsEOSCustomizationIgnored = false;
             }
@@ -208,19 +217,19 @@ namespace EOS.UI.iOS
             _circleLayer.LineWidth = _lineWidth;
             var center = new CGPoint(circleView.Frame.Width / 2, circleView.Frame.Height / 2);
             var circlePath = new UIBezierPath();
-            circlePath.AddArc(center, _radius, _startAngle, _startAngle, true);
+            circlePath.AddArc(center, circleView.Frame.Width / 2, _startAngle, _startAngle, true);
             _circleLayer.Path = circlePath.CGPath;
             circleView.Transform = CGAffineTransform.MakeRotation(_rotatienAngle);
-            
+
             _fillCircleLayer = new CAShapeLayer();
             _fillCircleLayer.FillColor = UIColor.Clear.CGColor;
             _fillCircleLayer.StrokeColor = FillColor.CGColor;
             _fillCircleLayer.LineWidth = _lineWidth;
             circlePath = new UIBezierPath();
-            circlePath.AddArc(center, _radius, _startAngle, _360angle, true);
+            circlePath.AddArc(center, circleView.Frame.Width / 2, _startAngle, _360angle, true);
             _fillCircleLayer.Path = circlePath.CGPath;
             circleView.Transform = CGAffineTransform.MakeRotation(_rotatienAngle);
-            
+
             circleView.Layer.AddSublayer(_fillCircleLayer);
             circleView.Layer.AddSublayer(_circleLayer);
         }
@@ -230,7 +239,7 @@ namespace EOS.UI.iOS
             var endAngle = _360angle * (Progress / 100.0);
             var circlePath = new UIBezierPath();
             var center = new CGPoint(circleView.Frame.Width / 2, circleView.Frame.Height / 2);
-            circlePath.AddArc(center, _radius, _startAngle, (nfloat)endAngle, true);
+            circlePath.AddArc(center, circleView.Frame.Width / 2, _startAngle, (nfloat)endAngle, true);
             _circleLayer.Path = circlePath.CGPath;
         }
 
@@ -240,6 +249,11 @@ namespace EOS.UI.iOS
             imageView.Hidden = false;
             _circleLayer.Path = null;
             _isRunnung = false;
+        }
+
+        private void SetFontStyle()
+        {
+            percentLabel.Font = Font.WithSize(TextSize);
         }
     }
 }

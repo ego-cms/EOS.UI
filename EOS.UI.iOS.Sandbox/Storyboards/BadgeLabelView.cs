@@ -7,6 +7,7 @@ using EOS.UI.iOS.Extensions;
 using EOS.UI.iOS.Sandbox.Helpers;
 using EOS.UI.iOS.Sandbox.Storyboards;
 using EOS.UI.Shared.Themes.Themes;
+using UIFrameworks.Shared.Themes.Helpers;
 using UIKit;
 using static EOS.UI.iOS.Sandbox.Helpers.Constants;
 
@@ -29,7 +30,7 @@ namespace EOS.UI.iOS.Sandbox
             UpdateApperaence();
 
             var label = new BadgeLabel();
-            label.Text = "Default Text";
+            label.Text = ControlNames.BadgeLabel;
 
             _dropDowns = new List<EOSSandboxDropDown>()
             {
