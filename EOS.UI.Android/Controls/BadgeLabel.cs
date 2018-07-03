@@ -5,6 +5,7 @@ using Android.Graphics.Drawables;
 using Android.Runtime;
 using Android.Util;
 using Android.Widget;
+using EOS.UI.Shared.Themes.DataModels;
 using EOS.UI.Shared.Themes.Helpers;
 using EOS.UI.Shared.Themes.Interfaces;
 using UIFrameworks.Android.Themes;
@@ -65,7 +66,9 @@ namespace EOS.UI.Android.Controls
             set
             {
                 IsEOSCustomizationIgnored = true;
-                base.Typeface = value;
+                FontStyle.Typeface = value;
+                SetFontStyle();
+                //base.Typeface = value;
             }
         }
 
@@ -108,7 +111,9 @@ namespace EOS.UI.Android.Controls
             set
             {
                 IsEOSCustomizationIgnored = true;
-                base.TextSize = value; 
+                FontStyle.Size = value;
+                SetFontStyle();
+                //base.TextSize = value; 
             }
         }
 
@@ -120,6 +125,27 @@ namespace EOS.UI.Android.Controls
                 IsEOSCustomizationIgnored = true;
                 (Background as GradientDrawable).SetCornerRadius(value);
             }
+        }
+
+        private FontStyleItem _fontStyle;
+        public FontStyleItem FontStyle
+        {
+            get => _fontStyle;
+            set
+            {
+                _fontStyle = value;
+                SetFontStyle();
+                IsEOSCustomizationIgnored = true;
+            }
+        }
+
+        private void SetFontStyle()
+        {
+            base.Typeface = Typeface;
+            //base.SetTypeface()
+            //this.SetTextSize(TextSize);
+            //base.TextColor = this.TextColor;
+            //this.SetLetterSpacing(LetterSpacing);
         }
 
         #endregion
@@ -189,11 +215,13 @@ namespace EOS.UI.Android.Controls
             if(!IsEOSCustomizationIgnored)
             {
                 (Background as GradientDrawable).SetColor(GetThemeProvider().GetEOSProperty<Color>(this, EOSConstants.BrandPrimaryColor));
-                base.SetTypeface(Typeface.CreateFromAsset(Context.Assets, GetThemeProvider().GetEOSProperty<string>(this, EOSConstants.Font)), TypefaceStyle.Normal);
-                base.LetterSpacing = GetThemeProvider().GetEOSProperty<float>(this, EOSConstants.LetterSpacing);
-                base.SetTextColor(GetThemeProvider().GetEOSProperty<Color>(this, EOSConstants.NeutralColor6));
-                base.TextSize = GetThemeProvider().GetEOSProperty<float>(this, EOSConstants.TextSize);
-                (Background as GradientDrawable).SetCornerRadius(GetThemeProvider().GetEOSProperty<float>(this, EOSConstants.LabelCornerRadius));
+                FontStyle = GetThemeProvider().GetEOSProperty<FontStyleItem>(this, EOSConstants.R2C5);
+                //base.SetTypeface(Typeface.CreateFromAsset(Context.Assets, GetThemeProvider().GetEOSProperty<string>(this, EOSConstants.Font)), TypefaceStyle.Normal);
+                //base.LetterSpacing = GetThemeProvider().GetEOSProperty<float>(this, EOSConstants.LetterSpacing);
+                //base.SetTextColor(GetThemeProvider().GetEOSProperty<Color>(this, EOSConstants.NeutralColor6));
+                //base.TextSize = GetThemeProvider().GetEOSProperty<float>(this, EOSConstants.TextSize);
+                (Background as GradientDrawable).SetCornerRadius(GetThemeProvider().GetEOSProperty<float>(this, EOSConstants.BadgeLabelCornerRadius));
+                IsEOSCustomizationIgnored = false;
             }
         }
 
