@@ -31,7 +31,7 @@ namespace EOS.UI.iOS.Sandbox
 
             _simpleLabel = new SimpleLabel
             {
-                Text = ControlNames.SimpleLabel
+                Text = "Label"
             };
 
             _dropDowns = new List<EOSSandboxDropDown>()
