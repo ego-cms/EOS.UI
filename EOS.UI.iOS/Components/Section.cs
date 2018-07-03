@@ -103,6 +103,7 @@ namespace EOS.UI.iOS.Components
             set
             {
                 SectionFontStyle.Size = value;
+                SectionNameFont = SectionNameFont.WithSize(value);
                 SetSectionFontStyle();
                 IsEOSCustomizationIgnored = true;
             }
