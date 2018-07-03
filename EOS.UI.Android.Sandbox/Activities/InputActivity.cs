@@ -1,4 +1,4 @@
-﻿using System.Linq;
+using System.Linq;
 using Android.App;
 using Android.Graphics;
 using Android.OS;
@@ -27,13 +27,16 @@ namespace EOS.UI.Android.Sandbox.Activities
         private EOSSandboxDropDown _textColorDisabledDropDown;
         private EOSSandboxDropDown _hintTextColorDropDown;
         private EOSSandboxDropDown _hintTextColorDisabledDropDown;
-        private EOSSandboxDropDown _leftDrawableFocusedDropDown;
-        private EOSSandboxDropDown _leftDrawableUnfocusedDropDown;
-        private EOSSandboxDropDown _leftDrawableDisabledDropDown;
-        private EOSSandboxDropDown _underlineColorFocusedDropDown;
-        private EOSSandboxDropDown _underlineColorUnfocusedDropDown;
-        private EOSSandboxDropDown _underlineColorDisabledDropDown;
+        private EOSSandboxDropDown _leftDrawableDropDown;
+        private EOSSandboxDropDown _focusedColorDropDown;
+        private EOSSandboxDropDown _disabledColorDropDown;
+        private EOSSandboxDropDown _normalUnderlineColorDropDown;
+        private EOSSandboxDropDown _normalIconColorDropDown;
+        private EOSSandboxDropDown _populatedUnderlineColorDropDown;
+        private EOSSandboxDropDown _populatedIconColorDropDown;
+        private EOSSandboxDropDown _validatedRulesDropDown;
         private Switch _disabledSwitch;
+        private int _validationKey;
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
@@ -42,8 +45,19 @@ namespace EOS.UI.Android.Sandbox.Activities
 
             _inputTop = FindViewById<Input>(Resource.Id.inputTop);
             _inputTop.UpdateAppearance();
+
+            _inputTop.TextChanged += (s, e) =>
+            {
+                ProceedValidation(_validationKey);
+            };
+
             _inputBottom = FindViewById<Input>(Resource.Id.inputBottom);
             _inputBottom.UpdateAppearance();
+
+            _inputBottom.TextChanged += (s, e) =>
+            {
+                ProceedValidation(_validationKey);
+            };
 
             _themeDropDown = FindViewById<EOSSandboxDropDown>(Resource.Id.themeDropDown);
             _fontDropDown = FindViewById<EOSSandboxDropDown>(Resource.Id.fontDropDown);
@@ -53,12 +67,14 @@ namespace EOS.UI.Android.Sandbox.Activities
             _textColorDisabledDropDown = FindViewById<EOSSandboxDropDown>(Resource.Id.disabledTextColorDropDown);
             _hintTextColorDropDown = FindViewById<EOSSandboxDropDown>(Resource.Id.hintTextColorDropDown);
             _hintTextColorDisabledDropDown = FindViewById<EOSSandboxDropDown>(Resource.Id.disabledHintTextColorDropDown);
-            _leftDrawableFocusedDropDown = FindViewById<EOSSandboxDropDown>(Resource.Id.focusedIconDropDown);
-            _leftDrawableUnfocusedDropDown = FindViewById<EOSSandboxDropDown>(Resource.Id.unfocusedIconDropDown);
-            _leftDrawableDisabledDropDown = FindViewById<EOSSandboxDropDown>(Resource.Id.disabledIconDropDown);
-            _underlineColorFocusedDropDown = FindViewById<EOSSandboxDropDown>(Resource.Id.focusedUnderlineColorDropDown);
-            _underlineColorUnfocusedDropDown = FindViewById<EOSSandboxDropDown>(Resource.Id.unfocusedUnderlineColorDropDown);
-            _underlineColorDisabledDropDown = FindViewById<EOSSandboxDropDown>(Resource.Id.disabledUnderlineColorDropDown);
+            _leftDrawableDropDown = FindViewById<EOSSandboxDropDown>(Resource.Id.iconDropDown);
+            _focusedColorDropDown = FindViewById<EOSSandboxDropDown>(Resource.Id.focusedColorDropDown);
+            _disabledColorDropDown = FindViewById<EOSSandboxDropDown>(Resource.Id.disabledColorDropDown);
+            _normalUnderlineColorDropDown = FindViewById<EOSSandboxDropDown>(Resource.Id.normalUnderlineColorDropDown);
+            _normalIconColorDropDown = FindViewById<EOSSandboxDropDown>(Resource.Id.normalIconColorDropDown);
+            _populatedUnderlineColorDropDown = FindViewById<EOSSandboxDropDown>(Resource.Id.populatedUnderlineColorDropDown);
+            _populatedIconColorDropDown = FindViewById<EOSSandboxDropDown>(Resource.Id.populatedIconColorDropDown);
+            _validatedRulesDropDown = FindViewById<EOSSandboxDropDown>(Resource.Id.validationRulesDropDown);
             var resetButton = FindViewById<Button>(Resource.Id.buttonResetCustomization);
             _disabledSwitch = FindViewById<Switch>(Resource.Id.switchDisabled);
 
@@ -94,29 +110,37 @@ namespace EOS.UI.Android.Sandbox.Activities
             _hintTextColorDisabledDropDown.SetupAdapter(Colors.ColorsCollection.Select(item => item.Key).ToList());
             _hintTextColorDisabledDropDown.ItemSelected += HintTextColorDisabledItemSelected;
 
-            _leftDrawableFocusedDropDown.Name = Fields.IconFocused;
-            _leftDrawableFocusedDropDown.SetupAdapter(Icons.DrawableCollection.Select(item => item.Key).ToList());
-            _leftDrawableFocusedDropDown.ItemSelected += LeftDrawableFocusedItemSelected;
+            _leftDrawableDropDown.Name = Fields.Icon;
+            _leftDrawableDropDown.SetupAdapter(Icons.DrawableCollection.Select(item => item.Key).ToList());
+            _leftDrawableDropDown.ItemSelected += LeftDrawableItemSelected;
 
-            _leftDrawableUnfocusedDropDown.Name = Fields.IconUnocused;
-            _leftDrawableUnfocusedDropDown.SetupAdapter(Icons.DrawableCollection.Select(item => item.Key).ToList());
-            _leftDrawableUnfocusedDropDown.ItemSelected += LeftDrawableUnfocusedItemSelected;
+            _focusedColorDropDown.Name = Fields.FocusedColor;
+            _focusedColorDropDown.SetupAdapter(Colors.ColorsCollection.Select(item => item.Key).ToList());
+            _focusedColorDropDown.ItemSelected += FocusedColorItemSelected;
 
-            _leftDrawableDisabledDropDown.Name = Fields.IconDisabled;
-            _leftDrawableDisabledDropDown.SetupAdapter(Icons.DrawableCollection.Select(item => item.Key).ToList());
-            _leftDrawableDisabledDropDown.ItemSelected += LeftDrawableDisabledItemSelected;
+            _disabledColorDropDown.Name = Fields.DisabledColor;
+            _disabledColorDropDown.SetupAdapter(Colors.ColorsCollection.Select(item => item.Key).ToList());
+            _disabledColorDropDown.ItemSelected += DisabledColorItemSelected;
 
-            _underlineColorFocusedDropDown.Name = Fields.UnderlineColorFocused;
-            _underlineColorFocusedDropDown.SetupAdapter(Colors.ColorsCollection.Select(item => item.Key).ToList());
-            _underlineColorFocusedDropDown.ItemSelected += UnderlineColorFocusedItemSelected;
+            _normalUnderlineColorDropDown.Name = Fields.NormalUnderlineColor;
+            _normalUnderlineColorDropDown.SetupAdapter(Colors.ColorsCollection.Select(item => item.Key).ToList());
+            _normalUnderlineColorDropDown.ItemSelected += NormalUnderlineColorItemSelected;
 
-            _underlineColorUnfocusedDropDown.Name = Fields.UnderlineColorUnocused;
-            _underlineColorUnfocusedDropDown.SetupAdapter(Colors.ColorsCollection.Select(item => item.Key).ToList());
-            _underlineColorUnfocusedDropDown.ItemSelected += UnderlineColorUnfocusedItemSelected;
+            _normalIconColorDropDown.Name = Fields.NormalIconColor;
+            _normalIconColorDropDown.SetupAdapter(Colors.ColorsCollection.Select(item => item.Key).ToList());
+            _normalIconColorDropDown.ItemSelected += NormalIconColorItemSelected;
 
-            _underlineColorDisabledDropDown.Name = Fields.UnderlineColorDisabled;
-            _underlineColorDisabledDropDown.SetupAdapter(Colors.ColorsCollection.Select(item => item.Key).ToList());
-            _underlineColorDisabledDropDown.ItemSelected += UnderlineColorDisabledItemSelected;
+            _populatedIconColorDropDown.Name = Fields.PopulatedIconColor;
+            _populatedIconColorDropDown.SetupAdapter(Colors.ColorsCollection.Select(item => item.Key).ToList());
+            _populatedIconColorDropDown.ItemSelected += PopulatedIconColorItemSelected;
+
+            _populatedUnderlineColorDropDown.Name = Fields.PopulatedUnderlineColor;
+            _populatedUnderlineColorDropDown.SetupAdapter(Colors.ColorsCollection.Select(item => item.Key).ToList());
+            _populatedUnderlineColorDropDown.ItemSelected += PopulatedUnderlineColorItemSelected;
+
+            _validatedRulesDropDown.Name = Fields.ValidationRules;
+            _validatedRulesDropDown.SetupAdapter(Validation.ValidationCollection.Select(item => item.Key).ToList());
+            _validatedRulesDropDown.ItemSelected += ValidatedRulesItemSelected;
 
             SetCurrenTheme(_inputTop.GetThemeProvider().GetCurrentTheme());
 
@@ -128,6 +152,63 @@ namespace EOS.UI.Android.Sandbox.Activities
             _disabledSwitch.SetOnCheckedChangeListener(this);
 
             Window.SetSoftInputMode(A.Views.SoftInput.StateAlwaysHidden);
+        }
+
+        private void ProceedValidation(int key)
+        {
+            switch(_validationKey)
+            {
+                case 0:
+                case 1:
+                    break;
+                case 2:
+                    _inputTop.IsValid = _inputTop.Text.Contains("@");
+                    _inputBottom.IsValid = _inputBottom.Text.Contains("@");
+                    break;
+                case 3:
+                    _inputTop.IsValid = !string.IsNullOrEmpty(_inputTop.Text);
+                    _inputBottom.IsValid = !string.IsNullOrEmpty(_inputBottom.Text);
+                    break;
+            }
+        }
+
+        private void ValidatedRulesItemSelected(int position)
+        {
+            _validationKey = position;
+            ProceedValidation(_validationKey);
+
+            if(_validationKey == 1 || _validationKey == 0)
+            {
+                _inputTop.IsValid = true;
+                _inputBottom.IsValid = true;
+            }
+        }
+
+        private void PopulatedUnderlineColorItemSelected(int position)
+        {
+            if(position > 0)
+            {
+                _inputTop.PopulatedUnderlineColor = Colors.ColorsCollection.ElementAt(position).Value;
+                _inputBottom.PopulatedUnderlineColor = Colors.ColorsCollection.ElementAt(position).Value;
+            }
+        }
+
+        private void PopulatedIconColorItemSelected(int position)
+        {
+            if(position > 0)
+            {
+                _inputTop.PopulatedIconColor = Colors.ColorsCollection.ElementAt(position).Value;
+                _inputBottom.PopulatedIconColor = Colors.ColorsCollection.ElementAt(position).Value;
+            }
+        }
+
+        private void NormalIconColorItemSelected(int position)
+        {
+            if(position > 0)
+            {
+                _inputTop.NormalIconColor = Colors.ColorsCollection.ElementAt(position).Value;
+                _inputBottom.NormalIconColor = Colors.ColorsCollection.ElementAt(position).Value;
+            }
         }
 
         private void SetCurrenTheme(IEOSTheme iEOSTheme)
@@ -211,57 +292,39 @@ namespace EOS.UI.Android.Sandbox.Activities
             }
         }
 
-        private void LeftDrawableUnfocusedItemSelected(int position)
+        private void LeftDrawableItemSelected(int position)
         {
             if(position > 0)
             {
-                _inputTop.LeftImageUnfocused =  BaseContext.GetDrawable(Icons.DrawableCollection.ElementAt(position).Value);
-                _inputBottom.LeftImageUnfocused = BaseContext.GetDrawable(Icons.DrawableCollection.ElementAt(position).Value);
+                _inputTop.LeftImage = BaseContext.GetDrawable(Icons.DrawableCollection.ElementAt(position).Value);
+                _inputBottom.LeftImage = BaseContext.GetDrawable(Icons.DrawableCollection.ElementAt(position).Value);
             }
         }
 
-        private void LeftDrawableFocusedItemSelected(int position)
+        private void FocusedColorItemSelected(int position)
         {
             if(position > 0)
             {
-                _inputTop.LeftImageFocused = BaseContext.GetDrawable(Icons.DrawableCollection.ElementAt(position).Value);
-                _inputBottom.LeftImageFocused = BaseContext.GetDrawable(Icons.DrawableCollection.ElementAt(position).Value);
+                _inputTop.FocusedColor = Colors.ColorsCollection.ElementAt(position).Value;
+                _inputBottom.FocusedColor = Colors.ColorsCollection.ElementAt(position).Value;
             }
         }
 
-        private void LeftDrawableDisabledItemSelected(int position)
+        private void NormalUnderlineColorItemSelected(int position)
         {
             if(position > 0)
             {
-                _inputTop.LeftImageDisabled = BaseContext.GetDrawable(Icons.DrawableCollection.ElementAt(position).Value);
-                _inputBottom.LeftImageDisabled = BaseContext.GetDrawable(Icons.DrawableCollection.ElementAt(position).Value);
+                _inputTop.NormalUnderlineColor = Colors.ColorsCollection.ElementAt(position).Value;
+                _inputBottom.NormalUnderlineColor = Colors.ColorsCollection.ElementAt(position).Value;
             }
         }
 
-        private void UnderlineColorFocusedItemSelected(int position)
+        private void DisabledColorItemSelected(int position)
         {
             if(position > 0)
             {
-                _inputTop.UnderlineColorFocused = Colors.ColorsCollection.ElementAt(position).Value;
-                _inputBottom.UnderlineColorFocused = Colors.ColorsCollection.ElementAt(position).Value;
-            }
-        }
-
-        private void UnderlineColorUnfocusedItemSelected(int position)
-        {
-            if(position > 0)
-            {
-                _inputTop.UnderlineColorUnfocused = Colors.ColorsCollection.ElementAt(position).Value;
-                _inputBottom.UnderlineColorUnfocused = Colors.ColorsCollection.ElementAt(position).Value;
-            }
-        }
-
-        private void UnderlineColorDisabledItemSelected(int position)
-        {
-            if(position > 0)
-            {
-                _inputTop.UnderlineColorDisabled = Colors.ColorsCollection.ElementAt(position).Value;
-                _inputBottom.UnderlineColorDisabled = Colors.ColorsCollection.ElementAt(position).Value;
+                _inputTop.DisabledColor = Colors.ColorsCollection.ElementAt(position).Value;
+                _inputBottom.DisabledColor = Colors.ColorsCollection.ElementAt(position).Value;
             }
         }
 
@@ -276,12 +339,14 @@ namespace EOS.UI.Android.Sandbox.Activities
             _textColorDisabledDropDown.SetSpinnerSelection(0);
             _hintTextColorDropDown.SetSpinnerSelection(0);
             _hintTextColorDisabledDropDown.SetSpinnerSelection(0);
-            _leftDrawableFocusedDropDown.SetSpinnerSelection(0);
-            _leftDrawableUnfocusedDropDown.SetSpinnerSelection(0);
-            _leftDrawableDisabledDropDown.SetSpinnerSelection(0);
-            _underlineColorFocusedDropDown.SetSpinnerSelection(0);
-            _underlineColorUnfocusedDropDown.SetSpinnerSelection(0);
-            _underlineColorDisabledDropDown.SetSpinnerSelection(0);
+            _leftDrawableDropDown.SetSpinnerSelection(0);
+            _focusedColorDropDown.SetSpinnerSelection(0);
+            _disabledColorDropDown.SetSpinnerSelection(0);
+            _normalUnderlineColorDropDown.SetSpinnerSelection(0);
+            _normalIconColorDropDown.SetSpinnerSelection(0);
+            _populatedUnderlineColorDropDown.SetSpinnerSelection(0);
+            _populatedIconColorDropDown.SetSpinnerSelection(0);
+            _validatedRulesDropDown.SetSpinnerSelection(0);
         }
 
         public void OnCheckedChanged(CompoundButton buttonView, bool isChecked)
