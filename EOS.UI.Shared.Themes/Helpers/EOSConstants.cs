@@ -23,9 +23,10 @@ namespace UIFrameworks.Shared.Themes.Helpers
         public const string SecondaryFont = "secondaryFont";
         public const string LetterSpacing = "letterSpacing";
         public const string SecondaryLetterSpacing = "secondaryLetterSpacing";
-        public const string LeftImageUnfocused = "leftImageUnfocused";
-        public const string LeftImageFocused = "leftImageFocused";
-        public const string LeftImageDisabled = "leftImageDisabled";
+        public const string LeftImage = "leftImage";
+        public const string WarningInputImage = "warningInputImage";
+        public const string ClearInputImage = "clearInputImage";
+        public const string SimpleButtonShadow = "simpleButtonShadow";
         //fab progress constans
         public const string CalendarImage = "calendarImage";
         public const string FabProgressPreloaderImage = "fabProgressPreloaderImage";
@@ -49,6 +50,21 @@ namespace UIFrameworks.Shared.Themes.Helpers
         public const string WorkTimeDayTextFont = "workTimeDayFont";
         //Sandbox
         public const string DefaultText = "default";
+        //themes
+        public static string R1C1 = "R1C1";
+        public static string R1C2 = "R1C2";
+        public static string R1C3 = "R1C3";
+        public static string R1C4 = "R1C4";
+        public static string R2C1 = "R2C1";
+        public static string R2C2 = "R2C2";
+        public static string R2C3 = "R2C3";
+        public static string R2C4 = "R2C4";
+        public static string R2C5 = "R2C5";
+        public static string R3C1 = "R3C1";
+        public static string R3C2 = "R3C2";
+        public static string R3C3 = "R3C3";
+        public static string R3C4 = "R3C4";
+        public static string R3C5 = "R3C5";
     }
 
     public static class ControlNames
@@ -56,6 +72,7 @@ namespace UIFrameworks.Shared.Themes.Helpers
         public const string BadgeLabel = "Badge label";
         public const string GhostButton = "Ghost button";
         public const string SimpleButton = "Simple button";
+        public const string FullBleedButton = "Full-bleed button";
         public const string SimpleLabel = "Simple label";
         public const string Input = "Input";
         public const string FabProgress = "Fab progress";

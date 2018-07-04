@@ -4,9 +4,12 @@ using System.Linq;
 using CoreGraphics;
 using EOS.UI.iOS.Controls;
 using EOS.UI.iOS.Extensions;
+using EOS.UI.iOS.Sandbox.Enums;
 using EOS.UI.iOS.Sandbox.Helpers;
 using EOS.UI.iOS.Sandbox.Storyboards;
+using EOS.UI.Shared.Helpers;
 using EOS.UI.Shared.Themes.Themes;
+using UIFrameworks.Shared.Themes.Helpers;
 using UIKit;
 using static EOS.UI.iOS.Sandbox.Helpers.Constants;
 
@@ -18,10 +21,12 @@ namespace EOS.UI.iOS.Sandbox
 
         private SimpleButton _simpleButton;
         private List<EOSSandboxDropDown> _dropDowns;
+        private NSLayoutConstraint[] _defaultConstraints;
+        private ShadowConfig _defaultShadow;
 
-        public SimpleButtonView (IntPtr handle) : base (handle)
+        public SimpleButtonView(IntPtr handle) : base(handle)
         {
-              
+
         }
 
         public override void ViewDidLoad()
@@ -29,9 +34,7 @@ namespace EOS.UI.iOS.Sandbox
             base.ViewDidLoad();
 
             _simpleButton = new SimpleButton();
-            _simpleButton.SetTitle("Simple button", UIControlState.Normal);
-
-            _simpleButton.UpdateAppearance();
+            _simpleButton.SetTitle(ControlNames.SimpleButton, UIControlState.Normal);
 
             _dropDowns = new List<EOSSandboxDropDown>()
             {
@@ -41,13 +44,16 @@ namespace EOS.UI.iOS.Sandbox
                 textSizeDropDown,
                 enabledTextColorDropDown,
                 disabledTextColorDropDown,
-                pressedTextColorDropDown,
                 enabledBackgrDropDown,
                 disabledBackgroundDropDown,
-                pressedTextColorDropDown,
                 pressedBackgroundDropDown,
                 cornerRadiusDropDown,
-                rippleColorDropDown
+                shadowColorDropDown,
+                shadowRadiusDropDown,
+                shadowOffsetXDropDown,
+                shadowOffsetYDropDown,
+                shadowOpacityDropDown,
+                buttonTypeDropDown
             };
 
             View.AddGestureRecognizer(new UITapGestureRecognizer(() =>
@@ -56,9 +62,10 @@ namespace EOS.UI.iOS.Sandbox
             }));
 
             containerView.ConstrainLayout(() => _simpleButton.Frame.GetCenterX() == containerView.Frame.GetCenterX() &&
-                              _simpleButton.Frame.GetCenterY() == containerView.Frame.GetCenterY() &&
-                              _simpleButton.Frame.Left == containerView.Frame.Left &&
-                              _simpleButton.Frame.Right == containerView.Frame.Right, _simpleButton);
+                                               _simpleButton.Frame.GetCenterY() == containerView.Frame.GetCenterY() &&
+                                               _simpleButton.Frame.Height == 50 &&
+                                               _simpleButton.Frame.Width == 340, _simpleButton);
+            _defaultConstraints = containerView.Constraints;
 
 
             var rect = new CGRect(0, 0, 100, 150);
@@ -69,14 +76,18 @@ namespace EOS.UI.iOS.Sandbox
             InitTextSizeDropDown(rect);
             InitTextColorEnabledDropDown(rect);
             InitTextColorDisabledDropDown(rect);
-            InitTextColorPressedDropDown(rect);
             InitBackgroundColorEnabledDropDown(rect);
             InitBackgroundColorDisabledDropDown(rect);
             InitBackgroundColorPressedDropDown(rect);
             InitCornerRadiusDropDown(rect);
             InitDisabledSwitch();
             InitResetButton();
-            InitRippleColorDropDown(rect);
+            InitButtonTypeDropDown(rect);
+            InitShadowColorDropDown(rect);
+            InitShadowOffsetXDropDown(rect);
+            InitShadowOffsetYDropDown(rect);
+            InitShadowOpacityDropDown(rect);
+            InitShadowRadiusDropDown(rect);
         }
 
         private void InitThemeDropDown(CGRect rect)
@@ -92,7 +103,7 @@ namespace EOS.UI.iOS.Sandbox
                 },
                 Fields.Theme,
                 rect);
-            themeDropDown.SetTextFieldText(_simpleButton.GetThemeProvider().GetCurrentTheme() is LightEOSTheme  ? "Light" : "Dark");
+            themeDropDown.SetTextFieldText(_simpleButton.GetThemeProvider().GetCurrentTheme() is LightEOSTheme ? "Light" : "Dark");
         }
 
         private void InitFontDropDown(CGRect rect)
@@ -138,14 +149,6 @@ namespace EOS.UI.iOS.Sandbox
                 rect);
         }
 
-        private void InitTextColorPressedDropDown(CGRect rect)
-        {
-            pressedTextColorDropDown.InitSource(
-                color => _simpleButton.PressedTextColor = color,
-                Fields.PressedTextColor,
-                rect);
-        }
-
         private void InitBackgroundColorEnabledDropDown(CGRect rect)
         {
             enabledBackgrDropDown.InitSource(
@@ -178,12 +181,107 @@ namespace EOS.UI.iOS.Sandbox
                 Fields.ConerRadius,
                 rect);
         }
-        
-        private void InitRippleColorDropDown(CGRect rect)
+
+        private void InitButtonTypeDropDown(CGRect rect)
         {
-            rippleColorDropDown.InitSource(
-                color => _simpleButton.RippleColor = color,
-                Fields.RippleColor,
+            buttonTypeDropDown.InitSource(
+                ButtonTypes,
+                type =>
+                {
+                    ResetFields();
+                    _simpleButton.ResetCustomization();
+                    switch (type)
+                    {
+                        case SimpleButtonTypeEnum.Simple:
+                            containerView.RemoveConstraints(containerView.Constraints);
+                            containerView.AddConstraints(_defaultConstraints);
+                        _simpleButton.SetTitle(ControlNames.SimpleButton, UIControlState.Normal);
+                            break;
+                        case SimpleButtonTypeEnum.FullBleed:
+                            containerView.RemoveConstraints(containerView.Constraints);
+                            View.ConstrainLayout(() => containerView.Frame.Height == 150);
+                            containerView.ConstrainLayout(() => _simpleButton.Frame.GetCenterX() == containerView.Frame.GetCenterX() &&
+                                                                _simpleButton.Frame.GetCenterY() == containerView.Frame.GetCenterY() &&
+                                                                _simpleButton.Frame.Height == 50 &&
+                                                                _simpleButton.Frame.Left == containerView.Frame.Left &&
+                                                                _simpleButton.Frame.Right == containerView.Frame.Right);
+                            _simpleButton.ContentEdgeInsets = new UIEdgeInsets();
+                            _simpleButton.CornerRadius = 0;
+                            _simpleButton.ShadowConfig = null;
+                        _simpleButton.SetTitle(ControlNames.FullBleedButton, UIControlState.Normal);
+                            break;
+                    }
+                },
+                Fields.ButtonType,
+                rect);
+        }
+
+        private void InitShadowColorDropDown(CGRect rect)
+        {
+            shadowColorDropDown.InitSource(
+                color =>
+                {
+                    var config = _simpleButton.ShadowConfig;
+                    config.Color = color.CGColor;
+                    _simpleButton.ShadowConfig = config;
+                },
+                Fields.ShadowColor,
+                rect);
+        }
+
+        private void InitShadowOffsetXDropDown(CGRect rect)
+        {
+            shadowOffsetXDropDown.InitSource(
+                ShadowOffsetValues,
+                offset =>
+                {
+                    var config = _simpleButton.ShadowConfig;
+                    config.Offset = new CGSize(offset, config.Offset.Height);
+                    _simpleButton.ShadowConfig = config;
+                },
+                Fields.ShadowOffsetX,
+                rect);
+        }
+
+        private void InitShadowOffsetYDropDown(CGRect rect)
+        {
+            shadowOffsetYDropDown.InitSource(
+                ShadowOffsetValues,
+                offset =>
+                {
+                    var config = _simpleButton.ShadowConfig;
+                    config.Offset = new CGSize(config.Offset.Width, offset);
+                    _simpleButton.ShadowConfig = config;
+                },
+                Fields.ShadowOffsetY,
+                rect);
+        }
+
+        private void InitShadowRadiusDropDown(CGRect rect)
+        {
+            shadowRadiusDropDown.InitSource(
+                ShadowRadiusValues,
+                radius =>
+                {
+                    var config = _simpleButton.ShadowConfig;
+                    config.Radius = radius;
+                    _simpleButton.ShadowConfig = config;
+                },
+                Fields.ShadowRadius,
+                rect);
+        }
+
+        private void InitShadowOpacityDropDown(CGRect rect)
+        {
+            shadowOpacityDropDown.InitSource(
+                ShadowOpacityValues,
+                opacity =>
+                {
+                    var config = _simpleButton.ShadowConfig;
+                    config.Opacity = (float)opacity;
+                    _simpleButton.ShadowConfig = config;
+                },
+                Fields.ShadowOpacity,
                 rect);
         }
 
@@ -193,6 +291,15 @@ namespace EOS.UI.iOS.Sandbox
             enableSwitch.ValueChanged += (sender, e) =>
             {
                 _simpleButton.Enabled = enableSwitch.On;
+                if (!enableSwitch.On)
+                {
+                    _defaultShadow = _simpleButton.ShadowConfig;
+                    _simpleButton.ShadowConfig = null;
+                }
+                else
+                {
+                    _simpleButton.ShadowConfig = _defaultShadow;
+                }
             };
         }
 
@@ -201,6 +308,8 @@ namespace EOS.UI.iOS.Sandbox
             resetButton.TouchUpInside += (sender, e) =>
             {
                 _simpleButton.ResetCustomization();
+                containerView.RemoveConstraints(containerView.Constraints);
+                containerView.AddConstraints(_defaultConstraints);
                 ResetFields();
             };
         }
@@ -209,6 +318,5 @@ namespace EOS.UI.iOS.Sandbox
         {
             _dropDowns.Except(new[] { themeDropDown }).ToList().ForEach(dropDown => dropDown.ResetValue());
         }
-
     }
 }

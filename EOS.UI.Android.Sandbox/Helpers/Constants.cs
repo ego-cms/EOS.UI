@@ -27,12 +27,15 @@ namespace EOS.UI.Android.Sandbox.Helpers
             public static string PressedBackground = "Pressed background";
             public static string HintTextColor = "Hint text color";
             public static string HintTextColorDisabled = "Hint text color disabled";
-            public static string IconFocused = "Icon focused";
+            public static string Icon = "Icon";
             public static string IconUnocused = "Icon unfocused";
             public static string IconDisabled = "Icon disabled";
-            public static string UnderlineColorFocused = "Underline color focused";
-            public static string UnderlineColorUnocused = "Underline color unfocused";
-            public static string UnderlineColorDisabled = "Underline color disabled";
+            public static string FocusedColor = "Focused color";
+            public static string NormalUnderlineColor = "Normal underline color";
+            public static string NormalIconColor = "Normal icon color";
+            public static string PopulatedUnderlineColor = "Populated underline color";
+            public static string ValidationRules = "Validation rules";
+            public static string PopulatedIconColor = "Populated icon color";
             public static string DisabledColor = "Disabled color";
             public static string PressedColor = "Pressed color";
             public static string Size = "Size";
@@ -113,6 +116,21 @@ namespace EOS.UI.Android.Sandbox.Helpers
                 { Berkshireswash, "Fonts/Berkshireswash.ttf" },
                 { Amita, "Fonts/Amita.ttf" },
                 { AcademyEngraved, "Fonts/academyEngraved.ttf" },
+            };
+        }
+
+        public static class Validation
+        {
+            public const string Without = "without validation";
+            public const string Email = "e-mail validation";
+            public const string Empty = "empty validation";
+
+            public static readonly Dictionary<string, int> ValidationCollection = new Dictionary<string, int>()
+            {
+                { string.Empty, 0 },
+                { Without, 1 },
+                { Email, 2 },
+                { Empty, 3 }
             };
         }
 
@@ -308,22 +326,18 @@ namespace EOS.UI.Android.Sandbox.Helpers
 
         public static class Icons
         {
-            public const string AccountCircle = "account circle";
-            public const string AccountKey = "account key";
-            public const string AccountOff = "account off";
-            public const string AndroidIcon = "android";
-            public const string Airballoon = "air balloon";
-            public const string Apple = "apple";
+            public const string Calendar = "Calendar";
+            public const string AccountCircle = "Account circle";
+            public const string AccountKey = "Account key";
+            public const string AccountOff = "Account off";
 
             public static Dictionary<string, int> DrawableCollection = new Dictionary<string, int>()
             {
                 { string.Empty, 0 },
+                { Calendar, Resource.Drawable.icCalendar },
                 { AccountCircle, Resource.Drawable.AccountCircle },
                 { AccountKey, Resource.Drawable.AccountKey },
                 { AccountOff, Resource.Drawable.AccountOff },
-                { Airballoon, Resource.Drawable.Airballoon },
-                { AndroidIcon, Resource.Drawable.Android },
-                { Apple, Resource.Drawable.Apple },
             };
         }
 

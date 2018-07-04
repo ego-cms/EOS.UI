@@ -7,6 +7,7 @@ using EOS.UI.iOS.Helpers;
 using CoreGraphics;
 using EOS.UI.Shared.Helpers;
 using EOS.UI.Shared.Themes.Enums;
+using EOS.UI.iOS.Sandbox.Enums;
 
 namespace EOS.UI.iOS.Sandbox.Helpers
 {
@@ -29,12 +30,13 @@ namespace EOS.UI.iOS.Sandbox.Helpers
             public const string PressedBackground = "Pressed background";
             public const string HintTextColor = "Hint text color";
             public const string HintTextColorDisabled = "Hint text color disabled";
-            public const string IconFocused = "Icon focused";
-            public const string IconUnfocused = "Icon unfocused";
-            public const string IconDisabled = "Icon disabled";
-            public const string UnderlineColorFocused = "Underline color focused";
-            public const string UnderlineColorUnfocused = "Underline color unfocused";
-            public const string UnderlineColorDisabled = "Underline color disabled";
+            public const string Icon = "Icon";
+            public const string FocusedColor = "Focused color";
+            public const string PopulatedUnderlineColor = "Populated underline color";
+            public const string ValidationRules = "Validation rules";
+            public const string NormalIconColor = "Normal icon color";
+            public const string NormalUnderlineColor = "Normal underline color";
+            public const string PopulatedIconColor = "Populated icon color";
             public const string DisabledColor = "Disabled color";
             public const string PressedColor = "Pressed color";
             public const string Size = "Size";
@@ -73,6 +75,12 @@ namespace EOS.UI.iOS.Sandbox.Helpers
             public const string DayEvenBackgroundColor = "Even day background color";
             public const string WeekStartDay = "Week start day";
             public const string Default = "Default";
+            public const string ButtonType = "Button type";
+            public const string ShadowColor = "Shadow color";
+            public const string ShadowOffsetX = "Shadow offset X";
+            public const string ShadowOffsetY = "Shadow offset Y";
+            public const string ShadowRadius = "Shadow radius";
+            public const string ShadowOpacity = "Shadow opacity";
         };
 
         public static UIColor BackgroundColor = UIColor.FromRGB(224, 224, 224);
@@ -104,11 +112,18 @@ namespace EOS.UI.iOS.Sandbox.Helpers
             { "Dark", EOSThemeEnumeration.Dark },
         };
 
-        public static List<string> Icons = new List<string>()
+        public static Dictionary<string, SimpleButtonTypeEnum> ButtonTypes = new Dictionary<string, SimpleButtonTypeEnum>()
         {
-            { "icAccountCircle"},
-            { "icAccountKey"},
-            { "icAccountOff"},
+            { "Simple button", SimpleButtonTypeEnum.Simple },
+            { "Full-bleed button", SimpleButtonTypeEnum.FullBleed },
+        };
+
+        public static Dictionary<string, string> Icons = new Dictionary<string, string>()
+        {
+            { "Calendar", "icCalendar" },
+            { "Account circle", "icAccountCircle" },
+            { "Account key", "icAccountKey" },
+            { "Account off", "icAccountOff" },
         };
 
         public static Dictionary<string, bool> States = new Dictionary<string, bool>()
@@ -183,8 +198,18 @@ namespace EOS.UI.iOS.Sandbox.Helpers
             "Third",
         };
 
+        public static Dictionary<String, Predicate<string>> Validations = new Dictionary<string, Predicate<string>>()
+        {
+            {"without validation", null },
+            {"e-mail validation", (s) => s.Contains("@") && !String.IsNullOrEmpty(s)},
+            {"empty validation", (s) => !String.IsNullOrEmpty(s) },
+        };
+
         public static List<int> WidthValues;
         public static List<int> PaddingValues;
+        public static List<int> ShadowOffsetValues;
+        public static List<int> ShadowRadiusValues;
+        public static List<double> ShadowOpacityValues;
 
         static Constants()
         {
@@ -206,6 +231,9 @@ namespace EOS.UI.iOS.Sandbox.Helpers
             FabProgressSizes = Enumerable.Range(40, 50).Where(i => i % 10 == 0).ToList();
             WidthValues = Enumerable.Range(1, 10).ToList();
             PaddingValues = Enumerable.Range(1, 10).ToList();
+            ShadowOffsetValues = Enumerable.Range(-15, 30).ToList();
+            ShadowRadiusValues = Enumerable.Range(1, 15).ToList();
+            ShadowOpacityValues = new List<double>() { 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0 };
         }
     }
 }

@@ -4,6 +4,7 @@ using EOS.UI.Shared.Helpers;
 using UIFrameworks.Shared.Themes.Helpers;
 using UIFrameworks.Shared.Themes.Interfaces;
 using EOS.UI.Shared.Themes.Extensions;
+using EOS.UI.Shared.Themes.DataModels;
 
 #if __IOS__
 using CoreGraphics;
@@ -55,15 +56,16 @@ namespace EOS.UI.Shared.Themes.Themes
             { EOSConstants.SecondaryTextSize, 17 },
             { EOSConstants.Font, UIFont.SystemFontOfSize(17) },
             { EOSConstants.SecondaryFont, UIFont.SystemFontOfSize(17) },
-            { EOSConstants.CornerRadius, 3 },
+            { EOSConstants.ButtonCornerRadius, 25 },
+            { EOSConstants.LabelCornerRadius, 5 },
             { EOSConstants.LetterSpacing, 1 },
             { EOSConstants.SecondaryLetterSpacing, 2 },
-            { EOSConstants.LeftImageFocused, "icAccountCircle" },
-            { EOSConstants.LeftImageUnfocused, "icAccountKey" },
-            { EOSConstants.LeftImageDisabled, "icAccountOff" },
+            { EOSConstants.LeftImage, "icCalendar" },
             { EOSConstants.CalendarImage, "icCalendar"},
             { EOSConstants.FabProgressPreloaderImage, "icPreloader"},
-            { EOSConstants.FabProgressSize, 50},
+            { EOSConstants.WarningInputImage, "icWarning"},
+            { EOSConstants.ClearInputImage, "icClear"},
+            { EOSConstants.FabProgressSize, 52},
             { EOSConstants.CircleProgressShown, true},
             { EOSConstants.FabShadow,  new ShadowConfig(){
                 Color = ColorExtension.FromHex(neutralColor3, 0.64f),
@@ -71,19 +73,81 @@ namespace EOS.UI.Shared.Themes.Themes
                 Blur = 12,
                 Spread = 1
             }},
+            { EOSConstants.SimpleButtonShadow, new ShadowConfig(){
+                        Color = UIColor.Black.CGColor,
+                        Offset = new CGSize(0, 12),
+                        Radius = 5,
+                        Opacity = 0.2f
+            }},
             { EOSConstants.BorderWidth, 2 },
             { EOSConstants.SectionTitle, "Dark section" },
             { EOSConstants.SectionActionTitle, "View All" },
-            { EOSConstants.LeftPadding, 5 },
-            { EOSConstants.TopPadding, 5 },
-            { EOSConstants.RightPadding, 5 },
-            { EOSConstants.BottomPadding, 5 },
-            { EOSConstants.HasSectionBorder, false },
+            { EOSConstants.LeftPadding, 16 },
+            { EOSConstants.TopPadding, 10 },
+            { EOSConstants.RightPadding, 16 },
+            { EOSConstants.BottomPadding, 10 },
+            { EOSConstants.HasSectionBorder, true },
             { EOSConstants.HasSectionAction, true },
             { EOSConstants.WorkTimeTitleSize, 13 },
             { EOSConstants.WorkTimeTitleFont, UIFont.BoldSystemFontOfSize(13) },
             { EOSConstants.WorkTimeDayTextSize, 11 },
-            { EOSConstants.WorkTimeDayTextFont, UIFont.BoldSystemFontOfSize(13) }
+            { EOSConstants.WorkTimeDayTextFont, UIFont.BoldSystemFontOfSize(13) },
+            //simplebutton enabled
+            { EOSConstants.R3C1, new FontStyleItem() {
+                    Color = ColorExtension.FromHex(neutralColor1), //must be white in all themes
+                    Font = UIFont.SystemFontOfSize(16f, UIFontWeight.Medium),
+                    Size = 16f,
+                    LetterSpacing = -0.2f,
+                    LineHeight = 19f
+            }},
+            //simplebutton disabled
+            { EOSConstants.R3C4, new FontStyleItem() {
+                    Color = ColorExtension.FromHex(neutralColor3),
+                    Font = UIFont.SystemFontOfSize(16f, UIFontWeight.Medium),
+                    Size = 16f,
+                    LetterSpacing = -0.2f,
+                    LineHeight = 19f
+            }},
+            //ghostbutton enabled, simple label
+            { EOSConstants.R2C1, new FontStyleItem() {
+                    Color = ColorExtension.FromHex(brandPrimaryColor),
+                    Font = UIFont.SystemFontOfSize(13f, UIFontWeight.Semibold),
+                    Size = 13f,
+                    LetterSpacing = -0.6f,
+                    LineHeight = 15f
+            }},
+            //ghostbutton disabled
+            { EOSConstants.R2C4, new FontStyleItem() {
+                    Color = ColorExtension.FromHex(neutralColor3),
+                    Font = UIFont.SystemFontOfSize(13f, UIFontWeight.Semibold),
+                    Size = 13f,
+                    LetterSpacing = -0.6f,
+                    LineHeight = 15f
+            }},
+            //badge label
+            { EOSConstants.R2C5, new FontStyleItem() {
+            Color = ColorExtension.FromHex(neutralColor1), //must be white in all themes
+                    Font = UIFont.SystemFontOfSize(13f, UIFontWeight.Semibold),
+                    Size = 13f,
+                    LetterSpacing = -0.6f,
+                    LineHeight = 15f
+            }},
+            //section fontstyle
+            { EOSConstants.R2C3, new FontStyleItem() {
+                    Color = ColorExtension.FromHex(neutralColor2),
+                    Font = UIFont.SystemFontOfSize(13f, UIFontWeight.Semibold),
+                    Size = 13f,
+                    LetterSpacing = -0.6f,
+                    LineHeight = 15f
+            }},
+            //circle progress
+            { EOSConstants.R1C1, new FontStyleItem() {
+                    Color = ColorExtension.FromHex(brandPrimaryColor),
+                    Font = UIFont.SystemFontOfSize(11f, UIFontWeight.Bold),
+                    Size = 11f,
+                    LetterSpacing = 0.06f,
+                    LineHeight = 13f
+            }},
 #endif
 
 #if __ANDROID__
@@ -100,7 +164,7 @@ namespace EOS.UI.Shared.Themes.Themes
             { EOSConstants.NeutralColor6, Color.ParseColor(neutralColor6)},
             { EOSConstants.RippleColor, Color.ParseColor(rippleColor) },
             { EOSConstants.TextSize, 16f },
-            { EOSConstants.SecondaryTextSize, 163f },
+            { EOSConstants.SecondaryTextSize, 16f },
             { EOSConstants.Font, "Fonts/Roboto.ttf" },
             { EOSConstants.SecondaryFont, "Fonts/Roboto.ttf" },
             { EOSConstants.CornerRadius, 20f },
@@ -108,9 +172,7 @@ namespace EOS.UI.Shared.Themes.Themes
             { EOSConstants.ButtonCornerRadius, 60f },
             { EOSConstants.LetterSpacing, 0f },
             { EOSConstants.SecondaryLetterSpacing, 0f },
-            { EOSConstants.LeftImageFocused, Resource.Drawable.AccountCircle },
-            { EOSConstants.LeftImageUnfocused, Resource.Drawable.AccountKey },
-            { EOSConstants.LeftImageDisabled, Resource.Drawable.AccountOff },
+            { EOSConstants.LeftImage, Resource.Drawable.icCalendar },
             { EOSConstants.CalendarImage, Resource.Drawable.icCalendar },
             { EOSConstants.FabProgressPreloaderImage, Resource.Drawable.icPreloader },
             { EOSConstants.CircleProgressShown, true},

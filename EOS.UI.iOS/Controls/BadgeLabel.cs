@@ -8,6 +8,7 @@ using UIFrameworks.Shared.Themes.Helpers;
 using UIFrameworks.Shared.Themes.Interfaces;
 using UIKit;
 using CoreGraphics;
+using EOS.UI.Shared.Themes.DataModels;
 
 namespace EOS.UI.iOS.Controls
 {
@@ -16,48 +17,85 @@ namespace EOS.UI.iOS.Controls
     {
         private UIEdgeInsets _insets;
 
-        private bool _isEOSCustomizationIgnored;
-        public bool IsEOSCustomizationIgnored => _isEOSCustomizationIgnored;
+        public bool IsEOSCustomizationIgnored { get; private set; }
 
+        private FontStyleItem _fontStyle;
+        public FontStyleItem FontStyle
+        {
+            get => _fontStyle;
+            set
+            {
+                _fontStyle = value;
+                SetFontStyle();
+                IsEOSCustomizationIgnored = true;
+            }
+        }
+        
+        public float LetterSpacing
+        {
+            get => FontStyle.LetterSpacing;
+            set
+            {
+                FontStyle.LetterSpacing = value;
+                SetFontStyle();
+                IsEOSCustomizationIgnored = true;
+            }
+        }
+
+        public float TextSize
+        {
+            get => FontStyle?.Size ?? (int)base.Font.PointSize;
+            set
+            {
+                FontStyle.Size = value;
+                SetFontStyle();
+                IsEOSCustomizationIgnored = true;
+            }
+        }
+
+
+        public override UIFont Font
+        {
+            get => FontStyle?.Font ?? base.Font;
+            set
+            {
+                //overrided property, that calls in constructor
+                if (FontStyle == null)
+                {
+                    base.Font = value;
+                    return;
+                }
+
+                FontStyle.Font = value.WithSize(FontStyle.Size);
+                SetFontStyle();
+                IsEOSCustomizationIgnored = true;
+            }
+        }
+
+        public override UIColor TextColor
+        {
+            get => FontStyle?.Color;
+            set
+            {
+                if (FontStyle == null)
+                {
+                    base.TextColor = value;
+                    return;
+                }
+
+                FontStyle.Color = value;
+                SetFontStyle();
+                IsEOSCustomizationIgnored = true;
+            }
+        }
+        
         public int CornerRadius
         {
             get => (int)this.Layer.CornerRadius;
             set
             {
                 this.Layer.CornerRadius = value;
-                _isEOSCustomizationIgnored = true;
-            }
-        }
-
-        private int _letterSpacing;
-        public int LetterSpacing
-        {
-            get => _letterSpacing;
-            set
-            {
-                this.SetLetterSpacing(value);
-                _letterSpacing = value;
-                _isEOSCustomizationIgnored = true;
-            }
-        }
-
-        public int TextSize
-        {
-            get => (int)Font.PointSize;
-            set
-            {
-                this.SetTextSize(value);
-                _isEOSCustomizationIgnored = true;
-            }
-        }
-
-        public override UIFont Font
-        {
-            get => base.Font;
-            set
-            {
-                base.Font = value.WithSize(TextSize);
-                _isEOSCustomizationIgnored = true;
+                IsEOSCustomizationIgnored = true;
             }
         }
 
@@ -67,17 +105,7 @@ namespace EOS.UI.iOS.Controls
             set
             {
                 base.BackgroundColor = value;
-                _isEOSCustomizationIgnored = true;
-            }
-        }
-
-        public override UIColor TextColor
-        {
-            get => base.TextColor;
-            set
-            {
-                base.TextColor = value;
-                _isEOSCustomizationIgnored = true;
+                IsEOSCustomizationIgnored = true;
             }
         }
 
@@ -102,10 +130,10 @@ namespace EOS.UI.iOS.Controls
         {
             this.Text = " ";
             Layer.MasksToBounds = true;
-            _insets = new UIEdgeInsets(0, 15, 0, 15);
+            _insets = new UIEdgeInsets(2, 15, 2, 15);
             Lines = 1;
             LineBreakMode = UILineBreakMode.TailTruncation;
-            _isEOSCustomizationIgnored = false;
+            IsEOSCustomizationIgnored = false;
             UpdateAppearance();
         }
 
@@ -125,7 +153,7 @@ namespace EOS.UI.iOS.Controls
 
         public void ResetCustomization()
         {
-            _isEOSCustomizationIgnored = false;
+            IsEOSCustomizationIgnored = false;
             UpdateAppearance();
         }
 
@@ -138,20 +166,17 @@ namespace EOS.UI.iOS.Controls
             if (!IsEOSCustomizationIgnored)
             {
                 var provider = GetThemeProvider();
-                CornerRadius = provider.GetEOSProperty<int>(this, EOSConstants.CornerRadius);
+                FontStyle = provider.GetEOSProperty<FontStyleItem>(this, EOSConstants.R2C5);
+                CornerRadius = provider.GetEOSProperty<int>(this, EOSConstants.LabelCornerRadius);
                 BackgroundColor = provider.GetEOSProperty<UIColor>(this, EOSConstants.BrandPrimaryColor);
-                Font = provider.GetEOSProperty<UIFont>(this, EOSConstants.Font);
-                TextColor = provider.GetEOSProperty<UIColor>(this, EOSConstants.NeutralColor6);
-                TextSize = provider.GetEOSProperty<int>(this, EOSConstants.TextSize);
-                LetterSpacing = provider.GetEOSProperty<int>(this, EOSConstants.LetterSpacing);
-                _isEOSCustomizationIgnored = false;
+                IsEOSCustomizationIgnored = false;
                 SizeToFit();
             }
         }
 
         public override void DrawText(CGRect rect)
         {
-            rect = new CGRect(rect.X + _insets.Left, rect.Y + _insets.Top,
+            rect = new CGRect(rect.X + _insets.Left, rect.Y - _insets.Top,
                               rect.Width + _insets.Left + _insets.Right, rect.Height + _insets.Top + _insets.Bottom);
             base.DrawText(rect);
         }
@@ -159,9 +184,17 @@ namespace EOS.UI.iOS.Controls
         public override CGRect TextRectForBounds(CGRect bounds, nint numberOfLines)
         {
             var textRect = base.TextRectForBounds(bounds, numberOfLines);
-            var requredRect = new CGRect(textRect.GetMinX() + _insets.Left, textRect.GetMinY() + _insets.Top,
+            var requredRect = new CGRect(textRect.GetMinX() + _insets.Left, textRect.GetMinY() - _insets.Top,
                            textRect.Width + _insets.Left + _insets.Right, textRect.Height + _insets.Bottom + _insets.Top);
             return requredRect;
+        }
+        
+        private void SetFontStyle()
+        {
+            base.Font = this.Font.WithSize(TextSize);
+            this.SetTextSize(TextSize);
+            base.TextColor = this.TextColor;
+            this.SetLetterSpacing(LetterSpacing);
         }
     }
 }

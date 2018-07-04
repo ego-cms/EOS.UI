@@ -195,15 +195,6 @@
     <AndroidResource Include="Resources\drawable\AccountOff.xml" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\Airballoon.xml" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable\Android.xml" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable\Apple.xml" />
-  </ItemGroup>
-  <ItemGroup>
     <AndroidResource Include="Resources\layout\DropDownLayout.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
