@@ -12,6 +12,7 @@ using UIFrameworks.Shared.Themes.Interfaces;
 using EOS.UI.Shared.Themes.Extensions;
 
 using static EOS.UI.iOS.Helpers.Constants;
+using EOS.UI.Shared.Themes.DataModels;
 
 namespace EOS.UI.iOS.Controls
 {
@@ -47,6 +48,55 @@ namespace EOS.UI.iOS.Controls
 
         #region customization
 
+        private FontStyleItem _fontStyle;
+        public FontStyleItem FontStyle
+        {
+            get => _fontStyle;
+            set
+            {
+                _fontStyle = value;
+                SetFontStyle();
+                IsEOSCustomizationIgnored = true;
+            }
+        }
+
+        private FontStyleItem _disabledFontStyle;
+        public FontStyleItem DisabledFontStyle
+        {
+            get => _disabledFontStyle;
+            set
+            {
+                _disabledFontStyle = value;
+                SetDisabledFontStyle();
+                IsEOSCustomizationIgnored = true;
+            }
+        }
+
+        private FontStyleItem _placeholderFontStyle;
+        public FontStyleItem PlaceholderFontStyle
+        {
+            get => _placeholderFontStyle;
+            set
+            {
+                _placeholderFontStyle = value;
+                SetPlaceholderFontStyle();
+                IsEOSCustomizationIgnored = true;
+            }
+        }
+
+
+        private FontStyleItem _placeholderDisabledFontStyle;
+        public FontStyleItem PlaceholderDisabledFontStyle
+        {
+            get => _placeholderDisabledFontStyle;
+            set
+            {
+                _placeholderDisabledFontStyle = value;
+                SetPlaceholderDisabledFontStyle();
+                IsEOSCustomizationIgnored = true;
+            }
+        }
+
         public override bool Enabled
         {
             get => base.Enabled;
@@ -59,36 +109,35 @@ namespace EOS.UI.iOS.Controls
             }
         }
 
-        private int _letterSpacing;
-        public int LetterSpacing
+        public float LetterSpacing
         {
-            get => _letterSpacing;
+            get => FontStyle.LetterSpacing;
             set
             {
-                SetLetterSpacing(value);
-                _letterSpacing = value;
+                FontStyle.LetterSpacing = value;
+                SetFontStyle();
                 IsEOSCustomizationIgnored = true;
             }
         }
 
-        private int _textSize;
-        public int TextSize
+        public float TextSize
         {
-            get => _textSize;
+            get => FontStyle.Size;
             set
             {
-                _textSize = value;
-                SetTextSize(value);
+                FontStyle.Size = value;
+                SetFontStyle();
                 IsEOSCustomizationIgnored = true;
             }
         }
 
         public override UIFont Font
         {
-            get => base.Font;
+            get => FontStyle?.Font ?? base.Font;
             set
             {
-                base.Font = value.WithSize(TextSize);
+                FontStyle.Font = value.WithSize(FontStyle.Size);
+                SetFontStyle();
                 IsEOSCustomizationIgnored = true;
             }
         }
@@ -103,55 +152,47 @@ namespace EOS.UI.iOS.Controls
             }
         }
 
-        private UIColor _textColor;
         public override UIColor TextColor
         {
-            get => _textColor;
+            get => FontStyle?.Color ?? base.TextColor;
             set
             {
+                FontStyle.Color = value;
+                SetFontStyle();
                 IsEOSCustomizationIgnored = true;
-                _textColor = value;
-                if (Enabled)
-                    base.TextColor = value;
             }
         }
 
-        private UIColor _textColorDisabled;
         public UIColor TextColorDisabled
         {
-            get => _textColorDisabled;
+            get => DisabledFontStyle.Color;
             set
             {
+                DisabledFontStyle.Color = value;
+                SetDisabledFontStyle();
                 IsEOSCustomizationIgnored = true;
-                _textColorDisabled = value;
-                if (!Enabled)
-                    base.TextColor = value;
             }
         }
 
-        private UIColor _placeholderColor;
         public UIColor PlaceholderColor
         {
-            get => _placeholderColor;
+            get => PlaceholderFontStyle.Color;
             set
             {
+                PlaceholderFontStyle.Color = value;
+                SetPlaceholderFontStyle();
                 IsEOSCustomizationIgnored = true;
-                _placeholderColor = value;
-                if (Enabled && Placeholder != null)
-                    AttributedPlaceholder = new NSAttributedString(Placeholder, null, value);
             }
         }
 
-        private UIColor _placeholderColorDisabled;
         public UIColor PlaceholderColorDisabled
         {
-            get => _placeholderColorDisabled;
+            get => PlaceholderDisabledFontStyle.Color;
             set
             {
+                PlaceholderDisabledFontStyle.Color = value;
+                SetPlaceholderDisabledFontStyle();
                 IsEOSCustomizationIgnored = true;
-                _placeholderColorDisabled = value;
-                if (!Enabled && Placeholder != null)
-                    AttributedPlaceholder = new NSAttributedString(Placeholder, null, value);
             }
         }
 
@@ -352,7 +393,7 @@ namespace EOS.UI.iOS.Controls
             UpdateUnderlineColor();
         }
 
-        private void SetLetterSpacing(int spacing)
+        private void SetLetterSpacing(float spacing)
         {
             if (AttributedText == null)
                 Text = string.Empty;
@@ -369,7 +410,7 @@ namespace EOS.UI.iOS.Controls
             AttributedPlaceholder = attributedPlaceholder;
         }
 
-        private void SetTextSize(int size)
+        private void SetTextSize(float size)
         {
             if (AttributedText == null)
                 Text = string.Empty;
@@ -472,13 +513,10 @@ namespace EOS.UI.iOS.Controls
             if (!IsEOSCustomizationIgnored)
             {
                 var provider = GetThemeProvider();
-                LetterSpacing = provider.GetEOSProperty<int>(this, EOSConstants.LetterSpacing);
-                TextSize = provider.GetEOSProperty<int>(this, EOSConstants.TextSize);
-                Font = provider.GetEOSProperty<UIFont>(this, EOSConstants.Font);
-                TextColor = provider.GetEOSProperty<UIColor>(this, EOSConstants.NeutralColor1);
-                TextColorDisabled = provider.GetEOSProperty<UIColor>(this, EOSConstants.NeutralColor3);
-                PlaceholderColor = provider.GetEOSProperty<UIColor>(this, EOSConstants.NeutralColor2);
-                PlaceholderColorDisabled = provider.GetEOSProperty<UIColor>(this, EOSConstants.NeutralColor3);
+                FontStyle = provider.GetEOSProperty<FontStyleItem>(this, EOSConstants.R4C2);
+                PlaceholderFontStyle = provider.GetEOSProperty<FontStyleItem>(this, EOSConstants.R4C3);
+                PlaceholderDisabledFontStyle = provider.GetEOSProperty<FontStyleItem>(this, EOSConstants.R4C4);
+                DisabledFontStyle = provider.GetEOSProperty<FontStyleItem>(this, EOSConstants.R4C4);
                 LeftImage = UIImage.FromBundle(provider.GetEOSProperty<string>(this, EOSConstants.LeftImage));
                 NormalIconColor = provider.GetEOSProperty<UIColor>(this, EOSConstants.NeutralColor2);
                 NormalUnderlineColor = provider.GetEOSProperty<UIColor>(this, EOSConstants.NeutralColor3);
@@ -487,21 +525,21 @@ namespace EOS.UI.iOS.Controls
                 FocusedColor = provider.GetEOSProperty<UIColor>(this, EOSConstants.BrandPrimaryColor);
                 DisabledColor = provider.GetEOSProperty<UIColor>(this, EOSConstants.NeutralColor3);
                 _clearImage = UIImage.FromBundle(provider.GetEOSProperty<string>(this, EOSConstants.ClearInputImage));
-                _rightImageView.Image = UIImage.FromBundle(provider.GetEOSProperty<string>(this, EOSConstants.WarningInputImage));;
+                _rightImageView.Image = UIImage.FromBundle(provider.GetEOSProperty<string>(this, EOSConstants.WarningInputImage)); ;
                 _rightImageView.TintColor = _warningColor;
                 _clearImageColor = provider.GetEOSProperty<UIColor>(this, EOSConstants.NeutralColor3);
                 IsEOSCustomizationIgnored = false;
             }
         }
-        
+
         private void UpdateClearButtonColor()
         {
-            var button = (UIButton) Subviews.SingleOrDefault(s => s is UIButton);
+            var button = (UIButton)Subviews.SingleOrDefault(s => s is UIButton);
             if (button == null || button.ImageView.Image == _clearImage)
                 return;
             button.SetImage(_clearImage, UIControlState.Normal);
             button.SetImage(_clearImage, UIControlState.Highlighted);
-            button.ImageEdgeInsets = new UIEdgeInsets(-1,-1,-1,-1);
+            button.ImageEdgeInsets = new UIEdgeInsets(-1, -1, -1, -1);
             button.ImageView.TintColor = _clearImageColor;
         }
 
@@ -552,7 +590,7 @@ namespace EOS.UI.iOS.Controls
                     }
                     else
                     {
-                        if(!String.IsNullOrEmpty(Text) && !String.IsNullOrWhiteSpace(Text))
+                        if (!String.IsNullOrEmpty(Text) && !String.IsNullOrWhiteSpace(Text))
                         {
                             _underlineLayer.BorderColor = PopulatedUnderlineColor.CGColor;
                         }
@@ -573,6 +611,32 @@ namespace EOS.UI.iOS.Controls
             }
         }
 
+        private void SetFontStyle()
+        {
+            base.Font = Font.WithSize(TextSize);
+            this.SetTextSize(TextSize);
+            if (Enabled)
+                base.TextColor = FontStyle.Color;
+            this.SetLetterSpacing(FontStyle.LetterSpacing);
+        }
+
+        private void SetPlaceholderFontStyle()
+        {
+            if (Enabled && Placeholder != null)
+                AttributedPlaceholder = new NSAttributedString(Placeholder, null, PlaceholderColor);
+        }
+
+        private void SetPlaceholderDisabledFontStyle()
+        {
+            if (!Enabled && Placeholder != null)
+                AttributedPlaceholder = new NSAttributedString(Placeholder, null, PlaceholderColorDisabled);
+        }
+
+        private void SetDisabledFontStyle()
+        {
+            if (!Enabled)
+                base.TextColor = TextColorDisabled;
+        }
         #endregion
     }
 }
