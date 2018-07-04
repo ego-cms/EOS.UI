@@ -39,16 +39,16 @@ namespace EOS.UI.Android.Controls
             get => _progress;
             set
             {
-                if (value > 100)
+                if(value > 100)
                     return;
                 ((Activity)Context).RunOnUiThread(() =>
                 {
                     _progress = value;
-                    if (_checkmarkImage.Visibility == ViewStates.Visible)
+                    if(_checkmarkImage.Visibility == ViewStates.Visible)
                         _checkmarkImage.Visibility = ViewStates.Invisible;
                     _progressBar.Progress = _progress;
                     _percentText.Text = $"{value} %";
-                    if (_progress == 100)
+                    if(_progress == 100)
                     {
                         ShowCheckmark();
                     }
@@ -244,7 +244,7 @@ namespace EOS.UI.Android.Controls
 
         public void UpdateAppearance()
         {
-            if (!IsEOSCustomizationIgnored)
+            if(!IsEOSCustomizationIgnored)
             {
                 var provider = GetThemeProvider();
                 FontStyle = GetThemeProvider().GetEOSProperty<FontStyleItem>(this, EOSConstants.R1C1);
@@ -265,9 +265,9 @@ namespace EOS.UI.Android.Controls
 
         public override bool OnTouchEvent(MotionEvent e)
         {
-            if (e.Action == MotionEventActions.Up || e.Action == MotionEventActions.Cancel)
+            if(e.Action == MotionEventActions.Up || e.Action == MotionEventActions.Cancel)
             {
-                if (!_isRunning)
+                if(!_isRunning)
                 {
                     Started?.Invoke(this, EventArgs.Empty);
                     _isRunning = true;
