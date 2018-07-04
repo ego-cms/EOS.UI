@@ -200,6 +200,7 @@ namespace EOS.UI.iOS.Sandbox
                         case SimpleButtonTypeEnum.Simple:
                             containerView.RemoveConstraints(containerView.Constraints);
                             containerView.AddConstraints(_defaultConstraints);
+                            _simpleButton.SetTitle(ControlNames.SimpleButton, UIControlState.Normal);
                             break;
                         case SimpleButtonTypeEnum.FullBleed:
                             containerView.RemoveConstraints(containerView.Constraints);
@@ -212,6 +213,7 @@ namespace EOS.UI.iOS.Sandbox
                             _simpleButton.ContentEdgeInsets = new UIEdgeInsets();
                             _simpleButton.CornerRadius = 0;
                             _simpleButton.ShadowConfig = null;
+                            _simpleButton.SetTitle(ControlNames.FullBleedButton, UIControlState.Normal);
                             break;
                     }
                 },
@@ -311,6 +313,7 @@ namespace EOS.UI.iOS.Sandbox
             resetButton.TouchUpInside += (sender, e) =>
             {
                 _simpleButton.ResetCustomization();
+                _simpleButton.SetTitle(ControlNames.SimpleButton, UIControlState.Normal);
                 containerView.RemoveConstraints(containerView.Constraints);
                 containerView.AddConstraints(_defaultConstraints);
                 ResetFields();
