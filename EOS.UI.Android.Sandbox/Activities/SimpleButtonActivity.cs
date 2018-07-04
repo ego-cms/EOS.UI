@@ -54,7 +54,7 @@ namespace EOS.UI.Android.Sandbox.Activities
 
             _buttonTypeDropDown.Visibility = V.ViewStates.Visible;
             _buttonTypeDropDown.Name = Fields.ButtonType;
-            _buttonTypeDropDown.SetupAdapter(Buttons.ButtonTypeollection.Select(item => item.Key).ToList());
+            _buttonTypeDropDown.SetupAdapter(Buttons.SimpleButtonTypeCollection.Select(item => item.Key).ToList());
             _buttonTypeDropDown.ItemSelected += ButtonTypeItemSelected;
 
             _themeDropDown.Name = Fields.Theme;

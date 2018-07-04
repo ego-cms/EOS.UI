@@ -311,12 +311,20 @@ namespace EOS.UI.Android.Sandbox.Helpers
         public static class Buttons
         {
             public const string Simple = "Simple button";
+            public const string CTA = "Call to action";
             public const string FullBleed = "Full bleed button";
 
-            public static Dictionary<string, int> ButtonTypeollection = new Dictionary<string, int>()
+            public static Dictionary<string, int> SimpleButtonTypeCollection = new Dictionary<string, int>()
             {
                 { string.Empty, 0 },
                 { Simple, 1 },
+                { FullBleed, 2 },
+            };
+
+            public static Dictionary<string, int> CTAButtonTypeCollection = new Dictionary<string, int>()
+            {
+                { string.Empty, 0 },
+                { CTA, 1 },
                 { FullBleed, 2 },
             };
         }

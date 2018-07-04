@@ -12,6 +12,7 @@ using UIFrameworks.Shared.Themes.Helpers;
 using UIFrameworks.Shared.Themes.Interfaces;
 using static Android.Widget.CompoundButton;
 using static EOS.UI.Android.Sandbox.Helpers.Constants;
+using V = Android.Views;
 
 namespace EOS.UI.Android.Sandbox.Activities
 {
@@ -33,6 +34,7 @@ namespace EOS.UI.Android.Sandbox.Activities
         private Button _resetButton;
         private Switch _disableSwitch;
         private List<EOSSandboxDropDown> _dropDowns;
+        private EOSSandboxDropDown _buttonTypeDropDown;
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
@@ -65,6 +67,7 @@ namespace EOS.UI.Android.Sandbox.Activities
             _rippleColorDropDown = FindViewById<EOSSandboxDropDown>(Resource.Id.rippleColorDropDown);
             _resetButton = FindViewById<Button>(Resource.Id.buttonResetCustomization);
             _disableSwitch = FindViewById<Switch>(Resource.Id.switchDisabled);
+            _buttonTypeDropDown = FindViewById<EOSSandboxDropDown>(Resource.Id.buttonTypeDropDown);
 
             _dropDowns = new List<EOSSandboxDropDown>
             {
@@ -80,6 +83,11 @@ namespace EOS.UI.Android.Sandbox.Activities
                 _cornerRadiusDropDown,
                 _rippleColorDropDown
             };
+
+            _buttonTypeDropDown.Visibility = V.ViewStates.Visible;
+            _buttonTypeDropDown.Name = Fields.ButtonType;
+            _buttonTypeDropDown.SetupAdapter(Buttons.CTAButtonTypeCollection.Select(item => item.Key).ToList());
+            _buttonTypeDropDown.ItemSelected += ButtonTypeItemSelected;
 
             _themeDropDown.Name = Fields.Theme;
             _themeDropDown.SetupAdapter(ThemeTypes.ThemeCollection.Select(item => item.Key).ToList());
@@ -220,15 +228,45 @@ namespace EOS.UI.Android.Sandbox.Activities
                 _themeDropDown.SetSpinnerSelection(2);
         }
 
-        private void ResetCustomValues()
+        private void ResetCustomValues(bool ignogeButtonType = false)
         {
             _CTAButton.ResetCustomization();
             _dropDowns.Except(new[] { _themeDropDown }).ToList().ForEach(dropDown => dropDown.SetSpinnerSelection(0));
+            if(!ignogeButtonType)
+                _buttonTypeDropDown.SetSpinnerSelection(1);
         }
 
         public void OnCheckedChanged(CompoundButton buttonView, bool isChecked)
         {
             _CTAButton.Enabled = isChecked;
+        }
+
+        private void ButtonTypeItemSelected(int position)
+        {
+            switch(position)
+            {
+                case 0:
+                case 1:
+                    ResetCustomValues(true);
+                    var layoutParameters = new LinearLayout.LayoutParams(V.ViewGroup.LayoutParams.WrapContent, V.ViewGroup.LayoutParams.WrapContent);
+                    layoutParameters.Gravity = V.GravityFlags.Center;
+                    _CTAButton.LayoutParameters = layoutParameters;
+                    var denisty = Resources.DisplayMetrics.Density;
+                    _CTAButton.SetPadding(
+                        (int)(SimpleButtonConstants.LeftPadding * denisty),
+                        (int)(SimpleButtonConstants.TopPadding * denisty),
+                        (int)(SimpleButtonConstants.RightPadding * denisty),
+                        (int)(SimpleButtonConstants.BottomPadding * denisty));
+                    _CTAButton.Text = Buttons.CTA;
+                    break;
+                case 2:
+                    ResetCustomValues(true);
+                    _CTAButton.CornerRadius = 0;
+                    _CTAButton.SetPadding(0, 0, 0, 0);
+                    _CTAButton.LayoutParameters = new LinearLayout.LayoutParams(V.ViewGroup.LayoutParams.MatchParent, V.ViewGroup.LayoutParams.WrapContent);
+                    _CTAButton.Text = Buttons.FullBleed;
+                    break;
+            }
         }
     }
 }
