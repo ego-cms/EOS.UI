@@ -257,13 +257,16 @@ namespace EOS.UI.Android.Controls
 
         private void Initialize(IAttributeSet attrs = null)
         {
+            StateListAnimator = AnimatorInflater.LoadStateListAnimator(Context, Resource.Animation.ButtonStateList);
             _rotateDrawable = CreateRotateDrawable();
-            var denisty = Resources.DisplayMetrics.Density;
             SetAllCaps(false);
             SetLines(1);
             Ellipsize = TextUtils.TruncateAt.End;
+            ClipToOutline = false;
+
             if(attrs != null)
                 InitializeAttributes(attrs);
+
             UpdateAppearance();
             Background = CreateRippleDrawable(BackgroundColor);
         }
