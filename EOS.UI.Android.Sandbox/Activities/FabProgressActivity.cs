@@ -36,6 +36,7 @@ namespace EOS.UI.Android.Sandbox.Activities
         int _shadowOffsetX; 
         int _shadowOffsetY;
         int _shadowBlur;
+        float _shadowAlpha = 1.0f;
         Color _shadowColor;
 
         protected override void OnCreate(Bundle savedInstanceState)
@@ -54,6 +55,7 @@ namespace EOS.UI.Android.Sandbox.Activities
             var shadowOffsetY = FindViewById<EOSSandboxEditText>(Resource.Id.shadowOffsetY);
             var shadowBlur = FindViewById<EOSSandboxEditText>(Resource.Id.shadowBlur);
             var shadowColorDropDown = FindViewById<EOSSandboxDropDown>(Resource.Id.shadowColorDropDown);
+            var shadowOpacityDropDown = FindViewById<EOSSandboxDropDown>(Resource.Id.shadowOpacityDropDown);
 
             var sizeDropDown = FindViewById<EOSSandboxDropDown>(Resource.Id.sizeDropDown);
             var stateSwitch = FindViewById<Switch>(Resource.Id.stateSwitch);
@@ -79,6 +81,7 @@ namespace EOS.UI.Android.Sandbox.Activities
                 backgroundColorDropDown,
                 //shadowDropDown,
                 shadowColorDropDown,
+                shadowOpacityDropDown,
                 sizeDropDown
             };
 
@@ -150,6 +153,22 @@ namespace EOS.UI.Android.Sandbox.Activities
                         fab.ShadowConfig = null;
                     }
                     _shadowColor = Colors.ColorsCollection.ElementAt(position).Value;
+                    fab.ShadowConfig = CreateShadowConfig();
+                    fab.StopProgressAnimation();
+                }
+            };
+
+            shadowOpacityDropDown.Name = Fields.ShadowOpacity;
+            shadowOpacityDropDown.SetupAdapter(Android.Sandbox.Helpers.Constants.ShadowOpacityValues.ToList());
+            shadowOpacityDropDown.ItemSelected += (position) =>
+            {
+                if (position > 0)
+                {
+                    if (fab.ShadowConfig != null)
+                    {
+                        fab.ShadowConfig = null;
+                    }
+                    _shadowAlpha = (float)Android.Sandbox.Helpers.Constants.ShadowOpacityValues.ElementAt(position);
                     fab.ShadowConfig = CreateShadowConfig();
                     fab.StopProgressAnimation();
                 }
@@ -250,11 +269,21 @@ namespace EOS.UI.Android.Sandbox.Activities
 
         private ShadowConfig CreateShadowConfig()
         {
+            Color resultColor;
+            if (_shadowAlpha == 1)
+            {
+                resultColor = _shadowColor;
+            }
+            else
+            {
+                resultColor = _shadowColor;
+                resultColor.A = (byte)(255 * _shadowAlpha);
+            }
             return new ShadowConfig
             {
                 Offset = new Point(_shadowOffsetX, _shadowOffsetY),
                 Blur = _shadowBlur,
-                Color = _shadowColor
+                Color = resultColor
             };
         }
 
@@ -308,7 +337,7 @@ namespace EOS.UI.Android.Sandbox.Activities
                     intent.PutExtra(ShadowOffsetXKey, _shadowOffsetX);
                     intent.PutExtra(ShadowOffsetYKey, _shadowOffsetY);
                     intent.PutExtra(ShadowBlurKey, _shadowBlur);
-                    intent.PutExtra(ShadowColorAKey, _shadowColor.A);
+                    intent.PutExtra(ShadowColorAKey, (byte)(255 * _shadowAlpha));
                     intent.PutExtra(ShadowColorRKey, _shadowColor.R);
                     intent.PutExtra(ShadowColorGKey, _shadowColor.G);
                     intent.PutExtra(ShadowColorBKey, _shadowColor.B);

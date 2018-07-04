@@ -71,11 +71,11 @@ namespace EOS.UI.Shared.Themes.Themes
                 Blur = 12,
                 Spread = 1
             }},
-            { EOSConstants.SimpleButtonShadow, new ShadowConfig(){
-                        Color = UIColor.Black.CGColor,
-                        Offset = new CGSize(0, 12),
-                        Radius = 5,
-                        Opacity = 0.2f
+            { EOSConstants.SimpleButtonShadow, new ShadowConfig(){ 
+                Color = ColorExtension.FromHex("#000", 0.2f),
+                Offset = new CGPoint(0, 12),
+                Blur = 5,
+                Spread = 2
             }},
             { EOSConstants.BorderWidth, 2 },
             { EOSConstants.SectionTitle, "Light section" },

@@ -18,6 +18,7 @@ namespace EOS.UI.iOS.Sandbox
         public const string Identifier = "FabProgressView";
         private List<EOSSandboxDropDown> _dropDowns;
         private FabProgress _fab;
+        private double? _opacity;
 
         public FabProgressView(IntPtr handle) : base(handle)
         {
@@ -105,8 +106,8 @@ namespace EOS.UI.iOS.Sandbox
                 {
                     Color = shadow.Color,
                     Offset = shadow.Offset,
-                    Opacity = shadow.Opacity,
-                    Radius = shadow.Radius
+                    Spread = shadow.Spread,
+                    Blur = shadow.Blur
                 },
                 Fields.Shadow,
                 rect);
@@ -115,7 +116,14 @@ namespace EOS.UI.iOS.Sandbox
                 color =>
                 {
                     var config = _fab.ShadowConfig;
-                    config.Color = color.CGColor;
+                    if (_opacity != null)
+                    {
+                        config.Color = config.Color.ColorWithAlpha((nfloat)_opacity); 
+                    }
+                    else
+                    {
+                        config.Color = color;
+                    }
                     _fab.ShadowConfig = config;
                 },
                 Fields.ShadowColor,
@@ -126,7 +134,7 @@ namespace EOS.UI.iOS.Sandbox
                 offset =>
                 {
                     var config = _fab.ShadowConfig;
-                    config.Offset = new CGSize(offset, config.Offset.Height);
+                    config.Offset = new CGPoint(offset, config.Offset.Y);
                     _fab.ShadowConfig = config;
                 },
                 Fields.ShadowOffsetX,
@@ -138,7 +146,7 @@ namespace EOS.UI.iOS.Sandbox
                 offset =>
                 {
                     var config = _fab.ShadowConfig;
-                    config.Offset = new CGSize(config.Offset.Width, offset);
+                    config.Offset = new CGPoint(config.Offset.X, offset);
                     _fab.ShadowConfig = config;
                 },
                 Fields.ShadowOffsetY,
@@ -146,10 +154,10 @@ namespace EOS.UI.iOS.Sandbox
 
             shadowRadiusDropDown.InitSource(
                 ShadowRadiusValues,
-                radius =>
+                blur =>
                 {
                     var config = _fab.ShadowConfig;
-                    config.Radius = radius;
+                    config.Blur = blur;
                     _fab.ShadowConfig = config;
                 },
                 Fields.ShadowRadius,
@@ -160,7 +168,8 @@ namespace EOS.UI.iOS.Sandbox
                 opacity =>
                 {
                     var config = _fab.ShadowConfig;
-                    config.Opacity = (float)opacity;
+                    _opacity = opacity;
+                    config.Color = config.Color.ColorWithAlpha((nfloat)opacity); 
                     _fab.ShadowConfig = config;
                 },
                 Fields.ShadowOpacity,
@@ -175,6 +184,8 @@ namespace EOS.UI.iOS.Sandbox
             {
                 if (_fab.InProgress)
                     return;
+
+                _opacity = null;
                 _fab.ResetCustomization();
                 _dropDowns.Except(new[] { themeDropDown }).ToList().ForEach(dropDown => dropDown.ResetValue());
                 UpdateFrame();

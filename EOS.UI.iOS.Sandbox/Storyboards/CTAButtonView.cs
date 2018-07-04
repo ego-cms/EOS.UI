@@ -228,7 +228,7 @@ namespace EOS.UI.iOS.Sandbox
                 color =>
                 {
                     var config = _simpleButton.ShadowConfig;
-                    config.Color = color.CGColor;
+                    config.Color = color;
                     _simpleButton.ShadowConfig = config;
                 },
                 Fields.ShadowColor,
@@ -242,7 +242,7 @@ namespace EOS.UI.iOS.Sandbox
                 offset =>
                 {
                     var config = _simpleButton.ShadowConfig;
-                    config.Offset = new CGSize(offset, config.Offset.Height);
+                    config.Offset = new CGPoint(offset, config.Offset.Y);
                     _simpleButton.ShadowConfig = config;
                 },
                 Fields.ShadowOffsetX,
@@ -256,7 +256,7 @@ namespace EOS.UI.iOS.Sandbox
                 offset =>
                 {
                     var config = _simpleButton.ShadowConfig;
-                    config.Offset = new CGSize(config.Offset.Width, offset);
+                    config.Offset = new CGPoint(config.Offset.X, offset);
                     _simpleButton.ShadowConfig = config;
                 },
                 Fields.ShadowOffsetY,
@@ -267,10 +267,10 @@ namespace EOS.UI.iOS.Sandbox
         {
             shadowRadiusDropDown.InitSource(
                 ShadowRadiusValues,
-                radius =>
+                blur =>
                 {
                     var config = _simpleButton.ShadowConfig;
-                    config.Radius = radius;
+                    config.Blur = blur;
                     _simpleButton.ShadowConfig = config;
                 },
                 Fields.ShadowRadius,
@@ -281,10 +281,10 @@ namespace EOS.UI.iOS.Sandbox
         {
             shadowOpacityDropDown.InitSource(
                 ShadowOpacityValues,
-                opacity =>
+                spread =>
                 {
                     var config = _simpleButton.ShadowConfig;
-                    config.Opacity = (float)opacity;
+                    config.Spread = (int)spread;
                     _simpleButton.ShadowConfig = config;
                 },
                 Fields.ShadowOpacity,

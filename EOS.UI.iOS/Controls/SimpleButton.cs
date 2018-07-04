@@ -410,10 +410,10 @@ namespace EOS.UI.iOS.Controls
         {
             if (config != null)
             {
-                Layer.ShadowColor = config.Color;
-                Layer.ShadowOffset = config.Offset;
-                Layer.ShadowRadius = config.Radius;
-                Layer.ShadowOpacity = config.Opacity;
+                Layer.ShadowColor = config.Color.CGColor;
+                Layer.ShadowOffset = new CGSize(config.Offset);
+                Layer.ShadowRadius = config.Blur / 2;
+                Layer.ShadowOpacity = (float)config.Color.CGColor.Alpha;
             }
             else
             {

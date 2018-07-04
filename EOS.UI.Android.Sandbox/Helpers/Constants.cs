@@ -40,7 +40,8 @@ namespace EOS.UI.Android.Sandbox.Helpers
             public static string PressedColor = "Pressed color";
             public static string Size = "Size";
             public static string Shadow = "Shadow";
-            public static string ShadowColor = "ShadowColor";
+            public static string ShadowColor = "Shadow Color";
+            public static string ShadowOpacity = "Shadow Opacity";
             public static string Color = "Color";
             public static string AlternativeColor = "Alternative color";
             public static string FillColor = "Fill color";
@@ -382,5 +383,6 @@ namespace EOS.UI.Android.Sandbox.Helpers
             };
         }
 
+        public static List<double> ShadowOpacityValues = new List<double>() { 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0 };
     }
 }
