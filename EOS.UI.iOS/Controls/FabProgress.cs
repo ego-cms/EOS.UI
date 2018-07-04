@@ -74,7 +74,7 @@ namespace EOS.UI.iOS.Controls
                 base.Enabled = value;
                 base.BackgroundColor = value ? BackgroundColor : DisabledBackgroundColor;
                 base.ImageView.TintColor = value ? 
-                    GetThemeProvider().GetEOSProperty<UIColor>(this, EOSConstants.NeutralColor6) :
+                    GetThemeProvider().GetEOSProperty<UIColor>(this, EOSConstants.FabIconColor) :
                     GetThemeProvider().GetEOSProperty<UIColor>(this, EOSConstants.NeutralColor3);
 
                 SetShadowConfig(Enabled ? _shadowConfig : null);
@@ -166,7 +166,7 @@ namespace EOS.UI.iOS.Controls
             _rotationAnimation.Cumulative = true;
             _rotationAnimation.RepeatCount = Int32.MaxValue;
             UpdateAppearance();
-            ImageView.TintColor = UIColor.White;
+            ImageView.TintColor = GetThemeProvider().GetEOSProperty<UIColor>(this, EOSConstants.FabIconColor);
         }
 
         private void SetShadowConfig(ShadowConfig config)

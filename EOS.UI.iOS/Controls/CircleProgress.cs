@@ -24,8 +24,8 @@ namespace EOS.UI.iOS
         private const int _dotSize = 1;
         private CAShapeLayer _circleLayer;
         private CAShapeLayer _fillCircleLayer;
-        private CAShapeLayer _progressbarEndDotLayer;
-        private CAShapeLayer _progressbarStartDotLayer;
+        private CAShapeLayer _endDotLayer;
+        private CAShapeLayer _startDotLayer;
         private UIBezierPath _startDotPath;
 
         public event EventHandler Started;
@@ -71,10 +71,10 @@ namespace EOS.UI.iOS
                 if (_circleLayer != null)
                 {
                     _circleLayer.StrokeColor = _color.CGColor;
-                    _progressbarEndDotLayer.StrokeColor = _color.CGColor;
-                    _progressbarEndDotLayer.FillColor = _color.CGColor;
-                    _progressbarStartDotLayer.StrokeColor = _color.CGColor;
-                    _progressbarStartDotLayer.FillColor = _color.CGColor;
+                    _endDotLayer.StrokeColor = _color.CGColor;
+                    _endDotLayer.FillColor = _color.CGColor;
+                    _startDotLayer.StrokeColor = _color.CGColor;
+                    _startDotLayer.FillColor = _color.CGColor;
                 }
             }
         }
@@ -240,20 +240,20 @@ namespace EOS.UI.iOS
             _fillCircleLayer.Path = circlePath.CGPath;
             circleView.Transform = CGAffineTransform.MakeRotation(_rotatienAngle);
 
-            _progressbarEndDotLayer = new CAShapeLayer();
-            _progressbarEndDotLayer.FillColor = UIColor.Clear.CGColor;
-            _progressbarEndDotLayer.StrokeColor = UIColor.Clear.CGColor;
-            _progressbarEndDotLayer.LineWidth = 1;
+            _endDotLayer = new CAShapeLayer();
+            _endDotLayer.FillColor = UIColor.Clear.CGColor;
+            _endDotLayer.StrokeColor = UIColor.Clear.CGColor;
+            _endDotLayer.LineWidth = 1;
 
-            _progressbarStartDotLayer = new CAShapeLayer();
-            _progressbarStartDotLayer.FillColor = UIColor.Clear.CGColor;
-            _progressbarStartDotLayer.StrokeColor = UIColor.Clear.CGColor;
-            _progressbarStartDotLayer.LineWidth = 1;
+            _startDotLayer = new CAShapeLayer();
+            _startDotLayer.FillColor = UIColor.Clear.CGColor;
+            _startDotLayer.StrokeColor = UIColor.Clear.CGColor;
+            _startDotLayer.LineWidth = 1;
 
             circleView.Layer.AddSublayer(_fillCircleLayer);
             circleView.Layer.AddSublayer(_circleLayer);
-            circleView.Layer.AddSublayer(_progressbarEndDotLayer);
-            circleView.Layer.AddSublayer(_progressbarStartDotLayer);
+            circleView.Layer.AddSublayer(_endDotLayer);
+            circleView.Layer.AddSublayer(_startDotLayer);
 
             var radius = circleView.Frame.Width / 2;
             var arcPath = new UIBezierPath();
@@ -265,7 +265,15 @@ namespace EOS.UI.iOS
 
         private void RedrawCircle()
         {
-            _progressbarStartDotLayer.Path = _startDotPath.CGPath;
+            if (Progress != 0)
+            {
+                _startDotLayer.Path = _startDotPath.CGPath;
+            }
+            else
+            {
+                ClearPathes();
+                return;
+            }
 
             var endAngle = _360angle * (Progress / 100.0);
             var radius = circleView.Frame.Width / 2;
@@ -277,7 +285,7 @@ namespace EOS.UI.iOS
             var y = circlePath.CurrentPoint.Y - _dotOffset;
             var roundPath = UIBezierPath.FromRoundedRect(new CGRect(x, y, _dotSize, _dotSize), _dotOffset);
 
-            _progressbarEndDotLayer.Path = roundPath.CGPath;
+            _endDotLayer.Path = roundPath.CGPath;
             _circleLayer.Path = circlePath.CGPath;
         }
 
@@ -285,13 +293,20 @@ namespace EOS.UI.iOS
         {
             Finished?.Invoke(this, EventArgs.Empty);
             imageView.Hidden = false;
-            _circleLayer.Path = null;
+            ClearPathes();
             _isRunnung = false;
         }
 
         private void SetFontStyle()
         {
             percentLabel.Font = Font.WithSize(TextSize);
+        }
+
+        private void ClearPathes()
+        {
+            _startDotLayer.Path = null;
+            _endDotLayer.Path = null;
+            _circleLayer.Path = null;
         }
     }
 }

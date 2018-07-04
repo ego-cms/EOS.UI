@@ -60,6 +60,8 @@ namespace EOS.UI.Shared.Themes.Themes
             { EOSConstants.LeftImage, "icCalendar" },
             { EOSConstants.CalendarImage, "icCalendar"},
             { EOSConstants.FabProgressPreloaderImage, "icPreloader"},
+            //should always be white
+            { EOSConstants.FabIconColor, ColorExtension.FromHex(neutralColor6)},
             { EOSConstants.WarningInputImage, "icWarning"},
             { EOSConstants.ClearInputImage, "icClear"},
             { EOSConstants.FabProgressSize, 52},

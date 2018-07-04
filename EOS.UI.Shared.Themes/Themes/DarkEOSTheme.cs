@@ -61,6 +61,8 @@ namespace EOS.UI.Shared.Themes.Themes
             { EOSConstants.SecondaryLetterSpacing, 2 },
             { EOSConstants.LeftImage, "icCalendar" },
             { EOSConstants.CalendarImage, "icCalendar"},
+            //should always be white
+            { EOSConstants.FabIconColor, ColorExtension.FromHex(neutralColor1)},
             { EOSConstants.FabProgressPreloaderImage, "icPreloader"},
             { EOSConstants.WarningInputImage, "icWarning"},
             { EOSConstants.ClearInputImage, "icClear"},
