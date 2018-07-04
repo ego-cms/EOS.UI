@@ -5,6 +5,7 @@ using Android.Support.V7.Widget;
 using Android.Views;
 using Android.Widget;
 using EOS.UI.Android.Controls;
+using EOS.UI.Shared.Themes.DataModels;
 using EOS.UI.Shared.Themes.Helpers;
 using EOS.UI.Shared.Themes.Interfaces;
 using UIFrameworks.Android.Themes;
@@ -35,6 +36,8 @@ namespace EOS.UI.Android.Components
             {
                 SectionAction?.Invoke();
             };
+
+            UpdateAppearance();
         }
 
         #endregion
@@ -69,6 +72,7 @@ namespace EOS.UI.Android.Components
             set
             {
                 _titleLabel.TextSize = value;
+                TitleFontStyle.Size = value;
                 IsEOSCustomizationIgnored = true;
             }
         }
@@ -79,6 +83,7 @@ namespace EOS.UI.Android.Components
             set
             {
                 _actionButton.TextSize = value;
+                ButtonFontStyle.Size = value;
                 IsEOSCustomizationIgnored = true;
             }
         }
@@ -89,6 +94,7 @@ namespace EOS.UI.Android.Components
             set
             {
                 _titleLabel.LetterSpacing = value;
+                TitleFontStyle.LetterSpacing = value;
                 IsEOSCustomizationIgnored = true;
             }
         }
@@ -99,6 +105,7 @@ namespace EOS.UI.Android.Components
             set
             {
                 _actionButton.LetterSpacing = value;
+                ButtonFontStyle.LetterSpacing = value;
                 IsEOSCustomizationIgnored = true;
             }
         }
@@ -109,6 +116,7 @@ namespace EOS.UI.Android.Components
             set
             {
                 _titleLabel.Typeface = value;
+                TitleFontStyle.Typeface = value;
                 IsEOSCustomizationIgnored = true;
             }
         }
@@ -119,29 +127,28 @@ namespace EOS.UI.Android.Components
             set
             {
                 _actionButton.Typeface = value;
+                ButtonFontStyle.Typeface = value;
                 IsEOSCustomizationIgnored = true;
             }
         }
 
-        private Color _sectionNameColor;
         public Color SectionNameColor
         {
-            get => _sectionNameColor;
+            get => TitleFontStyle.Color;
             set
             {
-                _sectionNameColor = value;
+                TitleFontStyle.Color = value;
                 _titleLabel.TextColor = value;
                 IsEOSCustomizationIgnored = true;
             }
         }
 
-        private Color _buttonNameColor;
         public Color ButtonNameColor
         {
-            get => _buttonNameColor;
+            get => ButtonFontStyle.Color;
             set
             {
-                _buttonNameColor = value;
+                ButtonFontStyle.Color = value;
                 _actionButton.SetTextColor(value);
                 IsEOSCustomizationIgnored = true;
             }
@@ -224,6 +231,46 @@ namespace EOS.UI.Android.Components
             }
         }
 
+        private FontStyleItem _titleFontStyle;
+        public FontStyleItem TitleFontStyle
+        {
+            get => _titleFontStyle;
+            set
+            {
+                _titleFontStyle = value;
+                SetTitleFontStyle();
+                IsEOSCustomizationIgnored = true;
+            }
+        }
+
+        private FontStyleItem _buttonFontStyle;
+        public FontStyleItem ButtonFontStyle
+        {
+            get => _buttonFontStyle;
+            set
+            {
+                _buttonFontStyle = value;
+                SetButtonFontStyle();
+                IsEOSCustomizationIgnored = true;
+            }
+        }
+
+        private void SetTitleFontStyle()
+        {
+            _titleLabel.Typeface = TitleFontStyle.Typeface;
+            _titleLabel.TextSize = TitleFontStyle.Size;
+            _titleLabel.SetTextColor(TitleFontStyle.Color);
+            _titleLabel.LetterSpacing = TitleFontStyle.LetterSpacing;
+        }
+
+        private void SetButtonFontStyle()
+        {
+            _actionButton.Typeface = ButtonFontStyle.Typeface;
+            _actionButton.TextSize = ButtonFontStyle.Size;
+            _actionButton.SetTextColor(ButtonFontStyle.Color);
+            _actionButton.LetterSpacing = ButtonFontStyle.LetterSpacing;
+        }
+
         #endregion
 
         #region utility methods
@@ -265,15 +312,9 @@ namespace EOS.UI.Android.Components
                 HasButton = GetThemeProvider().GetEOSProperty<bool>(this, EOSConstants.HasSectionAction);
                 SectionName = GetThemeProvider().GetEOSProperty<string>(this, EOSConstants.SectionTitle);
                 ButtonText = GetThemeProvider().GetEOSProperty<string>(this, EOSConstants.SectionActionTitle);
-                SectionTextSize = GetThemeProvider().GetEOSProperty<float>(this, EOSConstants.TextSize);
-                ButtonTextSize = GetThemeProvider().GetEOSProperty<float>(this, EOSConstants.SecondaryTextSize);
-                SectionTextLetterSpacing = GetThemeProvider().GetEOSProperty<float>(this, EOSConstants.LetterSpacing);
-                ButtonTextLetterSpacing = GetThemeProvider().GetEOSProperty<float>(this, EOSConstants.SecondaryLetterSpacing);
-                SectionNameFont = Typeface.CreateFromAsset(ItemView.Context.Assets, GetThemeProvider().GetEOSProperty<string>(this, EOSConstants.Font));
-                ButtonNameFont = Typeface.CreateFromAsset(ItemView.Context.Assets, GetThemeProvider().GetEOSProperty<string>(this, EOSConstants.SecondaryFont));
+                TitleFontStyle = GetThemeProvider().GetEOSProperty<FontStyleItem>(this, EOSConstants.R2C3);
+                ButtonFontStyle = GetThemeProvider().GetEOSProperty<FontStyleItem>(this, EOSConstants.R2C1);
                 BackgroundColor = GetThemeProvider().GetEOSProperty<Color>(this, EOSConstants.NeutralColor5);
-                SectionNameColor = GetThemeProvider().GetEOSProperty<Color>(this, EOSConstants.NeutralColor2);
-                ButtonNameColor = GetThemeProvider().GetEOSProperty<Color>(this, EOSConstants.BrandPrimaryColor);
                 BorderColor = GetThemeProvider().GetEOSProperty<Color>(this, EOSConstants.NeutralColor4);
                 BorderWidth = GetThemeProvider().GetEOSProperty<int>(this, EOSConstants.BorderWidth);
                 var leftPadding = GetThemeProvider().GetEOSProperty<int>(this, EOSConstants.LeftPadding);

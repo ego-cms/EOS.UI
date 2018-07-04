@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using Android.App;
 using Android.Content;
 using Android.Content.Res;
@@ -8,6 +8,7 @@ using Android.Runtime;
 using Android.Util;
 using Android.Views;
 using Android.Widget;
+using EOS.UI.Shared.Themes.DataModels;
 using EOS.UI.Shared.Themes.Helpers;
 using EOS.UI.Shared.Themes.Interfaces;
 using UIFrameworks.Android.Themes;
@@ -66,6 +67,7 @@ namespace EOS.UI.Android.Controls
                 _progressBar.ProgressTintList = ColorStateList.ValueOf(_color);
                 _centralRectangle.SetBackgroundColor(_color);
                 _percentText.SetTextColor(_color);
+                FontStyle.Color = value;
             }
         }
 
@@ -105,28 +107,46 @@ namespace EOS.UI.Android.Controls
             }
         }
 
-        private Typeface _typeface;
         public Typeface Typeface
         {
-            get => _typeface;
+            get => _percentText.Typeface;
             set
             {
-                _typeface = value;
-                _percentText.Typeface = _typeface;
+                _percentText.Typeface = value;
+                FontStyle.Typeface = value;
                 IsEOSCustomizationIgnored = true;
             }
         }
 
-        private float _textSize;
         public float TextSize
         {
-            get => _textSize;
+            get => _percentText.TextSize;
             set
             {
-                _textSize = value;
-                _percentText.TextSize = _textSize;
+                _percentText.TextSize = value;
+                FontStyle.Size = value;
                 IsEOSCustomizationIgnored = true;
             }
+        }
+
+        private FontStyleItem _fontStyle;
+        public FontStyleItem FontStyle
+        {
+            get => _fontStyle;
+            set
+            {
+                _fontStyle = value;
+                SetFontStyle();
+                IsEOSCustomizationIgnored = true;
+            }
+        }
+
+        private void SetFontStyle()
+        {
+            _percentText.Typeface = FontStyle.Typeface;
+            _percentText.TextSize = FontStyle.Size;
+            _percentText.SetTextColor(FontStyle.Color);
+            _percentText.LetterSpacing = FontStyle.LetterSpacing;
         }
 
         protected CircleProgress(IntPtr javaReference, JniHandleOwnership transfer) : base(javaReference, transfer)
@@ -227,13 +247,11 @@ namespace EOS.UI.Android.Controls
             if (!IsEOSCustomizationIgnored)
             {
                 var provider = GetThemeProvider();
+                FontStyle = GetThemeProvider().GetEOSProperty<FontStyleItem>(this, EOSConstants.R1C1);
                 Color = provider.GetEOSProperty<Color>(this, EOSConstants.BrandPrimaryColor);
                 AlternativeColor = provider.GetEOSProperty<Color>(this, EOSConstants.BrandPrimaryColor);
                 FillColor = provider.GetEOSProperty<Color>(this, EOSConstants.NeutralColor4);
                 ShowProgress = provider.GetEOSProperty<bool>(this, EOSConstants.CircleProgressShown);
-                Typeface = Typeface.CreateFromAsset(Context.Assets, provider.GetEOSProperty<string>(this, EOSConstants.Font));
-                TextSize = provider.GetEOSProperty<float>(this, EOSConstants.TextSize);
-
                 IsEOSCustomizationIgnored = false;
             }
         }

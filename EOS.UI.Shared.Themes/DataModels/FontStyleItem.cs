@@ -18,7 +18,6 @@ namespace EOS.UI.Shared.Themes.DataModels
 #if __ANDROID__
         public Typeface Typeface { get; set; }
         public Color Color { get; set; }
-        public TypefaceStyle TypefaceStyle { get; set; }
 #endif
         public float Size { get; set; }
         public float LetterSpacing { get; set; }

@@ -62,13 +62,12 @@ namespace EOS.UI.Android.Controls
 
         public override Typeface Typeface
         {
-            get => base.Typeface;
+            get => FontStyle?.Typeface;
             set
             {
                 IsEOSCustomizationIgnored = true;
                 FontStyle.Typeface = value;
-                SetFontStyle();
-                //base.Typeface = value;
+                base.Typeface = value;
             }
         }
 
@@ -84,18 +83,18 @@ namespace EOS.UI.Android.Controls
             set
             {
                 IsEOSCustomizationIgnored = true;
+                FontStyle.LetterSpacing = value;
                 base.LetterSpacing = value;
             }
         }
 
-        private Color _textColor;
         public Color TextColor
         {
-            get => _textColor;
+            get => FontStyle.Color;
             set
             {
                 IsEOSCustomizationIgnored = true;
-                _textColor = value;
+                FontStyle.Color = value;
                 base.SetTextColor(value);
             }
         }
@@ -112,8 +111,7 @@ namespace EOS.UI.Android.Controls
             {
                 IsEOSCustomizationIgnored = true;
                 FontStyle.Size = value;
-                SetFontStyle();
-                //base.TextSize = value; 
+                base.TextSize = value;
             }
         }
 
@@ -141,11 +139,10 @@ namespace EOS.UI.Android.Controls
 
         private void SetFontStyle()
         {
-            base.Typeface = Typeface;
-            //base.SetTypeface()
-            //this.SetTextSize(TextSize);
-            //base.TextColor = this.TextColor;
-            //this.SetLetterSpacing(LetterSpacing);
+            base.Typeface = FontStyle.Typeface;
+            base.TextSize = FontStyle.Size;
+            base.SetTextColor(FontStyle.Color);
+            base.LetterSpacing = FontStyle.LetterSpacing;
         }
 
         #endregion
@@ -214,13 +211,9 @@ namespace EOS.UI.Android.Controls
         {
             if(!IsEOSCustomizationIgnored)
             {
-                (Background as GradientDrawable).SetColor(GetThemeProvider().GetEOSProperty<Color>(this, EOSConstants.BrandPrimaryColor));
                 FontStyle = GetThemeProvider().GetEOSProperty<FontStyleItem>(this, EOSConstants.R2C5);
-                //base.SetTypeface(Typeface.CreateFromAsset(Context.Assets, GetThemeProvider().GetEOSProperty<string>(this, EOSConstants.Font)), TypefaceStyle.Normal);
-                //base.LetterSpacing = GetThemeProvider().GetEOSProperty<float>(this, EOSConstants.LetterSpacing);
-                //base.SetTextColor(GetThemeProvider().GetEOSProperty<Color>(this, EOSConstants.NeutralColor6));
-                //base.TextSize = GetThemeProvider().GetEOSProperty<float>(this, EOSConstants.TextSize);
-                (Background as GradientDrawable).SetCornerRadius(GetThemeProvider().GetEOSProperty<float>(this, EOSConstants.BadgeLabelCornerRadius));
+                (Background as GradientDrawable).SetColor(GetThemeProvider().GetEOSProperty<Color>(this, EOSConstants.BrandPrimaryColor));
+                (Background as GradientDrawable).SetCornerRadius(GetThemeProvider().GetEOSProperty<float>(this, EOSConstants.LabelCornerRadius));
                 IsEOSCustomizationIgnored = false;
             }
         }

@@ -25,7 +25,6 @@ namespace EOS.UI.Android.Sandbox.Activities
         private EOSSandboxDropDown _textSizeDropDown;
         private EOSSandboxDropDown _textColorEnabledDropDown;
         private EOSSandboxDropDown _textColorDisabledDropDown;
-        private EOSSandboxDropDown _textColorPressedDropDown;
         private EOSSandboxDropDown _backgroundColorEnabledDropDown;
         private EOSSandboxDropDown _backgroundColorDisabledDropDown;
         private EOSSandboxDropDown _backgroundColorPressedDropDown;
@@ -44,7 +43,6 @@ namespace EOS.UI.Android.Sandbox.Activities
             _textSizeDropDown = FindViewById<EOSSandboxDropDown>(Resource.Id.textSizeDropDown);
             _textColorEnabledDropDown = FindViewById<EOSSandboxDropDown>(Resource.Id.enabledTextColorDropDown);
             _textColorDisabledDropDown = FindViewById<EOSSandboxDropDown>(Resource.Id.disabledTextColorDropDown);
-            _textColorPressedDropDown = FindViewById<EOSSandboxDropDown>(Resource.Id.pressedTextColorDropDown);
             _backgroundColorEnabledDropDown = FindViewById<EOSSandboxDropDown>(Resource.Id.enabledBackgroundDropDown);
             _backgroundColorDisabledDropDown = FindViewById<EOSSandboxDropDown>(Resource.Id.disabledBackgroundDropDown);
             _backgroundColorPressedDropDown = FindViewById<EOSSandboxDropDown>(Resource.Id.pressedBackgroundDropDown);
@@ -82,10 +80,6 @@ namespace EOS.UI.Android.Sandbox.Activities
             _textColorDisabledDropDown.Name = Fields.DisabledTextColor;
             _textColorDisabledDropDown.SetupAdapter(Colors.ColorsCollection.Select(item => item.Key).ToList());
             _textColorDisabledDropDown.ItemSelected += TextColorDisabledItemSelected;
-
-            _textColorPressedDropDown.Name = Fields.PressedTextColor;
-            _textColorPressedDropDown.SetupAdapter(Colors.ColorsCollection.Select(item => item.Key).ToList());
-            _textColorPressedDropDown.ItemSelected += TextColorPressedItemSelected;
 
             _backgroundColorEnabledDropDown.Name = Fields.EnabledBackground;
             _backgroundColorEnabledDropDown.SetupAdapter(Colors.ColorsCollection.Select(item => item.Key).ToList());
@@ -185,12 +179,6 @@ namespace EOS.UI.Android.Sandbox.Activities
                 _simpleButton.DisabledTextColor = Colors.ColorsCollection.ElementAt(position).Value;
         }
 
-        private void TextColorPressedItemSelected(int position)
-        {
-            if(position > 0)
-                _simpleButton.PressedTextColor = Colors.ColorsCollection.ElementAt(position).Value;
-        }
-
         private void BackgroundColorEnabledItemSelected(int position)
         {
             if(position > 0)
@@ -237,7 +225,6 @@ namespace EOS.UI.Android.Sandbox.Activities
             _textSizeDropDown.SetSpinnerSelection(0);
             _textColorEnabledDropDown.SetSpinnerSelection(0);
             _textColorDisabledDropDown.SetSpinnerSelection(0);
-            _textColorPressedDropDown.SetSpinnerSelection(0);
             _backgroundColorEnabledDropDown.SetSpinnerSelection(0);
             _backgroundColorDisabledDropDown.SetSpinnerSelection(0);
             _backgroundColorPressedDropDown.SetSpinnerSelection(0);

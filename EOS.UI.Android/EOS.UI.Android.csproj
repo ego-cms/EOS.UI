@@ -108,6 +108,9 @@
     <AndroidAsset Include="Assets\Fonts\SFUITextBold.ttf" />
     <AndroidAsset Include="Assets\Fonts\SFUITextSemibold.ttf" />
     <AndroidAsset Include="Assets\Fonts\Roboto.ttf" />
+    <AndroidAsset Include="Assets\Fonts\RobotoBold.ttf" />
+    <AndroidAsset Include="Assets\Fonts\RobotoMedium.ttf" />
+    <AndroidAsset Include="Assets\Fonts\RobotoRegular.ttf" />
     <None Include="packages.config" />
     <AndroidResource Include="Resources\layout\Section.axml">
       <SubType>Designer</SubType>

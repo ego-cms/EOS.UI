@@ -6,6 +6,7 @@ using Android.Runtime;
 using Android.Util;
 using Android.Views;
 using Android.Widget;
+using EOS.UI.Shared.Themes.DataModels;
 using EOS.UI.Shared.Themes.Helpers;
 using EOS.UI.Shared.Themes.Interfaces;
 using UIFrameworks.Android.Themes;
@@ -157,27 +158,25 @@ namespace EOS.UI.Android.Controls
             base.SetCompoundDrawables(left, top, right, bottom);
         }
 
-        private Color _hintTextColor;
         public Color HintTextColor
         {
-            get => _hintTextColor;
+            get => HintFontStyle.Color;
             set
             {
                 IsEOSCustomizationIgnored = true;
-                _hintTextColor = value;
+                HintFontStyle.Color = value;
                 if(Enabled)
                     base.SetHintTextColor(value);
             }
         }
 
-        private Color _hintTextColorDisabled;
         public Color HintTextColorDisabled
         {
-            get => _hintTextColorDisabled;
+            get => DisabledHintFontStyle.Color;
             set
             {
                 IsEOSCustomizationIgnored = true;
-                _hintTextColorDisabled = value;
+                DisabledHintFontStyle.Color = value;
                 if(!Enabled)
                     base.SetHintTextColor(value);
             }
@@ -197,6 +196,7 @@ namespace EOS.UI.Android.Controls
             set
             {
                 IsEOSCustomizationIgnored = true;
+                FontStyle.Typeface = value;
                 base.Typeface = value;
             }
         }
@@ -213,31 +213,30 @@ namespace EOS.UI.Android.Controls
             set
             {
                 IsEOSCustomizationIgnored = true;
+                FontStyle.LetterSpacing = value;
                 base.LetterSpacing = value;
             }
         }
 
-        private Color _textColor;
         public Color TextColor
         {
-            get => _textColor;
+            get => FontStyle.Color;
             set
             {
                 IsEOSCustomizationIgnored = true;
-                _textColor = value;
+                FontStyle.Color = value;
                 if(Enabled)
                     base.SetTextColor(value);
             }
         }
 
-        private Color _textColorDisabled;
         public Color TextColorDisabled
         {
-            get => _textColorDisabled;
+            get => DisabledFontStyle.Color;
             set
             {
                 IsEOSCustomizationIgnored = true;
-                _textColorDisabled = value;
+                DisabledFontStyle.Color = value;
                 if(!Enabled)
                     base.SetTextColor(value);
             }
@@ -271,6 +270,90 @@ namespace EOS.UI.Android.Controls
             }
         }
 
+        private FontStyleItem _fontStyle;
+        public FontStyleItem FontStyle
+        {
+            get => _fontStyle;
+            set
+            {
+                _fontStyle = value;
+                SetFontStyle();
+                IsEOSCustomizationIgnored = true;
+            }
+        }
+
+        private FontStyleItem _disabledFontStyle;
+        public FontStyleItem DisabledFontStyle
+        {
+            get => _disabledFontStyle;
+            set
+            {
+                _disabledFontStyle = value;
+                SetDisabledFontStyle();
+                IsEOSCustomizationIgnored = true;
+            }
+        }
+
+        private FontStyleItem _hintFontStyle;
+        public FontStyleItem HintFontStyle
+        {
+            get => _hintFontStyle;
+            set
+            {
+                _hintFontStyle = value;
+                SetHintFontStyle();
+                IsEOSCustomizationIgnored = true;
+            }
+        }
+
+        private FontStyleItem _disabledHintFontStyle;
+        public FontStyleItem DisabledHintFontStyle
+        {
+            get => _disabledHintFontStyle;
+            set
+            {
+                _disabledHintFontStyle = value;
+                SetDisabledHintFontStyle();
+                IsEOSCustomizationIgnored = true;
+            }
+        }
+
+        private void SetFontStyle()
+        {
+            base.Typeface = FontStyle.Typeface;
+            base.TextSize = FontStyle.Size;
+            if(!Enabled)
+                base.SetTextColor(FontStyle.Color);
+            base.LetterSpacing = FontStyle.LetterSpacing;
+        }
+
+        private void SetDisabledFontStyle()
+        {
+            base.Typeface = DisabledFontStyle.Typeface;
+            base.TextSize = DisabledFontStyle.Size;
+            if(!Enabled)
+                base.SetTextColor(DisabledFontStyle.Color);
+            base.LetterSpacing = DisabledFontStyle.LetterSpacing;
+        }
+
+        private void SetHintFontStyle()
+        {
+            base.Typeface = HintFontStyle.Typeface;
+            base.TextSize = HintFontStyle.Size;
+            if(!Enabled)
+                base.SetHintTextColor(HintFontStyle.Color);
+            base.LetterSpacing = HintFontStyle.LetterSpacing;
+        }
+
+        private void SetDisabledHintFontStyle()
+        {
+            base.Typeface = DisabledHintFontStyle.Typeface;
+            base.TextSize = DisabledHintFontStyle.Size;
+            if(!Enabled)
+                base.SetHintTextColor(DisabledHintFontStyle.Color);
+            base.LetterSpacing = DisabledHintFontStyle.LetterSpacing;
+        }
+
         #endregion
 
         #region utility methods
@@ -298,6 +381,9 @@ namespace EOS.UI.Android.Controls
             OnFocusChangeListener = this;
             if(attrs != null)
                 InitializeAttributes(attrs);
+
+            Text = string.Empty;
+            UpdateAppearance();
         }
 
         private void InitializeAttributes(IAttributeSet attrs)
@@ -439,13 +525,10 @@ namespace EOS.UI.Android.Controls
                 _clearColor = GetThemeProvider().GetEOSProperty<Color>(this, EOSConstants.NeutralColor3);
                 _closeImage.Mutate().SetColorFilter(_clearColor, PorterDuff.Mode.SrcIn);
 
-                Typeface = Typeface.CreateFromAsset(Context.Assets, GetThemeProvider().GetEOSProperty<string>(this, EOSConstants.Font));
-                LetterSpacing = GetThemeProvider().GetEOSProperty<float>(this, EOSConstants.LetterSpacing);
-                TextSize = GetThemeProvider().GetEOSProperty<float>(this, EOSConstants.TextSize);
-                TextColor = GetThemeProvider().GetEOSProperty<Color>(this, EOSConstants.NeutralColor1);
-                TextColorDisabled = GetThemeProvider().GetEOSProperty<Color>(this, EOSConstants.NeutralColor3);
-                HintTextColor = GetThemeProvider().GetEOSProperty<Color>(this, EOSConstants.NeutralColor2);
-                HintTextColorDisabled = GetThemeProvider().GetEOSProperty<Color>(this, EOSConstants.NeutralColor3);
+                FontStyle = GetThemeProvider().GetEOSProperty<FontStyleItem>(this, EOSConstants.R4C2);
+                DisabledFontStyle = GetThemeProvider().GetEOSProperty<FontStyleItem>(this, EOSConstants.R4C4);
+                HintFontStyle = GetThemeProvider().GetEOSProperty<FontStyleItem>(this, EOSConstants.R4C3);
+                DisabledHintFontStyle = GetThemeProvider().GetEOSProperty<FontStyleItem>(this, EOSConstants.R4C4);
                 FocusedColor = GetThemeProvider().GetEOSProperty<Color>(this, EOSConstants.BrandPrimaryColor);
                 DisabledColor = GetThemeProvider().GetEOSProperty<Color>(this, EOSConstants.NeutralColor3);
                 NormalIconColor = GetThemeProvider().GetEOSProperty<Color>(this, EOSConstants.NeutralColor2);

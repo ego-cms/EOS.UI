@@ -4,6 +4,7 @@ using Android.Graphics;
 using Android.Runtime;
 using Android.Util;
 using Android.Widget;
+using EOS.UI.Shared.Themes.DataModels;
 using EOS.UI.Shared.Themes.Helpers;
 using EOS.UI.Shared.Themes.Interfaces;
 using UIFrameworks.Android.Themes;
@@ -47,6 +48,7 @@ namespace EOS.UI.Android.Controls
             set
             {
                 IsEOSCustomizationIgnored = true;
+                FontStyle.Typeface = value;
                 base.Typeface = value;
             }
         }
@@ -63,18 +65,18 @@ namespace EOS.UI.Android.Controls
             set
             {
                 IsEOSCustomizationIgnored = true;
+                FontStyle.LetterSpacing = value;
                 base.LetterSpacing = value;
             }
         }
 
-        private Color _textColor;
         public Color TextColor
         {
-            get => _textColor;
+            get => FontStyle.Color;
             set
             {
                 IsEOSCustomizationIgnored = true;
-                _textColor = value;
+                FontStyle.Color = value;
                 base.SetTextColor(value);
             }
         }
@@ -90,8 +92,29 @@ namespace EOS.UI.Android.Controls
             set
             {
                 IsEOSCustomizationIgnored = true;
+                FontStyle.Size = value;
                 base.TextSize = value;
             }
+        }
+
+        private FontStyleItem _fontStyle;
+        public FontStyleItem FontStyle
+        {
+            get => _fontStyle;
+            set
+            {
+                _fontStyle = value;
+                SetFontStyle();
+                IsEOSCustomizationIgnored = true;
+            }
+        }
+
+        private void SetFontStyle()
+        {
+            base.Typeface = FontStyle.Typeface;
+            base.TextSize = FontStyle.Size;
+            base.SetTextColor(FontStyle.Color);
+            base.LetterSpacing = FontStyle.LetterSpacing;
         }
 
         #endregion
@@ -104,6 +127,7 @@ namespace EOS.UI.Android.Controls
             Ellipsize = A.Text.TextUtils.TruncateAt.End;
             if(attrs != null)
                 InitializeAttributes(attrs);
+            UpdateAppearance();
         }
 
         private void InitializeAttributes(IAttributeSet attrs)
@@ -142,10 +166,8 @@ namespace EOS.UI.Android.Controls
         {
             if(!IsEOSCustomizationIgnored)
             {
-                base.SetTypeface(Typeface.CreateFromAsset(Context.Assets, GetThemeProvider().GetEOSProperty<string>(this, EOSConstants.Font)), TypefaceStyle.Normal);
-                base.LetterSpacing = GetThemeProvider().GetEOSProperty<float>(this, EOSConstants.LetterSpacing);
-                base.SetTextColor(GetThemeProvider().GetEOSProperty<Color>(this, EOSConstants.BrandPrimaryColor));
-                base.TextSize = GetThemeProvider().GetEOSProperty<float>(this, EOSConstants.TextSize);
+                FontStyle = GetThemeProvider().GetEOSProperty<FontStyleItem>(this, EOSConstants.R2C1);
+                IsEOSCustomizationIgnored = false;
             }
         }
 

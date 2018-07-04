@@ -55,6 +55,7 @@ namespace UIFrameworks.Shared.Themes.Helpers
         public static string R1C2 = "R1C2";
         public static string R1C3 = "R1C3";
         public static string R1C4 = "R1C4";
+        public static string R1C5 = "R1C5";
         public static string R2C1 = "R2C1";
         public static string R2C2 = "R2C2";
         public static string R2C3 = "R2C3";
@@ -65,6 +66,11 @@ namespace UIFrameworks.Shared.Themes.Helpers
         public static string R3C3 = "R3C3";
         public static string R3C4 = "R3C4";
         public static string R3C5 = "R3C5";
+        public static string R4C1 = "R4C1";
+        public static string R4C2 = "R4C2";
+        public static string R4C3 = "R4C3";
+        public static string R4C4 = "R4C4";
+        public static string R4C5 = "R4C5";
     }
 
     public static class ControlNames

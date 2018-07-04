@@ -9,9 +9,9 @@ using Android.OS;
 using Android.Runtime;
 using Android.Text;
 using Android.Util;
-using Android.Views;
 using Android.Views.Animations;
 using Android.Widget;
+using EOS.UI.Shared.Themes.DataModels;
 using EOS.UI.Shared.Themes.Helpers;
 using EOS.UI.Shared.Themes.Interfaces;
 using Java.Util;
@@ -22,7 +22,7 @@ using static EOS.UI.Android.Helpers.Constants;
 
 namespace EOS.UI.Android.Controls
 {
-    public class SimpleButton : Button, IEOSThemeControl, View.IOnTouchListener
+    public class SimpleButton : Button, IEOSThemeControl
     {
         #region fields
 
@@ -116,6 +116,7 @@ namespace EOS.UI.Android.Controls
             set
             {
                 IsEOSCustomizationIgnored = true;
+                FontStyle.Typeface = value;
                 base.Typeface = value;
             }
         }
@@ -126,6 +127,7 @@ namespace EOS.UI.Android.Controls
             set
             {
                 IsEOSCustomizationIgnored = true;
+                FontStyle.LetterSpacing = value;
                 base.LetterSpacing = value;
             }
         }
@@ -136,18 +138,18 @@ namespace EOS.UI.Android.Controls
             set
             {
                 IsEOSCustomizationIgnored = true;
+                FontStyle.Size = value;
                 base.TextSize = value;
             }
         }
 
-        private Color _textColor;
         public Color TextColor
         {
-            get => _textColor;
+            get => FontStyle.Color;
             set
             {
                 IsEOSCustomizationIgnored = true;
-                _textColor = value;
+                FontStyle.Color = value;
                 _rotateDrawable.Drawable?.SetColorFilter(value, PorterDuff.Mode.SrcIn);
                 if(Enabled)
                     base.SetTextColor(value);
@@ -159,27 +161,15 @@ namespace EOS.UI.Android.Controls
             base.SetTextColor(Enabled ? TextColor : DisabledTextColor);
         }
 
-        private Color _disabledTextColor;
         public Color DisabledTextColor
         {
-            get => _disabledTextColor;
+            get => DisabledFontStyle.Color;
             set
             {
                 IsEOSCustomizationIgnored = true;
-                _disabledTextColor = value;
+                DisabledFontStyle.Color = value;
                 if(!Enabled)
                     base.SetTextColor(value);
-            }
-        }
-
-        private Color _pressedTextColor;
-        public Color PressedTextColor
-        {
-            get => _pressedTextColor;
-            set
-            {
-                IsEOSCustomizationIgnored = true;
-                _pressedTextColor = value;
             }
         }
 
@@ -219,6 +209,48 @@ namespace EOS.UI.Android.Controls
             }
         }
 
+        private FontStyleItem _fontStyle;
+        public FontStyleItem FontStyle
+        {
+            get => _fontStyle;
+            set
+            {
+                _fontStyle = value;
+                SetFontStyle();
+                IsEOSCustomizationIgnored = true;
+            }
+        }
+
+        private FontStyleItem _disabledFontStyle;
+        public FontStyleItem DisabledFontStyle
+        {
+            get => _disabledFontStyle;
+            set
+            {
+                _disabledFontStyle = value;
+                SetDisabledFontStyle();
+                IsEOSCustomizationIgnored = true;
+            }
+        }
+
+        private void SetFontStyle()
+        {
+            base.Typeface = FontStyle.Typeface;
+            base.TextSize = FontStyle.Size;
+            if(Enabled)
+                base.SetTextColor(FontStyle.Color);
+            base.LetterSpacing = FontStyle.LetterSpacing;
+        }
+
+        private void SetDisabledFontStyle()
+        {
+            base.Typeface = DisabledFontStyle.Typeface;
+            base.TextSize = DisabledFontStyle.Size;
+            if(!Enabled)
+                base.SetTextColor(DisabledFontStyle.Color);
+            base.LetterSpacing = DisabledFontStyle.LetterSpacing;
+        }
+
         #endregion
 
         #region utility methods
@@ -228,14 +260,12 @@ namespace EOS.UI.Android.Controls
             _rotateDrawable = CreateRotateDrawable();
             var denisty = Resources.DisplayMetrics.Density;
             SetAllCaps(false);
-            SetOnTouchListener(this);
             SetLines(1);
             Ellipsize = TextUtils.TruncateAt.End;
             if(attrs != null)
                 InitializeAttributes(attrs);
             UpdateAppearance();
             Background = CreateRippleDrawable(BackgroundColor);
-            Elevation = 20;
         }
 
         private void InitializeAttributes(IAttributeSet attrs)
@@ -269,10 +299,6 @@ namespace EOS.UI.Android.Controls
             var disabledTextColor = styledAttributes.GetColor(Resource.Styleable.SimpleButton_eos_textcolor_disabled, Color.Transparent);
             if(disabledTextColor != Color.Transparent)
                 DisabledTextColor = disabledTextColor;
-
-            var pressedTextColor = styledAttributes.GetColor(Resource.Styleable.SimpleButton_eos_textcolor_pressed, Color.Transparent);
-            if(pressedTextColor != Color.Transparent)
-                PressedTextColor = pressedTextColor;
 
             var textSize = styledAttributes.GetFloat(Resource.Styleable.SimpleButton_eos_textsize, -1);
             if(textSize > 0)
@@ -362,7 +388,7 @@ namespace EOS.UI.Android.Controls
             _animator.Cancel();
             InProgress = false;
             BackgroundColor = _backgroundColor;
-            base.SetTextColor(_textColor);
+            base.SetTextColor(TextColor);
         }
 
         private RotateDrawable CreateRotateDrawable()
@@ -407,12 +433,8 @@ namespace EOS.UI.Android.Controls
         {
             if(!IsEOSCustomizationIgnored)
             {
-                base.SetTypeface(Typeface.CreateFromAsset(Context.Assets, GetThemeProvider().GetEOSProperty<string>(this, EOSConstants.Font)), TypefaceStyle.Normal);
-                base.LetterSpacing = GetThemeProvider().GetEOSProperty<float>(this, EOSConstants.LetterSpacing);
-                base.TextSize = GetThemeProvider().GetEOSProperty<float>(this, EOSConstants.TextSize);
-                TextColor = GetThemeProvider().GetEOSProperty<Color>(this, EOSConstants.NeutralColor6);
-                DisabledTextColor = GetThemeProvider().GetEOSProperty<Color>(this, EOSConstants.NeutralColor3);
-                PressedTextColor = GetThemeProvider().GetEOSProperty<Color>(this, EOSConstants.NeutralColor6);
+                FontStyle = GetThemeProvider().GetEOSProperty<FontStyleItem>(this, EOSConstants.R3C5);
+                DisabledFontStyle = GetThemeProvider().GetEOSProperty<FontStyleItem>(this, EOSConstants.R3C4);
                 BackgroundColor = GetThemeProvider().GetEOSProperty<Color>(this, EOSConstants.BrandPrimaryColor);
                 DisabledBackgroundColor = GetThemeProvider().GetEOSProperty<Color>(this, EOSConstants.NeutralColor4);
                 PressedBackgroundColor = GetThemeProvider().GetEOSProperty<Color>(this, EOSConstants.BrandPrimaryColorVariant1);
@@ -437,25 +459,6 @@ namespace EOS.UI.Android.Controls
         public void SetEOSStyle(EOSStyleEnumeration style)
         {
 
-        }
-
-        #endregion
-
-        #region IOnTouchListener implementation
-
-        public bool OnTouch(View v, MotionEvent e)
-        {
-            if(InProgress)
-                return true;
-
-            if(Enabled && !InProgress)
-            {
-                if(e.Action == MotionEventActions.Down)
-                    base.SetTextColor(PressedTextColor);
-                if(e.Action == MotionEventActions.Up || e.Action == MotionEventActions.Cancel)
-                    base.SetTextColor(TextColor);
-            }
-            return false;
         }
 
         #endregion
