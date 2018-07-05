@@ -53,7 +53,7 @@ namespace EOS.UI.Android.Sandbox.Controls
         {
             if(!IsEOSCustomizationIgnored)
             {
-                (Background as ColorDrawable).Color = GetThemeProvider().GetEOSProperty<Color>(this, EOSConstants.NeutralColor6);
+                Background = new ColorDrawable(GetThemeProvider().GetEOSProperty<Color>(this, EOSConstants.NeutralColor6));
             }
         }
 
