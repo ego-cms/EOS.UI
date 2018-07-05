@@ -36,6 +36,43 @@ namespace EOS.UI.Shared.Themes.Themes
         private const string neutralColor6 = "#343334";
         private const string rippleColor = "#1AFFFFFF";
 
+#if __ANDROID__
+
+        private Typeface _robotoBold;
+        private Typeface RobotoBold
+        {
+            get
+            {
+                if(_robotoBold == null)
+                    _robotoBold = Typeface.CreateFromAsset(Application.Context.Assets, "Fonts/RobotoBold.ttf");
+                return _robotoBold;
+            }
+        }
+
+        private Typeface _robotoMedium;
+        private Typeface RobotoMedium
+        {
+            get
+            {
+                if(_robotoMedium == null)
+                    _robotoMedium = Typeface.CreateFromAsset(Application.Context.Assets, "Fonts/RobotoMedium.ttf");
+                return _robotoMedium;
+            }
+        }
+
+        private Typeface _robotoRegular;
+        private Typeface RobotoRegular
+        {
+            get
+            {
+                if(_robotoRegular == null)
+                    _robotoRegular = Typeface.CreateFromAsset(Application.Context.Assets, "Fonts/RobotoRegular.ttf");
+                return _robotoRegular;
+            }
+        }
+
+#endif
+
         public Dictionary<string, object> ThemeValues => new Dictionary<string, object>()
         {
 #if __IOS__
@@ -162,15 +199,9 @@ namespace EOS.UI.Shared.Themes.Themes
             { EOSConstants.NeutralColor5, Color.ParseColor(neutralColor5)},
             { EOSConstants.NeutralColor6, Color.ParseColor(neutralColor6)},
             { EOSConstants.RippleColor, Color.ParseColor(rippleColor) },
-            { EOSConstants.TextSize, 16f },
-            { EOSConstants.SecondaryTextSize, 16f },
-            { EOSConstants.Font, "Fonts/Roboto.ttf" },
-            { EOSConstants.SecondaryFont, "Fonts/Roboto.ttf" },
             { EOSConstants.CornerRadius, 20f },
             { EOSConstants.LabelCornerRadius, 4f },
             { EOSConstants.ButtonCornerRadius, 60f },
-            { EOSConstants.LetterSpacing, 0f },
-            { EOSConstants.SecondaryLetterSpacing, 0f },
             { EOSConstants.LeftImage, Resource.Drawable.icCalendar },
             { EOSConstants.CalendarImage, Resource.Drawable.icCalendar },
             { EOSConstants.FabProgressPreloaderImage, Resource.Drawable.icPreloader },
@@ -184,15 +215,11 @@ namespace EOS.UI.Shared.Themes.Themes
             { EOSConstants.BottomPadding, 10 },
             { EOSConstants.HasSectionBorder, true },
             { EOSConstants.HasSectionAction, true },
-            { EOSConstants.WorkTimeTitleFont, "Fonts/SFUITextSemibold.ttf" },
-            { EOSConstants.WorkTimeDayTextFont, "Fonts/SFUITextBold.ttf"},
-            { EOSConstants.WorkTimeTitleSize, 13 },
-            { EOSConstants.WorkTimeDayTextSize, 11 },
             { EOSConstants.R1C1,
                 new FontStyleItem()
                 {
                     Color = Color.ParseColor(brandPrimaryColor),
-                    Typeface = Typeface.CreateFromAsset(Application.Context.Assets, "Fonts/RobotoBold.ttf"),
+                    Typeface = RobotoBold,
                     Size = 11f,
                     LetterSpacing = 0.005f,
                     LineHeight = 13f
@@ -202,7 +229,7 @@ namespace EOS.UI.Shared.Themes.Themes
                 new FontStyleItem()
                 {
                     Color = Color.ParseColor(neutralColor1),
-                    Typeface = Typeface.CreateFromAsset(Application.Context.Assets, "Fonts/RobotoBold.ttf"),
+                    Typeface = RobotoBold,
                     Size = 11f,
                     LetterSpacing = 0.005f,
                     LineHeight = 13f
@@ -212,7 +239,7 @@ namespace EOS.UI.Shared.Themes.Themes
                 new FontStyleItem()
                 {
                     Color = Color.ParseColor(neutralColor2),
-                    Typeface = Typeface.CreateFromAsset(Application.Context.Assets, "Fonts/RobotoBold.ttf"),
+                    Typeface = RobotoBold,
                     Size = 11f,
                     LetterSpacing = 0.005f,
                     LineHeight = 13f
@@ -222,7 +249,7 @@ namespace EOS.UI.Shared.Themes.Themes
                 new FontStyleItem()
                 {
                     Color = Color.ParseColor(neutralColor3),
-                    Typeface = Typeface.CreateFromAsset(Application.Context.Assets, "Fonts/RobotoBold.ttf"),
+                    Typeface = RobotoBold,
                     Size = 11f,
                     LetterSpacing = 0.005f,
                     LineHeight = 13f
@@ -232,7 +259,7 @@ namespace EOS.UI.Shared.Themes.Themes
                 new FontStyleItem()
                 {
                     Color = Color.ParseColor(neutralColor6),
-                    Typeface = Typeface.CreateFromAsset(Application.Context.Assets, "Fonts/RobotoBold.ttf"),
+                    Typeface = RobotoBold,
                     Size = 11f,
                     LetterSpacing = 0.005f,
                     LineHeight = 13f
@@ -242,7 +269,7 @@ namespace EOS.UI.Shared.Themes.Themes
                 new FontStyleItem()
                 {
                     Color = Color.ParseColor(brandPrimaryColor),
-                    Typeface = Typeface.CreateFromAsset(Application.Context.Assets, "Fonts/RobotoBold.ttf"),
+                    Typeface = RobotoBold,
                     Size = 13f,
                     LetterSpacing = -0.005f,
                     LineHeight = 15f
@@ -252,7 +279,7 @@ namespace EOS.UI.Shared.Themes.Themes
                 new FontStyleItem()
                 {
                     Color = Color.ParseColor(neutralColor1),
-                    Typeface = Typeface.CreateFromAsset(Application.Context.Assets, "Fonts/RobotoBold.ttf"),
+                    Typeface = RobotoBold,
                     Size = 13f,
                     LetterSpacing = -0.005f,
                     LineHeight = 15f
@@ -262,7 +289,7 @@ namespace EOS.UI.Shared.Themes.Themes
                 new FontStyleItem()
                 {
                     Color = Color.ParseColor(neutralColor2),
-                    Typeface = Typeface.CreateFromAsset(Application.Context.Assets, "Fonts/RobotoBold.ttf"),
+                    Typeface = RobotoBold,
                     Size = 13f,
                     LetterSpacing = -0.005f,
                     LineHeight = 15f
@@ -272,7 +299,7 @@ namespace EOS.UI.Shared.Themes.Themes
                 new FontStyleItem()
                 {
                     Color = Color.ParseColor(neutralColor3),
-                    Typeface = Typeface.CreateFromAsset(Application.Context.Assets, "Fonts/RobotoBold.ttf"),
+                    Typeface = RobotoBold,
                     Size = 13f,
                     LetterSpacing = -0.005f,
                     LineHeight = 15f
@@ -282,7 +309,7 @@ namespace EOS.UI.Shared.Themes.Themes
                 new FontStyleItem()
                 {
                     Color = Color.ParseColor(neutralColor6),
-                    Typeface = Typeface.CreateFromAsset(Application.Context.Assets, "Fonts/RobotoBold.ttf"),
+                    Typeface = RobotoBold,
                     Size = 13f,
                     LetterSpacing = -0.005f,
                     LineHeight = 15f
@@ -292,7 +319,7 @@ namespace EOS.UI.Shared.Themes.Themes
                 new FontStyleItem()
                 {
                     Color = Color.ParseColor(brandPrimaryColor),
-                    Typeface = Typeface.CreateFromAsset(Application.Context.Assets, "Fonts/RobotoMedium.ttf"),
+                    Typeface = RobotoMedium,
                     Size = 16f,
                     LetterSpacing = -0.01f,
                     LineHeight = 19f
@@ -302,7 +329,7 @@ namespace EOS.UI.Shared.Themes.Themes
                 new FontStyleItem()
                 {
                     Color = Color.ParseColor(neutralColor1),
-                    Typeface = Typeface.CreateFromAsset(Application.Context.Assets, "Fonts/RobotoMedium.ttf"),
+                    Typeface = RobotoMedium,
                     Size = 16f,
                     LetterSpacing = -0.01f,
                     LineHeight = 19f
@@ -312,7 +339,7 @@ namespace EOS.UI.Shared.Themes.Themes
                 new FontStyleItem()
                 {
                     Color = Color.ParseColor(neutralColor2),
-                    Typeface = Typeface.CreateFromAsset(Application.Context.Assets, "Fonts/RobotoMedium.ttf"),
+                    Typeface = RobotoMedium,
                     Size = 16f,
                     LetterSpacing = -0.01f,
                     LineHeight = 19f
@@ -322,7 +349,7 @@ namespace EOS.UI.Shared.Themes.Themes
                 new FontStyleItem()
                 {
                     Color = Color.ParseColor(neutralColor3),
-                    Typeface = Typeface.CreateFromAsset(Application.Context.Assets, "Fonts/RobotoMedium.ttf"),
+                    Typeface = RobotoMedium,
                     Size = 16f,
                     LetterSpacing = -0.01f,
                     LineHeight = 19f
@@ -332,7 +359,7 @@ namespace EOS.UI.Shared.Themes.Themes
                 new FontStyleItem()
                 {
                     Color = Color.ParseColor(neutralColor6),
-                    Typeface = Typeface.CreateFromAsset(Application.Context.Assets, "Fonts/RobotoMedium.ttf"),
+                    Typeface = RobotoMedium,
                     Size = 16f,
                     LetterSpacing = -0.01f,
                     LineHeight = 19f
@@ -342,7 +369,7 @@ namespace EOS.UI.Shared.Themes.Themes
                 new FontStyleItem()
                 {
                     Color = Color.ParseColor(brandPrimaryColor),
-                    Typeface = Typeface.CreateFromAsset(Application.Context.Assets, "Fonts/RobotoRegular.ttf"),
+                    Typeface = RobotoRegular,
                     Size = 17f,
                     LetterSpacing = -0.02f,
                     LineHeight = 20f
@@ -352,7 +379,7 @@ namespace EOS.UI.Shared.Themes.Themes
                 new FontStyleItem()
                 {
                     Color = Color.ParseColor(neutralColor1),
-                    Typeface = Typeface.CreateFromAsset(Application.Context.Assets, "Fonts/RobotoRegular.ttf"),
+                    Typeface = RobotoRegular,
                     Size = 17f,
                     LetterSpacing = -0.02f,
                     LineHeight = 20f
@@ -362,7 +389,7 @@ namespace EOS.UI.Shared.Themes.Themes
                 new FontStyleItem()
                 {
                     Color = Color.ParseColor(neutralColor2),
-                    Typeface = Typeface.CreateFromAsset(Application.Context.Assets, "Fonts/RobotoRegular.ttf"),
+                    Typeface = RobotoRegular,
                     Size = 17f,
                     LetterSpacing = -0.02f,
                     LineHeight = 20f
@@ -372,7 +399,7 @@ namespace EOS.UI.Shared.Themes.Themes
                 new FontStyleItem()
                 {
                     Color = Color.ParseColor(neutralColor3),
-                    Typeface = Typeface.CreateFromAsset(Application.Context.Assets, "Fonts/RobotoRegular.ttf"),
+                    Typeface = RobotoRegular,
                     Size = 17f,
                     LetterSpacing = -0.02f,
                     LineHeight = 20f
@@ -382,7 +409,7 @@ namespace EOS.UI.Shared.Themes.Themes
                 new FontStyleItem()
                 {
                     Color = Color.ParseColor(neutralColor6),
-                    Typeface = Typeface.CreateFromAsset(Application.Context.Assets, "Fonts/RobotoRegular.ttf"),
+                    Typeface = RobotoRegular,
                     Size = 17f,
                     LetterSpacing = -0.02f,
                     LineHeight = 20f
