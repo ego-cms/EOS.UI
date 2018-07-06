@@ -185,7 +185,7 @@ namespace EOS.UI.iOS.Models
             }
         }
 
-        private int _topPadding;
+        private int _topPadding = 10;
         public int TopPadding
         {
             get => _topPadding;
@@ -196,7 +196,7 @@ namespace EOS.UI.iOS.Models
             }
         }
 
-        private int _bottomPadding;
+        private int _bottomPadding = 10;
         public int BottonPadding
         {
             get => _bottomPadding;
@@ -207,7 +207,7 @@ namespace EOS.UI.iOS.Models
             }
         }
 
-        private int _rightPadding;
+        private int _rightPadding = 16;
         public int RightPadding
         {
             get => _rightPadding;
@@ -218,7 +218,7 @@ namespace EOS.UI.iOS.Models
             }
         }
 
-        private int _leftPadding;
+        private int _leftPadding = 16;
         public int LeftPadding
         {
             get => _leftPadding;

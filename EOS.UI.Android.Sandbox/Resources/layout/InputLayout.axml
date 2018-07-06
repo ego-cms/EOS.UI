@@ -81,27 +81,35 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
             <EOS.UI.Android.Sandbox.Controls.EOSSandboxDropDown
-                android:id="@+id/focusedIconDropDown"
+                android:id="@+id/iconDropDown"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
             <EOS.UI.Android.Sandbox.Controls.EOSSandboxDropDown
-                android:id="@+id/unfocusedIconDropDown"
+                android:id="@+id/focusedColorDropDown"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
             <EOS.UI.Android.Sandbox.Controls.EOSSandboxDropDown
-                android:id="@+id/disabledIconDropDown"
+                android:id="@+id/disabledColorDropDown"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
             <EOS.UI.Android.Sandbox.Controls.EOSSandboxDropDown
-                android:id="@+id/focusedUnderlineColorDropDown"
+                android:id="@+id/normalUnderlineColorDropDown"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
             <EOS.UI.Android.Sandbox.Controls.EOSSandboxDropDown
-                android:id="@+id/unfocusedUnderlineColorDropDown"
+                android:id="@+id/normalIconColorDropDown"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
             <EOS.UI.Android.Sandbox.Controls.EOSSandboxDropDown
-                android:id="@+id/disabledUnderlineColorDropDown"
+                android:id="@+id/populatedUnderlineColorDropDown"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+            <EOS.UI.Android.Sandbox.Controls.EOSSandboxDropDown
+                android:id="@+id/populatedIconColorDropDown"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+            <EOS.UI.Android.Sandbox.Controls.EOSSandboxDropDown
+                android:id="@+id/validationRulesDropDown"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
             <LinearLayout

@@ -54,13 +54,13 @@ namespace EOS.UI.iOS.Components
             }
         }
 
-        public int TitleTextSize
+        public float TitleTextSize
         {
             get => (int)dayLabel.Font.PointSize;
             set => dayLabel.Font = dayLabel.Font.WithSize(value);
         }
 
-        public int DayTextSize
+        public float DayTextSize
         {
             get => (int)startWorkLabel.Font.PointSize;
             set
