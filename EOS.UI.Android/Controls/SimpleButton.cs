@@ -1,5 +1,4 @@
 using System;
-using Android.Animation;
 using Android.Content;
 using Android.Content.Res;
 using Android.Graphics;
@@ -10,7 +9,6 @@ using Android.Runtime;
 using Android.Text;
 using Android.Util;
 using Android.Views;
-using Android.Views.Animations;
 using Android.Widget;
 using Com.Airbnb.Lottie;
 using EOS.UI.Shared.Themes.Helpers;
@@ -19,7 +17,6 @@ using Java.Util;
 using UIFrameworks.Android.Themes;
 using UIFrameworks.Shared.Themes.Helpers;
 using UIFrameworks.Shared.Themes.Interfaces;
-using static EOS.UI.Android.Helpers.Constants;
 
 namespace EOS.UI.Android.Controls
 {
@@ -28,9 +25,14 @@ namespace EOS.UI.Android.Controls
         #region fields
 
         private float _pivot = 0.5f;
-        private ObjectAnimator _animator;
         private LottieDrawable _animationDrawable;
         private const string _animationKey = "Animations/preloader-snake.json";
+        private int _top;
+        private int _bottom;
+        private int _left;
+        private int _right;
+        private string _text;
+        private bool _shouldRedraw = true;
 
         public bool InProgress { get; private set; }
 
@@ -118,6 +120,7 @@ namespace EOS.UI.Android.Controls
             set
             {
                 IsEOSCustomizationIgnored = true;
+                _shouldRedraw = true;
                 base.Typeface = value;
             }
         }
@@ -128,6 +131,7 @@ namespace EOS.UI.Android.Controls
             set
             {
                 IsEOSCustomizationIgnored = true;
+                _shouldRedraw = true;
                 base.LetterSpacing = value;
             }
         }
@@ -138,6 +142,7 @@ namespace EOS.UI.Android.Controls
             set
             {
                 IsEOSCustomizationIgnored = true;
+                _shouldRedraw = true;
                 base.TextSize = value;
             }
         }
@@ -217,6 +222,16 @@ namespace EOS.UI.Android.Controls
             _animationDrawable = new LottieDrawable();
             _animationDrawable.Loop(true);
 
+            LottieComposition.Factory.FromAssetFileName(Context, _animationKey, (composition) =>
+            {
+                _animationDrawable.SetComposition(composition);
+            });
+
+            _bottom = PaddingBottom;
+            _top = PaddingTop;
+            _left = PaddingLeft;
+            _right = PaddingRight;
+
             var denisty = Resources.DisplayMetrics.Density;
             SetAllCaps(false);
             SetOnTouchListener(this);
@@ -226,7 +241,6 @@ namespace EOS.UI.Android.Controls
                 InitializeAttributes(attrs);
             UpdateAppearance();
             Background = CreateRippleDrawable(BackgroundColor);
-            Elevation = 20;
         }
 
         private void InitializeAttributes(IAttributeSet attrs)
@@ -324,30 +338,49 @@ namespace EOS.UI.Android.Controls
         {
             if(Enabled && !InProgress)
             {
-                Drawable[] layers = { CreateGradientDrawable(BackgroundColor), _animationDrawable };
-                var layerDrawable = new LayerDrawable(layers);
+                SetStartAnimationValues();
 
-                var preloaderSize = Height / 2;
-                var insetVertical = Height / 4;
-                var insetHorizontal = (Width - preloaderSize) / 2;
-                layerDrawable.SetLayerInset(1, insetHorizontal, insetVertical, insetHorizontal, insetVertical);
-                Background = layerDrawable;
-                
-                LottieComposition.Factory.FromAssetFileName(Context, _animationKey, (composition) =>
+                if(_shouldRedraw)
                 {
-                    _animationDrawable.SetComposition(composition);
-                    _animationDrawable.PlayAnimation();
-                });
+                    SetStopAnimationValues();
+                    SetStartAnimationValues();
+                    _shouldRedraw = false;
+                }
+
+                _animationDrawable.PlayAnimation();
+
                 InProgress = true;
             }
         }
 
+        private void SetStartAnimationValues()
+        {
+            _text = Text;
+
+            var scale = (Height * 0.7f) / 95f;
+            _animationDrawable.Scale = scale;
+
+            var deltaX = (int)((Width - _animationDrawable.IntrinsicWidth) * 0.5);
+            var deltaY = (int)((Height - _animationDrawable.IntrinsicHeight) * 0.5);
+
+            Text = string.Empty;
+            SetCompoundDrawables(_animationDrawable, null, null, null);
+            SetPadding(deltaX, deltaY, deltaX, deltaY);
+        }
+
+        private void SetStopAnimationValues()
+        {
+            SetCompoundDrawables(null, null, null, null);
+            SetPadding(_left, _top, _right, _bottom);
+            Text = _text;
+        }
+
         public void StopProgressAnimation()
         {
-            _animator.Cancel();
+            _animationDrawable.Stop();
             InProgress = false;
-            BackgroundColor = _backgroundColor;
-            base.SetTextColor(_textColor);
+
+            SetStopAnimationValues();
         }
 
         private RotateDrawable CreateRotateDrawable()
