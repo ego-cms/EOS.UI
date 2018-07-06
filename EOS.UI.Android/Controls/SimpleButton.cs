@@ -117,6 +117,7 @@ namespace EOS.UI.Android.Controls
             {
                 IsEOSCustomizationIgnored = true;
                 FontStyle.Typeface = value;
+                SetFontStyle();
                 base.Typeface = value;
             }
         }
@@ -128,6 +129,7 @@ namespace EOS.UI.Android.Controls
             {
                 IsEOSCustomizationIgnored = true;
                 FontStyle.LetterSpacing = value;
+                SetFontStyle();
                 base.LetterSpacing = value;
             }
         }
@@ -139,6 +141,7 @@ namespace EOS.UI.Android.Controls
             {
                 IsEOSCustomizationIgnored = true;
                 FontStyle.Size = value;
+                SetFontStyle();
                 base.TextSize = value;
             }
         }
@@ -150,6 +153,7 @@ namespace EOS.UI.Android.Controls
             {
                 IsEOSCustomizationIgnored = true;
                 FontStyle.Color = value;
+                SetFontStyle();
                 _rotateDrawable.Drawable?.SetColorFilter(value, PorterDuff.Mode.SrcIn);
                 if(Enabled)
                     base.SetTextColor(value);
@@ -168,6 +172,7 @@ namespace EOS.UI.Android.Controls
             {
                 IsEOSCustomizationIgnored = true;
                 DisabledFontStyle.Color = value;
+                SetDisabledFontStyle();
                 if(!Enabled)
                     base.SetTextColor(value);
             }

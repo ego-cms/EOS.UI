@@ -165,6 +165,7 @@ namespace EOS.UI.Android.Controls
             {
                 IsEOSCustomizationIgnored = true;
                 HintFontStyle.Color = value;
+                SetHintFontStyle();
                 if(Enabled)
                     base.SetHintTextColor(value);
             }
@@ -177,6 +178,7 @@ namespace EOS.UI.Android.Controls
             {
                 IsEOSCustomizationIgnored = true;
                 DisabledHintFontStyle.Color = value;
+                SetDisabledHintFontStyle();
                 if(!Enabled)
                     base.SetHintTextColor(value);
             }
@@ -197,6 +199,7 @@ namespace EOS.UI.Android.Controls
             {
                 IsEOSCustomizationIgnored = true;
                 FontStyle.Typeface = value;
+                SetFontStyle();
                 base.Typeface = value;
             }
         }
@@ -214,6 +217,7 @@ namespace EOS.UI.Android.Controls
             {
                 IsEOSCustomizationIgnored = true;
                 FontStyle.LetterSpacing = value;
+                SetFontStyle();
                 base.LetterSpacing = value;
             }
         }
@@ -225,6 +229,7 @@ namespace EOS.UI.Android.Controls
             {
                 IsEOSCustomizationIgnored = true;
                 FontStyle.Color = value;
+                SetFontStyle();
                 if(Enabled)
                     base.SetTextColor(value);
             }
@@ -237,6 +242,7 @@ namespace EOS.UI.Android.Controls
             {
                 IsEOSCustomizationIgnored = true;
                 DisabledFontStyle.Color = value;
+                SetDisabledFontStyle();
                 if(!Enabled)
                     base.SetTextColor(value);
             }

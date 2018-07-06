@@ -31,6 +31,7 @@ namespace EOS.UI.Android.Controls
             {
                 base.Typeface = value;
                 FontStyle.Typeface = value;
+                SetFontStyle();
                 IsEOSCustomizationIgnored = true;
             }
         }
@@ -42,6 +43,7 @@ namespace EOS.UI.Android.Controls
             {
                 base.LetterSpacing = value;
                 FontStyle.LetterSpacing = value;
+                SetFontStyle();
                 IsEOSCustomizationIgnored = true;
             }
         }
@@ -53,6 +55,7 @@ namespace EOS.UI.Android.Controls
             {
                 base.TextSize = value;
                 FontStyle.Size = value;
+                SetFontStyle();
                 IsEOSCustomizationIgnored = true;
             }
         }
@@ -63,6 +66,7 @@ namespace EOS.UI.Android.Controls
             set
             {
                 FontStyle.Color = value;
+                SetFontStyle();
                 SetTextColorSet(value, DisabledTextColor);
                 IsEOSCustomizationIgnored = true;
             }
@@ -92,6 +96,7 @@ namespace EOS.UI.Android.Controls
             set
             {
                 DisabledFontStyle.Color = value;
+                SetDisabledFontStyle();
                 SetTextColorSet(EnabledTextColor, DisabledFontStyle.Color);
                 IsEOSCustomizationIgnored = true;
             }

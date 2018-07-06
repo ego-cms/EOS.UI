@@ -114,6 +114,7 @@ namespace EOS.UI.Android.Controls
             {
                 _percentText.Typeface = value;
                 FontStyle.Typeface = value;
+                SetFontStyle();
                 IsEOSCustomizationIgnored = true;
             }
         }
@@ -125,6 +126,7 @@ namespace EOS.UI.Android.Controls
             {
                 _percentText.TextSize = value;
                 FontStyle.Size = value;
+                SetFontStyle();
                 IsEOSCustomizationIgnored = true;
             }
         }

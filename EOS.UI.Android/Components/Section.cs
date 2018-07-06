@@ -73,6 +73,7 @@ namespace EOS.UI.Android.Components
             {
                 _titleLabel.TextSize = value;
                 TitleFontStyle.Size = value;
+                SetTitleFontStyle();
                 IsEOSCustomizationIgnored = true;
             }
         }
@@ -84,6 +85,7 @@ namespace EOS.UI.Android.Components
             {
                 _actionButton.TextSize = value;
                 ButtonFontStyle.Size = value;
+                SetButtonFontStyle();
                 IsEOSCustomizationIgnored = true;
             }
         }
@@ -95,6 +97,7 @@ namespace EOS.UI.Android.Components
             {
                 _titleLabel.LetterSpacing = value;
                 TitleFontStyle.LetterSpacing = value;
+                SetTitleFontStyle();
                 IsEOSCustomizationIgnored = true;
             }
         }
@@ -106,6 +109,7 @@ namespace EOS.UI.Android.Components
             {
                 _actionButton.LetterSpacing = value;
                 ButtonFontStyle.LetterSpacing = value;
+                SetButtonFontStyle();
                 IsEOSCustomizationIgnored = true;
             }
         }
@@ -117,6 +121,7 @@ namespace EOS.UI.Android.Components
             {
                 _titleLabel.Typeface = value;
                 TitleFontStyle.Typeface = value;
+                SetTitleFontStyle();
                 IsEOSCustomizationIgnored = true;
             }
         }
@@ -128,6 +133,7 @@ namespace EOS.UI.Android.Components
             {
                 _actionButton.Typeface = value;
                 ButtonFontStyle.Typeface = value;
+                SetButtonFontStyle();
                 IsEOSCustomizationIgnored = true;
             }
         }
@@ -138,6 +144,7 @@ namespace EOS.UI.Android.Components
             set
             {
                 TitleFontStyle.Color = value;
+                SetTitleFontStyle();
                 _titleLabel.TextColor = value;
                 IsEOSCustomizationIgnored = true;
             }
@@ -149,6 +156,7 @@ namespace EOS.UI.Android.Components
             set
             {
                 ButtonFontStyle.Color = value;
+                SetButtonFontStyle();
                 _actionButton.SetTextColor(value);
                 IsEOSCustomizationIgnored = true;
             }
