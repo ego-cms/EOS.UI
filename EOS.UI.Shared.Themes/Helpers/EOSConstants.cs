@@ -14,6 +14,7 @@ namespace UIFrameworks.Shared.Themes.Helpers
         public const string NeutralColor5 = "neutralColor5";
         public const string NeutralColor6 = "neutralColor6";
         public const string RippleColor = "rippleColor";
+        public const string FabIconColor = "fabIconColor";
         public const string TextSize = "textSize";
         public const string SecondaryTextSize = "secondaryTextSize";
         public const string CornerRadius = "cornerRadius";
@@ -23,9 +24,9 @@ namespace UIFrameworks.Shared.Themes.Helpers
         public const string SecondaryFont = "secondaryFont";
         public const string LetterSpacing = "letterSpacing";
         public const string SecondaryLetterSpacing = "secondaryLetterSpacing";
-        public const string LeftImageUnfocused = "leftImageUnfocused";
-        public const string LeftImageFocused = "leftImageFocused";
-        public const string LeftImageDisabled = "leftImageDisabled";
+        public const string LeftImage = "leftImage";
+        public const string WarningInputImage = "warningInputImage";
+        public const string ClearInputImage = "clearInputImage";
         public const string SimpleButtonShadow = "simpleButtonShadow";
         //fab progress constans
         public const string CalendarImage = "calendarImage";
@@ -65,6 +66,10 @@ namespace UIFrameworks.Shared.Themes.Helpers
         public static string R3C3 = "R3C3";
         public static string R3C4 = "R3C4";
         public static string R3C5 = "R3C5";
+        public static string R4C1 = "R4C1";
+        public static string R4C2 = "R4C2";
+        public static string R4C3 = "R4C3";
+        public static string R4C4 = "R4C4";
     }
 
     public static class ControlNames

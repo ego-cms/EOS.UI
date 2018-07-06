@@ -30,12 +30,13 @@ namespace EOS.UI.iOS.Sandbox.Helpers
             public const string PressedBackground = "Pressed background";
             public const string HintTextColor = "Hint text color";
             public const string HintTextColorDisabled = "Hint text color disabled";
-            public const string IconFocused = "Icon focused";
-            public const string IconUnfocused = "Icon unfocused";
-            public const string IconDisabled = "Icon disabled";
-            public const string UnderlineColorFocused = "Underline color focused";
-            public const string UnderlineColorUnfocused = "Underline color unfocused";
-            public const string UnderlineColorDisabled = "Underline color disabled";
+            public const string Icon = "Icon";
+            public const string FocusedColor = "Focused color";
+            public const string PopulatedUnderlineColor = "Populated underline color";
+            public const string ValidationRules = "Validation rules";
+            public const string NormalIconColor = "Normal icon color";
+            public const string NormalUnderlineColor = "Normal underline color";
+            public const string PopulatedIconColor = "Populated icon color";
             public const string DisabledColor = "Disabled color";
             public const string PressedColor = "Pressed color";
             public const string Size = "Size";
@@ -117,11 +118,12 @@ namespace EOS.UI.iOS.Sandbox.Helpers
             { "Full-bleed button", SimpleButtonTypeEnum.FullBleed },
         };
 
-        public static List<string> Icons = new List<string>()
+        public static Dictionary<string, string> Icons = new Dictionary<string, string>()
         {
-            { "icAccountCircle"},
-            { "icAccountKey"},
-            { "icAccountOff"},
+            { "Calendar", "icCalendar" },
+            { "Account circle", "icAccountCircle" },
+            { "Account key", "icAccountKey" },
+            { "Account off", "icAccountOff" },
         };
 
         public static Dictionary<string, bool> States = new Dictionary<string, bool>()
@@ -157,6 +159,13 @@ namespace EOS.UI.iOS.Sandbox.Helpers
             "First",
             "Second",
             "Third",
+        };
+
+        public static Dictionary<String, Predicate<string>> Validations = new Dictionary<string, Predicate<string>>()
+        {
+            {"without validation", null },
+            {"e-mail validation", (s) => s.Contains("@") && !String.IsNullOrEmpty(s)},
+            {"empty validation", (s) => !String.IsNullOrEmpty(s) },
         };
 
         public static List<int> WidthValues;

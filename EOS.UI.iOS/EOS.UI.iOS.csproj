@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -101,6 +101,18 @@
     <ImageAsset Include="Assets.xcassets\icAccountKey.imageset\icAccountKey.pdf">
       <Visible>false</Visible>
     </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\icWarning.imageset\Contents.json">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\icWarning.imageset\icWarning.pdf">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\icClear.imageset\Contents.json">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\icClear.imageset\icClear.pdf">
+      <Visible>false</Visible>
+    </ImageAsset>
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
@@ -161,6 +173,8 @@
     <Folder Include="Assets.xcassets\icAccountOff.imageset\" />
     <Folder Include="Assets.xcassets\icAccountKey.imageset\" />
     <Folder Include="CollectionViewSources\" />
+    <Folder Include="Assets.xcassets\icWarning.imageset\" />
+    <Folder Include="Assets.xcassets\icClear.imageset\" />
     <Folder Include="Resources\Animations\" />
   </ItemGroup>
   <ItemGroup>

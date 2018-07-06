@@ -57,11 +57,13 @@ namespace EOS.UI.Shared.Themes.Themes
             { EOSConstants.LabelCornerRadius, 5 },
             { EOSConstants.LetterSpacing, 1 },
             { EOSConstants.SecondaryLetterSpacing, 1 },
-            { EOSConstants.LeftImageFocused, "icAccountCircle" },
-            { EOSConstants.LeftImageUnfocused, "icAccountKey" },
-            { EOSConstants.LeftImageDisabled, "icAccountOff" },
+            { EOSConstants.LeftImage, "icCalendar" },
             { EOSConstants.CalendarImage, "icCalendar"},
             { EOSConstants.FabProgressPreloaderImage, "icPreloader"},
+            //should always be white
+            { EOSConstants.FabIconColor, ColorExtension.FromHex(neutralColor6)},
+            { EOSConstants.WarningInputImage, "icWarning"},
+            { EOSConstants.ClearInputImage, "icClear"},
             { EOSConstants.FabProgressSize, 52},
             { EOSConstants.CircleProgressShown, true},
             { EOSConstants.FabShadow, new ShadowConfig(){
@@ -145,6 +147,30 @@ namespace EOS.UI.Shared.Themes.Themes
                     LetterSpacing = 0.06f,
                     LineHeight = 13f
             }},
+            //input normal
+            { EOSConstants.R4C2, new FontStyleItem() {
+                    Color = ColorExtension.FromHex(neutralColor1),
+                    Font = UIFont.SystemFontOfSize(17f, UIFontWeight.Regular),
+                    Size = 17f,
+                    LetterSpacing = -0.24f,
+                    LineHeight = 20f
+            }},
+            //input placeholder
+            { EOSConstants.R4C3, new FontStyleItem() {
+                    Color = ColorExtension.FromHex(neutralColor2),
+                    Font = UIFont.SystemFontOfSize(17f, UIFontWeight.Regular),
+                    Size = 17f,
+                    LetterSpacing = -0.24f,
+                    LineHeight = 20f
+            }},
+            //input placeholder disabled, input disabled
+            { EOSConstants.R4C4, new FontStyleItem() {
+                    Color = ColorExtension.FromHex(neutralColor3),
+                    Font = UIFont.SystemFontOfSize(17f, UIFontWeight.Regular),
+                    Size = 17f,
+                    LetterSpacing = -0.24f,
+                    LineHeight = 20f
+            }},
 #endif
 
 #if __ANDROID__
@@ -169,9 +195,7 @@ namespace EOS.UI.Shared.Themes.Themes
             { EOSConstants.ButtonCornerRadius, 60f },
             { EOSConstants.LetterSpacing, 0f },
             { EOSConstants.SecondaryLetterSpacing, 0f },
-            { EOSConstants.LeftImageFocused, Resource.Drawable.AccountCircle },
-            { EOSConstants.LeftImageUnfocused, Resource.Drawable.AccountKey },
-            { EOSConstants.LeftImageDisabled, Resource.Drawable.AccountOff },
+            { EOSConstants.LeftImage, Resource.Drawable.icCalendar },
             { EOSConstants.CalendarImage, Resource.Drawable.icCalendar },
             { EOSConstants.FabProgressPreloaderImage, Resource.Drawable.icPreloader },
             { EOSConstants.CircleProgressShown, true},
