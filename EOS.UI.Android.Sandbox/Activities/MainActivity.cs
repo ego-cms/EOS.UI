@@ -33,14 +33,7 @@ namespace EOS.UI.Android.Sandbox
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
-            try
-            {
-                SetContentView(Resource.Layout.Main);
-            }
-            catch(Exception ex)
-            {
-                var m = ex.Message;
-            }
+            SetContentView(Resource.Layout.Main);
 
             _recyclerView = FindViewById<RecyclerView>(Resource.Id.recyclerView);
             var layoutManager = new LinearLayoutManager(BaseContext);
