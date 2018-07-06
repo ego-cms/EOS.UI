@@ -97,6 +97,8 @@ namespace EOS.UI.Shared.Themes.Themes
             { EOSConstants.LeftImage, "icCalendar" },
             { EOSConstants.CalendarImage, "icCalendar"},
             { EOSConstants.FabProgressPreloaderImage, "icPreloader"},
+            //should always be white
+            { EOSConstants.FabIconColor, ColorExtension.FromHex(neutralColor6)},
             { EOSConstants.WarningInputImage, "icWarning"},
             { EOSConstants.ClearInputImage, "icClear"},
             { EOSConstants.FabProgressSize, 52},
@@ -181,6 +183,30 @@ namespace EOS.UI.Shared.Themes.Themes
                     Size = 11f,
                     LetterSpacing = 0.06f,
                     LineHeight = 13f
+            }},
+            //input normal
+            { EOSConstants.R4C2, new FontStyleItem() {
+                    Color = ColorExtension.FromHex(neutralColor1),
+                    Font = UIFont.SystemFontOfSize(17f, UIFontWeight.Regular),
+                    Size = 17f,
+                    LetterSpacing = -0.24f,
+                    LineHeight = 20f
+            }},
+            //input placeholder
+            { EOSConstants.R4C3, new FontStyleItem() {
+                    Color = ColorExtension.FromHex(neutralColor2),
+                    Font = UIFont.SystemFontOfSize(17f, UIFontWeight.Regular),
+                    Size = 17f,
+                    LetterSpacing = -0.24f,
+                    LineHeight = 20f
+            }},
+            //input placeholder disabled, input disabled
+            { EOSConstants.R4C4, new FontStyleItem() {
+                    Color = ColorExtension.FromHex(neutralColor3),
+                    Font = UIFont.SystemFontOfSize(17f, UIFontWeight.Regular),
+                    Size = 17f,
+                    LetterSpacing = -0.24f,
+                    LineHeight = 20f
             }},
 #endif
 

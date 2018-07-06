@@ -98,6 +98,8 @@ namespace EOS.UI.Shared.Themes.Themes
             { EOSConstants.SecondaryLetterSpacing, 2 },
             { EOSConstants.LeftImage, "icCalendar" },
             { EOSConstants.CalendarImage, "icCalendar"},
+            //should always be white
+            { EOSConstants.FabIconColor, ColorExtension.FromHex(neutralColor1)},
             { EOSConstants.FabProgressPreloaderImage, "icPreloader"},
             { EOSConstants.WarningInputImage, "icWarning"},
             { EOSConstants.ClearInputImage, "icClear"},
@@ -122,7 +124,7 @@ namespace EOS.UI.Shared.Themes.Themes
             { EOSConstants.TopPadding, 10 },
             { EOSConstants.RightPadding, 16 },
             { EOSConstants.BottomPadding, 10 },
-            { EOSConstants.HasSectionBorder, false },
+            { EOSConstants.HasSectionBorder, true },
             { EOSConstants.HasSectionAction, true },
             { EOSConstants.WorkTimeTitleSize, 13 },
             { EOSConstants.WorkTimeTitleFont, UIFont.BoldSystemFontOfSize(13) },
@@ -183,6 +185,30 @@ namespace EOS.UI.Shared.Themes.Themes
                     Size = 11f,
                     LetterSpacing = 0.06f,
                     LineHeight = 13f
+            }},
+            //input normal
+            { EOSConstants.R4C2, new FontStyleItem() {
+                    Color = ColorExtension.FromHex(neutralColor1),
+                    Font = UIFont.SystemFontOfSize(17f, UIFontWeight.Regular),
+                    Size = 17f,
+                    LetterSpacing = -0.24f,
+                    LineHeight = 20f
+            }},
+            //input placeholder
+            { EOSConstants.R4C3, new FontStyleItem() {
+                    Color = ColorExtension.FromHex(neutralColor2),
+                    Font = UIFont.SystemFontOfSize(17f, UIFontWeight.Regular),
+                    Size = 17f,
+                    LetterSpacing = -0.24f,
+                    LineHeight = 20f
+            }},
+            //input placeholder disabled, input disabled
+            { EOSConstants.R4C4, new FontStyleItem() {
+                    Color = ColorExtension.FromHex(neutralColor3),
+                    Font = UIFont.SystemFontOfSize(17f, UIFontWeight.Regular),
+                    Size = 17f,
+                    LetterSpacing = -0.24f,
+                    LineHeight = 20f
             }},
 #endif
 

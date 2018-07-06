@@ -14,6 +14,7 @@ namespace UIFrameworks.Shared.Themes.Helpers
         public const string NeutralColor5 = "neutralColor5";
         public const string NeutralColor6 = "neutralColor6";
         public const string RippleColor = "rippleColor";
+        public const string FabIconColor = "fabIconColor";
         public const string TextSize = "textSize";
         public const string SecondaryTextSize = "secondaryTextSize";
         public const string CornerRadius = "cornerRadius";
