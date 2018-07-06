@@ -3,7 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using EOS.UI.iOS.Components;
 using EOS.UI.iOS.Models;
+using EOS.UI.iOS.Themes;
+using EOS.UI.Shared.Themes.Extensions;
 using Foundation;
+using UIFrameworks.Shared.Themes.Helpers;
 using UIKit;
 
 namespace EOS.UI.iOS.Sandbox.TableSources
@@ -13,6 +16,7 @@ namespace EOS.UI.iOS.Sandbox.TableSources
         private UITableView _tableView;
         private const string _cellIdentifier = "SectionTableViewCell";
         private List<string> _source;
+        private readonly List<string> _cellsText = new List<string>() { "Terms of Use", "Privacy Policy", "About Us" };
         public SectionModel SectionModel { get; set; }
 
         public SectionTableSource(UITableView table, List<object> dataSource)
@@ -27,7 +31,10 @@ namespace EOS.UI.iOS.Sandbox.TableSources
         public override UITableViewCell GetCell(UITableView tableView, NSIndexPath indexPath)
         {
             var cell = tableView.DequeueReusableCell(_cellIdentifier, indexPath);
-            cell.TextLabel.Text = _source[indexPath.Row];
+            var theme = EOSThemeProvider.Instance.GetCurrentTheme();
+            cell.Accessory = indexPath.Row == 0 ? UITableViewCellAccessory.DisclosureIndicator : UITableViewCellAccessory.None;
+            cell.TextLabel.Text = _cellsText[indexPath.Row];
+            cell.TextLabel.TextColor = EOSThemeProvider.Instance.GetEOSProperty<UIColor>(EOSConstants.NeutralColor1);
             return cell;
         }
 
@@ -46,10 +53,15 @@ namespace EOS.UI.iOS.Sandbox.TableSources
             return 36;
         }
 
+        public override nfloat GetHeightForRow(UITableView tableView, NSIndexPath indexPath)
+        {
+            return 44;
+        }
+
         public override UIView GetViewForHeader(UITableView tableView, nint section)
         {
+            _tableView.BackgroundColor = EOSThemeProvider.Instance.GetEOSProperty<UIColor>(EOSConstants.NeutralColor6);
             var header = _tableView.DequeueReusableHeaderFooterView(Section.Key);
-
             var customSection = (header as Section);
 
             customSection.Initialize();
