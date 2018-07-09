@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using Airbnb.Lottie;
 using CoreAnimation;
@@ -21,7 +21,6 @@ namespace EOS.UI.iOS.Controls
     {
         private LOTAnimationView _snakeAnimation;
         private const string _snakeAnimationKey = "Animations/preloader-snake";
-        private const string _rippleAnimationKey = "rippleAnimation";
         private const double _360degrees = 6.28319;//value in radians
         private Dictionary<UIControlState, NSAttributedString> _attributedTitles = new Dictionary<UIControlState, NSAttributedString>();
         private const double _verticalPaddingRatio = 0.25;

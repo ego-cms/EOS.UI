@@ -56,6 +56,8 @@ namespace UIFrameworks.Shared.Themes.Helpers
         public static string R1C2 = "R1C2";
         public static string R1C3 = "R1C3";
         public static string R1C4 = "R1C4";
+        public static string R1C5 = "R1C5";
+        public static string R1C6 = "R1C6";
         public static string R2C1 = "R2C1";
         public static string R2C2 = "R2C2";
         public static string R2C3 = "R2C3";
