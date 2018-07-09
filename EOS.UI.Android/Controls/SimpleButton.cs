@@ -24,15 +24,17 @@ namespace EOS.UI.Android.Controls
     {
         #region fields
 
+        private readonly float _proportionHeight = 0.7f;
         private float _pivot = 0.5f;
         private LottieDrawable _animationDrawable;
         private const string _animationKey = "Animations/preloader-snake.json";
-        private int _top;
-        private int _bottom;
-        private int _left;
-        private int _right;
+        private int _baseTopPadding;
+        private int _baseBottomPadding;
+        private int _baseLeftPadding;
+        private int _baseRightPadding;
         private string _text;
         private bool _shouldRedraw = true;
+        private float _baseHeight;
 
         public bool InProgress { get; private set; }
 
@@ -225,12 +227,13 @@ namespace EOS.UI.Android.Controls
             LottieComposition.Factory.FromAssetFileName(Context, _animationKey, (composition) =>
             {
                 _animationDrawable.SetComposition(composition);
+                _baseHeight = _animationDrawable.IntrinsicHeight;
             });
 
-            _bottom = PaddingBottom;
-            _top = PaddingTop;
-            _left = PaddingLeft;
-            _right = PaddingRight;
+            _baseBottomPadding = PaddingBottom;
+            _baseTopPadding = PaddingTop;
+            _baseLeftPadding = PaddingLeft;
+            _baseRightPadding = PaddingRight;
 
             var denisty = Resources.DisplayMetrics.Density;
             SetAllCaps(false);
@@ -357,21 +360,24 @@ namespace EOS.UI.Android.Controls
         {
             _text = Text;
 
-            var scale = (Height * 0.7f) / 95f;
+            //calculate scale of animation drawable like 70% of button's height 
+            var scale = (Height * _proportionHeight) / _baseHeight;
             _animationDrawable.Scale = scale;
 
-            var deltaX = (int)((Width - _animationDrawable.IntrinsicWidth) * 0.5);
-            var deltaY = (int)((Height - _animationDrawable.IntrinsicHeight) * 0.5);
+            //calculate padding around lottie drawable which saved normal button size 
+            //after replacing text with lottie drawable
+            var paddingX = (int)((Width - _animationDrawable.IntrinsicWidth) / 2f);
+            var paddingY = (int)((Height - _animationDrawable.IntrinsicHeight) / 2f);
 
             Text = string.Empty;
             SetCompoundDrawables(_animationDrawable, null, null, null);
-            SetPadding(deltaX, deltaY, deltaX, deltaY);
+            SetPadding(paddingX, paddingY, paddingX, paddingY);
         }
 
         private void SetStopAnimationValues()
         {
             SetCompoundDrawables(null, null, null, null);
-            SetPadding(_left, _top, _right, _bottom);
+            SetPadding(_baseLeftPadding, _baseTopPadding, _baseRightPadding, _baseBottomPadding);
             Text = _text;
         }
 
