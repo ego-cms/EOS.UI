@@ -10,10 +10,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/textViewTitle"
-        android:textSize="17sp"
+        android:textSize="13dp"
         android:background="#ff303f9f"
-        android:paddingLeft="10dp"
-        android:height="30dp"
+        android:paddingLeft="16dp"
+        android:height="35dp"
         android:gravity="center_vertical" />
     <View
         android:layout_width="match_parent"

@@ -31,7 +31,6 @@ namespace EOS.UI.iOS.Sandbox.TableSources
         public override UITableViewCell GetCell(UITableView tableView, NSIndexPath indexPath)
         {
             var cell = tableView.DequeueReusableCell(_cellIdentifier, indexPath);
-            var theme = EOSThemeProvider.Instance.GetCurrentTheme();
             cell.Accessory = indexPath.Row == 0 ? UITableViewCellAccessory.DisclosureIndicator : UITableViewCellAccessory.None;
             cell.TextLabel.Text = _cellsText[indexPath.Row];
             cell.TextLabel.TextColor = EOSThemeProvider.Instance.GetEOSProperty<UIColor>(EOSConstants.NeutralColor1);
