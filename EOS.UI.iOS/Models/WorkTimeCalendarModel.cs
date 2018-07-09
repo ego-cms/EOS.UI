@@ -48,49 +48,66 @@ namespace EOS.UI.iOS.Models
             }
         }
 
-        private UIFont _titleFont;
+        private FontStyleItem _dayFontStyle;
+        public FontStyleItem DayFontStyle
+        {
+            get => _dayFontStyle;
+            set => _dayFontStyle = value;
+        }
+        
+        private FontStyleItem _titleFontStyle;
+        public FontStyleItem TitleFontStyle
+        {
+            get => _titleFontStyle;
+            set => _titleFontStyle = value;
+        }
+        
+        private FontStyleItem _currentDayFontStyle;
+        public FontStyleItem CurrentDayFontStyle
+        {
+            get => _currentDayFontStyle;
+            set => _currentDayFontStyle = value;
+        }
+
         public UIFont TitleFont
         {
-            get => _titleFont;
+            get => TitleFontStyle.Font;
             set
             {
-                _titleFont = value;
+                TitleFontStyle.Font = value.WithSize(TitleTextSize);
                 IsEOSCustomizationIgnored = true;
                 PropertyChanged?.Invoke(this, EventArgs.Empty);
             }
         }
 
-        private UIFont _dayTextFont;
         public UIFont DayTextFont
         {
-            get => _dayTextFont;
+            get => DayFontStyle.Font;
             set
             {
-                _dayTextFont = value;
+                DayFontStyle.Font = value.WithSize(DayTextSize);
                 IsEOSCustomizationIgnored = true;
                 PropertyChanged?.Invoke(this, EventArgs.Empty);
             }
         }
 
-        private UIColor _titleColor;
         public UIColor TitleColor
         {
-            get => _titleColor;
+            get => TitleFontStyle.Color;
             set
             {
-                _titleColor = value;
+                TitleFontStyle.Color = value;
                 IsEOSCustomizationIgnored = true;
                 PropertyChanged?.Invoke(this, EventArgs.Empty);
             }
         }
 
-        private UIColor _dayTextColor;
         public UIColor DayTextColor
         {
-            get => _dayTextColor;
+            get => DayFontStyle.Color;
             set
             {
-                _dayTextColor = value;
+                DayFontStyle.Color = value;
                 IsEOSCustomizationIgnored = true;
                 PropertyChanged?.Invoke(this, EventArgs.Empty);
             }
@@ -108,13 +125,12 @@ namespace EOS.UI.iOS.Models
             }
         }
 
-        private UIColor _currentDayTextColor;
         public UIColor CurrentDayTextColor
         {
-            get => _currentDayTextColor;
+            get => CurrentDayFontStyle.Color;
             set
             {
-                _currentDayTextColor = value;
+                CurrentDayFontStyle.Color = value;
                 IsEOSCustomizationIgnored = true;
                 PropertyChanged?.Invoke(this, EventArgs.Empty);
             }
@@ -132,25 +148,23 @@ namespace EOS.UI.iOS.Models
             }
         }
 
-        private int _titleTextSize;
-        public int TitleTextSize
+        public float TitleTextSize
         {
-            get => _titleTextSize;
+            get => TitleFontStyle.Size;
             set
             {
-                _titleTextSize = value;
+                TitleFontStyle.Size = value;
                 IsEOSCustomizationIgnored = true;
                 PropertyChanged?.Invoke(this, EventArgs.Empty);
             }
         }
 
-        private int _dayTextSize;
-        public int DayTextSize
+        public float DayTextSize
         {
-            get => _dayTextSize;
+            get => DayFontStyle.Size;
             set
             {
-                _dayTextSize = value;
+                DayFontStyle.Size = value;
                 IsEOSCustomizationIgnored = true;
                 PropertyChanged?.Invoke(this, EventArgs.Empty);
             }
@@ -208,14 +222,10 @@ namespace EOS.UI.iOS.Models
             if (!IsEOSCustomizationIgnored)
             {
                 var provider = EOSThemeProvider.Instance;
-                TitleColor = provider.GetEOSProperty<UIColor>(this, EOSConstants.NeutralColor1);
-                TitleFont = provider.GetEOSProperty<UIFont>(this, EOSConstants.WorkTimeTitleFont);
-                DayTextColor = provider.GetEOSProperty<UIColor>(this, EOSConstants.NeutralColor2);
-                DayTextFont = provider.GetEOSProperty<UIFont>(this, EOSConstants.WorkTimeDayTextFont);
+                TitleFontStyle = provider.GetEOSProperty<FontStyleItem>(this, EOSConstants.R2C2);
+                DayFontStyle = provider.GetEOSProperty<FontStyleItem>(this, EOSConstants.R1C3);
+                CurrentDayFontStyle = provider.GetEOSProperty<FontStyleItem>(this, EOSConstants.R1C6);
                 CurrentDayBackgroundColor = provider.GetEOSProperty<UIColor>(this, EOSConstants.BrandPrimaryColor);
-                CurrentDayTextColor = provider.GetEOSProperty<UIColor>(this, EOSConstants.NeutralColor6);
-                TitleTextSize = provider.GetEOSProperty<int>(this, EOSConstants.WorkTimeTitleSize);
-                DayTextSize = provider.GetEOSProperty<int>(this, EOSConstants.WorkTimeDayTextSize);
                 DayEvenBackgroundColor = provider.GetEOSProperty<UIColor>(this, EOSConstants.NeutralColor5);
                 ColorDividers = provider.GetEOSProperty<UIColor>(this, EOSConstants.NeutralColor4);
                 CurrentColorDeviders = provider.GetEOSProperty<UIColor>(this, EOSConstants.NeutralColor4);

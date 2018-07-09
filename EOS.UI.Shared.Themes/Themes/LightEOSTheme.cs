@@ -208,6 +208,30 @@ namespace EOS.UI.Shared.Themes.Themes
                     LetterSpacing = -0.24f,
                     LineHeight = 20f
             }},
+            //worktimecalendar title day fontstyle
+            { EOSConstants.R2C2, new FontStyleItem() {
+                    Color = ColorExtension.FromHex(neutralColor1),
+                    Font = UIFont.SystemFontOfSize(13f, UIFontWeight.Bold),
+                    Size = 13f,
+                    LetterSpacing = -0.06f,
+                    LineHeight = 15f
+            }},
+            //worktimecalendar day fontstyle
+            { EOSConstants.R1C3, new FontStyleItem() {
+                    Color = ColorExtension.FromHex(neutralColor2),
+                    Font = UIFont.SystemFontOfSize(11f, UIFontWeight.Bold),
+                    Size = 11f,
+                    LetterSpacing = 0.06f,
+                    LineHeight = 13f
+            }},
+            //worktimecalendar currentday fontstyle
+            { EOSConstants.R1C6, new FontStyleItem() {
+                    Color = ColorExtension.FromHex(neutralColor6),
+                    Font = UIFont.SystemFontOfSize(11f, UIFontWeight.Bold),
+                    Size = 11f,
+                    LetterSpacing = 0.06f,
+                    LineHeight = 13f
+            }},
 #endif
 
 #if __ANDROID__
