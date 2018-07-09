@@ -239,6 +239,13 @@ namespace EOS.UI.Shared.Themes.Themes
             { EOSConstants.BottomPadding, 10 },
             { EOSConstants.HasSectionBorder, true },
             { EOSConstants.HasSectionAction, true },
+            { EOSConstants.SimpleButtonShadow,
+                new ShadowConfig()
+                {
+                    Offset = 7f,
+                    Radius = 7f,
+                }
+            },
             { EOSConstants.R1C1,
                 new FontStyleItem()
                 {

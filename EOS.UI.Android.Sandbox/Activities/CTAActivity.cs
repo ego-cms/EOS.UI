@@ -35,6 +35,7 @@ namespace EOS.UI.Android.Sandbox.Activities
         private Switch _disableSwitch;
         private List<EOSSandboxDropDown> _dropDowns;
         private EOSSandboxDropDown _buttonTypeDropDown;
+        private EOSSandboxDropDown _shadowRadiusDropDown;
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
@@ -68,6 +69,7 @@ namespace EOS.UI.Android.Sandbox.Activities
             _resetButton = FindViewById<Button>(Resource.Id.buttonResetCustomization);
             _disableSwitch = FindViewById<Switch>(Resource.Id.switchDisabled);
             _buttonTypeDropDown = FindViewById<EOSSandboxDropDown>(Resource.Id.buttonTypeDropDown);
+            _shadowRadiusDropDown = FindViewById<EOSSandboxDropDown>(Resource.Id.shadowRadiusDropDown);
 
             _dropDowns = new List<EOSSandboxDropDown>
             {
@@ -81,8 +83,14 @@ namespace EOS.UI.Android.Sandbox.Activities
                 _backgroundColorDisabledDropDown,
                 _backgroundColorPressedDropDown,
                 _cornerRadiusDropDown,
-                _rippleColorDropDown
+                _rippleColorDropDown,
+                _shadowRadiusDropDown
             };
+
+
+            _shadowRadiusDropDown.Name = Fields.ShadowRadius;
+            _shadowRadiusDropDown.SetupAdapter(Shadow.RadiusCollection.Select(item => item.Key).ToList());
+            _shadowRadiusDropDown.ItemSelected += ShadowRadiusItemSelected;
 
             _buttonTypeDropDown.Visibility = V.ViewStates.Visible;
             _buttonTypeDropDown.Name = Fields.ButtonType;
@@ -141,6 +149,16 @@ namespace EOS.UI.Android.Sandbox.Activities
             _disableSwitch.SetOnCheckedChangeListener(this);
 
             SetCurrenTheme(_CTAButton.GetThemeProvider().GetCurrentTheme());
+        }
+
+        private void ShadowRadiusItemSelected(int position)
+        {
+            if(position > 0)
+            {
+                var config = _CTAButton.ShadowConfig;
+                config.Radius = Shadow.RadiusCollection.ElementAt(position).Value;
+                _CTAButton.ShadowConfig = config;
+            }
         }
 
         private void ToggleEnableState()

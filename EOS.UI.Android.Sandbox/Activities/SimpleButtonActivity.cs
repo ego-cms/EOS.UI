@@ -30,6 +30,8 @@ namespace EOS.UI.Android.Sandbox.Activities
         private EOSSandboxDropDown _backgroundColorPressedDropDown;
         private EOSSandboxDropDown _cornerRadiusDropDown;
         private EOSSandboxDropDown _rippleColorDropDown;
+        private EOSSandboxDropDown _shadowRadiusDropDown;
+
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
@@ -51,6 +53,11 @@ namespace EOS.UI.Android.Sandbox.Activities
             var resetButton = FindViewById<Button>(Resource.Id.buttonResetCustomization);
             var disableSwitch = FindViewById<Switch>(Resource.Id.switchDisabled);
             _buttonTypeDropDown = FindViewById<EOSSandboxDropDown>(Resource.Id.buttonTypeDropDown);
+            _shadowRadiusDropDown = FindViewById<EOSSandboxDropDown>(Resource.Id.shadowRadiusDropDown);
+
+            _shadowRadiusDropDown.Name = Fields.ShadowRadius;
+            _shadowRadiusDropDown.SetupAdapter(Shadow.RadiusCollection.Select(item => item.Key).ToList());
+            _shadowRadiusDropDown.ItemSelected += ShadowRadiusItemSelected;
 
             _buttonTypeDropDown.Visibility = V.ViewStates.Visible;
             _buttonTypeDropDown.Name = Fields.ButtonType;
@@ -109,6 +116,26 @@ namespace EOS.UI.Android.Sandbox.Activities
             disableSwitch.SetOnCheckedChangeListener(this);
 
             SetCurrenTheme(_simpleButton.GetThemeProvider().GetCurrentTheme());
+        }
+
+        private void ShadowRadiusItemSelected(int position)
+        {
+            if(position > 0)
+            {
+                var config = _simpleButton.ShadowConfig;
+                config.Radius = Shadow.RadiusCollection.ElementAt(position).Value;
+                _simpleButton.ShadowConfig = config;
+            }
+        }
+
+        private void ShadowOffsetZItemSelected(int position)
+        {
+            if(position > 0)
+            {
+                var config = _simpleButton.ShadowConfig;
+                config.Offset = Shadow.OffsetCollection.ElementAt(position).Value;
+                _simpleButton.ShadowConfig = config;
+            }
         }
 
         private void ButtonTypeItemSelected(int position)
@@ -230,6 +257,7 @@ namespace EOS.UI.Android.Sandbox.Activities
             _backgroundColorPressedDropDown.SetSpinnerSelection(0);
             _cornerRadiusDropDown.SetSpinnerSelection(0);
             _rippleColorDropDown.SetSpinnerSelection(0);
+            _shadowRadiusDropDown.SetSpinnerSelection(0);
             if(!ignogeButtonType)
                 _buttonTypeDropDown.SetSpinnerSelection(1);
         }

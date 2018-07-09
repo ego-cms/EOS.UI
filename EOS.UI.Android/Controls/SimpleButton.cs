@@ -11,6 +11,7 @@ using Android.Text;
 using Android.Util;
 using Android.Views.Animations;
 using Android.Widget;
+using EOS.UI.Shared.Helpers;
 using EOS.UI.Shared.Themes.DataModels;
 using EOS.UI.Shared.Themes.Helpers;
 using EOS.UI.Shared.Themes.Interfaces;
@@ -19,6 +20,7 @@ using UIFrameworks.Android.Themes;
 using UIFrameworks.Shared.Themes.Helpers;
 using UIFrameworks.Shared.Themes.Interfaces;
 using static EOS.UI.Android.Helpers.Constants;
+using A = Android;
 
 namespace EOS.UI.Android.Controls
 {
@@ -202,6 +204,38 @@ namespace EOS.UI.Android.Controls
             }
         }
 
+        private ShadowConfig _shadowConfig;
+        public ShadowConfig ShadowConfig
+        {
+            get => _shadowConfig;
+            set
+            {
+                _shadowConfig = value;
+                UpdateStateListAnimator();
+                IsEOSCustomizationIgnored = true;
+            }
+        }
+
+        private void UpdateStateListAnimator()
+        {
+            var stateList = new StateListAnimator();
+
+            var elevationHolderToPressed = PropertyValuesHolder.OfFloat("Elevation", _shadowConfig.Radius, 0);
+            var translationZHolderToPressed = PropertyValuesHolder.OfFloat("TranslationZ", _shadowConfig.Radius, 0);
+            var pressedAnimation = ObjectAnimator.OfPropertyValuesHolder(this, elevationHolderToPressed, translationZHolderToPressed);
+            pressedAnimation.SetDuration(100);
+
+            var elevationHolderToNormal = PropertyValuesHolder.OfFloat("Elevation", 0, _shadowConfig.Radius);
+            var translationZHolderToNormal = PropertyValuesHolder.OfFloat("TranslationZ", 0, _shadowConfig.Radius);
+            var normalAnimation = ObjectAnimator.OfPropertyValuesHolder(this, elevationHolderToNormal, translationZHolderToNormal);
+            normalAnimation.SetDuration(100);
+
+            stateList.AddState(new int[1] { A.Resource.Attribute.StatePressed }, pressedAnimation);
+            stateList.AddState(new int[1] { A.Resource.Attribute.StateEnabled }, normalAnimation);
+
+            StateListAnimator = stateList;
+        }
+
         private Drawable _preloaderImage;
         public Drawable PreloaderImage
         {
@@ -262,7 +296,6 @@ namespace EOS.UI.Android.Controls
 
         private void Initialize(IAttributeSet attrs = null)
         {
-            StateListAnimator = AnimatorInflater.LoadStateListAnimator(Context, Resource.Animation.ButtonStateList);
             _rotateDrawable = CreateRotateDrawable();
             SetAllCaps(false);
             SetLines(1);
@@ -449,6 +482,8 @@ namespace EOS.UI.Android.Controls
                 RippleColor = GetThemeProvider().GetEOSProperty<Color>(this, EOSConstants.BrandPrimaryColorVariant1);
                 CornerRadius = GetThemeProvider().GetEOSProperty<float>(this, EOSConstants.ButtonCornerRadius);
                 PreloaderImage = Resources.GetDrawable(GetThemeProvider().GetEOSProperty<int>(this, EOSConstants.FabProgressPreloaderImage), null);
+                ShadowConfig = GetThemeProvider().GetEOSProperty<ShadowConfig>(this, EOSConstants.SimpleButtonShadow);
+
                 IsEOSCustomizationIgnored = false;
             }
         }
