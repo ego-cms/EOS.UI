@@ -191,7 +191,8 @@ namespace EOS.UI.Shared.Themes.Themes
             }},
             //worktimecalendar currentday fontstyle
             { EOSConstants.R1C6, new FontStyleItem() {
-                    Color = ColorExtension.FromHex(neutralColor6),
+                    //color must always be white
+                    Color = ColorExtension.FromHex(neutralColor1),
                     Font = UIFont.SystemFontOfSize(11f, UIFontWeight.Bold),
                     Size = 11f,
                     LetterSpacing = 0.06f,
