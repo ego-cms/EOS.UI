@@ -16,11 +16,14 @@
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:background="@android:color/darker_gray" />
-    <LinearLayout
-        android:orientation="vertical"
+    <EOS.UI.Android.Sandbox.Controls.EOSSandboxLinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp">
+        android:background="@color/background_color"
+        android:orientation="vertical"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="20dp"
+        android:layout_gravity="center">
         <EOS.UI.Android.Controls.GhostButton
             android:id="@+id/ghostButton"
             android:layout_width="wrap_content"
@@ -29,71 +32,83 @@
             android:paddingRight="24dp"
             android:layout_gravity="center"
             android:text="Default text" />
-        <EOS.UI.Android.Sandbox.Controls.EOSSandboxDivider
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_marginTop="20dp"
-            android:background="@android:color/darker_gray" />
-        <EOS.UI.Android.Sandbox.Controls.EOSSandboxDropDown
-            android:id="@+id/themeDropDown"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-        <EOS.UI.Android.Sandbox.Controls.EOSSandboxDropDown
-            android:id="@+id/fontDropDown"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-        <EOS.UI.Android.Sandbox.Controls.EOSSandboxDropDown
-            android:id="@+id/enabledTextColorDropDown"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-        <EOS.UI.Android.Sandbox.Controls.EOSSandboxDropDown
-            android:id="@+id/disabledTextColorDropDown"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-        <EOS.UI.Android.Sandbox.Controls.EOSSandboxDropDown
-            android:id="@+id/letterSpacingDropDown"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-        <EOS.UI.Android.Sandbox.Controls.EOSSandboxDropDown
-            android:id="@+id/textSizeDropDown"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-        <EOS.UI.Android.Sandbox.Controls.EOSSandboxDropDown
-            android:id="@+id/rippleColorDropDown"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+    </EOS.UI.Android.Sandbox.Controls.EOSSandboxLinearLayout>
+    <EOS.UI.Android.Sandbox.Controls.EOSSandboxDivider
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@android:color/darker_gray" />
+    <EOS.UI.Android.Sandbox.Controls.EOSSandboxScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
         <LinearLayout
-            android:orientation="horizontal"
+            android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:weightSum="3"
-            android:layout_marginBottom="5dp">
-            <EOS.UI.Android.Sandbox.Controls.EOSSandboxTextView
+            android:layout_height="wrap_content">
+            <EOS.UI.Android.Sandbox.Controls.EOSSandboxDropDown
+                android:id="@+id/themeDropDown"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:text="Enabled"
-                android:textSize="18sp"
-                android:paddingLeft="3dp"
-                android:layout_weight="2"
-                android:gravity="center_vertical" />
-            <Switch
+                android:layout_height="wrap_content" />
+            <EOS.UI.Android.Sandbox.Controls.EOSSandboxDropDown
+                android:id="@+id/fontDropDown"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:checked="true"
-                android:id="@+id/stateSwitch"
-                android:paddingLeft="3dp"
-                android:paddingRight="3dp"
-                android:layout_weight="1" />
+                android:layout_height="wrap_content" />
+            <EOS.UI.Android.Sandbox.Controls.EOSSandboxDropDown
+                android:id="@+id/enabledTextColorDropDown"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+            <EOS.UI.Android.Sandbox.Controls.EOSSandboxDropDown
+                android:id="@+id/disabledTextColorDropDown"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+            <EOS.UI.Android.Sandbox.Controls.EOSSandboxDropDown
+                android:id="@+id/pressedTextColorDropDown"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+            <EOS.UI.Android.Sandbox.Controls.EOSSandboxDropDown
+                android:id="@+id/letterSpacingDropDown"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+            <EOS.UI.Android.Sandbox.Controls.EOSSandboxDropDown
+                android:id="@+id/textSizeDropDown"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+            <EOS.UI.Android.Sandbox.Controls.EOSSandboxDropDown
+                android:id="@+id/rippleColorDropDown"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:weightSum="3"
+                android:layout_marginBottom="5dp">
+                <EOS.UI.Android.Sandbox.Controls.EOSSandboxTextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="Enabled"
+                    android:textSize="18sp"
+                    android:paddingLeft="3dp"
+                    android:layout_weight="2"
+                    android:gravity="center_vertical" />
+                <Switch
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:checked="true"
+                    android:id="@+id/stateSwitch"
+                    android:paddingLeft="3dp"
+                    android:paddingRight="3dp"
+                    android:layout_weight="1" />
+            </LinearLayout>
+            <EOS.UI.Android.Sandbox.Controls.EOSSandboxDivider
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@android:color/darker_gray" />
+            <EOS.UI.Android.Sandbox.Controls.EOSSandboxButton
+                android:text="Reset customization"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/buttonResetCustomization" />
         </LinearLayout>
-        <EOS.UI.Android.Sandbox.Controls.EOSSandboxDivider
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="@android:color/darker_gray" />
-        <EOS.UI.Android.Sandbox.Controls.EOSSandboxButton
-            android:text="Reset customization"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/buttonResetCustomization" />
-    </LinearLayout>
+    </EOS.UI.Android.Sandbox.Controls.EOSSandboxScrollView>
 </EOS.UI.Android.Sandbox.Controls.EOSSandboxLinearLayout>
