@@ -110,6 +110,8 @@
     <ImageAsset Include="Assets.xcassets\icClear.imageset\icClear.pdf">
       <Visible>false</Visible>
     </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\icHamburger.imageset\Contents.json" />
+    <ImageAsset Include="Assets.xcassets\icHamburger.imageset\icHamburger.png" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
@@ -146,6 +148,8 @@
     <Compile Include="Models\WorkTimeCalendarModel.cs" />
     <Compile Include="Components\WorkTimeCalendarCollection.cs" />
     <Compile Include="Extensions\DateTimeExtensions.cs" />
+    <Compile Include="Components\CircleMenu.cs" />
+    <Compile Include="Components\CircleMenuButton.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets.tt">
@@ -170,6 +174,7 @@
     <Folder Include="CollectionViewSources\" />
     <Folder Include="Assets.xcassets\icWarning.imageset\" />
     <Folder Include="Assets.xcassets\icClear.imageset\" />
+    <Folder Include="Assets.xcassets\icHamburger.imageset\" />
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="Controls\CircleProgress.xib" />

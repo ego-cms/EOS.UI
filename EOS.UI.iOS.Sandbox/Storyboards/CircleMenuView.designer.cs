@@ -1,18 +1,26 @@
 // WARNING
 //
-// This file has been generated automatically by Visual Studio from the outlets and
-// actions declared in your storyboard file.
-// Manual changes to this file will not be maintained.
+// This file has been generated automatically by Visual Studio to store outlets and
+// actions made in the UI designer. If it is removed, they will be lost.
+// Manual changes to this file may not be handled correctly.
 //
 using Foundation;
-using System;
 using System.CodeDom.Compiler;
-using UIKit;
 
 namespace EOS.UI.iOS.Sandbox
 {
-    [Register ("CircleMenuView")]
-    partial class CircleMenuView
-    {
-    }
+	[Register ("CircleMenuView")]
+	partial class CircleMenuView
+	{
+		[Outlet]
+		UIKit.UILabel swipeLabel { get; set; }
+		
+		void ReleaseDesignerOutlets ()
+		{
+			if (swipeLabel != null) {
+				swipeLabel.Dispose ();
+				swipeLabel = null;
+			}
+		}
+	}
 }
