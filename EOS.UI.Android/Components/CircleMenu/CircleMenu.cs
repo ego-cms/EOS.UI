@@ -14,7 +14,6 @@ namespace EOS.UI.Android.Components
 
         private HamburgerMenu _hamburgerMenu;
         private RelativeLayout _container;
-        private bool _isOpened;
         private float _bufferX;
         private bool _isMovedRight;
         private bool _isMovedLeft;
@@ -66,8 +65,8 @@ namespace EOS.UI.Android.Components
 
         private void HamburgerMenuClick(object sender, EventArgs e)
         {
-            _isOpened = !_isOpened;
-            _container.SetBackgroundColor(_isOpened ? Color.Argb(50, 0, 0, 0) : Color.Transparent);
+            _hamburgerMenu.IsOpened = !_hamburgerMenu.IsOpened;
+            _container.SetBackgroundColor(_hamburgerMenu.IsOpened ? Color.Argb(50, 0, 0, 0) : Color.Transparent);
         }
 
         public void Attach(ViewGroup viewGroup)

@@ -14,7 +14,17 @@ namespace EOS.UI.Android.Components
     {
         #region fields
 
+        private const string _forwardAnimationPath = "Animations/menu_animation_forward.json";
+        private const string _backAnimationPath = "Animations/menu_animation_back.json";
         private LottieAnimationView _lottieView;
+
+        #endregion
+
+        #region properties
+
+        public bool IsOpened { get; set; } = false;
+
+        private string AnimationName => IsOpened ? _backAnimationPath : _forwardAnimationPath;
 
         #endregion
 
@@ -62,13 +72,14 @@ namespace EOS.UI.Android.Components
             view.TranslationZ = 4;
 
             _lottieView = view.FindViewById<LottieAnimationView>(Resource.Id.lottieView);
-            _lottieView.SetAnimation("Animations/menuButton1.json");
+            _lottieView.SetAnimation(AnimationName);
 
             Click += HamburgerMenuClick;
         }
 
         private void HamburgerMenuClick(object sender, EventArgs e)
         {
+            _lottieView.SetAnimation(AnimationName);
             _lottieView.PlayAnimation();
         }
 

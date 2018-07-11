@@ -132,8 +132,8 @@
     <AndroidAsset Include="Assets\Fonts\SFUITextBold.ttf" />
     <AndroidAsset Include="Assets\Fonts\SFUITextSemibold.ttf" />
     <AndroidAsset Include="Assets\Fonts\Roboto.ttf" />
-    <AndroidAsset Include="Assets\Animations\menuButton1.json" />
-    <AndroidAsset Include="Assets\Animations\menuButton2.json" />
+    <AndroidAsset Include="Assets\Animations\menu_animation_back.json" />
+    <AndroidAsset Include="Assets\Animations\menu_animation_forward.json" />
     <None Include="packages.config" />
     <AndroidResource Include="Resources\layout\Section.axml">
       <SubType>Designer</SubType>
