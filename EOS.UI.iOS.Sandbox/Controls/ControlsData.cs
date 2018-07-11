@@ -28,7 +28,8 @@ namespace EOS.UI.iOS.Sandbox.Controls
                 {SharedControls.CircleProgress, CircleProgressView.Identifier},
                 {SharedControls.Section, SectionComponentView.Identifier },
                 {SharedControls.CTAButton, CTAButtonView.Identifier},
-                {SharedControls.WorkTimeCalendar, WorkTimeView.Identifier}
+                {SharedControls.WorkTimeCalendar, WorkTimeView.Identifier},
+                {SharedControls.CircleMenu, CircleMenuView.Identifier}
             };
         }
     }

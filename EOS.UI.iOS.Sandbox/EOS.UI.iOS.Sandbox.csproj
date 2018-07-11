@@ -169,6 +169,7 @@
     <InterfaceDefinition Include="Storyboards\CircleProgressView.storyboard" />
     <InterfaceDefinition Include="Storyboards\CTAButtonView.storyboard" />
     <InterfaceDefinition Include="Storyboards\WorkTimeView.storyboard" />
+    <InterfaceDefinition Include="Storyboards\CircleMenuView.storyboard" />
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="Controls\EOSSandboxDropDown.xib" />
@@ -244,6 +245,10 @@
       <DependentUpon>WorkTimeView.cs</DependentUpon>
     </Compile>
     <Compile Include="Enums\SimpleButtonTypeEnum.cs" />
+    <Compile Include="Storyboards\CircleMenuView.cs" />
+    <Compile Include="Storyboards\CircleMenuView.designer.cs">
+      <DependentUpon>CircleMenuView.cs</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\EOS.UI.iOS\EOS.UI.iOS.csproj">

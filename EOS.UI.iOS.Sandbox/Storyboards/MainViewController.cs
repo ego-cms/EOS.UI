@@ -28,7 +28,6 @@ namespace EOS.UI.iOS.Sandbox
         {
             base.ViewWillAppear(animated);
             UpdateApperaence();
-
         }
 
         private void OnRowSelected(object sender, NSIndexPath indexPath)
