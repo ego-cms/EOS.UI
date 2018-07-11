@@ -87,6 +87,7 @@ namespace UIFrameworks.Shared.Themes.Helpers
         public const string Section = "Section";
         public const string CTAButton = "CTA Button";
         public const string WorkTimeCalendar = "Work time calendar";
+        public const string CircleMenu = "Circle menu";
     }
 
     public static class SimpleButtonConstants
