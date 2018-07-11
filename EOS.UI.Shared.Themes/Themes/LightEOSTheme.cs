@@ -68,9 +68,9 @@ namespace EOS.UI.Shared.Themes.Themes
             { EOSConstants.CircleProgressShown, true},
             { EOSConstants.FabShadow, new ShadowConfig(){
                         Color = UIColor.Black.CGColor,
-                        Offset = new CGSize(0, 0),
-                        Radius = 2,
-                        Opacity = 0.4f
+                        Offset = new CGSize(0, 4),
+                        Radius = 5,
+                        Opacity = 0.2f
             }},
             { EOSConstants.SimpleButtonShadow, new ShadowConfig(){
                         Color = UIColor.Black.CGColor,
