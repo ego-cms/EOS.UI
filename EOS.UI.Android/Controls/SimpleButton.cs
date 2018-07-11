@@ -1,5 +1,4 @@
 using System;
-using Android.Animation;
 using Android.Content;
 using Android.Content.Res;
 using Android.Graphics;
@@ -10,15 +9,14 @@ using Android.Runtime;
 using Android.Text;
 using Android.Util;
 using Android.Views;
-using Android.Views.Animations;
 using Android.Widget;
+using Com.Airbnb.Lottie;
 using EOS.UI.Shared.Themes.Helpers;
 using EOS.UI.Shared.Themes.Interfaces;
 using Java.Util;
 using UIFrameworks.Android.Themes;
 using UIFrameworks.Shared.Themes.Helpers;
 using UIFrameworks.Shared.Themes.Interfaces;
-using static EOS.UI.Android.Helpers.Constants;
 
 namespace EOS.UI.Android.Controls
 {
@@ -26,9 +24,17 @@ namespace EOS.UI.Android.Controls
     {
         #region fields
 
+        private readonly float _proportionHeight = 0.7f;
         private float _pivot = 0.5f;
-        private ObjectAnimator _animator;
-        private RotateDrawable _rotateDrawable;
+        private LottieDrawable _animationDrawable;
+        private const string _animationKey = "Animations/preloader-snake.json";
+        private int _baseTopPadding;
+        private int _baseBottomPadding;
+        private int _baseLeftPadding;
+        private int _baseRightPadding;
+        private string _text;
+        private bool _shouldRedraw = true;
+        private float _baseHeight;
 
         public bool InProgress { get; private set; }
 
@@ -116,6 +122,7 @@ namespace EOS.UI.Android.Controls
             set
             {
                 IsEOSCustomizationIgnored = true;
+                _shouldRedraw = true;
                 base.Typeface = value;
             }
         }
@@ -126,6 +133,7 @@ namespace EOS.UI.Android.Controls
             set
             {
                 IsEOSCustomizationIgnored = true;
+                _shouldRedraw = true;
                 base.LetterSpacing = value;
             }
         }
@@ -136,6 +144,7 @@ namespace EOS.UI.Android.Controls
             set
             {
                 IsEOSCustomizationIgnored = true;
+                _shouldRedraw = true;
                 base.TextSize = value;
             }
         }
@@ -148,7 +157,6 @@ namespace EOS.UI.Android.Controls
             {
                 IsEOSCustomizationIgnored = true;
                 _textColor = value;
-                _rotateDrawable.Drawable?.SetColorFilter(value, PorterDuff.Mode.SrcIn);
                 if(Enabled)
                     base.SetTextColor(value);
             }
@@ -207,35 +215,35 @@ namespace EOS.UI.Android.Controls
             }
         }
 
-        private Drawable _preloaderImage;
-        public Drawable PreloaderImage
-        {
-            get => _preloaderImage;
-            set
-            {
-                _preloaderImage = value;
-                _rotateDrawable.Drawable = _preloaderImage;
-                _rotateDrawable.Drawable.SetColorFilter(TextColor, PorterDuff.Mode.SrcIn);
-            }
-        }
-
         #endregion
 
         #region utility methods
 
         private void Initialize(IAttributeSet attrs = null)
         {
-            _rotateDrawable = CreateRotateDrawable();
+            _animationDrawable = new LottieDrawable();
+            _animationDrawable.Loop(true);
+
+            LottieComposition.Factory.FromAssetFileName(Context, _animationKey, (composition) =>
+            {
+                _animationDrawable.SetComposition(composition);
+                _baseHeight = _animationDrawable.IntrinsicHeight;
+            });
+
+            _baseBottomPadding = PaddingBottom;
+            _baseTopPadding = PaddingTop;
+            _baseLeftPadding = PaddingLeft;
+            _baseRightPadding = PaddingRight;
+
             var denisty = Resources.DisplayMetrics.Density;
             SetAllCaps(false);
             SetOnTouchListener(this);
             SetLines(1);
             Ellipsize = TextUtils.TruncateAt.End;
-            if(attrs != null)
+            if (attrs != null)
                 InitializeAttributes(attrs);
             UpdateAppearance();
             Background = CreateRippleDrawable(BackgroundColor);
-            Elevation = 20;
         }
 
         private void InitializeAttributes(IAttributeSet attrs)
@@ -281,10 +289,6 @@ namespace EOS.UI.Android.Controls
             var cornerRadius = styledAttributes.GetFloat(Resource.Styleable.SimpleButton_eos_cornerradius, -1);
             if(cornerRadius > 0)
                 CornerRadius = cornerRadius;
-
-            var preloaderImage = styledAttributes.GetDrawable(Resource.Styleable.SimpleButton_eos_preloaderimage);
-            if(preloaderImage != null)
-                PreloaderImage = preloaderImage;
 
             var enabled = styledAttributes.GetBoolean(Resource.Styleable.SimpleButton_eos_enabled, true);
             if(!enabled)
@@ -337,32 +341,52 @@ namespace EOS.UI.Android.Controls
         {
             if(Enabled && !InProgress)
             {
-                Drawable[] layers = { CreateGradientDrawable(BackgroundColor), _rotateDrawable };
-                var layerDrawable = new LayerDrawable(layers);
+                SetStartAnimationValues();
 
-                var preloaderSize = Height / 2;
-                var insetVertical = Height / 4;
-                var insetHorizontal = (Width - preloaderSize) / 2;
-                layerDrawable.SetLayerInset(1, insetHorizontal, insetVertical, insetHorizontal, insetVertical);
+                if(_shouldRedraw)
+                {
+                    SetStopAnimationValues();
+                    SetStartAnimationValues();
+                    _shouldRedraw = false;
+                }
 
-                Background = layerDrawable;
-                base.SetTextColor(Color.Transparent);
-                _animator = ObjectAnimator.OfInt(_rotateDrawable, "Level", 0, AnimationConstants.LevelMaxCount);
-                _animator.SetInterpolator(new LinearInterpolator());
-                _animator.SetDuration(AnimationConstants.TurnoverTime);
-                _animator.RepeatCount = ValueAnimator.Infinite;
-                _animator.RepeatMode = ValueAnimatorRepeatMode.Restart;
-                _animator.Start();
+                _animationDrawable.PlayAnimation();
+
                 InProgress = true;
             }
         }
 
+        private void SetStartAnimationValues()
+        {
+            _text = Text;
+
+            //calculate scale of animation drawable like 70% of button's height 
+            var scale = (Height * _proportionHeight) / _baseHeight;
+            _animationDrawable.Scale = scale;
+
+            //calculate padding around lottie drawable which saved normal button size 
+            //after replacing text with lottie drawable
+            var paddingX = (int)((Width - _animationDrawable.IntrinsicWidth) / 2f);
+            var paddingY = (int)((Height - _animationDrawable.IntrinsicHeight) / 2f);
+
+            Text = string.Empty;
+            SetCompoundDrawables(_animationDrawable, null, null, null);
+            SetPadding(paddingX, paddingY, paddingX, paddingY);
+        }
+
+        private void SetStopAnimationValues()
+        {
+            SetCompoundDrawables(null, null, null, null);
+            SetPadding(_baseLeftPadding, _baseTopPadding, _baseRightPadding, _baseBottomPadding);
+            Text = _text;
+        }
+
         public void StopProgressAnimation()
         {
-            _animator.Cancel();
+            _animationDrawable.Stop();
             InProgress = false;
-            BackgroundColor = _backgroundColor;
-            base.SetTextColor(_textColor);
+
+            SetStopAnimationValues();
         }
 
         private RotateDrawable CreateRotateDrawable()
@@ -418,7 +442,6 @@ namespace EOS.UI.Android.Controls
                 PressedBackgroundColor = GetThemeProvider().GetEOSProperty<Color>(this, EOSConstants.BrandPrimaryColorVariant1);
                 RippleColor = GetThemeProvider().GetEOSProperty<Color>(this, EOSConstants.BrandPrimaryColorVariant1);
                 CornerRadius = GetThemeProvider().GetEOSProperty<float>(this, EOSConstants.ButtonCornerRadius);
-                PreloaderImage = Resources.GetDrawable(GetThemeProvider().GetEOSProperty<int>(this, EOSConstants.FabProgressPreloaderImage), null);
                 IsEOSCustomizationIgnored = false;
             }
         }
