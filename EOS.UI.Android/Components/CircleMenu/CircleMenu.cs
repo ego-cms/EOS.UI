@@ -8,13 +8,16 @@ using Android.Widget;
 
 namespace EOS.UI.Android.Components
 {
-    public class CircleMenu: FrameLayout
+    public class CircleMenu: FrameLayout, View.IOnTouchListener
     {
         #region fields
 
         private HamburgerMenu _hamburgerMenu;
         private RelativeLayout _container;
         private bool _isOpened;
+        private float _bufferX;
+        private bool _isMovedRight;
+        private bool _isMovedLeft;
 
         #endregion
 
@@ -57,6 +60,8 @@ namespace EOS.UI.Android.Components
 
             _hamburgerMenu = view.FindViewById<HamburgerMenu>(Resource.Id.hamburgerMenu);
             _hamburgerMenu.Click += HamburgerMenuClick;
+
+            _container.SetOnTouchListener(this);
         }
 
         private void HamburgerMenuClick(object sender, EventArgs e)
@@ -69,6 +74,32 @@ namespace EOS.UI.Android.Components
         {
             var parameters = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MatchParent, RelativeLayout.LayoutParams.MatchParent);
             viewGroup.AddView(this, parameters);
+        }
+
+        public bool OnTouch(View v, MotionEvent e)
+        {
+            if(e.Action == MotionEventActions.Down)
+            {
+                _bufferX = e.RawX;
+            }
+            else if(e.Action == MotionEventActions.Move && _bufferX != e.RawX)
+            {
+                if(_bufferX - e.RawX > 10)
+                    _isMovedLeft = true;
+                if(_bufferX - e.RawX < -10)
+                    _isMovedRight = true;
+            }
+            if(e.Action == MotionEventActions.Up && !_isMovedRight && !_isMovedLeft)
+            {
+            }
+            if(e.Action == MotionEventActions.Up && (_isMovedRight || _isMovedLeft))
+            {
+                Toast.MakeText(Context, _isMovedRight ? "right" : "left", ToastLength.Short).Show();
+                _bufferX = 0f;
+                _isMovedRight = false;
+                _isMovedLeft = false;
+            }
+            return true;
         }
 
         #endregion
