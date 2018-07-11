@@ -6,8 +6,8 @@
     android:id="@+id/container">
     <EOS.UI.Android.Components.HamburgerMenu
         android:id="@+id/hamburgerMenu"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
+        android:layout_width="52dp"
+        android:layout_height="52dp"
         android:layout_alignParentRight="true"
         android:layout_alignParentBottom="true"
         android:layout_margin="20dp" />

@@ -113,8 +113,12 @@
     <ImageAsset Include="Assets.xcassets\icClear.imageset\icClear.pdf">
       <Visible>false</Visible>
     </ImageAsset>
-    <ImageAsset Include="Assets.xcassets\icHamburger.imageset\Contents.json" />
-    <ImageAsset Include="Assets.xcassets\icHamburger.imageset\icHamburger.png" />
+    <ImageAsset Include="Assets.xcassets\icHamburger.imageset\Contents.json">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\icHamburger.imageset\icHamburger.png">
+      <Visible>false</Visible>
+    </ImageAsset>
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
