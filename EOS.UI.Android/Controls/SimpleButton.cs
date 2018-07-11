@@ -1,4 +1,5 @@
 using System;
+using Android.Animation;
 using Android.Content;
 using Android.Content.Res;
 using Android.Graphics;
@@ -19,7 +20,6 @@ using Java.Util;
 using UIFrameworks.Android.Themes;
 using UIFrameworks.Shared.Themes.Helpers;
 using UIFrameworks.Shared.Themes.Interfaces;
-using static EOS.UI.Android.Helpers.Constants;
 using A = Android;
 
 namespace EOS.UI.Android.Controls
@@ -167,7 +167,6 @@ namespace EOS.UI.Android.Controls
                 IsEOSCustomizationIgnored = true;
                 FontStyle.Color = value;
                 SetFontStyle();
-                _rotateDrawable.Drawable?.SetColorFilter(value, PorterDuff.Mode.SrcIn);
                 if(Enabled)
                     base.SetTextColor(value);
             }
@@ -259,18 +258,6 @@ namespace EOS.UI.Android.Controls
             stateList.AddState(new int[1] { -A.Resource.Attribute.StateEnabled }, disabledAnimation);
 
             StateListAnimator = stateList;
-        }
-
-        private Drawable _preloaderImage;
-        public Drawable PreloaderImage
-        {
-            get => _preloaderImage;
-            set
-            {
-                _preloaderImage = value;
-                _rotateDrawable.Drawable = _preloaderImage;
-                _rotateDrawable.Drawable.SetColorFilter(TextColor, PorterDuff.Mode.SrcIn);
-            }
         }
 
         private FontStyleItem _fontStyle;
