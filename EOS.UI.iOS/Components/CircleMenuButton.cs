@@ -11,28 +11,15 @@ namespace EOS.UI.iOS.Components
         private const float _endScale = 1.0f;
         private const double _animationDuration = 0.1;
 
+        public int CircleMenuItemId { get; set; }
+
         public CircleMenuButton()
         {
-            var image = UIImage.FromBundle("icHamburger");
-            SetImage(image, UIControlState.Normal);
+            
             ImageEdgeInsets = new UIEdgeInsets(_padding, _padding, _padding, _padding);
             BackgroundColor = UIColor.White;
-            
-            TouchDown += (sender, e) =>
-            {
-                UIView.Animate(_animationDuration, () =>
-                {
-                    Transform = CGAffineTransform.MakeScale(_startScale, _startScale);
-                });
-            };
 
-            TouchUpInside += (sender, e) =>
-            {
-                UIView.Animate(_animationDuration, () =>
-                {
-                    Transform = CGAffineTransform.MakeScale(_endScale, _endScale);
-                });
-            };
+            UIView.Animate(12, 12, UIViewAnimationOptions.CurveEaseInOut, () => { }, () => { });
         }
 
         public override void MovedToSuperview()

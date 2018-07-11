@@ -170,6 +170,8 @@
     <InterfaceDefinition Include="Components\WorkTimeCalendarCell.xib" />
     <None Include="packages.config" />
     <BundleResource Include="Resources\Animations\preloader-snake.json" />
+    <BundleResource Include="Resources\Animations\hamburger-open.json" />
+    <BundleResource Include="Resources\Animations\hamburger-close.json" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
