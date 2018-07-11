@@ -225,6 +225,9 @@ namespace EOS.UI.Android.Controls
             var pressedAnimation = ObjectAnimator.OfPropertyValuesHolder(this, elevationHolderToPressed, translationZHolderToPressed);
             pressedAnimation.SetDuration(100);
 
+            var disabledAnimation = ObjectAnimator.OfPropertyValuesHolder(this, elevationHolderToPressed, translationZHolderToPressed);
+            disabledAnimation.SetDuration(0);
+
             var elevationHolderToNormal = PropertyValuesHolder.OfFloat("Elevation", 0, _shadowConfig.Radius);
             var translationZHolderToNormal = PropertyValuesHolder.OfFloat("TranslationZ", 0, _shadowConfig.Radius);
             var normalAnimation = ObjectAnimator.OfPropertyValuesHolder(this, elevationHolderToNormal, translationZHolderToNormal);
@@ -232,6 +235,7 @@ namespace EOS.UI.Android.Controls
 
             stateList.AddState(new int[1] { A.Resource.Attribute.StatePressed }, pressedAnimation);
             stateList.AddState(new int[1] { A.Resource.Attribute.StateEnabled }, normalAnimation);
+            stateList.AddState(new int[1] { -A.Resource.Attribute.StateEnabled }, disabledAnimation);
 
             StateListAnimator = stateList;
         }
