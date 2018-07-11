@@ -9,6 +9,7 @@ using Android.OS;
 using Android.Runtime;
 using Android.Text;
 using Android.Util;
+using Android.Views;
 using Android.Views.Animations;
 using Android.Widget;
 using EOS.UI.Shared.Helpers;
@@ -211,7 +212,17 @@ namespace EOS.UI.Android.Controls
             set
             {
                 _shadowConfig = value;
-                UpdateStateListAnimator();
+
+                if(Build.VERSION.SdkInt > BuildVersionCodes.Lollipop)
+                {
+                    UpdateStateListAnimator();
+                }
+                else
+                {
+                    StateListAnimator = null;
+                    Elevation = 2 * _shadowConfig.Radius;
+                }
+
                 IsEOSCustomizationIgnored = true;
             }
         }
@@ -461,6 +472,18 @@ namespace EOS.UI.Android.Controls
             //use creation from xml hack
             var drawable = (RotateDrawable)Drawable.CreateFromXml(Resources, Resources.GetXml(Resource.Drawable.RotateDrawable));
             return drawable;
+        }
+
+        public override bool OnTouchEvent(MotionEvent e)
+        {
+            if(Build.VERSION.SdkInt <= BuildVersionCodes.Lollipop)
+            {
+                if(e.Action == MotionEventActions.Down)
+                    Elevation = 0; 
+                if(e.Action == MotionEventActions.Up || e.Action == MotionEventActions.Cancel)
+                    Elevation = 2 * _shadowConfig.Radius;
+            }
+            return base.OnTouchEvent(e);
         }
 
         #endregion
