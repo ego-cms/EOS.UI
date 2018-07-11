@@ -30,7 +30,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:text="Simple button"
-            android:paddingBottom="17dp"
+            android:paddingBottom="14dp"
             android:paddingTop="14dp"
             android:paddingLeft="110dp"
             android:paddingRight="110dp" />
