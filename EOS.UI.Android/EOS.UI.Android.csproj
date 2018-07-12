@@ -87,7 +87,7 @@
     <Reference Include="Xamarin.Android.Support.Vector.Drawable, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Xamarin.Android.Support.Vector.Drawable.27.0.2\lib\MonoAndroid81\Xamarin.Android.Support.Vector.Drawable.dll</HintPath>
     </Reference>
-  </ItemGroup>Lottie.Android
+  </ItemGroup>
   <ItemGroup>
     <Compile Include="Components\CircleMenu\CircleMenu.cs" />
     <Compile Include="Components\CircleMenu\HamburgerMenu.cs" />
