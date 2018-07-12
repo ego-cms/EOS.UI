@@ -24,6 +24,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Enums\WeekStartEnum.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Extensions\WorkTimeCalendarExtension.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)DataModels\FontStyleItem.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)DataModels\CircleMenuItemModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="$(MSBuildThisFileDirectory)Themes\" />

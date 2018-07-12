@@ -54,6 +54,9 @@
     <Reference Include="System.Xml" />
     <Reference Include="System.Core" />
     <Reference Include="Xamarin.iOS" />
+    <Reference Include="Lottie.iOS">
+      <HintPath>..\packages\Com.Airbnb.iOS.Lottie.2.5.4\lib\xamarinios10\Lottie.iOS.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Contents.json">
@@ -165,6 +168,10 @@
     <BundleResource Include="Resources\Fonts\capture_it_dark.ttf" />
     <BundleResource Include="Resources\Fonts\capture_it_light.ttf" />
     <InterfaceDefinition Include="Components\WorkTimeCalendarCell.xib" />
+    <None Include="packages.config" />
+    <BundleResource Include="Resources\Animations\preloader-snake.json" />
+    <BundleResource Include="Resources\Animations\hamburger-open.json" />
+    <BundleResource Include="Resources\Animations\hamburger-close.json" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
@@ -179,6 +186,7 @@
     <Folder Include="Assets.xcassets\icWarning.imageset\" />
     <Folder Include="Assets.xcassets\icClear.imageset\" />
     <Folder Include="Assets.xcassets\icHamburger.imageset\" />
+    <Folder Include="Resources\Animations\" />
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="Controls\CircleProgress.xib" />
