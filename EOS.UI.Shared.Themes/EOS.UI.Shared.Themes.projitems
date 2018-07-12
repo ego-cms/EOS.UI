@@ -9,6 +9,7 @@
     <Import_RootNamespace>EOS.UI.Shared.Themes</Import_RootNamespace>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)DataModels\FontStyleItem.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Extensions\TimeSpanExtension.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Helpers\EOSConstants.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Interfaces\IEOSTheme.cs" />
@@ -23,11 +24,9 @@
     <Compile Include="$(MSBuildThisFileDirectory)DataModels\WorkTimeCalendarItem.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Enums\WeekStartEnum.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Extensions\WorkTimeCalendarExtension.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)DataModels\FontStyleItem.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="$(MSBuildThisFileDirectory)Themes\" />
-    <Folder Include="$(MSBuildThisFileDirectory)DataModels\" />
     <Folder Include="$(MSBuildThisFileDirectory)Enums\" />
   </ItemGroup>
 </Project>

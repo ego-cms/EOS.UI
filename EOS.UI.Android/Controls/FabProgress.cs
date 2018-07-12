@@ -37,7 +37,7 @@ namespace EOS.UI.Android.Controls
                 base.Enabled = value;
                 (Background as GradientDrawable).SetColor(value ? BackgroundColor : DisabledBackgroundColor);
                 Image.SetColorFilter(value ? 
-                    GetThemeProvider().GetEOSProperty<Color>(this, EOSConstants.NeutralColor6) :
+                    Color.White :
                     GetThemeProvider().GetEOSProperty<Color>(this, EOSConstants.NeutralColor3), 
                     PorterDuff.Mode.SrcIn);
                 Elevation = Enabled ? _normalElevation : _disabledElevation;
@@ -54,7 +54,7 @@ namespace EOS.UI.Android.Controls
                 if(Enabled)
                 {
                     (Background as GradientDrawable).SetColor(value);
-                    Image.SetColorFilter(GetThemeProvider().GetEOSProperty<Color>(this, EOSConstants.NeutralColor6), PorterDuff.Mode.SrcIn);
+                    Image.SetColorFilter(Color.White, PorterDuff.Mode.SrcIn);
                 }
                 IsEOSCustomizationIgnored = true;
             }

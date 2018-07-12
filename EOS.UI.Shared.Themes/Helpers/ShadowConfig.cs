@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 #if __IOS__
 using CoreGraphics;
 using UIKit;
@@ -13,6 +13,10 @@ namespace EOS.UI.Shared.Helpers
         public CGSize Offset { get; set; }
         public nfloat Radius { get; set; }
         public float Opacity { get; set; }
+#endif
+#if __ANDROID__
+        public float Offset { get; set; }
+        public float Radius { get; set; }
 #endif
     }
 }
