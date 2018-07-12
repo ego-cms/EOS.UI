@@ -72,6 +72,7 @@ namespace UIFrameworks.Shared.Themes.Helpers
         public static string R4C2 = "R4C2";
         public static string R4C3 = "R4C3";
         public static string R4C4 = "R4C4";
+        public static string R4C5 = "R4C5";
     }
 
     public static class ControlNames

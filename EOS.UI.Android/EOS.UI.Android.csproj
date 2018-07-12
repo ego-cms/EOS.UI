@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -87,7 +87,7 @@
     <Reference Include="Xamarin.Android.Support.Vector.Drawable, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Xamarin.Android.Support.Vector.Drawable.27.0.2\lib\MonoAndroid81\Xamarin.Android.Support.Vector.Drawable.dll</HintPath>
     </Reference>
-  </ItemGroup>
+  </ItemGroup>Lottie.Android
   <ItemGroup>
     <Compile Include="Components\CircleMenu\CircleMenu.cs" />
     <Compile Include="Components\CircleMenu\HamburgerMenu.cs" />
@@ -127,11 +127,15 @@
   </ItemGroup>
   <ItemGroup>
     <AndroidAsset Include="Assets\Fonts\OpenSansRegular.ttf" />
+    <AndroidAsset Include="Assets\Animations\preloader-snake.json" />
   </ItemGroup>
   <ItemGroup>
     <AndroidAsset Include="Assets\Fonts\SFUITextBold.ttf" />
     <AndroidAsset Include="Assets\Fonts\SFUITextSemibold.ttf" />
     <AndroidAsset Include="Assets\Fonts\Roboto.ttf" />
+    <AndroidAsset Include="Assets\Fonts\RobotoBold.ttf" />
+    <AndroidAsset Include="Assets\Fonts\RobotoMedium.ttf" />
+    <AndroidAsset Include="Assets\Fonts\RobotoRegular.ttf" />
     <AndroidAsset Include="Assets\Animations\menu_animation_back.json" />
     <AndroidAsset Include="Assets\Animations\menu_animation_forward.json" />
     <None Include="packages.config" />
@@ -165,6 +169,9 @@
     <AndroidResource Include="Resources\layout\HamburgerMenu.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Assets\Animations\" />
   </ItemGroup>
   <Import Project="..\EOS.UI.Shared.Themes\EOS.UI.Shared.Themes.projitems" Label="Shared" />
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
