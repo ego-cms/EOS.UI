@@ -98,7 +98,7 @@ namespace EOS.UI.Android.Components
                 _isMovedRight = false;
                 _isMovedLeft = false;
             }
-            return true;
+            return _hamburgerMenu.IsOpened;
         }
 
         #endregion
