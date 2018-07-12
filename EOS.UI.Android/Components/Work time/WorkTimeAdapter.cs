@@ -106,6 +106,8 @@ namespace EOS.UI.Android.Components
             set
             {
                 _titleFont = value;
+                TitleFontStyle.Typeface = value;
+                SetTitleFontStyle();
                 IsEOSCustomizationIgnored = true;
                 NotifyDataSetChanged();
             }
@@ -118,6 +120,8 @@ namespace EOS.UI.Android.Components
             set
             {
                 _dayTextFont = value;
+                DayFontStyle.Typeface = value;
+                SetDayFontStyle();
                 IsEOSCustomizationIgnored = true;
                 NotifyDataSetChanged();
             }
@@ -130,6 +134,8 @@ namespace EOS.UI.Android.Components
             set
             {
                 _titleTextSize = value;
+                TitleFontStyle.Size = value;
+                SetTitleFontStyle();
                 IsEOSCustomizationIgnored = true;
                 NotifyDataSetChanged();
             }
@@ -142,6 +148,8 @@ namespace EOS.UI.Android.Components
             set
             {
                 _dayTextSize = value;
+                DayFontStyle.Size = value;
+                SetDayFontStyle();
                 IsEOSCustomizationIgnored = true;
                 NotifyDataSetChanged();
             }
@@ -154,6 +162,8 @@ namespace EOS.UI.Android.Components
             set
             {
                 _titleColor = value;
+                TitleFontStyle.Color = value;
+                SetTitleFontStyle();
                 IsEOSCustomizationIgnored = true;
                 NotifyDataSetChanged();
             }
@@ -166,6 +176,8 @@ namespace EOS.UI.Android.Components
             set
             {
                 _dayTextColor = value;
+                DayFontStyle.Color = value;
+                SetDayFontStyle();
                 IsEOSCustomizationIgnored = true;
                 NotifyDataSetChanged();
             }
@@ -190,6 +202,10 @@ namespace EOS.UI.Android.Components
             set
             {
                 _currentDayTextColor = value;
+                CurrentDayFontStyle.Color = value;
+                SetCurrntDayFontStyle();
+                CurrentTitleFontStyle.Color = value;
+                SetCurrentTitleFontStyle();
                 IsEOSCustomizationIgnored = true;
                 NotifyDataSetChanged();
             }
@@ -244,6 +260,82 @@ namespace EOS.UI.Android.Components
                 IsEOSCustomizationIgnored = true;
                 NotifyDataSetChanged();
             }
+        }
+
+        private FontStyleItem _titleFontStyle;
+        public FontStyleItem TitleFontStyle
+        {
+            get => _titleFontStyle;
+            set
+            {
+                _titleFontStyle = value;
+                SetTitleFontStyle();
+                IsEOSCustomizationIgnored = true;
+            }
+        }
+
+        private FontStyleItem _dayFontStyle;
+        public FontStyleItem DayFontStyle
+        {
+            get => _dayFontStyle;
+            set
+            {
+                _dayFontStyle = value;
+                SetDayFontStyle();
+                IsEOSCustomizationIgnored = true;
+            }
+        }
+
+        private FontStyleItem _currentTitleFontStyle;
+        public FontStyleItem CurrentTitleFontStyle
+        {
+            get => _currentTitleFontStyle;
+            set
+            {
+                _currentTitleFontStyle = value;
+                SetCurrentTitleFontStyle();
+                IsEOSCustomizationIgnored = true;
+            }
+        }
+
+        private FontStyleItem _currentDayFontStyle;
+        public FontStyleItem CurrentDayFontStyle
+        {
+            get => _currentDayFontStyle;
+            set
+            {
+                _currentDayFontStyle = value;
+                SetCurrntDayFontStyle();
+                IsEOSCustomizationIgnored = true;
+            }
+        }
+
+        private void SetTitleFontStyle()
+        {
+            _titleFont = TitleFontStyle.Typeface;
+            _titleTextSize = (int)TitleFontStyle.Size;
+            _titleColor = TitleFontStyle.Color;
+        }
+
+        private void SetDayFontStyle()
+        {
+            _dayTextFont = DayFontStyle.Typeface;
+            _dayTextSize = (int)DayFontStyle.Size;
+            _dayTextColor = DayFontStyle.Color;
+        }
+
+        private void SetCurrentTitleFontStyle()
+        {
+            _titleFont = CurrentTitleFontStyle.Typeface;
+            _titleTextSize = (int)CurrentTitleFontStyle.Size;
+            _currentDayTextColor = CurrentTitleFontStyle.Color;
+        }
+
+        private void SetCurrntDayFontStyle()
+        {
+            _dayTextFont = CurrentDayFontStyle.Typeface;
+            _dayTextSize = (int)CurrentDayFontStyle.Size;
+            _currentDayTextColor = CurrentDayFontStyle.Color;
         }
 
         #endregion
@@ -432,20 +524,17 @@ namespace EOS.UI.Android.Components
         {
             if(!IsEOSCustomizationIgnored)
             {
-                TitleFont = Typeface.CreateFromAsset(_context.Assets, GetThemeProvider().GetEOSProperty<string>(this, EOSConstants.WorkTimeTitleFont));
-                TitleTextSize = GetThemeProvider().GetEOSProperty<int>(this, EOSConstants.WorkTimeTitleSize);
-                TitleColor = GetThemeProvider().GetEOSProperty<Color>(this, EOSConstants.NeutralColor1);
-                CurrentDayTextColor = GetThemeProvider().GetEOSProperty<Color>(this, EOSConstants.NeutralColor6);
+                TitleFontStyle = GetThemeProvider().GetEOSProperty<FontStyleItem>(this, EOSConstants.R2C2);
+                DayFontStyle = GetThemeProvider().GetEOSProperty<FontStyleItem>(this, EOSConstants.R1C3);
 
-                DayTextFont = Typeface.CreateFromAsset(_context.Assets, GetThemeProvider().GetEOSProperty<string>(this, EOSConstants.WorkTimeDayTextFont));
-                DayTextSize = GetThemeProvider().GetEOSProperty<int>(this, EOSConstants.WorkTimeDayTextSize);
-                DayTextColor = GetThemeProvider().GetEOSProperty<Color>(this, EOSConstants.NeutralColor3);
+                CurrentTitleFontStyle = GetThemeProvider().GetEOSProperty<FontStyleItem>(this, EOSConstants.R2C5);
+                CurrentDayFontStyle = GetThemeProvider().GetEOSProperty<FontStyleItem>(this, EOSConstants.R1C5);
 
                 CurrentDayBackgroundColor = GetThemeProvider().GetEOSProperty<Color>(this, EOSConstants.BrandPrimaryColor);
                 DayEvenBackgroundColor = GetThemeProvider().GetEOSProperty<Color>(this, EOSConstants.NeutralColor4);
 
                 DividerColor = GetThemeProvider().GetEOSProperty<Color>(this, EOSConstants.NeutralColor3);
-                CurrentDividerColor = GetThemeProvider().GetEOSProperty<Color>(this, EOSConstants.NeutralColor6);
+                CurrentDividerColor = Color.White;
             }
             NotifyDataSetChanged();
         }

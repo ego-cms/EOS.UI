@@ -22,6 +22,7 @@
         android:orientation="vertical"
         android:paddingTop="20dp"
         android:paddingBottom="20dp"
+        android:clipToPadding="false"
         android:background="@color/background_color">
         <EOS.UI.Android.Controls.SimpleButton
             android:id="@+id/simpleButton"
@@ -32,9 +33,7 @@
             android:paddingBottom="14dp"
             android:paddingTop="14dp"
             android:paddingLeft="110dp"
-            android:paddingRight="110dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginBottom="10dp" />
+            android:paddingRight="110dp" />
     </EOS.UI.Android.Sandbox.Controls.EOSSandboxLinearLayout>
     <EOS.UI.Android.Sandbox.Controls.EOSSandboxDivider
         android:layout_width="match_parent"
@@ -77,10 +76,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
             <EOS.UI.Android.Sandbox.Controls.EOSSandboxDropDown
-                android:id="@+id/pressedTextColorDropDown"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-            <EOS.UI.Android.Sandbox.Controls.EOSSandboxDropDown
                 android:id="@+id/enabledBackgroundDropDown"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
@@ -98,6 +93,10 @@
                 android:layout_height="wrap_content" />
             <EOS.UI.Android.Sandbox.Controls.EOSSandboxDropDown
                 android:id="@+id/rippleColorDropDown"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+            <EOS.UI.Android.Sandbox.Controls.EOSSandboxDropDown
+                android:id="@+id/shadowRadiusDropDown"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
             <LinearLayout

@@ -1,8 +1,9 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Android.App;
 using Android.Graphics;
+using Android.Graphics.Drawables;
 using Android.OS;
 using Android.Support.V7.Widget;
 using Android.Widget;
@@ -14,6 +15,7 @@ using UIFrameworks.Android.Themes;
 using UIFrameworks.Shared.Themes.Helpers;
 using UIFrameworks.Shared.Themes.Interfaces;
 using static EOS.UI.Android.Sandbox.Helpers.Constants;
+using A = Android;
 
 namespace EOS.UI.Android.Sandbox.Activities
 {
@@ -44,6 +46,7 @@ namespace EOS.UI.Android.Sandbox.Activities
         private Switch _hasBorderSwitch;
         private Switch _hasButtonSwitch;
         private Button _resetCustomizationButton;
+        private Toast _toast;
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
@@ -54,9 +57,11 @@ namespace EOS.UI.Android.Sandbox.Activities
             var layoutManager = new LinearLayoutManager(BaseContext);
             _sectionRecyclerView.SetLayoutManager(layoutManager);
 
+            _toast = Toast.MakeText(BaseContext, "Action invoked", ToastLength.Short);
+
             var defaultModel = new SectionModel()
             {
-                SectionAction = () => { Toast.MakeText(BaseContext, "Action invoked", ToastLength.Short).Show(); },
+                SectionAction = () => { _toast.Show(); },
                 HasBorder = (bool)EOSThemeProvider.Instance.GetCurrentTheme().ThemeValues[EOSConstants.HasSectionBorder],
                 HasButton = (bool)EOSThemeProvider.Instance.GetCurrentTheme().ThemeValues[EOSConstants.HasSectionAction]
             };
@@ -190,7 +195,7 @@ namespace EOS.UI.Android.Sandbox.Activities
         {
             var defaultModel = new SectionModel()
             {
-                SectionAction = () => { Toast.MakeText(BaseContext, "Action invoked", ToastLength.Short).Show(); },
+                SectionAction = () => { _toast.Show(); },
                 HasBorder = (bool)EOSThemeProvider.Instance.GetCurrentTheme().ThemeValues[EOSConstants.HasSectionBorder],
                 HasButton = (bool)EOSThemeProvider.Instance.GetCurrentTheme().ThemeValues[EOSConstants.HasSectionAction]
             };
@@ -472,7 +477,29 @@ namespace EOS.UI.Android.Sandbox.Activities
                 EOSThemeProvider.Instance.SetCurrentTheme(ThemeTypes.ThemeCollection.ElementAt(position).Value);
                 ResetCustomValues();
                 UpdateApperaence();
+                var message = _toast.View.FindViewById<TextView>(A.Resource.Id.Message);
+                message.SetShadowLayer(0, 0, 0, Color.Transparent);
+                if(EOSThemeProvider.Instance.GetCurrentTheme() is LightEOSTheme)
+                {
+                    message.SetTextColor(Color.Argb(255, 246, 246, 246));
+                    _toast.View.Background = CreateGradientDrawable(Color.Argb(255, 52, 51, 52));
+                }
+                else
+                {
+                    message.SetTextColor(Color.Argb(255, 52, 51, 52));
+                    _toast.View.Background = CreateGradientDrawable(Color.Argb(255, 246, 246, 246));
+                }
             }
         }
+
+        private GradientDrawable CreateGradientDrawable(Color color)
+        {
+            var drawable = new GradientDrawable();
+            drawable.SetShape(ShapeType.Rectangle);
+            drawable.SetColor(color);
+            drawable.SetCornerRadius(25);
+            return drawable;
+        }
+
     }
 }
