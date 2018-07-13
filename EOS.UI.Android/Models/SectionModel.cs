@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using Android.Graphics;
 
 namespace EOS.UI.Android.Models
@@ -22,10 +22,10 @@ namespace EOS.UI.Android.Models
         public bool HasBorder { get; set; }
         public Color BorderColor { get; set; }
         public int BorderWidth { get; set; }
-        public int TopPadding { get; set; }
-        public int BottonPadding { get; set; }
-        public int RightPadding { get; set; }
-        public int LeftPadding { get; set; }
+        public int TopPadding { get; set; } = -1;
+        public int BottonPadding { get; set; } = -1;
+        public int RightPadding { get; set; } = -1;
+        public int LeftPadding { get; set; } = -1;
 
         public void CopyData(SectionModel model)
         {

@@ -12,70 +12,71 @@ namespace EOS.UI.Android.Sandbox.Helpers
     {
         public static class Fields
         {
-            public static string Theme = "Theme";
-            public static string Background = "Background";
-            public static string Font = "Font";
-            public static string TextColor = "Text color";
-            public static string LetterSpacing = "Letter spacing";
-            public static string TextSize = "Text size";
-            public static string ConerRadius = "Corner radius";
-            public static string EnabledTextColor = "Enabled text color";
-            public static string DisabledTextColor = "Disabled text color";
-            public static string PressedTextColor = "Pressed text color";
-            public static string EnabledBackground = "Enabled background";
-            public static string DisabledBackground  = "Disabled background";
-            public static string PressedBackground = "Pressed background";
-            public static string HintTextColor = "Hint text color";
-            public static string HintTextColorDisabled = "Hint text color disabled";
-            public static string Icon = "Icon";
-            public static string IconUnocused = "Icon unfocused";
-            public static string IconDisabled = "Icon disabled";
-            public static string FocusedColor = "Focused color";
-            public static string NormalUnderlineColor = "Normal underline color";
-            public static string NormalIconColor = "Normal icon color";
-            public static string PopulatedUnderlineColor = "Populated underline color";
-            public static string ValidationRules = "Validation rules";
-            public static string PopulatedIconColor = "Populated icon color";
-            public static string DisabledColor = "Disabled color";
-            public static string PressedColor = "Pressed color";
-            public static string Size = "Size";
-            public static string Shadow = "Shadow";
-            public static string ShadowColor = "Shadow Color";
-            public static string ShadowOpacity = "Shadow Opacity";
-            public static string Color = "Color";
-            public static string AlternativeColor = "Alternative color";
-            public static string FillColor = "Fill color";
-            public static string SectionName = "Section name";
-            public static string ButtonText = "Button text";
-            public static string SectionNameLetterSpacing = "Section name letter spacing";
-            public static string ButtonTextLetterSpacing = "Button text letter spacing";
-            public static string SectionNameFont = "Section name font";
-            public static string ButtonTextFont = "Button text font";
-            public static string SectionTextSize = "Section text size";
-            public static string ButtonTextSize = "Button text size";
-            public static string SectionTextColor = "Section text color";
-            public static string ButtonTextColor = "Button text color";
-            public static string BackgroundColor = "Backgroud color";
-            public static string BorderColor = "Border color";
-            public static string BorderWidth = "Border width";
-            public static string PaddingTop = "Padding top";
-            public static string PaddingBottom = "Padding bottom";
-            public static string PaddingLeft = "Padding left";
-            public static string PaddingRight = "Padding right";
-            public static string TitleFont = "Title font";
-            public static string DayTextFont = "Day text font";
-            public static string TitleTextSize = "Title text size";
-            public static string DayTextSize = "Day text size";
-            public static string TitleColor = "Title color";
-            public static string DayTextColor = "Day text color";
-            public static string CurrentDayBackgroundColor = "Current day background color";
-            public static string CurrentDayTextColor = "Current day text color";
-            public static string DayEvenBackgroundColor = "Even day background color";
-            public static string DividerColor = "Divider color";
-            public static string CurrentDividerColor = "Current day divider color";
-            public static string RippleColor = "Ripple color";
-            public static string FirstDayOfWeek = "Week start day";
-            public static string ButtonType = "Button type";
+            public const string Theme = "Theme";
+            public const string Background = "Background";
+            public const string Font = "Font";
+            public const string TextColor = "Text color";
+            public const string LetterSpacing = "Letter spacing";
+            public const string TextSize = "Text size";
+            public const string ConerRadius = "Corner radius";
+            public const string EnabledTextColor = "Enabled text color";
+            public const string DisabledTextColor = "Disabled text color";
+            public const string PressedTextColor = "Pressed text color";
+            public const string EnabledBackground = "Enabled background";
+            public const string DisabledBackground  = "Disabled background";
+            public const string PressedBackground = "Pressed background";
+            public const string HintTextColor = "Hint text color";
+            public const string HintTextColorDisabled = "Hint text color disabled";
+            public const string Icon = "Icon";
+            public const string IconUnocused = "Icon unfocused";
+            public const string IconDisabled = "Icon disabled";
+            public const string FocusedColor = "Focused color";
+            public const string NormalUnderlineColor = "Normal underline color";
+            public const string NormalIconColor = "Normal icon color";
+            public const string PopulatedUnderlineColor = "Populated underline color";
+            public const string ValidationRules = "Validation rules";
+            public const string PopulatedIconColor = "Populated icon color";
+            public const string DisabledColor = "Disabled color";
+            public const string PressedColor = "Pressed color";
+            public const string Size = "Size";
+            public const string Color = "Color";
+            public const string AlternativeColor = "Alternative color";
+            public const string FillColor = "Fill color";
+            public const string SectionName = "Section name";
+            public const string ButtonText = "Button text";
+            public const string SectionNameLetterSpacing = "Section name letter spacing";
+            public const string ButtonTextLetterSpacing = "Button text letter spacing";
+            public const string SectionNameFont = "Section name font";
+            public const string ButtonTextFont = "Button text font";
+            public const string SectionTextSize = "Section text size";
+            public const string ButtonTextSize = "Button text size";
+            public const string SectionTextColor = "Section text color";
+            public const string ButtonTextColor = "Button text color";
+            public const string BackgroundColor = "Backgroud color";
+            public const string BorderColor = "Border color";
+            public const string BorderWidth = "Border width";
+            public const string PaddingTop = "Padding top";
+            public const string PaddingBottom = "Padding bottom";
+            public const string PaddingLeft = "Padding left";
+            public const string PaddingRight = "Padding right";
+            public const string TitleFont = "Title font";
+            public const string DayTextFont = "Day text font";
+            public const string TitleTextSize = "Title text size";
+            public const string DayTextSize = "Day text size";
+            public const string TitleColor = "Title color";
+            public const string DayTextColor = "Day text color";
+            public const string CurrentDayBackgroundColor = "Current day background color";
+            public const string CurrentDayTextColor = "Current day text color";
+            public const string DayEvenBackgroundColor = "Even day background color";
+            public const string DividerColor = "Divider color";
+            public const string CurrentDividerColor = "Current day divider color";
+            public const string RippleColor = "Ripple color";
+            public const string FirstDayOfWeek = "Week start day";
+            public const string ButtonType = "Button type";
+            public const string ShadowOffsetZ = "Shadow offset Z";
+            public const string ShadowRadius = "Shadow radius";
+            public const string ShadowColor = "Shadow color";
+            public const string ShadowOpacity = "Shadow opacity";
         };
 
         public static class Colors
@@ -373,14 +374,41 @@ namespace EOS.UI.Android.Sandbox.Helpers
         public static class Buttons
         {
             public const string Simple = "Simple button";
+            public const string CTA = "CTA button";
             public const string FullBleed = "Full bleed button";
 
-            public static Dictionary<string, int> ButtonTypeollection = new Dictionary<string, int>()
+            public static Dictionary<string, int> SimpleButtonTypeCollection = new Dictionary<string, int>()
             {
                 { string.Empty, 0 },
                 { Simple, 1 },
                 { FullBleed, 2 },
             };
+
+            public static Dictionary<string, int> CTAButtonTypeCollection = new Dictionary<string, int>()
+            {
+                { string.Empty, 0 },
+                { CTA, 1 },
+                { FullBleed, 2 },
+            };
+        }
+
+        public static class Shadow
+        {
+            public static readonly Dictionary<string, int> OffsetCollection = new Dictionary<string, int>();
+            public static readonly Dictionary<string, int> RadiusCollection = new Dictionary<string, int>();
+
+            static Shadow()
+            {
+                OffsetCollection.Add("default", 0);
+                var offsetValues = Enumerable.Range(0, 30);
+                foreach(var val in offsetValues)
+                    OffsetCollection.Add(val.ToString(), val);
+
+                RadiusCollection.Add("default", 0);
+                var radiusValues = Enumerable.Range(0, 16);
+                foreach(var val in radiusValues)
+                    RadiusCollection.Add(val.ToString(), val);
+            }
         }
 
         public static List<double> ShadowOpacityValues = new List<double>() { 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0 };

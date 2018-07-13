@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.Linq;
 using Android.App;
 using Android.Graphics;
@@ -22,9 +22,8 @@ namespace EOS.UI.Android.Sandbox.Activities
 
             var ghostButton = FindViewById<GhostButton>(Resource.Id.ghostButton);
             var themeDropDown = FindViewById<EOSSandboxDropDown>(Resource.Id.themeDropDown);
-            var disabledColorDropDown = FindViewById<EOSSandboxDropDown>(Resource.Id.enabledTextColorDropDown);
-            var pressedColorDropDown = FindViewById<EOSSandboxDropDown>(Resource.Id.disabledTextColorDropDown);
-            var enabledColorDropDown = FindViewById<EOSSandboxDropDown>(Resource.Id.pressedTextColorDropDown);
+            var disabledColorDropDown = FindViewById<EOSSandboxDropDown>(Resource.Id.disabledTextColorDropDown);
+            var enabledColorDropDown = FindViewById<EOSSandboxDropDown>(Resource.Id.enabledTextColorDropDown);
             var fontDropDown = FindViewById<EOSSandboxDropDown>(Resource.Id.fontDropDown);
             var letterSpacingDropDown = FindViewById<EOSSandboxDropDown>(Resource.Id.letterSpacingDropDown);
             var textSizeDropDown = FindViewById<EOSSandboxDropDown>(Resource.Id.textSizeDropDown);
@@ -37,7 +36,6 @@ namespace EOS.UI.Android.Sandbox.Activities
             {
                 themeDropDown,
                 disabledColorDropDown,
-                pressedColorDropDown,
                 enabledColorDropDown,
                 fontDropDown,
                 letterSpacingDropDown,
@@ -94,14 +92,6 @@ namespace EOS.UI.Android.Sandbox.Activities
             {
                 if (position > 0)
                     ghostButton.DisabledTextColor = Colors.ColorsCollection.ElementAt(position).Value;
-            };
-
-            pressedColorDropDown.Name = Fields.PressedTextColor;
-            pressedColorDropDown.SetupAdapter(Colors.ColorsCollection.Select(item => item.Key).ToList());
-            pressedColorDropDown.ItemSelected += (position) =>
-            {
-                if (position > 0)
-                    ghostButton.PressedStateTextColor = Colors.ColorsCollection.ElementAt(position).Value;
             };
 
             textSizeDropDown.Name = Fields.TextSize;

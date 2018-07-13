@@ -20,9 +20,13 @@ namespace EOS.UI.iOS
         private readonly nfloat _rotatienAngle = -1.57f;
         private readonly nfloat _360angle = 6.28319f;
         private const string _zeroPercents = "0%";
+        private readonly nfloat _dotOffset = 0.5f;
+        private const int _dotSize = 1;
         private CAShapeLayer _circleLayer;
         private CAShapeLayer _fillCircleLayer;
-        private CAShapeLayer _roundedLayer;
+        private CAShapeLayer _endDotLayer;
+        private CAShapeLayer _startDotLayer;
+        private UIBezierPath _startDotPath;
 
         public event EventHandler Started;
         public event EventHandler Stopped;
@@ -67,8 +71,10 @@ namespace EOS.UI.iOS
                 if (_circleLayer != null)
                 {
                     _circleLayer.StrokeColor = _color.CGColor;
-                    _roundedLayer.StrokeColor = _color.CGColor;
-                    _roundedLayer.FillColor = _color.CGColor;
+                    _endDotLayer.StrokeColor = _color.CGColor;
+                    _endDotLayer.FillColor = _color.CGColor;
+                    _startDotLayer.StrokeColor = _color.CGColor;
+                    _startDotLayer.FillColor = _color.CGColor;
                 }
             }
         }
@@ -234,28 +240,52 @@ namespace EOS.UI.iOS
             _fillCircleLayer.Path = circlePath.CGPath;
             circleView.Transform = CGAffineTransform.MakeRotation(_rotatienAngle);
 
-            _roundedLayer = new CAShapeLayer();
-            _roundedLayer.FillColor = UIColor.Clear.CGColor;
-            _roundedLayer.StrokeColor = UIColor.Clear.CGColor;
-            _roundedLayer.LineWidth = 1;
+            _endDotLayer = new CAShapeLayer();
+            _endDotLayer.FillColor = UIColor.Clear.CGColor;
+            _endDotLayer.StrokeColor = UIColor.Clear.CGColor;
+            _endDotLayer.LineWidth = 1;
+
+            _startDotLayer = new CAShapeLayer();
+            _startDotLayer.FillColor = UIColor.Clear.CGColor;
+            _startDotLayer.StrokeColor = UIColor.Clear.CGColor;
+            _startDotLayer.LineWidth = 1;
 
             circleView.Layer.AddSublayer(_fillCircleLayer);
             circleView.Layer.AddSublayer(_circleLayer);
-            circleView.Layer.AddSublayer(_roundedLayer);
+            circleView.Layer.AddSublayer(_endDotLayer);
+            circleView.Layer.AddSublayer(_startDotLayer);
+
+            var radius = circleView.Frame.Width / 2;
+            var arcPath = new UIBezierPath();
+            arcPath.AddArc(center, radius, _startAngle, _startAngle, true);
+            var startDotPoint = arcPath.CurrentPoint;
+            var dotRect = new CGRect(startDotPoint.X - _dotOffset, startDotPoint.Y - _dotOffset, _dotSize, _dotSize);
+            _startDotPath = UIBezierPath.FromRoundedRect(dotRect, _dotOffset);
         }
 
         private void RedrawCircle()
         {
+            if (Progress != 0)
+            {
+                _startDotLayer.Path = _startDotPath.CGPath;
+            }
+            else
+            {
+                ClearPathes();
+                return;
+            }
+
             var endAngle = _360angle * (Progress / 100.0);
             var radius = circleView.Frame.Width / 2;
             var circlePath = new UIBezierPath();
             var center = new CGPoint(circleView.Frame.Width / 2, circleView.Frame.Height / 2);
             circlePath.AddArc(center, radius, _startAngle, (nfloat)endAngle, true);
 
-            var x = circlePath.CurrentPoint.X;
-            var y = circlePath.CurrentPoint.Y;
-            var roundPath = UIBezierPath.FromRoundedRect(new CGRect(x - 0.5, y - 0.5, 1, 1), 0.5f);
-            _roundedLayer.Path = roundPath.CGPath;
+            var x = circlePath.CurrentPoint.X - _dotOffset;
+            var y = circlePath.CurrentPoint.Y - _dotOffset;
+            var roundPath = UIBezierPath.FromRoundedRect(new CGRect(x, y, _dotSize, _dotSize), _dotOffset);
+
+            _endDotLayer.Path = roundPath.CGPath;
             _circleLayer.Path = circlePath.CGPath;
         }
 
@@ -263,13 +293,20 @@ namespace EOS.UI.iOS
         {
             Finished?.Invoke(this, EventArgs.Empty);
             imageView.Hidden = false;
-            _circleLayer.Path = null;
+            ClearPathes();
             _isRunnung = false;
         }
 
         private void SetFontStyle()
         {
             percentLabel.Font = Font.WithSize(TextSize);
+        }
+
+        private void ClearPathes()
+        {
+            _startDotLayer.Path = null;
+            _endDotLayer.Path = null;
+            _circleLayer.Path = null;
         }
     }
 }

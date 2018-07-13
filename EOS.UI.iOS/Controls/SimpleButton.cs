@@ -1,5 +1,6 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
+using Airbnb.Lottie;
 using CoreAnimation;
 using CoreGraphics;
 using EOS.UI.iOS.Extensions;
@@ -18,12 +19,12 @@ namespace EOS.UI.iOS.Controls
     [Register("SimpleButton")]
     public class SimpleButton : UIButton, IEOSThemeControl
     {
-        private CABasicAnimation _rotationAnimation;
-        private const string _rotationAnimationKey = "rotationAnimation";
-        private const string _rippleAnimationKey = "rippleAnimation";
+        private LOTAnimationView _snakeAnimation;
+        private const string _snakeAnimationKey = "Animations/preloader-snake";
         private const double _360degrees = 6.28319;//value in radians
         private Dictionary<UIControlState, NSAttributedString> _attributedTitles = new Dictionary<UIControlState, NSAttributedString>();
         private const double _verticalPaddingRatio = 0.25;
+        private UIView _animationView;
 
         #region constructor
 
@@ -209,17 +210,6 @@ namespace EOS.UI.iOS.Controls
             }
         }
 
-        private UIImage _preloaderImage;
-        public UIImage PreloaderImage
-        {
-            get => _preloaderImage;
-            set
-            {
-                _preloaderImage = value;
-                IsEOSCustomizationIgnored = true;
-            }
-        }
-
         #endregion
 
         #region utility methods
@@ -230,14 +220,16 @@ namespace EOS.UI.iOS.Controls
             TitleLabel.LineBreakMode = UILineBreakMode.TailTruncation;
             ContentEdgeInsets = new UIEdgeInsets(ContentEdgeInsets.Top, 10, ContentEdgeInsets.Bottom, 10);
             base.SetAttributedTitle(new NSAttributedString(string.Empty), UIControlState.Normal);
-            _rotationAnimation = new CABasicAnimation();
-            _rotationAnimation.KeyPath = "transform.rotation.z";
-            _rotationAnimation.From = new NSNumber(0);
-            _rotationAnimation.To = new NSNumber(_360degrees);
-            _rotationAnimation.Duration = 1;
-            _rotationAnimation.Cumulative = true;
-            _rotationAnimation.RepeatCount = Int32.MaxValue;
-            ImageView.ContentMode = UIViewContentMode.ScaleAspectFit;
+            _snakeAnimation = LOTAnimationView.AnimationNamed(_snakeAnimationKey);
+            _snakeAnimation.LoopAnimation = true;
+            _animationView = new UIView()
+            {
+                Frame = new CGRect(0, 0, 0, 0),
+                BackgroundColor = UIColor.Clear,
+                Hidden = true
+            };
+            _animationView.AddSubview(_snakeAnimation);
+            AddSubview(_animationView);
             UpdateAppearance();
         }
 
@@ -353,7 +345,6 @@ namespace EOS.UI.iOS.Controls
                 RippleColor = provider.GetEOSProperty<UIColor>(this, EOSConstants.RippleColor);
                 ShadowConfig = provider.GetEOSProperty<ShadowConfig>(this, EOSConstants.SimpleButtonShadow);
                 Enabled = base.Enabled;
-                PreloaderImage = UIImage.FromBundle(provider.GetEOSProperty<string>(this, EOSConstants.FabProgressPreloaderImage));
                 IsEOSCustomizationIgnored = false;
             }
         }
@@ -363,32 +354,28 @@ namespace EOS.UI.iOS.Controls
             InProgress = true;
             SaveTitles();
             SetTitle(string.Empty, UIControlState.Normal);
-            SetImage(PreloaderImage);
-            ImageView.Layer.AddAnimation(_rotationAnimation, _rotationAnimationKey);
+            UpdateAnimationFrame();
+            _animationView.Hidden = false;
+            _snakeAnimation.Play();
         }
 
         public void StopProgressAnimation()
         {
-            ImageView.Layer.RemoveAnimation(_rotationAnimationKey);
-            ClearImage();
+            _snakeAnimation.Stop();
+            _animationView.Hidden = true;
             RestoreTitles();
             InProgress = false;
         }
 
-        private void SetImage(UIImage image)
+        private void UpdateAnimationFrame()
         {
-            base.SetImage(image, UIControlState.Normal);
-            VerticalAlignment = UIControlContentVerticalAlignment.Fill;
-            HorizontalAlignment = UIControlContentHorizontalAlignment.Fill;
             var padding = (nfloat)(_verticalPaddingRatio * Frame.Height);
-            ImageEdgeInsets = new UIEdgeInsets(padding, 0, padding, 0);
-        }
-
-        private void ClearImage()
-        {
-            base.SetImage(null, UIControlState.Normal);
-            VerticalAlignment = UIControlContentVerticalAlignment.Center;
-            HorizontalAlignment = UIControlContentHorizontalAlignment.Center;
+            var heightWidth = Frame.Height - padding * 2;
+            var x = (Frame.Width / 2) - heightWidth / 2;
+            var y = padding;
+            var newFrame = new CGRect(x, y, heightWidth, heightWidth);
+            _animationView.Frame = newFrame;
+            _snakeAnimation.Frame = _animationView.Bounds;
         }
 
         private void SaveTitles()
@@ -442,6 +429,7 @@ namespace EOS.UI.iOS.Controls
         {
             //text color
             SetTitleColor(DisabledFontStyle.Color, UIControlState.Disabled);
+
         }
 
         #endregion

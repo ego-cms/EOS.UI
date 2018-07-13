@@ -118,7 +118,7 @@ namespace EOS.UI.iOS.Sandbox
                     var config = _fab.ShadowConfig;
                     if (_opacity != null)
                     {
-                        config.Color = config.Color.ColorWithAlpha((nfloat)_opacity); 
+                        config.Color = color.ColorWithAlpha((nfloat)_opacity); 
                     }
                     else
                     {
