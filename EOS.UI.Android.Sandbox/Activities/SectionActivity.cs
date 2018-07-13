@@ -69,9 +69,9 @@ namespace EOS.UI.Android.Sandbox.Activities
             _dataSource = new List<object>()
             {
                 defaultModel,
-                "First item",
-                "Second item",
-                "Third item"
+                "Terms of Use", 
+                "Privacy Policy", 
+                "About Us"
             };
 
             var adapter = new SectionAdapter(_dataSource);

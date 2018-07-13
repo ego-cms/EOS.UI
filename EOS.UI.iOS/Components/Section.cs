@@ -57,7 +57,6 @@ namespace EOS.UI.iOS.Components
             }
         }
 
-
         private FontStyleItem _buttonFontStyle;
         public FontStyleItem ButtonFontStyle
         {
