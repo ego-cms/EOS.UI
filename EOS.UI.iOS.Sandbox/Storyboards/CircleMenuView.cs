@@ -1,7 +1,9 @@
 using EOS.UI.iOS.Components;
 using EOS.UI.iOS.Sandbox.Storyboards;
+using EOS.UI.Shared.Themes.DataModels;
 using Foundation;
 using System;
+using System.Collections.Generic;
 using UIKit;
 
 namespace EOS.UI.iOS.Sandbox
@@ -21,6 +23,60 @@ namespace EOS.UI.iOS.Sandbox
             circleMenu.LeftSwiped += (sender, e) => swipeLabel.Text = "Left swipe";
             circleMenu.RightSwiped += (sender, e) => swipeLabel.Text = "Right swipe";
 
+            var m = new CircleMenuItemModel();
+            var source = new List<CircleMenuItemModel>()
+            {
+                new CircleMenuItemModel()
+                {
+                    Id = 0,
+                    ImageSource = UIImage.FromBundle("ic_backup"),
+                },
+                new CircleMenuItemModel()
+                {
+                    Id = 1,
+                    ImageSource = UIImage.FromBundle("ic_build")
+                },
+                new CircleMenuItemModel()
+                {
+                    Id = 2,
+                    ImageSource = UIImage.FromBundle("ic_camera_enhance")
+                },
+                new CircleMenuItemModel()
+                {
+                    Id = 3,
+                    ImageSource = UIImage.FromBundle("ic_backup")
+                },
+                new CircleMenuItemModel()
+                {
+                    Id = 4,
+                    ImageSource = UIImage.FromBundle("ic_build")
+                },
+                new CircleMenuItemModel()
+                {
+                    Id = 5,
+                    ImageSource = UIImage.FromBundle("ic_camera_enhance")
+                },
+                new CircleMenuItemModel()
+                {
+                    Id = 6,
+                    ImageSource = UIImage.FromBundle("ic_build")
+                },
+                new CircleMenuItemModel()
+                {
+                    Id = 7,
+                    ImageSource = UIImage.FromBundle("ic_camera_enhance")
+                },
+                new CircleMenuItemModel()
+                {
+                    Id = 8,
+                    ImageSource = UIImage.FromBundle("ic_camera_enhance")
+                },
+            };
+            source.ForEach(model => model.Clicked += (sender, e) =>
+            {
+                swipeLabel.Text = $"{model.Id} clicked";
+            });
+            circleMenu.Source = source;
             circleMenu.Attach();
         }
     }
