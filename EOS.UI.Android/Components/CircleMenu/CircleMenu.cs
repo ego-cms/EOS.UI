@@ -1,22 +1,59 @@
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using Android.Content;
 using Android.Graphics;
 using Android.Runtime;
+using Android.Support.Animation;
 using Android.Util;
 using Android.Views;
 using Android.Widget;
+using EOS.UI.Android.Interfaces;
+using Java.Lang;
 
 namespace EOS.UI.Android.Components
 {
-    public class CircleMenu: FrameLayout, View.IOnTouchListener
+    public class CircleMenu: FrameLayout, View.IOnTouchListener, IRunnable, DynamicAnimation.IOnAnimationEndListener, IIsOpened
     {
         #region fields
 
-        private HamburgerMenu _hamburgerMenu;
+        private const float Diameter = 52f;
+        private const float StartDelta = 94f;
+        private const float Delta1 = -16f;
+        private const float Delta2 = 26f;
+        private const float Delta3 = 60f;
+        private const float Delta4 = 64f;
+
+        private const float MinSwipeWidth = 50;
+        private const int SwipeAnimateDuration = 300;
+        private const int ShowHideAnimateDuration = 50;
+
+        private float[][] _deltaClosePositions = new float[6][];
+        private float[][] _deltaOpenPositions = new float[6][];
+        private float[][] _deltaForwardPositions = new float[6][];
+        private float[][] _deltaBackPositions = new float[6][];
+
+        private float _deltaNormalizePositions;
+
+        private bool _forward;
+        private bool _normalize;
+        private bool _isScrolling;
+        private int _showMenuItemsIteration;
+
+        private MainMenuButton _mainMenu;
         private RelativeLayout _container;
         private float _bufferX;
+        private float _bufferY;
         private bool _isMovedRight;
         private bool _isMovedLeft;
+
+        private List<CircleMenuItem> _menuItems = new List<CircleMenuItem>();
+
+        #endregion
+
+        #region IIsOpened implementation
+
+        public bool IsOpened { get; private set; }
 
         #endregion
 
@@ -49,6 +86,16 @@ namespace EOS.UI.Android.Components
 
         #endregion
 
+        #region public API
+
+        public void Attach(ViewGroup viewGroup)
+        {
+            var parameters = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MatchParent, RelativeLayout.LayoutParams.MatchParent);
+            viewGroup.AddView(this, parameters);
+        }
+
+        #endregion
+
         #region utility methods
 
         private void Initialize(IAttributeSet attrs = null)
@@ -57,50 +104,243 @@ namespace EOS.UI.Android.Components
             var view = inflater.Inflate(Resource.Layout.CircleMenu, this);
             _container = view.FindViewById<RelativeLayout>(Resource.Id.container);
 
-            _hamburgerMenu = view.FindViewById<HamburgerMenu>(Resource.Id.hamburgerMenu);
-            _hamburgerMenu.Click += HamburgerMenuClick;
+            _mainMenu = view.FindViewById<MainMenuButton>(Resource.Id.hamburgerMenu);
+            _mainMenu.SetIIsOpenedItem(this);
+            _mainMenu.Click += MainMenuClick;
 
             _container.SetOnTouchListener(this);
+
+            _menuItems.AddRange(new List<CircleMenuItem>
+            {
+                FindViewById<CircleMenuItem>(Resource.Id.menu0),
+                FindViewById<CircleMenuItem>(Resource.Id.menu1),
+                FindViewById<CircleMenuItem>(Resource.Id.menu2),
+                FindViewById<CircleMenuItem>(Resource.Id.menu3),
+                FindViewById<CircleMenuItem>(Resource.Id.menu4),
+                FindViewById<CircleMenuItem>(Resource.Id.menu5),
+            });
+
+            var denisty = Context.Resources.DisplayMetrics.Density;
+            _deltaClosePositions[0] = new float[] { -Diameter * 0.25f * denisty, 0f };
+            _deltaClosePositions[1] = new float[] { -Delta4 * denisty, Delta1 * denisty };
+            _deltaClosePositions[2] = new float[] { -Delta3 * denisty, Delta2 * denisty };
+            _deltaClosePositions[3] = new float[] { -Delta2 * denisty, Delta3 * denisty };
+            _deltaClosePositions[4] = new float[] { -Delta1 * denisty, Delta4 * denisty };
+            _deltaClosePositions[5] = new float[] { 0f, Diameter * 0.25f * denisty };
+
+            _deltaOpenPositions[0] = new float[] { 0f, -Diameter * 0.25f * denisty };
+            _deltaOpenPositions[5] = new float[] { Delta1 * denisty, -Delta4 * denisty };
+            _deltaOpenPositions[4] = new float[] { Delta2 * denisty, -Delta3 * denisty };
+            _deltaOpenPositions[3] = new float[] { Delta3 * denisty, -Delta2 * denisty };
+            _deltaOpenPositions[2] = new float[] { Delta4 * denisty, -Delta1 * denisty };
+            _deltaOpenPositions[1] = new float[] { Diameter * 0.25f * denisty, 0f };
+
+            _deltaForwardPositions[0] = new float[] { 0f, -Diameter * 0.25f * denisty };
+            _deltaForwardPositions[1] = new float[] { Delta1 * denisty, -Delta4 * denisty };
+            _deltaForwardPositions[2] = new float[] { Delta2 * denisty, -Delta3 * denisty };
+            _deltaForwardPositions[3] = new float[] { Delta3 * denisty, -Delta2 * denisty };
+            _deltaForwardPositions[4] = new float[] { Delta4 * denisty, -Delta1 * denisty };
+            _deltaForwardPositions[5] = new float[] { Diameter * 0.25f * denisty, 0f };
+
+            _deltaBackPositions[0] = new float[] { -Diameter * 0.25f * denisty,  0f};
+            _deltaBackPositions[5] = new float[] { -Delta4 * denisty, Delta1 * denisty };
+            _deltaBackPositions[4] = new float[] { -Delta3 * denisty, Delta2 * denisty };
+            _deltaBackPositions[3] = new float[] { -Delta2 * denisty, Delta3 * denisty };
+            _deltaBackPositions[2] = new float[] { -Delta1 * denisty, Delta4 * denisty };
+            _deltaBackPositions[1] = new float[] { 0f, Diameter * 0.25f * denisty };
+
+            _deltaNormalizePositions = (Diameter + StartDelta) * denisty;
         }
 
-        private void HamburgerMenuClick(object sender, EventArgs e)
+        private void MainMenuClick(object sender, EventArgs e)
         {
-            _hamburgerMenu.IsOpened = !_hamburgerMenu.IsOpened;
-            _container.SetBackgroundColor(_hamburgerMenu.IsOpened ? Color.Argb(50, 0, 0, 0) : Color.Transparent);
+            if(_showMenuItemsIteration == 0)
+                ShowMenuItemsAnimation();
         }
 
-        public void Attach(ViewGroup viewGroup)
+        private void MoveMenuItemsAnimation(bool normalize = true)
         {
-            var parameters = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MatchParent, RelativeLayout.LayoutParams.MatchParent);
-            viewGroup.AddView(this, parameters);
+            if(normalize)
+            {
+                _normalize = true;
+                if(_forward)
+                    _menuItems[0].Animate().WithEndAction(this).XBy(-_deltaNormalizePositions).SetDuration(1);
+                else
+                    _menuItems[0].Animate().WithEndAction(this).YBy(-_deltaNormalizePositions).SetDuration(1);
+            }
+            else
+            {
+                for(int i = 0; i < _menuItems.Count; i++)
+                {
+                    var x =  _forward ? _deltaForwardPositions[i][0] : _deltaBackPositions[i][0];
+                    var y = _forward ? _deltaForwardPositions[i][1] : _deltaBackPositions[i][1];
+                    var denisty = Context.Resources.DisplayMetrics.Density;
+
+                    var menu = _menuItems[i];
+                    var springX = new SpringAnimation(menu, DynamicAnimation.TranslationX, menu.TranslationX + x);
+                    var springY = new SpringAnimation(menu, DynamicAnimation.TranslationY, menu.TranslationY + y);
+
+                    if(i == _menuItems.Count - 1)
+                        springY.AddEndListener(this);
+
+                    springX.Start();
+                    springY.Start();
+                }
+            }
         }
 
-        public bool OnTouch(View v, MotionEvent e)
+        private void ShowMenuItemsAnimation()
         {
-            if(e.Action == MotionEventActions.Down)
+            ++_showMenuItemsIteration;
+            if(IsOpened)
             {
-                _bufferX = e.RawX;
+                for(int i = 0; i < _menuItems.Count - _showMenuItemsIteration; i++)
+                {
+                    var deltaX = _deltaOpenPositions[_menuItems.Count - i - _showMenuItemsIteration][0];
+                    var deltaY = _deltaOpenPositions[_menuItems.Count - i - _showMenuItemsIteration][1];
+
+                    if(i == _menuItems.Count - _showMenuItemsIteration - 1)
+                        _menuItems[i + 1].Animate().XBy(deltaX).YBy(deltaY).SetDuration(ShowHideAnimateDuration).WithEndAction(this);
+                    else
+                        _menuItems[i + 1].Animate().XBy(deltaX).YBy(deltaY).SetDuration(ShowHideAnimateDuration);
+                }
             }
-            else if(e.Action == MotionEventActions.Move && _bufferX != e.RawX)
+            else
             {
-                if(_bufferX - e.RawX > 10)
-                    _isMovedLeft = true;
-                if(_bufferX - e.RawX < -10)
-                    _isMovedRight = true;
+                for(int i = 0; i < _showMenuItemsIteration; i++)
+                {
+                    var deltaX = _deltaClosePositions[i][0];
+                    var deltaY = _deltaClosePositions[i][1];
+                    var menu = _menuItems[_showMenuItemsIteration - i];
+
+                    if(_showMenuItemsIteration != _menuItems.Count - 1)
+                    {
+                        if(i == _showMenuItemsIteration - 1)
+                            menu.Animate().XBy(deltaX).YBy(deltaY).SetDuration(ShowHideAnimateDuration).WithEndAction(this);
+                        else
+                            menu.Animate().XBy(deltaX).YBy(deltaY).SetDuration(ShowHideAnimateDuration);
+                    }
+                    else
+                    {
+                        var springX = new SpringAnimation(menu, DynamicAnimation.TranslationX, menu.TranslationX + deltaX);
+                        var springY = new SpringAnimation(menu, DynamicAnimation.TranslationY, menu.TranslationY + deltaY);
+
+                        if(i == _showMenuItemsIteration - 1)
+                        {
+                            _container.SetBackgroundColor(!IsOpened ? Color.Argb(50, 0, 0, 0) : Color.Transparent);
+                            springY.AddEndListener(this);
+                        }
+
+                        springX.Start();
+                        springY.Start();
+                    }
+                }
             }
-            if(e.Action == MotionEventActions.Up && !_isMovedRight && !_isMovedLeft)
-            {
-            }
-            if(e.Action == MotionEventActions.Up && (_isMovedRight || _isMovedLeft))
-            {
-                Toast.MakeText(Context, _isMovedRight ? "right" : "left", ToastLength.Short).Show();
-                _bufferX = 0f;
-                _isMovedRight = false;
-                _isMovedLeft = false;
-            }
-            return _hamburgerMenu.IsOpened;
         }
 
         #endregion
+
+        #region IOnTouchListener implementation
+
+        public bool OnTouch(View v, MotionEvent e)
+        {
+            if(!_isScrolling)
+            {
+                if(e.Action == MotionEventActions.Down)
+                {
+                    _bufferX = e.RawX;
+                    _bufferY = e.RawY;
+                }
+                else if(e.Action == MotionEventActions.Move && _bufferX != e.RawX)
+                {
+                    if(_bufferX - e.RawX > MinSwipeWidth && System.Math.Abs(_bufferX - e.RawX) > System.Math.Abs(_bufferY - e.RawY))
+                        _isMovedLeft = true;
+                    if(_bufferX - e.RawX < -MinSwipeWidth && System.Math.Abs(_bufferX - e.RawX) > System.Math.Abs(_bufferY - e.RawY))
+                        _isMovedRight = true;
+                }
+                if(e.Action == MotionEventActions.Up && !_isMovedRight && !_isMovedLeft)
+                {
+                }
+                if(e.Action == MotionEventActions.Up && (_isMovedRight || _isMovedLeft))
+                {
+                    _forward = _isMovedRight;
+                    _isScrolling = true;
+                    MoveMenuItemsAnimation();
+                    _bufferX = 0f;
+                    _bufferY = 0f;
+                    _isMovedRight = false;
+                    _isMovedLeft = false;
+                }
+            }
+            return IsOpened;
+        }
+
+        #endregion
+
+        #region IRunnable implementation
+
+        public void Run()
+        {
+            if(_normalize)
+            {
+                _normalize = false;
+                MoveMenuItemsAnimation(false);
+            }
+            else if(_showMenuItemsIteration > 0)
+            {
+                if(_showMenuItemsIteration != _menuItems.Count - 1)
+                {
+                    ShowMenuItemsAnimation();
+                }
+                else if(IsOpened)
+                {
+                    _showMenuItemsIteration = 0;
+                    IsOpened = !IsOpened;
+                    _container.SetBackgroundColor(IsOpened ? Color.Argb(50, 0, 0, 0) : Color.Transparent);
+                }
+            }
+        }
+
+        #endregion
+
+        #region IOnAnimationEndListener implementation
+
+        public void OnAnimationEnd(DynamicAnimation animation, bool canceled, float value, float velocity)
+        {
+            if(_isScrolling)
+            {
+                //HACK: if ImageView was out of the bounds it is invisible
+                _menuItems[0].Visibility = ViewStates.Invisible;
+                _menuItems[0].Visibility = ViewStates.Visible;
+
+                if(_forward)
+                {
+                    var menuItem = _menuItems.Last();
+                    _menuItems.RemoveAt(_menuItems.Count - 1);
+                    _menuItems.Insert(0, menuItem);
+
+                    //Set to zero position
+                    _menuItems.First().Animate().YBy(_deltaNormalizePositions).SetDuration(1);
+                }
+                else
+                {
+                    var menuItem = _menuItems.First();
+                    _menuItems.RemoveAt(0);
+                    _menuItems.Add(menuItem);
+
+                    //Set to zero position
+                    _menuItems.First().Animate().XBy(_deltaNormalizePositions).SetDuration(1);
+                }
+
+                _isScrolling = false;
+            }
+            else
+            {
+                _showMenuItemsIteration = 0;
+                IsOpened = !IsOpened;
+            }
+        }
+
+        #endregion 
     }
 }
