@@ -11,7 +11,7 @@ namespace EOS.UI.Shared.Themes.DataModels
 {
     public class CircleMenuItemModel
     {
-        int Id { get; set; }
+        public int Id { get; set; }
 #if __IOS__
         public UIImage ImageSource { get; set; }
 #endif

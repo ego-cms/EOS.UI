@@ -226,5 +226,10 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup />
+  <ItemGroup>
+    <BundleResource Include="Resources\ic_backup.png" />
+    <BundleResource Include="Resources\ic_build.png" />
+    <BundleResource Include="Resources\ic_camera_enhance.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
 </Project>

@@ -12,14 +12,21 @@ namespace EOS.UI.iOS.Components
         private const double _animationDuration = 0.1;
 
         public int CircleMenuItemId { get; set; }
+        
+        public CircleMenuButton(CGRect frame) : base(frame)
+        {
+            Initialize();
+        }
 
         public CircleMenuButton()
         {
-            
+            Initialize();
+        }
+        
+        private void Initialize()
+        {
             ImageEdgeInsets = new UIEdgeInsets(_padding, _padding, _padding, _padding);
             BackgroundColor = UIColor.White;
-
-            UIView.Animate(12, 12, UIViewAnimationOptions.CurveEaseInOut, () => { }, () => { });
         }
 
         public override void MovedToSuperview()
