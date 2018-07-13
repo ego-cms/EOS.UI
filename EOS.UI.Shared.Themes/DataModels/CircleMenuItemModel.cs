@@ -20,5 +20,7 @@ namespace EOS.UI.Shared.Themes.DataModels
         public Drawable ImageSource { get; set; }
 #endif
         IEnumerable<CircleMenuItemModel> Children { get; set; }
+
+        public EventHandler Clicked;
     }
 }

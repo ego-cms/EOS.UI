@@ -7,9 +7,6 @@ namespace EOS.UI.iOS.Components
     public class CircleMenuButton : UIButton
     {
         private const int _padding = 5;
-        private const float _startScale = 0.85f;
-        private const float _endScale = 1.0f;
-        private const double _animationDuration = 0.1;
 
         public int CircleMenuItemId { get; set; }
         
@@ -27,6 +24,10 @@ namespace EOS.UI.iOS.Components
         {
             ImageEdgeInsets = new UIEdgeInsets(_padding, _padding, _padding, _padding);
             BackgroundColor = UIColor.White;
+            Layer.ShadowColor = UIColor.Black.CGColor;
+            Layer.ShadowOffset = new CGSize(0, 6);
+            Layer.ShadowRadius = 12;
+            Layer.ShadowOpacity = 0.2f;
         }
 
         public override void MovedToSuperview()
