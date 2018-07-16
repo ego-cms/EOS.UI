@@ -5,6 +5,7 @@ using Android.Graphics.Drawables;
 using Android.Runtime;
 using Android.Util;
 using Android.Views;
+using Android.Views.Animations;
 using Android.Widget;
 
 namespace EOS.UI.Android.Components
@@ -15,6 +16,20 @@ namespace EOS.UI.Android.Components
     /// </summary>
     internal class CircleMenuItem : FrameLayout
     {
+        #region fields
+
+        private const float StartAngle = -180f;
+        private const float EndAngle = 0f;
+        private const float PivotScale = 0.5f;
+        private const int RotateDimention = 380;
+
+        private const float ShadowRadiusValue = 4f;
+        private const float CornerRadius = 200f;
+
+        private ImageView _icon;
+
+        #endregion
+
         #region .ctors
 
         public CircleMenuItem(IntPtr javaReference, JniHandleOwnership transfer) : base(javaReference, transfer)
@@ -50,13 +65,20 @@ namespace EOS.UI.Android.Components
         {
             var inflater = (LayoutInflater)Context.GetSystemService(Context.LayoutInflaterService);
             var view = inflater.Inflate(Resource.Layout.CircleMenuItem, this);
-
+            _icon = view.FindViewById<ImageView>(Resource.Id.icon);
             var roundedDrawable = new GradientDrawable();
             roundedDrawable.SetColor(Color.LightBlue);
-            roundedDrawable.SetCornerRadius(150f);
+            roundedDrawable.SetCornerRadius(CornerRadius);
             view.SetBackgroundDrawable(roundedDrawable);
-            view.Elevation = 4;
-            view.TranslationZ = 4;
+            view.Elevation = ShadowRadiusValue;
+            view.TranslationZ = ShadowRadiusValue;
+        }
+
+        public void StartRotateAnimation()
+        {
+            var scaleInAnimation = new RotateAnimation(StartAngle, EndAngle, Dimension.RelativeToSelf, PivotScale, Dimension.RelativeToSelf, PivotScale);
+            scaleInAnimation.Duration = RotateDimention;
+            _icon.StartAnimation(scaleInAnimation);
         }
 
         #endregion

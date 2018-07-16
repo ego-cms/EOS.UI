@@ -5,6 +5,7 @@ using Android.Graphics.Drawables;
 using Android.Runtime;
 using Android.Util;
 using Android.Views;
+using Android.Views.Animations;
 using Android.Widget;
 using Com.Airbnb.Lottie;
 using EOS.UI.Android.Interfaces;
@@ -18,6 +19,11 @@ namespace EOS.UI.Android.Components
     internal class MainMenuButton: FrameLayout
     {
         #region fields
+
+        private const float StartScale = 1f;
+        private const float EndScale = 0.9f;
+        private const float PivotScale = 0.5f;
+        private const int ScaleDimention = 150;
 
         private const float ShadowRadiusValue = 4f;
         private const float CornerRadius = 200f;
@@ -89,6 +95,7 @@ namespace EOS.UI.Android.Components
             {
                 _lottieView.SetAnimation(AnimationName);
                 _lottieView.PlayAnimation();
+                StartTouchAnimation();
             }
             return base.OnTouchEvent(e);
         }
@@ -96,6 +103,13 @@ namespace EOS.UI.Android.Components
         public void SetIIsOpenedItem(IIsOpened isOpened)
         {
             _mainControl = isOpened;
+        }
+
+        private void StartTouchAnimation()
+        {
+            var scaleInAnimation = new ScaleAnimation(StartScale, EndScale, StartScale, EndScale, Dimension.RelativeToSelf, PivotScale, Dimension.RelativeToSelf, PivotScale);
+            scaleInAnimation.Duration = ScaleDimention;
+            StartAnimation(scaleInAnimation);
         }
 
         #endregion

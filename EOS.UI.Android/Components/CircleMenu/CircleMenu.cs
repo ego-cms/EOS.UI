@@ -207,6 +207,10 @@ namespace EOS.UI.Android.Components
             }
             else
             {
+                if(_showMenuItemsIteration == 1)
+                    foreach(var menu in _menuItems)
+                        menu.StartRotateAnimation();
+
                 for(int i = 0; i < _showMenuItemsIteration; i++)
                 {
                     var deltaX = _deltaClosePositions[i][0];
