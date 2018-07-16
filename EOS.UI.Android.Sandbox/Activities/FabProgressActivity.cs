@@ -3,17 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Android.App;
-using Android.Content;
 using Android.Graphics;
 using Android.OS;
-using Android.Views;
 using Android.Widget;
 using EOS.UI.Android.Controls;
 using EOS.UI.Android.Helpers;
 using EOS.UI.Android.Sandbox.Controls;
 using EOS.UI.Shared.Helpers;
 using EOS.UI.Shared.Themes.Themes;
-using UIFrameworks.Android.Themes;
 using UIFrameworks.Shared.Themes.Helpers;
 using static EOS.UI.Android.Sandbox.Helpers.Constants;
 
@@ -309,43 +306,6 @@ namespace EOS.UI.Android.Sandbox.Activities
         {
             spinners.Except(new[] { themeDropDown }).ToList().ForEach(s => s.SetSpinnerSelection(0));
             fab.ResetCustomization();
-        }
-
-        public override bool OnCreateOptionsMenu(IMenu menu)
-        {
-            MenuInflater.Inflate(Resource.Menu.FabProgressMenu, menu);
-            ChangeMenuItemColor(menu);
-            return true;
-        }
-
-        private void ChangeMenuItemColor(IMenu menu)
-        {
-            var item = _toolbar.Menu.FindItem(Resource.Id.fab_progress_menu_new);
-
-            if (item == null)
-                return;
-
-            item.Icon.SetColorFilter(EOSThemeProvider.Instance.GetEOSProperty<Color>(_toolbar, EOSConstants.BrandPrimaryColor), PorterDuff.Mode.SrcIn);
-        }
-
-        public override bool OnOptionsItemSelected(IMenuItem item)
-        {
-            switch (item.ItemId)
-            {
-                case Resource.Id.fab_progress_menu_new:
-                    var intent = new Intent(this, typeof(FabProgressSampleActivity));
-                    intent.PutExtra(ShadowOffsetXKey, _shadowOffsetX);
-                    intent.PutExtra(ShadowOffsetYKey, _shadowOffsetY);
-                    intent.PutExtra(ShadowBlurKey, _shadowBlur);
-                    intent.PutExtra(ShadowColorAKey, (byte)(255 * _shadowAlpha));
-                    intent.PutExtra(ShadowColorRKey, _shadowColor.R);
-                    intent.PutExtra(ShadowColorGKey, _shadowColor.G);
-                    intent.PutExtra(ShadowColorBKey, _shadowColor.B);
-                    StartActivity(intent);
-                    return true;
-                default:
-                    return base.OnOptionsItemSelected(item);
-            }
         }
     }
 }

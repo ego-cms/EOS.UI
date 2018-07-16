@@ -125,7 +125,6 @@
     <Compile Include="Styles\EOSSandboxLightStyle.cs" />
     <Compile Include="Styles\EOSSandboxStyleProvider.cs" />
     <Compile Include="Controls\EOSSandboxEditText.cs" />
-    <Compile Include="Activities\FabProgressSampleActivity.cs" />
   </ItemGroup>
   <ItemGroup>
     <AndroidAsset Include="Assets\Fonts\Amita.ttf" />
@@ -158,8 +157,6 @@
     <AndroidAsset Include="Assets\Fonts\academyEngraved.ttf" />
     <AndroidResource Include="Resources\layout\CircleProgressLayout.axml" />
     <AndroidResource Include="Resources\menu\FabProgressMenu.xml" />
-    <AndroidResource Include="Resources\layout\FabProgressItemLayout.axml" />
-    <AndroidResource Include="Resources\layout\FabProgressSampleLayout.axml" />
     <AndroidResource Include="Resources\drawable\FabRightArrow.xml" />
   </ItemGroup>
   <ItemGroup>
