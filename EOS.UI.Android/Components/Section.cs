@@ -11,6 +11,8 @@ using EOS.UI.Shared.Themes.Interfaces;
 using UIFrameworks.Android.Themes;
 using UIFrameworks.Shared.Themes.Helpers;
 using UIFrameworks.Shared.Themes.Interfaces;
+using R = Android.Content.Res.Resources;
+
 
 namespace EOS.UI.Android.Components
 {
@@ -216,10 +218,11 @@ namespace EOS.UI.Android.Components
 
         public void SetPaddings(int left, int top, int right, int bottom)
         {
-            _leftPadding = left == -1 ? _leftPadding : left;
-            _rightPadding = right == -1 ? _rightPadding : right;
-            _topPadding = top == -1 ? _topPadding : top;
-            _bottomPadding = bottom == -1 ? _bottomPadding : bottom;
+            var denisty = _containerLayout.Resources.DisplayMetrics.Density;
+            _leftPadding = left == -1 ? _leftPadding : (int)(left * denisty);
+            _rightPadding = right == -1 ? _rightPadding : (int)(right * denisty);
+            _topPadding = top == -1 ? _topPadding : (int)(top * denisty);
+            _bottomPadding = bottom == -1 ? _bottomPadding : (int)(bottom * denisty);
             UpdatePaddings();
         }
 

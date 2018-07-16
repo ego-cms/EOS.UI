@@ -44,9 +44,9 @@ namespace EOS.UI.iOS.Sandbox.Storyboards
                     HasBorder= (bool)EOSThemeProvider.Instance.GetCurrentTheme().ThemeValues[EOSConstants.HasSectionBorder],
                     HasButton = (bool)EOSThemeProvider.Instance.GetCurrentTheme().ThemeValues[EOSConstants.HasSectionAction]
                 },
-                "First item",
-                "Second item",
-                "Third item"
+                "Terms of Use", 
+                "Privacy Policy",
+                "About Us"
             };
             _source = new SectionTableSource(sectionTableView, _dataSource);
             sectionTableView.Source = _source;
