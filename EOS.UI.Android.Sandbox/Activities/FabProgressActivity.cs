@@ -54,7 +54,6 @@ namespace EOS.UI.Android.Sandbox.Activities
             var shadowColorDropDown = FindViewById<EOSSandboxDropDown>(Resource.Id.shadowColorDropDown);
             var shadowOpacityDropDown = FindViewById<EOSSandboxDropDown>(Resource.Id.shadowOpacityDropDown);
 
-            var sizeDropDown = FindViewById<EOSSandboxDropDown>(Resource.Id.sizeDropDown);
             var stateSwitch = FindViewById<Switch>(Resource.Id.stateSwitch);
             var resetButton = FindViewById<Button>(Resource.Id.buttonResetCustomization);
             fab.Click += async (sender, e) =>
@@ -76,10 +75,8 @@ namespace EOS.UI.Android.Sandbox.Activities
                 disabledColorDropDown,
                 pressedColorDropDown,
                 backgroundColorDropDown,
-                //shadowDropDown,
                 shadowColorDropDown,
-                shadowOpacityDropDown,
-                sizeDropDown
+                shadowOpacityDropDown
             };
 
             themeDropDown.Name = Fields.Theme;
@@ -213,21 +210,6 @@ namespace EOS.UI.Android.Sandbox.Activities
                 if (Int32.TryParse(e.Text.ToString(), out _shadowBlur))
                 {
                     ChangeShadow(fab);
-                }
-            };
-
-            sizeDropDown.Name = Fields.Size;
-            sizeDropDown.SetupAdapter(Sizes.FabProgressSizes.Select(i => i.Key).ToList());
-            sizeDropDown.ItemSelected += (position) =>
-            {
-                if (_fabInitialSize == 0)
-                    _fabInitialSize = fab.Width;
-
-                if (position > 0)
-                {
-                    ChangeFabLayoutParameters(Sizes.FabProgressSizes.ElementAt(position).Value, fab);
-                    ResetShadowFields(shadowOffsetX, shadowOffsetY, shadowBlur, shadowColorDropDown);
-                    //shadowDropDown.SetSpinnerSelection(0);
                 }
             };
 

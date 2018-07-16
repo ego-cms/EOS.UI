@@ -5,7 +5,6 @@ using System.Threading.Tasks;
 using CoreGraphics;
 using EOS.UI.iOS.Controls;
 using EOS.UI.iOS.Sandbox.Storyboards;
-using EOS.UI.Shared.Helpers;
 using EOS.UI.Shared.Themes.Themes;
 using UIKit;
 using static EOS.UI.iOS.Sandbox.Helpers.Constants;
@@ -49,10 +48,8 @@ namespace EOS.UI.iOS.Sandbox
             {
                 backgroundDropDown,
                 themeDropDown,
-                sizeDropDown,
                 disabledColorDropDown,
                 pressedColorDropDown,
-                shadowDropDown,
                 shadowColorDropDown,
                 shadowRadiusDropDown,
                 shadowOffsetXDropDown,
@@ -92,24 +89,6 @@ namespace EOS.UI.iOS.Sandbox
             disabledColorDropDown.InitSource(
                 color => _fab.DisabledBackgroundColor = color,
                 Fields.DisabledColor,
-                rect);
-
-            sizeDropDown.InitSource(
-                FabProgressSizes,
-                size => _fab.ButtonSize = size,
-                Fields.Size,
-                rect);
-
-            shadowDropDown.InitSource(
-                ShadowConfigs,
-                shadow => _fab.ShadowConfig = new ShadowConfig()
-                {
-                    Color = shadow.Color,
-                    Offset = shadow.Offset,
-                    Spread = shadow.Spread,
-                    Blur = shadow.Blur
-                },
-                Fields.Shadow,
                 rect);
 
             shadowColorDropDown.InitSource(

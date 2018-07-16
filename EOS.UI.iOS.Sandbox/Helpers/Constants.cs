@@ -79,7 +79,7 @@ namespace EOS.UI.iOS.Sandbox.Helpers
             public const string ShadowColor = "Shadow color";
             public const string ShadowOffsetX = "Shadow offset X";
             public const string ShadowOffsetY = "Shadow offset Y";
-            public const string ShadowRadius = "Shadow radius";
+            public const string ShadowRadius = "Shadow Blur";
             public const string ShadowOpacity = "Shadow opacity";
         };
 

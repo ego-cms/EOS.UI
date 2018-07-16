@@ -54,6 +54,10 @@
                 android:id="@+id/pressedColorDropDown"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
+            <EOS.UI.Android.Sandbox.Controls.EOSSandboxDropDown
+                android:id="@+id/shadowColorDropDown"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
             <LinearLayout
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
@@ -127,15 +131,7 @@
                     android:inputType="numberSigned" />
             </LinearLayout>
             <EOS.UI.Android.Sandbox.Controls.EOSSandboxDropDown
-                android:id="@+id/shadowColorDropDown"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-            <EOS.UI.Android.Sandbox.Controls.EOSSandboxDropDown
                 android:id="@+id/shadowOpacityDropDown"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-            <EOS.UI.Android.Sandbox.Controls.EOSSandboxDropDown
-                android:id="@+id/sizeDropDown"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
             <LinearLayout

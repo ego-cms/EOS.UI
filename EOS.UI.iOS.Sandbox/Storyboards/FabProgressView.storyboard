@@ -33,19 +33,19 @@
                                 <rect key="frame" x="16" y="120" width="343" height="680"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pHG-HJ-QVH">
-                                        <rect key="frame" x="0.0" y="0.0" width="343" height="610"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="343" height="520"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Enabled" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1p0-2J-ARX" customClass="EOSSandboxLabel">
-                                                <rect key="frame" x="0.0" y="505" width="62" height="21"/>
+                                                <rect key="frame" x="0.0" y="415" width="62" height="21"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="PRC-RK-RK9">
-                                                <rect key="frame" x="284" y="500" width="51" height="31"/>
+                                                <rect key="frame" x="284" y="410" width="51" height="31"/>
                                             </switch>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LcA-VA-fSG" customClass="EOSSandboxButton">
-                                                <rect key="frame" x="152" y="550" width="39" height="30"/>
+                                                <rect key="frame" x="152" y="460" width="39" height="30"/>
                                                 <state key="normal" title="Reset"/>
                                             </button>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1183" customClass="CustomDropDown">
@@ -76,50 +76,36 @@
                                                     <constraint firstAttribute="height" constant="40" id="1287"/>
                                                 </constraints>
                                             </view>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1292" customClass="CustomDropDown">
-                                                <rect key="frame" x="0.0" y="180" width="343" height="40"/>
-                                                <color key="backgroundColor" red="0.89411764705882357" green="0.51372549019607838" blue="0.51372549019607838" alpha="1" colorSpace="calibratedRGB"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="height" constant="40" id="1293"/>
-                                                </constraints>
-                                            </view>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2030" customClass="CustomDropDown">
-                                                <rect key="frame" x="0.0" y="225" width="343" height="40"/>
-                                                <color key="backgroundColor" red="0.89411764705882357" green="0.51372549019607838" blue="0.51372549019607838" alpha="1" colorSpace="calibratedRGB"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="height" constant="40" id="2031"/>
-                                                </constraints>
-                                            </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nqS-re-ze8" customClass="CustomDropDown">
-                                                <rect key="frame" x="0.0" y="270" width="343" height="40"/>
+                                                <rect key="frame" x="0.0" y="180" width="343" height="40"/>
                                                 <color key="backgroundColor" red="0.89411764709999997" green="0.51372549020000002" blue="0.51372549020000002" alpha="1" colorSpace="calibratedRGB"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="40" id="X5V-OG-bHG"/>
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LGP-Y8-EQT" customClass="CustomDropDown">
-                                                <rect key="frame" x="0.0" y="315" width="343" height="40"/>
+                                                <rect key="frame" x="0.0" y="225" width="343" height="40"/>
                                                 <color key="backgroundColor" red="0.89411764709999997" green="0.51372549020000002" blue="0.51372549020000002" alpha="1" colorSpace="calibratedRGB"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="40" id="U9x-dc-Eqy"/>
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IXb-Ca-rPW" customClass="CustomDropDown">
-                                                <rect key="frame" x="0.0" y="360" width="343" height="40"/>
+                                                <rect key="frame" x="0.0" y="270" width="343" height="40"/>
                                                 <color key="backgroundColor" red="0.89411764709999997" green="0.51372549020000002" blue="0.51372549020000002" alpha="1" colorSpace="calibratedRGB"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="40" id="SkC-JT-7nl"/>
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="deq-Qh-wRg" customClass="CustomDropDown">
-                                                <rect key="frame" x="0.0" y="405" width="343" height="40"/>
+                                                <rect key="frame" x="0.0" y="315" width="343" height="40"/>
                                                 <color key="backgroundColor" red="0.89411764709999997" green="0.51372549020000002" blue="0.51372549020000002" alpha="1" colorSpace="calibratedRGB"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="40" id="VMz-q1-PlI"/>
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Akm-eD-F15" customClass="CustomDropDown">
-                                                <rect key="frame" x="0.0" y="450" width="343" height="40"/>
+                                                <rect key="frame" x="0.0" y="360" width="343" height="40"/>
                                                 <color key="backgroundColor" red="0.89411764709999997" green="0.51372549020000002" blue="0.51372549020000002" alpha="1" colorSpace="calibratedRGB"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="40" id="yVv-XU-aAr"/>
@@ -129,11 +115,10 @@
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstItem="LGP-Y8-EQT" firstAttribute="top" secondItem="nqS-re-ze8" secondAttribute="bottom" constant="5" id="0Gd-O8-OIz"/>
+                                            <constraint firstItem="nqS-re-ze8" firstAttribute="top" secondItem="1286" secondAttribute="bottom" constant="5" id="1j2-gi-9oB"/>
                                             <constraint firstItem="1189" firstAttribute="top" secondItem="1183" secondAttribute="bottom" constant="5" id="4jd-c1-QSl"/>
-                                            <constraint firstItem="1292" firstAttribute="leading" secondItem="pHG-HJ-QVH" secondAttribute="leading" id="7Z0-Gx-kXx"/>
                                             <constraint firstItem="1p0-2J-ARX" firstAttribute="leading" secondItem="pHG-HJ-QVH" secondAttribute="leading" id="7cM-o5-j1x"/>
                                             <constraint firstItem="1280" firstAttribute="leading" secondItem="pHG-HJ-QVH" secondAttribute="leading" id="7jb-uJ-Gav"/>
-                                            <constraint firstAttribute="trailing" secondItem="2030" secondAttribute="trailing" id="8ku-ed-czO"/>
                                             <constraint firstItem="PRC-RK-RK9" firstAttribute="centerY" secondItem="1p0-2J-ARX" secondAttribute="centerY" id="8vY-3i-kF1"/>
                                             <constraint firstAttribute="trailing" secondItem="1280" secondAttribute="trailing" id="9hD-mo-FFj"/>
                                             <constraint firstItem="deq-Qh-wRg" firstAttribute="leading" secondItem="pHG-HJ-QVH" secondAttribute="leading" id="AV9-Pw-vZw"/>
@@ -142,17 +127,13 @@
                                             <constraint firstItem="nqS-re-ze8" firstAttribute="leading" secondItem="pHG-HJ-QVH" secondAttribute="leading" id="DLU-TY-Lg2"/>
                                             <constraint firstItem="Akm-eD-F15" firstAttribute="top" secondItem="deq-Qh-wRg" secondAttribute="bottom" constant="5" id="Dgf-JY-h2c"/>
                                             <constraint firstItem="LGP-Y8-EQT" firstAttribute="leading" secondItem="pHG-HJ-QVH" secondAttribute="leading" id="Ead-Ml-BX2"/>
-                                            <constraint firstItem="2030" firstAttribute="leading" secondItem="pHG-HJ-QVH" secondAttribute="leading" id="EcP-Ho-Gy3"/>
                                             <constraint firstAttribute="trailing" secondItem="IXb-Ca-rPW" secondAttribute="trailing" id="Hp1-8R-hrr"/>
-                                            <constraint firstItem="nqS-re-ze8" firstAttribute="top" secondItem="2030" secondAttribute="bottom" constant="5" id="L6s-ve-XeG"/>
                                             <constraint firstItem="1189" firstAttribute="leading" secondItem="pHG-HJ-QVH" secondAttribute="leading" id="M28-yw-dUV"/>
                                             <constraint firstAttribute="trailing" secondItem="PRC-RK-RK9" secondAttribute="trailing" constant="10" id="OFD-Ia-xpd"/>
                                             <constraint firstAttribute="trailing" secondItem="LGP-Y8-EQT" secondAttribute="trailing" id="Syi-4M-Lxu"/>
                                             <constraint firstAttribute="bottom" secondItem="LcA-VA-fSG" secondAttribute="bottom" constant="30" id="TD3-fe-XH7"/>
-                                            <constraint firstItem="2030" firstAttribute="top" secondItem="1292" secondAttribute="bottom" constant="5" id="WRu-P1-621"/>
                                             <constraint firstItem="1183" firstAttribute="leading" secondItem="pHG-HJ-QVH" secondAttribute="leading" id="WnH-fp-kBK"/>
                                             <constraint firstAttribute="trailing" secondItem="nqS-re-ze8" secondAttribute="trailing" id="XMZ-NW-D69"/>
-                                            <constraint firstAttribute="trailing" secondItem="1292" secondAttribute="trailing" id="ZUS-zO-Qqz"/>
                                             <constraint firstItem="IXb-Ca-rPW" firstAttribute="leading" secondItem="pHG-HJ-QVH" secondAttribute="leading" id="Zl2-NY-u5u"/>
                                             <constraint firstAttribute="trailing" secondItem="1183" secondAttribute="trailing" id="Zzb-yE-5fj"/>
                                             <constraint firstItem="1286" firstAttribute="top" secondItem="1280" secondAttribute="bottom" constant="5" id="bNt-N9-kHj"/>
@@ -161,7 +142,6 @@
                                             <constraint firstItem="LcA-VA-fSG" firstAttribute="top" secondItem="PRC-RK-RK9" secondAttribute="top" constant="50" id="i9N-gE-F2Y"/>
                                             <constraint firstAttribute="trailing" secondItem="Akm-eD-F15" secondAttribute="trailing" id="iJa-hc-YqI"/>
                                             <constraint firstItem="Akm-eD-F15" firstAttribute="leading" secondItem="pHG-HJ-QVH" secondAttribute="leading" id="lQc-Rf-41I"/>
-                                            <constraint firstItem="1292" firstAttribute="top" secondItem="1286" secondAttribute="bottom" constant="5" id="mKn-iP-BdD"/>
                                             <constraint firstItem="IXb-Ca-rPW" firstAttribute="top" secondItem="LGP-Y8-EQT" secondAttribute="bottom" constant="5" id="oPl-fZ-8gG"/>
                                             <constraint firstAttribute="trailing" secondItem="1286" secondAttribute="trailing" id="ot4-4c-XP3"/>
                                             <constraint firstAttribute="trailing" secondItem="1189" secondAttribute="trailing" id="py0-Fg-ZjA"/>
@@ -201,18 +181,16 @@
                         <outlet property="pressedColorDropDown" destination="1286" id="name-outlet-1286"/>
                         <outlet property="resetButton" destination="LcA-VA-fSG" id="Zpa-LP-Bs2"/>
                         <outlet property="shadowColorDropDown" destination="nqS-re-ze8" id="3bk-xF-DfX"/>
-                        <outlet property="shadowDropDown" destination="2030" id="name-outlet-2030"/>
                         <outlet property="shadowOffsetXDropDown" destination="LGP-Y8-EQT" id="0nT-Yc-3tu"/>
                         <outlet property="shadowOffsetYDropDown" destination="IXb-Ca-rPW" id="Uar-8v-cnE"/>
                         <outlet property="shadowOpacityDropDown" destination="Akm-eD-F15" id="EGx-Dv-ihE"/>
                         <outlet property="shadowRadiusDropDown" destination="deq-Qh-wRg" id="gfN-ae-2sV"/>
-                        <outlet property="sizeDropDown" destination="1292" id="name-outlet-1292"/>
                         <outlet property="themeDropDown" destination="1183" id="name-outlet-1183"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="207" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="664.79999999999995" y="238.83058470764618"/>
+            <point key="canvasLocation" x="664.79999999999995" y="238.8306"/>
         </scene>
     </scenes>
 </document>
