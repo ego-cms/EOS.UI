@@ -73,6 +73,9 @@ namespace EOS.UI.Android.Sandbox.Activities
                 disabledColorDropDown,
                 pressedColorDropDown,
                 backgroundColorDropDown,
+                shadowOffsetXDropDown,
+                shadowOffsetYDropDown,
+                shadowBlurDropDown,
                 shadowColorDropDown,
                 shadowOpacityDropDown
             };
@@ -85,6 +88,7 @@ namespace EOS.UI.Android.Sandbox.Activities
                 {
                     fab.GetThemeProvider().SetCurrentTheme(ThemeTypes.ThemeCollection.ElementAt(position).Value);
                     fab.ResetCustomization();
+                    ResetShadowFields(shadowOffsetXDropDown, shadowOffsetYDropDown, shadowBlurDropDown, shadowColorDropDown);
                     spinners.Except(new[] { themeDropDown }).ToList().ForEach(s => s.SetSpinnerSelection(0));
                     UpdateApperaence();
                 }
