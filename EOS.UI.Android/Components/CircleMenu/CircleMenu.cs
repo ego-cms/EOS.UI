@@ -120,6 +120,18 @@ namespace EOS.UI.Android.Components
                 FindViewById<CircleMenuItem>(Resource.Id.menu5),
             });
 
+            InitDeltaArrays();
+
+            _deltaNormalizePositions = (Diameter + StartDelta) * Context.Resources.DisplayMetrics.Density;
+        }
+
+        /// <summary>
+        /// Delta arrays should be filled for two actions: close/open action and scroll action
+        /// Each action sho?ld contains deltas for forward (left to right) and back (right to left) translation
+        /// Delta values are constants, which calculated from design like 
+        /// </summary>
+        private void InitDeltaArrays()
+        {
             var denisty = Context.Resources.DisplayMetrics.Density;
             _deltaClosePositions[0] = new float[] { -Diameter * 0.25f * denisty, 0f };
             _deltaClosePositions[1] = new float[] { -Delta4 * denisty, Delta1 * denisty };
@@ -142,14 +154,12 @@ namespace EOS.UI.Android.Components
             _deltaForwardPositions[4] = new float[] { Delta4 * denisty, -Delta1 * denisty };
             _deltaForwardPositions[5] = new float[] { Diameter * 0.25f * denisty, 0f };
 
-            _deltaBackPositions[0] = new float[] { -Diameter * 0.25f * denisty,  0f};
+            _deltaBackPositions[0] = new float[] { -Diameter * 0.25f * denisty, 0f };
             _deltaBackPositions[5] = new float[] { -Delta4 * denisty, Delta1 * denisty };
             _deltaBackPositions[4] = new float[] { -Delta3 * denisty, Delta2 * denisty };
             _deltaBackPositions[3] = new float[] { -Delta2 * denisty, Delta3 * denisty };
             _deltaBackPositions[2] = new float[] { -Delta1 * denisty, Delta4 * denisty };
             _deltaBackPositions[1] = new float[] { 0f, Diameter * 0.25f * denisty };
-
-            _deltaNormalizePositions = (Diameter + StartDelta) * denisty;
         }
 
         private void MainMenuClick(object sender, EventArgs e)
@@ -158,6 +168,13 @@ namespace EOS.UI.Android.Components
                 ShowMenuItemsAnimation();
         }
 
+        /// <summary>
+        /// Method which spin round items by swipe action.
+        /// If we should normlize position of invisible item in method transmit bool flag.
+        /// Animation animated X and Y with spring interpolator (implemented with native SpringAnimation)
+        /// Spin round can be forward (left to right) and back (right to left)
+        /// </summary>
+        /// <param name="normalize">flag for normalize position of invisible item</param>
         private void MoveMenuItemsAnimation(bool normalize = true)
         {
             if(normalize)
@@ -189,6 +206,12 @@ namespace EOS.UI.Android.Components
             }
         }
 
+        /// <summary>
+        /// Method which spin round items by swipe action.
+        /// If we should normlize position of invisible item in method transmit bool flag.
+        /// Animation has 5 iterations. First 4 iterations animated X and Y without interpolator, and last fith spring interpolator (implemented with native SpringAnimation)
+        /// Spin round can be forward (left to right) and back (right to left)
+        /// </summary>
         private void ShowMenuItemsAnimation()
         {
             ++_showMenuItemsIteration;
@@ -257,6 +280,7 @@ namespace EOS.UI.Android.Components
                 }
                 else if(e.Action == MotionEventActions.Move && _bufferX != e.RawX)
                 {
+                    //checking if swipe was horizontal and not vertical
                     if(_bufferX - e.RawX > MinSwipeWidth && System.Math.Abs(_bufferX - e.RawX) > System.Math.Abs(_bufferY - e.RawY))
                         _isMovedLeft = true;
                     if(_bufferX - e.RawX < -MinSwipeWidth && System.Math.Abs(_bufferX - e.RawX) > System.Math.Abs(_bufferY - e.RawY))
@@ -267,6 +291,7 @@ namespace EOS.UI.Android.Components
                 }
                 if(e.Action == MotionEventActions.Up && (_isMovedRight || _isMovedLeft))
                 {
+                    Toast.MakeText(Context, _isMovedRight ? "swipe right" : "swipe left", ToastLength.Short).Show();
                     _forward = _isMovedRight;
                     _isScrolling = true;
                     MoveMenuItemsAnimation();
@@ -285,6 +310,7 @@ namespace EOS.UI.Android.Components
 
         public void Run()
         {
+            //checked if need normalize position of invisible item
             if(_normalize)
             {
                 _normalize = false;
@@ -294,10 +320,12 @@ namespace EOS.UI.Android.Components
             {
                 if(_showMenuItemsIteration != _menuItems.Count - 1)
                 {
+                    //Invoke animation until all items not on theirs positions
                     ShowMenuItemsAnimation();
                 }
                 else if(IsOpened)
                 {
+                    //after end of animation setup internal values to default and change background color
                     _showMenuItemsIteration = 0;
                     IsOpened = !IsOpened;
                     _container.SetBackgroundColor(IsOpened ? Color.Argb(50, 0, 0, 0) : Color.Transparent);
@@ -313,6 +341,9 @@ namespace EOS.UI.Android.Components
         {
             if(_isScrolling)
             {
+                //After end of swipe animation we should change indexes to default for items collection
+                //and set invisible item to default position
+
                 //HACK: if ImageView was out of the bounds it is invisible
                 _menuItems[0].Visibility = ViewStates.Invisible;
                 _menuItems[0].Visibility = ViewStates.Visible;
@@ -340,6 +371,7 @@ namespace EOS.UI.Android.Components
             }
             else
             {
+                //after end of open/hide animation setup internal values to default
                 _showMenuItemsIteration = 0;
                 IsOpened = !IsOpened;
             }
