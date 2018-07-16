@@ -133,33 +133,33 @@ namespace EOS.UI.Android.Components
         private void InitDeltaArrays()
         {
             var denisty = Context.Resources.DisplayMetrics.Density;
-            _deltaClosePositions[0] = new float[] { -Diameter * 0.25f * denisty, 0f };
+            _deltaClosePositions[0] = new float[] { Delta1 * denisty, 0f };
             _deltaClosePositions[1] = new float[] { -Delta4 * denisty, Delta1 * denisty };
             _deltaClosePositions[2] = new float[] { -Delta3 * denisty, Delta2 * denisty };
             _deltaClosePositions[3] = new float[] { -Delta2 * denisty, Delta3 * denisty };
             _deltaClosePositions[4] = new float[] { -Delta1 * denisty, Delta4 * denisty };
-            _deltaClosePositions[5] = new float[] { 0f, Diameter * 0.25f * denisty };
+            _deltaClosePositions[5] = new float[] { 0f, -Delta1 * denisty };
 
-            _deltaOpenPositions[0] = new float[] { 0f, -Diameter * 0.25f * denisty };
+            _deltaOpenPositions[0] = new float[] { 0f, Delta1 * denisty };
             _deltaOpenPositions[5] = new float[] { Delta1 * denisty, -Delta4 * denisty };
             _deltaOpenPositions[4] = new float[] { Delta2 * denisty, -Delta3 * denisty };
             _deltaOpenPositions[3] = new float[] { Delta3 * denisty, -Delta2 * denisty };
             _deltaOpenPositions[2] = new float[] { Delta4 * denisty, -Delta1 * denisty };
-            _deltaOpenPositions[1] = new float[] { Diameter * 0.25f * denisty, 0f };
+            _deltaOpenPositions[1] = new float[] { -Delta1 * denisty, 0f };
 
-            _deltaForwardPositions[0] = new float[] { 0f, -Diameter * 0.25f * denisty };
+            _deltaForwardPositions[0] = new float[] { 0f, Delta1 * denisty };
             _deltaForwardPositions[1] = new float[] { Delta1 * denisty, -Delta4 * denisty };
             _deltaForwardPositions[2] = new float[] { Delta2 * denisty, -Delta3 * denisty };
             _deltaForwardPositions[3] = new float[] { Delta3 * denisty, -Delta2 * denisty };
             _deltaForwardPositions[4] = new float[] { Delta4 * denisty, -Delta1 * denisty };
-            _deltaForwardPositions[5] = new float[] { Diameter * 0.25f * denisty, 0f };
+            _deltaForwardPositions[5] = new float[] { -Delta1 * denisty, 0f };
 
-            _deltaBackPositions[0] = new float[] { -Diameter * 0.25f * denisty, 0f };
+            _deltaBackPositions[0] = new float[] { Delta1 * denisty, 0f };
             _deltaBackPositions[5] = new float[] { -Delta4 * denisty, Delta1 * denisty };
             _deltaBackPositions[4] = new float[] { -Delta3 * denisty, Delta2 * denisty };
             _deltaBackPositions[3] = new float[] { -Delta2 * denisty, Delta3 * denisty };
             _deltaBackPositions[2] = new float[] { -Delta1 * denisty, Delta4 * denisty };
-            _deltaBackPositions[1] = new float[] { 0f, Diameter * 0.25f * denisty };
+            _deltaBackPositions[1] = new float[] { 0f, -Delta1 * denisty };
         }
 
         private void MainMenuClick(object sender, EventArgs e)
@@ -181,9 +181,9 @@ namespace EOS.UI.Android.Components
             {
                 _normalize = true;
                 if(_forward)
-                    _menuItems[0].Animate().WithEndAction(this).XBy(-_deltaNormalizePositions).SetDuration(1);
+                    _menuItems[0].Animate().WithEndAction(this).X(Width -_deltaNormalizePositions).Y(Height).SetDuration(1);
                 else
-                    _menuItems[0].Animate().WithEndAction(this).YBy(-_deltaNormalizePositions).SetDuration(1);
+                    _menuItems[0].Animate().WithEndAction(this).X(Width).Y(Height - _deltaNormalizePositions).SetDuration(1);
             }
             else
             {
@@ -291,7 +291,6 @@ namespace EOS.UI.Android.Components
                 }
                 if(e.Action == MotionEventActions.Up && (_isMovedRight || _isMovedLeft))
                 {
-                    Toast.MakeText(Context, _isMovedRight ? "swipe right" : "swipe left", ToastLength.Short).Show();
                     _forward = _isMovedRight;
                     _isScrolling = true;
                     MoveMenuItemsAnimation();
