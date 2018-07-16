@@ -256,13 +256,13 @@ namespace EOS.UI.Android.Controls
                 var provider = GetThemeProvider();
                 Image = Resources.GetDrawable(provider.GetEOSProperty<int>(this, EOSConstants.CalendarImage), null);
                 PreloaderImage = Resources.GetDrawable(provider.GetEOSProperty<int>(this, EOSConstants.FabProgressPreloaderImage), null);
-                DisabledBackgroundColor = provider.GetEOSProperty<Color>(this, EOSConstants.NeutralColor4);
-                PressedBackgroundColor = provider.GetEOSProperty<Color>(this, EOSConstants.BrandPrimaryColorVariant1);
                 ShadowConfig = provider.GetEOSProperty<ShadowConfig>(this, EOSConstants.FabShadow);
 
                 //Should initialize after ShadowConfig
                 //ShadowConfig method checks and background drawable which should be used for color.
                 BackgroundColor = provider.GetEOSProperty<Color>(this, EOSConstants.BrandPrimaryColor);
+                DisabledBackgroundColor = provider.GetEOSProperty<Color>(this, EOSConstants.NeutralColor4);
+                PressedBackgroundColor = provider.GetEOSProperty<Color>(this, EOSConstants.BrandPrimaryColorVariant1);
                 IsEOSCustomizationIgnored = false;
             }
         }
@@ -542,7 +542,8 @@ namespace EOS.UI.Android.Controls
 
         private GradientDrawable CreateBackgroundDrawable()
         {
-            var colors = new[] { BackgroundColor.ToArgb(), BackgroundColor.ToArgb() };
+            var color = Enabled ? BackgroundColor.ToArgb() : DisabledBackgroundColor.ToArgb();
+            var colors = new[] { color, color };
             var backColor = new GradientDrawable(GradientDrawable.Orientation.TopBottom, colors);
             backColor.SetCornerRadius(_cornerRadius);
             return backColor;
