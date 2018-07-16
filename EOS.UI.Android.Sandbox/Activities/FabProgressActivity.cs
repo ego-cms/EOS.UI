@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -47,10 +46,9 @@ namespace EOS.UI.Android.Sandbox.Activities
             var backgroundColorDropDown = FindViewById<EOSSandboxDropDown>(Resource.Id.backgroundDropDown);
             var disabledColorDropDown = FindViewById<EOSSandboxDropDown>(Resource.Id.disabledColorDropDown);
             var pressedColorDropDown = FindViewById<EOSSandboxDropDown>(Resource.Id.pressedColorDropDown);
-            //var shadowDropDown = FindViewById<EOSSandboxDropDown>(Resource.Id.shadowDropDown);
-            var shadowOffsetX = FindViewById<EOSSandboxEditText>(Resource.Id.shadowOffsetX);
-            var shadowOffsetY = FindViewById<EOSSandboxEditText>(Resource.Id.shadowOffsetY);
-            var shadowBlur = FindViewById<EOSSandboxEditText>(Resource.Id.shadowBlur);
+            var shadowOffsetXDropDown = FindViewById<EOSSandboxDropDown>(Resource.Id.shadowOffsetXDropDown);
+            var shadowOffsetYDropDown = FindViewById<EOSSandboxDropDown>(Resource.Id.shadowOffsetYDropDown);
+            var shadowBlurDropDown = FindViewById<EOSSandboxDropDown>(Resource.Id.shadowBlurDropDown);
             var shadowColorDropDown = FindViewById<EOSSandboxDropDown>(Resource.Id.shadowColorDropDown);
             var shadowOpacityDropDown = FindViewById<EOSSandboxDropDown>(Resource.Id.shadowOpacityDropDown);
 
@@ -121,20 +119,39 @@ namespace EOS.UI.Android.Sandbox.Activities
                     fab.PressedBackgroundColor = Colors.ColorsCollection.ElementAt(position).Value;
             };
 
-            //shadowDropDown.Name = Fields.Shadow;
-            //shadowDropDown.SetupAdapter(Shadows.ShadowsCollection.Select(i => i.Key).ToList());
-            //shadowDropDown.ItemSelected += (position) =>
-            //{
-            //    if (position > 0)
-            //    {
-            //        if (fab.ShadowConfig != null)
-            //        {
-            //            fab.ShadowConfig = null;
-            //        }
-            //        fab.ShadowConfig = Shadows.ShadowsCollection.ElementAt(position).Value;
-            //        fab.StopProgressAnimation();
-            //    }
-            //};
+            shadowOffsetXDropDown.Name = Fields.ShadowOffsetX;
+            shadowOffsetXDropDown.SetupAdapter(Shadow.ShadowOffsetValues.ToList());
+            shadowOffsetXDropDown.ItemSelected += (position) =>
+            {
+                if (position > 0)
+                {
+                    _shadowOffsetX = Shadow.ShadowOffsetValues.ElementAt(position);
+                    ChangeShadow(fab);
+                }
+            };
+
+
+            shadowOffsetYDropDown.Name = Fields.ShadowOffsetY;
+            shadowOffsetYDropDown.SetupAdapter(Shadow.ShadowOffsetValues.ToList());
+            shadowOffsetYDropDown.ItemSelected += (position) =>
+            {
+                if (position > 0)
+                {
+                    _shadowOffsetY = Shadow.ShadowOffsetValues.ElementAt(position);
+                    ChangeShadow(fab);
+                }
+            };
+
+            shadowBlurDropDown.Name = Fields.ShadowRadius;
+            shadowBlurDropDown.SetupAdapter(Shadow.ShadowRadiusValues.ToList());
+            shadowBlurDropDown.ItemSelected += (position) =>
+            {
+                if (position > 0)
+                {
+                    _shadowBlur = Shadow.ShadowRadiusValues.ElementAt(position);
+                    ChangeShadow(fab);
+                }
+            };
 
             shadowColorDropDown.Name = Fields.ShadowColor;
             shadowColorDropDown.SetupAdapter(Colors.ColorsCollection.Select(i => i.Key).ToList());
@@ -153,7 +170,7 @@ namespace EOS.UI.Android.Sandbox.Activities
             };
 
             shadowOpacityDropDown.Name = Fields.ShadowOpacity;
-            shadowOpacityDropDown.SetupAdapter(Android.Sandbox.Helpers.Constants.ShadowOpacityValues.ToList());
+            shadowOpacityDropDown.SetupAdapter(Android.Sandbox.Helpers.Constants.Shadow.ShadowOpacityValues.ToList());
             shadowOpacityDropDown.ItemSelected += (position) =>
             {
                 if (position > 0)
@@ -162,54 +179,9 @@ namespace EOS.UI.Android.Sandbox.Activities
                     {
                         fab.ShadowConfig = null;
                     }
-                    _shadowAlpha = (float)Android.Sandbox.Helpers.Constants.ShadowOpacityValues.ElementAt(position);
+                    _shadowAlpha = (float)Android.Sandbox.Helpers.Constants.Shadow.ShadowOpacityValues.ElementAt(position);
                     fab.ShadowConfig = CreateShadowConfig();
                     fab.StopProgressAnimation();
-                }
-            };
-
-            shadowOffsetX.TextChanged += (sender, e) =>
-            {
-                if (string.IsNullOrEmpty(e.Text.ToString()))
-                {
-                    _shadowOffsetX = 0;
-                    ChangeShadow(fab);
-                    return;
-                }
-                if (Int32.TryParse(e.Text.ToString(), out _shadowOffsetX))
-                {
-                    ChangeShadow(fab);
-                }
-            };
-
-            shadowOffsetY.TextChanged += (sender, e) =>
-            {
-                if (string.IsNullOrEmpty(e.Text.ToString()))
-                {
-                    _shadowOffsetY = 0;
-                    ChangeShadow(fab);
-                    return;
-                }
-
-                if (Int32.TryParse(e.Text.ToString(), out _shadowOffsetY))
-                {
-                    ChangeShadow(fab);
-                }
-            };
-
-
-            shadowBlur.TextChanged += (sender, e) =>
-            {
-                if (string.IsNullOrEmpty(e.Text.ToString()))
-                {
-                    _shadowBlur = 0;
-                    ChangeShadow(fab);
-                    return;
-                }
-                
-                if (Int32.TryParse(e.Text.ToString(), out _shadowBlur))
-                {
-                    ChangeShadow(fab);
                 }
             };
 
@@ -225,7 +197,7 @@ namespace EOS.UI.Android.Sandbox.Activities
                     ChangeFabLayoutParameters(_fabInitialSize, fab);
                 }
                 ResetCustomization(fab, themeDropDown, spinners);
-                ResetShadowFields(shadowOffsetX, shadowOffsetY, shadowBlur, shadowColorDropDown);
+                ResetShadowFields(shadowOffsetXDropDown, shadowOffsetYDropDown, shadowBlurDropDown, shadowColorDropDown);
             };
         }
 
@@ -266,12 +238,12 @@ namespace EOS.UI.Android.Sandbox.Activities
             };
         }
 
-        private void ResetShadowFields(EOSSandboxEditText shadowOffsetX, EOSSandboxEditText shadowOffsetY, EOSSandboxEditText shadowBlur, EOSSandboxDropDown shadowColorDropDown)
+        private void ResetShadowFields(EOSSandboxDropDown shadowOffsetX, EOSSandboxDropDown shadowOffsetY, EOSSandboxDropDown shadowBlur, EOSSandboxDropDown shadowColorDropDown)
         {
             shadowColorDropDown.SetSpinnerSelection(0);
-            shadowOffsetX.Text = "";
-            shadowOffsetY.Text = "";
-            shadowBlur.Text = "";
+            shadowOffsetX.SetSpinnerSelection(0);
+            shadowOffsetY.SetSpinnerSelection(0);
+            shadowBlur.SetSpinnerSelection(0);
             _shadowOffsetX = 0;
             _shadowOffsetY = 0;
             _shadowBlur = 0;

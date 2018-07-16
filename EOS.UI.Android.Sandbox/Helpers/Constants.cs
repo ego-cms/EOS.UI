@@ -74,7 +74,9 @@ namespace EOS.UI.Android.Sandbox.Helpers
             public const string FirstDayOfWeek = "Week start day";
             public const string ButtonType = "Button type";
             public const string ShadowOffsetZ = "Shadow offset Z";
-            public const string ShadowRadius = "Shadow radius";
+            public const string ShadowOffsetX = "Shadow offset X";
+            public const string ShadowOffsetY = "Shadow offset Y";
+            public const string ShadowRadius = "Shadow Blur";
             public const string ShadowColor = "Shadow color";
             public const string ShadowOpacity = "Shadow opacity";
         };
@@ -396,6 +398,9 @@ namespace EOS.UI.Android.Sandbox.Helpers
         {
             public static readonly Dictionary<string, int> OffsetCollection = new Dictionary<string, int>();
             public static readonly Dictionary<string, int> RadiusCollection = new Dictionary<string, int>();
+            public static List<double> ShadowOpacityValues = new List<double>() { 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0 };
+            public static List<int> ShadowOffsetValues;
+            public static List<int> ShadowRadiusValues;
 
             static Shadow()
             {
@@ -408,9 +413,12 @@ namespace EOS.UI.Android.Sandbox.Helpers
                 var radiusValues = Enumerable.Range(0, 16);
                 foreach(var val in radiusValues)
                     RadiusCollection.Add(val.ToString(), val);
+
+
+                ShadowOffsetValues = Enumerable.Range(-15, 30).ToList();
+                ShadowRadiusValues = Enumerable.Range(1, 15).ToList();
             }
         }
 
-        public static List<double> ShadowOpacityValues = new List<double>() { 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0 };
     }
 }
