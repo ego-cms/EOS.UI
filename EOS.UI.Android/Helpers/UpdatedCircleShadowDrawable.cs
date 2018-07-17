@@ -23,6 +23,7 @@ namespace EOS.UI.Android.Helpers
         //When offset larger than blur width of canvas larger than when it's lesser 
         private float _offsetWithBlurX;
         private float _offsetWithBlurY;
+        private int _drawableAlpha = 255;
         private Paint _paint = new Paint();
         private IDictionary<int, int[]> _colorCache = new Dictionary<int, int[]>();
         private IDictionary<int, float[]> _stopCache = new Dictionary<int, float[]>();
@@ -54,6 +55,7 @@ namespace EOS.UI.Android.Helpers
             var oldWidth = ShadowHelpers.GetOldWidth(canvas.Width, (int)_densityOffsetX, _iterations) / 2;
             var radius = oldWidth + _iterations -1;
             CreateAndSetShader(canvas, center, oldWidth, radius);
+            _paint.Alpha = _drawableAlpha;
             canvas.DrawCircle(center.X, center.Y, radius, _paint);
         }
 
@@ -206,6 +208,7 @@ namespace EOS.UI.Android.Helpers
 
         public override void SetAlpha(int alpha)
         {
+            _drawableAlpha = alpha;
         }
 
         public override void SetColorFilter(ColorFilter colorFilter)

@@ -49,17 +49,50 @@ namespace EOS.UI.Android.Controls
             get => base.Enabled;
             set
             {
-                if (base.Enabled != value)
-                {
-                    SetShadowOrBackground(value, ShadowConfig);
-                    SetBackgroundColor(value ? BackgroundColor : DisabledBackgroundColor);
-                    Image.SetColorFilter(value ?
-                        GetThemeProvider().GetEOSProperty<Color>(this, EOSConstants.FabIconColor) :
-                        GetThemeProvider().GetEOSProperty<Color>(this, EOSConstants.NeutralColor3),
-                        PorterDuff.Mode.SrcIn);
-                }
-
+                var enabled = base.Enabled;
                 base.Enabled = value;
+
+                if (enabled != value)
+                {
+                    //SetShadowOrBackground(value, ShadowConfig);
+                    SetBackgroundColor(value ? BackgroundColor : DisabledBackgroundColor);
+                    ChangeImageColor(value ?
+                        GetThemeProvider().GetEOSProperty<Color>(this, EOSConstants.FabIconColor) :
+                        GetThemeProvider().GetEOSProperty<Color>(this, EOSConstants.NeutralColor3));
+                    ToggleShadow(value);
+                }
+            }
+        }
+
+        private void ToggleShadow(bool value)
+        {
+            var layer = Background as LayerDrawable;
+            if (HasShadowDrawable(layer))
+            {
+                var drawable = layer.GetDrawable(_shadowLayerIndex);
+                drawable.Alpha = value ? 255 : 0;
+                if (value)
+                {
+                    SetShadow(ShadowConfig);
+                }
+                layer.Mutate();
+                layer.InvalidateSelf();
+            }
+        }
+
+        private void ChangeImageColor(Color color)
+        {
+            var layer = Background as LayerDrawable;
+            if (HasShadowDrawable(layer))
+            {
+                var drawable = layer.GetDrawable(_imageLayerIndex);
+                drawable.SetColorFilter(color, PorterDuff.Mode.SrcIn);
+                layer.Mutate();
+                layer.InvalidateSelf();
+            }
+            else
+            {
+                Image.SetColorFilter(color, PorterDuff.Mode.SrcIn);
             }
         }
 
