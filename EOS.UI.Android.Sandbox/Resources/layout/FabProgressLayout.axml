@@ -1,43 +1,48 @@
 <?xml version="1.0" encoding="utf-8"?>
-<EOS.UI.Android.Sandbox.Controls.EOSSandboxScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<EOS.UI.Android.Sandbox.Controls.EOSSandboxLinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:local="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
-    <EOS.UI.Android.Sandbox.Controls.EOSSandboxLinearLayout
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/background_color"
+    android:focusable="true"
+    android:focusableInTouchMode="true">
+    <requestFocus />
+    <EOS.UI.Android.Sandbox.Controls.EOSSandboxToolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="@style/ToolBarStyle"
+        local:navigationIcon="?homeAsUpIndicator" />
+    <EOS.UI.Android.Sandbox.Controls.EOSSandboxDivider
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@android:color/darker_gray" />
+    <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/background_color"
-        android:focusable="true"
-        android:focusableInTouchMode="true">
-        <requestFocus />
-        <EOS.UI.Android.Sandbox.Controls.EOSSandboxToolbar
-            android:id="@+id/toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:minHeight="?attr/actionBarSize"
-            android:theme="@style/ToolBarStyle"
-            local:navigationIcon="?homeAsUpIndicator" />
+        android:layout_height="wrap_content"
+        android:clipChildren="false">
+        <EOS.UI.Android.Controls.FabProgress
+            android:id="@+id/fabProgress"
+            android:layout_marginTop="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center" />
         <EOS.UI.Android.Sandbox.Controls.EOSSandboxDivider
             android:layout_width="match_parent"
             android:layout_height="1dp"
+            android:layout_marginTop="20dp"
             android:background="@android:color/darker_gray" />
+    </LinearLayout>
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
         <LinearLayout
             android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:clipChildren="false">
-            <EOS.UI.Android.Controls.FabProgress
-                android:id="@+id/fabProgress"
-                android:layout_marginTop="10dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center" />
-            <EOS.UI.Android.Sandbox.Controls.EOSSandboxDivider
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginTop="20dp"
-                android:background="@android:color/darker_gray" />
+            android:layout_height="match_parent">
             <EOS.UI.Android.Sandbox.Controls.EOSSandboxDropDown
                 android:id="@+id/themeDropDown"
                 android:layout_width="match_parent"
@@ -108,5 +113,5 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/buttonResetCustomization" />
         </LinearLayout>
-    </EOS.UI.Android.Sandbox.Controls.EOSSandboxLinearLayout>
-</EOS.UI.Android.Sandbox.Controls.EOSSandboxScrollView>
+    </ScrollView>
+</EOS.UI.Android.Sandbox.Controls.EOSSandboxLinearLayout>

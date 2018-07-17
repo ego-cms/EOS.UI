@@ -29,11 +29,7 @@ namespace EOS.UI.Android.Sandbox.Activities
         EOSSandboxToolbar _toolbar;
 
         int _fabInitialSize = 0;
-        int _shadowOffsetX; 
-        int _shadowOffsetY;
-        int _shadowBlur;
-        float _shadowAlpha = 1.0f;
-        Color _shadowColor;
+        double _shadowAlpha = 1.0f;
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
@@ -129,7 +125,7 @@ namespace EOS.UI.Android.Sandbox.Activities
             {
                 if (position > 0)
                 {
-                    _shadowOffsetX = Shadow.ShadowOffsetValues.ElementAt(position);
+                    fab.ShadowConfig.Offset.X = Shadow.ShadowOffsetValues.ElementAt(position);
                     ChangeShadow(fab);
                 }
             };
@@ -141,7 +137,7 @@ namespace EOS.UI.Android.Sandbox.Activities
             {
                 if (position > 0)
                 {
-                    _shadowOffsetY = Shadow.ShadowOffsetValues.ElementAt(position);
+                    fab.ShadowConfig.Offset.Y = Shadow.ShadowOffsetValues.ElementAt(position);
                     ChangeShadow(fab);
                 }
             };
@@ -152,7 +148,7 @@ namespace EOS.UI.Android.Sandbox.Activities
             {
                 if (position > 0)
                 {
-                    _shadowBlur = Shadow.ShadowRadiusValues.ElementAt(position);
+                    fab.ShadowConfig.Blur = Shadow.ShadowRadiusValues.ElementAt(position);
                     ChangeShadow(fab);
                 }
             };
@@ -163,13 +159,8 @@ namespace EOS.UI.Android.Sandbox.Activities
             {
                 if (position > 0)
                 {
-                    if (fab.ShadowConfig != null)
-                    {
-                        fab.ShadowConfig = null;
-                    }
-                    _shadowColor = Colors.ColorsCollection.ElementAt(position).Value;
-                    fab.ShadowConfig = CreateShadowConfig();
-                    fab.StopProgressAnimation();
+                    fab.ShadowConfig.Color = Colors.ColorsCollection.ElementAt(position).Value;
+                    ChangeShadow(fab);
                 }
             };
 
@@ -179,13 +170,8 @@ namespace EOS.UI.Android.Sandbox.Activities
             {
                 if (position > 0)
                 {
-                    if (fab.ShadowConfig != null)
-                    {
-                        fab.ShadowConfig = null;
-                    }
                     _shadowAlpha = (float)Android.Sandbox.Helpers.Constants.Shadow.ShadowOpacityValues.ElementAt(position);
-                    fab.ShadowConfig = CreateShadowConfig();
-                    fab.StopProgressAnimation();
+                    ChangeShadow(fab);
                 }
             };
 
@@ -213,31 +199,26 @@ namespace EOS.UI.Android.Sandbox.Activities
 
         private void ChangeShadow(FabProgress fab)
         {
-            if (fab.ShadowConfig != null)
-            {
-                fab.ShadowConfig = null;
-            }
-
-            fab.ShadowConfig = CreateShadowConfig();
+            fab.ShadowConfig = CreateShadowConfig(fab);
             fab.StopProgressAnimation();
         }
 
-        private ShadowConfig CreateShadowConfig()
+        private ShadowConfig CreateShadowConfig(FabProgress fab)
         {
             Color resultColor;
-            if (_shadowAlpha == 1)
+            if (fab.ShadowConfig.Color.A == 255)
             {
-                resultColor = _shadowColor;
+                resultColor = fab.ShadowConfig.Color;
             }
             else
             {
-                resultColor = _shadowColor;
+                resultColor = fab.ShadowConfig.Color;
                 resultColor.A = (byte)(255 * _shadowAlpha);
             }
             return new ShadowConfig
             {
-                Offset = new Point(_shadowOffsetX, _shadowOffsetY),
-                Blur = _shadowBlur,
+                Offset = fab.ShadowConfig.Offset,
+                Blur = fab.ShadowConfig.Blur,
                 Color = resultColor
             };
         }
@@ -248,10 +229,6 @@ namespace EOS.UI.Android.Sandbox.Activities
             shadowOffsetX.SetSpinnerSelection(0);
             shadowOffsetY.SetSpinnerSelection(0);
             shadowBlur.SetSpinnerSelection(0);
-            _shadowOffsetX = 0;
-            _shadowOffsetY = 0;
-            _shadowBlur = 0;
-            _shadowColor = Color.Transparent;
         }
 
         private void ChangeFabLayoutParameters(int width, FabProgress fab)
