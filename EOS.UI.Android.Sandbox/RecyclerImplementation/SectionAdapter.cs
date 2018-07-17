@@ -5,6 +5,8 @@ using Android.Support.V7.Widget;
 using Android.Views;
 using EOS.UI.Android.Components;
 using EOS.UI.Android.Models;
+using UIFrameworks.Android.Themes;
+using UIFrameworks.Shared.Themes.Helpers;
 
 namespace EOS.UI.Android.Sandbox.RecyclerImplementation
 {
@@ -98,6 +100,9 @@ namespace EOS.UI.Android.Sandbox.RecyclerImplementation
             else
             {
                 (holder as SimpleViewHolder).TitleView.Text = _itemSource[position] as string;
+                (holder as SimpleViewHolder).Layout.SetBackgroundColor(EOSThemeProvider.Instance.GetEOSProperty<Color>(EOSConstants.NeutralColor6));
+                (holder as SimpleViewHolder).TitleView.SetTextColor(EOSThemeProvider.Instance.GetEOSProperty<Color>(EOSConstants.NeutralColor1));
+                (holder as SimpleViewHolder).Devider.Visibility = position < 3 ? ViewStates.Visible : ViewStates.Invisible;
             }
         }
 
