@@ -206,9 +206,10 @@ namespace EOS.UI.Android.Sandbox.Activities
         private ShadowConfig CreateShadowConfig(FabProgress fab)
         {
             Color resultColor;
-            if (fab.ShadowConfig.Color.A == 255)
+            if (_shadowAlpha == 1)
             {
                 resultColor = fab.ShadowConfig.Color;
+                resultColor.A = 255;
             }
             else
             {

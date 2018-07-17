@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using Android.App;
+using System.Linq;
 using Android.Content.PM;
 using Android.Graphics;
 using Android.Graphics.Drawables;
@@ -58,16 +58,85 @@ namespace EOS.UI.Android.Helpers
 
         private void CreateAndSetShader(Canvas canvas, PointF center, int oldWidth, int radius)
         {
-            float startGradientPoint = oldWidth - _iterations;
             var colorWith0Alpha = _config.Color;
             colorWith0Alpha.A = 0;
-            var startGradientColor = startGradientPoint / radius;
             var shader = new RadialGradient(center.X, center.Y, radius,
-                                            new[] { _config.Color.ToArgb(), _config.Color.ToArgb(), colorWith0Alpha.ToArgb() },
-                                            new[] { 0f, startGradientColor, 1f },
+                                            CalculateColors(),
+                                            CalculateStops(radius, oldWidth),
                                             Shader.TileMode.Clamp);
             _paint.SetShader(shader);
         }
+
+        /// <summary>
+        /// Calculates alphas for each circle
+        /// </summary>
+        private int[] CalculateColors()
+        {
+            var startBlurringColor = _config.Color;
+            var alpha = _config.Color.A / 2;
+            startBlurringColor.A = (byte)alpha;
+
+            List<Color> result = new List<Color>()
+            {
+                _config.Color,
+                _config.Color,
+                startBlurringColor
+            };
+
+            var step = _iterations / 10;
+
+            for (int i = 0; i <= _iterations; i+=step )
+            {
+                var a = GetAlpha(() => GetEquationX(i, _iterations));
+                var c = _config.Color;
+                if (c.A == 255)
+                {
+                    c.A = a;
+                    result.Add(c);
+                }
+                else
+                {
+                    var coef = c.A / (float)255;
+                    c.A = (byte)(a * coef);
+                    result.Add(c);
+                }
+            }
+            Console.WriteLine("\nColors:");
+            foreach (var cc in result)
+            {
+                Console.Write($"{cc.A} ");
+            }
+            return result.Select(clr => clr.ToArgb()).ToArray();
+        }
+
+        private float[] CalculateStops(int radius, int oldWidth)
+        {
+            float startGradientPoint = oldWidth - _iterations;
+            var startGradientRelativePosition = startGradientPoint / radius;
+            var blurringStartPoint = (float)oldWidth / radius;
+            List<float> result = new List<float>()
+            {
+                0f,
+                startGradientRelativePosition,
+                blurringStartPoint
+            };
+
+            var step = _iterations / 10;
+
+            for (int i = 0; i <= _iterations; i += step)
+            {
+                var point = oldWidth + i;
+                var position = point / (float)radius;
+                result.Add(position);
+            }
+            Console.WriteLine("\nStops:");
+            foreach (var cc in result)
+            {
+                Console.Write($"{cc} ");
+            }
+            return result.ToArray();
+        }
+
 
         //Get center point for drawing shadow circle, 
         //Take into account offset, blur, view translations, etc.
@@ -116,6 +185,20 @@ namespace EOS.UI.Android.Helpers
         private int GetPivotParameter(Canvas canvas)
         {
             return Math.Min(canvas.Width, canvas.Height);
+        }
+
+        private byte GetAlpha(Func<float> getXFunc)
+        {
+            // Second degree polynom - y(x) = 127 + (-4.56 * x ) + 0.0411*x^2
+            // Can be substituted with 10th degree polynom
+            var x = getXFunc();
+            var alpha = 127 + (-4.56 * x) + 0.0411 * Math.Pow(x, 2);
+            return (byte)(alpha > 255 ? 255 : Math.Round(alpha));
+        }
+
+        float GetEquationX(int i, int total)
+        {
+            return i * 50 / (float)total;
         }
 
         #region overrides
