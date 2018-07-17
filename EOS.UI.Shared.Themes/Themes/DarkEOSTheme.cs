@@ -35,7 +35,8 @@ namespace EOS.UI.Shared.Themes.Themes
         private const string neutralColor5 = "#777677";
         private const string neutralColor6 = "#343334";
         private const string rippleColor = "#1AFFFFFF";
-        private const string shadowColor = "#949494";
+        private const string shadowColor = "#A3EAEAEA";
+        private const string fabShadowColor = "#A3C0BFC0";
 
 #if __ANDROID__
 
@@ -268,7 +269,7 @@ namespace EOS.UI.Shared.Themes.Themes
             { EOSConstants.HasSectionBorder, true },
             { EOSConstants.HasSectionAction, true },
             { EOSConstants.FabShadow,  new ShadowConfig(){
-                Color = Color.ParseColor(shadowColor),
+                Color = Color.ParseColor(fabShadowColor),
                 Offset = new Point(0, 6),
                 Blur = 12,
                 Spread = 200

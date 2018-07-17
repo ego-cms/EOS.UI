@@ -110,6 +110,7 @@
     <Compile Include="Helpers\CircleShadowDrawable.cs" />
     <Compile Include="Helpers\Helpers.cs" />
     <Compile Include="Helpers\Extensions.cs" />
+    <Compile Include="Helpers\UpdatedCircleShadowDrawable.cs" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\values\Strings.xml" />

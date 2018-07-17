@@ -381,7 +381,7 @@ namespace EOS.UI.Android.Controls
             SetPadding(paddings, paddings, paddings, paddings);
 
             Drawable[] layers = new Drawable[3];
-            layers[_shadowLayerIndex] = new CircleShadowDrawable(config);
+            layers[_shadowLayerIndex] = new UpdatedCircleShadowDrawable(config);
             layers[_backgroundLayerIndex] = CreateBackgroundDrawable();
             layers[_imageLayerIndex] = Image;
 
@@ -471,7 +471,7 @@ namespace EOS.UI.Android.Controls
             if (offsetX > 0)
             {
                 //doesn't understand why it offsets on that value, but still.
-                var magic = blur > Math.Abs(offsetX)? blur - Math.Abs(offsetX) : 0;
+                var magic = blur > Math.Abs(offsetX) ? blur - Math.Abs(offsetX) : 0;
                 TranslationX = newWidth / 2 - _initialWidth/2 - magic;
             }
             if (offsetX < 0)
