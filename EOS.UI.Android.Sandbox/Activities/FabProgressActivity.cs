@@ -120,35 +120,35 @@ namespace EOS.UI.Android.Sandbox.Activities
             };
 
             shadowOffsetXDropDown.Name = Fields.ShadowOffsetX;
-            shadowOffsetXDropDown.SetupAdapter(Shadow.ShadowOffsetValues.ToList());
+            shadowOffsetXDropDown.SetupAdapter(Shadow.ShadowOffsetValues.Select(item => item.Key).ToList());
             shadowOffsetXDropDown.ItemSelected += (position) =>
             {
                 if (position > 0)
                 {
-                    fab.ShadowConfig.Offset.X = Shadow.ShadowOffsetValues.ElementAt(position);
+                    fab.ShadowConfig.Offset.X = Shadow.ShadowOffsetValues.ElementAt(position).Value;
                     ChangeShadow(fab);
                 }
             };
 
 
             shadowOffsetYDropDown.Name = Fields.ShadowOffsetY;
-            shadowOffsetYDropDown.SetupAdapter(Shadow.ShadowOffsetValues.ToList());
+            shadowOffsetYDropDown.SetupAdapter(Shadow.ShadowOffsetValues.Select(item => item.Key).ToList());
             shadowOffsetYDropDown.ItemSelected += (position) =>
             {
                 if (position > 0)
                 {
-                    fab.ShadowConfig.Offset.Y = Shadow.ShadowOffsetValues.ElementAt(position);
+                    fab.ShadowConfig.Offset.Y = Shadow.ShadowOffsetValues.ElementAt(position).Value;
                     ChangeShadow(fab);
                 }
             };
 
             shadowBlurDropDown.Name = Fields.ShadowRadius;
-            shadowBlurDropDown.SetupAdapter(Shadow.ShadowRadiusValues.ToList());
+            shadowBlurDropDown.SetupAdapter(Shadow.ShadowRadiusValues.Select(item => item.Key).ToList());
             shadowBlurDropDown.ItemSelected += (position) =>
             {
                 if (position > 0)
                 {
-                    fab.ShadowConfig.Blur = Shadow.ShadowRadiusValues.ElementAt(position);
+                    fab.ShadowConfig.Blur = Shadow.ShadowRadiusValues.ElementAt(position).Value;
                     ChangeShadow(fab);
                 }
             };
@@ -165,12 +165,12 @@ namespace EOS.UI.Android.Sandbox.Activities
             };
 
             shadowOpacityDropDown.Name = Fields.ShadowOpacity;
-            shadowOpacityDropDown.SetupAdapter(Android.Sandbox.Helpers.Constants.Shadow.ShadowOpacityValues.ToList());
+            shadowOpacityDropDown.SetupAdapter(Shadow.ShadowOpacityValues.Select(item => item.Key).ToList());
             shadowOpacityDropDown.ItemSelected += (position) =>
             {
                 if (position > 0)
                 {
-                    _shadowAlpha = (float)Android.Sandbox.Helpers.Constants.Shadow.ShadowOpacityValues.ElementAt(position);
+                    _shadowAlpha = (float)Shadow.ShadowOpacityValues.ElementAt(position).Value;
                     ChangeShadow(fab);
                 }
             };

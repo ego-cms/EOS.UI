@@ -398,9 +398,9 @@ namespace EOS.UI.Android.Sandbox.Helpers
         {
             public static readonly Dictionary<string, int> OffsetCollection = new Dictionary<string, int>();
             public static readonly Dictionary<string, int> RadiusCollection = new Dictionary<string, int>();
-            public static List<double> ShadowOpacityValues = new List<double>() { 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0 };
-            public static List<int> ShadowOffsetValues;
-            public static List<int> ShadowRadiusValues;
+            public static readonly Dictionary<string, double> ShadowOpacityValues = new Dictionary<string, double>();
+            public static readonly Dictionary<string, int> ShadowOffsetValues = new Dictionary<string, int>();
+            public static readonly Dictionary<string, int> ShadowRadiusValues = new Dictionary<string, int>();
 
             static Shadow()
             {
@@ -414,9 +414,20 @@ namespace EOS.UI.Android.Sandbox.Helpers
                 foreach(var val in radiusValues)
                     RadiusCollection.Add(val.ToString(), val);
 
+                ShadowOpacityValues.Add("default", 0);
+                foreach (var val in Enumerable.Range(0, 10))
+                {
+                    var v = val * 0.1 + 0.1;
+                    ShadowOpacityValues.Add(v.ToString(), v);
+                }
 
-                ShadowOffsetValues = Enumerable.Range(-15, 30).ToList();
-                ShadowRadiusValues = Enumerable.Range(1, 15).ToList();
+                ShadowOffsetValues.Add("default", -16);
+                foreach (var val in Enumerable.Range(-14, 29))
+                    ShadowOffsetValues.Add(val.ToString(), val);
+
+                ShadowRadiusValues.Add("default", 0);
+                foreach (var val in Enumerable.Range(1, 15))
+                    ShadowRadiusValues.Add(val.ToString(), val);
             }
         }
 
