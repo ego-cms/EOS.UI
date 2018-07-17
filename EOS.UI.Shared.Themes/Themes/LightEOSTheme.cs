@@ -254,6 +254,8 @@ namespace EOS.UI.Shared.Themes.Themes
             { EOSConstants.ButtonCornerRadius, 100f },
             { EOSConstants.LeftImage, Resource.Drawable.icCalendar },
             { EOSConstants.CalendarImage, Resource.Drawable.icCalendar },
+            //should always be white
+            { EOSConstants.FabIconColor, Color.ParseColor(neutralColor6)},
             { EOSConstants.FabProgressPreloaderImage, Resource.Drawable.icPreloader },
             { EOSConstants.CircleProgressShown, true},
             { EOSConstants.BorderWidth, 2 },

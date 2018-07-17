@@ -24,7 +24,8 @@ namespace EOS.UI.Android.Helpers
         private float _offsetWithBlurX;
         private float _offsetWithBlurY;
         private Paint _paint = new Paint();
-        private IDictionary<int, Color> _colors = new Dictionary<int, Color>();
+        private IDictionary<int, int[]> _colorCache = new Dictionary<int, int[]>();
+        private IDictionary<int, float[]> _stopCache = new Dictionary<int, float[]>();
 
         public override int Opacity => 255;
 
@@ -61,8 +62,8 @@ namespace EOS.UI.Android.Helpers
             var colorWith0Alpha = _config.Color;
             colorWith0Alpha.A = 0;
             var shader = new RadialGradient(center.X, center.Y, radius,
-                                            CalculateColors(),
-                                            CalculateStops(radius, oldWidth),
+                                            CalculateColors(canvas),
+                                            CalculateStops(canvas, radius, oldWidth),
                                             Shader.TileMode.Clamp);
             _paint.SetShader(shader);
         }
@@ -70,13 +71,16 @@ namespace EOS.UI.Android.Helpers
         /// <summary>
         /// Calculates alphas for each circle
         /// </summary>
-        private int[] CalculateColors()
+        private int[] CalculateColors(Canvas canvas)
         {
+            if (_colorCache.ContainsKey(canvas.Width))
+                return _colorCache[canvas.Width];
+
             var startBlurringColor = _config.Color;
             var alpha = _config.Color.A / 2;
             startBlurringColor.A = (byte)alpha;
 
-            List<Color> result = new List<Color>()
+            var resultList = new List<Color>()
             {
                 _config.Color,
                 _config.Color,
@@ -92,29 +96,29 @@ namespace EOS.UI.Android.Helpers
                 if (c.A == 255)
                 {
                     c.A = a;
-                    result.Add(c);
+                    resultList.Add(c);
                 }
                 else
                 {
                     var coef = c.A / (float)255;
                     c.A = (byte)(a * coef);
-                    result.Add(c);
+                    resultList.Add(c);
                 }
             }
-            Console.WriteLine("\nColors:");
-            foreach (var cc in result)
-            {
-                Console.Write($"{cc.A} ");
-            }
-            return result.Select(clr => clr.ToArgb()).ToArray();
+            var result = resultList.Select(clr => clr.ToArgb()).ToArray();
+            _colorCache.Add(canvas.Width, result);
+            return result;
         }
 
-        private float[] CalculateStops(int radius, int oldWidth)
+        private float[] CalculateStops(Canvas canvas, int radius, int oldWidth)
         {
+            if (_stopCache.ContainsKey(canvas.Width))
+                return _stopCache[canvas.Width];
+            
             float startGradientPoint = oldWidth - _iterations;
             var startGradientRelativePosition = startGradientPoint / radius;
             var blurringStartPoint = (float)oldWidth / radius;
-            List<float> result = new List<float>()
+            var resultList = new List<float>()
             {
                 0f,
                 startGradientRelativePosition,
@@ -127,14 +131,11 @@ namespace EOS.UI.Android.Helpers
             {
                 var point = oldWidth + i;
                 var position = point / (float)radius;
-                result.Add(position);
+                resultList.Add(position);
             }
-            Console.WriteLine("\nStops:");
-            foreach (var cc in result)
-            {
-                Console.Write($"{cc} ");
-            }
-            return result.ToArray();
+            var result = resultList.ToArray();
+            _stopCache.Add(canvas.Width, result);
+            return result;
         }
 
 

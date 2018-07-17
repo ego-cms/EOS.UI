@@ -54,7 +54,7 @@ namespace EOS.UI.Android.Controls
                     SetShadowOrBackground(value, ShadowConfig);
                     SetBackgroundColor(value ? BackgroundColor : DisabledBackgroundColor);
                     Image.SetColorFilter(value ?
-                        GetThemeProvider().GetEOSProperty<Color>(this, EOSConstants.NeutralColor6) :
+                        GetThemeProvider().GetEOSProperty<Color>(this, EOSConstants.FabIconColor) :
                         GetThemeProvider().GetEOSProperty<Color>(this, EOSConstants.NeutralColor3),
                         PorterDuff.Mode.SrcIn);
                 }
@@ -73,7 +73,7 @@ namespace EOS.UI.Android.Controls
                 if(Enabled)
                 {
                     SetBackgroundColor(value);
-                    Image.SetColorFilter(GetThemeProvider().GetEOSProperty<Color>(this, EOSConstants.NeutralColor6), PorterDuff.Mode.SrcIn);
+                    Image.SetColorFilter(GetThemeProvider().GetEOSProperty<Color>(this, EOSConstants.FabIconColor), PorterDuff.Mode.SrcIn);
                 }
                 IsEOSCustomizationIgnored = true;
             }
