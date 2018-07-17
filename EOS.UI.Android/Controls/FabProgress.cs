@@ -138,7 +138,10 @@ namespace EOS.UI.Android.Controls
             set
             {
                 IsEOSCustomizationIgnored = true;
-                SetShadowOrBackground(value != null, value);
+                if (Enabled)
+                {
+                    SetShadowOrBackground(value != null, value);
+                }
                 _shadowConfig = value;
             }
         }
