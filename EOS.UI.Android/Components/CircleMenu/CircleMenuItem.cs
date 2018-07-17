@@ -23,8 +23,7 @@ namespace EOS.UI.Android.Components
         private const float PivotScale = 0.5f;
         private const int RotateDimention = 380;
 
-        private const float ShadowRadiusValue = 4f;
-        private const float CornerRadius = 200f;
+        private const float ShadowRadiusValue = 8f;
 
         private ImageView _icon;
 
@@ -67,11 +66,10 @@ namespace EOS.UI.Android.Components
             var view = inflater.Inflate(Resource.Layout.CircleMenuItem, this);
             _icon = view.FindViewById<ImageView>(Resource.Id.icon);
             var roundedDrawable = new GradientDrawable();
-            roundedDrawable.SetColor(Color.LightBlue);
-            roundedDrawable.SetCornerRadius(CornerRadius);
+            roundedDrawable.SetColor(Color.White);
+            roundedDrawable.SetShape(ShapeType.Oval);
             view.SetBackgroundDrawable(roundedDrawable);
             view.Elevation = ShadowRadiusValue;
-            view.TranslationZ = ShadowRadiusValue;
         }
 
         public void StartRotateAnimation()

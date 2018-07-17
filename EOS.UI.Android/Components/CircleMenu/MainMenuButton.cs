@@ -25,8 +25,7 @@ namespace EOS.UI.Android.Components
         private const float PivotScale = 0.5f;
         private const int ScaleDimention = 150;
 
-        private const float ShadowRadiusValue = 4f;
-        private const float CornerRadius = 200f;
+        private const float ShadowRadiusValue = 8f;
 
         private const string _forwardAnimationPath = "Animations/menu_animation_forward.json";
         private const string _backAnimationPath = "Animations/menu_animation_back.json";
@@ -79,11 +78,10 @@ namespace EOS.UI.Android.Components
             var view = inflater.Inflate(Resource.Layout.MainMenu, this);
 
             var roundedDrawable = new GradientDrawable();
-            roundedDrawable.SetColor(Color.LightBlue);
-            roundedDrawable.SetCornerRadius(CornerRadius);
+            roundedDrawable.SetColor(Color.White);
+            roundedDrawable.SetShape(ShapeType.Oval);
             view.SetBackgroundDrawable(roundedDrawable);
             view.Elevation = ShadowRadiusValue;
-            view.TranslationZ = ShadowRadiusValue;
 
             _lottieView = view.FindViewById<LottieAnimationView>(Resource.Id.lottieView);
             _lottieView.SetAnimation(AnimationName);

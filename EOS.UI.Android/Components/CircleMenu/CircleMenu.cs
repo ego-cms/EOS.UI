@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using Android.Content;
 using Android.Graphics;
+using Android.Graphics.Drawables;
 using Android.Runtime;
 using Android.Support.Animation;
 using Android.Util;
 using Android.Views;
+using Android.Views.Animations;
 using Android.Widget;
 using EOS.UI.Android.Interfaces;
 using Java.Lang;
@@ -15,7 +17,13 @@ namespace EOS.UI.Android.Components
 {
     public class CircleMenu: FrameLayout, View.IOnTouchListener, IRunnable, DynamicAnimation.IOnAnimationEndListener, IIsOpened
     {
-        #region fields
+        #region fields and properties
+
+        private const int RightMargin = 29;
+        private const int BottomMargin = 110;
+        private const int HintElevationValue = 2;
+        private const int HintAnimationDuration = 300;
+        private const int HintAnimationDeltaY = 10;
 
         private const float Diameter = 52f;
         private const float StartDelta = 94f;
@@ -46,8 +54,10 @@ namespace EOS.UI.Android.Components
         private float _bufferY;
         private bool _isMovedRight;
         private bool _isMovedLeft;
-
         private List<CircleMenuItem> _menuItems = new List<CircleMenuItem>();
+
+        private bool IsBusy => _isScrolling && _showMenuItemsIteration > 0;
+        public bool ShowHintAnimation { get; set; } = true;
 
         #endregion
 
@@ -265,13 +275,83 @@ namespace EOS.UI.Android.Components
             }
         }
 
+        /// <summary>
+        /// Hint animation shows one time on start of application
+        /// </summary>
+        /// <param name="action">After animation complete action</param>
+        private void StartHintAnimation(Action action)
+        {
+            ShowHintAnimation = false;
+
+            var lastView = CreateHintView();
+            var middleView = CreateHintView();
+
+            var translateDown = CreateHintAnimation(false);
+
+            translateDown.AnimationEnd += (s, e) =>
+            {
+                _container.RemoveViewAt(0);
+                _container.RemoveViewAt(0);
+
+                lastView?.Dispose();
+                middleView?.Dispose();
+
+                action?.Invoke();
+            };
+
+            var translateUp = CreateHintAnimation();
+
+            lastView.Elevation = HintElevationValue;
+            middleView.Elevation = HintElevationValue * 2;
+
+            _container.AddView(middleView, 0);
+            _container.AddView(lastView, 0);
+
+            lastView.StartAnimation(translateDown);
+            _menuItems[4].StartAnimation(translateUp);
+        }
+
+        private TranslateAnimation CreateHintAnimation(bool isUp = true)
+        {
+            var delta = (isUp ? -HintAnimationDeltaY : HintAnimationDeltaY) * Context.Resources.DisplayMetrics.Density;
+            var translateAnimation = new TranslateAnimation(0, 0, 0, delta);
+            translateAnimation.Interpolator = new DecelerateInterpolator();
+            translateAnimation.FillAfter = false;
+            translateAnimation.Duration = HintAnimationDuration;
+            return translateAnimation;
+        }
+
+        private View CreateHintView()
+        {
+            var hintView = new View(Context);
+            var layoutParameters = new RelativeLayout.LayoutParams(
+                (int)(Diameter * Context.Resources.DisplayMetrics.Density),
+                (int)(Diameter * Context.Resources.DisplayMetrics.Density));
+
+            layoutParameters.RightMargin = (int)(RightMargin * Context.Resources.DisplayMetrics.Density);
+            layoutParameters.BottomMargin = (int)(BottomMargin * Context.Resources.DisplayMetrics.Density);
+
+            layoutParameters.AddRule(LayoutRules.AlignParentBottom);
+            layoutParameters.AddRule(LayoutRules.AlignParentRight);
+
+            hintView.LayoutParameters = layoutParameters;
+
+            var roundedDrawable = new GradientDrawable();
+            roundedDrawable.SetColor(Color.White);
+            roundedDrawable.SetShape(ShapeType.Oval);
+
+            hintView.SetBackgroundDrawable(roundedDrawable);
+
+            return hintView;
+        }
+
         #endregion
 
         #region IOnTouchListener implementation
 
         public bool OnTouch(View v, MotionEvent e)
         {
-            if(!_isScrolling)
+            if(!IsBusy)
             {
                 if(e.Action == MotionEventActions.Down)
                 {
@@ -371,8 +451,16 @@ namespace EOS.UI.Android.Components
             else
             {
                 //after end of open/hide animation setup internal values to default
-                _showMenuItemsIteration = 0;
-                IsOpened = !IsOpened;
+                var action = new Action(() =>
+                {
+                    _showMenuItemsIteration = 0;
+                    IsOpened = !IsOpened;
+                });
+
+                if(ShowHintAnimation)
+                    StartHintAnimation(action);
+                else
+                    action.Invoke();
             }
         }
 
