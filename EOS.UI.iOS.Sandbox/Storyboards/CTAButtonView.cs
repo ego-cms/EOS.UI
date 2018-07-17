@@ -44,7 +44,9 @@ namespace EOS.UI.iOS.Sandbox
             _simpleButton.TouchUpInside += async (sender, e) =>
             {
                 _simpleButton.StartProgressAnimation();
+                _dropDowns.ForEach(dropDown => dropDown.Enabled = false);
                 await Task.Delay(5000);
+                _dropDowns.ForEach(dropDown => dropDown.Enabled = true);
                 _simpleButton.StopProgressAnimation();
             };
 
@@ -65,7 +67,7 @@ namespace EOS.UI.iOS.Sandbox
                 shadowOffsetYDropDown,
                 shadowOpacityDropDown,
                 shadowRadiusDropDown,
-                buttonTypeDropDown
+                buttonTypeDropDown,
             };
 
             View.AddGestureRecognizer(new UITapGestureRecognizer(() =>

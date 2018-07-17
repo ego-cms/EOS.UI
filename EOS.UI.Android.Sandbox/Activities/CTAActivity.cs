@@ -84,9 +84,9 @@ namespace EOS.UI.Android.Sandbox.Activities
                 _backgroundColorPressedDropDown,
                 _cornerRadiusDropDown,
                 _rippleColorDropDown,
-                _shadowRadiusDropDown
+                _shadowRadiusDropDown,
+                _buttonTypeDropDown
             };
-
 
             _shadowRadiusDropDown.Name = Fields.ShadowRadius;
             _shadowRadiusDropDown.SetupAdapter(Shadow.RadiusCollection.Select(item => item.Key).ToList());
@@ -249,7 +249,7 @@ namespace EOS.UI.Android.Sandbox.Activities
         private void ResetCustomValues(bool ignogeButtonType = false)
         {
             _CTAButton.ResetCustomization();
-            _dropDowns.Except(new[] { _themeDropDown }).ToList().ForEach(dropDown => dropDown.SetSpinnerSelection(0));
+            _dropDowns.Except(new[] { _themeDropDown, _buttonTypeDropDown }).ToList().ForEach(dropDown => dropDown.SetSpinnerSelection(0));
             if(!ignogeButtonType)
                 _buttonTypeDropDown.SetSpinnerSelection(1);
         }
