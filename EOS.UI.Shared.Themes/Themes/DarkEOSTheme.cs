@@ -36,7 +36,7 @@ namespace EOS.UI.Shared.Themes.Themes
         private const string neutralColor6 = "#343334";
         private const string rippleColor = "#1AFFFFFF";
         private const string shadowColor = "#A3EAEAEA";
-        private const string fabShadowColor = "#A3C0BFC0";
+        private const string fabShadowColor = "#3D000000";
 
 #if __ANDROID__
 
@@ -108,7 +108,7 @@ namespace EOS.UI.Shared.Themes.Themes
             { EOSConstants.FabProgressSize, 52},
             { EOSConstants.CircleProgressShown, true},
             { EOSConstants.FabShadow,  new ShadowConfig(){
-                Color = ColorExtension.FromHex(neutralColor3, 0.64f),
+                Color = ColorExtension.FromHex(fabShadowColor),
                 Offset = new CGPoint(0, 6),
                 Blur = 12,
                 Spread = 1
