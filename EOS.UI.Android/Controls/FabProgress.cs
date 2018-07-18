@@ -49,10 +49,10 @@ namespace EOS.UI.Android.Controls
             get => base.Enabled;
             set
             {
-                var enabled = base.Enabled;
+                var wasEnabled = base.Enabled;
                 base.Enabled = value;
 
-                if (enabled != value)
+                if (wasEnabled!= value)
                 {
                     //SetShadowOrBackground(value, ShadowConfig);
                     SetBackgroundColor(value ? BackgroundColor : DisabledBackgroundColor);

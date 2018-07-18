@@ -89,11 +89,11 @@ namespace EOS.UI.Android.Helpers
                 startBlurringColor
             };
 
-            var step = _iterations / 10;
+            var step = (float)_iterations / 10;
 
-            for (int i = 0; i <= _iterations; i+=step )
+            for (float i = 0; i <= _iterations; i+=step )
             {
-                var a = GetAlpha(() => GetEquationX(i, _iterations));
+                var a = GetAlpha(() => GetEquationX((int)i, _iterations));
                 var c = _config.Color;
                 if (c.A == 255)
                 {
@@ -127,9 +127,9 @@ namespace EOS.UI.Android.Helpers
                 blurringStartPoint
             };
 
-            var step = _iterations / 10;
+            var step = (float)_iterations / 10;
 
-            for (int i = 0; i <= _iterations; i += step)
+            for (float i = 0; i <= _iterations; i += step)
             {
                 var point = oldWidth + i;
                 var position = point / (float)radius;
@@ -199,7 +199,7 @@ namespace EOS.UI.Android.Helpers
             return (byte)(alpha > 255 ? 255 : Math.Round(alpha));
         }
 
-        float GetEquationX(int i, int total)
+        float GetEquationX(float i, int total)
         {
             return i * 50 / (float)total;
         }
