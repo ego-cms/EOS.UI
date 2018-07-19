@@ -94,7 +94,12 @@
   <ItemGroup>
     <Compile Include="Components\CircleMenu\CircleMenu.cs" />
     <Compile Include="Components\CircleMenu\CircleMenuItem.cs" />
+    <Compile Include="Components\CircleMenu\CircleMenuScrollListener.cs" />
     <Compile Include="Components\CircleMenu\MainMenuButton.cs" />
+    <Compile Include="Components\CircleMenu\Listeners\NormalizationEndListener.cs" />
+    <Compile Include="Components\CircleMenu\Listeners\OpenSpringAnimationEndListener.cs" />
+    <Compile Include="Components\CircleMenu\Listeners\ScrollSpringAnimationEndListener.cs" />
+    <Compile Include="Components\CircleMenu\Listeners\UpdateMenuItemsVisibilityListener.cs" />
     <Compile Include="Components\Section.cs" />
     <Compile Include="Components\Work time\WorkTime.cs" />
     <Compile Include="Components\Work time\WorkTimeItem.cs" />

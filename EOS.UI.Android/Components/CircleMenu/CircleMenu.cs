@@ -15,57 +15,57 @@ using EOS.UI.Android.Interfaces;
 using EOS.UI.Shared.Themes.DataModels;
 using EOS.UI.Shared.Themes.Helpers;
 using EOS.UI.Shared.Themes.Interfaces;
-using Java.Lang;
 using UIFrameworks.Android.Themes;
 using UIFrameworks.Shared.Themes.Interfaces;
 
 namespace EOS.UI.Android.Components
 {
-    public class CircleMenu: FrameLayout, View.IOnTouchListener, IRunnable, DynamicAnimation.IOnAnimationEndListener, IIsOpened, IEOSThemeControl, ICircleMenuClicable
+    public class CircleMenu: FrameLayout, View.IOnTouchListener, IIsOpened, IEOSThemeControl, ICircleMenuClicable
     {
-        #region fields and properties
+        #region constants
 
-        private const int RightMargin = 29;
-        private const int BottomMargin = 110;
         private const int HintElevationValue = 2;
         private const int HintAnimationDuration = 300;
         private const int HintAnimationDeltaY = 10;
         private const int SubMenuMargin = 11;
 
         private const float Diameter = 52f;
-        private const float StartDelta = 94f;
-        private const float Delta1 = -16f;
-        private const float Delta2 = 26f;
-        private const float Delta3 = 60f;
-        private const float Delta4 = 64f;
+        private const float Margin1 = 94f;
+        private const float Margin2 = -36f;
+        private const float Margin3 = 25f;
+        private const float Margin4 = 84f;
+        private const float Margin5 = 111f;
 
-        private const float MinSwipeWidth = 50;
         private const int SwipeAnimateDuration = 300;
         private const int ShowHideAnimateDuration = 50;
 
-        private float[][] _deltaClosePositions = new float[6][];
-        private float[][] _deltaOpenPositions = new float[6][];
-        private float[][] _deltaForwardPositions = new float[6][];
-        private float[][] _deltaBackPositions = new float[6][];
+        #endregion
 
-        private int _startMenuItemsPosition = 1;
-        private float _deltaNormalizePositions;
-
-        private bool _forward;
-        private bool _normalize;
-        private bool _isScrolling;
-        private int _showMenuItemsIteration;
-        private bool _isSubMenuOpened;
+        #region fields 
 
         private MainMenuButton _mainMenu;
         private RelativeLayout _container;
-        private float _bufferX;
-        private float _bufferY;
-        private bool _isMovedRight;
-        private bool _isMovedLeft;
         private List<CircleMenuItem> _menuItems = new List<CircleMenuItem>();
+        private PointF[] _mainMenuPositions = new PointF[7];
 
-        private bool IsBusy => _isScrolling || _showMenuItemsIteration > 0 || _isSubMenuOpened;
+        private bool _forward;
+        private bool _isSubMenuOpened;
+        private int _showMenuItemsIteration;
+        private int _startMenuItemsPosition = 1;
+        private float _deltaNormalizePositions;
+
+        private CircleMenuScrollListener _scrollListener = new CircleMenuScrollListener();
+        private ScrollSpringAnimationEndListener _scrollSpringAnimationEndListener;
+        private OpenSpringAnimationEndListener _openSpringAnimationEndListener;
+        private NormalizationEndListener _normalizationEndListener;
+        private UpdateMenuItemsVisibilityListener _updateMenuItemsVisibilityListener;
+
+        #endregion
+
+        #region properties
+
+        internal bool IsScrolling { get; set; }
+        private bool IsBusy => IsScrolling || _showMenuItemsIteration > 0 || _isSubMenuOpened;
         public bool ShowHintAnimation { get; set; } = true;
 
         #endregion
@@ -230,6 +230,26 @@ namespace EOS.UI.Android.Components
 
         #region utility methods
 
+        protected override void OnSizeChanged(int w, int h, int oldw, int oldh)
+        {
+            base.OnSizeChanged(w, h, oldw, oldh);
+            FillMenuItemsPositions();
+        }
+
+        private void FillMenuItemsPositions()
+        {
+            var denisty = Context.Resources.DisplayMetrics.Density;
+            var normalX = Width - Diameter * denisty;
+            var normalY = Height - Diameter * denisty;
+            _mainMenuPositions[0] = new PointF(Width, normalY - Margin1 * denisty);
+            _mainMenuPositions[1] = new PointF(normalX - Margin2 * denisty, normalY - Margin1 * denisty);
+            _mainMenuPositions[2] = new PointF(normalX - Margin3 * denisty, normalY - Margin5 * denisty);
+            _mainMenuPositions[3] = new PointF(normalX - Margin4 * denisty, normalY - Margin4 * denisty);
+            _mainMenuPositions[4] = new PointF(normalX - Margin5 * denisty, normalY - Margin3 * denisty);
+            _mainMenuPositions[5] = new PointF(normalX - Margin1 * denisty, normalY - Margin2 * denisty);
+            _mainMenuPositions[6] = new PointF(normalX - Margin1 * denisty, Height);
+        }
+
         private void Initialize(IAttributeSet attrs = null)
         {
             var inflater = (LayoutInflater)Context.GetSystemService(Context.LayoutInflaterService);
@@ -255,110 +275,166 @@ namespace EOS.UI.Android.Components
             foreach(var menu in _menuItems)
                 menu.SetICircleMenuClicable(this);
 
-            InitDeltaArrays();
+            _scrollSpringAnimationEndListener = new ScrollSpringAnimationEndListener(Context, this);
+            _openSpringAnimationEndListener = new OpenSpringAnimationEndListener(Context, this);
+            _normalizationEndListener = new NormalizationEndListener(Context, this);
+            _updateMenuItemsVisibilityListener = new UpdateMenuItemsVisibilityListener(Context, this);
 
-            _deltaNormalizePositions = (Diameter + StartDelta) * Context.Resources.DisplayMetrics.Density;
-        }
-
-        /// <summary>
-        /// Delta arrays should be filled for two actions: close/open action and scroll action
-        /// Each action sho?ld contains deltas for forward (left to right) and back (right to left) translation
-        /// Delta values are constants, which calculated from design like 
-        /// </summary>
-        private void InitDeltaArrays()
-        {
-            var denisty = Context.Resources.DisplayMetrics.Density;
-            _deltaClosePositions[0] = new float[] { Delta1 * denisty, 0f };
-            _deltaClosePositions[1] = new float[] { -Delta4 * denisty, Delta1 * denisty };
-            _deltaClosePositions[2] = new float[] { -Delta3 * denisty, Delta2 * denisty };
-            _deltaClosePositions[3] = new float[] { -Delta2 * denisty, Delta3 * denisty };
-            _deltaClosePositions[4] = new float[] { -Delta1 * denisty, Delta4 * denisty };
-            _deltaClosePositions[5] = new float[] { 0f, -Delta1 * denisty };
-
-            _deltaOpenPositions[0] = new float[] { 0f, Delta1 * denisty };
-            _deltaOpenPositions[5] = new float[] { Delta1 * denisty, -Delta4 * denisty };
-            _deltaOpenPositions[4] = new float[] { Delta2 * denisty, -Delta3 * denisty };
-            _deltaOpenPositions[3] = new float[] { Delta3 * denisty, -Delta2 * denisty };
-            _deltaOpenPositions[2] = new float[] { Delta4 * denisty, -Delta1 * denisty };
-            _deltaOpenPositions[1] = new float[] { -Delta1 * denisty, 0f };
-
-            _deltaForwardPositions[0] = new float[] { 0f, Delta1 * denisty };
-            _deltaForwardPositions[1] = new float[] { Delta1 * denisty, -Delta4 * denisty };
-            _deltaForwardPositions[2] = new float[] { Delta2 * denisty, -Delta3 * denisty };
-            _deltaForwardPositions[3] = new float[] { Delta3 * denisty, -Delta2 * denisty };
-            _deltaForwardPositions[4] = new float[] { Delta4 * denisty, -Delta1 * denisty };
-            _deltaForwardPositions[5] = new float[] { -Delta1 * denisty, 0f };
-
-            _deltaBackPositions[0] = new float[] { Delta1 * denisty, 0f };
-            _deltaBackPositions[5] = new float[] { -Delta4 * denisty, Delta1 * denisty };
-            _deltaBackPositions[4] = new float[] { -Delta3 * denisty, Delta2 * denisty };
-            _deltaBackPositions[3] = new float[] { -Delta2 * denisty, Delta3 * denisty };
-            _deltaBackPositions[2] = new float[] { -Delta1 * denisty, Delta4 * denisty };
-            _deltaBackPositions[1] = new float[] { 0f, -Delta1 * denisty };
+            _deltaNormalizePositions = (Diameter + Margin1) * Context.Resources.DisplayMetrics.Density;
         }
 
         private void MainMenuClick(object sender, EventArgs e)
         {
             if(_showMenuItemsIteration == 0 && !_isSubMenuOpened)
-                ShowMenuItemsAnimation();
+                UpdateMenuItemsVisiblility();
         }
 
         /// <summary>
         /// Method which spin round items by swipe action.
-        /// If we should normlize position of invisible item in method transmit bool flag.
         /// Animation animated X and Y with spring interpolator (implemented with native SpringAnimation)
         /// Spin round can be forward (left to right) and back (right to left)
         /// </summary>
-        /// <param name="normalize">flag for normalize position of invisible item</param>
-        private void MoveMenuItemsAnimation(bool normalize = true)
+        private void MoveMenuItemsAnimation()
         {
-            if(normalize)
+            for(int i = 0; i < _menuItems.Count; i++)
             {
-                _normalize = true;
-                if(_forward)
-                {
-                    _menuItems[0].Animate().WithEndAction(this).X(Width - _deltaNormalizePositions).Y(Height).SetDuration(1);
+                var position = _mainMenuPositions[_forward ? _menuItems.Count - 1 - i : i + 1];
 
-                    if(_startMenuItemsPosition > 0)
-                        --_startMenuItemsPosition;
-                    else
-                        _startMenuItemsPosition = _circleMenuItems.Count - 1;
-
-                    _menuItems[1].SetDataFromModel(CircleMenuItems[_startMenuItemsPosition].ImageSource, CircleMenuItems[_startMenuItemsPosition].Id);
-                }
+                var menu = default(CircleMenuItem);
+                if(_forward || i == 0)
+                    menu = _menuItems[i];
                 else
-                {
-                    _menuItems[0].Animate().WithEndAction(this).X(Width).Y(Height - _deltaNormalizePositions).SetDuration(1);
+                    menu = _menuItems[_menuItems.Count - i];
 
-                    if(_startMenuItemsPosition == _circleMenuItems.Count - 1)
-                    {
-                        _startMenuItemsPosition = 0;
-                        _menuItems[5].SetDataFromModel(CircleMenuItems[_startMenuItemsPosition + 2].ImageSource, CircleMenuItems[_startMenuItemsPosition + 2].Id);
-                    }
-                    else
-                    {
-                        ++_startMenuItemsPosition;
-                        if(_startMenuItemsPosition == _circleMenuItems.Count - 1)
-                            _menuItems[5].SetDataFromModel(CircleMenuItems[0].ImageSource, CircleMenuItems[0].Id);
-                        else
-                            _menuItems[5].SetDataFromModel(CircleMenuItems[_startMenuItemsPosition].ImageSource, CircleMenuItems[_startMenuItemsPosition].Id);
-                    }
-                }
+                var springX = new SpringAnimation(menu, DynamicAnimation.X, position.X);
+                var springY = new SpringAnimation(menu, DynamicAnimation.Y, position.Y);
+
+                if(i == _menuItems.Count - 1)
+                    springY.AddEndListener(_scrollSpringAnimationEndListener);
+
+                springX.Start();
+                springY.Start();
+            }
+        }
+
+        /// <summary>
+        /// Before scroll right/left we should set invisible item to start position
+        /// Start position depends on scroll direction
+        /// After normalize starts scroll animation
+        /// </summary>
+        private void NormalizeHiddenMenuItem()
+        {
+            var model = FindNextWithbleModel(_forward);
+
+            if(_forward)
+            {
+                _menuItems[1].SetDataFromModel(model.ImageSource, model.Id);
+                _menuItems[0].Animate().X(Width - _deltaNormalizePositions).Y(Height).SetDuration(1).WithEndAction(_normalizationEndListener);
             }
             else
             {
-                for(int i = 0; i < _menuItems.Count; i++)
+                _menuItems[5].SetDataFromModel(model.ImageSource, model.Id);
+                _menuItems[0].Animate().X(Width).Y(Height - _deltaNormalizePositions).SetDuration(1).WithEndAction(_normalizationEndListener);
+            }
+        }
+
+        /// <summary>
+        /// Method find next visible model after scrolling
+        /// </summary>
+        /// <param name="scrollForward">Sets direction of scrolling</param>
+        /// <returns>Returns finded model on CircleMenuItems list</returns>
+        private CircleMenuItemModel FindNextWithbleModel(bool scrollForward)
+        {
+            var index = 0;
+            if(scrollForward)
+            {
+                if(_startMenuItemsPosition > 0)
+                    --_startMenuItemsPosition;
+                else
+                    _startMenuItemsPosition = _circleMenuItems.Count - 1;
+
+                index = _startMenuItemsPosition;
+            }
+            else
+            {
+                if(_startMenuItemsPosition == _circleMenuItems.Count - 1)
                 {
-                    var x =  _forward ? _deltaForwardPositions[i][0] : _deltaBackPositions[i][0];
-                    var y = _forward ? _deltaForwardPositions[i][1] : _deltaBackPositions[i][1];
-                    var denisty = Context.Resources.DisplayMetrics.Density;
+                    _startMenuItemsPosition = 0;
+                    index = _startMenuItemsPosition + 2;
+                }
+                else
+                {
+                    ++_startMenuItemsPosition;
+                    if(_startMenuItemsPosition == _circleMenuItems.Count - 1)
+                        index = 0;
+                    else
+                        index = _startMenuItemsPosition;
+                }
+            }
+            return CircleMenuItems[index];
+        }
 
+        /// <summary>
+        /// Method which spin round items by swipe action.
+        /// Animation has 5 iterations. 
+        /// For hiding all iterations animate X and Y without interpolator. 
+        /// For showing first 4 iterations animate X and Y without interpolator, 
+        /// and last has spring interpolator (implemented with native SpringAnimation)
+        /// </summary>
+        private void UpdateMenuItemsVisiblility()
+        {
+            ++_showMenuItemsIteration;
+            if(IsOpened)
+                HideMenuItems();
+            else
+                ShowMenuItems();
+        }
+
+        private void ShowMenuItems()
+        {
+            if(_showMenuItemsIteration == 1)
+            {
+                foreach(var menu in _menuItems)
+                    menu.StartRotateAnimation();
+
+                _menuItems[1].Animate().X(_mainMenuPositions[0].X).Y(_mainMenuPositions[0].Y).SetDuration(ShowHideAnimateDuration).WithEndAction(_updateMenuItemsVisibilityListener);
+            }
+            if(_showMenuItemsIteration == 2)
+            {
+                _menuItems[2].Animate().X(_mainMenuPositions[0].X).Y(_mainMenuPositions[0].Y).SetDuration(ShowHideAnimateDuration);
+                _menuItems[1].Animate().X(_mainMenuPositions[1].X).Y(_mainMenuPositions[1].Y).SetDuration(ShowHideAnimateDuration).WithEndAction(_updateMenuItemsVisibilityListener);
+
+            }
+            if(_showMenuItemsIteration == 3)
+            {
+                _menuItems[3].Animate().X(_mainMenuPositions[0].X).Y(_mainMenuPositions[0].Y).SetDuration(ShowHideAnimateDuration);
+                _menuItems[2].Animate().X(_mainMenuPositions[1].X).Y(_mainMenuPositions[1].Y).SetDuration(ShowHideAnimateDuration);
+                _menuItems[1].Animate().X(_mainMenuPositions[2].X).Y(_mainMenuPositions[2].Y).SetDuration(ShowHideAnimateDuration).WithEndAction(_updateMenuItemsVisibilityListener);
+
+            }
+            if(_showMenuItemsIteration == 4)
+            {
+                _menuItems[4].Animate().X(_mainMenuPositions[0].X).Y(_mainMenuPositions[0].Y).SetDuration(ShowHideAnimateDuration);
+                _menuItems[3].Animate().X(_mainMenuPositions[1].X).Y(_mainMenuPositions[1].Y).SetDuration(ShowHideAnimateDuration);
+                _menuItems[2].Animate().X(_mainMenuPositions[2].X).Y(_mainMenuPositions[2].Y).SetDuration(ShowHideAnimateDuration);
+                _menuItems[1].Animate().X(_mainMenuPositions[3].X).Y(_mainMenuPositions[3].Y).SetDuration(ShowHideAnimateDuration).WithEndAction(_updateMenuItemsVisibilityListener);
+            }
+            if(_showMenuItemsIteration == 5)
+            {
+                //last iteration of showing menus should be with spring animation
+                for(int i = _menuItems.Count - 1; i > 0; i--)
+                {
                     var menu = _menuItems[i];
-                    var springX = new SpringAnimation(menu, DynamicAnimation.TranslationX, menu.TranslationX + x);
-                    var springY = new SpringAnimation(menu, DynamicAnimation.TranslationY, menu.TranslationY + y);
+                    var point = _mainMenuPositions[_menuItems.Count - i];
 
-                    if(i == _menuItems.Count - 1)
-                        springY.AddEndListener(this);
+                    var springX = new SpringAnimation(menu, DynamicAnimation.X, point.X);
+                    var springY = new SpringAnimation(menu, DynamicAnimation.Y, point.Y);
+
+                    if(i == 1)
+                    {
+                        _container.SetBackgroundColor(!IsOpened ? Color.Argb(50, 0, 0, 0) : Color.Transparent);
+                        springY.AddEndListener(_openSpringAnimationEndListener);
+                    }
 
                     springX.Start();
                     springY.Start();
@@ -366,69 +442,41 @@ namespace EOS.UI.Android.Components
             }
         }
 
-        /// <summary>
-        /// Method which spin round items by swipe action.
-        /// If we should normlize position of invisible item in method transmit bool flag.
-        /// Animation has 5 iterations. First 4 iterations animated X and Y without interpolator, and last fith spring interpolator (implemented with native SpringAnimation)
-        /// Spin round can be forward (left to right) and back (right to left)
-        /// </summary>
-        private void ShowMenuItemsAnimation()
+        private void HideMenuItems()
         {
-            ++_showMenuItemsIteration;
-            if(IsOpened)
+            if(_showMenuItemsIteration == 1)
             {
-                if(_startMenuItemsPosition > 0)
-                    --_startMenuItemsPosition;
-                else
-                    _startMenuItemsPosition = _circleMenuItems.Count - 1;
+                //on hiding animation should be visible icon on last item
+                var model = FindNextWithbleModel(true);
+                _menuItems[1].SetDataFromModel(model.ImageSource, model.Id);
 
-                _menuItems[1].SetDataFromModel(CircleMenuItems[_startMenuItemsPosition].ImageSource, CircleMenuItems[_startMenuItemsPosition].Id);
-
-                for(int i = 0; i < _menuItems.Count - _showMenuItemsIteration; i++)
-                {
-                    var deltaX = _deltaOpenPositions[_menuItems.Count - i - _showMenuItemsIteration][0];
-                    var deltaY = _deltaOpenPositions[_menuItems.Count - i - _showMenuItemsIteration][1];
-
-                    if(i == _menuItems.Count - _showMenuItemsIteration - 1)
-                        _menuItems[i + 1].Animate().XBy(deltaX).YBy(deltaY).SetDuration(ShowHideAnimateDuration).WithEndAction(this);
-                    else
-                        _menuItems[i + 1].Animate().XBy(deltaX).YBy(deltaY).SetDuration(ShowHideAnimateDuration);
-                }
+                _menuItems[1].Animate().X(_mainMenuPositions[4].X).Y(_mainMenuPositions[4].Y).SetDuration(ShowHideAnimateDuration);
+                _menuItems[2].Animate().X(_mainMenuPositions[3].X).Y(_mainMenuPositions[3].Y).SetDuration(ShowHideAnimateDuration);
+                _menuItems[3].Animate().X(_mainMenuPositions[2].X).Y(_mainMenuPositions[2].Y).SetDuration(ShowHideAnimateDuration);
+                _menuItems[4].Animate().X(_mainMenuPositions[1].X).Y(_mainMenuPositions[1].Y).SetDuration(ShowHideAnimateDuration);
+                _menuItems[5].Animate().X(_mainMenuPositions[0].X).Y(_mainMenuPositions[0].Y).SetDuration(ShowHideAnimateDuration).WithEndAction(_updateMenuItemsVisibilityListener);
             }
-            else
+            if(_showMenuItemsIteration == 2)
             {
-                if(_showMenuItemsIteration == 1)
-                    foreach(var menu in _menuItems)
-                        menu.StartRotateAnimation();
-
-                for(int i = 0; i < _showMenuItemsIteration; i++)
-                {
-                    var deltaX = _deltaClosePositions[i][0];
-                    var deltaY = _deltaClosePositions[i][1];
-                    var menu = _menuItems[_showMenuItemsIteration - i];
-
-                    if(_showMenuItemsIteration != _menuItems.Count - 1)
-                    {
-                        if(i == _showMenuItemsIteration - 1)
-                            menu.Animate().XBy(deltaX).YBy(deltaY).SetDuration(ShowHideAnimateDuration).WithEndAction(this);
-                        else
-                            menu.Animate().XBy(deltaX).YBy(deltaY).SetDuration(ShowHideAnimateDuration);
-                    }
-                    else
-                    {
-                        var springX = new SpringAnimation(menu, DynamicAnimation.TranslationX, menu.TranslationX + deltaX);
-                        var springY = new SpringAnimation(menu, DynamicAnimation.TranslationY, menu.TranslationY + deltaY);
-
-                        if(i == _showMenuItemsIteration - 1)
-                        {
-                            _container.SetBackgroundColor(!IsOpened ? Color.Argb(50, 0, 0, 0) : Color.Transparent);
-                            springY.AddEndListener(this);
-                        }
-
-                        springX.Start();
-                        springY.Start();
-                    }
-                }
+                _menuItems[1].Animate().X(_mainMenuPositions[3].X).Y(_mainMenuPositions[3].Y).SetDuration(ShowHideAnimateDuration);
+                _menuItems[2].Animate().X(_mainMenuPositions[2].X).Y(_mainMenuPositions[2].Y).SetDuration(ShowHideAnimateDuration);
+                _menuItems[3].Animate().X(_mainMenuPositions[1].X).Y(_mainMenuPositions[1].Y).SetDuration(ShowHideAnimateDuration);
+                _menuItems[4].Animate().X(_mainMenuPositions[0].X).Y(_mainMenuPositions[0].Y).SetDuration(ShowHideAnimateDuration).WithEndAction(_updateMenuItemsVisibilityListener);
+            }
+            if(_showMenuItemsIteration == 3)
+            {
+                _menuItems[1].Animate().X(_mainMenuPositions[2].X).Y(_mainMenuPositions[2].Y).SetDuration(ShowHideAnimateDuration);
+                _menuItems[2].Animate().X(_mainMenuPositions[1].X).Y(_mainMenuPositions[1].Y).SetDuration(ShowHideAnimateDuration);
+                _menuItems[3].Animate().X(_mainMenuPositions[0].X).Y(_mainMenuPositions[0].Y).SetDuration(ShowHideAnimateDuration).WithEndAction(_updateMenuItemsVisibilityListener);
+            }
+            if(_showMenuItemsIteration == 4)
+            {
+                _menuItems[1].Animate().X(_mainMenuPositions[1].X).Y(_mainMenuPositions[1].Y).SetDuration(ShowHideAnimateDuration);
+                _menuItems[2].Animate().X(_mainMenuPositions[0].X).Y(_mainMenuPositions[0].Y).SetDuration(ShowHideAnimateDuration).WithEndAction(_updateMenuItemsVisibilityListener);
+            }
+            if(_showMenuItemsIteration == 5)
+            {
+                _menuItems[1].Animate().X(_mainMenuPositions[0].X).Y(_mainMenuPositions[0].Y).SetDuration(ShowHideAnimateDuration).WithEndAction(_updateMenuItemsVisibilityListener);
             }
         }
 
@@ -493,8 +541,8 @@ namespace EOS.UI.Android.Components
                 (int)(Diameter * Context.Resources.DisplayMetrics.Density),
                 (int)(Diameter * Context.Resources.DisplayMetrics.Density));
 
-            layoutParameters.RightMargin = (int)(RightMargin * Context.Resources.DisplayMetrics.Density);
-            layoutParameters.BottomMargin = (int)(BottomMargin * Context.Resources.DisplayMetrics.Density);
+            layoutParameters.RightMargin = (int)(Margin3 * Context.Resources.DisplayMetrics.Density);
+            layoutParameters.BottomMargin = (int)(Margin5 * Context.Resources.DisplayMetrics.Density);
 
             layoutParameters.AddRule(LayoutRules.AlignParentBottom);
             layoutParameters.AddRule(LayoutRules.AlignParentRight);
@@ -536,62 +584,67 @@ namespace EOS.UI.Android.Components
             return subMenu;
         }
 
-        #endregion
-
-        #region IOnTouchListener implementation
-
-        public bool OnTouch(View v, MotionEvent e)
+        internal void HandleOnScrollSpringAnimationEnd()
         {
-            if(!IsBusy)
+            //After end of swipe animation we should change indexes to default for items collection
+            //and set invisible item to default position
+
+            //HACK: if ImageView was out of the bounds it is invisible
+            _menuItems[0].Visibility = ViewStates.Invisible;
+            _menuItems[0].Visibility = ViewStates.Visible;
+
+            if(_forward)
             {
-                if(e.Action == MotionEventActions.Down)
-                {
-                    _bufferX = e.RawX;
-                    _bufferY = e.RawY;
-                }
-                else if(e.Action == MotionEventActions.Move && _bufferX != e.RawX)
-                {
-                    //checking if swipe was horizontal and not vertical
-                    if(_bufferX - e.RawX > MinSwipeWidth && System.Math.Abs(_bufferX - e.RawX) > System.Math.Abs(_bufferY - e.RawY))
-                        _isMovedLeft = true;
-                    if(_bufferX - e.RawX < -MinSwipeWidth && System.Math.Abs(_bufferX - e.RawX) > System.Math.Abs(_bufferY - e.RawY))
-                        _isMovedRight = true;
-                }
-                if(e.Action == MotionEventActions.Up && !_isMovedRight && !_isMovedLeft)
-                {
-                }
-                if(e.Action == MotionEventActions.Up && (_isMovedRight || _isMovedLeft))
-                {
-                    _forward = _isMovedRight;
-                    _isScrolling = true;
-                    MoveMenuItemsAnimation();
-                    _bufferX = 0f;
-                    _bufferY = 0f;
-                    _isMovedRight = false;
-                    _isMovedLeft = false;
-                }
+                var menuItem = _menuItems.Last();
+                _menuItems.RemoveAt(_menuItems.Count - 1);
+                _menuItems.Insert(0, menuItem);
             }
-            return IsOpened;
+            else
+            {
+                var menuItem = _menuItems.First();
+                _menuItems.RemoveAt(0);
+                _menuItems.Add(menuItem);
+            }
+
+            //Set to zero position
+            _menuItems.First().Animate().X(Width).Y(Height).SetDuration(1);
+
+            //reset data from model for part visible and not clickable menus
+            _menuItems[1].ResetDataFromModel();
+            _menuItems[5].ResetDataFromModel();
         }
 
-        #endregion
-
-        #region IRunnable implementation
-
-        public void Run()
+        internal void HandleOnOpenSpringAnimationEnd()
         {
-            //checked if need normalize position of invisible item
-            if(_normalize)
+            //reset data from model for part visible and not clickable menus
+            _menuItems[1].ResetDataFromModel();
+
+            //after end of open/hide animation setup internal values to default
+            var action = new Action(() =>
             {
-                _normalize = false;
-                MoveMenuItemsAnimation(false);
-            }
-            else if(_showMenuItemsIteration > 0)
+                _showMenuItemsIteration = 0;
+                IsOpened = !IsOpened;
+            });
+
+            if(ShowHintAnimation)
+                StartHintAnimation(action);
+            else
+                action.Invoke();
+        }
+
+        internal void HandleNormalizationEnd()
+        {
+            MoveMenuItemsAnimation();
+        }
+
+        internal void HandleUpdateMenuItemsVisibility()
+        {
+            if(_showMenuItemsIteration > 0)
             {
                 if(_showMenuItemsIteration != _menuItems.Count - 1)
                 {
                     //Invoke animation until all items not on theirs positions
-                    ShowMenuItemsAnimation();
+                    UpdateMenuItemsVisiblility();
                 }
                 else if(IsOpened)
                 {
@@ -605,61 +658,19 @@ namespace EOS.UI.Android.Components
 
         #endregion
 
-        #region IOnAnimationEndListener implementation
+        #region IOnTouchListener implementation
 
-        public void OnAnimationEnd(DynamicAnimation animation, bool canceled, float value, float velocity)
+        public bool OnTouch(View v, MotionEvent e)
         {
-            if(_isScrolling)
+            if(!IsBusy)
             {
-                //After end of swipe animation we should change indexes to default for items collection
-                //and set invisible item to default position
-
-                //HACK: if ImageView was out of the bounds it is invisible
-                _menuItems[0].Visibility = ViewStates.Invisible;
-                _menuItems[0].Visibility = ViewStates.Visible;
-
-                if(_forward)
+                if(_scrollListener.IsScrolled(ref _forward, e))
                 {
-                    var menuItem = _menuItems.Last();
-                    _menuItems.RemoveAt(_menuItems.Count - 1);
-                    _menuItems.Insert(0, menuItem);
-
-                    //Set to zero position
-                    _menuItems.First().Animate().YBy(_deltaNormalizePositions).SetDuration(1);
+                    IsScrolling = true;
+                    NormalizeHiddenMenuItem();
                 }
-                else
-                {
-                    var menuItem = _menuItems.First();
-                    _menuItems.RemoveAt(0);
-                    _menuItems.Add(menuItem);
-
-                    //Set to zero position
-                    _menuItems.First().Animate().XBy(_deltaNormalizePositions).SetDuration(1);
-                }
-
-                //reset data from model for part visible and not clickable menus
-                _menuItems[1].ResetDataFromModel();
-                _menuItems[5].ResetDataFromModel();
-
-                _isScrolling = false;
             }
-            else
-            {
-                //reset data from model for part visible and not clickable menus
-                _menuItems[1].ResetDataFromModel();
-
-                //after end of open/hide animation setup internal values to default
-                var action = new Action(() =>
-                {
-                    _showMenuItemsIteration = 0;
-                    IsOpened = !IsOpened;
-                });
-
-                if(ShowHintAnimation)
-                    StartHintAnimation(action);
-                else
-                    action.Invoke();
-            }
+            return IsOpened;
         }
 
         #endregion
