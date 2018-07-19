@@ -39,6 +39,16 @@ namespace EOS.UI.Android.Components
 
         private string AnimationName => _mainControl != null && _mainControl.IsOpened ? _backAnimationPath : _forwardAnimationPath;
 
+        public override bool Enabled
+        {
+            get => base.Enabled;
+            set
+            {
+                base.Enabled = value;
+                Alpha = Enabled ? 1f : 0.6f;
+            }
+        }
+
         #endregion
 
         #region .ctors
@@ -89,7 +99,7 @@ namespace EOS.UI.Android.Components
 
         public override bool OnTouchEvent(MotionEvent e)
         {
-            if(e.Action == MotionEventActions.Down)
+            if(e.Action == MotionEventActions.Down && Enabled)
             {
                 _lottieView.SetAnimation(AnimationName);
                 _lottieView.PlayAnimation();

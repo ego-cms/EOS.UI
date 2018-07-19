@@ -7,6 +7,8 @@ using Android.Util;
 using Android.Views;
 using Android.Views.Animations;
 using Android.Widget;
+using EOS.UI.Android.Interfaces;
+using EOS.UI.Shared.Themes.DataModels;
 
 namespace EOS.UI.Android.Components
 {
@@ -21,11 +23,43 @@ namespace EOS.UI.Android.Components
         private const float StartAngle = -180f;
         private const float EndAngle = 0f;
         private const float PivotScale = 0.5f;
-        private const int RotateDimention = 380;
+        private const int RotateDuration = 380;
 
         private const float ShadowRadiusValue = 8f;
 
         private ImageView _icon;
+
+        private ICircleMenuClicable _circleMenu;
+
+        private bool _isSubMenu;
+        private bool _isOpened;
+
+        #endregion
+
+        #region properties
+
+        public int CircleMenuModelId { get; set; }
+
+        public int HasSubMenus { get; set; }
+
+        public override bool Enabled
+        {
+            get => base.Enabled;
+            set
+            {
+                base.Enabled = value;
+                if(Enabled)
+                {
+                    _icon.Alpha = 1f;
+                    Alpha = 1f;
+                }
+                else
+                {
+                    _icon.Alpha = 0.6f;
+                    Alpha = 0.6f;
+                }
+            }
+        }
 
         #endregion
 
@@ -75,8 +109,41 @@ namespace EOS.UI.Android.Components
         public void StartRotateAnimation()
         {
             var scaleInAnimation = new RotateAnimation(StartAngle, EndAngle, Dimension.RelativeToSelf, PivotScale, Dimension.RelativeToSelf, PivotScale);
-            scaleInAnimation.Duration = RotateDimention;
+            scaleInAnimation.Duration = RotateDuration;
             _icon.StartAnimation(scaleInAnimation);
+        }
+
+        public void SetICircleMenuClicable(ICircleMenuClicable circleMenu)
+        {
+            _circleMenu = circleMenu;
+        }
+
+        public void SetDataFromModel(Drawable drawable, int id, bool isSubmenu = false)
+        {
+            _icon.SetImageDrawable(drawable);
+            CircleMenuModelId = id;
+            _isSubMenu = isSubmenu;
+        }
+
+        public void ResetDataFromModel()
+        {
+            _icon.SetImageDrawable(new ColorDrawable(Color.Transparent));
+            CircleMenuModelId = -1;
+        }
+
+        #endregion
+
+        #region overrides
+
+        public override bool OnTouchEvent(MotionEvent e)
+        {
+            if(e.Action == MotionEventActions.Down && Enabled)
+                _circleMenu.PerformClick(CircleMenuModelId, _isSubMenu, _isOpened);
+
+            if(!_isSubMenu)
+                _isOpened = !_isOpened;
+
+            return base.OnTouchEvent(e);
         }
 
         #endregion

@@ -1,4 +1,3 @@
-﻿using System;
 using System.Collections.Generic;
 #if __IOS__
 using UIKit;
@@ -18,9 +17,19 @@ namespace EOS.UI.Shared.Themes.DataModels
 
 #if __ANDROID__
         public Drawable ImageSource { get; set; }
-#endif
-        IEnumerable<CircleMenuItemModel> Children { get; set; }
 
-        public EventHandler Clicked;
+        public CircleMenuItemModel()
+        {
+
+        }
+
+        public CircleMenuItemModel(int id, Drawable drawable, List<CircleMenuItemModel> children = null)
+        {
+            Id = id;
+            ImageSource = drawable;
+            Children = children?? new List<CircleMenuItemModel>();
+        }
+#endif
+        public List<CircleMenuItemModel> Children { get; set; }
     }
 }

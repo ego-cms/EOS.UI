@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Android.Animation;
 using Android.Content;
 using Android.Graphics;
 using Android.Graphics.Drawables;
@@ -11,11 +12,16 @@ using Android.Views;
 using Android.Views.Animations;
 using Android.Widget;
 using EOS.UI.Android.Interfaces;
+using EOS.UI.Shared.Themes.DataModels;
+using EOS.UI.Shared.Themes.Helpers;
+using EOS.UI.Shared.Themes.Interfaces;
 using Java.Lang;
+using UIFrameworks.Android.Themes;
+using UIFrameworks.Shared.Themes.Interfaces;
 
 namespace EOS.UI.Android.Components
 {
-    public class CircleMenu: FrameLayout, View.IOnTouchListener, IRunnable, DynamicAnimation.IOnAnimationEndListener, IIsOpened
+    public class CircleMenu: FrameLayout, View.IOnTouchListener, IRunnable, DynamicAnimation.IOnAnimationEndListener, IIsOpened, IEOSThemeControl, ICircleMenuClicable
     {
         #region fields and properties
 
@@ -24,6 +30,7 @@ namespace EOS.UI.Android.Components
         private const int HintElevationValue = 2;
         private const int HintAnimationDuration = 300;
         private const int HintAnimationDeltaY = 10;
+        private const int SubMenuMargin = 11;
 
         private const float Diameter = 52f;
         private const float StartDelta = 94f;
@@ -41,12 +48,14 @@ namespace EOS.UI.Android.Components
         private float[][] _deltaForwardPositions = new float[6][];
         private float[][] _deltaBackPositions = new float[6][];
 
+        private int _startMenuItemsPosition = 1;
         private float _deltaNormalizePositions;
 
         private bool _forward;
         private bool _normalize;
         private bool _isScrolling;
         private int _showMenuItemsIteration;
+        private bool _isSubMenuOpened;
 
         private MainMenuButton _mainMenu;
         private RelativeLayout _container;
@@ -56,8 +65,14 @@ namespace EOS.UI.Android.Components
         private bool _isMovedLeft;
         private List<CircleMenuItem> _menuItems = new List<CircleMenuItem>();
 
-        private bool IsBusy => _isScrolling && _showMenuItemsIteration > 0;
+        private bool IsBusy => _isScrolling || _showMenuItemsIteration > 0 || _isSubMenuOpened;
         public bool ShowHintAnimation { get; set; } = true;
+
+        #endregion
+
+        #region events
+
+        public event EventHandler<int> Clicked;
 
         #endregion
 
@@ -96,6 +111,113 @@ namespace EOS.UI.Android.Components
 
         #endregion
 
+        #region customization
+
+        private Color _mainColor;
+        public Color MainColor
+        {
+            get => _mainColor;
+            set
+            {
+                _mainColor = value;
+                IsEOSCustomizationIgnored = true;
+            }
+        }
+
+        private Color _focusedMainColor;
+        public Color FocusedMainColor
+        {
+            get => _focusedMainColor;
+            set
+            {
+                _focusedMainColor = value;
+                IsEOSCustomizationIgnored = true;
+            }
+        }
+
+        private Color _focusedButtonMainColor;
+        public Color FocusedButtonMainColor
+        {
+            get => _focusedButtonMainColor;
+            set
+            {
+                _focusedButtonMainColor = value;
+                IsEOSCustomizationIgnored = true;
+            }
+        }
+
+        private Color _unfocusedButtonMainColor;
+        public Color UnfocusedButtonMainColor
+        {
+            get => _unfocusedButtonMainColor;
+            set
+            {
+                _unfocusedButtonMainColor = value;
+                IsEOSCustomizationIgnored = true;
+            }
+        }
+
+        private List<CircleMenuItemModel> _circleMenuItems;
+        public List<CircleMenuItemModel> CircleMenuItems
+        {
+            get => _circleMenuItems;
+            set
+            {
+                if(value?.Count > 9 || value?.Count < 4)
+                    throw new ArgumentOutOfRangeException("Items should be more then 4 and less then 9");
+
+                _circleMenuItems = value;
+
+                _startMenuItemsPosition = 1;
+
+                if(!IsOpened)
+                    _menuItems[1].SetDataFromModel(_circleMenuItems[0].ImageSource, _circleMenuItems[0].Id);
+
+                _menuItems[2].SetDataFromModel(_circleMenuItems[1].ImageSource, _circleMenuItems[1].Id);
+                _menuItems[3].SetDataFromModel(_circleMenuItems[2].ImageSource, _circleMenuItems[2].Id);
+                _menuItems[4].SetDataFromModel(_circleMenuItems[3].ImageSource, _circleMenuItems[3].Id);
+
+                IsEOSCustomizationIgnored = true;
+            }
+        }
+
+        #endregion
+
+        #region IEOSThemeControl implementation
+
+        public bool IsEOSCustomizationIgnored { get; private set; }
+
+        public IEOSThemeProvider GetThemeProvider()
+        {
+            return EOSThemeProvider.Instance;
+        }
+
+        public void UpdateAppearance()
+        {
+            if(!IsEOSCustomizationIgnored)
+            {
+                IsEOSCustomizationIgnored = false;
+            }
+        }
+
+        public void ResetCustomization()
+        {
+            IsEOSCustomizationIgnored = false;
+            UpdateAppearance();
+        }
+
+        public IEOSStyle GetCurrentEOSStyle()
+        {
+            return null;
+        }
+
+        public void SetEOSStyle(EOSStyleEnumeration style)
+        {
+
+        }
+
+        #endregion
+
         #region public API
 
         public void Attach(ViewGroup viewGroup)
@@ -129,6 +251,9 @@ namespace EOS.UI.Android.Components
                 FindViewById<CircleMenuItem>(Resource.Id.menu4),
                 FindViewById<CircleMenuItem>(Resource.Id.menu5),
             });
+
+            foreach(var menu in _menuItems)
+                menu.SetICircleMenuClicable(this);
 
             InitDeltaArrays();
 
@@ -174,7 +299,7 @@ namespace EOS.UI.Android.Components
 
         private void MainMenuClick(object sender, EventArgs e)
         {
-            if(_showMenuItemsIteration == 0)
+            if(_showMenuItemsIteration == 0 && !_isSubMenuOpened)
                 ShowMenuItemsAnimation();
         }
 
@@ -191,9 +316,34 @@ namespace EOS.UI.Android.Components
             {
                 _normalize = true;
                 if(_forward)
-                    _menuItems[0].Animate().WithEndAction(this).X(Width -_deltaNormalizePositions).Y(Height).SetDuration(1);
+                {
+                    _menuItems[0].Animate().WithEndAction(this).X(Width - _deltaNormalizePositions).Y(Height).SetDuration(1);
+
+                    if(_startMenuItemsPosition > 0)
+                        --_startMenuItemsPosition;
+                    else
+                        _startMenuItemsPosition = _circleMenuItems.Count - 1;
+
+                    _menuItems[1].SetDataFromModel(CircleMenuItems[_startMenuItemsPosition].ImageSource, CircleMenuItems[_startMenuItemsPosition].Id);
+                }
                 else
+                {
                     _menuItems[0].Animate().WithEndAction(this).X(Width).Y(Height - _deltaNormalizePositions).SetDuration(1);
+
+                    if(_startMenuItemsPosition == _circleMenuItems.Count - 1)
+                    {
+                        _startMenuItemsPosition = 0;
+                        _menuItems[5].SetDataFromModel(CircleMenuItems[_startMenuItemsPosition + 2].ImageSource, CircleMenuItems[_startMenuItemsPosition + 2].Id);
+                    }
+                    else
+                    {
+                        ++_startMenuItemsPosition;
+                        if(_startMenuItemsPosition == _circleMenuItems.Count - 1)
+                            _menuItems[5].SetDataFromModel(CircleMenuItems[0].ImageSource, CircleMenuItems[0].Id);
+                        else
+                            _menuItems[5].SetDataFromModel(CircleMenuItems[_startMenuItemsPosition].ImageSource, CircleMenuItems[_startMenuItemsPosition].Id);
+                    }
+                }
             }
             else
             {
@@ -227,6 +377,13 @@ namespace EOS.UI.Android.Components
             ++_showMenuItemsIteration;
             if(IsOpened)
             {
+                if(_startMenuItemsPosition > 0)
+                    --_startMenuItemsPosition;
+                else
+                    _startMenuItemsPosition = _circleMenuItems.Count - 1;
+
+                _menuItems[1].SetDataFromModel(CircleMenuItems[_startMenuItemsPosition].ImageSource, CircleMenuItems[_startMenuItemsPosition].Id);
+
                 for(int i = 0; i < _menuItems.Count - _showMenuItemsIteration; i++)
                 {
                     var deltaX = _deltaOpenPositions[_menuItems.Count - i - _showMenuItemsIteration][0];
@@ -321,6 +478,14 @@ namespace EOS.UI.Android.Components
             return translateAnimation;
         }
 
+        private ObjectAnimator CreateAlphaAnimation(CircleMenuItem menu, int duration, int startDelay, bool isShow = true)
+        {
+            var alfaAnimation = isShow? ObjectAnimator.OfFloat(menu, "Alpha", 1f) : ObjectAnimator.OfFloat(menu, "Alpha", 0f);
+            alfaAnimation.SetDuration(duration);
+            alfaAnimation.StartDelay = startDelay;
+            return alfaAnimation;
+        }
+
         private View CreateHintView()
         {
             var hintView = new View(Context);
@@ -343,6 +508,32 @@ namespace EOS.UI.Android.Components
             hintView.SetBackgroundDrawable(roundedDrawable);
 
             return hintView;
+        }
+
+        private CircleMenuItem CreateSubMenu(int buttonMargin, int rightMargin)
+        {
+            var subMenu = new CircleMenuItem(Context);
+            var layoutParameters = new RelativeLayout.LayoutParams(
+                (int)(Diameter * Context.Resources.DisplayMetrics.Density),
+                (int)(Diameter * Context.Resources.DisplayMetrics.Density));
+
+            layoutParameters.RightMargin = (int)(rightMargin * Context.Resources.DisplayMetrics.Density);
+            layoutParameters.BottomMargin = (int)(buttonMargin * Context.Resources.DisplayMetrics.Density);
+
+            layoutParameters.AddRule(LayoutRules.AlignParentBottom);
+            layoutParameters.AddRule(LayoutRules.AlignParentRight);
+
+            subMenu.LayoutParameters = layoutParameters;
+
+            var roundedDrawable = new GradientDrawable();
+            roundedDrawable.SetColor(Color.White);
+            roundedDrawable.SetShape(ShapeType.Oval);
+
+            subMenu.SetBackgroundDrawable(roundedDrawable);
+
+            subMenu.Alpha = 0f;
+
+            return subMenu;
         }
 
         #endregion
@@ -446,10 +637,17 @@ namespace EOS.UI.Android.Components
                     _menuItems.First().Animate().XBy(_deltaNormalizePositions).SetDuration(1);
                 }
 
+                //reset data from model for part visible and not clickable menus
+                _menuItems[1].ResetDataFromModel();
+                _menuItems[5].ResetDataFromModel();
+
                 _isScrolling = false;
             }
             else
             {
+                //reset data from model for part visible and not clickable menus
+                _menuItems[1].ResetDataFromModel();
+
                 //after end of open/hide animation setup internal values to default
                 var action = new Action(() =>
                 {
@@ -464,6 +662,96 @@ namespace EOS.UI.Android.Components
             }
         }
 
-        #endregion 
+        #endregion
+
+        #region ICircleMenuClicable implementation
+
+        public void PerformClick(int id, bool isSubMenu, bool isOpened)
+        {
+            if(isSubMenu)
+            {
+                Clicked?.Invoke(this, id);
+            }
+            else
+            {
+                var menuItemModel = default(CircleMenuItemModel); //CircleMenuItems?.FirstOrDefault(item => item.Id == id);
+
+                if(menuItemModel == null)
+                    return;
+
+                if(menuItemModel.Children.Count() > 0)
+                {
+                    var index = _menuItems.IndexOf(_menuItems.FirstOrDefault(item => item.CircleMenuModelId == menuItemModel.Id));
+
+                    for(int i = 1; i < _menuItems.Count; i++)
+                        if(i != index)
+                            _menuItems[i].Enabled = !_menuItems[i].Enabled;
+
+                    _mainMenu.Enabled = !_mainMenu.Enabled;
+
+                    _isSubMenuOpened = !isOpened;
+
+                    if(!isOpened)
+                    {
+                        var initBottomMargin = 0;
+                        var initRightMargin = 0;
+
+                        switch(index)
+                        {
+                            case 2:
+                                break;
+                            case 3:
+                                initBottomMargin = 136;
+                                initRightMargin = 90;
+                                break;
+                            case 4:
+                                break;
+                        }
+
+                        for(int i = 0; i < menuItemModel.Children.Count; i++)
+                        {
+                            var subMenu = CreateSubMenu(initBottomMargin + SubMenuMargin + ((int)Diameter + SubMenuMargin) * i, initRightMargin);
+                            subMenu.Tag = $"Child{i}";
+                            subMenu.SetICircleMenuClicable(this);
+                            menuItemModel.Children[i].ImageSource.SetColorFilter(Color.Black, PorterDuff.Mode.SrcIn);
+                            subMenu.SetDataFromModel(menuItemModel.Children[i].ImageSource, menuItemModel.Children[i].Id, true);
+                            _container.AddView(subMenu, 0);
+
+                            var alfaAnimation = CreateAlphaAnimation(subMenu, 100, 100 * i);
+                            alfaAnimation.Start();
+
+                            if(i == menuItemModel.Children.Count() - 1)
+                            {
+                                alfaAnimation.AnimationEnd += (s, e) =>
+                                {
+                                    //TODO: After animation actions
+                                };
+                            }
+                        }
+                    }
+                    else
+                    {
+                        for(int i = 0; i < menuItemModel.Children.Count; i++)
+                        {
+                            var subMenu = _container.FindViewWithTag($"Child{i}") as CircleMenuItem;
+                            var alfaAnimation = CreateAlphaAnimation(subMenu, 100, 100 * i, false);
+                            alfaAnimation.Start();
+
+                            alfaAnimation.AnimationEnd += (s, e) =>
+                            {
+                                _container.RemoveViewAt(0);
+                                //TODO: After animation actions
+                            };
+                        }
+                    }
+                }
+                else
+                {
+                    Clicked?.Invoke(this, id);
+                }
+            }
+        }
+
+        #endregion
     }
 }
