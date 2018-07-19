@@ -56,6 +56,7 @@ namespace EOS.UI.Android.Helpers
             var radius = oldWidth + _iterations -1;
             CreateAndSetShader(canvas, center, oldWidth, radius);
             _paint.Alpha = _drawableAlpha;
+            _paint.AntiAlias = true;
             canvas.DrawCircle(center.X, center.Y, radius, _paint);
         }
 
