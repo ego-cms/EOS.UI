@@ -35,7 +35,7 @@ namespace EOS.UI.Android.Sandbox.Activities
             menus.Add(new CircleMenuItemModel(1, BaseContext.Resources.GetDrawable(Resource.Drawable.TurnoverIcon)));
             menus.Add(new CircleMenuItemModel(2, BaseContext.Resources.GetDrawable(Resource.Drawable.CameraIcon)));
             menus.Add(new CircleMenuItemModel(3, BaseContext.Resources.GetDrawable(Resource.Drawable.PhotoIcon), submenus));
-            menus.Add(new CircleMenuItemModel(4, BaseContext.Resources.GetDrawable(Resource.Drawable.TimerIcon)));
+            menus.Add(new CircleMenuItemModel(4, BaseContext.Resources.GetDrawable(Resource.Drawable.TimerIcon), submenus));
 
             return menus;
         }

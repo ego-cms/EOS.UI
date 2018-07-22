@@ -31,5 +31,7 @@ namespace EOS.UI.Shared.Themes.DataModels
         }
 #endif
         public List<CircleMenuItemModel> Children { get; set; }
+
+        public bool HasChildren => Children != null && Children.Count > 0;
     }
 }

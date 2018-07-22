@@ -18,14 +18,19 @@ namespace EOS.UI.Android.Components
     /// </summary>
     internal class CircleMenuItem : FrameLayout
     {
-        #region fields
+        #region constants
 
         private const float StartAngle = -180f;
         private const float EndAngle = 0f;
         private const float PivotScale = 0.5f;
         private const int RotateDuration = 380;
-
         private const float ShadowRadiusValue = 8f;
+        private const float EnabledAlpha = 1f;
+        private const float DisabledAlpha = 0.6f;
+
+        #endregion
+
+        #region fields
 
         private ImageView _icon;
 
@@ -48,18 +53,20 @@ namespace EOS.UI.Android.Components
             set
             {
                 base.Enabled = value;
-                if(Enabled)
-                {
-                    _icon.Alpha = 1f;
-                    Alpha = 1f;
-                }
-                else
-                {
-                    _icon.Alpha = 0.6f;
-                    Alpha = 0.6f;
-                }
+
+                var alpha = Enabled ? EnabledAlpha : DisabledAlpha;
+                _icon.Alpha = alpha;
+                Alpha = alpha;
             }
         }
+
+        public Color MainColor { get; set; }
+
+        public Color FocusedMainColor { get; set; }
+
+        public Color FocusedButtonMainColor { get; set; }
+
+        public Color UnfocusedButtonMainColor { get; set; }
 
         #endregion
 
@@ -137,11 +144,13 @@ namespace EOS.UI.Android.Components
 
         public override bool OnTouchEvent(MotionEvent e)
         {
-            if(e.Action == MotionEventActions.Down && Enabled)
+            if(e.Action == MotionEventActions.Down && Enabled && !_circleMenu.Locked)
+            {
                 _circleMenu.PerformClick(CircleMenuModelId, _isSubMenu, _isOpened);
 
-            if(!_isSubMenu)
-                _isOpened = !_isOpened;
+                if(!_isSubMenu)
+                    _isOpened = !_isOpened;
+            }
 
             return base.OnTouchEvent(e);
         }

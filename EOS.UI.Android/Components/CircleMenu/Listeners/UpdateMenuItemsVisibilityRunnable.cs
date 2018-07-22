@@ -4,11 +4,11 @@ using Java.Lang;
 
 namespace EOS.UI.Android.Components
 {
-    internal class NormalizationEndListener: View, IRunnable
+    internal class UpdateMenuItemsVisibilityRunnable: View, IRunnable
     {
         private CircleMenu _menu;
 
-        internal NormalizationEndListener(Context context, CircleMenu menu) : base(context)
+        internal UpdateMenuItemsVisibilityRunnable(Context context, CircleMenu menu) : base(context)
         {
             _menu = menu;
         }
@@ -17,7 +17,7 @@ namespace EOS.UI.Android.Components
 
         public void Run()
         {
-            _menu.HandleNormalizationEnd();
+            _menu.HandleUpdateMenuItemsVisibility();
         }
 
         #endregion
