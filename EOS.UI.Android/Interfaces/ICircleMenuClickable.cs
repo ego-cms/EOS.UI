@@ -1,6 +1,6 @@
 namespace EOS.UI.Android.Interfaces
 {
-    interface ICircleMenuClicable
+    interface ICircleMenuClickable
     {
         void PerformClick(int id, bool isSubMenu = false, bool isOpened = false);
         bool Locked { get; }

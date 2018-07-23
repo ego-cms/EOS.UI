@@ -33,7 +33,7 @@ namespace EOS.UI.Android.Components
 
         private ImageView _icon;
 
-        private ICircleMenuClicable _circleMenu;
+        private ICircleMenuClickable _circleMenu;
 
         private bool _isSubMenu;
         private bool _isOpened;
@@ -67,7 +67,7 @@ namespace EOS.UI.Android.Components
             set
             {
                 _mainColor = value;
-                if(!_isOpened)
+                if(!_hasChildren || (_hasChildren && !_isOpened))
                     (Background as GradientDrawable).SetColor(value);
             }
         }
@@ -79,7 +79,7 @@ namespace EOS.UI.Android.Components
             set
             {
                 _focusedMainColor = value;
-                if(_isOpened)
+                if(_hasChildren && _isOpened)
                     (Background as GradientDrawable).SetColor(value);
             }
         }
@@ -91,7 +91,7 @@ namespace EOS.UI.Android.Components
             set
             {
                 _focusedButtonColor = value;
-                if(_isOpened)
+                if(_hasChildren && _isOpened)
                     _icon?.Drawable?.SetColorFilter(value, PorterDuff.Mode.SrcIn);
             }
         }
@@ -103,7 +103,7 @@ namespace EOS.UI.Android.Components
             set
             {
                 _unfocusedButonColor = value;
-                if(!_isOpened)
+                if(!_hasChildren || (_hasChildren && !_isOpened))
                     _icon?.Drawable?.SetColorFilter(value, PorterDuff.Mode.SrcIn);
             }
         }
@@ -160,7 +160,7 @@ namespace EOS.UI.Android.Components
             _icon.StartAnimation(scaleInAnimation);
         }
 
-        public void SetICircleMenuClicable(ICircleMenuClicable circleMenu)
+        public void SetICircleMenuClicable(ICircleMenuClickable circleMenu)
         {
             _circleMenu = circleMenu;
         }
@@ -192,15 +192,14 @@ namespace EOS.UI.Android.Components
 
                 if(!_isSubMenu)
                 {
-                    _isOpened = !_isOpened;
                     if(_hasChildren)
                     {
+                        _isOpened = !_isOpened;
                         (Background as GradientDrawable).SetColor(_isOpened ? FocusedMainColor : MainColor);
                         _icon.Drawable.SetColorFilter(_isOpened ? FocusedButtonColor : UnfocusedButtonColor, PorterDuff.Mode.SrcIn);
                     }
                 }
             }
-
             return base.OnTouchEvent(e);
         }
 

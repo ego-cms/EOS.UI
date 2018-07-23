@@ -8,6 +8,8 @@ using Android.Views;
 using Android.Views.Animations;
 using Android.Widget;
 using Com.Airbnb.Lottie;
+using Com.Airbnb.Lottie.Model;
+using Com.Airbnb.Lottie.Value;
 using EOS.UI.Android.Interfaces;
 
 namespace EOS.UI.Android.Components
@@ -54,9 +56,17 @@ namespace EOS.UI.Android.Components
             set => (Background as GradientDrawable).SetColor(value);
         }
 
+        private Color _unfocusedButtonColor;
         public Color UnfocusedButtonColor
         {
-            set => _lottieView.Drawable?.SetColorFilter(value, PorterDuff.Mode.SrcIn);
+            get => _unfocusedButtonColor;
+            set
+            {
+                _unfocusedButtonColor = value;
+                _lottieView.AddValueCallback(new KeyPath("**"),
+                   LottieProperty.ColorFilter,
+                   new LottieValueCallback(new SimpleColorFilter(value)));
+            }
         }
 
         #endregion
@@ -112,6 +122,7 @@ namespace EOS.UI.Android.Components
             if(e.Action == MotionEventActions.Down && Enabled)
             {
                 _lottieView.SetAnimation(AnimationName);
+                SetCustomColorToLottieView();
                 _lottieView.PlayAnimation();
                 StartTouchAnimation();
             }
@@ -128,6 +139,13 @@ namespace EOS.UI.Android.Components
             var scaleInAnimation = new ScaleAnimation(StartScale, EndScale, StartScale, EndScale, Dimension.RelativeToSelf, PivotScale, Dimension.RelativeToSelf, PivotScale);
             scaleInAnimation.Duration = ScaleDimention;
             StartAnimation(scaleInAnimation);
+        }
+
+        private void SetCustomColorToLottieView()
+        {
+            _lottieView.AddValueCallback(new KeyPath("**"),
+                   LottieProperty.ColorFilter,
+                   new LottieValueCallback(new SimpleColorFilter(UnfocusedButtonColor)));
         }
 
         #endregion

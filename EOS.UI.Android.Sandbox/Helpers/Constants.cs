@@ -73,6 +73,11 @@ namespace EOS.UI.Android.Sandbox.Helpers
             public const string ButtonType = "Button type";
             public const string ShadowOffsetZ = "Shadow offset Z";
             public const string ShadowRadius = "Shadow radius";
+            public const string MainColor = "Main color";
+            public const string FocusedMainColor = "Focused main color";
+            public const string FocusedButtonColor = "Focused button color";
+            public const string UnfocusedButtonColor = "Unfocused button color";
+            public const string CircleMenuItems = "Circle menu items";
         };
 
         public static class Colors
@@ -348,6 +353,17 @@ namespace EOS.UI.Android.Sandbox.Helpers
                 foreach(var val in radiusValues)
                     RadiusCollection.Add(val.ToString(), (float)val);
             }
+        }
+
+        public static class CircleMenuSource
+        {
+            public static Dictionary<string, int> SourceCollection = new Dictionary<string, int>()
+            {
+                { string.Empty, 9 },
+                { "3", 3 },
+                { "4", 4 },
+                { "9", 9 }
+            };
         }
     }
 }

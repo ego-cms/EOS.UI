@@ -13,6 +13,8 @@ namespace UIFrameworks.Shared.Themes.Helpers
         public const string NeutralColor4 = "neutralColor4";
         public const string NeutralColor5 = "neutralColor5";
         public const string NeutralColor6 = "neutralColor6";
+        public const string NeutralColor1s = "neutralColor1s";
+        public const string NeutralColor6s = "neutralColor6s";
         public const string RippleColor = "rippleColor";
         public const string FabIconColor = "fabIconColor";
         public const string TextSize = "textSize";

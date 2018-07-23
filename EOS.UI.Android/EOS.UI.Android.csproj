@@ -92,6 +92,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Components\CircleMenu\Animators\MenuStateAnimator.cs" />
+    <Compile Include="Components\CircleMenu\Animators\MenuStateAnimatorFull.cs" />
+    <Compile Include="Components\CircleMenu\Animators\MenuStateAnimatorSimple.cs" />
     <Compile Include="Components\CircleMenu\CircleMenu.cs" />
     <Compile Include="Components\CircleMenu\CircleMenuItem.cs" />
     <Compile Include="Components\CircleMenu\Listeners\CircleMenuScrollListener.cs" />
@@ -109,8 +112,10 @@
     <Compile Include="Controls\SimpleLabel.cs" />
     <Compile Include="Controls\BadgeLabel.cs" />
     <Compile Include="Helpers\Constants.cs" />
-    <Compile Include="Interfaces\ICircleMenuClicable.cs" />
+    <Compile Include="Helpers\Enums.cs" />
+    <Compile Include="Interfaces\ICircleMenuClickable.cs" />
     <Compile Include="Interfaces\IIsOpened.cs" />
+    <Compile Include="Interfaces\IMenuStateAnimator.cs" />
     <Compile Include="Models\SectionModel.cs" />
     <Compile Include="Resources\Resource.designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
