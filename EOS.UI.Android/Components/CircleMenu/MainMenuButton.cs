@@ -49,6 +49,16 @@ namespace EOS.UI.Android.Components
             }
         }
 
+        public Color MainColor
+        {
+            set => (Background as GradientDrawable).SetColor(value);
+        }
+
+        public Color UnfocusedButtonColor
+        {
+            set => _lottieView.Drawable?.SetColorFilter(value, PorterDuff.Mode.SrcIn);
+        }
+
         #endregion
 
         #region .ctors
@@ -90,8 +100,8 @@ namespace EOS.UI.Android.Components
             var roundedDrawable = new GradientDrawable();
             roundedDrawable.SetColor(Color.White);
             roundedDrawable.SetShape(ShapeType.Oval);
-            view.SetBackgroundDrawable(roundedDrawable);
-            view.Elevation = ShadowRadiusValue;
+            SetBackgroundDrawable(roundedDrawable);
+            Elevation = ShadowRadiusValue;
 
             _lottieView = view.FindViewById<LottieAnimationView>(Resource.Id.lottieView);
             _lottieView.SetAnimation(AnimationName);

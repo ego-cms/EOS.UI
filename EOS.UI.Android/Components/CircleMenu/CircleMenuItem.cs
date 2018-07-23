@@ -8,7 +8,6 @@ using Android.Views;
 using Android.Views.Animations;
 using Android.Widget;
 using EOS.UI.Android.Interfaces;
-using EOS.UI.Shared.Themes.DataModels;
 
 namespace EOS.UI.Android.Components
 {
@@ -38,6 +37,7 @@ namespace EOS.UI.Android.Components
 
         private bool _isSubMenu;
         private bool _isOpened;
+        private bool _hasChildren;
 
         #endregion
 
@@ -60,13 +60,53 @@ namespace EOS.UI.Android.Components
             }
         }
 
-        public Color MainColor { get; set; }
+        private Color _mainColor;
+        public Color MainColor
+        {
+            get => _mainColor;
+            set
+            {
+                _mainColor = value;
+                if(!_isOpened)
+                    (Background as GradientDrawable).SetColor(value);
+            }
+        }
 
-        public Color FocusedMainColor { get; set; }
+        private Color _focusedMainColor;
+        public Color FocusedMainColor
+        {
+            get => _focusedMainColor;
+            set
+            {
+                _focusedMainColor = value;
+                if(_isOpened)
+                    (Background as GradientDrawable).SetColor(value);
+            }
+        }
 
-        public Color FocusedButtonMainColor { get; set; }
+        private Color _focusedButtonColor;
+        public Color FocusedButtonColor
+        {
+            get => _focusedButtonColor;
+            set
+            {
+                _focusedButtonColor = value;
+                if(_isOpened)
+                    _icon?.Drawable?.SetColorFilter(value, PorterDuff.Mode.SrcIn);
+            }
+        }
 
-        public Color UnfocusedButtonMainColor { get; set; }
+        private Color _unfocusedButonColor;
+        public Color UnfocusedButtonColor
+        {
+            get => _unfocusedButonColor;
+            set
+            {
+                _unfocusedButonColor = value;
+                if(!_isOpened)
+                    _icon?.Drawable?.SetColorFilter(value, PorterDuff.Mode.SrcIn);
+            }
+        }
 
         #endregion
 
@@ -109,8 +149,8 @@ namespace EOS.UI.Android.Components
             var roundedDrawable = new GradientDrawable();
             roundedDrawable.SetColor(Color.White);
             roundedDrawable.SetShape(ShapeType.Oval);
-            view.SetBackgroundDrawable(roundedDrawable);
-            view.Elevation = ShadowRadiusValue;
+            SetBackgroundDrawable(roundedDrawable);
+            Elevation = ShadowRadiusValue;
         }
 
         public void StartRotateAnimation()
@@ -125,11 +165,13 @@ namespace EOS.UI.Android.Components
             _circleMenu = circleMenu;
         }
 
-        public void SetDataFromModel(Drawable drawable, int id, bool isSubmenu = false)
+        public void SetDataFromModel(Drawable drawable, int id, bool hasChildren = false, bool isSubmenu = false)
         {
+            drawable.SetColorFilter(!_hasChildren || !(_hasChildren && _isOpened) ? UnfocusedButtonColor : FocusedButtonColor, PorterDuff.Mode.SrcIn);
             _icon.SetImageDrawable(drawable);
             CircleMenuModelId = id;
             _isSubMenu = isSubmenu;
+            _hasChildren = hasChildren;
         }
 
         public void ResetDataFromModel()
@@ -149,7 +191,14 @@ namespace EOS.UI.Android.Components
                 _circleMenu.PerformClick(CircleMenuModelId, _isSubMenu, _isOpened);
 
                 if(!_isSubMenu)
+                {
                     _isOpened = !_isOpened;
+                    if(_hasChildren)
+                    {
+                        (Background as GradientDrawable).SetColor(_isOpened ? FocusedMainColor : MainColor);
+                        _icon.Drawable.SetColorFilter(_isOpened ? FocusedButtonColor : UnfocusedButtonColor, PorterDuff.Mode.SrcIn);
+                    }
+                }
             }
 
             return base.OnTouchEvent(e);

@@ -1,33 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <vector xmlns:android="http://schemas.android.com/apk/res/android"
-    android:width="16dp"
-    android:height="10dp"
-    android:viewportWidth="16"
-    android:viewportHeight="10">
-
-    <group
-            android:translateX="-1287.000000"
-            android:translateY="-534.000000">
-        <path
-            android:fillColor="#F6F6F6"
-            android:fillType="evenOdd"
-            android:strokeWidth="1"
-            android:pathData="M 0 0 H 1440 V 1024 H 0 V 0 Z" />
-        <group
-                android:translateX="412.000000"
-                android:translateY="223.000000">
-            <group
-                    android:translateX="640.000000"
-                    android:translateY="52.000000">
-                <group
-                        android:translateX="218.000000"
-                        android:translateY="238.000000">
-                    <group
-                            android:translateX="14.000000"
-                            android:translateY="14.000000">
-                    </group>
-                </group>
-            </group>
-        </group>
-    </group>
+    android:width="24dp"
+    android:height="24dp"
+    android:viewportWidth="24"
+    android:viewportHeight="24">
+    <path
+        android:fillColor="#343334"
+        android:fillType="evenOdd"
+        android:strokeWidth="1"
+        android:pathData="M7.13705375,17 L7.13705375,10.6299376 L7.03364793,10.6299376 L5,11.982675 L5,10.4248094 L7.14279852,9 L8.87197374,9 L8.87197374,17 L7.13705375,17 Z M12.3762823,15.9133749 C11.7615921,15.9133749 11.3594584,15.5086625 11.3594584,14.9487179 C11.3594584,14.3887734 11.7615921,13.989605 12.3762823,13.989605 C12.9967173,13.989605 13.3931063,14.3887734 13.3931063,14.9487179 C13.3931063,15.5086625 12.9967173,15.9133749 12.3762823,15.9133749 Z M12.3762823,12.010395 C11.7615921,12.010395 11.3594584,11.6056826 11.3594584,11.045738 C11.3594584,10.4857935 11.7615921,10.0866251 12.3762823,10.0866251 C12.9967173,10.0866251 13.3931063,10.4857935 13.3931063,11.045738 C13.3931063,11.6056826 12.9967173,12.010395 12.3762823,12.010395 Z M17.26508,17 L17.26508,10.6299376 L17.1616742,10.6299376 L15.1280263,11.982675 L15.1280263,10.4248094 L17.2708248,9 L19,9 L19,17 L17.26508,17 Z" />
 </vector>

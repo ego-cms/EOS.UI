@@ -16,6 +16,7 @@ using EOS.UI.Shared.Themes.DataModels;
 using EOS.UI.Shared.Themes.Helpers;
 using EOS.UI.Shared.Themes.Interfaces;
 using UIFrameworks.Android.Themes;
+using UIFrameworks.Shared.Themes.Helpers;
 using UIFrameworks.Shared.Themes.Interfaces;
 
 namespace EOS.UI.Android.Components
@@ -142,6 +143,9 @@ namespace EOS.UI.Android.Components
             set
             {
                 _mainColor = value;
+                foreach(var menu in _menuItems)
+                    menu.MainColor = value;
+                _mainMenu.MainColor = value;
                 IsEOSCustomizationIgnored = true;
             }
         }
@@ -153,28 +157,37 @@ namespace EOS.UI.Android.Components
             set
             {
                 _focusedMainColor = value;
+                foreach(var menu in _menuItems)
+                    menu.FocusedMainColor = value;
+                foreach(var indicator in _indicators)
+                    (indicator.Background as GradientDrawable).SetColor(value);
                 IsEOSCustomizationIgnored = true;
             }
         }
 
-        private Color _focusedButtonMainColor;
-        public Color FocusedButtonMainColor
+        private Color _focusedButtonColor;
+        public Color FocusedButtonColor
         {
-            get => _focusedButtonMainColor;
+            get => _focusedButtonColor;
             set
             {
-                _focusedButtonMainColor = value;
+                _focusedButtonColor = value;
+                foreach(var menu in _menuItems)
+                    menu.FocusedButtonColor = value;
                 IsEOSCustomizationIgnored = true;
             }
         }
 
-        private Color _unfocusedButtonMainColor;
-        public Color UnfocusedButtonMainColor
+        private Color _unfocusedButtonColor;
+        public Color UnfocusedButtonColor
         {
-            get => _unfocusedButtonMainColor;
+            get => _unfocusedButtonColor;
             set
             {
-                _unfocusedButtonMainColor = value;
+                _unfocusedButtonColor = value;
+                foreach(var menu in _menuItems)
+                    menu.UnfocusedButtonColor = value;
+                _mainMenu.UnfocusedButtonColor = value;
                 IsEOSCustomizationIgnored = true;
             }
         }
@@ -189,46 +202,9 @@ namespace EOS.UI.Android.Components
                     throw new ArgumentOutOfRangeException("Items should be more then 4 and less then 9");
 
                 _circleMenuItems = value;
-
                 InitialDataModelSetup();
-
                 IsEOSCustomizationIgnored = true;
             }
-        }
-
-        #endregion
-
-        #region IEOSThemeControl implementation
-
-        public bool IsEOSCustomizationIgnored { get; private set; }
-
-        public IEOSThemeProvider GetThemeProvider()
-        {
-            return EOSThemeProvider.Instance;
-        }
-
-        public void UpdateAppearance()
-        {
-            if(!IsEOSCustomizationIgnored)
-            {
-                IsEOSCustomizationIgnored = false;
-            }
-        }
-
-        public void ResetCustomization()
-        {
-            IsEOSCustomizationIgnored = false;
-            UpdateAppearance();
-        }
-
-        public IEOSStyle GetCurrentEOSStyle()
-        {
-            return null;
-        }
-
-        public void SetEOSStyle(EOSStyleEnumeration style)
-        {
-
         }
 
         #endregion
@@ -317,6 +293,8 @@ namespace EOS.UI.Android.Components
                 _container.AddView(indicator);
 
             _deltaNormalizePositions = (MenuDiameter + MenuMargin1) * Context.Resources.DisplayMetrics.Density;
+
+            UpdateAppearance();
         }
 
         private void MainMenuClick(object sender, EventArgs e)
@@ -368,12 +346,12 @@ namespace EOS.UI.Android.Components
         {
             if(_forward)
             {
-                _menuItems[1].SetDataFromModel(model.ImageSource, model.Id);
+                _menuItems[1].SetDataFromModel(model.ImageSource, model.Id, model.HasChildren);
                 _menuItems[0].Animate().X(Width - _deltaNormalizePositions).Y(Height).SetDuration(1).WithEndAction(_normalizationEndListener);
             }
             else
             {
-                _menuItems[5].SetDataFromModel(model.ImageSource, model.Id);
+                _menuItems[5].SetDataFromModel(model.ImageSource, model.Id, model.HasChildren);
                 _menuItems[0].Animate().X(Width).Y(Height - _deltaNormalizePositions).SetDuration(1).WithEndAction(_normalizationEndListener);
             }
         }
@@ -507,7 +485,7 @@ namespace EOS.UI.Android.Components
             {
                 //on hiding animation should be visible icon on last item
                 var model = FindNextWithibleModel(true);
-                _menuItems[1].SetDataFromModel(model.ImageSource, model.Id);
+                _menuItems[1].SetDataFromModel(model.ImageSource, model.Id, model.HasChildren);
                 _indicators[1].Visibility = model.HasChildren ? ViewStates.Visible : ViewStates.Gone;
 
                 _indicators[1].Animate().X(_indicatorsPositions[4].X).Y(_indicatorsPositions[4].Y).SetDuration(ShowHideAnimateDuration);
@@ -602,7 +580,7 @@ namespace EOS.UI.Android.Components
             for(int i = !IsOpened ? 0 : 1; i < 4; i++)
             {
                 var model = _circleMenuItems[i];
-                _menuItems[i + 1].SetDataFromModel(model.ImageSource, model.Id);
+                _menuItems[i + 1].SetDataFromModel(model.ImageSource, model.Id, model.HasChildren);
                 _indicators[i + 1].Visibility = model.HasChildren ? ViewStates.Visible : ViewStates.Gone;
             }
         }
@@ -671,6 +649,11 @@ namespace EOS.UI.Android.Components
             subMenu.SetBackgroundDrawable(roundedDrawable);
 
             subMenu.Alpha = 0f;
+
+            subMenu.MainColor = MainColor;
+            subMenu.FocusedMainColor = FocusedMainColor;
+            subMenu.FocusedButtonColor = FocusedButtonColor;
+            subMenu.UnfocusedButtonColor = UnfocusedButtonColor;
 
             return subMenu;
         }
@@ -748,7 +731,7 @@ namespace EOS.UI.Android.Components
                 subMenu.Tag = $"{Child}{i}";
                 subMenu.SetICircleMenuClicable(this);
                 menuItemModel.Children[i].ImageSource.SetColorFilter(Color.Black, PorterDuff.Mode.SrcIn);
-                subMenu.SetDataFromModel(menuItemModel.Children[i].ImageSource, menuItemModel.Children[i].Id, true);
+                subMenu.SetDataFromModel(menuItemModel.Children[i].ImageSource, menuItemModel.Children[i].Id, false, true);
                 _container.AddView(subMenu, 0);
 
                 var alfaAnimation = CreateAlphaAnimation(subMenu, SubMenuAnimateDuration, SubMenuAnimateDuration * i);
@@ -890,6 +873,45 @@ namespace EOS.UI.Android.Components
 
         #endregion
 
+        #region IEOSThemeControl implementation
+
+        public bool IsEOSCustomizationIgnored { get; private set; }
+
+        public IEOSThemeProvider GetThemeProvider()
+        {
+            return EOSThemeProvider.Instance;
+        }
+
+        public void UpdateAppearance()
+        {
+            if(!IsEOSCustomizationIgnored)
+            {
+                MainColor = GetThemeProvider().GetEOSProperty<Color>(this, EOSConstants.NeutralColor6);
+                FocusedMainColor = GetThemeProvider().GetEOSProperty<Color>(this, EOSConstants.BrandPrimaryColor);
+                FocusedButtonColor = GetThemeProvider().GetEOSProperty<Color>(this, EOSConstants.NeutralColor6);
+                UnfocusedButtonColor = GetThemeProvider().GetEOSProperty<Color>(this, EOSConstants.NeutralColor1);
+                IsEOSCustomizationIgnored = false;
+            }
+        }
+
+        public void ResetCustomization()
+        {
+            IsEOSCustomizationIgnored = false;
+            UpdateAppearance();
+        }
+
+        public IEOSStyle GetCurrentEOSStyle()
+        {
+            return null;
+        }
+
+        public void SetEOSStyle(EOSStyleEnumeration style)
+        {
+
+        }
+
+        #endregion
+
         #region IOnTouchListener implementation
 
         public bool OnTouch(View v, MotionEvent e)
@@ -945,6 +967,7 @@ namespace EOS.UI.Android.Components
                     else
                     {
                         Clicked?.Invoke(this, id);
+                        Locked = false;
                     }
                 }
             }

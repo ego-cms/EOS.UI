@@ -32,10 +32,15 @@ namespace EOS.UI.Android.Sandbox.Activities
             submenus.Add(new CircleMenuItemModel(32, BaseContext.Resources.GetDrawable(Resource.Drawable.OneToOneIcon)));
             submenus.Add(new CircleMenuItemModel(33, BaseContext.Resources.GetDrawable(Resource.Drawable.HDRIcon)));
 
-            menus.Add(new CircleMenuItemModel(1, BaseContext.Resources.GetDrawable(Resource.Drawable.TurnoverIcon)));
+            menus.Add(new CircleMenuItemModel(1, BaseContext.Resources.GetDrawable(Resource.Drawable.SwitchIcon)));
             menus.Add(new CircleMenuItemModel(2, BaseContext.Resources.GetDrawable(Resource.Drawable.CameraIcon)));
-            menus.Add(new CircleMenuItemModel(3, BaseContext.Resources.GetDrawable(Resource.Drawable.PhotoIcon), submenus));
-            menus.Add(new CircleMenuItemModel(4, BaseContext.Resources.GetDrawable(Resource.Drawable.TimerIcon), submenus));
+            menus.Add(new CircleMenuItemModel(3, BaseContext.Resources.GetDrawable(Resource.Drawable.ShutterIcon), submenus));
+            menus.Add(new CircleMenuItemModel(4, BaseContext.Resources.GetDrawable(Resource.Drawable.TimerIcon)));
+            menus.Add(new CircleMenuItemModel(5, BaseContext.Resources.GetDrawable(Resource.Drawable.BushIcon)));
+            menus.Add(new CircleMenuItemModel(6, BaseContext.Resources.GetDrawable(Resource.Drawable.DurationIcon)));
+            menus.Add(new CircleMenuItemModel(7, BaseContext.Resources.GetDrawable(Resource.Drawable.EffectsIcon)));
+            menus.Add(new CircleMenuItemModel(8, BaseContext.Resources.GetDrawable(Resource.Drawable.HealIcon)));
+            menus.Add(new CircleMenuItemModel(9, BaseContext.Resources.GetDrawable(Resource.Drawable.MasksIcon)));
 
             return menus;
         }

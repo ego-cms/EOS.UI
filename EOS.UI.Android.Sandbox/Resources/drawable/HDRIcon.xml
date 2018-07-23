@@ -1,33 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <vector xmlns:android="http://schemas.android.com/apk/res/android"
-    android:width="27dp"
-    android:height="10dp"
-    android:viewportWidth="27"
-    android:viewportHeight="10">
-
-    <group
-            android:translateX="-1282.000000"
-            android:translateY="-471.000000">
-        <path
-            android:fillColor="#F6F6F6"
-            android:fillType="evenOdd"
-            android:strokeWidth="1"
-            android:pathData="M 0 0 H 1440 V 1024 H 0 V 0 Z" />
-        <group
-                android:translateX="412.000000"
-                android:translateY="223.000000">
-            <group
-                    android:translateX="640.000000"
-                    android:translateY="52.000000">
-                <group
-                        android:translateX="218.000000"
-                        android:translateY="175.000000">
-                    <group
-                            android:translateX="14.000000"
-                            android:translateY="14.000000">
-                    </group>
-                </group>
-            </group>
-        </group>
-    </group>
+    android:width="24dp"
+    android:height="24dp"
+    android:viewportWidth="24"
+    android:viewportHeight="24">
+    <path
+        android:fillColor="#343334"
+        android:fillType="evenOdd"
+        android:strokeWidth="1"
+        android:pathData="M7.38271935,17 L5.60474388,17 L5.60474388,13.2390852 L1.77797547,13.2390852 L1.77797547,17 L0,17 L0,8 L1.77797547,8 L1.77797547,11.6299376 L5.60474388,11.6299376 L5.60474388,8 L7.38271935,8 L7.38271935,17 Z M8.80023288,8 L12.1442397,8 C14.6699069,8 16.1299662,9.61538462 16.1299662,12.4345114 C16.1299662,15.3596674 14.6875689,17 12.1442397,17 L8.80023288,17 L8.80023288,8 Z M10.5782084,9.60914761 L10.5782084,15.3908524 L11.8616476,15.3908524 C13.4335663,15.3908524 14.3166667,14.3679834 14.3166667,12.4656965 C14.3166667,10.6444906 13.4041296,9.60914761 11.8616476,9.60914761 L10.5782084,9.60914761 Z M18.9486657,9.52182952 L18.9486657,12.2910603 L20.5088097,12.2910603 C21.4036848,12.2910603 21.9276577,11.7796258 21.9276577,10.9126819 C21.9276577,10.0582121 21.3742481,9.52182952 20.4911477,9.52182952 L18.9486657,9.52182952 Z M18.9486657,13.7380457 L18.9486657,17 L17.1706902,17 L17.1706902,8 L20.7384159,8 C22.6047014,8 23.7527319,9.0977131 23.7527319,10.8877339 C23.7527319,12.035343 23.1875476,13.033264 22.2102499,13.4449064 L24,17 L21.9865311,17 L20.4028377,13.7380457 L18.9486657,13.7380457 Z" />
 </vector>
