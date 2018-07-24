@@ -128,17 +128,6 @@ namespace EOS.UI.Android.Sandbox.Activities
             }
         }
 
-        private void ShadowOffsetZItemSelected(int position)
-        {
-            if(position > 0)
-            {
-                var config = _simpleButton.ShadowConfig;
-                var point = Shadow.OffsetCollection.ElementAt(position).Value;
-                config.Offset = new Point(point, point);
-                _simpleButton.ShadowConfig = config;
-            }
-        }
-
         private void ButtonTypeItemSelected(int position)
         {
             switch(position)

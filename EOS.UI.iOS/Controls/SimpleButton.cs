@@ -400,7 +400,8 @@ namespace EOS.UI.iOS.Controls
                 Layer.ShadowColor = config.Color.CGColor;
                 Layer.ShadowOffset = new CGSize(config.Offset);
                 Layer.ShadowRadius = config.Blur / 2;
-                Layer.ShadowOpacity = (float)config.Color.CGColor.Alpha;
+                //Layer.ShadowOpacity = (float)config.Color.CGColor.Alpha;
+                Layer.ShadowOpacity = 1.0f;
             }
             else
             {
