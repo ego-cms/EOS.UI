@@ -24,8 +24,6 @@ namespace EOS.UI.Android.Components
         {
             if(iteration == 1)
             {
-                _afterHideAction?.Invoke();
-
                 _commutatorIndicators[2].Animate().X(_commutatorIndicatorsPositions[3].X).Y(_commutatorIndicatorsPositions[3].Y).SetDuration(ShowHideAnimateDuration);
                 _commutatorIndicators[3].Animate().X(_commutatorIndicatorsPositions[2].X).Y(_commutatorIndicatorsPositions[2].Y).SetDuration(ShowHideAnimateDuration);
                 _commutatorIndicators[4].Animate().X(_commutatorIndicatorsPositions[1].X).Y(_commutatorIndicatorsPositions[1].Y).SetDuration(ShowHideAnimateDuration);

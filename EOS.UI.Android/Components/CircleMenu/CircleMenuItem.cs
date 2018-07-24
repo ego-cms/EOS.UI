@@ -168,9 +168,8 @@ namespace EOS.UI.Android.Components
 
         public void SetDataFromModel(CircleMenuItemModel model, bool isSubmenu = false)
         {
-            var drawable = model.ImageSource;
-            drawable.SetColorFilter(!_hasChildren || !(_hasChildren && _isOpened) ? UnfocusedButtonColor : FocusedButtonColor, PorterDuff.Mode.SrcIn);
-            _icon.SetImageDrawable(drawable);
+            _icon.SetImageDrawable(model.ImageSource);
+            UpdateIconColor();
             CircleMenuModelId = model.Id;
             _isSubMenu = isSubmenu;
             _hasChildren = model.HasChildren;
@@ -180,6 +179,15 @@ namespace EOS.UI.Android.Components
         {
             _icon.SetImageDrawable(new ColorDrawable(Color.Transparent));
             CircleMenuModelId = -1;
+        }
+
+        private void UpdateIconColor()
+        {
+            _icon.Drawable.ClearColorFilter();
+            if(_hasChildren)
+                _icon.Drawable.SetColorFilter(_isOpened ? FocusedButtonColor : UnfocusedButtonColor, PorterDuff.Mode.SrcIn);
+            else
+                _icon.Drawable.SetColorFilter(UnfocusedButtonColor, PorterDuff.Mode.SrcIn);
         }
 
         #endregion
@@ -198,7 +206,7 @@ namespace EOS.UI.Android.Components
                     {
                         _isOpened = !_isOpened;
                         (Background as GradientDrawable).SetColor(_isOpened ? FocusedMainColor : MainColor);
-                        _icon.Drawable.SetColorFilter(_isOpened ? FocusedButtonColor : UnfocusedButtonColor, PorterDuff.Mode.SrcIn);
+                        UpdateIconColor();
                     }
                 }
             }
