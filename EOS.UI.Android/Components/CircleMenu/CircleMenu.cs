@@ -362,12 +362,12 @@ namespace EOS.UI.Android.Components
         {
             if(_forward)
             {
-                _menuItems[1].SetDataFromModel(model.ImageSource, model.Id, model.HasChildren);
+                _menuItems[1].SetDataFromModel(model);
                 _menuItems[0].Animate().X(Width - _deltaNormalizePositions).Y(Height).SetDuration(1).WithEndAction(_normalizationEndListener);
             }
             else
             {
-                _menuItems[5].SetDataFromModel(model.ImageSource, model.Id, model.HasChildren);
+                _menuItems[5].SetDataFromModel(model);
                 _menuItems[0].Animate().X(Width).Y(Height - _deltaNormalizePositions).SetDuration(1).WithEndAction(_normalizationEndListener);
             }
         }
@@ -434,7 +434,7 @@ namespace EOS.UI.Android.Components
             {
                 //on hiding animation should be visible icon on last item
                 var model = FindNextVisibleModel(true);
-                _menuItems[1].SetDataFromModel(model.ImageSource, model.Id, model.HasChildren);
+                _menuItems[1].SetDataFromModel(model);
                 _indicators[1].Visibility = model.HasChildren ? ViewStates.Visible : ViewStates.Gone;
             });
 
@@ -482,6 +482,7 @@ namespace EOS.UI.Android.Components
         private void StartHintAnimation(Action action)
         {
             ShowHintAnimation = false;
+            Locked = true;
 
             var lastView = CreateHintView();
             var middleView = CreateHintView();
@@ -522,7 +523,7 @@ namespace EOS.UI.Android.Components
                 for(int i = !IsOpened ? 0 : 1; i < 4; i++)
                 {
                     var model = _circleMenuItems[i];
-                    _menuItems[i + 1].SetDataFromModel(model.ImageSource, model.Id, model.HasChildren);
+                    _menuItems[i + 1].SetDataFromModel(model);
                     _indicators[i + 1].Visibility = model.HasChildren ? ViewStates.Visible : ViewStates.Gone;
                 }
             }
@@ -531,7 +532,7 @@ namespace EOS.UI.Android.Components
                 for(int i = 0; i < 3; i++)
                 {
                     var model = _circleMenuItems[i];
-                    _menuItems[i + 2].SetDataFromModel(model.ImageSource, model.Id, model.HasChildren);
+                    _menuItems[i + 2].SetDataFromModel(model);
                     _indicators[i + 2].Visibility = model.HasChildren ? ViewStates.Visible : ViewStates.Gone;
                 }
             }
@@ -682,8 +683,7 @@ namespace EOS.UI.Android.Components
                 var subMenu = CreateSubMenu(bottom + SubMenuMargin + ((int)MenuDiameter + SubMenuMargin) * i, right);
                 subMenu.Tag = $"{Child}{i}";
                 subMenu.SetICircleMenuClicable(this);
-                menuItemModel.Children[i].ImageSource.SetColorFilter(Color.Black, PorterDuff.Mode.SrcIn);
-                subMenu.SetDataFromModel(menuItemModel.Children[i].ImageSource, menuItemModel.Children[i].Id, false, true);
+                subMenu.SetDataFromModel(menuItemModel.Children[i], true);
                 _container.AddView(subMenu, 0);
 
                 var alfaAnimation = CreateAlphaAnimation(subMenu, SubMenuAnimateDuration, SubMenuAnimateDuration * i);
@@ -791,6 +791,7 @@ namespace EOS.UI.Android.Components
             {
                 _showMenuItemsIteration = 0;
                 IsOpened = !IsOpened;
+                Locked = false;
             });
 
             if(ShowHintAnimation)
@@ -819,6 +820,7 @@ namespace EOS.UI.Android.Components
                     _showMenuItemsIteration = 0;
                     IsOpened = !IsOpened;
                     _container.SetBackgroundColor(IsOpened ? Color.Argb(50, 0, 0, 0) : Color.Transparent);
+                    Locked = false;
                 }
             }
         }
@@ -870,7 +872,7 @@ namespace EOS.UI.Android.Components
         {
             if(!IsBusy)
             {
-                if(_canSwipe && _scrollListener.IsScrolled(ref _forward, e))
+                if(!Locked && _canSwipe && _scrollListener.IsScrolled(ref _forward, e))
                 {
                     IsScrolling = true;
                     PreScrollingSetup();
@@ -883,7 +885,7 @@ namespace EOS.UI.Android.Components
 
         #region ICircleMenuClicable implementation
 
-        public bool Locked { get; private set; }
+        public bool Locked { get; private set; } = true;
 
         public void PerformClick(int id, bool isSubMenu, bool isOpened)
         {

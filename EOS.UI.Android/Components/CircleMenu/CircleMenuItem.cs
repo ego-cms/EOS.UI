@@ -8,6 +8,7 @@ using Android.Views;
 using Android.Views.Animations;
 using Android.Widget;
 using EOS.UI.Android.Interfaces;
+using EOS.UI.Shared.Themes.DataModels;
 
 namespace EOS.UI.Android.Components
 {
@@ -165,13 +166,14 @@ namespace EOS.UI.Android.Components
             _circleMenu = circleMenu;
         }
 
-        public void SetDataFromModel(Drawable drawable, int id, bool hasChildren = false, bool isSubmenu = false)
+        public void SetDataFromModel(CircleMenuItemModel model, bool isSubmenu = false)
         {
+            var drawable = model.ImageSource;
             drawable.SetColorFilter(!_hasChildren || !(_hasChildren && _isOpened) ? UnfocusedButtonColor : FocusedButtonColor, PorterDuff.Mode.SrcIn);
             _icon.SetImageDrawable(drawable);
-            CircleMenuModelId = id;
+            CircleMenuModelId = model.Id;
             _isSubMenu = isSubmenu;
-            _hasChildren = hasChildren;
+            _hasChildren = model.HasChildren;
         }
 
         public void ResetDataFromModel()
