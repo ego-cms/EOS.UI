@@ -1,17 +1,14 @@
-﻿using CoreGraphics;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using CoreGraphics;
 using EOS.UI.iOS.Controls;
 using EOS.UI.iOS.Extensions;
-using EOS.UI.iOS.Sandbox.Helpers;
 using EOS.UI.iOS.Sandbox.Storyboards;
-using EOS.UI.Shared.Themes.Helpers;
-using System;
-using System.Linq;
-using System.Collections.Generic;
-using EOS.UI.Shared.Themes.Helpers;
-using UIKit;
-using EOS.UI.iOS.Sandbox.Controls.Pickers;
-using static EOS.UI.iOS.Sandbox.Helpers.Constants;
 using EOS.UI.Shared.Themes.Themes;
+using UIKit;
+using static EOS.UI.iOS.Sandbox.Helpers.Constants;
+using static EOS.UI.Shared.Sandbox.Helpers.Constants;
 
 namespace EOS.UI.iOS.Sandbox
 {
@@ -70,7 +67,7 @@ namespace EOS.UI.iOS.Sandbox
         private void InitThemePicker(CGRect frame)
         {
             themesDropDown.InitSource(
-                Constants.Themes,
+                ThemeCollection,
                 (theme) =>
                 {
                     _simpleLabel.GetThemeProvider().SetCurrentTheme(theme);
@@ -95,7 +92,7 @@ namespace EOS.UI.iOS.Sandbox
         private void InitFontPicker(CGRect frame)
         {
             fontDropDown.InitSource(
-                Fonts,
+                Fonts.FontsCollection,
                 font => _simpleLabel.Font = font,
                 Fields.Font,
                 frame);

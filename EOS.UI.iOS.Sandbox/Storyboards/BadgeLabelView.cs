@@ -7,8 +7,8 @@ using EOS.UI.iOS.Extensions;
 using EOS.UI.iOS.Sandbox.Helpers;
 using EOS.UI.iOS.Sandbox.Storyboards;
 using EOS.UI.Shared.Themes.Themes;
-using EOS.UI.Shared.Themes.Helpers;
 using UIKit;
+using static EOS.UI.Shared.Sandbox.Helpers.Constants;
 using static EOS.UI.iOS.Sandbox.Helpers.Constants;
 
 namespace EOS.UI.iOS.Sandbox
@@ -53,7 +53,7 @@ namespace EOS.UI.iOS.Sandbox
             var rect = new CGRect(0, 0, 100, 150);
 
             themeDropDown.InitSource(
-                Constants.Themes,
+                Constants.ThemeCollection,
                 (theme) => 
                 {
                     label.GetThemeProvider().SetCurrentTheme(theme);
@@ -76,7 +76,7 @@ namespace EOS.UI.iOS.Sandbox
                 rect);
 
             fontDropDown.InitSource(
-                Fonts,
+                Fonts.FontsCollection,
                 font => label.Font = font,
                 Fields.Font,
                 rect);

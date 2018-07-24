@@ -4,11 +4,11 @@ using System.Linq;
 using CoreGraphics;
 using EOS.UI.iOS.Controls;
 using EOS.UI.iOS.Extensions;
-using EOS.UI.iOS.Sandbox.Helpers;
 using EOS.UI.iOS.Sandbox.Storyboards;
 using EOS.UI.Shared.Themes.Themes;
 using UIKit;
 using static EOS.UI.iOS.Sandbox.Helpers.Constants;
+using static EOS.UI.Shared.Sandbox.Helpers.Constants;
 
 namespace EOS.UI.iOS.Sandbox
 {
@@ -130,7 +130,7 @@ namespace EOS.UI.iOS.Sandbox
         private void InitThemeTextField(CGRect rect)
         {
             themeDropDown.InitSource(
-                Constants.Themes,
+                ThemeCollection,
                 (theme) =>
                 {
                     _inputTop.GetThemeProvider().SetCurrentTheme(theme);
@@ -150,7 +150,7 @@ namespace EOS.UI.iOS.Sandbox
         private void InitFontTextField(CGRect rect)
         {
             fontDropDown.InitSource(
-                Fonts,
+                Fonts.FontsCollection,
                 font =>
                 {
                     _inputTop.Font = font;

@@ -8,9 +8,10 @@ using Android.Widget;
 using EOS.UI.Droid.Controls;
 using EOS.UI.Droid.Sandbox.Controls;
 using EOS.UI.Droid.Sandbox.Helpers;
+using EOS.UI.Shared.Sandbox.Helpers;
 using EOS.UI.Shared.Themes.Themes;
-using EOS.UI.Shared.Themes.Helpers;
 using static EOS.UI.Droid.Sandbox.Helpers.Constants;
+using static EOS.UI.Shared.Sandbox.Helpers.Constants;
 
 namespace EOS.UI.Droid.Sandbox.Activities
 {

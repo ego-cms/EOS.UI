@@ -8,7 +8,7 @@ using EOS.UI.iOS.Sandbox.Storyboards;
 using EOS.UI.Shared.Themes.Themes;
 using UIKit;
 using static EOS.UI.iOS.Sandbox.Helpers.Constants;
-using Constants = EOS.UI.iOS.Sandbox.Helpers.Constants;
+using static EOS.UI.Shared.Sandbox.Helpers.Constants;
 
 namespace EOS.UI.iOS.Sandbox
 {
@@ -64,7 +64,7 @@ namespace EOS.UI.iOS.Sandbox
             var rect = new CGRect(0, 0, 100, 150);
 
             themeDropDown.InitSource(
-                Constants.Themes,
+                ThemeCollection,
                 (theme) =>
                 {
                     _fab.GetThemeProvider().SetCurrentTheme(theme);

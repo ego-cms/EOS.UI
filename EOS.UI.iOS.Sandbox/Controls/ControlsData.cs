@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using EOS.UI.iOS.Sandbox.Storyboards;
-using SharedControls = EOS.UI.Shared.Themes.Helpers.ControlNames;
+using EOS.UI.Shared.Sandbox.Helpers;
 
 namespace EOS.UI.iOS.Sandbox.Controls
 {
@@ -19,16 +19,16 @@ namespace EOS.UI.iOS.Sandbox.Controls
         {
             Names = new Dictionary<string, string>()
             {
-                {SharedControls.BadgeLabel, BadgeLabelView.Identifier},
-                {SharedControls.SimpleLabel, SimpleLabelView.Identifier},
-                {SharedControls.GhostButton, GhostButtonView.Identifier},
-                {SharedControls.SimpleButton, SimpleButtonView.Identifier},
-                {SharedControls.FabProgress, FabProgressView.Identifier},
-                {SharedControls.Input, InputControlView.Identifier},
-                {SharedControls.CircleProgress, CircleProgressView.Identifier},
-                {SharedControls.Section, SectionComponentView.Identifier },
-                {SharedControls.CTAButton, CTAButtonView.Identifier},
-                {SharedControls.WorkTimeCalendar, WorkTimeView.Identifier}
+                {ControlNames.BadgeLabel, BadgeLabelView.Identifier},
+                {ControlNames.SimpleLabel, SimpleLabelView.Identifier},
+                {ControlNames.GhostButton, GhostButtonView.Identifier},
+                {ControlNames.SimpleButton, SimpleButtonView.Identifier},
+                {ControlNames.FabProgress, FabProgressView.Identifier},
+                {ControlNames.Input, InputControlView.Identifier},
+                {ControlNames.CircleProgress, CircleProgressView.Identifier},
+                {ControlNames.Section, SectionComponentView.Identifier },
+                {ControlNames.CTAButton, CTAButtonView.Identifier},
+                {ControlNames.WorkTimeCalendar, WorkTimeView.Identifier}
             };
         }
     }

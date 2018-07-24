@@ -11,10 +11,12 @@ using EOS.UI.Droid.Models;
 using EOS.UI.Droid.Sandbox.Controls;
 using EOS.UI.Droid.Sandbox.RecyclerImplementation;
 using EOS.UI.Droid.Themes;
+using EOS.UI.Shared.Sandbox.Helpers;
 using EOS.UI.Shared.Themes.Helpers;
 using EOS.UI.Shared.Themes.Interfaces;
 using EOS.UI.Shared.Themes.Themes;
 using static EOS.UI.Droid.Sandbox.Helpers.Constants;
+using static EOS.UI.Shared.Sandbox.Helpers.Constants;
 
 namespace EOS.UI.Droid.Sandbox.Activities
 {

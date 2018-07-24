@@ -1,11 +1,9 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using EOS.UI.iOS.Sandbox.Helpers;
-using EOS.UI.Shared.Themes.Helpers;
 using Foundation;
 using UIKit;
-using System.Collections;
+using static EOS.UI.Shared.Sandbox.Helpers.Constants;
 
 namespace EOS.UI.iOS.Sandbox.Controls.Pickers
 {
@@ -19,7 +17,7 @@ namespace EOS.UI.iOS.Sandbox.Controls.Pickers
 
         public override nint GetRowsInComponent(UIPickerView pickerView, nint component)
         {
-            return Constants.Colors.Count;
+            return Colors.ColorsCollection.Count;
         }
     }
 
@@ -29,7 +27,7 @@ namespace EOS.UI.iOS.Sandbox.Controls.Pickers
 
         public override NSAttributedString GetAttributedTitle(UIPickerView pickerView, nint row, nint component)
         {
-            var pair = Constants.Colors.ElementAt((int)row);
+            var pair = Colors.ColorsCollection.ElementAt((int)row);
             var attributedString = new NSMutableAttributedString(pair.Key);
             attributedString.AddAttribute(UIStringAttributeKey.ForegroundColor, pair.Value, new NSRange(0, attributedString.Length));
             attributedString.AddAttribute(UIStringAttributeKey.Shadow, new NSShadow() { ShadowOffset = new CoreGraphics.CGSize(2, 2), ShadowBlurRadius = 3 }, new NSRange(0, attributedString.Length));
@@ -38,7 +36,7 @@ namespace EOS.UI.iOS.Sandbox.Controls.Pickers
 
         public override void Selected(UIPickerView pickerView, nint row, nint component)
         {
-            DidSelected?.Invoke(this, Constants.Colors.ElementAt((int)row));
+            DidSelected?.Invoke(this, Colors.ColorsCollection.ElementAt((int)row));
         }
     }
 

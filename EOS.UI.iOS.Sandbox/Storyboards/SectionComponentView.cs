@@ -3,15 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using CoreGraphics;
 using EOS.UI.iOS.Models;
-using EOS.UI.iOS.Sandbox.Controls.Pickers;
 using EOS.UI.iOS.Sandbox.Helpers;
 using EOS.UI.iOS.Sandbox.TableSources;
 using EOS.UI.iOS.Themes;
 using EOS.UI.Shared.Themes.Helpers;
 using EOS.UI.Shared.Themes.Themes;
-using EOS.UI.Shared.Themes.Helpers;
 using UIKit;
 using static EOS.UI.iOS.Sandbox.Helpers.Constants;
+using static EOS.UI.Shared.Sandbox.Helpers.Constants;
 
 namespace EOS.UI.iOS.Sandbox.Storyboards
 {
@@ -296,7 +295,7 @@ namespace EOS.UI.iOS.Sandbox.Storyboards
         private void InitButtonTextFontDropDown(CGRect rect)
         {
             buttonTextFontDropDown.InitSource(
-                Fonts,
+                Fonts.FontsCollection,
                 font =>
                 {
                     _source.SectionModel.ButtonNameFont = font;
@@ -308,7 +307,7 @@ namespace EOS.UI.iOS.Sandbox.Storyboards
         private void InitSectionNameFontDropDown(CGRect rect)
         {
             sectionNameFontDropDown.InitSource(
-                Fonts,
+                Fonts.FontsCollection,
                 font =>
                 {
                     _source.SectionModel.SectionNameFont = font;
@@ -344,7 +343,7 @@ namespace EOS.UI.iOS.Sandbox.Storyboards
         private void InitThemeDropDown(CGRect rect)
         {
             themeDropDown.InitSource(
-                Constants.Themes,
+                Constants.ThemeCollection,
                 (theme) =>
                 {
                     EOSThemeProvider.Instance.SetCurrentTheme(theme);

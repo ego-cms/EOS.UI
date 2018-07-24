@@ -7,6 +7,7 @@ using EOS.UI.iOS.Sandbox.Storyboards;
 using EOS.UI.Shared.Themes.Themes;
 using UIKit;
 using static EOS.UI.iOS.Sandbox.Helpers.Constants;
+using static EOS.UI.Shared.Sandbox.Helpers.Constants;
 
 namespace EOS.UI.iOS.Sandbox
 {
@@ -69,7 +70,7 @@ namespace EOS.UI.iOS.Sandbox
             var rect = new CGRect(0, 0, 100, 100);
 
             themeDropDown.InitSource(
-                Constants.Themes,
+                Constants.ThemeCollection,
                 (theme) =>
                 {
                     _circleProgress.GetThemeProvider().SetCurrentTheme(theme);
@@ -82,7 +83,7 @@ namespace EOS.UI.iOS.Sandbox
             themeDropDown.SetTextFieldText(_circleProgress.GetThemeProvider().GetCurrentTheme() is LightEOSTheme ? "Light" : "Dark");
 
             fontDropDown.InitSource(
-                Fonts,
+                Fonts.FontsCollection,
                 font => _circleProgress.Font = font,
                 Fields.Font,
                 rect);

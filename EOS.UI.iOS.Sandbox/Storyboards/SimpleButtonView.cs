@@ -5,13 +5,13 @@ using CoreGraphics;
 using EOS.UI.iOS.Controls;
 using EOS.UI.iOS.Extensions;
 using EOS.UI.iOS.Sandbox.Enums;
-using EOS.UI.iOS.Sandbox.Helpers;
 using EOS.UI.iOS.Sandbox.Storyboards;
 using EOS.UI.Shared.Helpers;
+using EOS.UI.Shared.Sandbox.Helpers;
 using EOS.UI.Shared.Themes.Themes;
-using EOS.UI.Shared.Themes.Helpers;
 using UIKit;
 using static EOS.UI.iOS.Sandbox.Helpers.Constants;
+using static EOS.UI.Shared.Sandbox.Helpers.Constants;
 
 namespace EOS.UI.iOS.Sandbox
 {
@@ -94,7 +94,7 @@ namespace EOS.UI.iOS.Sandbox
         private void InitThemeDropDown(CGRect rect)
         {
             themeDropDown.InitSource(
-                Constants.Themes,
+                ThemeCollection,
                 (theme) =>
                 {
                     _simpleButton.GetThemeProvider().SetCurrentTheme(theme);
@@ -110,7 +110,7 @@ namespace EOS.UI.iOS.Sandbox
         private void InitFontDropDown(CGRect rect)
         {
             fontDropDown.InitSource(
-                Fonts,
+                Fonts.FontsCollection,
                 font => _simpleButton.Font = font,
                 Fields.Font,
                 rect);

@@ -4,14 +4,13 @@ using System.ComponentModel;
 using System.Linq;
 using CoreGraphics;
 using EOS.UI.iOS.Sandbox.Controls.Pickers;
-using EOS.UI.iOS.Sandbox.Helpers;
 using EOS.UI.iOS.Themes;
+using EOS.UI.Shared.Sandbox.Helpers;
 using EOS.UI.Shared.Themes.Helpers;
 using EOS.UI.Shared.Themes.Interfaces;
 using Foundation;
-using EOS.UI.Shared.Themes.Helpers;
-using EOS.UI.Shared.Themes.Interfaces;
 using UIKit;
+using static EOS.UI.Shared.Sandbox.Helpers.Constants;
 
 namespace EOS.UI.iOS.Sandbox
 {
@@ -81,11 +80,11 @@ namespace EOS.UI.iOS.Sandbox
             pickerDelegate.DidSelected += (object sender, KeyValuePair<string, UIColor> e) =>
             {
                 action?.Invoke(e.Value);
-                textField.Text = e.Key.ToString();
+                textField.Text = e.Key;
             };
             textField.EditingDidBegin += (sender, e) =>
             {
-                var item = Constants.Colors.ElementAt((int)picker.SelectedRowInComponent(0));
+                var item = Colors.ColorsCollection.ElementAt((int)picker.SelectedRowInComponent(0));
                 action?.Invoke(item.Value);
                 textField.Text = item.Key.ToString();
             };

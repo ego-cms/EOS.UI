@@ -1,17 +1,15 @@
-using CoreGraphics;
-using EOS.UI.iOS.CollectionViewSources;
-using EOS.UI.iOS.Models;
-using EOS.UI.iOS.Sandbox.Helpers;
-using EOS.UI.iOS.Sandbox.Storyboards;
-using EOS.UI.Shared.Themes.DataModels;
-using EOS.UI.Shared.Themes.Enums;
-using EOS.UI.Shared.Themes.Themes;
-using Foundation;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using CoreGraphics;
+using EOS.UI.iOS.CollectionViewSources;
+using EOS.UI.iOS.Sandbox.Helpers;
+using EOS.UI.iOS.Sandbox.Storyboards;
+using EOS.UI.Shared.Themes.DataModels;
+using EOS.UI.Shared.Themes.Themes;
 using UIKit;
 using static EOS.UI.iOS.Sandbox.Helpers.Constants;
+using static EOS.UI.Shared.Sandbox.Helpers.Constants;
 
 namespace EOS.UI.iOS.Sandbox
 {
@@ -58,7 +56,7 @@ namespace EOS.UI.iOS.Sandbox
             var rect = new CGRect(0, 0, 100, 100);
 
             themesDropDown.InitSource(
-                Constants.Themes,
+                ThemeCollection,
                 (theme) =>
                 {
                     source.CalendarModel.GetThemeProvider().SetCurrentTheme(theme);
@@ -71,13 +69,13 @@ namespace EOS.UI.iOS.Sandbox
             themesDropDown.SetTextFieldText(source.CalendarModel.GetThemeProvider().GetCurrentTheme() is LightEOSTheme ? "Light" : "Dark");
 
             titleFontDropDown.InitSource(
-                Fonts,
+                Fonts.FontsCollection,
                 font => source.CalendarModel.TitleFont = font,
                 Fields.TitleFont,
                 rect);
 
             dayFontDropDown.InitSource(
-                Fonts,
+                Fonts.FontsCollection,
                 font => source.CalendarModel.DayTextFont = font,
                 Fields.DayTextFont,
                 rect);

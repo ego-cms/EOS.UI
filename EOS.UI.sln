@@ -12,6 +12,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EOS.UI.Droid.Sandbox", "EOS
 EndProject
 Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "EOS.UI.Shared.Themes", "EOS.UI.Shared.Themes\EOS.UI.Shared.Themes.shproj", "{3722AE67-FC49-4983-974D-D4BDED69FCE4}"
 EndProject
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "EOS.UI.Shared.Sandbox", "EOS.UI.Shared.Sandbox\EOS.UI.Shared.Sandbox.shproj", "{A40235BD-9F17-4586-B2C1-51A98AC464EC}"
+EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
 		EOS.UI.Shared.Themes\EOS.UI.Shared.Themes.projitems*{3722ae67-fc49-4983-974d-d4bded69fce4}*SharedItemsImports = 13

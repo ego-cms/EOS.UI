@@ -6,11 +6,12 @@ using Android.Graphics;
 using Android.OS;
 using EOS.UI.Droid.Components;
 using EOS.UI.Droid.Sandbox.Controls;
+using EOS.UI.Shared.Sandbox.Helpers;
 using EOS.UI.Shared.Themes.DataModels;
-using EOS.UI.Shared.Themes.Themes;
-using EOS.UI.Shared.Themes.Helpers;
 using EOS.UI.Shared.Themes.Interfaces;
+using EOS.UI.Shared.Themes.Themes;
 using static EOS.UI.Droid.Sandbox.Helpers.Constants;
+using static EOS.UI.Shared.Sandbox.Helpers.Constants;
 
 namespace EOS.UI.Droid.Sandbox.Activities
 {
@@ -110,15 +111,15 @@ namespace EOS.UI.Droid.Sandbox.Activities
             _dayEvenBackgroundColorDropDown.SetupAdapter(Colors.ColorsCollection.Select(item => item.Key).ToList());
             _dayEvenBackgroundColorDropDown.ItemSelected += DayEvenBackgroundColorItemSelected;
 
-            _dividerColorDropDown.Name = Fields.DividerColor;
+            _dividerColorDropDown.Name = Fields.ColorDividers;
             _dividerColorDropDown.SetupAdapter(Colors.ColorsCollection.Select(item => item.Key).ToList());
             _dividerColorDropDown.ItemSelected += DividerColorItemSelected;
 
-            _currentDividerColorDropDown.Name = Fields.CurrentDividerColor;
+            _currentDividerColorDropDown.Name = Fields.CurrentColorDividers;
             _currentDividerColorDropDown.SetupAdapter(Colors.ColorsCollection.Select(item => item.Key).ToList());
             _currentDividerColorDropDown.ItemSelected += CurrentDividerColorItemSelected;
 
-            _firstDayOfWeekDropDown.Name = Fields.FirstDayOfWeek;
+            _firstDayOfWeekDropDown.Name = Fields.WeekStartDay;
             _firstDayOfWeekDropDown.SetupAdapter(Days.DaysCollection.Select(item => item.Key).ToList());
             _firstDayOfWeekDropDown.ItemSelected += FirstDayOfWeekItemSelected;
 
