@@ -11,7 +11,6 @@ using EOS.UI.Droid.Sandbox.Controls;
 using EOS.UI.Shared.Helpers;
 using EOS.UI.Shared.Sandbox.Helpers;
 using EOS.UI.Shared.Themes.Themes;
-using static EOS.UI.Droid.Sandbox.Helpers.Constants;
 using static EOS.UI.Shared.Sandbox.Helpers.Constants;
 
 namespace EOS.UI.Droid.Sandbox.Activities
@@ -121,35 +120,35 @@ namespace EOS.UI.Droid.Sandbox.Activities
             };
 
             shadowOffsetXDropDown.Name = Fields.ShadowOffsetX;
-            shadowOffsetXDropDown.SetupAdapter(Shadow.ShadowOffsetValues.Select(item => item.Key).ToList());
+            shadowOffsetXDropDown.SetupAdapter(Shadow.OffsetCollection.Select(item => item.Key).ToList());
             shadowOffsetXDropDown.ItemSelected += (position) =>
             {
                 if (position > 0)
                 {
-                    fab.ShadowConfig.Offset.X = Shadow.ShadowOffsetValues.ElementAt(position).Value;
+                    fab.ShadowConfig.Offset.X = Shadow.OffsetCollection.ElementAt(position).Value;
                     ChangeShadow(fab);
                 }
             };
 
 
             shadowOffsetYDropDown.Name = Fields.ShadowOffsetY;
-            shadowOffsetYDropDown.SetupAdapter(Shadow.ShadowOffsetValues.Select(item => item.Key).ToList());
+            shadowOffsetYDropDown.SetupAdapter(Shadow.OffsetCollection.Select(item => item.Key).ToList());
             shadowOffsetYDropDown.ItemSelected += (position) =>
             {
                 if (position > 0)
                 {
-                    fab.ShadowConfig.Offset.Y = Shadow.ShadowOffsetValues.ElementAt(position).Value;
+                    fab.ShadowConfig.Offset.Y = Shadow.OffsetCollection.ElementAt(position).Value;
                     ChangeShadow(fab);
                 }
             };
 
             shadowBlurDropDown.Name = Fields.ShadowRadius;
-            shadowBlurDropDown.SetupAdapter(Shadow.ShadowRadiusValues.Select(item => item.Key).ToList());
+            shadowBlurDropDown.SetupAdapter(Shadow.RadiusCollection.Select(item => item.Key).ToList());
             shadowBlurDropDown.ItemSelected += (position) =>
             {
                 if (position > 0)
                 {
-                    fab.ShadowConfig.Blur = Shadow.ShadowRadiusValues.ElementAt(position).Value;
+                    fab.ShadowConfig.Blur = Shadow.RadiusCollection.ElementAt(position).Value;
                     ChangeShadow(fab);
                 }
             };
@@ -166,12 +165,12 @@ namespace EOS.UI.Droid.Sandbox.Activities
             };
 
             shadowOpacityDropDown.Name = Fields.ShadowOpacity;
-            shadowOpacityDropDown.SetupAdapter(Shadow.ShadowOpacityValues.Select(item => item.Key).ToList());
+            shadowOpacityDropDown.SetupAdapter(Shadow.OpacityCollection.Select(item => item.Key).ToList());
             shadowOpacityDropDown.ItemSelected += (position) =>
             {
                 if (position > 0)
                 {
-                    _shadowAlpha = (float)Shadow.ShadowOpacityValues.ElementAt(position).Value;
+                    _shadowAlpha = (float)Shadow.OpacityCollection.ElementAt(position).Value;
                     ChangeShadow(fab);
                 }
             };

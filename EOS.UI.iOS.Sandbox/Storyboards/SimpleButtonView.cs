@@ -4,13 +4,11 @@ using System.Linq;
 using CoreGraphics;
 using EOS.UI.iOS.Controls;
 using EOS.UI.iOS.Extensions;
-using EOS.UI.iOS.Sandbox.Enums;
 using EOS.UI.iOS.Sandbox.Storyboards;
 using EOS.UI.Shared.Helpers;
 using EOS.UI.Shared.Sandbox.Helpers;
 using EOS.UI.Shared.Themes.Themes;
 using UIKit;
-using static EOS.UI.iOS.Sandbox.Helpers.Constants;
 using static EOS.UI.Shared.Sandbox.Helpers.Constants;
 
 namespace EOS.UI.iOS.Sandbox
@@ -94,7 +92,7 @@ namespace EOS.UI.iOS.Sandbox
         private void InitThemeDropDown(CGRect rect)
         {
             themeDropDown.InitSource(
-                ThemeCollection,
+                ThemeTypes.ThemeCollection,
                 (theme) =>
                 {
                     _simpleButton.GetThemeProvider().SetCurrentTheme(theme);
@@ -119,7 +117,7 @@ namespace EOS.UI.iOS.Sandbox
         private void InitLetterSpacingDropDown(CGRect rect)
         {
             letterSpacingDropDown.InitSource(
-                LetterSpacingValues,
+                Sizes.LetterSpacingCollection,
                 spacing => _simpleButton.LetterSpacing = spacing,
                 Fields.LetterSpacing,
                 rect);
@@ -128,7 +126,7 @@ namespace EOS.UI.iOS.Sandbox
         private void InitTextSizeDropDown(CGRect rect)
         {
             textSizeDropDown.InitSource(
-                FontSizeValues,
+                Sizes.TextSizeCollection,
                 size => _simpleButton.TextSize = size,
                 Fields.TextSize,
                 rect);
@@ -177,8 +175,8 @@ namespace EOS.UI.iOS.Sandbox
         private void InitCornerRadiusDropDown(CGRect rect)
         {
             cornerRadiusDropDown.InitSource(
-                CornerRadiusValues,
-                radius => _simpleButton.CornerRadius = radius,
+                Sizes.CornerRadiusCollection,
+                radius => _simpleButton.CornerRadius = (int)radius,
                 Fields.ConerRadius,
                 rect);
         }
@@ -186,7 +184,7 @@ namespace EOS.UI.iOS.Sandbox
         private void InitButtonTypeDropDown(CGRect rect)
         {
             buttonTypeDropDown.InitSource(
-                ButtonTypes,
+                Buttons.SimpleButtonTypeCollection,
                 type =>
                 {
                     ResetFields();
@@ -196,7 +194,7 @@ namespace EOS.UI.iOS.Sandbox
                         case SimpleButtonTypeEnum.Simple:
                             containerView.RemoveConstraints(containerView.Constraints);
                             containerView.AddConstraints(_defaultConstraints);
-                            _simpleButton.SetTitle(ControlNames.SimpleButton, UIControlState.Normal);
+                            _simpleButton.SetTitle(Buttons.CTAButtonTypeCollection.First(t => t.Value == type).Key, UIControlState.Normal);
                             break;
                         case SimpleButtonTypeEnum.FullBleed:
                             containerView.RemoveConstraints(containerView.Constraints);
@@ -209,7 +207,7 @@ namespace EOS.UI.iOS.Sandbox
                             _simpleButton.ContentEdgeInsets = new UIEdgeInsets();
                             _simpleButton.CornerRadius = 0;
                             _simpleButton.ShadowConfig = null;
-                            _simpleButton.SetTitle(ControlNames.FullBleedButton, UIControlState.Normal);
+                            _simpleButton.SetTitle(Buttons.CTAButtonTypeCollection.First(t => t.Value == type).Key, UIControlState.Normal);
                             break;
                     }
                 },
@@ -240,7 +238,7 @@ namespace EOS.UI.iOS.Sandbox
         private void InitShadowOffsetXDropDown(CGRect rect)
         {
             shadowOffsetXDropDown.InitSource(
-                ShadowOffsetValues,
+                Shadow.OffsetCollection,
                 offset =>
                 {
                     var config = _simpleButton.ShadowConfig;
@@ -254,7 +252,7 @@ namespace EOS.UI.iOS.Sandbox
         private void InitShadowOffsetYDropDown(CGRect rect)
         {
             shadowOffsetYDropDown.InitSource(
-                ShadowOffsetValues,
+                Shadow.OffsetCollection,
                 offset =>
                 {
                     var config = _simpleButton.ShadowConfig;
@@ -268,7 +266,7 @@ namespace EOS.UI.iOS.Sandbox
         private void InitShadowRadiusDropDown(CGRect rect)
         {
             shadowRadiusDropDown.InitSource(
-                ShadowRadiusValues,
+                Shadow.RadiusCollection,
                 blur =>
                 {
                     var config = _simpleButton.ShadowConfig;
@@ -282,7 +280,7 @@ namespace EOS.UI.iOS.Sandbox
         private void InitShadowOpacityDropDown(CGRect rect)
         {
             shadowOpacityDropDown.InitSource(
-                ShadowOpacityValues,
+                Shadow.OpacityCollection,
                 opacity =>
                 {
                     var config = _simpleButton.ShadowConfig;

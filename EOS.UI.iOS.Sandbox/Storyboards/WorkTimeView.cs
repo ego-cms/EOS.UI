@@ -3,12 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using CoreGraphics;
 using EOS.UI.iOS.CollectionViewSources;
-using EOS.UI.iOS.Sandbox.Helpers;
 using EOS.UI.iOS.Sandbox.Storyboards;
 using EOS.UI.Shared.Themes.DataModels;
 using EOS.UI.Shared.Themes.Themes;
 using UIKit;
-using static EOS.UI.iOS.Sandbox.Helpers.Constants;
 using static EOS.UI.Shared.Sandbox.Helpers.Constants;
 
 namespace EOS.UI.iOS.Sandbox
@@ -56,7 +54,7 @@ namespace EOS.UI.iOS.Sandbox
             var rect = new CGRect(0, 0, 100, 100);
 
             themesDropDown.InitSource(
-                ThemeCollection,
+                ThemeTypes.ThemeCollection,
                 (theme) =>
                 {
                     source.CalendarModel.GetThemeProvider().SetCurrentTheme(theme);
@@ -81,13 +79,13 @@ namespace EOS.UI.iOS.Sandbox
                 rect);
 
             titleSizeDropDown.InitSource(
-               FontSizeValues,
+                Sizes.TextSizeCollection,
                 size => source.CalendarModel.TitleTextSize = size,
                 Fields.TitleTextSize,
                rect);
 
             dayTextSizeDropDown.InitSource(
-               FontSizeValues,
+                Sizes.TextSizeCollection,
                 size => source.CalendarModel.DayTextSize = size,
                 Fields.DayTextSize,
                rect);
@@ -128,10 +126,10 @@ namespace EOS.UI.iOS.Sandbox
                 rect);
 
             weekStartDropdown.InitSource(
-                WeekStartDays,
+                Days.DaysCollection,
                 weekStart => source.CalendarModel.WeekStart = weekStart,
-               Fields.WeekStartDay,
-               rect);
+                Fields.WeekStartDay,
+                rect);
 
             resetButton.TouchUpInside += (sender, e) =>
             {

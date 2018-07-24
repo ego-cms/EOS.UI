@@ -4,12 +4,10 @@ using System.Linq;
 using CoreGraphics;
 using EOS.UI.iOS.Controls;
 using EOS.UI.iOS.Extensions;
-using EOS.UI.iOS.Sandbox.Helpers;
 using EOS.UI.iOS.Sandbox.Storyboards;
 using EOS.UI.Shared.Themes.Themes;
 using UIKit;
 using static EOS.UI.Shared.Sandbox.Helpers.Constants;
-using static EOS.UI.iOS.Sandbox.Helpers.Constants;
 
 namespace EOS.UI.iOS.Sandbox
 {
@@ -53,7 +51,7 @@ namespace EOS.UI.iOS.Sandbox
             var rect = new CGRect(0, 0, 100, 150);
 
             themeDropDown.InitSource(
-                Constants.ThemeCollection,
+                ThemeTypes.ThemeCollection,
                 (theme) => 
                 {
                     label.GetThemeProvider().SetCurrentTheme(theme);
@@ -82,20 +80,20 @@ namespace EOS.UI.iOS.Sandbox
                 rect);
 
             letterSpaceDropDown.InitSource(
-                LetterSpacingValues,
+                Sizes.LetterSpacingCollection,
                 spacing => label.LetterSpacing = spacing,
                 Fields.LetterSpacing,
                 rect);
 
             textSizeDropDown.InitSource(
-                FontSizeValues,
+                Sizes.TextSizeCollection,
                 size => label.TextSize = size,
                 Fields.TextSize,
                 rect);
-
+            
             cornerRadiusDropDown.InitSource(
-                CornerRadiusValues,
-                radius => label.CornerRadius = radius,
+                Sizes.CornerRadiusCollection,
+                radius => label.CornerRadius = (int)radius,
                 Fields.ConerRadius,
                 rect);
 

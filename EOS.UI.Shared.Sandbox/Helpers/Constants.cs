@@ -1,4 +1,9 @@
-﻿using System;
+﻿using System.Collections.Generic;
+using System.Linq;
+using EOS.UI.Shared.Themes.Enums;
+using EOS.UI.Shared.Themes.Helpers;
+
+//On Android 0 element is selected 'default' value for control, that doesn't show in spinner's dropdown
 namespace EOS.UI.Shared.Sandbox.Helpers
 {
     public static partial class Constants
@@ -72,6 +77,157 @@ namespace EOS.UI.Shared.Sandbox.Helpers
             public const string ShadowRadius = "Shadow Blur";
             public const string ShadowOpacity = "Shadow opacity";
         };
+
+        public static partial class Sizes
+        {
+            public static readonly Dictionary<string, float> TextSizeCollection = new Dictionary<string, float>();
+            public static readonly Dictionary<string, float> CornerRadiusCollection = new Dictionary<string, float>();
+            public static readonly Dictionary<string, int> BorderWidthCollection = new Dictionary<string, int>();
+            public static readonly Dictionary<string, int> PaddingsCollection = new Dictionary<string, int>();
+            public static readonly Dictionary<string, float> LetterSpacingCollection = new Dictionary<string, float>();
+
+            static Sizes()
+            {
+#if __ANDROID__
+                LetterSpacingCollection.Add("default", 0);
+#endif
+                foreach (var val in Enumerable.Range(1, 10))
+                {
+#if __IOS__
+                    var v = val;
+#else
+                    var v = (float)val / 10;
+#endif
+                    LetterSpacingCollection.Add(v.ToString(), v);
+                }
+
+#if __ANDROID__
+                TextSizeCollection.Add("default", 0);
+#endif
+                foreach (var val in Enumerable.Range(0, 16))
+                {
+                    var v = val * 2 + 10;
+                    TextSizeCollection.Add(v.ToString(), v);
+                }
+
+#if __ANDROID__
+                CornerRadiusCollection.Add("default", 0);
+#endif
+                foreach (var val in Enumerable.Range(0, 16))
+                {
+                    var v = val * 4 + 10;
+                    CornerRadiusCollection.Add(v.ToString(), v);
+                }
+#if __ANDROID__
+                BorderWidthCollection.Add("default", 0);
+#endif
+                foreach (var val in Enumerable.Range(1, 10))
+                {
+                    BorderWidthCollection.Add(val.ToString(), val);
+                }
+#if __ANDROID__
+                PaddingsCollection.Add("default", 0);
+#endif
+                foreach (var val in Enumerable.Range(1, 20))
+                {
+                    PaddingsCollection.Add(val.ToString(), val);
+                }
+            }
+        }
+
+        public static class ThemeTypes
+        {
+            public static Dictionary<string, EOSThemeEnumeration> ThemeCollection = new Dictionary<string, EOSThemeEnumeration>()
+            {
+#if __ANDROID__
+                { string.Empty, EOSThemeEnumeration.Light },
+#endif
+                { "Light", EOSThemeEnumeration.Light },
+                { "Dark", EOSThemeEnumeration.Dark },
+            };
+        }
+
+        public static class Buttons
+        {
+            private const string Simple = "Simple button";
+            private const string CTA = "CTA button";
+            private const string FullBleed = "Full bleed button";
+
+            public static Dictionary<string, SimpleButtonTypeEnum> SimpleButtonTypeCollection = new Dictionary<string, SimpleButtonTypeEnum>()
+            {
+#if __ANDROID__
+                { string.Empty, SimpleButtonTypeEnum.Simple },
+#endif
+                { Simple, SimpleButtonTypeEnum.Simple },
+                { FullBleed, SimpleButtonTypeEnum.FullBleed },
+            };
+
+            public static Dictionary<string, SimpleButtonTypeEnum> CTAButtonTypeCollection = new Dictionary<string, SimpleButtonTypeEnum>()
+            {
+#if __ANDROID__
+                { string.Empty, SimpleButtonTypeEnum.Simple },
+#endif
+                { CTA, SimpleButtonTypeEnum.Simple  },
+                { FullBleed, SimpleButtonTypeEnum.FullBleed  },
+            };
+        }
+
+        public static class Titles
+        {
+            public static Dictionary<string, string> TitleCollection = new Dictionary<string, string>()
+            {
+#if __ANDROID__
+                { string.Empty, string.Empty },
+#endif
+                { "First", "First" },
+                { "Second" , "Second" },
+                { "Third", "Third" },
+            };
+        }
+
+        public static class Days
+        {
+            public static Dictionary<string, WeekStartEnum> DaysCollection = new Dictionary<string, WeekStartEnum>()
+            {
+#if __ANDROID__
+                { string.Empty, WeekStartEnum.Sunday },
+#endif
+                { "Sunday", WeekStartEnum.Sunday },
+                { "Monday", WeekStartEnum.Monday },
+            };
+        }
+
+        public static class Shadow
+        {
+            public static readonly Dictionary<string, int> OffsetCollection = new Dictionary<string, int>();
+            public static readonly Dictionary<string, int> RadiusCollection = new Dictionary<string, int>();
+            public static readonly Dictionary<string, double> OpacityCollection = new Dictionary<string, double>();
+
+            static Shadow()
+            {
+#if __ANDROID__
+                OpacityCollection.Add("default", 0);
+#endif
+                foreach (var val in Enumerable.Range(0, 10))
+                {
+                    var v = val * 0.1 + 0.1;
+                    OpacityCollection.Add(v.ToString(), v);
+                }
+
+#if __ANDROID__
+                OffsetCollection.Add("default", -15);
+#endif
+                foreach (var val in Enumerable.Range(-14, 29))
+                    OffsetCollection.Add(val.ToString(), val);
+
+#if __ANDROID__
+                RadiusCollection.Add("default", 0);
+#endif
+                foreach (var val in Enumerable.Range(1, 15))
+                    RadiusCollection.Add(val.ToString(), val);
+            }
+        }
+    
     }
 
 
@@ -80,7 +236,6 @@ namespace EOS.UI.Shared.Sandbox.Helpers
         public const string BadgeLabel = "Badge label";
         public const string GhostButton = "Ghost button";
         public const string SimpleButton = "Simple button";
-        public const string FullBleedButton = "Full-bleed button";
         public const string SimpleLabel = "Simple label";
         public const string Input = "Input";
         public const string FabProgress = "Fab progress";
@@ -88,5 +243,11 @@ namespace EOS.UI.Shared.Sandbox.Helpers
         public const string Section = "Section";
         public const string CTAButton = "CTA Button";
         public const string WorkTimeCalendar = "Work time calendar";
+    }
+
+    public enum SimpleButtonTypeEnum
+    {
+        Simple,
+        FullBleed
     }
 }

@@ -8,7 +8,6 @@ using EOS.UI.Droid.Sandbox.Controls;
 using EOS.UI.Shared.Sandbox.Helpers;
 using EOS.UI.Shared.Themes.Interfaces;
 using EOS.UI.Shared.Themes.Themes;
-using static EOS.UI.Droid.Sandbox.Helpers.Constants;
 using static EOS.UI.Shared.Sandbox.Helpers.Constants;
 
 namespace EOS.UI.Droid.Sandbox.Activities
@@ -69,7 +68,7 @@ namespace EOS.UI.Droid.Sandbox.Activities
             _textSizeDropDown.ItemSelected += TextSizeItemSelected;
 
             _cornerRadiusDropDown.Name = Fields.ConerRadius;
-            _cornerRadiusDropDown.SetupAdapter(Sizes.CornerRadusCollection.Select(item => item.Key).ToList());
+            _cornerRadiusDropDown.SetupAdapter(Sizes.CornerRadiusCollection.Select(item => item.Key).ToList());
             _cornerRadiusDropDown.ItemSelected += CornerRadiusItemSelected;
 
             SetCurrenTheme(_badge.GetThemeProvider().GetCurrentTheme());
@@ -103,7 +102,7 @@ namespace EOS.UI.Droid.Sandbox.Activities
         private void CornerRadiusItemSelected(int position)
         {
             if(position > 0)
-                _badge.CornerRadius = Sizes.CornerRadusCollection.ElementAt(position).Value;
+                _badge.CornerRadius = Sizes.CornerRadiusCollection.ElementAt(position).Value;
         }
 
         private void TextSizeItemSelected(int position)

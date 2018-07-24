@@ -7,7 +7,6 @@ using EOS.UI.iOS.Extensions;
 using EOS.UI.iOS.Sandbox.Storyboards;
 using EOS.UI.Shared.Themes.Themes;
 using UIKit;
-using static EOS.UI.iOS.Sandbox.Helpers.Constants;
 using static EOS.UI.Shared.Sandbox.Helpers.Constants;
 
 namespace EOS.UI.iOS.Sandbox
@@ -130,7 +129,7 @@ namespace EOS.UI.iOS.Sandbox
         private void InitThemeTextField(CGRect rect)
         {
             themeDropDown.InitSource(
-                ThemeCollection,
+                ThemeTypes.ThemeCollection,
                 (theme) =>
                 {
                     _inputTop.GetThemeProvider().SetCurrentTheme(theme);
@@ -163,7 +162,7 @@ namespace EOS.UI.iOS.Sandbox
         private void InitLetterSpacing(CGRect rect)
         {
             letterSpacingDropDown.InitSource(
-                LetterSpacingValues,
+                Sizes.LetterSpacingCollection,
                 spacing =>
                 {
                     _inputTop.LetterSpacing = spacing;
@@ -176,7 +175,7 @@ namespace EOS.UI.iOS.Sandbox
         private void InitTextSizeTextField(CGRect rect)
         {
             textSizeDropDown.InitSource(
-                FontSizeValues,
+                Sizes.TextSizeCollection,
                 size =>
                 {
                     _inputTop.TextSize = size;
@@ -237,7 +236,7 @@ namespace EOS.UI.iOS.Sandbox
         private void InitIconTextField(CGRect rect)
         {
             focusedIconDropDown.InitSource(
-                Icons,
+                Icons.IconsCollection,
                 iconName =>
                 {
                     _inputTop.LeftImage = UIImage.FromBundle(iconName);
@@ -321,7 +320,7 @@ namespace EOS.UI.iOS.Sandbox
 
         private void InitValidatingRulesTextField(CGRect rect)
         {
-            validatingRulesDropDown.InitSource(Validations,
+            validatingRulesDropDown.InitSource(Validation.ValidationCollection,
                 rule =>
                 {
                     _validateRule = rule;

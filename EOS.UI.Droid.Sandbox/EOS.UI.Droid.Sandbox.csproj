@@ -111,7 +111,6 @@
     <Compile Include="Controls\EOSSandboxDropDown.cs" />
     <Compile Include="Controls\EOSSandboxTextView.cs" />
     <Compile Include="Controls\EOSSandboxToolbar.cs" />
-    <Compile Include="Helpers\Constants.cs" />
     <Compile Include="Helpers\ContextHelpers.cs" />
     <Compile Include="RecyclerImplementation\ControlsAdapter.cs" />
     <Compile Include="RecyclerImplementation\EOSSandboxControlsViewHolder.cs" />

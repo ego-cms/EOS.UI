@@ -6,7 +6,6 @@ using EOS.UI.iOS.Sandbox.Helpers;
 using EOS.UI.iOS.Sandbox.Storyboards;
 using EOS.UI.Shared.Themes.Themes;
 using UIKit;
-using static EOS.UI.iOS.Sandbox.Helpers.Constants;
 using static EOS.UI.Shared.Sandbox.Helpers.Constants;
 
 namespace EOS.UI.iOS.Sandbox
@@ -70,7 +69,7 @@ namespace EOS.UI.iOS.Sandbox
             var rect = new CGRect(0, 0, 100, 100);
 
             themeDropDown.InitSource(
-                Constants.ThemeCollection,
+                ThemeTypes.ThemeCollection,
                 (theme) =>
                 {
                     _circleProgress.GetThemeProvider().SetCurrentTheme(theme);
@@ -89,7 +88,7 @@ namespace EOS.UI.iOS.Sandbox
                 rect);
 
             textSizeDropDown.InitSource(
-                FontSizeValues,
+                Sizes.TextSizeCollection,
                 size => _circleProgress.TextSize = size,
                 Fields.TextSize,
                 rect);

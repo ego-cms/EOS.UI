@@ -1,8 +1,10 @@
-﻿#if __IOS__
-#else
+﻿#if __ANDROID__
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using Android.Graphics;
+using Android.Widget;
+using EOS.UI.Droid.Sandbox;
 
 namespace EOS.UI.Shared.Sandbox.Helpers
 {
@@ -38,6 +40,34 @@ namespace EOS.UI.Shared.Sandbox.Helpers
                 { Berkshireswash, "Fonts/Berkshireswash.ttf" },
                 { Amita, "Fonts/Amita.ttf" },
                 { AcademyEngraved, "Fonts/academyEngraved.ttf" },
+            };
+        }
+
+        public static class Validation
+        {
+            public static readonly Dictionary<string, int> ValidationCollection = new Dictionary<string, int>()
+            {
+                { string.Empty, 0 },
+                { "without validation", 1 },
+                { "e-mail validation", 2 },
+                { "empty validation", 3 }
+            };
+        }
+
+        public static class Icons
+        {
+            public const string Calendar = "Calendar";
+            public const string AccountCircle = "Account circle";
+            public const string AccountKey = "Account key";
+            public const string AccountOff = "Account off";
+
+            public static Dictionary<string, int> DrawableCollection = new Dictionary<string, int>()
+            {
+                { string.Empty, 0 },
+                { Calendar, Resource.Drawable.icCalendar },
+                { AccountCircle, Resource.Drawable.AccountCircle },
+                { AccountKey, Resource.Drawable.AccountKey },
+                { AccountOff, Resource.Drawable.AccountOff },
             };
         }
     }

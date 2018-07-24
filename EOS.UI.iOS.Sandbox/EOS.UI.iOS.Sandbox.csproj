@@ -195,7 +195,6 @@
       <DependentUpon>InputControlView.cs</DependentUpon>
     </Compile>
     <Compile Include="Controls\ControlsData.cs" />
-    <Compile Include="Helpers\Constants.cs" />
     <Compile Include="Controls\Pickers.cs" />
     <Compile Include="Storyboards\CircleProgressView.cs" />
     <Compile Include="Storyboards\CircleProgressView.designer.cs">
@@ -210,7 +209,6 @@
     <Compile Include="Storyboards\WorkTimeView.designer.cs">
       <DependentUpon>WorkTimeView.cs</DependentUpon>
     </Compile>
-    <Compile Include="Enums\SimpleButtonTypeEnum.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\EOS.UI.iOS\EOS.UI.iOS.csproj">
@@ -220,7 +218,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Resources\" />
-    <Folder Include="Enums\" />
   </ItemGroup>
   <Import Project="..\EOS.UI.Shared.Sandbox\EOS.UI.Shared.Sandbox.projitems" Label="Shared" Condition="Exists('..\EOS.UI.Shared.Sandbox\EOS.UI.Shared.Sandbox.projitems')" />
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />

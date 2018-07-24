@@ -4,12 +4,10 @@ using System.Linq;
 using CoreGraphics;
 using EOS.UI.iOS.Controls;
 using EOS.UI.iOS.Extensions;
-using EOS.UI.iOS.Sandbox.Helpers;
 using EOS.UI.iOS.Sandbox.Storyboards;
 using EOS.UI.Shared.Sandbox.Helpers;
 using EOS.UI.Shared.Themes.Themes;
 using UIKit;
-using static EOS.UI.iOS.Sandbox.Helpers.Constants;
 using static EOS.UI.Shared.Sandbox.Helpers.Constants;
 
 namespace EOS.UI.iOS.Sandbox
@@ -52,7 +50,7 @@ namespace EOS.UI.iOS.Sandbox
             var rect = new CGRect(0, 0, 100, 100);
 
             themeDropDown.InitSource(
-                ThemeCollection,
+                ThemeTypes.ThemeCollection,
                 (theme) =>
                 {
                     ghostButton.GetThemeProvider().SetCurrentTheme(theme);
@@ -71,7 +69,7 @@ namespace EOS.UI.iOS.Sandbox
                 rect);
 
             letterSpacingDropDown.InitSource(
-                LetterSpacingValues,
+                Sizes.LetterSpacingCollection,
                 spacing => ghostButton.LetterSpacing = spacing,
                 Fields.LetterSpacing,
                 rect);
@@ -87,7 +85,7 @@ namespace EOS.UI.iOS.Sandbox
                 rect);
 
             textSizeDropDown.InitSource(
-                FontSizeValues,
+                Sizes.TextSizeCollection,
                 size => ghostButton.TextSize = size,
                 Fields.TextSize,
                 rect);

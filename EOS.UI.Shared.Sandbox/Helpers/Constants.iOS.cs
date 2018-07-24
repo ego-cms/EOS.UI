@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using EOS.UI.Shared.Themes.Helpers;
 using UIKit;
 
 namespace EOS.UI.Shared.Sandbox.Helpers
@@ -44,6 +45,27 @@ namespace EOS.UI.Shared.Sandbox.Helpers
 
                 FontsCollection = FontsCollection.OrderBy(f => f.Name).ToList();
             }
+        }
+
+        public static class Validation
+        {
+            public static Dictionary<String, Predicate<string>> ValidationCollection = new Dictionary<string, Predicate<string>>()
+            {
+                {"without validation", null },
+                {"e-mail validation", (s) => s.Contains("@") && !String.IsNullOrEmpty(s)},
+                {"empty validation", (s) => !String.IsNullOrEmpty(s) },
+            };
+        }
+
+        public static class Icons
+        {
+            public static Dictionary<string, string> IconsCollection = new Dictionary<string, string>()
+            {
+                { "Calendar", "icCalendar" },
+                { "Account circle", "icAccountCircle" },
+                { "Account key", "icAccountKey" },
+                { "Account off", "icAccountOff" },
+            };
         }
     }
 }

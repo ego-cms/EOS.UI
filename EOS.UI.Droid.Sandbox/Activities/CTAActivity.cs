@@ -13,7 +13,6 @@ using EOS.UI.Shared.Themes.Helpers;
 using EOS.UI.Shared.Themes.Interfaces;
 using EOS.UI.Shared.Themes.Themes;
 using static Android.Widget.CompoundButton;
-using static EOS.UI.Droid.Sandbox.Helpers.Constants;
 using static EOS.UI.Shared.Sandbox.Helpers.Constants;
 
 namespace EOS.UI.Droid.Sandbox.Activities
@@ -136,7 +135,7 @@ namespace EOS.UI.Droid.Sandbox.Activities
             _backgroundColorPressedDropDown.ItemSelected += BackgroundColorPressedItemSelected;
 
             _cornerRadiusDropDown.Name = Fields.ConerRadius;
-            _cornerRadiusDropDown.SetupAdapter(Sizes.CornerRadusCollection.Select(item => item.Key).ToList());
+            _cornerRadiusDropDown.SetupAdapter(Sizes.CornerRadiusCollection.Select(item => item.Key).ToList());
             _cornerRadiusDropDown.ItemSelected += CornerRadiusItemSelected;
 
             _rippleColorDropDown.Name = Fields.RippleColor;
@@ -231,7 +230,7 @@ namespace EOS.UI.Droid.Sandbox.Activities
         private void CornerRadiusItemSelected(int position)
         {
             if (position > 0)
-                _CTAButton.CornerRadius = Sizes.CornerRadusCollection.ElementAt(position).Value;
+                _CTAButton.CornerRadius = Sizes.CornerRadiusCollection.ElementAt(position).Value;
         }
 
         private void RippleColorItemSelected(int position)
@@ -263,10 +262,10 @@ namespace EOS.UI.Droid.Sandbox.Activities
 
         private void ButtonTypeItemSelected(int position)
         {
-            switch(position)
+            var buttonType = Buttons.CTAButtonTypeCollection.ElementAt(position).Value;
+            switch(buttonType)
             {
-                case 0:
-                case 1:
+                case SimpleButtonTypeEnum.Simple:
                     ResetCustomValues(true);
                     var layoutParameters = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WrapContent, ViewGroup.LayoutParams.WrapContent);
                     layoutParameters.Gravity = GravityFlags.Center;
@@ -277,14 +276,14 @@ namespace EOS.UI.Droid.Sandbox.Activities
                         (int)(SimpleButtonConstants.TopPadding * denisty),
                         (int)(SimpleButtonConstants.RightPadding * denisty),
                         (int)(SimpleButtonConstants.BottomPadding * denisty));
-                    _CTAButton.Text = Buttons.CTA;
+                    _CTAButton.Text = Buttons.CTAButtonTypeCollection.ElementAt(position).Key;
                     break;
-                case 2:
+                case SimpleButtonTypeEnum.FullBleed:
                     ResetCustomValues(true);
                     _CTAButton.CornerRadius = 0;
                     _CTAButton.SetPadding(0, 0, 0, 0);
                     _CTAButton.LayoutParameters = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MatchParent, ViewGroup.LayoutParams.WrapContent);
-                    _CTAButton.Text = Buttons.FullBleed;
+                    _CTAButton.Text = Buttons.CTAButtonTypeCollection.ElementAt(position).Key;
                     break;
             }
         }

@@ -9,7 +9,6 @@ using EOS.UI.iOS.Themes;
 using EOS.UI.Shared.Themes.Helpers;
 using EOS.UI.Shared.Themes.Themes;
 using UIKit;
-using static EOS.UI.iOS.Sandbox.Helpers.Constants;
 using static EOS.UI.Shared.Sandbox.Helpers.Constants;
 
 namespace EOS.UI.iOS.Sandbox.Storyboards
@@ -143,7 +142,7 @@ namespace EOS.UI.iOS.Sandbox.Storyboards
         private void InitPaddingRightDropDown(CGRect rect)
         {
             paddingRightDropDown.InitSource(
-                PaddingValues,
+                Sizes.PaddingsCollection,
                 padding =>
                 {
                     _source.SectionModel.RightPadding = padding;
@@ -155,7 +154,7 @@ namespace EOS.UI.iOS.Sandbox.Storyboards
         private void InitPaddingLeftDropDown(CGRect rect)
         {
             paddingLeftDropDown.InitSource(
-                PaddingValues,
+                Sizes.PaddingsCollection,
                 padding =>
                 {
                     _source.SectionModel.LeftPadding = padding;
@@ -167,7 +166,7 @@ namespace EOS.UI.iOS.Sandbox.Storyboards
         private void InitPaddingBottomDropDown(CGRect rect)
         {
             paddingBottomDropDown.InitSource(
-                PaddingValues,
+                Sizes.PaddingsCollection,
                 padding =>
                 {
                     _source.SectionModel.BottonPadding = padding;
@@ -179,7 +178,7 @@ namespace EOS.UI.iOS.Sandbox.Storyboards
         private void InitPaddingTopDropDown(CGRect rect)
         {
             paddingTopDropDown.InitSource(
-                PaddingValues,
+                Sizes.PaddingsCollection,
                 padding =>
                 {
                     _source.SectionModel.TopPadding = padding;
@@ -191,7 +190,7 @@ namespace EOS.UI.iOS.Sandbox.Storyboards
         private void InitBorderWidthDropDown(CGRect rect)
         {
             borderWidthDropDown.InitSource(
-                WidthValues,
+                Sizes.BorderWidthCollection,
                 width =>
                 {
                     _source.SectionModel.BorderWidth = width;
@@ -247,7 +246,7 @@ namespace EOS.UI.iOS.Sandbox.Storyboards
         private void InitButtonTextSizeDropDown(CGRect rect)
         {
             buttonTextSizeDropDown.InitSource(
-                FontSizeValues,
+                Sizes.TextSizeCollection,
                 size =>
                 {
                     _source.SectionModel.ButtonTextSize = size;
@@ -259,7 +258,7 @@ namespace EOS.UI.iOS.Sandbox.Storyboards
         private void InitSectionTextSizeDropDown(CGRect rect)
         {
             sectionTextSizeDropDown.InitSource(
-                FontSizeValues,
+                Sizes.TextSizeCollection,
                 size =>
                 {
                     _source.SectionModel.SectionNameTextSize = size;
@@ -271,7 +270,7 @@ namespace EOS.UI.iOS.Sandbox.Storyboards
         private void InitButtonTextLetterSpacingDropDown(CGRect rect)
         {
             buttonTextLetterSpacingDropDown.InitSource(
-                LetterSpacingValues,
+                Sizes.LetterSpacingCollection,
                 spacing =>
                 {
                     _source.SectionModel.ButtonTextLetterSpacing = spacing;
@@ -283,7 +282,7 @@ namespace EOS.UI.iOS.Sandbox.Storyboards
         private void InitSectionNameLetterSpacingDropDown(CGRect rect)
         {
             sectionNameLetterSpacingDropDown.InitSource(
-                LetterSpacingValues,
+                Sizes.LetterSpacingCollection,
                 spacing =>
                 {
                     _source.SectionModel.SectionTextLetterSpacing = spacing;
@@ -319,7 +318,7 @@ namespace EOS.UI.iOS.Sandbox.Storyboards
         private void InitButtonTextDropDown(CGRect rect)
         {
             buttonTextDropDown.InitSource(
-                Titles,
+                Titles.TitleCollection,
                 title =>
                 {
                     _source.SectionModel.ButtonText = title;
@@ -331,7 +330,7 @@ namespace EOS.UI.iOS.Sandbox.Storyboards
         private void InitSectionNameDropDown(CGRect rect)
         {
             sectionNameDropDown.InitSource(
-                Titles,
+                Titles.TitleCollection,
                 title =>
                 {
                     _source.SectionModel.SectionName = title;
@@ -343,7 +342,7 @@ namespace EOS.UI.iOS.Sandbox.Storyboards
         private void InitThemeDropDown(CGRect rect)
         {
             themeDropDown.InitSource(
-                Constants.ThemeCollection,
+                ThemeTypes.ThemeCollection,
                 (theme) =>
                 {
                     EOSThemeProvider.Instance.SetCurrentTheme(theme);
