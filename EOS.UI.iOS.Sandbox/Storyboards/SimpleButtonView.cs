@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using CoreGraphics;
@@ -9,7 +9,7 @@ using EOS.UI.iOS.Sandbox.Helpers;
 using EOS.UI.iOS.Sandbox.Storyboards;
 using EOS.UI.Shared.Helpers;
 using EOS.UI.Shared.Themes.Themes;
-using UIFrameworks.Shared.Themes.Helpers;
+using EOS.UI.Shared.Themes.Helpers;
 using UIKit;
 using static EOS.UI.iOS.Sandbox.Helpers.Constants;
 

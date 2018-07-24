@@ -4,7 +4,7 @@
 <#@ import namespace="System.Text" #>
 <#@ import namespace="System.Collections.Generic" #>
 <#@ import namespace="System.IO" #>
-namespace UIFrameworks.iOS
+namespace EOS.UI.iOS
 {
     public static class Assets
     {

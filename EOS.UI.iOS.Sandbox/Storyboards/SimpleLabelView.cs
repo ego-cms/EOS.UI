@@ -7,7 +7,7 @@ using EOS.UI.Shared.Themes.Helpers;
 using System;
 using System.Linq;
 using System.Collections.Generic;
-using UIFrameworks.Shared.Themes.Helpers;
+using EOS.UI.Shared.Themes.Helpers;
 using UIKit;
 using EOS.UI.iOS.Sandbox.Controls.Pickers;
 using static EOS.UI.iOS.Sandbox.Helpers.Constants;

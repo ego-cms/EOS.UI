@@ -9,7 +9,7 @@ using EOS.UI.iOS.Sandbox.TableSources;
 using EOS.UI.iOS.Themes;
 using EOS.UI.Shared.Themes.Helpers;
 using EOS.UI.Shared.Themes.Themes;
-using UIFrameworks.Shared.Themes.Helpers;
+using EOS.UI.Shared.Themes.Helpers;
 using UIKit;
 using static EOS.UI.iOS.Sandbox.Helpers.Constants;
 

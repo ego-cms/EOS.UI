@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using Airbnb.Lottie;
 using CoreAnimation;
@@ -10,8 +10,8 @@ using EOS.UI.Shared.Themes.DataModels;
 using EOS.UI.Shared.Themes.Helpers;
 using EOS.UI.Shared.Themes.Interfaces;
 using Foundation;
-using UIFrameworks.Shared.Themes.Helpers;
-using UIFrameworks.Shared.Themes.Interfaces;
+using EOS.UI.Shared.Themes.Helpers;
+using EOS.UI.Shared.Themes.Interfaces;
 using UIKit;
 
 namespace EOS.UI.iOS.Controls

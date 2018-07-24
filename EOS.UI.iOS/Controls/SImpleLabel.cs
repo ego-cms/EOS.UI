@@ -1,11 +1,11 @@
-using Foundation;
+﻿using Foundation;
 using System;
 using EOS.UI.iOS.Extensions;
 using EOS.UI.iOS.Themes;
 using EOS.UI.Shared.Themes.Helpers;
 using EOS.UI.Shared.Themes.Interfaces;
-using UIFrameworks.Shared.Themes.Helpers;
-using UIFrameworks.Shared.Themes.Interfaces;
+using EOS.UI.Shared.Themes.Helpers;
+using EOS.UI.Shared.Themes.Interfaces;
 using UIKit;
 using EOS.UI.Shared.Themes.DataModels;
 

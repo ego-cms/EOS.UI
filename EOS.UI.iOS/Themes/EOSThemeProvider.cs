@@ -1,7 +1,7 @@
 ﻿using System;
 using EOS.UI.Shared.Themes.Helpers;
 using EOS.UI.Shared.Themes.Themes;
-using UIFrameworks.Shared.Themes.Interfaces;
+using EOS.UI.Shared.Themes.Interfaces;
 
 namespace EOS.UI.iOS.Themes
 {

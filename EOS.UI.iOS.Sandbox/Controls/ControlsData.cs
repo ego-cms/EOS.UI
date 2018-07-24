@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using EOS.UI.iOS.Sandbox.Storyboards;
-using SharedControls = UIFrameworks.Shared.Themes.Helpers.ControlNames;
+using SharedControls = EOS.UI.Shared.Themes.Helpers.ControlNames;
 
 namespace EOS.UI.iOS.Sandbox.Controls
 {

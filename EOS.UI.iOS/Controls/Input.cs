@@ -1,4 +1,4 @@
-using UIKit;
+﻿using UIKit;
 using Foundation;
 using CoreGraphics;
 using CoreAnimation;
@@ -7,8 +7,8 @@ using System.Linq;
 using EOS.UI.iOS.Themes;
 using EOS.UI.Shared.Themes.Helpers;
 using EOS.UI.Shared.Themes.Interfaces;
-using UIFrameworks.Shared.Themes.Helpers;
-using UIFrameworks.Shared.Themes.Interfaces;
+using EOS.UI.Shared.Themes.Helpers;
+using EOS.UI.Shared.Themes.Interfaces;
 using EOS.UI.Shared.Themes.Extensions;
 
 using static EOS.UI.iOS.Helpers.Constants;

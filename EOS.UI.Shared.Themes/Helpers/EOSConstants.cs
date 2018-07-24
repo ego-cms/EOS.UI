@@ -1,4 +1,4 @@
-namespace UIFrameworks.Shared.Themes.Helpers
+namespace EOS.UI.Shared.Themes.Helpers
 {
     public static class EOSConstants
     {

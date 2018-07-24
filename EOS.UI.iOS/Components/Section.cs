@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Linq;
 using CoreAnimation;
 using CoreGraphics;
@@ -8,8 +8,8 @@ using EOS.UI.Shared.Themes.DataModels;
 using EOS.UI.Shared.Themes.Helpers;
 using EOS.UI.Shared.Themes.Interfaces;
 using Foundation;
-using UIFrameworks.Shared.Themes.Helpers;
-using UIFrameworks.Shared.Themes.Interfaces;
+using EOS.UI.Shared.Themes.Helpers;
+using EOS.UI.Shared.Themes.Interfaces;
 using UIKit;
 using static EOS.UI.iOS.Helpers.Constants;
 

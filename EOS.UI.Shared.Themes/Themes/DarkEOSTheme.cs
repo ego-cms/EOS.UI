@@ -1,8 +1,8 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using EOS.UI.Shared.Helpers;
-using UIFrameworks.Shared.Themes.Helpers;
-using UIFrameworks.Shared.Themes.Interfaces;
+using EOS.UI.Shared.Themes.Helpers;
+using EOS.UI.Shared.Themes.Interfaces;
 using EOS.UI.Shared.Themes.Extensions;
 using EOS.UI.Shared.Themes.DataModels;
 
@@ -14,7 +14,7 @@ using UIKit;
 
 #if __ANDROID__
 using Android.Graphics;
-using EOS.UI.Android;
+using EOS.UI.Droid;
 using Android.App;
 #endif
 

@@ -1,6 +1,6 @@
 ﻿using EOS.UI.Shared.Themes.Helpers;
 
-namespace UIFrameworks.Shared.Themes.Interfaces
+namespace EOS.UI.Shared.Themes.Interfaces
 {
     public interface IEOSThemeProvider
     {

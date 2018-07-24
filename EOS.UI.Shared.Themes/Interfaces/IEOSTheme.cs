@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace UIFrameworks.Shared.Themes.Interfaces
+namespace EOS.UI.Shared.Themes.Interfaces
 {
     public interface IEOSTheme
     {

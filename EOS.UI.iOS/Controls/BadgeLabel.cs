@@ -1,14 +1,12 @@
-using Foundation;
-using System;
+﻿using System;
+using CoreGraphics;
 using EOS.UI.iOS.Extensions;
 using EOS.UI.iOS.Themes;
+using EOS.UI.Shared.Themes.DataModels;
 using EOS.UI.Shared.Themes.Helpers;
 using EOS.UI.Shared.Themes.Interfaces;
-using UIFrameworks.Shared.Themes.Helpers;
-using UIFrameworks.Shared.Themes.Interfaces;
+using Foundation;
 using UIKit;
-using CoreGraphics;
-using EOS.UI.Shared.Themes.DataModels;
 
 namespace EOS.UI.iOS.Controls
 {

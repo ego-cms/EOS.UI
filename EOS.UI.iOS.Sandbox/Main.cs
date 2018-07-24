@@ -1,6 +1,6 @@
 ﻿using UIKit;
 
-namespace UIFrameworks.Sandbox
+namespace EOS.UI.Sandbox
 {
     public class Application
     {

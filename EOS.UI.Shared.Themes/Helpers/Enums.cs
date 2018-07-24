@@ -1,4 +1,3 @@
-using System;
 namespace EOS.UI.Shared.Themes.Helpers
 {
     public enum EOSThemeEnumeration
