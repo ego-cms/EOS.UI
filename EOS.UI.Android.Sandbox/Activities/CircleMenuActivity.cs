@@ -22,6 +22,7 @@ namespace EOS.UI.Android.Sandbox.Activities
         private EOSSandboxDropDown _focusedButtonColorDropDown;
         private EOSSandboxDropDown _unfocusedButtonColorDropDown;
         private EOSSandboxDropDown _circleMenuItemsDropDown;
+        private Dictionary<int, int> _iconsDictionary;
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
@@ -31,7 +32,30 @@ namespace EOS.UI.Android.Sandbox.Activities
             _circleMenu = new CircleMenu(BaseContext);
             _circleMenu.Attach(Window.DecorView.FindViewById(A.Resource.Id.Content) as ViewGroup);
 
+            _iconsDictionary = new Dictionary<int, int>()
+            {
+                { 1,  Resource.Drawable.SwitchIcon },
+                { 2,  Resource.Drawable.CameraIcon },
+                { 3,  Resource.Drawable.ShutterIcon },
+                { 4,  Resource.Drawable.TimerIcon },
+                { 5,  Resource.Drawable.BushIcon },
+                { 6,  Resource.Drawable.DurationIcon },
+                { 7,  Resource.Drawable.EffectsIcon },
+                { 8,  Resource.Drawable.HealIcon },
+                { 9,  Resource.Drawable.MasksIcon },
+                { 101,  Resource.Drawable.WidescreenIcon },
+                { 102,  Resource.Drawable.OneToOneIcon },
+                { 103,  Resource.Drawable.HDRIcon },
+            };
+
             _circleMenu.CircleMenuItems = GenerateSource(9);
+
+            _circleMenu.Clicked += (s, index) =>
+            {
+                var intent = new A.Content.Intent(this, typeof(CircleMenuItemActivity));
+                intent.PutExtra("logoId", _iconsDictionary.GetValueOrDefault(index));
+                StartActivity(intent);
+            };
 
             _themeDropDown = FindViewById<EOSSandboxDropDown>(Resource.Id.themeDropDown);
             _mainColorDropDown = FindViewById<EOSSandboxDropDown>(Resource.Id.mainColor);
@@ -115,28 +139,16 @@ namespace EOS.UI.Android.Sandbox.Activities
         {
             var menus = new List<CircleMenuItemModel>();
             var submenus = new List<CircleMenuItemModel>();
+            for(int i = 101; i <= 103; i++)
+                submenus.Add(new CircleMenuItemModel(i, BaseContext.Resources.GetDrawable(_iconsDictionary.GetValueOrDefault(i))));
 
-            submenus.Add(new CircleMenuItemModel(31, BaseContext.Resources.GetDrawable(Resource.Drawable.WidescreenIcon)));
-            submenus.Add(new CircleMenuItemModel(32, BaseContext.Resources.GetDrawable(Resource.Drawable.OneToOneIcon)));
-            submenus.Add(new CircleMenuItemModel(33, BaseContext.Resources.GetDrawable(Resource.Drawable.HDRIcon)));
-
-            menus.Add(new CircleMenuItemModel(1, BaseContext.Resources.GetDrawable(Resource.Drawable.SwitchIcon)));
-            menus.Add(new CircleMenuItemModel(2, BaseContext.Resources.GetDrawable(Resource.Drawable.CameraIcon)));
-            menus.Add(new CircleMenuItemModel(3, BaseContext.Resources.GetDrawable(Resource.Drawable.ShutterIcon), submenus));
-
-            if(items == 3)
-                return menus;
-
-            menus.Add(new CircleMenuItemModel(4, BaseContext.Resources.GetDrawable(Resource.Drawable.TimerIcon), submenus));
-
-            if(items == 4)
-                return menus;
-
-            menus.Add(new CircleMenuItemModel(5, BaseContext.Resources.GetDrawable(Resource.Drawable.BushIcon)));
-            menus.Add(new CircleMenuItemModel(6, BaseContext.Resources.GetDrawable(Resource.Drawable.DurationIcon)));
-            menus.Add(new CircleMenuItemModel(7, BaseContext.Resources.GetDrawable(Resource.Drawable.EffectsIcon)));
-            menus.Add(new CircleMenuItemModel(8, BaseContext.Resources.GetDrawable(Resource.Drawable.HealIcon)));
-            menus.Add(new CircleMenuItemModel(9, BaseContext.Resources.GetDrawable(Resource.Drawable.MasksIcon)));
+            for(int i = 1; i <= items; i++)
+            {
+                if(i == 3 || i == 4)
+                    menus.Add(new CircleMenuItemModel(i, BaseContext.Resources.GetDrawable(_iconsDictionary.GetValueOrDefault(i)), submenus));
+                else
+                    menus.Add(new CircleMenuItemModel(i, BaseContext.Resources.GetDrawable(_iconsDictionary.GetValueOrDefault(i))));
+            }
 
             return menus;
         }

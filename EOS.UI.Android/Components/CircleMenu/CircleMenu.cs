@@ -378,7 +378,7 @@ namespace EOS.UI.Android.Components
 
         private void PreScrollingSetup()
         {
-            var model = FindNextVithibleModel(_forward);
+            var model = FindNextVisibleModel(_forward);
             ToggleIndicatorVisibility(model);
             NormalizeHiddenMenuItem(model);
         }
@@ -388,7 +388,7 @@ namespace EOS.UI.Android.Components
         /// </summary>
         /// <param name="scrollForward">Sets direction of scrolling</param>
         /// <returns>Returns finded model on CircleMenuItems list</returns>
-        private CircleMenuItemModel FindNextVithibleModel(bool scrollForward)
+        private CircleMenuItemModel FindNextVisibleModel(bool scrollForward)
         {
             var index = 0;
             if(scrollForward)
@@ -427,7 +427,7 @@ namespace EOS.UI.Android.Components
             var afterHideAnimation = new Action(() =>
             {
                 //on hiding animation should be visible icon on last item
-                var model = FindNextVithibleModel(true);
+                var model = FindNextVisibleModel(true);
                 _menuItems[1].SetDataFromModel(model.ImageSource, model.Id, model.HasChildren);
                 _indicators[1].Visibility = model.HasChildren ? ViewStates.Visible : ViewStates.Gone;
             });

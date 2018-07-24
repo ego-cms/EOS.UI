@@ -91,6 +91,7 @@
   <ItemGroup>
     <Compile Include="Activities\BaseActivity.cs" />
     <Compile Include="Activities\CircleMenuActivity.cs" />
+    <Compile Include="Activities\CircleMenuItemActivity.cs" />
     <Compile Include="Activities\FabProgressActivity.cs" />
     <Compile Include="Activities\InputActivity.cs" />
     <Compile Include="Activities\SectionActivity.cs" />
@@ -104,6 +105,7 @@
     <Compile Include="Adapters\EOSSandboxSpinnerAdapter.cs" />
     <Compile Include="Controls\EOSSandboxButton.cs" />
     <Compile Include="Controls\EOSSandboxDivider.cs" />
+    <Compile Include="Controls\EOSSandboxImageView.cs" />
     <Compile Include="Controls\EOSSandboxLinearLayout.cs" />
     <Compile Include="Controls\EOSSandboxRelativeLayout.cs" />
     <Compile Include="Controls\EOSSandboxScrollView.cs" />
@@ -257,6 +259,11 @@
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable\MasksIcon.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\layout\CircleMenuItemLayout.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <Import Project="..\packages\Xamarin.Android.Support.Annotations.27.0.2\build\MonoAndroid81\Xamarin.Android.Support.Annotations.targets" Condition="Exists('..\packages\Xamarin.Android.Support.Annotations.27.0.2\build\MonoAndroid81\Xamarin.Android.Support.Annotations.targets')" />
