@@ -127,7 +127,7 @@ namespace EOS.UI.Android.Sandbox.Activities
             if(items == 3)
                 return menus;
 
-            menus.Add(new CircleMenuItemModel(4, BaseContext.Resources.GetDrawable(Resource.Drawable.TimerIcon)));
+            menus.Add(new CircleMenuItemModel(4, BaseContext.Resources.GetDrawable(Resource.Drawable.TimerIcon), submenus));
 
             if(items == 4)
                 return menus;
