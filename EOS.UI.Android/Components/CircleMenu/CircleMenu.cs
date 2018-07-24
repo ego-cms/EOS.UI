@@ -85,7 +85,7 @@ namespace EOS.UI.Android.Components
         private NormalizationEndRunnable _normalizationEndListener;
         private UpdateMenuItemsVisibilityRunnable _updateRunnable;
 
-        private IMenuStateAnimator _menuStateAnimator;
+        private IMenuStateCommutator _menuStateCommutator;
 
         #endregion
 
@@ -208,13 +208,14 @@ namespace EOS.UI.Android.Components
                 var menuState = MenuState.Full;
                 _canSwipe = true;
 
+                //if source contains 3 item we should off swipe and set simple open/show algorithm
                 if(value.Count == 3)
                 {
                     menuState = MenuState.Simple;
                     _canSwipe = false;
                 }
 
-                _menuStateAnimator = GetMenuStateAnimator(menuState);
+                _menuStateCommutator = GetMenuStateCommutator(menuState);
 
                 _circleMenuItems = value;
                 InitialDataModelSetup();
@@ -417,12 +418,17 @@ namespace EOS.UI.Android.Components
         {
             ++_showMenuItemsIteration;
             if(IsOpened)
-                _menuStateAnimator.HideMenuItems(_showMenuItemsIteration);
+                _menuStateCommutator.HideMenuItems(_showMenuItemsIteration);
             else
-                _menuStateAnimator.ShowMenuItems(_showMenuItemsIteration);
+                _menuStateCommutator.ShowMenuItems(_showMenuItemsIteration);
         }
 
-        private IMenuStateAnimator GetMenuStateAnimator(MenuState menuState)
+        /// <summary>
+        /// Method which responsible for open/show algorithm implementation
+        /// </summary>
+        /// <param name="menuState">identificator of algorithm</param>
+        /// <returns>open/show algorithm implementation</returns>
+        private IMenuStateCommutator GetMenuStateCommutator(MenuState menuState)
         {
             var afterHideAnimation = new Action(() =>
             {
@@ -440,7 +446,7 @@ namespace EOS.UI.Android.Components
             switch(menuState)
             {
                 case MenuState.Full:
-                    return new MenuStateAnimatorFull(_menuItems, 
+                    return new MenuStateCommutatorFull(_menuItems, 
                         _indicators, 
                         _mainMenuPositions, 
                         _indicatorsPositions, 
@@ -449,7 +455,7 @@ namespace EOS.UI.Android.Components
                         _updateRunnable,
                         _openSpringAnimationEndListener);
                 case MenuState.Simple:
-                    return new MenuStateAnimatorSimple(_menuItems,
+                    return new MenuStateCommutatorSimple(_menuItems,
                         _indicators,
                         _mainMenuPositions,
                         _indicatorsPositions,
@@ -458,7 +464,7 @@ namespace EOS.UI.Android.Components
                         _updateRunnable,
                         _openSpringAnimationEndListener);
                 default:
-                    return new MenuStateAnimatorFull(_menuItems,
+                    return new MenuStateCommutatorFull(_menuItems,
                         _indicators,
                         _mainMenuPositions,
                         _indicatorsPositions,
@@ -509,6 +515,8 @@ namespace EOS.UI.Android.Components
 
         private void InitialDataModelSetup()
         {
+            //if _canSwipe flag is true you can see 4 item on open/hide animation
+            //else you can see 3
             if(_canSwipe)
             {
                 for(int i = !IsOpened ? 0 : 1; i < 4; i++)

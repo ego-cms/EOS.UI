@@ -6,7 +6,9 @@ using Android.Views;
 using EOS.UI.Android.Components;
 using EOS.UI.Android.Sandbox.Controls;
 using EOS.UI.Shared.Themes.DataModels;
+using EOS.UI.Shared.Themes.Themes;
 using UIFrameworks.Shared.Themes.Helpers;
+using UIFrameworks.Shared.Themes.Interfaces;
 using static EOS.UI.Android.Sandbox.Helpers.Constants;
 using A = Android;
 
@@ -93,6 +95,16 @@ namespace EOS.UI.Android.Sandbox.Activities
             {
                 ResetCustomValues();
             };
+
+            SetCurrenTheme(_circleMenu.GetThemeProvider().GetCurrentTheme());
+        }
+
+        private void SetCurrenTheme(IEOSTheme iEOSTheme)
+        {
+            if(iEOSTheme is LightEOSTheme)
+                _themeDropDown.SetSpinnerSelection(1);
+            if(iEOSTheme is DarkEOSTheme)
+                _themeDropDown.SetSpinnerSelection(2);
         }
 
         private void CircleMenuItemsItemSelected(int position)
@@ -160,6 +172,7 @@ namespace EOS.UI.Android.Sandbox.Activities
             _focusedMainColorDropDown.SetSpinnerSelection(0);
             _focusedButtonColorDropDown.SetSpinnerSelection(0);
             _unfocusedButtonColorDropDown.SetSpinnerSelection(0);
+            _circleMenuItemsDropDown.SetSpinnerSelection(0);
         }
     }
 }
