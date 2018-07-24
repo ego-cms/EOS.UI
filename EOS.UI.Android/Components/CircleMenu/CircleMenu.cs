@@ -51,7 +51,7 @@ namespace EOS.UI.Android.Components
         private const int BottomMargin2 = 136;
         private const int BottomMargin3 = 161;
         private const int LeftMargin1 = 174;
-        private const int LeftMargin2 = 90;
+        private const int LeftMargin2 = 86;
         private const int LeftMargin3 = 26;
 
         //Tags for submenus and indicator
@@ -59,7 +59,6 @@ namespace EOS.UI.Android.Components
         private const string Indicator = "Indicator";
 
         private const int SwipeAnimateDuration = 300;
-        private const int ShowHideAnimateDuration = 50;
         private const int SubMenuAnimateDuration = 100;
 
         #endregion
@@ -81,9 +80,7 @@ namespace EOS.UI.Android.Components
 
         private CircleMenuScrollListener _scrollListener = new CircleMenuScrollListener();
         private ScrollSpringAnimationEndListener _scrollSpringAnimationEndListener;
-        private OpenSpringAnimationEndListener _openSpringAnimationEndListener;
         private NormalizationEndRunnable _normalizationEndListener;
-        private UpdateMenuItemsVisibilityRunnable _updateRunnable;
 
         private IMenuStateCommutator _menuStateCommutator;
 
@@ -293,9 +290,7 @@ namespace EOS.UI.Android.Components
                 menu.SetICircleMenuClicable(this);
 
             _scrollSpringAnimationEndListener = new ScrollSpringAnimationEndListener(Context, this);
-            _openSpringAnimationEndListener = new OpenSpringAnimationEndListener(Context, this);
             _normalizationEndListener = new NormalizationEndRunnable(Context, this);
-            _updateRunnable = new UpdateMenuItemsVisibilityRunnable(Context, this);
 
             var denisty = Context.Resources.DisplayMetrics.Density;
             _indicators.Add(CreateIndicatorView((int)(-IndicatorDiameter * denisty), (int)(-IndicatorDiameter * denisty)));
@@ -443,6 +438,9 @@ namespace EOS.UI.Android.Components
                 _container.SetBackgroundColor(!IsOpened ? Color.Argb(50, 0, 0, 0) : Color.Transparent);
             });
 
+            var updateRunnable = new UpdateMenuItemsVisibilityRunnable(Context, this);
+            var springEndListener = new OpenSpringAnimationEndListener(Context, this);
+
             switch(menuState)
             {
                 case MenuState.Full:
@@ -451,9 +449,9 @@ namespace EOS.UI.Android.Components
                         _mainMenuPositions, 
                         _indicatorsPositions, 
                         afterShowAnimation, 
-                        afterHideAnimation, 
-                        _updateRunnable,
-                        _openSpringAnimationEndListener);
+                        afterHideAnimation,
+                        updateRunnable,
+                        springEndListener);
                 case MenuState.Simple:
                     return new MenuStateCommutatorSimple(_menuItems,
                         _indicators,
@@ -461,8 +459,8 @@ namespace EOS.UI.Android.Components
                         _indicatorsPositions,
                         afterShowAnimation,
                         afterHideAnimation,
-                        _updateRunnable,
-                        _openSpringAnimationEndListener);
+                        updateRunnable,
+                        springEndListener);
                 default:
                     return new MenuStateCommutatorFull(_menuItems,
                         _indicators,
@@ -470,8 +468,8 @@ namespace EOS.UI.Android.Components
                         _indicatorsPositions,
                         afterShowAnimation,
                         afterHideAnimation,
-                        _updateRunnable,
-                        _openSpringAnimationEndListener);
+                        updateRunnable,
+                        springEndListener);
             }
         }
 
