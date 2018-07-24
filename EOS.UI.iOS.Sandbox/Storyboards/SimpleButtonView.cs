@@ -23,6 +23,7 @@ namespace EOS.UI.iOS.Sandbox
         private List<EOSSandboxDropDown> _dropDowns;
         private NSLayoutConstraint[] _defaultConstraints;
         private ShadowConfig _defaultShadow;
+        private double? _opacity;
 
         public SimpleButtonView(IntPtr handle) : base(handle)
         {
@@ -222,7 +223,14 @@ namespace EOS.UI.iOS.Sandbox
                 color =>
                 {
                     var config = _simpleButton.ShadowConfig;
-                    config.Color = color;
+                    if (_opacity != null)
+                    {
+                        config.Color = color.ColorWithAlpha((nfloat)_opacity);
+                    }
+                    else
+                    {
+                        config.Color = color;
+                    }
                     _simpleButton.ShadowConfig = config;
                 },
                 Fields.ShadowColor,
@@ -275,10 +283,11 @@ namespace EOS.UI.iOS.Sandbox
         {
             shadowOpacityDropDown.InitSource(
                 ShadowOpacityValues,
-                spread =>
+                opacity =>
                 {
                     var config = _simpleButton.ShadowConfig;
-                    config.Spread = (int)spread;
+                    _opacity = opacity;
+                    config.Color = config.Color.ColorWithAlpha((nfloat)opacity); 
                     _simpleButton.ShadowConfig = config;
                 },
                 Fields.ShadowOpacity,
@@ -307,6 +316,7 @@ namespace EOS.UI.iOS.Sandbox
         {
             resetButton.TouchUpInside += (sender, e) =>
             {
+                _opacity = null;
                 _simpleButton.ResetCustomization();
                 _simpleButton.SetTitle(ControlNames.SimpleButton, UIControlState.Normal);
                 containerView.RemoveConstraints(containerView.Constraints);
