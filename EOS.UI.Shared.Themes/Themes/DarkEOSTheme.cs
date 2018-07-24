@@ -105,7 +105,6 @@ namespace EOS.UI.Shared.Themes.Themes
             { EOSConstants.FabProgressPreloaderImage, "icPreloader"},
             { EOSConstants.WarningInputImage, "icWarning"},
             { EOSConstants.ClearInputImage, "icClear"},
-            { EOSConstants.FabProgressSize, 52},
             { EOSConstants.CircleProgressShown, true},
             { EOSConstants.FabShadow,  new ShadowConfig(){
                 Color = ColorExtension.FromHex(fabShadowColor),

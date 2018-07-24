@@ -103,7 +103,6 @@ namespace EOS.UI.Shared.Themes.Themes
             { EOSConstants.FabIconColor, ColorExtension.FromHex(neutralColor6)},
             { EOSConstants.WarningInputImage, "icWarning"},
             { EOSConstants.ClearInputImage, "icClear"},
-            { EOSConstants.FabProgressSize, 52},
             { EOSConstants.CircleProgressShown, true},
             { EOSConstants.FabShadow, new ShadowConfig(){
                 Color = ColorExtension.FromHex(fabShadowColor),

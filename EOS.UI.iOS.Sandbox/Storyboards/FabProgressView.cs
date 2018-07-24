@@ -173,7 +173,8 @@ namespace EOS.UI.iOS.Sandbox
 
         protected void UpdateFrame()
         {
-            var frame = new CGRect(containerView.Frame.Width / 2 - _fab.ButtonSize / 2, containerView.Frame.Height / 2 - _fab.ButtonSize / 2, _fab.ButtonSize, _fab.ButtonSize);
+            var buttonSize = 52;
+            var frame = new CGRect(containerView.Frame.Width / 2 - buttonSize / 2, containerView.Frame.Height / 2 - buttonSize / 2, buttonSize, buttonSize);
             _fab.Frame = frame;
         }
     }

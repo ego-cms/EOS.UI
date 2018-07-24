@@ -114,19 +114,6 @@ namespace EOS.UI.iOS.Controls
             }
         }
 
-        private int _buttonSize;
-        public int ButtonSize
-        {
-            get => _buttonSize;
-            set
-            {
-                _buttonSize = value;
-                UpdateSize();
-                UpdateImageInsets();
-                IsEOSCustomizationIgnored = true;
-            }
-        }
-
         private ShadowConfig _shadowConfig;
         public ShadowConfig ShadowConfig
         {
@@ -167,6 +154,12 @@ namespace EOS.UI.iOS.Controls
             _rotationAnimation.RepeatCount = Int32.MaxValue;
             UpdateAppearance();
             ImageView.TintColor = GetThemeProvider().GetEOSProperty<UIColor>(this, EOSConstants.FabIconColor);
+        }
+
+        public override void LayoutSubviews()
+        {
+            base.LayoutSubviews();
+            Layer.CornerRadius = Frame.Width / 2;
         }
 
         private void SetShadowConfig(ShadowConfig config)
@@ -214,7 +207,6 @@ namespace EOS.UI.iOS.Controls
                 DisabledBackgroundColor = provider.GetEOSProperty<UIColor>(this, EOSConstants.NeutralColor4);
                 Image = UIImage.FromBundle(provider.GetEOSProperty<string>(this, EOSConstants.CalendarImage));
                 PreloaderImage = UIImage.FromBundle(provider.GetEOSProperty<string>(this, EOSConstants.FabProgressPreloaderImage));
-                ButtonSize = provider.GetEOSProperty<int>(this, EOSConstants.FabProgressSize);
                 ShadowConfig = provider.GetEOSProperty<ShadowConfig>(this, EOSConstants.FabShadow);
                 Enabled = Enabled;
                 IsEOSCustomizationIgnored = false;
@@ -239,16 +231,9 @@ namespace EOS.UI.iOS.Controls
             InProgress = false;
         }
 
-        private void UpdateSize()
-        {
-            Layer.MasksToBounds = false;
-            Frame = Frame.ResizeRect(height: ButtonSize, width: ButtonSize);
-            Layer.CornerRadius = ButtonSize / 2;
-        }
-
         private void UpdateImageInsets()
         {
-            var padding = (nfloat)(ButtonSize * _paddingRatio);
+            var padding = (nfloat)(Frame.Width * _paddingRatio);
             var insets = new UIEdgeInsets(padding, padding, padding, padding);
             ImageEdgeInsets = insets;
         }

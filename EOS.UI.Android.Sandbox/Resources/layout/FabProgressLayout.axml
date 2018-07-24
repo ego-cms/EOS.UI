@@ -26,8 +26,8 @@
         <EOS.UI.Android.Controls.FabProgress
             android:id="@+id/fabProgress"
             android:layout_marginTop="30dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="52dp"
+            android:layout_height="52dp"
             android:layout_gravity="center" />
         <EOS.UI.Android.Sandbox.Controls.EOSSandboxDivider
             android:layout_width="match_parent"
