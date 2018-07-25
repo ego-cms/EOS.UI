@@ -20,13 +20,12 @@ namespace EOS.UI.Droid.Components
     {
         #region constants
 
+        private string BlackoutTag = "Blackout";
         private const float StartAngle = -180f;
         private const float EndAngle = 0f;
         private const float PivotScale = 0.5f;
         private const int RotateDuration = 380;
         private const float ShadowRadiusValue = 8f;
-        private const float EnabledAlpha = 1f;
-        private const float DisabledAlpha = 0.6f;
 
         #endregion
 
@@ -55,9 +54,8 @@ namespace EOS.UI.Droid.Components
             {
                 base.Enabled = value;
 
-                var alpha = Enabled ? EnabledAlpha : DisabledAlpha;
-                _icon.Alpha = alpha;
-                Alpha = alpha;
+                var view = FindViewWithTag(BlackoutTag);
+                (view.Background as GradientDrawable).SetColor(value ? Color.Transparent : BlackoutColor);
             }
         }
 
@@ -109,6 +107,8 @@ namespace EOS.UI.Droid.Components
             }
         }
 
+        public Color BlackoutColor { get; set; }
+
         #endregion
 
         #region .ctors
@@ -152,6 +152,7 @@ namespace EOS.UI.Droid.Components
             roundedDrawable.SetShape(ShapeType.Oval);
             SetBackgroundDrawable(roundedDrawable);
             Elevation = ShadowRadiusValue;
+            AddView(CreateBlackoutView());
         }
 
         public void StartRotateAnimation()
@@ -188,6 +189,20 @@ namespace EOS.UI.Droid.Components
                 _icon.Drawable.SetColorFilter(_isOpened ? FocusedIconColor : UnfocusedIconColor, PorterDuff.Mode.SrcIn);
             else
                 _icon.Drawable.SetColorFilter(UnfocusedIconColor, PorterDuff.Mode.SrcIn);
+        }
+
+        private View CreateBlackoutView()
+        {
+            var view = new View(Context);
+            var layoutParameters = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MatchParent, RelativeLayout.LayoutParams.MatchParent);
+            layoutParameters.AddRule(LayoutRules.CenterInParent);
+            view.LayoutParameters = layoutParameters;
+            var roundedDrawable = new GradientDrawable();
+            roundedDrawable.SetColor(Color.Transparent);
+            roundedDrawable.SetShape(ShapeType.Oval);
+            view.SetBackgroundDrawable(roundedDrawable);
+            view.Tag = BlackoutTag;
+            return view;
         }
 
         #endregion

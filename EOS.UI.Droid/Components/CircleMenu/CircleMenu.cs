@@ -184,7 +184,7 @@ namespace EOS.UI.Droid.Components
         }
 
         private Color _unfocusedIconColor;
-        public Color UnfocusedButtonColor
+        public Color UnfocusedIconColor
         {
             get => _unfocusedIconColor;
             set
@@ -198,6 +198,19 @@ namespace EOS.UI.Droid.Components
         }
 
         private Color _blackoutColor;
+        private Color BlackoutColor
+        {
+            get => _blackoutColor;
+            set
+            {
+                _blackoutColor = value;
+                foreach(var menu in _menuItems)
+                    menu.BlackoutColor = value;
+                foreach(var indicator in _indicators)
+                    indicator.BlackoutColor = value;
+                _mainMenu.BlackoutColor = value;
+            }
+        }
 
         private List<CircleMenuItemModel> _circleMenuItems;
         public List<CircleMenuItemModel> CircleMenuItems
@@ -451,7 +464,7 @@ namespace EOS.UI.Droid.Components
 
             var afterShowAnimation = new Action(() =>
             {
-                _container.SetBackgroundColor(!IsOpened ? _blackoutColor : Color.Transparent);
+                _container.SetBackgroundColor(!IsOpened ? BlackoutColor : Color.Transparent);
             });
 
             var updateRunnable = new UpdateMenuItemsVisibilityRunnable(Context, this);
@@ -647,7 +660,7 @@ namespace EOS.UI.Droid.Components
             subMenu.UnfocusedBackgroundColor = UnfocusedBackgroundColor;
             subMenu.FocusedBackgroundColor = FocusedBackgroundColor;
             subMenu.FocusedIconColor = FocusedIconColor;
-            subMenu.UnfocusedIconColor = UnfocusedButtonColor;
+            subMenu.UnfocusedIconColor = UnfocusedIconColor;
 
             return subMenu;
         }
@@ -862,7 +875,7 @@ namespace EOS.UI.Droid.Components
                     //after end of animation setup internal values to default and change background color
                     _showMenuItemsIteration = 0;
                     IsOpened = !IsOpened;
-                    _container.SetBackgroundColor(IsOpened ? _blackoutColor : Color.Transparent);
+                    _container.SetBackgroundColor(IsOpened ? BlackoutColor : Color.Transparent);
                     Locked = false;
                 }
             }
@@ -886,8 +899,8 @@ namespace EOS.UI.Droid.Components
                 UnfocusedBackgroundColor = GetThemeProvider().GetEOSProperty<Color>(this, EOSConstants.NeutralColor6s);
                 FocusedBackgroundColor = GetThemeProvider().GetEOSProperty<Color>(this, EOSConstants.BrandPrimaryColor);
                 FocusedIconColor = GetThemeProvider().GetEOSProperty<Color>(this, EOSConstants.NeutralColor6s);
-                UnfocusedButtonColor = GetThemeProvider().GetEOSProperty<Color>(this, EOSConstants.NeutralColor1s);
-                _blackoutColor = GetThemeProvider().GetEOSProperty<Color>(this, EOSConstants.Blackout);
+                UnfocusedIconColor = GetThemeProvider().GetEOSProperty<Color>(this, EOSConstants.NeutralColor1s);
+                BlackoutColor = GetThemeProvider().GetEOSProperty<Color>(this, EOSConstants.Blackout);
                 IsEOSCustomizationIgnored = false;
             }
         }

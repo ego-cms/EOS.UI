@@ -117,7 +117,7 @@ namespace EOS.UI.Droid.Sandbox.Activities
         private void UnfocusedButtonColorItemSelected(int position)
         {
             if(position > 0)
-                _circleMenu.UnfocusedButtonColor = Colors.ColorsCollection.ElementAt(position).Value;
+                _circleMenu.UnfocusedIconColor = Colors.ColorsCollection.ElementAt(position).Value;
         }
 
         private void FocusedButtonColorItemSelected(int position)

@@ -20,6 +20,12 @@ namespace EOS.UI.Droid.Components
     /// </summary>
     internal class MainMenuButton: FrameLayout
     {
+        #region constants
+
+        private string BlackoutTag = "Blackout";
+
+        #endregion
+
         #region fields
 
         private const float StartScale = 1f;
@@ -41,13 +47,17 @@ namespace EOS.UI.Droid.Components
 
         private string AnimationName => _mainControl != null && _mainControl.IsOpened ? _backAnimationPath : _forwardAnimationPath;
 
+        public Color BlackoutColor { get; set; }
+
         public override bool Enabled
         {
             get => base.Enabled;
             set
             {
                 base.Enabled = value;
-                Alpha = Enabled ? 1f : 0.6f;
+
+                var view = FindViewWithTag(BlackoutTag);
+                (view.Background as GradientDrawable).SetColor(value ? Color.Transparent : BlackoutColor);
             }
         }
 
@@ -115,6 +125,8 @@ namespace EOS.UI.Droid.Components
 
             _lottieView = view.FindViewById<LottieAnimationView>(Resource.Id.lottieView);
             _lottieView.SetAnimation(AnimationName);
+
+            AddView(CreateBlackoutView());
         }
 
         public override bool OnTouchEvent(MotionEvent e)
@@ -146,6 +158,20 @@ namespace EOS.UI.Droid.Components
             _lottieView.AddValueCallback(new KeyPath("**"),
                    LottieProperty.ColorFilter,
                    new LottieValueCallback(new SimpleColorFilter(UnfocusedIconColor)));
+        }
+        
+        private View CreateBlackoutView()
+        {
+            var view = new View(Context);
+            var layoutParameters = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MatchParent, RelativeLayout.LayoutParams.MatchParent);
+            layoutParameters.AddRule(LayoutRules.CenterInParent);
+            view.LayoutParameters = layoutParameters;
+            var roundedDrawable = new GradientDrawable();
+            roundedDrawable.SetColor(Color.Transparent);
+            roundedDrawable.SetShape(ShapeType.Oval);
+            view.SetBackgroundDrawable(roundedDrawable);
+            view.Tag = BlackoutTag;
+            return view;
         }
 
         #endregion
