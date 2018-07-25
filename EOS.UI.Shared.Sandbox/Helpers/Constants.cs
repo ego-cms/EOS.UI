@@ -76,6 +76,11 @@ namespace EOS.UI.Shared.Sandbox.Helpers
             public const string ShadowOffsetY = "Shadow offset Y";
             public const string ShadowRadius = "Shadow Blur";
             public const string ShadowOpacity = "Shadow opacity";
+            public const string MainColor = "Main color";
+            public const string FocusedMainColor = "Focused main color";
+            public const string FocusedButtonColor = "Focused button color";
+            public const string UnfocusedButtonColor = "Unfocused button color";
+            public const string CircleMenuItems = "Circle menu items";
         };
 
         public static partial class Sizes
@@ -228,6 +233,18 @@ namespace EOS.UI.Shared.Sandbox.Helpers
             }
         }
     
+        public static class CircleMenuSource
+        {
+            public static Dictionary<string, int> SourceCollection = new Dictionary<string, int>()
+            {
+#if __ANDROID__
+                { string.Empty, 9 },
+#endif
+                { "3", 3 },
+                { "4", 4 },
+                { "9", 9 }
+            };
+        }
     }
 
 
@@ -243,6 +260,8 @@ namespace EOS.UI.Shared.Sandbox.Helpers
         public const string Section = "Section";
         public const string CTAButton = "CTA Button";
         public const string WorkTimeCalendar = "Work time calendar";
+        public const string CircleMenu = "Circle menu";
+        public const string CircleMenuItem = "Circle menu item";
     }
 
     public enum SimpleButtonTypeEnum

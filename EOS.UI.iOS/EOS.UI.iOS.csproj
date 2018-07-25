@@ -113,6 +113,12 @@
     <ImageAsset Include="Assets.xcassets\icClear.imageset\icClear.pdf">
       <Visible>false</Visible>
     </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\icHamburger.imageset\Contents.json">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\icHamburger.imageset\icHamburger.png">
+      <Visible>false</Visible>
+    </ImageAsset>
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
@@ -149,6 +155,9 @@
     <Compile Include="Models\WorkTimeCalendarModel.cs" />
     <Compile Include="Components\WorkTimeCalendarCollection.cs" />
     <Compile Include="Extensions\DateTimeExtensions.cs" />
+    <Compile Include="Components\CircleMenu\CircleMenu.cs" />
+    <Compile Include="Components\CircleMenu\CircleMenuButton.cs" />
+    <Compile Include="Components\CircleMenu\CircleMenuMainButton.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets.tt">
@@ -162,6 +171,8 @@
     <InterfaceDefinition Include="Components\WorkTimeCalendarCell.xib" />
     <None Include="packages.config" />
     <BundleResource Include="Resources\Animations\preloader-snake.json" />
+    <BundleResource Include="Resources\Animations\hamburger-open.json" />
+    <BundleResource Include="Resources\Animations\hamburger-close.json" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
@@ -175,7 +186,9 @@
     <Folder Include="CollectionViewSources\" />
     <Folder Include="Assets.xcassets\icWarning.imageset\" />
     <Folder Include="Assets.xcassets\icClear.imageset\" />
+    <Folder Include="Assets.xcassets\icHamburger.imageset\" />
     <Folder Include="Resources\Animations\" />
+    <Folder Include="Components\CircleMenu\" />
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="Controls\CircleProgress.xib" />

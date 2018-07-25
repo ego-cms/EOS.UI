@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using EOS.UI.iOS.Sandbox.Storyboards;
 using EOS.UI.Shared.Sandbox.Helpers;
@@ -28,7 +28,8 @@ namespace EOS.UI.iOS.Sandbox.Controls
                 {ControlNames.CircleProgress, CircleProgressView.Identifier},
                 {ControlNames.Section, SectionComponentView.Identifier },
                 {ControlNames.CTAButton, CTAButtonView.Identifier},
-                {ControlNames.WorkTimeCalendar, WorkTimeView.Identifier}
+                {ControlNames.WorkTimeCalendar, WorkTimeView.Identifier},
+                {ControlNames.CircleMenu, CircleMenuView.Identifier}
             };
         }
     }

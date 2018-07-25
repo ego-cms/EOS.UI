@@ -26,7 +26,6 @@ namespace EOS.UI.iOS.Sandbox
         {
             base.ViewDidLoad();
             _fab = new FabProgress();
-            var frame = _fab.Frame;
             _fab.TouchUpInside += async (sender, e) =>
             {
                 if (_fab.InProgress)
