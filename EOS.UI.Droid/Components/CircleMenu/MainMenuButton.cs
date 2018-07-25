@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using Android.Content;
 using Android.Graphics;
 using Android.Graphics.Drawables;
@@ -51,18 +51,18 @@ namespace EOS.UI.Droid.Components
             }
         }
 
-        public Color MainColor
+        public Color UnfocusedBackgroundColor
         {
             set => (Background as GradientDrawable).SetColor(value);
         }
 
-        private Color _unfocusedButtonColor;
-        public Color UnfocusedButtonColor
+        private Color _unfocusedIconColor;
+        public Color UnfocusedIconColor
         {
-            get => _unfocusedButtonColor;
+            get => _unfocusedIconColor;
             set
             {
-                _unfocusedButtonColor = value;
+                _unfocusedIconColor = value;
                 _lottieView.AddValueCallback(new KeyPath("**"),
                    LottieProperty.ColorFilter,
                    new LottieValueCallback(new SimpleColorFilter(value)));
@@ -145,7 +145,7 @@ namespace EOS.UI.Droid.Components
         {
             _lottieView.AddValueCallback(new KeyPath("**"),
                    LottieProperty.ColorFilter,
-                   new LottieValueCallback(new SimpleColorFilter(UnfocusedButtonColor)));
+                   new LottieValueCallback(new SimpleColorFilter(UnfocusedIconColor)));
         }
 
         #endregion

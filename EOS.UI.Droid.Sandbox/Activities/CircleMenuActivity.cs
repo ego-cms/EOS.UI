@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.Linq;
 using Android.App;
 using Android.Content;
@@ -72,19 +72,19 @@ namespace EOS.UI.Droid.Sandbox.Activities
             _themeDropDown.SetupAdapter(ThemeTypes.ThemeCollection.Select(item => item.Key).ToList());
             _themeDropDown.ItemSelected += ThemeItemSelected;
 
-            _mainColorDropDown.Name = Fields.MainColor;
+            _mainColorDropDown.Name = Fields.UnfocusedBackgroundColor;
             _mainColorDropDown.SetupAdapter(Colors.ColorsCollection.Select(item => item.Key).ToList());
             _mainColorDropDown.ItemSelected += MainColorItemSelected;
 
-            _focusedMainColorDropDown.Name = Fields.FocusedMainColor;
+            _focusedMainColorDropDown.Name = Fields.FocusedBackgroundColor;
             _focusedMainColorDropDown.SetupAdapter(Colors.ColorsCollection.Select(item => item.Key).ToList());
             _focusedMainColorDropDown.ItemSelected += FocusedMainColorItemSelected;
 
-            _focusedButtonColorDropDown.Name = Fields.FocusedButtonColor;
+            _focusedButtonColorDropDown.Name = Fields.FocusedIconColor;
             _focusedButtonColorDropDown.SetupAdapter(Colors.ColorsCollection.Select(item => item.Key).ToList());
             _focusedButtonColorDropDown.ItemSelected += FocusedButtonColorItemSelected;
 
-            _unfocusedButtonColorDropDown.Name = Fields.UnfocusedButtonColor;
+            _unfocusedButtonColorDropDown.Name = Fields.UnfocusedIconColor;
             _unfocusedButtonColorDropDown.SetupAdapter(Colors.ColorsCollection.Select(item => item.Key).ToList());
             _unfocusedButtonColorDropDown.ItemSelected += UnfocusedButtonColorItemSelected;
 
@@ -123,19 +123,19 @@ namespace EOS.UI.Droid.Sandbox.Activities
         private void FocusedButtonColorItemSelected(int position)
         {
             if(position > 0)
-                _circleMenu.FocusedButtonColor = Colors.ColorsCollection.ElementAt(position).Value;
+                _circleMenu.FocusedIconColor = Colors.ColorsCollection.ElementAt(position).Value;
         }
 
         private void FocusedMainColorItemSelected(int position)
         {
             if(position > 0)
-                _circleMenu.FocusedMainColor = Colors.ColorsCollection.ElementAt(position).Value;
+                _circleMenu.FocusedBackgroundColor = Colors.ColorsCollection.ElementAt(position).Value;
         }
 
         private void MainColorItemSelected(int position)
         {
             if(position > 0)
-                _circleMenu.MainColor = Colors.ColorsCollection.ElementAt(position).Value;
+                _circleMenu.UnfocusedBackgroundColor = Colors.ColorsCollection.ElementAt(position).Value;
         }
 
         private void ThemeItemSelected(int position)

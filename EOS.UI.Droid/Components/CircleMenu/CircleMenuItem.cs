@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using Android.Content;
 using Android.Graphics;
 using Android.Graphics.Drawables;
@@ -61,49 +61,49 @@ namespace EOS.UI.Droid.Components
             }
         }
 
-        private Color _mainColor;
-        public Color MainColor
+        private Color _unfocusedBackgroundColor;
+        public Color UnfocusedBackgroundColor
         {
-            get => _mainColor;
+            get => _unfocusedBackgroundColor;
             set
             {
-                _mainColor = value;
+                _unfocusedBackgroundColor = value;
                 if(!_hasChildren || (_hasChildren && !_isOpened))
                     (Background as GradientDrawable).SetColor(value);
             }
         }
 
-        private Color _focusedMainColor;
-        public Color FocusedMainColor
+        private Color _focusedBackgroundColor;
+        public Color FocusedBackgroundColor
         {
-            get => _focusedMainColor;
+            get => _focusedBackgroundColor;
             set
             {
-                _focusedMainColor = value;
+                _focusedBackgroundColor = value;
                 if(_hasChildren && _isOpened)
                     (Background as GradientDrawable).SetColor(value);
             }
         }
 
-        private Color _focusedButtonColor;
-        public Color FocusedButtonColor
+        private Color _focusedIconColor;
+        public Color FocusedIconColor
         {
-            get => _focusedButtonColor;
+            get => _focusedIconColor;
             set
             {
-                _focusedButtonColor = value;
+                _focusedIconColor = value;
                 if(_hasChildren && _isOpened)
                     _icon?.Drawable?.SetColorFilter(value, PorterDuff.Mode.SrcIn);
             }
         }
 
-        private Color _unfocusedButonColor;
-        public Color UnfocusedButtonColor
+        private Color _unfocusedIconColor;
+        public Color UnfocusedIconColor
         {
-            get => _unfocusedButonColor;
+            get => _unfocusedIconColor;
             set
             {
-                _unfocusedButonColor = value;
+                _unfocusedIconColor = value;
                 if(!_hasChildren || (_hasChildren && !_isOpened))
                     _icon?.Drawable?.SetColorFilter(value, PorterDuff.Mode.SrcIn);
             }
@@ -185,9 +185,9 @@ namespace EOS.UI.Droid.Components
         {
             _icon.Drawable.ClearColorFilter();
             if(_hasChildren)
-                _icon.Drawable.SetColorFilter(_isOpened ? FocusedButtonColor : UnfocusedButtonColor, PorterDuff.Mode.SrcIn);
+                _icon.Drawable.SetColorFilter(_isOpened ? FocusedIconColor : UnfocusedIconColor, PorterDuff.Mode.SrcIn);
             else
-                _icon.Drawable.SetColorFilter(UnfocusedButtonColor, PorterDuff.Mode.SrcIn);
+                _icon.Drawable.SetColorFilter(UnfocusedIconColor, PorterDuff.Mode.SrcIn);
         }
 
         #endregion
@@ -205,7 +205,7 @@ namespace EOS.UI.Droid.Components
                     if(_hasChildren)
                     {
                         _isOpened = !_isOpened;
-                        (Background as GradientDrawable).SetColor(_isOpened ? FocusedMainColor : MainColor);
+                        (Background as GradientDrawable).SetColor(_isOpened ? FocusedBackgroundColor : UnfocusedBackgroundColor);
                         UpdateIconColor();
                     }
                 }

@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.Linq;
 using EOS.UI.Shared.Themes.Enums;
 using EOS.UI.Shared.Themes.Helpers;
@@ -76,10 +76,10 @@ namespace EOS.UI.Shared.Sandbox.Helpers
             public const string ShadowOffsetY = "Shadow offset Y";
             public const string ShadowRadius = "Shadow Blur";
             public const string ShadowOpacity = "Shadow opacity";
-            public const string MainColor = "Main color";
-            public const string FocusedMainColor = "Focused main color";
-            public const string FocusedButtonColor = "Focused button color";
-            public const string UnfocusedButtonColor = "Unfocused button color";
+            public const string UnfocusedBackgroundColor = "Unfocused background color";
+            public const string FocusedBackgroundColor = "Focused background color";
+            public const string FocusedIconColor = "Focused icon color";
+            public const string UnfocusedIconColor = "Unfocused icon color";
             public const string CircleMenuItems = "Circle menu items";
         };
 

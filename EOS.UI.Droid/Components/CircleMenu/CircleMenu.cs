@@ -141,58 +141,58 @@ namespace EOS.UI.Droid.Components
 
         #region customization
 
-        private Color _mainColor;
-        public Color MainColor
+        private Color _unfocusedBackgroundColor;
+        public Color UnfocusedBackgroundColor
         {
-            get => _mainColor;
+            get => _unfocusedBackgroundColor;
             set
             {
-                _mainColor = value;
+                _unfocusedBackgroundColor = value;
                 foreach(var menu in _menuItems)
-                    menu.MainColor = value;
-                _mainMenu.MainColor = value;
+                    menu.UnfocusedBackgroundColor = value;
+                _mainMenu.UnfocusedBackgroundColor = value;
                 IsEOSCustomizationIgnored = true;
             }
         }
 
-        private Color _focusedMainColor;
-        public Color FocusedMainColor
+        private Color _focusedBackrgoundColor;
+        public Color FocusedBackgroundColor
         {
-            get => _focusedMainColor;
+            get => _focusedBackrgoundColor;
             set
             {
-                _focusedMainColor = value;
+                _focusedBackrgoundColor = value;
                 foreach(var menu in _menuItems)
-                    menu.FocusedMainColor = value;
+                    menu.FocusedBackgroundColor = value;
                 foreach(var indicator in _indicators)
                     (indicator.Background as GradientDrawable).SetColor(value);
                 IsEOSCustomizationIgnored = true;
             }
         }
 
-        private Color _focusedButtonColor;
-        public Color FocusedButtonColor
+        private Color _focusedIconColor;
+        public Color FocusedIconColor
         {
-            get => _focusedButtonColor;
+            get => _focusedIconColor;
             set
             {
-                _focusedButtonColor = value;
+                _focusedIconColor = value;
                 foreach(var menu in _menuItems)
-                    menu.FocusedButtonColor = value;
+                    menu.FocusedIconColor = value;
                 IsEOSCustomizationIgnored = true;
             }
         }
 
-        private Color _unfocusedButtonColor;
+        private Color _unfocusedIconColor;
         public Color UnfocusedButtonColor
         {
-            get => _unfocusedButtonColor;
+            get => _unfocusedIconColor;
             set
             {
-                _unfocusedButtonColor = value;
+                _unfocusedIconColor = value;
                 foreach(var menu in _menuItems)
-                    menu.UnfocusedButtonColor = value;
-                _mainMenu.UnfocusedButtonColor = value;
+                    menu.UnfocusedIconColor = value;
+                _mainMenu.UnfocusedIconColor = value;
                 IsEOSCustomizationIgnored = true;
             }
         }
@@ -613,7 +613,7 @@ namespace EOS.UI.Droid.Components
             hintView.LayoutParameters = layoutParameters;
 
             var roundedDrawable = new GradientDrawable();
-            roundedDrawable.SetColor(MainColor);
+            roundedDrawable.SetColor(UnfocusedBackgroundColor);
             roundedDrawable.SetShape(ShapeType.Oval);
 
             hintView.SetBackgroundDrawable(roundedDrawable);
@@ -637,17 +637,17 @@ namespace EOS.UI.Droid.Components
             subMenu.LayoutParameters = layoutParameters;
 
             var roundedDrawable = new GradientDrawable();
-            roundedDrawable.SetColor(MainColor);
+            roundedDrawable.SetColor(UnfocusedBackgroundColor);
             roundedDrawable.SetShape(ShapeType.Oval);
 
             subMenu.SetBackgroundDrawable(roundedDrawable);
 
             subMenu.Alpha = 0f;
 
-            subMenu.MainColor = MainColor;
-            subMenu.FocusedMainColor = FocusedMainColor;
-            subMenu.FocusedButtonColor = FocusedButtonColor;
-            subMenu.UnfocusedButtonColor = UnfocusedButtonColor;
+            subMenu.UnfocusedBackgroundColor = UnfocusedBackgroundColor;
+            subMenu.FocusedBackgroundColor = FocusedBackgroundColor;
+            subMenu.FocusedIconColor = FocusedIconColor;
+            subMenu.UnfocusedIconColor = UnfocusedButtonColor;
 
             return subMenu;
         }
@@ -668,7 +668,7 @@ namespace EOS.UI.Droid.Components
             indicatorView.LayoutParameters = layoutParameters;
 
             var roundedDrawable = new GradientDrawable();
-            roundedDrawable.SetColor(FocusedMainColor);
+            roundedDrawable.SetColor(FocusedBackgroundColor);
             roundedDrawable.SetShape(ShapeType.Oval);
 
             indicatorView.SetBackgroundDrawable(roundedDrawable);
@@ -883,9 +883,9 @@ namespace EOS.UI.Droid.Components
         {
             if(!IsEOSCustomizationIgnored)
             {
-                MainColor = GetThemeProvider().GetEOSProperty<Color>(this, EOSConstants.NeutralColor6s);
-                FocusedMainColor = GetThemeProvider().GetEOSProperty<Color>(this, EOSConstants.BrandPrimaryColor);
-                FocusedButtonColor = GetThemeProvider().GetEOSProperty<Color>(this, EOSConstants.NeutralColor6s);
+                UnfocusedBackgroundColor = GetThemeProvider().GetEOSProperty<Color>(this, EOSConstants.NeutralColor6s);
+                FocusedBackgroundColor = GetThemeProvider().GetEOSProperty<Color>(this, EOSConstants.BrandPrimaryColor);
+                FocusedIconColor = GetThemeProvider().GetEOSProperty<Color>(this, EOSConstants.NeutralColor6s);
                 UnfocusedButtonColor = GetThemeProvider().GetEOSProperty<Color>(this, EOSConstants.NeutralColor1s);
                 _blackoutColor = GetThemeProvider().GetEOSProperty<Color>(this, EOSConstants.Blackout);
                 IsEOSCustomizationIgnored = false;
