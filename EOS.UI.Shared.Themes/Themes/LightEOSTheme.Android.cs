@@ -1,4 +1,4 @@
-﻿#if __ANDROID__
+#if __ANDROID__
 using System;
 using Android.Graphics;
 using Android.App;
@@ -60,6 +60,7 @@ namespace EOS.UI.Shared.Themes.Themes
             { EOSConstants.NeutralColor6, Color.ParseColor(neutralColor6)},
             { EOSConstants.NeutralColor1s, Color.ParseColor(neutralColor1)},
             { EOSConstants.NeutralColor6s, Color.ParseColor(neutralColor6)},
+            { EOSConstants.Blackout, Color.Argb(164, Color.ParseColor(neutralColor5).R, Color.ParseColor(neutralColor5).G, Color.ParseColor(neutralColor5).B) },
             { EOSConstants.RippleColor, Color.ParseColor(rippleColor) },
             { EOSConstants.LabelCornerRadius, 4f },
             { EOSConstants.ButtonCornerRadius, 100f },
