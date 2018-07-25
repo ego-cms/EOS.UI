@@ -449,10 +449,6 @@ namespace EOS.UI.Droid.Controls
             var textSize = styledAttributes.GetFloat(Resource.Styleable.Input_eos_textsize, -1);
             if(textSize > 0)
                 TextSize = textSize;
-
-            var enabled = styledAttributes.GetBoolean(Resource.Styleable.Input_eos_enabled, true);
-            if(!enabled)
-                Enabled = enabled;
         }
 
         private void UpdateEnabledState()

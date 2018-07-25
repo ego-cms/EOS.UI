@@ -23,7 +23,6 @@
         <attr name="eos_textsize" format="float"/>
     </declare-styleable>
     <declare-styleable name="FabProgress">
-        <attr name="eos_enabled" format="boolean"/>
         <attr name="eos_backgroundcolor" format="reference|color"/>
         <attr name="eos_backgroundcolor_disabled" format="reference|color"/>
         <attr name="eos_backgroundcolor_pressed" format="reference|color"/>
@@ -41,7 +40,6 @@
         <attr name="eos_textcolor_pressed" format="reference|color"/>
         <attr name="eos_textsize" format="float"/>
         <attr name="eos_cornerradius" format="float"/>
-        <attr name="eos_enabled" format="boolean"/>
         <attr name="eos_preloaderimage" format="reference"/>
     </declare-styleable>
     <declare-styleable name="GhostButton">
@@ -51,7 +49,6 @@
         <attr name="eos_textcolor_disabled" format="reference|color"/>
         <attr name="eos_textcolor_pressed" format="reference|color"/>
         <attr name="eos_textsize" format="float"/>
-        <attr name="eos_enabled" format="boolean"/>
     </declare-styleable>
     <declare-styleable name="Input">
         <attr name="eos_color_focused" format="reference|color"/>
@@ -68,6 +65,5 @@
         <attr name="eos_font" format="string"/>
         <attr name="eos_letterspacing" format="float"/>
         <attr name="eos_textsize" format="float"/>
-        <attr name="eos_enabled" format="boolean"/>
     </declare-styleable>
 </resources>

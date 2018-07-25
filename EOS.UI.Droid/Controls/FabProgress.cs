@@ -256,10 +256,6 @@ namespace EOS.UI.Droid.Controls
             var preloaderImage = styledAttributes.GetDrawable(Resource.Styleable.FabProgress_eos_preloaderimage);
             if(preloaderImage != null)
                 PreloaderImage = preloaderImage;
-
-            var enabled = styledAttributes.GetBoolean(Resource.Styleable.FabProgress_eos_enabled, true);
-            if(!enabled)
-                Enabled = enabled;
         }
 
         public IEOSStyle GetCurrentEOSStyle()

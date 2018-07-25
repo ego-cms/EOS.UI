@@ -212,10 +212,6 @@ namespace EOS.UI.Droid.Controls
             var textSize = styledAttributes.GetFloat(Resource.Styleable.GhostButton_eos_textsize, -1);
             if(textSize > 0)
                 TextSize = textSize;
-
-            var enabled = styledAttributes.GetBoolean(Resource.Styleable.GhostButton_eos_enabled, true);
-            if(!enabled)
-                Enabled = enabled;
         }
 
         private Drawable CreateRippleDrawable()

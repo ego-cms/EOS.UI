@@ -6,6 +6,7 @@ using Android.Widget;
 using EOS.UI.Droid.Themes;
 using EOS.UI.Shared.Themes.Helpers;
 using EOS.UI.Shared.Themes.Interfaces;
+using static EOS.UI.Shared.Sandbox.Helpers.Constants;
 
 namespace EOS.UI.Droid.Sandbox.Adapters
 {
@@ -27,7 +28,7 @@ namespace EOS.UI.Droid.Sandbox.Adapters
                 (view as TextView).SetTextColor(_textColor);
 
             if(position == 0)
-                (view as TextView).Text = EOSConstants.DefaultText;
+                (view as TextView).Text = Fields.Default;
 
             return view;
         }
