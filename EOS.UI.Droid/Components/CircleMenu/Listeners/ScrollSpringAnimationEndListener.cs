@@ -1,4 +1,4 @@
-﻿using Android.Content;
+using Android.Content;
 using Android.Support.Animation;
 using Android.Views;
 using static Android.Support.Animation.DynamicAnimation;
@@ -7,7 +7,9 @@ namespace EOS.UI.Droid.Components
 {
     internal class ScrollSpringAnimationEndListener: View, IOnAnimationEndListener
     {
+        private const int CountAnimations = 4;
         private CircleMenu _menu;
+        private int _countAnimationsEnd;
 
         internal ScrollSpringAnimationEndListener(Context context, CircleMenu menu): base(context)
         {
@@ -18,10 +20,11 @@ namespace EOS.UI.Droid.Components
 
         public void OnAnimationEnd(DynamicAnimation animation, bool canceled, float value, float velocity)
         {
-            if(_menu.IsScrolling)
+            ++_countAnimationsEnd;
+            if(_countAnimationsEnd == CountAnimations)
             {
                 _menu.HandleOnScrollSpringAnimationEnd();
-                _menu.IsScrolling = false;
+                _countAnimationsEnd = 0;
             }
         }
 

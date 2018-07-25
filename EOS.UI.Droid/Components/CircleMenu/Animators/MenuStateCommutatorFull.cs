@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using Android.Graphics;
 using Android.Support.Animation;
@@ -132,10 +132,18 @@ namespace EOS.UI.Droid.Components
                     var springIndicatorX = new SpringAnimation(indicator, DynamicAnimation.X, pointIndicator.X);
                     var springIndicatorY = new SpringAnimation(indicator, DynamicAnimation.Y, pointIndicator.Y);
 
+                    springX.Spring.SetDampingRatio(DampingRatio).SetStiffness(Stiffness);
+                    springY.Spring.SetDampingRatio(DampingRatio).SetStiffness(Stiffness);
+                    springIndicatorX.Spring.SetDampingRatio(DampingRatio).SetStiffness(Stiffness);
+                    springIndicatorY.Spring.SetDampingRatio(DampingRatio).SetStiffness(Stiffness);
+
                     if(i == 1)
                     {
                         _afterShowAction?.Invoke();
+                        springX.AddEndListener(_commutatorAnimationEndListener);
                         springY.AddEndListener(_commutatorAnimationEndListener);
+                        springIndicatorX.AddEndListener(_commutatorAnimationEndListener);
+                        springIndicatorY.AddEndListener(_commutatorAnimationEndListener);
                     }
 
                     springIndicatorX.Start();

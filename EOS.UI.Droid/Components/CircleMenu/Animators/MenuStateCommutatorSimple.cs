@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using Android.Graphics;
 using Android.Support.Animation;
@@ -115,7 +115,10 @@ namespace EOS.UI.Droid.Components
                     if(i == 2)
                     {
                         _afterShowAction?.Invoke();
+                        springX.AddEndListener(_commutatorAnimationEndListener);
                         springY.AddEndListener(_commutatorAnimationEndListener);
+                        springIndicatorX.AddEndListener(_commutatorAnimationEndListener);
+                        springIndicatorY.AddEndListener(_commutatorAnimationEndListener);
                     }
 
                     springIndicatorX.Start();

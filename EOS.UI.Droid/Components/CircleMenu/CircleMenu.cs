@@ -24,6 +24,10 @@ namespace EOS.UI.Droid.Components
     {
         #region constants
 
+        //spring animation constants
+        private const float Stiffness = 1000f;
+        private const float DampingRatio = 0.35f;
+
         private const int HintElevationValue = 2;
         private const int HintAnimationSmoothDuration = 200;
         private const int HintAnimationFirstDuration = 300;
@@ -337,8 +341,18 @@ namespace EOS.UI.Droid.Components
                 var springXIndicator = new SpringAnimation(indicator, DynamicAnimation.X, indicatorPosition.X);
                 var springYIndicator = new SpringAnimation(indicator, DynamicAnimation.Y, indicatorPosition.Y);
 
+                springX.Spring.SetDampingRatio(DampingRatio).SetStiffness(Stiffness);
+                springY.Spring.SetDampingRatio(DampingRatio).SetStiffness(Stiffness);
+                springXIndicator.Spring.SetDampingRatio(DampingRatio).SetStiffness(Stiffness);
+                springYIndicator.Spring.SetDampingRatio(DampingRatio).SetStiffness(Stiffness);
+
                 if(i == _menuItems.Count - 1)
+                {
+                    springX.AddEndListener(_scrollSpringAnimationEndListener);
+                    springY.AddEndListener(_scrollSpringAnimationEndListener);
+                    springXIndicator.AddEndListener(_scrollSpringAnimationEndListener);
                     springYIndicator.AddEndListener(_scrollSpringAnimationEndListener);
+                }
 
                 springX.Start();
                 springY.Start();
@@ -804,6 +818,8 @@ namespace EOS.UI.Droid.Components
             //reset data from model for part visible and not clickable menus
             _menuItems[1].ResetDataFromModel();
             _menuItems[5].ResetDataFromModel();
+
+            IsScrolling = false;
         }
 
         internal void HandleOnOpenSpringAnimationEnd()

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using Android.Graphics;
 
@@ -6,6 +6,9 @@ namespace EOS.UI.Droid.Components
 {
     internal abstract class MenuStateCommutator
     {
+        //spring animation constants
+        protected const float Stiffness = 1000f;
+        protected const float DampingRatio = 0.4f;
         protected const int ShowHideAnimateDuration = 50;
 
         protected List<CircleMenuItem> _commutatorMenuItems;
