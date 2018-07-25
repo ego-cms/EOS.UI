@@ -27,7 +27,9 @@ namespace EOS.UI.Android.Components
         #region constants
 
         private const int HintElevationValue = 2;
-        private const int HintAnimationDuration = 300;
+        private const int HintAnimationSmoothDuration = 200;
+        private const int HintAnimationFirstDuration = 300;
+        private const int HintAnimationSecondDuration = 400;
         private const int HintAnimationDeltaY = 10;
         private const int SubMenuMargin = 11;
 
@@ -485,20 +487,40 @@ namespace EOS.UI.Android.Components
             var lastView = CreateHintView();
             var middleView = CreateHintView();
 
-            var translateDown = CreateHintAnimation(false);
+            var delta = HintAnimationDeltaY * Context.Resources.DisplayMetrics.Density;
 
-            translateDown.AnimationEnd += (s, e) =>
+            var lastItemTranslateDown = CreateHintAnimation(delta, HintAnimationFirstDuration);
+            lastItemTranslateDown.AnimationEnd += delegate
             {
-                _container.RemoveViewAt(0);
-                _container.RemoveViewAt(0);
+                var lastItemTranslateUp = CreateHintAnimation(delta, HintAnimationSecondDuration, false);
+                lastItemTranslateUp.AnimationEnd += delegate
+                {
+                    _container.RemoveViewAt(0);
+                    _container.RemoveViewAt(0);
 
-                lastView?.Dispose();
-                middleView?.Dispose();
+                    lastView?.Dispose();
+                    middleView?.Dispose();
 
-                action?.Invoke();
+                    action?.Invoke();
+                };
+                lastView.StartAnimation(lastItemTranslateUp);
             };
-
-            var translateUp = CreateHintAnimation();
+            var firstItemTranslateUp = CreateHintAnimation(-delta, HintAnimationFirstDuration);
+            firstItemTranslateUp.AnimationEnd += delegate
+            {
+                var firstItemTranslateDown = CreateHintAnimation(-delta, HintAnimationSecondDuration, false);
+                _menuItems[4].StartAnimation(firstItemTranslateDown);
+                if(_indicators[4].Visibility == ViewStates.Visible)
+                {
+                    firstItemTranslateDown.AnimationEnd += delegate
+                    {
+                        //after translate animation view can't change visibilitythat's why we should clear animation after complete
+                        //thats why we shold clear animation after complete
+                        _indicators[4].ClearAnimation();
+                    };
+                    _indicators[4].StartAnimation(firstItemTranslateDown);
+                }
+            };
 
             lastView.Elevation = HintElevationValue;
             middleView.Elevation = HintElevationValue * 2;
@@ -506,10 +528,10 @@ namespace EOS.UI.Android.Components
             _container.AddView(middleView, 0);
             _container.AddView(lastView, 0);
 
-            lastView.StartAnimation(translateDown);
-            _menuItems[4].StartAnimation(translateUp);
+            lastView.StartAnimation(lastItemTranslateDown);
+            _menuItems[4].StartAnimation(firstItemTranslateUp);
             if(_indicators[4].Visibility == ViewStates.Visible)
-                _indicators[4].StartAnimation(translateUp);
+                _indicators[4].StartAnimation(firstItemTranslateUp);
         }
 
         private void InitialDataModelSetup()
@@ -536,13 +558,20 @@ namespace EOS.UI.Android.Components
             }
         }
 
-        private TranslateAnimation CreateHintAnimation(bool isUp = true)
+        /// <summary>
+        /// method of implementation of hint animation
+        /// </summary>
+        /// <param name="delta">animated delta Y position</param>
+        /// <param name="duration">animation time</param>
+        /// <param name="isIn">flag for detecting animation direction out or in  </param>
+        /// <returns></returns>
+        private TranslateAnimation CreateHintAnimation(float delta, long duration, bool isIn = true)
         {
-            var delta = (isUp ? -HintAnimationDeltaY : HintAnimationDeltaY) * Context.Resources.DisplayMetrics.Density;
-            var translateAnimation = new TranslateAnimation(0, 0, 0, delta);
+            var translateAnimation = isIn ? new TranslateAnimation(0, 0, 0, delta) : new TranslateAnimation(0, 0, delta, 0);
+            translateAnimation.StartOffset = isIn? 0 : HintAnimationSmoothDuration;
             translateAnimation.Interpolator = new DecelerateInterpolator();
-            translateAnimation.FillAfter = false;
-            translateAnimation.Duration = HintAnimationDuration;
+            translateAnimation.FillAfter = true;
+            translateAnimation.Duration = duration;
             return translateAnimation;
         }
 
