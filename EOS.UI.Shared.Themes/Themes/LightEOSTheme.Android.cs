@@ -58,6 +58,8 @@ namespace EOS.UI.Shared.Themes.Themes
             { EOSConstants.NeutralColor4, Color.ParseColor(neutralColor4)},
             { EOSConstants.NeutralColor5, Color.ParseColor(neutralColor5)},
             { EOSConstants.NeutralColor6, Color.ParseColor(neutralColor6)},
+            { EOSConstants.NeutralColor1s, Color.ParseColor(neutralColor1)},
+            { EOSConstants.NeutralColor6s, Color.ParseColor(neutralColor6)},
             { EOSConstants.RippleColor, Color.ParseColor(rippleColor) },
             { EOSConstants.LabelCornerRadius, 4f },
             { EOSConstants.ButtonCornerRadius, 100f },

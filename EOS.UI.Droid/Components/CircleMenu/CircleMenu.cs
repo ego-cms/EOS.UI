@@ -11,16 +11,14 @@ using Android.Util;
 using Android.Views;
 using Android.Views.Animations;
 using Android.Widget;
-using EOS.UI.Android.Interfaces;
+using EOS.UI.Droid.Interfaces;
+using EOS.UI.Droid.Themes;
 using EOS.UI.Shared.Themes.DataModels;
 using EOS.UI.Shared.Themes.Helpers;
 using EOS.UI.Shared.Themes.Interfaces;
-using UIFrameworks.Android.Themes;
-using UIFrameworks.Shared.Themes.Helpers;
-using UIFrameworks.Shared.Themes.Interfaces;
-using static EOS.UI.Android.Helpers.Enums;
+using static EOS.UI.Droid.Helpers.Enums;
 
-namespace EOS.UI.Android.Components
+namespace EOS.UI.Droid.Components
 {
     public class CircleMenu: FrameLayout, View.IOnTouchListener, IIsOpened, IEOSThemeControl, ICircleMenuClickable
     {

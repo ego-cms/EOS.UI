@@ -25,6 +25,8 @@ namespace EOS.UI.Shared.Themes.Themes
             { EOSConstants.NeutralColor4, ColorExtension.FromHex(neutralColor4) },
             { EOSConstants.NeutralColor5, ColorExtension.FromHex(neutralColor5) },
             { EOSConstants.NeutralColor6, ColorExtension.FromHex(neutralColor6) },
+            { EOSConstants.NeutralColor1s, ColorExtension.FromHex(neutralColor6)},
+            { EOSConstants.NeutralColor6s, ColorExtension.FromHex(neutralColor1)},
             { EOSConstants.RippleColor, ColorExtension.FromHex(rippleColor) },
             { EOSConstants.ButtonCornerRadius, 25 },
             { EOSConstants.LabelCornerRadius, 5 },
