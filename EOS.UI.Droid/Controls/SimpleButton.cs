@@ -369,10 +369,6 @@ namespace EOS.UI.Droid.Controls
             var cornerRadius = styledAttributes.GetFloat(Resource.Styleable.SimpleButton_eos_cornerradius, -1);
             if(cornerRadius > 0)
                 CornerRadius = cornerRadius;
-
-            var enabled = styledAttributes.GetBoolean(Resource.Styleable.SimpleButton_eos_enabled, true);
-            if(!enabled)
-                Enabled = enabled;
         }
 
         private Drawable CreateRippleDrawable(Color contentColor)
