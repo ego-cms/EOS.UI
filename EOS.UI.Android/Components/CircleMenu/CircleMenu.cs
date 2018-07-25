@@ -782,10 +782,7 @@ namespace EOS.UI.Android.Components
         internal void HandleOnOpenSpringAnimationEnd()
         {
             //reset data from model for part visible and not clickable menus
-            if(!_canSwipe)
-                InitialDataModelSetup();
-            else
-                _menuItems[1].ResetDataFromModel();
+            _menuItems[1].ResetDataFromModel();
 
             //after end of open/hide animation setup internal values to default
             var action = new Action(() =>

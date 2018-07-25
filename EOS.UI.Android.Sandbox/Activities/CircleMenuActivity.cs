@@ -173,6 +173,7 @@ namespace EOS.UI.Android.Sandbox.Activities
             _focusedButtonColorDropDown.SetSpinnerSelection(0);
             _unfocusedButtonColorDropDown.SetSpinnerSelection(0);
             _circleMenuItemsDropDown.SetSpinnerSelection(0);
+            _circleMenu.CircleMenuItems = GenerateSource(9);
         }
     }
 }
