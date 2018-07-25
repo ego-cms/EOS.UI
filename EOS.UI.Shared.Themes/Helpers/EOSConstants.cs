@@ -15,15 +15,8 @@ namespace EOS.UI.Shared.Themes.Helpers
         public const string NeutralColor6 = "neutralColor6";
         public const string RippleColor = "rippleColor";
         public const string FabIconColor = "fabIconColor";
-        public const string TextSize = "textSize";
-        public const string SecondaryTextSize = "secondaryTextSize";
-        public const string CornerRadius = "cornerRadius";
         public const string LabelCornerRadius = "labelCornerRadius";
         public const string ButtonCornerRadius = "buttonCornerRadius";
-        public const string Font = "font";
-        public const string SecondaryFont = "secondaryFont";
-        public const string LetterSpacing = "letterSpacing";
-        public const string SecondaryLetterSpacing = "secondaryLetterSpacing";
         public const string LeftImage = "leftImage";
         public const string WarningInputImage = "warningInputImage";
         public const string ClearInputImage = "clearInputImage";
@@ -31,7 +24,6 @@ namespace EOS.UI.Shared.Themes.Helpers
         //fab progress constans
         public const string CalendarImage = "calendarImage";
         public const string FabProgressPreloaderImage = "fabProgressPreloaderImage";
-        public const string FabProgressSize = "fabProgressSize";
         public const string FabShadow = "fabShadow";
         //circle progress
         public const string CircleProgressShown = "CircleProgressShown";
@@ -44,13 +36,6 @@ namespace EOS.UI.Shared.Themes.Helpers
         public const string RightPadding = "rightPadding";
         public const string HasSectionBorder = "hasSectionBorder";
         public const string HasSectionAction = "hasSectionAction";
-        //worktime control
-        public const string WorkTimeTitleSize = "workTimeTitleSize";
-        public const string WorkTimeDayTextSize = "workTimeDayTextSize";
-        public const string WorkTimeTitleFont = "workTimeTitleFont";
-        public const string WorkTimeDayTextFont = "workTimeDayFont";
-        //Sandbox
-        public const string DefaultText = "default";
         //themes
         public static string R1C1 = "R1C1";
         public static string R1C2 = "R1C2";

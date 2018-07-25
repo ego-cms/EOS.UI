@@ -24,6 +24,10 @@
     <Compile Include="$(MSBuildThisFileDirectory)DataModels\WorkTimeCalendarItem.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Enums\WeekStartEnum.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Extensions\WorkTimeCalendarExtension.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Themes\DarkEOSTheme.Android.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Themes\DarkEOSTheme.iOS.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Themes\LightEOSTheme.Android.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Themes\LightEOSTheme.iOS.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="$(MSBuildThisFileDirectory)Themes\" />
