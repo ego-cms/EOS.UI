@@ -330,7 +330,10 @@ namespace EOS.UI.Droid.Components
         private void MainMenuClick(object sender, EventArgs e)
         {
             if(!IsBusy)
+            {
+                _mainMenu.AnimateClick();
                 UpdateMenuItemsVisiblility();
+            }
         }
 
         /// <summary>

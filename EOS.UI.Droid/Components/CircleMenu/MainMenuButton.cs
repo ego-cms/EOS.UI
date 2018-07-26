@@ -129,16 +129,15 @@ namespace EOS.UI.Droid.Components
             AddView(CreateBlackoutView());
         }
 
-        public override bool OnTouchEvent(MotionEvent e)
+        public void AnimateClick()
         {
-            if(e.Action == MotionEventActions.Down && Enabled)
+            if(Enabled)
             {
                 _lottieView.SetAnimation(AnimationName);
                 SetCustomColorToLottieView();
                 _lottieView.PlayAnimation();
                 StartTouchAnimation();
             }
-            return base.OnTouchEvent(e);
         }
 
         public void SetIIsOpenedItem(IIsOpened isOpened)
