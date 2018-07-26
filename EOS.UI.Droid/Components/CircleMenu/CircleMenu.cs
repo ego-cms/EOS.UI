@@ -63,7 +63,7 @@ namespace EOS.UI.Droid.Components
         private const string Indicator = "Indicator";
 
         private const int SwipeAnimateDuration = 300;
-        private const int SubMenuAnimateDuration = 100;
+        private const int SubMenuAnimateDuration = 150;
 
         #endregion
 
