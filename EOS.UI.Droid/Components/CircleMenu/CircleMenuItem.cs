@@ -38,6 +38,9 @@ namespace EOS.UI.Droid.Components
         private bool _isSubMenu;
         private bool _isOpened;
         private bool _hasChildren;
+        private bool _forward;
+
+        private CircleMenuScrollListener _scrollListener = new CircleMenuScrollListener();
 
         #endregion
 
@@ -211,21 +214,29 @@ namespace EOS.UI.Droid.Components
 
         public override bool OnTouchEvent(MotionEvent e)
         {
-            if(e.Action == MotionEventActions.Down && Enabled && !_circleMenu.Locked)
+            var isSpinned = _scrollListener.IsSpinRound(ref _forward, e);
+            if((e.Action == MotionEventActions.Up || e.Action == MotionEventActions.Cancel) && Enabled && !_circleMenu.Locked)
             {
-                _circleMenu.PerformClick(CircleMenuModelId, _isSubMenu, _isOpened);
-
-                if(!_isSubMenu)
+                if(isSpinned)
                 {
-                    if(_hasChildren)
+                    _circleMenu.PerformSwipe(_forward);
+                }
+                else
+                {
+                    _circleMenu.PerformClick(CircleMenuModelId, _isSubMenu, _isOpened);
+
+                    if(!_isSubMenu)
                     {
-                        _isOpened = !_isOpened;
-                        (Background as GradientDrawable).SetColor(_isOpened ? FocusedBackgroundColor : UnfocusedBackgroundColor);
-                        UpdateIconColor();
+                        if(_hasChildren)
+                        {
+                            _isOpened = !_isOpened;
+                            (Background as GradientDrawable).SetColor(_isOpened ? FocusedBackgroundColor : UnfocusedBackgroundColor);
+                            UpdateIconColor();
+                        }
                     }
                 }
             }
-            return base.OnTouchEvent(e);
+            return true;
         }
 
         #endregion

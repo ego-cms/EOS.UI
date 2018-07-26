@@ -984,6 +984,16 @@ namespace EOS.UI.Droid.Components
             }
         }
 
+        public void PerformSwipe(bool isForward)
+        {
+            if(!IsBusy && !Locked && _canSwipe)
+            {
+                _forward = isForward;
+                IsScrolling = true;
+                PreScrollingSetup();
+            }
+        }
+
         #endregion
     }
 }
