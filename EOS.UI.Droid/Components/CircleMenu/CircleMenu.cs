@@ -65,6 +65,11 @@ namespace EOS.UI.Droid.Components
         private const int SwipeAnimateDuration = 300;
         private const int SubMenuAnimateDuration = 150;
 
+        private const float ShadowRadiusValue = 8f;
+        //intermediate alpha values when should show or hide shadow
+        private const float AlphaHidingValue = 0.8f;
+        private const float AlphaShowingValue = 0.5f;
+
         #endregion
 
         #region fields 
@@ -659,6 +664,7 @@ namespace EOS.UI.Droid.Components
             subMenu.SetBackgroundDrawable(roundedDrawable);
 
             subMenu.Alpha = 0f;
+            subMenu.Elevation = 0f;
 
             subMenu.UnfocusedBackgroundColor = UnfocusedBackgroundColor;
             subMenu.FocusedBackgroundColor = FocusedBackgroundColor;
@@ -745,6 +751,13 @@ namespace EOS.UI.Droid.Components
 
                 var alfaAnimation = CreateAlphaAnimation(subMenu, SubMenuAnimateDuration, SubMenuAnimateDuration * i);
 
+                alfaAnimation.Update += delegate
+                {
+                    //when alpha is intermediate value it's necessary to add shadow
+                    if(subMenu.Alpha >= AlphaShowingValue)
+                        subMenu.Elevation = ShadowRadiusValue;
+                };
+
                 if(i == menuItemModel.Children.Count() - 1)
                 {
                     //after showing submenus shows indicator
@@ -775,7 +788,7 @@ namespace EOS.UI.Droid.Components
             var indicator = _container.FindViewWithTag(Indicator) as Indicator;
             var alfaIndicatorAnimation = CreateAlphaAnimation(indicator, SubMenuAnimateDuration, 0, false);
             alfaIndicatorAnimation.Start();
-            alfaIndicatorAnimation.AnimationEnd += (s, e) =>
+            alfaIndicatorAnimation.AnimationEnd += delegate
             {
                 _container.RemoveView(indicator);
             };
@@ -786,7 +799,14 @@ namespace EOS.UI.Droid.Components
                 var alfaAnimation = CreateAlphaAnimation(subMenu, SubMenuAnimateDuration, SubMenuAnimateDuration * (menuItemModel.Children.Count - i), false);
                 alfaAnimation.Start();
 
-                alfaAnimation.AnimationEnd += (s, e) =>
+                alfaAnimation.Update += delegate
+                {
+                    //when alpha is intermediate value it's necessary to remove shadow
+                    if(subMenu.Alpha < AlphaHidingValue)
+                        subMenu.Elevation = 0;
+                };
+
+                alfaAnimation.AnimationEnd += delegate
                 {
                     if(subMenu.Tag.ToString() == $"{Child}{0}")
                     {
