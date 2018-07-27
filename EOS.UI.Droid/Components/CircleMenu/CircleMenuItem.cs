@@ -46,7 +46,7 @@ namespace EOS.UI.Droid.Components
 
         #region properties
 
-        public int CircleMenuModelId { get; set; }
+        public int CircleMenuModelId { get; set; } = -1;
 
         public int HasSubMenus { get; set; }
 
@@ -215,7 +215,7 @@ namespace EOS.UI.Droid.Components
         public override bool OnTouchEvent(MotionEvent e)
         {
             var isSpinned = _scrollListener.IsSpinRound(ref _forward, e);
-            if((e.Action == MotionEventActions.Up || e.Action == MotionEventActions.Cancel) && Enabled && !_circleMenu.Locked)
+            if((e.Action == MotionEventActions.Up || e.Action == MotionEventActions.Cancel) && Enabled && !_circleMenu.Locked && CircleMenuModelId != -1)
             {
                 if(isSpinned)
                 {
