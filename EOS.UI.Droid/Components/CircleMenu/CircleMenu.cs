@@ -769,7 +769,7 @@ namespace EOS.UI.Droid.Components
 
                         indicator.Tag = Indicator;
                         _container.AddView(indicator);
-                        var alfaIndicatorAnimation = CreateAlphaAnimation(indicator, SubMenuAnimateDuration, SubMenuAnimateDuration * (i + 1));
+                        var alfaIndicatorAnimation = CreateAlphaAnimation(indicator, SubMenuAnimateDuration, 0);
                         alfaIndicatorAnimation.Start();
                         alfaIndicatorAnimation.AnimationEnd += delegate 
                         {
