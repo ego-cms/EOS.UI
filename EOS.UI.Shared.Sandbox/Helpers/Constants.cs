@@ -149,9 +149,9 @@ namespace EOS.UI.Shared.Sandbox.Helpers
 
         public static class Buttons
         {
-            private const string Simple = "Simple button";
-            private const string CTA = "CTA button";
-            private const string FullBleed = "Full bleed button";
+            public const string Simple = "Simple button";
+            public const string CTA = "CTA button";
+            public const string FullBleed = "Full bleed button";
 
             public static Dictionary<string, SimpleButtonTypeEnum> SimpleButtonTypeCollection = new Dictionary<string, SimpleButtonTypeEnum>()
             {

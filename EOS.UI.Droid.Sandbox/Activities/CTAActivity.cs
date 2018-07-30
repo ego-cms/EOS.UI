@@ -276,14 +276,14 @@ namespace EOS.UI.Droid.Sandbox.Activities
                         (int)(SimpleButtonConstants.TopPadding * denisty),
                         (int)(SimpleButtonConstants.RightPadding * denisty),
                         (int)(SimpleButtonConstants.BottomPadding * denisty));
-                    _CTAButton.Text = Buttons.CTAButtonTypeCollection.ElementAt(position).Key;
+                    _CTAButton.Text = Buttons.CTA;
                     break;
                 case SimpleButtonTypeEnum.FullBleed:
                     ResetCustomValues(true);
                     _CTAButton.CornerRadius = 0;
                     _CTAButton.SetPadding(0, 0, 0, 0);
                     _CTAButton.LayoutParameters = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MatchParent, ViewGroup.LayoutParams.WrapContent);
-                    _CTAButton.Text = Buttons.CTAButtonTypeCollection.ElementAt(position).Key;
+                    _CTAButton.Text = Buttons.FullBleed;
                     break;
             }
         }
