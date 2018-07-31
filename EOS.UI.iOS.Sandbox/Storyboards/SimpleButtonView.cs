@@ -194,7 +194,7 @@ namespace EOS.UI.iOS.Sandbox
                         case SimpleButtonTypeEnum.Simple:
                             containerView.RemoveConstraints(containerView.Constraints);
                             containerView.AddConstraints(_defaultConstraints);
-                            _simpleButton.SetTitle(Buttons.CTAButtonTypeCollection.First(t => t.Value == type).Key, UIControlState.Normal);
+                            _simpleButton.SetTitle(Buttons.Simple, UIControlState.Normal);
                             break;
                         case SimpleButtonTypeEnum.FullBleed:
                             containerView.RemoveConstraints(containerView.Constraints);
@@ -207,7 +207,7 @@ namespace EOS.UI.iOS.Sandbox
                             _simpleButton.ContentEdgeInsets = new UIEdgeInsets();
                             _simpleButton.CornerRadius = 0;
                             _simpleButton.ShadowConfig = null;
-                            _simpleButton.SetTitle(Buttons.CTAButtonTypeCollection.First(t => t.Value == type).Key, UIControlState.Normal);
+                            _simpleButton.SetTitle(Buttons.FullBleed, UIControlState.Normal);
                             break;
                     }
                 },
@@ -316,7 +316,7 @@ namespace EOS.UI.iOS.Sandbox
             {
                 _opacity = null;
                 _simpleButton.ResetCustomization();
-                _simpleButton.SetTitle(ControlNames.SimpleButton, UIControlState.Normal);
+                _simpleButton.SetTitle(Buttons.Simple, UIControlState.Normal);
                 containerView.RemoveConstraints(containerView.Constraints);
                 containerView.AddConstraints(_defaultConstraints);
                 ResetFields();
