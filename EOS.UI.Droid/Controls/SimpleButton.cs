@@ -219,17 +219,36 @@ namespace EOS.UI.Droid.Controls
             {
                 _shadowConfig = value;
 
-                if(Build.VERSION.SdkInt > BuildVersionCodes.Lollipop)
+                if (_shadowConfig == null)
                 {
-                    UpdateStateListAnimator();
+                    ResetShadow();
                 }
                 else
                 {
-                    StateListAnimator = null;
-                    Elevation = 2 * _shadowConfig.Blur;
+                    SetupShadow();
                 }
 
+
                 IsEOSCustomizationIgnored = true;
+            }
+        }
+
+        private void ResetShadow()
+        {
+            StateListAnimator = null;
+            Elevation = 0;
+        }
+
+        private void SetupShadow()
+        {
+            if (Build.VERSION.SdkInt > BuildVersionCodes.Lollipop)
+            {
+                UpdateStateListAnimator();
+            }
+            else
+            {
+                StateListAnimator = null;
+                Elevation = 2 * _shadowConfig.Blur;
             }
         }
 
