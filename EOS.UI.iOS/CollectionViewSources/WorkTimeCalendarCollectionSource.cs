@@ -1,11 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using CoreGraphics;
 using EOS.UI.iOS.Components;
 using EOS.UI.iOS.Models;
 using EOS.UI.Shared.Themes.DataModels;
-using EOS.UI.Shared.Themes.Extensions;
 using Foundation;
 using UIKit;
 
@@ -57,7 +55,7 @@ namespace EOS.UI.iOS.CollectionViewSources
                 cell.CellBackgroundColor = CalendarModel.CurrentDayBackgroundColor;
                 cell.DayTextColor = CalendarModel.CurrentDayTextColor;
                 cell.TitleColor = CalendarModel.CurrentDayTextColor;
-                cell.DividersColor = CalendarModel.CurrentColorDeviders;
+                cell.DividersColor = CalendarModel.CurrentColorDividers;
             }
             else
             {
