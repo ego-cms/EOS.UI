@@ -43,6 +43,8 @@ namespace EOS.UI.Droid.Controls
                     _progress = value;
                     if(_checkmarkImage.Visibility == ViewStates.Visible)
                         _checkmarkImage.Visibility = ViewStates.Invisible;
+                    if (_percentText.Visibility == ViewStates.Invisible)
+                        _percentText.Visibility = ViewStates.Visible;
                     _progressBar.Progress = _progress;
                     _percentText.Text = $"{value} %";
                     if(_progress == 100)
@@ -259,6 +261,7 @@ namespace EOS.UI.Droid.Controls
         {
             Finished?.Invoke(this, EventArgs.Empty);
             _checkmarkImage.Visibility = ViewStates.Visible;
+            _percentText.Visibility = ViewStates.Invisible;
             _isRunning = false;
         }
 
