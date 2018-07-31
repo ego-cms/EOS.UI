@@ -99,6 +99,7 @@ namespace EOS.UI.iOS.Sandbox
                     _simpleButton.ResetCustomization();
                     _dropDowns.Except(new[] { themeDropDown }).ToList().ForEach(dropDown => dropDown.ResetValue());
                     UpdateApperaence();
+                    SetupSimpleButtonStyle();
                 },
                 Fields.Theme,
                 rect);
@@ -192,27 +193,37 @@ namespace EOS.UI.iOS.Sandbox
                     switch (type)
                     {
                         case SimpleButtonTypeEnum.Simple:
-                            containerView.RemoveConstraints(containerView.Constraints);
-                            containerView.AddConstraints(_defaultConstraints);
-                            _simpleButton.SetTitle(Buttons.Simple, UIControlState.Normal);
+                            SetupSimpleButtonStyle();
                             break;
                         case SimpleButtonTypeEnum.FullBleed:
-                            containerView.RemoveConstraints(containerView.Constraints);
-                            View.ConstrainLayout(() => containerView.Frame.Height == 150);
-                            containerView.ConstrainLayout(() => _simpleButton.Frame.GetCenterX() == containerView.Frame.GetCenterX() &&
-                                                                _simpleButton.Frame.GetCenterY() == containerView.Frame.GetCenterY() &&
-                                                                _simpleButton.Frame.Height == 50 &&
-                                                                _simpleButton.Frame.Left == containerView.Frame.Left &&
-                                                                _simpleButton.Frame.Right == containerView.Frame.Right);
-                            _simpleButton.ContentEdgeInsets = new UIEdgeInsets();
-                            _simpleButton.CornerRadius = 0;
-                            _simpleButton.ShadowConfig = null;
-                            _simpleButton.SetTitle(Buttons.FullBleed, UIControlState.Normal);
+                            SetupFullBleedButtonStyle();
                             break;
                     }
                 },
                 Fields.ButtonType,
                 rect);
+        }
+
+        private void SetupFullBleedButtonStyle()
+        {
+            containerView.RemoveConstraints(containerView.Constraints);
+            View.ConstrainLayout(() => containerView.Frame.Height == 150);
+            containerView.ConstrainLayout(() => _simpleButton.Frame.GetCenterX() == containerView.Frame.GetCenterX() &&
+                                                _simpleButton.Frame.GetCenterY() == containerView.Frame.GetCenterY() &&
+                                                _simpleButton.Frame.Height == 50 &&
+                                                _simpleButton.Frame.Left == containerView.Frame.Left &&
+                                                _simpleButton.Frame.Right == containerView.Frame.Right);
+            _simpleButton.ContentEdgeInsets = new UIEdgeInsets();
+            _simpleButton.CornerRadius = 0;
+            _simpleButton.ShadowConfig = null;
+            _simpleButton.SetTitle(Buttons.FullBleed, UIControlState.Normal);
+        }
+
+        private void SetupSimpleButtonStyle()
+        {
+            containerView.RemoveConstraints(containerView.Constraints);
+            containerView.AddConstraints(_defaultConstraints);
+            _simpleButton.SetTitle(Buttons.Simple, UIControlState.Normal);
         }
 
         private void InitShadowColorDropDown(CGRect rect)
