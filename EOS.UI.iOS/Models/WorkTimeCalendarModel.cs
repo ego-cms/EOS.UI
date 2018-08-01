@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.Globalization;
 using System.Linq;
 using EOS.UI.iOS.Extensions;
 using EOS.UI.iOS.Themes;
@@ -11,8 +9,6 @@ using EOS.UI.Shared.Themes.Extensions;
 using EOS.UI.Shared.Themes.Helpers;
 using EOS.UI.Shared.Themes.Interfaces;
 using Foundation;
-using EOS.UI.Shared.Themes.Helpers;
-using EOS.UI.Shared.Themes.Interfaces;
 using UIKit;
 
 namespace EOS.UI.iOS.Models
@@ -182,13 +178,13 @@ namespace EOS.UI.iOS.Models
             }
         }
 
-        private UIColor _currentColorDeviders;
-        public UIColor CurrentColorDeviders
+        private UIColor _currentColorDividers;
+        public UIColor CurrentColorDividers
         {
-            get => _currentColorDeviders;
+            get => _currentColorDividers;
             set
             {
-                _currentColorDeviders = value;
+                _currentColorDividers = value;
                 IsEOSCustomizationIgnored = true;
                 PropertyChanged?.Invoke(this, EventArgs.Empty);
             }
@@ -228,7 +224,7 @@ namespace EOS.UI.iOS.Models
                 CurrentDayBackgroundColor = provider.GetEOSProperty<UIColor>(this, EOSConstants.BrandPrimaryColor);
                 DayEvenBackgroundColor = provider.GetEOSProperty<UIColor>(this, EOSConstants.NeutralColor5);
                 ColorDividers = provider.GetEOSProperty<UIColor>(this, EOSConstants.NeutralColor4);
-                CurrentColorDeviders = provider.GetEOSProperty<UIColor>(this, EOSConstants.NeutralColor4);
+                CurrentColorDividers = provider.GetEOSProperty<UIColor>(this, EOSConstants.NeutralColor4);
             }
         }
 
