@@ -251,6 +251,8 @@ namespace EOS.UI.Droid.Controls
             {
                 IsEOSCustomizationIgnored = true;
                 base.TextSize = value;
+                FontStyle.Size = value;
+                SetFontStyle();
             }
         }
 
