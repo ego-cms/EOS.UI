@@ -200,10 +200,6 @@ namespace EOS.UI.Droid.Components
             set
             {
                 _currentDayTextColor = value;
-                CurrentDayFontStyle.Color = value;
-                SetCurrntDayFontStyle();
-                CurrentTitleFontStyle.Color = value;
-                SetCurrentTitleFontStyle();
                 IsEOSCustomizationIgnored = true;
                 NotifyDataSetChanged();
             }
@@ -284,26 +280,13 @@ namespace EOS.UI.Droid.Components
             }
         }
 
-        private FontStyleItem _currentTitleFontStyle;
-        public FontStyleItem CurrentTitleFontStyle
+        private Color _currentTitleTextColor;
+        public Color CurrentTitleTextColor
         {
-            get => _currentTitleFontStyle;
+            get => _currentTitleTextColor;
             set
             {
-                _currentTitleFontStyle = value;
-                SetCurrentTitleFontStyle();
-                IsEOSCustomizationIgnored = true;
-            }
-        }
-
-        private FontStyleItem _currentDayFontStyle;
-        public FontStyleItem CurrentDayFontStyle
-        {
-            get => _currentDayFontStyle;
-            set
-            {
-                _currentDayFontStyle = value;
-                SetCurrntDayFontStyle();
+                _currentTitleTextColor = value;
                 IsEOSCustomizationIgnored = true;
             }
         }
@@ -320,20 +303,6 @@ namespace EOS.UI.Droid.Components
             _dayTextFont = DayFontStyle.Typeface;
             _dayTextSize = (int)DayFontStyle.Size;
             _dayTextColor = DayFontStyle.Color;
-        }
-
-        private void SetCurrentTitleFontStyle()
-        {
-            _titleFont = CurrentTitleFontStyle.Typeface;
-            _titleTextSize = (int)CurrentTitleFontStyle.Size;
-            _currentDayTextColor = CurrentTitleFontStyle.Color;
-        }
-
-        private void SetCurrntDayFontStyle()
-        {
-            _dayTextFont = CurrentDayFontStyle.Typeface;
-            _dayTextSize = (int)CurrentDayFontStyle.Size;
-            _currentDayTextColor = CurrentDayFontStyle.Color;
         }
 
         #endregion
@@ -525,8 +494,8 @@ namespace EOS.UI.Droid.Components
                 TitleFontStyle = GetThemeProvider().GetEOSProperty<FontStyleItem>(this, EOSConstants.R2C2);
                 DayFontStyle = GetThemeProvider().GetEOSProperty<FontStyleItem>(this, EOSConstants.R1C3);
 
-                CurrentTitleFontStyle = GetThemeProvider().GetEOSProperty<FontStyleItem>(this, EOSConstants.R2C5);
-                CurrentDayFontStyle = GetThemeProvider().GetEOSProperty<FontStyleItem>(this, EOSConstants.R1C5);
+                CurrentTitleTextColor = GetThemeProvider().GetEOSProperty<FontStyleItem>(this, EOSConstants.R2C5).Color;
+                CurrentDayTextColor = GetThemeProvider().GetEOSProperty<FontStyleItem>(this, EOSConstants.R1C5).Color;
 
                 CurrentDayBackgroundColor = GetThemeProvider().GetEOSProperty<Color>(this, EOSConstants.BrandPrimaryColor);
                 DayEvenBackgroundColor = GetThemeProvider().GetEOSProperty<Color>(this, EOSConstants.NeutralColor4);

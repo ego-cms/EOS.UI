@@ -116,7 +116,7 @@ namespace EOS.UI.iOS.Sandbox
                 rect);
 
             currentDayDevidersColor.InitSource(
-                color => source.CalendarModel.CurrentColorDeviders = color,
+                color => source.CalendarModel.CurrentColorDividers = color,
                 Fields.CurrentColorDividers,
                 rect);
 
