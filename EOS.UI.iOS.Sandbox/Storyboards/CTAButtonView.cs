@@ -40,15 +40,6 @@ namespace EOS.UI.iOS.Sandbox
                                                 _simpleButton.Frame.Width == 340, _simpleButton);
             _defaultConstraints = containerView.Constraints;
 
-            _simpleButton.TouchUpInside += async (sender, e) =>
-            {
-                _simpleButton.StartProgressAnimation();
-                _dropDowns.ForEach(dropDown => dropDown.Enabled = false);
-                await Task.Delay(5000);
-                _dropDowns.ForEach(dropDown => dropDown.Enabled = true);
-                _simpleButton.StopProgressAnimation();
-            };
-
             _dropDowns = new List<EOSSandboxDropDown>()
             {
                 themeDropDown,
@@ -67,6 +58,15 @@ namespace EOS.UI.iOS.Sandbox
                 shadowOpacityDropDown,
                 shadowRadiusDropDown,
                 buttonTypeDropDown,
+            };
+
+            _simpleButton.TouchUpInside += async (sender, e) =>
+            {
+                _simpleButton.StartProgressAnimation();
+                ToggleAllControlsEnabled(false, _dropDowns, resetButton, enableSwitch);
+                await Task.Delay(5000);
+                ToggleAllControlsEnabled(true, _dropDowns, resetButton, enableSwitch);
+                _simpleButton.StopProgressAnimation();
             };
 
             View.AddGestureRecognizer(new UITapGestureRecognizer(() =>
@@ -336,6 +336,13 @@ namespace EOS.UI.iOS.Sandbox
         private void ResetFields()
         {
             _dropDowns.Except(new[] { themeDropDown }).ToList().ForEach(dropDown => dropDown.ResetValue());
+        }
+
+        private void ToggleAllControlsEnabled(bool enabled, List<EOSSandboxDropDown> spinners, UIButton resetUIButton, UISwitch enabledSwitch)
+        {
+            spinners.ToList().ForEach(s => s.Enabled = enabled);
+            resetUIButton.Enabled = enabled;
+            enabledSwitch.Enabled = enabled;
         }
     }
 }
