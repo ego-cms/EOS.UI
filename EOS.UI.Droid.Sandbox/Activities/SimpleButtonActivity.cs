@@ -2,6 +2,7 @@
 using Android.App;
 using Android.Graphics;
 using Android.OS;
+using Android.Util;
 using Android.Views;
 using Android.Widget;
 using EOS.UI.Droid.Controls;
@@ -18,6 +19,7 @@ namespace EOS.UI.Droid.Sandbox.Activities
     [Activity(Label = ControlNames.SimpleButton, Theme = "@style/Sandbox.Main")]
     public class SimpleButtonActivity : BaseActivity, IOnCheckedChangeListener
     {
+        private Size _cachedSize;
         private SimpleButton _simpleButton;
         private EOSSandboxDropDown _buttonTypeDropDown;
         private EOSSandboxDropDown _themeDropDown;
@@ -137,7 +139,7 @@ namespace EOS.UI.Droid.Sandbox.Activities
             {
                 case SimpleButtonTypeEnum.Simple:
                     ResetCustomValues(true);
-                    var layoutParameters = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WrapContent, ViewGroup.LayoutParams.WrapContent);
+                    var layoutParameters = GetSimpleButtonLayoutParameters();
                     layoutParameters.Gravity = GravityFlags.Center;
                     _simpleButton.LayoutParameters = layoutParameters;
                     var denisty = Resources.DisplayMetrics.Density;
@@ -152,10 +154,26 @@ namespace EOS.UI.Droid.Sandbox.Activities
                     ResetCustomValues(true);
                     _simpleButton.CornerRadius = 0;
                     _simpleButton.SetPadding(0, 0, 0, 0);
-                    _simpleButton.LayoutParameters = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MatchParent, ViewGroup.LayoutParams.WrapContent);
+                    _simpleButton.LayoutParameters = GetFullBleedButtonLayoutParameters();
                     _simpleButton.Text = Buttons.FullBleed;
                     break;
             }
+        }
+
+        private LinearLayout.LayoutParams GetSimpleButtonLayoutParameters()
+        {
+            if(_cachedSize != null)
+                return new LinearLayout.LayoutParams(_cachedSize.Width, _cachedSize.Height);
+
+            return _simpleButton.LayoutParameters as LinearLayout.LayoutParams;
+        }
+
+        private LinearLayout.LayoutParams GetFullBleedButtonLayoutParameters()
+        {
+            if (_cachedSize == null)
+                _cachedSize = new Size(_simpleButton.Width, _simpleButton.Height);
+
+            return new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MatchParent, _cachedSize.Height);
         }
 
         private void ThemeItemSelected(int position)
