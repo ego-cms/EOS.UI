@@ -1,13 +1,11 @@
-﻿using CoreAnimation;
+﻿using System;
+using CoreAnimation;
 using CoreGraphics;
 using EOS.UI.iOS.Themes;
 using EOS.UI.Shared.Themes.DataModels;
 using EOS.UI.Shared.Themes.Helpers;
 using EOS.UI.Shared.Themes.Interfaces;
 using Foundation;
-using System;
-using EOS.UI.Shared.Themes.Helpers;
-using EOS.UI.Shared.Themes.Interfaces;
 using UIKit;
 
 namespace EOS.UI.iOS
