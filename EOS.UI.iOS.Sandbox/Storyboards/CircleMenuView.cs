@@ -76,7 +76,7 @@ namespace EOS.UI.iOS.Sandbox
             //{
             //    swipeLabel.Text = $"{model.Id} clicked";
             //});
-            circleMenu.Source = source;
+            circleMenu.CircleMenuItems = source;
             circleMenu.Attach();
         }
     }
