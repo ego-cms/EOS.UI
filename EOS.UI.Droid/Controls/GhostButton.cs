@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using Android.Content;
 using Android.Content.Res;
 using Android.Graphics;
@@ -87,14 +87,15 @@ namespace EOS.UI.Droid.Controls
             base.SetTextColor(colorSet);
         }
 
+
+        private Color _disabledTextColor;
         public Color DisabledTextColor
         {
-            get => DisabledFontStyle.Color;
+            get => _disabledTextColor;
             set
             {
-                DisabledFontStyle.Color = value;
-                SetDisabledFontStyle();
-                SetTextColorSet(EnabledTextColor, DisabledFontStyle.Color);
+                _disabledTextColor= value;
+                SetTextColorSet(EnabledTextColor, _disabledTextColor);
                 IsEOSCustomizationIgnored = true;
             }
         }
@@ -123,32 +124,13 @@ namespace EOS.UI.Droid.Controls
             }
         }
 
-        private FontStyleItem _disabledFontStyle;
-        public FontStyleItem DisabledFontStyle
-        {
-            get => _disabledFontStyle;
-            set
-            {
-                _disabledFontStyle = value;
-                SetDisabledFontStyle();
-                IsEOSCustomizationIgnored = true;
-            }
-        }
 
         private void SetFontStyle()
         {
             base.Typeface = FontStyle.Typeface;
             base.TextSize = FontStyle.Size;
-            SetTextColorSet(FontStyle.Color, DisabledFontStyle?.Color ?? Color.Transparent);
+            SetTextColorSet(FontStyle.Color, _disabledTextColor);
             base.LetterSpacing = FontStyle.LetterSpacing;
-        }
-
-        private void SetDisabledFontStyle()
-        {
-            base.Typeface = DisabledFontStyle.Typeface;
-            base.TextSize = DisabledFontStyle.Size;
-            SetTextColorSet(FontStyle?.Color ?? Color.Transparent, DisabledFontStyle.Color);
-            base.LetterSpacing = DisabledFontStyle.LetterSpacing;
         }
 
         public GhostButton(Context context) : base(context)
@@ -282,8 +264,8 @@ namespace EOS.UI.Droid.Controls
             {
                 var provider = GetThemeProvider();
                 FontStyle = GetThemeProvider().GetEOSProperty<FontStyleItem>(this, EOSConstants.R2C1);
-                DisabledFontStyle = GetThemeProvider().GetEOSProperty<FontStyleItem>(this, EOSConstants.R2C4);
-                RippleColor = GetThemeProvider().GetEOSProperty<Color>(this, EOSConstants.BrandPrimaryColorVariant1);
+                DisabledTextColor = GetThemeProvider().GetEOSProperty<FontStyleItem>(this, EOSConstants.R2C4).Color;
+                RippleColor = GetThemeProvider().GetEOSProperty<Color>(this, EOSConstants.RippleColor);
                 IsEOSCustomizationIgnored = false;
             }
         }

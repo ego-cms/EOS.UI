@@ -1,12 +1,7 @@
 ﻿using System;
-using EOS.UI.iOS.Extensions;
-using EOS.UI.iOS.Themes;
-using EOS.UI.Shared.Themes.Extensions;
 using EOS.UI.Shared.Themes.DataModels;
-using EOS.UI.Shared.Themes.Helpers;
-using EOS.UI.Shared.Themes.Interfaces;
+using EOS.UI.Shared.Themes.Extensions;
 using Foundation;
-using EOS.UI.Shared.Themes.Interfaces;
 using UIKit;
 
 namespace EOS.UI.iOS.Components
