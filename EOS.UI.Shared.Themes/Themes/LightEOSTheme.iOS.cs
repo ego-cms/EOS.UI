@@ -38,15 +38,15 @@ namespace EOS.UI.Shared.Themes.Themes
             { EOSConstants.CircleProgressShown, true},
             { EOSConstants.FabShadow, new ShadowConfig(){
                 Color = ColorExtension.FromHex(fabShadowColor),
-                Offset = new CGPoint(0, 6),
+                Offset = new CGPoint(0, 12),
                 Blur = 12,
                 Spread = 1
             }},
             { EOSConstants.SimpleButtonShadow, new ShadowConfig(){
-                Color = ColorExtension.FromHex("#000", 0.2f),
+                Color = ColorExtension.FromHex(shadowColor),
                 Offset = new CGPoint(0, 12),
-                Blur = 5,
-                Spread = 2
+                Blur = 12,
+                Spread = 200
             }},
             { EOSConstants.BorderWidth, 2 },
             { EOSConstants.SectionTitle, "Light section" },
