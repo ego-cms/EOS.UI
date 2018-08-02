@@ -7,8 +7,6 @@ using System.Linq;
 using EOS.UI.iOS.Themes;
 using EOS.UI.Shared.Themes.Helpers;
 using EOS.UI.Shared.Themes.Interfaces;
-using EOS.UI.Shared.Themes.Helpers;
-using EOS.UI.Shared.Themes.Interfaces;
 using EOS.UI.Shared.Themes.Extensions;
 
 using static EOS.UI.iOS.Helpers.Constants;
@@ -56,43 +54,6 @@ namespace EOS.UI.iOS.Controls
             {
                 _fontStyle = value;
                 SetFontStyle();
-                IsEOSCustomizationIgnored = true;
-            }
-        }
-
-        private FontStyleItem _disabledFontStyle;
-        public FontStyleItem DisabledFontStyle
-        {
-            get => _disabledFontStyle;
-            set
-            {
-                _disabledFontStyle = value;
-                SetDisabledFontStyle();
-                IsEOSCustomizationIgnored = true;
-            }
-        }
-
-        private FontStyleItem _placeholderFontStyle;
-        public FontStyleItem PlaceholderFontStyle
-        {
-            get => _placeholderFontStyle;
-            set
-            {
-                _placeholderFontStyle = value;
-                SetPlaceholderFontStyle();
-                IsEOSCustomizationIgnored = true;
-            }
-        }
-
-
-        private FontStyleItem _placeholderDisabledFontStyle;
-        public FontStyleItem PlaceholderDisabledFontStyle
-        {
-            get => _placeholderDisabledFontStyle;
-            set
-            {
-                _placeholderDisabledFontStyle = value;
-                SetPlaceholderDisabledFontStyle();
                 IsEOSCustomizationIgnored = true;
             }
         }
@@ -163,35 +124,38 @@ namespace EOS.UI.iOS.Controls
             }
         }
 
+        private UIColor _textColorDisabled;
         public UIColor TextColorDisabled
         {
-            get => DisabledFontStyle.Color;
+            get => _textColorDisabled;
             set
             {
-                DisabledFontStyle.Color = value;
-                SetDisabledFontStyle();
+                _textColorDisabled = value;
+                SetDisabledTextColor();
                 IsEOSCustomizationIgnored = true;
             }
         }
 
+        private UIColor _placeholderColor;
         public UIColor PlaceholderColor
         {
-            get => PlaceholderFontStyle.Color;
+            get => _placeholderColor;
             set
             {
-                PlaceholderFontStyle.Color = value;
-                SetPlaceholderFontStyle();
+                _placeholderColor = value;
+                SetPlaceholderTextColor();
                 IsEOSCustomizationIgnored = true;
             }
         }
 
+        private UIColor _placeholderColorDisabled;
         public UIColor PlaceholderColorDisabled
         {
-            get => PlaceholderDisabledFontStyle.Color;
+            get => _placeholderColorDisabled;
             set
             {
-                PlaceholderDisabledFontStyle.Color = value;
-                SetPlaceholderDisabledFontStyle();
+                _placeholderColorDisabled = value;
+                SetPlaceholderDisabledTextColor();
                 IsEOSCustomizationIgnored = true;
             }
         }
@@ -513,10 +477,12 @@ namespace EOS.UI.iOS.Controls
             if (!IsEOSCustomizationIgnored)
             {
                 var provider = GetThemeProvider();
+                //There are different fontstyles, but the difference only in colors, 
+                //so from font style items we only get the right color
                 FontStyle = provider.GetEOSProperty<FontStyleItem>(this, EOSConstants.R4C2);
-                PlaceholderFontStyle = provider.GetEOSProperty<FontStyleItem>(this, EOSConstants.R4C3);
-                PlaceholderDisabledFontStyle = provider.GetEOSProperty<FontStyleItem>(this, EOSConstants.R4C4);
-                DisabledFontStyle = provider.GetEOSProperty<FontStyleItem>(this, EOSConstants.R4C4);
+                PlaceholderColor = provider.GetEOSProperty<FontStyleItem>(this, EOSConstants.R4C3).Color;
+                PlaceholderColorDisabled = provider.GetEOSProperty<FontStyleItem>(this, EOSConstants.R4C4).Color;
+                DisabledColor = provider.GetEOSProperty<FontStyleItem>(this, EOSConstants.R4C4).Color;
                 LeftImage = UIImage.FromBundle(provider.GetEOSProperty<string>(this, EOSConstants.LeftImage));
                 NormalIconColor = provider.GetEOSProperty<UIColor>(this, EOSConstants.NeutralColor2);
                 NormalUnderlineColor = provider.GetEOSProperty<UIColor>(this, EOSConstants.NeutralColor3);
@@ -620,19 +586,19 @@ namespace EOS.UI.iOS.Controls
             this.SetLetterSpacing(FontStyle.LetterSpacing);
         }
 
-        private void SetPlaceholderFontStyle()
+        private void SetPlaceholderTextColor()
         {
             if (Enabled && Placeholder != null)
                 AttributedPlaceholder = new NSAttributedString(Placeholder, null, PlaceholderColor);
         }
 
-        private void SetPlaceholderDisabledFontStyle()
+        private void SetPlaceholderDisabledTextColor()
         {
             if (!Enabled && Placeholder != null)
                 AttributedPlaceholder = new NSAttributedString(Placeholder, null, PlaceholderColorDisabled);
         }
 
-        private void SetDisabledFontStyle()
+        private void SetDisabledTextColor()
         {
             if (!Enabled)
                 base.TextColor = TextColorDisabled;

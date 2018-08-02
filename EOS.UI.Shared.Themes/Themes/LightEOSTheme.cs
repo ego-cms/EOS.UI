@@ -1,4 +1,4 @@
-﻿using EOS.UI.Shared.Themes.Interfaces;
+using EOS.UI.Shared.Themes.Interfaces;
 
 namespace EOS.UI.Shared.Themes.Themes
 {
@@ -16,7 +16,7 @@ namespace EOS.UI.Shared.Themes.Themes
         private const string neutralColor5 = "#F6F6F6";
         private const string neutralColor6 = "#FFFFFF";
         private const string rippleColor = "#293C6DF0";
-        private const string shadowColor = "#A3EAEAEA";
-        private const string fabShadowColor = "#3D000000"; 
+        private const string shadowColor = "#33343334";
+        private const string fabShadowColor = "#3D000000";
     }
 }

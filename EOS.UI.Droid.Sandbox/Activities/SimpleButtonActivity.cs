@@ -146,10 +146,12 @@ namespace EOS.UI.Droid.Sandbox.Activities
                         (int)(SimpleButtonConstants.TopPadding * denisty),
                         (int)(SimpleButtonConstants.RightPadding * denisty),
                         (int)(SimpleButtonConstants.BottomPadding * denisty));
+                    _simpleButton.ResetCustomization();
                     _simpleButton.Text = Buttons.Simple;
                     break;
                 case SimpleButtonTypeEnum.FullBleed:
                     ResetCustomValues(true);
+                    _simpleButton.ShadowConfig = null;
                     _simpleButton.CornerRadius = 0;
                     _simpleButton.SetPadding(0, 0, 0, 0);
                     _simpleButton.LayoutParameters = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MatchParent, ViewGroup.LayoutParams.WrapContent);

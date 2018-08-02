@@ -92,7 +92,7 @@ namespace EOS.UI.Shared.Themes.Themes
                 new ShadowConfig()
                 {
                     Color = Color.ParseColor(shadowColor),
-                    Offset = new Point(0, 6),
+                    Offset = new Point(0, 12),
                     Blur = 12,
                     Spread = 200
                 }
