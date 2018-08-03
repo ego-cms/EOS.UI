@@ -22,6 +22,7 @@ namespace EOS.UI.iOS.Sandbox
             var circleMenu = new CircleMenu(View);
             circleMenu.LeftSwiped += (sender, e) => swipeLabel.Text = "Left swipe";
             circleMenu.RightSwiped += (sender, e) => swipeLabel.Text = "Right swipe";
+            circleMenu.Clicked += (object sender, int e) => swipeLabel.Text = $"{e.ToString()} clicked";
 
             circleMenu.CircleMenuItems = CreateSource();
             circleMenu.Attach();
@@ -35,7 +36,7 @@ namespace EOS.UI.iOS.Sandbox
                 var menuModel = new CircleMenuItemModel(i, null);
                 if(i % 2 == 0)
                 {
-                    for (int j = 0; j < 3; ++j)
+                    for (int j = 0; j < 5; ++j)
                     {
                         var subMenuModel = new CircleMenuItemModel(j, null);
                         menuModel.Children.Add(subMenuModel);
