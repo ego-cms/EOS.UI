@@ -13,6 +13,15 @@ namespace EOS.UI.Shared.Themes.DataModels
         public int Id { get; set; }
 #if __IOS__
         public UIImage ImageSource { get; set; }
+        
+        public CircleMenuItemModel () {}
+        
+        public CircleMenuItemModel(int id, UIImage imageSource, List<CircleMenuItemModel> children = null)
+        {
+            Id = id;
+            ImageSource = imageSource;
+            Children = children ?? new List<CircleMenuItemModel>();
+        }
 #endif
 
 #if __ANDROID__
@@ -27,7 +36,7 @@ namespace EOS.UI.Shared.Themes.DataModels
         {
             Id = id;
             ImageSource = drawable;
-            Children = children?? new List<CircleMenuItemModel>();
+            Children = children ?? new List<CircleMenuItemModel>();
         }
 #endif
         public List<CircleMenuItemModel> Children { get; set; }

@@ -1,5 +1,7 @@
 ﻿using System;
 using CoreGraphics;
+using EOS.UI.iOS.Extensions;
+using EOS.UI.Shared.Themes.DataModels;
 using UIKit;
 
 namespace EOS.UI.iOS.Components
@@ -8,7 +10,37 @@ namespace EOS.UI.iOS.Components
     {
         private const int _padding = 5;
 
-        public int CircleMenuItemId { get; set; }
+        private CircleMenuItemModel _model;
+        internal CircleMenuItemModel Model 
+        {
+            get => _model;
+            set
+            {
+                _model = value;
+                Indicator.Hidden = value?.HasChildren ?? true;
+                //TODO need to remove after develop
+                if(value != null)
+                {
+                    SetTitle(value.Id.ToString(), UIControlState.Normal);
+                }
+            }
+        }
+        
+        internal CircleButtonIndicator Indicator { get; set; }
+
+        private CGPoint _position;
+        internal CGPoint Position
+        {
+            get => _position;
+            set
+            {
+                _position = value;
+                if(value != null)
+                {
+                    Frame = Frame.ResizeRect(x: value.X, y: value.Y);
+                }
+            }
+        }
         
         public CircleMenuButton(CGRect frame) : base(frame)
         {

@@ -14,27 +14,37 @@ namespace EOS.UI.iOS.Components
 {
     public class CircleMenu : UIView
     {
+        //TODO need to remove after develop
+#if DEBUG
+        private bool _isTest = false;
+#else
         private bool _isTest = true;
+#endif
 
         private const int _minimumCountOfElements = 3;
         private const int _maximumCountOfElements = 9;
         private const int _visibleCountOfElements = 5;
+        private const int _mainButtonPadding = 15;
         private const int _menuSize = 300;
         private const double _menuOpenButtonAnimationDuration = 0.1;
         private const double _buttonMovementAnimationDuration = 0.2;
         private const int _radius = 96;
         private readonly nfloat _20degrees = 0.349066f;
         private readonly nfloat _10degrees = 0.174533f;
-
+        private readonly nfloat _55degrees = 0.959931f;
         private readonly UIView _rootView;
         private readonly UIView _shadowView;
         private readonly UISwipeGestureRecognizer _leftSwipe;
         private readonly UISwipeGestureRecognizer _rightSwipe;
+        private readonly UISwipeGestureRecognizer _upSwipe;
+        private readonly UISwipeGestureRecognizer _downSwipe;
+        private readonly UIView _menuButtonsView;
 
         //view for circle of menu buttons
-        private readonly UIView _menuButtonsView;
         private List<CircleMenuButton> _menuButtons = new List<CircleMenuButton>();
+        private List<CircleButtonIndicator> _buttonIndicators = new List<CircleButtonIndicator>();
         private List<CGPoint> _buttonPositions = new List<CGPoint>();
+        private List<CGPoint> _indicatorPositions = new List<CGPoint>();
 
 
         private List<CircleMenuItemModel> _circleMenuItems = new List<CircleMenuItemModel>();
@@ -46,7 +56,6 @@ namespace EOS.UI.iOS.Components
                 if (value.Count < _minimumCountOfElements || value.Count > _maximumCountOfElements)
                     throw new ArgumentException($"Source must contain {_minimumCountOfElements}-{_maximumCountOfElements} elements");
                 _circleMenuItems = value;
-
             }
         }
 
@@ -65,7 +74,9 @@ namespace EOS.UI.iOS.Components
 
             if (_isTest)
             {
-                Frame = new CGRect(mainFrame.Width - _menuSize * 0.65, mainFrame.Height - _menuSize * 0.65, _menuSize, _menuSize);
+                Frame = new CGRect(mainFrame.Width - (_menuSize / 2 + CircleMenuMainButton.Size / 2 + _mainButtonPadding),
+                                   mainFrame.Height - (_menuSize / 2 + CircleMenuMainButton.Size / 2 + _mainButtonPadding),
+                                   _menuSize, _menuSize);
             }
             else
             {
@@ -90,20 +101,18 @@ namespace EOS.UI.iOS.Components
             _mainButton.TouchUpInside += OnMainButtonClicked;
 
             //swipe init
-            _leftSwipe = new UISwipeGestureRecognizer(() =>
-            {
-                LeftSwiped?.Invoke(this, EventArgs.Empty);
-                MoveLeft();
-            });
+            _leftSwipe = new UISwipeGestureRecognizer(OnLeftSwipe);
             _leftSwipe.Direction = UISwipeGestureRecognizerDirection.Left;
             _rootView.AddGestureRecognizer(_leftSwipe);
-            _rightSwipe = new UISwipeGestureRecognizer(() =>
-            {
-                RightSwiped?.Invoke(this, EventArgs.Empty);
-                MoveRight();
-            });
+            _rightSwipe = new UISwipeGestureRecognizer(OnRightSwipe);
             _rightSwipe.Direction = UISwipeGestureRecognizerDirection.Right;
             _rootView.AddGestureRecognizer(_rightSwipe);
+            _upSwipe = new UISwipeGestureRecognizer(OnRightSwipe);
+            _upSwipe.Direction = UISwipeGestureRecognizerDirection.Up;
+            _rootView.AddGestureRecognizer(_upSwipe);
+            _downSwipe = new UISwipeGestureRecognizer(OnLeftSwipe);
+            _downSwipe.Direction = UISwipeGestureRecognizerDirection.Down;
+            _rootView.AddGestureRecognizer(_downSwipe);
 
             _menuButtonsView = new UIView()
             {
@@ -120,17 +129,19 @@ namespace EOS.UI.iOS.Components
             _rootView.AddSubview(this);
             FillbuttonsPositions();
             CreateMenuButtons();
+            FillIndicatorPositions();
+            CreateMenuIndicators();
         }
 
         void FillbuttonsPositions()
         {
-            double startAngle = -0.977384;//56c
+            double startAngle = -_55degrees;//56c
             double endAngle = 6.28 + startAngle;
             double diff = (endAngle - startAngle) / _maximumCountOfElements;
 
             double x;
             double y;
-            for (int i = 0; i < 5; ++i)
+            for (int i = 0; i < _visibleCountOfElements; ++i)
             {
                 x = Math.Cos(startAngle) * _radius + _menuButtonsView.Bounds.GetCenterX() - CircleMenuMainButton.Size / 2;
                 y = Math.Sin(startAngle) * _radius + _menuButtonsView.Bounds.GetCenterY() - CircleMenuMainButton.Size / 2;
@@ -139,9 +150,31 @@ namespace EOS.UI.iOS.Components
             }
 
             startAngle = 0.785398;
-            x = Math.Cos(startAngle) * 300 + _menuButtonsView.Bounds.GetCenterX() - CircleMenuMainButton.Size / 2;
-            y = Math.Sin(startAngle) * 300 + _menuButtonsView.Bounds.GetCenterY() - CircleMenuMainButton.Size / 2;
+            x = Math.Cos(startAngle) * (_isTest ? _menuSize : _radius) + _menuButtonsView.Bounds.GetCenterX() - CircleMenuMainButton.Size / 2;
+            y = Math.Sin(startAngle) * (_isTest ? _menuSize : _radius) + _menuButtonsView.Bounds.GetCenterY() - CircleMenuMainButton.Size / 2;
             _buttonPositions.Add(new CGPoint(x, y));
+        }
+
+        void FillIndicatorPositions()
+        {
+            double startAngle = -_55degrees;//56c
+            double endAngle = 6.28 + startAngle;
+            double diff = (endAngle - startAngle) / _maximumCountOfElements;
+
+            double x;
+            double y;
+            for (int i = 0; i < _visibleCountOfElements; ++i)
+            {
+                x = Math.Cos(startAngle) * 130 + _menuButtonsView.Bounds.GetCenterX() - CircleButtonIndicator.Size / 2;
+                y = Math.Sin(startAngle) * 130 + _menuButtonsView.Bounds.GetCenterY() - CircleButtonIndicator.Size / 2;
+                _indicatorPositions.Add(new CGPoint(x, y));
+                startAngle -= diff;
+            }
+
+            startAngle = 0.785398;
+            x = Math.Cos(startAngle) * 150 + _menuButtonsView.Bounds.GetCenterX() - CircleButtonIndicator.Size / 2;
+            y = Math.Sin(startAngle) * 150 + _menuButtonsView.Bounds.GetCenterY() - CircleButtonIndicator.Size / 2;
+            _indicatorPositions.Add(new CGPoint(x, y));
         }
 
         void CreateMenuButtons()
@@ -155,18 +188,65 @@ namespace EOS.UI.iOS.Components
                     BackgroundColor = UIColor.White,
                     Frame = new CGRect(position.X, position.Y, CircleMenuMainButton.Size, CircleMenuMainButton.Size),
                 };
-                menuButton.SetTitle(i.ToString(), UIControlState.Normal);
                 menuButton.SetTitleColor(UIColor.Black, UIControlState.Normal);
-
                 _menuButtonsView.InsertSubview(menuButton, 0);
                 _menuButtons.Add(menuButton);
             }
         }
 
+        void CreateMenuIndicators()
+        {
+            var position = _indicatorPositions.Last();
+            for (int i = 0; i < _indicatorPositions.Count; ++i)
+            {
+                var indicator = new CircleButtonIndicator()
+                {
+                    Frame = new CGRect(position.X, position.Y, CircleButtonIndicator.Size, CircleButtonIndicator.Size),
+                };
+                _menuButtons[i].Indicator = indicator;
+                _menuButtonsView.InsertSubview(indicator, 0);
+                _buttonIndicators.Add(indicator);
+            }
+        }
+
+        void PrepareMenuButtons()
+        {
+            if (_circleMenuItems.Count == _minimumCountOfElements)
+            {
+                for (int modelIndex = 0, buttonIndex = 1; modelIndex < _minimumCountOfElements; ++modelIndex, ++buttonIndex)
+                {
+                    _menuButtons[buttonIndex].Model = _circleMenuItems[modelIndex];
+                }
+                foreach (var button in _menuButtons)
+                {
+                    if (button.Model == null)
+                        button.Hidden = true;
+                }
+            }
+
+            if (_circleMenuItems.Count == 4)
+            {
+                for (int i = 0; i < _circleMenuItems.Count; ++i)
+                {
+                    _menuButtons[i].Model = _circleMenuItems[i];
+                }
+                _menuButtons[4].Model = _circleMenuItems[0];
+            }
+
+            if (_circleMenuItems.Count > 4)
+            {
+                for (int i = 0; i < _circleMenuItems.Count && i < _menuButtons.Count; ++i)
+                {
+                    _menuButtons[i].Model = _circleMenuItems[i];
+                }
+            }
+        }
+
         async Task OpenMenu()
         {
+            PrepareMenuButtons();
             var tcs = new TaskCompletionSource<bool>();
-            for (int i = 0; i < _menuButtons.Count - 1; ++i)
+            for (int i = 0; i < _visibleCountOfElements; ++i)
             {
                 var delay = _menuOpenButtonAnimationDuration * i;
                 for (int j = 0; j <= i; ++j)
@@ -174,7 +254,8 @@ namespace EOS.UI.iOS.Components
                     UIView.Animate(_menuOpenButtonAnimationDuration, delay, UIViewAnimationOptions.CurveEaseInOut, () =>
                     {
                         var positionIndex = i - j;
-                        _menuButtons[j].Frame = _menuButtons[j].Frame.ResizeRect(x: _buttonPositions[positionIndex].X, y: _buttonPositions[positionIndex].Y);
+                        _menuButtons[j].Position = _buttonPositions[positionIndex];
+                        _menuButtons[j].Indicator.Frame = _menuButtons[j].Indicator.Frame.ResizeRect(x: _indicatorPositions[positionIndex].X, y: _indicatorPositions[positionIndex].Y);
                     }, () =>
                     {
                         if (i == _menuButtons.Count - 1 && j == i)
@@ -202,7 +283,8 @@ namespace EOS.UI.iOS.Components
                         positionIndex - 1 : _buttonPositions.Count - 1;
                     UIView.Animate(_menuOpenButtonAnimationDuration, () =>
                     {
-                        _menuButtons[j].Frame = _menuButtons[j].Frame.ResizeRect(x: _buttonPositions[previousPositionIndex].X, y: _buttonPositions[previousPositionIndex].Y);
+                        _menuButtons[j].Position = _buttonPositions[previousPositionIndex];
+                        _menuButtons[j].Indicator.Frame = _menuButtons[j].Indicator.Frame.ResizeRect(x: _indicatorPositions[previousPositionIndex].X, y: _indicatorPositions[previousPositionIndex].Y);
                     });
                 }
                 await Task.Delay(TimeSpan.FromSeconds(_menuOpenButtonAnimationDuration));
@@ -211,39 +293,51 @@ namespace EOS.UI.iOS.Components
 
         void MoveLeft()
         {
+            var zeroButtonPositionModel = _menuButtons.SingleOrDefault(b => b.Position == _buttonPositions[0]).Model;
+            var indexOfZerobuttonPositionModel = _circleMenuItems.IndexOf(zeroButtonPositionModel);
+
             for (int i = 0; i < _menuButtons.Count; ++i)
             {
-                var buttonPosition = new CGPoint(_menuButtons[i].Frame.X, _menuButtons[i].Frame.Y);
-                var positionIndex = _buttonPositions.IndexOf(buttonPosition);
-                var nextPositionIndex = 0;
-                if (positionIndex != _buttonPositions.Count - 1)
+                var positionIndex = _buttonPositions.IndexOf(_menuButtons[i].Position);
+                var nextPositionIndex = positionIndex != _buttonPositions.Count - 1 ? positionIndex += 1 : 0;
+
+                if (nextPositionIndex == 0)
                 {
-                    nextPositionIndex = positionIndex + 1;
+                    var indexOfNextModel = indexOfZerobuttonPositionModel < _circleMenuItems.Count - 1 ?
+                                                                                            indexOfZerobuttonPositionModel + 1 : 0;
+                    _menuButtons[i].Model = _circleMenuItems[indexOfNextModel];
                 }
-                
+
                 UIView.Animate(_buttonMovementAnimationDuration, () =>
                 {
-                    _menuButtons[i].Frame = _menuButtons[i].Frame.ResizeRect(x: _buttonPositions[nextPositionIndex].X, y: _buttonPositions[nextPositionIndex].Y);
+                    _menuButtons[i].Position = _buttonPositions[nextPositionIndex];
+                    _menuButtons[i].Indicator.Frame = _menuButtons[i].Indicator.Frame.ResizeRect(x: _indicatorPositions[nextPositionIndex].X, y: _indicatorPositions[nextPositionIndex].Y);
                 });
-                
             }
             StartSpringEffect(UISwipeGestureRecognizerDirection.Left, _10degrees);
         }
 
         void MoveRight()
         {
+            var lastButtonPositionModel = _menuButtons.SingleOrDefault(b => b.Position == _buttonPositions[4]).Model;
+            var indexOfLastButtonPositionModel = _circleMenuItems.IndexOf(lastButtonPositionModel);
+
             for (int i = 0; i < _menuButtons.Count; ++i)
             {
-                var buttonPosition = new CGPoint(_menuButtons[i].Frame.X, _menuButtons[i].Frame.Y);
-                var positionIndex = _buttonPositions.IndexOf(buttonPosition);
-                var previousPositionIndex = _buttonPositions.Count - 1;
-                if (positionIndex != 0)
+                var positionIndex = _buttonPositions.IndexOf(_menuButtons[i].Position);
+                var previousPositionIndex = positionIndex != 0 ? positionIndex - 1 : _buttonPositions.Count - 1;
+
+                if (previousPositionIndex == 4)
                 {
-                    previousPositionIndex = positionIndex - 1;
+                    var indexOfPreviousModel = indexOfLastButtonPositionModel > 0 ?
+                        indexOfLastButtonPositionModel - 1 : _circleMenuItems.Count - 1;
+                    _menuButtons[i].Model = _circleMenuItems[indexOfPreviousModel];
                 }
+
                 UIView.Animate(_buttonMovementAnimationDuration, () =>
                 {
-                    _menuButtons[i].Frame = _menuButtons[i].Frame.ResizeRect(x: _buttonPositions[previousPositionIndex].X, y: _buttonPositions[previousPositionIndex].Y);
+                    _menuButtons[i].Position = _buttonPositions[previousPositionIndex];
+                    _menuButtons[i].Indicator.Frame = _menuButtons[i].Indicator.Frame.ResizeRect(x: _indicatorPositions[previousPositionIndex].X, y: _indicatorPositions[previousPositionIndex].Y);
                 });
             }
             StartSpringEffect(UISwipeGestureRecognizerDirection.Right, _10degrees);
@@ -251,7 +345,7 @@ namespace EOS.UI.iOS.Components
 
         void StartSpringEffect(UISwipeGestureRecognizerDirection direction, nfloat angle)
         {
-            if(direction == UISwipeGestureRecognizerDirection.Left)
+            if (direction == UISwipeGestureRecognizerDirection.Left)
             {
                 angle = -angle;
             }
@@ -297,6 +391,22 @@ namespace EOS.UI.iOS.Components
                 _shadowView.Hidden = false;
                 await OpenMenu();
             }
+        }
+
+        void OnRightSwipe()
+        {
+            if (!_mainButton.IsOpen || _circleMenuItems.Count == _minimumCountOfElements)
+                return;
+            RightSwiped?.Invoke(this, EventArgs.Empty);
+            MoveRight();
+        }
+
+        void OnLeftSwipe()
+        {
+            if (!_mainButton.IsOpen || _circleMenuItems.Count == _minimumCountOfElements)
+                return;
+            LeftSwiped?.Invoke(this, EventArgs.Empty);
+            MoveLeft();
         }
     }
 }

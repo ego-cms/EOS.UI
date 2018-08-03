@@ -7,8 +7,8 @@ namespace EOS.UI.iOS.Components
 {
     public class CircleMenuMainButton: CircleMenuButton
     {
-        public const int Size = 52;
-        public const int AnimationViewSize = 24;
+        internal const int Size = 52;
+        internal const int AnimationViewSize = 24;
         private const float _startScale = 0.85f;
         private const float _endScale = 1.0f;
         private const double _scaleDuration = 0.1;
@@ -17,7 +17,7 @@ namespace EOS.UI.iOS.Components
         private LOTAnimationView _mainButtonOpenAnimation;
         private LOTAnimationView _mainButtonCloseAnimation;
 
-        public bool IsOpen { get; private set; }
+        internal bool IsOpen { get; private set; }
         
         public CircleMenuMainButton(CGRect frame): base(frame)
         {

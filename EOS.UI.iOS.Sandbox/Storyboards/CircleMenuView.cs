@@ -23,61 +23,27 @@ namespace EOS.UI.iOS.Sandbox
             circleMenu.LeftSwiped += (sender, e) => swipeLabel.Text = "Left swipe";
             circleMenu.RightSwiped += (sender, e) => swipeLabel.Text = "Right swipe";
 
-            var m = new CircleMenuItemModel();
-            var source = new List<CircleMenuItemModel>()
-            {
-                new CircleMenuItemModel()
-                {
-                    Id = 0,
-                    ImageSource = UIImage.FromBundle("ic_backup"),
-                },
-                new CircleMenuItemModel()
-                {
-                    Id = 1,
-                    ImageSource = UIImage.FromBundle("ic_build")
-                },
-                new CircleMenuItemModel()
-                {
-                    Id = 2,
-                    ImageSource = UIImage.FromBundle("ic_camera_enhance")
-                },
-                new CircleMenuItemModel()
-                {
-                    Id = 3,
-                    ImageSource = UIImage.FromBundle("ic_backup")
-                },
-                new CircleMenuItemModel()
-                {
-                    Id = 4,
-                    ImageSource = UIImage.FromBundle("ic_build")
-                },
-                new CircleMenuItemModel()
-                {
-                    Id = 5,
-                    ImageSource = UIImage.FromBundle("ic_camera_enhance")
-                },
-                new CircleMenuItemModel()
-                {
-                    Id = 6,
-                    ImageSource = UIImage.FromBundle("ic_build")
-                },
-                new CircleMenuItemModel()
-                {
-                    Id = 7,
-                    ImageSource = UIImage.FromBundle("ic_camera_enhance")
-                },
-                new CircleMenuItemModel()
-                {
-                    Id = 8,
-                    ImageSource = UIImage.FromBundle("ic_camera_enhance")
-                },
-            };
-            //source.ForEach(model => model.Clicked += (sender, e) =>
-            //{
-            //    swipeLabel.Text = $"{model.Id} clicked";
-            //});
-            circleMenu.CircleMenuItems = source;
+            circleMenu.CircleMenuItems = CreateSource();
             circleMenu.Attach();
+        }
+        
+        private List<CircleMenuItemModel> CreateSource()
+        {
+            var menuModels = new List<CircleMenuItemModel>();
+            for (int i = 0; i < 6; ++i)
+            {
+                var menuModel = new CircleMenuItemModel(i, null);
+                if(i % 2 == 0)
+                {
+                    for (int j = 0; j < 3; ++j)
+                    {
+                        var subMenuModel = new CircleMenuItemModel(j, null);
+                        menuModel.Children.Add(subMenuModel);
+                    }
+                }
+                menuModels.Add(menuModel);
+            }
+            return menuModels;
         }
     }
 }
