@@ -7,7 +7,6 @@ namespace EOS.UI.iOS.Components
 {
     public class CircleMenuMainButton: CircleMenuButton
     {
-        internal const int Size = 52;
         internal const int AnimationViewSize = 24;
         private const float _startScale = 0.85f;
         private const float _endScale = 1.0f;

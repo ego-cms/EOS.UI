@@ -9,6 +9,8 @@ namespace EOS.UI.iOS.Components
 {
     public class CircleMenuButton : UIButton
     {
+        internal const int Size = 52;
+
         private const int _padding = 5;
         private List<CGPoint> _positions;
 
@@ -45,11 +47,7 @@ namespace EOS.UI.iOS.Components
                 {
                     Frame = new CGRect(value.X, value.Y, CircleMenuMainButton.Size, CircleMenuMainButton.Size);
                     var positionIndex = _positions.IndexOf(_position);
-
-                    if (positionIndex == 4 || positionIndex == 0)
-                        UserInteractionEnabled = false;
-                    else
-                        UserInteractionEnabled = true;
+                    UserInteractionEnabled = PositionIndex != 4 && positionIndex != 0;
                 }
             }
         }
@@ -58,7 +56,7 @@ namespace EOS.UI.iOS.Components
         {
             get => _positions.IndexOf(Position);
         }
-        
+
         public CircleMenuButton()
         {
             Initialize();
@@ -95,7 +93,7 @@ namespace EOS.UI.iOS.Components
             base.MovedToSuperview();
             Layer.CornerRadius = Frame.Height / 2;
         }
-        
+
         internal void ResetPosition()
         {
             Position = _position;

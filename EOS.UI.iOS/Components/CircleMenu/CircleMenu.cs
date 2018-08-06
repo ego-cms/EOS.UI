@@ -87,8 +87,8 @@ namespace EOS.UI.iOS.Components
 
             if (_isTest)
             {
-                Frame = new CGRect(mainFrame.Width - (_menuSize / 2 + CircleMenuMainButton.Size / 2 + _mainButtonPadding),
-                                   mainFrame.Height - (_menuSize / 2 + CircleMenuMainButton.Size / 2 + _mainButtonPadding),
+                Frame = new CGRect(mainFrame.Width - (_menuSize / 2 + CircleMenuButton.Size / 2 + _mainButtonPadding),
+                                   mainFrame.Height - (_menuSize / 2 + CircleMenuButton.Size / 2 + _mainButtonPadding),
                                    _menuSize, _menuSize);
             }
             else
@@ -108,9 +108,9 @@ namespace EOS.UI.iOS.Components
             //mainbutton init
             MainButton = new CircleMenuMainButton();
             MainButton.Frame = new CGRect(
-                (Frame.Width - CircleMenuMainButton.Size) / 2,
-                (Frame.Height - CircleMenuMainButton.Size) / 2,
-                CircleMenuMainButton.Size, CircleMenuMainButton.Size);
+                (Frame.Width - CircleMenuButton.Size) / 2,
+                (Frame.Height - CircleMenuButton.Size) / 2,
+                CircleMenuButton.Size, CircleMenuButton.Size);
             MainButton.TouchUpInside += OnMainButtonClicked;
 
             //swipe init
@@ -130,11 +130,11 @@ namespace EOS.UI.iOS.Components
             _menuButtonsView = new UIView()
             {
                 Frame = new CGRect(20, 20, this.Frame.Width - 40, this.Frame.Height - 40),
-                BackgroundColor = _isTest ? UIColor.Clear : UIColor.DarkGray
+                BackgroundColor = _isTest ? UIColor.Clear : UIColor.DarkGray,
+                ClipsToBounds = false,
             };
             AddSubview(_menuButtonsView);
             AddSubview(MainButton);
-            Clicked += PrepareSubmenuIfNeeded;
         }
 
         public void Attach()
@@ -156,15 +156,15 @@ namespace EOS.UI.iOS.Components
             double y;
             for (int i = 0; i < _visibleCountOfElements; ++i)
             {
-                x = Math.Cos(startAngle) * _radius + _menuButtonsView.Bounds.GetCenterX() - CircleMenuMainButton.Size / 2;
-                y = Math.Sin(startAngle) * _radius + _menuButtonsView.Bounds.GetCenterY() - CircleMenuMainButton.Size / 2;
+                x = Math.Cos(startAngle) * _radius + _menuButtonsView.Bounds.GetCenterX() - CircleMenuButton.Size / 2;
+                y = Math.Sin(startAngle) * _radius + _menuButtonsView.Bounds.GetCenterY() - CircleMenuButton.Size / 2;
                 _buttonPositions.Add(new CGPoint(x, y));
                 startAngle -= diff;
             }
 
             startAngle = 0.785398;
-            x = Math.Cos(startAngle) * (_isTest ? _menuSize : _radius) + _menuButtonsView.Bounds.GetCenterX() - CircleMenuMainButton.Size / 2;
-            y = Math.Sin(startAngle) * (_isTest ? _menuSize : _radius) + _menuButtonsView.Bounds.GetCenterY() - CircleMenuMainButton.Size / 2;
+            x = Math.Cos(startAngle) * (_isTest ? _menuSize : _radius) + _menuButtonsView.Bounds.GetCenterX() - CircleMenuButton.Size / 2;
+            y = Math.Sin(startAngle) * (_isTest ? _menuSize : _radius) + _menuButtonsView.Bounds.GetCenterY() - CircleMenuButton.Size / 2;
             _buttonPositions.Add(new CGPoint(x, y));
         }
 
@@ -202,6 +202,7 @@ namespace EOS.UI.iOS.Components
                     if (model != null)
                     {
                         Clicked?.Invoke(menuButton, model.Id);
+                        PrepareSubmenuIfNeeded(menuButton, model);
                     }
                 };
                 menuButton.Position = position;
@@ -395,12 +396,10 @@ namespace EOS.UI.iOS.Components
             _menuButtonsView.Layer.AddAnimation(leftAnimation, null);
         }
 
-        async void PrepareSubmenuIfNeeded(object sender, int id)
+        async void PrepareSubmenuIfNeeded(CircleMenuButton invokedButton, CircleMenuItemModel model)
         {
-            var model = _circleMenuItems.Single(s => s.Id == id);
             if (!model.HasChildren)
                 return;
-            var invokedButton = (CircleMenuButton)sender;
             if (!_isSubmenuOpen)
             {
                 PrepareSubmenu(invokedButton, model.Children);
@@ -410,40 +409,41 @@ namespace EOS.UI.iOS.Components
             else
             {
                 await CloseSubmenu(invokedButton);
-                _submenuButtons.ForEach(b => b.RemoveFromSuperview());
-                _submenuButtons.Clear();
                 _isSubmenuOpen = false;
             }
         }
 
         void PrepareSubmenu(CircleMenuButton invokedButton, List<CircleMenuItemModel> chilren)
         {
-            nfloat yPosition = invokedButton.Frame.Y;
-            nfloat xPosition = invokedButton.Frame.X;
+            var convertedPosition = _menuButtonsView.ConvertPointToView(invokedButton.Position, _rootView);
+            nfloat xPosition = convertedPosition.X;
+            nfloat yPosition = convertedPosition.Y;
 
             var buttonPosition = _buttonPositions.IndexOf(invokedButton.Position);
             if (buttonPosition == 3)
             {
-                xPosition = xPosition - CircleMenuMainButton.Size - 10;
-                yPosition = invokedButton.Frame.Y + CircleMenuMainButton.Size + 10;
+                xPosition = xPosition - CircleMenuButton.Size - 10;
+                yPosition = yPosition + CircleMenuButton.Size + 10;
             }
             foreach (var children in chilren)
             {
-                yPosition = yPosition - CircleMenuMainButton.Size - 10;
+                yPosition = yPosition - CircleMenuButton.Size - 10;
 
                 var button = new CircleMenuButton()
                 {
                     Model = children,
-                    Frame = new CGRect(xPosition, yPosition, CircleMenuMainButton.Size, CircleMenuMainButton.Size),
-                    Alpha = 0
+                    Frame = new CGRect(xPosition, yPosition, CircleMenuButton.Size, CircleMenuButton.Size),
+                    Alpha = 0,
                 };
+                button.TouchUpInside += OnSubmenuClicked;
                 _submenuButtons.Add(button);
             }
 
             var indicator = invokedButton.Indicator;
             indicator.Hidden = true;
             var buttonFrame = _submenuButtons.Last().Frame;
-            indicator.Frame = indicator.Frame.ResizeRect(x: buttonFrame.X + buttonFrame.Width / 2 - indicator.Frame.Width / 2, y: buttonFrame.Y - 15);
+            var leftUpCorner = _rootView.ConvertPointToView(new CGPoint(buttonFrame.X, buttonFrame.Y), _menuButtonsView);
+            indicator.Frame = indicator.Frame.ResizeRect(x: leftUpCorner.X + buttonFrame.Width / 2 - indicator.Frame.Width / 2, y: leftUpCorner.Y - 15);
         }
 
         async Task ShowSubmenu(CircleMenuButton invokedButton)
@@ -451,7 +451,7 @@ namespace EOS.UI.iOS.Components
             var tcs = new TaskCompletionSource<bool>();
             for (int i = 0; i < _submenuButtons.Count; ++i)
             {
-                _menuButtonsView.AddSubview(_submenuButtons[i]);
+                _rootView.AddSubview(_submenuButtons[i]);
                 UIView.Animate(_menuOpenButtonAnimationDuration, () =>
                  {
                      _submenuButtons[i].Alpha = 1;
@@ -477,6 +477,12 @@ namespace EOS.UI.iOS.Components
             }
             invokedButton.Indicator.ResetPosition();
             invokedButton.Indicator.Hidden = false;
+            foreach (var button in _submenuButtons)
+            {
+                button.RemoveFromSuperview();
+                button.TouchUpInside -= OnSubmenuClicked;
+            }
+            _submenuButtons.Clear();
         }
 
         async void OnMainButtonClicked(object sender, EventArgs e)
@@ -508,7 +514,7 @@ namespace EOS.UI.iOS.Components
             LeftSwiped?.Invoke(this, EventArgs.Empty);
             MoveLeft();
         }
-        
+
         void StartHintAnimation()
         {
             var hintButtons = new List<CircleMenuButton>();
@@ -530,10 +536,16 @@ namespace EOS.UI.iOS.Components
                 invokedButton.ResetPosition();
                 hintButtons[0].Frame = invokedButton.Frame;
                 hintButtons[1].Frame = invokedButton.Frame;
-            }, () => 
+            }, () =>
             {
                 hintButtons.ForEach(b => b.RemoveFromSuperview());
             });
+        }
+
+        void OnSubmenuClicked(object sender, EventArgs e)
+        {
+            var button = (CircleMenuButton)sender;
+            Clicked?.Invoke(button, button.Model.Id);
         }
     }
 }
