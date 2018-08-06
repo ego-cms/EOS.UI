@@ -95,5 +95,10 @@ namespace EOS.UI.iOS.Components
             base.MovedToSuperview();
             Layer.CornerRadius = Frame.Height / 2;
         }
+        
+        internal void ResetPosition()
+        {
+            Position = _position;
+        }
     }
 }

@@ -28,6 +28,8 @@ namespace EOS.UI.iOS.Components
         private const int _menuSize = 300;
         private const double _menuOpenButtonAnimationDuration = 0.1;
         private const double _buttonMovementAnimationDuration = 0.2;
+        private const double _buttonHintAnimationDuration = 0.3;
+        private const double _buttonHintAnimationDelay = 0.5;
         private const int _radius = 96;
         private readonly nfloat _20degrees = 0.349066f;
         private readonly nfloat _10degrees = 0.174533f;
@@ -279,6 +281,7 @@ namespace EOS.UI.iOS.Components
             }
             await tcs.Task;
             StartSpringEffect(UISwipeGestureRecognizerDirection.Left, _20degrees);
+            StartHintAnimation();
         }
 
         async Task CloseMenu()
@@ -377,7 +380,7 @@ namespace EOS.UI.iOS.Components
             rightAnimation.RemovedOnCompletion = false;
             rightAnimation.FillMode = CAFillMode.Forwards;
 
-            leftAnimation.AnimationStarted += (sender, e) => MainButton.UserInteractionEnabled = false; ;
+            leftAnimation.AnimationStarted += (sender, e) => MainButton.UserInteractionEnabled = false;
             leftAnimation.AnimationStopped += (sender, e) =>
             {
                 _menuButtonsView.Layer.AddAnimation(rightAnimation, null);
@@ -504,6 +507,33 @@ namespace EOS.UI.iOS.Components
                 return;
             LeftSwiped?.Invoke(this, EventArgs.Empty);
             MoveLeft();
+        }
+        
+        void StartHintAnimation()
+        {
+            var hintButtons = new List<CircleMenuButton>();
+            var invokedButton = _menuButtons.Single(b => b.PositionIndex == 1);
+            for (int i = 0; i < 2; ++i)
+            {
+                var hintButton = new CircleMenuButton(invokedButton.Frame);
+                hintButtons.Add(hintButton);
+                _menuButtonsView.InsertSubview(hintButton, 0);
+            }
+
+            UIView.Animate(_buttonHintAnimationDuration, _buttonHintAnimationDelay, UIViewAnimationOptions.CurveEaseInOut, () =>
+            {
+                invokedButton.Frame = invokedButton.Frame.ResizeRect(y: invokedButton.Frame.Y - 10);
+                hintButtons[1].Frame = hintButtons[1].Frame.ResizeRect(y: hintButtons[1].Frame.Y + 10);
+            }, null);
+            UIView.Animate(_buttonHintAnimationDuration, 2 * _buttonHintAnimationDelay, UIViewAnimationOptions.CurveEaseInOut, () =>
+            {
+                invokedButton.ResetPosition();
+                hintButtons[0].Frame = invokedButton.Frame;
+                hintButtons[1].Frame = invokedButton.Frame;
+            }, () => 
+            {
+                hintButtons.ForEach(b => b.RemoveFromSuperview());
+            });
         }
     }
 }
