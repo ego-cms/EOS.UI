@@ -24,6 +24,7 @@ namespace EOS.UI.iOS.Components
         private const int _minimumCountOfElements = 3;
         private const int _maximumCountOfElements = 9;
         private const int _visibleCountOfElements = 5;
+        private const int _maximumCountOfChildren = 5;
         private const int _mainButtonPadding = 15;
         private const int _menuSize = 300;
         private const double _menuOpenButtonAnimationDuration = 0.1;
@@ -41,6 +42,7 @@ namespace EOS.UI.iOS.Components
         private readonly UISwipeGestureRecognizer _upSwipe;
         private readonly UISwipeGestureRecognizer _downSwipe;
         private readonly UIView _menuButtonsView;
+        private readonly CircleMenuMainButton _mainButton;
 
         //view for circle of menu buttons
         private List<CircleMenuButton> _menuButtons = new List<CircleMenuButton>();
@@ -49,7 +51,9 @@ namespace EOS.UI.iOS.Components
         private List<CGPoint> _indicatorPositions = new List<CGPoint>();
         private List<CircleMenuButton> _submenuButtons = new List<CircleMenuButton>();
         private bool _isSubmenuOpen;
+        private bool _isHintShown;
 
+        public bool IsEOSCustomizationIgnored { get; private set; }
 
         private List<CircleMenuItemModel> _circleMenuItems = new List<CircleMenuItemModel>();
         public List<CircleMenuItemModel> CircleMenuItems
@@ -63,13 +67,55 @@ namespace EOS.UI.iOS.Components
             }
         }
 
-        public CircleMenuMainButton MainButton { get; private set; }
-
         private bool IsSwipeBlocked
         {
             get
             {
-                return !MainButton.IsOpen || _circleMenuItems.Count == _minimumCountOfElements || _isSubmenuOpen;
+                return !_mainButton.IsOpen || _circleMenuItems.Count == _minimumCountOfElements || _isSubmenuOpen;
+            }
+        }
+
+        private UIColor _unfocusedBackgroundColor;
+        public UIColor UnfocusedBackgroundColor
+        {
+            get => _unfocusedBackgroundColor;
+            set
+            {
+                _unfocusedBackgroundColor = value;
+                IsEOSCustomizationIgnored = true;
+            }
+        }
+
+        private UIColor _focusedBackgroundColor;
+        public UIColor FocusedBackgroundColor
+        {
+            get => _focusedBackgroundColor;
+            set
+            {
+                _focusedBackgroundColor = value;
+                IsEOSCustomizationIgnored = true;
+            }
+        }
+
+        private UIColor _focusedIconColor;
+        public UIColor FocusedIconColor
+        {
+            get => _focusedIconColor;
+            set
+            {
+                _focusedIconColor = value;
+                IsEOSCustomizationIgnored = true;
+            }
+        }
+
+        private UIColor _unfocusedIconColor;
+        public UIColor UnfocusedIconColor
+        {
+            get => _unfocusedIconColor;
+            set
+            {
+                _unfocusedIconColor = value;
+                IsEOSCustomizationIgnored = true;
             }
         }
 
@@ -106,12 +152,12 @@ namespace EOS.UI.iOS.Components
             _rootView.AddSubview(_shadowView);
 
             //mainbutton init
-            MainButton = new CircleMenuMainButton();
-            MainButton.Frame = new CGRect(
+            _mainButton = new CircleMenuMainButton();
+            _mainButton.Frame = new CGRect(
                 (Frame.Width - CircleMenuButton.Size) / 2,
                 (Frame.Height - CircleMenuButton.Size) / 2,
                 CircleMenuButton.Size, CircleMenuButton.Size);
-            MainButton.TouchUpInside += OnMainButtonClicked;
+            _mainButton.TouchUpInside += OnMainButtonClicked;
 
             //swipe init
             _leftSwipe = new UISwipeGestureRecognizer(OnLeftSwipe);
@@ -134,7 +180,7 @@ namespace EOS.UI.iOS.Components
                 ClipsToBounds = false,
             };
             AddSubview(_menuButtonsView);
-            AddSubview(MainButton);
+            AddSubview(_mainButton);
         }
 
         public void Attach()
@@ -261,6 +307,7 @@ namespace EOS.UI.iOS.Components
         {
             PrepareMenuButtons();
             var tcs = new TaskCompletionSource<bool>();
+            _mainButton.UserInteractionEnabled = false;
             for (int i = 0; i < _visibleCountOfElements; ++i)
             {
                 var delay = _menuOpenButtonAnimationDuration * i;
@@ -281,8 +328,13 @@ namespace EOS.UI.iOS.Components
                 }
             }
             await tcs.Task;
-            StartSpringEffect(UISwipeGestureRecognizerDirection.Left, _20degrees);
-            StartHintAnimation();
+            await StartSpringEffect(UISwipeGestureRecognizerDirection.Left, _20degrees);
+            if (!_isHintShown)
+            {
+                await StartHintAnimation();
+                _isHintShown = true;
+            }
+            _mainButton.UserInteractionEnabled = true;
         }
 
         async Task CloseMenu()
@@ -358,8 +410,9 @@ namespace EOS.UI.iOS.Components
             StartSpringEffect(UISwipeGestureRecognizerDirection.Right, _10degrees);
         }
 
-        void StartSpringEffect(UISwipeGestureRecognizerDirection direction, nfloat angle)
+        Task<bool> StartSpringEffect(UISwipeGestureRecognizerDirection direction, nfloat angle)
         {
+            var tcs = new TaskCompletionSource<bool>();
             if (direction == UISwipeGestureRecognizerDirection.Left)
             {
                 angle = -angle;
@@ -381,7 +434,6 @@ namespace EOS.UI.iOS.Components
             rightAnimation.RemovedOnCompletion = false;
             rightAnimation.FillMode = CAFillMode.Forwards;
 
-            leftAnimation.AnimationStarted += (sender, e) => MainButton.UserInteractionEnabled = false;
             leftAnimation.AnimationStopped += (sender, e) =>
             {
                 _menuButtonsView.Layer.AddAnimation(rightAnimation, null);
@@ -390,16 +442,19 @@ namespace EOS.UI.iOS.Components
             rightAnimation.AnimationStopped += (sender, e) =>
             {
                 _menuButtonsView.Layer.RemoveAllAnimations();
-                MainButton.UserInteractionEnabled = true;
+                tcs.SetResult(true);
             };
-
             _menuButtonsView.Layer.AddAnimation(leftAnimation, null);
+            return tcs.Task;
         }
 
         async void PrepareSubmenuIfNeeded(CircleMenuButton invokedButton, CircleMenuItemModel model)
         {
             if (!model.HasChildren)
                 return;
+            if (model.Children.Count > _maximumCountOfChildren)
+                throw new ArgumentException($"Submenu must contain no more then {_maximumCountOfChildren} elements");
+            invokedButton.UserInteractionEnabled = false;
             if (!_isSubmenuOpen)
             {
                 PrepareSubmenu(invokedButton, model.Children);
@@ -411,6 +466,7 @@ namespace EOS.UI.iOS.Components
                 await CloseSubmenu(invokedButton);
                 _isSubmenuOpen = false;
             }
+            invokedButton.UserInteractionEnabled = true;
         }
 
         void PrepareSubmenu(CircleMenuButton invokedButton, List<CircleMenuItemModel> chilren)
@@ -453,13 +509,14 @@ namespace EOS.UI.iOS.Components
             {
                 _rootView.AddSubview(_submenuButtons[i]);
                 UIView.Animate(_menuOpenButtonAnimationDuration, () =>
-                 {
-                     _submenuButtons[i].Alpha = 1;
-                 }, () => tcs.SetResult(true));
+               {
+                   _submenuButtons[i].Alpha = 1;
+               }, () => tcs.SetResult(true));
                 await tcs.Task;
                 tcs = new TaskCompletionSource<bool>();
             }
             invokedButton.Indicator.Hidden = false;
+            DisableMenuButtons(invokedButton);
         }
 
         async Task CloseSubmenu(CircleMenuButton invokedButton)
@@ -483,11 +540,12 @@ namespace EOS.UI.iOS.Components
                 button.TouchUpInside -= OnSubmenuClicked;
             }
             _submenuButtons.Clear();
+            EnableMenuButtons();
         }
 
         async void OnMainButtonClicked(object sender, EventArgs e)
         {
-            if (MainButton.IsOpen)
+            if (_mainButton.IsOpen)
             {
                 _shadowView.Hidden = true;
                 await CloseMenu();
@@ -515,8 +573,9 @@ namespace EOS.UI.iOS.Components
             MoveLeft();
         }
 
-        void StartHintAnimation()
+        Task<bool> StartHintAnimation()
         {
+            var tcs = new TaskCompletionSource<bool>();
             var hintButtons = new List<CircleMenuButton>();
             var invokedButton = _menuButtons.Single(b => b.PositionIndex == 1);
             for (int i = 0; i < 2; ++i)
@@ -539,13 +598,27 @@ namespace EOS.UI.iOS.Components
             }, () =>
             {
                 hintButtons.ForEach(b => b.RemoveFromSuperview());
+                tcs.SetResult(true);
             });
+            return tcs.Task;
         }
 
         void OnSubmenuClicked(object sender, EventArgs e)
         {
             var button = (CircleMenuButton)sender;
             Clicked?.Invoke(button, button.Model.Id);
+        }
+
+        void DisableMenuButtons(CircleMenuButton invokedButton)
+        {
+            _menuButtons.Except(new CircleMenuButton[] { invokedButton }).ToList().ForEach(b => b.Enabled = false);
+            _mainButton.Enabled = false;
+        }
+
+        void EnableMenuButtons()
+        {
+            _menuButtons.ForEach(b => b.Enabled = true);
+            _mainButton.Enabled = true;
         }
     }
 }

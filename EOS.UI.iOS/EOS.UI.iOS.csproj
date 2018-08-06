@@ -116,9 +116,7 @@
     <ImageAsset Include="Assets.xcassets\icHamburger.imageset\Contents.json">
       <Visible>false</Visible>
     </ImageAsset>
-    <ImageAsset Include="Assets.xcassets\icHamburger.imageset\icHamburger.png">
-      <Visible>false</Visible>
-    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\icHamburger.imageset\icHamburger.pdf" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

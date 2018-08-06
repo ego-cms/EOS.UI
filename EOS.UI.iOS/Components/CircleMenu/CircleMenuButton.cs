@@ -21,15 +21,13 @@ namespace EOS.UI.iOS.Components
             set
             {
                 _model = value;
+                if(_model != null)
+                {
+                    SetImage(_model.ImageSource, UIControlState.Normal);
+                }
                 if (Indicator != null)
                 {
                     Indicator.Hidden = (!value?.HasChildren) ?? true;
-                }
-
-                //TODO need to remove after develop
-                if (value != null)
-                {
-                    SetTitle(value.Id.ToString(), UIControlState.Normal);
                 }
             }
         }
@@ -45,7 +43,7 @@ namespace EOS.UI.iOS.Components
                 _position = value;
                 if (value != null)
                 {
-                    Frame = new CGRect(value.X, value.Y, CircleMenuMainButton.Size, CircleMenuMainButton.Size);
+                    Frame = new CGRect(value.X, value.Y, CircleMenuButton.Size, CircleMenuButton.Size);
                     var positionIndex = _positions.IndexOf(_position);
                     UserInteractionEnabled = PositionIndex != 4 && positionIndex != 0;
                 }

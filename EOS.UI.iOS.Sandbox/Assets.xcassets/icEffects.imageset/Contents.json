@@ -1,7 +1,7 @@
 {
   "images": [
     {
-      "filename": "icHamburger.pdf",
+      "filename": "icEffects.pdf",
       "idiom": "universal"
     },
     {
@@ -78,11 +78,12 @@
   ],
   "info": {
     "version": 1,
-    "author": "xcode"
+    "author": "xcode",
+    "template-rendering-intent": "template"
   },
   "properties": {
     "on-demand-resource-tags": [
-      "icHamburger"
+      "icEffects"
     ]
   }
 }

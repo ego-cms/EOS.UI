@@ -123,10 +123,60 @@
     <ImageAsset Include="Assets.xcassets\Contents.json">
       <Visible>false</Visible>
     </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\icBrush.imageset\Contents.json" />
+    <ImageAsset Include="Assets.xcassets\icEffects.imageset\Contents.json" />
+    <ImageAsset Include="Assets.xcassets\icDuration.imageset\Contents.json" />
+    <ImageAsset Include="Assets.xcassets\icHDR.imageset\Contents.json" />
+    <ImageAsset Include="Assets.xcassets\icHeal.imageset\Contents.json" />
+    <ImageAsset Include="Assets.xcassets\icMasks.imageset\Contents.json" />
+    <ImageAsset Include="Assets.xcassets\icOneToOne.imageset\Contents.json" />
+    <ImageAsset Include="Assets.xcassets\icReplay.imageset\Contents.json" />
+    <ImageAsset Include="Assets.xcassets\icShutter.imageset\Contents.json" />
+    <ImageAsset Include="Assets.xcassets\icSixteenToNine.imageset\Contents.json" />
+    <ImageAsset Include="Assets.xcassets\icTimer.imageset\Contents.json" />
+    <ImageAsset Include="Assets.xcassets\icVideo.imageset\Contents.json" />
+    <ImageAsset Include="Assets.xcassets\icBrush.imageset\icBrush.pdf" />
+    <ImageAsset Include="Assets.xcassets\icDuration.imageset\icDuration.pdf" />
+    <ImageAsset Include="Assets.xcassets\icEffects.imageset\icEffects.pdf" />
+    <ImageAsset Include="Assets.xcassets\icHDR.imageset\icHDR.pdf" />
+    <ImageAsset Include="Assets.xcassets\icHeal.imageset\icHeal.pdf" />
+    <ImageAsset Include="Assets.xcassets\icMasks.imageset\icMasks.pdf" />
+    <ImageAsset Include="Assets.xcassets\icOneToOne.imageset\icOneToOne.pdf" />
+    <ImageAsset Include="Assets.xcassets\icReplay.imageset\icReplay.pdf" />
+    <ImageAsset Include="Assets.xcassets\icShutter.imageset\icShutter.pdf" />
+    <ImageAsset Include="Assets.xcassets\icSixteenToNine.imageset\icSixteenToNine.pdf" />
+    <ImageAsset Include="Assets.xcassets\icTimer.imageset\icTimer.pdf" />
+    <ImageAsset Include="Assets.xcassets\icVideo.imageset\icVideo.pdf" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Resources\" />
-    <Folder Include="Enums\" />
+    <Folder Include="Assets.xcassets\icOneToOne.imageset\" />
+    <Folder Include="Assets.xcassets\icSixteenToNine.imageset\" />
+    <Folder Include="Assets.xcassets\icDuration.imageset\" />
+    <Folder Include="Assets.xcassets\icEffects.imageset\" />
+    <Folder Include="Assets.xcassets\icHDR.imageset\" />
+    <Folder Include="Assets.xcassets\icHeal.imageset\" />
+    <Folder Include="Assets.xcassets\icMasks.imageset\" />
+    <Folder Include="Assets.xcassets\icReplay.imageset\" />
+    <Folder Include="Assets.xcassets\icShutter.imageset\" />
+    <Folder Include="Assets.xcassets\icTimer.imageset\" />
+    <Folder Include="Assets.xcassets\icVideo.imageset\" />
+    <Folder Include="Assets.xcassets\icCalendar.imageset\" />
+    <Folder Include="Assets.xcassets\icBrush.imageset\" />
+    <Folder Include="Assets.xcassets\BrushIcon.imageset\" />
+    <Folder Include="Assets.xcassets\MyBrash.imageset\" />
+    <Folder Include="Assets.xcassets\icBrush.imageset\" />
+    <Folder Include="Assets.xcassets\icEffects.imageset\" />
+    <Folder Include="Assets.xcassets\icDuration.imageset\" />
+    <Folder Include="Assets.xcassets\icHDR.imageset\" />
+    <Folder Include="Assets.xcassets\icHeal.imageset\" />
+    <Folder Include="Assets.xcassets\icMasks.imageset\" />
+    <Folder Include="Assets.xcassets\icOneToOne.imageset\" />
+    <Folder Include="Assets.xcassets\icReplay.imageset\" />
+    <Folder Include="Assets.xcassets\icShutter.imageset\" />
+    <Folder Include="Assets.xcassets\icSixteenToNine.imageset\" />
+    <Folder Include="Assets.xcassets\icTimer.imageset\" />
+    <Folder Include="Assets.xcassets\icVideo.imageset\" />
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="LaunchScreen.storyboard" />
