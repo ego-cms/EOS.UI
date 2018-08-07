@@ -62,10 +62,10 @@ namespace EOS.UI.Shared.Themes.Helpers
 
     public static class SimpleButtonConstants
     {
-        public const int LeftPadding = 110;
-        public const int RightPadding = 110;
+        public const int LeftPadding = 15;
+        public const int RightPadding = 15;
         public const int TopPadding = 14;
-        public const int BottomPadding = 17;
+        public const int BottomPadding = 15;
     }
 
 }
