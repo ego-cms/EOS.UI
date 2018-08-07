@@ -8,6 +8,38 @@ namespace EOS.UI.Shared.Sandbox.Helpers
 {
     public static partial class Constants
     {
+        private static string ColorNameBlue = "Blue";
+        private static string ColorNameUltramarine = "Ultramarine";
+        private static string ColorNameCerulean = "Cerulean";
+        private static string ColorNameTeal = "Teal";
+        private static string ColorNameGreen = "Green";
+        private static string ColorNameLime = "Lime";
+        private static string ColorNameYellow = "Yellow ";
+        private static string ColorNameGold = "Gold";
+        private static string ColorNameOrange = "Orange";
+        private static string ColorNamePeach = "Peach";
+        private static string ColorNameRed = "Red";
+        private static string ColorNameMagenta = "Magenta";
+        private static string ColorNamePurple = "Purple";
+        private static string ColorNameViolet = "Violet";
+        private static string ColorNameIndigo = "Indigo";
+
+        private static string ColorBlue = "#2d74da";
+        private static string ColorUltramarine = "#3c6df0";
+        private static string ColorCerulean = "#047cc0";
+        private static string ColorTeal = "#00baa1";
+        private static string ColorGreen = "#34bc6e";
+        private static string ColorLime = "#81b532";
+        private static string ColorYellow = "#fed500";
+        private static string ColorGold = "#ffb000";
+        private static string ColorOrange = "#fe8500";
+        private static string ColorPeach = "#fc835c";
+        private static string ColorRed = "#ff5c49";
+        private static string ColorMagenta = "#dc267f";
+        private static string ColorPurple = "#c22dd5";
+        private static string ColorViolet = "#9753e1";
+        private static string ColorIndigo = "#785ef0";
+
         public static class Fields
         {
             public const string Theme = "Theme";

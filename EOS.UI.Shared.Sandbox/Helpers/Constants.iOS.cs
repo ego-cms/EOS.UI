@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using EOS.UI.Shared.Themes.Extensions;
 using EOS.UI.Shared.Themes.Helpers;
 using UIKit;
 
@@ -14,14 +15,21 @@ namespace EOS.UI.Shared.Sandbox.Helpers
         {
             public static Dictionary<string, UIColor> ColorsCollection = new Dictionary<string, UIColor>()
             {
-                {"Black", UIColor.Black},
-                {"White", UIColor.White},
-                {"Gray", UIColor.Gray},
-                {"Green", UIColor.Green},
-                {"Blue", UIColor.Blue},
-                {"Red", UIColor.Red},
-                {"Yellow", UIColor.Yellow},
-                {"Brown", UIColor.Brown},
+                {ColorNameBlue, ColorExtension.FromHex(ColorBlue)},
+                {ColorNameUltramarine, ColorExtension.FromHex(ColorUltramarine)},
+                {ColorNameCerulean, ColorExtension.FromHex(ColorCerulean)},
+                {ColorNameTeal, ColorExtension.FromHex(ColorTeal)},
+                {ColorNameGreen, ColorExtension.FromHex(ColorGreen)},
+                {ColorNameLime, ColorExtension.FromHex(ColorLime)},
+                {ColorNameYellow, ColorExtension.FromHex(ColorYellow)},
+                {ColorNameGold, ColorExtension.FromHex(ColorGold)},
+                {ColorNameOrange, ColorExtension.FromHex(ColorOrange)},
+                {ColorNamePeach, ColorExtension.FromHex(ColorPeach)},
+                {ColorNameRed, ColorExtension.FromHex(ColorRed)},
+                {ColorNameMagenta, ColorExtension.FromHex(ColorMagenta)},
+                {ColorNamePurple, ColorExtension.FromHex(ColorPurple)},
+                {ColorNameViolet, ColorExtension.FromHex(ColorViolet)},
+                {ColorNameIndigo, ColorExtension.FromHex(ColorIndigo)},
             };
         }
 

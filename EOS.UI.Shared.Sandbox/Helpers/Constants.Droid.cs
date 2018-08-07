@@ -15,14 +15,21 @@ namespace EOS.UI.Shared.Sandbox.Helpers
             public static readonly Dictionary<string, Color> ColorsCollection = new Dictionary<string, Color>()
             {
                 { string.Empty, Color.Transparent },
-                { "Black", Color.Black },
-                { "White", Color.White },
-                { "Gray", Color.Gray },
-                { "Green", Color.Green },
-                { "Blue", Color.Blue },
-                { "Red", Color.Red },
-                { "Yellow", Color.Yellow },
-                { "Brown", Color.Brown }
+                {ColorNameBlue, Color.ParseColor(ColorBlue)},
+                {ColorNameUltramarine, Color.ParseColor(ColorUltramarine)},
+                {ColorNameCerulean, Color.ParseColor(ColorCerulean)},
+                {ColorNameTeal, Color.ParseColor(ColorTeal)},
+                {ColorNameGreen, Color.ParseColor(ColorGreen)},
+                {ColorNameLime, Color.ParseColor(ColorLime)},
+                {ColorNameYellow, Color.ParseColor(ColorYellow)},
+                {ColorNameGold, Color.ParseColor(ColorGold)},
+                {ColorNameOrange, Color.ParseColor(ColorOrange)},
+                {ColorNamePeach, Color.ParseColor(ColorPeach)},
+                {ColorNameRed, Color.ParseColor(ColorRed)},
+                {ColorNameMagenta, Color.ParseColor(ColorMagenta)},
+                {ColorNamePurple, Color.ParseColor(ColorPurple)},
+                {ColorNameViolet, Color.ParseColor(ColorViolet)},
+                {ColorNameIndigo, Color.ParseColor(ColorIndigo)},
             };
         }
 
