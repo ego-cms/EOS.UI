@@ -42,6 +42,12 @@ namespace EOS.UI.Droid.Sandbox.Activities
             }
         }
 
+        protected void ResetAndUpdateView()
+        {
+            ResetCustomization();
+            UpdateApperaence();
+        }
+
         public void UpdateApperaence()
         {
             SetStyle();

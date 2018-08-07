@@ -130,6 +130,14 @@ namespace EOS.UI.Droid.Sandbox.Activities
             {
                 ResetCustomValues();
             };
+
+            ResetViewWhenActivityRecreated(savedInstanceState);
+        }
+
+        private void ResetViewWhenActivityRecreated(Bundle savedInstanceState)
+        {
+            if (savedInstanceState != null)
+                ResetAndUpdateView();
         }
 
         private void FirstDayOfWeekItemSelected(int position)

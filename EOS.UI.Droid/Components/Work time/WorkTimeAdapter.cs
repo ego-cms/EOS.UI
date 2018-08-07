@@ -32,13 +32,15 @@ namespace EOS.UI.Droid.Components
 
         #endregion
 
-        #region conastructors
+        #region constructors
 
         public WorkTimeAdapter(Context context, int sectionWidth)
         {
             _context = context;
             _sectionWidth = sectionWidth;
             _startDayOfweek = CultureInfo.CurrentCulture.DateTimeFormat.FirstDayOfWeek;
+            DayFontStyle = new FontStyleItem();
+            TitleFontStyle = new FontStyleItem();
         }
 
         #endregion
