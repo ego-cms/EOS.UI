@@ -123,30 +123,6 @@
     <ImageAsset Include="Assets.xcassets\Contents.json">
       <Visible>false</Visible>
     </ImageAsset>
-    <ImageAsset Include="Assets.xcassets\icBrush.imageset\Contents.json" />
-    <ImageAsset Include="Assets.xcassets\icEffects.imageset\Contents.json" />
-    <ImageAsset Include="Assets.xcassets\icDuration.imageset\Contents.json" />
-    <ImageAsset Include="Assets.xcassets\icHDR.imageset\Contents.json" />
-    <ImageAsset Include="Assets.xcassets\icHeal.imageset\Contents.json" />
-    <ImageAsset Include="Assets.xcassets\icMasks.imageset\Contents.json" />
-    <ImageAsset Include="Assets.xcassets\icOneToOne.imageset\Contents.json" />
-    <ImageAsset Include="Assets.xcassets\icReplay.imageset\Contents.json" />
-    <ImageAsset Include="Assets.xcassets\icShutter.imageset\Contents.json" />
-    <ImageAsset Include="Assets.xcassets\icSixteenToNine.imageset\Contents.json" />
-    <ImageAsset Include="Assets.xcassets\icTimer.imageset\Contents.json" />
-    <ImageAsset Include="Assets.xcassets\icVideo.imageset\Contents.json" />
-    <ImageAsset Include="Assets.xcassets\icBrush.imageset\icBrush.pdf" />
-    <ImageAsset Include="Assets.xcassets\icDuration.imageset\icDuration.pdf" />
-    <ImageAsset Include="Assets.xcassets\icEffects.imageset\icEffects.pdf" />
-    <ImageAsset Include="Assets.xcassets\icHDR.imageset\icHDR.pdf" />
-    <ImageAsset Include="Assets.xcassets\icHeal.imageset\icHeal.pdf" />
-    <ImageAsset Include="Assets.xcassets\icMasks.imageset\icMasks.pdf" />
-    <ImageAsset Include="Assets.xcassets\icOneToOne.imageset\icOneToOne.pdf" />
-    <ImageAsset Include="Assets.xcassets\icReplay.imageset\icReplay.pdf" />
-    <ImageAsset Include="Assets.xcassets\icShutter.imageset\icShutter.pdf" />
-    <ImageAsset Include="Assets.xcassets\icSixteenToNine.imageset\icSixteenToNine.pdf" />
-    <ImageAsset Include="Assets.xcassets\icTimer.imageset\icTimer.pdf" />
-    <ImageAsset Include="Assets.xcassets\icVideo.imageset\icVideo.pdf" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Resources\" />
@@ -177,6 +153,7 @@
     <Folder Include="Assets.xcassets\icSixteenToNine.imageset\" />
     <Folder Include="Assets.xcassets\icTimer.imageset\" />
     <Folder Include="Assets.xcassets\icVideo.imageset\" />
+    <Folder Include="Assets.xcassets\icClnd.imageset\" />
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="LaunchScreen.storyboard" />
@@ -190,6 +167,7 @@
     <InterfaceDefinition Include="Storyboards\CTAButtonView.storyboard" />
     <InterfaceDefinition Include="Storyboards\WorkTimeView.storyboard" />
     <InterfaceDefinition Include="Storyboards\CircleMenuView.storyboard" />
+    <InterfaceDefinition Include="Storyboards\CircleMenuItemView.storyboard" />
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="Controls\EOSSandboxDropDown.xib" />
@@ -266,6 +244,10 @@
     <Compile Include="Storyboards\CircleMenuView.cs" />
     <Compile Include="Storyboards\CircleMenuView.designer.cs">
       <DependentUpon>CircleMenuView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Storyboards\CircleMenuItemView.cs" />
+    <Compile Include="Storyboards\CircleMenuItemView.designer.cs">
+      <DependentUpon>CircleMenuItemView.cs</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>

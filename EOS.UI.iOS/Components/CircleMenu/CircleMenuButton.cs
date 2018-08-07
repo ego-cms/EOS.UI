@@ -9,9 +9,10 @@ namespace EOS.UI.iOS.Components
 {
     public class CircleMenuButton : UIButton
     {
+        private bool _isClicked;
         internal const int Size = 52;
 
-        private const int _padding = 5;
+        private const int _padding = 15;
         private List<CGPoint> _positions;
 
         private CircleMenuItemModel _model;
@@ -21,7 +22,7 @@ namespace EOS.UI.iOS.Components
             set
             {
                 _model = value;
-                if(_model != null)
+                if (_model != null)
                 {
                     SetImage(_model.ImageSource, UIControlState.Normal);
                 }
@@ -50,11 +51,54 @@ namespace EOS.UI.iOS.Components
             }
         }
 
+
+        private UIColor _focusedBackgroundColor;
+        internal UIColor FocusedBackgroundColor
+        {
+            get => _focusedBackgroundColor;
+            set
+            {
+                _focusedBackgroundColor = value;
+            }
+        }
+
+        private UIColor _unfocusedBackgroundColor;
+        internal UIColor UnfocusedBackgroundColor
+        {
+            get => _unfocusedBackgroundColor;
+            set
+            {
+                _unfocusedBackgroundColor = value;
+                BackgroundColor = _unfocusedBackgroundColor;
+            }
+        }
+
+        private UIColor _focusedIconColor;
+        internal UIColor FocusedIconColor
+        {
+            get => _focusedIconColor;
+            set
+            {
+                _focusedIconColor = value;
+            }
+        }
+
+        private UIColor _unfocusedIconColor;
+        internal UIColor UnfocusedIconColor
+        {
+            get => _unfocusedIconColor;
+            set
+            {
+                _unfocusedIconColor = value;
+                ImageView.TintColor = _unfocusedIconColor;
+            }
+        }
+        
         internal int PositionIndex
         {
             get => _positions.IndexOf(Position);
         }
-
+        
         public CircleMenuButton()
         {
             Initialize();
@@ -75,7 +119,6 @@ namespace EOS.UI.iOS.Components
         {
             //TODO need to remove
             TintColor = UIColor.Black;
-            BackgroundColor = UIColor.White;
             SetTitleColor(UIColor.Black, UIControlState.Normal);
 
             ImageEdgeInsets = new UIEdgeInsets(_padding, _padding, _padding, _padding);
@@ -84,6 +127,7 @@ namespace EOS.UI.iOS.Components
             Layer.ShadowOffset = new CGSize(0, 6);
             Layer.ShadowRadius = 12;
             Layer.ShadowOpacity = 0.2f;
+            TouchUpInside += OnClicked;
         }
 
         public override void MovedToSuperview()
@@ -95,6 +139,15 @@ namespace EOS.UI.iOS.Components
         internal void ResetPosition()
         {
             Position = _position;
+        }
+
+        void OnClicked(object sender, EventArgs e)
+        {
+            if (!Model.HasChildren)
+                return;
+            BackgroundColor = _isClicked ? _unfocusedBackgroundColor : _focusedBackgroundColor;
+            ImageView.TintColor = _isClicked ? _unfocusedIconColor : _focusedIconColor;
+            _isClicked = !_isClicked;
         }
     }
 }

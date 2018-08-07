@@ -6,13 +6,16 @@ using Airbnb.Lottie;
 using CoreAnimation;
 using CoreGraphics;
 using EOS.UI.iOS.Extensions;
+using EOS.UI.iOS.Themes;
 using EOS.UI.Shared.Themes.DataModels;
+using EOS.UI.Shared.Themes.Helpers;
+using EOS.UI.Shared.Themes.Interfaces;
 using Foundation;
 using UIKit;
 
 namespace EOS.UI.iOS.Components
 {
-    public class CircleMenu : UIView
+    public class CircleMenu : UIView, IEOSThemeControl
     {
         //TODO need to remove after develop
 #if DEBUG
@@ -75,17 +78,6 @@ namespace EOS.UI.iOS.Components
             }
         }
 
-        private UIColor _unfocusedBackgroundColor;
-        public UIColor UnfocusedBackgroundColor
-        {
-            get => _unfocusedBackgroundColor;
-            set
-            {
-                _unfocusedBackgroundColor = value;
-                IsEOSCustomizationIgnored = true;
-            }
-        }
-
         private UIColor _focusedBackgroundColor;
         public UIColor FocusedBackgroundColor
         {
@@ -94,6 +86,21 @@ namespace EOS.UI.iOS.Components
             {
                 _focusedBackgroundColor = value;
                 IsEOSCustomizationIgnored = true;
+                _menuButtons.ForEach(b => b.FocusedBackgroundColor = _focusedBackgroundColor);
+                _buttonIndicators.ForEach(b => b.BackgroundColor = _focusedBackgroundColor);
+            }
+        }
+
+        private UIColor _unfocusedBackgroundColor;
+        public UIColor UnfocusedBackgroundColor
+        {
+            get => _unfocusedBackgroundColor;
+            set
+            {
+                _unfocusedBackgroundColor = value;
+                IsEOSCustomizationIgnored = true;
+                _menuButtons.ForEach(b => b.UnfocusedBackgroundColor = _unfocusedBackgroundColor);
+                _mainButton.BackgroundColor = _unfocusedBackgroundColor;
             }
         }
 
@@ -105,6 +112,7 @@ namespace EOS.UI.iOS.Components
             {
                 _focusedIconColor = value;
                 IsEOSCustomizationIgnored = true;
+                _menuButtons.ForEach(b => b.FocusedIconColor = _focusedIconColor);
             }
         }
 
@@ -116,6 +124,7 @@ namespace EOS.UI.iOS.Components
             {
                 _unfocusedIconColor = value;
                 IsEOSCustomizationIgnored = true;
+                _menuButtons.ForEach(b => b.UnfocusedIconColor = UnfocusedIconColor);
             }
         }
 
@@ -142,7 +151,7 @@ namespace EOS.UI.iOS.Components
                 Frame = new CGRect(mainFrame.Width - _menuSize, mainFrame.Height - _menuSize, _menuSize, _menuSize);
             }
 
-            BackgroundColor = UIColor.LightGray;
+            BackgroundColor = _isTest ? UIColor.Clear : UIColor.LightGray;
 
             //shadowview init
             _shadowView = new UIView(mainFrame);
@@ -181,6 +190,8 @@ namespace EOS.UI.iOS.Components
             };
             AddSubview(_menuButtonsView);
             AddSubview(_mainButton);
+
+            UpdateAppearance();
         }
 
         public void Attach()
@@ -307,7 +318,7 @@ namespace EOS.UI.iOS.Components
         {
             PrepareMenuButtons();
             var tcs = new TaskCompletionSource<bool>();
-            _mainButton.UserInteractionEnabled = false;
+            ToggleAllInteractions(false);
             for (int i = 0; i < _visibleCountOfElements; ++i)
             {
                 var delay = _menuOpenButtonAnimationDuration * i;
@@ -334,11 +345,12 @@ namespace EOS.UI.iOS.Components
                 await StartHintAnimation();
                 _isHintShown = true;
             }
-            _mainButton.UserInteractionEnabled = true;
+            ToggleAllInteractions(true);
         }
 
         async Task CloseMenu()
         {
+            ToggleAllInteractions(false);
             for (int i = 0; i < _menuButtons.Count; ++i)
             {
                 for (int j = 0; j < _menuButtons.Count; ++j)
@@ -356,6 +368,7 @@ namespace EOS.UI.iOS.Components
                 }
                 await Task.Delay(TimeSpan.FromSeconds(_menuOpenButtonAnimationDuration));
             }
+            ToggleAllInteractions(true);
         }
 
         void MoveLeft()
@@ -490,6 +503,8 @@ namespace EOS.UI.iOS.Components
                     Model = children,
                     Frame = new CGRect(xPosition, yPosition, CircleMenuButton.Size, CircleMenuButton.Size),
                     Alpha = 0,
+                    UnfocusedBackgroundColor = this.UnfocusedBackgroundColor ?? UIColor.White,
+                    UnfocusedIconColor = this.UnfocusedIconColor ?? UIColor.Black
                 };
                 button.TouchUpInside += OnSubmenuClicked;
                 _submenuButtons.Add(button);
@@ -619,6 +634,46 @@ namespace EOS.UI.iOS.Components
         {
             _menuButtons.ForEach(b => b.Enabled = true);
             _mainButton.Enabled = true;
+        }
+
+        void ToggleAllInteractions(bool enabled)
+        {
+            _mainButton.UserInteractionEnabled = enabled;
+            _leftSwipe.Enabled = enabled;
+            _rightSwipe.Enabled = enabled;
+        }
+
+        public IEOSThemeProvider GetThemeProvider()
+        {
+            return EOSThemeProvider.Instance;
+        }
+
+        public void UpdateAppearance()
+        {
+            if (!IsEOSCustomizationIgnored)
+            {
+                var provider = GetThemeProvider();
+                UnfocusedBackgroundColor = provider.GetEOSProperty<UIColor>(this, EOSConstants.NeutralColor6s);
+                FocusedBackgroundColor = provider.GetEOSProperty<UIColor>(this, EOSConstants.BrandPrimaryColor);
+                FocusedIconColor = provider.GetEOSProperty<UIColor>(this, EOSConstants.NeutralColor6s);
+                UnfocusedIconColor = provider.GetEOSProperty<UIColor>(this, EOSConstants.NeutralColor1s);
+                IsEOSCustomizationIgnored = false;
+            }
+        }
+
+        public void ResetCustomization()
+        {
+            IsEOSCustomizationIgnored = false;
+            UpdateAppearance();
+        }
+
+        public IEOSStyle GetCurrentEOSStyle()
+        {
+            return null;
+        }
+
+        public void SetEOSStyle(EOSStyleEnumeration style)
+        {
         }
     }
 }

@@ -5,9 +5,10 @@ using UIKit;
 
 namespace EOS.UI.iOS.Components
 {
-    public class CircleMenuMainButton: CircleMenuButton
+    public class CircleMenuMainButton: UIButton
     {
-        internal const int AnimationViewSize = 24;
+        private const int Size = 52;
+        private const int AnimationViewSize = 24;
         private const float _startScale = 0.85f;
         private const float _endScale = 1.0f;
         private const double _scaleDuration = 0.1;
@@ -30,6 +31,7 @@ namespace EOS.UI.iOS.Components
         
         void Initalize()
         {
+            BackgroundColor = UIColor.White;
             var mainButtonAnimationView = new UIView()
             {
                 Frame = new CGRect((Size - AnimationViewSize) / 2,
@@ -52,6 +54,12 @@ namespace EOS.UI.iOS.Components
             }));
             this.AddSubview(mainButtonAnimationView);
             this.TouchUpInside += OnMainButtonClicked;
+        }
+        
+        public override void MovedToSuperview()
+        {
+            base.MovedToSuperview();
+            Layer.CornerRadius = Frame.Height / 2;
         }
         
         void AnimateScale()

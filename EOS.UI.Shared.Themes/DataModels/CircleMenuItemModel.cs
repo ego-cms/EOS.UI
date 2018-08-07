@@ -19,7 +19,7 @@ namespace EOS.UI.Shared.Themes.DataModels
         public CircleMenuItemModel(int id, UIImage imageSource, List<CircleMenuItemModel> children = null)
         {
             Id = id;
-            ImageSource = imageSource;
+            ImageSource = imageSource?.ImageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate);
             Children = children ?? new List<CircleMenuItemModel>();
         }
 #endif
