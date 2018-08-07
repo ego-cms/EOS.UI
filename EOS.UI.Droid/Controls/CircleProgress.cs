@@ -43,7 +43,7 @@ namespace EOS.UI.Droid.Controls
                     _progress = value;
                     if(_checkmarkImage.Visibility == ViewStates.Visible)
                         _checkmarkImage.Visibility = ViewStates.Invisible;
-                    if (_percentText.Visibility == ViewStates.Invisible)
+                    if (ShouldShowProgress)
                         _percentText.Visibility = ViewStates.Visible;
                     _progressBar.Progress = _progress;
                     _percentText.Text = $"{value} %";
@@ -101,7 +101,7 @@ namespace EOS.UI.Droid.Controls
             set
             {
                 _showProgress = value;
-                _percentText.Visibility = _showProgress ? ViewStates.Visible : ViewStates.Invisible;
+                _percentText.Visibility = ShouldShowProgress ? ViewStates.Visible : ViewStates.Invisible;
                 IsEOSCustomizationIgnored = true;
             }
         }
@@ -256,6 +256,8 @@ namespace EOS.UI.Droid.Controls
                 IsEOSCustomizationIgnored = false;
             }
         }
+
+        private bool ShouldShowProgress => ShowProgress && _progressBar.Progress != 100;
 
         private void ShowCheckmark()
         {

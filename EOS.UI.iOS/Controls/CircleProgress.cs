@@ -46,7 +46,7 @@ namespace EOS.UI.iOS
                 {
                     if (imageView.Hidden == false)
                         imageView.Hidden = true;
-                    if (percentLabel.Hidden == true)
+                    if (ShouldShowProgress)
                         percentLabel.Hidden = false;
                     percentLabel.Text = $"{_progress.ToString()}%";
                     RedrawCircle();
@@ -112,7 +112,7 @@ namespace EOS.UI.iOS
             {
                 _showProgress = value;
                 IsEOSCustomizationIgnored = true;
-                percentLabel.Hidden = !_showProgress;
+                percentLabel.Hidden = !ShouldShowProgress;
             }
         }
 
@@ -196,6 +196,8 @@ namespace EOS.UI.iOS
         {
 
         }
+
+        private bool ShouldShowProgress => ShowProgress && _progress != 100;
 
         private void Initalize()
         {
