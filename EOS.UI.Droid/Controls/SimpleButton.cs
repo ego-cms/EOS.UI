@@ -217,38 +217,64 @@ namespace EOS.UI.Droid.Controls
             get => _shadowConfig;
             set
             {
-                _shadowConfig = value;
-
-                if(Build.VERSION.SdkInt > BuildVersionCodes.Lollipop)
+                if (value == null)
                 {
-                    UpdateStateListAnimator();
+                    ResetShadow();
                 }
                 else
                 {
-                    StateListAnimator = null;
-                    Elevation = 2 * _shadowConfig.Blur;
+                    if(_shadowConfig != value)
+                        SetupShadow(value);
                 }
+                _shadowConfig = value;
 
                 IsEOSCustomizationIgnored = true;
             }
         }
 
-        private void UpdateStateListAnimator()
+        private void ResetShadow()
+        {
+            if (Build.VERSION.SdkInt > BuildVersionCodes.Lollipop)
+            {
+                StateListAnimator = null;
+                Elevation = 0;
+                TranslationZ = 0;
+            }
+            else
+            {
+                Elevation = 0;
+            }
+        }
+
+        private void SetupShadow(ShadowConfig shadow)
+        {
+            if (Build.VERSION.SdkInt > BuildVersionCodes.Lollipop)
+            {
+                UpdateStateListAnimator(shadow);
+            }
+            else
+            {
+                StateListAnimator = null;
+                Elevation = 2 * shadow.Blur;
+            }
+        }
+
+        private void UpdateStateListAnimator(ShadowConfig shadow)
         {
             var stateList = new StateListAnimator();
 
-            var elevationHolderToPressed = PropertyValuesHolder.OfFloat("Elevation", _shadowConfig.Blur, 0);
-            var translationZHolderToPressed = PropertyValuesHolder.OfFloat("TranslationZ", _shadowConfig.Blur, 0);
+            var elevationHolderToPressed = PropertyValuesHolder.OfFloat("Elevation", shadow.Blur, 0);
+            var translationZHolderToPressed = PropertyValuesHolder.OfFloat("TranslationZ", shadow.Blur, 0);
             var pressedAnimation = ObjectAnimator.OfPropertyValuesHolder(this, elevationHolderToPressed, translationZHolderToPressed);
             pressedAnimation.SetDuration(100);
 
             var disabledAnimation = ObjectAnimator.OfPropertyValuesHolder(this, elevationHolderToPressed, translationZHolderToPressed);
             disabledAnimation.SetDuration(0);
 
-            var elevationHolderToNormal = PropertyValuesHolder.OfFloat("Elevation", 0, _shadowConfig.Blur);
-            var translationZHolderToNormal = PropertyValuesHolder.OfFloat("TranslationZ", 0, _shadowConfig.Blur);
+            var elevationHolderToNormal = PropertyValuesHolder.OfFloat("Elevation", 0, shadow.Blur);
+            var translationZHolderToNormal = PropertyValuesHolder.OfFloat("TranslationZ", 0, shadow.Blur);
             var normalAnimation = ObjectAnimator.OfPropertyValuesHolder(this, elevationHolderToNormal, translationZHolderToNormal);
-            normalAnimation.SetDuration(100);
+            normalAnimation.SetDuration(1);
 
             stateList.AddState(new int[1] { Android.Resource.Attribute.StatePressed }, pressedAnimation);
             stateList.AddState(new int[1] { Android.Resource.Attribute.StateEnabled }, normalAnimation);

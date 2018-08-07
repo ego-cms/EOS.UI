@@ -43,10 +43,10 @@ namespace EOS.UI.Shared.Themes.Themes
                 Spread = 1
             }},
             { EOSConstants.SimpleButtonShadow, new ShadowConfig(){
-                Color = ColorExtension.FromHex("#000", 0.2f),
+                Color = ColorExtension.FromHex(shadowColor),
                 Offset = new CGPoint(0, 12),
-                Blur = 5,
-                Spread = 2
+                Blur = 12,
+                Spread = 200
             }},
             { EOSConstants.BorderWidth, 2 },
             { EOSConstants.SectionTitle, "Dark section" },

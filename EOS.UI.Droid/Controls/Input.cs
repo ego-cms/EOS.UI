@@ -156,29 +156,27 @@ namespace EOS.UI.Droid.Controls
             base.SetCompoundDrawables(left, top, right, bottom);
         }
 
+        private Color _hintTextColor;
         public Color HintTextColor
         {
-            get => HintFontStyle.Color;
+            get => _hintTextColor;
             set
             {
                 IsEOSCustomizationIgnored = true;
-                HintFontStyle.Color = value;
-                SetHintFontStyle();
-                if(Enabled)
-                    base.SetHintTextColor(value);
+                _hintTextColor = value;
+                SetHintTextColor();
             }
         }
 
+        private Color _hintTextColorDisabled;
         public Color HintTextColorDisabled
         {
-            get => DisabledHintFontStyle.Color;
+            get => _hintTextColorDisabled;
             set
             {
                 IsEOSCustomizationIgnored = true;
-                DisabledHintFontStyle.Color = value;
-                SetDisabledHintFontStyle();
-                if(!Enabled)
-                    base.SetHintTextColor(value);
+                _hintTextColorDisabled = value;
+                SetDisabledHintTextColor();
             }
         }
 
@@ -198,7 +196,6 @@ namespace EOS.UI.Droid.Controls
                 IsEOSCustomizationIgnored = true;
                 FontStyle.Typeface = value;
                 SetFontStyle();
-                base.Typeface = value;
             }
         }
 
@@ -216,7 +213,6 @@ namespace EOS.UI.Droid.Controls
                 IsEOSCustomizationIgnored = true;
                 FontStyle.LetterSpacing = value;
                 SetFontStyle();
-                base.LetterSpacing = value;
             }
         }
 
@@ -228,21 +224,18 @@ namespace EOS.UI.Droid.Controls
                 IsEOSCustomizationIgnored = true;
                 FontStyle.Color = value;
                 SetFontStyle();
-                if(Enabled)
-                    base.SetTextColor(value);
             }
         }
 
+        private Color _textColorDisabled;
         public Color TextColorDisabled
         {
-            get => DisabledFontStyle.Color;
+            get => _textColorDisabled;
             set
             {
                 IsEOSCustomizationIgnored = true;
-                DisabledFontStyle.Color = value;
-                SetDisabledFontStyle();
-                if(!Enabled)
-                    base.SetTextColor(value);
+                _textColorDisabled = value;
+                SetDisabledTextColor();
             }
         }
 
@@ -258,6 +251,8 @@ namespace EOS.UI.Droid.Controls
             {
                 IsEOSCustomizationIgnored = true;
                 base.TextSize = value;
+                FontStyle.Size = value;
+                SetFontStyle();
             }
         }
 
@@ -286,76 +281,31 @@ namespace EOS.UI.Droid.Controls
             }
         }
 
-        private FontStyleItem _disabledFontStyle;
-        public FontStyleItem DisabledFontStyle
-        {
-            get => _disabledFontStyle;
-            set
-            {
-                _disabledFontStyle = value;
-                SetDisabledFontStyle();
-                IsEOSCustomizationIgnored = true;
-            }
-        }
-
-        private FontStyleItem _hintFontStyle;
-        public FontStyleItem HintFontStyle
-        {
-            get => _hintFontStyle;
-            set
-            {
-                _hintFontStyle = value;
-                SetHintFontStyle();
-                IsEOSCustomizationIgnored = true;
-            }
-        }
-
-        private FontStyleItem _disabledHintFontStyle;
-        public FontStyleItem DisabledHintFontStyle
-        {
-            get => _disabledHintFontStyle;
-            set
-            {
-                _disabledHintFontStyle = value;
-                SetDisabledHintFontStyle();
-                IsEOSCustomizationIgnored = true;
-            }
-        }
-
         private void SetFontStyle()
         {
             base.Typeface = FontStyle.Typeface;
             base.TextSize = FontStyle.Size;
-            if(!Enabled)
+            if(Enabled)
                 base.SetTextColor(FontStyle.Color);
             base.LetterSpacing = FontStyle.LetterSpacing;
         }
 
-        private void SetDisabledFontStyle()
+        private void SetDisabledTextColor()
         {
-            base.Typeface = DisabledFontStyle.Typeface;
-            base.TextSize = DisabledFontStyle.Size;
             if(!Enabled)
-                base.SetTextColor(DisabledFontStyle.Color);
-            base.LetterSpacing = DisabledFontStyle.LetterSpacing;
+                base.SetTextColor(DisabledColor);
         }
 
-        private void SetHintFontStyle()
+        private void SetHintTextColor()
         {
-            base.Typeface = HintFontStyle.Typeface;
-            base.TextSize = HintFontStyle.Size;
-            if(!Enabled)
-                base.SetHintTextColor(HintFontStyle.Color);
-            base.LetterSpacing = HintFontStyle.LetterSpacing;
+            if(Enabled)
+                base.SetHintTextColor(HintTextColor);
         }
 
-        private void SetDisabledHintFontStyle()
+        private void SetDisabledHintTextColor()
         {
-            base.Typeface = DisabledHintFontStyle.Typeface;
-            base.TextSize = DisabledHintFontStyle.Size;
             if(!Enabled)
-                base.SetHintTextColor(DisabledHintFontStyle.Color);
-            base.LetterSpacing = DisabledHintFontStyle.LetterSpacing;
+                base.SetHintTextColor(HintTextColorDisabled);
         }
 
         #endregion
@@ -525,10 +475,11 @@ namespace EOS.UI.Droid.Controls
                 _clearColor = GetThemeProvider().GetEOSProperty<Color>(this, EOSConstants.NeutralColor3);
                 _closeImage.Mutate().SetColorFilter(_clearColor, PorterDuff.Mode.SrcIn);
 
+                //There are different fontstyles, but the difference only in colors, 
+                //so from font style items we only get the right color
                 FontStyle = GetThemeProvider().GetEOSProperty<FontStyleItem>(this, EOSConstants.R4C2);
-                DisabledFontStyle = GetThemeProvider().GetEOSProperty<FontStyleItem>(this, EOSConstants.R4C4);
-                HintFontStyle = GetThemeProvider().GetEOSProperty<FontStyleItem>(this, EOSConstants.R4C3);
-                DisabledHintFontStyle = GetThemeProvider().GetEOSProperty<FontStyleItem>(this, EOSConstants.R4C4);
+                HintTextColor = GetThemeProvider().GetEOSProperty<FontStyleItem>(this, EOSConstants.R4C3).Color;
+                HintTextColorDisabled = GetThemeProvider().GetEOSProperty<FontStyleItem>(this, EOSConstants.R4C4).Color;
                 FocusedColor = GetThemeProvider().GetEOSProperty<Color>(this, EOSConstants.BrandPrimaryColor);
                 DisabledColor = GetThemeProvider().GetEOSProperty<Color>(this, EOSConstants.NeutralColor3);
                 NormalIconColor = GetThemeProvider().GetEOSProperty<Color>(this, EOSConstants.NeutralColor2);
