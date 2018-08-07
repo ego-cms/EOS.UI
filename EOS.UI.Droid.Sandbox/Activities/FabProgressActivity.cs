@@ -87,6 +87,7 @@ namespace EOS.UI.Droid.Sandbox.Activities
                     ResetShadowFields(shadowOffsetXDropDown, shadowOffsetYDropDown, shadowBlurDropDown, shadowColorDropDown);
                     spinners.Except(new[] { themeDropDown }).ToList().ForEach(s => s.SetSpinnerSelection(0));
                     UpdateApperaence();
+                    _shadowAlpha = fab.ShadowConfig != null ? (float)fab.ShadowConfig?.Color.A / 255 : 1;
                 }
             };
             var theme = fab.GetThemeProvider().GetCurrentTheme();
