@@ -30,13 +30,14 @@ namespace EOS.UI.iOS.Components
         private const int _maximumCountOfChildren = 5;
         private const int _mainButtonPadding = 15;
         private const int _menuSize = 300;
-        private const double _menuOpenButtonAnimationDuration = 0.1;
-        private const double _buttonMovementAnimationDuration = 0.2;
-        private const double _buttonHintAnimationDuration = 0.3;
+        private const double _menuOpenButtonAnimationDuration = 0.05;
+        private const double _buttonMovementAnimationDuration = 0.1;
+        private const double _buttonHintAnimationDuration = 0.2;
         private const double _buttonHintAnimationDelay = 0.5;
+        private const double _showSubmenuDuration = 0.1;
         private const int _radius = 96;
-        private readonly nfloat _20degrees = 0.349066f;
-        private readonly nfloat _10degrees = 0.174533f;
+        private readonly nfloat _6degrees = 0.10472f;
+        private readonly nfloat _8degrees = 0.139626f;
         private readonly nfloat _55degrees = 0.959931f;
         private readonly UIView _rootView;
         private readonly UIView _shadowView;
@@ -339,7 +340,7 @@ namespace EOS.UI.iOS.Components
                 }
             }
             await tcs.Task;
-            await StartSpringEffect(UISwipeGestureRecognizerDirection.Left, _20degrees);
+            await StartOpenSpringEffect(-_6degrees);
             if (!_isHintShown)
             {
                 await StartHintAnimation();
@@ -394,7 +395,7 @@ namespace EOS.UI.iOS.Components
                     _menuButtons[i].Indicator.Position = _indicatorPositions[nextPositionIndex];
                 });
             }
-            StartSpringEffect(UISwipeGestureRecognizerDirection.Left, _10degrees);
+            StartMoveSpringEffect(-_8degrees);
         }
 
         void MoveRight()
@@ -420,16 +421,15 @@ namespace EOS.UI.iOS.Components
                     _menuButtons[i].Indicator.Position = _indicatorPositions[previousPositionIndex];
                 });
             }
-            StartSpringEffect(UISwipeGestureRecognizerDirection.Right, _10degrees);
+            StartMoveSpringEffect(_8degrees);
         }
 
-        Task<bool> StartSpringEffect(UISwipeGestureRecognizerDirection direction, nfloat angle)
+        Task<bool> StartOpenSpringEffect(nfloat angle)
         {
+            const int initialVelocity = 120;
+            const int damping = 15;
+
             var tcs = new TaskCompletionSource<bool>();
-            if (direction == UISwipeGestureRecognizerDirection.Left)
-            {
-                angle = -angle;
-            }
 
             var leftAnimation = new CASpringAnimation();
             leftAnimation.KeyPath = "transform.rotation.z";
@@ -438,14 +438,20 @@ namespace EOS.UI.iOS.Components
             leftAnimation.RepeatCount = 1;
             leftAnimation.RemovedOnCompletion = false;
             leftAnimation.FillMode = CAFillMode.Forwards;
+            leftAnimation.Damping = damping;
+
+            leftAnimation.InitialVelocity = initialVelocity;
 
             var rightAnimation = new CASpringAnimation();
             rightAnimation.KeyPath = "transform.rotation.z";
             rightAnimation.From = new NSNumber(angle);
             rightAnimation.To = new NSNumber(0);
-            rightAnimation.RepeatCount = 1;
             rightAnimation.RemovedOnCompletion = false;
             rightAnimation.FillMode = CAFillMode.Forwards;
+            rightAnimation.Damping = damping;
+            rightAnimation.Duration = 0.6;
+
+            rightAnimation.InitialVelocity = initialVelocity / 2;
 
             leftAnimation.AnimationStopped += (sender, e) =>
             {
@@ -461,6 +467,38 @@ namespace EOS.UI.iOS.Components
             return tcs.Task;
         }
 
+        Task<bool> StartMoveSpringEffect(nfloat angle)
+        {
+            var tcs = new TaskCompletionSource<bool>();
+            var firstAnimation = new CASpringAnimation();
+            firstAnimation.KeyPath = "transform.rotation.z";
+            firstAnimation.From = new NSNumber(0);
+            firstAnimation.To = new NSNumber(angle);
+            firstAnimation.RepeatCount = 1;
+            firstAnimation.RemovedOnCompletion = false;
+            firstAnimation.FillMode = CAFillMode.Forwards;
+
+            var secondAnimation = new CASpringAnimation();
+            secondAnimation.KeyPath = "transform.rotation.z";
+            secondAnimation.From = new NSNumber(angle);
+            secondAnimation.To = new NSNumber(0);
+            secondAnimation.RemovedOnCompletion = false;
+            secondAnimation.FillMode = CAFillMode.Forwards;
+
+            firstAnimation.AnimationStopped += (sender, e) =>
+            {
+                _menuButtonsView.Layer.AddAnimation(secondAnimation, null);
+            };
+
+            secondAnimation.AnimationStopped += (sender, e) =>
+            {
+                _menuButtonsView.Layer.RemoveAllAnimations();
+                tcs.SetResult(true);
+            };
+            _menuButtonsView.Layer.AddAnimation(firstAnimation, null);
+            return tcs.Task;
+        }
+        
         async void PrepareSubmenuIfNeeded(CircleMenuButton invokedButton, CircleMenuItemModel model)
         {
             if (!model.HasChildren)
@@ -523,7 +561,7 @@ namespace EOS.UI.iOS.Components
             for (int i = 0; i < _submenuButtons.Count; ++i)
             {
                 _rootView.AddSubview(_submenuButtons[i]);
-                UIView.Animate(_menuOpenButtonAnimationDuration, () =>
+                UIView.Animate(_showSubmenuDuration, () =>
                {
                    _submenuButtons[i].Alpha = 1;
                }, () => tcs.SetResult(true));
@@ -540,7 +578,7 @@ namespace EOS.UI.iOS.Components
             invokedButton.Indicator.Hidden = true;
             for (int i = _submenuButtons.Count - 1; i >= 0; --i)
             {
-                UIView.Animate(_menuOpenButtonAnimationDuration, () =>
+                UIView.Animate(_showSubmenuDuration, () =>
                 {
                     _submenuButtons[i].Alpha = 0;
                 }, () => tcs.SetResult(true));
@@ -591,28 +629,37 @@ namespace EOS.UI.iOS.Components
         Task<bool> StartHintAnimation()
         {
             var tcs = new TaskCompletionSource<bool>();
-            var hintButtons = new List<CircleMenuButton>();
+            var hintViews = new List<UIView>();
             var invokedButton = _menuButtons.Single(b => b.PositionIndex == 1);
             for (int i = 0; i < 2; ++i)
             {
-                var hintButton = new CircleMenuButton(invokedButton.Frame);
-                hintButtons.Add(hintButton);
-                _menuButtonsView.InsertSubview(hintButton, 0);
+                var hintView = new UIView(invokedButton.Frame);
+                hintView.BackgroundColor = UIColor.White;
+                hintView.Layer.CornerRadius = invokedButton.Frame.Height / 2;
+                hintView.Layer.ShadowColor = UIColor.Black.CGColor;
+                hintView.Layer.ShadowOffset = new CGSize(0, 1);
+                hintView.Layer.ShadowRadius = 1;
+                hintView.Layer.ShadowOpacity = 0.2f;
+                
+                hintViews.Add(hintView);
+                _menuButtonsView.InsertSubview(hintView, 0);
             }
 
-            UIView.Animate(_buttonHintAnimationDuration, _buttonHintAnimationDelay, UIViewAnimationOptions.CurveEaseInOut, () =>
+            UIView.Animate(_showSubmenuDuration, _buttonHintAnimationDelay, UIViewAnimationOptions.CurveEaseInOut, () =>
             {
                 invokedButton.Frame = invokedButton.Frame.ResizeRect(y: invokedButton.Frame.Y - 10);
-                hintButtons[1].Frame = hintButtons[1].Frame.ResizeRect(y: hintButtons[1].Frame.Y + 10);
+                invokedButton.Indicator.Frame = invokedButton.Indicator.Frame.ResizeRect(y: invokedButton.Indicator.Frame.Y - 10);
+                hintViews[1].Frame = hintViews[1].Frame.ResizeRect(y: hintViews[1].Frame.Y + 10);
             }, null);
-            UIView.Animate(_buttonHintAnimationDuration, 2 * _buttonHintAnimationDelay, UIViewAnimationOptions.CurveEaseInOut, () =>
+            UIView.Animate(_showSubmenuDuration, 2 * _buttonHintAnimationDelay, UIViewAnimationOptions.CurveEaseInOut, () =>
             {
                 invokedButton.ResetPosition();
-                hintButtons[0].Frame = invokedButton.Frame;
-                hintButtons[1].Frame = invokedButton.Frame;
+                invokedButton.Indicator.ResetPosition();
+                hintViews[0].Frame = invokedButton.Frame;
+                hintViews[1].Frame = invokedButton.Frame;
             }, () =>
             {
-                hintButtons.ForEach(b => b.RemoveFromSuperview());
+                hintViews.ForEach(b => b.RemoveFromSuperview());
                 tcs.SetResult(true);
             });
             return tcs.Task;
