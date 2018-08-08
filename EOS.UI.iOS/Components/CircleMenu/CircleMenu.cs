@@ -32,8 +32,7 @@ namespace EOS.UI.iOS.Components
         private const int _menuSize = 300;
         private const double _menuOpenButtonAnimationDuration = 0.05;
         private const double _buttonMovementAnimationDuration = 0.1;
-        private const double _buttonHintAnimationDuration = 0.2;
-        private const double _buttonHintAnimationDelay = 0.5;
+        private const double _buttonHintAnimationDuration = 0.5;
         private const double _showSubmenuDuration = 0.1;
         private const int _radius = 96;
         private readonly nfloat _6degrees = 0.10472f;
@@ -490,7 +489,7 @@ namespace EOS.UI.iOS.Components
             return tcs.Task;
         }
         
-        async void PrepareSubmenuIfNeeded(CircleMenuButton invokedButton, CircleMenuItemModel model)
+        async Task PrepareSubmenuIfNeeded(CircleMenuButton invokedButton, CircleMenuItemModel model)
         {
             if (!model.HasChildren)
                 return;
@@ -638,13 +637,13 @@ namespace EOS.UI.iOS.Components
                 _menuButtonsView.InsertSubview(hintView, 0);
             }
 
-            UIView.Animate(_showSubmenuDuration, _buttonHintAnimationDelay, UIViewAnimationOptions.CurveEaseInOut, () =>
+            UIView.Animate(_buttonHintAnimationDuration, 0, UIViewAnimationOptions.CurveEaseInOut, () =>
             {
                 invokedButton.Frame = invokedButton.Frame.ResizeRect(y: invokedButton.Frame.Y - 10);
                 invokedButton.Indicator.Frame = invokedButton.Indicator.Frame.ResizeRect(y: invokedButton.Indicator.Frame.Y - 10);
                 hintViews[1].Frame = hintViews[1].Frame.ResizeRect(y: hintViews[1].Frame.Y + 10);
             }, null);
-            UIView.Animate(_showSubmenuDuration, 2 * _buttonHintAnimationDelay, UIViewAnimationOptions.CurveEaseInOut, () =>
+            UIView.Animate(_buttonHintAnimationDuration, _buttonHintAnimationDuration, UIViewAnimationOptions.CurveEaseInOut, () =>
             {
                 invokedButton.ResetPosition();
                 invokedButton.Indicator.ResetPosition();

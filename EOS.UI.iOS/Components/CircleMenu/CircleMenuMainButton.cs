@@ -49,8 +49,6 @@ namespace EOS.UI.iOS.Components
                                   AnimationViewSize),
                 BackgroundColor = UIColor.Clear
             };
-            mainButtonAnimationView.Layer.BackgroundColor = UIColor.LightGray.CGColor;
-            
             _mainButtonOpenAnimation = LOTAnimationView.AnimationNamed(_openAnimationKey);
             _mainButtonOpenAnimation.Hidden = false;
             _mainButtonOpenAnimation.Frame = mainButtonAnimationView.Bounds;
