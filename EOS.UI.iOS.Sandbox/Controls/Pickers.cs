@@ -10,6 +10,13 @@ namespace EOS.UI.iOS.Sandbox.Controls.Pickers
     //color picker
     public class ColorPickerSource : UIPickerViewDataSource
     {
+        Dictionary<string, UIColor> _colorCollection;
+
+        public ColorPickerSource(Dictionary<string, UIColor> colorCollection)
+        {
+            _colorCollection = colorCollection;
+        }
+
         public override nint GetComponentCount(UIPickerView pickerView)
         {
             return 1;
@@ -17,17 +24,24 @@ namespace EOS.UI.iOS.Sandbox.Controls.Pickers
 
         public override nint GetRowsInComponent(UIPickerView pickerView, nint component)
         {
-            return Colors.ColorsCollection.Count;
+            return _colorCollection.Count;
         }
     }
 
     public class ColorPickerDelegate : UIPickerViewDelegate
     {
+        Dictionary<string, UIColor> _colorCollection;
+
         public event EventHandler<KeyValuePair<String, UIColor>> DidSelected;
+
+        public ColorPickerDelegate(Dictionary<string, UIColor> colorCollection)
+        {
+            _colorCollection = colorCollection;
+        }
 
         public override NSAttributedString GetAttributedTitle(UIPickerView pickerView, nint row, nint component)
         {
-            var pair = Colors.ColorsCollection.ElementAt((int)row);
+            var pair = _colorCollection.ElementAt((int)row);
             var attributedString = new NSMutableAttributedString(pair.Key);
             attributedString.AddAttribute(UIStringAttributeKey.ForegroundColor, pair.Value, new NSRange(0, attributedString.Length));
             attributedString.AddAttribute(UIStringAttributeKey.Shadow, new NSShadow() { ShadowOffset = new CoreGraphics.CGSize(2, 2), ShadowBlurRadius = 3 }, new NSRange(0, attributedString.Length));
@@ -36,7 +50,7 @@ namespace EOS.UI.iOS.Sandbox.Controls.Pickers
 
         public override void Selected(UIPickerView pickerView, nint row, nint component)
         {
-            DidSelected?.Invoke(this, Colors.ColorsCollection.ElementAt((int)row));
+            DidSelected?.Invoke(this, _colorCollection.ElementAt((int)row));
         }
     }
 

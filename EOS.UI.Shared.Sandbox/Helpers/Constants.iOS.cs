@@ -13,7 +13,7 @@ namespace EOS.UI.Shared.Sandbox.Helpers
     {
         public static class Colors
         {
-            public static Dictionary<string, UIColor> ColorsCollection = new Dictionary<string, UIColor>()
+            public static Dictionary<string, UIColor> MainColorsCollection = new Dictionary<string, UIColor>()
             {
                 {ColorNameBlue, ColorExtension.FromHex(ColorBlue)},
                 {ColorNameUltramarine, ColorExtension.FromHex(ColorUltramarine)},
@@ -31,6 +31,23 @@ namespace EOS.UI.Shared.Sandbox.Helpers
                 {ColorNameViolet, ColorExtension.FromHex(ColorViolet)},
                 {ColorNameIndigo, ColorExtension.FromHex(ColorIndigo)},
             };
+
+
+            public static Dictionary<string, UIColor> FontColorsCollection = new Dictionary<string, UIColor>()
+            {
+                {ColorNameBlack, ColorExtension.FromHex(ColorBlack)},
+                {ColorNameDarkGray, ColorExtension.FromHex(ColorDarkGray)},
+                {ColorNameGray, ColorExtension.FromHex(ColorGray)},
+                {ColorNameLightGray, ColorExtension.FromHex(ColorLightGray)},
+                {ColorNameWhite, ColorExtension.FromHex(ColorWhite)},
+                {ColorNameRed, ColorExtension.FromHex(ColorRed)},
+                {ColorNameUltramarine, ColorExtension.FromHex(ColorUltramarine)}
+            };
+
+            public static Dictionary<string, UIColor> GetGhostButtonFonts()
+            {
+                return MainColorsCollection.Union(FontColorsCollection).ToDictionary(a => a.Key, b => b.Value);
+            }
         }
 
         public static class Fonts
@@ -60,17 +77,7 @@ namespace EOS.UI.Shared.Sandbox.Helpers
             static Fonts()
             {
                 FontsCollection = new List<UIFont>();
-                var s =UIFont.SystemFontOfSize(10);
-                var s1 = UIFont.BoldSystemFontOfSize(10);
-                var s2 = UIFont.ItalicSystemFontOfSize(10);
-                var ff = UIFont.FamilyNames.OrderBy(a => a).ToList();
-                var f0 = UIFont.FontNamesForFamilyName("Avenir");
-                var f1 = UIFont.FontNamesForFamilyName("Avenir Next");
-                var f2 = UIFont.FontNamesForFamilyName("Futura");
-                var f3 = UIFont.FontNamesForFamilyName("Helvetica");
-                var f4 = UIFont.FontNamesForFamilyName("Helvetica Neue");
-                var f5 = UIFont.FontNamesForFamilyName("Geeza Pro");
-                var f6 = UIFont.FontNamesForFamilyName("Hiragino Sans");
+
                 FontsCollection.Add(UIFont.FromName(AvenirBlack, UIFont.SystemFontSize));
                 FontsCollection.Add(UIFont.FromName(AvenirBook, UIFont.SystemFontSize));
                 FontsCollection.Add(UIFont.FromName(AvenirHeavy, UIFont.SystemFontSize));
@@ -91,26 +98,10 @@ namespace EOS.UI.Shared.Sandbox.Helpers
                 FontsCollection.Add(UIFont.FromName(HelveticaNeueRoman, UIFont.SystemFontSize));
                 FontsCollection.Add(UIFont.FromName(HelveticaNeueMedium, UIFont.SystemFontSize));
                 FontsCollection.Add(UIFont.FromName(HiraginoSansW3, UIFont.SystemFontSize));
-                //FontsCollection.Add(UIFont.FromName("SFProDisplay-Bold", UIFont.SystemFontSize));
-                //FontsCollection.Add(UIFont.FromName("SFProText-Bold", UIFont.SystemFontSize));
-                //FontsCollection.Add(UIFont.FromName("SFProText-Medium", UIFont.SystemFontSize));
-                //FontsCollection.Add(UIFont.FromName("SFProText-Regular", UIFont.SystemFontSize));
-                //FontsCollection.Add(UIFont.FromName("SFProText-Semibold", UIFont.SystemFontSize));
                 FontsCollection.Add(UIFont.SystemFontOfSize(UIFont.SystemFontSize, UIFontWeight.Bold));
                 FontsCollection.Add(UIFont.SystemFontOfSize(UIFont.SystemFontSize, UIFontWeight.Medium));
                 FontsCollection.Add(UIFont.SystemFontOfSize(UIFont.SystemFontSize, UIFontWeight.Regular));
                 FontsCollection.Add(UIFont.SystemFontOfSize(UIFont.SystemFontSize, UIFontWeight.Semibold));
-
-                //FontsCollection.Add(UIFont.BoldSystemFontOfSize(UIFont.SystemFontSize));
-                //FontsCollection.Add(UIFont.SystemFontOfSize(UIFont.SystemFontSize));
-                //foreach (var familyName in UIFont.FamilyNames)
-                //{
-                //    foreach (var fontName in UIFont.FontNamesForFamilyName(familyName))
-                //    {
-                //        var font = UIFont.FromName(fontName, UIFont.SystemFontSize);
-                //        FontsCollection.Add(font);
-                //    }
-                //}
 
                 FontsCollection = FontsCollection.OrderBy(f => f.Name).ToList();
             }

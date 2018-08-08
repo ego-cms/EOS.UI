@@ -142,6 +142,7 @@ namespace EOS.UI.iOS.Sandbox
         private void InitTextColorEnabledDropDown(CGRect rect)
         {
             enabledTextColorDropDown.InitSource(
+                Colors.FontColorsCollection,
                 color => _simpleButton.TextColor = color,
                 Fields.EnabledTextColor,
                 rect);
@@ -150,6 +151,7 @@ namespace EOS.UI.iOS.Sandbox
         private void InitTextColorDisabledDropDown(CGRect rect)
         {
             disabledTextColorDropDown.InitSource(
+                Colors.FontColorsCollection,
                 color => _simpleButton.DisabledTextColor = color,
                 Fields.DisabledTextColor,
                 rect);
@@ -158,6 +160,7 @@ namespace EOS.UI.iOS.Sandbox
         private void InitBackgroundColorEnabledDropDown(CGRect rect)
         {
             enabledBackgroundDropDown.InitSource(
+                Colors.MainColorsCollection,
                 color => _simpleButton.BackgroundColor = color,
                 Fields.EnabledBackground,
                 rect);
@@ -166,6 +169,7 @@ namespace EOS.UI.iOS.Sandbox
         private void InitBackgroundColorDisabledDropDown(CGRect rect)
         {
             disabledBackgroundDropDown.InitSource(
+                Colors.MainColorsCollection,
                 color => _simpleButton.DisabledBackgroundColor = color,
                 Fields.DisabledBackground,
                 rect);
@@ -174,6 +178,7 @@ namespace EOS.UI.iOS.Sandbox
         private void InitBackgroundColorPressedDropDown(CGRect rect)
         {
             pressedBackgroundDropdown.InitSource(
+                Colors.MainColorsCollection,
                 color => _simpleButton.PressedBackgroundColor = color,
                 Fields.PressedBackground,
                 rect);
@@ -236,6 +241,7 @@ namespace EOS.UI.iOS.Sandbox
         private void InitShadowColorDropDown(CGRect rect)
         {
             shadowColorDropdown.InitSource(
+                Colors.MainColorsCollection,
                 color =>
                 {
                     var config = _simpleButton.ShadowConfig;

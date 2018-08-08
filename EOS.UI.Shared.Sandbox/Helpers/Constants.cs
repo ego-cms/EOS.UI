@@ -23,6 +23,11 @@ namespace EOS.UI.Shared.Sandbox.Helpers
         private static string ColorNamePurple = "Purple";
         private static string ColorNameViolet = "Violet";
         private static string ColorNameIndigo = "Indigo";
+        private static string ColorNameBlack = "Black";
+        private static string ColorNameDarkGray = "Dark Gray";
+        private static string ColorNameGray = "Gray";
+        private static string ColorNameLightGray = "Light Gray";
+        private static string ColorNameWhite = "White";
 
         private static string ColorBlue = "#2d74da";
         private static string ColorUltramarine = "#3c6df0";
@@ -39,6 +44,11 @@ namespace EOS.UI.Shared.Sandbox.Helpers
         private static string ColorPurple = "#c22dd5";
         private static string ColorViolet = "#9753e1";
         private static string ColorIndigo = "#785ef0";
+        private static string ColorBlack = "#343334";
+        private static string ColorDarkGray = "#777677";
+        private static string ColorGray = "#C0BFC0";
+        private static string ColorLightGray = "#EAEAEA";
+        private static string ColorWhite = "#FFFFFF";
 
         public static class Fields
         {

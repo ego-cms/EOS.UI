@@ -93,27 +93,27 @@ namespace EOS.UI.Droid.Sandbox.Activities
             };
 
             colorDropDown.Name = Fields.Color;
-            colorDropDown.SetupAdapter(Colors.ColorsCollection.Select(item => item.Key).ToList());
+            colorDropDown.SetupAdapter(Colors.MainColorsCollection.Select(item => item.Key).ToList());
             colorDropDown.ItemSelected += (position) =>
             {
                 if(position > 0)
-                    circleProgress.Color = Colors.ColorsCollection.ElementAt(position).Value;
+                    circleProgress.Color = Colors.MainColorsCollection.ElementAt(position).Value;
             };
 
             alternativeColorDropDown.Name = Fields.AlternativeColor;
-            alternativeColorDropDown.SetupAdapter(Colors.ColorsCollection.Select(item => item.Key).ToList());
+            alternativeColorDropDown.SetupAdapter(Colors.MainColorsCollection.Select(item => item.Key).ToList());
             alternativeColorDropDown.ItemSelected += (position) =>
             {
                 if(position > 0)
-                    circleProgress.AlternativeColor = Colors.ColorsCollection.ElementAt(position).Value;
+                    circleProgress.AlternativeColor = Colors.MainColorsCollection.ElementAt(position).Value;
             };
 
             backgroundColorDropDown.Name = Fields.FillColor;
-            backgroundColorDropDown.SetupAdapter(Colors.ColorsCollection.Select(item => item.Key).ToList());
+            backgroundColorDropDown.SetupAdapter(Colors.MainColorsCollection.Select(item => item.Key).ToList());
             backgroundColorDropDown.ItemSelected += (position) =>
             {
                 if(position > 0)
-                    circleProgress.FillColor = Colors.ColorsCollection.ElementAt(position).Value;
+                    circleProgress.FillColor = Colors.MainColorsCollection.ElementAt(position).Value;
             };
 
             textSizeDropDown.Name = Fields.TextSize;

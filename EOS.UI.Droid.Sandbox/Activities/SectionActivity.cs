@@ -128,19 +128,19 @@ namespace EOS.UI.Droid.Sandbox.Activities
             _buttonTextSizeDropDown.ItemSelected += ButtonTextSizeItemSelected;
 
             _sectionTextColorDropDown.Name = Fields.SectionTextColor;
-            _sectionTextColorDropDown.SetupAdapter(Colors.ColorsCollection.Select(item => item.Key).ToList());
+            _sectionTextColorDropDown.SetupAdapter(Colors.FontColorsCollection.Select(item => item.Key).ToList());
             _sectionTextColorDropDown.ItemSelected += SectionTextColorItemSelected;
 
             _buttonTextColorDropDown.Name = Fields.ButtonTextColor;
-            _buttonTextColorDropDown.SetupAdapter(Colors.ColorsCollection.Select(item => item.Key).ToList());
+            _buttonTextColorDropDown.SetupAdapter(Colors.FontColorsCollection.Select(item => item.Key).ToList());
             _buttonTextColorDropDown.ItemSelected += ButtonTextColorItemSelected;
 
             _backgroundColorDropDown.Name = Fields.BackgroundColor;
-            _backgroundColorDropDown.SetupAdapter(Colors.ColorsCollection.Select(item => item.Key).ToList());
+            _backgroundColorDropDown.SetupAdapter(Colors.MainColorsCollection.Select(item => item.Key).ToList());
             _backgroundColorDropDown.ItemSelected += BackgroundColorItemSelected;
 
             _borderColorDropDown.Name = Fields.BorderColor;
-            _borderColorDropDown.SetupAdapter(Colors.ColorsCollection.Select(item => item.Key).ToList());
+            _borderColorDropDown.SetupAdapter(Colors.MainColorsCollection.Select(item => item.Key).ToList());
             _borderColorDropDown.ItemSelected += BorderColorItemSelected;
 
             _borderWidthDropDown.Name = Fields.BorderWidth;
@@ -346,7 +346,7 @@ namespace EOS.UI.Droid.Sandbox.Activities
                 var adapter = _sectionRecyclerView.GetAdapter() as SectionAdapter;
                 if(adapter.Headers.FirstOrDefault() is SectionModel section)
                 {
-                    section.BorderColor = Colors.ColorsCollection.ElementAt(position).Value;
+                    section.BorderColor = Colors.MainColorsCollection.ElementAt(position).Value;
                     adapter.NotifyDataSetChanged();
                 }
             }
@@ -359,7 +359,7 @@ namespace EOS.UI.Droid.Sandbox.Activities
                 var adapter = _sectionRecyclerView.GetAdapter() as SectionAdapter;
                 if(adapter.Headers.FirstOrDefault() is SectionModel section)
                 {
-                    section.BackgroundColor = Colors.ColorsCollection.ElementAt(position).Value;
+                    section.BackgroundColor = Colors.MainColorsCollection.ElementAt(position).Value;
                     adapter.NotifyDataSetChanged();
                 }
             }
@@ -372,7 +372,7 @@ namespace EOS.UI.Droid.Sandbox.Activities
                 var adapter = _sectionRecyclerView.GetAdapter() as SectionAdapter;
                 if(adapter.Headers.FirstOrDefault() is SectionModel section)
                 {
-                    section.ButtonNameColor = Colors.ColorsCollection.ElementAt(position).Value;
+                    section.ButtonNameColor = Colors.FontColorsCollection.ElementAt(position).Value;
                     adapter.NotifyDataSetChanged();
                 }
             }
@@ -385,7 +385,7 @@ namespace EOS.UI.Droid.Sandbox.Activities
                 var adapter = _sectionRecyclerView.GetAdapter() as SectionAdapter;
                 if(adapter.Headers.FirstOrDefault() is SectionModel section)
                 {
-                    section.SectionNameColor = Colors.ColorsCollection.ElementAt(position).Value;
+                    section.SectionNameColor = Colors.FontColorsCollection.ElementAt(position).Value;
                     adapter.NotifyDataSetChanged();
                 }
             }

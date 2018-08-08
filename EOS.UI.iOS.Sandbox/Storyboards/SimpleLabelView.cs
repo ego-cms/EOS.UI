@@ -100,6 +100,7 @@ namespace EOS.UI.iOS.Sandbox
         private void InitTextColorPicker(CGRect frame)
         {
             textColorDropDown.InitSource(
+                Colors.FontColorsCollection,
                 color => _simpleLabel.TextColor = color,
                 Fields.TextColor,
                 frame);

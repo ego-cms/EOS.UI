@@ -75,11 +75,13 @@ namespace EOS.UI.iOS.Sandbox
                 rect);
 
             enabledTextColorDropDown.InitSource(
+                Colors.GetGhostButtonFonts(),
                 color => ghostButton.EnabledTextColor = color,
                 Fields.EnabledTextColor,
                 rect);
 
             disabledTextColorDropDown.InitSource(
+                Colors.GetGhostButtonFonts(),
                 color => ghostButton.DisabledTextColor = color,
                 Fields.DisabledTextColor,
                 rect);
@@ -91,6 +93,7 @@ namespace EOS.UI.iOS.Sandbox
                 rect);
             
             rippleColorDropDown.InitSource(
+               Colors.MainColorsCollection,
                color => ghostButton.RippleColor = color,
                Fields.RippleColor,
                rect);

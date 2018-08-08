@@ -97,27 +97,27 @@ namespace EOS.UI.Droid.Sandbox.Activities
                 themeDropDown.SetSpinnerSelection(2);
 
             backgroundColorDropDown.Name = Fields.Background;
-            backgroundColorDropDown.SetupAdapter(Colors.ColorsCollection.Select(item => item.Key).ToList());
+            backgroundColorDropDown.SetupAdapter(Colors.MainColorsCollection.Select(item => item.Key).ToList());
             backgroundColorDropDown.ItemSelected += (position) =>
             {
                 if(position > 0)
-                    fab.BackgroundColor = Colors.ColorsCollection.ElementAt(position).Value;
+                    fab.BackgroundColor = Colors.MainColorsCollection.ElementAt(position).Value;
             };
 
             disabledColorDropDown.Name = Fields.DisabledColor;
-            disabledColorDropDown.SetupAdapter(Colors.ColorsCollection.Select(item => item.Key).ToList());
+            disabledColorDropDown.SetupAdapter(Colors.MainColorsCollection.Select(item => item.Key).ToList());
             disabledColorDropDown.ItemSelected += (position) =>
             {
                 if(position > 0)
-                    fab.DisabledBackgroundColor = Colors.ColorsCollection.ElementAt(position).Value;
+                    fab.DisabledBackgroundColor = Colors.MainColorsCollection.ElementAt(position).Value;
             };
 
             pressedColorDropDown.Name = Fields.PressedColor;
-            pressedColorDropDown.SetupAdapter(Colors.ColorsCollection.Select(item => item.Key).ToList());
+            pressedColorDropDown.SetupAdapter(Colors.MainColorsCollection.Select(item => item.Key).ToList());
             pressedColorDropDown.ItemSelected += (position) =>
             {
                 if(position > 0)
-                    fab.PressedBackgroundColor = Colors.ColorsCollection.ElementAt(position).Value;
+                    fab.PressedBackgroundColor = Colors.MainColorsCollection.ElementAt(position).Value;
             };
 
             shadowOffsetXDropDown.Name = Fields.ShadowOffsetX;
@@ -155,12 +155,12 @@ namespace EOS.UI.Droid.Sandbox.Activities
             };
 
             shadowColorDropDown.Name = Fields.ShadowColor;
-            shadowColorDropDown.SetupAdapter(Colors.ColorsCollection.Select(i => i.Key).ToList());
+            shadowColorDropDown.SetupAdapter(Colors.MainColorsCollection.Select(i => i.Key).ToList());
             shadowColorDropDown.ItemSelected += (position) =>
             {
                 if (position > 0)
                 {
-                    fab.ShadowConfig.Color = Colors.ColorsCollection.ElementAt(position).Value;
+                    fab.ShadowConfig.Color = Colors.MainColorsCollection.ElementAt(position).Value;
                     ChangeShadow(fab);
                 }
             };

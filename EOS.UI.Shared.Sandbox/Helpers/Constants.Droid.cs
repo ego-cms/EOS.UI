@@ -12,7 +12,7 @@ namespace EOS.UI.Shared.Sandbox.Helpers
     {
         public static class Colors
         {
-            public static readonly Dictionary<string, Color> ColorsCollection = new Dictionary<string, Color>()
+            public static readonly Dictionary<string, Color> MainColorsCollection = new Dictionary<string, Color>()
             {
                 { string.Empty, Color.Transparent },
                 {ColorNameBlue, Color.ParseColor(ColorBlue)},
@@ -31,6 +31,23 @@ namespace EOS.UI.Shared.Sandbox.Helpers
                 {ColorNameViolet, Color.ParseColor(ColorViolet)},
                 {ColorNameIndigo, Color.ParseColor(ColorIndigo)},
             };
+
+            public static Dictionary<string, Color> FontColorsCollection = new Dictionary<string, Color>()
+            {
+                { string.Empty, Color.Transparent },
+                {ColorNameBlack, Color.ParseColor(ColorBlack)},
+                {ColorNameDarkGray, Color.ParseColor(ColorDarkGray)},
+                {ColorNameGray, Color.ParseColor(ColorGray)},
+                {ColorNameLightGray, Color.ParseColor(ColorLightGray)},
+                {ColorNameWhite, Color.ParseColor(ColorWhite)},
+                {ColorNameRed, Color.ParseColor(ColorRed)},
+                {ColorNameUltramarine, Color.ParseColor(ColorUltramarine)}
+            };
+
+            public static Dictionary<string, Color> GetGhostButtonFonts()
+            {
+                return MainColorsCollection.Union(FontColorsCollection).ToDictionary(a => a.Key, b => b.Value);
+            }
         }
 
         public static class Fonts

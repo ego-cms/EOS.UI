@@ -48,11 +48,11 @@ namespace EOS.UI.Droid.Sandbox.Activities
             _themeDropDown.ItemSelected += ThemeItemSelected;
 
             _backgroundColorDropDown.Name = Fields.Background;
-            _backgroundColorDropDown.SetupAdapter(Colors.ColorsCollection.Select(item => item.Key).ToList());
+            _backgroundColorDropDown.SetupAdapter(Colors.MainColorsCollection.Select(item => item.Key).ToList());
             _backgroundColorDropDown.ItemSelected += BackgroundColorItemSelected;
 
             _textColorDropDown.Name = Fields.TextColor;
-            _textColorDropDown.SetupAdapter(Colors.ColorsCollection.Select(item => item.Key).ToList());
+            _textColorDropDown.SetupAdapter(Colors.FontColorsCollection.Select(item => item.Key).ToList());
             _textColorDropDown.ItemSelected += TextColorItemSelected;
 
             _fontDropDown.Name = Fields.Font;
@@ -126,13 +126,13 @@ namespace EOS.UI.Droid.Sandbox.Activities
         private void TextColorItemSelected(int position)
         {
             if(position > 0)
-                _badge.TextColor = Colors.ColorsCollection.ElementAt(position).Value;
+                _badge.TextColor = Colors.FontColorsCollection.ElementAt(position).Value;
         }
 
         private void BackgroundColorItemSelected(int position)
         {
             if(position > 0)
-                _badge.BackgroundColor = Colors.ColorsCollection.ElementAt(position).Value;
+                _badge.BackgroundColor = Colors.MainColorsCollection.ElementAt(position).Value;
         }
 
         private void ResetCustomValues()

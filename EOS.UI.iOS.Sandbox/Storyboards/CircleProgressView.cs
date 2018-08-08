@@ -94,16 +94,19 @@ namespace EOS.UI.iOS.Sandbox
                 rect);
 
             colorDropDown.InitSource(
+                Colors.MainColorsCollection,
                 color => _circleProgress.Color = color,
                 Fields.Color,
                 rect);
 
             alternativeColorDropDown.InitSource(
+                Colors.MainColorsCollection,
                 color => _circleProgress.AlternativeColor = color,
                 Fields.AlternativeColor,
                 rect);
             
             fillColorDropDown.InitSource(
+                Colors.MainColorsCollection,
                 color => _circleProgress.FillColor = color,
                 Fields.FillColor,
                 rect);

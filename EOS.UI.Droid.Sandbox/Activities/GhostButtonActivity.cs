@@ -79,19 +79,19 @@ namespace EOS.UI.Droid.Sandbox.Activities
             };
 
             enabledColorDropDown.Name = Fields.EnabledTextColor;
-            enabledColorDropDown.SetupAdapter(Colors.ColorsCollection.Select(item => item.Key).ToList());
+            enabledColorDropDown.SetupAdapter(Colors.GetGhostButtonFonts().Select(item => item.Key).ToList());
             enabledColorDropDown.ItemSelected += (position) =>
             {
                 if (position > 0)
-                    ghostButton.EnabledTextColor = Colors.ColorsCollection.ElementAt(position).Value;
+                    ghostButton.EnabledTextColor = Colors.GetGhostButtonFonts().ElementAt(position).Value;
             };
 
             disabledColorDropDown.Name = Fields.DisabledTextColor;
-            disabledColorDropDown.SetupAdapter(Colors.ColorsCollection.Select(item => item.Key).ToList());
+            disabledColorDropDown.SetupAdapter(Colors.GetGhostButtonFonts().Select(item => item.Key).ToList());
             disabledColorDropDown.ItemSelected += (position) =>
             {
                 if (position > 0)
-                    ghostButton.DisabledTextColor = Colors.ColorsCollection.ElementAt(position).Value;
+                    ghostButton.DisabledTextColor = Colors.GetGhostButtonFonts().ElementAt(position).Value;
             };
 
             textSizeDropDown.Name = Fields.TextSize;
@@ -103,11 +103,11 @@ namespace EOS.UI.Droid.Sandbox.Activities
             };
 
             rippleColorDropDown.Name = Fields.RippleColor;
-            rippleColorDropDown.SetupAdapter(Colors.ColorsCollection.Select(item => item.Key).ToList());
+            rippleColorDropDown.SetupAdapter(Colors.MainColorsCollection.Select(item => item.Key).ToList());
             rippleColorDropDown.ItemSelected += (position) =>
             {
                 if (position > 0)
-                    ghostButton.RippleColor = Colors.ColorsCollection.ElementAt(position).Value;
+                    ghostButton.RippleColor = Colors.MainColorsCollection.ElementAt(position).Value;
             };
 
             stateSwitch.CheckedChange += (sender, e) =>

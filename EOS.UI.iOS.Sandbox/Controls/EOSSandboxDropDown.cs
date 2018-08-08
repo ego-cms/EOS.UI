@@ -68,15 +68,15 @@ namespace EOS.UI.iOS.Sandbox
             UpdateAppearance();
         }
 
-        public void InitSource(Action<UIColor> action, string title, CGRect rectangle)
+        public void InitSource(Dictionary<string,UIColor> colorCollection, Action<UIColor> action, string title, CGRect rectangle)
         {
             label.Text = title;
             var picker = new UIPickerView(rectangle)
             {
                 ShowSelectionIndicator = true,
-                DataSource = new ColorPickerSource()
+                DataSource = new ColorPickerSource(colorCollection)
             };
-            var pickerDelegate = new ColorPickerDelegate();
+            var pickerDelegate = new ColorPickerDelegate(colorCollection);
             pickerDelegate.DidSelected += (object sender, KeyValuePair<string, UIColor> e) =>
             {
                 action?.Invoke(e.Value);
@@ -84,9 +84,9 @@ namespace EOS.UI.iOS.Sandbox
             };
             textField.EditingDidBegin += (sender, e) =>
             {
-                var item = Colors.ColorsCollection.ElementAt((int)picker.SelectedRowInComponent(0));
+                var item = colorCollection.ElementAt((int)picker.SelectedRowInComponent(0));
                 action?.Invoke(item.Value);
-                textField.Text = item.Key.ToString();
+                textField.Text = item.Key;
             };
             textField.Text = Constants.Fields.Default;
             picker.Delegate = pickerDelegate;

@@ -76,21 +76,25 @@ namespace EOS.UI.iOS.Sandbox
             themeDropDown.SetTextFieldText(_fab.GetThemeProvider().GetCurrentTheme() is LightEOSTheme ? "Light" : "Dark");
 
             backgroundDropDown.InitSource(
+                Colors.MainColorsCollection,
                 color => _fab.BackgroundColor = color,
                 Fields.Background,
                 rect);
 
             pressedColorDropDown.InitSource(
+                Colors.MainColorsCollection,
                 color => _fab.PressedBackgroundColor = color,
                 Fields.PressedColor,
                 rect);
 
             disabledColorDropDown.InitSource(
+                Colors.MainColorsCollection,
                 color => _fab.DisabledBackgroundColor = color,
                 Fields.DisabledColor,
                 rect);
 
             shadowColorDropDown.InitSource(
+                Colors.MainColorsCollection,
                 color =>
                 {
                     var config = _fab.ShadowConfig;

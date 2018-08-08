@@ -95,19 +95,19 @@ namespace EOS.UI.Droid.Sandbox.Activities
             _textSizeDropDown.ItemSelected += TextSizeView_ItemSelected;
 
             _textColorDropDown.Name = Fields.TextColor;
-            _textColorDropDown.SetupAdapter(Colors.ColorsCollection.Select(item => item.Key).ToList());
+            _textColorDropDown.SetupAdapter(Colors.FontColorsCollection.Select(item => item.Key).ToList());
             _textColorDropDown.ItemSelected += TextColorItemSelected;
 
             _textColorDisabledDropDown.Name = Fields.DisabledTextColor;
-            _textColorDisabledDropDown.SetupAdapter(Colors.ColorsCollection.Select(item => item.Key).ToList());
+            _textColorDisabledDropDown.SetupAdapter(Colors.FontColorsCollection.Select(item => item.Key).ToList());
             _textColorDisabledDropDown.ItemSelected += TextColorDisabledItemSelected;
 
             _hintTextColorDropDown.Name = Fields.HintTextColor;
-            _hintTextColorDropDown.SetupAdapter(Colors.ColorsCollection.Select(item => item.Key).ToList());
+            _hintTextColorDropDown.SetupAdapter(Colors.FontColorsCollection.Select(item => item.Key).ToList());
             _hintTextColorDropDown.ItemSelected += HintTextColorItemSelected;
 
             _hintTextColorDisabledDropDown.Name = Fields.HintTextColorDisabled;
-            _hintTextColorDisabledDropDown.SetupAdapter(Colors.ColorsCollection.Select(item => item.Key).ToList());
+            _hintTextColorDisabledDropDown.SetupAdapter(Colors.MainColorsCollection.Select(item => item.Key).ToList());
             _hintTextColorDisabledDropDown.ItemSelected += HintTextColorDisabledItemSelected;
 
             _leftDrawableDropDown.Name = Fields.Icon;
@@ -115,27 +115,27 @@ namespace EOS.UI.Droid.Sandbox.Activities
             _leftDrawableDropDown.ItemSelected += LeftDrawableItemSelected;
 
             _focusedColorDropDown.Name = Fields.FocusedColor;
-            _focusedColorDropDown.SetupAdapter(Colors.ColorsCollection.Select(item => item.Key).ToList());
+            _focusedColorDropDown.SetupAdapter(Colors.MainColorsCollection.Select(item => item.Key).ToList());
             _focusedColorDropDown.ItemSelected += FocusedColorItemSelected;
 
             _disabledColorDropDown.Name = Fields.DisabledColor;
-            _disabledColorDropDown.SetupAdapter(Colors.ColorsCollection.Select(item => item.Key).ToList());
+            _disabledColorDropDown.SetupAdapter(Colors.MainColorsCollection.Select(item => item.Key).ToList());
             _disabledColorDropDown.ItemSelected += DisabledColorItemSelected;
 
             _normalUnderlineColorDropDown.Name = Fields.NormalUnderlineColor;
-            _normalUnderlineColorDropDown.SetupAdapter(Colors.ColorsCollection.Select(item => item.Key).ToList());
+            _normalUnderlineColorDropDown.SetupAdapter(Colors.MainColorsCollection.Select(item => item.Key).ToList());
             _normalUnderlineColorDropDown.ItemSelected += NormalUnderlineColorItemSelected;
 
             _normalIconColorDropDown.Name = Fields.NormalIconColor;
-            _normalIconColorDropDown.SetupAdapter(Colors.ColorsCollection.Select(item => item.Key).ToList());
+            _normalIconColorDropDown.SetupAdapter(Colors.MainColorsCollection.Select(item => item.Key).ToList());
             _normalIconColorDropDown.ItemSelected += NormalIconColorItemSelected;
 
             _populatedIconColorDropDown.Name = Fields.PopulatedIconColor;
-            _populatedIconColorDropDown.SetupAdapter(Colors.ColorsCollection.Select(item => item.Key).ToList());
+            _populatedIconColorDropDown.SetupAdapter(Colors.MainColorsCollection.Select(item => item.Key).ToList());
             _populatedIconColorDropDown.ItemSelected += PopulatedIconColorItemSelected;
 
             _populatedUnderlineColorDropDown.Name = Fields.PopulatedUnderlineColor;
-            _populatedUnderlineColorDropDown.SetupAdapter(Colors.ColorsCollection.Select(item => item.Key).ToList());
+            _populatedUnderlineColorDropDown.SetupAdapter(Colors.MainColorsCollection.Select(item => item.Key).ToList());
             _populatedUnderlineColorDropDown.ItemSelected += PopulatedUnderlineColorItemSelected;
 
             _validatedRulesDropDown.Name = Fields.ValidationRules;
@@ -188,8 +188,8 @@ namespace EOS.UI.Droid.Sandbox.Activities
         {
             if(position > 0)
             {
-                _inputTop.PopulatedUnderlineColor = Colors.ColorsCollection.ElementAt(position).Value;
-                _inputBottom.PopulatedUnderlineColor = Colors.ColorsCollection.ElementAt(position).Value;
+                _inputTop.PopulatedUnderlineColor = Colors.MainColorsCollection.ElementAt(position).Value;
+                _inputBottom.PopulatedUnderlineColor = Colors.MainColorsCollection.ElementAt(position).Value;
             }
         }
 
@@ -197,8 +197,8 @@ namespace EOS.UI.Droid.Sandbox.Activities
         {
             if(position > 0)
             {
-                _inputTop.PopulatedIconColor = Colors.ColorsCollection.ElementAt(position).Value;
-                _inputBottom.PopulatedIconColor = Colors.ColorsCollection.ElementAt(position).Value;
+                _inputTop.PopulatedIconColor = Colors.MainColorsCollection.ElementAt(position).Value;
+                _inputBottom.PopulatedIconColor = Colors.MainColorsCollection.ElementAt(position).Value;
             }
         }
 
@@ -206,8 +206,8 @@ namespace EOS.UI.Droid.Sandbox.Activities
         {
             if(position > 0)
             {
-                _inputTop.NormalIconColor = Colors.ColorsCollection.ElementAt(position).Value;
-                _inputBottom.NormalIconColor = Colors.ColorsCollection.ElementAt(position).Value;
+                _inputTop.NormalIconColor = Colors.MainColorsCollection.ElementAt(position).Value;
+                _inputBottom.NormalIconColor = Colors.MainColorsCollection.ElementAt(position).Value;
             }
         }
 
@@ -260,8 +260,8 @@ namespace EOS.UI.Droid.Sandbox.Activities
         {
             if(position > 0)
             {
-                _inputTop.TextColor = Colors.ColorsCollection.ElementAt(position).Value;
-                _inputBottom.TextColor = Colors.ColorsCollection.ElementAt(position).Value;
+                _inputTop.TextColor = Colors.FontColorsCollection.ElementAt(position).Value;
+                _inputBottom.TextColor = Colors.FontColorsCollection.ElementAt(position).Value;
             }
         }
 
@@ -269,8 +269,8 @@ namespace EOS.UI.Droid.Sandbox.Activities
         {
             if(position > 0)
             {
-                _inputTop.TextColorDisabled = Colors.ColorsCollection.ElementAt(position).Value;
-                _inputBottom.TextColorDisabled = Colors.ColorsCollection.ElementAt(position).Value;
+                _inputTop.TextColorDisabled = Colors.FontColorsCollection.ElementAt(position).Value;
+                _inputBottom.TextColorDisabled = Colors.FontColorsCollection.ElementAt(position).Value;
             }
         }
 
@@ -278,8 +278,8 @@ namespace EOS.UI.Droid.Sandbox.Activities
         {
             if(position > 0)
             {
-                _inputTop.HintTextColor = Colors.ColorsCollection.ElementAt(position).Value;
-                _inputBottom.HintTextColor = Colors.ColorsCollection.ElementAt(position).Value;
+                _inputTop.HintTextColor = Colors.FontColorsCollection.ElementAt(position).Value;
+                _inputBottom.HintTextColor = Colors.FontColorsCollection.ElementAt(position).Value;
             }
         }
 
@@ -287,8 +287,8 @@ namespace EOS.UI.Droid.Sandbox.Activities
         {
             if(position > 0)
             {
-                _inputTop.HintTextColorDisabled = Colors.ColorsCollection.ElementAt(position).Value;
-                _inputBottom.HintTextColorDisabled = Colors.ColorsCollection.ElementAt(position).Value;
+                _inputTop.HintTextColorDisabled = Colors.FontColorsCollection.ElementAt(position).Value;
+                _inputBottom.HintTextColorDisabled = Colors.FontColorsCollection.ElementAt(position).Value;
             }
         }
 
@@ -305,8 +305,8 @@ namespace EOS.UI.Droid.Sandbox.Activities
         {
             if(position > 0)
             {
-                _inputTop.FocusedColor = Colors.ColorsCollection.ElementAt(position).Value;
-                _inputBottom.FocusedColor = Colors.ColorsCollection.ElementAt(position).Value;
+                _inputTop.FocusedColor = Colors.MainColorsCollection.ElementAt(position).Value;
+                _inputBottom.FocusedColor = Colors.MainColorsCollection.ElementAt(position).Value;
             }
         }
 
@@ -314,8 +314,8 @@ namespace EOS.UI.Droid.Sandbox.Activities
         {
             if(position > 0)
             {
-                _inputTop.NormalUnderlineColor = Colors.ColorsCollection.ElementAt(position).Value;
-                _inputBottom.NormalUnderlineColor = Colors.ColorsCollection.ElementAt(position).Value;
+                _inputTop.NormalUnderlineColor = Colors.MainColorsCollection.ElementAt(position).Value;
+                _inputBottom.NormalUnderlineColor = Colors.MainColorsCollection.ElementAt(position).Value;
             }
         }
 
@@ -323,8 +323,8 @@ namespace EOS.UI.Droid.Sandbox.Activities
         {
             if(position > 0)
             {
-                _inputTop.DisabledColor = Colors.ColorsCollection.ElementAt(position).Value;
-                _inputBottom.DisabledColor = Colors.ColorsCollection.ElementAt(position).Value;
+                _inputTop.DisabledColor = Colors.MainColorsCollection.ElementAt(position).Value;
+                _inputBottom.DisabledColor = Colors.MainColorsCollection.ElementAt(position).Value;
             }
         }
 
