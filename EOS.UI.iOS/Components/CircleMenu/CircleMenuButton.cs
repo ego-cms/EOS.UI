@@ -46,7 +46,8 @@ namespace EOS.UI.iOS.Components
                 {
                     Frame = new CGRect(value.X, value.Y, CircleMenuButton.Size, CircleMenuButton.Size);
                     var positionIndex = _positions.IndexOf(_position);
-                    UserInteractionEnabled = PositionIndex != 4 && positionIndex != 0;
+                    if (!Lock)
+                        UserInteractionEnabled = PositionIndex != 4 && positionIndex != 0;
                 }
             }
         }

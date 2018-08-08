@@ -6,6 +6,18 @@ namespace EOS.UI.iOS.Components
 {
     public class BasicCircleMenuButton : UIButton
     {
+
+        bool _lock;
+        internal bool Lock
+        {
+            get => _lock;
+            set
+            {
+                _lock = value;
+                UserInteractionEnabled = !_lock;
+            }
+        }
+        
         public BasicCircleMenuButton(CGRect frame) : base(frame)
         {
             Initalize();

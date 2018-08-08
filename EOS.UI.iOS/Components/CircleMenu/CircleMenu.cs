@@ -19,7 +19,7 @@ namespace EOS.UI.iOS.Components
     {
         //TODO need to remove after develop
 #if DEBUG
-        private bool _isTest = false;
+        private bool _isTest = true;
 #else
         private bool _isTest = true;
 #endif
@@ -319,7 +319,6 @@ namespace EOS.UI.iOS.Components
         {
             PrepareMenuButtons();
             var tcs = new TaskCompletionSource<bool>();
-            ToggleAllInteractions(false);
             for (int i = 0; i < _visibleCountOfElements; ++i)
             {
                 var delay = _menuOpenButtonAnimationDuration * i;
@@ -346,12 +345,10 @@ namespace EOS.UI.iOS.Components
                 await StartHintAnimation();
                 _isHintShown = true;
             }
-            ToggleAllInteractions(true);
         }
 
         async Task CloseMenu()
         {
-            ToggleAllInteractions(false);
             for (int i = 0; i < _menuButtons.Count; ++i)
             {
                 for (int j = 0; j < _menuButtons.Count; ++j)
@@ -369,7 +366,6 @@ namespace EOS.UI.iOS.Components
                 }
                 await Task.Delay(TimeSpan.FromSeconds(_menuOpenButtonAnimationDuration));
             }
-            ToggleAllInteractions(true);
         }
 
         void MoveLeft()
@@ -426,11 +422,7 @@ namespace EOS.UI.iOS.Components
 
         Task<bool> StartOpenSpringEffect(nfloat angle)
         {
-            const int initialVelocity = 120;
-            const int damping = 15;
-
             var tcs = new TaskCompletionSource<bool>();
-
             var leftAnimation = new CASpringAnimation();
             leftAnimation.KeyPath = "transform.rotation.z";
             leftAnimation.From = new NSNumber(0);
@@ -438,20 +430,18 @@ namespace EOS.UI.iOS.Components
             leftAnimation.RepeatCount = 1;
             leftAnimation.RemovedOnCompletion = false;
             leftAnimation.FillMode = CAFillMode.Forwards;
-            leftAnimation.Damping = damping;
-
-            leftAnimation.InitialVelocity = initialVelocity;
+            leftAnimation.Damping = 15;
+            leftAnimation.InitialVelocity = 120;
+            leftAnimation.Duration = 0.43;
 
             var rightAnimation = new CASpringAnimation();
             rightAnimation.KeyPath = "transform.rotation.z";
-            rightAnimation.From = new NSNumber(angle);
+            rightAnimation.From = new NSNumber(angle * 1.08f);
             rightAnimation.To = new NSNumber(0);
             rightAnimation.RemovedOnCompletion = false;
             rightAnimation.FillMode = CAFillMode.Forwards;
-            rightAnimation.Damping = damping;
+            rightAnimation.InitialVelocity = 10;
             rightAnimation.Duration = 0.6;
-
-            rightAnimation.InitialVelocity = initialVelocity / 2;
 
             leftAnimation.AnimationStopped += (sender, e) =>
             {
@@ -460,6 +450,7 @@ namespace EOS.UI.iOS.Components
 
             rightAnimation.AnimationStopped += (sender, e) =>
             {
+                _menuButtonsView.Transform.Rotate(0);
                 _menuButtonsView.Layer.RemoveAllAnimations();
                 tcs.SetResult(true);
             };
@@ -505,7 +496,7 @@ namespace EOS.UI.iOS.Components
                 return;
             if (model.Children.Count > _maximumCountOfChildren)
                 throw new ArgumentException($"Submenu must contain no more then {_maximumCountOfChildren} elements");
-            invokedButton.UserInteractionEnabled = false;
+            invokedButton.Lock = true;
             if (!_isSubmenuOpen)
             {
                 PrepareSubmenu(invokedButton, model.Children);
@@ -517,7 +508,7 @@ namespace EOS.UI.iOS.Components
                 await CloseSubmenu(invokedButton);
                 _isSubmenuOpen = false;
             }
-            invokedButton.UserInteractionEnabled = true;
+            invokedButton.Lock = false;
         }
 
         void PrepareSubmenu(CircleMenuButton invokedButton, List<CircleMenuItemModel> chilren)
@@ -598,6 +589,7 @@ namespace EOS.UI.iOS.Components
 
         async void OnMainButtonClicked(object sender, EventArgs e)
         {
+            ToggleAllInteractions(false);
             if (_mainButton.IsOpen)
             {
                 _shadowView.Hidden = true;
@@ -608,6 +600,7 @@ namespace EOS.UI.iOS.Components
                 _shadowView.Hidden = false;
                 await OpenMenu();
             }
+            ToggleAllInteractions(true);
         }
 
         void OnRightSwipe()
@@ -685,7 +678,8 @@ namespace EOS.UI.iOS.Components
 
         void ToggleAllInteractions(bool enabled)
         {
-            _mainButton.UserInteractionEnabled = enabled;
+            _menuButtons.ForEach(b => b.Lock = !enabled);
+            _mainButton.Lock = !enabled;
             _leftSwipe.Enabled = enabled;
             _rightSwipe.Enabled = enabled;
         }
