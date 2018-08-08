@@ -8,6 +8,7 @@ using CoreGraphics;
 using EOS.UI.iOS.Extensions;
 using EOS.UI.iOS.Themes;
 using EOS.UI.Shared.Themes.DataModels;
+using EOS.UI.Shared.Themes.Extensions;
 using EOS.UI.Shared.Themes.Helpers;
 using EOS.UI.Shared.Themes.Interfaces;
 using Foundation;
@@ -19,7 +20,7 @@ namespace EOS.UI.iOS.Components
     {
         //TODO need to remove after develop
 #if DEBUG
-        private bool _isTest = true;
+        private bool _isTest = false;
 #else
         private bool _isTest = true;
 #endif
@@ -46,6 +47,10 @@ namespace EOS.UI.iOS.Components
         private readonly UISwipeGestureRecognizer _downSwipe;
         private readonly UIView _menuButtonsView;
         private readonly CircleMenuMainButton _mainButton;
+        private readonly UIViewController _rootViewController;
+        private readonly UIImage _navigationBarBackgroundImage;
+        private readonly UIColor _navigationBarBackgroundColor;
+        private readonly UIColor _navigationBarTintColor;
 
         //view for circle of menu buttons
         private List<CircleMenuButton> _menuButtons = new List<CircleMenuButton>();
@@ -55,6 +60,7 @@ namespace EOS.UI.iOS.Components
         private List<CircleMenuButton> _submenuButtons = new List<CircleMenuButton>();
         private bool _isSubmenuOpen;
         private bool _isHintShown;
+        private bool _navigationBarDisabled;
 
         public bool IsEOSCustomizationIgnored { get; private set; }
 
@@ -136,7 +142,11 @@ namespace EOS.UI.iOS.Components
 
         public CircleMenu(UIViewController rootViewController)
         {
+            _rootViewController = rootViewController;
             _rootView = rootViewController.View;
+            _navigationBarBackgroundImage = _rootViewController?.NavigationController?.NavigationBar?.GetBackgroundImage(UIBarMetrics.Default);
+            _navigationBarBackgroundColor = rootViewController?.NavigationController?.NavigationBar?.BackgroundColor;
+            _navigationBarTintColor = rootViewController?.NavigationController?.NavigationBar?.TintColor;
 
             var mainFrame = UIApplication.SharedApplication.KeyWindow.Frame;
 
@@ -588,8 +598,8 @@ namespace EOS.UI.iOS.Components
 
         async void OnMainButtonClicked(object sender, EventArgs e)
         {
-            Clicked?.Invoke(_mainButton, -1);
-            ToggleAllInteractions(false);
+            ToggleNavigationBar();
+            SwitchAllInteractions(false);
             if (_mainButton.IsOpen)
             {
                 _shadowView.Hidden = true;
@@ -600,7 +610,7 @@ namespace EOS.UI.iOS.Components
                 _shadowView.Hidden = false;
                 await OpenMenu();
             }
-            ToggleAllInteractions(true);
+            SwitchAllInteractions(true);
         }
 
         void OnRightSwipe()
@@ -676,12 +686,40 @@ namespace EOS.UI.iOS.Components
             _mainButton.Enabled = true;
         }
 
-        void ToggleAllInteractions(bool enabled)
+        void SwitchAllInteractions(bool enabled)
         {
             _menuButtons.ForEach(b => b.Lock = !enabled);
             _mainButton.Lock = !enabled;
             _leftSwipe.Enabled = enabled;
             _rightSwipe.Enabled = enabled;
+        }
+        
+        void ToggleNavigationBar()
+        {
+            if (_rootViewController.NavigationController == null 
+                || _rootViewController.NavigationController.NavigationBar == null)
+                return;
+            
+            if (_navigationBarDisabled)
+            {
+                _rootViewController.NavigationController.NavigationBar.BackgroundColor = _navigationBarBackgroundColor;
+                _rootViewController.NavigationController.NavigationBar.SetBackgroundImage(_navigationBarBackgroundImage, UIBarMetrics.Default);
+
+                _rootViewController.NavigationController.NavigationBar.BackgroundColor = UIColor.Clear;
+                _rootViewController.NavigationController.NavigationBar.UserInteractionEnabled = true;
+                _rootViewController.NavigationController.NavigationBar.TintColor = _navigationBarTintColor;
+                _rootViewController.NavigationController.InteractivePopGestureRecognizer.Enabled = true;
+            }
+            else
+            {
+                _rootViewController.NavigationController.NavigationBar.SetBackgroundImage(new UIImage(), UIBarMetrics.Default);
+                _rootViewController.NavigationController.NavigationBar.BackgroundColor = UIColor.Clear;
+
+                _rootViewController.NavigationController.NavigationBar.UserInteractionEnabled = false;
+                _rootViewController.NavigationController.NavigationBar.TintColor = UIColor.LightGray;
+                _rootViewController.NavigationController.InteractivePopGestureRecognizer.Enabled = false;
+            }
+            _navigationBarDisabled = !_navigationBarDisabled;
         }
 
         public IEOSThemeProvider GetThemeProvider()
