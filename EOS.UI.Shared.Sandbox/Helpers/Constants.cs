@@ -146,10 +146,9 @@ namespace EOS.UI.Shared.Sandbox.Helpers
 #if __ANDROID__
                 TextSizeCollection.Add("default", 0);
 #endif
-                foreach (var val in Enumerable.Range(0, 16))
+                foreach (var val in Enumerable.Range(10, 11))
                 {
-                    var v = val * 2 + 10;
-                    TextSizeCollection.Add(v.ToString(), v);
+                    TextSizeCollection.Add(val.ToString(), val);
                 }
 
 #if __ANDROID__
