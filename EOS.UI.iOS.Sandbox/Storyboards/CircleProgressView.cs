@@ -82,7 +82,7 @@ namespace EOS.UI.iOS.Sandbox
             themeDropDown.SetTextFieldText(_circleProgress.GetThemeProvider().GetCurrentTheme() is LightEOSTheme ? "Light" : "Dark");
 
             fontDropDown.InitSource(
-                Fonts.FontsCollection,
+                Fonts.GetCircleProgressFonts().ToList(),
                 font => _circleProgress.Font = font,
                 Fields.Font,
                 rect);

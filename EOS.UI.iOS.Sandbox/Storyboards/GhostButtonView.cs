@@ -63,7 +63,7 @@ namespace EOS.UI.iOS.Sandbox
             themeDropDown.SetTextFieldText(ghostButton.GetThemeProvider().GetCurrentTheme() is LightEOSTheme  ? "Light" : "Dark");
 
             fontDropDown.InitSource(
-                Fonts.FontsCollection,
+                Fonts.GetGhostButtonSimpleLabelFonts().ToList(),
                 font => ghostButton.Font = font,
                 Fields.Font,
                 rect);

@@ -109,7 +109,7 @@ namespace EOS.UI.iOS.Sandbox
         private void InitFontDropDown(CGRect rect)
         {
             fontDropDown.InitSource(
-                Fonts.FontsCollection,
+                Fonts.GetButtonLabelFonts().ToList(),
                 font => _simpleButton.Font = font,
                 Fields.Font,
                 rect);

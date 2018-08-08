@@ -74,7 +74,7 @@ namespace EOS.UI.iOS.Sandbox
                 rect);
 
             fontDropDown.InitSource(
-                Fonts.FontsCollection,
+                Fonts.GetButtonLabelFonts().ToList(),
                 font => label.Font = font,
                 Fields.Font,
                 rect);
