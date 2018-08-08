@@ -181,6 +181,7 @@
     <Compile Include="Components\CircleMenu\CircleMenuButton.cs" />
     <Compile Include="Components\CircleMenu\CircleMenuMainButton.cs" />
     <Compile Include="Components\CircleMenu\CircleButtonIndicator.cs" />
+    <Compile Include="Components\CircleMenu\BasicCircleMenuButton.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets.tt">

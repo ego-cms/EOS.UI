@@ -7,7 +7,7 @@ using UIKit;
 
 namespace EOS.UI.iOS.Components
 {
-    public class CircleMenuButton : UIButton
+    public class CircleMenuButton : BasicCircleMenuButton
     {
         private bool _isClicked;
         internal const int Size = 52;
@@ -123,17 +123,7 @@ namespace EOS.UI.iOS.Components
 
             ImageEdgeInsets = new UIEdgeInsets(_padding, _padding, _padding, _padding);
             BackgroundColor = UIColor.White;
-            Layer.ShadowColor = UIColor.Black.CGColor;
-            Layer.ShadowOffset = new CGSize(0, 6);
-            Layer.ShadowRadius = 12;
-            Layer.ShadowOpacity = 0.2f;
             TouchUpInside += OnClicked;
-        }
-
-        public override void MovedToSuperview()
-        {
-            base.MovedToSuperview();
-            Layer.CornerRadius = Frame.Height / 2;
         }
 
         internal void ResetPosition()

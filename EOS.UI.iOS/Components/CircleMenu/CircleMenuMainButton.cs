@@ -5,7 +5,7 @@ using UIKit;
 
 namespace EOS.UI.iOS.Components
 {
-    public class CircleMenuMainButton: UIButton
+    public class CircleMenuMainButton: BasicCircleMenuButton
     {
         private const int Size = 52;
         private const int AnimationViewSize = 24;
@@ -18,7 +18,16 @@ namespace EOS.UI.iOS.Components
         private LOTAnimationView _mainButtonCloseAnimation;
 
         internal bool IsOpen { get; private set; }
-        
+
+        public override bool Enabled
+        {
+            get => base.Enabled;
+            set
+            {
+                base.Enabled = value;
+            }
+        }
+
         public CircleMenuMainButton(CGRect frame): base(frame)
         {
             Initalize();
@@ -40,6 +49,8 @@ namespace EOS.UI.iOS.Components
                                   AnimationViewSize),
                 BackgroundColor = UIColor.Clear
             };
+            mainButtonAnimationView.Layer.BackgroundColor = UIColor.LightGray.CGColor;
+            
             _mainButtonOpenAnimation = LOTAnimationView.AnimationNamed(_openAnimationKey);
             _mainButtonOpenAnimation.Hidden = false;
             _mainButtonOpenAnimation.Frame = mainButtonAnimationView.Bounds;
@@ -53,13 +64,8 @@ namespace EOS.UI.iOS.Components
                 this.SendActionForControlEvents(UIControlEvent.TouchUpInside);
             }));
             this.AddSubview(mainButtonAnimationView);
+            
             this.TouchUpInside += OnMainButtonClicked;
-        }
-        
-        public override void MovedToSuperview()
-        {
-            base.MovedToSuperview();
-            Layer.CornerRadius = Frame.Height / 2;
         }
         
         void AnimateScale()
