@@ -1,6 +1,7 @@
 using EOS.UI.iOS.Components;
 using EOS.UI.iOS.Sandbox.Storyboards;
 using EOS.UI.Shared.Themes.DataModels;
+using EOS.UI.Shared.Themes.Extensions;
 using Foundation;
 using System;
 using System.Collections.Generic;
@@ -12,6 +13,8 @@ namespace EOS.UI.iOS.Sandbox
     {
         public const string Identifier = "CircleMenuView";
         private List<UIImage> _icons;
+        private bool _navigationBarDisabled;
+        private UIImage _backgroundImage;
 
         public CircleMenuView(IntPtr handle) : base(handle)
         {
@@ -20,6 +23,8 @@ namespace EOS.UI.iOS.Sandbox
         public override void ViewDidLoad()
         {
             base.ViewDidLoad();
+            _backgroundImage = NavigationController.NavigationBar.GetBackgroundImage(UIBarMetrics.Default);
+            
             _icons = new List<UIImage>()
             {
                 UIImage.FromBundle("icReplay"),
@@ -37,14 +42,21 @@ namespace EOS.UI.iOS.Sandbox
                 UIImage.FromBundle("icHDR"),
             };
 
-            var circleMenu = new CircleMenu(View);
+            var circleMenu = new CircleMenu(this);
             circleMenu.LeftSwiped += (sender, e) => swipeLabel.Text = "Left swipe";
             circleMenu.RightSwiped += (sender, e) => swipeLabel.Text = "Right swipe";
             circleMenu.Clicked += (object sender, int id) =>
             {
                 swipeLabel.Text = $"{id.ToString()}id clicked";
-                if (id != 2 && id != 3)
-                    ShowItemController(_icons[id]);
+                if (id == -1)
+                {
+                    ToggleNavigationBar();
+                }
+                else
+                {
+                    if (id != 2 && id != 3)
+                        ShowItemController(_icons[id]);
+                }
             };
 
             circleMenu.CircleMenuItems = CreateSource();
@@ -70,13 +82,37 @@ namespace EOS.UI.iOS.Sandbox
             return menuModels;
         }
 
-        private void ShowItemController(UIImage image)
+        void ShowItemController(UIImage image)
         {
             var storyboard = UIStoryboard.FromName("CircleMenuItemView", null);
             var viewController = (CircleMenuItemView)storyboard.InstantiateViewController("CircleMenuItemView");
             viewController.NavigationItem.Title = "CircleMenuItemView";
             viewController.MenuItemImage = image;
             NavigationController.PushViewController(viewController, true);
+        }
+
+        void ToggleNavigationBar()
+        {
+            if (_navigationBarDisabled)
+            {
+                NavigationController.NavigationBar.BackgroundColor = UIColor.White;
+                NavigationController.NavigationBar.SetBackgroundImage(_backgroundImage, UIBarMetrics.Default);
+                
+                NavigationController.NavigationBar.BackgroundColor = UIColor.Clear;
+                NavigationController.NavigationBar.UserInteractionEnabled = true;
+                NavigationController.NavigationBar.TintColor = ColorExtension.FromHex("3C6DF0");
+                NavigationController.InteractivePopGestureRecognizer.Enabled = true;
+            }
+            else
+            {
+                NavigationController.NavigationBar.SetBackgroundImage(new UIImage(), UIBarMetrics.Default);
+                NavigationController.NavigationBar.BackgroundColor = UIColor.Clear;
+                
+                NavigationController.NavigationBar.UserInteractionEnabled = false;
+                NavigationController.NavigationBar.TintColor = UIColor.LightGray;
+                NavigationController.InteractivePopGestureRecognizer.Enabled = false;
+            }
+            _navigationBarDisabled = !_navigationBarDisabled;
         }
     }
 }

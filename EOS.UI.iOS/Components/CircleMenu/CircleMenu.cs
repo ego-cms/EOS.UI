@@ -134,9 +134,9 @@ namespace EOS.UI.iOS.Components
 
         public EventHandler<int> Clicked;
 
-        public CircleMenu(UIView rootView)
+        public CircleMenu(UIViewController rootViewController)
         {
-            _rootView = rootView;
+            _rootView = rootViewController.View;
 
             var mainFrame = UIApplication.SharedApplication.KeyWindow.Frame;
 
@@ -588,6 +588,7 @@ namespace EOS.UI.iOS.Components
 
         async void OnMainButtonClicked(object sender, EventArgs e)
         {
+            Clicked?.Invoke(_mainButton, -1);
             ToggleAllInteractions(false);
             if (_mainButton.IsOpen)
             {
