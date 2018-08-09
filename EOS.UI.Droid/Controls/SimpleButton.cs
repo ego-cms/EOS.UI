@@ -174,16 +174,15 @@ namespace EOS.UI.Droid.Controls
             base.SetTextColor(Enabled ? TextColor : DisabledTextColor);
         }
 
+        private Color _disabledTextColor;
         public Color DisabledTextColor
         {
-            get => DisabledFontStyle.Color;
+            get => _disabledTextColor;
             set
             {
                 IsEOSCustomizationIgnored = true;
-                DisabledFontStyle.Color = value;
-                SetDisabledFontStyle();
-                if(!Enabled)
-                    base.SetTextColor(value);
+                _disabledTextColor = value;
+                SetFontStyle();
             }
         }
 
@@ -295,34 +294,12 @@ namespace EOS.UI.Droid.Controls
             }
         }
 
-        private FontStyleItem _disabledFontStyle;
-        public FontStyleItem DisabledFontStyle
-        {
-            get => _disabledFontStyle;
-            set
-            {
-                _disabledFontStyle = value;
-                SetDisabledFontStyle();
-                IsEOSCustomizationIgnored = true;
-            }
-        }
-
         private void SetFontStyle()
         {
             base.Typeface = FontStyle.Typeface;
             base.TextSize = FontStyle.Size;
-            if(Enabled)
-                base.SetTextColor(FontStyle.Color);
+            base.SetTextColor(Enabled ? FontStyle.Color : _disabledTextColor);
             base.LetterSpacing = FontStyle.LetterSpacing;
-        }
-
-        private void SetDisabledFontStyle()
-        {
-            base.Typeface = DisabledFontStyle.Typeface;
-            base.TextSize = DisabledFontStyle.Size;
-            if(!Enabled)
-                base.SetTextColor(DisabledFontStyle.Color);
-            base.LetterSpacing = DisabledFontStyle.LetterSpacing;
         }
 
         #endregion
@@ -546,7 +523,7 @@ namespace EOS.UI.Droid.Controls
             if(!IsEOSCustomizationIgnored)
             {
                 FontStyle = GetThemeProvider().GetEOSProperty<FontStyleItem>(this, EOSConstants.R3C5);
-                DisabledFontStyle = GetThemeProvider().GetEOSProperty<FontStyleItem>(this, EOSConstants.R3C4);
+                DisabledTextColor = GetThemeProvider().GetEOSProperty<FontStyleItem>(this, EOSConstants.R3C4).Color;
                 BackgroundColor = GetThemeProvider().GetEOSProperty<Color>(this, EOSConstants.BrandPrimaryColor);
                 DisabledBackgroundColor = GetThemeProvider().GetEOSProperty<Color>(this, EOSConstants.NeutralColor4);
                 PressedBackgroundColor = GetThemeProvider().GetEOSProperty<Color>(this, EOSConstants.BrandPrimaryColorVariant1);
