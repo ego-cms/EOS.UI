@@ -27,16 +27,17 @@ namespace EOS.UI.iOS.Sandbox
 
             _icons = new List<UIImage>()
             {
-                UIImage.FromBundle("icReplay"),
+                UIImage.FromBundle("icImage"),
+                UIImage.FromBundle("icPanorama"),
                 UIImage.FromBundle("icVideo"),
-                UIImage.FromBundle("icShutter"),
+                UIImage.FromBundle("icPhoto"),
+                
+                UIImage.FromBundle("icTimelapse"),
+                UIImage.FromBundle("icMacro"),
+                UIImage.FromBundle("icPortrait"),
+                UIImage.FromBundle("icSeries"),
                 UIImage.FromBundle("icTimer"),
-                UIImage.FromBundle("icBrush"),
-                UIImage.FromBundle("icDuration"),
-                UIImage.FromBundle("icEffects"),
-                UIImage.FromBundle("icHeal"),
-                UIImage.FromBundle("icMasks"),
-
+                
                 UIImage.FromBundle("icSixteenToNine"),
                 UIImage.FromBundle("icOneToOne"),
                 UIImage.FromBundle("icHDR"),

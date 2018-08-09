@@ -12,7 +12,7 @@ namespace EOS.UI.iOS.Components
         private bool _isClicked;
         internal const int Size = 52;
 
-        private const int _padding = 15;
+        private const int _padding = 14;
         private List<CGPoint> _positions;
 
         private CircleMenuItemModel _model;

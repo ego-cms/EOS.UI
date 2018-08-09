@@ -258,9 +258,42 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
-    <BundleResource Include="Resources\ic_backup.png" />
-    <BundleResource Include="Resources\ic_build.png" />
-    <BundleResource Include="Resources\ic_camera_enhance.png" />
+    <BundleResource Include="Resources\icHDR%401x.png" />
+    <BundleResource Include="Resources\icHDR%402x.png" />
+    <BundleResource Include="Resources\icHDR%403x.png" />
+    <BundleResource Include="Resources\icImage%401x.png" />
+    <BundleResource Include="Resources\icImage%402x.png" />
+    <BundleResource Include="Resources\icImage%403x.png" />
+    <BundleResource Include="Resources\icMacro%401x.png" />
+    <BundleResource Include="Resources\icMacro%402x.png" />
+    <BundleResource Include="Resources\icMacro%403x.png" />
+    <BundleResource Include="Resources\icOneToOne%401x.png" />
+    <BundleResource Include="Resources\icOneToOne%402x.png" />
+    <BundleResource Include="Resources\icOneToOne%403x.png" />
+    <BundleResource Include="Resources\icPanorama%401x.png" />
+    <BundleResource Include="Resources\icPanorama%402x.png" />
+    <BundleResource Include="Resources\icPanorama%403x.png" />
+    <BundleResource Include="Resources\icPhoto%401x.png" />
+    <BundleResource Include="Resources\icPhoto%402x.png" />
+    <BundleResource Include="Resources\icPhoto%403x.png" />
+    <BundleResource Include="Resources\icPortrait%401x.png" />
+    <BundleResource Include="Resources\icPortrait%402x.png" />
+    <BundleResource Include="Resources\icPortrait%403x.png" />
+    <BundleResource Include="Resources\icSeries%401x.png" />
+    <BundleResource Include="Resources\icSeries%402x.png" />
+    <BundleResource Include="Resources\icSeries%403x.png" />
+    <BundleResource Include="Resources\icSixteenToNine%401x.png" />
+    <BundleResource Include="Resources\icSixteenToNine%402x.png" />
+    <BundleResource Include="Resources\icSixteenToNine%403x.png" />
+    <BundleResource Include="Resources\icTimelapse%401x.png" />
+    <BundleResource Include="Resources\icTimelapse%402x.png" />
+    <BundleResource Include="Resources\icTimelapse%403x.png" />
+    <BundleResource Include="Resources\icTimer%401x.png" />
+    <BundleResource Include="Resources\icTimer%402x.png" />
+    <BundleResource Include="Resources\icTimer%403x.png" />
+    <BundleResource Include="Resources\icVideo%401x.png" />
+    <BundleResource Include="Resources\icVideo%402x.png" />
+    <BundleResource Include="Resources\icVideo%403x.png" />
   </ItemGroup>
   <Import Project="..\EOS.UI.Shared.Sandbox\EOS.UI.Shared.Sandbox.projitems" Label="Shared" Condition="Exists('..\EOS.UI.Shared.Sandbox\EOS.UI.Shared.Sandbox.projitems')" />
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
