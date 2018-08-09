@@ -43,7 +43,7 @@ namespace EOS.UI.iOS.Sandbox
                 UIImage.FromBundle("icHDR"),
             };
 
-            var circleMenu = new CircleMenu(this);
+            var circleMenu = new CircleMenu();
             circleMenu.LeftSwiped += (sender, e) => swipeLabel.Text = "Left swipe";
             circleMenu.RightSwiped += (sender, e) => swipeLabel.Text = "Right swipe";
             circleMenu.Clicked += (object sender, int id) =>
@@ -62,7 +62,7 @@ namespace EOS.UI.iOS.Sandbox
             };
 
             circleMenu.CircleMenuItems = CreateSource();
-            circleMenu.Attach();
+            circleMenu.Attach(this);
         }
 
         private List<CircleMenuItemModel> CreateSource()
