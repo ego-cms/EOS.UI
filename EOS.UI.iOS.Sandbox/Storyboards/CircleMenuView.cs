@@ -13,7 +13,7 @@ namespace EOS.UI.iOS.Sandbox
     {
         public const string Identifier = "CircleMenuView";
         private List<UIImage> _icons;
-        private bool _navigationBarDisabled;
+        private bool _navigationBarEnabled = true;
         private UIImage _backgroundImage;
 
         public CircleMenuView(IntPtr handle) : base(handle)
@@ -24,7 +24,7 @@ namespace EOS.UI.iOS.Sandbox
         {
             base.ViewDidLoad();
             _backgroundImage = NavigationController.NavigationBar.GetBackgroundImage(UIBarMetrics.Default);
-            
+
             _icons = new List<UIImage>()
             {
                 UIImage.FromBundle("icReplay"),
@@ -48,9 +48,10 @@ namespace EOS.UI.iOS.Sandbox
             circleMenu.Clicked += (object sender, int id) =>
             {
                 swipeLabel.Text = $"{id.ToString()}id clicked";
-                if (id == -1)
+                if (id == 100)
                 {
-                    ToggleNavigationBar();
+                    _navigationBarEnabled = !_navigationBarEnabled;
+                    ToggleNavigationBar(_navigationBarEnabled);
                 }
                 else
                 {
@@ -91,13 +92,16 @@ namespace EOS.UI.iOS.Sandbox
             NavigationController.PushViewController(viewController, true);
         }
 
-        void ToggleNavigationBar()
+        void ToggleNavigationBar(bool enabled)
         {
-            if (_navigationBarDisabled)
+            if (NavigationController == null)
+                return;
+            
+            if (enabled)
             {
                 NavigationController.NavigationBar.BackgroundColor = UIColor.White;
                 NavigationController.NavigationBar.SetBackgroundImage(_backgroundImage, UIBarMetrics.Default);
-                
+
                 NavigationController.NavigationBar.BackgroundColor = UIColor.Clear;
                 NavigationController.NavigationBar.UserInteractionEnabled = true;
                 NavigationController.NavigationBar.TintColor = ColorExtension.FromHex("3C6DF0");
@@ -107,12 +111,23 @@ namespace EOS.UI.iOS.Sandbox
             {
                 NavigationController.NavigationBar.SetBackgroundImage(new UIImage(), UIBarMetrics.Default);
                 NavigationController.NavigationBar.BackgroundColor = UIColor.Clear;
-                
+
                 NavigationController.NavigationBar.UserInteractionEnabled = false;
                 NavigationController.NavigationBar.TintColor = UIColor.LightGray;
                 NavigationController.InteractivePopGestureRecognizer.Enabled = false;
             }
-            _navigationBarDisabled = !_navigationBarDisabled;
+        }
+
+        public override void ViewWillAppear(bool animated)
+        {
+            base.ViewWillAppear(animated);
+            ToggleNavigationBar(_navigationBarEnabled);
+        }
+
+        public override void ViewDidDisappear(bool animated)
+        {
+            base.ViewDidDisappear(animated);
+            ToggleNavigationBar(true);
         }
     }
 }

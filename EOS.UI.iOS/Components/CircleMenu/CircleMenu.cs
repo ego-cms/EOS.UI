@@ -48,9 +48,7 @@ namespace EOS.UI.iOS.Components
         private readonly UIView _menuButtonsView;
         private readonly CircleMenuMainButton _mainButton;
         private readonly UIViewController _rootViewController;
-        private readonly UIImage _navigationBarBackgroundImage;
-        private readonly UIColor _navigationBarBackgroundColor;
-        private readonly UIColor _navigationBarTintColor;
+
 
         //view for circle of menu buttons
         private List<CircleMenuButton> _menuButtons = new List<CircleMenuButton>();
@@ -60,7 +58,6 @@ namespace EOS.UI.iOS.Components
         private List<CircleMenuButton> _submenuButtons = new List<CircleMenuButton>();
         private bool _isSubmenuOpen;
         private bool _isHintShown;
-        private bool _navigationBarDisabled;
 
         public bool IsEOSCustomizationIgnored { get; private set; }
 
@@ -144,9 +141,6 @@ namespace EOS.UI.iOS.Components
         {
             _rootViewController = rootViewController;
             _rootView = rootViewController.View;
-            _navigationBarBackgroundImage = _rootViewController?.NavigationController?.NavigationBar?.GetBackgroundImage(UIBarMetrics.Default);
-            _navigationBarBackgroundColor = rootViewController?.NavigationController?.NavigationBar?.BackgroundColor;
-            _navigationBarTintColor = rootViewController?.NavigationController?.NavigationBar?.TintColor;
 
             var mainFrame = UIApplication.SharedApplication.KeyWindow.Frame;
 
@@ -269,7 +263,10 @@ namespace EOS.UI.iOS.Components
                     if (model != null)
                     {
                         Clicked?.Invoke(menuButton, model.Id);
-                        PrepareSubmenuIfNeeded(menuButton, model);
+                        if (model.HasChildren)
+                        {
+                            PrepareSubmenu(menuButton, model);
+                        }
                     }
                 };
                 menuButton.Position = position;
@@ -347,6 +344,7 @@ namespace EOS.UI.iOS.Components
                     });
                 }
             }
+            _menuButtons.ForEach(b => b.UserInteractionEnabled = false);
             await tcs.Task;
             await StartOpenSpringEffect(-_6degrees);
             if (!_isHintShown)
@@ -354,6 +352,7 @@ namespace EOS.UI.iOS.Components
                 await StartHintAnimation();
                 _isHintShown = true;
             }
+            _menuButtons.ForEach(b => b.UserInteractionEnabled = b.PositionIndex != 4 && b.PositionIndex != 0);
         }
 
         async Task CloseMenu()
@@ -498,14 +497,12 @@ namespace EOS.UI.iOS.Components
             _menuButtonsView.Layer.AddAnimation(firstAnimation, null);
             return tcs.Task;
         }
-        
-        async Task PrepareSubmenuIfNeeded(CircleMenuButton invokedButton, CircleMenuItemModel model)
+
+        async Task PrepareSubmenu(CircleMenuButton invokedButton, CircleMenuItemModel model)
         {
-            if (!model.HasChildren)
-                return;
             if (model.Children.Count > _maximumCountOfChildren)
                 throw new ArgumentException($"Submenu must contain no more then {_maximumCountOfChildren} elements");
-            invokedButton.Lock = true;
+            invokedButton.UserInteractionEnabled = false;
             if (!_isSubmenuOpen)
             {
                 PrepareSubmenu(invokedButton, model.Children);
@@ -517,7 +514,7 @@ namespace EOS.UI.iOS.Components
                 await CloseSubmenu(invokedButton);
                 _isSubmenuOpen = false;
             }
-            invokedButton.Lock = false;
+            invokedButton.UserInteractionEnabled = true;
         }
 
         void PrepareSubmenu(CircleMenuButton invokedButton, List<CircleMenuItemModel> chilren)
@@ -598,8 +595,8 @@ namespace EOS.UI.iOS.Components
 
         async void OnMainButtonClicked(object sender, EventArgs e)
         {
-            ToggleNavigationBar();
-            SwitchAllInteractions(false);
+            Clicked?.Invoke(_mainButton, _mainButton.Id);
+            SwitchInteractions(false);
             if (_mainButton.IsOpen)
             {
                 _shadowView.Hidden = true;
@@ -610,7 +607,7 @@ namespace EOS.UI.iOS.Components
                 _shadowView.Hidden = false;
                 await OpenMenu();
             }
-            SwitchAllInteractions(true);
+            SwitchInteractions(true);
         }
 
         void OnRightSwipe()
@@ -643,7 +640,7 @@ namespace EOS.UI.iOS.Components
                 hintView.Layer.ShadowOffset = new CGSize(0, 1);
                 hintView.Layer.ShadowRadius = 1;
                 hintView.Layer.ShadowOpacity = 0.2f;
-                
+
                 hintViews.Add(hintView);
                 _menuButtonsView.InsertSubview(hintView, 0);
             }
@@ -686,40 +683,11 @@ namespace EOS.UI.iOS.Components
             _mainButton.Enabled = true;
         }
 
-        void SwitchAllInteractions(bool enabled)
+        void SwitchInteractions(bool enabled)
         {
-            _menuButtons.ForEach(b => b.Lock = !enabled);
-            _mainButton.Lock = !enabled;
+            _mainButton.UserInteractionEnabled = enabled;
             _leftSwipe.Enabled = enabled;
             _rightSwipe.Enabled = enabled;
-        }
-        
-        void ToggleNavigationBar()
-        {
-            if (_rootViewController.NavigationController == null 
-                || _rootViewController.NavigationController.NavigationBar == null)
-                return;
-            
-            if (_navigationBarDisabled)
-            {
-                _rootViewController.NavigationController.NavigationBar.BackgroundColor = _navigationBarBackgroundColor;
-                _rootViewController.NavigationController.NavigationBar.SetBackgroundImage(_navigationBarBackgroundImage, UIBarMetrics.Default);
-
-                _rootViewController.NavigationController.NavigationBar.BackgroundColor = UIColor.Clear;
-                _rootViewController.NavigationController.NavigationBar.UserInteractionEnabled = true;
-                _rootViewController.NavigationController.NavigationBar.TintColor = _navigationBarTintColor;
-                _rootViewController.NavigationController.InteractivePopGestureRecognizer.Enabled = true;
-            }
-            else
-            {
-                _rootViewController.NavigationController.NavigationBar.SetBackgroundImage(new UIImage(), UIBarMetrics.Default);
-                _rootViewController.NavigationController.NavigationBar.BackgroundColor = UIColor.Clear;
-
-                _rootViewController.NavigationController.NavigationBar.UserInteractionEnabled = false;
-                _rootViewController.NavigationController.NavigationBar.TintColor = UIColor.LightGray;
-                _rootViewController.NavigationController.InteractivePopGestureRecognizer.Enabled = false;
-            }
-            _navigationBarDisabled = !_navigationBarDisabled;
         }
 
         public IEOSThemeProvider GetThemeProvider()

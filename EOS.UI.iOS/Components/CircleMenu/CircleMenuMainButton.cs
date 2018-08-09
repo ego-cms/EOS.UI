@@ -17,6 +17,8 @@ namespace EOS.UI.iOS.Components
         private LOTAnimationView _mainButtonOpenAnimation;
         private LOTAnimationView _mainButtonCloseAnimation;
 
+        internal int Id => 100;
+
         internal bool IsOpen { get; private set; }
 
         public override bool Enabled
