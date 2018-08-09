@@ -1,10 +1,11 @@
+using EOS.UI.iOS.Sandbox.Storyboards;
 using Foundation;
 using System;
 using UIKit;
 
 namespace EOS.UI.iOS.Sandbox
 {
-    public partial class CircleMenuItemView : UIViewController
+    public partial class CircleMenuItemView : BaseViewController
     {
         public UIImage MenuItemImage { get; set; }
         
@@ -16,6 +17,12 @@ namespace EOS.UI.iOS.Sandbox
         {
             base.ViewDidLoad();
             menuItemImage.Image = MenuItemImage;
+        }
+
+        public override void ViewWillAppear(bool animated)
+        {
+            base.ViewWillAppear(animated);
+            ToggleNavigationBar(true);
         }
     }
 }

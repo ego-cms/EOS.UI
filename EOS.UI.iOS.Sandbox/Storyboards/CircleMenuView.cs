@@ -14,7 +14,6 @@ namespace EOS.UI.iOS.Sandbox
         public const string Identifier = "CircleMenuView";
         private List<UIImage> _icons;
         private bool _navigationBarEnabled = true;
-        private UIImage _backgroundImage;
 
         public CircleMenuView(IntPtr handle) : base(handle)
         {
@@ -23,8 +22,7 @@ namespace EOS.UI.iOS.Sandbox
         public override void ViewDidLoad()
         {
             base.ViewDidLoad();
-            _backgroundImage = NavigationController.NavigationBar.GetBackgroundImage(UIBarMetrics.Default);
-
+            
             _icons = new List<UIImage>()
             {
                 UIImage.FromBundle("icImage"),
@@ -93,42 +91,10 @@ namespace EOS.UI.iOS.Sandbox
             NavigationController.PushViewController(viewController, true);
         }
 
-        void ToggleNavigationBar(bool enabled)
-        {
-            if (NavigationController == null)
-                return;
-            
-            if (enabled)
-            {
-                NavigationController.NavigationBar.BackgroundColor = UIColor.White;
-                NavigationController.NavigationBar.SetBackgroundImage(_backgroundImage, UIBarMetrics.Default);
-
-                NavigationController.NavigationBar.BackgroundColor = UIColor.Clear;
-                NavigationController.NavigationBar.UserInteractionEnabled = true;
-                NavigationController.NavigationBar.TintColor = ColorExtension.FromHex("3C6DF0");
-                NavigationController.InteractivePopGestureRecognizer.Enabled = true;
-            }
-            else
-            {
-                NavigationController.NavigationBar.SetBackgroundImage(new UIImage(), UIBarMetrics.Default);
-                NavigationController.NavigationBar.BackgroundColor = UIColor.Clear;
-
-                NavigationController.NavigationBar.UserInteractionEnabled = false;
-                NavigationController.NavigationBar.TintColor = UIColor.LightGray;
-                NavigationController.InteractivePopGestureRecognizer.Enabled = false;
-            }
-        }
-
         public override void ViewWillAppear(bool animated)
         {
             base.ViewWillAppear(animated);
             ToggleNavigationBar(_navigationBarEnabled);
-        }
-
-        public override void ViewDidDisappear(bool animated)
-        {
-            base.ViewDidDisappear(animated);
-            ToggleNavigationBar(true);
         }
     }
 }
