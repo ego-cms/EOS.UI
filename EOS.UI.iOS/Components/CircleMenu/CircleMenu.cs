@@ -16,11 +16,11 @@ using UIKit;
 
 namespace EOS.UI.iOS.Components
 {
-    public class CircleMenu : UIView, IEOSThemeControl
+    public class CircleMenu : PassthroughToWindowView, IEOSThemeControl
     {
         //TODO need to remove after develop
 #if DEBUG
-        private bool _isTest = false;
+        private bool _isTest = true;
 #else
         private bool _isTest = true;
 #endif
@@ -192,9 +192,9 @@ namespace EOS.UI.iOS.Components
             _downSwipe.Direction = UISwipeGestureRecognizerDirection.Down;
             _rootView.AddGestureRecognizer(_downSwipe);
 
-            _menuButtonsView = new UIView()
+            _menuButtonsView = new PassthroughToWindowView()
             {
-                Frame = new CGRect(20, 20, this.Frame.Width - 40, this.Frame.Height - 40),
+                Frame = new CGRect(0, 0, this.Frame.Width, this.Frame.Height),
                 BackgroundColor = _isTest ? UIColor.Clear : UIColor.DarkGray,
                 ClipsToBounds = false,
             };
