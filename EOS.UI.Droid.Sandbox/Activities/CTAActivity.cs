@@ -269,7 +269,7 @@ namespace EOS.UI.Droid.Sandbox.Activities
             {
                 case SimpleButtonTypeEnum.Simple:
                     ResetCustomValues(true);
-                    var layoutParameters = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WrapContent, ViewGroup.LayoutParams.WrapContent);
+                    var layoutParameters = GetSimpleButtonLayoutParameters();
                     layoutParameters.Gravity = GravityFlags.Center;
                     _CTAButton.LayoutParameters = layoutParameters;
                     var denisty = Resources.DisplayMetrics.Density;
