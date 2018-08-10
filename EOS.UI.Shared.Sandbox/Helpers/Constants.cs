@@ -274,6 +274,7 @@ namespace EOS.UI.Shared.Sandbox.Helpers
 
     public static class ControlNames
     {
+        public const string MainTitle = "EOS Sandbox";
         public const string BadgeLabel = "Badge label";
         public const string GhostButton = "Ghost button";
         public const string SimpleButton = "Simple button";
