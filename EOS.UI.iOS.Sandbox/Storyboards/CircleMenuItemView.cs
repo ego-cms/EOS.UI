@@ -23,6 +23,7 @@ namespace EOS.UI.iOS.Sandbox
         {
             base.ViewWillAppear(animated);
             ToggleNavigationBar(true);
+            NavigationController.InteractivePopGestureRecognizer.Enabled = false;
         }
     }
 }

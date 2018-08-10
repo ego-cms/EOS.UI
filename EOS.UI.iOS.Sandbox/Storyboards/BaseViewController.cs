@@ -84,12 +84,10 @@ namespace EOS.UI.iOS.Sandbox.Storyboards
         {
             if (NavigationController == null)
                 return;
-
             if (enabled)
             {
-                NavigationController.NavigationBar.BackgroundColor = UIColor.White;
                 NavigationController.NavigationBar.SetBackgroundImage(_backgroundImage, UIBarMetrics.Default);
-                NavigationController.NavigationBar.BackgroundColor = UIColor.Clear;
+                NavigationController.NavigationBar.BackgroundColor = UIColor.White;
                 NavigationController.NavigationBar.Items[0].BackBarButtonItem.Enabled = true; 
                 NavigationController.NavigationBar.TintColor = ColorExtension.FromHex("3C6DF0");
                 NavigationController.InteractivePopGestureRecognizer.Enabled = true;

@@ -490,6 +490,7 @@ namespace EOS.UI.iOS.Components
             invokedButton.UserInteractionEnabled = false;
             if (!_isSubmenuOpen)
             {
+                DisableMenuButtons(invokedButton);
                 var submenuButtons = PrepareSubmenu(invokedButton, model.Children);
                 await ShowSubmenu(invokedButton, submenuButtons);
                 _isSubmenuOpen = true;
@@ -498,6 +499,7 @@ namespace EOS.UI.iOS.Components
             {
                 await CloseSubmenu(invokedButton);
                 _isSubmenuOpen = false;
+                EnableMenuButtons();
             }
             invokedButton.UserInteractionEnabled = true;
         }
@@ -548,7 +550,6 @@ namespace EOS.UI.iOS.Components
                 task = await task.ContinueWith(t => ChangeAlphaAnimation(submenuButtons[i], 1, _showSubmenuDuration));
             }
             invokedButton.Indicator.Hidden = false;
-            DisableMenuButtons(invokedButton);
         }
 
         async Task CloseSubmenu(CircleMenuButton invokedButton)
@@ -573,7 +574,6 @@ namespace EOS.UI.iOS.Components
                 button.RemoveFromSuperview();
                 button.TouchUpInside -= OnSubmenuClicked;
             }
-            EnableMenuButtons();
         }
 
         Task<bool> ChangeAlphaAnimation(CircleMenuButton button, nfloat alpha, double duration)
