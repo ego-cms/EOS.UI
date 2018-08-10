@@ -34,11 +34,11 @@ namespace EOS.UI.iOS.Components
         private const int _submenuButtonsStartTag = 500;
         private const double _menuOpenButtonAnimationDuration = 0.05;
         private const double _buttonMovementAnimationDuration = 0.1;
-        private const double _buttonHintAnimationDuration = 0.5;
+        private const double _buttonHintAnimationDuration = 0.4;
         private const double _showSubmenuDuration = 0.1;
         private const int _radius = 96;
         private readonly nfloat _6degrees = 0.10472f;
-        private readonly nfloat _8degrees = 0.139626f;
+        private readonly nfloat _8degrees = 0.0698132f;
         private readonly nfloat _55degrees = 0.959931f;
         private UIView _rootView;
         private UIView _shadowView;
@@ -441,8 +441,8 @@ namespace EOS.UI.iOS.Components
             rightAnimation.To = new NSNumber(0);
             rightAnimation.RemovedOnCompletion = false;
             rightAnimation.FillMode = CAFillMode.Forwards;
-            rightAnimation.InitialVelocity = 10;
-            rightAnimation.Duration = 0.6;
+            rightAnimation.InitialVelocity = 15;
+            rightAnimation.Duration = 1;
 
             leftAnimation.AnimationStopped += (sender, e) =>
             {
@@ -469,6 +469,8 @@ namespace EOS.UI.iOS.Components
             firstAnimation.RepeatCount = 1;
             firstAnimation.RemovedOnCompletion = false;
             firstAnimation.FillMode = CAFillMode.Forwards;
+            firstAnimation.InitialVelocity = 30;
+            firstAnimation.Duration = 0.3;
 
             var secondAnimation = new CASpringAnimation();
             secondAnimation.KeyPath = "transform.rotation.z";
@@ -476,6 +478,8 @@ namespace EOS.UI.iOS.Components
             secondAnimation.To = new NSNumber(0);
             secondAnimation.RemovedOnCompletion = false;
             secondAnimation.FillMode = CAFillMode.Forwards;
+            secondAnimation.InitialVelocity = 30;
+            secondAnimation.Duration = 0.5;
 
             firstAnimation.AnimationStopped += (sender, e) =>
             {
@@ -635,6 +639,7 @@ namespace EOS.UI.iOS.Components
 
         Task<bool> StartHintAnimation()
         {
+            var padding = 7;
             var tcs = new TaskCompletionSource<bool>();
             var hintViews = new List<UIView>();
             var invokedButton = _menuButtons.Single(b => b.PositionIndex == 1);
@@ -654,9 +659,9 @@ namespace EOS.UI.iOS.Components
 
             UIView.Animate(_buttonHintAnimationDuration, 0, UIViewAnimationOptions.CurveEaseInOut, () =>
             {
-                invokedButton.Frame = invokedButton.Frame.ResizeRect(y: invokedButton.Frame.Y - 10);
-                invokedButton.Indicator.Frame = invokedButton.Indicator.Frame.ResizeRect(y: invokedButton.Indicator.Frame.Y - 10);
-                hintViews[1].Frame = hintViews[1].Frame.ResizeRect(y: hintViews[1].Frame.Y + 10);
+                invokedButton.Frame = invokedButton.Frame.ResizeRect(y: invokedButton.Frame.Y - padding);
+                invokedButton.Indicator.Frame = invokedButton.Indicator.Frame.ResizeRect(y: invokedButton.Indicator.Frame.Y - padding);
+                hintViews[1].Frame = hintViews[1].Frame.ResizeRect(y: hintViews[1].Frame.Y + padding);
             }, null);
             UIView.Animate(_buttonHintAnimationDuration, _buttonHintAnimationDuration, UIViewAnimationOptions.CurveEaseInOut, () =>
             {
