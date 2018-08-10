@@ -50,18 +50,6 @@ namespace EOS.UI.Droid.Sandbox.Activities
 
             var stateSwitch = FindViewById<Switch>(Resource.Id.stateSwitch);
             var resetButton = FindViewById<Button>(Resource.Id.buttonResetCustomization);
-            fab.Click += async (sender, e) =>
-            {
-                if(fab.InProgress)
-                    return;
-                themeDropDown.Enabled = false;
-                resetButton.Enabled = false;
-                fab.StartProgressAnimation();
-                await Task.Delay(5000);
-                fab.StopProgressAnimation();
-                themeDropDown.Enabled = true;
-                resetButton.Enabled = true;
-            };
 
             var spinners = new List<EOSSandboxDropDown>()
             {
@@ -74,6 +62,17 @@ namespace EOS.UI.Droid.Sandbox.Activities
                 shadowBlurDropDown,
                 shadowColorDropDown,
                 shadowOpacityDropDown
+            };
+
+            fab.Click += async (sender, e) =>
+            {
+                if (fab.InProgress)
+                    return;
+                ToggleAllControlsEnabled(false, spinners, resetButton, stateSwitch);
+                fab.StartProgressAnimation();
+                await Task.Delay(5000);
+                fab.StopProgressAnimation();
+                ToggleAllControlsEnabled(true, spinners, resetButton, stateSwitch);
             };
 
             themeDropDown.Name = Fields.Theme;
@@ -242,6 +241,13 @@ namespace EOS.UI.Droid.Sandbox.Activities
         {
             spinners.Except(new[] { themeDropDown }).ToList().ForEach(s => s.SetSpinnerSelection(0));
             fab.ResetCustomization();
+        }
+
+        private void ToggleAllControlsEnabled(bool enabled, List<EOSSandboxDropDown> spinners, Button resetButton, Switch enabledSwitch)
+        {
+            spinners.ToList().ForEach(s => s.Enabled = enabled);
+            resetButton.Enabled = enabled;
+            enabledSwitch.Enabled = enabled;
         }
     }
 }
