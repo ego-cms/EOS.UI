@@ -317,6 +317,7 @@ namespace EOS.UI.iOS.Components
         async Task OpenMenu()
         {
             PrepareMenuButtons();
+            _menuButtonsView.Transform = CGAffineTransform.MakeRotation(-_6degrees);
             var tcs = new TaskCompletionSource<bool>();
             for (int i = 0; i < _visibleCountOfElements; ++i)
             {
@@ -426,32 +427,17 @@ namespace EOS.UI.iOS.Components
             var tcs = new TaskCompletionSource<bool>();
             var leftAnimation = new CASpringAnimation();
             leftAnimation.KeyPath = "transform.rotation.z";
-            leftAnimation.From = new NSNumber(0);
-            leftAnimation.To = new NSNumber(angle);
+            leftAnimation.From = new NSNumber(angle);
+            leftAnimation.To = new NSNumber(0);
             leftAnimation.RepeatCount = 1;
             leftAnimation.RemovedOnCompletion = false;
             leftAnimation.FillMode = CAFillMode.Forwards;
-            leftAnimation.Damping = 15;
-            leftAnimation.InitialVelocity = 120;
-            leftAnimation.Duration = 0.43;
-
-            var rightAnimation = new CASpringAnimation();
-            rightAnimation.KeyPath = "transform.rotation.z";
-            rightAnimation.From = new NSNumber(angle * 1.08f);
-            rightAnimation.To = new NSNumber(0);
-            rightAnimation.RemovedOnCompletion = false;
-            rightAnimation.FillMode = CAFillMode.Forwards;
-            rightAnimation.InitialVelocity = 15;
-            rightAnimation.Duration = 1;
+            leftAnimation.InitialVelocity = 40;
+            leftAnimation.Duration = 0.8;
 
             leftAnimation.AnimationStopped += (sender, e) =>
             {
-                _menuButtonsView.Layer.AddAnimation(rightAnimation, null);
-            };
-
-            rightAnimation.AnimationStopped += (sender, e) =>
-            {
-                _menuButtonsView.Transform.Rotate(0);
+                _menuButtonsView.Transform = CGAffineTransform.MakeRotation(0);
                 _menuButtonsView.Layer.RemoveAllAnimations();
                 tcs.SetResult(true);
             };
