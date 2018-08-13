@@ -151,7 +151,7 @@ namespace EOS.UI.iOS.Components
         public void Attach(UIViewController viewController)
         {
             _rootView = viewController.View;
-            
+
             var mainFrame = UIApplication.SharedApplication.KeyWindow.Frame;
             //shadowview init
             _shadowView = new UIView(mainFrame);
@@ -190,13 +190,13 @@ namespace EOS.UI.iOS.Components
             };
             AddSubview(_menuButtonsView);
             AddSubview(_mainButton);
-            
+
             FillbuttonsPositions();
             CreateMenuButtons();
             FillIndicatorPositions();
             CreateMenuIndicators();
             _rootView.AddSubview(this);
-            
+
             UpdateAppearance();
         }
 
@@ -278,18 +278,14 @@ namespace EOS.UI.iOS.Components
             }
         }
 
-        void PrepareMenuButtons()
+        void SetModelsForButtons()
         {
+            _menuButtons.ForEach(b => b.Model = null);
             if (_circleMenuItems.Count == _minimumCountOfElements)
             {
                 for (int modelIndex = 0, buttonIndex = 1; modelIndex < _minimumCountOfElements; ++modelIndex, ++buttonIndex)
                 {
                     _menuButtons[buttonIndex].Model = _circleMenuItems[modelIndex];
-                }
-                foreach (var button in _menuButtons)
-                {
-                    if (button.Model == null)
-                        button.Hidden = true;
                 }
             }
 
@@ -313,7 +309,7 @@ namespace EOS.UI.iOS.Components
 
         async Task OpenMenu()
         {
-            PrepareMenuButtons();
+            SetModelsForButtons();
             _menuButtonsView.Transform = CGAffineTransform.MakeRotation(-_6degrees);
             var tcs = new TaskCompletionSource<bool>();
             for (int i = 0; i < _visibleCountOfElements; ++i)
@@ -569,7 +565,7 @@ namespace EOS.UI.iOS.Components
             invokedButton.Indicator.Hidden = true;
             var task = Task.CompletedTask;
             for (int i = 0; i < submenuButtons.Count; ++i)
-            {   
+            {
                 //Have to close on local variable
                 var localViewIndex = i;
                 task = task.ContinueWith(t => ChangeAlphaAnimation((CircleMenuButton)submenuButtons[localViewIndex], 0, _showSubmenuDuration),
@@ -612,7 +608,7 @@ namespace EOS.UI.iOS.Components
             else
             {
                 _shadowView.Hidden = false;
-                PrepareMenuButtons();
+                SetModelsForButtons();
                 await OpenMenu();
             }
             SwitchInteractions(true);

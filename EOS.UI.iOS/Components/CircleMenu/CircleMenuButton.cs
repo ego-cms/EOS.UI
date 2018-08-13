@@ -25,6 +25,11 @@ namespace EOS.UI.iOS.Components
                 if (_model != null)
                 {
                     SetImage(_model.ImageSource, UIControlState.Normal);
+                    Hidden = false;
+                }
+                else
+                {
+                    Hidden = true;
                 }
                 if (Indicator != null)
                 {
@@ -69,7 +74,8 @@ namespace EOS.UI.iOS.Components
             set
             {
                 _unfocusedBackgroundColor = value;
-                BackgroundColor = _unfocusedBackgroundColor;
+                if (!_isClicked)
+                    BackgroundColor = _unfocusedBackgroundColor;
             }
         }
 
