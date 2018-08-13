@@ -75,6 +75,7 @@ namespace EOS.UI.iOS.Sandbox
                     _circleProgress.GetThemeProvider().SetCurrentTheme(theme);
                     _circleProgress.ResetCustomization();
                     _dropDowns.Except(new[] { themeDropDown }).ToList().ForEach(dropDown => dropDown.ResetValue());
+                    _circleProgress.Progress = 0;
                     UpdateApperaence();
                 },
                 Fields.Theme,
@@ -82,7 +83,7 @@ namespace EOS.UI.iOS.Sandbox
             themeDropDown.SetTextFieldText(_circleProgress.GetThemeProvider().GetCurrentTheme() is LightEOSTheme ? "Light" : "Dark");
 
             fontDropDown.InitSource(
-                Fonts.FontsCollection,
+                Fonts.GetCircleProgressFonts().ToList(),
                 font => _circleProgress.Font = font,
                 Fields.Font,
                 rect);
@@ -94,16 +95,19 @@ namespace EOS.UI.iOS.Sandbox
                 rect);
 
             colorDropDown.InitSource(
+                Colors.MainColorsCollection,
                 color => _circleProgress.Color = color,
                 Fields.Color,
                 rect);
 
             alternativeColorDropDown.InitSource(
+                Colors.MainColorsCollection,
                 color => _circleProgress.AlternativeColor = color,
                 Fields.AlternativeColor,
                 rect);
             
             fillColorDropDown.InitSource(
+                Colors.MainColorsCollection,
                 color => _circleProgress.FillColor = color,
                 Fields.FillColor,
                 rect);

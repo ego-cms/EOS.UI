@@ -67,13 +67,13 @@ namespace EOS.UI.iOS.Sandbox
             themesDropDown.SetTextFieldText(source.CalendarModel.GetThemeProvider().GetCurrentTheme() is LightEOSTheme ? "Light" : "Dark");
 
             titleFontDropDown.InitSource(
-                Fonts.FontsCollection,
+                Fonts.GetWorkTimeTitleFonts().ToList(),
                 font => source.CalendarModel.TitleFont = font,
                 Fields.TitleFont,
                 rect);
 
             dayFontDropDown.InitSource(
-                Fonts.FontsCollection,
+                Fonts.GetWorkTimeDayFonts().ToList(),
                 font => source.CalendarModel.DayTextFont = font,
                 Fields.DayTextFont,
                 rect);
@@ -91,36 +91,43 @@ namespace EOS.UI.iOS.Sandbox
                rect);
 
             dayTextColorDropDown.InitSource(
+                Colors.FontColorsCollection,
                 color => source.CalendarModel.DayTextColor = color,
                 Fields.DayTextColor,
                 rect);
 
             currentDayTextColorDropDown.InitSource(
+               Colors.FontColorsCollection,
                color => source.CalendarModel.CurrentDayTextColor = color,
                Fields.CurrentDayTextColor,
                rect);
 
             titleColorDropDown.InitSource(
+              Colors.FontColorsCollection,
               color => source.CalendarModel.TitleColor = color,
               Fields.TitleColor,
               rect);
 
             currentDayBackgroundColorDropDown.InitSource(
+                Colors.MainColorsCollection,
                 color => source.CalendarModel.CurrentDayBackgroundColor = color,
                 Fields.CurrentDayBackgroundColor,
                rect);
 
             devidersColor.InitSource(
+                Colors.MainColorsCollection,
                 color => source.CalendarModel.ColorDividers = color,
                 Fields.ColorDividers,
                 rect);
 
             currentDayDevidersColor.InitSource(
+                Colors.MainColorsCollection,
                 color => source.CalendarModel.CurrentColorDividers = color,
                 Fields.CurrentColorDividers,
                 rect);
 
             dayEvenBackgroundColor.InitSource(
+                Colors.MainColorsCollection,
                 color => source.CalendarModel.DayEvenBackgroundColor = color,
                 Fields.DayEvenBackgroundColor,
                 rect);

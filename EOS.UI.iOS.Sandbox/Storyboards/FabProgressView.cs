@@ -26,19 +26,6 @@ namespace EOS.UI.iOS.Sandbox
         {
             base.ViewDidLoad();
             _fab = new FabProgress();
-            _fab.TouchUpInside += async (sender, e) =>
-            {
-                if (_fab.InProgress)
-                    return;
-                themeDropDown.Enabled = false;
-                resetButton.Enabled = false;
-                _fab.StartProgressAnimation();
-                await Task.Delay(5000);
-                _fab.StopProgressAnimation();
-                themeDropDown.Enabled = true;
-                resetButton.Enabled = true;
-            };
-
             UpdateFrame();
             containerView.AddSubview(_fab);
 
@@ -54,6 +41,18 @@ namespace EOS.UI.iOS.Sandbox
                 shadowOffsetYDropDown,
                 shadowOpacityDropDown,
             };
+
+            _fab.TouchUpInside += async (sender, e) =>
+            {
+                if (_fab.InProgress)
+                    return;
+                ToggleAllControlsEnabled(false, _dropDowns, resetButton, enableSwitch);
+                _fab.StartProgressAnimation();
+                await Task.Delay(5000);
+                _fab.StopProgressAnimation();
+                ToggleAllControlsEnabled(true, _dropDowns, resetButton, enableSwitch);
+            };
+
             View.AddGestureRecognizer(new UITapGestureRecognizer(() =>
             {
                 _dropDowns.ForEach(dropDown => dropDown.CloseInputControl());
@@ -75,21 +74,25 @@ namespace EOS.UI.iOS.Sandbox
             themeDropDown.SetTextFieldText(_fab.GetThemeProvider().GetCurrentTheme() is LightEOSTheme ? "Light" : "Dark");
 
             backgroundDropDown.InitSource(
+                Colors.MainColorsCollection,
                 color => _fab.BackgroundColor = color,
                 Fields.Background,
                 rect);
 
             pressedColorDropDown.InitSource(
+                Colors.MainColorsCollection,
                 color => _fab.PressedBackgroundColor = color,
                 Fields.PressedColor,
                 rect);
 
             disabledColorDropDown.InitSource(
+                Colors.MainColorsCollection,
                 color => _fab.DisabledBackgroundColor = color,
                 Fields.DisabledColor,
                 rect);
 
             shadowColorDropDown.InitSource(
+                Colors.MainColorsCollection,
                 color =>
                 {
                     var config = _fab.ShadowConfig;
@@ -174,6 +177,13 @@ namespace EOS.UI.iOS.Sandbox
             var buttonSize = 52;
             var frame = new CGRect(containerView.Frame.Width / 2 - buttonSize / 2, containerView.Frame.Height / 2 - buttonSize / 2, buttonSize, buttonSize);
             _fab.Frame = frame;
+        }
+
+        private void ToggleAllControlsEnabled(bool enabled, List<EOSSandboxDropDown> spinners, UIButton resetUIButton, UISwitch enabledSwitch)
+        {
+            spinners.ToList().ForEach(s => s.Enabled = enabled);
+            resetUIButton.Enabled = enabled;
+            enabledSwitch.Enabled = enabled;
         }
     }
 }

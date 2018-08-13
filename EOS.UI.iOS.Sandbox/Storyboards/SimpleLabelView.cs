@@ -91,7 +91,7 @@ namespace EOS.UI.iOS.Sandbox
         private void InitFontPicker(CGRect frame)
         {
             fontDropDown.InitSource(
-                Fonts.FontsCollection,
+                Fonts.GetGhostButtonSimpleLabelFonts().ToList(),
                 font => _simpleLabel.Font = font,
                 Fields.Font,
                 frame);
@@ -100,6 +100,7 @@ namespace EOS.UI.iOS.Sandbox
         private void InitTextColorPicker(CGRect frame)
         {
             textColorDropDown.InitSource(
+                Colors.FontColorsCollection,
                 color => _simpleLabel.TextColor = color,
                 Fields.TextColor,
                 frame);

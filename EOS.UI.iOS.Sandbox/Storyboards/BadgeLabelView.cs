@@ -64,17 +64,19 @@ namespace EOS.UI.iOS.Sandbox
             themeDropDown.SetTextFieldText(label.GetThemeProvider().GetCurrentTheme() is LightEOSTheme  ? "Light" : "Dark");
 
             backgroundColorDropDown.InitSource(
+                Colors.MainColorsCollection,
                 color => label.BackgroundColor = color,
                 Fields.Background,
                 rect);
 
             textColorDropDown.InitSource(
+                Colors.FontColorsCollection,
                 color => label.TextColor = color,
                 Fields.TextColor,
                 rect);
 
             fontDropDown.InitSource(
-                Fonts.FontsCollection,
+                Fonts.GetButtonLabelFonts().ToList(),
                 font => label.Font = font,
                 Fields.Font,
                 rect);

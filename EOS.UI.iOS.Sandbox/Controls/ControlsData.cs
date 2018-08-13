@@ -12,7 +12,7 @@ namespace EOS.UI.iOS.Sandbox.Controls
 
         public Dictionary<String, String> Names { get; }
 
-        public const string Title = "Sandbox";
+        public const string Title = ControlNames.MainTitle;
         public const string BackTitle = "Back";
 
         private ControlsData()

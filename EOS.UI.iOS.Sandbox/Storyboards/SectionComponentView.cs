@@ -202,6 +202,7 @@ namespace EOS.UI.iOS.Sandbox.Storyboards
         private void InitBorderColorDropDown(CGRect rect)
         {
             borderColorDropDown.InitSource(
+                Colors.MainColorsCollection,
                 color =>
                 {
                     _source.SectionModel.BorderColor = color;
@@ -213,6 +214,7 @@ namespace EOS.UI.iOS.Sandbox.Storyboards
         private void InitBackgroundColorDropDown(CGRect rect)
         {
             backgoundColorDropDown.InitSource(
+                Colors.MainColorsCollection,
                 color =>
                 {
                     _source.SectionModel.BackgroundColor = color;
@@ -224,6 +226,7 @@ namespace EOS.UI.iOS.Sandbox.Storyboards
         private void InitButtonTextColorDropDown(CGRect rect)
         {
             buttonTextColorDropDown.InitSource(
+                Colors.MainColorsCollection,
                 color =>
                 {
                     _source.SectionModel.ButtonNameColor = color;
@@ -235,6 +238,7 @@ namespace EOS.UI.iOS.Sandbox.Storyboards
         private void InitSectionTextColorDropDown(CGRect rect)
         {
             sectionTextColorDropDown.InitSource(
+                Colors.MainColorsCollection,
                 color =>
                 {
                     _source.SectionModel.SectionNameColor = color;

@@ -1,13 +1,11 @@
-﻿using CoreAnimation;
+﻿using System;
+using CoreAnimation;
 using CoreGraphics;
 using EOS.UI.iOS.Themes;
 using EOS.UI.Shared.Themes.DataModels;
 using EOS.UI.Shared.Themes.Helpers;
 using EOS.UI.Shared.Themes.Interfaces;
 using Foundation;
-using System;
-using EOS.UI.Shared.Themes.Helpers;
-using EOS.UI.Shared.Themes.Interfaces;
 using UIKit;
 
 namespace EOS.UI.iOS
@@ -48,6 +46,8 @@ namespace EOS.UI.iOS
                 {
                     if (imageView.Hidden == false)
                         imageView.Hidden = true;
+                    if (ShouldShowProgress)
+                        percentLabel.Hidden = false;
                     percentLabel.Text = $"{_progress.ToString()}%";
                     RedrawCircle();
                     if (_progress == 100)
@@ -112,7 +112,7 @@ namespace EOS.UI.iOS
             {
                 _showProgress = value;
                 IsEOSCustomizationIgnored = true;
-                percentLabel.Hidden = !_showProgress;
+                percentLabel.Hidden = !ShouldShowProgress;
             }
         }
 
@@ -196,6 +196,8 @@ namespace EOS.UI.iOS
         {
 
         }
+
+        private bool ShouldShowProgress => ShowProgress && _progress != 100;
 
         private void Initalize()
         {
@@ -293,6 +295,7 @@ namespace EOS.UI.iOS
         {
             Finished?.Invoke(this, EventArgs.Empty);
             imageView.Hidden = false;
+            percentLabel.Hidden = true;
             ClearPathes();
             _isRunnung = false;
         }

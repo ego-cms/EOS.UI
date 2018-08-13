@@ -50,18 +50,6 @@ namespace EOS.UI.Droid.Sandbox.Activities
 
             var stateSwitch = FindViewById<Switch>(Resource.Id.stateSwitch);
             var resetButton = FindViewById<Button>(Resource.Id.buttonResetCustomization);
-            fab.Click += async (sender, e) =>
-            {
-                if(fab.InProgress)
-                    return;
-                themeDropDown.Enabled = false;
-                resetButton.Enabled = false;
-                fab.StartProgressAnimation();
-                await Task.Delay(5000);
-                fab.StopProgressAnimation();
-                themeDropDown.Enabled = true;
-                resetButton.Enabled = true;
-            };
 
             var spinners = new List<EOSSandboxDropDown>()
             {
@@ -76,6 +64,17 @@ namespace EOS.UI.Droid.Sandbox.Activities
                 shadowOpacityDropDown
             };
 
+            fab.Click += async (sender, e) =>
+            {
+                if (fab.InProgress)
+                    return;
+                ToggleAllControlsEnabled(false, spinners, resetButton, stateSwitch);
+                fab.StartProgressAnimation();
+                await Task.Delay(5000);
+                fab.StopProgressAnimation();
+                ToggleAllControlsEnabled(true, spinners, resetButton, stateSwitch);
+            };
+
             themeDropDown.Name = Fields.Theme;
             themeDropDown.SetupAdapter(ThemeTypes.ThemeCollection.Select(item => item.Key).ToList());
             themeDropDown.ItemSelected += (position) =>
@@ -87,6 +86,7 @@ namespace EOS.UI.Droid.Sandbox.Activities
                     ResetShadowFields(shadowOffsetXDropDown, shadowOffsetYDropDown, shadowBlurDropDown, shadowColorDropDown);
                     spinners.Except(new[] { themeDropDown }).ToList().ForEach(s => s.SetSpinnerSelection(0));
                     UpdateApperaence();
+                    _shadowAlpha = fab.ShadowConfig != null ? (float)fab.ShadowConfig?.Color.A / 255 : 1;
                 }
             };
             var theme = fab.GetThemeProvider().GetCurrentTheme();
@@ -96,27 +96,27 @@ namespace EOS.UI.Droid.Sandbox.Activities
                 themeDropDown.SetSpinnerSelection(2);
 
             backgroundColorDropDown.Name = Fields.Background;
-            backgroundColorDropDown.SetupAdapter(Colors.ColorsCollection.Select(item => item.Key).ToList());
+            backgroundColorDropDown.SetupAdapter(Colors.MainColorsCollection.Select(item => item.Key).ToList());
             backgroundColorDropDown.ItemSelected += (position) =>
             {
                 if(position > 0)
-                    fab.BackgroundColor = Colors.ColorsCollection.ElementAt(position).Value;
+                    fab.BackgroundColor = Colors.MainColorsCollection.ElementAt(position).Value;
             };
 
             disabledColorDropDown.Name = Fields.DisabledColor;
-            disabledColorDropDown.SetupAdapter(Colors.ColorsCollection.Select(item => item.Key).ToList());
+            disabledColorDropDown.SetupAdapter(Colors.MainColorsCollection.Select(item => item.Key).ToList());
             disabledColorDropDown.ItemSelected += (position) =>
             {
                 if(position > 0)
-                    fab.DisabledBackgroundColor = Colors.ColorsCollection.ElementAt(position).Value;
+                    fab.DisabledBackgroundColor = Colors.MainColorsCollection.ElementAt(position).Value;
             };
 
             pressedColorDropDown.Name = Fields.PressedColor;
-            pressedColorDropDown.SetupAdapter(Colors.ColorsCollection.Select(item => item.Key).ToList());
+            pressedColorDropDown.SetupAdapter(Colors.MainColorsCollection.Select(item => item.Key).ToList());
             pressedColorDropDown.ItemSelected += (position) =>
             {
                 if(position > 0)
-                    fab.PressedBackgroundColor = Colors.ColorsCollection.ElementAt(position).Value;
+                    fab.PressedBackgroundColor = Colors.MainColorsCollection.ElementAt(position).Value;
             };
 
             shadowOffsetXDropDown.Name = Fields.ShadowOffsetX;
@@ -154,12 +154,12 @@ namespace EOS.UI.Droid.Sandbox.Activities
             };
 
             shadowColorDropDown.Name = Fields.ShadowColor;
-            shadowColorDropDown.SetupAdapter(Colors.ColorsCollection.Select(i => i.Key).ToList());
+            shadowColorDropDown.SetupAdapter(Colors.MainColorsCollection.Select(i => i.Key).ToList());
             shadowColorDropDown.ItemSelected += (position) =>
             {
                 if (position > 0)
                 {
-                    fab.ShadowConfig.Color = Colors.ColorsCollection.ElementAt(position).Value;
+                    fab.ShadowConfig.Color = Colors.MainColorsCollection.ElementAt(position).Value;
                     ChangeShadow(fab);
                 }
             };
@@ -242,6 +242,13 @@ namespace EOS.UI.Droid.Sandbox.Activities
         {
             spinners.Except(new[] { themeDropDown }).ToList().ForEach(s => s.SetSpinnerSelection(0));
             fab.ResetCustomization();
+        }
+
+        private void ToggleAllControlsEnabled(bool enabled, List<EOSSandboxDropDown> spinners, Button resetButton, Switch enabledSwitch)
+        {
+            spinners.ToList().ForEach(s => s.Enabled = enabled);
+            resetButton.Enabled = enabled;
+            enabledSwitch.Enabled = enabled;
         }
     }
 }

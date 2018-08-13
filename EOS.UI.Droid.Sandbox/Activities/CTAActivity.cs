@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using Android.App;
 using Android.Graphics;
 using Android.OS;
+using Android.Util;
 using Android.Views;
 using Android.Widget;
 using EOS.UI.Droid.Controls;
@@ -20,6 +21,7 @@ namespace EOS.UI.Droid.Sandbox.Activities
     [Activity(Label = ControlNames.CTAButton, Theme = "@style/Sandbox.Main")]
     public class CTAActivity : BaseActivity, IOnCheckedChangeListener
     {
+        private Size _cachedSize;
         private SimpleButton _CTAButton;
         private EOSSandboxDropDown _themeDropDown;
         private EOSSandboxDropDown _fontDropDown;
@@ -115,23 +117,23 @@ namespace EOS.UI.Droid.Sandbox.Activities
             _textSizeDropDown.ItemSelected += TextSizeItemSelected;
 
             _textColorEnabledDropDown.Name = Fields.EnabledTextColor;
-            _textColorEnabledDropDown.SetupAdapter(Colors.ColorsCollection.Select(item => item.Key).ToList());
+            _textColorEnabledDropDown.SetupAdapter(Colors.FontColorsCollection.Select(item => item.Key).ToList());
             _textColorEnabledDropDown.ItemSelected += TextColorEnabledItemSelected;
 
             _textColorDisabledDropDown.Name = Fields.DisabledTextColor;
-            _textColorDisabledDropDown.SetupAdapter(Colors.ColorsCollection.Select(item => item.Key).ToList());
+            _textColorDisabledDropDown.SetupAdapter(Colors.FontColorsCollection.Select(item => item.Key).ToList());
             _textColorDisabledDropDown.ItemSelected += TextColorDisabledItemSelected;
 
             _backgroundColorEnabledDropDown.Name = Fields.EnabledBackground;
-            _backgroundColorEnabledDropDown.SetupAdapter(Colors.ColorsCollection.Select(item => item.Key).ToList());
+            _backgroundColorEnabledDropDown.SetupAdapter(Colors.MainColorsCollection.Select(item => item.Key).ToList());
             _backgroundColorEnabledDropDown.ItemSelected += BackgroundColorEnabledItemSelected;
 
             _backgroundColorDisabledDropDown.Name = Fields.DisabledBackground;
-            _backgroundColorDisabledDropDown.SetupAdapter(Colors.ColorsCollection.Select(item => item.Key).ToList());
+            _backgroundColorDisabledDropDown.SetupAdapter(Colors.MainColorsCollection.Select(item => item.Key).ToList());
             _backgroundColorDisabledDropDown.ItemSelected += BackgroundColorDisabledItemSelected;
 
             _backgroundColorPressedDropDown.Name = Fields.PressedBackground;
-            _backgroundColorPressedDropDown.SetupAdapter(Colors.ColorsCollection.Select(item => item.Key).ToList());
+            _backgroundColorPressedDropDown.SetupAdapter(Colors.MainColorsCollection.Select(item => item.Key).ToList());
             _backgroundColorPressedDropDown.ItemSelected += BackgroundColorPressedItemSelected;
 
             _cornerRadiusDropDown.Name = Fields.ConerRadius;
@@ -139,7 +141,7 @@ namespace EOS.UI.Droid.Sandbox.Activities
             _cornerRadiusDropDown.ItemSelected += CornerRadiusItemSelected;
 
             _rippleColorDropDown.Name = Fields.RippleColor;
-            _rippleColorDropDown.SetupAdapter(Colors.ColorsCollection.Select(item => item.Key).ToList());
+            _rippleColorDropDown.SetupAdapter(Colors.MainColorsCollection.Select(item => item.Key).ToList());
             _rippleColorDropDown.ItemSelected += RippleColorItemSelected;
 
             _resetButton.Click += delegate
@@ -200,31 +202,31 @@ namespace EOS.UI.Droid.Sandbox.Activities
         private void TextColorEnabledItemSelected(int position)
         {
             if (position > 0)
-                _CTAButton.TextColor = Colors.ColorsCollection.ElementAt(position).Value;
+                _CTAButton.TextColor = Colors.FontColorsCollection.ElementAt(position).Value;
         }
 
         private void TextColorDisabledItemSelected(int position)
         {
             if (position > 0)
-                _CTAButton.DisabledTextColor = Colors.ColorsCollection.ElementAt(position).Value;
+                _CTAButton.DisabledTextColor = Colors.FontColorsCollection.ElementAt(position).Value;
         }
 
         private void BackgroundColorEnabledItemSelected(int position)
         {
             if (position > 0)
-                _CTAButton.BackgroundColor = Colors.ColorsCollection.ElementAt(position).Value;
+                _CTAButton.BackgroundColor = Colors.MainColorsCollection.ElementAt(position).Value;
         }
 
         private void BackgroundColorDisabledItemSelected(int position)
         {
             if (position > 0)
-                _CTAButton.DisabledBackgroundColor = Colors.ColorsCollection.ElementAt(position).Value;
+                _CTAButton.DisabledBackgroundColor = Colors.MainColorsCollection.ElementAt(position).Value;
         }
 
         private void BackgroundColorPressedItemSelected(int position)
         {
             if (position > 0)
-                _CTAButton.PressedBackgroundColor = Colors.ColorsCollection.ElementAt(position).Value;
+                _CTAButton.PressedBackgroundColor = Colors.MainColorsCollection.ElementAt(position).Value;
         }
 
         private void CornerRadiusItemSelected(int position)
@@ -236,7 +238,7 @@ namespace EOS.UI.Droid.Sandbox.Activities
         private void RippleColorItemSelected(int position)
         {
             if (position > 0)
-                _CTAButton.RippleColor = Colors.ColorsCollection.ElementAt(position).Value;
+                _CTAButton.RippleColor = Colors.MainColorsCollection.ElementAt(position).Value;
         }
 
         private void SetCurrenTheme(IEOSTheme iEOSTheme)
@@ -267,7 +269,7 @@ namespace EOS.UI.Droid.Sandbox.Activities
             {
                 case SimpleButtonTypeEnum.Simple:
                     ResetCustomValues(true);
-                    var layoutParameters = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WrapContent, ViewGroup.LayoutParams.WrapContent);
+                    var layoutParameters = GetSimpleButtonLayoutParameters();
                     layoutParameters.Gravity = GravityFlags.Center;
                     _CTAButton.LayoutParameters = layoutParameters;
                     var denisty = Resources.DisplayMetrics.Density;
@@ -284,10 +286,26 @@ namespace EOS.UI.Droid.Sandbox.Activities
                     _CTAButton.ShadowConfig = null;
                     _CTAButton.CornerRadius = 0;
                     _CTAButton.SetPadding(0, 0, 0, 0);
-                    _CTAButton.LayoutParameters = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MatchParent, ViewGroup.LayoutParams.WrapContent);
+                    _CTAButton.LayoutParameters = GetFullBleedButtonLayoutParameters();
                     _CTAButton.Text = Buttons.FullBleed;
                     break;
             }
+        }
+
+        private LinearLayout.LayoutParams GetSimpleButtonLayoutParameters()
+        {
+            if (_cachedSize != null)
+                return new LinearLayout.LayoutParams(_cachedSize.Width, _cachedSize.Height);
+
+            return _CTAButton.LayoutParameters as LinearLayout.LayoutParams;
+        }
+
+        private LinearLayout.LayoutParams GetFullBleedButtonLayoutParameters()
+        {
+            if (_cachedSize == null)
+                _cachedSize = new Size(_CTAButton.Width, _CTAButton.Height);
+
+            return new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MatchParent, _cachedSize.Height);
         }
     }
 }

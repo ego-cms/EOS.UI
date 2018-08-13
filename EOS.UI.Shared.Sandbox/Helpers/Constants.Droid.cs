@@ -12,18 +12,42 @@ namespace EOS.UI.Shared.Sandbox.Helpers
     {
         public static class Colors
         {
-            public static readonly Dictionary<string, Color> ColorsCollection = new Dictionary<string, Color>()
+            public static readonly Dictionary<string, Color> MainColorsCollection = new Dictionary<string, Color>()
             {
                 { string.Empty, Color.Transparent },
-                { "Black", Color.Black },
-                { "White", Color.White },
-                { "Gray", Color.Gray },
-                { "Green", Color.Green },
-                { "Blue", Color.Blue },
-                { "Red", Color.Red },
-                { "Yellow", Color.Yellow },
-                { "Brown", Color.Brown }
+                {ColorNameBlue, Color.ParseColor(ColorBlue)},
+                {ColorNameUltramarine, Color.ParseColor(ColorUltramarine)},
+                {ColorNameCerulean, Color.ParseColor(ColorCerulean)},
+                {ColorNameTeal, Color.ParseColor(ColorTeal)},
+                {ColorNameGreen, Color.ParseColor(ColorGreen)},
+                {ColorNameLime, Color.ParseColor(ColorLime)},
+                {ColorNameYellow, Color.ParseColor(ColorYellow)},
+                {ColorNameGold, Color.ParseColor(ColorGold)},
+                {ColorNameOrange, Color.ParseColor(ColorOrange)},
+                {ColorNamePeach, Color.ParseColor(ColorPeach)},
+                {ColorNameRed, Color.ParseColor(ColorRed)},
+                {ColorNameMagenta, Color.ParseColor(ColorMagenta)},
+                {ColorNamePurple, Color.ParseColor(ColorPurple)},
+                {ColorNameViolet, Color.ParseColor(ColorViolet)},
+                {ColorNameIndigo, Color.ParseColor(ColorIndigo)},
             };
+
+            public static Dictionary<string, Color> FontColorsCollection = new Dictionary<string, Color>()
+            {
+                { string.Empty, Color.Transparent },
+                {ColorNameBlack, Color.ParseColor(ColorBlack)},
+                {ColorNameDarkGray, Color.ParseColor(ColorDarkGray)},
+                {ColorNameGray, Color.ParseColor(ColorGray)},
+                {ColorNameLightGray, Color.ParseColor(ColorLightGray)},
+                {ColorNameWhite, Color.ParseColor(ColorWhite)},
+                {ColorNameRed, Color.ParseColor(ColorRed)},
+                {ColorNameUltramarine, Color.ParseColor(ColorUltramarine)}
+            };
+
+            public static Dictionary<string, Color> GetGhostButtonFonts()
+            {
+                return MainColorsCollection.Union(FontColorsCollection).ToDictionary(a => a.Key, b => b.Value);
+            }
         }
 
         public static class Fonts

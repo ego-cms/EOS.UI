@@ -41,7 +41,7 @@ namespace EOS.UI.Droid.Sandbox.Activities
             _themeDropDown.ItemSelected += ThemeItemSelected;
 
             _textColorDropDown.Name = Fields.TextColor;
-            _textColorDropDown.SetupAdapter(Colors.ColorsCollection.Select(item => item.Key).ToList());
+            _textColorDropDown.SetupAdapter(Colors.FontColorsCollection.Select(item => item.Key).ToList());
             _textColorDropDown.ItemSelected += TextColorItemSelected;
 
             _fontDropDown.Name = Fields.Font;
@@ -103,7 +103,7 @@ namespace EOS.UI.Droid.Sandbox.Activities
         private void TextColorItemSelected(int position)
         {
             if(position > 0)
-                _simpleLabel.TextColor = Colors.ColorsCollection.ElementAt(position).Value;
+                _simpleLabel.TextColor = Colors.FontColorsCollection.ElementAt(position).Value;
         }
 
         private void ResetCustomValues()
