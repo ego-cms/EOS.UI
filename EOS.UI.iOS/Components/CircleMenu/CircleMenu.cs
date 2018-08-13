@@ -13,6 +13,7 @@ using EOS.UI.Shared.Themes.Helpers;
 using EOS.UI.Shared.Themes.Interfaces;
 using Foundation;
 using UIKit;
+using System.Threading;
 
 namespace EOS.UI.iOS.Components
 {
@@ -541,51 +542,62 @@ namespace EOS.UI.iOS.Components
             return submenuButtons;
         }
 
-        async Task ShowSubmenu(CircleMenuButton invokedButton, List<CircleMenuButton> submenuButtons)
+        private Task ShowSubmenu(CircleMenuButton invokedButton, List<CircleMenuButton> submenuButtons)
         {
-            var task = Task.FromResult(true);
+            var task = Task.CompletedTask;
             for (int i = 0; i < submenuButtons.Count; ++i)
             {
                 _rootView.AddSubview(submenuButtons[i]);
-                task = await task.ContinueWith(t => ChangeAlphaAnimation(submenuButtons[i], 1, _showSubmenuDuration));
+                //Have to close on local variable
+                var localViewIndex = i;
+                task = task.ContinueWith(t => ChangeAlphaAnimation(submenuButtons[localViewIndex], 1, _showSubmenuDuration),
+                                         TaskScheduler.FromCurrentSynchronizationContext())
+                           .Unwrap();
             }
             invokedButton.Indicator.Hidden = false;
+            return task;
         }
 
-        async Task CloseSubmenu(CircleMenuButton invokedButton)
+        private Task CloseSubmenu(CircleMenuButton invokedButton)
         {
             var submenuButtons = _rootView.Subviews.Where(v =>
                                                           v.Tag >= 0
                                                           && v.Tag <= _submenuButtonsStartTag + _maximumCountOfChildren
                                                           && v is CircleMenuButton).OrderByDescending(v => v.Tag).ToList();
             if (submenuButtons.Count == 0)
-                return;
+                return Task.CompletedTask;
 
             invokedButton.Indicator.Hidden = true;
-            var task = Task.FromResult(true);
+            var task = Task.CompletedTask;
             for (int i = 0; i < submenuButtons.Count; ++i)
-            {
-                task = await task.ContinueWith(t => ChangeAlphaAnimation((CircleMenuButton)submenuButtons[i], 0, _showSubmenuDuration));
+            {   
+                //Have to close on local variable
+                var localViewIndex = i;
+                task = task.ContinueWith(t => ChangeAlphaAnimation((CircleMenuButton)submenuButtons[localViewIndex], 0, _showSubmenuDuration),
+                                         TaskScheduler.FromCurrentSynchronizationContext())
+                           .Unwrap();
             }
-            invokedButton.Indicator.ResetPosition();
-            invokedButton.Indicator.Hidden = false;
-            foreach (CircleMenuButton button in submenuButtons)
+
+            task = task.ContinueWith((t) =>
             {
-                button.RemoveFromSuperview();
-                button.TouchUpInside -= OnSubmenuClicked;
-            }
+                invokedButton.Indicator.ResetPosition();
+                invokedButton.Indicator.Hidden = false;
+                foreach (CircleMenuButton button in submenuButtons)
+                {
+                    button.RemoveFromSuperview();
+                    button.TouchUpInside -= OnSubmenuClicked;
+                }
+            }, TaskScheduler.FromCurrentSynchronizationContext());
+            return task;
         }
 
-        Task<bool> ChangeAlphaAnimation(CircleMenuButton button, nfloat alpha, double duration)
+        Task ChangeAlphaAnimation(CircleMenuButton button, nfloat alpha, double duration)
         {
             var tcs = new TaskCompletionSource<bool>();
-            InvokeOnMainThread(() =>
+            UIView.Animate(_showSubmenuDuration, () =>
             {
-                UIView.Animate(_showSubmenuDuration, () =>
-                {
-                    button.Alpha = alpha;
-                }, () => tcs.SetResult(true));
-            });
+                button.Alpha = alpha;
+            }, () => tcs.SetResult(true));
             return tcs.Task;
         }
 
