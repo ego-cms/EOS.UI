@@ -554,7 +554,10 @@ namespace EOS.UI.iOS.Components
                                          TaskScheduler.FromCurrentSynchronizationContext())
                            .Unwrap();
             }
-            invokedButton.Indicator.Hidden = false;
+            task = task.ContinueWith((t) =>
+            {
+                invokedButton.Indicator.Hidden = false;
+            }, TaskScheduler.FromCurrentSynchronizationContext());
             return task;
         }
 
