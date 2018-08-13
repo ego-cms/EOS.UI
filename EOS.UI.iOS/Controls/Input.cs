@@ -241,8 +241,8 @@ namespace EOS.UI.iOS.Controls
             set
             {
                 IsEOSCustomizationIgnored = true;
-                _leftImage = value;
-                _leftImageView.Image = value;
+                _leftImage = value?.ImageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate);
+                _leftImageView.Image = _leftImage;
                 UpdateIconColor();
             }
         }
@@ -490,8 +490,10 @@ namespace EOS.UI.iOS.Controls
                 PopulatedUnderlineColor = provider.GetEOSProperty<UIColor>(this, EOSConstants.NeutralColor3);
                 FocusedColor = provider.GetEOSProperty<UIColor>(this, EOSConstants.BrandPrimaryColor);
                 DisabledColor = provider.GetEOSProperty<UIColor>(this, EOSConstants.NeutralColor3);
-                _clearImage = UIImage.FromBundle(provider.GetEOSProperty<string>(this, EOSConstants.ClearInputImage));
-                _rightImageView.Image = UIImage.FromBundle(provider.GetEOSProperty<string>(this, EOSConstants.WarningInputImage)); ;
+                _clearImage = UIImage.FromBundle(provider.GetEOSProperty<string>(this, EOSConstants.ClearInputImage))
+                                     .ImageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate);
+                _rightImageView.Image = UIImage.FromBundle(provider.GetEOSProperty<string>(this, EOSConstants.WarningInputImage))
+                                     .ImageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate);
                 _rightImageView.TintColor = _warningColor;
                 _clearImageColor = provider.GetEOSProperty<UIColor>(this, EOSConstants.NeutralColor3);
                 IsEOSCustomizationIgnored = false;

@@ -8,8 +8,6 @@ using EOS.UI.Shared.Helpers;
 using EOS.UI.Shared.Themes.Helpers;
 using EOS.UI.Shared.Themes.Interfaces;
 using Foundation;
-using EOS.UI.Shared.Themes.Helpers;
-using EOS.UI.Shared.Themes.Interfaces;
 using UIKit;
 
 namespace EOS.UI.iOS.Controls
@@ -97,7 +95,7 @@ namespace EOS.UI.iOS.Controls
             get => _image;
             set
             {
-                _image = value;
+                _image = value?.ImageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate);
                 SetImage(_image);
                 IsEOSCustomizationIgnored = true;
             }
@@ -109,7 +107,7 @@ namespace EOS.UI.iOS.Controls
             get => _preloaderImage;
             set
             {
-                _preloaderImage = value;
+                _preloaderImage = value?.ImageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate);
                 IsEOSCustomizationIgnored = true;
             }
         }

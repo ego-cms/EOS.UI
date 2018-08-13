@@ -58,62 +58,6 @@
       <HintPath>..\packages\Com.Airbnb.iOS.Lottie.2.5.4\lib\xamarinios10\Lottie.iOS.dll</HintPath>
     </Reference>
   </ItemGroup>
-  <ItemGroup>
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Contents.json">
-      <Visible>false</Visible>
-    </ImageAsset>
-    <ImageAsset Include="Assets.xcassets\Contents.json">
-      <Visible>false</Visible>
-    </ImageAsset>
-    <ImageAsset Include="Assets.xcassets\icCalendar.imageset\Contents.json">
-      <Visible>false</Visible>
-    </ImageAsset>
-    <ImageAsset Include="Assets.xcassets\icPreloader.imageset\Contents.json">
-      <Visible>false</Visible>
-    </ImageAsset>
-    <ImageAsset Include="Assets.xcassets\icCalendar.imageset\icCalendar.pdf">
-      <Visible>false</Visible>
-    </ImageAsset>
-    <ImageAsset Include="Assets.xcassets\icPreloader.imageset\icPreloader.pdf">
-      <Visible>false</Visible>
-    </ImageAsset>
-    <ImageAsset Include="Assets.xcassets\icSuccess.imageset\Contents.json">
-      <Visible>false</Visible>
-    </ImageAsset>
-    <ImageAsset Include="Assets.xcassets\icSuccess.imageset\icSuccess.pdf">
-      <Visible>false</Visible>
-    </ImageAsset>
-    <ImageAsset Include="Assets.xcassets\icAccountCircle.imageset\Contents.json">
-      <Visible>false</Visible>
-    </ImageAsset>
-    <ImageAsset Include="Assets.xcassets\icAccountCircle.imageset\icAccountCircle.pdf">
-      <Visible>false</Visible>
-    </ImageAsset>
-    <ImageAsset Include="Assets.xcassets\icAccountOff.imageset\Contents.json">
-      <Visible>false</Visible>
-    </ImageAsset>
-    <ImageAsset Include="Assets.xcassets\icAccountOff.imageset\icAccountOff.pdf">
-      <Visible>false</Visible>
-    </ImageAsset>
-    <ImageAsset Include="Assets.xcassets\icAccountKey.imageset\Contents.json">
-      <Visible>false</Visible>
-    </ImageAsset>
-    <ImageAsset Include="Assets.xcassets\icAccountKey.imageset\icAccountKey.pdf">
-      <Visible>false</Visible>
-    </ImageAsset>
-    <ImageAsset Include="Assets.xcassets\icWarning.imageset\Contents.json">
-      <Visible>false</Visible>
-    </ImageAsset>
-    <ImageAsset Include="Assets.xcassets\icWarning.imageset\icWarning.pdf">
-      <Visible>false</Visible>
-    </ImageAsset>
-    <ImageAsset Include="Assets.xcassets\icClear.imageset\Contents.json">
-      <Visible>false</Visible>
-    </ImageAsset>
-    <ImageAsset Include="Assets.xcassets\icClear.imageset\icClear.pdf">
-      <Visible>false</Visible>
-    </ImageAsset>
-  </ItemGroup>
   <ItemGroup />
   <ItemGroup>
     <Compile Include="Controls\SimpleButton.cs" />
@@ -126,9 +70,6 @@
     <Compile Include="Controls\SimpleLabel.cs" />
     <Compile Include="Models\SectionModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Assets.cs">
-      <DependentUpon>Assets.tt</DependentUpon>
-    </Compile>
     <Compile Include="Themes\EOSThemeProvider.cs" />
     <Compile Include="Traverser\IEOSViewTraverser.cs" />
     <Compile Include="Traverser\EOSViewTraverser.cs" />
@@ -151,10 +92,6 @@
     <Compile Include="Extensions\DateTimeExtensions.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Assets.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>Assets.cs</LastGenOutput>
-    </None>
     <InterfaceDefinition Include="Components\Section.xib" />
     <None Include="Info.plist" />
     <BundleResource Include="Resources\Fonts\capture_it_dark.ttf" />
@@ -162,19 +99,25 @@
     <InterfaceDefinition Include="Components\WorkTimeCalendarCell.xib" />
     <None Include="packages.config" />
     <BundleResource Include="Resources\Animations\preloader-snake.json" />
+    <BundleResource Include="Resources\icCalendar%401x.png" />
+    <BundleResource Include="Resources\icCalendar%402x.png" />
+    <BundleResource Include="Resources\icCalendar%403x.png" />
+    <BundleResource Include="Resources\icClear%401x.png" />
+    <BundleResource Include="Resources\icClear%402x.png" />
+    <BundleResource Include="Resources\icClear%403x.png" />
+    <BundleResource Include="Resources\icPreloader%401x.png" />
+    <BundleResource Include="Resources\icPreloader%402x.png" />
+    <BundleResource Include="Resources\icPreloader%403x.png" />
+    <BundleResource Include="Resources\icSuccess%401x.png" />
+    <BundleResource Include="Resources\icSuccess%402x.png" />
+    <BundleResource Include="Resources\icSuccess%403x.png" />
+    <BundleResource Include="Resources\icWarning%401x.png" />
+    <BundleResource Include="Resources\icWarning%402x.png" />
+    <BundleResource Include="Resources\icWarning%403x.png" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
-    <Folder Include="Assets.xcassets\calenda.imageset\" />
-    <Folder Include="Assets.xcassets\icCalendar.imageset\" />
-    <Folder Include="Assets.xcassets\icPreloader.imageset\" />
-    <Folder Include="Assets.xcassets\icSuccess.imageset\" />
-    <Folder Include="Assets.xcassets\icAccountCircle.imageset\" />
-    <Folder Include="Assets.xcassets\icAccountOff.imageset\" />
-    <Folder Include="Assets.xcassets\icAccountKey.imageset\" />
     <Folder Include="CollectionViewSources\" />
-    <Folder Include="Assets.xcassets\icWarning.imageset\" />
-    <Folder Include="Assets.xcassets\icClear.imageset\" />
     <Folder Include="Resources\Animations\" />
   </ItemGroup>
   <ItemGroup>
