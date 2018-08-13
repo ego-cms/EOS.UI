@@ -13,13 +13,61 @@ namespace EOS.UI.iOS.Sandbox
 	partial class CircleMenuView
 	{
 		[Outlet]
-		UIKit.UILabel swipeLabel { get; set; }
+		EOS.UI.iOS.Sandbox.EOSSandboxDropDown focusedButtonColorDropDown { get; set; }
+
+		[Outlet]
+		EOS.UI.iOS.Sandbox.EOSSandboxDropDown focusedIconColorDropDown { get; set; }
+
+		[Outlet]
+		EOS.UI.iOS.Sandbox.EOSSandboxDropDown itemsCountDropDown { get; set; }
+
+		[Outlet]
+		UIKit.UIButton resetButton { get; set; }
+
+		[Outlet]
+		EOS.UI.iOS.Sandbox.EOSSandboxDropDown themeDropDown { get; set; }
+
+		[Outlet]
+		EOS.UI.iOS.Sandbox.EOSSandboxDropDown unfocusedButtonColorDropDown { get; set; }
+
+		[Outlet]
+		EOS.UI.iOS.Sandbox.EOSSandboxDropDown unfocusedIconColorDropDown { get; set; }
 		
 		void ReleaseDesignerOutlets ()
 		{
-			if (swipeLabel != null) {
-				swipeLabel.Dispose ();
-				swipeLabel = null;
+			if (themeDropDown != null) {
+				themeDropDown.Dispose ();
+				themeDropDown = null;
+			}
+
+			if (unfocusedButtonColorDropDown != null) {
+				unfocusedButtonColorDropDown.Dispose ();
+				unfocusedButtonColorDropDown = null;
+			}
+
+			if (focusedButtonColorDropDown != null) {
+				focusedButtonColorDropDown.Dispose ();
+				focusedButtonColorDropDown = null;
+			}
+
+			if (focusedIconColorDropDown != null) {
+				focusedIconColorDropDown.Dispose ();
+				focusedIconColorDropDown = null;
+			}
+
+			if (unfocusedIconColorDropDown != null) {
+				unfocusedIconColorDropDown.Dispose ();
+				unfocusedIconColorDropDown = null;
+			}
+
+			if (itemsCountDropDown != null) {
+				itemsCountDropDown.Dispose ();
+				itemsCountDropDown = null;
+			}
+
+			if (resetButton != null) {
+				resetButton.Dispose ();
+				resetButton = null;
 			}
 		}
 	}

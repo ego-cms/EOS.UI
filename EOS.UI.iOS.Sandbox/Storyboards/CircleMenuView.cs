@@ -1,12 +1,17 @@
+using CoreGraphics;
 using EOS.UI.iOS.Components;
 using EOS.UI.iOS.Sandbox.Storyboards;
+using EOS.UI.iOS.Themes;
 using EOS.UI.Shared.Themes.DataModels;
 using EOS.UI.Shared.Themes.Extensions;
+using EOS.UI.Shared.Themes.Helpers;
+using EOS.UI.Shared.Themes.Themes;
 using Foundation;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using UIKit;
+using static EOS.UI.Shared.Sandbox.Helpers.Constants;
 
 namespace EOS.UI.iOS.Sandbox
 {
@@ -15,6 +20,8 @@ namespace EOS.UI.iOS.Sandbox
         public const string Identifier = "CircleMenuView";
         private Dictionary<string, UIImage> _icons;
         private bool _navigationBarEnabled = true;
+        private List<EOSSandboxDropDown> _dropDowns;
+        private CircleMenu _circleMenu;
 
         public CircleMenuView(IntPtr handle) : base(handle)
         {
@@ -23,7 +30,7 @@ namespace EOS.UI.iOS.Sandbox
         public override void ViewDidLoad()
         {
             base.ViewDidLoad();
-            
+
             _icons = new Dictionary<string, UIImage>()
             {
                 {"icImage",UIImage.FromBundle("icImage")},
@@ -40,12 +47,9 @@ namespace EOS.UI.iOS.Sandbox
                 {"icHDR", UIImage.FromBundle("icHDR")}
             };
 
-            var circleMenu = new CircleMenu();
-            circleMenu.LeftSwiped += (sender, e) => swipeLabel.Text = "Left swipe";
-            circleMenu.RightSwiped += (sender, e) => swipeLabel.Text = "Right swipe";
-            circleMenu.Clicked += (object sender, int id) =>
+            _circleMenu = new CircleMenu();
+            _circleMenu.Clicked += (object sender, int id) =>
             {
-                swipeLabel.Text = $"{id.ToString()}id clicked";
                 if (id == 100)
                 {
                     _navigationBarEnabled = !_navigationBarEnabled;
@@ -58,14 +62,117 @@ namespace EOS.UI.iOS.Sandbox
                 }
             };
 
-            circleMenu.CircleMenuItems = CreateSource();
-            circleMenu.Attach(this);
+            _circleMenu.CircleMenuItems = CreateSource(9);
+            _circleMenu.Attach(this);
+
+            View.AddGestureRecognizer(new UITapGestureRecognizer(() =>
+            {
+                _dropDowns.ForEach(dropDown => dropDown.CloseInputControl());
+            }));
+
+            _dropDowns = new List<EOSSandboxDropDown>()
+            {
+                themeDropDown,
+                unfocusedButtonColorDropDown,
+                unfocusedIconColorDropDown,
+                focusedButtonColorDropDown,
+                focusedIconColorDropDown,
+                itemsCountDropDown
+            };
+
+            var rect = new CGRect(0, 0, 100, 150);
+            InitThemeDropDown(rect);
+            InitFocusedIconColorDropDown(rect);
+            InitFocusedBackgroundColorDropDown(rect);
+            InitUnfocusedIconColorDropDown(rect);
+            InitUnfocusedButtonColorDropDown(rect);
+            InitItemsCountDropDown(rect);
+            InitResetButton();
         }
 
-        private List<CircleMenuItemModel> CreateSource()
+        private void InitThemeDropDown(CGRect rect)
+        {
+            themeDropDown.InitSource(
+                ThemeTypes.ThemeCollection,
+                (theme) =>
+                {
+                    _circleMenu.GetThemeProvider().SetCurrentTheme(theme);
+                    _circleMenu.ResetCustomization();
+                    ResetFields();
+                    UpdateApperaence();
+                },
+                Fields.Theme,
+                rect);
+            themeDropDown.SetTextFieldText(_circleMenu.GetThemeProvider().GetCurrentTheme() is LightEOSTheme ? "Light" : "Dark");
+        }
+
+        private void InitFocusedBackgroundColorDropDown(CGRect rect)
+        {
+            focusedButtonColorDropDown.InitSource(
+                Colors.MainColorsCollection,
+                color => _circleMenu.FocusedBackgroundColor = color,
+                Fields.FocusedBackgroundColor,
+               rect);
+        }
+
+        private void InitFocusedIconColorDropDown(CGRect rect)
+        {
+            focusedIconColorDropDown.InitSource(
+                Colors.MainColorsCollection,
+                color => _circleMenu.FocusedIconColor = color,
+                Fields.FocusedIconColor,
+               rect);
+        }
+
+        private void InitUnfocusedButtonColorDropDown(CGRect rect)
+        {
+            unfocusedButtonColorDropDown.InitSource(
+               Colors.MainColorsCollection,
+                color => _circleMenu.UnfocusedBackgroundColor = color,
+                Fields.UnfocusedBackgroundColor,
+              rect);
+        }
+
+        private void InitUnfocusedIconColorDropDown(CGRect rect)
+        {
+            unfocusedIconColorDropDown.InitSource(
+               Colors.MainColorsCollection,
+                color => _circleMenu.UnfocusedIconColor = color,
+                Fields.UnfocusedIconColor,
+              rect);
+        }
+        
+        
+        private void InitItemsCountDropDown(CGRect rect)
+        {
+            itemsCountDropDown.InitSource(
+                CircleMenuSource.SourceCollection.Select(item => item.Key).ToList(),
+                items =>
+                {
+                    _circleMenu.CircleMenuItems = CreateSource(Convert.ToInt32(items));
+                },
+                Fields.CircleMenuItems,
+              rect);
+        }
+
+        private void InitResetButton()
+        {
+            resetButton.TouchUpInside += (sender, e) =>
+            {
+                _circleMenu.ResetCustomization();
+                ResetFields();
+            };
+        }
+
+        private void ResetFields()
+        {
+            _dropDowns.Except(new[] { themeDropDown }).ToList().ForEach(dropDown => dropDown.ResetValue());
+        }
+
+        private List<CircleMenuItemModel> CreateSource(int count)
         {
             var menuModels = new List<CircleMenuItemModel>();
-            for (int i = 0; i < 9; ++i)
+            for (int i = 0; i < count; ++i)
             {
                 var menuModel = new CircleMenuItemModel(i, _icons.ElementAt(i).Value);
                 if (i == 2 || i == 3)
@@ -86,7 +193,7 @@ namespace EOS.UI.iOS.Sandbox
             var storyboard = UIStoryboard.FromName("CircleMenuItemView", null);
             var viewController = (CircleMenuItemView)storyboard.InstantiateViewController("CircleMenuItemView");
             viewController.NavigationItem.Title = "CircleMenuItemView";
-            viewController.MenuItemImage = UIImage.FromBundle(hdImageName+"_HD");
+            viewController.MenuItemImage = UIImage.FromBundle(hdImageName + "_HD");
             NavigationController.PushViewController(viewController, true);
         }
 

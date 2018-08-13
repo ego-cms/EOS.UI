@@ -87,7 +87,6 @@ namespace EOS.UI.iOS.Sandbox.Storyboards
             if (enabled)
             {
                 NavigationController.NavigationBar.SetBackgroundImage(_backgroundImage, UIBarMetrics.Default);
-                NavigationController.NavigationBar.BackgroundColor = UIColor.White;
                 NavigationController.NavigationBar.Items[0].BackBarButtonItem.Enabled = true; 
                 NavigationController.NavigationBar.TintColor = ColorExtension.FromHex("3C6DF0");
                 NavigationController.InteractivePopGestureRecognizer.Enabled = true;
@@ -95,7 +94,6 @@ namespace EOS.UI.iOS.Sandbox.Storyboards
             else
             {
                 NavigationController.NavigationBar.SetBackgroundImage(new UIImage(), UIBarMetrics.Default);
-                NavigationController.NavigationBar.BackgroundColor = UIColor.Clear;
                 NavigationController.NavigationBar.Items[0].BackBarButtonItem.Enabled = false; 
                 NavigationController.NavigationBar.TintColor = UIColor.LightGray;
                 NavigationController.InteractivePopGestureRecognizer.Enabled = false;

@@ -129,10 +129,6 @@ namespace EOS.UI.iOS.Components
             }
         }
 
-        ///TODO: Events for test purpose only, need to remove in future
-        public EventHandler LeftSwiped;
-        public EventHandler RightSwiped;
-
         public EventHandler<int> Clicked;
 
         public CircleMenu()
@@ -611,7 +607,6 @@ namespace EOS.UI.iOS.Components
         {
             if (IsSwipeBlocked)
                 return;
-            RightSwiped?.Invoke(this, EventArgs.Empty);
             MoveRight();
         }
 
@@ -619,7 +614,6 @@ namespace EOS.UI.iOS.Components
         {
             if (IsSwipeBlocked)
                 return;
-            LeftSwiped?.Invoke(this, EventArgs.Empty);
             MoveLeft();
         }
 
