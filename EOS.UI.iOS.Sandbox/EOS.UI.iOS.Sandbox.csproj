@@ -294,6 +294,18 @@
     <BundleResource Include="Resources\icVideo%401x.png" />
     <BundleResource Include="Resources\icVideo%402x.png" />
     <BundleResource Include="Resources\icVideo%403x.png" />
+    <BundleResource Include="Resources\icOneToOne_HD.png" />
+    <BundleResource Include="Resources\icSixteenToNine_HD.png" />
+    <BundleResource Include="Resources\icHDR_HD.png" />
+    <BundleResource Include="Resources\icImage_HD.png" />
+    <BundleResource Include="Resources\icMacro_HD.png" />
+    <BundleResource Include="Resources\icPanorama_HD.png" />
+    <BundleResource Include="Resources\icPhoto_HD.png" />
+    <BundleResource Include="Resources\icPortrait_HD.png" />
+    <BundleResource Include="Resources\icSeries_HD.png" />
+    <BundleResource Include="Resources\icTimelapse_HD.png" />
+    <BundleResource Include="Resources\icTimer_HD.png" />
+    <BundleResource Include="Resources\icVideo_HD.png" />
   </ItemGroup>
   <Import Project="..\EOS.UI.Shared.Sandbox\EOS.UI.Shared.Sandbox.projitems" Label="Shared" Condition="Exists('..\EOS.UI.Shared.Sandbox\EOS.UI.Shared.Sandbox.projitems')" />
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />

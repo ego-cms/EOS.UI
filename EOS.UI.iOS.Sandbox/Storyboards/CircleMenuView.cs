@@ -5,6 +5,7 @@ using EOS.UI.Shared.Themes.Extensions;
 using Foundation;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using UIKit;
 
 namespace EOS.UI.iOS.Sandbox
@@ -12,7 +13,7 @@ namespace EOS.UI.iOS.Sandbox
     public partial class CircleMenuView : BaseViewController
     {
         public const string Identifier = "CircleMenuView";
-        private List<UIImage> _icons;
+        private Dictionary<string, UIImage> _icons;
         private bool _navigationBarEnabled = true;
 
         public CircleMenuView(IntPtr handle) : base(handle)
@@ -23,22 +24,20 @@ namespace EOS.UI.iOS.Sandbox
         {
             base.ViewDidLoad();
             
-            _icons = new List<UIImage>()
+            _icons = new Dictionary<string, UIImage>()
             {
-                UIImage.FromBundle("icImage"),
-                UIImage.FromBundle("icPanorama"),
-                UIImage.FromBundle("icVideo"),
-                UIImage.FromBundle("icPhoto"),
-                
-                UIImage.FromBundle("icTimelapse"),
-                UIImage.FromBundle("icMacro"),
-                UIImage.FromBundle("icPortrait"),
-                UIImage.FromBundle("icSeries"),
-                UIImage.FromBundle("icTimer"),
-                
-                UIImage.FromBundle("icSixteenToNine"),
-                UIImage.FromBundle("icOneToOne"),
-                UIImage.FromBundle("icHDR"),
+                {"icImage",UIImage.FromBundle("icImage")},
+                {"icPanorama", UIImage.FromBundle("icPanorama")},
+                {"icVideo",UIImage.FromBundle("icVideo")},
+                {"icPhoto", UIImage.FromBundle("icPhoto")},
+                {"icTimelapse", UIImage.FromBundle("icTimelapse")},
+                {"icMacro", UIImage.FromBundle("icMacro")},
+                {"icPortrait", UIImage.FromBundle("icPortrait")},
+                {"icSeries", UIImage.FromBundle("icSeries")},
+                {"icTimer", UIImage.FromBundle("icTimer")},
+                {"icSixteenToNine", UIImage.FromBundle("icSixteenToNine")},
+                {"icOneToOne", UIImage.FromBundle("icOneToOne")},
+                {"icHDR", UIImage.FromBundle("icHDR")}
             };
 
             var circleMenu = new CircleMenu();
@@ -55,7 +54,7 @@ namespace EOS.UI.iOS.Sandbox
                 else
                 {
                     if (id != 2 && id != 3)
-                        ShowItemController(_icons[id]);
+                        ShowItemController(_icons.ElementAt(id).Key);
                 }
             };
 
@@ -68,12 +67,12 @@ namespace EOS.UI.iOS.Sandbox
             var menuModels = new List<CircleMenuItemModel>();
             for (int i = 0; i < 9; ++i)
             {
-                var menuModel = new CircleMenuItemModel(i, _icons[i]);
+                var menuModel = new CircleMenuItemModel(i, _icons.ElementAt(i).Value);
                 if (i == 2 || i == 3)
                 {
                     for (int j = 9; j < 12; ++j)
                     {
-                        var subMenuModel = new CircleMenuItemModel(j, _icons[j]);
+                        var subMenuModel = new CircleMenuItemModel(j, _icons.ElementAt(j).Value);
                         menuModel.Children.Add(subMenuModel);
                     }
                 }
@@ -82,12 +81,12 @@ namespace EOS.UI.iOS.Sandbox
             return menuModels;
         }
 
-        void ShowItemController(UIImage image)
+        void ShowItemController(string hdImageName)
         {
             var storyboard = UIStoryboard.FromName("CircleMenuItemView", null);
             var viewController = (CircleMenuItemView)storyboard.InstantiateViewController("CircleMenuItemView");
             viewController.NavigationItem.Title = "CircleMenuItemView";
-            viewController.MenuItemImage = image;
+            viewController.MenuItemImage = UIImage.FromBundle(hdImageName+"_HD");
             NavigationController.PushViewController(viewController, true);
         }
 
