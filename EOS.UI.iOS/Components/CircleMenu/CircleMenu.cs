@@ -492,16 +492,16 @@ namespace EOS.UI.iOS.Components
             invokedButton.UserInteractionEnabled = false;
             if (!_isSubmenuOpen)
             {
-                DisableMenuButtons(invokedButton);
+                SendViewToBack();
                 var submenuButtons = PrepareSubmenu(invokedButton, model.Children);
                 await ShowSubmenu(invokedButton, submenuButtons);
                 _isSubmenuOpen = true;
             }
             else
             {
+                SendViewToFront();
                 await CloseSubmenu(invokedButton);
                 _isSubmenuOpen = false;
-                EnableMenuButtons();
             }
             invokedButton.UserInteractionEnabled = true;
         }
@@ -546,6 +546,11 @@ namespace EOS.UI.iOS.Components
         private Task ShowSubmenu(CircleMenuButton invokedButton, List<CircleMenuButton> submenuButtons)
         {
             var task = Task.CompletedTask;
+            
+            var convertedPosition = _menuButtonsView.ConvertPointToView(invokedButton.Position, _rootView);
+            invokedButton.Frame = invokedButton.Frame.ResizeRect(x: convertedPosition.X, y: convertedPosition.Y);
+            _rootView.InsertSubview(invokedButton, _rootView.Subviews.Length);
+            
             for (int i = 0; i < submenuButtons.Count; ++i)
             {
                 _rootView.AddSubview(submenuButtons[i]);
@@ -564,6 +569,9 @@ namespace EOS.UI.iOS.Components
 
         private Task CloseSubmenu(CircleMenuButton invokedButton)
         {
+            invokedButton.ResetPosition();
+            _menuButtonsView.InsertSubview(invokedButton, _menuButtonsView.Subviews.Length);
+            
             var submenuButtons = _rootView.Subviews.Where(v =>
                                                           v.Tag >= 0
                                                           && v.Tag <= _submenuButtonsStartTag + _maximumCountOfChildren
@@ -682,17 +690,17 @@ namespace EOS.UI.iOS.Components
             var button = (CircleMenuButton)sender;
             Clicked?.Invoke(button, button.Model.Id);
         }
-
-        void DisableMenuButtons(CircleMenuButton invokedButton)
+        
+        void SendViewToBack()
         {
-            _menuButtons.Except(new CircleMenuButton[] { invokedButton }).ToList().ForEach(b => b.Enabled = false);
-            _mainButton.Enabled = false;
+            var index = _rootView.Subviews.ToList().IndexOf(_shadowView);
+            _rootView.InsertSubview(this, index - 1);
         }
-
-        void EnableMenuButtons()
+        
+        void SendViewToFront()
         {
-            _menuButtons.ForEach(b => b.Enabled = true);
-            _mainButton.Enabled = true;
+            var index = _rootView.Subviews.ToList().IndexOf(_shadowView);
+            _rootView.InsertSubview(this, _rootView.Subviews.Length);
         }
 
         void SwitchInteractions(bool enabled)
