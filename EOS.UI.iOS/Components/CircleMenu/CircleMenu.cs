@@ -637,7 +637,7 @@ namespace EOS.UI.iOS.Components
             for (int i = 0; i < 2; ++i)
             {
                 var hintView = new UIView(invokedButton.Frame);
-                hintView.BackgroundColor = UIColor.White;
+                hintView.BackgroundColor = UnfocusedBackgroundColor;
                 hintView.Layer.CornerRadius = invokedButton.Frame.Height / 2;
                 hintView.Layer.ShadowColor = UIColor.Black.CGColor;
                 hintView.Layer.ShadowOffset = new CGSize(0, 1);

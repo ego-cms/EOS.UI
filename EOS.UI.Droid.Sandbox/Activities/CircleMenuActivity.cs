@@ -73,19 +73,19 @@ namespace EOS.UI.Droid.Sandbox.Activities
             _themeDropDown.ItemSelected += ThemeItemSelected;
 
             _mainColorDropDown.Name = Fields.UnfocusedBackgroundColor;
-            _mainColorDropDown.SetupAdapter(Colors.ColorsCollection.Select(item => item.Key).ToList());
+            _mainColorDropDown.SetupAdapter(Colors.MainColorsCollection.Select(item => item.Key).ToList());
             _mainColorDropDown.ItemSelected += MainColorItemSelected;
 
             _focusedMainColorDropDown.Name = Fields.FocusedBackgroundColor;
-            _focusedMainColorDropDown.SetupAdapter(Colors.ColorsCollection.Select(item => item.Key).ToList());
+            _focusedMainColorDropDown.SetupAdapter(Colors.MainColorsCollection.Select(item => item.Key).ToList());
             _focusedMainColorDropDown.ItemSelected += FocusedMainColorItemSelected;
 
             _focusedButtonColorDropDown.Name = Fields.FocusedIconColor;
-            _focusedButtonColorDropDown.SetupAdapter(Colors.ColorsCollection.Select(item => item.Key).ToList());
+            _focusedButtonColorDropDown.SetupAdapter(Colors.MainColorsCollection.Select(item => item.Key).ToList());
             _focusedButtonColorDropDown.ItemSelected += FocusedButtonColorItemSelected;
 
             _unfocusedButtonColorDropDown.Name = Fields.UnfocusedIconColor;
-            _unfocusedButtonColorDropDown.SetupAdapter(Colors.ColorsCollection.Select(item => item.Key).ToList());
+            _unfocusedButtonColorDropDown.SetupAdapter(Colors.MainColorsCollection.Select(item => item.Key).ToList());
             _unfocusedButtonColorDropDown.ItemSelected += UnfocusedButtonColorItemSelected;
 
             _circleMenuItemsDropDown.Name = Fields.CircleMenuItems;
@@ -117,25 +117,25 @@ namespace EOS.UI.Droid.Sandbox.Activities
         private void UnfocusedButtonColorItemSelected(int position)
         {
             if(position > 0)
-                _circleMenu.UnfocusedIconColor = Colors.ColorsCollection.ElementAt(position).Value;
+                _circleMenu.UnfocusedIconColor = Colors.MainColorsCollection.ElementAt(position).Value;
         }
 
         private void FocusedButtonColorItemSelected(int position)
         {
             if(position > 0)
-                _circleMenu.FocusedIconColor = Colors.ColorsCollection.ElementAt(position).Value;
+                _circleMenu.FocusedIconColor = Colors.MainColorsCollection.ElementAt(position).Value;
         }
 
         private void FocusedMainColorItemSelected(int position)
         {
             if(position > 0)
-                _circleMenu.FocusedBackgroundColor = Colors.ColorsCollection.ElementAt(position).Value;
+                _circleMenu.FocusedBackgroundColor = Colors.MainColorsCollection.ElementAt(position).Value;
         }
 
         private void MainColorItemSelected(int position)
         {
             if(position > 0)
-                _circleMenu.UnfocusedBackgroundColor = Colors.ColorsCollection.ElementAt(position).Value;
+                _circleMenu.UnfocusedBackgroundColor = Colors.MainColorsCollection.ElementAt(position).Value;
         }
 
         private void ThemeItemSelected(int position)
