@@ -265,31 +265,54 @@ namespace EOS.UI.Droid.Sandbox.Activities
         private void ButtonTypeItemSelected(int position)
         {
             var buttonType = Buttons.CTAButtonTypeCollection.ElementAt(position).Value;
+            ResetCustomValues(true);
             switch(buttonType)
             {
                 case SimpleButtonTypeEnum.Simple:
-                    ResetCustomValues(true);
-                    var layoutParameters = GetSimpleButtonLayoutParameters();
-                    layoutParameters.Gravity = GravityFlags.Center;
-                    _CTAButton.LayoutParameters = layoutParameters;
-                    var denisty = Resources.DisplayMetrics.Density;
-                    _CTAButton.SetPadding(
-                        (int)(SimpleButtonConstants.LeftPadding * denisty),
-                        (int)(SimpleButtonConstants.TopPadding * denisty),
-                        (int)(SimpleButtonConstants.RightPadding * denisty),
-                        (int)(SimpleButtonConstants.BottomPadding * denisty));
-                    _CTAButton.ResetCustomization();
-                    _CTAButton.Text = Buttons.CTA;
+                    SetupSimpleButtonStyle();
+                    EnableSimpleButtonFields();
                     break;
                 case SimpleButtonTypeEnum.FullBleed:
-                    ResetCustomValues(true);
-                    _CTAButton.ShadowConfig = null;
-                    _CTAButton.CornerRadius = 0;
-                    _CTAButton.SetPadding(0, 0, 0, 0);
-                    _CTAButton.LayoutParameters = GetFullBleedButtonLayoutParameters();
-                    _CTAButton.Text = Buttons.FullBleed;
+                    SetupFullBleedButtonStyle();
+                    DisableSimpleButtonFields();
                     break;
             }
+        }
+
+        private void DisableSimpleButtonFields()
+        {
+            _cornerRadiusDropDown.Enabled = false;
+            _shadowRadiusDropDown.Enabled = false;
+        }
+
+        private void EnableSimpleButtonFields()
+        {
+            _cornerRadiusDropDown.Enabled = true;
+            _shadowRadiusDropDown.Enabled = true;
+        }
+
+        private void SetupFullBleedButtonStyle()
+        {
+            _CTAButton.ShadowConfig = null;
+            _CTAButton.CornerRadius = 0;
+            _CTAButton.SetPadding(0, 0, 0, 0);
+            _CTAButton.LayoutParameters = GetFullBleedButtonLayoutParameters();
+            _CTAButton.Text = Buttons.FullBleed;
+        }
+
+        private void SetupSimpleButtonStyle()
+        {
+            var layoutParameters = GetSimpleButtonLayoutParameters();
+            layoutParameters.Gravity = GravityFlags.Center;
+            _CTAButton.LayoutParameters = layoutParameters;
+            var denisty = Resources.DisplayMetrics.Density;
+            _CTAButton.SetPadding(
+                (int)(SimpleButtonConstants.LeftPadding * denisty),
+                (int)(SimpleButtonConstants.TopPadding * denisty),
+                (int)(SimpleButtonConstants.RightPadding * denisty),
+                (int)(SimpleButtonConstants.BottomPadding * denisty));
+            _CTAButton.ResetCustomization();
+            _CTAButton.Text = Buttons.CTA;
         }
 
         private LinearLayout.LayoutParams GetSimpleButtonLayoutParameters()

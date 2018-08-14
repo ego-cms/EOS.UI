@@ -199,14 +199,36 @@ namespace EOS.UI.iOS.Sandbox
                     {
                         case SimpleButtonTypeEnum.Simple:
                             SetupSimpleButtonStyle();
+                            EnableSimpleButtonFields();
                             break;
                         case SimpleButtonTypeEnum.FullBleed:
                             SetupFullBleedButtonStyle();
+                            DisableSimpleButtonFields();
                             break;
                     }
                 },
                 Fields.ButtonType,
                 rect);
+        }
+
+        private void DisableSimpleButtonFields()
+        {
+            cornerRadiusDropDown.Enabled = false;
+            shadowColorDropDown.Enabled = false;
+            shadowRadiusDropDown.Enabled = false;
+            shadowOffsetXDropDown.Enabled = false;
+            shadowOffsetYDropDown.Enabled = false;
+            shadowOpacityDropDown.Enabled = false;
+        }
+
+        private void EnableSimpleButtonFields()
+        {
+            cornerRadiusDropDown.Enabled = true;
+            shadowColorDropDown.Enabled = true;
+            shadowRadiusDropDown.Enabled = true;
+            shadowOffsetXDropDown.Enabled = true;
+            shadowOffsetYDropDown.Enabled = true;
+            shadowOpacityDropDown.Enabled = true;
         }
 
         private void SetupFullBleedButtonStyle()
@@ -302,7 +324,7 @@ namespace EOS.UI.iOS.Sandbox
                 {
                     var config = _simpleButton.ShadowConfig;
                     _opacity = opacity;
-                    config.Color = config.Color.ColorWithAlpha((nfloat)opacity); 
+                    config.Color = config.Color.ColorWithAlpha((nfloat)opacity);
                     _simpleButton.ShadowConfig = config;
                 },
                 Fields.ShadowOpacity,
