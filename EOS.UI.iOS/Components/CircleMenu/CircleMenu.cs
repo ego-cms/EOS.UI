@@ -130,6 +130,17 @@ namespace EOS.UI.iOS.Components
             }
         }
 
+        private UIColor _blackoutColor;
+        private UIColor BlackoutColor
+        {
+            get => _blackoutColor;
+            set
+            {
+                _blackoutColor = value;
+                _shadowView.BackgroundColor = _blackoutColor;
+            }
+        }
+
         public EventHandler<int> Clicked;
 
         public CircleMenu()
@@ -155,8 +166,6 @@ namespace EOS.UI.iOS.Components
             var mainFrame = UIApplication.SharedApplication.KeyWindow.Frame;
             //shadowview init
             _shadowView = new UIView(mainFrame);
-            _shadowView.BackgroundColor = UIColor.Black;
-            _shadowView.Layer.Opacity = 0.05f;
             _shadowView.Hidden = true;
             _rootView.AddSubview(_shadowView);
 
@@ -707,6 +716,7 @@ namespace EOS.UI.iOS.Components
                 FocusedBackgroundColor = provider.GetEOSProperty<UIColor>(this, EOSConstants.BrandPrimaryColor);
                 FocusedIconColor = provider.GetEOSProperty<UIColor>(this, EOSConstants.NeutralColor6s);
                 UnfocusedIconColor = provider.GetEOSProperty<UIColor>(this, EOSConstants.NeutralColor1s);
+                BlackoutColor = provider.GetEOSProperty<UIColor>(this, EOSConstants.Blackout);
                 IsEOSCustomizationIgnored = false;
             }
         }

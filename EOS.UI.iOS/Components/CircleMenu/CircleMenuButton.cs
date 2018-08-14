@@ -96,7 +96,8 @@ namespace EOS.UI.iOS.Components
             set
             {
                 _unfocusedIconColor = value;
-                ImageView.TintColor = _unfocusedIconColor;
+                if (!_isClicked)
+                    ImageView.TintColor = _unfocusedIconColor;
             }
         }
 
