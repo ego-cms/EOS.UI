@@ -164,17 +164,15 @@
     <AndroidAsset Include="Assets\Fonts\OpenSans-ExtraBold.ttf" />
     <AndroidAsset Include="Assets\Fonts\OpenSans-Regular.ttf" />
     <AndroidAsset Include="Assets\Fonts\OpenSans-SemiBold.ttf" />
-    <AndroidAsset Include="Assets\Fonts\Poppins-Bold.ttf" />
-    <AndroidAsset Include="Assets\Fonts\Poppins-Light.ttf" />
-    <AndroidAsset Include="Assets\Fonts\Poppins-Medium.ttf" />
-    <AndroidAsset Include="Assets\Fonts\Poppins-Regular.ttf" />
-    <AndroidAsset Include="Assets\Fonts\Poppins-SemiBold.ttf" />
     <AndroidAsset Include="Assets\Fonts\Ubuntu-Bold.ttf" />
     <AndroidAsset Include="Assets\Fonts\Ubuntu-Medium.ttf" />
     <AndroidAsset Include="Assets\Fonts\Ubuntu-Regular.ttf" />
     <AndroidAsset Include="Assets\Fonts\Roboto-Bold.ttf" />
     <AndroidAsset Include="Assets\Fonts\Roboto-Medium.ttf" />
     <AndroidAsset Include="Assets\Fonts\Roboto-Regular.ttf" />
+    <AndroidAsset Include="Assets\Fonts\Lato-Black.ttf" />
+    <AndroidAsset Include="Assets\Fonts\Lato-Bold.ttf" />
+    <AndroidAsset Include="Assets\Fonts\Lato-Regular.ttf" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\layout\Main.axml">

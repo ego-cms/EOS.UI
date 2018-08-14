@@ -68,6 +68,9 @@ namespace EOS.UI.Shared.Sandbox.Helpers
 
             public const string ArimoRegular = "ArimoRegular";
             public const string ArimoBold = "ArimoBold";
+            public const string LatoRegular = "LatoRegular";
+            public const string LatoBold = "LatoBold";
+            public const string LatoBlack = "LatoBlack";
             public const string MontserratRegular = "MontserratRegular";
             public const string MontserratMedium = "MontserratMedium";
             public const string MontserratSemiBold = "MontserratSemiBold";
@@ -77,11 +80,6 @@ namespace EOS.UI.Shared.Sandbox.Helpers
             public const string OpenSansSemiBold = "OpenSansSemiBold";
             public const string OpenSansBold = "OpenSansBold";
             public const string OpenSansExtraBold = "OpenSansExtraBold";
-            public const string PoppinsLight = "PoppinsLight";
-            public const string PoppinsRegular = "PoppinsRegular";
-            public const string PoppinsMedium = "PoppinsMedium";
-            public const string PoppinsSemiBold = "PoppinsSemiBold";
-            public const string PoppinsBold = "PoppinsBold";
             public const string UbuntuRegular = "UbuntuRegular";
             public const string UbuntuMedium = "UbuntuMedium";
             public const string UbuntuBold = "UbuntuBold";
@@ -95,12 +93,12 @@ namespace EOS.UI.Shared.Sandbox.Helpers
                 {
                     { string.Empty, string.Empty },
                     { ArimoBold, "Fonts/Arimo-Bold.ttf" },
+                    { LatoBlack, "Fonts/Lato-Black.ttf" },
+                    { LatoBold, "Fonts/Lato-Bold.ttf" },
                     { MontserratSemiBold, "Fonts/Montserrat-SemiBold.ttf" },
                     { MontserratBold, "Fonts/Montserrat-Bold.ttf" },
                     { OpenSansSemiBold, "Fonts/OpenSans-SemiBold.ttf" },
                     { OpenSansBold, "Fonts/OpenSans-Bold.ttf" },
-                    { PoppinsSemiBold, "Fonts/Poppins-SemiBold.ttf" },
-                    { PoppinsBold, "Fonts/Poppins-Bold.ttf" },
                     { UbuntuBold, "Fonts/Ubuntu-Bold.ttf" },
                     { RobotoRegular, "Fonts/Roboto-Regular.ttf" },
                     { RobotoMedium, "Fonts/Roboto-Medium.ttf" },
@@ -114,13 +112,13 @@ namespace EOS.UI.Shared.Sandbox.Helpers
                 {
                     { string.Empty, string.Empty },
                     { ArimoBold, "Fonts/Arimo-Bold.ttf" },
+                    { LatoBlack, "Fonts/Lato-Black.ttf" },
+                    { LatoBold, "Fonts/Lato-Bold.ttf" },
                     { MontserratSemiBold, "Fonts/Montserrat-SemiBold.ttf" },
                     { MontserratBold, "Fonts/Montserrat-Bold.ttf" },
                     { MontserratExtraBold, "Fonts/Montserrat-ExtraBold.ttf" },
                     { OpenSansBold, "Fonts/OpenSans-Bold.ttf" },
                     { OpenSansExtraBold, "Fonts/OpenSans-ExtraBold.ttf" },
-                    { PoppinsSemiBold, "Fonts/Poppins-SemiBold.ttf" },
-                    { PoppinsBold, "Fonts/Poppins-Bold.ttf" },
                     { UbuntuMedium, "Fonts/Ubuntu-Medium.ttf" },
                     { UbuntuBold, "Fonts/Ubuntu-Bold.ttf" },
                     { RobotoRegular, "Fonts/Roboto-Regular.ttf" },
@@ -135,13 +133,13 @@ namespace EOS.UI.Shared.Sandbox.Helpers
                 {
                     { string.Empty, string.Empty },
                     { ArimoBold, "Fonts/Arimo-Bold.ttf" },
+                    { LatoRegular, "Fonts/Lato-Regular.ttf" },
+                    { LatoBold, "Fonts/Lato-Bold.ttf" },
                     { MontserratMedium, "Fonts/Montserrat-Medium.ttf" },
                     { MontserratSemiBold, "Fonts/Montserrat-SemiBold.ttf" },
                     { MontserratBold, "Fonts/Montserrat-Bold.ttf" },
                     { OpenSansSemiBold, "Fonts/OpenSans-SemiBold.ttf" },
                     { OpenSansBold, "Fonts/OpenSans-Bold.ttf" },
-                    { PoppinsMedium, "Fonts/Poppins-Medium.ttf" },
-                    { PoppinsSemiBold, "Fonts/Poppins-SemiBold.ttf" },
                     { UbuntuMedium, "Fonts/Ubuntu-Medium.ttf" },
                     { UbuntuBold, "Fonts/Ubuntu-Bold.ttf" },
                     { RobotoRegular, "Fonts/Roboto-Regular.ttf" },
@@ -156,12 +154,13 @@ namespace EOS.UI.Shared.Sandbox.Helpers
                 {
                     { string.Empty, string.Empty },
                     { ArimoBold, "Fonts/Arimo-Bold.ttf" },
+                    { LatoBlack, "Fonts/Lato-Black.ttf" },
+                    { LatoBold, "Fonts/Lato-Bold.ttf" },
                     { MontserratMedium, "Fonts/Montserrat-Medium.ttf" },
                     { MontserratSemiBold, "Fonts/Montserrat-SemiBold.ttf" },
                     { MontserratBold, "Fonts/Montserrat-Bold.ttf" },
                     { OpenSansSemiBold, "Fonts/OpenSans-SemiBold.ttf" },
                     { OpenSansBold, "Fonts/OpenSans-Bold.ttf" },
-                    { PoppinsSemiBold, "Fonts/Poppins-SemiBold.ttf" },
                     { UbuntuMedium, "Fonts/Ubuntu-Medium.ttf" },
                     { UbuntuBold, "Fonts/Ubuntu-Bold.ttf" },
                     { RobotoRegular, "Fonts/Roboto-Regular.ttf" },
@@ -176,10 +175,11 @@ namespace EOS.UI.Shared.Sandbox.Helpers
                 {
                     { string.Empty, string.Empty },
                     { ArimoBold, "Fonts/Arimo-Bold.ttf" },
+                    { LatoBlack, "Fonts/Lato-Black.ttf" },
+                    { LatoBold, "Fonts/Lato-Bold.ttf" },
                     { MontserratSemiBold, "Fonts/Montserrat-SemiBold.ttf" },
                     { MontserratBold, "Fonts/Montserrat-Bold.ttf" },
                     { OpenSansBold, "Fonts/OpenSans-Bold.ttf" },
-                    { PoppinsSemiBold, "Fonts/Poppins-SemiBold.ttf" },
                     { UbuntuBold, "Fonts/Ubuntu-Bold.ttf" },
                     { RobotoRegular, "Fonts/Roboto-Regular.ttf" },
                     { RobotoMedium, "Fonts/Roboto-Medium.ttf" },
@@ -193,11 +193,10 @@ namespace EOS.UI.Shared.Sandbox.Helpers
                 {
                     { string.Empty, string.Empty },
                     { ArimoRegular, "Fonts/Arimo-Regular.ttf" },
+                    { LatoRegular, "Fonts/Lato-Regular.ttf" },
                     { MontserratRegular, "Fonts/Montserrat-Regular.ttf" },
                     { MontserratMedium, "Fonts/Montserrat-Medium.ttf" },
                     { OpenSansRegular, "Fonts/OpenSans-Regular.ttf" },
-                    { PoppinsLight, "Fonts/Poppins-Light.ttf" },
-                    { PoppinsRegular, "Fonts/Poppins-Regular.ttf" },
                     { UbuntuRegular, "Fonts/Ubuntu-Regular.ttf" },
                     { RobotoRegular, "Fonts/Roboto-Regular.ttf" },
                     { RobotoMedium, "Fonts/Roboto-Medium.ttf" },
