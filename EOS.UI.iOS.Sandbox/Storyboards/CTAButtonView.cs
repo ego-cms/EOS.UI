@@ -103,9 +103,9 @@ namespace EOS.UI.iOS.Sandbox
                 {
                     _simpleButton.GetThemeProvider().SetCurrentTheme(theme);
                     _simpleButton.ResetCustomization();
-                    _dropDowns.Except(new[] { themeDropDown }).ToList().ForEach(dropDown => dropDown.ResetValue());
+                    ResetFields();
                     UpdateApperaence();
-                    SetupSimpleButtonStyle();
+                    ApplySimpleButtonViewBehavior();
                 },
                 Fields.Theme,
                 rect);
@@ -205,8 +205,7 @@ namespace EOS.UI.iOS.Sandbox
                     switch (type)
                     {
                         case SimpleButtonTypeEnum.Simple:
-                            SetupSimpleButtonStyle();
-                            EnableSimpleButtonFields();
+                            ApplySimpleButtonViewBehavior();
                             break;
                         case SimpleButtonTypeEnum.FullBleed:
                             SetupFullBleedButtonStyle();
@@ -216,6 +215,12 @@ namespace EOS.UI.iOS.Sandbox
                 },
                 Fields.ButtonType,
                 rect);
+        }
+
+        private void ApplySimpleButtonViewBehavior()
+        {
+            SetupSimpleButtonStyle();
+            EnableSimpleButtonFields();
         }
 
         private void DisableSimpleButtonFields()
@@ -365,10 +370,8 @@ namespace EOS.UI.iOS.Sandbox
             {
                 _opacity = null;
                 _simpleButton.ResetCustomization();
-                _simpleButton.SetTitle(Buttons.CTA, UIControlState.Normal);
-                containerView.RemoveConstraints(containerView.Constraints);
-                containerView.AddConstraints(_defaultConstraints);
                 ResetFields();
+                ApplySimpleButtonViewBehavior();
             };
         }
 
