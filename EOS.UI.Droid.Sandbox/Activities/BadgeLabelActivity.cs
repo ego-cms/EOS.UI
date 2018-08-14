@@ -102,7 +102,7 @@ namespace EOS.UI.Droid.Sandbox.Activities
         private void CornerRadiusItemSelected(int position)
         {
             if(position > 0)
-                _badge.CornerRadius = Sizes.CornerRadiusCollection.ElementAt(position).Value;
+                _badge.CornerRadius = Sizes.CornerRadiusCollection.ElementAt(position).Value * Resources.DisplayMetrics.Density;
         }
 
         private void TextSizeItemSelected(int position)

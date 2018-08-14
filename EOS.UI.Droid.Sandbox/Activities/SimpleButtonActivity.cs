@@ -262,7 +262,7 @@ namespace EOS.UI.Droid.Sandbox.Activities
         private void CornerRadiurSpinner_ItemSelected(int position)
         {
             if(position > 0)
-                _simpleButton.CornerRadius = Sizes.CornerRadiusCollection.ElementAt(position).Value;
+                _simpleButton.CornerRadius = Sizes.CornerRadiusCollection.ElementAt(position).Value * Resources.DisplayMetrics.Density;
         }
 
         private void RippleColorItemSelected(int position)

@@ -232,7 +232,7 @@ namespace EOS.UI.Droid.Sandbox.Activities
         private void CornerRadiusItemSelected(int position)
         {
             if (position > 0)
-                _CTAButton.CornerRadius = Sizes.CornerRadiusCollection.ElementAt(position).Value;
+                _CTAButton.CornerRadius = Sizes.CornerRadiusCollection.ElementAt(position).Value * Resources.DisplayMetrics.Density;
         }
 
         private void RippleColorItemSelected(int position)
