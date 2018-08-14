@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Threading.Tasks;
 using Android.App;
+using Android.Content.PM;
 using Android.Graphics;
 using Android.OS;
 using Android.Util;
@@ -18,7 +19,7 @@ using static EOS.UI.Shared.Sandbox.Helpers.Constants;
 
 namespace EOS.UI.Droid.Sandbox.Activities
 {
-    [Activity(Label = ControlNames.CTAButton, Theme = "@style/Sandbox.Main")]
+    [Activity(Label = ControlNames.CTAButton, Theme = "@style/Sandbox.Main", ScreenOrientation = ScreenOrientation.Portrait)]
     public class CTAActivity : BaseActivity, IOnCheckedChangeListener
     {
         private Size _cachedSize;
@@ -177,7 +178,7 @@ namespace EOS.UI.Droid.Sandbox.Activities
             {
                 _CTAButton.GetThemeProvider().SetCurrentTheme(ThemeTypes.ThemeCollection.ElementAt(position).Value);
                 ResetCustomValues();
-                UpdateApperaence();
+                UpdateAppearance();
             }
         }
 

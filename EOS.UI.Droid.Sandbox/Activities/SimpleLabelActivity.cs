@@ -1,5 +1,6 @@
 ﻿using System.Linq;
 using Android.App;
+using Android.Content.PM;
 using Android.Graphics;
 using Android.OS;
 using Android.Widget;
@@ -12,7 +13,7 @@ using static EOS.UI.Shared.Sandbox.Helpers.Constants;
 
 namespace EOS.UI.Droid.Sandbox.Activities
 {
-    [Activity(Label = ControlNames.SimpleLabel, Theme = "@style/Sandbox.Main")]
+    [Activity(Label = ControlNames.SimpleLabel, Theme = "@style/Sandbox.Main", ScreenOrientation = ScreenOrientation.Portrait)]
     public class SimpleLabelActivity : BaseActivity
     {
         private SimpleLabel _simpleLabel;
@@ -78,7 +79,7 @@ namespace EOS.UI.Droid.Sandbox.Activities
             {
                 _simpleLabel.GetThemeProvider().SetCurrentTheme(ThemeTypes.ThemeCollection.ElementAt(position).Value);
                 ResetCustomValues();
-                UpdateApperaence();
+                UpdateAppearance();
             }
         }
 

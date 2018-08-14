@@ -1,5 +1,6 @@
 ﻿using System.Linq;
 using Android.App;
+using Android.Content.PM;
 using Android.Graphics;
 using Android.OS;
 using Android.Util;
@@ -16,7 +17,7 @@ using static EOS.UI.Shared.Sandbox.Helpers.Constants;
 
 namespace EOS.UI.Droid.Sandbox.Activities
 {
-    [Activity(Label = ControlNames.SimpleButton, Theme = "@style/Sandbox.Main")]
+    [Activity(Label = ControlNames.SimpleButton, Theme = "@style/Sandbox.Main", ScreenOrientation = ScreenOrientation.Portrait)]
     public class SimpleButtonActivity : BaseActivity, IOnCheckedChangeListener
     {
         private Size _cachedSize;
@@ -207,7 +208,7 @@ namespace EOS.UI.Droid.Sandbox.Activities
             {
                 _simpleButton.GetThemeProvider().SetCurrentTheme(ThemeTypes.ThemeCollection.ElementAt(position).Value);
                 ResetCustomValues();
-                UpdateApperaence();
+                UpdateAppearance();
             }
         }
 

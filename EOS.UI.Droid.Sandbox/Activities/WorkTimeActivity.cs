@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Android.App;
+using Android.Content.PM;
 using Android.Graphics;
 using Android.OS;
 using EOS.UI.Droid.Components;
@@ -14,7 +15,7 @@ using static EOS.UI.Shared.Sandbox.Helpers.Constants;
 
 namespace EOS.UI.Droid.Sandbox.Activities
 {
-    [Activity(Label = ControlNames.WorkTimeCalendar, Theme = "@style/Sandbox.Main")]
+    [Activity(Label = ControlNames.WorkTimeCalendar, Theme = "@style/Sandbox.Main", ScreenOrientation = ScreenOrientation.Portrait)]
     public class WorkTimeActivity : BaseActivity
     {
         private WorkTime _workTime;
@@ -218,7 +219,7 @@ namespace EOS.UI.Droid.Sandbox.Activities
             {
                 _workTime.GetThemeProvider().SetCurrentTheme(ThemeTypes.ThemeCollection.ElementAt(position).Value);
                 ResetCustomValues();
-                UpdateApperaence();
+                UpdateAppearance();
             }
         }
 
