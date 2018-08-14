@@ -164,11 +164,11 @@ namespace EOS.UI.Droid.Sandbox.Activities
             _paddingRightDropDown.ItemSelected += PaddingRightItemSelected;
 
             _sectionFontDropDown.Name = Fields.SectionNameFont;
-            _sectionFontDropDown.SetupAdapter(Fonts.FontsCollection.Select(item => item.Key).ToList());
+            _sectionFontDropDown.SetupAdapter(Fonts.GetSectionFonts().Select(item => item.Key).ToList());
             _sectionFontDropDown.ItemSelected += SectionFontItemSelected;
 
             _buttonFontDropDown.Name = Fields.ButtonTextFont;
-            _buttonFontDropDown.SetupAdapter(Fonts.FontsCollection.Select(item => item.Key).ToList());
+            _buttonFontDropDown.SetupAdapter(Fonts.GetSectionFonts().Select(item => item.Key).ToList());
             _buttonFontDropDown.ItemSelected += ButtonFontItemSelected;
 
             _hasBorderSwitch.CheckedChange += HasBorderSwitch_CheckedChange;
@@ -234,7 +234,7 @@ namespace EOS.UI.Droid.Sandbox.Activities
                 var adapter = _sectionRecyclerView.GetAdapter() as SectionAdapter;
                 if(adapter.Headers.FirstOrDefault() is SectionModel section)
                 {
-                    section.ButtonNameFont = Typeface.CreateFromAsset(Assets, Fonts.FontsCollection.ElementAt(position).Value);
+                    section.ButtonNameFont = Typeface.CreateFromAsset(Assets, Fonts.GetSectionFonts().ElementAt(position).Value);
                     adapter.NotifyDataSetChanged();
                 }
             }
@@ -247,7 +247,7 @@ namespace EOS.UI.Droid.Sandbox.Activities
                 var adapter = _sectionRecyclerView.GetAdapter() as SectionAdapter;
                 if(adapter.Headers.FirstOrDefault() is SectionModel section)
                 {
-                    section.SectionNameFont = Typeface.CreateFromAsset(Assets, Fonts.FontsCollection.ElementAt(position).Value);
+                    section.SectionNameFont = Typeface.CreateFromAsset(Assets, Fonts.GetSectionFonts().ElementAt(position).Value);
                     adapter.NotifyDataSetChanged();
                 }
             }

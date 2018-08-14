@@ -52,19 +52,169 @@ namespace EOS.UI.Shared.Sandbox.Helpers
 
         public static class Fonts
         {
-            public const string Roboto = "Roboto";
-            public const string Berkshireswash = "Berkshireswash";
-            public const string Amita = "Amita";
-            public const string AcademyEngraved = "AcademyEngraved";
+            //public const string Roboto = "Roboto";
+            //public const string Berkshireswash = "Berkshireswash";
+            //public const string Amita = "Amita";
+            //public const string AcademyEngraved = "AcademyEngraved";
 
-            public static readonly Dictionary<string, string> FontsCollection = new Dictionary<string, string>()
+            //public static readonly Dictionary<string, string> FontsCollection = new Dictionary<string, string>()
+            //{
+            //    { string.Empty, string.Empty },
+            //    { Roboto, "Fonts/Roboto.ttf" },
+            //    { Berkshireswash, "Fonts/Berkshireswash.ttf" },
+            //    { Amita, "Fonts/Amita.ttf" },
+            //    { AcademyEngraved, "Fonts/academyEngraved.ttf" },
+            //};
+
+            public const string ArimoRegular = "ArimoRegular";
+            public const string ArimoBold = "ArimoBold";
+            public const string MontserratRegular = "MontserratRegular";
+            public const string MontserratMedium = "MontserratMedium";
+            public const string MontserratSemiBold = "MontserratSemiBold";
+            public const string MontserratBold = "MontserratBold";
+            public const string MontserratExtraBold = "MontserratExtraBold";
+            public const string OpenSansRegular = "OpenSansRegular";
+            public const string OpenSansSemiBold = "OpenSansSemiBold";
+            public const string OpenSansBold = "OpenSansBold";
+            public const string OpenSansExtraBold = "OpenSansExtraBold";
+            public const string PoppinsLight = "PoppinsLight";
+            public const string PoppinsRegular = "PoppinsRegular";
+            public const string PoppinsMedium = "PoppinsMedium";
+            public const string PoppinsSemiBold = "PoppinsSemiBold";
+            public const string PoppinsBold = "PoppinsBold";
+            public const string UbuntuRegular = "UbuntuRegular";
+            public const string UbuntuMedium = "UbuntuMedium";
+            public const string UbuntuBold = "UbuntuBold";
+            public const string RobotoRegular = "RobotoRegular";
+            public const string RobotoMedium = "RobotoMedium";
+            public const string RobotoBold = "RobotoBold";
+
+            public static Dictionary<string, string> GetButtonBadgeFonts()
             {
-                { string.Empty, string.Empty },
-                { Roboto, "Fonts/Roboto.ttf" },
-                { Berkshireswash, "Fonts/Berkshireswash.ttf" },
-                { Amita, "Fonts/Amita.ttf" },
-                { AcademyEngraved, "Fonts/academyEngraved.ttf" },
-            };
+                return new Dictionary<string, string>
+                {
+                    { string.Empty, string.Empty },
+                    { ArimoBold, "Fonts/Arimo-Bold.ttf" },
+                    { MontserratSemiBold, "Fonts/Montserrat-SemiBold.ttf" },
+                    { MontserratBold, "Fonts/Montserrat-Bold.ttf" },
+                    { OpenSansSemiBold, "Fonts/OpenSans-SemiBold.ttf" },
+                    { OpenSansBold, "Fonts/OpenSans-Bold.ttf" },
+                    { PoppinsSemiBold, "Fonts/Poppins-SemiBold.ttf" },
+                    { PoppinsBold, "Fonts/Poppins-Bold.ttf" },
+                    { UbuntuBold, "Fonts/Ubuntu-Bold.ttf" },
+                    { RobotoRegular, "Fonts/Roboto-Regular.ttf" },
+                    { RobotoMedium, "Fonts/Roboto-Medium.ttf" },
+                    { RobotoBold, "Fonts/Roboto-Bold.ttf" }
+                };
+            }
+
+            public static Dictionary<string, string> GetWorktimeTitleFonts()
+            {
+                return new Dictionary<string, string>
+                {
+                    { string.Empty, string.Empty },
+                    { ArimoBold, "Fonts/Arimo-Bold.ttf" },
+                    { MontserratSemiBold, "Fonts/Montserrat-SemiBold.ttf" },
+                    { MontserratBold, "Fonts/Montserrat-Bold.ttf" },
+                    { MontserratExtraBold, "Fonts/Montserrat-ExtraBold.ttf" },
+                    { OpenSansBold, "Fonts/OpenSans-Bold.ttf" },
+                    { OpenSansExtraBold, "Fonts/OpenSans-ExtraBold.ttf" },
+                    { PoppinsSemiBold, "Fonts/Poppins-SemiBold.ttf" },
+                    { PoppinsBold, "Fonts/Poppins-Bold.ttf" },
+                    { UbuntuMedium, "Fonts/Ubuntu-Medium.ttf" },
+                    { UbuntuBold, "Fonts/Ubuntu-Bold.ttf" },
+                    { RobotoRegular, "Fonts/Roboto-Regular.ttf" },
+                    { RobotoMedium, "Fonts/Roboto-Medium.ttf" },
+                    { RobotoBold, "Fonts/Roboto-Bold.ttf" }
+                };
+            }
+
+            public static Dictionary<string, string> GetWorktimeDayFonts()
+            {
+                return new Dictionary<string, string>
+                {
+                    { string.Empty, string.Empty },
+                    { ArimoBold, "Fonts/Arimo-Bold.ttf" },
+                    { MontserratMedium, "Fonts/Montserrat-Medium.ttf" },
+                    { MontserratSemiBold, "Fonts/Montserrat-SemiBold.ttf" },
+                    { MontserratBold, "Fonts/Montserrat-Bold.ttf" },
+                    { OpenSansSemiBold, "Fonts/OpenSans-SemiBold.ttf" },
+                    { OpenSansBold, "Fonts/OpenSans-Bold.ttf" },
+                    { PoppinsMedium, "Fonts/Poppins-Medium.ttf" },
+                    { PoppinsSemiBold, "Fonts/Poppins-SemiBold.ttf" },
+                    { UbuntuMedium, "Fonts/Ubuntu-Medium.ttf" },
+                    { UbuntuBold, "Fonts/Ubuntu-Bold.ttf" },
+                    { RobotoRegular, "Fonts/Roboto-Regular.ttf" },
+                    { RobotoMedium, "Fonts/Roboto-Medium.ttf" },
+                    { RobotoBold, "Fonts/Roboto-Bold.ttf" }
+                };
+            }
+
+            public static Dictionary<string, string> GetGhostButtonSimpleLabelFonts()
+            {
+                return new Dictionary<string, string>
+                {
+                    { string.Empty, string.Empty },
+                    { ArimoBold, "Fonts/Arimo-Bold.ttf" },
+                    { MontserratMedium, "Fonts/Montserrat-Medium.ttf" },
+                    { MontserratSemiBold, "Fonts/Montserrat-SemiBold.ttf" },
+                    { MontserratBold, "Fonts/Montserrat-Bold.ttf" },
+                    { OpenSansSemiBold, "Fonts/OpenSans-SemiBold.ttf" },
+                    { OpenSansBold, "Fonts/OpenSans-Bold.ttf" },
+                    { PoppinsSemiBold, "Fonts/Poppins-SemiBold.ttf" },
+                    { UbuntuMedium, "Fonts/Ubuntu-Medium.ttf" },
+                    { UbuntuBold, "Fonts/Ubuntu-Bold.ttf" },
+                    { RobotoRegular, "Fonts/Roboto-Regular.ttf" },
+                    { RobotoMedium, "Fonts/Roboto-Medium.ttf" },
+                    { RobotoBold, "Fonts/Roboto-Bold.ttf" }
+                };
+            }
+
+            public static Dictionary<string, string> GetCircleProgressFonts()
+            {
+                return new Dictionary<string, string>
+                {
+                    { string.Empty, string.Empty },
+                    { ArimoBold, "Fonts/Arimo-Bold.ttf" },
+                    { MontserratSemiBold, "Fonts/Montserrat-SemiBold.ttf" },
+                    { MontserratBold, "Fonts/Montserrat-Bold.ttf" },
+                    { OpenSansBold, "Fonts/OpenSans-Bold.ttf" },
+                    { PoppinsSemiBold, "Fonts/Poppins-SemiBold.ttf" },
+                    { UbuntuBold, "Fonts/Ubuntu-Bold.ttf" },
+                    { RobotoRegular, "Fonts/Roboto-Regular.ttf" },
+                    { RobotoMedium, "Fonts/Roboto-Medium.ttf" },
+                    { RobotoBold, "Fonts/Roboto-Bold.ttf" }
+                };
+            }
+
+            public static Dictionary<string, string> GetInputFonts()
+            {
+                return new Dictionary<string, string>
+                {
+                    { string.Empty, string.Empty },
+                    { ArimoRegular, "Fonts/Arimo-Regular.ttf" },
+                    { MontserratRegular, "Fonts/Montserrat-Regular.ttf" },
+                    { MontserratMedium, "Fonts/Montserrat-Medium.ttf" },
+                    { OpenSansRegular, "Fonts/OpenSans-Regular.ttf" },
+                    { PoppinsLight, "Fonts/Poppins-Light.ttf" },
+                    { PoppinsRegular, "Fonts/Poppins-Regular.ttf" },
+                    { UbuntuRegular, "Fonts/Ubuntu-Regular.ttf" },
+                    { RobotoRegular, "Fonts/Roboto-Regular.ttf" },
+                    { RobotoMedium, "Fonts/Roboto-Medium.ttf" },
+                    { RobotoBold, "Fonts/Roboto-Bold.ttf" }
+                };
+            }
+
+            public static Dictionary<string, string> GetSectionFonts()
+            {
+                return new Dictionary<string, string>
+                {
+                    { string.Empty, string.Empty },
+                    { RobotoRegular, "Fonts/Roboto-Regular.ttf" },
+                    { RobotoMedium, "Fonts/Roboto-Medium.ttf" },
+                    { RobotoBold, "Fonts/Roboto-Bold.ttf" }
+                };
+            }
         }
 
         public static class Validation

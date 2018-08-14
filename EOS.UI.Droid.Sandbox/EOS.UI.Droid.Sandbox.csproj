@@ -127,10 +127,6 @@
     <Compile Include="Controls\EOSSandboxEditText.cs" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidAsset Include="Assets\Fonts\Amita.ttf" />
-    <AndroidAsset Include="Assets\Fonts\Berkshireswash.ttf" />
-    <AndroidAsset Include="Assets\Fonts\Roboto.ttf" />
-    <AndroidAsset Include="Assets\Fonts\OpenSansRegular.ttf" />
     <None Include="packages.config" />
     <None Include="Properties\AndroidManifest.xml" />
     <AndroidResource Include="Resources\layout\ControlsItemCell.axml">
@@ -154,10 +150,31 @@
     <AndroidResource Include="Resources\layout\SimpleLabelLayout.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
-    <AndroidAsset Include="Assets\Fonts\academyEngraved.ttf" />
     <AndroidResource Include="Resources\layout\CircleProgressLayout.axml" />
     <AndroidResource Include="Resources\menu\FabProgressMenu.xml" />
     <AndroidResource Include="Resources\drawable\FabRightArrow.xml" />
+    <AndroidAsset Include="Assets\Fonts\Arimo-Bold.ttf" />
+    <AndroidAsset Include="Assets\Fonts\Arimo-Regular.ttf" />
+    <AndroidAsset Include="Assets\Fonts\Montserrat-Bold.ttf" />
+    <AndroidAsset Include="Assets\Fonts\Montserrat-ExtraBold.ttf" />
+    <AndroidAsset Include="Assets\Fonts\Montserrat-Medium.ttf" />
+    <AndroidAsset Include="Assets\Fonts\Montserrat-Regular.ttf" />
+    <AndroidAsset Include="Assets\Fonts\Montserrat-SemiBold.ttf" />
+    <AndroidAsset Include="Assets\Fonts\OpenSans-Bold.ttf" />
+    <AndroidAsset Include="Assets\Fonts\OpenSans-ExtraBold.ttf" />
+    <AndroidAsset Include="Assets\Fonts\OpenSans-Regular.ttf" />
+    <AndroidAsset Include="Assets\Fonts\OpenSans-SemiBold.ttf" />
+    <AndroidAsset Include="Assets\Fonts\Poppins-Bold.ttf" />
+    <AndroidAsset Include="Assets\Fonts\Poppins-Light.ttf" />
+    <AndroidAsset Include="Assets\Fonts\Poppins-Medium.ttf" />
+    <AndroidAsset Include="Assets\Fonts\Poppins-Regular.ttf" />
+    <AndroidAsset Include="Assets\Fonts\Poppins-SemiBold.ttf" />
+    <AndroidAsset Include="Assets\Fonts\Ubuntu-Bold.ttf" />
+    <AndroidAsset Include="Assets\Fonts\Ubuntu-Medium.ttf" />
+    <AndroidAsset Include="Assets\Fonts\Ubuntu-Regular.ttf" />
+    <AndroidAsset Include="Assets\Fonts\Roboto-Bold.ttf" />
+    <AndroidAsset Include="Assets\Fonts\Roboto-Medium.ttf" />
+    <AndroidAsset Include="Assets\Fonts\Roboto-Regular.ttf" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\layout\Main.axml">
