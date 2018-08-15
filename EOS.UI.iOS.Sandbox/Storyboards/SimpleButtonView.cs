@@ -22,6 +22,7 @@ namespace EOS.UI.iOS.Sandbox
         private NSLayoutConstraint[] _defaultConstraints;
         private ShadowConfig _defaultShadow;
         private double? _opacity;
+        private SimpleButtonTypeEnum _currentButtonState = SimpleButtonTypeEnum.Simple;
 
         public SimpleButtonView(IntPtr handle) : base(handle)
         {
@@ -195,6 +196,7 @@ namespace EOS.UI.iOS.Sandbox
                 {
                     ResetFields();
                     _simpleButton.ResetCustomization();
+                    _currentButtonState = type;
                     switch (type)
                     {
                         case SimpleButtonTypeEnum.Simple:
@@ -234,7 +236,10 @@ namespace EOS.UI.iOS.Sandbox
         private void EnableSimpleButtonFields()
         {
             cornerRadiusDropDown.Enabled = true;
-            EnableShadowFields();
+            if (_simpleButton.Enabled)
+            {
+                EnableShadowFields();
+            }
         }
 
         private void EnableShadowFields()
@@ -361,7 +366,10 @@ namespace EOS.UI.iOS.Sandbox
                 else
                 {
                     _simpleButton.ShadowConfig = _defaultShadow;
-                    EnableShadowFields();
+                    if (_currentButtonState == SimpleButtonTypeEnum.Simple)
+                    {
+                        EnableShadowFields();
+                    }
                 }
             };
         }
