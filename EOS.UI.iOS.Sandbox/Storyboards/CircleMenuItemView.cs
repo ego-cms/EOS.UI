@@ -19,6 +19,9 @@ namespace EOS.UI.iOS.Sandbox
         {
             base.ViewDidLoad();
             menuItemImage.Image = MenuItemImage;
+
+            var theme = EOSThemeProvider.Instance.GetCurrentTheme();
+            menuItemImage.TintColor = theme is LightEOSTheme ? UIColor.Black : UIColor.White;
         }
 
         public override void ViewWillAppear(bool animated)

@@ -193,7 +193,7 @@ namespace EOS.UI.iOS.Sandbox
             var storyboard = UIStoryboard.FromName("CircleMenuItemView", null);
             var viewController = (CircleMenuItemView)storyboard.InstantiateViewController("CircleMenuItemView");
             viewController.NavigationItem.Title = "CircleMenuItemView";
-            viewController.MenuItemImage = UIImage.FromBundle(hdImageName + "_HD");
+            viewController.MenuItemImage = UIImage.FromBundle(hdImageName + "_HD").ImageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate);
             NavigationController.PushViewController(viewController, true);
         }
 

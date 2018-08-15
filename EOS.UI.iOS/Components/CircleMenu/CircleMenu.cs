@@ -535,22 +535,22 @@ namespace EOS.UI.iOS.Components
                 button.TouchUpInside += OnSubmenuClicked;
                 submenuButtons.Add(button);
             }
-
-            var indicator = invokedButton.Indicator;
-            indicator.Hidden = true;
-            var buttonFrame = submenuButtons.Last().Frame;
-            var leftUpCorner = _rootView.ConvertPointToView(new CGPoint(buttonFrame.X, buttonFrame.Y), _menuButtonsView);
-            indicator.Frame = indicator.Frame.ResizeRect(x: leftUpCorner.X + buttonFrame.Width / 2 - indicator.Frame.Width / 2, y: leftUpCorner.Y - 15);
             return submenuButtons;
         }
 
         private Task ShowSubmenu(CircleMenuButton invokedButton, List<CircleMenuButton> submenuButtons)
         {
             var task = Task.CompletedTask;
-            
+            invokedButton.UserInteractionEnabled = false;
             var convertedPosition = _menuButtonsView.ConvertPointToView(invokedButton.Position, _rootView);
             invokedButton.Frame = invokedButton.Frame.ResizeRect(x: convertedPosition.X, y: convertedPosition.Y);
             _rootView.InsertSubview(invokedButton, _rootView.Subviews.Length);
+            
+            var indicator = invokedButton.Indicator;
+            indicator.Hidden = true;
+            var lastButtonFrame = submenuButtons.Last().Frame;
+            indicator.Frame = indicator.Frame.ResizeRect(x: lastButtonFrame.X + lastButtonFrame.Width / 2 - indicator.Frame.Width / 2, y: lastButtonFrame.Y - 15);
+            _rootView.InsertSubview(indicator, _rootView.Subviews.Length);
             
             for (int i = 0; i < submenuButtons.Count; ++i)
             {
@@ -564,14 +564,18 @@ namespace EOS.UI.iOS.Components
             task = task.ContinueWith((t) =>
             {
                 invokedButton.Indicator.Hidden = false;
+                invokedButton.UserInteractionEnabled = true;
             }, TaskScheduler.FromCurrentSynchronizationContext());
             return task;
         }
 
         private Task CloseSubmenu(CircleMenuButton invokedButton)
         {
+            invokedButton.UserInteractionEnabled = false;
             invokedButton.ResetPosition();
+            invokedButton.Indicator.ResetPosition();
             _menuButtonsView.InsertSubview(invokedButton, _menuButtonsView.Subviews.Length);
+            _menuButtonsView.InsertSubview(invokedButton.Indicator, _menuButtonsView.Subviews.Length);
             
             var submenuButtons = _rootView.Subviews.Where(v =>
                                                           v.Tag >= 0
@@ -600,6 +604,7 @@ namespace EOS.UI.iOS.Components
                     button.RemoveFromSuperview();
                     button.TouchUpInside -= OnSubmenuClicked;
                 }
+                invokedButton.UserInteractionEnabled = true;
             }, TaskScheduler.FromCurrentSynchronizationContext());
             return task;
         }
