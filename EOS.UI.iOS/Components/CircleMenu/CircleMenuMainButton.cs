@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Airbnb.Lottie;
 using CoreGraphics;
 using UIKit;
@@ -16,6 +17,10 @@ namespace EOS.UI.iOS.Components
         private const string _closeAnimationKey = "Animations/hamburger-close";
         private LOTAnimationView _mainButtonOpenAnimation;
         private LOTAnimationView _mainButtonCloseAnimation;
+        private List<LOTKeypath> _keyPaths = new List<LOTKeypath>();
+        //IMPORTANT: we must save colorValueCallback as global private variable in class.
+        // because lottie clears all delegates after showing the animation
+        private LOTColorValueCallback _colorValue;
 
         internal int Id => 100;
 
@@ -27,6 +32,18 @@ namespace EOS.UI.iOS.Components
             set
             {
                 base.Enabled = value;
+            }
+        }
+
+        private UIColor _unfocusedIconColor;
+        internal UIColor UnfocusedIconColor
+        {
+            get => _unfocusedIconColor;
+            set
+            {
+                _unfocusedIconColor = value;
+                _colorValue = new LOTColorValueCallback() { ColorValue = _unfocusedIconColor.CGColor };
+                SetColor();
             }
         }
 
@@ -54,6 +71,7 @@ namespace EOS.UI.iOS.Components
             _mainButtonOpenAnimation = LOTAnimationView.AnimationNamed(_openAnimationKey);
             _mainButtonOpenAnimation.Hidden = false;
             _mainButtonOpenAnimation.Frame = mainButtonAnimationView.Bounds;
+
             _mainButtonCloseAnimation = LOTAnimationView.AnimationNamed(_closeAnimationKey);
             _mainButtonCloseAnimation.Hidden = true;
             _mainButtonCloseAnimation.Frame = mainButtonAnimationView.Bounds;
@@ -64,8 +82,21 @@ namespace EOS.UI.iOS.Components
                 this.SendActionForControlEvents(UIControlEvent.TouchUpInside);
             }));
             this.AddSubview(mainButtonAnimationView);
-            
+
             this.TouchUpInside += OnMainButtonClicked;
+
+            _keyPaths.Add(LOTKeypath.KeypathWithString("line1.Rectangle 1.Fill 1.Color"));
+            _keyPaths.Add(LOTKeypath.KeypathWithString("line2.Rectangle 1.Fill 1.Color"));
+            _keyPaths.Add(LOTKeypath.KeypathWithString("line3.Rectangle 1.Fill 1.Color"));
+        }
+        
+        void SetColor()
+        {
+            foreach(var keyPath in _keyPaths)
+            {
+                _mainButtonOpenAnimation.SetValueDelegate(_colorValue, keyPath);
+                _mainButtonCloseAnimation.SetValueDelegate(_colorValue, keyPath);
+            }
         }
         
         void AnimateScale()

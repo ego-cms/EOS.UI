@@ -127,6 +127,7 @@ namespace EOS.UI.iOS.Components
                 _unfocusedIconColor = value;
                 IsEOSCustomizationIgnored = true;
                 _menuButtons.ForEach(b => b.UnfocusedIconColor = UnfocusedIconColor);
+                _mainButton.UnfocusedIconColor = _unfocusedIconColor;
             }
         }
 
