@@ -382,15 +382,20 @@ namespace EOS.UI.Droid.Controls
             return new RippleDrawable(
                 CreateRippleColorStateList(),
                 CreateGradientDrawable(contentColor),
-                CreateRoundedMaskDrawable());
+                CreateRoundedMaskDrawable()
+            );
         }
 
         private ColorStateList CreateRippleColorStateList()
         {
             return new ColorStateList(
-               new int[][] { new int[] { } },
+                new int[][] { 
+                    new int[] { Android.Resource.Attribute.StatePressed }, 
+                    new int[] { } 
+               },
                new int[]
                {
+                   PressedBackgroundColor,
                    RippleColor,
                });
         }
