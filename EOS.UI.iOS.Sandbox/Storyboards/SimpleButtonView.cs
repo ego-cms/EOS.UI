@@ -219,6 +219,11 @@ namespace EOS.UI.iOS.Sandbox
         private void DisableSimpleButtonFields()
         {
             cornerRadiusDropDown.Enabled = false;
+            DisableShadowFields();
+        }
+
+        private void DisableShadowFields()
+        {
             shadowColorDropDown.Enabled = false;
             shadowRadiusDropDown.Enabled = false;
             shadowOffsetXDropDown.Enabled = false;
@@ -229,6 +234,11 @@ namespace EOS.UI.iOS.Sandbox
         private void EnableSimpleButtonFields()
         {
             cornerRadiusDropDown.Enabled = true;
+            EnableShadowFields();
+        }
+
+        private void EnableShadowFields()
+        {
             shadowColorDropDown.Enabled = true;
             shadowRadiusDropDown.Enabled = true;
             shadowOffsetXDropDown.Enabled = true;
@@ -346,10 +356,12 @@ namespace EOS.UI.iOS.Sandbox
                 {
                     _defaultShadow = _simpleButton.ShadowConfig;
                     _simpleButton.ShadowConfig = null;
+                    DisableShadowFields();
                 }
                 else
                 {
                     _simpleButton.ShadowConfig = _defaultShadow;
+                    EnableShadowFields();
                 }
             };
         }
