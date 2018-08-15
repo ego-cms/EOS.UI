@@ -262,16 +262,18 @@ namespace EOS.UI.Droid.Controls
         {
             var stateList = new StateListAnimator();
 
-            var elevationHolderToPressed = PropertyValuesHolder.OfFloat("Elevation", shadow.Blur, 0);
-            var translationZHolderToPressed = PropertyValuesHolder.OfFloat("TranslationZ", shadow.Blur, 0);
+            var elevationHolderToPressed = PropertyValuesHolder.OfFloat("Elevation", shadow.Blur, shadow.Blur/2);
+            var translationZHolderToPressed = PropertyValuesHolder.OfFloat("TranslationZ", shadow.Blur, shadow.Blur / 2);
             var pressedAnimation = ObjectAnimator.OfPropertyValuesHolder(this, elevationHolderToPressed, translationZHolderToPressed);
             pressedAnimation.SetDuration(100);
 
-            var disabledAnimation = ObjectAnimator.OfPropertyValuesHolder(this, elevationHolderToPressed, translationZHolderToPressed);
+            var elevationHolderToDisabled = PropertyValuesHolder.OfFloat("Elevation", shadow.Blur, 0);
+            var translationZHolderToDisabled = PropertyValuesHolder.OfFloat("TranslationZ", shadow.Blur, 0);
+            var disabledAnimation = ObjectAnimator.OfPropertyValuesHolder(this, elevationHolderToDisabled, translationZHolderToDisabled);
             disabledAnimation.SetDuration(0);
 
-            var elevationHolderToNormal = PropertyValuesHolder.OfFloat("Elevation", 0, shadow.Blur);
-            var translationZHolderToNormal = PropertyValuesHolder.OfFloat("TranslationZ", 0, shadow.Blur);
+            var elevationHolderToNormal = PropertyValuesHolder.OfFloat("Elevation", shadow.Blur / 2, shadow.Blur);
+            var translationZHolderToNormal = PropertyValuesHolder.OfFloat("TranslationZ", shadow.Blur / 2, shadow.Blur);
             var normalAnimation = ObjectAnimator.OfPropertyValuesHolder(this, elevationHolderToNormal, translationZHolderToNormal);
             normalAnimation.SetDuration(1);
 

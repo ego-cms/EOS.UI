@@ -82,14 +82,12 @@ namespace EOS.UI.Droid.Sandbox.Activities
         protected override void OnRestoreInstanceState(Bundle savedInstanceState)
         {
             base.OnRestoreInstanceState(savedInstanceState);
-            var a = savedInstanceState.GetInt("color");
             _badge.BackgroundColor = new Color(savedInstanceState.GetInt("color"));
         }
 
         protected override void OnSaveInstanceState(Bundle outState)
         {
             base.OnSaveInstanceState(outState);
-            var a = _badge.BackgroundColor.ToArgb();
             outState.PutInt("color", _badge.BackgroundColor.ToArgb());
         }
 
