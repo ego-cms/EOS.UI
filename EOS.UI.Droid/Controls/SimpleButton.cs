@@ -317,11 +317,6 @@ namespace EOS.UI.Droid.Controls
                 _baseHeight = _animationDrawable.IntrinsicHeight;
             });
 
-            _baseBottomPadding = PaddingBottom;
-            _baseTopPadding = PaddingTop;
-            _baseLeftPadding = PaddingLeft;
-            _baseRightPadding = PaddingRight;
-
             var denisty = Resources.DisplayMetrics.Density;
             SetAllCaps(false);
             SetLines(1);
@@ -331,6 +326,14 @@ namespace EOS.UI.Droid.Controls
 
             UpdateAppearance();
             Background = CreateRippleDrawable(BackgroundColor);
+        }
+
+        private void SaveCurrentPaddings()
+        {
+            _baseBottomPadding = PaddingBottom;
+            _baseTopPadding = PaddingTop;
+            _baseLeftPadding = PaddingLeft;
+            _baseRightPadding = PaddingRight;
         }
 
         private void InitializeAttributes(IAttributeSet attrs)
@@ -420,6 +423,7 @@ namespace EOS.UI.Droid.Controls
         {
             if(Enabled && !InProgress)
             {
+                SaveCurrentPaddings();
                 SetStartAnimationValues();
 
                 if(_shouldRedraw)
