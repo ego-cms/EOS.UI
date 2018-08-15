@@ -38,7 +38,7 @@ namespace EOS.UI.Droid.Controls
         }
 
         #endregion
-        
+
         #region customization
 
         private Color _backgroundColor;
@@ -214,8 +214,8 @@ namespace EOS.UI.Droid.Controls
             if(!IsEOSCustomizationIgnored)
             {
                 FontStyle = GetThemeProvider().GetEOSProperty<FontStyleItem>(this, EOSConstants.R2C5);
-                (Background as GradientDrawable).SetColor(GetThemeProvider().GetEOSProperty<Color>(this, EOSConstants.BrandPrimaryColor));
-                (base.Background as GradientDrawable).SetCornerRadius(GetCornerRadius());
+                BackgroundColor = GetThemeProvider().GetEOSProperty<Color>(this, EOSConstants.BrandPrimaryColor);
+                CornerRadius = GetCornerRadius();
                 IsEOSCustomizationIgnored = false;
             }
         }

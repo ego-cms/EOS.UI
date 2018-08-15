@@ -32,7 +32,6 @@ namespace EOS.UI.Droid.Sandbox.Activities
             SetContentView(Resource.Layout.BadgeLabelLayout);
 
             _badge = FindViewById<BadgeLabel>(Resource.Id.badgeLabel);
-            _badge.UpdateAppearance();
 
             _rootView = FindViewById<ScrollView>(Resource.Id.rootView);
             _themeDropDown = FindViewById<EOSSandboxDropDown>(Resource.Id.themeDropDown);
@@ -78,6 +77,20 @@ namespace EOS.UI.Droid.Sandbox.Activities
             {
                 ResetCustomValues();
             };
+        }
+
+        protected override void OnRestoreInstanceState(Bundle savedInstanceState)
+        {
+            base.OnRestoreInstanceState(savedInstanceState);
+            var a = savedInstanceState.GetInt("color");
+            _badge.BackgroundColor = new Color(savedInstanceState.GetInt("color"));
+        }
+
+        protected override void OnSaveInstanceState(Bundle outState)
+        {
+            base.OnSaveInstanceState(outState);
+            var a = _badge.BackgroundColor.ToArgb();
+            outState.PutInt("color", _badge.BackgroundColor.ToArgb());
         }
 
         private void SetCurrenTheme(IEOSTheme iEOSTheme)
