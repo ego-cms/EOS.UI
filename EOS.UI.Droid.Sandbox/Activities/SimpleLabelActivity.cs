@@ -45,7 +45,7 @@ namespace EOS.UI.Droid.Sandbox.Activities
             _textColorDropDown.ItemSelected += TextColorItemSelected;
 
             _fontDropDown.Name = Fields.Font;
-            _fontDropDown.SetupAdapter(Fonts.FontsCollection.Select(item => item.Key).ToList());
+            _fontDropDown.SetupAdapter(Fonts.GetGhostButtonSimpleLabelFonts().Select(item => item.Key).ToList());
             _fontDropDown.ItemSelected += FontItemSelected;
 
             _letterSpacingDropDown.Name = Fields.LetterSpacing;
@@ -97,7 +97,7 @@ namespace EOS.UI.Droid.Sandbox.Activities
         private void FontItemSelected(int position)
         {
             if(position > 0)
-                _simpleLabel.Typeface = Typeface.CreateFromAsset(Assets, Fonts.FontsCollection.ElementAt(position).Value);
+                _simpleLabel.Typeface = Typeface.CreateFromAsset(Assets, Fonts.GetGhostButtonSimpleLabelFonts().ElementAt(position).Value);
         }
 
         private void TextColorItemSelected(int position)

@@ -217,6 +217,7 @@ namespace EOS.UI.iOS
             UpdateAppearance();
             InitCircles();
             circleView.Layer.CornerRadius = circleView.Frame.Height / 2;
+            imageView.Image = imageView.Image.ImageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate);
             imageView.Hidden = true;
             percentLabel.Text = _zeroPercents;
         }

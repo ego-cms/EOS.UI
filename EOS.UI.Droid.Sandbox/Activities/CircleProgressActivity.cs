@@ -86,11 +86,11 @@ namespace EOS.UI.Droid.Sandbox.Activities
                 themeDropDown.SetSpinnerSelection(2);
 
             fontDropDown.Name = Fields.Font;
-            fontDropDown.SetupAdapter(Fonts.FontsCollection.Select(item => item.Key).ToList());
+            fontDropDown.SetupAdapter(Fonts.GetCircleProgressFonts().Select(item => item.Key).ToList());
             fontDropDown.ItemSelected += (position) =>
             {
                 if(position > 0)
-                    circleProgress.Typeface = Typeface.CreateFromAsset(Assets, Fonts.FontsCollection.ElementAt(position).Value);
+                    circleProgress.Typeface = Typeface.CreateFromAsset(Assets, Fonts.GetCircleProgressFonts().ElementAt(position).Value);
             };
 
             colorDropDown.Name = Fields.Color;

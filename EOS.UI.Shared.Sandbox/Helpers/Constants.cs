@@ -14,7 +14,7 @@ namespace EOS.UI.Shared.Sandbox.Helpers
         private static string ColorNameTeal = "Teal";
         private static string ColorNameGreen = "Green";
         private static string ColorNameLime = "Lime";
-        private static string ColorNameYellow = "Yellow ";
+        private static string ColorNameYellow = "Yellow";
         private static string ColorNameGold = "Gold";
         private static string ColorNameOrange = "Orange";
         private static string ColorNamePeach = "Peach";
