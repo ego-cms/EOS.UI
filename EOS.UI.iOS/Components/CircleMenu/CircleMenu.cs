@@ -452,8 +452,8 @@ namespace EOS.UI.iOS.Components
             secondAnimation.To = new NSNumber(0);
             secondAnimation.RemovedOnCompletion = false;
             secondAnimation.FillMode = CAFillMode.Forwards;
-            secondAnimation.InitialVelocity = 60;
-            secondAnimation.Duration = 0.5;
+            secondAnimation.InitialVelocity = 70;
+            secondAnimation.Duration = 0.7;
 
             firstAnimation.AnimationStopped += (sender, e) =>
             {
