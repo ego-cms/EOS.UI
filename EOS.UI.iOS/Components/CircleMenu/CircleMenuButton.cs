@@ -56,7 +56,6 @@ namespace EOS.UI.iOS.Components
             }
         }
 
-
         private UIColor _focusedBackgroundColor;
         internal UIColor FocusedBackgroundColor
         {
@@ -106,6 +105,25 @@ namespace EOS.UI.iOS.Components
             get => _positions.IndexOf(Position);
         }
 
+        public override bool Highlighted
+        {
+            get => base.Highlighted;
+            set
+            {
+                base.Highlighted = value;
+                if (value)
+                {
+                    if (_isClicked)
+                        ImageView.TintColor = FocusedIconColor;
+                }
+                else
+                {
+                    if (!_isClicked)
+                        ImageView.TintColor = UnfocusedIconColor;
+                }
+            }
+        }
+
         public CircleMenuButton()
         {
             Initialize();
@@ -130,6 +148,7 @@ namespace EOS.UI.iOS.Components
 
             ImageEdgeInsets = new UIEdgeInsets(_padding, _padding, _padding, _padding);
             BackgroundColor = UIColor.White;
+            AdjustsImageWhenHighlighted = false;
             TouchUpInside += OnClicked;
         }
 
@@ -142,8 +161,8 @@ namespace EOS.UI.iOS.Components
         {
             if (!Model.HasChildren)
                 return;
-            BackgroundColor = _isClicked ? _unfocusedBackgroundColor : _focusedBackgroundColor;
-            ImageView.TintColor = _isClicked ? _unfocusedIconColor : _focusedIconColor;
+            BackgroundColor = _isClicked ? UnfocusedBackgroundColor : FocusedBackgroundColor;
+            ImageView.TintColor = _isClicked ? UnfocusedIconColor : FocusedIconColor;
             _isClicked = !_isClicked;
         }
     }

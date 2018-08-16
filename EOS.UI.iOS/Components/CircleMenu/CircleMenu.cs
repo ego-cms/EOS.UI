@@ -475,9 +475,10 @@ namespace EOS.UI.iOS.Components
             if (!model.HasChildren)
                 return;
             if (model.Children.Count > _maximumCountOfChildren)
-                throw new ArgumentException($"Submenu must contain no more then {_maximumCountOfChildren} elements");
+                throw new ArgumentException($"Submenu should contain no more then {_maximumCountOfChildren} elements");
             invokedButton.UserInteractionEnabled = false;
             SwitchSwipeInteractions(false);
+            SwitchButtonsInteractions(false);
             if (!_isSubmenuOpen)
             {
                 SendViewToBack();
@@ -492,6 +493,7 @@ namespace EOS.UI.iOS.Components
                 _isSubmenuOpen = false;
             }
             invokedButton.UserInteractionEnabled = true;
+            SwitchButtonsInteractions(true);
             SwitchSwipeInteractions(true);
         }
 
@@ -709,7 +711,7 @@ namespace EOS.UI.iOS.Components
             _upSwipe.Enabled = enabled;
             _downSwipe.Enabled = enabled;
         }
-        
+
         void SwitchButtonsInteractions(bool enabled)
         {
             if (!enabled)
