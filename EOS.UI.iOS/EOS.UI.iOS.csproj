@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+
 <Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -70,9 +70,6 @@
     <Compile Include="Controls\SimpleLabel.cs" />
     <Compile Include="Models\SectionModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Assets.cs">
-      <DependentUpon>Assets.tt</DependentUpon>
-    </Compile>
     <Compile Include="Themes\EOSThemeProvider.cs" />
     <Compile Include="Traverser\IEOSViewTraverser.cs" />
     <Compile Include="Traverser\EOSViewTraverser.cs" />
@@ -101,10 +98,6 @@
     <Compile Include="Components\CircleMenu\PassthroughToWindowView.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Assets.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>Assets.cs</LastGenOutput>
-    </None>
     <InterfaceDefinition Include="Components\Section.xib" />
     <None Include="Info.plist" />
     <BundleResource Include="Resources\Fonts\capture_it_dark.ttf" />
@@ -114,6 +107,21 @@
     <BundleResource Include="Resources\Animations\preloader-snake.json" />
     <BundleResource Include="Resources\Animations\hamburger-open.json" />
     <BundleResource Include="Resources\Animations\hamburger-close.json" />
+    <BundleResource Include="Resources\icCalendar%401x.png" />
+    <BundleResource Include="Resources\icCalendar%402x.png" />
+    <BundleResource Include="Resources\icCalendar%403x.png" />
+    <BundleResource Include="Resources\icClear%401x.png" />
+    <BundleResource Include="Resources\icClear%402x.png" />
+    <BundleResource Include="Resources\icClear%403x.png" />
+    <BundleResource Include="Resources\icPreloader%401x.png" />
+    <BundleResource Include="Resources\icPreloader%402x.png" />
+    <BundleResource Include="Resources\icPreloader%403x.png" />
+    <BundleResource Include="Resources\icSuccess%401x.png" />
+    <BundleResource Include="Resources\icSuccess%402x.png" />
+    <BundleResource Include="Resources\icSuccess%403x.png" />
+    <BundleResource Include="Resources\icWarning%401x.png" />
+    <BundleResource Include="Resources\icWarning%402x.png" />
+    <BundleResource Include="Resources\icWarning%403x.png" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
