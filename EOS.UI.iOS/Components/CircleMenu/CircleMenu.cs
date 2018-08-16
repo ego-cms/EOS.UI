@@ -35,7 +35,7 @@ namespace EOS.UI.iOS.Components
         private const double _showSubmenuDuration = 0.1;
         private const int _radius = 96;
         private readonly nfloat _6degrees = 0.10472f;
-        private readonly nfloat _8degrees = 0.0698132f;
+        private readonly nfloat _2degrees = 0.0174533f;
         private readonly nfloat _55degrees = 0.959931f;
         private readonly double _45degrees = 0.785398;
         private UIView _rootView;
@@ -309,7 +309,7 @@ namespace EOS.UI.iOS.Components
 
         async Task OpenMenu()
         {
-            SetModelsForButtons();
+            SwitchSwipeInteractions(false);
             _menuButtonsView.Transform = CGAffineTransform.MakeRotation(-_6degrees);
             var task = Task.CompletedTask;
             var tcs = new TaskCompletionSource<bool>();
@@ -330,8 +330,8 @@ namespace EOS.UI.iOS.Components
                     }
                 }
             }
-            _menuButtons.ForEach(b => b.UserInteractionEnabled = false);
             await tcs.Task;
+            SwitchButtonsInteractions(false);
             task = task.ContinueWith((arg) => StartOpenSpringEffect(-_6degrees), TaskScheduler.FromCurrentSynchronizationContext()).Unwrap();
             if (!_isHintShown)
             {
@@ -340,12 +340,14 @@ namespace EOS.UI.iOS.Components
             }
             task = task.ContinueWith((t) =>
             {
-                _menuButtons.ForEach(b => b.UserInteractionEnabled = b.PositionIndex != 4 && b.PositionIndex != 0);
+                SwitchButtonsInteractions(true);
+                SwitchSwipeInteractions(true);
             }, TaskScheduler.FromCurrentSynchronizationContext());
         }
 
         async Task CloseMenu()
         {
+            SwitchSwipeInteractions(false);
             for (int i = 0; i < _menuButtons.Count; ++i)
             {
                 for (int j = 0; j < _menuButtons.Count; ++j)
@@ -359,13 +361,13 @@ namespace EOS.UI.iOS.Components
                 }
                 await Task.Delay(TimeSpan.FromSeconds(_menuOpenButtonAnimationDuration));
             }
+            SwitchSwipeInteractions(true);
         }
 
-        void MoveLeft()
+        async Task MoveLeft()
         {
             var zeroButtonPositionModel = _menuButtons.SingleOrDefault(b => b.Position == _buttonPositions[0]).Model;
             var indexOfZerobuttonPositionModel = _circleMenuItems.IndexOf(zeroButtonPositionModel);
-
             for (int i = 0; i < _menuButtons.Count; ++i)
             {
                 var positionIndex = _buttonPositions.IndexOf(_menuButtons[i].Position);
@@ -377,13 +379,14 @@ namespace EOS.UI.iOS.Components
                                                                                             indexOfZerobuttonPositionModel + 1 : 0;
                     _menuButtons[i].Model = _circleMenuItems[indexOfNextModel];
                 }
-
                 StartMoveButtonAnmation(_menuButtons[i], _buttonPositions[nextPositionIndex], _indicatorPositions[nextPositionIndex], _buttonMovementAnimationDuration);
             }
-            StartMoveSpringEffect(-_8degrees);
+            SwitchButtonsInteractions(false);
+            await StartMoveSpringEffect(-_2degrees);
+            SwitchButtonsInteractions(true);
         }
 
-        void MoveRight()
+        async void MoveRight()
         {
             var lastButtonPositionModel = _menuButtons.SingleOrDefault(b => b.Position == _buttonPositions[4]).Model;
             var indexOfLastButtonPositionModel = _circleMenuItems.IndexOf(lastButtonPositionModel);
@@ -401,7 +404,9 @@ namespace EOS.UI.iOS.Components
                 }
                 StartMoveButtonAnmation(_menuButtons[i], _buttonPositions[previousPositionIndex], _indicatorPositions[previousPositionIndex], _buttonMovementAnimationDuration);
             }
-            StartMoveSpringEffect(_8degrees);
+            SwitchButtonsInteractions(false);
+            await StartMoveSpringEffect(_2degrees);
+            SwitchButtonsInteractions(true);
         }
 
 
@@ -438,8 +443,8 @@ namespace EOS.UI.iOS.Components
             firstAnimation.RepeatCount = 1;
             firstAnimation.RemovedOnCompletion = false;
             firstAnimation.FillMode = CAFillMode.Forwards;
-            firstAnimation.InitialVelocity = 30;
-            firstAnimation.Duration = 0.3;
+            firstAnimation.InitialVelocity = 80;
+            firstAnimation.Duration = 0.2;
 
             var secondAnimation = new CASpringAnimation();
             secondAnimation.KeyPath = "transform.rotation.z";
@@ -447,7 +452,7 @@ namespace EOS.UI.iOS.Components
             secondAnimation.To = new NSNumber(0);
             secondAnimation.RemovedOnCompletion = false;
             secondAnimation.FillMode = CAFillMode.Forwards;
-            secondAnimation.InitialVelocity = 30;
+            secondAnimation.InitialVelocity = 60;
             secondAnimation.Duration = 0.5;
 
             firstAnimation.AnimationStopped += (sender, e) =>
@@ -611,7 +616,6 @@ namespace EOS.UI.iOS.Components
         async void OnMainButtonClicked(object sender, EventArgs e)
         {
             Clicked?.Invoke(_mainButton, _mainButton.Id);
-            SwitchInteractions(false);
             if (_mainButton.IsOpen)
             {
                 _shadowView.Hidden = true;
@@ -623,7 +627,6 @@ namespace EOS.UI.iOS.Components
                 SetModelsForButtons();
                 await OpenMenu();
             }
-            SwitchInteractions(true);
         }
 
         void OnRightSwipe()
@@ -697,11 +700,25 @@ namespace EOS.UI.iOS.Components
             _rootView.InsertSubview(this, _rootView.Subviews.Length);
         }
 
-        void SwitchInteractions(bool enabled)
+        void SwitchSwipeInteractions(bool enabled)
         {
             _mainButton.UserInteractionEnabled = enabled;
             _leftSwipe.Enabled = enabled;
             _rightSwipe.Enabled = enabled;
+            _upSwipe.Enabled = enabled;
+            _downSwipe.Enabled = enabled;
+        }
+        
+        void SwitchButtonsInteractions(bool enabled)
+        {
+            if (!enabled)
+            {
+                _menuButtons.ForEach(b => b.UserInteractionEnabled = false);
+            }
+            else
+            {
+                _menuButtons.ForEach(b => b.UserInteractionEnabled = b.PositionIndex != 4 && b.PositionIndex != 0);
+            }
         }
 
         public IEOSThemeProvider GetThemeProvider()
