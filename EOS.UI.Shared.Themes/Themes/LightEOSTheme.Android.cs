@@ -18,7 +18,7 @@ namespace EOS.UI.Shared.Themes.Themes
             get
             {
                 if (_robotoBold == null)
-                    _robotoBold = Typeface.CreateFromAsset(Application.Context.Assets, "Fonts/RobotoBold.ttf");
+                    _robotoBold = Typeface.CreateFromAsset(Application.Context.Assets, "Fonts/Roboto-Bold.ttf");
                 return _robotoBold;
             }
         }
@@ -29,7 +29,7 @@ namespace EOS.UI.Shared.Themes.Themes
             get
             {
                 if (_robotoMedium == null)
-                    _robotoMedium = Typeface.CreateFromAsset(Application.Context.Assets, "Fonts/RobotoMedium.ttf");
+                    _robotoMedium = Typeface.CreateFromAsset(Application.Context.Assets, "Fonts/Roboto-Medium.ttf");
                 return _robotoMedium;
             }
         }
@@ -40,7 +40,7 @@ namespace EOS.UI.Shared.Themes.Themes
             get
             {
                 if (_robotoRegular == null)
-                    _robotoRegular = Typeface.CreateFromAsset(Application.Context.Assets, "Fonts/RobotoRegular.ttf");
+                    _robotoRegular = Typeface.CreateFromAsset(Application.Context.Assets, "Fonts/Roboto-Regular.ttf");
                 return _robotoRegular;
             }
         }

@@ -72,7 +72,7 @@ namespace EOS.UI.Droid.Sandbox.Activities
             _themeDropDown.ItemSelected += ThemeItemSelected;
 
             _fontDropDown.Name = Fields.Font;
-            _fontDropDown.SetupAdapter(Fonts.FontsCollection.Select(item => item.Key).ToList());
+            _fontDropDown.SetupAdapter(Fonts.GetButtonBadgeFonts().Select(item => item.Key).ToList());
             _fontDropDown.ItemSelected += FontSpinner_ItemSelected;
 
             _letterSpacingDropDown.Name = Fields.LetterSpacing;
@@ -191,7 +191,7 @@ namespace EOS.UI.Droid.Sandbox.Activities
         private void FontSpinner_ItemSelected(int position)
         {
             if(position > 0)
-                _simpleButton.Typeface = Typeface.CreateFromAsset(Assets, Fonts.FontsCollection.ElementAt(position).Value);
+                _simpleButton.Typeface = Typeface.CreateFromAsset(Assets, Fonts.GetButtonBadgeFonts().ElementAt(position).Value);
         }
 
         private void LetterSpacingView_ItemSelected(int position)
