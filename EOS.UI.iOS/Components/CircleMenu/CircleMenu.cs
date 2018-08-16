@@ -462,7 +462,8 @@ namespace EOS.UI.iOS.Components
 
             secondAnimation.AnimationStopped += (sender, e) =>
             {
-                _menuButtonsView.Layer.RemoveAllAnimations();
+                _menuButtonsView.Layer.RemoveAnimation(nameof(firstAnimation));
+                _menuButtonsView.Layer.RemoveAnimation(nameof(secondAnimation));
                 tcs.SetResult(true);
             };
             _menuButtonsView.Layer.AddAnimation(firstAnimation, null);
@@ -476,11 +477,12 @@ namespace EOS.UI.iOS.Components
             if (model.Children.Count > _maximumCountOfChildren)
                 throw new ArgumentException($"Submenu must contain no more then {_maximumCountOfChildren} elements");
             invokedButton.UserInteractionEnabled = false;
+            SwitchSwipeInteractions(false);
             if (!_isSubmenuOpen)
             {
                 SendViewToBack();
                 var submenuButtons = PrepareSubmenu(invokedButton, model.Children);
-                await ShowSubmenu(invokedButton, submenuButtons);
+                await OpenSubmenu(invokedButton, submenuButtons);
                 _isSubmenuOpen = true;
             }
             else
@@ -490,6 +492,7 @@ namespace EOS.UI.iOS.Components
                 _isSubmenuOpen = false;
             }
             invokedButton.UserInteractionEnabled = true;
+            SwitchSwipeInteractions(true);
         }
 
         List<CircleMenuButton> PrepareSubmenu(CircleMenuButton invokedButton, List<CircleMenuItemModel> children)
@@ -523,10 +526,9 @@ namespace EOS.UI.iOS.Components
             return submenuButtons;
         }
 
-        private Task ShowSubmenu(CircleMenuButton invokedButton, List<CircleMenuButton> submenuButtons)
+        private Task OpenSubmenu(CircleMenuButton invokedButton, List<CircleMenuButton> submenuButtons)
         {
             var task = Task.CompletedTask;
-            invokedButton.UserInteractionEnabled = false;
             var convertedPosition = _menuButtonsView.ConvertPointToView(invokedButton.Position, _rootView);
             invokedButton.Frame = invokedButton.Frame.ResizeRect(x: convertedPosition.X, y: convertedPosition.Y);
             _rootView.InsertSubview(invokedButton, _rootView.Subviews.Length);
@@ -549,7 +551,6 @@ namespace EOS.UI.iOS.Components
             task = task.ContinueWith((t) =>
             {
                 invokedButton.Indicator.Hidden = false;
-                invokedButton.UserInteractionEnabled = true;
             }, TaskScheduler.FromCurrentSynchronizationContext());
             return task;
         }
