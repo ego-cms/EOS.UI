@@ -58,66 +58,6 @@
       <HintPath>..\packages\Com.Airbnb.iOS.Lottie.2.5.4\lib\xamarinios10\Lottie.iOS.dll</HintPath>
     </Reference>
   </ItemGroup>
-  <ItemGroup>
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Contents.json">
-      <Visible>false</Visible>
-    </ImageAsset>
-    <ImageAsset Include="Assets.xcassets\Contents.json">
-      <Visible>false</Visible>
-    </ImageAsset>
-    <ImageAsset Include="Assets.xcassets\icCalendar.imageset\Contents.json">
-      <Visible>false</Visible>
-    </ImageAsset>
-    <ImageAsset Include="Assets.xcassets\icPreloader.imageset\Contents.json">
-      <Visible>false</Visible>
-    </ImageAsset>
-    <ImageAsset Include="Assets.xcassets\icCalendar.imageset\icCalendar.pdf">
-      <Visible>false</Visible>
-    </ImageAsset>
-    <ImageAsset Include="Assets.xcassets\icPreloader.imageset\icPreloader.pdf">
-      <Visible>false</Visible>
-    </ImageAsset>
-    <ImageAsset Include="Assets.xcassets\icSuccess.imageset\Contents.json">
-      <Visible>false</Visible>
-    </ImageAsset>
-    <ImageAsset Include="Assets.xcassets\icSuccess.imageset\icSuccess.pdf">
-      <Visible>false</Visible>
-    </ImageAsset>
-    <ImageAsset Include="Assets.xcassets\icAccountCircle.imageset\Contents.json">
-      <Visible>false</Visible>
-    </ImageAsset>
-    <ImageAsset Include="Assets.xcassets\icAccountCircle.imageset\icAccountCircle.pdf">
-      <Visible>false</Visible>
-    </ImageAsset>
-    <ImageAsset Include="Assets.xcassets\icAccountOff.imageset\Contents.json">
-      <Visible>false</Visible>
-    </ImageAsset>
-    <ImageAsset Include="Assets.xcassets\icAccountOff.imageset\icAccountOff.pdf">
-      <Visible>false</Visible>
-    </ImageAsset>
-    <ImageAsset Include="Assets.xcassets\icAccountKey.imageset\Contents.json">
-      <Visible>false</Visible>
-    </ImageAsset>
-    <ImageAsset Include="Assets.xcassets\icAccountKey.imageset\icAccountKey.pdf">
-      <Visible>false</Visible>
-    </ImageAsset>
-    <ImageAsset Include="Assets.xcassets\icWarning.imageset\Contents.json">
-      <Visible>false</Visible>
-    </ImageAsset>
-    <ImageAsset Include="Assets.xcassets\icWarning.imageset\icWarning.pdf">
-      <Visible>false</Visible>
-    </ImageAsset>
-    <ImageAsset Include="Assets.xcassets\icClear.imageset\Contents.json">
-      <Visible>false</Visible>
-    </ImageAsset>
-    <ImageAsset Include="Assets.xcassets\icClear.imageset\icClear.pdf">
-      <Visible>false</Visible>
-    </ImageAsset>
-    <ImageAsset Include="Assets.xcassets\icHamburger.imageset\Contents.json">
-      <Visible>false</Visible>
-    </ImageAsset>
-    <ImageAsset Include="Assets.xcassets\icHamburger.imageset\icHamburger.pdf" />
-  </ItemGroup>
   <ItemGroup />
   <ItemGroup>
     <Compile Include="Controls\SimpleButton.cs" />
@@ -177,31 +117,9 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
-    <Folder Include="Assets.xcassets\calenda.imageset\" />
-    <Folder Include="Assets.xcassets\icCalendar.imageset\" />
-    <Folder Include="Assets.xcassets\icPreloader.imageset\" />
-    <Folder Include="Assets.xcassets\icSuccess.imageset\" />
-    <Folder Include="Assets.xcassets\icAccountCircle.imageset\" />
-    <Folder Include="Assets.xcassets\icAccountOff.imageset\" />
-    <Folder Include="Assets.xcassets\icAccountKey.imageset\" />
     <Folder Include="CollectionViewSources\" />
-    <Folder Include="Assets.xcassets\icWarning.imageset\" />
-    <Folder Include="Assets.xcassets\icClear.imageset\" />
-    <Folder Include="Assets.xcassets\icHamburger.imageset\" />
     <Folder Include="Resources\Animations\" />
     <Folder Include="Components\CircleMenu\" />
-    <Folder Include="Assets.xcassets\icEffects.imageset\" />
-    <Folder Include="Assets.xcassets\icHDR.imageset\" />
-    <Folder Include="Assets.xcassets\icHeal.imageset\" />
-    <Folder Include="Assets.xcassets\icOneToOne.imageset\" />
-    <Folder Include="Assets.xcassets\icReplay.imageset\" />
-    <Folder Include="Assets.xcassets\icShutter.imageset\" />
-    <Folder Include="Assets.xcassets\icSixteenToNine.imageset\" />
-    <Folder Include="Assets.xcassets\icTimer.imageset\" />
-    <Folder Include="Assets.xcassets\icVideo.imageset\" />
-    <Folder Include="Assets.xcassets\icDuration.imageset\" />
-    <Folder Include="Assets.xcassets\icBrush.imageset\" />
-    <Folder Include="Assets.xcassets\icMasks.imageset\" />
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="Controls\CircleProgress.xib" />
