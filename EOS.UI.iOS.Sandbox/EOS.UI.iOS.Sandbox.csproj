@@ -137,6 +137,30 @@
     </ImageAsset>
     <ImageAsset Include="Assets.xcassets\icAccountCircle.imageset\Contents.json" />
     <ImageAsset Include="Assets.xcassets\icAccountCircle.imageset\icAccountCircle.pdf" />
+    <ImageAsset Include="Assets.xcassets\icImage.imageset\Contents.json" />
+    <ImageAsset Include="Assets.xcassets\icPanorama.imageset\Contents.json" />
+    <ImageAsset Include="Assets.xcassets\icVideo.imageset\Contents.json" />
+    <ImageAsset Include="Assets.xcassets\icPhoto.imageset\Contents.json" />
+    <ImageAsset Include="Assets.xcassets\icTimelapse.imageset\Contents.json" />
+    <ImageAsset Include="Assets.xcassets\icMacro.imageset\Contents.json" />
+    <ImageAsset Include="Assets.xcassets\icPortrait.imageset\Contents.json" />
+    <ImageAsset Include="Assets.xcassets\icSeries.imageset\Contents.json" />
+    <ImageAsset Include="Assets.xcassets\icTimer.imageset\Contents.json" />
+    <ImageAsset Include="Assets.xcassets\icSixteenToNine.imageset\Contents.json" />
+    <ImageAsset Include="Assets.xcassets\icOneToOne.imageset\Contents.json" />
+    <ImageAsset Include="Assets.xcassets\icHDR.imageset\Contents.json" />
+    <ImageAsset Include="Assets.xcassets\icImage.imageset\icImage.pdf" />
+    <ImageAsset Include="Assets.xcassets\icHDR.imageset\icHDR.pdf" />
+    <ImageAsset Include="Assets.xcassets\icMacro.imageset\icMacro.pdf" />
+    <ImageAsset Include="Assets.xcassets\icOneToOne.imageset\icOneToOne.pdf" />
+    <ImageAsset Include="Assets.xcassets\icPanorama.imageset\icPanorama.pdf" />
+    <ImageAsset Include="Assets.xcassets\icPhoto.imageset\icPhoto.pdf" />
+    <ImageAsset Include="Assets.xcassets\icPortrait.imageset\icPortrait.pdf" />
+    <ImageAsset Include="Assets.xcassets\icSeries.imageset\icSeries.pdf" />
+    <ImageAsset Include="Assets.xcassets\icSixteenToNine.imageset\icSixteenToNine.pdf" />
+    <ImageAsset Include="Assets.xcassets\icTimelapse.imageset\icTimelapse.pdf" />
+    <ImageAsset Include="Assets.xcassets\icTimer.imageset\icTimer.pdf" />
+    <ImageAsset Include="Assets.xcassets\icVideo.imageset\icVideo.pdf" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Resources\" />
@@ -168,6 +192,18 @@
     <Folder Include="Assets.xcassets\icTimer.imageset\" />
     <Folder Include="Assets.xcassets\icVideo.imageset\" />
     <Folder Include="Assets.xcassets\icClnd.imageset\" />
+    <Folder Include="Assets.xcassets\icImage.imageset\" />
+    <Folder Include="Assets.xcassets\icPanorama.imageset\" />
+    <Folder Include="Assets.xcassets\icVideo.imageset\" />
+    <Folder Include="Assets.xcassets\icPhoto.imageset\" />
+    <Folder Include="Assets.xcassets\icTimelapse.imageset\" />
+    <Folder Include="Assets.xcassets\icMacro.imageset\" />
+    <Folder Include="Assets.xcassets\icPortrait.imageset\" />
+    <Folder Include="Assets.xcassets\icSeries.imageset\" />
+    <Folder Include="Assets.xcassets\icTimer.imageset\" />
+    <Folder Include="Assets.xcassets\icSixteenToNine.imageset\" />
+    <Folder Include="Assets.xcassets\icOneToOne.imageset\" />
+    <Folder Include="Assets.xcassets\icHDR.imageset\" />
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="LaunchScreen.storyboard" />
@@ -272,58 +308,22 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
-    <BundleResource Include="Resources\icHDR%401x.png" />
-    <BundleResource Include="Resources\icHDR%402x.png" />
-    <BundleResource Include="Resources\icHDR%403x.png" />
-    <BundleResource Include="Resources\icImage%401x.png" />
-    <BundleResource Include="Resources\icImage%402x.png" />
-    <BundleResource Include="Resources\icImage%403x.png" />
-    <BundleResource Include="Resources\icMacro%401x.png" />
-    <BundleResource Include="Resources\icMacro%402x.png" />
-    <BundleResource Include="Resources\icMacro%403x.png" />
-    <BundleResource Include="Resources\icOneToOne%401x.png" />
-    <BundleResource Include="Resources\icOneToOne%402x.png" />
-    <BundleResource Include="Resources\icOneToOne%403x.png" />
-    <BundleResource Include="Resources\icPanorama%401x.png" />
-    <BundleResource Include="Resources\icPanorama%402x.png" />
-    <BundleResource Include="Resources\icPanorama%403x.png" />
-    <BundleResource Include="Resources\icPhoto%401x.png" />
-    <BundleResource Include="Resources\icPhoto%402x.png" />
-    <BundleResource Include="Resources\icPhoto%403x.png" />
-    <BundleResource Include="Resources\icPortrait%401x.png" />
-    <BundleResource Include="Resources\icPortrait%402x.png" />
-    <BundleResource Include="Resources\icPortrait%403x.png" />
-    <BundleResource Include="Resources\icSeries%401x.png" />
-    <BundleResource Include="Resources\icSeries%402x.png" />
-    <BundleResource Include="Resources\icSeries%403x.png" />
-    <BundleResource Include="Resources\icSixteenToNine%401x.png" />
-    <BundleResource Include="Resources\icSixteenToNine%402x.png" />
-    <BundleResource Include="Resources\icSixteenToNine%403x.png" />
-    <BundleResource Include="Resources\icTimelapse%401x.png" />
-    <BundleResource Include="Resources\icTimelapse%402x.png" />
-    <BundleResource Include="Resources\icTimelapse%403x.png" />
-    <BundleResource Include="Resources\icTimer%401x.png" />
-    <BundleResource Include="Resources\icTimer%402x.png" />
-    <BundleResource Include="Resources\icTimer%403x.png" />
-    <BundleResource Include="Resources\icVideo%401x.png" />
-    <BundleResource Include="Resources\icVideo%402x.png" />
-    <BundleResource Include="Resources\icVideo%403x.png" />
     <BundleResource Include="Resources\icOneToOne_HD.png" />
     <BundleResource Include="Resources\icSixteenToNine_HD.png" />
     <BundleResource Include="Resources\icHDR_HD.png" />
     <BundleResource Include="Resources\icImage_HD.png" />
     <BundleResource Include="Resources\icMacro_HD.png" />
-    <BundleResource Include="Resources\icPanorama_HD.png" />
-    <BundleResource Include="Resources\icPhoto_HD.png" />
     <BundleResource Include="Resources\icPortrait_HD.png" />
     <BundleResource Include="Resources\icSeries_HD.png" />
     <BundleResource Include="Resources\icTimelapse_HD.png" />
     <BundleResource Include="Resources\icTimer_HD.png" />
-    <BundleResource Include="Resources\icVideo_HD.png" />
     <Folder Include="Resources\" />
     <Folder Include="Assets.xcassets\icAccountCircle.imageset\" />
     <Folder Include="Assets.xcassets\icAccountOff.imageset\" />
     <Folder Include="Assets.xcassets\icAccountKey.imageset\" />
+    <BundleResource Include="Resources\icVideo_HD.png" />
+    <BundleResource Include="Resources\icPhoto_HD.png" />
+    <BundleResource Include="Resources\icPanorama_HD.png" />
   </ItemGroup>
   <Import Project="..\EOS.UI.Shared.Sandbox\EOS.UI.Shared.Sandbox.projitems" Label="Shared" Condition="Exists('..\EOS.UI.Shared.Sandbox\EOS.UI.Shared.Sandbox.projitems')" />
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
