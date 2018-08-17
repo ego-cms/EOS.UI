@@ -143,17 +143,16 @@ namespace EOS.UI.iOS.Components
 
         public CircleMenu()
         {
-            var mainFrame = UIApplication.SharedApplication.KeyWindow.Frame;
-            Frame = new CGRect(mainFrame.Width - (_menuSize / 2 + CircleMenuButton.Size / 2 + _mainButtonPadding),
-                               mainFrame.Height - (_menuSize / 2 + CircleMenuButton.Size / 2 + _mainButtonPadding),
-                               _menuSize, _menuSize);
-            BackgroundColor = UIColor.Clear;
         }
 
         public void Attach(UIViewController viewController)
         {
             _rootView = viewController.View;
-
+            Frame = new CGRect(_rootView.Frame.Width - (_menuSize / 2 + CircleMenuButton.Size / 2 + _mainButtonPadding),
+                               _rootView.Frame.Height - (_menuSize / 2 + CircleMenuButton.Size / 2 + _mainButtonPadding),
+                              _menuSize, _menuSize);
+            BackgroundColor = UIColor.Clear;
+            
             var mainFrame = UIApplication.SharedApplication.KeyWindow.Frame;
             //shadowview init
             _shadowView = new UIView(mainFrame);
