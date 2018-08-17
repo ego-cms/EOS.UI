@@ -408,7 +408,7 @@ namespace EOS.UI.iOS.Components
             leftAnimation.RemovedOnCompletion = false;
             leftAnimation.FillMode = CAFillMode.Forwards;
             leftAnimation.InitialVelocity = 40;
-            leftAnimation.Duration = 0.8;
+            leftAnimation.Duration = 0.7;
 
             leftAnimation.AnimationStopped += (sender, e) =>
             {
@@ -440,7 +440,7 @@ namespace EOS.UI.iOS.Components
             secondAnimation.RemovedOnCompletion = false;
             secondAnimation.FillMode = CAFillMode.Forwards;
             secondAnimation.InitialVelocity = 70;
-            secondAnimation.Duration = 0.7;
+            secondAnimation.Duration = 0.6;
 
             firstAnimation.AnimationStopped += (sender, e) =>
             {
