@@ -60,6 +60,7 @@ namespace EOS.UI.Shared.Themes.Themes
             { EOSConstants.NeutralColor6, Color.ParseColor(neutralColor6)},
             { EOSConstants.RippleColor, Color.ParseColor(rippleColor) },
             { EOSConstants.DisabledSimpleButtonBackgroundColor, Color.ParseColor(neutralColor4)},
+            { EOSConstants.DisabledInputColor, Color.ParseColor(neutralColor3)},
             { EOSConstants.LabelCornerRadius, 4f },
             { EOSConstants.ButtonCornerRadius, 100f },
             { EOSConstants.LeftImage, Resource.Drawable.icCalendar },

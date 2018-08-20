@@ -60,6 +60,7 @@ namespace EOS.UI.Shared.Themes.Themes
             { EOSConstants.NeutralColor6, Color.ParseColor(neutralColor6)},
             { EOSConstants.RippleColor, Color.ParseColor(rippleColor) },
             { EOSConstants.DisabledSimpleButtonBackgroundColor, Color.ParseColor(neutralColor3)},
+            { EOSConstants.DisabledInputColor, Color.ParseColor(neutralColor5)},
             { EOSConstants.LabelCornerRadius, 4f },
             { EOSConstants.ButtonCornerRadius, 100f },
             { EOSConstants.LeftImage, Resource.Drawable.icCalendar },
@@ -275,7 +276,7 @@ namespace EOS.UI.Shared.Themes.Themes
             { EOSConstants.R4C4,
                 new FontStyleItem()
                 {
-                    Color = Color.ParseColor(neutralColor3),
+                    Color = Color.ParseColor(neutralColor5),
                     Typeface = RobotoRegular,
                     Size = 17f,
                     LetterSpacing = -0.02f,

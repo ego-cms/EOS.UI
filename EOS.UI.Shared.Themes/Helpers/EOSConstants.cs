@@ -22,6 +22,7 @@ namespace EOS.UI.Shared.Themes.Helpers
         public const string ClearInputImage = "clearInputImage";
         public const string SimpleButtonShadow = "simpleButtonShadow";
         public const string DisabledSimpleButtonBackgroundColor = "disabledSimpleButtonBackgroundColor";
+        public const string DisabledInputColor = "disabledInputColor";
         //fab progress constans
         public const string CalendarImage = "calendarImage";
         public const string FabProgressPreloaderImage = "fabProgressPreloaderImage";

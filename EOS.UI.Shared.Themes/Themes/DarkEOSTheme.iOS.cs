@@ -27,6 +27,7 @@ namespace EOS.UI.Shared.Themes.Themes
             { EOSConstants.NeutralColor6, ColorExtension.FromHex(neutralColor6) },
             { EOSConstants.RippleColor, ColorExtension.FromHex(rippleColor) },
             { EOSConstants.DisabledSimpleButtonBackgroundColor, ColorExtension.FromHex(neutralColor3)},
+            { EOSConstants.DisabledInputColor, ColorExtension.FromHex(neutralColor5)},
             { EOSConstants.ButtonCornerRadius, 25 },
             { EOSConstants.LabelCornerRadius, 5 },
             { EOSConstants.LeftImage, "icCalendar" },
@@ -132,7 +133,7 @@ namespace EOS.UI.Shared.Themes.Themes
             }},
             //input placeholder disabled, input disabled
             { EOSConstants.R4C4, new FontStyleItem() {
-                    Color = ColorExtension.FromHex(neutralColor3),
+                    Color = ColorExtension.FromHex(neutralColor5),
                     Font = UIFont.SystemFontOfSize(17f, UIFontWeight.Regular),
                     Size = 17f,
                     LetterSpacing = -0.24f,
