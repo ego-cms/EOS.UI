@@ -40,10 +40,8 @@ namespace EOS.UI.iOS.Components
         private readonly double _45degrees = 0.785398;
         private UIView _rootView;
         private UIView _shadowView;
-        private UISwipeGestureRecognizer _leftSwipe;
-        private UISwipeGestureRecognizer _rightSwipe;
-        private UISwipeGestureRecognizer _upSwipe;
-        private UISwipeGestureRecognizer _downSwipe;
+        private UIPanGestureRecognizer _panSwipe;
+        private CircleMenuPanGestureAnalyzer _gestureAnalyzer;
         private UIView _menuButtonsView;
         private CircleMenuMainButton _mainButton;
 
@@ -167,19 +165,9 @@ namespace EOS.UI.iOS.Components
                 CircleMenuButton.Size, CircleMenuButton.Size);
             _mainButton.TouchUpInside += OnMainButtonClicked;
 
-            //swipe init
-            _leftSwipe = new UISwipeGestureRecognizer(OnLeftSwipe);
-            _leftSwipe.Direction = UISwipeGestureRecognizerDirection.Left;
-            _rootView.AddGestureRecognizer(_leftSwipe);
-            _rightSwipe = new UISwipeGestureRecognizer(OnRightSwipe);
-            _rightSwipe.Direction = UISwipeGestureRecognizerDirection.Right;
-            _rootView.AddGestureRecognizer(_rightSwipe);
-            _upSwipe = new UISwipeGestureRecognizer(OnRightSwipe);
-            _upSwipe.Direction = UISwipeGestureRecognizerDirection.Up;
-            _rootView.AddGestureRecognizer(_upSwipe);
-            _downSwipe = new UISwipeGestureRecognizer(OnLeftSwipe);
-            _downSwipe.Direction = UISwipeGestureRecognizerDirection.Down;
-            _rootView.AddGestureRecognizer(_downSwipe);
+            _gestureAnalyzer = new CircleMenuPanGestureAnalyzer(_rootView);
+            _panSwipe = new UIPanGestureRecognizer(PanAction);
+            _rootView.AddGestureRecognizer(_panSwipe);
 
             _menuButtonsView = new PassthroughToWindowView()
             {
@@ -420,7 +408,7 @@ namespace EOS.UI.iOS.Components
             leftAnimation.RemovedOnCompletion = false;
             leftAnimation.FillMode = CAFillMode.Forwards;
             leftAnimation.InitialVelocity = 40;
-            leftAnimation.Duration = 0.8;
+            leftAnimation.Duration = 0.7;
 
             leftAnimation.AnimationStopped += (sender, e) =>
             {
@@ -452,7 +440,7 @@ namespace EOS.UI.iOS.Components
             secondAnimation.RemovedOnCompletion = false;
             secondAnimation.FillMode = CAFillMode.Forwards;
             secondAnimation.InitialVelocity = 70;
-            secondAnimation.Duration = 0.7;
+            secondAnimation.Duration = 0.6;
 
             firstAnimation.AnimationStopped += (sender, e) =>
             {
@@ -631,18 +619,23 @@ namespace EOS.UI.iOS.Components
             }
         }
 
-        void OnRightSwipe()
+        void PanAction(UIPanGestureRecognizer recognizer)
         {
-            if (IsSwipeBlocked)
-                return;
-            MoveRight();
-        }
+            var direction = _gestureAnalyzer.GetDirection(recognizer);
+            if (direction.HasValue)
+            {
+                if (IsSwipeBlocked)
+                    return;
 
-        void OnLeftSwipe()
-        {
-            if (IsSwipeBlocked)
-                return;
-            MoveLeft();
+                if (direction.Value == UISwipeGestureRecognizerDirection.Left || direction.Value == UISwipeGestureRecognizerDirection.Down)
+                {
+                    MoveLeft();
+                }
+                else
+                {
+                    MoveRight();
+                }
+            }
         }
 
         Task<bool> StartHintAnimation()
@@ -702,13 +695,12 @@ namespace EOS.UI.iOS.Components
             _rootView.InsertSubview(this, _rootView.Subviews.Length);
         }
 
+
+        /// TODO need to remove return statement
         void SwitchSwipeInteractions(bool enabled)
         {
             _mainButton.UserInteractionEnabled = enabled;
-            _leftSwipe.Enabled = enabled;
-            _rightSwipe.Enabled = enabled;
-            _upSwipe.Enabled = enabled;
-            _downSwipe.Enabled = enabled;
+            _panSwipe.Enabled = enabled;
         }
 
         void SwitchButtonsInteractions(bool enabled)
