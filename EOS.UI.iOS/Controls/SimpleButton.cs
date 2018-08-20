@@ -339,7 +339,7 @@ namespace EOS.UI.iOS.Controls
                 FontStyle = provider.GetEOSProperty<FontStyleItem>(this, EOSConstants.R3C1);
                 DisabledFontStyle = provider.GetEOSProperty<FontStyleItem>(this, EOSConstants.R3C4);
                 BackgroundColor = provider.GetEOSProperty<UIColor>(this, EOSConstants.BrandPrimaryColor);
-                DisabledBackgroundColor = provider.GetEOSProperty<UIColor>(this, EOSConstants.NeutralColor4);
+                DisabledBackgroundColor = provider.GetEOSProperty<UIColor>(this, EOSConstants.DisabledSimpleButtonBackgroundColor);
                 PressedBackgroundColor = provider.GetEOSProperty<UIColor>(this, EOSConstants.BrandPrimaryColorVariant1);
                 CornerRadius = provider.GetEOSProperty<int>(this, EOSConstants.ButtonCornerRadius);
                 RippleColor = provider.GetEOSProperty<UIColor>(this, EOSConstants.RippleColor);

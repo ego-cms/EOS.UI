@@ -25,6 +25,7 @@ namespace EOS.UI.Shared.Themes.Themes
             { EOSConstants.NeutralColor4, ColorExtension.FromHex(neutralColor4) },
             { EOSConstants.NeutralColor5, ColorExtension.FromHex(neutralColor5) },
             { EOSConstants.NeutralColor6, ColorExtension.FromHex(neutralColor6) },
+            { EOSConstants.DisabledSimpleButtonBackgroundColor, ColorExtension.FromHex(neutralColor4)},
             { EOSConstants.RippleColor, ColorExtension.FromHex(rippleColor) },
             { EOSConstants.ButtonCornerRadius, 25 },
             { EOSConstants.LabelCornerRadius, 5 },
@@ -67,7 +68,7 @@ namespace EOS.UI.Shared.Themes.Themes
             }},
             //simplebutton disabled
             { EOSConstants.R3C4, new FontStyleItem() {
-                    Color = ColorExtension.FromHex(neutralColor3),
+                    Color = ColorExtension.FromHex(neutralColor3),//should be #C0BFC0 in all themes
                     Font = UIFont.SystemFontOfSize(16f, UIFontWeight.Medium),
                     Size = 16f,
                     LetterSpacing = -0.2f,
