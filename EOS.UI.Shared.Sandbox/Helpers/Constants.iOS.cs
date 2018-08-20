@@ -64,8 +64,6 @@ namespace EOS.UI.Shared.Sandbox.Helpers
             public static string AvenirNextRegular = "AvenirNext-Regular";
             public static string FuturaBold = "Futura-Bold";
             public static string FuturaMedium = "Futura-Medium";
-            public static string GeezaProRegular = "GeezaPro";
-            public static string GeezaProBold = "GeezaPro-Bold";
             public static string HelveticaBold = "Helvetica-Bold";
             public static string HelveticaRoman = "Helvetica";
             public static string HelveticaNeueBold = "HelveticaNeue-Bold";
@@ -78,32 +76,28 @@ namespace EOS.UI.Shared.Sandbox.Helpers
             {
                 FontsCollection = new List<UIFont>();
 
-                FontsCollection.Add(UIFont.FromName(AvenirBlack, UIFont.SystemFontSize));
-                FontsCollection.Add(UIFont.FromName(AvenirBook, UIFont.SystemFontSize));
-                FontsCollection.Add(UIFont.FromName(AvenirHeavy, UIFont.SystemFontSize));
-                FontsCollection.Add(UIFont.FromName(AvenirMedium, UIFont.SystemFontSize));
-                FontsCollection.Add(UIFont.FromName(AvenirRoman, UIFont.SystemFontSize));
-                FontsCollection.Add(UIFont.FromName(AvenirNextDemiBold, UIFont.SystemFontSize));
-                FontsCollection.Add(UIFont.FromName(AvenirNextBold, UIFont.SystemFontSize));
-                FontsCollection.Add(UIFont.FromName(AvenirNextMedium, UIFont.SystemFontSize));
-                FontsCollection.Add(UIFont.FromName(AvenirNextRegular, UIFont.SystemFontSize));
-                FontsCollection.Add(UIFont.FromName(FuturaBold, UIFont.SystemFontSize));
-                FontsCollection.Add(UIFont.FromName(FuturaMedium, UIFont.SystemFontSize));
-                FontsCollection.Add(UIFont.FromName(GeezaProBold, UIFont.SystemFontSize));
-                FontsCollection.Add(UIFont.FromName(GeezaProRegular, UIFont.SystemFontSize));
-                FontsCollection.Add(UIFont.FromName(HelveticaBold, UIFont.SystemFontSize));
-                FontsCollection.Add(UIFont.FromName(HelveticaRoman, UIFont.SystemFontSize));
-                FontsCollection.Add(UIFont.FromName(HelveticaNeueBold, UIFont.SystemFontSize));
-                FontsCollection.Add(UIFont.FromName(HelveticaNeueLight, UIFont.SystemFontSize));
-                FontsCollection.Add(UIFont.FromName(HelveticaNeueRoman, UIFont.SystemFontSize));
-                FontsCollection.Add(UIFont.FromName(HelveticaNeueMedium, UIFont.SystemFontSize));
-                FontsCollection.Add(UIFont.FromName(HiraginoSansW3, UIFont.SystemFontSize));
                 FontsCollection.Add(UIFont.SystemFontOfSize(UIFont.SystemFontSize, UIFontWeight.Bold));
                 FontsCollection.Add(UIFont.SystemFontOfSize(UIFont.SystemFontSize, UIFontWeight.Medium));
                 FontsCollection.Add(UIFont.SystemFontOfSize(UIFont.SystemFontSize, UIFontWeight.Regular));
                 FontsCollection.Add(UIFont.SystemFontOfSize(UIFont.SystemFontSize, UIFontWeight.Semibold));
-
-                FontsCollection = FontsCollection.OrderBy(f => f.Name).ToList();
+                
+                FontsCollection.Add(UIFont.FromName(AvenirRoman, UIFont.SystemFontSize));
+                FontsCollection.Add(UIFont.FromName(AvenirBook, UIFont.SystemFontSize));
+                FontsCollection.Add(UIFont.FromName(AvenirMedium, UIFont.SystemFontSize));
+                FontsCollection.Add(UIFont.FromName(AvenirBlack, UIFont.SystemFontSize));
+                FontsCollection.Add(UIFont.FromName(AvenirHeavy, UIFont.SystemFontSize));
+                FontsCollection.Add(UIFont.FromName(AvenirNextRegular, UIFont.SystemFontSize));
+                FontsCollection.Add(UIFont.FromName(AvenirNextMedium, UIFont.SystemFontSize));
+                FontsCollection.Add(UIFont.FromName(AvenirNextDemiBold, UIFont.SystemFontSize));
+                FontsCollection.Add(UIFont.FromName(FuturaMedium, UIFont.SystemFontSize));
+                FontsCollection.Add(UIFont.FromName(FuturaBold, UIFont.SystemFontSize));
+                FontsCollection.Add(UIFont.FromName(HelveticaRoman, UIFont.SystemFontSize));
+                FontsCollection.Add(UIFont.FromName(HelveticaBold, UIFont.SystemFontSize));
+                FontsCollection.Add(UIFont.FromName(HelveticaNeueLight, UIFont.SystemFontSize));
+                FontsCollection.Add(UIFont.FromName(HelveticaNeueRoman, UIFont.SystemFontSize));
+                FontsCollection.Add(UIFont.FromName(HelveticaNeueMedium, UIFont.SystemFontSize));
+                FontsCollection.Add(UIFont.FromName(HelveticaNeueBold, UIFont.SystemFontSize));
+                FontsCollection.Add(UIFont.FromName(HiraginoSansW3, UIFont.SystemFontSize));
             }
 
             public static IEnumerable<UIFont> GetButtonLabelFonts()
@@ -112,13 +106,12 @@ namespace EOS.UI.Shared.Sandbox.Helpers
                 {
                     UIFont.FromName(AvenirBook, UIFont.SystemFontSize),
                     UIFont.FromName(AvenirMedium, UIFont.SystemFontSize),
+                    UIFont.FromName(AvenirNextBold, UIFont.SystemFontSize),
                     UIFont.FromName(AvenirRoman, UIFont.SystemFontSize),
                     UIFont.FromName(AvenirNextMedium, UIFont.SystemFontSize),
                     UIFont.FromName(AvenirNextRegular, UIFont.SystemFontSize),
-                    UIFont.FromName(GeezaProBold, UIFont.SystemFontSize),
-                    UIFont.FromName(GeezaProRegular, UIFont.SystemFontSize),
                     UIFont.FromName(HiraginoSansW3, UIFont.SystemFontSize),
-                    UIFont.FromName(HelveticaNeueLight, UIFont.SystemFontSize)
+                    UIFont.FromName(HelveticaNeueLight, UIFont.SystemFontSize),
                 });
             }
 
@@ -129,13 +122,11 @@ namespace EOS.UI.Shared.Sandbox.Helpers
                     UIFont.FromName(AvenirBook, UIFont.SystemFontSize),
                     UIFont.FromName(AvenirMedium, UIFont.SystemFontSize),
                     UIFont.FromName(AvenirRoman, UIFont.SystemFontSize),
+                    UIFont.FromName(AvenirNextBold, UIFont.SystemFontSize),
                     UIFont.FromName(AvenirNextMedium, UIFont.SystemFontSize),
                     UIFont.FromName(AvenirNextRegular, UIFont.SystemFontSize),
-                    UIFont.FromName(GeezaProBold, UIFont.SystemFontSize),
-                    UIFont.FromName(GeezaProRegular, UIFont.SystemFontSize),
                     UIFont.FromName(HiraginoSansW3, UIFont.SystemFontSize),
                     UIFont.FromName(FuturaBold, UIFont.SystemFontSize),
-                    UIFont.FromName(HelveticaRoman, UIFont.SystemFontSize),
                     UIFont.FromName(HelveticaNeueLight, UIFont.SystemFontSize),
                     UIFont.FromName(HelveticaNeueRoman, UIFont.SystemFontSize)
                 });
@@ -145,7 +136,6 @@ namespace EOS.UI.Shared.Sandbox.Helpers
             {
                 return FontsCollection.Except(new[]
                 {
-                    UIFont.FromName(AvenirBlack, UIFont.SystemFontSize),
                     UIFont.FromName(AvenirBook, UIFont.SystemFontSize),
                     UIFont.FromName(AvenirMedium, UIFont.SystemFontSize),
                     UIFont.FromName(AvenirRoman, UIFont.SystemFontSize),
@@ -154,8 +144,8 @@ namespace EOS.UI.Shared.Sandbox.Helpers
                     UIFont.FromName(AvenirNextRegular, UIFont.SystemFontSize),
                     UIFont.FromName(FuturaBold, UIFont.SystemFontSize),
                     UIFont.FromName(FuturaMedium, UIFont.SystemFontSize),
-                    UIFont.FromName(GeezaProRegular, UIFont.SystemFontSize),
                     UIFont.FromName(HelveticaRoman, UIFont.SystemFontSize),
+                    UIFont.FromName(HelveticaNeueRoman, UIFont.SystemFontSize),
                     UIFont.FromName(HelveticaNeueMedium, UIFont.SystemFontSize),
                     UIFont.FromName(HelveticaNeueLight, UIFont.SystemFontSize),
                     UIFont.FromName(HiraginoSansW3, UIFont.SystemFontSize)
@@ -166,16 +156,15 @@ namespace EOS.UI.Shared.Sandbox.Helpers
             {
                 return FontsCollection.Except(new[]
                 {
-                    UIFont.FromName(AvenirBlack, UIFont.SystemFontSize),
                     UIFont.FromName(AvenirBook, UIFont.SystemFontSize),
                     UIFont.FromName(AvenirMedium, UIFont.SystemFontSize),
                     UIFont.FromName(AvenirRoman, UIFont.SystemFontSize),
                     UIFont.FromName(AvenirNextBold, UIFont.SystemFontSize),
                     UIFont.FromName(AvenirNextMedium, UIFont.SystemFontSize),
                     UIFont.FromName(AvenirNextRegular, UIFont.SystemFontSize),
-                    UIFont.FromName(GeezaProRegular, UIFont.SystemFontSize),
-                    UIFont.FromName(HelveticaNeueLight, UIFont.SystemFontSize),
                     UIFont.FromName(HelveticaRoman, UIFont.SystemFontSize),
+                    UIFont.FromName(HelveticaNeueRoman, UIFont.SystemFontSize),
+                    UIFont.FromName(HelveticaNeueLight, UIFont.SystemFontSize),
                     UIFont.FromName(HiraginoSansW3, UIFont.SystemFontSize)
                 });
             }
@@ -187,13 +176,10 @@ namespace EOS.UI.Shared.Sandbox.Helpers
                     UIFont.FromName(AvenirBook, UIFont.SystemFontSize),
                     UIFont.FromName(AvenirMedium, UIFont.SystemFontSize),
                     UIFont.FromName(AvenirRoman, UIFont.SystemFontSize),
+                    UIFont.FromName(AvenirNextBold, UIFont.SystemFontSize),
                     UIFont.FromName(AvenirNextMedium, UIFont.SystemFontSize),
                     UIFont.FromName(AvenirNextRegular, UIFont.SystemFontSize),
-                    UIFont.FromName(HiraginoSansW3, UIFont.SystemFontSize),
-                    UIFont.FromName(GeezaProBold, UIFont.SystemFontSize),
-                    UIFont.FromName(GeezaProRegular, UIFont.SystemFontSize),
                     UIFont.FromName(HelveticaBold, UIFont.SystemFontSize),
-                    UIFont.FromName(HelveticaRoman, UIFont.SystemFontSize),
                     UIFont.FromName(HelveticaNeueBold, UIFont.SystemFontSize),
                     UIFont.FromName(HelveticaNeueLight, UIFont.SystemFontSize),
                     UIFont.FromName(FuturaBold, UIFont.SystemFontSize)
@@ -208,7 +194,6 @@ namespace EOS.UI.Shared.Sandbox.Helpers
                     UIFont.FromName(AvenirHeavy, UIFont.SystemFontSize),
                     UIFont.FromName(AvenirNextBold, UIFont.SystemFontSize),
                     UIFont.FromName(AvenirNextDemiBold, UIFont.SystemFontSize),
-                    UIFont.FromName(GeezaProBold, UIFont.SystemFontSize),
                     UIFont.FromName(HelveticaBold, UIFont.SystemFontSize),
                     UIFont.FromName(HelveticaNeueBold, UIFont.SystemFontSize),
                     UIFont.FromName(HelveticaNeueMedium, UIFont.SystemFontSize),
