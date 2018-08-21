@@ -13,6 +13,12 @@ namespace EOS.UI.Shared.Themes.Helpers
         public const string NeutralColor4 = "neutralColor4";
         public const string NeutralColor5 = "neutralColor5";
         public const string NeutralColor6 = "neutralColor6";
+        public const string NeutralColor1S = "neutralColor1S";
+        public const string NeutralColor2S = "neutralColor2S";
+        public const string NeutralColor3S = "neutralColor3S";
+        public const string NeutralColor4S = "neutralColor4S";
+        public const string NeutralColor5S = "neutralColor5S";
+        public const string NeutralColor6S = "neutralColor6S";
         public const string RippleColor = "rippleColor";
         public const string FabIconColor = "fabIconColor";
         public const string LabelCornerRadius = "labelCornerRadius";
@@ -21,7 +27,6 @@ namespace EOS.UI.Shared.Themes.Helpers
         public const string WarningInputImage = "warningInputImage";
         public const string ClearInputImage = "clearInputImage";
         public const string SimpleButtonShadow = "simpleButtonShadow";
-        public const string DisabledSimpleButtonBackgroundColor = "disabledSimpleButtonBackgroundColor";
         public const string DisabledInputColor = "disabledInputColor";
         //fab progress constans
         public const string CalendarImage = "calendarImage";
@@ -49,12 +54,15 @@ namespace EOS.UI.Shared.Themes.Helpers
         public static string R2C2 = "R2C2";
         public static string R2C3 = "R2C3";
         public static string R2C4 = "R2C4";
-        public static string R2C5 = "R2C5";
-        public static string R3C1 = "R3C1";
+        //public static string R2C5 = "R2C5";
+        public static string R2C5S = "R2C5S";
+        //public static string R3C1 = "R3C1";
+        public static string R3C1S = "R3C1S";
         public static string R3C2 = "R3C2";
         public static string R3C3 = "R3C3";
-        public static string R3C4 = "R3C4";
-        public static string R3C5 = "R3C5";
+        //public static string R3C4 = "R3C4";
+        public static string R3C4S = "R3C4S";
+        public static string R3C5S = "R3C5S";
         public static string R4C1 = "R4C1";
         public static string R4C2 = "R4C2";
         public static string R4C3 = "R4C3";

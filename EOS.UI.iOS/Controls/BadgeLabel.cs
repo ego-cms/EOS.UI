@@ -164,7 +164,7 @@ namespace EOS.UI.iOS.Controls
             if (!IsEOSCustomizationIgnored)
             {
                 var provider = GetThemeProvider();
-                FontStyle = provider.GetEOSProperty<FontStyleItem>(this, EOSConstants.R2C5);
+                FontStyle = provider.GetEOSProperty<FontStyleItem>(this, EOSConstants.R2C5S);
                 CornerRadius = provider.GetEOSProperty<int>(this, EOSConstants.LabelCornerRadius);
                 BackgroundColor = provider.GetEOSProperty<UIColor>(this, EOSConstants.BrandPrimaryColor);
                 IsEOSCustomizationIgnored = false;

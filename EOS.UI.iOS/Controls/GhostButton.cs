@@ -219,7 +219,7 @@ namespace EOS.UI.iOS.Controls
             {
                 var provider = GetThemeProvider();
                 FontStyle = provider.GetEOSProperty<FontStyleItem>(this, EOSConstants.R2C1);
-                DisabledFontStyle = provider.GetEOSProperty<FontStyleItem>(this, EOSConstants.R3C4);
+                DisabledFontStyle = provider.GetEOSProperty<FontStyleItem>(this, EOSConstants.R3C4S);
                 RippleColor = provider.GetEOSProperty<UIColor>(this, EOSConstants.RippleColor);
                 Enabled = base.Enabled;
                 IsEOSCustomizationIgnored = false;

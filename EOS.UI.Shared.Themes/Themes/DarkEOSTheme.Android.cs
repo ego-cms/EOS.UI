@@ -59,7 +59,7 @@ namespace EOS.UI.Shared.Themes.Themes
             { EOSConstants.NeutralColor5, Color.ParseColor(neutralColor5)},
             { EOSConstants.NeutralColor6, Color.ParseColor(neutralColor6)},
             { EOSConstants.RippleColor, Color.ParseColor(rippleColor) },
-            { EOSConstants.DisabledSimpleButtonBackgroundColor, Color.ParseColor(neutralColor3)},
+            { EOSConstants.NeutralColor4S, Color.ParseColor(neutralColor4S)},
             { EOSConstants.DisabledInputColor, Color.ParseColor(neutralColor5)},
             { EOSConstants.LabelCornerRadius, 4f },
             { EOSConstants.ButtonCornerRadius, 100f },
@@ -183,17 +183,17 @@ namespace EOS.UI.Shared.Themes.Themes
                     LineHeight = 15f
                 }
             },
-            { EOSConstants.R2C5,
+            { EOSConstants.R2C5S,
                 new FontStyleItem()
                 {
-                    Color = Color.ParseColor(neutralColor1),
+                    Color = Color.ParseColor(neutralColor6S),
                     Typeface = RobotoBold,
                     Size = 13f,
                     LetterSpacing = -0.005f,
                     LineHeight = 15f
                 }
             },
-            { EOSConstants.R3C1,
+            { EOSConstants.R3C1S,
                 new FontStyleItem()
                 {
                     Color = Color.ParseColor(brandPrimaryColor),
@@ -223,20 +223,20 @@ namespace EOS.UI.Shared.Themes.Themes
                     LineHeight = 19f
                 }
             },
-            { EOSConstants.R3C4,
+            { EOSConstants.R3C4S,
                 new FontStyleItem()
                 {
-                    Color = Color.ParseColor(neutralColor4),//should be #C0BFC0 in all themes
+                    Color = Color.ParseColor(neutralColor3S),
                     Typeface = RobotoMedium,
                     Size = 16f,
                     LetterSpacing = -0.01f,
                     LineHeight = 19f
                 }
             },
-            { EOSConstants.R3C5,
+            { EOSConstants.R3C5S,
                 new FontStyleItem()
                 {
-                    Color = Color.ParseColor(neutralColor1),
+                    Color = Color.ParseColor(neutralColor6S),
                     Typeface = RobotoMedium,
                     Size = 16f,
                     LetterSpacing = -0.01f,
