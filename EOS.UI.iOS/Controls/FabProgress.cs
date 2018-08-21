@@ -72,8 +72,8 @@ namespace EOS.UI.iOS.Controls
                 base.Enabled = value;
                 base.BackgroundColor = value ? BackgroundColor : DisabledBackgroundColor;
                 base.ImageView.TintColor = value ? 
-                    GetThemeProvider().GetEOSProperty<UIColor>(this, EOSConstants.FabIconColor) :
-                    GetThemeProvider().GetEOSProperty<UIColor>(this, EOSConstants.NeutralColor3);
+                    GetThemeProvider().GetEOSProperty<UIColor>(this, EOSConstants.NeutralColor6S) :
+                    GetThemeProvider().GetEOSProperty<UIColor>(this, EOSConstants.NeutralColor3S);
 
                 SetShadowConfig(Enabled ? _shadowConfig : null);
             }
@@ -151,7 +151,7 @@ namespace EOS.UI.iOS.Controls
             _rotationAnimation.Cumulative = true;
             _rotationAnimation.RepeatCount = Int32.MaxValue;
             UpdateAppearance();
-            ImageView.TintColor = GetThemeProvider().GetEOSProperty<UIColor>(this, EOSConstants.FabIconColor);
+            ImageView.TintColor = GetThemeProvider().GetEOSProperty<UIColor>(this, EOSConstants.NeutralColor6S);
         }
 
         public override void LayoutSubviews()
@@ -202,7 +202,7 @@ namespace EOS.UI.iOS.Controls
                 var provider = GetThemeProvider();
                 BackgroundColor = provider.GetEOSProperty<UIColor>(this, EOSConstants.BrandPrimaryColor);
                 PressedBackgroundColor = provider.GetEOSProperty<UIColor>(this, EOSConstants.BrandPrimaryColorVariant1);
-                DisabledBackgroundColor = provider.GetEOSProperty<UIColor>(this, EOSConstants.NeutralColor4);
+                DisabledBackgroundColor = provider.GetEOSProperty<UIColor>(this, EOSConstants.NeutralColor4S);
                 Image = UIImage.FromBundle(provider.GetEOSProperty<string>(this, EOSConstants.CalendarImage));
                 PreloaderImage = UIImage.FromBundle(provider.GetEOSProperty<string>(this, EOSConstants.FabProgressPreloaderImage));
                 ShadowConfig = provider.GetEOSProperty<ShadowConfig>(this, EOSConstants.FabShadow);
