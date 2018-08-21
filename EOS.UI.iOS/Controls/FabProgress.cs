@@ -152,6 +152,7 @@ namespace EOS.UI.iOS.Controls
             _rotationAnimation.RepeatCount = Int32.MaxValue;
             UpdateAppearance();
             ImageView.TintColor = GetThemeProvider().GetEOSProperty<UIColor>(this, EOSConstants.NeutralColor6S);
+            AdjustsImageWhenDisabled = false;
         }
 
         public override void LayoutSubviews()
