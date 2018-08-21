@@ -64,7 +64,7 @@ namespace EOS.UI.Shared.Themes.Themes
             { EOSConstants.HasSectionBorder, true },
             { EOSConstants.HasSectionAction, true },
             //simblebutton enabled
-            { EOSConstants.R3C1S, new FontStyleItem() {
+            { EOSConstants.R3C5S, new FontStyleItem() {
                     Color = ColorExtension.FromHex(neutralColor6S),
                     Font = UIFont.SystemFontOfSize(16f, UIFontWeight.Medium),
                     Size = 16f,
@@ -80,7 +80,7 @@ namespace EOS.UI.Shared.Themes.Themes
                     LineHeight = 19f
             }},
             //ghostbutton enabled, simple label, section button
-            { EOSConstants.R2C1, new FontStyleItem() {
+            { EOSConstants.R2C1S, new FontStyleItem() {
                     Color = ColorExtension.FromHex(brandPrimaryColor),
                     Font = UIFont.SystemFontOfSize(13f, UIFontWeight.Semibold),
                     Size = 13f,
@@ -88,8 +88,8 @@ namespace EOS.UI.Shared.Themes.Themes
                     LineHeight = 15f
             }},
             //ghostbutton disabled
-            { EOSConstants.R2C4, new FontStyleItem() {
-                    Color = ColorExtension.FromHex(neutralColor3),
+            { EOSConstants.R2C4S, new FontStyleItem() {
+                    Color = ColorExtension.FromHex(neutralColor3S),
                     Font = UIFont.SystemFontOfSize(13f, UIFontWeight.Semibold),
                     Size = 13f,
                     LetterSpacing = -0.6f,

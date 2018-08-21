@@ -147,7 +147,7 @@ namespace EOS.UI.Shared.Themes.Themes
                     LineHeight = 13f
                 }
             },
-            { EOSConstants.R2C1,
+            { EOSConstants.R2C1S,
                 new FontStyleItem()
                 {
                     Color = Color.ParseColor(brandPrimaryColor),
@@ -177,10 +177,10 @@ namespace EOS.UI.Shared.Themes.Themes
                     LineHeight = 15f
                 }
             },
-            { EOSConstants.R2C4,
+            { EOSConstants.R2C4S,
                 new FontStyleItem()
                 {
-                    Color = Color.ParseColor(neutralColor3),
+                    Color = Color.ParseColor(neutralColor3S),
                     Typeface = RobotoBold,
                     Size = 13f,
                     LetterSpacing = -0.005f,

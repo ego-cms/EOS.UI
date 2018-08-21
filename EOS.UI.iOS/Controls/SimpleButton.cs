@@ -336,7 +336,7 @@ namespace EOS.UI.iOS.Controls
             if (!IsEOSCustomizationIgnored)
             {
                 var provider = GetThemeProvider();
-                FontStyle = provider.GetEOSProperty<FontStyleItem>(this, EOSConstants.R3C1S);
+                FontStyle = provider.GetEOSProperty<FontStyleItem>(this, EOSConstants.R3C5S);
                 DisabledFontStyle = provider.GetEOSProperty<FontStyleItem>(this, EOSConstants.R3C4S);
                 BackgroundColor = provider.GetEOSProperty<UIColor>(this, EOSConstants.BrandPrimaryColor);
                 DisabledBackgroundColor = provider.GetEOSProperty<UIColor>(this, EOSConstants.NeutralColor4S);
