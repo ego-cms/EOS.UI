@@ -173,6 +173,7 @@ namespace EOS.UI.iOS.Controls
                 if (Enabled != value)
                     ToggleState(value);
                 base.Enabled = value;
+                SetShadowConfig(Enabled ? _shadowConfig : null);
             }
         }
 
@@ -207,7 +208,7 @@ namespace EOS.UI.iOS.Controls
             {
                 _shadowConfig = value;
                 IsEOSCustomizationIgnored = true;
-                SetShadowConfig(_shadowConfig);
+                SetShadowConfig(Enabled ? _shadowConfig : null);
                 if (_shadowConfig != null)
                     _pressedShadowOffset = new CGSize(_shadowConfig.Offset.X, ShadowConfig.Offset.Y * _shadowYCoeff);
             }
