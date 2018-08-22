@@ -15,5 +15,7 @@ namespace EOS.UI.Shared.Themes.Themes
         protected const string neutralColor4S = "#EAEAEA";
         protected const string neutralColor5S = "#F6F6F6";
         protected const string neutralColor6S = "#FFFFFF";
+        protected const string rippleColor = "#293C6DF0";
+        protected const string shadowColor = "#33343334";
     }
 }

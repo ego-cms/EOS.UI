@@ -10,7 +10,5 @@ namespace EOS.UI.Shared.Themes.Themes
         private const string neutralColor4 = "#EAEAEA";
         private const string neutralColor5 = "#F6F6F6";
         private const string neutralColor6 = "#FFFFFF";
-        private const string rippleColor = "#293C6DF0";
-        private const string shadowColor = "#33343334";
     }
 }
