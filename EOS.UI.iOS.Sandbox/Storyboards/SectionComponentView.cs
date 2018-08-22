@@ -359,6 +359,8 @@ namespace EOS.UI.iOS.Sandbox.Storyboards
                     _source.SectionModel.CopyData(defaultModel);
                     _source.SectionModel.ResetCustomization = true;
                     _dropDowns.Except(new[] { themeDropDown }).ToList().ForEach(dropDown => dropDown.ResetValue());
+                    hasBorderSwitch.On = defaultModel.HasBorder;
+                    hasButtonSwitch.On = defaultModel.HasButton;
                     UpdateApperaence();
                 },
                 Fields.Theme,

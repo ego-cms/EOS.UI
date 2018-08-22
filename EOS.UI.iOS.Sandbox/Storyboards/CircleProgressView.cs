@@ -76,6 +76,7 @@ namespace EOS.UI.iOS.Sandbox
                     _circleProgress.ResetCustomization();
                     _dropDowns.Except(new[] { themeDropDown }).ToList().ForEach(dropDown => dropDown.ResetValue());
                     _circleProgress.Progress = 0;
+                    showProgressSwitch.On = true;
                     UpdateApperaence();
                 },
                 Fields.Theme,
