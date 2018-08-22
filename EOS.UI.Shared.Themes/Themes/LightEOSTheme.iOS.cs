@@ -25,14 +25,20 @@ namespace EOS.UI.Shared.Themes.Themes
             { EOSConstants.NeutralColor4, ColorExtension.FromHex(neutralColor4) },
             { EOSConstants.NeutralColor5, ColorExtension.FromHex(neutralColor5) },
             { EOSConstants.NeutralColor6, ColorExtension.FromHex(neutralColor6) },
+            { EOSConstants.NeutralColor1S, ColorExtension.FromHex(neutralColor1S) },
+            { EOSConstants.NeutralColor2S, ColorExtension.FromHex(neutralColor2S) },
+            { EOSConstants.NeutralColor3S, ColorExtension.FromHex(neutralColor3S) },
+            { EOSConstants.NeutralColor4S, ColorExtension.FromHex(neutralColor4S) },
+            { EOSConstants.NeutralColor5S, ColorExtension.FromHex(neutralColor5S) },
+            { EOSConstants.NeutralColor6S, ColorExtension.FromHex(neutralColor6S) },
             { EOSConstants.RippleColor, ColorExtension.FromHex(rippleColor) },
+            { EOSConstants.DisabledInputColor, ColorExtension.FromHex(neutralColor3)},
             { EOSConstants.ButtonCornerRadius, 25 },
             { EOSConstants.LabelCornerRadius, 5 },
             { EOSConstants.LeftImage, "icCalendar" },
             { EOSConstants.CalendarImage, "icCalendar"},
             { EOSConstants.FabProgressPreloaderImage, "icPreloader"},
             //should always be white
-            { EOSConstants.FabIconColor, ColorExtension.FromHex(neutralColor6)},
             { EOSConstants.WarningInputImage, "icWarning"},
             { EOSConstants.ClearInputImage, "icClear"},
             { EOSConstants.CircleProgressShown, true},
@@ -58,23 +64,23 @@ namespace EOS.UI.Shared.Themes.Themes
             { EOSConstants.HasSectionBorder, true },
             { EOSConstants.HasSectionAction, true },
             //simblebutton enabled
-            { EOSConstants.R3C1, new FontStyleItem() {
-                    Color = ColorExtension.FromHex(neutralColor6), //must be white in all themes
+            { EOSConstants.R3C5S, new FontStyleItem() {
+                    Color = ColorExtension.FromHex(neutralColor6S),
                     Font = UIFont.SystemFontOfSize(16f, UIFontWeight.Medium),
                     Size = 16f,
                     LetterSpacing = -0.2f,
                     LineHeight = 19f
             }},
-            //simplebutton disabled
-            { EOSConstants.R3C4, new FontStyleItem() {
-                    Color = ColorExtension.FromHex(neutralColor3),
+            //simplebutton, ghostbutton disabled
+            { EOSConstants.R3C4S, new FontStyleItem() {
+                    Color = ColorExtension.FromHex(neutralColor3S),
                     Font = UIFont.SystemFontOfSize(16f, UIFontWeight.Medium),
                     Size = 16f,
                     LetterSpacing = -0.2f,
                     LineHeight = 19f
             }},
             //ghostbutton enabled, simple label, section button
-            { EOSConstants.R2C1, new FontStyleItem() {
+            { EOSConstants.R2C1S, new FontStyleItem() {
                     Color = ColorExtension.FromHex(brandPrimaryColor),
                     Font = UIFont.SystemFontOfSize(13f, UIFontWeight.Semibold),
                     Size = 13f,
@@ -82,16 +88,16 @@ namespace EOS.UI.Shared.Themes.Themes
                     LineHeight = 15f
             }},
             //ghostbutton disabled
-            { EOSConstants.R2C4, new FontStyleItem() {
-                    Color = ColorExtension.FromHex(neutralColor3),
+            { EOSConstants.R2C4S, new FontStyleItem() {
+                    Color = ColorExtension.FromHex(neutralColor3S),
                     Font = UIFont.SystemFontOfSize(13f, UIFontWeight.Semibold),
                     Size = 13f,
                     LetterSpacing = -0.6f,
                     LineHeight = 15f
             }},
             //badge label
-            { EOSConstants.R2C5, new FontStyleItem() {
-                    Color = ColorExtension.FromHex(neutralColor6), //must be white in all themes
+            { EOSConstants.R2C5S, new FontStyleItem() {
+                    Color = ColorExtension.FromHex(neutralColor6S),
                     Font = UIFont.SystemFontOfSize(13f, UIFontWeight.Semibold),
                     Size = 13f,
                     LetterSpacing = -0.6f,

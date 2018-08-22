@@ -168,7 +168,7 @@ namespace EOS.UI.Droid.Controls
         {
             if(!IsEOSCustomizationIgnored)
             {
-                FontStyle = GetThemeProvider().GetEOSProperty<FontStyleItem>(this, EOSConstants.R2C1);
+                FontStyle = GetThemeProvider().GetEOSProperty<FontStyleItem>(this, EOSConstants.R2C1S);
                 IsEOSCustomizationIgnored = false;
             }
         }

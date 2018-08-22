@@ -481,7 +481,8 @@ namespace EOS.UI.Droid.Controls
                 HintTextColor = GetThemeProvider().GetEOSProperty<FontStyleItem>(this, EOSConstants.R4C3).Color;
                 HintTextColorDisabled = GetThemeProvider().GetEOSProperty<FontStyleItem>(this, EOSConstants.R4C4).Color;
                 FocusedColor = GetThemeProvider().GetEOSProperty<Color>(this, EOSConstants.BrandPrimaryColor);
-                DisabledColor = GetThemeProvider().GetEOSProperty<Color>(this, EOSConstants.NeutralColor3);
+                DisabledColor = GetThemeProvider().GetEOSProperty<Color>(this, EOSConstants.DisabledInputColor);
+                TextColorDisabled = GetThemeProvider().GetEOSProperty<FontStyleItem>(this, EOSConstants.R4C4).Color;
                 NormalIconColor = GetThemeProvider().GetEOSProperty<Color>(this, EOSConstants.NeutralColor2);
                 NormalUnderlineColor = GetThemeProvider().GetEOSProperty<Color>(this, EOSConstants.NeutralColor3);
                 PopulatedIconColor = GetThemeProvider().GetEOSProperty<Color>(this, EOSConstants.BrandPrimaryColor);
