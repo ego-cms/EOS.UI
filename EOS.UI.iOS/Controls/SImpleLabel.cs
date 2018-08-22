@@ -154,7 +154,7 @@ namespace EOS.UI.iOS.Controls
             if (!IsEOSCustomizationIgnored)
             {
                 var provider = GetThemeProvider();
-                FontStyle = provider.GetEOSProperty<FontStyleItem>(this, EOSConstants.R2C1);
+                FontStyle = provider.GetEOSProperty<FontStyleItem>(this, EOSConstants.R2C1S);
                 IsEOSCustomizationIgnored = false;
             }
         }

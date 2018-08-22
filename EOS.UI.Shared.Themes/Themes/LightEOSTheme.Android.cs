@@ -18,7 +18,7 @@ namespace EOS.UI.Shared.Themes.Themes
             get
             {
                 if (_robotoBold == null)
-                    _robotoBold = Typeface.CreateFromAsset(Application.Context.Assets, "Fonts/RobotoBold.ttf");
+                    _robotoBold = Typeface.CreateFromAsset(Application.Context.Assets, "Fonts/Roboto-Bold.ttf");
                 return _robotoBold;
             }
         }
@@ -29,7 +29,7 @@ namespace EOS.UI.Shared.Themes.Themes
             get
             {
                 if (_robotoMedium == null)
-                    _robotoMedium = Typeface.CreateFromAsset(Application.Context.Assets, "Fonts/RobotoMedium.ttf");
+                    _robotoMedium = Typeface.CreateFromAsset(Application.Context.Assets, "Fonts/Roboto-Medium.ttf");
                 return _robotoMedium;
             }
         }
@@ -40,7 +40,7 @@ namespace EOS.UI.Shared.Themes.Themes
             get
             {
                 if (_robotoRegular == null)
-                    _robotoRegular = Typeface.CreateFromAsset(Application.Context.Assets, "Fonts/RobotoRegular.ttf");
+                    _robotoRegular = Typeface.CreateFromAsset(Application.Context.Assets, "Fonts/Roboto-Regular.ttf");
                 return _robotoRegular;
             }
         }
@@ -58,13 +58,19 @@ namespace EOS.UI.Shared.Themes.Themes
             { EOSConstants.NeutralColor4, Color.ParseColor(neutralColor4)},
             { EOSConstants.NeutralColor5, Color.ParseColor(neutralColor5)},
             { EOSConstants.NeutralColor6, Color.ParseColor(neutralColor6)},
+            { EOSConstants.NeutralColor1S, Color.ParseColor(neutralColor1S)},
+            { EOSConstants.NeutralColor2S, Color.ParseColor(neutralColor2S)},
+            { EOSConstants.NeutralColor3S, Color.ParseColor(neutralColor3S)},
+            { EOSConstants.NeutralColor4S, Color.ParseColor(neutralColor4S)},
+            { EOSConstants.NeutralColor5S, Color.ParseColor(neutralColor5S)},
+            { EOSConstants.NeutralColor6S, Color.ParseColor(neutralColor6S)},
             { EOSConstants.RippleColor, Color.ParseColor(rippleColor) },
+            { EOSConstants.DisabledInputColor, Color.ParseColor(neutralColor3)},
             { EOSConstants.LabelCornerRadius, 4f },
             { EOSConstants.ButtonCornerRadius, 24f },
             { EOSConstants.LeftImage, Resource.Drawable.icCalendar },
             { EOSConstants.CalendarImage, Resource.Drawable.icCalendar },
             //should always be white
-            { EOSConstants.FabIconColor, Color.ParseColor(neutralColor6)},
             { EOSConstants.FabProgressPreloaderImage, Resource.Drawable.icPreloader },
             { EOSConstants.CircleProgressShown, true},
             { EOSConstants.BorderWidth, 2 },
@@ -141,7 +147,7 @@ namespace EOS.UI.Shared.Themes.Themes
                     LineHeight = 13f
                 }
             },
-            { EOSConstants.R2C1,
+            { EOSConstants.R2C1S,
                 new FontStyleItem()
                 {
                     Color = Color.ParseColor(brandPrimaryColor),
@@ -171,27 +177,27 @@ namespace EOS.UI.Shared.Themes.Themes
                     LineHeight = 15f
                 }
             },
-            { EOSConstants.R2C4,
+            { EOSConstants.R2C4S,
                 new FontStyleItem()
                 {
-                    Color = Color.ParseColor(neutralColor3),
+                    Color = Color.ParseColor(neutralColor3S),
                     Typeface = RobotoBold,
                     Size = 13f,
                     LetterSpacing = -0.005f,
                     LineHeight = 15f
                 }
             },
-            { EOSConstants.R2C5,
+            { EOSConstants.R2C5S,
                 new FontStyleItem()
                 {
-                    Color = Color.ParseColor(neutralColor6),
+                    Color = Color.ParseColor(neutralColor6S),
                     Typeface = RobotoBold,
                     Size = 13f,
                     LetterSpacing = -0.005f,
                     LineHeight = 15f
                 }
             },
-            { EOSConstants.R3C1,
+            { EOSConstants.R3C1S,
                 new FontStyleItem()
                 {
                     Color = Color.ParseColor(brandPrimaryColor),
@@ -221,20 +227,20 @@ namespace EOS.UI.Shared.Themes.Themes
                     LineHeight = 19f
                 }
             },
-            { EOSConstants.R3C4,
+            { EOSConstants.R3C4S,
                 new FontStyleItem()
                 {
-                    Color = Color.ParseColor(neutralColor3),
+                    Color = Color.ParseColor(neutralColor3S),
                     Typeface = RobotoMedium,
                     Size = 16f,
                     LetterSpacing = -0.01f,
                     LineHeight = 19f
                 }
             },
-            { EOSConstants.R3C5,
+            { EOSConstants.R3C5S,
                 new FontStyleItem()
                 {
-                    Color = Color.ParseColor(neutralColor6),
+                    Color = Color.ParseColor(neutralColor6S),
                     Typeface = RobotoMedium,
                     Size = 16f,
                     LetterSpacing = -0.01f,

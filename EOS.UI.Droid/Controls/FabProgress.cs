@@ -55,8 +55,8 @@ namespace EOS.UI.Droid.Controls
                     //SetShadowOrBackground(value, ShadowConfig);
                     SetBackgroundColor(value ? BackgroundColor : DisabledBackgroundColor);
                     ChangeImageColor(value ?
-                        GetThemeProvider().GetEOSProperty<Color>(this, EOSConstants.FabIconColor) :
-                        GetThemeProvider().GetEOSProperty<Color>(this, EOSConstants.NeutralColor3));
+                                     GetThemeProvider().GetEOSProperty<Color>(this, EOSConstants.NeutralColor6S) :
+                                     GetThemeProvider().GetEOSProperty<Color>(this, EOSConstants.NeutralColor3S));
                     ToggleShadow(value);
                 }
             }
@@ -104,7 +104,7 @@ namespace EOS.UI.Droid.Controls
                 if(Enabled)
                 {
                     SetBackgroundColor(value);
-                    Image.SetColorFilter(GetThemeProvider().GetEOSProperty<Color>(this, EOSConstants.FabIconColor), PorterDuff.Mode.SrcIn);
+                    Image.SetColorFilter(GetThemeProvider().GetEOSProperty<Color>(this, EOSConstants.NeutralColor6S), PorterDuff.Mode.SrcIn);
                 }
                 IsEOSCustomizationIgnored = true;
             }
@@ -120,7 +120,7 @@ namespace EOS.UI.Droid.Controls
                 if(!Enabled)
                 {
                     SetBackgroundColor(value);
-                    Image.SetColorFilter(GetThemeProvider().GetEOSProperty<Color>(this, EOSConstants.NeutralColor3), PorterDuff.Mode.SrcIn);
+                    Image.SetColorFilter(GetThemeProvider().GetEOSProperty<Color>(this, EOSConstants.NeutralColor3S), PorterDuff.Mode.SrcIn);
                 }
                 IsEOSCustomizationIgnored = true;
             }
@@ -291,7 +291,7 @@ namespace EOS.UI.Droid.Controls
                 //Should initialize after ShadowConfig
                 //ShadowConfig method checks and background drawable which should be used for color.
                 BackgroundColor = provider.GetEOSProperty<Color>(this, EOSConstants.BrandPrimaryColor);
-                DisabledBackgroundColor = provider.GetEOSProperty<Color>(this, EOSConstants.NeutralColor4);
+                DisabledBackgroundColor = provider.GetEOSProperty<Color>(this, EOSConstants.NeutralColor4S);
                 PressedBackgroundColor = provider.GetEOSProperty<Color>(this, EOSConstants.BrandPrimaryColorVariant1);
                 IsEOSCustomizationIgnored = false;
             }

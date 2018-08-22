@@ -123,6 +123,20 @@
     <ImageAsset Include="Assets.xcassets\Contents.json">
       <Visible>false</Visible>
     </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\icAccountOff.imageset\Contents.json">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\icAccountOff.imageset\icAccountOff.pdf">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\icAccountKey.imageset\Contents.json">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\icAccountKey.imageset\icAccountKey.pdf">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\icAccountCircle.imageset\Contents.json" />
+    <ImageAsset Include="Assets.xcassets\icAccountCircle.imageset\icAccountCircle.pdf" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
@@ -218,6 +232,9 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Resources\" />
+    <Folder Include="Assets.xcassets\icAccountCircle.imageset\" />
+    <Folder Include="Assets.xcassets\icAccountOff.imageset\" />
+    <Folder Include="Assets.xcassets\icAccountKey.imageset\" />
   </ItemGroup>
   <Import Project="..\EOS.UI.Shared.Sandbox\EOS.UI.Shared.Sandbox.projitems" Label="Shared" Condition="Exists('..\EOS.UI.Shared.Sandbox\EOS.UI.Shared.Sandbox.projitems')" />
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />

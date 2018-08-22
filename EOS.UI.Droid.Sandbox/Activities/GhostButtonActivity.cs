@@ -64,11 +64,11 @@ namespace EOS.UI.Droid.Sandbox.Activities
                 themeDropDown.SetSpinnerSelection(2);
 
             fontDropDown.Name = Fields.Font;
-            fontDropDown.SetupAdapter(Fonts.FontsCollection.Select(item => item.Key).ToList());
+            fontDropDown.SetupAdapter(Fonts.GetGhostButtonSimpleLabelFonts().Select(item => item.Key).ToList());
             fontDropDown.ItemSelected += (position) =>
             {
                 if (position > 0)
-                    ghostButton.Typeface = Typeface.CreateFromAsset(Assets, Fonts.FontsCollection.ElementAt(position).Value);
+                    ghostButton.Typeface = Typeface.CreateFromAsset(Assets, Fonts.GetGhostButtonSimpleLabelFonts().ElementAt(position).Value);
             };
 
             letterSpacingDropDown.Name = Fields.LetterSpacing;

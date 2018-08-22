@@ -84,7 +84,7 @@ namespace EOS.UI.Droid.Sandbox.Activities
             _themeDropDown.ItemSelected += ThemeItemSelected;
 
             _fontDropDown.Name = Fields.Font;
-            _fontDropDown.SetupAdapter(Fonts.FontsCollection.Select(item => item.Key).ToList());
+            _fontDropDown.SetupAdapter(Fonts.GetInputFonts().Select(item => item.Key).ToList());
             _fontDropDown.ItemSelected += FontItemSelected;
 
             _letterSpacingDropDown.Name = Fields.LetterSpacing;
@@ -252,8 +252,8 @@ namespace EOS.UI.Droid.Sandbox.Activities
         {
             if(position > 0)
             {
-                _inputTop.Typeface = Typeface.CreateFromAsset(Assets, Fonts.FontsCollection.ElementAt(position).Value);
-                _inputBottom.Typeface = Typeface.CreateFromAsset(Assets, Fonts.FontsCollection.ElementAt(position).Value);
+                _inputTop.Typeface = Typeface.CreateFromAsset(Assets, Fonts.GetInputFonts().ElementAt(position).Value);
+                _inputBottom.Typeface = Typeface.CreateFromAsset(Assets, Fonts.GetInputFonts().ElementAt(position).Value);
             }
         }
 

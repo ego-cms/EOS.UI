@@ -106,7 +106,7 @@ namespace EOS.UI.Droid.Sandbox.Activities
             _themeDropDown.ItemSelected += ThemeItemSelected;
 
             _fontDropDown.Name = Fields.Font;
-            _fontDropDown.SetupAdapter(Fonts.FontsCollection.Select(item => item.Key).ToList());
+            _fontDropDown.SetupAdapter(Fonts.GetGhostButtonSimpleLabelFonts().Select(item => item.Key).ToList());
             _fontDropDown.ItemSelected += FontItemSelected;
 
             _letterSpacingDropDown.Name = Fields.LetterSpacing;
@@ -185,7 +185,7 @@ namespace EOS.UI.Droid.Sandbox.Activities
         private void FontItemSelected(int position)
         {
             if (position > 0)
-                _CTAButton.Typeface = Typeface.CreateFromAsset(Assets, Fonts.FontsCollection.ElementAt(position).Value);
+                _CTAButton.Typeface = Typeface.CreateFromAsset(Assets, Fonts.GetButtonBadgeFonts().ElementAt(position).Value);
         }
 
         private void LetterSpacingItemSelected(int position)

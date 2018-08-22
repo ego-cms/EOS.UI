@@ -241,8 +241,8 @@ namespace EOS.UI.iOS.Controls
             set
             {
                 IsEOSCustomizationIgnored = true;
-                _leftImage = value;
-                _leftImageView.Image = value;
+                _leftImage = value?.ImageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate);
+                _leftImageView.Image = _leftImage;
                 UpdateIconColor();
             }
         }
@@ -482,16 +482,18 @@ namespace EOS.UI.iOS.Controls
                 FontStyle = provider.GetEOSProperty<FontStyleItem>(this, EOSConstants.R4C2);
                 PlaceholderColor = provider.GetEOSProperty<FontStyleItem>(this, EOSConstants.R4C3).Color;
                 PlaceholderColorDisabled = provider.GetEOSProperty<FontStyleItem>(this, EOSConstants.R4C4).Color;
-                DisabledColor = provider.GetEOSProperty<FontStyleItem>(this, EOSConstants.R4C4).Color;
+                TextColorDisabled = provider.GetEOSProperty<FontStyleItem>(this, EOSConstants.R4C4).Color;
                 LeftImage = UIImage.FromBundle(provider.GetEOSProperty<string>(this, EOSConstants.LeftImage));
                 NormalIconColor = provider.GetEOSProperty<UIColor>(this, EOSConstants.NeutralColor2);
                 NormalUnderlineColor = provider.GetEOSProperty<UIColor>(this, EOSConstants.NeutralColor3);
                 PopulatedIconColor = provider.GetEOSProperty<UIColor>(this, EOSConstants.BrandPrimaryColor);
                 PopulatedUnderlineColor = provider.GetEOSProperty<UIColor>(this, EOSConstants.NeutralColor3);
                 FocusedColor = provider.GetEOSProperty<UIColor>(this, EOSConstants.BrandPrimaryColor);
-                DisabledColor = provider.GetEOSProperty<UIColor>(this, EOSConstants.NeutralColor3);
-                _clearImage = UIImage.FromBundle(provider.GetEOSProperty<string>(this, EOSConstants.ClearInputImage));
-                _rightImageView.Image = UIImage.FromBundle(provider.GetEOSProperty<string>(this, EOSConstants.WarningInputImage)); ;
+                DisabledColor = provider.GetEOSProperty<UIColor>(this, EOSConstants.DisabledInputColor);
+                _clearImage = UIImage.FromBundle(provider.GetEOSProperty<string>(this, EOSConstants.ClearInputImage))
+                                     .ImageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate);
+                _rightImageView.Image = UIImage.FromBundle(provider.GetEOSProperty<string>(this, EOSConstants.WarningInputImage))
+                                     .ImageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate);
                 _rightImageView.TintColor = _warningColor;
                 _clearImageColor = provider.GetEOSProperty<UIColor>(this, EOSConstants.NeutralColor3);
                 IsEOSCustomizationIgnored = false;

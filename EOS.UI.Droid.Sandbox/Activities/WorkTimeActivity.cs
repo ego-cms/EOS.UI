@@ -76,11 +76,11 @@ namespace EOS.UI.Droid.Sandbox.Activities
             _themeDropDown.ItemSelected += ThemeItemSelected;
 
             _titleFontDropDown.Name = Fields.TitleFont;
-            _titleFontDropDown.SetupAdapter(Fonts.FontsCollection.Select(item => item.Key).ToList());
+            _titleFontDropDown.SetupAdapter(Fonts.GetWorktimeTitleFonts().Select(item => item.Key).ToList());
             _titleFontDropDown.ItemSelected += TitleFontItemSelected;
 
             _dayTextFontDropDown.Name = Fields.DayTextFont;
-            _dayTextFontDropDown.SetupAdapter(Fonts.FontsCollection.Select(item => item.Key).ToList());
+            _dayTextFontDropDown.SetupAdapter(Fonts.GetWorktimeDayFonts().Select(item => item.Key).ToList());
             _dayTextFontDropDown.ItemSelected += DayTextFonItemSelected;
 
             _titleTextSizeDropDown.Name = Fields.TitleTextSize;
@@ -204,13 +204,13 @@ namespace EOS.UI.Droid.Sandbox.Activities
         private void DayTextFonItemSelected(int position)
         {
             if(position > 0)
-                _workTime.DayTextFont = Typeface.CreateFromAsset(Assets, Fonts.FontsCollection.ElementAt(position).Value);
+                _workTime.DayTextFont = Typeface.CreateFromAsset(Assets, Fonts.GetWorktimeDayFonts().ElementAt(position).Value);
         }
 
         private void TitleFontItemSelected(int position)
         {
             if(position > 0)
-                _workTime.TitleFont = Typeface.CreateFromAsset(Assets, Fonts.FontsCollection.ElementAt(position).Value);
+                _workTime.TitleFont = Typeface.CreateFromAsset(Assets, Fonts.GetWorktimeTitleFonts().ElementAt(position).Value);
         }
 
         private void ThemeItemSelected(int position)

@@ -263,8 +263,8 @@ namespace EOS.UI.Droid.Controls
             if(!IsEOSCustomizationIgnored)
             {
                 var provider = GetThemeProvider();
-                FontStyle = GetThemeProvider().GetEOSProperty<FontStyleItem>(this, EOSConstants.R2C1);
-                DisabledTextColor = GetThemeProvider().GetEOSProperty<FontStyleItem>(this, EOSConstants.R2C4).Color;
+                FontStyle = GetThemeProvider().GetEOSProperty<FontStyleItem>(this, EOSConstants.R2C1S);
+                DisabledTextColor = GetThemeProvider().GetEOSProperty<FontStyleItem>(this, EOSConstants.R2C4S).Color;
                 RippleColor = GetThemeProvider().GetEOSProperty<Color>(this, EOSConstants.RippleColor);
                 IsEOSCustomizationIgnored = false;
             }
