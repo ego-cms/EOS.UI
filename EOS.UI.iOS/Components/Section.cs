@@ -340,7 +340,7 @@ namespace EOS.UI.iOS.Components
                 SectionName = provider.GetEOSProperty<string>(this, EOSConstants.SectionTitle);
                 ButtonText = provider.GetEOSProperty<string>(this, EOSConstants.SectionActionTitle);
                 SectionFontStyle = provider.GetEOSProperty<FontStyleItem>(this, EOSConstants.R2C3);
-                ButtonFontStyle = provider.GetEOSProperty<FontStyleItem>(this, EOSConstants.R2C1);
+                ButtonFontStyle = provider.GetEOSProperty<FontStyleItem>(this, EOSConstants.R2C1S);
                 BackgroundColor = provider.GetEOSProperty<UIColor>(this, EOSConstants.NeutralColor5);
                 BorderColor = provider.GetEOSProperty<UIColor>(this, EOSConstants.NeutralColor4);
                 BorderWidth = provider.GetEOSProperty<int>(this, EOSConstants.BorderWidth);
