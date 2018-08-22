@@ -106,7 +106,7 @@ namespace EOS.UI.Droid.Sandbox.Activities
             _themeDropDown.ItemSelected += ThemeItemSelected;
 
             _fontDropDown.Name = Fields.Font;
-            _fontDropDown.SetupAdapter(Fonts.GetGhostButtonSimpleLabelFonts().Select(item => item.Key).ToList());
+            _fontDropDown.SetupAdapter(Fonts.GetButtonBadgeFonts().Select(item => item.Key).ToList());
             _fontDropDown.ItemSelected += FontItemSelected;
 
             _letterSpacingDropDown.Name = Fields.LetterSpacing;
