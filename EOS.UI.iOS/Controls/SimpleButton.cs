@@ -10,8 +10,6 @@ using EOS.UI.Shared.Themes.DataModels;
 using EOS.UI.Shared.Themes.Helpers;
 using EOS.UI.Shared.Themes.Interfaces;
 using Foundation;
-using EOS.UI.Shared.Themes.Helpers;
-using EOS.UI.Shared.Themes.Interfaces;
 using UIKit;
 
 namespace EOS.UI.iOS.Controls
@@ -25,6 +23,9 @@ namespace EOS.UI.iOS.Controls
         private Dictionary<UIControlState, NSAttributedString> _attributedTitles = new Dictionary<UIControlState, NSAttributedString>();
         private const double _verticalPaddingRatio = 0.25;
         private UIView _animationView;
+        private CGSize _pressedShadowOffset;
+        private const double _shadowYCoeff = 0.25;
+        private const double _blurCoeff = 0.66;
 
         #region constructor
 
@@ -172,6 +173,7 @@ namespace EOS.UI.iOS.Controls
                 if (Enabled != value)
                     ToggleState(value);
                 base.Enabled = value;
+                SetShadowConfig(Enabled ? _shadowConfig : null);
             }
         }
 
@@ -207,6 +209,8 @@ namespace EOS.UI.iOS.Controls
                 _shadowConfig = value;
                 IsEOSCustomizationIgnored = true;
                 SetShadowConfig(Enabled ? _shadowConfig : null);
+                if (_shadowConfig != null)
+                    _pressedShadowOffset = new CGSize(_shadowConfig.Offset.X, ShadowConfig.Offset.Y * _shadowYCoeff);
             }
         }
 
@@ -238,7 +242,18 @@ namespace EOS.UI.iOS.Controls
             get => base.Highlighted;
             set
             {
-                base.BackgroundColor = value ? PressedBackgroundColor : BackgroundColor;
+                if(value)
+                {
+                    base.BackgroundColor = PressedBackgroundColor;
+                    Layer.ShadowOffset = _pressedShadowOffset;
+                    Layer.ShadowRadius = (nfloat) (ShadowConfig.Blur / 2 * _blurCoeff);
+                }
+                else
+                {
+                    base.BackgroundColor = BackgroundColor;
+                    SetShadowConfig(ShadowConfig);
+                }
+
                 base.Highlighted = value;
             }
         }
@@ -336,10 +351,10 @@ namespace EOS.UI.iOS.Controls
             if (!IsEOSCustomizationIgnored)
             {
                 var provider = GetThemeProvider();
-                FontStyle = provider.GetEOSProperty<FontStyleItem>(this, EOSConstants.R3C1);
-                DisabledFontStyle = provider.GetEOSProperty<FontStyleItem>(this, EOSConstants.R3C4);
+                FontStyle = provider.GetEOSProperty<FontStyleItem>(this, EOSConstants.R3C5S);
+                DisabledFontStyle = provider.GetEOSProperty<FontStyleItem>(this, EOSConstants.R3C4S);
                 BackgroundColor = provider.GetEOSProperty<UIColor>(this, EOSConstants.BrandPrimaryColor);
-                DisabledBackgroundColor = provider.GetEOSProperty<UIColor>(this, EOSConstants.NeutralColor4);
+                DisabledBackgroundColor = provider.GetEOSProperty<UIColor>(this, EOSConstants.NeutralColor4S);
                 PressedBackgroundColor = provider.GetEOSProperty<UIColor>(this, EOSConstants.BrandPrimaryColorVariant1);
                 CornerRadius = provider.GetEOSProperty<int>(this, EOSConstants.ButtonCornerRadius);
                 RippleColor = provider.GetEOSProperty<UIColor>(this, EOSConstants.RippleColor);
@@ -400,7 +415,6 @@ namespace EOS.UI.iOS.Controls
                 Layer.ShadowColor = config.Color.CGColor;
                 Layer.ShadowOffset = new CGSize(config.Offset);
                 Layer.ShadowRadius = config.Blur / 2;
-                //Layer.ShadowOpacity = (float)config.Color.CGColor.Alpha;
                 Layer.ShadowOpacity = 1.0f;
             }
             else

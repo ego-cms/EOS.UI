@@ -52,9 +52,9 @@ namespace EOS.UI.Shared.Sandbox.Helpers
 
         public static class Fonts
         {
-            public static List<UIFont> FontsCollection;
+            public static Dictionary<string, UIFont> FontsCollection;
             public static string AvenirBlack = "Avenir-Black";
-            public static string AvenirBook= "Avenir-Book";
+            public static string AvenirBook = "Avenir-Book";
             public static string AvenirHeavy = "Avenir-Heavy";
             public static string AvenirMedium = "Avenir-Medium";
             public static string AvenirRoman = "Avenir-Roman";
@@ -64,8 +64,6 @@ namespace EOS.UI.Shared.Sandbox.Helpers
             public static string AvenirNextRegular = "AvenirNext-Regular";
             public static string FuturaBold = "Futura-Bold";
             public static string FuturaMedium = "Futura-Medium";
-            public static string GeezaProRegular = "GeezaPro";
-            public static string GeezaProBold = "GeezaPro-Bold";
             public static string HelveticaBold = "Helvetica-Bold";
             public static string HelveticaRoman = "Helvetica";
             public static string HelveticaNeueBold = "HelveticaNeue-Bold";
@@ -73,148 +71,133 @@ namespace EOS.UI.Shared.Sandbox.Helpers
             public static string HelveticaNeueMedium = "HelveticaNeue-Medium";
             public static string HelveticaNeueRoman = "HelveticaNeue";
             public static string HiraginoSansW3 = "HiraginoSans-W3";
+            public static string SystemBold = "SystemBold";
+            public static string SystemMedium = "SystemMedium";
+            public static string SystemRegular = "SystemRegular";
+            public static string SystemSemibold = "SystemSemibold";
 
             static Fonts()
             {
-                FontsCollection = new List<UIFont>();
+                FontsCollection = new Dictionary<string, UIFont>();
 
-                FontsCollection.Add(UIFont.FromName(AvenirBlack, UIFont.SystemFontSize));
-                FontsCollection.Add(UIFont.FromName(AvenirBook, UIFont.SystemFontSize));
-                FontsCollection.Add(UIFont.FromName(AvenirHeavy, UIFont.SystemFontSize));
-                FontsCollection.Add(UIFont.FromName(AvenirMedium, UIFont.SystemFontSize));
-                FontsCollection.Add(UIFont.FromName(AvenirRoman, UIFont.SystemFontSize));
-                FontsCollection.Add(UIFont.FromName(AvenirNextDemiBold, UIFont.SystemFontSize));
-                FontsCollection.Add(UIFont.FromName(AvenirNextBold, UIFont.SystemFontSize));
-                FontsCollection.Add(UIFont.FromName(AvenirNextMedium, UIFont.SystemFontSize));
-                FontsCollection.Add(UIFont.FromName(AvenirNextRegular, UIFont.SystemFontSize));
-                FontsCollection.Add(UIFont.FromName(FuturaBold, UIFont.SystemFontSize));
-                FontsCollection.Add(UIFont.FromName(FuturaMedium, UIFont.SystemFontSize));
-                FontsCollection.Add(UIFont.FromName(GeezaProBold, UIFont.SystemFontSize));
-                FontsCollection.Add(UIFont.FromName(GeezaProRegular, UIFont.SystemFontSize));
-                FontsCollection.Add(UIFont.FromName(HelveticaBold, UIFont.SystemFontSize));
-                FontsCollection.Add(UIFont.FromName(HelveticaRoman, UIFont.SystemFontSize));
-                FontsCollection.Add(UIFont.FromName(HelveticaNeueBold, UIFont.SystemFontSize));
-                FontsCollection.Add(UIFont.FromName(HelveticaNeueLight, UIFont.SystemFontSize));
-                FontsCollection.Add(UIFont.FromName(HelveticaNeueRoman, UIFont.SystemFontSize));
-                FontsCollection.Add(UIFont.FromName(HelveticaNeueMedium, UIFont.SystemFontSize));
-                FontsCollection.Add(UIFont.FromName(HiraginoSansW3, UIFont.SystemFontSize));
-                FontsCollection.Add(UIFont.SystemFontOfSize(UIFont.SystemFontSize, UIFontWeight.Bold));
-                FontsCollection.Add(UIFont.SystemFontOfSize(UIFont.SystemFontSize, UIFontWeight.Medium));
-                FontsCollection.Add(UIFont.SystemFontOfSize(UIFont.SystemFontSize, UIFontWeight.Regular));
-                FontsCollection.Add(UIFont.SystemFontOfSize(UIFont.SystemFontSize, UIFontWeight.Semibold));
+                FontsCollection.Add(SystemBold, UIFont.SystemFontOfSize(UIFont.SystemFontSize, UIFontWeight.Bold));
+                FontsCollection.Add(SystemMedium, UIFont.SystemFontOfSize(UIFont.SystemFontSize, UIFontWeight.Medium));
+                FontsCollection.Add(SystemRegular, UIFont.SystemFontOfSize(UIFont.SystemFontSize, UIFontWeight.Regular));
+                FontsCollection.Add(SystemSemibold, UIFont.SystemFontOfSize(UIFont.SystemFontSize, UIFontWeight.Semibold));
 
-                FontsCollection = FontsCollection.OrderBy(f => f.Name).ToList();
+                FontsCollection.Add(AvenirRoman, UIFont.FromName(AvenirRoman, UIFont.SystemFontSize));
+                FontsCollection.Add(AvenirBook, UIFont.FromName(AvenirBook, UIFont.SystemFontSize));
+                FontsCollection.Add(AvenirMedium, UIFont.FromName(AvenirMedium, UIFont.SystemFontSize));
+                FontsCollection.Add(AvenirBlack, UIFont.FromName(AvenirBlack, UIFont.SystemFontSize));
+                FontsCollection.Add(AvenirHeavy, UIFont.FromName(AvenirHeavy, UIFont.SystemFontSize));
+                FontsCollection.Add(AvenirNextRegular, UIFont.FromName(AvenirNextRegular, UIFont.SystemFontSize));
+                FontsCollection.Add(AvenirNextMedium, UIFont.FromName(AvenirNextMedium, UIFont.SystemFontSize));
+                FontsCollection.Add(AvenirNextDemiBold, UIFont.FromName(AvenirNextDemiBold, UIFont.SystemFontSize));
+                FontsCollection.Add(FuturaMedium, UIFont.FromName(FuturaMedium, UIFont.SystemFontSize));
+                FontsCollection.Add(FuturaBold, UIFont.FromName(FuturaBold, UIFont.SystemFontSize));
+                FontsCollection.Add(HelveticaRoman, UIFont.FromName(HelveticaRoman, UIFont.SystemFontSize));
+                FontsCollection.Add(HelveticaBold, UIFont.FromName(HelveticaBold, UIFont.SystemFontSize));
+                FontsCollection.Add(HelveticaNeueLight, UIFont.FromName(HelveticaNeueLight, UIFont.SystemFontSize));
+                FontsCollection.Add(HelveticaNeueRoman, UIFont.FromName(HelveticaNeueRoman, UIFont.SystemFontSize));
+                FontsCollection.Add(HelveticaNeueMedium, UIFont.FromName(HelveticaNeueMedium, UIFont.SystemFontSize));
+                FontsCollection.Add(HelveticaNeueBold, UIFont.FromName(HelveticaNeueBold, UIFont.SystemFontSize));
+                FontsCollection.Add(HiraginoSansW3, UIFont.FromName(HiraginoSansW3, UIFont.SystemFontSize));
             }
 
             public static IEnumerable<UIFont> GetButtonLabelFonts()
             {
-                return FontsCollection.Except(new[]
-                {
-                    UIFont.FromName(AvenirBook, UIFont.SystemFontSize),
-                    UIFont.FromName(AvenirMedium, UIFont.SystemFontSize),
-                    UIFont.FromName(AvenirRoman, UIFont.SystemFontSize),
-                    UIFont.FromName(AvenirNextMedium, UIFont.SystemFontSize),
-                    UIFont.FromName(AvenirNextRegular, UIFont.SystemFontSize),
-                    UIFont.FromName(GeezaProBold, UIFont.SystemFontSize),
-                    UIFont.FromName(GeezaProRegular, UIFont.SystemFontSize),
-                    UIFont.FromName(HiraginoSansW3, UIFont.SystemFontSize),
-                    UIFont.FromName(HelveticaNeueLight, UIFont.SystemFontSize)
-                });
+                return FontsCollection.Keys.Except(new[] {
+                    AvenirBook,
+                    AvenirMedium,
+                    AvenirNextBold,
+                    AvenirRoman,
+                    AvenirNextMedium,
+                    AvenirNextRegular,
+                    HiraginoSansW3,
+                    HelveticaNeueLight
+                }).Select(k => FontsCollection[k]);
             }
 
             public static IEnumerable<UIFont> GetWorkTimeTitleFonts()
             {
-                return FontsCollection.Except(new[]
-                {
-                    UIFont.FromName(AvenirBook, UIFont.SystemFontSize),
-                    UIFont.FromName(AvenirMedium, UIFont.SystemFontSize),
-                    UIFont.FromName(AvenirRoman, UIFont.SystemFontSize),
-                    UIFont.FromName(AvenirNextMedium, UIFont.SystemFontSize),
-                    UIFont.FromName(AvenirNextRegular, UIFont.SystemFontSize),
-                    UIFont.FromName(GeezaProBold, UIFont.SystemFontSize),
-                    UIFont.FromName(GeezaProRegular, UIFont.SystemFontSize),
-                    UIFont.FromName(HiraginoSansW3, UIFont.SystemFontSize),
-                    UIFont.FromName(FuturaBold, UIFont.SystemFontSize),
-                    UIFont.FromName(HelveticaRoman, UIFont.SystemFontSize),
-                    UIFont.FromName(HelveticaNeueLight, UIFont.SystemFontSize),
-                    UIFont.FromName(HelveticaNeueRoman, UIFont.SystemFontSize)
-                });
+                return FontsCollection.Keys.Except(new[] {
+                   AvenirBook,
+                    AvenirMedium,
+                    AvenirRoman,
+                    AvenirNextBold,
+                    AvenirNextMedium,
+                    AvenirNextRegular,
+                    HiraginoSansW3,
+                    FuturaBold,
+                    HelveticaNeueLight,
+                    HelveticaNeueRoman
+                }).Select(k => FontsCollection[k]);
             }
 
             public static IEnumerable<UIFont> GetCircleProgressFonts()
             {
-                return FontsCollection.Except(new[]
-                {
-                    UIFont.FromName(AvenirBlack, UIFont.SystemFontSize),
-                    UIFont.FromName(AvenirBook, UIFont.SystemFontSize),
-                    UIFont.FromName(AvenirMedium, UIFont.SystemFontSize),
-                    UIFont.FromName(AvenirRoman, UIFont.SystemFontSize),
-                    UIFont.FromName(AvenirNextBold, UIFont.SystemFontSize),
-                    UIFont.FromName(AvenirNextMedium, UIFont.SystemFontSize),
-                    UIFont.FromName(AvenirNextRegular, UIFont.SystemFontSize),
-                    UIFont.FromName(FuturaBold, UIFont.SystemFontSize),
-                    UIFont.FromName(FuturaMedium, UIFont.SystemFontSize),
-                    UIFont.FromName(GeezaProRegular, UIFont.SystemFontSize),
-                    UIFont.FromName(HelveticaRoman, UIFont.SystemFontSize),
-                    UIFont.FromName(HelveticaNeueMedium, UIFont.SystemFontSize),
-                    UIFont.FromName(HelveticaNeueLight, UIFont.SystemFontSize),
-                    UIFont.FromName(HiraginoSansW3, UIFont.SystemFontSize)
-                });
+                return FontsCollection.Keys.Except(new[] {
+                    AvenirBook,
+                    AvenirMedium,
+                    AvenirRoman,
+                    AvenirNextBold,
+                    AvenirNextMedium,
+                    AvenirNextRegular,
+                    FuturaBold,
+                    FuturaMedium,
+                    HelveticaRoman,
+                    HelveticaNeueRoman,
+                    HelveticaNeueMedium,
+                    HelveticaNeueLight,
+                    HiraginoSansW3,
+                }).Select(k => FontsCollection[k]);
             }
 
             public static IEnumerable<UIFont> GetGhostButtonSimpleLabelFonts()
             {
-                return FontsCollection.Except(new[]
-                {
-                    UIFont.FromName(AvenirBlack, UIFont.SystemFontSize),
-                    UIFont.FromName(AvenirBook, UIFont.SystemFontSize),
-                    UIFont.FromName(AvenirMedium, UIFont.SystemFontSize),
-                    UIFont.FromName(AvenirRoman, UIFont.SystemFontSize),
-                    UIFont.FromName(AvenirNextBold, UIFont.SystemFontSize),
-                    UIFont.FromName(AvenirNextMedium, UIFont.SystemFontSize),
-                    UIFont.FromName(AvenirNextRegular, UIFont.SystemFontSize),
-                    UIFont.FromName(GeezaProRegular, UIFont.SystemFontSize),
-                    UIFont.FromName(HelveticaNeueLight, UIFont.SystemFontSize),
-                    UIFont.FromName(HelveticaRoman, UIFont.SystemFontSize),
-                    UIFont.FromName(HiraginoSansW3, UIFont.SystemFontSize)
-                });
+                return FontsCollection.Keys.Except(new[] {
+                        AvenirBook,
+                    AvenirMedium,
+                    AvenirRoman,
+                    AvenirNextBold,
+                    AvenirNextMedium,
+                    AvenirNextRegular,
+                    HelveticaRoman,
+                    HelveticaNeueRoman,
+                    HelveticaNeueLight,
+                    HiraginoSansW3
+                }).Select(k => FontsCollection[k]);
             }
 
             public static IEnumerable<UIFont> GetWorkTimeDayFonts()
             {
-                return FontsCollection.Except(new[]
-                {
-                    UIFont.FromName(AvenirBook, UIFont.SystemFontSize),
-                    UIFont.FromName(AvenirMedium, UIFont.SystemFontSize),
-                    UIFont.FromName(AvenirRoman, UIFont.SystemFontSize),
-                    UIFont.FromName(AvenirNextMedium, UIFont.SystemFontSize),
-                    UIFont.FromName(AvenirNextRegular, UIFont.SystemFontSize),
-                    UIFont.FromName(HiraginoSansW3, UIFont.SystemFontSize),
-                    UIFont.FromName(GeezaProBold, UIFont.SystemFontSize),
-                    UIFont.FromName(GeezaProRegular, UIFont.SystemFontSize),
-                    UIFont.FromName(HelveticaBold, UIFont.SystemFontSize),
-                    UIFont.FromName(HelveticaRoman, UIFont.SystemFontSize),
-                    UIFont.FromName(HelveticaNeueBold, UIFont.SystemFontSize),
-                    UIFont.FromName(HelveticaNeueLight, UIFont.SystemFontSize),
-                    UIFont.FromName(FuturaBold, UIFont.SystemFontSize)
-                });
+                return FontsCollection.Keys.Except(new[] {
+                    AvenirBook,
+                    AvenirMedium,
+                    AvenirRoman,
+                    AvenirNextBold,
+                    AvenirNextMedium,
+                    AvenirNextRegular,
+                    HelveticaBold,
+                    HelveticaNeueBold,
+                    HelveticaNeueLight,
+                    FuturaBold
+                }).Select(k => FontsCollection[k]);
             }
 
             public static IEnumerable<UIFont> GetInputFonts()
             {
-                return FontsCollection.Except(new[]
-                {
-                    UIFont.FromName(AvenirBlack, UIFont.SystemFontSize),
-                    UIFont.FromName(AvenirHeavy, UIFont.SystemFontSize),
-                    UIFont.FromName(AvenirNextBold, UIFont.SystemFontSize),
-                    UIFont.FromName(AvenirNextDemiBold, UIFont.SystemFontSize),
-                    UIFont.FromName(GeezaProBold, UIFont.SystemFontSize),
-                    UIFont.FromName(HelveticaBold, UIFont.SystemFontSize),
-                    UIFont.FromName(HelveticaNeueBold, UIFont.SystemFontSize),
-                    UIFont.FromName(HelveticaNeueMedium, UIFont.SystemFontSize),
-                    UIFont.FromName(FuturaBold, UIFont.SystemFontSize),
-                    UIFont.FromName(FuturaMedium, UIFont.SystemFontSize)
-                });
+                return FontsCollection.Keys.Except(new[] {
+                    AvenirBlack,
+                    AvenirHeavy,
+                    AvenirNextBold,
+                    AvenirNextDemiBold,
+                    HelveticaBold,
+                    HelveticaNeueBold,
+                    HelveticaNeueMedium,
+                    FuturaBold,
+                    FuturaMedium,
+                    }).Select(k => FontsCollection[k]);
             }
         }
 

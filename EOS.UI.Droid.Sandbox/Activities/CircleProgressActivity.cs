@@ -75,6 +75,7 @@ namespace EOS.UI.Droid.Sandbox.Activities
                     circleProgress.ResetCustomization();
                     spinners.Except(new[] { themeDropDown }).ToList().ForEach(s => s.SetSpinnerSelection(0));
                     circleProgress.Progress = 0;
+                    showProgressSwitch.Checked = true;
                     UpdateApperaence();
                 }
             };

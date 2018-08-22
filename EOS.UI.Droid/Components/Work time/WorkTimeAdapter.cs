@@ -496,7 +496,7 @@ namespace EOS.UI.Droid.Components
                 TitleFontStyle = GetThemeProvider().GetEOSProperty<FontStyleItem>(this, EOSConstants.R2C2);
                 DayFontStyle = GetThemeProvider().GetEOSProperty<FontStyleItem>(this, EOSConstants.R1C3);
 
-                CurrentTitleTextColor = GetThemeProvider().GetEOSProperty<FontStyleItem>(this, EOSConstants.R2C5).Color;
+                CurrentTitleTextColor = GetThemeProvider().GetEOSProperty<FontStyleItem>(this, EOSConstants.R2C5S).Color;
                 CurrentDayTextColor = GetThemeProvider().GetEOSProperty<FontStyleItem>(this, EOSConstants.R1C5).Color;
 
                 CurrentDayBackgroundColor = GetThemeProvider().GetEOSProperty<Color>(this, EOSConstants.BrandPrimaryColor);

@@ -725,10 +725,10 @@ namespace EOS.UI.iOS.Components
             if (!IsEOSCustomizationIgnored)
             {
                 var provider = GetThemeProvider();
-                UnfocusedBackgroundColor = provider.GetEOSProperty<UIColor>(this, EOSConstants.NeutralColor6s);
+                UnfocusedBackgroundColor = provider.GetEOSProperty<UIColor>(this, EOSConstants.NeutralColor6S);
                 FocusedBackgroundColor = provider.GetEOSProperty<UIColor>(this, EOSConstants.BrandPrimaryColor);
-                FocusedIconColor = provider.GetEOSProperty<UIColor>(this, EOSConstants.NeutralColor6s);
-                UnfocusedIconColor = provider.GetEOSProperty<UIColor>(this, EOSConstants.NeutralColor1s);
+                FocusedIconColor = provider.GetEOSProperty<UIColor>(this, EOSConstants.NeutralColor6S);
+                UnfocusedIconColor = provider.GetEOSProperty<UIColor>(this, EOSConstants.NeutralColor1S);
                 BlackoutColor = provider.GetEOSProperty<UIColor>(this, EOSConstants.Blackout);
                 IsEOSCustomizationIgnored = false;
             }

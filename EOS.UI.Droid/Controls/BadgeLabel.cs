@@ -213,7 +213,7 @@ namespace EOS.UI.Droid.Controls
         {
             if(!IsEOSCustomizationIgnored)
             {
-                FontStyle = GetThemeProvider().GetEOSProperty<FontStyleItem>(this, EOSConstants.R2C5);
+                FontStyle = GetThemeProvider().GetEOSProperty<FontStyleItem>(this, EOSConstants.R2C5S);
                 (Background as GradientDrawable).SetColor(GetThemeProvider().GetEOSProperty<Color>(this, EOSConstants.BrandPrimaryColor));
                 (Background as GradientDrawable).SetCornerRadius(GetThemeProvider().GetEOSProperty<float>(this, EOSConstants.LabelCornerRadius));
                 IsEOSCustomizationIgnored = false;

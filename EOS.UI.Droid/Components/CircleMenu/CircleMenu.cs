@@ -919,10 +919,10 @@ namespace EOS.UI.Droid.Components
         {
             if(!IsEOSCustomizationIgnored)
             {
-                UnfocusedBackgroundColor = GetThemeProvider().GetEOSProperty<Color>(this, EOSConstants.NeutralColor6s);
+                UnfocusedBackgroundColor = GetThemeProvider().GetEOSProperty<Color>(this, EOSConstants.NeutralColor6S);
                 FocusedBackgroundColor = GetThemeProvider().GetEOSProperty<Color>(this, EOSConstants.BrandPrimaryColor);
-                FocusedIconColor = GetThemeProvider().GetEOSProperty<Color>(this, EOSConstants.NeutralColor6s);
-                UnfocusedIconColor = GetThemeProvider().GetEOSProperty<Color>(this, EOSConstants.NeutralColor1s);
+                FocusedIconColor = GetThemeProvider().GetEOSProperty<Color>(this, EOSConstants.NeutralColor6S);
+                UnfocusedIconColor = GetThemeProvider().GetEOSProperty<Color>(this, EOSConstants.NeutralColor1S);
                 BlackoutColor = GetThemeProvider().GetEOSProperty<Color>(this, EOSConstants.Blackout);
                 IsEOSCustomizationIgnored = false;
             }
