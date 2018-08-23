@@ -20,7 +20,6 @@ namespace EOS.UI.iOS.Sandbox
         private SimpleButton _simpleButton;
         private List<EOSSandboxDropDown> _dropDowns;
         private NSLayoutConstraint[] _defaultConstraints;
-        private ShadowConfig _defaultShadow;
         private double? _opacity;
         private SimpleButtonTypeEnum _currentButtonState = SimpleButtonTypeEnum.Simple;
 
@@ -359,13 +358,10 @@ namespace EOS.UI.iOS.Sandbox
                 _simpleButton.Enabled = enableSwitch.On;
                 if (!enableSwitch.On)
                 {
-                    _defaultShadow = _simpleButton.ShadowConfig;
-                    _simpleButton.ShadowConfig = null;
                     DisableShadowFields();
                 }
                 else
                 {
-                    _simpleButton.ShadowConfig = _defaultShadow;
                     if (_currentButtonState == SimpleButtonTypeEnum.Simple)
                     {
                         EnableShadowFields();
