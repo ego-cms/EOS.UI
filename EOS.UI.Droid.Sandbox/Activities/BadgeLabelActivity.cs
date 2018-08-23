@@ -83,12 +83,14 @@ namespace EOS.UI.Droid.Sandbox.Activities
         {
             base.OnRestoreInstanceState(savedInstanceState);
             _badge.BackgroundColor = new Color(savedInstanceState.GetInt("color"));
+            _badge.CornerRadius = savedInstanceState.GetFloat("cornerRadius");
         }
 
         protected override void OnSaveInstanceState(Bundle outState)
         {
             base.OnSaveInstanceState(outState);
             outState.PutInt("color", _badge.BackgroundColor.ToArgb());
+            outState.PutFloat("cornerRadius", _badge.CornerRadius);
         }
 
         private void SetCurrenTheme(IEOSTheme iEOSTheme)

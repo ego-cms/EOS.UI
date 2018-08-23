@@ -117,11 +117,13 @@ namespace EOS.UI.Droid.Controls
             }
         }
 
+        float _cornerRadius;
         public float CornerRadius
         {
-            get => (Background as GradientDrawable).CornerRadius;
+            get => _cornerRadius;
             set
             {
+                _cornerRadius = value;
                 IsEOSCustomizationIgnored = true;
                 (Background as GradientDrawable).SetCornerRadius(value);
             }
@@ -213,8 +215,8 @@ namespace EOS.UI.Droid.Controls
         {
             if(!IsEOSCustomizationIgnored)
             {
-                FontStyle = GetThemeProvider().GetEOSProperty<FontStyleItem>(this, EOSConstants.R2C5S);
-                (Background as GradientDrawable).SetColor(GetThemeProvider().GetEOSProperty<Color>(this, EOSConstants.BrandPrimaryColor));
+                FontStyle = GetThemeProvider().GetEOSProperty<FontStyleItem>(this, EOSConstants.R2C5S); 
+                BackgroundColor = GetThemeProvider().GetEOSProperty<Color>(this, EOSConstants.BrandPrimaryColor);
                 CornerRadius = GetCornerRadius();
                 IsEOSCustomizationIgnored = false;
             }
