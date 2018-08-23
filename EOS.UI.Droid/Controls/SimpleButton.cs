@@ -192,7 +192,7 @@ namespace EOS.UI.Droid.Controls
             get => _rippleColor;
             set
             {
-                _rippleColor = value.A == 255 ? Color.Argb(26, value.R, value.G, value.B) : value;
+                _rippleColor = value;//value.A == 255 ? Color.Argb(26, value.R, value.G, value.B) : value;
                 Background = CreateRippleDrawable(BackgroundColor);
                 IsEOSCustomizationIgnored = true;
             }
@@ -416,7 +416,7 @@ namespace EOS.UI.Droid.Controls
             var outerRadii = new float[8];
             Arrays.Fill(outerRadii, CornerRadius);
             var shapeDrawable = new ShapeDrawable(new RoundRectShape(outerRadii, null, null));
-            shapeDrawable.Paint.Color = PressedBackgroundColor;
+            //shapeDrawable.Paint.Color = PressedBackgroundColor;
             return shapeDrawable;
         }
 
