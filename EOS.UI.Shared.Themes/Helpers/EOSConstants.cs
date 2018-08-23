@@ -70,8 +70,8 @@ namespace EOS.UI.Shared.Themes.Helpers
     {
         public const int LeftPadding = 15;
         public const int RightPadding = 15;
-        public const int TopPadding = 14;
-        public const int BottomPadding = 15;
+        public const int TopPadding = 0;
+        public const int BottomPadding = 0;
     }
 
 }

@@ -27,7 +27,7 @@
         <EOS.UI.Droid.Controls.SimpleButton
             android:id="@+id/simpleButton"
             android:layout_width="320dp"
-            android:layout_height="wrap_content"
+            android:layout_height="48dp"
             android:layout_gravity="center"
             android:text="Simple button"
             android:paddingBottom="14dp"

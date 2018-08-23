@@ -326,6 +326,7 @@ namespace EOS.UI.Droid.Controls
 
             SetHorizontallyScrolling(true);
             SetLines(1);
+            SetSingleLine(true);
             Ellipsize = TextUtils.TruncateAt.End;
 
             var denisty = Resources.DisplayMetrics.Density;

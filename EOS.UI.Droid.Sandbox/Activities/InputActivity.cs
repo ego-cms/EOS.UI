@@ -1,5 +1,6 @@
 ﻿using System.Linq;
 using Android.App;
+using Android.Content.PM;
 using Android.Graphics;
 using Android.OS;
 using Android.Views;
@@ -14,7 +15,7 @@ using static EOS.UI.Shared.Sandbox.Helpers.Constants;
 
 namespace EOS.UI.Droid.Sandbox.Activities
 {
-    [Activity(Label = ControlNames.Input, Theme = "@style/Sandbox.Main")]
+    [Activity(Label = ControlNames.Input, Theme = "@style/Sandbox.Main", ScreenOrientation = ScreenOrientation.Portrait)]
     public class InputActivity : BaseActivity, IOnCheckedChangeListener
     {
         private Input _inputTop;
@@ -225,7 +226,7 @@ namespace EOS.UI.Droid.Sandbox.Activities
             {
                 _inputTop.GetThemeProvider().SetCurrentTheme(ThemeTypes.ThemeCollection.ElementAt(position).Value);
                 ResetCustomValues();
-                UpdateApperaence();
+                UpdateAppearance();
             }
         }
 

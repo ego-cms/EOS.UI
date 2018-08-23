@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using Android.App;
+using Android.Content.PM;
 using Android.Graphics;
 using Android.OS;
 using Android.Widget;
@@ -12,7 +13,7 @@ using static EOS.UI.Shared.Sandbox.Helpers.Constants;
 
 namespace EOS.UI.Droid.Sandbox.Activities
 {
-    [Activity(Label = ControlNames.GhostButton, Theme = "@style/Sandbox.Main")]
+    [Activity(Label = ControlNames.GhostButton, Theme = "@style/Sandbox.Main", ScreenOrientation = ScreenOrientation.Portrait)]
     public class GhostButtonActivity : BaseActivity
     {
         protected override void OnCreate(Bundle savedInstanceState)
@@ -52,7 +53,7 @@ namespace EOS.UI.Droid.Sandbox.Activities
                     ghostButton.GetThemeProvider().SetCurrentTheme(ThemeTypes.ThemeCollection.ElementAt(position).Value);
                     ghostButton.ResetCustomization();
                     spinners.Except(new[] { themeDropDown }).ToList().ForEach(s => s.SetSpinnerSelection(0));
-                    UpdateApperaence();
+                    UpdateAppearance();
                 }
             };
 

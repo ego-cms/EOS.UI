@@ -1,5 +1,6 @@
 using System.Linq;
 using Android.App;
+using Android.Content.PM;
 using Android.Graphics;
 using Android.OS;
 using Android.Util;
@@ -16,7 +17,7 @@ using static EOS.UI.Shared.Sandbox.Helpers.Constants;
 
 namespace EOS.UI.Droid.Sandbox.Activities
 {
-    [Activity(Label = ControlNames.SimpleButton, Theme = "@style/Sandbox.Main")]
+    [Activity(Label = ControlNames.SimpleButton, Theme = "@style/Sandbox.Main", ScreenOrientation = ScreenOrientation.Portrait)]
     public class SimpleButtonActivity : BaseActivity, IOnCheckedChangeListener
     {
         private Size _cachedSize;
@@ -134,31 +135,54 @@ namespace EOS.UI.Droid.Sandbox.Activities
         private void ButtonTypeItemSelected(int position)
         {
             var type = Buttons.SimpleButtonTypeCollection.ElementAt(position).Value;
+            ResetCustomValues(true);
             switch(type)
             {
                 case SimpleButtonTypeEnum.Simple:
-                    ResetCustomValues(true);
-                    var layoutParameters = GetSimpleButtonLayoutParameters();
-                    layoutParameters.Gravity = GravityFlags.Center;
-                    _simpleButton.LayoutParameters = layoutParameters;
-                    var denisty = Resources.DisplayMetrics.Density;
-                    _simpleButton.SetPadding(
-                        (int)(SimpleButtonConstants.LeftPadding * denisty),
-                        (int)(SimpleButtonConstants.TopPadding * denisty),
-                        (int)(SimpleButtonConstants.RightPadding * denisty),
-                        (int)(SimpleButtonConstants.BottomPadding * denisty));
-                    _simpleButton.ResetCustomization();
-                    _simpleButton.Text = Buttons.Simple;
+                    SetupSimpleButtonStyle();
+                    EnableSimpleButtonFields();
                     break;
                 case SimpleButtonTypeEnum.FullBleed:
-                    ResetCustomValues(true);
-                    _simpleButton.ShadowConfig = null;
-                    _simpleButton.CornerRadius = 0;
-                    _simpleButton.SetPadding(0, 0, 0, 0);
-                    _simpleButton.LayoutParameters = GetFullBleedButtonLayoutParameters();
-                    _simpleButton.Text = Buttons.FullBleed;
+                    SetupFullBleedButtonStyle();
+                    DisableSimpleButtonFields();
                     break;
             }
+        }
+
+        private void DisableSimpleButtonFields()
+        {
+            _cornerRadiusDropDown.Enabled = false;
+            _shadowRadiusDropDown.Enabled = false;
+        }
+
+        private void EnableSimpleButtonFields()
+        {
+            _cornerRadiusDropDown.Enabled = true;
+            _shadowRadiusDropDown.Enabled = true;
+        }
+
+        private void SetupFullBleedButtonStyle()
+        {
+            _simpleButton.ShadowConfig = null;
+            _simpleButton.CornerRadius = 0;
+            _simpleButton.SetPadding(0, 0, 0, 0);
+            _simpleButton.LayoutParameters = GetFullBleedButtonLayoutParameters();
+            _simpleButton.Text = Buttons.FullBleed;
+        }
+
+        private void SetupSimpleButtonStyle()
+        {
+            var layoutParameters = GetSimpleButtonLayoutParameters();
+            layoutParameters.Gravity = GravityFlags.Center;
+            _simpleButton.LayoutParameters = layoutParameters;
+            var denisty = Resources.DisplayMetrics.Density;
+            _simpleButton.SetPadding(
+                (int)(SimpleButtonConstants.LeftPadding * denisty),
+                (int)(SimpleButtonConstants.TopPadding * denisty),
+                (int)(SimpleButtonConstants.RightPadding * denisty),
+                (int)(SimpleButtonConstants.BottomPadding * denisty));
+            _simpleButton.ResetCustomization();
+            _simpleButton.Text = Buttons.Simple;
         }
 
         private LinearLayout.LayoutParams GetSimpleButtonLayoutParameters()
@@ -183,7 +207,7 @@ namespace EOS.UI.Droid.Sandbox.Activities
             {
                 _simpleButton.GetThemeProvider().SetCurrentTheme(ThemeTypes.ThemeCollection.ElementAt(position).Value);
                 ResetCustomValues();
-                UpdateApperaence();
+                UpdateAppearance();
             }
         }
 
@@ -238,7 +262,7 @@ namespace EOS.UI.Droid.Sandbox.Activities
         private void CornerRadiurSpinner_ItemSelected(int position)
         {
             if(position > 0)
-                _simpleButton.CornerRadius = Sizes.CornerRadiusCollection.ElementAt(position).Value;
+                _simpleButton.CornerRadius = Sizes.CornerRadiusCollection.ElementAt(position).Value * Resources.DisplayMetrics.Density;
         }
 
         private void RippleColorItemSelected(int position)

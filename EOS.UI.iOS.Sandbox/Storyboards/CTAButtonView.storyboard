@@ -23,7 +23,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="c6W-ap-2rc">
-                                <rect key="frame" x="2" y="44" width="371" height="150"/>
+                                <rect key="frame" x="0.0" y="44" width="375" height="150"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="150" id="o3A-2A-xUA"/>
@@ -237,10 +237,10 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="dzy-ax-1bM" firstAttribute="bottom" secondItem="FlL-cg-jgQ" secondAttribute="bottom" id="9O0-hN-TOn"/>
-                            <constraint firstAttribute="trailing" secondItem="c6W-ap-2rc" secondAttribute="trailing" constant="2" id="AEt-HF-slK"/>
+                            <constraint firstAttribute="trailing" secondItem="c6W-ap-2rc" secondAttribute="trailing" id="AEt-HF-slK"/>
                             <constraint firstItem="c6W-ap-2rc" firstAttribute="top" secondItem="661" secondAttribute="bottom" id="Tea-As-QBA"/>
                             <constraint firstItem="dzy-ax-1bM" firstAttribute="trailing" secondItem="FlL-cg-jgQ" secondAttribute="trailingMargin" id="aa9-zC-Pef"/>
-                            <constraint firstItem="c6W-ap-2rc" firstAttribute="leading" secondItem="FlL-cg-jgQ" secondAttribute="leading" constant="2" id="ftO-xp-JyL"/>
+                            <constraint firstItem="c6W-ap-2rc" firstAttribute="leading" secondItem="FlL-cg-jgQ" secondAttribute="leading" id="ftO-xp-JyL"/>
                             <constraint firstItem="dzy-ax-1bM" firstAttribute="top" secondItem="c6W-ap-2rc" secondAttribute="bottom" id="gYu-wh-N6H"/>
                             <constraint firstItem="dzy-ax-1bM" firstAttribute="centerX" secondItem="FlL-cg-jgQ" secondAttribute="centerX" id="hcq-UC-T1b"/>
                         </constraints>

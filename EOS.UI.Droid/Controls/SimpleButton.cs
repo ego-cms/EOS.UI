@@ -262,16 +262,18 @@ namespace EOS.UI.Droid.Controls
         {
             var stateList = new StateListAnimator();
 
-            var elevationHolderToPressed = PropertyValuesHolder.OfFloat("Elevation", shadow.Blur, 0);
-            var translationZHolderToPressed = PropertyValuesHolder.OfFloat("TranslationZ", shadow.Blur, 0);
+            var elevationHolderToPressed = PropertyValuesHolder.OfFloat("Elevation", shadow.Blur, shadow.Blur/2);
+            var translationZHolderToPressed = PropertyValuesHolder.OfFloat("TranslationZ", shadow.Blur, shadow.Blur / 2);
             var pressedAnimation = ObjectAnimator.OfPropertyValuesHolder(this, elevationHolderToPressed, translationZHolderToPressed);
             pressedAnimation.SetDuration(100);
 
-            var disabledAnimation = ObjectAnimator.OfPropertyValuesHolder(this, elevationHolderToPressed, translationZHolderToPressed);
+            var elevationHolderToDisabled = PropertyValuesHolder.OfFloat("Elevation", shadow.Blur, 0);
+            var translationZHolderToDisabled = PropertyValuesHolder.OfFloat("TranslationZ", shadow.Blur, 0);
+            var disabledAnimation = ObjectAnimator.OfPropertyValuesHolder(this, elevationHolderToDisabled, translationZHolderToDisabled);
             disabledAnimation.SetDuration(0);
 
-            var elevationHolderToNormal = PropertyValuesHolder.OfFloat("Elevation", 0, shadow.Blur);
-            var translationZHolderToNormal = PropertyValuesHolder.OfFloat("TranslationZ", 0, shadow.Blur);
+            var elevationHolderToNormal = PropertyValuesHolder.OfFloat("Elevation", shadow.Blur / 2, shadow.Blur);
+            var translationZHolderToNormal = PropertyValuesHolder.OfFloat("TranslationZ", shadow.Blur / 2, shadow.Blur);
             var normalAnimation = ObjectAnimator.OfPropertyValuesHolder(this, elevationHolderToNormal, translationZHolderToNormal);
             normalAnimation.SetDuration(1);
 
@@ -317,11 +319,6 @@ namespace EOS.UI.Droid.Controls
                 _baseHeight = _animationDrawable.IntrinsicHeight;
             });
 
-            _baseBottomPadding = PaddingBottom;
-            _baseTopPadding = PaddingTop;
-            _baseLeftPadding = PaddingLeft;
-            _baseRightPadding = PaddingRight;
-
             var denisty = Resources.DisplayMetrics.Density;
             SetAllCaps(false);
             SetLines(1);
@@ -331,6 +328,14 @@ namespace EOS.UI.Droid.Controls
 
             UpdateAppearance();
             Background = CreateRippleDrawable(BackgroundColor);
+        }
+
+        private void SaveCurrentPaddings()
+        {
+            _baseBottomPadding = PaddingBottom;
+            _baseTopPadding = PaddingTop;
+            _baseLeftPadding = PaddingLeft;
+            _baseRightPadding = PaddingRight;
         }
 
         private void InitializeAttributes(IAttributeSet attrs)
@@ -379,15 +384,20 @@ namespace EOS.UI.Droid.Controls
             return new RippleDrawable(
                 CreateRippleColorStateList(),
                 CreateGradientDrawable(contentColor),
-                CreateRoundedMaskDrawable());
+                CreateRoundedMaskDrawable()
+            );
         }
 
         private ColorStateList CreateRippleColorStateList()
         {
             return new ColorStateList(
-               new int[][] { new int[] { } },
+                new int[][] { 
+                    new int[] { Android.Resource.Attribute.StatePressed }, 
+                    new int[] { } 
+               },
                new int[]
                {
+                   PressedBackgroundColor,
                    RippleColor,
                });
         }
@@ -420,6 +430,7 @@ namespace EOS.UI.Droid.Controls
         {
             if(Enabled && !InProgress)
             {
+                SaveCurrentPaddings();
                 SetStartAnimationValues();
 
                 if(_shouldRedraw)
@@ -528,7 +539,7 @@ namespace EOS.UI.Droid.Controls
                 DisabledBackgroundColor = GetThemeProvider().GetEOSProperty<Color>(this, EOSConstants.NeutralColor4S);
                 PressedBackgroundColor = GetThemeProvider().GetEOSProperty<Color>(this, EOSConstants.BrandPrimaryColorVariant1);
                 RippleColor = GetThemeProvider().GetEOSProperty<Color>(this, EOSConstants.BrandPrimaryColorVariant1);
-                CornerRadius = GetThemeProvider().GetEOSProperty<float>(this, EOSConstants.ButtonCornerRadius);
+                CornerRadius = GetThemeProvider().GetEOSProperty<float>(this, EOSConstants.ButtonCornerRadius) * Resources.DisplayMetrics.Density;
                 ShadowConfig = GetThemeProvider().GetEOSProperty<ShadowConfig>(this, EOSConstants.SimpleButtonShadow);
 
                 IsEOSCustomizationIgnored = false;
