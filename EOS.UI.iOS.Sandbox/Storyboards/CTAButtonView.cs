@@ -211,7 +211,7 @@ namespace EOS.UI.iOS.Sandbox
                             break;
                         case SimpleButtonTypeEnum.FullBleed:
                             SetupFullBleedButtonStyle();
-                            DisableSimpleButtonFields();
+                            ToggleSimpleButtonFields(false);
                             break;
                     }
                 },
@@ -222,40 +222,22 @@ namespace EOS.UI.iOS.Sandbox
         private void ApplySimpleButtonViewBehavior()
         {
             SetupSimpleButtonStyle();
-            EnableSimpleButtonFields();
+            ToggleSimpleButtonFields(true);
         }
 
-        private void DisableSimpleButtonFields()
+        private void ToggleSimpleButtonFields(bool enable)
         {
-            cornerRadiusDropDown.Enabled = false;
-            DisableShadowFields();
-        }
-
-        private void DisableShadowFields()
-        {
-            shadowColorDropdown.Enabled = false;
-            shadowRadiusDropDown.Enabled = false;
-            shadowOffsetXDropDown.Enabled = false;
-            shadowOffsetYDropDown.Enabled = false;
-            shadowOpacityDropDown.Enabled = false;
-        }
-
-        private void EnableSimpleButtonFields()
-        {
-            cornerRadiusDropDown.Enabled = true;
-            if (_simpleButton.Enabled)
-            {
-                EnableShadowFields();
-            }
+            cornerRadiusDropDown.Enabled = enable;
+            shadowColorDropdown.Enabled = enable;
+            shadowRadiusDropDown.Enabled = enable;
+            shadowOffsetXDropDown.Enabled = enable;
+            shadowOffsetYDropDown.Enabled = enable;
+            shadowOpacityDropDown.Enabled = enable;
         }
 
         private void EnableShadowFields()
         {
-            shadowColorDropdown.Enabled = true;
-            shadowRadiusDropDown.Enabled = true;
-            shadowOffsetXDropDown.Enabled = true;
-            shadowOffsetYDropDown.Enabled = true;
-            shadowOpacityDropDown.Enabled = true;
+            
         }
 
         private void SetupFullBleedButtonStyle()
@@ -367,20 +349,6 @@ namespace EOS.UI.iOS.Sandbox
             enableSwitch.ValueChanged += (sender, e) =>
             {
                 _simpleButton.Enabled = enableSwitch.On;
-                if (!enableSwitch.On)
-                {
-                    _defaultShadow = _simpleButton.ShadowConfig;
-                    _simpleButton.ShadowConfig = null;
-                    DisableShadowFields();
-                }
-                else
-                {
-                    _simpleButton.ShadowConfig = _defaultShadow;
-                    if (_currentButtonState == SimpleButtonTypeEnum.Simple)
-                    {
-                        EnableShadowFields();
-                    }
-                }
             };
         }
 
@@ -390,6 +358,7 @@ namespace EOS.UI.iOS.Sandbox
             {
                 _opacity = null;
                 _simpleButton.ResetCustomization();
+                _currentButtonState = SimpleButtonTypeEnum.Simple;
                 ResetFields();
                 ApplySimpleButtonViewBehavior();
             };
