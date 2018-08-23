@@ -242,19 +242,20 @@ namespace EOS.UI.iOS.Controls
             get => base.Highlighted;
             set
             {
-                if(value)
+                base.Highlighted = value;
+                if (ShadowConfig == null)
+                    return;
+                if (value)
                 {
                     base.BackgroundColor = PressedBackgroundColor;
                     Layer.ShadowOffset = _pressedShadowOffset;
-                    Layer.ShadowRadius = (nfloat) (ShadowConfig.Blur / 2 * _blurCoeff);
+                    Layer.ShadowRadius = (nfloat)(ShadowConfig.Blur / 2 * _blurCoeff);
                 }
                 else
                 {
                     base.BackgroundColor = BackgroundColor;
                     SetShadowConfig(ShadowConfig);
                 }
-
-                base.Highlighted = value;
             }
         }
 
