@@ -369,13 +369,10 @@ namespace EOS.UI.iOS.Sandbox
                 _simpleButton.Enabled = enableSwitch.On;
                 if (!enableSwitch.On)
                 {
-                    _defaultShadow = _simpleButton.ShadowConfig;
-                    _simpleButton.ShadowConfig = null;
                     DisableShadowFields();
                 }
                 else
                 {
-                    _simpleButton.ShadowConfig = _defaultShadow;
                     if (_currentButtonState == SimpleButtonTypeEnum.Simple)
                     {
                         EnableShadowFields();
@@ -390,6 +387,7 @@ namespace EOS.UI.iOS.Sandbox
             {
                 _opacity = null;
                 _simpleButton.ResetCustomization();
+                _currentButtonState = SimpleButtonTypeEnum.Simple;
                 ResetFields();
                 ApplySimpleButtonViewBehavior();
             };

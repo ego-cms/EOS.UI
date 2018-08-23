@@ -376,6 +376,7 @@ namespace EOS.UI.iOS.Sandbox
             {
                 _opacity = null;
                 _simpleButton.ResetCustomization();
+                _currentButtonState = SimpleButtonTypeEnum.Simple;
                 ResetFields();
                 ApplySimpleButtonViewBehavior();
             };
