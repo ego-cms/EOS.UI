@@ -31,7 +31,7 @@
             android:paddingLeft="24dp"
             android:paddingRight="24dp"
             android:layout_gravity="center"
-            android:text="Default text" />
+            android:text="Ghost button" />
     </EOS.UI.Droid.Sandbox.Controls.EOSSandboxLinearLayout>
     <EOS.UI.Droid.Sandbox.Controls.EOSSandboxDivider
         android:layout_width="match_parent"
