@@ -9,7 +9,6 @@ using Android.OS;
 using Android.Runtime;
 using Android.Text;
 using Android.Util;
-using Android.Views;
 using Android.Widget;
 using Com.Airbnb.Lottie;
 using EOS.UI.Droid.Themes;
@@ -233,29 +232,14 @@ namespace EOS.UI.Droid.Controls
 
         private void ResetShadow()
         {
-            if (Build.VERSION.SdkInt > BuildVersionCodes.Lollipop)
-            {
-                StateListAnimator = null;
-                Elevation = 0;
-                TranslationZ = 0;
-            }
-            else
-            {
-                Elevation = 0;
-            }
+            StateListAnimator = null;
+            Elevation = 0;
+            TranslationZ = 0;
         }
 
         private void SetupShadow(ShadowConfig shadow)
         {
-            if (Build.VERSION.SdkInt > BuildVersionCodes.Lollipop)
-            {
-                UpdateStateListAnimator(shadow);
-            }
-            else
-            {
-                StateListAnimator = null;
-                Elevation = 2 * shadow.Blur;
-            }
+            UpdateStateListAnimator(shadow);
         }
 
         private void UpdateStateListAnimator(ShadowConfig shadow)
@@ -504,18 +488,6 @@ namespace EOS.UI.Droid.Controls
             //use creation from xml hack
             var drawable = (RotateDrawable)Drawable.CreateFromXml(Resources, Resources.GetXml(Resource.Drawable.RotateDrawable));
             return drawable;
-        }
-
-        public override bool OnTouchEvent(MotionEvent e)
-        {
-            if(Build.VERSION.SdkInt <= BuildVersionCodes.Lollipop)
-            {
-                if(e.Action == MotionEventActions.Down)
-                    Elevation = 0; 
-                if(e.Action == MotionEventActions.Up || e.Action == MotionEventActions.Cancel)
-                    Elevation = 2 * _shadowConfig.Blur;
-            }
-            return base.OnTouchEvent(e);
         }
 
         #endregion
