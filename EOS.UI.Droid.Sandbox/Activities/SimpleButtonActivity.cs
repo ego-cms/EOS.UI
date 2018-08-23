@@ -133,7 +133,6 @@ namespace EOS.UI.Droid.Sandbox.Activities
 
         private void ButtonTypeItemSelected(int position)
         {
-
             var type = Buttons.SimpleButtonTypeCollection.ElementAt(position).Value;
             switch(type)
             {
