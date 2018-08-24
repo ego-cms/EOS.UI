@@ -331,7 +331,7 @@ namespace EOS.UI.Droid.Controls
 
             var denisty = Resources.DisplayMetrics.Density;
             CompoundDrawablePadding = (int)(10 * denisty);
-            SetPaddingRelative(0, (int)(14 * denisty), 0, (int)(14 * denisty));
+            SetPaddingRelative(0, (int)(14 * denisty), (int)(6 * denisty), (int)(14 * denisty));
 
             OnFocusChangeListener = this;
             if(attrs != null)

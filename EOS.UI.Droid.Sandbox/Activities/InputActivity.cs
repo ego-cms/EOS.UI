@@ -108,7 +108,7 @@ namespace EOS.UI.Droid.Sandbox.Activities
             _hintTextColorDropDown.ItemSelected += HintTextColorItemSelected;
 
             _hintTextColorDisabledDropDown.Name = Fields.HintTextColorDisabled;
-            _hintTextColorDisabledDropDown.SetupAdapter(Colors.MainColorsCollection.Select(item => item.Key).ToList());
+            _hintTextColorDisabledDropDown.SetupAdapter(Colors.FontColorsCollection.Select(item => item.Key).ToList());
             _hintTextColorDisabledDropDown.ItemSelected += HintTextColorDisabledItemSelected;
 
             _leftDrawableDropDown.Name = Fields.Icon;

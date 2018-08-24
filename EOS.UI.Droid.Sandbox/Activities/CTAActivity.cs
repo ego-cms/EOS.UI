@@ -255,7 +255,7 @@ namespace EOS.UI.Droid.Sandbox.Activities
             _CTAButton.ResetCustomization();
             _dropDowns.Except(new[] { _themeDropDown, _buttonTypeDropDown }).ToList().ForEach(dropDown => dropDown.SetSpinnerSelection(0));
             if(!ignogeButtonType)
-                _buttonTypeDropDown.SetSpinnerSelection(1);
+                _buttonTypeDropDown.SetSpinnerSelection(0);
         }
 
         public void OnCheckedChanged(CompoundButton buttonView, bool isChecked)
