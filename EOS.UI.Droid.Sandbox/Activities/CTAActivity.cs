@@ -40,6 +40,7 @@ namespace EOS.UI.Droid.Sandbox.Activities
         private List<EOSSandboxDropDown> _dropDowns;
         private EOSSandboxDropDown _buttonTypeDropDown;
         private EOSSandboxDropDown _shadowRadiusDropDown;
+        private SimpleButtonTypeEnum _buttonType;
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
@@ -170,6 +171,10 @@ namespace EOS.UI.Droid.Sandbox.Activities
             _dropDowns.ForEach(dropDown => dropDown.Enabled = !_CTAButton.InProgress);
             _resetButton.Enabled = !_CTAButton.InProgress;
             _disableSwitch.Enabled = !_CTAButton.InProgress;
+            if(_buttonType == SimpleButtonTypeEnum.FullBleed)
+            {
+                DisableSimpleButtonFields();
+            }
         }
 
         private void ThemeItemSelected(int position)
@@ -265,9 +270,9 @@ namespace EOS.UI.Droid.Sandbox.Activities
 
         private void ButtonTypeItemSelected(int position)
         {
-            var buttonType = Buttons.CTAButtonTypeCollection.ElementAt(position).Value;
+            _buttonType = Buttons.CTAButtonTypeCollection.ElementAt(position).Value;
             ResetCustomValues(true);
-            switch(buttonType)
+            switch(_buttonType)
             {
                 case SimpleButtonTypeEnum.Simple:
                     SetupSimpleButtonStyle();
