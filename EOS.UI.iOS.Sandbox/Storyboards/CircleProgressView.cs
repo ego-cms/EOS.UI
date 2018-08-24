@@ -17,7 +17,7 @@ namespace EOS.UI.iOS.Sandbox
         private PlatformTimer _timer;
         private int _percents = 0;
         private List<EOSSandboxDropDown> _dropDowns;
-        private int _circleProgressSize;
+        private int _circleProgressSize = 75;
 
         public CircleProgressView(IntPtr handle) : base(handle)
         {

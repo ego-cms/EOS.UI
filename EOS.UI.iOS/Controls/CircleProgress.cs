@@ -213,7 +213,7 @@ namespace EOS.UI.iOS
 
         private bool ShouldShowProgress => ShowProgress && _progress != 100;
 
-        private void Initalize()
+        private void Initialize()
         {
             circleView.AddGestureRecognizer(new UITapGestureRecognizer((obj) =>
             {
