@@ -1,4 +1,4 @@
-﻿using System.Linq;
+using System.Linq;
 using Android.App;
 using Android.Content.PM;
 using Android.Graphics;
@@ -134,7 +134,6 @@ namespace EOS.UI.Droid.Sandbox.Activities
 
         private void ButtonTypeItemSelected(int position)
         {
-
             var type = Buttons.SimpleButtonTypeCollection.ElementAt(position).Value;
             ResetCustomValues(true);
             switch(type)
@@ -295,7 +294,7 @@ namespace EOS.UI.Droid.Sandbox.Activities
             _rippleColorDropDown.SetSpinnerSelection(0);
             _shadowRadiusDropDown.SetSpinnerSelection(0);
             if(!ignogeButtonType)
-                _buttonTypeDropDown.SetSpinnerSelection(1);
+                _buttonTypeDropDown.SetSpinnerSelection(0);
         }
 
         public void OnCheckedChanged(CompoundButton buttonView, bool isChecked)
