@@ -50,18 +50,6 @@ namespace EOS.UI.iOS.Controls
             }
         }
 
-        private FontStyleItem _disabledFontStyle;
-        public FontStyleItem DisabledFontStyle
-        {
-            get => _disabledFontStyle;
-            set
-            {
-                _disabledFontStyle = value;
-                SetDisabledFontStyle();
-                IsEOSCustomizationIgnored = true;
-            }
-        }
-
         public override UIFont Font
         {
             get => FontStyle?.Font ?? base.Font;
@@ -106,13 +94,14 @@ namespace EOS.UI.iOS.Controls
             }
         }
 
+        private UIColor _disabledTextColor;
         public UIColor DisabledTextColor
         {
-            get => DisabledFontStyle.Color;
+            get => _disabledTextColor;
             set
             {
-                DisabledFontStyle.Color = value;
-                SetDisabledFontStyle();
+                _disabledTextColor = value;
+                SetTitleColor(value, UIControlState.Disabled);
                 IsEOSCustomizationIgnored = true;
             }
         }
@@ -353,7 +342,6 @@ namespace EOS.UI.iOS.Controls
             {
                 var provider = GetThemeProvider();
                 FontStyle = provider.GetEOSProperty<FontStyleItem>(this, EOSConstants.R3C5S);
-                DisabledFontStyle = provider.GetEOSProperty<FontStyleItem>(this, EOSConstants.R3C4S);
                 BackgroundColor = provider.GetEOSProperty<UIColor>(this, EOSConstants.BrandPrimaryColor);
                 DisabledBackgroundColor = provider.GetEOSProperty<UIColor>(this, EOSConstants.NeutralColor4S);
                 PressedBackgroundColor = provider.GetEOSProperty<UIColor>(this, EOSConstants.BrandPrimaryColorVariant1);
@@ -439,13 +427,6 @@ namespace EOS.UI.iOS.Controls
             ImageView.TintColor = FontStyle.Color;
             //letter spacing
             this.SetLetterSpacing(FontStyle.LetterSpacing);
-        }
-
-        private void SetDisabledFontStyle()
-        {
-            //text color
-            SetTitleColor(DisabledFontStyle.Color, UIControlState.Disabled);
-
         }
 
         #endregion
