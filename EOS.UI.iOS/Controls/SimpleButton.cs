@@ -434,18 +434,26 @@ namespace EOS.UI.iOS.Controls
             base.Font = FontStyle.Font;
             //size
             this.SetTextSize(FontStyle.Size);
-            //text color
-            SetTitleColor(FontStyle.Color, UIControlState.Normal);
-            ImageView.TintColor = FontStyle.Color;
             //letter spacing
             this.SetLetterSpacing(FontStyle.LetterSpacing);
+
+            //text color
+            if (Enabled)
+            {
+                SetTitleColor(FontStyle.Color, UIControlState.Normal);
+                ImageView.TintColor = FontStyle.Color;
+            }
+            else
+            {
+                SetDisabledFontStyle();
+            }
         }
 
         private void SetDisabledFontStyle()
         {
             //text color
             SetTitleColor(DisabledFontStyle.Color, UIControlState.Disabled);
-
+            ImageView.TintColor = DisabledFontStyle.Color;
         }
 
         #endregion

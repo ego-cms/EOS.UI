@@ -67,13 +67,13 @@ namespace EOS.UI.iOS.Sandbox
             themesDropDown.SetTextFieldText(source.CalendarModel.GetThemeProvider().GetCurrentTheme() is LightEOSTheme ? "Light" : "Dark");
 
             titleFontDropDown.InitSource(
-                Fonts.GetWorkTimeTitleFonts().ToList(),
+                Fonts.GetWorkTimeTitleFonts(),
                 font => source.CalendarModel.TitleFont = font,
                 Fields.TitleFont,
                 rect);
 
             dayFontDropDown.InitSource(
-                Fonts.GetWorkTimeDayFonts().ToList(),
+                Fonts.GetWorkTimeDayFonts(),
                 font => source.CalendarModel.DayTextFont = font,
                 Fields.DayTextFont,
                 rect);

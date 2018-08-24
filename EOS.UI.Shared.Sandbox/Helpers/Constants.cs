@@ -123,7 +123,7 @@ namespace EOS.UI.Shared.Sandbox.Helpers
         public static partial class Sizes
         {
             public static readonly Dictionary<string, float> TextSizeCollection = new Dictionary<string, float>();
-            public static readonly Dictionary<string, float> CornerRadiusCollection = new Dictionary<string, float>();
+            public static readonly Dictionary<string, int> CornerRadiusCollection = new Dictionary<string, int>();
             public static readonly Dictionary<string, int> BorderWidthCollection = new Dictionary<string, int>();
             public static readonly Dictionary<string, int> PaddingsCollection = new Dictionary<string, int>();
             public static readonly Dictionary<string, float> LetterSpacingCollection = new Dictionary<string, float>();

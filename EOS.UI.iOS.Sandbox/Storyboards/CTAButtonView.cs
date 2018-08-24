@@ -7,6 +7,7 @@ using EOS.UI.iOS.Controls;
 using EOS.UI.iOS.Extensions;
 using EOS.UI.iOS.Sandbox.Storyboards;
 using EOS.UI.Shared.Helpers;
+using EOS.UI.Shared.Sandbox.ControlConstants.iOS;
 using EOS.UI.Shared.Sandbox.Helpers;
 using EOS.UI.Shared.Themes.Themes;
 using UIKit;
@@ -20,7 +21,6 @@ namespace EOS.UI.iOS.Sandbox
         private SimpleButton _simpleButton;
         private List<EOSSandboxDropDown> _dropDowns;
         private NSLayoutConstraint[] _defaultConstraints;
-        private ShadowConfig _defaultShadow;
         private double? _opacity;
         private SimpleButtonTypeEnum _currentButtonState = SimpleButtonTypeEnum.Simple;
 
@@ -75,25 +75,30 @@ namespace EOS.UI.iOS.Sandbox
                 _dropDowns.ForEach(dropDown => dropDown.CloseInputControl());
             }));
 
-            var rect = new CGRect(0, 0, 100, 150);
-            InitThemeDropDown(rect);
-            InitFontDropDown(rect);
-            InitLetterSpacingDropDown(rect);
-            InitTextSizeDropDown(rect);
-            InitTextColorEnabledDropDown(rect);
-            InitTextColorDisabledDropDown(rect);
-            InitBackgroundColorEnabledDropDown(rect);
-            InitBackgroundColorDisabledDropDown(rect);
-            InitBackgroundColorPressedDropDown(rect);
-            InitCornerRadiusDropDown(rect);
-            InitButtonTypeDropDown(rect);
-            InitShadowColorDropDown(rect);
-            InitShadowOffsetXDropDown(rect);
-            InitShadowOffsetYDropDown(rect);
-            InitShadowOpacityDropDown(rect);
-            InitShadowRadiusDropDown(rect);
+            var frame = new CGRect(0, 0, 100, 150);
+            InitThemeDropDown(frame);
+            InitSources(frame);
             InitDisabledSwitch();
             InitResetButton();
+        }
+        
+        private void InitSources(CGRect frame)
+        {
+            InitFontDropDown(frame);
+            InitLetterSpacingDropDown(frame);
+            InitTextSizeDropDown(frame);
+            InitTextColorEnabledDropDown(frame);
+            InitTextColorDisabledDropDown(frame);
+            InitBackgroundColorEnabledDropDown(frame);
+            InitBackgroundColorDisabledDropDown(frame);
+            InitBackgroundColorPressedDropDown(frame);
+            InitCornerRadiusDropDown(frame);
+            InitButtonTypeDropDown(frame);
+            InitShadowColorDropDown(frame);
+            InitShadowOffsetXDropDown(frame);
+            InitShadowOffsetYDropDown(frame);
+            InitShadowOpacityDropDown(frame);
+            InitShadowRadiusDropDown(frame);
         }
 
         private void InitThemeDropDown(CGRect rect)
@@ -107,6 +112,7 @@ namespace EOS.UI.iOS.Sandbox
                     ResetFields();
                     UpdateApperaence();
                     ApplySimpleButtonViewBehavior();
+                    InitSources(rect);
                 },
                 Fields.Theme,
                 rect);
@@ -116,7 +122,7 @@ namespace EOS.UI.iOS.Sandbox
         private void InitFontDropDown(CGRect rect)
         {
             fontDropDown.InitSource(
-                Fonts.GetButtonLabelFonts().ToList(),
+                SimpleButtonConstants.SimpleButtonFonts,
                 font => _simpleButton.Font = font,
                 Fields.Font,
                 rect);
@@ -125,7 +131,7 @@ namespace EOS.UI.iOS.Sandbox
         private void InitLetterSpacingDropDown(CGRect rect)
         {
             letterSpacingDropDown.InitSource(
-                Sizes.LetterSpacingCollection,
+                SimpleButtonConstants.LetterSpacingCollection,
                 spacing => _simpleButton.LetterSpacing = spacing,
                 Fields.LetterSpacing,
                 rect);
@@ -134,7 +140,7 @@ namespace EOS.UI.iOS.Sandbox
         private void InitTextSizeDropDown(CGRect rect)
         {
             textSizeDropDown.InitSource(
-                Sizes.TextSizeCollection,
+                SimpleButtonConstants.TextSizeCollection,
                 size => _simpleButton.TextSize = size,
                 Fields.TextSize,
                 rect);
@@ -143,7 +149,7 @@ namespace EOS.UI.iOS.Sandbox
         private void InitTextColorEnabledDropDown(CGRect rect)
         {
             enabledTextColorDropDown.InitSource(
-                Colors.FontColorsCollection,
+                SimpleButtonConstants.FontColorCollection,
                 color => _simpleButton.TextColor = color,
                 Fields.EnabledTextColor,
                 rect);
@@ -152,7 +158,7 @@ namespace EOS.UI.iOS.Sandbox
         private void InitTextColorDisabledDropDown(CGRect rect)
         {
             disabledTextColorDropDown.InitSource(
-                Colors.FontColorsCollection,
+                SimpleButtonConstants.DisabledFontColorCollection,
                 color => _simpleButton.DisabledTextColor = color,
                 Fields.DisabledTextColor,
                 rect);
@@ -161,7 +167,7 @@ namespace EOS.UI.iOS.Sandbox
         private void InitBackgroundColorEnabledDropDown(CGRect rect)
         {
             enabledBackgroundDropDown.InitSource(
-                Colors.MainColorsCollection,
+                SimpleButtonConstants.BackgroundColorCollection,
                 color => _simpleButton.BackgroundColor = color,
                 Fields.EnabledBackground,
                 rect);
@@ -170,7 +176,7 @@ namespace EOS.UI.iOS.Sandbox
         private void InitBackgroundColorDisabledDropDown(CGRect rect)
         {
             disabledBackgroundDropDown.InitSource(
-                Colors.MainColorsCollection,
+                SimpleButtonConstants.DisabledBackgroundColorCollection,
                 color => _simpleButton.DisabledBackgroundColor = color,
                 Fields.DisabledBackground,
                 rect);
@@ -179,7 +185,7 @@ namespace EOS.UI.iOS.Sandbox
         private void InitBackgroundColorPressedDropDown(CGRect rect)
         {
             pressedBackgroundDropdown.InitSource(
-                Colors.MainColorsCollection,
+                SimpleButtonConstants.PressedBackgroundColorCollection,
                 color => _simpleButton.PressedBackgroundColor = color,
                 Fields.PressedBackground,
                 rect);
@@ -188,7 +194,7 @@ namespace EOS.UI.iOS.Sandbox
         private void InitCornerRadiusDropDown(CGRect rect)
         {
             cornerRadiusDropDown.InitSource(
-                Sizes.CornerRadiusCollection,
+                SimpleButtonConstants.CornerRadiusCollection,
                 radius => _simpleButton.CornerRadius = (int)radius,
                 Fields.ConerRadius,
                 rect);
@@ -265,7 +271,7 @@ namespace EOS.UI.iOS.Sandbox
         private void InitShadowColorDropDown(CGRect rect)
         {
             shadowColorDropdown.InitSource(
-                Colors.MainColorsCollection,
+                SimpleButtonConstants.ShadowColorCollection,
                 color =>
                 {
                     var config = _simpleButton.ShadowConfig;
@@ -286,7 +292,7 @@ namespace EOS.UI.iOS.Sandbox
         private void InitShadowOffsetXDropDown(CGRect rect)
         {
             shadowOffsetXDropDown.InitSource(
-                Shadow.OffsetCollection,
+                SimpleButtonConstants.ShadowOffsetXCollection,
                 offset =>
                 {
                     var config = _simpleButton.ShadowConfig;
@@ -300,7 +306,7 @@ namespace EOS.UI.iOS.Sandbox
         private void InitShadowOffsetYDropDown(CGRect rect)
         {
             shadowOffsetYDropDown.InitSource(
-                Shadow.OffsetCollection,
+                SimpleButtonConstants.ShadowOffsetYCollection,
                 offset =>
                 {
                     var config = _simpleButton.ShadowConfig;
@@ -314,7 +320,7 @@ namespace EOS.UI.iOS.Sandbox
         private void InitShadowRadiusDropDown(CGRect rect)
         {
             shadowRadiusDropDown.InitSource(
-                Shadow.RadiusCollection,
+                SimpleButtonConstants.ShadowRadiusCollection,
                 radius =>
                 {
                     var config = _simpleButton.ShadowConfig;
@@ -328,16 +334,13 @@ namespace EOS.UI.iOS.Sandbox
         private void InitShadowOpacityDropDown(CGRect rect)
         {
             shadowOpacityDropDown.InitSource(
-                Shadow.OpacityCollection,
+                SimpleButtonConstants.ShadowOpacityCollection,
                 opacity =>
                 {
                     var config = _simpleButton.ShadowConfig;
                     _opacity = opacity;
                     config.Color = config.Color.ColorWithAlpha((nfloat)opacity);
                     _simpleButton.ShadowConfig = config;
-                    //var config = _simpleButton.ShadowConfig;
-                    //config.Spread = (int)spread;
-                    //_simpleButton.ShadowConfig = config;
                 },
                 Fields.ShadowOpacity,
                 rect);

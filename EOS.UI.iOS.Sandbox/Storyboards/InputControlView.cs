@@ -149,7 +149,7 @@ namespace EOS.UI.iOS.Sandbox
         private void InitFontTextField(CGRect rect)
         {
             fontDropDown.InitSource(
-                Fonts.GetInputFonts().ToList(),
+                Fonts.GetInputFonts(),
                 font =>
                 {
                     _inputTop.Font = font;

@@ -12,8 +12,13 @@
     <Compile Include="$(MSBuildThisFileDirectory)Helpers\Constants.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Helpers\Constants.iOS.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Helpers\Constants.Droid.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ControlConstants\iOS\BadgeLabelConstants.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ControlConstants\iOS\CircleProgressConstants.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ControlConstants\iOS\SimpleButtonConstants.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="$(MSBuildThisFileDirectory)Helpers\" />
+    <Folder Include="$(MSBuildThisFileDirectory)ControlConstants\" />
+    <Folder Include="$(MSBuildThisFileDirectory)ControlConstants\iOS\" />
   </ItemGroup>
 </Project>

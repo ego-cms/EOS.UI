@@ -4,6 +4,7 @@ using System.Linq;
 using CoreGraphics;
 using EOS.UI.iOS.Sandbox.Helpers;
 using EOS.UI.iOS.Sandbox.Storyboards;
+using EOS.UI.Shared.Sandbox.ControlConstants.iOS;
 using EOS.UI.Shared.Themes.Themes;
 using UIKit;
 using static EOS.UI.Shared.Sandbox.Helpers.Constants;
@@ -66,7 +67,7 @@ namespace EOS.UI.iOS.Sandbox
             }));
 
 
-            var rect = new CGRect(0, 0, 100, 100);
+            var frame = new CGRect(0, 0, 100, 100);
 
             themeDropDown.InitSource(
                 ThemeTypes.ThemeCollection,
@@ -78,40 +79,11 @@ namespace EOS.UI.iOS.Sandbox
                     _circleProgress.Progress = 0;
                     showProgressSwitch.On = true;
                     UpdateApperaence();
+                    InitSources(frame);
                 },
                 Fields.Theme,
-                rect);
+                frame);
             themeDropDown.SetTextFieldText(_circleProgress.GetThemeProvider().GetCurrentTheme() is LightEOSTheme ? "Light" : "Dark");
-
-            fontDropDown.InitSource(
-                Fonts.GetCircleProgressFonts().ToList(),
-                font => _circleProgress.Font = font,
-                Fields.Font,
-                rect);
-
-            textSizeDropDown.InitSource(
-                Sizes.TextSizeCollection,
-                size => _circleProgress.TextSize = size,
-                Fields.TextSize,
-                rect);
-
-            colorDropDown.InitSource(
-                Colors.MainColorsCollection,
-                color => _circleProgress.Color = color,
-                Fields.Color,
-                rect);
-
-            alternativeColorDropDown.InitSource(
-                Colors.MainColorsCollection,
-                color => _circleProgress.AlternativeColor = color,
-                Fields.AlternativeColor,
-                rect);
-            
-            fillColorDropDown.InitSource(
-                Colors.MainColorsCollection,
-                color => _circleProgress.FillColor = color,
-                Fields.FillColor,
-                rect);
 
             showProgressSwitch.ValueChanged += (sender, e) =>
             {
@@ -120,13 +92,48 @@ namespace EOS.UI.iOS.Sandbox
 
             resetButton.TouchUpInside += (sender, e) =>
             {
-                _dropDowns.Except(new [] { themeDropDown }).ToList().ForEach(dropDown => dropDown.ResetValue());
+                _dropDowns.Except(new[] { themeDropDown }).ToList().ForEach(dropDown => dropDown.ResetValue());
                 showProgressSwitch.On = true;
                 _circleProgress.ResetCustomization();
             };
+
+            InitSources(frame);
         }
 
-        public void TimerAction()
+        void InitSources(CGRect frame)
+        {
+            fontDropDown.InitSource(
+                CircleProgressConstants.CircleProgressFonts,
+                font => _circleProgress.Font = font,
+                Fields.Font,
+                frame);
+
+            textSizeDropDown.InitSource(
+                CircleProgressConstants.TextSizeCollection,
+                size => _circleProgress.TextSize = size,
+                Fields.TextSize,
+                frame);
+
+            colorDropDown.InitSource(
+                CircleProgressConstants.CircleProgressColor,
+                color => _circleProgress.Color = color,
+                Fields.Color,
+                frame);
+
+            alternativeColorDropDown.InitSource(
+                CircleProgressConstants.AlternativeColors,
+                color => _circleProgress.AlternativeColor = color,
+                Fields.AlternativeColor,
+                frame);
+
+            fillColorDropDown.InitSource(
+                CircleProgressConstants.FillColors,
+                color => _circleProgress.FillColor = color,
+                Fields.FillColor,
+                frame);
+        }
+
+        void TimerAction()
         {
             _percents += 1;
             _circleProgress.Progress = _percents;

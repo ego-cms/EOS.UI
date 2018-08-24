@@ -32,7 +32,6 @@ namespace EOS.UI.Shared.Sandbox.Helpers
                 {ColorNameIndigo, ColorExtension.FromHex(ColorIndigo)},
             };
 
-
             public static Dictionary<string, UIColor> FontColorsCollection = new Dictionary<string, UIColor>()
             {
                 {ColorNameBlack, ColorExtension.FromHex(ColorBlack)},
@@ -104,7 +103,7 @@ namespace EOS.UI.Shared.Sandbox.Helpers
                 FontsCollection.Add(HiraginoSansW3, UIFont.FromName(HiraginoSansW3, UIFont.SystemFontSize));
             }
 
-            public static IEnumerable<UIFont> GetButtonLabelFonts()
+            public static Dictionary<string, UIFont> GetButtonLabelFonts()
             {
                 return FontsCollection.Keys.Except(new[] {
                     AvenirBook,
@@ -115,10 +114,10 @@ namespace EOS.UI.Shared.Sandbox.Helpers
                     AvenirNextRegular,
                     HiraginoSansW3,
                     HelveticaNeueLight
-                }).Select(k => FontsCollection[k]);
+                }).Select(k => FontsCollection.Single(s => s.Key == k)).ToDictionary(e => e.Key, e => e.Value);
             }
 
-            public static IEnumerable<UIFont> GetWorkTimeTitleFonts()
+            public static Dictionary<string, UIFont> GetWorkTimeTitleFonts()
             {
                 return FontsCollection.Keys.Except(new[] {
                    AvenirBook,
@@ -131,10 +130,10 @@ namespace EOS.UI.Shared.Sandbox.Helpers
                     FuturaBold,
                     HelveticaNeueLight,
                     HelveticaNeueRoman
-                }).Select(k => FontsCollection[k]);
+                }).Select(k => FontsCollection.Single(s => s.Key == k)).ToDictionary(e => e.Key, e => e.Value);
             }
 
-            public static IEnumerable<UIFont> GetCircleProgressFonts()
+            public static Dictionary<string, UIFont> GetCircleProgressFonts()
             {
                 return FontsCollection.Keys.Except(new[] {
                     AvenirBook,
@@ -150,10 +149,10 @@ namespace EOS.UI.Shared.Sandbox.Helpers
                     HelveticaNeueMedium,
                     HelveticaNeueLight,
                     HiraginoSansW3,
-                }).Select(k => FontsCollection[k]);
+                }).Select(k => FontsCollection.Single(s => s.Key == k)).ToDictionary(e => e.Key, e => e.Value);
             }
 
-            public static IEnumerable<UIFont> GetGhostButtonSimpleLabelFonts()
+            public static Dictionary<string, UIFont> GetGhostButtonSimpleLabelFonts()
             {
                 return FontsCollection.Keys.Except(new[] {
                         AvenirBook,
@@ -166,10 +165,10 @@ namespace EOS.UI.Shared.Sandbox.Helpers
                     HelveticaNeueRoman,
                     HelveticaNeueLight,
                     HiraginoSansW3
-                }).Select(k => FontsCollection[k]);
+                }).Select(k => FontsCollection.Single(s => s.Key == k)).ToDictionary(e => e.Key, e => e.Value);
             }
 
-            public static IEnumerable<UIFont> GetWorkTimeDayFonts()
+            public static Dictionary<string, UIFont> GetWorkTimeDayFonts()
             {
                 return FontsCollection.Keys.Except(new[] {
                     AvenirBook,
@@ -182,10 +181,10 @@ namespace EOS.UI.Shared.Sandbox.Helpers
                     HelveticaNeueBold,
                     HelveticaNeueLight,
                     FuturaBold
-                }).Select(k => FontsCollection[k]);
+                }).Select(k => FontsCollection.Single(s => s.Key == k)).ToDictionary(e => e.Key, e => e.Value);
             }
 
-            public static IEnumerable<UIFont> GetInputFonts()
+            public static Dictionary<string, UIFont> GetInputFonts()
             {
                 return FontsCollection.Keys.Except(new[] {
                     AvenirBlack,
@@ -197,7 +196,7 @@ namespace EOS.UI.Shared.Sandbox.Helpers
                     HelveticaNeueMedium,
                     FuturaBold,
                     FuturaMedium,
-                    }).Select(k => FontsCollection[k]);
+                    }).Select(k => FontsCollection.Single(s => s.Key == k)).ToDictionary(e => e.Key, e => e.Value);
             }
         }
 
