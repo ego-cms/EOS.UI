@@ -126,34 +126,39 @@ namespace EOS.UI.iOS.Controls
         
         public bool InProgress { get; private set; }
 
+        #region .ctors
+
         public FabProgress()
         {
-            TouchDown += (sender, e) => 
-            {
-                UIView.Animate(_animationDuration, () =>
-                {
-                    Transform = CGAffineTransform.MakeScale(_startScale, _startScale);
-                });
-            };
-            
-            TouchUpInside += (sender, e) =>
-            {
-                UIView.Animate(_animationDuration, () =>
-                {
-                    Transform = CGAffineTransform.MakeScale(_endScale, _endScale);
-                });
-            };
-            _rotationAnimation = new CABasicAnimation();
-            _rotationAnimation.KeyPath = "transform.rotation.z";
-            _rotationAnimation.From = new NSNumber(0);
-            _rotationAnimation.To = new NSNumber(_360degrees);
-            _rotationAnimation.Duration = 1;
-            _rotationAnimation.Cumulative = true;
-            _rotationAnimation.RepeatCount = Int32.MaxValue;
-            UpdateAppearance();
-            ImageView.TintColor = GetThemeProvider().GetEOSProperty<UIColor>(this, EOSConstants.NeutralColor6S);
-            AdjustsImageWhenDisabled = false;
+            Initialize();
         }
+
+        public FabProgress(UIButtonType type) : base(type)
+        {
+            Initialize();
+        }
+
+        public FabProgress(NSCoder coder) : base(coder)
+        {
+            Initialize();
+        }
+
+        public FabProgress(NSObjectFlag t) : base(t)
+        {
+            Initialize();
+        }
+
+        public FabProgress(IntPtr handle) : base(handle)
+        {
+            Initialize();
+        }
+
+        public FabProgress(CGRect frame) : base(frame)
+        {
+            Initialize();
+        }
+
+        #endregion
 
         public override void LayoutSubviews()
         {
@@ -244,6 +249,35 @@ namespace EOS.UI.iOS.Controls
             HorizontalAlignment = UIControlContentHorizontalAlignment.Fill;
             ContentMode = UIViewContentMode.ScaleToFill;
             UpdateImageInsets();
+        }
+
+        private void Initialize()
+        {
+            TouchDown += (sender, e) =>
+            {
+                UIView.Animate(_animationDuration, () =>
+                {
+                    Transform = CGAffineTransform.MakeScale(_startScale, _startScale);
+                });
+            };
+
+            TouchUpInside += (sender, e) =>
+            {
+                UIView.Animate(_animationDuration, () =>
+                {
+                    Transform = CGAffineTransform.MakeScale(_endScale, _endScale);
+                });
+            };
+            _rotationAnimation = new CABasicAnimation();
+            _rotationAnimation.KeyPath = "transform.rotation.z";
+            _rotationAnimation.From = new NSNumber(0);
+            _rotationAnimation.To = new NSNumber(_360degrees);
+            _rotationAnimation.Duration = 1;
+            _rotationAnimation.Cumulative = true;
+            _rotationAnimation.RepeatCount = Int32.MaxValue;
+            UpdateAppearance();
+            ImageView.TintColor = GetThemeProvider().GetEOSProperty<UIColor>(this, EOSConstants.NeutralColor6S);
+            AdjustsImageWhenDisabled = false;
         }
     }
 }
