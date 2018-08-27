@@ -144,7 +144,7 @@ namespace EOS.UI.Droid.Sandbox.Activities
             {
                 _circleMenu.GetThemeProvider().SetCurrentTheme(ThemeTypes.ThemeCollection.ElementAt(position).Value);
                 ResetCustomValues();
-                UpdateApperaence();
+                UpdateAppearance();
             }
         }
 
