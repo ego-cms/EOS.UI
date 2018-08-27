@@ -33,7 +33,6 @@ namespace EOS.UI.iOS.Components
 
         private void Initialize()
         {
-            BackgroundColor = ColorExtension.FromHex("#3C6DF0");
             Layer.ShadowColor = UIColor.Black.CGColor;
             Hidden = true;
         }
