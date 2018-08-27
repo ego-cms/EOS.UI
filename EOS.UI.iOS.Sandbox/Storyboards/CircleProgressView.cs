@@ -17,6 +17,7 @@ namespace EOS.UI.iOS.Sandbox
         private PlatformTimer _timer;
         private int _percents = 0;
         private List<EOSSandboxDropDown> _dropDowns;
+        private int _circleProgressSize = 75;
 
         public CircleProgressView(IntPtr handle) : base(handle)
         {
@@ -28,9 +29,9 @@ namespace EOS.UI.iOS.Sandbox
             _timer = new PlatformTimer();
             _timer.Setup(TimeSpan.FromMilliseconds(100), TimerAction);
 
-            _circleProgress = CircleProgress.Create();
-            _circleProgress.Frame = new CGRect(containerView.Frame.Width / 2 - _circleProgress.Frame.Width / 2,
-                                               containerView.Frame.Height / 2 - _circleProgress.Frame.Height / 2, _circleProgress.Frame.Width, _circleProgress.Frame.Width);
+            _circleProgress = new CircleProgress();
+            _circleProgress.Frame = new CGRect(containerView.Frame.Width / 2 - _circleProgressSize / 2,
+                                               containerView.Frame.Height / 2 - _circleProgressSize / 2, _circleProgressSize, _circleProgressSize);
 
             _circleProgress.Started += (sender, e) =>
             {
