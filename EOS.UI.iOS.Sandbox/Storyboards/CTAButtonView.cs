@@ -20,7 +20,6 @@ namespace EOS.UI.iOS.Sandbox
         private SimpleButton _simpleButton;
         private List<EOSSandboxDropDown> _dropDowns;
         private NSLayoutConstraint[] _defaultConstraints;
-        private ShadowConfig _defaultShadow;
         private double? _opacity;
         private SimpleButtonTypeEnum _currentButtonState = SimpleButtonTypeEnum.Simple;
 
@@ -67,6 +66,7 @@ namespace EOS.UI.iOS.Sandbox
                 ToggleAllControlsEnabled(false, _dropDowns, resetButton, enableSwitch);
                 await Task.Delay(5000);
                 ToggleAllControlsEnabled(true, _dropDowns, resetButton, enableSwitch);
+                ToggleSimpleButtonFields(_currentButtonState == SimpleButtonTypeEnum.Simple);
                 _simpleButton.StopProgressAnimation();
             };
 
@@ -194,7 +194,6 @@ namespace EOS.UI.iOS.Sandbox
                 rect);
         }
 
-
         private void InitButtonTypeDropDown(CGRect rect)
         {
             buttonTypeDropDown.InitSource(
@@ -233,11 +232,6 @@ namespace EOS.UI.iOS.Sandbox
             shadowOffsetXDropDown.Enabled = enable;
             shadowOffsetYDropDown.Enabled = enable;
             shadowOpacityDropDown.Enabled = enable;
-        }
-
-        private void EnableShadowFields()
-        {
-            
         }
 
         private void SetupFullBleedButtonStyle()
@@ -335,9 +329,6 @@ namespace EOS.UI.iOS.Sandbox
                     _opacity = opacity;
                     config.Color = config.Color.ColorWithAlpha((nfloat)opacity);
                     _simpleButton.ShadowConfig = config;
-                    //var config = _simpleButton.ShadowConfig;
-                    //config.Spread = (int)spread;
-                    //_simpleButton.ShadowConfig = config;
                 },
                 Fields.ShadowOpacity,
                 rect);
