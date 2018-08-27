@@ -139,7 +139,7 @@ namespace EOS.UI.iOS.Sandbox
                     _inputBotton.IsValid = true;
                     _validateRule = null;
                     _dropDowns.Except(new[] { themeDropDown }).ToList().ForEach(dropDown => dropDown.ResetValue());
-                    UpdateApperaence();
+                    UpdateAppearance();
                 },
                 Fields.Theme,
                 rect);

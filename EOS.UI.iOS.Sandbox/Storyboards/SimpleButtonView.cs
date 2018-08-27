@@ -98,7 +98,7 @@ namespace EOS.UI.iOS.Sandbox
                     _simpleButton.GetThemeProvider().SetCurrentTheme(theme);
                     _simpleButton.ResetCustomization();
                     ResetFields();
-                    UpdateApperaence();
+                    UpdateAppearance();
                     ApplySimpleButtonViewBehavior();
                 },
                 Fields.Theme,

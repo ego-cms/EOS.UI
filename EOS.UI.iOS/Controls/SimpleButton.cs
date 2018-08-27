@@ -27,11 +27,36 @@ namespace EOS.UI.iOS.Controls
         private const double _shadowYCoeff = 0.25;
         private const double _blurCoeff = 0.66;
 
-        #region constructor
+        #region .ctors
 
         public SimpleButton()
         {
-            Initialization();
+            Initialize();
+        }
+
+        public SimpleButton(UIButtonType type) : base(type)
+        {
+            Initialize();
+        }
+
+        public SimpleButton(NSCoder coder) : base(coder)
+        {
+            Initialize();
+        }
+
+        public SimpleButton(NSObjectFlag t) : base(t)
+        {
+            Initialize();
+        }
+
+        public SimpleButton(IntPtr handle) : base(handle)
+        {
+            Initialize();
+        }
+
+        public SimpleButton(CGRect frame) : base(frame)
+        {
+            Initialize();
         }
 
         #endregion
@@ -207,7 +232,7 @@ namespace EOS.UI.iOS.Controls
 
         #region utility methods
 
-        private void Initialization()
+        private void Initialize()
         {
             TitleLabel.Lines = 1;
             TitleLabel.LineBreakMode = UILineBreakMode.TailTruncation;

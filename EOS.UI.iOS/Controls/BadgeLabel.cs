@@ -124,6 +124,8 @@ namespace EOS.UI.iOS.Controls
             }
         }
 
+        #region .ctors
+
         public BadgeLabel()
         {
             Initialize();
@@ -133,6 +135,23 @@ namespace EOS.UI.iOS.Controls
         {
             Initialize();
         }
+
+        public BadgeLabel(NSCoder coder) : base(coder)
+        {
+            Initialize();
+        }
+
+        public BadgeLabel(NSObjectFlag t) : base(t)
+        {
+            Initialize();
+        }
+
+        public BadgeLabel(CGRect frame) : base(frame)
+        {
+            Initialize();
+        }
+
+        #endregion
 
         public IEOSStyle GetCurrentEOSStyle()
         {
