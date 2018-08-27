@@ -49,7 +49,7 @@ namespace EOS.UI.Droid.Sandbox
         protected override void OnStart()
         {
             base.OnStart();
-            UpdateApperaence();
+            UpdateAppearance();
         }
 
         private void ItemClick(object sender, int e)

@@ -71,7 +71,7 @@ namespace EOS.UI.Shared.Themes.Themes
             { EOSConstants.RippleColor, Color.ParseColor(rippleColor) },
             { EOSConstants.DisabledInputColor, Color.ParseColor(neutralColor5)},
             { EOSConstants.LabelCornerRadius, 4f },
-            { EOSConstants.ButtonCornerRadius, 100f },
+            { EOSConstants.ButtonCornerRadius, 24f },
             { EOSConstants.LeftImage, Resource.Drawable.icCalendar },
             { EOSConstants.CalendarImage, Resource.Drawable.icCalendar },
             //should always be white

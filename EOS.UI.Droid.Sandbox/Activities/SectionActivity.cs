@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Android.App;
+using Android.Content.PM;
 using Android.Graphics;
 using Android.Graphics.Drawables;
 using Android.OS;
@@ -19,7 +20,7 @@ using static EOS.UI.Shared.Sandbox.Helpers.Constants;
 
 namespace EOS.UI.Droid.Sandbox.Activities
 {
-    [Activity(Label = ControlNames.Section, Theme = "@style/Sandbox.Main")]
+    [Activity(Label = ControlNames.Section, Theme = "@style/Sandbox.Main", ScreenOrientation = ScreenOrientation.Portrait)]
     public class SectionActivity : BaseActivity
     {
         private RecyclerView _sectionRecyclerView;
@@ -476,7 +477,7 @@ namespace EOS.UI.Droid.Sandbox.Activities
             {
                 EOSThemeProvider.Instance.SetCurrentTheme(ThemeTypes.ThemeCollection.ElementAt(position).Value);
                 ResetCustomValues();
-                UpdateApperaence();
+                UpdateAppearance();
                 var message = _toast.View.FindViewById<TextView>(Android.Resource.Id.Message);
                 message.SetShadowLayer(0, 0, 0, Color.Transparent);
                 if(EOSThemeProvider.Instance.GetCurrentTheme() is LightEOSTheme)

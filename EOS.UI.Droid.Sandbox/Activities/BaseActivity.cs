@@ -26,7 +26,7 @@ namespace EOS.UI.Droid.Sandbox.Activities
         protected override void OnStart()
         {
             base.OnStart();
-            UpdateApperaence();
+            UpdateAppearance();
         }
 
         public override bool OnOptionsItemSelected(IMenuItem item)
@@ -45,10 +45,10 @@ namespace EOS.UI.Droid.Sandbox.Activities
         protected void ResetAndUpdateView()
         {
             ResetCustomization();
-            UpdateApperaence();
+            UpdateAppearance();
         }
 
-        public void UpdateApperaence()
+        public void UpdateAppearance()
         {
             SetStyle();
             foreach(var view in Children)

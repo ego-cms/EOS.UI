@@ -137,6 +137,10 @@
     </ImageAsset>
     <ImageAsset Include="Assets.xcassets\icAccountCircle.imageset\Contents.json" />
     <ImageAsset Include="Assets.xcassets\icAccountCircle.imageset\icAccountCircle.pdf" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon-App-20x20%401x.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon-App-29x29%401x.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon-App-40x40%401x.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\iTunesArtwork%402x.png" />
     <ImageAsset Include="Assets.xcassets\icImage.imageset\Contents.json" />
     <ImageAsset Include="Assets.xcassets\icPanorama.imageset\Contents.json" />
     <ImageAsset Include="Assets.xcassets\icVideo.imageset\Contents.json" />
@@ -324,6 +328,10 @@
     <BundleResource Include="Resources\icVideo_HD.png" />
     <BundleResource Include="Resources\icPhoto_HD.png" />
     <BundleResource Include="Resources\icPanorama_HD.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ITunesArtwork Include="iTunesArtwork%402x" />
+    <ITunesArtwork Include="iTunesArtwork" />
   </ItemGroup>
   <Import Project="..\EOS.UI.Shared.Sandbox\EOS.UI.Shared.Sandbox.projitems" Label="Shared" Condition="Exists('..\EOS.UI.Shared.Sandbox\EOS.UI.Shared.Sandbox.projitems')" />
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />

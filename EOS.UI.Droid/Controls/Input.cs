@@ -3,10 +3,10 @@ using Android.Content;
 using Android.Graphics;
 using Android.Graphics.Drawables;
 using Android.Runtime;
+using Android.Support.V7.Widget;
 using Android.Text;
 using Android.Util;
 using Android.Views;
-using Android.Widget;
 using EOS.UI.Droid.Themes;
 using EOS.UI.Shared.Themes.DataModels;
 using EOS.UI.Shared.Themes.Helpers;
@@ -14,7 +14,7 @@ using EOS.UI.Shared.Themes.Interfaces;
 
 namespace EOS.UI.Droid.Controls
 {
-    public class Input : EditText, IEOSThemeControl, View.IOnFocusChangeListener, View.IOnTouchListener
+    public class Input : AppCompatEditText, IEOSThemeControl, View.IOnFocusChangeListener, View.IOnTouchListener
     {
         #region fields
 
@@ -326,11 +326,12 @@ namespace EOS.UI.Droid.Controls
 
             SetHorizontallyScrolling(true);
             SetLines(1);
+            SetSingleLine(true);
             Ellipsize = TextUtils.TruncateAt.End;
 
             var denisty = Resources.DisplayMetrics.Density;
             CompoundDrawablePadding = (int)(10 * denisty);
-            SetPaddingRelative(0, (int)(14 * denisty), 0, (int)(14 * denisty));
+            SetPaddingRelative(0, (int)(14 * denisty), (int)(6 * denisty), (int)(14 * denisty));
 
             OnFocusChangeListener = this;
             if(attrs != null)

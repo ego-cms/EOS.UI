@@ -5,9 +5,9 @@ using Android.Graphics;
 using Android.Graphics.Drawables;
 using Android.Graphics.Drawables.Shapes;
 using Android.Runtime;
+using Android.Support.V7.Widget;
 using Android.Text;
 using Android.Util;
-using Android.Widget;
 using EOS.UI.Droid.Themes;
 using EOS.UI.Shared.Themes.DataModels;
 using EOS.UI.Shared.Themes.Helpers;
@@ -17,7 +17,7 @@ using Java.Util;
 
 namespace EOS.UI.Droid.Controls
 {
-    public class GhostButton : Button, IEOSThemeControl
+    public class GhostButton : AppCompatButton, IEOSThemeControl
     {
         public bool IsEOSCustomizationIgnored { get; private set; }
 
@@ -144,11 +144,6 @@ namespace EOS.UI.Droid.Controls
         }
 
         public GhostButton(Context context, IAttributeSet attrs, int defStyleAttr) : base(context, attrs, defStyleAttr)
-        {
-            Initialize(attrs);
-        }
-
-        public GhostButton(Context context, IAttributeSet attrs, int defStyleAttr, int defStyleRes) : base(context, attrs, defStyleAttr, defStyleRes)
         {
             Initialize(attrs);
         }

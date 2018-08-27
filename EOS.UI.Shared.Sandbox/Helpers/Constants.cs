@@ -159,10 +159,9 @@ namespace EOS.UI.Shared.Sandbox.Helpers
 #if __ANDROID__
                 CornerRadiusCollection.Add("default", 0);
 #endif
-                foreach (var val in Enumerable.Range(0, 16))
+                foreach (var val in Enumerable.Range(0, 11))
                 {
-                    var v = val * 4 + 10;
-                    CornerRadiusCollection.Add(v.ToString(), v);
+                    CornerRadiusCollection.Add(val.ToString(), val);
                 }
 #if __ANDROID__
                 BorderWidthCollection.Add("default", 0);

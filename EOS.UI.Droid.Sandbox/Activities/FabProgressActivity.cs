@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Threading.Tasks;
 using Android.App;
+using Android.Content.PM;
 using Android.Graphics;
 using Android.OS;
 using Android.Widget;
@@ -15,7 +16,7 @@ using static EOS.UI.Shared.Sandbox.Helpers.Constants;
 
 namespace EOS.UI.Droid.Sandbox.Activities
 {
-    [Activity(Label = ControlNames.FabProgress, Theme = "@style/Sandbox.Main")]
+    [Activity(Label = ControlNames.FabProgress, Theme = "@style/Sandbox.Main", ScreenOrientation = ScreenOrientation.Portrait)]
     public class FabProgressActivity : BaseActivity
     {
         public const string ShadowOffsetXKey = "ShadowOffsetXKey";
@@ -85,7 +86,7 @@ namespace EOS.UI.Droid.Sandbox.Activities
                     fab.ResetCustomization();
                     ResetShadowFields(shadowOffsetXDropDown, shadowOffsetYDropDown, shadowBlurDropDown, shadowColorDropDown);
                     spinners.Except(new[] { themeDropDown }).ToList().ForEach(s => s.SetSpinnerSelection(0));
-                    UpdateApperaence();
+                    UpdateAppearance();
                     _shadowAlpha = fab.ShadowConfig != null ? (float)fab.ShadowConfig?.Color.A / 255 : 1;
                 }
             };

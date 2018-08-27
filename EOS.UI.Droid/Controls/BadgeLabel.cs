@@ -1,11 +1,11 @@
-﻿using System;
+using System;
 using Android.Content;
 using Android.Graphics;
 using Android.Graphics.Drawables;
 using Android.Runtime;
+using Android.Support.V7.Widget;
 using Android.Text;
 using Android.Util;
-using Android.Widget;
 using EOS.UI.Droid.Themes;
 using EOS.UI.Shared.Themes.DataModels;
 using EOS.UI.Shared.Themes.Helpers;
@@ -13,7 +13,7 @@ using EOS.UI.Shared.Themes.Interfaces;
 
 namespace EOS.UI.Droid.Controls
 {
-    public class BadgeLabel: TextView, IEOSThemeControl
+    public class BadgeLabel: AppCompatTextView, IEOSThemeControl
     {
         #region constructors
 
@@ -38,7 +38,7 @@ namespace EOS.UI.Droid.Controls
         }
 
         #endregion
-        
+
         #region customization
 
         private Color _backgroundColor;
@@ -117,11 +117,13 @@ namespace EOS.UI.Droid.Controls
             }
         }
 
+        float _cornerRadius;
         public float CornerRadius
         {
-            get => (Background as GradientDrawable).CornerRadius;
+            get => _cornerRadius;
             set
             {
+                _cornerRadius = value;
                 IsEOSCustomizationIgnored = true;
                 (Background as GradientDrawable).SetCornerRadius(value);
             }
@@ -213,11 +215,16 @@ namespace EOS.UI.Droid.Controls
         {
             if(!IsEOSCustomizationIgnored)
             {
-                FontStyle = GetThemeProvider().GetEOSProperty<FontStyleItem>(this, EOSConstants.R2C5S);
-                (Background as GradientDrawable).SetColor(GetThemeProvider().GetEOSProperty<Color>(this, EOSConstants.BrandPrimaryColor));
-                (Background as GradientDrawable).SetCornerRadius(GetThemeProvider().GetEOSProperty<float>(this, EOSConstants.LabelCornerRadius));
+                FontStyle = GetThemeProvider().GetEOSProperty<FontStyleItem>(this, EOSConstants.R2C5S); 
+                BackgroundColor = GetThemeProvider().GetEOSProperty<Color>(this, EOSConstants.BrandPrimaryColor);
+                CornerRadius = GetCornerRadius();
                 IsEOSCustomizationIgnored = false;
             }
+        }
+
+        private float GetCornerRadius()
+        {
+            return GetThemeProvider().GetEOSProperty<float>(this, EOSConstants.LabelCornerRadius) * Resources.DisplayMetrics.Density;
         }
 
         public void ResetCustomization()

@@ -1,4 +1,4 @@
-﻿#if __IOS__
+#if __IOS__
 using System;
 using System.Collections.Generic;
 using CoreGraphics;
@@ -34,8 +34,8 @@ namespace EOS.UI.Shared.Themes.Themes
             { EOSConstants.Blackout, ColorExtension.FromHex(neutralColor6).ColorWithAlpha(0.64f)},
             { EOSConstants.RippleColor, ColorExtension.FromHex(rippleColor) },
             { EOSConstants.DisabledInputColor, ColorExtension.FromHex(neutralColor5)},
-            { EOSConstants.ButtonCornerRadius, 25 },
-            { EOSConstants.LabelCornerRadius, 5 },
+            { EOSConstants.ButtonCornerRadius, 24 },
+            { EOSConstants.LabelCornerRadius, 4 },
             { EOSConstants.LeftImage, "icCalendar" },
             { EOSConstants.CalendarImage, "icCalendar"},
             //should always be white

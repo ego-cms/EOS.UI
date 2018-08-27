@@ -1,5 +1,6 @@
 ﻿using System.Linq;
 using Android.App;
+using Android.Content.PM;
 using Android.Graphics;
 using Android.OS;
 using Android.Widget;
@@ -12,7 +13,7 @@ using static EOS.UI.Shared.Sandbox.Helpers.Constants;
 
 namespace EOS.UI.Droid.Sandbox.Activities
 {
-    [Activity(Label = ControlNames.BadgeLabel, Theme = "@style/Sandbox.Main") ]
+    [Activity(Label = ControlNames.BadgeLabel, Theme = "@style/Sandbox.Main", ScreenOrientation = ScreenOrientation.Portrait) ]
     public class BadgeLabelActivity : BaseActivity
     {
         private BadgeLabel _badge;
@@ -31,7 +32,6 @@ namespace EOS.UI.Droid.Sandbox.Activities
             SetContentView(Resource.Layout.BadgeLabelLayout);
 
             _badge = FindViewById<BadgeLabel>(Resource.Id.badgeLabel);
-            _badge.UpdateAppearance();
 
             _rootView = FindViewById<ScrollView>(Resource.Id.rootView);
             _themeDropDown = FindViewById<EOSSandboxDropDown>(Resource.Id.themeDropDown);
@@ -73,12 +73,24 @@ namespace EOS.UI.Droid.Sandbox.Activities
 
             SetCurrenTheme(_badge.GetThemeProvider().GetCurrentTheme());
 
-            UpdateApperaence();
-
             resetButton.Click += delegate
             {
                 ResetCustomValues();
             };
+        }
+
+        protected override void OnRestoreInstanceState(Bundle savedInstanceState)
+        {
+            base.OnRestoreInstanceState(savedInstanceState);
+            _badge.BackgroundColor = new Color(savedInstanceState.GetInt("color"));
+            _badge.CornerRadius = savedInstanceState.GetFloat("cornerRadius");
+        }
+
+        protected override void OnSaveInstanceState(Bundle outState)
+        {
+            base.OnSaveInstanceState(outState);
+            outState.PutInt("color", _badge.BackgroundColor.ToArgb());
+            outState.PutFloat("cornerRadius", _badge.CornerRadius);
         }
 
         private void SetCurrenTheme(IEOSTheme iEOSTheme)
@@ -95,14 +107,14 @@ namespace EOS.UI.Droid.Sandbox.Activities
             {
                 _badge.GetThemeProvider().SetCurrentTheme(ThemeTypes.ThemeCollection.ElementAt(position).Value);
                 ResetCustomValues();
-                UpdateApperaence();
+                UpdateAppearance();
             }
         }
 
         private void CornerRadiusItemSelected(int position)
         {
             if(position > 0)
-                _badge.CornerRadius = Sizes.CornerRadiusCollection.ElementAt(position).Value;
+                _badge.CornerRadius = Sizes.CornerRadiusCollection.ElementAt(position).Value * Resources.DisplayMetrics.Density;
         }
 
         private void TextSizeItemSelected(int position)

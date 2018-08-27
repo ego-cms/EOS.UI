@@ -21,6 +21,7 @@ namespace EOS.UI.iOS.Sandbox
         private List<EOSSandboxDropDown> _dropDowns;
         private NSLayoutConstraint[] _defaultConstraints;
         private double? _opacity;
+        private SimpleButtonTypeEnum _currentButtonState = SimpleButtonTypeEnum.Simple;
 
         public SimpleButtonView(IntPtr handle) : base(handle)
         {
@@ -96,9 +97,9 @@ namespace EOS.UI.iOS.Sandbox
                 {
                     _simpleButton.GetThemeProvider().SetCurrentTheme(theme);
                     _simpleButton.ResetCustomization();
-                    _dropDowns.Except(new[] { themeDropDown }).ToList().ForEach(dropDown => dropDown.ResetValue());
+                    ResetFields();
                     UpdateApperaence();
-                    SetupSimpleButtonStyle();
+                    ApplySimpleButtonViewBehavior();
                 },
                 Fields.Theme,
                 rect);
@@ -194,18 +195,36 @@ namespace EOS.UI.iOS.Sandbox
                 {
                     ResetFields();
                     _simpleButton.ResetCustomization();
+                    _currentButtonState = type;
                     switch (type)
                     {
                         case SimpleButtonTypeEnum.Simple:
-                            SetupSimpleButtonStyle();
+                            ApplySimpleButtonViewBehavior();
                             break;
                         case SimpleButtonTypeEnum.FullBleed:
                             SetupFullBleedButtonStyle();
+                            ToggleSimpleButtonFields(false);
                             break;
                     }
                 },
                 Fields.ButtonType,
                 rect);
+        }
+
+        private void ApplySimpleButtonViewBehavior()
+        {
+            SetupSimpleButtonStyle();
+            ToggleSimpleButtonFields(true);
+        }
+
+        private void ToggleSimpleButtonFields(bool enable)
+        {
+            cornerRadiusDropDown.Enabled = enable;
+            shadowColorDropDown.Enabled = enable;
+            shadowRadiusDropDown.Enabled = enable;
+            shadowOffsetXDropDown.Enabled = enable;
+            shadowOffsetYDropDown.Enabled = enable;
+            shadowOpacityDropDown.Enabled = enable;
         }
 
         private void SetupFullBleedButtonStyle()
@@ -301,7 +320,7 @@ namespace EOS.UI.iOS.Sandbox
                 {
                     var config = _simpleButton.ShadowConfig;
                     _opacity = opacity;
-                    config.Color = config.Color.ColorWithAlpha((nfloat)opacity); 
+                    config.Color = config.Color.ColorWithAlpha((nfloat)opacity);
                     _simpleButton.ShadowConfig = config;
                 },
                 Fields.ShadowOpacity,
@@ -323,10 +342,9 @@ namespace EOS.UI.iOS.Sandbox
             {
                 _opacity = null;
                 _simpleButton.ResetCustomization();
-                _simpleButton.SetTitle(Buttons.Simple, UIControlState.Normal);
-                containerView.RemoveConstraints(containerView.Constraints);
-                containerView.AddConstraints(_defaultConstraints);
+                _currentButtonState = SimpleButtonTypeEnum.Simple;
                 ResetFields();
+                ApplySimpleButtonViewBehavior();
             };
         }
 
