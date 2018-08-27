@@ -5,10 +5,10 @@ using Android.Graphics;
 using Android.Graphics.Drawables;
 using Android.OS;
 using Android.Runtime;
+using Android.Support.V7.Widget;
 using Android.Util;
 using Android.Views;
 using Android.Views.Animations;
-using Android.Widget;
 using EOS.UI.Droid.Helpers;
 using EOS.UI.Droid.Themes;
 using EOS.UI.Shared.Helpers;
@@ -17,7 +17,7 @@ using EOS.UI.Shared.Themes.Interfaces;
 
 namespace EOS.UI.Droid.Controls
 {
-    public class FabProgress : ImageButton, IEOSThemeControl
+    public class FabProgress : AppCompatImageButton, IEOSThemeControl
     {
         private const int _animationDuration = 100;
         private const float _startScale = 0.85f;
@@ -211,11 +211,6 @@ namespace EOS.UI.Droid.Controls
         }
 
         public FabProgress(Context context, IAttributeSet attrs, int defStyleAttr) : base(context, attrs, defStyleAttr)
-        {
-            Initialize();
-        }
-
-        public FabProgress(Context context, IAttributeSet attrs, int defStyleAttr, int defStyleRes) : base(context, attrs, defStyleAttr, defStyleRes)
         {
             Initialize();
         }
