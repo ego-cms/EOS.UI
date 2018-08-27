@@ -44,7 +44,7 @@ namespace EOS.UI.Shared.Themes.Themes
             { EOSConstants.CircleProgressShown, true},
             { EOSConstants.FabShadow, new ShadowConfig(){
                 Color = ColorExtension.FromHex(fabShadowColor),
-                Offset = new CGPoint(0, 12),
+                Offset = new CGPoint(0, 6),
                 Blur = 12,
                 Spread = 1
             }},
