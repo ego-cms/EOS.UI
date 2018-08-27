@@ -76,7 +76,7 @@ namespace EOS.UI.iOS.Sandbox
 
             enabledTextColorDropDown.InitSource(
                 Colors.GetGhostButtonFonts(),
-                color => ghostButton.EnabledTextColor = color,
+                color => ghostButton.TextColor = color,
                 Fields.EnabledTextColor,
                 rect);
 

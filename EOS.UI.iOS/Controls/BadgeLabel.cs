@@ -203,7 +203,9 @@ namespace EOS.UI.iOS.Controls
 
         private void Initialize()
         {
-            Text = String.Empty;
+            //AttributedText applies only for non-empty string. 
+            //For attributed text initialization should have something here
+            Text = " ";
             Layer.MasksToBounds = true;
             _insets = new UIEdgeInsets(2, 15, 2, 15);
             Lines = 1;

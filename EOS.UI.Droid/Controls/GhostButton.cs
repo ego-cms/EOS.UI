@@ -57,7 +57,7 @@ namespace EOS.UI.Droid.Controls
             }
         }
 
-        public Color EnabledTextColor
+        public Color TextColor
         {
             get => FontStyle.Color;
             set
@@ -95,7 +95,7 @@ namespace EOS.UI.Droid.Controls
             set
             {
                 _disabledTextColor= value;
-                SetTextColorSet(EnabledTextColor, _disabledTextColor);
+                SetTextColorSet(TextColor, _disabledTextColor);
                 IsEOSCustomizationIgnored = true;
             }
         }
@@ -180,7 +180,7 @@ namespace EOS.UI.Droid.Controls
 
             var textColor = styledAttributes.GetColor(Resource.Styleable.GhostButton_eos_textcolor, Color.Transparent);
             if(textColor != Color.Transparent)
-                EnabledTextColor = textColor;
+                TextColor = textColor;
 
             var disabledTextColor = styledAttributes.GetColor(Resource.Styleable.GhostButton_eos_textcolor_disabled, Color.Transparent);
             if(disabledTextColor != Color.Transparent)

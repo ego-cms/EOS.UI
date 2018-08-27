@@ -65,7 +65,7 @@ namespace EOS.UI.iOS.Controls
             }
         }
 
-        public UIColor EnabledTextColor
+        public UIColor TextColor
         {
             get => FontStyle?.Color;
             set
@@ -173,7 +173,7 @@ namespace EOS.UI.iOS.Controls
             {
                 case UIControlState.Normal:
                     resultString = new NSMutableAttributedString(attrString);
-                    resultString.AddAttribute(UIStringAttributeKey.ForegroundColor, EnabledTextColor, range);
+                    resultString.AddAttribute(UIStringAttributeKey.ForegroundColor, TextColor, range);
                     SetAttributedTitle(resultString, UIControlState.Normal);
 
                     resultString = new NSMutableAttributedString(attrString);
@@ -181,7 +181,7 @@ namespace EOS.UI.iOS.Controls
                     SetAttributedTitle(resultString, UIControlState.Disabled);
 
                     resultString = new NSMutableAttributedString(attrString);
-                    resultString.AddAttribute(UIStringAttributeKey.ForegroundColor, EnabledTextColor, range);
+                    resultString.AddAttribute(UIStringAttributeKey.ForegroundColor, TextColor, range);
                     SetAttributedTitle(resultString, UIControlState.Highlighted);
                     break;
                 case UIControlState.Disabled:
@@ -191,7 +191,7 @@ namespace EOS.UI.iOS.Controls
                     break;
                 case UIControlState.Highlighted:
                     resultString = new NSMutableAttributedString(attrString);
-                    resultString.AddAttribute(UIStringAttributeKey.ForegroundColor, EnabledTextColor, range);
+                    resultString.AddAttribute(UIStringAttributeKey.ForegroundColor, TextColor, range);
                     SetAttributedTitle(resultString, forState);
                     break;
             }
