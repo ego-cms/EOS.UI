@@ -213,6 +213,15 @@ namespace EOS.UI.iOS
 
         private bool ShouldShowProgress => ShowProgress && _progress != 100;
 
+        public override UIView HitTest(CGPoint point, UIEvent uievent)
+        {
+            //passthrough superview events to circleview
+            if (this.PointInside(point, uievent))
+                return circleView;
+            else
+                return base.HitTest(point, uievent);
+        }
+
         private void Initialize()
         {
             circleView.AddGestureRecognizer(new UITapGestureRecognizer((obj) =>
