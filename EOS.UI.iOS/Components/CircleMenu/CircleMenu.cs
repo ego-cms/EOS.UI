@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -172,7 +172,7 @@ namespace EOS.UI.iOS.Components
             _panSwipe = new UIPanGestureRecognizer(PanAction);
             _rootView.AddGestureRecognizer(_panSwipe);
 
-            _menuButtonsView = new PassthroughToWindowView()
+            _menuButtonsView = new UIView()
             {
                 Frame = new CGRect(0, 0, this.Frame.Width, this.Frame.Height),
                 BackgroundColor = UIColor.Clear,
@@ -333,16 +333,33 @@ namespace EOS.UI.iOS.Components
         }
 
         /// <summary>
-        /// Launchs "open" menu animation
+        /// Launchs "open" menu animations queue
         /// </summary>
         void OpenMenu()
         {
             SwitchSwipeInteractions(false);
             _menuButtonsView.Transform = CGAffineTransform.MakeRotation(-_6Degrees);
+            var task = StartOpenMenuAnimation();
+            task = task.AnimateNext((t) => SwitchButtonsInteractions(false));
+            task = task.AnimateNext((arg) => StartOpenSpringEffect(-_6Degrees)).Unwrap();
+            if (!_isHintShown)
+            {
+                task = task.AnimateNext((arg) => StartHintAnimation()).Unwrap();
+                _isHintShown = true;
+            }
+            task = task.AnimateNext((t) =>
+            {
+                SwitchButtonsInteractions(true);
+                SwitchSwipeInteractions(true);
+            });
+        }
+        
+        Task StartOpenMenuAnimation()
+        {
             var task = Task.CompletedTask;
             var tcs = new TaskCompletionSource<bool>();
             var callback = new Action(() => tcs.SetResult(true));
-            task = task.ContinueWith((arg) =>
+            task = task.AnimateNext((arg) =>
             {
                 for (int i = 0; i < VisibleCountOfElements; ++i)
                 {
@@ -352,90 +369,74 @@ namespace EOS.UI.iOS.Components
                         var positionIndex = i - j;
                         if (i == VisibleCountOfElements - 1 && j == i)
                         {
-                            StartMoveButtonAnmation(_menuButtons[j], _buttonPositions[positionIndex], _indicatorPositions[positionIndex], MenuOpenButtonAnimationDuration, delay, callback);
+                            StartMoveButtonAnimation(_menuButtons[j], _buttonPositions[positionIndex], _indicatorPositions[positionIndex], MenuOpenButtonAnimationDuration, delay, callback);
                         }
                         else
                         {
-                            StartMoveButtonAnmation(_menuButtons[j], _buttonPositions[positionIndex], _indicatorPositions[positionIndex], MenuOpenButtonAnimationDuration, delay);
+                            StartMoveButtonAnimation(_menuButtons[j], _buttonPositions[positionIndex], _indicatorPositions[positionIndex], MenuOpenButtonAnimationDuration, delay);
                         }
                     }
                 }
                 return tcs.Task;
-            }, TaskScheduler.FromCurrentSynchronizationContext()).Unwrap();
-            task = task.ContinueWith((t) => SwitchButtonsInteractions(false), TaskScheduler.FromCurrentSynchronizationContext());
-            task = task.ContinueWith((arg) => StartOpenSpringEffect(-_6Degrees), TaskScheduler.FromCurrentSynchronizationContext()).Unwrap();
-            if (!_isHintShown)
-            {
-                task = task.ContinueWith((arg) => StartHintAnimation(), TaskScheduler.FromCurrentSynchronizationContext()).Unwrap();
-                _isHintShown = true;
-            }
-            task = task.ContinueWith((t) =>
-            {
-                SwitchButtonsInteractions(true);
-                SwitchSwipeInteractions(true);
-            }, TaskScheduler.FromCurrentSynchronizationContext());
+            }).Unwrap();
+            return task;
         }
 
-
         /// <summary>
-        /// Launchs "close" menu animation
+        /// Launchs "close" menu animation queue
         /// </summary>
-        void CloseMenu()
+        async void CloseMenu()
         {
             var task = Task.CompletedTask;
-            task = task.ContinueWith(async (arg) =>
+            SwitchSwipeInteractions(false);
+            for (int i = 0; i < _menuButtons.Count; ++i)
             {
-                SwitchSwipeInteractions(false);
-                for (int i = 0; i < _menuButtons.Count; ++i)
+                task = task.AnimateNext((t) =>
                 {
-                    var tcs = new TaskCompletionSource<bool>();
-                    task = task.ContinueWith((t) =>
+                    for (int j = 0; j < _menuButtons.Count; ++j)
                     {
-                        for (int j = 0; j < _menuButtons.Count; ++j)
-                        {
-                            var positionIndex = _menuButtons[j].PositionIndex;
-                            if (positionIndex == _buttonPositions.Count - 1)
-                                continue;
-                            var previousPositionIndex = positionIndex > 0 ?
-                                positionIndex - 1 : _buttonPositions.Count - 1;
-                            StartMoveButtonAnmation(_menuButtons[j], _buttonPositions[previousPositionIndex], _indicatorPositions[previousPositionIndex], MenuOpenButtonAnimationDuration);
-                        }
-                    }, TaskScheduler.FromCurrentSynchronizationContext());
-
-                    await Task.Delay(TimeSpan.FromSeconds(MenuOpenButtonAnimationDuration));
-                    tcs.SetResult(true);
-                }
-                SwitchSwipeInteractions(true);
-            }, TaskScheduler.FromCurrentSynchronizationContext());
+                        var positionIndex = _menuButtons[j].PositionIndex;
+                        if (positionIndex == _buttonPositions.Count - 1)
+                            continue;
+                        var previousPositionIndex = positionIndex > 0 ?
+                            positionIndex - 1 : _buttonPositions.Count - 1;
+                        StartMoveButtonAnimation(_menuButtons[j], _buttonPositions[previousPositionIndex], _indicatorPositions[previousPositionIndex], MenuOpenButtonAnimationDuration);
+                    }
+                });
+                await Task.Delay(TimeSpan.FromSeconds(MenuOpenButtonAnimationDuration));
+            }
+            SwitchSwipeInteractions(true);
         }
 
         /// <summary>
-        /// Launchs left animation for the circle menu
+        /// Launchs "left" animations queue for the circle menu
         /// </summary>
         void MoveLeft()
         {
+            var task = Task.CompletedTask;
+            task.AnimateNext((t) => MoveLeftAnimation())
+                .AnimateNext(t => SwitchButtonsInteractions(false))
+                .AnimateNext(t => StartMoveSpringEffect(-_2Degrees)).Unwrap()
+                .AnimateNext(t => SwitchButtonsInteractions(true));
+        }
+        
+        void MoveLeftAnimation()
+        {
             var zeroButtonPositionModel = _menuButtons.SingleOrDefault(b => b.Position == _buttonPositions[0]).Model;
             var indexOfZerobuttonPositionModel = _circleMenuItems.IndexOf(zeroButtonPositionModel);
-            var task = Task.CompletedTask;
-            task = task.ContinueWith((t) =>
+            for (int i = 0; i < _menuButtons.Count; ++i)
             {
-                for (int i = 0; i < _menuButtons.Count; ++i)
-                {
-                    var positionIndex = _buttonPositions.IndexOf(_menuButtons[i].Position);
-                    var nextPositionIndex = positionIndex != _buttonPositions.Count - 1 ? positionIndex += 1 : 0;
+                var positionIndex = _buttonPositions.IndexOf(_menuButtons[i].Position);
+                var nextPositionIndex = positionIndex != _buttonPositions.Count - 1 ? positionIndex += 1 : 0;
 
-                    if (nextPositionIndex == 0)
-                    {
-                        var indexOfNextModel = indexOfZerobuttonPositionModel < _circleMenuItems.Count - 1 ?
-                                                                                                indexOfZerobuttonPositionModel + 1 : 0;
-                        _menuButtons[i].Model = _circleMenuItems[indexOfNextModel];
-                    }
-                    StartMoveButtonAnmation(_menuButtons[i], _buttonPositions[nextPositionIndex], _indicatorPositions[nextPositionIndex], ButtonMovementAnimationDuration);
+                if (nextPositionIndex == 0)
+                {
+                    var indexOfNextModel = indexOfZerobuttonPositionModel < _circleMenuItems.Count - 1 ?
+                                                                                            indexOfZerobuttonPositionModel + 1 : 0;
+                    _menuButtons[i].Model = _circleMenuItems[indexOfNextModel];
                 }
-            }, TaskScheduler.FromCurrentSynchronizationContext());
-            task = task.ContinueWith(t => SwitchButtonsInteractions(false), TaskScheduler.FromCurrentSynchronizationContext());
-            task = task.ContinueWith(t => StartMoveSpringEffect(-_2Degrees), TaskScheduler.FromCurrentSynchronizationContext()).Unwrap();
-            task = task.ContinueWith(t => SwitchButtonsInteractions(true), TaskScheduler.FromCurrentSynchronizationContext());
+                StartMoveButtonAnimation(_menuButtons[i], _buttonPositions[nextPositionIndex], _indicatorPositions[nextPositionIndex], ButtonMovementAnimationDuration);
+            }
         }
 
         /// <summary>
@@ -443,28 +444,30 @@ namespace EOS.UI.iOS.Components
         /// </summary>
         void MoveRight()
         {
+            var task = Task.CompletedTask;
+            task.AnimateNext((t) => MoveRightAnimation())
+                .AnimateNext(t => SwitchButtonsInteractions(false))
+                .AnimateNext(t => StartMoveSpringEffect(_2Degrees)).Unwrap()
+                .AnimateNext(t => SwitchButtonsInteractions(true));
+        }
+
+        void MoveRightAnimation()
+        {
             var lastButtonPositionModel = _menuButtons.SingleOrDefault(b => b.Position == _buttonPositions[4]).Model;
             var indexOfLastButtonPositionModel = _circleMenuItems.IndexOf(lastButtonPositionModel);
-            var task = Task.CompletedTask;
-            task = task.ContinueWith((t) =>
+            for (int i = 0; i < _menuButtons.Count; ++i)
             {
-                for (int i = 0; i < _menuButtons.Count; ++i)
-                {
-                    var positionIndex = _menuButtons[i].PositionIndex;
-                    var previousPositionIndex = positionIndex != 0 ? positionIndex - 1 : _buttonPositions.Count - 1;
+                var positionIndex = _menuButtons[i].PositionIndex;
+                var previousPositionIndex = positionIndex != 0 ? positionIndex - 1 : _buttonPositions.Count - 1;
 
-                    if (previousPositionIndex == 4)
-                    {
-                        var indexOfPreviousModel = indexOfLastButtonPositionModel > 0 ?
-                            indexOfLastButtonPositionModel - 1 : _circleMenuItems.Count - 1;
-                        _menuButtons[i].Model = _circleMenuItems[indexOfPreviousModel];
-                    }
-                    StartMoveButtonAnmation(_menuButtons[i], _buttonPositions[previousPositionIndex], _indicatorPositions[previousPositionIndex], ButtonMovementAnimationDuration);
+                if (previousPositionIndex == 4)
+                {
+                    var indexOfPreviousModel = indexOfLastButtonPositionModel > 0 ?
+                        indexOfLastButtonPositionModel - 1 : _circleMenuItems.Count - 1;
+                    _menuButtons[i].Model = _circleMenuItems[indexOfPreviousModel];
                 }
-            }, TaskScheduler.FromCurrentSynchronizationContext());
-            task = task.ContinueWith(t => SwitchButtonsInteractions(false), TaskScheduler.FromCurrentSynchronizationContext());
-            task = task.ContinueWith(t => StartMoveSpringEffect(_2Degrees), TaskScheduler.FromCurrentSynchronizationContext()).Unwrap();
-            task = task.ContinueWith(t => SwitchButtonsInteractions(true), TaskScheduler.FromCurrentSynchronizationContext());
+                StartMoveButtonAnimation(_menuButtons[i], _buttonPositions[previousPositionIndex], _indicatorPositions[previousPositionIndex], ButtonMovementAnimationDuration);
+            }
         }
 
         /// <summary>
@@ -553,28 +556,25 @@ namespace EOS.UI.iOS.Components
             SwitchSwipeInteractions(false);
             SwitchButtonsInteractions(false);
             var task = Task.CompletedTask;
-            task.ContinueWith(t =>
+            if (!_isSubmenuOpen)
             {
-                if (!_isSubmenuOpen)
-                {
-                    SendViewToBack();
-                    var submenuButtons = PrepareSubmenu(invokedButton, model.Children);
-                    task = OpenSubmenu(invokedButton, submenuButtons);
-                    _isSubmenuOpen = true;
-                }
-                else
-                {
-                    SendViewToFront();
-                    task = CloseSubmenu(invokedButton);
-                    _isSubmenuOpen = false;
-                }
-                task = task.ContinueWith(arg =>
-                {
-                    invokedButton.UserInteractionEnabled = true;
-                    SwitchButtonsInteractions(true);
-                    SwitchSwipeInteractions(true);
-                }, TaskScheduler.FromCurrentSynchronizationContext());
-            }, TaskScheduler.FromCurrentSynchronizationContext());
+                SendViewToBack();
+                var submenuButtons = PrepareSubmenu(invokedButton, model.Children);
+                task = OpenSubmenu(invokedButton, submenuButtons);
+                _isSubmenuOpen = true;
+            }
+            else
+            {
+                SendViewToFront();
+                task = CloseSubmenu(invokedButton);
+                _isSubmenuOpen = false;
+            }
+            task.AnimateNext(arg =>
+            {
+                invokedButton.UserInteractionEnabled = true;
+                SwitchButtonsInteractions(true);
+                SwitchSwipeInteractions(true);
+            });
         }
 
         /// <summary>
@@ -638,14 +638,9 @@ namespace EOS.UI.iOS.Components
                 _rootView.AddSubview(submenuButtons[i]);
                 //Have to close on local variable
                 var localViewIndex = i;
-                task = task.ContinueWith(t => StartChangeAlphaAnimation(submenuButtons[localViewIndex], 1, ShowSubmenuDuration),
-                                         TaskScheduler.FromCurrentSynchronizationContext())
-                           .Unwrap();
+                task = task.AnimateNext(t => StartChangeAlphaAnimation(submenuButtons[localViewIndex], 1, ShowSubmenuDuration)).Unwrap();
             }
-            task = task.ContinueWith((t) =>
-            {
-                invokedButton.Indicator.Hidden = false;
-            }, TaskScheduler.FromCurrentSynchronizationContext());
+            task.AnimateNext(t => invokedButton.Indicator.Hidden = false);
             return task;
         }
 
@@ -675,12 +670,10 @@ namespace EOS.UI.iOS.Components
             {
                 //Have to close on local variable
                 var localViewIndex = i;
-                task = task.ContinueWith(t => StartChangeAlphaAnimation((CircleMenuButton)submenuButtons[localViewIndex], 0, ShowSubmenuDuration),
-                                         TaskScheduler.FromCurrentSynchronizationContext())
-                           .Unwrap();
+                task = task.AnimateNext(t => StartChangeAlphaAnimation((CircleMenuButton)submenuButtons[localViewIndex], 0, ShowSubmenuDuration)).Unwrap();
             }
 
-            task = task.ContinueWith((t) =>
+            task.AnimateNext((t) =>
             {
                 invokedButton.Indicator.ResetPosition();
                 invokedButton.Indicator.Hidden = false;
@@ -690,7 +683,7 @@ namespace EOS.UI.iOS.Components
                     button.TouchUpInside -= OnSubmenuClicked;
                 }
                 invokedButton.UserInteractionEnabled = true;
-            }, TaskScheduler.FromCurrentSynchronizationContext());
+            });
             return task;
         }
 
@@ -720,7 +713,7 @@ namespace EOS.UI.iOS.Components
         /// <param name="duration">Duration</param>
         /// <param name="delay">Delay</param>
         /// <param name="callback">Ended callback</param>
-        void StartMoveButtonAnmation(CircleMenuButton button, CGPoint buttonPosition, CGPoint indicatorPosition, double duration, double delay = 0, Action callback = null)
+        void StartMoveButtonAnimation(CircleMenuButton button, CGPoint buttonPosition, CGPoint indicatorPosition, double duration, double delay = 0, Action callback = null)
         {
             UIView.Animate(duration, delay, UIViewAnimationOptions.CurveEaseInOut, () =>
             {
@@ -895,7 +888,15 @@ namespace EOS.UI.iOS.Components
         public override UIView HitTest(CGPoint point, UIEvent uievent)
         {
             var view = base.HitTest(point, uievent);
-            return view == this ? null : view;
+            if (view == this || view == _menuButtonsView)
+            {
+                return null;
+
+            }
+            else
+            {
+                return view;
+            }
         }
     }
 }

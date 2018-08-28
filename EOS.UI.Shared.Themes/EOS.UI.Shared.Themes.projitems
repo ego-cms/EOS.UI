@@ -30,6 +30,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Themes\LightEOSTheme.iOS.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)DataModels\CircleMenuItemModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Themes\StaticEOSTheme.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Extensions\TaskExtension.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="$(MSBuildThisFileDirectory)Themes\" />

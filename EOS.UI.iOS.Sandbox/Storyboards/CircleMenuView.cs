@@ -99,7 +99,7 @@ namespace EOS.UI.iOS.Sandbox
                     _circleMenu.GetThemeProvider().SetCurrentTheme(theme);
                     _circleMenu.ResetCustomization();
                     ResetFields();
-                    UpdateApperaence();
+                    UpdateAppearance();
                 },
                 Fields.Theme,
                 rect);
