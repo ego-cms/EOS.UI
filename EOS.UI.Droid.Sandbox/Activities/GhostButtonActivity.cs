@@ -84,7 +84,7 @@ namespace EOS.UI.Droid.Sandbox.Activities
             enabledColorDropDown.ItemSelected += (position) =>
             {
                 if (position > 0)
-                    ghostButton.EnabledTextColor = Colors.GetGhostButtonFonts().ElementAt(position).Value;
+                    ghostButton.TextColor = Colors.GetGhostButtonFonts().ElementAt(position).Value;
             };
 
             disabledColorDropDown.Name = Fields.DisabledTextColor;

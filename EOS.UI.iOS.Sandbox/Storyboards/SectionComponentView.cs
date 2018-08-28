@@ -361,7 +361,7 @@ namespace EOS.UI.iOS.Sandbox.Storyboards
                     _dropDowns.Except(new[] { themeDropDown }).ToList().ForEach(dropDown => dropDown.ResetValue());
                     hasBorderSwitch.On = defaultModel.HasBorder;
                     hasButtonSwitch.On = defaultModel.HasButton;
-                    UpdateApperaence();
+                    UpdateAppearance();
                 },
                 Fields.Theme,
                 rect);

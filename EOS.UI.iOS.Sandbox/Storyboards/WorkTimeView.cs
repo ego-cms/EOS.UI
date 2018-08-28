@@ -60,7 +60,7 @@ namespace EOS.UI.iOS.Sandbox
                     source.CalendarModel.GetThemeProvider().SetCurrentTheme(theme);
                     source.CalendarModel.ResetCustomization();
                     _dropDowns.Except(new[] { themesDropDown }).ToList().ForEach(dropDown => dropDown.ResetValue());
-                    UpdateApperaence();
+                    UpdateAppearance();
                 },
                 Fields.Theme,
                 rect);

@@ -32,18 +32,6 @@ namespace EOS.UI.iOS.Controls
             }
         }
 
-        private FontStyleItem _disabledFontStyle;
-        public FontStyleItem DisabledFontStyle
-        {
-            get => _disabledFontStyle;
-            set
-            {
-                _disabledFontStyle = value;
-                SetDisabledFontStyle();
-                IsEOSCustomizationIgnored = true;
-            }
-        }
-
         public override UIFont Font
         {
             get => FontStyle?.Font ?? base.Font;
@@ -77,7 +65,7 @@ namespace EOS.UI.iOS.Controls
             }
         }
 
-        public UIColor EnabledTextColor
+        public UIColor TextColor
         {
             get => FontStyle?.Color;
             set
@@ -88,13 +76,14 @@ namespace EOS.UI.iOS.Controls
             }
         }
 
+        private UIColor _disabledTextColor;
         public UIColor DisabledTextColor
         {
-            get => DisabledFontStyle.Color;
+            get => _disabledTextColor;
             set
             {
-                DisabledFontStyle.Color = value;
-                SetDisabledFontStyle();
+                _disabledTextColor = value;
+                SetTitleColor(_disabledTextColor, UIControlState.Disabled);
                 IsEOSCustomizationIgnored = true;
             }
         }
@@ -127,16 +116,39 @@ namespace EOS.UI.iOS.Controls
             }
         }
 
+        #region .ctors
+
         public GhostButton()
         {
-            Layer.MasksToBounds = true;
-            Layer.CornerRadius = 5;
-            BackgroundColor = UIColor.Clear;
-            TitleLabel.Lines = 1;
-            TitleLabel.LineBreakMode = UILineBreakMode.TailTruncation;
-            base.SetAttributedTitle(new NSAttributedString(String.Empty), UIControlState.Normal);
-            UpdateAppearance();
+            Initialize();
         }
+
+        public GhostButton(UIButtonType type) : base(type)
+        {
+            Initialize();
+        }
+
+        public GhostButton(NSCoder coder) : base(coder)
+        {
+            Initialize();
+        }
+
+        public GhostButton(NSObjectFlag t) : base(t)
+        {
+            Initialize();
+        }
+
+        public GhostButton(IntPtr handle) : base(handle)
+        {
+            Initialize();
+        }
+
+        public GhostButton(CoreGraphics.CGRect frame) : base(frame)
+        {
+            Initialize();
+        }
+
+        #endregion
 
         public override void SetTitle(string title, UIControlState forState)
         {
@@ -161,7 +173,7 @@ namespace EOS.UI.iOS.Controls
             {
                 case UIControlState.Normal:
                     resultString = new NSMutableAttributedString(attrString);
-                    resultString.AddAttribute(UIStringAttributeKey.ForegroundColor, EnabledTextColor, range);
+                    resultString.AddAttribute(UIStringAttributeKey.ForegroundColor, TextColor, range);
                     SetAttributedTitle(resultString, UIControlState.Normal);
 
                     resultString = new NSMutableAttributedString(attrString);
@@ -169,7 +181,7 @@ namespace EOS.UI.iOS.Controls
                     SetAttributedTitle(resultString, UIControlState.Disabled);
 
                     resultString = new NSMutableAttributedString(attrString);
-                    resultString.AddAttribute(UIStringAttributeKey.ForegroundColor, EnabledTextColor, range);
+                    resultString.AddAttribute(UIStringAttributeKey.ForegroundColor, TextColor, range);
                     SetAttributedTitle(resultString, UIControlState.Highlighted);
                     break;
                 case UIControlState.Disabled:
@@ -179,7 +191,7 @@ namespace EOS.UI.iOS.Controls
                     break;
                 case UIControlState.Highlighted:
                     resultString = new NSMutableAttributedString(attrString);
-                    resultString.AddAttribute(UIStringAttributeKey.ForegroundColor, EnabledTextColor, range);
+                    resultString.AddAttribute(UIStringAttributeKey.ForegroundColor, TextColor, range);
                     SetAttributedTitle(resultString, forState);
                     break;
             }
@@ -219,7 +231,7 @@ namespace EOS.UI.iOS.Controls
             {
                 var provider = GetThemeProvider();
                 FontStyle = provider.GetEOSProperty<FontStyleItem>(this, EOSConstants.R2C1S);
-                DisabledFontStyle = provider.GetEOSProperty<FontStyleItem>(this, EOSConstants.R3C4S);
+                DisabledTextColor = provider.GetEOSProperty<UIColor>(this, EOSConstants.NeutralColor3S);
                 RippleColor = provider.GetEOSProperty<UIColor>(this, EOSConstants.RippleColor);
                 Enabled = base.Enabled;
                 IsEOSCustomizationIgnored = false;
@@ -236,6 +248,17 @@ namespace EOS.UI.iOS.Controls
             _rippleAnimations.SetValueForKey(_rippleLayer, new NSString("animationLayer"));
             _rippleLayer.AddAnimation(_rippleAnimations, _rippleAnimationKey);
         }
+
+        private void Initialize()
+        {
+            Layer.MasksToBounds = true;
+            Layer.CornerRadius = 5;
+            BackgroundColor = UIColor.Clear;
+            TitleLabel.Lines = 1;
+            TitleLabel.LineBreakMode = UILineBreakMode.TailTruncation;
+            base.SetAttributedTitle(new NSAttributedString(String.Empty), UIControlState.Normal);
+            UpdateAppearance();
+        }
         
         private void SetFontStyle()
         {
@@ -248,12 +271,6 @@ namespace EOS.UI.iOS.Controls
             SetTitleColor(FontStyle.Color, UIControlState.Normal);
             //letter spacing
             this.SetLetterSpacing(FontStyle.LetterSpacing);
-        }
-
-        private void SetDisabledFontStyle()
-        {
-            //text color
-            SetTitleColor(DisabledFontStyle.Color, UIControlState.Disabled);
         }
     }
 }

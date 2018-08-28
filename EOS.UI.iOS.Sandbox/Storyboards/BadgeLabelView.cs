@@ -25,7 +25,7 @@ namespace EOS.UI.iOS.Sandbox
         {
             base.ViewDidLoad();
 
-            UpdateApperaence();
+            UpdateAppearance();
 
             var label = new BadgeLabel();
             label.Text = "Label";
@@ -57,7 +57,7 @@ namespace EOS.UI.iOS.Sandbox
                     label.GetThemeProvider().SetCurrentTheme(theme);
                     label.ResetCustomization();
                     _dropDowns.Except(new[] { themeDropDown }).ToList().ForEach(dropDown => dropDown.ResetValue());
-                    UpdateApperaence();
+                    UpdateAppearance();
                 },
                 Fields.Theme,
                 rect);

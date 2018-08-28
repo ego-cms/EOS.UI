@@ -27,7 +27,7 @@ namespace EOS.UI.iOS.Sandbox
         public override void ViewWillAppear(bool animated)
         {
             base.ViewWillAppear(animated);
-            UpdateApperaence();
+            UpdateAppearance();
 
         }
 

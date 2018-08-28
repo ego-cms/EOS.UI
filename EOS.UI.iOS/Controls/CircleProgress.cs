@@ -154,12 +154,26 @@ namespace EOS.UI.iOS
         {
         }
 
-        public static CircleProgress Create()
+        public CircleProgress()
         {
-            var array = NSBundle.MainBundle.LoadNib(nameof(CircleProgress), null, null);
-            var view = array.GetItem<CircleProgress>(0);
-            view.Initalize();
-            return view;
+            LoadNib();
+        }
+
+        private void LoadNib()
+        {
+            var array = NSBundle.MainBundle.LoadNib(nameof(CircleProgress), this, null);
+            var view = array.GetItem<UIView>(0);
+
+            view.Frame = Bounds;
+            AddSubview(view);
+            Initialize();
+        }
+
+        public override void AwakeFromNib()
+        {
+            base.AwakeFromNib();
+
+            LoadNib();
         }
 
         public IEOSThemeProvider GetThemeProvider()
@@ -199,7 +213,7 @@ namespace EOS.UI.iOS
 
         private bool ShouldShowProgress => ShowProgress && _progress != 100;
 
-        private void Initalize()
+        private void Initialize()
         {
             circleView.AddGestureRecognizer(new UITapGestureRecognizer((obj) =>
             {

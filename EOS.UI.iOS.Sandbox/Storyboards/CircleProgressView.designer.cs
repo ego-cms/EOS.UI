@@ -1,11 +1,10 @@
 // WARNING
 //
-// This file has been generated automatically by Visual Studio from the outlets and
-// actions declared in your storyboard file.
-// Manual changes to this file will not be maintained.
+// This file has been generated automatically by Visual Studio to store outlets and
+// actions made in the UI designer. If it is removed, they will be lost.
+// Manual changes to this file may not be handled correctly.
 //
 using Foundation;
-using System;
 using System.CodeDom.Compiler;
 
 namespace EOS.UI.iOS.Sandbox
@@ -13,18 +12,6 @@ namespace EOS.UI.iOS.Sandbox
     [Register ("CircleProgressView")]
     partial class CircleProgressView
     {
-        [Outlet]
-        UIKit.UIView containerView { get; set; }
-
-        [Outlet]
-        EOS.UI.iOS.Sandbox.EOSSandboxDropDown fillColorDropDown { get; set; }
-
-        [Outlet]
-        UIKit.UIButton resetButton { get; set; }
-
-        [Outlet]
-        UIKit.UISwitch showProgressSwitch { get; set; }
-
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
         EOS.UI.iOS.Sandbox.EOSSandboxDropDown alternativeColorDropDown { get; set; }
@@ -34,8 +21,20 @@ namespace EOS.UI.iOS.Sandbox
         EOS.UI.iOS.Sandbox.EOSSandboxDropDown colorDropDown { get; set; }
 
         [Outlet]
+        UIKit.UIView containerView { get; set; }
+
+        [Outlet]
+        EOS.UI.iOS.Sandbox.EOSSandboxDropDown fillColorDropDown { get; set; }
+
+        [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
         EOS.UI.iOS.Sandbox.EOSSandboxDropDown fontDropDown { get; set; }
+
+        [Outlet]
+        UIKit.UIButton resetButton { get; set; }
+
+        [Outlet]
+        UIKit.UISwitch showProgressSwitch { get; set; }
 
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
@@ -44,7 +43,7 @@ namespace EOS.UI.iOS.Sandbox
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
         EOS.UI.iOS.Sandbox.EOSSandboxDropDown themeDropDown { get; set; }
-
+        
         void ReleaseDesignerOutlets ()
         {
             if (alternativeColorDropDown != null) {
