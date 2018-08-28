@@ -129,18 +129,16 @@
     <ImageAsset Include="Assets.xcassets\icAccountOff.imageset\icAccountOff.pdf">
       <Visible>false</Visible>
     </ImageAsset>
-    <ImageAsset Include="Assets.xcassets\icAccountKey.imageset\Contents.json">
-      <Visible>false</Visible>
-    </ImageAsset>
-    <ImageAsset Include="Assets.xcassets\icAccountKey.imageset\icAccountKey.pdf">
-      <Visible>false</Visible>
-    </ImageAsset>
     <ImageAsset Include="Assets.xcassets\icAccountCircle.imageset\Contents.json" />
     <ImageAsset Include="Assets.xcassets\icAccountCircle.imageset\icAccountCircle.pdf" />
     <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon-App-20x20%401x.png" />
     <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon-App-29x29%401x.png" />
     <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon-App-40x40%401x.png" />
     <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\iTunesArtwork%402x.png" />
+    <ImageAsset Include="Assets.xcassets\icLock.imageset\Contents.json" />
+    <ImageAsset Include="Assets.xcassets\icLock.imageset\icLock%401x.png" />
+    <ImageAsset Include="Assets.xcassets\icLock.imageset\cLock%402x.png" />
+    <ImageAsset Include="Assets.xcassets\icLock.imageset\icLock%403x.png" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
@@ -239,6 +237,7 @@
     <Folder Include="Assets.xcassets\icAccountCircle.imageset\" />
     <Folder Include="Assets.xcassets\icAccountOff.imageset\" />
     <Folder Include="Assets.xcassets\icAccountKey.imageset\" />
+    <Folder Include="Assets.xcassets\icLock.imageset\" />
   </ItemGroup>
   <ItemGroup>
     <ITunesArtwork Include="iTunesArtwork%402x" />

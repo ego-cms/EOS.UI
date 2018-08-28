@@ -217,7 +217,7 @@ namespace EOS.UI.Shared.Sandbox.Helpers
             {
                 { "Calendar", "icCalendar" },
                 { "Account circle", "icAccountCircle" },
-                { "Account key", "icAccountKey" },
+                { "Lock", "icLock" },
                 { "Account off", "icAccountOff" },
             };
         }
