@@ -53,6 +53,8 @@ namespace EOS.UI.Droid.Sandbox.Activities
 
             _CTAButton.Click += async (s, e) =>
             {
+                if (_CTAButton.InProgress)
+                    return;
                 _CTAButton.StartProgressAnimation();
                 ToggleEnableState();
                 await Task.Delay(5000);

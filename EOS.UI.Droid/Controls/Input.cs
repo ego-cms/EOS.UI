@@ -3,10 +3,10 @@ using Android.Content;
 using Android.Graphics;
 using Android.Graphics.Drawables;
 using Android.Runtime;
+using Android.Support.V7.Widget;
 using Android.Text;
 using Android.Util;
 using Android.Views;
-using Android.Widget;
 using EOS.UI.Droid.Themes;
 using EOS.UI.Shared.Themes.DataModels;
 using EOS.UI.Shared.Themes.Helpers;
@@ -14,7 +14,7 @@ using EOS.UI.Shared.Themes.Interfaces;
 
 namespace EOS.UI.Droid.Controls
 {
-    public class Input : EditText, IEOSThemeControl, View.IOnFocusChangeListener, View.IOnTouchListener
+    public class Input : AppCompatEditText, IEOSThemeControl, View.IOnFocusChangeListener, View.IOnTouchListener
     {
         #region fields
 

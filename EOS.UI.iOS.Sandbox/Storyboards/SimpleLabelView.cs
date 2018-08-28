@@ -72,7 +72,7 @@ namespace EOS.UI.iOS.Sandbox
                     _simpleLabel.GetThemeProvider().SetCurrentTheme(theme);
                     _simpleLabel.ResetCustomization();
                     _dropDowns.Except(new[] { themesDropDown }).ToList().ForEach(dropDown => dropDown.ResetValue());
-                    UpdateApperaence();
+                    UpdateAppearance();
                 },
                 Fields.Theme,
                 frame);

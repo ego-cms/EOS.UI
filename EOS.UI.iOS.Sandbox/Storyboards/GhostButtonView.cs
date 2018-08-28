@@ -56,7 +56,7 @@ namespace EOS.UI.iOS.Sandbox
                     ghostButton.GetThemeProvider().SetCurrentTheme(theme);
                     ghostButton.ResetCustomization();
                     _dropDowns.Except(new[] { themeDropDown }).ToList().ForEach(dropDown => dropDown.ResetValue());
-                    UpdateApperaence();
+                    UpdateAppearance();
                 },
                 Fields.Theme,
                 rect);
@@ -76,7 +76,7 @@ namespace EOS.UI.iOS.Sandbox
 
             enabledTextColorDropDown.InitSource(
                 Colors.GetGhostButtonFonts(),
-                color => ghostButton.EnabledTextColor = color,
+                color => ghostButton.TextColor = color,
                 Fields.EnabledTextColor,
                 rect);
 

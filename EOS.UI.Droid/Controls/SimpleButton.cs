@@ -215,17 +215,15 @@ namespace EOS.UI.Droid.Controls
             get => _shadowConfig;
             set
             {
+                _shadowConfig = value;
                 if (value == null)
                 {
                     ResetShadow();
                 }
                 else
                 {
-                    if(_shadowConfig != value)
-                        SetupShadow(value);
+                    SetupShadow(_shadowConfig);
                 }
-                _shadowConfig = value;
-
                 IsEOSCustomizationIgnored = true;
             }
         }

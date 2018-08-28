@@ -5,9 +5,9 @@ using Android.Graphics;
 using Android.Graphics.Drawables;
 using Android.Graphics.Drawables.Shapes;
 using Android.Runtime;
+using Android.Support.V7.Widget;
 using Android.Text;
 using Android.Util;
-using Android.Widget;
 using EOS.UI.Droid.Themes;
 using EOS.UI.Shared.Themes.DataModels;
 using EOS.UI.Shared.Themes.Helpers;
@@ -17,7 +17,7 @@ using Java.Util;
 
 namespace EOS.UI.Droid.Controls
 {
-    public class GhostButton : Button, IEOSThemeControl
+    public class GhostButton : AppCompatButton, IEOSThemeControl
     {
         public bool IsEOSCustomizationIgnored { get; private set; }
 
@@ -57,7 +57,7 @@ namespace EOS.UI.Droid.Controls
             }
         }
 
-        public Color EnabledTextColor
+        public Color TextColor
         {
             get => FontStyle.Color;
             set
@@ -95,7 +95,7 @@ namespace EOS.UI.Droid.Controls
             set
             {
                 _disabledTextColor= value;
-                SetTextColorSet(EnabledTextColor, _disabledTextColor);
+                SetTextColorSet(TextColor, _disabledTextColor);
                 IsEOSCustomizationIgnored = true;
             }
         }
@@ -106,7 +106,7 @@ namespace EOS.UI.Droid.Controls
             get => _rippleColor;
             set
             {
-                _rippleColor = value.A == 255 ? Color.Argb(26, value.R, value.G, value.B) : value;
+                _rippleColor = value;
                 IsEOSCustomizationIgnored = true;
                 Background = CreateRippleDrawable();
             }
@@ -148,11 +148,6 @@ namespace EOS.UI.Droid.Controls
             Initialize(attrs);
         }
 
-        public GhostButton(Context context, IAttributeSet attrs, int defStyleAttr, int defStyleRes) : base(context, attrs, defStyleAttr, defStyleRes)
-        {
-            Initialize(attrs);
-        }
-
         protected GhostButton(IntPtr javaReference, JniHandleOwnership transfer) : base(javaReference, transfer)
         {
             Initialize();
@@ -185,7 +180,7 @@ namespace EOS.UI.Droid.Controls
 
             var textColor = styledAttributes.GetColor(Resource.Styleable.GhostButton_eos_textcolor, Color.Transparent);
             if(textColor != Color.Transparent)
-                EnabledTextColor = textColor;
+                TextColor = textColor;
 
             var disabledTextColor = styledAttributes.GetColor(Resource.Styleable.GhostButton_eos_textcolor_disabled, Color.Transparent);
             if(disabledTextColor != Color.Transparent)

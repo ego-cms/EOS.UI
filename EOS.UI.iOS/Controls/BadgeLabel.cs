@@ -124,20 +124,34 @@ namespace EOS.UI.iOS.Controls
             }
         }
 
+        #region .ctors
+
         public BadgeLabel()
         {
-            this.Text = " ";
-            Layer.MasksToBounds = true;
-            _insets = new UIEdgeInsets(2, 15, 2, 15);
-            Lines = 1;
-            LineBreakMode = UILineBreakMode.TailTruncation;
-            IsEOSCustomizationIgnored = false;
-            UpdateAppearance();
+            Initialize();
         }
 
         public BadgeLabel(IntPtr handle) : base(handle)
         {
+            Initialize();
         }
+
+        public BadgeLabel(NSCoder coder) : base(coder)
+        {
+            Initialize();
+        }
+
+        public BadgeLabel(NSObjectFlag t) : base(t)
+        {
+            Initialize();
+        }
+
+        public BadgeLabel(CGRect frame) : base(frame)
+        {
+            Initialize();
+        }
+
+        #endregion
 
         public IEOSStyle GetCurrentEOSStyle()
         {
@@ -185,6 +199,19 @@ namespace EOS.UI.iOS.Controls
             var requredRect = new CGRect(textRect.GetMinX() + _insets.Left, textRect.GetMinY() - _insets.Top,
                            textRect.Width + _insets.Left + _insets.Right, textRect.Height + _insets.Bottom + _insets.Top);
             return requredRect;
+        }
+
+        private void Initialize()
+        {
+            //AttributedText applies only for non-empty string. 
+            //For attributed text initialization should have something here
+            Text = " ";
+            Layer.MasksToBounds = true;
+            _insets = new UIEdgeInsets(2, 15, 2, 15);
+            Lines = 1;
+            LineBreakMode = UILineBreakMode.TailTruncation;
+            IsEOSCustomizationIgnored = false;
+            UpdateAppearance();
         }
         
         private void SetFontStyle()
