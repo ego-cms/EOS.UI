@@ -27,11 +27,36 @@ namespace EOS.UI.iOS.Controls
         private const double _shadowYCoeff = 0.25;
         private const double _blurCoeff = 0.66;
 
-        #region constructor
+        #region .ctors
 
         public SimpleButton()
         {
-            Initialization();
+            Initialize();
+        }
+
+        public SimpleButton(UIButtonType type) : base(type)
+        {
+            Initialize();
+        }
+
+        public SimpleButton(NSCoder coder) : base(coder)
+        {
+            Initialize();
+        }
+
+        public SimpleButton(NSObjectFlag t) : base(t)
+        {
+            Initialize();
+        }
+
+        public SimpleButton(IntPtr handle) : base(handle)
+        {
+            Initialize();
+        }
+
+        public SimpleButton(CGRect frame) : base(frame)
+        {
+            Initialize();
         }
 
         #endregion
@@ -46,18 +71,6 @@ namespace EOS.UI.iOS.Controls
             {
                 _fontStyle = value;
                 SetFontStyle();
-                IsEOSCustomizationIgnored = true;
-            }
-        }
-
-        private FontStyleItem _disabledFontStyle;
-        public FontStyleItem DisabledFontStyle
-        {
-            get => _disabledFontStyle;
-            set
-            {
-                _disabledFontStyle = value;
-                SetDisabledFontStyle();
                 IsEOSCustomizationIgnored = true;
             }
         }
@@ -101,18 +114,19 @@ namespace EOS.UI.iOS.Controls
             set
             {
                 FontStyle.Color = value;
-                SetFontStyle();
+                SetTitleColor(FontStyle.Color, UIControlState.Normal);
                 IsEOSCustomizationIgnored = true;
             }
         }
 
+        private UIColor _disabledTextColor;
         public UIColor DisabledTextColor
         {
-            get => DisabledFontStyle.Color;
+            get => _disabledTextColor;
             set
             {
-                DisabledFontStyle.Color = value;
-                SetDisabledFontStyle();
+                _disabledTextColor = value;
+                SetTitleColor(value, UIControlState.Disabled);
                 IsEOSCustomizationIgnored = true;
             }
         }
@@ -218,7 +232,7 @@ namespace EOS.UI.iOS.Controls
 
         #region utility methods
 
-        private void Initialization()
+        private void Initialize()
         {
             TitleLabel.Lines = 1;
             TitleLabel.LineBreakMode = UILineBreakMode.TailTruncation;
@@ -353,8 +367,8 @@ namespace EOS.UI.iOS.Controls
             {
                 var provider = GetThemeProvider();
                 FontStyle = provider.GetEOSProperty<FontStyleItem>(this, EOSConstants.R3C5S);
-                DisabledFontStyle = provider.GetEOSProperty<FontStyleItem>(this, EOSConstants.R3C4S);
                 BackgroundColor = provider.GetEOSProperty<UIColor>(this, EOSConstants.BrandPrimaryColor);
+                DisabledTextColor = provider.GetEOSProperty<FontStyleItem>(this, EOSConstants.R3C4S).Color;
                 DisabledBackgroundColor = provider.GetEOSProperty<UIColor>(this, EOSConstants.NeutralColor4S);
                 PressedBackgroundColor = provider.GetEOSProperty<UIColor>(this, EOSConstants.BrandPrimaryColorVariant1);
                 CornerRadius = provider.GetEOSProperty<int>(this, EOSConstants.ButtonCornerRadius);
@@ -435,17 +449,9 @@ namespace EOS.UI.iOS.Controls
             //size
             this.SetTextSize(FontStyle.Size);
             //text color
-            SetTitleColor(FontStyle.Color, UIControlState.Normal);
             ImageView.TintColor = FontStyle.Color;
             //letter spacing
             this.SetLetterSpacing(FontStyle.LetterSpacing);
-        }
-
-        private void SetDisabledFontStyle()
-        {
-            //text color
-            SetTitleColor(DisabledFontStyle.Color, UIControlState.Disabled);
-
         }
 
         #endregion

@@ -34,8 +34,8 @@ namespace EOS.UI.iOS.Sandbox.Storyboards
         {
             base.ViewWillAppear(animated);
             NavigationController.SetNavigationBarHidden(false, false);
-            UpdateApperaence();
-        }
+            UpdateAppearance();
+		}
 
         private List<UIView> GetChildren()
         {
@@ -56,7 +56,7 @@ namespace EOS.UI.iOS.Sandbox.Storyboards
             return result;
         }
 
-        public void UpdateApperaence()
+        public void UpdateAppearance()
         {
             View.BackgroundColor = EOSThemeProvider.Instance.GetEOSProperty<UIColor>(EOSConstants.NeutralColor6);
             NavigationController.NavigationBar.BarStyle = EOSThemeProvider.Instance.GetCurrentTheme() is LightEOSTheme ? UIBarStyle.Default : UIBarStyle.Black;
