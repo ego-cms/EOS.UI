@@ -385,7 +385,7 @@ namespace EOS.UI.iOS.Components
                 return;
             sectionButton.SetTextSize(ButtonTextSize);
             sectionButton.SetLetterSpacing(ButtonTextLetterSpacing);
-            sectionButton.Font = ButtonNameFont;
+            sectionButton.SetFont(ButtonNameFont);
             SetButtonTextColor(ButtonNameColor);
         }
 
