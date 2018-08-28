@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Linq;
 using CoreAnimation;
 using CoreGraphics;
@@ -8,8 +8,6 @@ using EOS.UI.Shared.Themes.DataModels;
 using EOS.UI.Shared.Themes.Helpers;
 using EOS.UI.Shared.Themes.Interfaces;
 using Foundation;
-using EOS.UI.Shared.Themes.Helpers;
-using EOS.UI.Shared.Themes.Interfaces;
 using UIKit;
 using static EOS.UI.iOS.Helpers.Constants;
 
@@ -102,7 +100,7 @@ namespace EOS.UI.iOS.Components
             set
             {
                 SectionFontStyle.Size = value;
-                SectionNameFont = SectionNameFont.WithSize(value);
+                SectionFontStyle.Font = SectionFontStyle.Font.WithSize(value);
                 SetSectionFontStyle();
                 IsEOSCustomizationIgnored = true;
             }
@@ -114,6 +112,7 @@ namespace EOS.UI.iOS.Components
             set
             {
                 ButtonFontStyle.Size = value;
+                ButtonFontStyle.Font = ButtonFontStyle.Font.WithSize(value);
                 SetButtonFontStyle();
                 IsEOSCustomizationIgnored = true;
             }
@@ -259,8 +258,12 @@ namespace EOS.UI.iOS.Components
             {
                 sectionButton.SetAttributedTitle(new NSAttributedString(ButtonText ?? string.Empty), UIControlState.Normal);
                 sectionName.AttributedText = new NSAttributedString(SectionName ?? string.Empty);
-
                 sectionButton.LineBreakMode = UILineBreakMode.TailTruncation;
+
+                if (ButtonFontStyle != null)
+                    SetButtonFontStyle();
+                if (SectionFontStyle != null)
+                    SetSectionFontStyle();
 
                 if (!_subscribed)
                 {
