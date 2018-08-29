@@ -8,6 +8,7 @@ using EOS.UI.iOS.Themes;
 using EOS.UI.Shared.Sandbox.Helpers;
 using EOS.UI.Shared.Themes.Helpers;
 using EOS.UI.Shared.Themes.Interfaces;
+using EOS.UI.Shared.Themes.Themes;
 using Foundation;
 using UIKit;
 using static EOS.UI.Shared.Sandbox.Helpers.Constants;
@@ -23,7 +24,14 @@ namespace EOS.UI.iOS.Sandbox
             set
             {
                 textField.Enabled = value;
-                textField.TextColor = value ? UIColor.Black : UIColor.LightGray;
+                if(value)
+                {
+                    textField.TextColor = EOSThemeProvider.Instance.GetCurrentTheme() is LightEOSTheme ? UIColor.Black : UIColor.White;
+                }
+                else
+                {
+                    textField.TextColor = UIColor.LightGray;
+                }
             }
         }
 
