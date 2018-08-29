@@ -110,13 +110,13 @@ namespace EOS.UI.iOS.Sandbox
                 frame);
 
             textSizeDropDown.InitSource(
-                CircleProgressConstants.TextSizeCollection,
+                CircleProgressConstants.TextSizes,
                 size => _circleProgress.TextSize = size,
                 Fields.TextSize,
                 frame);
 
             colorDropDown.InitSource(
-                CircleProgressConstants.CircleProgressColor,
+                CircleProgressConstants.CircleProgressColors,
                 color => _circleProgress.Color = color,
                 Fields.Color,
                 frame);

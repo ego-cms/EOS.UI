@@ -78,13 +78,13 @@ namespace EOS.UI.iOS.Sandbox
         void InitSources(CGRect frame)
         {
             backgroundColorDropDown.InitSource(
-                BadgeLabelConstants.BackgroundColorCollection,
+                BadgeLabelConstants.BackgroundColors,
                 color => _label.BackgroundColor = color,
                 Fields.Background,
                 frame);
 
             textColorDropDown.InitSource(
-                BadgeLabelConstants.FontColorCollection,
+                BadgeLabelConstants.FontColors,
                 color => _label.TextColor = color,
                 Fields.TextColor,
                 frame);
@@ -96,13 +96,13 @@ namespace EOS.UI.iOS.Sandbox
                 frame);
 
             letterSpaceDropDown.InitSource(
-                BadgeLabelConstants.LetterSpacingCollection,
+                BadgeLabelConstants.LetterSpacings,
                 spacing => _label.LetterSpacing = spacing,
                 Fields.LetterSpacing,
                 frame);
 
             textSizeDropDown.InitSource(
-                BadgeLabelConstants.TextSizeCollection,
+                BadgeLabelConstants.TextSizes,
                 size => _label.TextSize = size,
                 Fields.TextSize,
                 frame);

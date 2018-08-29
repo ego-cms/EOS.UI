@@ -12,7 +12,7 @@ namespace EOS.UI.Shared.Sandbox.ControlConstants.iOS
 {
     public static class CircleProgressConstants
     {
-        public static Dictionary<string, UIColor> CircleProgressColor =>
+        public static Dictionary<string, UIColor> CircleProgressColors =>
             Colors.MainColorsCollection.AddDefault(Fields.Default, (UIColor)EOSThemeProvider.Instance.GetCurrentTheme().ThemeValues[EOSConstants.BrandPrimaryColor]);
         public static Dictionary<string, UIColor> AlternativeColors =>
            Colors.MainColorsCollection.AddDefault(Fields.Default, (UIColor)EOSThemeProvider.Instance.GetCurrentTheme().ThemeValues[EOSConstants.BrandPrimaryColor]);
@@ -20,7 +20,7 @@ namespace EOS.UI.Shared.Sandbox.ControlConstants.iOS
             Colors.MainColorsCollection.AddDefault(Fields.Default, (UIColor)EOSThemeProvider.Instance.GetCurrentTheme().ThemeValues[EOSConstants.NeutralColor4]);
         public static Dictionary<string, UIFont> CircleProgressFonts =>
             Fonts.GetCircleProgressFonts().AddDefault(Fields.Default, ((FontStyleItem)EOSThemeProvider.Instance.GetCurrentTheme().ThemeValues[EOSConstants.R1C1]).Font);
-        public static Dictionary<string, float> TextSizeCollection =>
+        public static Dictionary<string, float> TextSizes =>
             Sizes.TextSizeCollection.AddDefault(Fields.Default, ((FontStyleItem)EOSThemeProvider.Instance.GetCurrentTheme().ThemeValues[EOSConstants.R1C1]).Size);
     }
 }

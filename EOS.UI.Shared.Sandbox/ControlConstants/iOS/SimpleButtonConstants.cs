@@ -13,21 +13,21 @@ namespace EOS.UI.Shared.Sandbox.ControlConstants.iOS
 {
     public static class SimpleButtonConstants
     {
-        public static Dictionary<string, UIColor> BackgroundColorCollection =>
+        public static Dictionary<string, UIColor> BackgroundColors =>
             Colors.MainColorsCollection.AddDefault(Fields.Default, (UIColor)EOSThemeProvider.Instance.GetCurrentTheme().ThemeValues[EOSConstants.BrandPrimaryColor]);
-        public static Dictionary<string, UIColor> DisabledBackgroundColorCollection =>
+        public static Dictionary<string, UIColor> DisabledBackgroundColors =>
             Colors.MainColorsCollection.AddDefault(Fields.Default, (UIColor)EOSThemeProvider.Instance.GetCurrentTheme().ThemeValues[EOSConstants.NeutralColor4S]);
-        public static Dictionary<string, UIColor> PressedBackgroundColorCollection =>
+        public static Dictionary<string, UIColor> PressedBackgroundColors =>
             Colors.MainColorsCollection.AddDefault(Fields.Default, (UIColor)EOSThemeProvider.Instance.GetCurrentTheme().ThemeValues[EOSConstants.BrandPrimaryColorVariant1]);
-        public static Dictionary<string, UIColor> ShadowColorCollection =>
+        public static Dictionary<string, UIColor> ShadowColors =>
         Colors.MainColorsCollection.AddDefault(Fields.Default, ((ShadowConfig)EOSThemeProvider.Instance.GetCurrentTheme().ThemeValues[EOSConstants.SimpleButtonShadow]).Color);
-        public static Dictionary<string, UIColor> FontColorCollection =>
+        public static Dictionary<string, UIColor> FontColors =>
             Colors.FontColorsCollection.AddDefault(Fields.Default, ((FontStyleItem)EOSThemeProvider.Instance.GetCurrentTheme().ThemeValues[EOSConstants.R3C5S]).Color);
-        public static Dictionary<string, UIColor> DisabledFontColorCollection =>
+        public static Dictionary<string, UIColor> DisabledFontColors =>
            Colors.FontColorsCollection.AddDefault(Fields.Default, ((FontStyleItem)EOSThemeProvider.Instance.GetCurrentTheme().ThemeValues[EOSConstants.R3C4S]).Color);
-        public static Dictionary<string, float> LetterSpacingCollection =>
+        public static Dictionary<string, float> LetterSpacings =>
             Sizes.LetterSpacingCollection.AddDefault(Fields.Default, ((FontStyleItem)EOSThemeProvider.Instance.GetCurrentTheme().ThemeValues[EOSConstants.R3C5S]).LetterSpacing);
-        public static Dictionary<string, float> TextSizeCollection =>
+        public static Dictionary<string, float> TextSizes =>
             Sizes.TextSizeCollection.AddDefault(Fields.Default, ((FontStyleItem)EOSThemeProvider.Instance.GetCurrentTheme().ThemeValues[EOSConstants.R3C5S]).Size);
         public static Dictionary<string, int> CornerRadiusCollection =>
             Sizes.CornerRadiusCollection.AddDefault(Fields.Default, (int)EOSThemeProvider.Instance.GetCurrentTheme().ThemeValues[EOSConstants.ButtonCornerRadius]);

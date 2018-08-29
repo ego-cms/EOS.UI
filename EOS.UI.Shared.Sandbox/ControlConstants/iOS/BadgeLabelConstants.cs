@@ -13,13 +13,13 @@ namespace EOS.UI.Shared.Sandbox.ControlConstants.iOS
 {
     public static class BadgeLabelConstants
     {
-        public static Dictionary<string, UIColor> BackgroundColorCollection =>
+        public static Dictionary<string, UIColor> BackgroundColors =>
             Colors.MainColorsCollection.AddDefault(Fields.Default, (UIColor)EOSThemeProvider.Instance.GetCurrentTheme().ThemeValues[EOSConstants.BrandPrimaryColor]);
-        public static Dictionary<string, UIColor> FontColorCollection =>
+        public static Dictionary<string, UIColor> FontColors =>
             Colors.FontColorsCollection.AddDefault(Fields.Default, ((FontStyleItem)EOSThemeProvider.Instance.GetCurrentTheme().ThemeValues[EOSConstants.R2C5S]).Color);
-        public static Dictionary<string, float> LetterSpacingCollection =>
+        public static Dictionary<string, float> LetterSpacings =>
             Sizes.LetterSpacingCollection.AddDefault(Fields.Default, ((FontStyleItem)EOSThemeProvider.Instance.GetCurrentTheme().ThemeValues[EOSConstants.R2C5S]).LetterSpacing);
-        public static Dictionary<string, float> TextSizeCollection =>
+        public static Dictionary<string, float> TextSizes =>
             Sizes.TextSizeCollection.AddDefault(Fields.Default, ((FontStyleItem)EOSThemeProvider.Instance.GetCurrentTheme().ThemeValues[EOSConstants.R2C5S]).Size);
         public static Dictionary<string, int> CornerRadiusCollection =>
             Sizes.CornerRadiusCollection.AddDefault(Fields.Default, (int)EOSThemeProvider.Instance.GetCurrentTheme().ThemeValues[EOSConstants.LabelCornerRadius]);
