@@ -253,21 +253,10 @@ namespace EOS.UI.iOS.Controls
 
         private void Initialize()
         {
-            TouchDown += (sender, e) =>
-            {
-                UIView.Animate(_animationDuration, () =>
-                {
-                    Transform = CGAffineTransform.MakeScale(_startScale, _startScale);
-                });
-            };
-
-            TouchUpInside += (sender, e) =>
-            {
-                UIView.Animate(_animationDuration, () =>
-                {
-                    Transform = CGAffineTransform.MakeScale(_endScale, _endScale);
-                });
-            };
+            TouchDown += (sender, e) => ScaleButton(_startScale, _animationDuration);
+            TouchUpInside += (sender, e) => ScaleButton(_endScale, _animationDuration);
+            TouchDragExit += (sender, e) => ScaleButton(_endScale, _animationDuration);
+            
             _rotationAnimation = new CABasicAnimation();
             _rotationAnimation.KeyPath = "transform.rotation.z";
             _rotationAnimation.From = new NSNumber(0);
@@ -278,6 +267,14 @@ namespace EOS.UI.iOS.Controls
             UpdateAppearance();
             ImageView.TintColor = GetThemeProvider().GetEOSProperty<UIColor>(this, EOSConstants.NeutralColor6S);
             AdjustsImageWhenDisabled = false;
+        }
+        
+        private void ScaleButton(float scale, double duration)
+        {
+            UIView.Animate(duration, () =>
+            {
+                Transform = CGAffineTransform.MakeScale(scale, scale);
+            });
         }
     }
 }
