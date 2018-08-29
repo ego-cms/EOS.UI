@@ -231,7 +231,7 @@ namespace EOS.UI.Shared.Sandbox.Helpers
         {
             public const string Calendar = "Calendar";
             public const string AccountCircle = "Account circle";
-            public const string AccountKey = "Account key";
+            public const string Lock = "Lock";
             public const string AccountOff = "Account off";
 
             public static Dictionary<string, int> DrawableCollection = new Dictionary<string, int>()
@@ -239,7 +239,7 @@ namespace EOS.UI.Shared.Sandbox.Helpers
                 { string.Empty, 0 },
                 { Calendar, Resource.Drawable.icCalendar },
                 { AccountCircle, Resource.Drawable.AccountCircle },
-                { AccountKey, Resource.Drawable.AccountKey },
+                { Lock, Resource.Drawable.Lock },
                 { AccountOff, Resource.Drawable.AccountOff },
             };
         }

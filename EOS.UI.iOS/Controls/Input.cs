@@ -42,6 +42,21 @@ namespace EOS.UI.iOS.Controls
             Initialize();
         }
 
+        public Input(NSCoder coder) : base(coder)
+        {
+            Initialize();
+        }
+
+        public Input(NSObjectFlag t) : base(t)
+        {
+            Initialize();
+        }
+
+        public Input(CGRect frame) : base(frame)
+        {
+            Initialize();
+        }
+
         #endregion
 
         #region customization
