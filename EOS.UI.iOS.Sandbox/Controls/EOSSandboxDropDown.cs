@@ -20,7 +20,11 @@ namespace EOS.UI.iOS.Sandbox
         public bool Enabled
         {
             get => textField.Enabled;
-            set => textField.Enabled = value;
+            set
+            {
+                textField.Enabled = value;
+                textField.TextColor = value ? UIColor.Black : UIColor.LightGray;
+            }
         }
 
         [Export("initWithCoder:")]
