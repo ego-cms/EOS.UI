@@ -1,10 +1,1 @@
-﻿using System;
-namespace EOS.UI.Shared.Sandbox.ControlConstants.iOS
-{
-    public class GhostButtonConstants
-    {
-        public GhostButtonConstants()
-        {
-        }
-    }
-}
+﻿#if __IOS__using System.Collections.Generic;using EOS.UI.iOS.Themes;using EOS.UI.Shared.Themes.DataModels;using EOS.UI.Shared.Themes.Extensions;using EOS.UI.Shared.Themes.Helpers;using UIKit;using static EOS.UI.Shared.Sandbox.Helpers.Constants;namespace EOS.UI.Shared.Sandbox.ControlConstants.iOS{    public static class GhostButtonConstants    {        public static Dictionary<string, UIFont> GhostButtonFonts =>            Fonts.GetGhostButtonSimpleLabelFonts().AddDefault(Fields.Default, ((FontStyleItem)EOSThemeProvider.Instance.GetCurrentTheme().ThemeValues[EOSConstants.R2C1S]).Font);        public static Dictionary<string, float> LetterSpacings =>            Sizes.LetterSpacingCollection.AddDefault(Fields.Default, ((FontStyleItem)EOSThemeProvider.Instance.GetCurrentTheme().ThemeValues[EOSConstants.R2C1S]).LetterSpacing);        public static Dictionary<string, float> TextSizes =>            Sizes.TextSizeCollection.AddDefault(Fields.Default, ((FontStyleItem)EOSThemeProvider.Instance.GetCurrentTheme().ThemeValues[EOSConstants.R2C1S]).Size);        public static Dictionary<string, UIColor> FontColors =>            Colors.GetGhostButtonFontColors().AddDefault(Fields.Default, ((FontStyleItem)EOSThemeProvider.Instance.GetCurrentTheme().ThemeValues[EOSConstants.R2C1S]).Color);        public static Dictionary<string, UIColor> DisabledFontColors =>            Colors.GetGhostButtonFontColors().AddDefault(Fields.Default, (UIColor)EOSThemeProvider.Instance.GetCurrentTheme().ThemeValues[EOSConstants.NeutralColor3S]);        public static Dictionary<string, UIColor> RippleColors =>            Colors.MainColorsCollection.AddDefault(Fields.Default, (UIColor)EOSThemeProvider.Instance.GetCurrentTheme().ThemeValues[EOSConstants.RippleColor]);    }}#endif

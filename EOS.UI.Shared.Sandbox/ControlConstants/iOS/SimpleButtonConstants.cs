@@ -1,7 +1,6 @@
 ﻿#if __IOS__
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using EOS.UI.iOS.Themes;
 using EOS.UI.Shared.Helpers;
 using EOS.UI.Shared.Themes.DataModels;
@@ -9,6 +8,7 @@ using EOS.UI.Shared.Themes.Extensions;
 using EOS.UI.Shared.Themes.Helpers;
 using UIKit;
 using static EOS.UI.Shared.Sandbox.Helpers.Constants;
+
 namespace EOS.UI.Shared.Sandbox.ControlConstants.iOS
 {
     public static class SimpleButtonConstants
@@ -32,7 +32,7 @@ namespace EOS.UI.Shared.Sandbox.ControlConstants.iOS
         public static Dictionary<string, int> CornerRadiusCollection =>
             Sizes.CornerRadiusCollection.AddDefault(Fields.Default, (int)EOSThemeProvider.Instance.GetCurrentTheme().ThemeValues[EOSConstants.ButtonCornerRadius]);
         public static Dictionary<string, UIFont> SimpleButtonFonts =>
-            Fonts.GetButtonLabelFonts().AddDefault(Fields.Default, ((FontStyleItem)EOSThemeProvider.Instance.GetCurrentTheme().ThemeValues[EOSConstants.R3C5S]).Font);
+            Fonts.GetGhostButtonSimpleLabelFonts().AddDefault(Fields.Default, ((FontStyleItem)EOSThemeProvider.Instance.GetCurrentTheme().ThemeValues[EOSConstants.R3C5S]).Font);
         public static Dictionary<string, int> ShadowOffsetXCollection =>
             Shadow.OffsetCollection.AddDefault(Fields.Default, (int)((ShadowConfig)EOSThemeProvider.Instance.GetCurrentTheme().ThemeValues[EOSConstants.SimpleButtonShadow]).Offset.X);
         public static Dictionary<string, int> ShadowOffsetYCollection =>

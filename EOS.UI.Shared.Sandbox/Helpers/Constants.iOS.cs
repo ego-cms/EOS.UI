@@ -43,7 +43,7 @@ namespace EOS.UI.Shared.Sandbox.Helpers
                 {ColorNameUltramarine, ColorExtension.FromHex(ColorUltramarine)}
             };
 
-            public static Dictionary<string, UIColor> GetGhostButtonFonts()
+            public static Dictionary<string, UIColor> GetGhostButtonFontColors()
             {
                 return MainColorsCollection.Union(FontColorsCollection).ToDictionary(a => a.Key, b => b.Value);
             }

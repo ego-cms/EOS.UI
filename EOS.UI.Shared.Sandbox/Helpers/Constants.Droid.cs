@@ -44,7 +44,7 @@ namespace EOS.UI.Shared.Sandbox.Helpers
                 {ColorNameUltramarine, Color.ParseColor(ColorUltramarine)}
             };
 
-            public static Dictionary<string, Color> GetGhostButtonFonts()
+            public static Dictionary<string, Color> GetGhostButtonFontColors()
             {
                 return MainColorsCollection.Union(FontColorsCollection).ToDictionary(a => a.Key, b => b.Value);
             }

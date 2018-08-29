@@ -5,6 +5,7 @@ using CoreGraphics;
 using EOS.UI.iOS.Controls;
 using EOS.UI.iOS.Extensions;
 using EOS.UI.iOS.Sandbox.Storyboards;
+using EOS.UI.Shared.Sandbox.ControlConstants.iOS;
 using EOS.UI.Shared.Sandbox.Helpers;
 using EOS.UI.Shared.Themes.Themes;
 using UIKit;
@@ -63,40 +64,40 @@ namespace EOS.UI.iOS.Sandbox
             themeDropDown.SetTextFieldText(ghostButton.GetThemeProvider().GetCurrentTheme() is LightEOSTheme  ? "Light" : "Dark");
 
             fontDropDown.InitSource(
-                Fonts.GetGhostButtonSimpleLabelFonts(),
+                GhostButtonConstants.GhostButtonFonts,
                 font => ghostButton.Font = font,
                 Fields.Font,
                 rect);
 
             letterSpacingDropDown.InitSource(
-                Sizes.LetterSpacingCollection,
+                GhostButtonConstants.LetterSpacings,
                 spacing => ghostButton.LetterSpacing = spacing,
                 Fields.LetterSpacing,
                 rect);
 
             enabledTextColorDropDown.InitSource(
-                Colors.GetGhostButtonFonts(),
+                GhostButtonConstants.FontColors,
                 color => ghostButton.TextColor = color,
                 Fields.EnabledTextColor,
                 rect);
 
             disabledTextColorDropDown.InitSource(
-                Colors.GetGhostButtonFonts(),
+                GhostButtonConstants.DisabledFontColors,
                 color => ghostButton.DisabledTextColor = color,
                 Fields.DisabledTextColor,
                 rect);
 
             textSizeDropDown.InitSource(
-                Sizes.TextSizeCollection,
+                GhostButtonConstants.TextSizes,
                 size => ghostButton.TextSize = size,
                 Fields.TextSize,
                 rect);
             
             rippleColorDropDown.InitSource(
-               Colors.MainColorsCollection,
-               color => ghostButton.RippleColor = color,
-               Fields.RippleColor,
-               rect);
+                GhostButtonConstants.RippleColors,
+                color => ghostButton.RippleColor = color,
+                Fields.RippleColor,
+                rect);
 
             stateSwitch.ValueChanged += (sender, e) =>
             {

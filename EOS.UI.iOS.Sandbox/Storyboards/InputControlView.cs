@@ -5,6 +5,7 @@ using CoreGraphics;
 using EOS.UI.iOS.Controls;
 using EOS.UI.iOS.Extensions;
 using EOS.UI.iOS.Sandbox.Storyboards;
+using EOS.UI.Shared.Sandbox.ControlConstants.iOS;
 using EOS.UI.Shared.Themes.Themes;
 using UIKit;
 using static EOS.UI.Shared.Sandbox.Helpers.Constants;
@@ -149,7 +150,7 @@ namespace EOS.UI.iOS.Sandbox
         private void InitFontTextField(CGRect rect)
         {
             fontDropDown.InitSource(
-                Fonts.GetInputFonts(),
+                InputConstants.InputFonts,
                 font =>
                 {
                     _inputTop.Font = font;
@@ -162,7 +163,7 @@ namespace EOS.UI.iOS.Sandbox
         private void InitLetterSpacing(CGRect rect)
         {
             letterSpacingDropDown.InitSource(
-                Sizes.LetterSpacingCollection,
+                InputConstants.LetterSpacings,
                 spacing =>
                 {
                     _inputTop.LetterSpacing = spacing;
@@ -175,7 +176,7 @@ namespace EOS.UI.iOS.Sandbox
         private void InitTextSizeTextField(CGRect rect)
         {
             textSizeDropDown.InitSource(
-                Sizes.TextSizeCollection,
+                InputConstants.TextSizes,
                 size =>
                 {
                     _inputTop.TextSize = size;
@@ -188,7 +189,7 @@ namespace EOS.UI.iOS.Sandbox
         private void InitTextColorTextField(CGRect rect)
         {
             textColorDropDown.InitSource(
-                Colors.FontColorsCollection,
+                InputConstants.FontColors,
                 color =>
                 {
                     _inputTop.TextColor = color;
@@ -201,7 +202,7 @@ namespace EOS.UI.iOS.Sandbox
         private void InitTextColorDisabledTextField(CGRect rect)
         {
             disabledTextColorDropDown.InitSource(
-                Colors.FontColorsCollection,
+                InputConstants.DisabledFontColors,
                 color =>
                 {
                     _inputTop.TextColorDisabled = color;
@@ -214,7 +215,7 @@ namespace EOS.UI.iOS.Sandbox
         private void InitPlaceholderTextField(CGRect rect)
         {
             hintTextColorDropDown.InitSource(
-                Colors.FontColorsCollection,
+                InputConstants.PlaceholderColors,
                 color =>
                 {
                     _inputTop.PlaceholderColor = color;
@@ -227,7 +228,7 @@ namespace EOS.UI.iOS.Sandbox
         private void InitPlaceholderDisabledTextField(CGRect rect)
         {
             disabledHintTextColorDropDown.InitSource(
-                Colors.FontColorsCollection,
+                InputConstants.DisabledPlaceholderColors,
                 color =>
                 {
                     _inputTop.PlaceholderColorDisabled = color;
@@ -253,7 +254,7 @@ namespace EOS.UI.iOS.Sandbox
         private void InitFocusedColorTextField(CGRect rect)
         {
             focusedUnderlineColorDropDown.InitSource(
-                Colors.MainColorsCollection,
+                InputConstants.FocusedColors,
                 color =>
                 {
                     _inputTop.FocusedColor = color;
@@ -266,7 +267,7 @@ namespace EOS.UI.iOS.Sandbox
         private void InitDisabledColorTextField(CGRect rect)
         {
             disabledUnderlineColorDropDown.InitSource(
-                Colors.MainColorsCollection,
+                InputConstants.DisabledColors,
                 color =>
                 {
                     _inputTop.DisabledColor = color;
@@ -279,7 +280,7 @@ namespace EOS.UI.iOS.Sandbox
         private void InitNormalIconColorTextField(CGRect rect)
         {
             normalIconColorDropDown.InitSource(
-                Colors.MainColorsCollection,
+                InputConstants.IconColors,
                 color =>
                 {
                     _inputTop.NormalIconColor = color;
@@ -292,7 +293,7 @@ namespace EOS.UI.iOS.Sandbox
         private void InitNormalUnderlineColorTextField(CGRect rect)
         {
             normalUnderlineColorDropDown.InitSource(
-                Colors.MainColorsCollection,
+                InputConstants.UnderlineColors,
                 color =>
                 {
                     _inputTop.NormalUnderlineColor = color;
@@ -305,7 +306,7 @@ namespace EOS.UI.iOS.Sandbox
         private void InitPopulatedIconColorTextField(CGRect rect)
         {
             populatedIconColorDropDown.InitSource(
-                Colors.MainColorsCollection,
+                InputConstants.PopulatedIconColors,
                 color =>
                 {
                     _inputTop.PopulatedIconColor = color;
@@ -318,7 +319,7 @@ namespace EOS.UI.iOS.Sandbox
         private void InitPopulatedUndrlineColorTextField(CGRect rect)
         {
             populatedUnderlineColorDropDown.InitSource(
-                Colors.MainColorsCollection,
+                InputConstants.PopulatedUnderlineColors,
                 color =>
                 {
                     _inputTop.PopulatedUnderlineColor = color;
