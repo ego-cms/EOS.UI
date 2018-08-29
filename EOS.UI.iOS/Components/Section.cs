@@ -67,7 +67,6 @@ namespace EOS.UI.iOS.Components
             }
         }
 
-
         private string _sectionName;
         public string SectionName
         {
@@ -90,6 +89,7 @@ namespace EOS.UI.iOS.Components
             {
                 _buttonTitle = value;
                 sectionButton.SetAttributedTitle(new NSAttributedString(value ?? string.Empty), UIControlState.Normal);
+                SetButtonFontStyle();
                 IsEOSCustomizationIgnored = true;
             }
         }
