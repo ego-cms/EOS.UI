@@ -15,6 +15,11 @@
     <Compile Include="$(MSBuildThisFileDirectory)ControlConstants\iOS\BadgeLabelConstants.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ControlConstants\iOS\CircleProgressConstants.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ControlConstants\iOS\SimpleButtonConstants.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ControlConstants\iOS\FabProgressConstants.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ControlConstants\iOS\GhostButtonConstants.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ControlConstants\iOS\InputConstants.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ControlConstants\iOS\SectionConstants.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ControlConstants\iOS\WorkTimeConstants.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="$(MSBuildThisFileDirectory)Helpers\" />
