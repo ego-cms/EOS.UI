@@ -191,8 +191,9 @@ namespace EOS.UI.Droid.Controls
             get => _rippleColor;
             set
             {
-                _rippleColor = value;//value.A == 255 ? Color.Argb(26, value.R, value.G, value.B) : value;
-                Background = CreateRippleDrawable(BackgroundColor);
+                _rippleColor = value;
+                if (Enabled)
+                    Background = CreateRippleDrawable(BackgroundColor);
                 IsEOSCustomizationIgnored = true;
             }
         }
