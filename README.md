@@ -3,6 +3,14 @@
 EOS.UI 
 ==================
 ## Table of contents
+* [Badge Label](../../wiki/BadgeLabel)
+* [Circle Progress](../../wiki/CircleProgress)
+* [Fab Progress](../../wiki/FabProgress)
+* [Simple button](../../wiki/SimpleButton)
+* [Input](../../wiki/Input)
+* [Section](../../wiki/Section)
+* [Simple label](../../wiki/SimpleLabel)
+* [Worktime Calendar](../../wiki/Worktime-calendar)
 
 
 Introduction
@@ -29,6 +37,7 @@ EOS.UI controls and components combine high-quality professional design, thought
 * Input 
 * Section 
 * Simple Label 
+* Worktime Calendar
 
 
 iOS and Android Sample Apps
@@ -36,6 +45,14 @@ iOS and Android Sample Apps
 We've created Snadbox Apps for both iOS and Android where you can play with controls and components, with their styles, fonts, sizes, etc. 
 
 There we've implemented 2 Themes support: light and dark ones. You can switch between themes and or play with every single control / component and customize them as you'd prefer. We hope that common sense prevail and you won't create a black button with black text on it :wink:
+
+**iOS**
+
+<img src="https://github.com/ego-cms/Resources/blob/master/EOSUI_images/readme_Main_iOS.PNG" width="200"/><img src="https://github.com/ego-cms/Resources/blob/master/EOSUI_images/readme_Worktime_Light_iOS.PNG" width="200"/><img src="https://github.com/ego-cms/Resources/blob/master/EOSUI_images/readme_Worktime_Dark_iOS.PNG" width="200"/><img src="https://github.com/ego-cms/Resources/blob/master/EOSUI_images/readme_Badge_Light_iOS.PNG" width="200"/><img src="https://github.com/ego-cms/Resources/blob/master/EOSUI_images/readme_Badge_Dark_iOS.PNG" width="200"/><img src="https://github.com/ego-cms/Resources/blob/master/EOSUI_images/readme_Fab_iOS.PNG" width="200"/><img src="https://github.com/ego-cms/Resources/blob/master/EOSUI_images/readme_CircleProgress_iOS.PNG" width="200"/>
+
+**Android**
+
+<img src="https://github.com/ego-cms/Resources/blob/master/EOSUI_images/readme_Main_Droid.png" width="200"/><img src="https://github.com/ego-cms/Resources/blob/master/EOSUI_images/readme_Badge_Light_Droid.png" width="200"/><img src="https://github.com/ego-cms/Resources/blob/master/EOSUI_images/readme_Badge_Dark_Droid.png" width="200"/><img src="https://github.com/ego-cms/Resources/blob/master/EOSUI_images/readme_Worktime_Light_Droid.png" width="200"/><img src="https://github.com/ego-cms/Resources/blob/master/EOSUI_images/readme_Worktime_Dark_Droid.png" width="200"/>
 
 Issues or feature requests?
 -----------
