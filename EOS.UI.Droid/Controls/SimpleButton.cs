@@ -7,9 +7,9 @@ using Android.Graphics.Drawables;
 using Android.Graphics.Drawables.Shapes;
 using Android.OS;
 using Android.Runtime;
+using Android.Support.V7.Widget;
 using Android.Text;
 using Android.Util;
-using Android.Widget;
 using Com.Airbnb.Lottie;
 using EOS.UI.Droid.Themes;
 using EOS.UI.Shared.Helpers;
@@ -20,7 +20,7 @@ using Java.Util;
 
 namespace EOS.UI.Droid.Controls
 {
-    public class SimpleButton : Button, IEOSThemeControl
+    public class SimpleButton : AppCompatButton, IEOSThemeControl
     {
         #region fields
 
