@@ -20,6 +20,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)ControlConstants\iOS\InputConstants.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ControlConstants\iOS\SectionConstants.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ControlConstants\iOS\WorkTimeConstants.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ControlConstants\iOS\SimpleLabelConstants.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="$(MSBuildThisFileDirectory)Helpers\" />

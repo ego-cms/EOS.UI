@@ -12,6 +12,8 @@ namespace EOS.UI.Shared.Sandbox.ControlConstants.iOS
 {
     public static class CircleProgressConstants
     {
+        private static FontStyleItem FontStyle => (FontStyleItem)EOSThemeProvider.Instance.GetCurrentTheme().ThemeValues[EOSConstants.R1C1];
+
         public static Dictionary<string, UIColor> CircleProgressColors =>
             Colors.MainColorsCollection.AddDefault(Fields.Default, (UIColor)EOSThemeProvider.Instance.GetCurrentTheme().ThemeValues[EOSConstants.BrandPrimaryColor]);
         public static Dictionary<string, UIColor> AlternativeColors =>
@@ -19,9 +21,9 @@ namespace EOS.UI.Shared.Sandbox.ControlConstants.iOS
         public static Dictionary<string, UIColor> FillColors =>
             Colors.MainColorsCollection.AddDefault(Fields.Default, (UIColor)EOSThemeProvider.Instance.GetCurrentTheme().ThemeValues[EOSConstants.NeutralColor4]);
         public static Dictionary<string, UIFont> CircleProgressFonts =>
-            Fonts.GetCircleProgressFonts().AddDefault(Fields.Default, ((FontStyleItem)EOSThemeProvider.Instance.GetCurrentTheme().ThemeValues[EOSConstants.R1C1]).Font);
+            Fonts.GetCircleProgressFonts().AddDefault(Fields.Default, FontStyle.Font);
         public static Dictionary<string, float> TextSizes =>
-            Sizes.TextSizeCollection.AddDefault(Fields.Default, ((FontStyleItem)EOSThemeProvider.Instance.GetCurrentTheme().ThemeValues[EOSConstants.R1C1]).Size);
+            Sizes.TextSizeCollection.AddDefault(Fields.Default, FontStyle.Size);
     }
 }
 #endif

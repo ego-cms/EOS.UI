@@ -11,14 +11,16 @@ namespace EOS.UI.Shared.Sandbox.ControlConstants.iOS
 {
     public static class InputConstants
     {
+        private static FontStyleItem FontStyle => (FontStyleItem)EOSThemeProvider.Instance.GetCurrentTheme().ThemeValues[EOSConstants.R4C2];
+
         public static Dictionary<string, UIFont> InputFonts =>
-            Fonts.GetInputFonts().AddDefault(Fields.Default, ((FontStyleItem)EOSThemeProvider.Instance.GetCurrentTheme().ThemeValues[EOSConstants.R4C2]).Font);
+            Fonts.GetInputFonts().AddDefault(Fields.Default, FontStyle.Font);
         public static Dictionary<string, float> LetterSpacings =>
-            Sizes.LetterSpacingCollection.AddDefault(Fields.Default, ((FontStyleItem)EOSThemeProvider.Instance.GetCurrentTheme().ThemeValues[EOSConstants.R4C2]).LetterSpacing);
+            Sizes.LetterSpacingCollection.AddDefault(Fields.Default, FontStyle.LetterSpacing);
         public static Dictionary<string, float> TextSizes =>
-            Sizes.TextSizeCollection.AddDefault(Fields.Default, ((FontStyleItem)EOSThemeProvider.Instance.GetCurrentTheme().ThemeValues[EOSConstants.R4C2]).Size);
+            Sizes.TextSizeCollection.AddDefault(Fields.Default, FontStyle.Size);
         public static Dictionary<string, UIColor> FontColors =>
-            Colors.FontColorsCollection.AddDefault(Fields.Default, ((FontStyleItem)EOSThemeProvider.Instance.GetCurrentTheme().ThemeValues[EOSConstants.R4C2]).Color);
+            Colors.FontColorsCollection.AddDefault(Fields.Default, FontStyle.Color);
         public static Dictionary<string, UIColor> DisabledFontColors =>
             Colors.FontColorsCollection.AddDefault(Fields.Default, (UIColor)EOSThemeProvider.Instance.GetCurrentTheme().ThemeValues[EOSConstants.NeutralColor5]);
         public static Dictionary<string, UIColor> PlaceholderColors =>
