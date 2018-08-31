@@ -3,15 +3,10 @@
 EOS.UI 
 ==================
 ## Table of contents
-* [Badge Label](../../wiki/BadgeLabel)
-* [Circle Progress](../../wiki/CircleProgress)
-* [Fab Progress](../../wiki/FabProgress)
-* [Simple button](../../wiki/SimpleButton)
-* [Input](../../wiki/Input)
-* [Section](../../wiki/Section)
-* [Simple label](../../wiki/SimpleLabel)
-* [Worktime Calendar](../../wiki/Worktime-calendar)
-
+* [Introduction](../..#introduction)
+* [iOS and Android Sample Apps](../..#ios-and-android-sample-apps)
+* [Documentation](../..#documentation)
+* [Issues or feature requests?](../..#issues-or-feature-requests)
 
 Introduction
 -----------
@@ -28,18 +23,6 @@ EOS.UI controls and components combine high-quality professional design, thought
 * Created a single API for iOS and Android - provides clear work of components and control interfaces, herewith it still has access to the native API. In addition, some platform-specific parameters have been redesigned for more obvious and convenient use.
 * Developed a system of individual styles that allows you to override the theme settings of a particular component or control without violating the API unification principle.
 
-**Currently EOS.UI offers the first set of Xamarin controls and components:**
-* Badge Label
-* Circle Progress
-* Fab Progress 
-* Ghost Button
-* Simple Button
-* Input 
-* Section 
-* Simple Label 
-* Worktime Calendar
-
-
 iOS and Android Sample Apps
 -----------
 We've created Snadbox Apps for both iOS and Android where you can play with controls and components, with their styles, fonts, sizes, etc. 
@@ -53,6 +36,18 @@ There we've implemented 2 Themes support: light and dark ones. You can switch be
 **Android**
 
 <img src="https://github.com/ego-cms/Resources/blob/master/EOSUI_images/readme_Main_Droid.png" width="200"/><img src="https://github.com/ego-cms/Resources/blob/master/EOSUI_images/readme_Badge_Light_Droid.png" width="200"/><img src="https://github.com/ego-cms/Resources/blob/master/EOSUI_images/readme_Badge_Dark_Droid.png" width="200"/><img src="https://github.com/ego-cms/Resources/blob/master/EOSUI_images/readme_Worktime_Light_Droid.png" width="200"/><img src="https://github.com/ego-cms/Resources/blob/master/EOSUI_images/readme_Worktime_Dark_Droid.png" width="200"/>
+
+Documentation
+-----------
+**Currently EOS.UI offers the first set of Xamarin controls and components:**
+* [Badge Label](../../wiki/BadgeLabel)
+* [Circle Progress](../../wiki/CircleProgress)
+* [Fab Progress](../../wiki/FabProgress)
+* [Simple button](../../wiki/SimpleButton)
+* [Input](../../wiki/Input)
+* [Section](../../wiki/Section)
+* [Simple label](../../wiki/SimpleLabel)
+* [Worktime Calendar](../../wiki/Worktime-calendar)
 
 Issues or feature requests?
 -----------
