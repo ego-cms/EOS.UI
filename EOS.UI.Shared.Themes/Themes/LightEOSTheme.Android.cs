@@ -104,7 +104,7 @@ namespace EOS.UI.Shared.Themes.Themes
                     Color = Color.ParseColor(brandPrimaryColor),
                     Typeface = RobotoBold,
                     Size = 11f,
-                    LetterSpacing = 0.005f,
+                    LetterSpacing = 0.0055f,
                     LineHeight = 13f
                 }
             },
@@ -114,7 +114,7 @@ namespace EOS.UI.Shared.Themes.Themes
                     Color = Color.ParseColor(neutralColor1),
                     Typeface = RobotoBold,
                     Size = 11f,
-                    LetterSpacing = 0.005f,
+                    LetterSpacing = 0.0055f,
                     LineHeight = 13f
                 }
             },
@@ -124,7 +124,7 @@ namespace EOS.UI.Shared.Themes.Themes
                     Color = Color.ParseColor(neutralColor2),
                     Typeface = RobotoBold,
                     Size = 11f,
-                    LetterSpacing = 0.005f,
+                    LetterSpacing = 0.0055f,
                     LineHeight = 13f
                 }
             },
@@ -134,7 +134,7 @@ namespace EOS.UI.Shared.Themes.Themes
                     Color = Color.ParseColor(neutralColor3),
                     Typeface = RobotoBold,
                     Size = 11f,
-                    LetterSpacing = 0.005f,
+                    LetterSpacing = 0.0055f,
                     LineHeight = 13f
                 }
             },
@@ -144,7 +144,7 @@ namespace EOS.UI.Shared.Themes.Themes
                     Color = Color.ParseColor(neutralColor6),
                     Typeface = RobotoBold,
                     Size = 11f,
-                    LetterSpacing = 0.005f,
+                    LetterSpacing = 0.0055f,
                     LineHeight = 13f
                 }
             },
@@ -154,7 +154,7 @@ namespace EOS.UI.Shared.Themes.Themes
                     Color = Color.ParseColor(brandPrimaryColor),
                     Typeface = RobotoBold,
                     Size = 13f,
-                    LetterSpacing = -0.005f,
+                    LetterSpacing = -0.0046f,
                     LineHeight = 15f
                 }
             },
@@ -164,7 +164,7 @@ namespace EOS.UI.Shared.Themes.Themes
                     Color = Color.ParseColor(neutralColor1),
                     Typeface = RobotoBold,
                     Size = 13f,
-                    LetterSpacing = -0.005f,
+                    LetterSpacing = -0.0046f,
                     LineHeight = 15f
                 }
             },
@@ -174,7 +174,7 @@ namespace EOS.UI.Shared.Themes.Themes
                     Color = Color.ParseColor(neutralColor2),
                     Typeface = RobotoBold,
                     Size = 13f,
-                    LetterSpacing = -0.005f,
+                    LetterSpacing = -0.0046f,
                     LineHeight = 15f
                 }
             },
@@ -184,7 +184,7 @@ namespace EOS.UI.Shared.Themes.Themes
                     Color = Color.ParseColor(neutralColor3S),
                     Typeface = RobotoBold,
                     Size = 13f,
-                    LetterSpacing = -0.005f,
+                    LetterSpacing = -0.0046f,
                     LineHeight = 15f
                 }
             },
@@ -194,7 +194,7 @@ namespace EOS.UI.Shared.Themes.Themes
                     Color = Color.ParseColor(neutralColor6S),
                     Typeface = RobotoBold,
                     Size = 13f,
-                    LetterSpacing = -0.005f,
+                    LetterSpacing = -0.0046f,
                     LineHeight = 15f
                 }
             },
@@ -204,7 +204,7 @@ namespace EOS.UI.Shared.Themes.Themes
                     Color = Color.ParseColor(brandPrimaryColor),
                     Typeface = RobotoMedium,
                     Size = 16f,
-                    LetterSpacing = -0.01f,
+                    LetterSpacing = -0.0125f,
                     LineHeight = 19f
                 }
             },
@@ -214,7 +214,7 @@ namespace EOS.UI.Shared.Themes.Themes
                     Color = Color.ParseColor(neutralColor1),
                     Typeface = RobotoMedium,
                     Size = 16f,
-                    LetterSpacing = -0.01f,
+                    LetterSpacing = -0.0125f,
                     LineHeight = 19f
                 }
             },
@@ -224,7 +224,7 @@ namespace EOS.UI.Shared.Themes.Themes
                     Color = Color.ParseColor(neutralColor2),
                     Typeface = RobotoMedium,
                     Size = 16f,
-                    LetterSpacing = -0.01f,
+                    LetterSpacing = -0.0125f,
                     LineHeight = 19f
                 }
             },
@@ -234,7 +234,7 @@ namespace EOS.UI.Shared.Themes.Themes
                     Color = Color.ParseColor(neutralColor3S),
                     Typeface = RobotoMedium,
                     Size = 16f,
-                    LetterSpacing = -0.01f,
+                    LetterSpacing = -0.0125f,
                     LineHeight = 19f
                 }
             },
@@ -244,7 +244,7 @@ namespace EOS.UI.Shared.Themes.Themes
                     Color = Color.ParseColor(neutralColor6S),
                     Typeface = RobotoMedium,
                     Size = 16f,
-                    LetterSpacing = -0.01f,
+                    LetterSpacing = -0.0125f,
                     LineHeight = 19f
                 }
             },
@@ -254,7 +254,7 @@ namespace EOS.UI.Shared.Themes.Themes
                     Color = Color.ParseColor(brandPrimaryColor),
                     Typeface = RobotoRegular,
                     Size = 17f,
-                    LetterSpacing = -0.02f,
+                    LetterSpacing = -0.0141f,
                     LineHeight = 20f
                 }
             },
@@ -264,7 +264,7 @@ namespace EOS.UI.Shared.Themes.Themes
                     Color = Color.ParseColor(neutralColor1),
                     Typeface = RobotoRegular,
                     Size = 17f,
-                    LetterSpacing = -0.02f,
+                    LetterSpacing = -0.0141f,
                     LineHeight = 20f
                 }
             },
@@ -274,7 +274,7 @@ namespace EOS.UI.Shared.Themes.Themes
                     Color = Color.ParseColor(neutralColor2),
                     Typeface = RobotoRegular,
                     Size = 17f,
-                    LetterSpacing = -0.02f,
+                    LetterSpacing = -0.0141f,
                     LineHeight = 20f
                 }
             },
@@ -284,7 +284,7 @@ namespace EOS.UI.Shared.Themes.Themes
                     Color = Color.ParseColor(neutralColor3),
                     Typeface = RobotoRegular,
                     Size = 17f,
-                    LetterSpacing = -0.02f,
+                    LetterSpacing = -0.0141f,
                     LineHeight = 20f
                 }
             },
@@ -294,7 +294,7 @@ namespace EOS.UI.Shared.Themes.Themes
                     Color = Color.ParseColor(neutralColor6),
                     Typeface = RobotoRegular,
                     Size = 17f,
-                    LetterSpacing = -0.02f,
+                    LetterSpacing = -0.0141f,
                     LineHeight = 20f
                 }
             }

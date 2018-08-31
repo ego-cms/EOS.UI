@@ -466,7 +466,7 @@ namespace EOS.UI.iOS.Extensions
             var disabledAttrString = new NSMutableAttributedString(existDisabledAttrString);
 
             var existHighlightedAttrString = button.GetAttributedTitle(UIControlState.Highlighted);
-            var highlightedAttrString = new NSMutableAttributedString(existDisabledAttrString);
+            var highlightedAttrString = new NSMutableAttributedString(existHighlightedAttrString);
 
             enabledAttrString.AddAttribute(UIStringAttributeKey.KerningAdjustment, new NSNumber(spacing), new NSRange(0, enabledAttrString.Length));
             disabledAttrString.AddAttribute(UIStringAttributeKey.KerningAdjustment, new NSNumber(spacing), new NSRange(0, disabledAttrString.Length));

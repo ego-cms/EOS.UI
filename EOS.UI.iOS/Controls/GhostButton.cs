@@ -71,7 +71,8 @@ namespace EOS.UI.iOS.Controls
             set
             {
                 FontStyle.Color = value;
-                SetFontStyle();
+                SetTitleColor(FontStyle.Color, UIControlState.Normal);
+                SetTitleColor(FontStyle.Color, UIControlState.Highlighted);
                 IsEOSCustomizationIgnored = true;
             }
         }
@@ -267,8 +268,6 @@ namespace EOS.UI.iOS.Controls
             base.Font = FontStyle.Font;
             //size
             this.SetTextSize(FontStyle.Size);
-            //text color
-            SetTitleColor(FontStyle.Color, UIControlState.Normal);
             //letter spacing
             this.SetLetterSpacing(FontStyle.LetterSpacing);
         }
