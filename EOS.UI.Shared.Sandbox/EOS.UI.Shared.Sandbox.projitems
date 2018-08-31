@@ -26,6 +26,9 @@
     <Compile Include="$(MSBuildThisFileDirectory)ControlConstants\Android\GhostButtonConstants.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ControlConstants\Android\SimpleButtonConstants.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ControlConstants\Android\FabProgressConstants.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ControlConstants\Android\InputConstants.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ControlConstants\Android\CircleProgressConstants.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ControlConstants\Android\SectionConstants.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="$(MSBuildThisFileDirectory)Helpers\" />

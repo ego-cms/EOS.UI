@@ -1,7 +1,5 @@
 ﻿#if __IOS__
-using System;
 using System.Collections.Generic;
-using System.Linq;
 using EOS.UI.iOS.Themes;
 using EOS.UI.Shared.Themes.DataModels;
 using EOS.UI.Shared.Themes.Extensions;
