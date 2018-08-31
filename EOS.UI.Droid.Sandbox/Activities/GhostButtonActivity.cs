@@ -7,6 +7,7 @@ using Android.OS;
 using Android.Widget;
 using EOS.UI.Droid.Controls;
 using EOS.UI.Droid.Sandbox.Controls;
+using EOS.UI.Shared.Sandbox.ControlConstants.Android;
 using EOS.UI.Shared.Sandbox.Helpers;
 using EOS.UI.Shared.Themes.Themes;
 using static EOS.UI.Shared.Sandbox.Helpers.Constants;
@@ -64,51 +65,45 @@ namespace EOS.UI.Droid.Sandbox.Activities
                 themeDropDown.SetSpinnerSelection(2);
 
             fontDropDown.Name = Fields.Font;
-            fontDropDown.SetupAdapter(Fonts.GetGhostButtonSimpleLabelFonts().Select(item => item.Key).ToList());
+            fontDropDown.SetupAdapter(GhostButtonConstants.GhostButtonFonts.Select(item => item.Key).ToList());
             fontDropDown.ItemSelected += (position) =>
             {
-                if (position > 0)
-                    ghostButton.Typeface = Typeface.CreateFromAsset(Assets, Fonts.GetGhostButtonSimpleLabelFonts().ElementAt(position).Value);
+                ghostButton.Typeface = Typeface.CreateFromAsset(Assets, GhostButtonConstants.GhostButtonFonts.ElementAt(position).Value);
             };
 
             letterSpacingDropDown.Name = Fields.LetterSpacing;
-            letterSpacingDropDown.SetupAdapter(Sizes.LetterSpacingCollection.Select(item => item.Key).ToList());
+            letterSpacingDropDown.SetupAdapter(GhostButtonConstants.LetterSpacings.Select(item => item.Key).ToList());
             letterSpacingDropDown.ItemSelected += (position) =>
             {
-                if (position > 0)
-                    ghostButton.LetterSpacing = Sizes.LetterSpacingCollection.ElementAt(position).Value;
+                ghostButton.LetterSpacing = GhostButtonConstants.LetterSpacings.ElementAt(position).Value;
             };
 
             enabledColorDropDown.Name = Fields.EnabledTextColor;
-            enabledColorDropDown.SetupAdapter(Colors.GetGhostButtonFonts().Select(item => item.Key).ToList());
+            enabledColorDropDown.SetupAdapter(GhostButtonConstants.FontColors.Select(item => item.Key).ToList());
             enabledColorDropDown.ItemSelected += (position) =>
             {
-                if (position > 0)
-                    ghostButton.TextColor = Colors.GetGhostButtonFonts().ElementAt(position).Value;
+                ghostButton.TextColor = GhostButtonConstants.FontColors.ElementAt(position).Value;
             };
 
             disabledColorDropDown.Name = Fields.DisabledTextColor;
-            disabledColorDropDown.SetupAdapter(Colors.GetGhostButtonFonts().Select(item => item.Key).ToList());
+            disabledColorDropDown.SetupAdapter(GhostButtonConstants.DisabledFontColors.Select(item => item.Key).ToList());
             disabledColorDropDown.ItemSelected += (position) =>
             {
-                if (position > 0)
-                    ghostButton.DisabledTextColor = Colors.GetGhostButtonFonts().ElementAt(position).Value;
+                ghostButton.DisabledTextColor = GhostButtonConstants.DisabledFontColors.ElementAt(position).Value;
             };
 
             textSizeDropDown.Name = Fields.TextSize;
-            textSizeDropDown.SetupAdapter(Sizes.TextSizeCollection.Select(item => item.Key).ToList());
+            textSizeDropDown.SetupAdapter(GhostButtonConstants.TextSizes.Select(item => item.Key).ToList());
             textSizeDropDown.ItemSelected += (position) =>
             {
-                if (position > 0)
-                    ghostButton.TextSize = Sizes.TextSizeCollection.ElementAt(position).Value;
+                ghostButton.TextSize = GhostButtonConstants.TextSizes.ElementAt(position).Value;
             };
 
             rippleColorDropDown.Name = Fields.RippleColor;
-            rippleColorDropDown.SetupAdapter(Colors.MainColorsCollection.Select(item => item.Key).ToList());
+            rippleColorDropDown.SetupAdapter(GhostButtonConstants.RippleColors.Select(item => item.Key).ToList());
             rippleColorDropDown.ItemSelected += (position) =>
             {
-                if (position > 0)
-                    ghostButton.RippleColor = Colors.MainColorsCollection.ElementAt(position).Value;
+                ghostButton.RippleColor = GhostButtonConstants.RippleColors.ElementAt(position).Value;
             };
 
             stateSwitch.CheckedChange += (sender, e) =>

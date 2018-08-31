@@ -10,6 +10,7 @@ using EOS.UI.Droid.Controls;
 using EOS.UI.Droid.Helpers;
 using EOS.UI.Droid.Sandbox.Controls;
 using EOS.UI.Shared.Helpers;
+using EOS.UI.Shared.Sandbox.ControlConstants.Android;
 using EOS.UI.Shared.Sandbox.Helpers;
 using EOS.UI.Shared.Themes.Themes;
 using static EOS.UI.Shared.Sandbox.Helpers.Constants;
@@ -97,81 +98,81 @@ namespace EOS.UI.Droid.Sandbox.Activities
                 themeDropDown.SetSpinnerSelection(2);
 
             backgroundColorDropDown.Name = Fields.Background;
-            backgroundColorDropDown.SetupAdapter(Colors.MainColorsCollection.Select(item => item.Key).ToList());
+            backgroundColorDropDown.SetupAdapter(FabProgressConstants.BackgroundColors.Select(item => item.Key).ToList());
             backgroundColorDropDown.ItemSelected += (position) =>
             {
                 if(position > 0)
-                    fab.BackgroundColor = Colors.MainColorsCollection.ElementAt(position).Value;
+                    fab.BackgroundColor = FabProgressConstants.BackgroundColors.ElementAt(position).Value;
             };
 
             disabledColorDropDown.Name = Fields.DisabledColor;
-            disabledColorDropDown.SetupAdapter(Colors.MainColorsCollection.Select(item => item.Key).ToList());
+            disabledColorDropDown.SetupAdapter(FabProgressConstants.DisabledBackgroundColors.Select(item => item.Key).ToList());
             disabledColorDropDown.ItemSelected += (position) =>
             {
                 if(position > 0)
-                    fab.DisabledBackgroundColor = Colors.MainColorsCollection.ElementAt(position).Value;
+                    fab.DisabledBackgroundColor = FabProgressConstants.DisabledBackgroundColors.ElementAt(position).Value;
             };
 
             pressedColorDropDown.Name = Fields.PressedColor;
-            pressedColorDropDown.SetupAdapter(Colors.MainColorsCollection.Select(item => item.Key).ToList());
+            pressedColorDropDown.SetupAdapter(FabProgressConstants.PressedBackgroundColors.Select(item => item.Key).ToList());
             pressedColorDropDown.ItemSelected += (position) =>
             {
                 if(position > 0)
-                    fab.PressedBackgroundColor = Colors.MainColorsCollection.ElementAt(position).Value;
+                    fab.PressedBackgroundColor = FabProgressConstants.PressedBackgroundColors.ElementAt(position).Value;
             };
 
             shadowOffsetXDropDown.Name = Fields.ShadowOffsetX;
-            shadowOffsetXDropDown.SetupAdapter(Shadow.OffsetCollection.Select(item => item.Key).ToList());
+            shadowOffsetXDropDown.SetupAdapter(FabProgressConstants.ShadowOffsetXCollection.Select(item => item.Key).ToList());
             shadowOffsetXDropDown.ItemSelected += (position) =>
             {
                 if (position > 0)
                 {
-                    fab.ShadowConfig.Offset.X = Shadow.OffsetCollection.ElementAt(position).Value;
+                    fab.ShadowConfig.Offset.X = FabProgressConstants.ShadowOffsetXCollection.ElementAt(position).Value;
                     ChangeShadow(fab);
                 }
             };
 
 
             shadowOffsetYDropDown.Name = Fields.ShadowOffsetY;
-            shadowOffsetYDropDown.SetupAdapter(Shadow.OffsetCollection.Select(item => item.Key).ToList());
+            shadowOffsetYDropDown.SetupAdapter(FabProgressConstants.ShadowOffsetYCollection.Select(item => item.Key).ToList());
             shadowOffsetYDropDown.ItemSelected += (position) =>
             {
                 if (position > 0)
                 {
-                    fab.ShadowConfig.Offset.Y = Shadow.OffsetCollection.ElementAt(position).Value;
+                    fab.ShadowConfig.Offset.Y = FabProgressConstants.ShadowOffsetYCollection.ElementAt(position).Value;
                     ChangeShadow(fab);
                 }
             };
 
             shadowBlurDropDown.Name = Fields.ShadowRadius;
-            shadowBlurDropDown.SetupAdapter(Shadow.RadiusCollection.Select(item => item.Key).ToList());
+            shadowBlurDropDown.SetupAdapter(FabProgressConstants.ShadowRadiusCollection.Select(item => item.Key).ToList());
             shadowBlurDropDown.ItemSelected += (position) =>
             {
                 if (position > 0)
                 {
-                    fab.ShadowConfig.Blur = Shadow.RadiusCollection.ElementAt(position).Value;
+                    fab.ShadowConfig.Blur = FabProgressConstants.ShadowRadiusCollection.ElementAt(position).Value;
                     ChangeShadow(fab);
                 }
             };
 
             shadowColorDropDown.Name = Fields.ShadowColor;
-            shadowColorDropDown.SetupAdapter(Colors.MainColorsCollection.Select(i => i.Key).ToList());
+            shadowColorDropDown.SetupAdapter(FabProgressConstants.ShadowColors.Select(i => i.Key).ToList());
             shadowColorDropDown.ItemSelected += (position) =>
             {
                 if (position > 0)
                 {
-                    fab.ShadowConfig.Color = Colors.MainColorsCollection.ElementAt(position).Value;
+                    fab.ShadowConfig.Color = FabProgressConstants.ShadowColors.ElementAt(position).Value;
                     ChangeShadow(fab);
                 }
             };
 
             shadowOpacityDropDown.Name = Fields.ShadowOpacity;
-            shadowOpacityDropDown.SetupAdapter(Shadow.OpacityCollection.Select(item => item.Key).ToList());
+            shadowOpacityDropDown.SetupAdapter(FabProgressConstants.ShadowOpacityCollection.Select(item => item.Key).ToList());
             shadowOpacityDropDown.ItemSelected += (position) =>
             {
                 if (position > 0)
                 {
-                    _shadowAlpha = (float)Shadow.OpacityCollection.ElementAt(position).Value;
+                    _shadowAlpha = (float)FabProgressConstants.ShadowOpacityCollection.ElementAt(position).Value;
                     ChangeShadow(fab);
                 }
             };

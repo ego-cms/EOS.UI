@@ -21,10 +21,16 @@
     <Compile Include="$(MSBuildThisFileDirectory)ControlConstants\iOS\SectionConstants.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ControlConstants\iOS\WorkTimeConstants.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ControlConstants\iOS\SimpleLabelConstants.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ControlConstants\Android\BadgeLabelConstants.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ControlConstants\Android\SimpleLabelConstants.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ControlConstants\Android\GhostButtonConstants.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ControlConstants\Android\SimpleButtonConstants.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ControlConstants\Android\FabProgressConstants.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="$(MSBuildThisFileDirectory)Helpers\" />
     <Folder Include="$(MSBuildThisFileDirectory)ControlConstants\" />
     <Folder Include="$(MSBuildThisFileDirectory)ControlConstants\iOS\" />
+    <Folder Include="$(MSBuildThisFileDirectory)ControlConstants\Android\" />
   </ItemGroup>
 </Project>
