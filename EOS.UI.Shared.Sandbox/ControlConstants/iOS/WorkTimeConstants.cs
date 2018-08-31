@@ -13,7 +13,7 @@ namespace EOS.UI.Shared.Sandbox.ControlConstants.iOS
     {
         private static FontStyleItem TitleFontStyle => (FontStyleItem)EOSThemeProvider.Instance.GetCurrentTheme().ThemeValues[EOSConstants.R2C2];
         private static FontStyleItem DayFontStyle => (FontStyleItem)EOSThemeProvider.Instance.GetCurrentTheme().ThemeValues[EOSConstants.R1C3];
-        private static FontStyleItem CurrentDayFontStyle => (FontStyleItem)EOSThemeProvider.Instance.GetCurrentTheme().ThemeValues[EOSConstants.R1C6];
+        private static FontStyleItem CurrentDayFontStyle => (FontStyleItem)EOSThemeProvider.Instance.GetCurrentTheme().ThemeValues[EOSConstants.R1C6S];
 
         public static Dictionary<string, UIFont> TitleFonts =>
             Fonts.GetWorkTimeTitleFonts().AddDefault(Fields.Default, TitleFontStyle.Font);
