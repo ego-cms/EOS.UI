@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using Airbnb.Lottie;
 using CoreAnimation;
@@ -115,6 +115,7 @@ namespace EOS.UI.iOS.Controls
             {
                 FontStyle.Color = value;
                 SetTitleColor(FontStyle.Color, UIControlState.Normal);
+                SetTitleColor(FontStyle.Color, UIControlState.Highlighted);
                 IsEOSCustomizationIgnored = true;
             }
         }
@@ -286,6 +287,7 @@ namespace EOS.UI.iOS.Controls
             attrString.AddAttribute(UIStringAttributeKey.ForegroundColor, color, new NSRange(0, attrString.Length));
             SetAttributedTitle(attrString, forState);
         }
+        
         public override void SetTitle(string title, UIControlState forState)
         {
             NSMutableAttributedString attrString;
