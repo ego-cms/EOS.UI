@@ -31,11 +31,21 @@ There we've implemented 2 Themes support: light and dark ones. You can switch be
 
 **iOS**
 
-<img src="https://github.com/ego-cms/Resources/blob/master/EOSUI_images/readme_Main_iOS.PNG" width="200"/><img src="https://github.com/ego-cms/Resources/blob/master/EOSUI_images/readme_Worktime_Light_iOS.PNG" width="200"/><img src="https://github.com/ego-cms/Resources/blob/master/EOSUI_images/readme_Worktime_Dark_iOS.PNG" width="200"/><img src="https://github.com/ego-cms/Resources/blob/master/EOSUI_images/readme_Badge_Light_iOS.PNG" width="200"/><img src="https://github.com/ego-cms/Resources/blob/master/EOSUI_images/readme_Badge_Dark_iOS.PNG" width="200"/><img src="https://github.com/ego-cms/Resources/blob/master/EOSUI_images/readme_Fab_iOS.PNG" width="200"/><img src="https://github.com/ego-cms/Resources/blob/master/EOSUI_images/readme_CircleProgress_iOS.PNG" width="200"/>
+<img src="https://github.com/ego-cms/Resources/blob/master/EOSUI_images/readme_Main_iOS.PNG" width="200"/>&nbsp;&nbsp;&nbsp;
+<img src="https://github.com/ego-cms/Resources/blob/master/EOSUI_images/readme_Worktime_Light_iOS.PNG" width="200"/>&nbsp;&nbsp;&nbsp;
+<img src="https://github.com/ego-cms/Resources/blob/master/EOSUI_images/readme_Worktime_Dark_iOS.PNG" width="200"/>&nbsp;&nbsp;&nbsp;
+<img src="https://github.com/ego-cms/Resources/blob/master/EOSUI_images/readme_Badge_Light_iOS.PNG" width="200"/>&nbsp;&nbsp;&nbsp;
+<img src="https://github.com/ego-cms/Resources/blob/master/EOSUI_images/readme_Badge_Dark_iOS.PNG" width="200"/>&nbsp;&nbsp;&nbsp;
+<img src="https://github.com/ego-cms/Resources/blob/master/EOSUI_images/readme_Fab_iOS.PNG" width="200"/>&nbsp;&nbsp;&nbsp;
+<img src="https://github.com/ego-cms/Resources/blob/master/EOSUI_images/readme_CircleProgress_iOS.PNG" width="200"/>
 
 **Android**
 
-<img src="https://github.com/ego-cms/Resources/blob/master/EOSUI_images/readme_Main_Droid.png" width="200"/><img src="https://github.com/ego-cms/Resources/blob/master/EOSUI_images/readme_Badge_Light_Droid.png" width="200"/><img src="https://github.com/ego-cms/Resources/blob/master/EOSUI_images/readme_Badge_Dark_Droid.png" width="200"/><img src="https://github.com/ego-cms/Resources/blob/master/EOSUI_images/readme_Worktime_Light_Droid.png" width="200"/><img src="https://github.com/ego-cms/Resources/blob/master/EOSUI_images/readme_Worktime_Dark_Droid.png" width="200"/>
+<img src="https://github.com/ego-cms/Resources/blob/master/EOSUI_images/readme_Main_Droid.png" width="200"/>&nbsp;&nbsp;&nbsp;
+<img src="https://github.com/ego-cms/Resources/blob/master/EOSUI_images/readme_Badge_Light_Droid.png" width="200"/>&nbsp;&nbsp;&nbsp;
+<img src="https://github.com/ego-cms/Resources/blob/master/EOSUI_images/readme_Badge_Dark_Droid.png" width="200"/>&nbsp;&nbsp;&nbsp;
+<img src="https://github.com/ego-cms/Resources/blob/master/EOSUI_images/readme_Worktime_Light_Droid.png" width="200"/>&nbsp;&nbsp;&nbsp;
+<img src="https://github.com/ego-cms/Resources/blob/master/EOSUI_images/readme_Worktime_Dark_Droid.png" width="200"/>
 
 Documentation
 -----------
