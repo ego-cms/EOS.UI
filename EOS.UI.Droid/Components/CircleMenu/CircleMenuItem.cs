@@ -223,15 +223,18 @@ namespace EOS.UI.Droid.Components
                 }
                 else
                 {
-                    _circleMenu.PerformClick(CircleMenuModelId, _isSubMenu, _isOpened);
-
-                    if(!_isSubMenu)
+                    if(!_circleMenu.Locked)
                     {
-                        if(_hasChildren)
+                        _circleMenu.PerformClick(CircleMenuModelId, _isSubMenu, _isOpened);
+
+                        if(!_isSubMenu)
                         {
-                            _isOpened = !_isOpened;
-                            (Background as GradientDrawable).SetColor(_isOpened ? FocusedBackgroundColor : UnfocusedBackgroundColor);
-                            UpdateIconColor();
+                            if(_hasChildren)
+                            {
+                                _isOpened = !_isOpened;
+                                (Background as GradientDrawable).SetColor(_isOpened ? FocusedBackgroundColor : UnfocusedBackgroundColor);
+                                UpdateIconColor();
+                            }
                         }
                     }
                 }

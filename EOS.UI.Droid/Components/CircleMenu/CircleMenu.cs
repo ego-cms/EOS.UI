@@ -100,8 +100,7 @@ namespace EOS.UI.Droid.Components
 
         #region properties
 
-        internal bool IsScrolling { get; set; }
-        private bool IsBusy => IsScrolling || _showMenuItemsIteration > 0 || _isSubMenuOpened;
+        private bool IsBusy => _showMenuItemsIteration > 0 || _isSubMenuOpened;
         public bool ShowHintAnimation { get; set; } = true;
 
         #endregion
@@ -861,7 +860,7 @@ namespace EOS.UI.Droid.Components
             _menuItems[1].ResetDataFromModel();
             _menuItems[5].ResetDataFromModel();
 
-            IsScrolling = false;
+            Locked = false;
         }
 
         internal void HandleOnOpenSpringAnimationEnd()
@@ -954,11 +953,11 @@ namespace EOS.UI.Droid.Components
 
         public bool OnTouch(View v, MotionEvent e)
         {
-            if(!IsBusy)
+            if(!IsBusy && !Locked && _canSwipe)
             {
-                if(!Locked && _canSwipe && _scrollListener.IsScrolled(ref _forward, e))
+                if(_scrollListener.IsScrolled(ref _forward, e))
                 {
-                    IsScrolling = true;
+                    Locked = true;
                     PreScrollingSetup();
                 }
             }
@@ -1013,10 +1012,10 @@ namespace EOS.UI.Droid.Components
 
         public void PerformSwipe(bool isForward)
         {
-            if(!IsBusy && !Locked && _canSwipe)
+            if(!IsBusy && !Locked &&_canSwipe)
             {
                 _forward = isForward;
-                IsScrolling = true;
+                Locked = true;
                 PreScrollingSetup();
             }
         }
