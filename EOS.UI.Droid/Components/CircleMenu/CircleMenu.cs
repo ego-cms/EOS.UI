@@ -25,7 +25,7 @@ namespace EOS.UI.Droid.Components
         #region constants
 
         //spring animation constants
-        private const float Stiffness = 1000f;
+        private const float Stiffness = 800f;
         private const float DampingRatio = 0.37f;
 
         private const int HintElevationValue = 2;
