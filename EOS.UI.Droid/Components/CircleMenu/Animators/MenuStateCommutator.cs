@@ -8,8 +8,8 @@ namespace EOS.UI.Droid.Components
     {
         //spring animation constants
         protected const float Stiffness = 1000f;
-        protected const float DampingRatio = 0.4f;
-        protected const int ShowHideAnimateDuration = 50;
+        protected const float DampingRatio = 0.37f;
+        protected const int ShowHideAnimateDuration = 100;
 
         protected List<CircleMenuItem> _commutatorMenuItems;
         protected List<Indicator> _commutatorIndicators;

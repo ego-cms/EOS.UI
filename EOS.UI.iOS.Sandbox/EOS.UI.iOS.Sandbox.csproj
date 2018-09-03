@@ -129,40 +129,108 @@
     <ImageAsset Include="Assets.xcassets\icAccountOff.imageset\icAccountOff.pdf">
       <Visible>false</Visible>
     </ImageAsset>
-    <ImageAsset Include="Assets.xcassets\icAccountCircle.imageset\Contents.json" />
-    <ImageAsset Include="Assets.xcassets\icAccountCircle.imageset\icAccountCircle.pdf" />
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon-App-20x20%401x.png" />
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon-App-29x29%401x.png" />
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon-App-40x40%401x.png" />
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\iTunesArtwork%402x.png" />
-    <ImageAsset Include="Assets.xcassets\icLock.imageset\Contents.json" />
-    <ImageAsset Include="Assets.xcassets\icLock.imageset\icLock%401x.png" />
-    <ImageAsset Include="Assets.xcassets\icLock.imageset\cLock%402x.png" />
-    <ImageAsset Include="Assets.xcassets\icLock.imageset\icLock%403x.png" />
-    <ImageAsset Include="Assets.xcassets\icImage.imageset\Contents.json" />
-    <ImageAsset Include="Assets.xcassets\icPanorama.imageset\Contents.json" />
-    <ImageAsset Include="Assets.xcassets\icVideo.imageset\Contents.json" />
-    <ImageAsset Include="Assets.xcassets\icPhoto.imageset\Contents.json" />
-    <ImageAsset Include="Assets.xcassets\icTimelapse.imageset\Contents.json" />
-    <ImageAsset Include="Assets.xcassets\icMacro.imageset\Contents.json" />
-    <ImageAsset Include="Assets.xcassets\icPortrait.imageset\Contents.json" />
-    <ImageAsset Include="Assets.xcassets\icSeries.imageset\Contents.json" />
-    <ImageAsset Include="Assets.xcassets\icTimer.imageset\Contents.json" />
-    <ImageAsset Include="Assets.xcassets\icSixteenToNine.imageset\Contents.json" />
-    <ImageAsset Include="Assets.xcassets\icOneToOne.imageset\Contents.json" />
-    <ImageAsset Include="Assets.xcassets\icHDR.imageset\Contents.json" />
-    <ImageAsset Include="Assets.xcassets\icImage.imageset\icImage.pdf" />
-    <ImageAsset Include="Assets.xcassets\icHDR.imageset\icHDR.pdf" />
-    <ImageAsset Include="Assets.xcassets\icMacro.imageset\icMacro.pdf" />
-    <ImageAsset Include="Assets.xcassets\icOneToOne.imageset\icOneToOne.pdf" />
-    <ImageAsset Include="Assets.xcassets\icPanorama.imageset\icPanorama.pdf" />
-    <ImageAsset Include="Assets.xcassets\icPhoto.imageset\icPhoto.pdf" />
-    <ImageAsset Include="Assets.xcassets\icPortrait.imageset\icPortrait.pdf" />
-    <ImageAsset Include="Assets.xcassets\icSeries.imageset\icSeries.pdf" />
-    <ImageAsset Include="Assets.xcassets\icSixteenToNine.imageset\icSixteenToNine.pdf" />
-    <ImageAsset Include="Assets.xcassets\icTimelapse.imageset\icTimelapse.pdf" />
-    <ImageAsset Include="Assets.xcassets\icTimer.imageset\icTimer.pdf" />
-    <ImageAsset Include="Assets.xcassets\icVideo.imageset\icVideo.pdf" />
+    <ImageAsset Include="Assets.xcassets\icAccountCircle.imageset\Contents.json">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\icAccountCircle.imageset\icAccountCircle.pdf">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon-App-20x20%401x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon-App-29x29%401x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon-App-40x40%401x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\iTunesArtwork%402x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\icLock.imageset\Contents.json">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\icLock.imageset\icLock%401x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\icLock.imageset\cLock%402x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\icLock.imageset\icLock%403x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\icImage.imageset\Contents.json">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\icPanorama.imageset\Contents.json">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\icVideo.imageset\Contents.json">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\icPhoto.imageset\Contents.json">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\icTimelapse.imageset\Contents.json">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\icMacro.imageset\Contents.json">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\icPortrait.imageset\Contents.json">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\icSeries.imageset\Contents.json">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\icTimer.imageset\Contents.json">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\icSixteenToNine.imageset\Contents.json">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\icOneToOne.imageset\Contents.json">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\icHDR.imageset\Contents.json">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\icImage.imageset\icImage.pdf">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\icHDR.imageset\icHDR.pdf">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\icMacro.imageset\icMacro.pdf">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\icOneToOne.imageset\icOneToOne.pdf">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\icPanorama.imageset\icPanorama.pdf">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\icPhoto.imageset\icPhoto.pdf">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\icPortrait.imageset\icPortrait.pdf">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\icSeries.imageset\icSeries.pdf">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\icSixteenToNine.imageset\icSixteenToNine.pdf">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\icTimelapse.imageset\icTimelapse.pdf">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\icTimer.imageset\icTimer.pdf">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\icVideo.imageset\icVideo.pdf">
+      <Visible>false</Visible>
+    </ImageAsset>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Resources\" />
