@@ -73,27 +73,27 @@ namespace EOS.UI.Droid.Components
             }
             if(iteration == 2)
             {
-                _commutatorIndicators[2].Animate().X(_commutatorIndicatorsPositions[0].X).Y(_commutatorIndicatorsPositions[0].Y).SetDuration(ShowHideAnimateDuration);
+                _commutatorIndicators[2].Animate().X(_commutatorIndicatorsPositions[1].X).Y(_commutatorIndicatorsPositions[1].Y).SetDuration(ShowHideAnimateDuration);
 
-                _commutatorMenuItems[2].Animate().X(_commutatorMenuItemsPositions[0].X).Y(_commutatorMenuItemsPositions[0].Y).SetDuration(ShowHideAnimateDuration).WithEndAction(_commutatorUpdateRunnable);
+                _commutatorMenuItems[2].Animate().X(_commutatorMenuItemsPositions[1].X).Y(_commutatorMenuItemsPositions[1].Y).SetDuration(ShowHideAnimateDuration).WithEndAction(_commutatorUpdateRunnable);
             }
             if(iteration == 3)
             {
-                _commutatorIndicators[3].Animate().X(_commutatorIndicatorsPositions[0].X).Y(_commutatorIndicatorsPositions[0].Y).SetDuration(ShowHideAnimateDuration);
-                _commutatorIndicators[2].Animate().X(_commutatorIndicatorsPositions[1].X).Y(_commutatorIndicatorsPositions[1].Y).SetDuration(ShowHideAnimateDuration);
-
-                _commutatorMenuItems[3].Animate().X(_commutatorMenuItemsPositions[0].X).Y(_commutatorMenuItemsPositions[0].Y).SetDuration(ShowHideAnimateDuration);
-                _commutatorMenuItems[2].Animate().X(_commutatorMenuItemsPositions[1].X).Y(_commutatorMenuItemsPositions[1].Y).SetDuration(ShowHideAnimateDuration).WithEndAction(_commutatorUpdateRunnable);
-            }
-            if(iteration == 4)
-            {
-                _commutatorIndicators[4].Animate().X(_commutatorIndicatorsPositions[0].X).Y(_commutatorIndicatorsPositions[0].Y).SetDuration(ShowHideAnimateDuration);
                 _commutatorIndicators[3].Animate().X(_commutatorIndicatorsPositions[1].X).Y(_commutatorIndicatorsPositions[1].Y).SetDuration(ShowHideAnimateDuration);
                 _commutatorIndicators[2].Animate().X(_commutatorIndicatorsPositions[2].X).Y(_commutatorIndicatorsPositions[2].Y).SetDuration(ShowHideAnimateDuration);
 
-                _commutatorMenuItems[4].Animate().X(_commutatorMenuItemsPositions[0].X).Y(_commutatorMenuItemsPositions[0].Y).SetDuration(ShowHideAnimateDuration);
                 _commutatorMenuItems[3].Animate().X(_commutatorMenuItemsPositions[1].X).Y(_commutatorMenuItemsPositions[1].Y).SetDuration(ShowHideAnimateDuration);
                 _commutatorMenuItems[2].Animate().X(_commutatorMenuItemsPositions[2].X).Y(_commutatorMenuItemsPositions[2].Y).SetDuration(ShowHideAnimateDuration).WithEndAction(_commutatorUpdateRunnable);
+            }
+            if(iteration == 4)
+            {
+                _commutatorIndicators[4].Animate().X(_commutatorIndicatorsPositions[1].X).Y(_commutatorIndicatorsPositions[1].Y).SetDuration(ShowHideAnimateDuration);
+                _commutatorIndicators[3].Animate().X(_commutatorIndicatorsPositions[2].X).Y(_commutatorIndicatorsPositions[2].Y).SetDuration(ShowHideAnimateDuration);
+                _commutatorIndicators[2].Animate().X(_commutatorIndicatorsPositions[3].X).Y(_commutatorIndicatorsPositions[3].Y).SetDuration(ShowHideAnimateDuration);
+
+                _commutatorMenuItems[4].Animate().X(_commutatorMenuItemsPositions[1].X).Y(_commutatorMenuItemsPositions[1].Y).SetDuration(ShowHideAnimateDuration);
+                _commutatorMenuItems[3].Animate().X(_commutatorMenuItemsPositions[2].X).Y(_commutatorMenuItemsPositions[2].Y).SetDuration(ShowHideAnimateDuration);
+                _commutatorMenuItems[2].Animate().X(_commutatorMenuItemsPositions[3].X).Y(_commutatorMenuItemsPositions[3].Y).SetDuration(ShowHideAnimateDuration).WithEndAction(_commutatorUpdateRunnable);
             }
             if(iteration == 5)
             {

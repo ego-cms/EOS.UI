@@ -25,8 +25,8 @@ namespace EOS.UI.Droid.Components
         #region constants
 
         //spring animation constants
-        private const float Stiffness = 1000f;
-        private const float DampingRatio = 0.35f;
+        private const float Stiffness = 800f;
+        private const float DampingRatio = 0.37f;
 
         private const int HintElevationValue = 2;
         private const int HintAnimationSmoothDuration = 200;
@@ -42,13 +42,16 @@ namespace EOS.UI.Droid.Components
         private const float MenuMargin3 = 25f;
         private const float MenuMargin4 = 84f;
         private const float MenuMargin5 = 111f;
+        private const float MenuMargin6 = -22f;
+        private const float MenuMargin7 = 76f;
 
         //Indicator margins from bottom and right side of screen
         private const float IndicatorDiameter = 6f;
-        private const float IndicatorMargin1 = 147f;
+        private const float IndicatorMargin1 = 155f;
         private const float IndicatorMargin2 = 50f;
         private const float IndicatorMargin3 = 131f;
         private const float IndicatorMargin4 = 168f;
+        private const float IndicatorMargin5 = 16f;
 
         //SubMenu margins for 3 position
         private const int BottomMargin1 = 15;
@@ -269,23 +272,23 @@ namespace EOS.UI.Droid.Components
             var denisty = Context.Resources.DisplayMetrics.Density;
             var normalMenuItemX = Width - MenuDiameter * denisty;
             var normalMenuItemY = Height - MenuDiameter * denisty;
-            _mainMenuPositions[0] = new PointF(Width, normalMenuItemY - MenuMargin1 * denisty);
+            _mainMenuPositions[0] = new PointF(Width - MenuMargin6 * denisty, Height - MenuMargin7 * denisty);
             _mainMenuPositions[1] = new PointF(normalMenuItemX - MenuMargin2 * denisty, normalMenuItemY - MenuMargin1 * denisty);
             _mainMenuPositions[2] = new PointF(normalMenuItemX - MenuMargin3 * denisty, normalMenuItemY - MenuMargin5 * denisty);
             _mainMenuPositions[3] = new PointF(normalMenuItemX - MenuMargin4 * denisty, normalMenuItemY - MenuMargin4 * denisty);
             _mainMenuPositions[4] = new PointF(normalMenuItemX - MenuMargin5 * denisty, normalMenuItemY - MenuMargin3 * denisty);
             _mainMenuPositions[5] = new PointF(normalMenuItemX - MenuMargin1 * denisty, normalMenuItemY - MenuMargin2 * denisty);
-            _mainMenuPositions[6] = new PointF(normalMenuItemX - MenuMargin1 * denisty, Height);
+            _mainMenuPositions[6] = new PointF(Width - MenuMargin7 * denisty, Height - MenuMargin6 * denisty);
 
             var normalIndicatorX = Width - IndicatorDiameter * denisty;
             var normalIndicatorY = Height - IndicatorDiameter * denisty;
-            _indicatorsPositions[0] = new PointF(Width, normalIndicatorY - IndicatorMargin1 * denisty);
-            _indicatorsPositions[1] = new PointF(Width, normalIndicatorY - IndicatorMargin1 * denisty);
+            _indicatorsPositions[0] = new PointF(Width + IndicatorMargin5 * denisty, Height - IndicatorMargin1 * denisty);
+            _indicatorsPositions[1] = new PointF(Width + IndicatorMargin5 * denisty, Height - IndicatorMargin1 * denisty);
             _indicatorsPositions[2] = new PointF(normalIndicatorX - IndicatorMargin2 * denisty, normalIndicatorY - IndicatorMargin4 * denisty);
             _indicatorsPositions[3] = new PointF(normalIndicatorX - IndicatorMargin3 * denisty, normalIndicatorY - IndicatorMargin3 * denisty);
             _indicatorsPositions[4] = new PointF(normalIndicatorX - IndicatorMargin4 * denisty, normalIndicatorY - IndicatorMargin2 * denisty);
-            _indicatorsPositions[5] = new PointF(normalIndicatorX - IndicatorMargin1 * denisty, Height);
-            _indicatorsPositions[6] = new PointF(normalIndicatorX - IndicatorMargin1 * denisty, Height);
+            _indicatorsPositions[5] = new PointF(Width - IndicatorMargin1 * denisty, Height + IndicatorMargin5 * denisty);
+            _indicatorsPositions[6] = new PointF(Width - IndicatorMargin1 * denisty, Height + IndicatorMargin5 * denisty);
         }
 
         private void Initialize(IAttributeSet attrs = null)
@@ -392,15 +395,16 @@ namespace EOS.UI.Droid.Components
         /// </summary>
         private void NormalizeHiddenMenuItem(CircleMenuItemModel model)
         {
+            var denisty = Context.Resources.DisplayMetrics.Density;
             if(_forward)
             {
                 _menuItems[1].SetDataFromModel(model);
-                _menuItems[0].Animate().X(Width - _deltaNormalizePositions).Y(Height).SetDuration(1).WithEndAction(_normalizationEndListener);
+                _menuItems[0].Animate().X(Width - MenuMargin7 * denisty).Y(Height - MenuMargin6 * denisty).SetDuration(1).WithEndAction(_normalizationEndListener);
             }
             else
             {
                 _menuItems[5].SetDataFromModel(model);
-                _menuItems[0].Animate().X(Width).Y(Height - _deltaNormalizePositions).SetDuration(1).WithEndAction(_normalizationEndListener);
+                _menuItems[0].Animate().X(Width - MenuMargin6 * denisty).Y(Height - MenuMargin7 * denisty).SetDuration(1).WithEndAction(_normalizationEndListener);
             }
         }
 

@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -18,40 +18,40 @@
         android:layout_height="52dp"
         android:layout_alignParentRight="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginRight="-52dp"
-        android:layout_marginBottom="94dp" />
+        android:layout_marginRight="-74dp"
+        android:layout_marginBottom="76dp" />
     <EOS.UI.Droid.Components.CircleMenuItem
         android:id="@+id/menu2"
         android:layout_width="52dp"
         android:layout_height="52dp"
         android:layout_alignParentRight="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginRight="-52dp"
-        android:layout_marginBottom="94dp" />
+        android:layout_marginRight="-74dp"
+        android:layout_marginBottom="76dp" />
     <EOS.UI.Droid.Components.CircleMenuItem
         android:id="@+id/menu3"
         android:layout_width="52dp"
         android:layout_height="52dp"
         android:layout_alignParentRight="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginRight="-52dp"
-        android:layout_marginBottom="94dp" />
+        android:layout_marginRight="-74dp"
+        android:layout_marginBottom="76dp" />
     <EOS.UI.Droid.Components.CircleMenuItem
         android:id="@+id/menu4"
         android:layout_width="52dp"
         android:layout_height="52dp"
         android:layout_alignParentRight="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginRight="-52dp"
-        android:layout_marginBottom="94dp" />
+        android:layout_marginRight="-74dp"
+        android:layout_marginBottom="76dp" />
     <EOS.UI.Droid.Components.CircleMenuItem
         android:id="@+id/menu5"
         android:layout_width="52dp"
         android:layout_height="52dp"
         android:layout_alignParentRight="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginRight="-52dp"
-        android:layout_marginBottom="94dp" />
+        android:layout_marginRight="-74dp"
+        android:layout_marginBottom="76dp" />
     <EOS.UI.Droid.Components.MainMenuButton
         android:id="@+id/hamburgerMenu"
         android:layout_width="52dp"
