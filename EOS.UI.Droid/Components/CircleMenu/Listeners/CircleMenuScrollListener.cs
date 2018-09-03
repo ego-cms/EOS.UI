@@ -28,9 +28,9 @@ namespace EOS.UI.Droid.Components
             else if(motionEvent.Action == MotionEventActions.Move && _bufferScrollX != motionEvent.RawX)
             {
                 //checking if swipe was horizontal and not vertical
-                if(_bufferScrollX - motionEvent.RawX > MinScrollWidth && System.Math.Abs(_bufferScrollX - motionEvent.RawX) > System.Math.Abs(_bufferScrollY - motionEvent.RawY))
+                if(_bufferScrollX - motionEvent.RawX > MinScrollWidth || _bufferScrollY - motionEvent.RawY < -MinScrollWidth)
                     _isScrollMovedLeft = true;
-                if(_bufferScrollX - motionEvent.RawX < -MinScrollWidth && System.Math.Abs(_bufferScrollX - motionEvent.RawX) > System.Math.Abs(_bufferScrollY - motionEvent.RawY))
+                else if(_bufferScrollX - motionEvent.RawX < -MinScrollWidth || _bufferScrollY - motionEvent.RawY > MinScrollWidth)
                     _isScrollMovedRight = true;
 
                 return false;
