@@ -25,7 +25,7 @@ EOS.UI controls and components combine high-quality professional design, thought
 
 iOS and Android Sample Apps
 -----------
-We've created Snadbox Apps for both iOS and Android where you can play with controls and components, with their styles, fonts, sizes, etc. 
+We've created Sandbox Apps for both iOS and Android where you can play with controls and components, with their styles, fonts, sizes, etc. 
 
 There we've implemented 2 Themes support: light and dark ones. You can switch between themes and or play with every single control / component and customize them as you'd prefer. We hope that common sense prevail and you won't create a black button with black text on it :wink:
 
