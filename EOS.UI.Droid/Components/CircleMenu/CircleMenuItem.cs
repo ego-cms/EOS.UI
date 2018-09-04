@@ -25,7 +25,7 @@ namespace EOS.UI.Droid.Components
         private const float EndAngle = 0f;
         private const float PivotScale = 0.5f;
         private const int RotateDuration = 380;
-        private const float ShadowRadiusValue = 8f;
+        private const float ShadowRadiusValue = 12f;
 
         #endregion
 

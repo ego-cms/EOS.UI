@@ -28,7 +28,7 @@ namespace EOS.UI.Droid.Components
         private const float Stiffness = 2000f;
         private const float DampingRatio = 0.5f;
 
-        private const int HintElevationValue = 2;
+        private const int HintElevationValue = 4;
         private const int HintAnimationSmoothDuration = 200;
         private const int HintAnimationFirstDuration = 300;
         private const int HintAnimationSecondDuration = 400;
