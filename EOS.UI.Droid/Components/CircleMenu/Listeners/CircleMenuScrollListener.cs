@@ -19,36 +19,37 @@ namespace EOS.UI.Droid.Components
 
         public bool IsScrolled(ref bool isForward, MotionEvent motionEvent)
         {
+            _isScrollMovedRight = false;
+            _isScrollMovedLeft = false;
+
             if(motionEvent.Action == MotionEventActions.Down)
             {
                 _bufferScrollX = motionEvent.RawX;
                 _bufferScrollY = motionEvent.RawY;
                 return false;
             }
-            else if(motionEvent.Action == MotionEventActions.Move && _bufferScrollX != motionEvent.RawX)
+            else if(motionEvent.Action == MotionEventActions.Move && _bufferScrollX != motionEvent.RawX && (!_isScrollMovedLeft && !_isScrollMovedRight))
             {
-                if((_bufferScrollX - motionEvent.RawX > MinScrollWidth && System.Math.Abs(_bufferScrollX - motionEvent.RawX) > System.Math.Abs(_bufferScrollY - motionEvent.RawY)) || 
-                    (_bufferScrollY - motionEvent.RawY < -MinScrollWidth && System.Math.Abs(_bufferScrollX - motionEvent.RawX) < System.Math.Abs(_bufferScrollY - motionEvent.RawY)))
+                if(_bufferScrollX != 0 && _bufferScrollX - motionEvent.RawX > MinScrollWidth && System.Math.Abs(_bufferScrollX - motionEvent.RawX) > System.Math.Abs(_bufferScrollY - motionEvent.RawY))
                     _isScrollMovedLeft = true;
-                if(_bufferScrollX - motionEvent.RawX < -MinScrollWidth && System.Math.Abs(_bufferScrollX - motionEvent.RawX) > System.Math.Abs(_bufferScrollY - motionEvent.RawY) ||
-                    (_bufferScrollY - motionEvent.RawY > MinScrollWidth && System.Math.Abs(_bufferScrollX - motionEvent.RawX) < System.Math.Abs(_bufferScrollY - motionEvent.RawY)))
+
+                else if(_bufferScrollY != 0 &&_bufferScrollY - motionEvent.RawY < -MinScrollWidth && System.Math.Abs(_bufferScrollX - motionEvent.RawX) < System.Math.Abs(_bufferScrollY - motionEvent.RawY))
+                    _isScrollMovedLeft = true;
+
+                else if(_bufferScrollX != 0 && _bufferScrollX - motionEvent.RawX < -MinScrollWidth && System.Math.Abs(_bufferScrollX - motionEvent.RawX) > System.Math.Abs(_bufferScrollY - motionEvent.RawY))
                     _isScrollMovedRight = true;
 
-                return false;
-            }
-            else if(motionEvent.Action == MotionEventActions.Up && !_isScrollMovedRight && !_isScrollMovedLeft)
-            {
-                return false;
-            }
-            else if(motionEvent.Action == MotionEventActions.Up && (_isScrollMovedRight || _isScrollMovedLeft))
-            {
-                isForward = _isScrollMovedRight;
-                _bufferScrollX = 0f;
-                _bufferScrollY = 0f;
-                _isScrollMovedRight = false;
-                _isScrollMovedLeft = false;
+                else if(_bufferScrollY != 0 && _bufferScrollY - motionEvent.RawY > MinScrollWidth && System.Math.Abs(_bufferScrollX - motionEvent.RawX) < System.Math.Abs(_bufferScrollY - motionEvent.RawY))
+                    _isScrollMovedRight = true;
 
-                return true;
+                if(_isScrollMovedRight || _isScrollMovedLeft)
+                {
+                    isForward = _isScrollMovedRight;
+                    _bufferScrollX = 0f;
+                    _bufferScrollY = 0f;
+                }
+
+                return _isScrollMovedRight || _isScrollMovedLeft;
             }
             return false;
         }
