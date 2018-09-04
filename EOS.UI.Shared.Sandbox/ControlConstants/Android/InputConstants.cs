@@ -22,11 +22,11 @@ namespace EOS.UI.Shared.Sandbox.ControlConstants.Android
         public static Dictionary<string, Color> FontColors =>
             Colors.FontColorsCollection.AddDefault(Fields.Default, FontStyle.Color);
         public static Dictionary<string, Color> DisabledFontColors =>
-            Colors.FontColorsCollection.AddDefault(Fields.Default, (Color)EOSThemeProvider.Instance.GetCurrentTheme().ThemeValues[EOSConstants.NeutralColor5]);
+        Colors.FontColorsCollection.AddDefault(Fields.Default, (Color)EOSThemeProvider.Instance.GetCurrentTheme().ThemeValues[EOSConstants.NeutralColor3]);
         public static Dictionary<string, Color> PlaceholderColors =>
             Colors.MainColorsCollection.AddDefault(Fields.Default, (Color)EOSThemeProvider.Instance.GetCurrentTheme().ThemeValues[EOSConstants.NeutralColor2]);
         public static Dictionary<string, Color> DisabledPlaceholderColors =>
-            Colors.MainColorsCollection.AddDefault(Fields.Default, (Color)EOSThemeProvider.Instance.GetCurrentTheme().ThemeValues[EOSConstants.NeutralColor5]);
+            Colors.MainColorsCollection.AddDefault(Fields.Default, (Color)EOSThemeProvider.Instance.GetCurrentTheme().ThemeValues[EOSConstants.NeutralColor3]);
         public static Dictionary<string, Color> IconColors =>
             Colors.MainColorsCollection.AddDefault(Fields.Default, (Color)EOSThemeProvider.Instance.GetCurrentTheme().ThemeValues[EOSConstants.NeutralColor2]);
         public static Dictionary<string, Color> PopulatedIconColors =>

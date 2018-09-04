@@ -22,11 +22,11 @@ namespace EOS.UI.Shared.Sandbox.ControlConstants.iOS
         public static Dictionary<string, UIColor> FontColors =>
             Colors.FontColorsCollection.AddDefault(Fields.Default, FontStyle.Color);
         public static Dictionary<string, UIColor> DisabledFontColors =>
-            Colors.FontColorsCollection.AddDefault(Fields.Default, (UIColor)EOSThemeProvider.Instance.GetCurrentTheme().ThemeValues[EOSConstants.NeutralColor5]);
+            Colors.FontColorsCollection.AddDefault(Fields.Default, (UIColor)EOSThemeProvider.Instance.GetCurrentTheme().ThemeValues[EOSConstants.NeutralColor3]);
         public static Dictionary<string, UIColor> PlaceholderColors =>
             Colors.MainColorsCollection.AddDefault(Fields.Default, (UIColor)EOSThemeProvider.Instance.GetCurrentTheme().ThemeValues[EOSConstants.NeutralColor2]);
         public static Dictionary<string, UIColor> DisabledPlaceholderColors =>
-            Colors.MainColorsCollection.AddDefault(Fields.Default, (UIColor)EOSThemeProvider.Instance.GetCurrentTheme().ThemeValues[EOSConstants.NeutralColor5]);
+            Colors.MainColorsCollection.AddDefault(Fields.Default, (UIColor)EOSThemeProvider.Instance.GetCurrentTheme().ThemeValues[EOSConstants.NeutralColor3]);
         public static Dictionary<string, UIColor> IconColors =>
             Colors.MainColorsCollection.AddDefault(Fields.Default, (UIColor)EOSThemeProvider.Instance.GetCurrentTheme().ThemeValues[EOSConstants.NeutralColor2]);
         public static Dictionary<string, UIColor> PopulatedIconColors =>
