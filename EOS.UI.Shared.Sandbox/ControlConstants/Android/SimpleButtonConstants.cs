@@ -32,7 +32,7 @@ namespace EOS.UI.Shared.Sandbox.ControlConstants.Android
         public static Dictionary<string, Color> DisabledFontColors =>
            Colors.FontColorsCollection.AddDefault(Fields.Default, ((FontStyleItem)EOSThemeProvider.Instance.GetCurrentTheme().ThemeValues[EOSConstants.R3C4S]).Color);
         public static Dictionary<string, Color> RippleColors =>
-            Colors.MainColorsCollection.AddDefault(Fields.Default, (Color)EOSThemeProvider.Instance.GetCurrentTheme().ThemeValues[EOSConstants.RippleColor]);
+        Colors.MainColorsCollection.AddDefault(Fields.Default, (Color)EOSThemeProvider.Instance.GetCurrentTheme().ThemeValues[EOSConstants.BrandPrimaryColorVariant1]);
         public static Dictionary<string, float> LetterSpacings =>
             Sizes.LetterSpacingCollection.AddDefault(Fields.Default, FontStyle.LetterSpacing);
         public static Dictionary<string, float> TextSizes =>
