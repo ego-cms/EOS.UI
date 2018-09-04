@@ -961,7 +961,7 @@ namespace EOS.UI.Droid.Components
                     PreScrollingSetup();
                 }
             }
-            return IsOpened;
+            return IsOpened || Locked || IsBusy;
         }
 
         #endregion
