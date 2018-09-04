@@ -32,6 +32,7 @@ namespace EOS.UI.Droid.Components
         private const float EndScale = 0.9f;
         private const float PivotScale = 0.5f;
         private const int ScaleDimention = 150;
+        private const int LottieViewSideSize = 24;
 
         private const float ShadowRadiusValue = 8f;
 
@@ -123,7 +124,7 @@ namespace EOS.UI.Droid.Components
             SetBackgroundDrawable(roundedDrawable);
             Elevation = ShadowRadiusValue;
 
-            _lottieView = view.FindViewById<LottieAnimationView>(Resource.Id.lottieView);
+            SetupLottieView(view);
             _lottieView.SetAnimation(AnimationName);
 
             AddView(CreateBlackoutView());
@@ -158,7 +159,16 @@ namespace EOS.UI.Droid.Components
                    LottieProperty.ColorFilter,
                    new LottieValueCallback(new SimpleColorFilter(UnfocusedIconColor)));
         }
-        
+
+        private void SetupLottieView(View view)
+        {
+            _lottieView = new LottieAnimationView(Context);
+            var layoutParameters = new RelativeLayout.LayoutParams((int)(LottieViewSideSize * Resources.DisplayMetrics.Density), (int)(LottieViewSideSize * Resources.DisplayMetrics.Density));
+            layoutParameters.AddRule(LayoutRules.CenterInParent);
+            _lottieView.LayoutParameters = layoutParameters;
+            view.FindViewById<RelativeLayout>(Resource.Id.container).AddView(_lottieView);
+        }
+
         private View CreateBlackoutView()
         {
             var view = new View(Context);
