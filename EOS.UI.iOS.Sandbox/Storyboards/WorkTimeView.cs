@@ -116,13 +116,13 @@ namespace EOS.UI.iOS.Sandbox
                rect);
 
             devidersColor.InitSource(
-                WorkTimeConstants.DevidersColors,
+                WorkTimeConstants.DividersColors,
                 color => source.CalendarModel.ColorDividers = color,
                 Fields.ColorDividers,
                 rect);
 
             currentDayDevidersColor.InitSource(
-                WorkTimeConstants.CurrentDayDeviderColors,
+                WorkTimeConstants.CurrentDayDividerColors,
                 color => source.CalendarModel.CurrentColorDividers = color,
                 Fields.CurrentColorDividers,
                 rect);

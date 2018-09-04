@@ -42,10 +42,10 @@ namespace EOS.UI.Shared.Sandbox.ControlConstants.iOS
         public static Dictionary<string, UIColor> DayEvenBackgroundColors =>
             Colors.MainColorsCollection.AddDefault(Fields.Default, (UIColor)EOSThemeProvider.Instance.GetCurrentTheme().ThemeValues[EOSConstants.NeutralColor5]);
 
-        public static Dictionary<string, UIColor> DevidersColors =>
+        public static Dictionary<string, UIColor> DividersColors =>
             Colors.MainColorsCollection.AddDefault(Fields.Default, (UIColor)EOSThemeProvider.Instance.GetCurrentTheme().ThemeValues[EOSConstants.NeutralColor4]);
 
-        public static Dictionary<string, UIColor> CurrentDayDeviderColors =>
+        public static Dictionary<string, UIColor> CurrentDayDividerColors =>
             Colors.MainColorsCollection.AddDefault(Fields.Default, (UIColor)EOSThemeProvider.Instance.GetCurrentTheme().ThemeValues[EOSConstants.NeutralColor4]);
     }
 }

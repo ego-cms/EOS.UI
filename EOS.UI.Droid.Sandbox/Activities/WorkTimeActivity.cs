@@ -113,11 +113,11 @@ namespace EOS.UI.Droid.Sandbox.Activities
             _dayEvenBackgroundColorDropDown.ItemSelected += DayEvenBackgroundColorItemSelected;
 
             _dividerColorDropDown.Name = Fields.ColorDividers;
-            _dividerColorDropDown.SetupAdapter(WorkTimeConstants.DevidersColors.Select(item => item.Key).ToList());
+            _dividerColorDropDown.SetupAdapter(WorkTimeConstants.DividersColors.Select(item => item.Key).ToList());
             _dividerColorDropDown.ItemSelected += DividerColorItemSelected;
 
             _currentDividerColorDropDown.Name = Fields.CurrentColorDividers;
-            _currentDividerColorDropDown.SetupAdapter(WorkTimeConstants.CurrentDayDeviderColors.Select(item => item.Key).ToList());
+            _currentDividerColorDropDown.SetupAdapter(WorkTimeConstants.CurrentDayDividerColors.Select(item => item.Key).ToList());
             _currentDividerColorDropDown.ItemSelected += CurrentDividerColorItemSelected;
 
             _firstDayOfWeekDropDown.Name = Fields.WeekStartDay;
@@ -150,12 +150,12 @@ namespace EOS.UI.Droid.Sandbox.Activities
 
         private void CurrentDividerColorItemSelected(int position)
         {
-            _workTime.CurrentDividerColor = WorkTimeConstants.CurrentDayDeviderColors.ElementAt(position).Value;
+            _workTime.CurrentDividerColor = WorkTimeConstants.CurrentDayDividerColors.ElementAt(position).Value;
         }
 
         private void DividerColorItemSelected(int position)
         {
-            _workTime.DividerColor = WorkTimeConstants.DevidersColors.ElementAt(position).Value;
+            _workTime.DividerColor = WorkTimeConstants.DividersColors.ElementAt(position).Value;
         }
 
         private void DayEvenBackgroundColorItemSelected(int position)
@@ -208,6 +208,14 @@ namespace EOS.UI.Droid.Sandbox.Activities
             if (position > 0)
             {
                 _workTime.GetThemeProvider().SetCurrentTheme(ThemeTypes.ThemeCollection.ElementAt(position).Value);
+                if(_workTime.GetThemeProvider().GetCurrentTheme() is LightEOSTheme)
+                {
+                    _workTime.SetBackgroundColor(Color.White);
+                }
+                else
+                {
+                    _workTime.SetBackgroundColor(Color.Transparent);
+                }
                 ResetCustomValues();
                 UpdateAppearance();
             }

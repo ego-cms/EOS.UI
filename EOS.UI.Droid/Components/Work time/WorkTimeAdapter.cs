@@ -500,9 +500,9 @@ namespace EOS.UI.Droid.Components
                 CurrentDayTextColor = GetThemeProvider().GetEOSProperty<FontStyleItem>(this, EOSConstants.R1C6S).Color;
 
                 CurrentDayBackgroundColor = GetThemeProvider().GetEOSProperty<Color>(this, EOSConstants.BrandPrimaryColor);
-                DayEvenBackgroundColor = GetThemeProvider().GetEOSProperty<Color>(this, EOSConstants.NeutralColor4);
+                DayEvenBackgroundColor = GetThemeProvider().GetEOSProperty<Color>(this, EOSConstants.NeutralColor5);
 
-                DividerColor = GetThemeProvider().GetEOSProperty<Color>(this, EOSConstants.NeutralColor3);
+                DividerColor = GetThemeProvider().GetEOSProperty<Color>(this, EOSConstants.NeutralColor4);
                 CurrentDividerColor = Color.White;
             }
             NotifyDataSetChanged();
