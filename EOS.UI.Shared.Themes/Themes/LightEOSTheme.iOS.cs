@@ -49,7 +49,7 @@ namespace EOS.UI.Shared.Themes.Themes
                 Spread = 1
             }},
             { EOSConstants.SimpleButtonShadow, new ShadowConfig(){
-                Color = ColorExtension.FromHex(shadowColor),
+                Color = ColorExtension.FromHex(fabShadowColor),
                 Offset = new CGPoint(0, 12),
                 Blur = 12,
                 Spread = 200
