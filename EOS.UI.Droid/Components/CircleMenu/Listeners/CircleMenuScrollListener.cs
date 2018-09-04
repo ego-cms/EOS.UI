@@ -4,7 +4,7 @@ namespace EOS.UI.Droid.Components
 {
     internal class CircleMenuScrollListener
     {
-        private const float MinScrollWidth = 50;
+        private const float MinScrollWidth = 20;
         private const float MinSpinWidth = 10;
 
         private float _bufferScrollX;
@@ -27,10 +27,11 @@ namespace EOS.UI.Droid.Components
             }
             else if(motionEvent.Action == MotionEventActions.Move && _bufferScrollX != motionEvent.RawX)
             {
-                //checking if swipe was horizontal and not vertical
-                if(_bufferScrollX - motionEvent.RawX > MinScrollWidth || _bufferScrollY - motionEvent.RawY < -MinScrollWidth)
+                if((_bufferScrollX - motionEvent.RawX > MinScrollWidth && System.Math.Abs(_bufferScrollX - motionEvent.RawX) > System.Math.Abs(_bufferScrollY - motionEvent.RawY)) || 
+                    (_bufferScrollY - motionEvent.RawY < -MinScrollWidth && System.Math.Abs(_bufferScrollX - motionEvent.RawX) < System.Math.Abs(_bufferScrollY - motionEvent.RawY)))
                     _isScrollMovedLeft = true;
-                else if(_bufferScrollX - motionEvent.RawX < -MinScrollWidth || _bufferScrollY - motionEvent.RawY > MinScrollWidth)
+                if(_bufferScrollX - motionEvent.RawX < -MinScrollWidth && System.Math.Abs(_bufferScrollX - motionEvent.RawX) > System.Math.Abs(_bufferScrollY - motionEvent.RawY) ||
+                    (_bufferScrollY - motionEvent.RawY > MinScrollWidth && System.Math.Abs(_bufferScrollX - motionEvent.RawX) < System.Math.Abs(_bufferScrollY - motionEvent.RawY)))
                     _isScrollMovedRight = true;
 
                 return false;
