@@ -7,8 +7,8 @@ namespace EOS.UI.Droid.Components
     internal abstract class MenuStateCommutator
     {
         //spring animation constants
-        protected const float Stiffness = 800f;
-        protected const float DampingRatio = 0.37f;
+        protected const float Stiffness = 1000f;
+        protected const float DampingRatio = 0.42f;
         protected const int ShowHideAnimateDuration = 50;
 
         protected List<CircleMenuItem> _commutatorMenuItems;
