@@ -41,6 +41,7 @@ namespace EOS.UI.Droid.Components
             _startDayOfweek = CultureInfo.CurrentCulture.DateTimeFormat.FirstDayOfWeek;
             DayFontStyle = new FontStyleItem();
             TitleFontStyle = new FontStyleItem();
+            IsEOSCustomizationIgnored = false;
         }
 
         #endregion
