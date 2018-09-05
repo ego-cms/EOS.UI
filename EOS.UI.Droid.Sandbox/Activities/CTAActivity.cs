@@ -160,9 +160,12 @@ namespace EOS.UI.Droid.Sandbox.Activities
 
         private void ShadowRadiusItemSelected(int position)
         {
-            var config = _CTAButton.ShadowConfig;
-            config.Blur = SimpleButtonConstants.ShadowRadiusCollection.ElementAt(position).Value;
-            _CTAButton.ShadowConfig = config;
+            if (_buttonType == SimpleButtonTypeEnum.Simple)
+            {
+                var config = _CTAButton.ShadowConfig;
+                config.Blur = SimpleButtonConstants.ShadowRadiusCollection.ElementAt(position).Value;
+                _CTAButton.ShadowConfig = config;
+            }
         }
 
         private void ToggleEnableState()
