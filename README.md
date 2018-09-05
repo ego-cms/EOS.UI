@@ -59,6 +59,12 @@ Documentation
 * [Simple label](../../wiki/SimpleLabel)
 * [Worktime Calendar](../../wiki/Worktime-calendar)
 
+Nuget
+-----------
+You can download from Nuget here:
+* [Android](https://www.nuget.org/packages/Com.EgoCms.Eos.UI.Droid/)
+* [iOS](https://www.nuget.org/packages/Com.EgoCms.Eos.UI.iOS/)
+
 Issues or feature requests?
 -----------
 Bugs or feature requests should be submitted at Issues section at GitHub project. Or feel free to reach out via [email](mailto:oksana@ego-cms.com) :speech-balloon:
