@@ -503,7 +503,7 @@ namespace EOS.UI.Droid.Components
                 DayEvenBackgroundColor = GetThemeProvider().GetEOSProperty<Color>(this, EOSConstants.NeutralColor5);
 
                 DividerColor = GetThemeProvider().GetEOSProperty<Color>(this, EOSConstants.NeutralColor4);
-                CurrentDividerColor = Color.White;
+                CurrentDividerColor = GetThemeProvider().GetEOSProperty<Color>(this, EOSConstants.NeutralColor4);
             }
             NotifyDataSetChanged();
         }
