@@ -46,8 +46,6 @@ namespace EOS.UI.iOS.Sandbox
 
             _fab.TouchUpInside += async (sender, e) =>
             {
-                if (_fab.InProgress)
-                    return;
                 ToggleAllControlsEnabled(false, _dropDowns, resetButton, enableSwitch);
                 _fab.StartProgressAnimation();
                 await Task.Delay(5000);
