@@ -338,6 +338,15 @@ namespace EOS.UI.Droid.Components
         {
             if(!IsBusy)
             {
+                if(IsOpened)
+                {
+                    //on hiding animation should be visible icon on last item
+                    var model = FindNextVisibleModel(true);
+                    _menuItems[1].SetDataFromModel(model);
+                    _indicators[1].Visibility = model.HasChildren ? ViewStates.Visible : ViewStates.Gone;
+                }
+
+                Locked = true;
                 _mainMenu.AnimateClick();
                 UpdateMenuItemsVisiblility();
             }
@@ -467,10 +476,8 @@ namespace EOS.UI.Droid.Components
         {
             var afterHideAnimation = new Action(() =>
             {
-                //on hiding animation should be visible icon on last item
-                var model = FindNextVisibleModel(true);
-                _menuItems[1].SetDataFromModel(model);
-                _indicators[1].Visibility = model.HasChildren ? ViewStates.Visible : ViewStates.Gone;
+                _indicators.ForEach(indicator => indicator.Visibility = ViewStates.Gone);
+                InitialDataModelSetup();
             });
 
             var afterShowAnimation = new Action(() =>
@@ -968,7 +975,7 @@ namespace EOS.UI.Droid.Components
 
         #region ICircleMenuClicable implementation
 
-        public bool Locked { get; private set; } = true;
+        public bool Locked { get; private set; }
 
         public void PerformClick(int id, bool isSubMenu, bool isOpened)
         {

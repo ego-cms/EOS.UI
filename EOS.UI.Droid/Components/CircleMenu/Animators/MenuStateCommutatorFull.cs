@@ -25,8 +25,6 @@ namespace EOS.UI.Droid.Components
         {
             if(iteration == 1)
             {
-                _afterHideAction?.Invoke();
-
                 _commutatorIndicators[1].Animate().X(_commutatorIndicatorsPositions[4].X).Y(_commutatorIndicatorsPositions[4].Y).SetDuration(ShowHideAnimateDuration);
                 _commutatorIndicators[2].Animate().X(_commutatorIndicatorsPositions[3].X).Y(_commutatorIndicatorsPositions[3].Y).SetDuration(ShowHideAnimateDuration);
                 _commutatorIndicators[3].Animate().X(_commutatorIndicatorsPositions[2].X).Y(_commutatorIndicatorsPositions[2].Y).SetDuration(ShowHideAnimateDuration);
@@ -73,6 +71,7 @@ namespace EOS.UI.Droid.Components
             {
                 _commutatorIndicators[1].Animate().X(_commutatorIndicatorsPositions[0].X).Y(_commutatorIndicatorsPositions[0].Y).SetDuration(ShowHideAnimateDuration);
                 _commutatorMenuItems[1].Animate().X(_commutatorMenuItemsPositions[0].X).Y(_commutatorMenuItemsPositions[0].Y).SetDuration(ShowHideAnimateDuration).WithEndAction(_commutatorUpdateRunnable);
+                _afterHideAction?.Invoke();
             }
         }
 
