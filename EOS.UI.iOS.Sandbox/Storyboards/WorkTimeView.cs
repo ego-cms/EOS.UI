@@ -4,6 +4,7 @@ using System.Linq;
 using CoreGraphics;
 using EOS.UI.iOS.CollectionViewSources;
 using EOS.UI.iOS.Sandbox.Storyboards;
+using EOS.UI.Shared.Sandbox.ControlConstants.iOS;
 using EOS.UI.Shared.Themes.DataModels;
 using EOS.UI.Shared.Themes.Themes;
 using UIKit;
@@ -67,67 +68,67 @@ namespace EOS.UI.iOS.Sandbox
             themesDropDown.SetTextFieldText(source.CalendarModel.GetThemeProvider().GetCurrentTheme() is LightEOSTheme ? "Light" : "Dark");
 
             titleFontDropDown.InitSource(
-                Fonts.GetWorkTimeTitleFonts().ToList(),
+                WorkTimeConstants.TitleFonts,
                 font => source.CalendarModel.TitleFont = font,
                 Fields.TitleFont,
                 rect);
 
             dayFontDropDown.InitSource(
-                Fonts.GetWorkTimeDayFonts().ToList(),
+                WorkTimeConstants.DayFonts,
                 font => source.CalendarModel.DayTextFont = font,
                 Fields.DayTextFont,
                 rect);
 
             titleSizeDropDown.InitSource(
-                Sizes.TextSizeCollection,
+                WorkTimeConstants.TitleTextSizes,
                 size => source.CalendarModel.TitleTextSize = size,
                 Fields.TitleTextSize,
                rect);
 
             dayTextSizeDropDown.InitSource(
-                Sizes.TextSizeCollection,
+                WorkTimeConstants.DayTextSizes,
                 size => source.CalendarModel.DayTextSize = size,
                 Fields.DayTextSize,
                rect);
 
             dayTextColorDropDown.InitSource(
-                Colors.FontColorsCollection,
+                WorkTimeConstants.DayColors,
                 color => source.CalendarModel.DayTextColor = color,
                 Fields.DayTextColor,
                 rect);
 
             currentDayTextColorDropDown.InitSource(
-               Colors.FontColorsCollection,
+                WorkTimeConstants.CurrentDayColors,
                color => source.CalendarModel.CurrentDayTextColor = color,
                Fields.CurrentDayTextColor,
                rect);
 
             titleColorDropDown.InitSource(
-              Colors.FontColorsCollection,
+                WorkTimeConstants.TitleColors,
               color => source.CalendarModel.TitleColor = color,
               Fields.TitleColor,
               rect);
 
             currentDayBackgroundColorDropDown.InitSource(
-                Colors.MainColorsCollection,
+                WorkTimeConstants.CurrentDayBackgroundColors,
                 color => source.CalendarModel.CurrentDayBackgroundColor = color,
                 Fields.CurrentDayBackgroundColor,
                rect);
 
             devidersColor.InitSource(
-                Colors.MainColorsCollection,
+                WorkTimeConstants.DividersColors,
                 color => source.CalendarModel.ColorDividers = color,
                 Fields.ColorDividers,
                 rect);
 
             currentDayDevidersColor.InitSource(
-                Colors.MainColorsCollection,
+                WorkTimeConstants.CurrentDayDividerColors,
                 color => source.CalendarModel.CurrentColorDividers = color,
                 Fields.CurrentColorDividers,
                 rect);
 
             dayEvenBackgroundColor.InitSource(
-                Colors.MainColorsCollection,
+                WorkTimeConstants.DayEvenBackgroundColors,
                 color => source.CalendarModel.DayEvenBackgroundColor = color,
                 Fields.DayEvenBackgroundColor,
                 rect);

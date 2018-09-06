@@ -315,7 +315,7 @@ namespace EOS.UI.Droid.Controls
         private void SetDisabledTextColor()
         {
             if(!Enabled)
-                base.SetTextColor(DisabledColor);
+                base.SetTextColor(TextColorDisabled);
         }
 
         private void SetHintTextColor()

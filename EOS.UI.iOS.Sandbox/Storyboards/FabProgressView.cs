@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using CoreGraphics;
 using EOS.UI.iOS.Controls;
 using EOS.UI.iOS.Sandbox.Storyboards;
+using EOS.UI.Shared.Sandbox.ControlConstants.iOS;
 using EOS.UI.Shared.Themes.Themes;
 using UIKit;
 using static EOS.UI.Shared.Sandbox.Helpers.Constants;
@@ -46,8 +47,6 @@ namespace EOS.UI.iOS.Sandbox
 
             _fab.TouchUpInside += async (sender, e) =>
             {
-                if (_fab.InProgress)
-                    return;
                 ToggleAllControlsEnabled(false, _dropDowns, resetButton, enableSwitch);
                 _fab.StartProgressAnimation();
                 await Task.Delay(5000);
@@ -76,25 +75,25 @@ namespace EOS.UI.iOS.Sandbox
             themeDropDown.SetTextFieldText(_fab.GetThemeProvider().GetCurrentTheme() is LightEOSTheme ? "Light" : "Dark");
 
             backgroundDropDown.InitSource(
-                Colors.MainColorsCollection,
+                FabProgressConstants.BackgroundColors,
                 color => _fab.BackgroundColor = color,
                 Fields.Background,
                 rect);
 
             pressedColorDropDown.InitSource(
-                Colors.MainColorsCollection,
+                FabProgressConstants.PressedBackgroundColors,
                 color => _fab.PressedBackgroundColor = color,
                 Fields.PressedColor,
                 rect);
 
             disabledColorDropDown.InitSource(
-                Colors.MainColorsCollection,
+                FabProgressConstants.DisabledBackgroundColors,
                 color => _fab.DisabledBackgroundColor = color,
                 Fields.DisabledColor,
                 rect);
 
             shadowColorDropDown.InitSource(
-                Colors.MainColorsCollection,
+                FabProgressConstants.ShadowColors,
                 color =>
                 {
                     var config = _fab.ShadowConfig;
@@ -112,7 +111,7 @@ namespace EOS.UI.iOS.Sandbox
                 rect);
 
             shadowOffsetXDropDown.InitSource(
-                Shadow.OffsetCollection,
+                FabProgressConstants.ShadowOffsetXCollection,
                 offset =>
                 {
                     var config = _fab.ShadowConfig;
@@ -124,7 +123,7 @@ namespace EOS.UI.iOS.Sandbox
 
 
             shadowOffsetYDropDown.InitSource(
-                Shadow.OffsetCollection,
+                FabProgressConstants.ShadowOffsetYCollection,
                 offset =>
                 {
                     var config = _fab.ShadowConfig;
@@ -135,7 +134,7 @@ namespace EOS.UI.iOS.Sandbox
                 rect);
 
             shadowRadiusDropDown.InitSource(
-                Shadow.RadiusCollection,
+                FabProgressConstants.ShadowRadiusCollection,
                 blur =>
                 {
                     var config = _fab.ShadowConfig;
@@ -146,7 +145,7 @@ namespace EOS.UI.iOS.Sandbox
                 rect);
 
             shadowOpacityDropDown.InitSource(
-                Shadow.OpacityCollection,
+                FabProgressConstants.ShadowOpacityCollection,
                 opacity =>
                 {
                     var config = _fab.ShadowConfig;

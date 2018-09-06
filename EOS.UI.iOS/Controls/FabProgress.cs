@@ -16,13 +16,13 @@ namespace EOS.UI.iOS.Controls
     public class FabProgress : UIButton, IEOSThemeControl
     {
         //image padding percent
-        private const double _paddingRatio= 0.27;
+        private const double _paddingRatio = 0.27;
         private const string _rotationAnimationKey = "rotationAnimation";
         private const double _360degrees = 6.28319;//value in radians
         private const float _startScale = 0.85f;
         private const float _endScale = 1.0f;
         private const double _animationDuration = 0.1;
-        
+
         private CABasicAnimation _rotationAnimation;
 
         public bool IsEOSCustomizationIgnored { get; private set; }
@@ -71,7 +71,7 @@ namespace EOS.UI.iOS.Controls
             {
                 base.Enabled = value;
                 base.BackgroundColor = value ? BackgroundColor : DisabledBackgroundColor;
-                base.ImageView.TintColor = value ? 
+                base.ImageView.TintColor = value ?
                     GetThemeProvider().GetEOSProperty<UIColor>(this, EOSConstants.NeutralColor6S) :
                     GetThemeProvider().GetEOSProperty<UIColor>(this, EOSConstants.NeutralColor3S);
 
@@ -123,8 +123,17 @@ namespace EOS.UI.iOS.Controls
                 SetShadowConfig(Enabled ? _shadowConfig : null);
             }
         }
-        
-        public bool InProgress { get; private set; }
+
+        private bool _inProgress;
+        public bool InProgress
+        {
+            get => _inProgress;
+            private set
+            {
+                _inProgress = value;
+                UserInteractionEnabled = !value;
+            }
+        }
 
         #region .ctors
 
@@ -172,7 +181,7 @@ namespace EOS.UI.iOS.Controls
             {
                 Layer.ShadowColor = config.Color.CGColor;
                 Layer.ShadowOffset = new CGSize(config.Offset);
-                Layer.ShadowRadius = config.Blur /2;
+                Layer.ShadowRadius = config.Blur / 2;
                 Layer.ShadowOpacity = 1.0f;//(float)config.Color.CGColor.Alpha;
             }
             else
@@ -216,7 +225,7 @@ namespace EOS.UI.iOS.Controls
                 IsEOSCustomizationIgnored = false;
             }
         }
-        
+
         public void StartProgressAnimation()
         {
             if (InProgress)
@@ -225,7 +234,7 @@ namespace EOS.UI.iOS.Controls
             ImageView.Layer.AddAnimation(_rotationAnimation, _rotationAnimationKey);
             InProgress = true;
         }
-        
+
         public void StopProgressAnimation()
         {
             if (!InProgress)
@@ -256,7 +265,7 @@ namespace EOS.UI.iOS.Controls
             TouchDown += (sender, e) => ScaleButton(_startScale, _animationDuration);
             TouchUpInside += (sender, e) => ScaleButton(_endScale, _animationDuration);
             TouchDragExit += (sender, e) => ScaleButton(_endScale, _animationDuration);
-            
+
             _rotationAnimation = new CABasicAnimation();
             _rotationAnimation.KeyPath = "transform.rotation.z";
             _rotationAnimation.From = new NSNumber(0);
@@ -268,7 +277,7 @@ namespace EOS.UI.iOS.Controls
             ImageView.TintColor = GetThemeProvider().GetEOSProperty<UIColor>(this, EOSConstants.NeutralColor6S);
             AdjustsImageWhenDisabled = false;
         }
-        
+
         private void ScaleButton(float scale, double duration)
         {
             UIView.Animate(duration, () =>

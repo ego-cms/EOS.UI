@@ -160,8 +160,8 @@ namespace EOS.UI.Shared.Themes.Themes
                     LineHeight = 13f
             }},
             //worktimecalendar currentday fontstyle
-            { EOSConstants.R1C6, new FontStyleItem() {
-                    Color = ColorExtension.FromHex(neutralColor6),
+            { EOSConstants.R1C6S, new FontStyleItem() {
+                    Color = ColorExtension.FromHex(neutralColor6S),
                     Font = UIFont.SystemFontOfSize(11f, UIFontWeight.Bold),
                     Size = 11f,
                     LetterSpacing = 0.06f,
