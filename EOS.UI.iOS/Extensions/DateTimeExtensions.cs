@@ -3,7 +3,7 @@ using Foundation;
 
 namespace EOS.UI.iOS.Extensions
 {
-    public static class DateTimeExtensions
+    internal static class DateTimeExtensions
     {
         public static DateTime ToDateTime(this NSDate nsDate)
         {
