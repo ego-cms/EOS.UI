@@ -36,6 +36,7 @@ namespace EOS.UI.Droid.Sandbox.Activities
         private EOSSandboxDropDown _cornerRadiusDropDown;
         private EOSSandboxDropDown _rippleColorDropDown;
         private EOSSandboxDropDown _shadowRadiusDropDown;
+        private SimpleButtonTypeEnum _buttonType;
 
 
         protected override void OnCreate(Bundle savedInstanceState)
@@ -125,6 +126,8 @@ namespace EOS.UI.Droid.Sandbox.Activities
 
         private void ShadowRadiusItemSelected(int position)
         {
+            if (_buttonType == SimpleButtonTypeEnum.FullBleed)
+                return;
             var config = _simpleButton.ShadowConfig;
             config.Blur = SimpleButtonConstants.ShadowRadiusCollection.ElementAt(position).Value;
             _simpleButton.ShadowConfig = config;
@@ -132,9 +135,9 @@ namespace EOS.UI.Droid.Sandbox.Activities
 
         private void ButtonTypeItemSelected(int position)
         {
-            var type = Buttons.SimpleButtonTypeCollection.ElementAt(position).Value;
+            _buttonType = Buttons.SimpleButtonTypeCollection.ElementAt(position).Value;
             ResetCustomValues(true);
-            switch (type)
+            switch (_buttonType)
             {
                 case SimpleButtonTypeEnum.Simple:
                     SetupSimpleButtonStyle();
@@ -251,6 +254,8 @@ namespace EOS.UI.Droid.Sandbox.Activities
 
         private void CornerRadiurSpinner_ItemSelected(int position)
         {
+            if (_buttonType == SimpleButtonTypeEnum.FullBleed)
+                return;
             _simpleButton.CornerRadius = SimpleButtonConstants.CornerRadiusCollection.ElementAt(position).Value * Resources.DisplayMetrics.Density;
         }
 
