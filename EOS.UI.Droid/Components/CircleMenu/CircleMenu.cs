@@ -6,7 +6,6 @@ using Android.Content;
 using Android.Graphics;
 using Android.Graphics.Drawables;
 using Android.Runtime;
-using Android.Support.Animation;
 using Android.Util;
 using Android.Views;
 using Android.Views.Animations;
@@ -102,11 +101,9 @@ namespace EOS.UI.Droid.Components
         private bool _forward;
         private bool _isSubMenuOpened;
         private bool _canSwipe = true;
-        private int _showMenuItemsIteration;
         private float _deltaNormalizePositions;
 
         private CircleMenuScrollListener _scrollListener = new CircleMenuScrollListener();
-        private ScrollSpringAnimationEndListener _scrollSpringAnimationEndListener;
         private NormalizationEndRunnable _normalizationEndListener;
 
         private IMenuStateCommutator _menuStateCommutator;
@@ -115,7 +112,7 @@ namespace EOS.UI.Droid.Components
 
         #region properties
 
-        private bool IsBusy => _showMenuItemsIteration > 0 || _isSubMenuOpened;
+        private bool IsBusy => _isSubMenuOpened;
         public bool ShowHintAnimation { get; set; } = true;
 
         #endregion
@@ -347,7 +344,6 @@ namespace EOS.UI.Droid.Components
             foreach(var menu in _menuItems)
                 menu.SetICircleMenuClicable(this);
 
-            _scrollSpringAnimationEndListener = new ScrollSpringAnimationEndListener(Context, this);
             _normalizationEndListener = new NormalizationEndRunnable(Context, this);
 
             var denisty = Context.Resources.DisplayMetrics.Density;
@@ -491,12 +487,17 @@ namespace EOS.UI.Droid.Components
         /// </summary>
         private void UpdateMenuItemsVisiblility()
         {
-            ++_showMenuItemsIteration;
+            Locked = true;
 
             if(IsOpened)
-                _menuStateCommutator.HideMenuItems(_showMenuItemsIteration);
+            {
+                _menuStateCommutator.HideMenuItems();
+            }
             else
-                _menuStateCommutator.ShowMenuItems(_showMenuItemsIteration);
+            {
+                _container.SetBackgroundColor(BlackoutColor);
+                _menuStateCommutator.ShowMenuItems();
+            }
         }
 
         private void GeneratePositions()
@@ -576,7 +577,6 @@ namespace EOS.UI.Droid.Components
             moveAnimation.Start();
         }
 
-
         /// <summary>
         /// Method which responsible for open/show algorithm implementation
         /// </summary>
@@ -588,45 +588,58 @@ namespace EOS.UI.Droid.Components
             {
                 _indicators.ForEach(indicator => indicator.Visibility = ViewStates.Gone);
                 InitialDataModelSetup();
+                IsOpened = !IsOpened;
+                Locked = false;
             });
 
             var afterShowAnimation = new Action(() =>
             {
-                _container.SetBackgroundColor(!IsOpened ? BlackoutColor : Color.Transparent);
-            });
+                _container.SetBackgroundColor(Color.Transparent);
+                //reset data from model for part visible and not clickable menus
+                _menuItems[1].ResetDataFromModel();
 
-            var updateRunnable = new UpdateMenuItemsVisibilityRunnable(Context, this);
-            var springEndListener = new OpenSpringAnimationEndListener(Context, this);
+                //after end of open/hide animation setup internal values to default
+                var action = new Action(() =>
+                {
+                    IsOpened = !IsOpened;
+                    Locked = false;
+                });
+
+                if(ShowHintAnimation)
+                    StartHintAnimation(action);
+                else
+                    action.Invoke();
+            });
 
             switch(menuState)
             {
                 case MenuState.Full:
                     return new MenuStateCommutatorFull(_menuItems, 
                         _indicators, 
-                        _mainMenuPositions, 
-                        _indicatorsPositions, 
                         afterShowAnimation, 
                         afterHideAnimation,
-                        updateRunnable,
-                        springEndListener);
+                        _indicatorsListPositions,
+                        _menusListPositions,
+                        _indicatorsSpringListPositions,
+                        _menusSpringListPositions);
                 case MenuState.Simple:
                     return new MenuStateCommutatorSimple(_menuItems,
                         _indicators,
-                        _mainMenuPositions,
-                        _indicatorsPositions,
                         afterShowAnimation,
                         afterHideAnimation,
-                        updateRunnable,
-                        springEndListener);
+                        _indicatorsListPositions,
+                        _menusListPositions,
+                        _indicatorsSpringListPositions,
+                        _menusSpringListPositions);
                 default:
                     return new MenuStateCommutatorFull(_menuItems,
                         _indicators,
-                        _mainMenuPositions,
-                        _indicatorsPositions,
                         afterShowAnimation,
                         afterHideAnimation,
-                        updateRunnable,
-                        springEndListener);
+                        _indicatorsListPositions,
+                        _menusListPositions,
+                        _indicatorsSpringListPositions,
+                        _menusSpringListPositions);
             }
         }
 
@@ -980,48 +993,9 @@ namespace EOS.UI.Droid.Components
             Locked = false;
         }
 
-        internal void HandleOnOpenSpringAnimationEnd()
-        {
-            //reset data from model for part visible and not clickable menus
-            _menuItems[1].ResetDataFromModel();
-
-            //after end of open/hide animation setup internal values to default
-            var action = new Action(() =>
-            {
-                _showMenuItemsIteration = 0;
-                IsOpened = !IsOpened;
-                Locked = false;
-            });
-
-            if(ShowHintAnimation)
-                StartHintAnimation(action);
-            else
-                action.Invoke();
-        }
-
         internal void HandleNormalizationEnd()
         {
             MoveMenuItemsAnimation();
-        }
-
-        internal void HandleUpdateMenuItemsVisibility()
-        {
-            if(_showMenuItemsIteration > 0)
-            {
-                if(_showMenuItemsIteration != _menuItems.Count - 1)
-                {
-                    //Invoke animation until all items not on theirs positions
-                    UpdateMenuItemsVisiblility();
-                }
-                else if(IsOpened)
-                {
-                    //after end of animation setup internal values to default and change background color
-                    _showMenuItemsIteration = 0;
-                    IsOpened = !IsOpened;
-                    _container.SetBackgroundColor(IsOpened ? BlackoutColor : Color.Transparent);
-                    Locked = false;
-                }
-            }
         }
 
         #endregion

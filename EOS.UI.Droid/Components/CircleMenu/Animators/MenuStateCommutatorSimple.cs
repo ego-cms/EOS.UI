@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using Android.Graphics;
 using Android.Support.Animation;
 using EOS.UI.Droid.Interfaces;
@@ -8,124 +9,115 @@ namespace EOS.UI.Droid.Components
 {
     internal class MenuStateCommutatorSimple : MenuStateCommutator, IMenuStateCommutator
     {
-        public MenuStateCommutatorSimple(List<CircleMenuItem> menuItems, 
-            List<Indicator> indicators, 
-            PointF[] menuItemsPositions, 
-            PointF[] indicatorsPositions, 
-            Action afterShowAction, 
-            Action afterHideAction, 
-            UpdateMenuItemsVisibilityRunnable updateRunnable, 
-            OpenSpringAnimationEndListener animationEndListener) : 
-            base(menuItems, indicators, menuItemsPositions, indicatorsPositions, afterShowAction, afterHideAction, updateRunnable, animationEndListener)
+        public MenuStateCommutatorSimple(List<CircleMenuItem> menuItems,
+            List<Indicator> indicators,
+            Action afterShowAction,
+            Action afterHideAction,
+            List<PointF>[][] indicatorsListPositions,
+            List<PointF>[][] menusListPositions,
+            List<PointF>[][] indicatorsSpringListPositions,
+            List<PointF>[][] menusSpringListPositions) :
+            base(menuItems, indicators, afterShowAction, afterHideAction, indicatorsListPositions, menusListPositions, indicatorsSpringListPositions, menusSpringListPositions)
         {
         }
 
-        public void HideMenuItems(int iteration)
+        public void HideMenuItems()
         {
-            if(iteration == 1)
+            for(int i = 2; i < _commutatorMenuItems.Count - 1; i++)
             {
-                _commutatorIndicators[2].Animate().X(_commutatorIndicatorsPositions[3].X).Y(_commutatorIndicatorsPositions[3].Y).SetDuration(ShowHideAnimateDuration);
-                _commutatorIndicators[3].Animate().X(_commutatorIndicatorsPositions[2].X).Y(_commutatorIndicatorsPositions[2].Y).SetDuration(ShowHideAnimateDuration);
-                _commutatorIndicators[4].Animate().X(_commutatorIndicatorsPositions[1].X).Y(_commutatorIndicatorsPositions[1].Y).SetDuration(ShowHideAnimateDuration);
+                var afterEndAnimation = i == 2 ? new Action(() => _afterHideAction?.Invoke()) : null;
 
-                _commutatorMenuItems[2].Animate().X(_commutatorMenuItemsPositions[3].X).Y(_commutatorMenuItemsPositions[3].Y).SetDuration(ShowHideAnimateDuration);
-                _commutatorMenuItems[3].Animate().X(_commutatorMenuItemsPositions[2].X).Y(_commutatorMenuItemsPositions[2].Y).SetDuration(ShowHideAnimateDuration);
-                _commutatorMenuItems[4].Animate().X(_commutatorMenuItemsPositions[1].X).Y(_commutatorMenuItemsPositions[1].Y).SetDuration(ShowHideAnimateDuration).WithEndAction(_commutatorUpdateRunnable);
-            }
-            if(iteration == 2)
-            {
-                _commutatorIndicators[2].Animate().X(_commutatorIndicatorsPositions[2].X).Y(_commutatorIndicatorsPositions[2].Y).SetDuration(ShowHideAnimateDuration);
-                _commutatorIndicators[3].Animate().X(_commutatorIndicatorsPositions[1].X).Y(_commutatorIndicatorsPositions[1].Y).SetDuration(ShowHideAnimateDuration);
-                _commutatorIndicators[4].Animate().X(_commutatorIndicatorsPositions[0].X).Y(_commutatorIndicatorsPositions[0].Y).SetDuration(ShowHideAnimateDuration);
+                var menu = _commutatorMenuItems[i];
+                var indicator = _commutatorIndicators[i];
 
-                _commutatorMenuItems[2].Animate().X(_commutatorMenuItemsPositions[2].X).Y(_commutatorMenuItemsPositions[2].Y).SetDuration(ShowHideAnimateDuration);
-                _commutatorMenuItems[3].Animate().X(_commutatorMenuItemsPositions[1].X).Y(_commutatorMenuItemsPositions[1].Y).SetDuration(ShowHideAnimateDuration);
-                _commutatorMenuItems[4].Animate().X(_commutatorMenuItemsPositions[0].X).Y(_commutatorMenuItemsPositions[0].Y).SetDuration(ShowHideAnimateDuration).WithEndAction(_commutatorUpdateRunnable);
-            }
-            if(iteration == 3)
-            {
-                _commutatorIndicators[2].Animate().X(_commutatorIndicatorsPositions[1].X).Y(_commutatorIndicatorsPositions[1].Y).SetDuration(ShowHideAnimateDuration);
-                _commutatorIndicators[3].Animate().X(_commutatorIndicatorsPositions[0].X).Y(_commutatorIndicatorsPositions[0].Y).SetDuration(ShowHideAnimateDuration);
+                var positions = new List<PointF>();
+                var indicatorPositions = new List<PointF>();
 
-                _commutatorMenuItems[2].Animate().X(_commutatorMenuItemsPositions[1].X).Y(_commutatorMenuItemsPositions[1].Y).SetDuration(ShowHideAnimateDuration);
-                _commutatorMenuItems[3].Animate().X(_commutatorMenuItemsPositions[0].X).Y(_commutatorMenuItemsPositions[0].Y).SetDuration(ShowHideAnimateDuration).WithEndAction(_commutatorUpdateRunnable);
-            }
-            if(iteration == 4)
-            {
-                _commutatorIndicators[2].Animate().X(_commutatorIndicatorsPositions[0].X).Y(_commutatorIndicatorsPositions[0].Y).SetDuration(ShowHideAnimateDuration);
-
-                _commutatorMenuItems[2].Animate().X(_commutatorMenuItemsPositions[0].X).Y(_commutatorMenuItemsPositions[0].Y).SetDuration(ShowHideAnimateDuration).WithEndAction(_commutatorUpdateRunnable);
-            }
-            if(iteration == 5)
-            {
-                _commutatorMenuItems[1].Animate().XBy(0).YBy(0).SetDuration(ShowHideAnimateDuration).WithEndAction(_commutatorUpdateRunnable);
-            }
-        }
-
-        public void ShowMenuItems(int iteration)
-        {
-            if(iteration == 1)
-            {
-                foreach(var menu in _commutatorMenuItems)
-                    menu.StartRotateAnimation();
-
-                _commutatorMenuItems[1].Animate().XBy(0).YBy(0).SetDuration(ShowHideAnimateDuration).WithEndAction(_commutatorUpdateRunnable);
-            }
-            if(iteration == 2)
-            {
-                _commutatorIndicators[2].Animate().X(_commutatorIndicatorsPositions[1].X).Y(_commutatorIndicatorsPositions[1].Y).SetDuration(ShowHideAnimateDuration);
-
-                _commutatorMenuItems[2].Animate().X(_commutatorMenuItemsPositions[1].X).Y(_commutatorMenuItemsPositions[1].Y).SetDuration(ShowHideAnimateDuration).WithEndAction(_commutatorUpdateRunnable);
-            }
-            if(iteration == 3)
-            {
-                _commutatorIndicators[3].Animate().X(_commutatorIndicatorsPositions[1].X).Y(_commutatorIndicatorsPositions[1].Y).SetDuration(ShowHideAnimateDuration);
-                _commutatorIndicators[2].Animate().X(_commutatorIndicatorsPositions[2].X).Y(_commutatorIndicatorsPositions[2].Y).SetDuration(ShowHideAnimateDuration);
-
-                _commutatorMenuItems[3].Animate().X(_commutatorMenuItemsPositions[1].X).Y(_commutatorMenuItemsPositions[1].Y).SetDuration(ShowHideAnimateDuration);
-                _commutatorMenuItems[2].Animate().X(_commutatorMenuItemsPositions[2].X).Y(_commutatorMenuItemsPositions[2].Y).SetDuration(ShowHideAnimateDuration).WithEndAction(_commutatorUpdateRunnable);
-            }
-            if(iteration == 4)
-            {
-                _commutatorIndicators[4].Animate().X(_commutatorIndicatorsPositions[1].X).Y(_commutatorIndicatorsPositions[1].Y).SetDuration(ShowHideAnimateDuration);
-                _commutatorIndicators[3].Animate().X(_commutatorIndicatorsPositions[2].X).Y(_commutatorIndicatorsPositions[2].Y).SetDuration(ShowHideAnimateDuration);
-                _commutatorIndicators[2].Animate().X(_commutatorIndicatorsPositions[3].X).Y(_commutatorIndicatorsPositions[3].Y).SetDuration(ShowHideAnimateDuration);
-
-                _commutatorMenuItems[4].Animate().X(_commutatorMenuItemsPositions[1].X).Y(_commutatorMenuItemsPositions[1].Y).SetDuration(ShowHideAnimateDuration);
-                _commutatorMenuItems[3].Animate().X(_commutatorMenuItemsPositions[2].X).Y(_commutatorMenuItemsPositions[2].Y).SetDuration(ShowHideAnimateDuration);
-                _commutatorMenuItems[2].Animate().X(_commutatorMenuItemsPositions[3].X).Y(_commutatorMenuItemsPositions[3].Y).SetDuration(ShowHideAnimateDuration).WithEndAction(_commutatorUpdateRunnable);
-            }
-            if(iteration == 5)
-            {
-                //last iteration of showing menus should be with spring animation
-                for(int i = _commutatorMenuItems.Count - 2; i > 1; i--)
+                for(int j = i; j < _commutatorMenuItems.Count; j++)
                 {
-                    var menu = _commutatorMenuItems[i];
-                    var point = _commutatorMenuItemsPositions[_commutatorMenuItems.Count - i];
-
-                    var indicator = _commutatorIndicators[i];
-                    var pointIndicator = _commutatorIndicatorsPositions[_commutatorMenuItems.Count - i];
-
-                    var springX = new SpringAnimation(menu, DynamicAnimation.X, point.X);
-                    var springY = new SpringAnimation(menu, DynamicAnimation.Y, point.Y);
-
-                    var springIndicatorX = new SpringAnimation(indicator, DynamicAnimation.X, pointIndicator.X);
-                    var springIndicatorY = new SpringAnimation(indicator, DynamicAnimation.Y, pointIndicator.Y);
-
-                    if(i == 2)
-                    {
-                        _afterShowAction?.Invoke();
-                        springX.AddEndListener(_commutatorAnimationEndListener);
-                        springY.AddEndListener(_commutatorAnimationEndListener);
-                        springIndicatorX.AddEndListener(_commutatorAnimationEndListener);
-                        springIndicatorY.AddEndListener(_commutatorAnimationEndListener);
-                    }
-
-                    springIndicatorX.Start();
-                    springIndicatorY.Start();
-                    springX.Start();
-                    springY.Start();
+                    positions.AddRange(_menusListPositions[0][j]);
+                    indicatorPositions.AddRange(_indicatorsListPositions[0][j]);
                 }
+
+                var delay = AnimateDuration / 5 * i;
+                StartAnimation(menu,
+                    positions.Select(item => item.X).ToArray(),
+                    positions.Select(item => item.Y).ToArray(),
+                    AnimateDuration - delay,
+                    0,
+                    null,
+                    new Action(() => afterEndAnimation?.Invoke()));
+
+                StartAnimation(indicator,
+                    indicatorPositions.Select(item => item.X).ToArray(),
+                    indicatorPositions.Select(item => item.Y).ToArray(),
+                    AnimateDuration - delay,
+                    0);
+            }
+        }
+
+        public void ShowMenuItems()
+        {
+            foreach(var menu in _commutatorMenuItems)
+                menu.StartRotateAnimation();
+
+            for(int i = 2; i < _commutatorMenuItems.Count - 1; i++)
+            {
+                var afterEndAnimation = i == _commutatorMenuItems.Count - 2 ? new Action(() => _afterShowAction?.Invoke()) : null;
+
+                var menu = _commutatorMenuItems[i];
+                var indicator = _commutatorIndicators[i];
+
+                var positions = new List<PointF>();
+                var springPositions = new List<PointF>();
+                var indicatorPositions = new List<PointF>();
+                var indicatorSpringPositions = new List<PointF>();
+
+                if(i == _commutatorMenuItems.Count - 1)
+                {
+                    positions = _menusListPositions[1][0];
+                    springPositions = _menusSpringListPositions[1][0];
+                    indicatorPositions = _indicatorsListPositions[1][0];
+                    indicatorSpringPositions = _indicatorsSpringListPositions[1][0];
+                }
+                else
+                {
+                    springPositions = _menusSpringListPositions[1][i + 1];
+                    indicatorSpringPositions = _indicatorsSpringListPositions[1][i + 1];
+
+                    for(int j = _commutatorMenuItems.Count - 1; j > i; j--)
+                    {
+                        positions.AddRange(_menusListPositions[1][j]);
+                        indicatorPositions.AddRange(_indicatorsListPositions[1][j]);
+                    }
+                }
+
+                var delay = AnimateDuration / 5 * i;
+                StartAnimation(menu,
+                    positions.Select(item => item.X).ToArray(),
+                    positions.Select(item => item.Y).ToArray(),
+                    AnimateDuration - delay,
+                    delay,
+                    null,
+                    new Action(() => StartAnimation(menu,
+                        springPositions.Select(item => item.X).ToArray(),
+                        springPositions.Select(item => item.Y).ToArray(),
+                        SpringAnimateDuration,
+                        0,
+                        null,
+                        afterEndAnimation)));
+
+                StartAnimation(indicator,
+                    indicatorPositions.Select(item => item.X).ToArray(),
+                    indicatorPositions.Select(item => item.Y).ToArray(),
+                    AnimateDuration - delay,
+                    delay,
+                    null,
+                    new Action(() => StartAnimation(indicator,
+                        indicatorSpringPositions.Select(item => item.X).ToArray(),
+                        indicatorSpringPositions.Select(item => item.Y).ToArray(),
+                        SpringAnimateDuration,
+                        0)));
             }
         }
     }
