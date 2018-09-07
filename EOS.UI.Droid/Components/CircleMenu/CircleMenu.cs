@@ -73,6 +73,13 @@ namespace EOS.UI.Droid.Components
         private const float AlphaHidingValue = 0.8f;
         private const float AlphaShowingValue = 0.5f;
 
+        private const int InitialIndex = 105;
+        private const int PointsOnIteration = 40;
+
+        private const int MainSwipeDuration = 100;
+        private const int MainSpringSwipeDuration = 300;
+        private const int IndicatorSpringSwipeDuration = 200;
+
         #endregion
 
         #region fields 
@@ -81,6 +88,14 @@ namespace EOS.UI.Droid.Components
         private RelativeLayout _container;
         private List<CircleMenuItem> _menuItems = new List<CircleMenuItem>();
         private List<Indicator> _indicators = new List<Indicator>();
+        private List<PointF> _menuIndicatorsPositions = new List<PointF>();
+        private List<PointF> _menuPositions = new List<PointF>();
+
+        private List<PointF>[][] _indicatorsListPositions = new List<PointF>[2][];
+        private List<PointF>[][] _menusListPositions = new List<PointF>[2][];
+        private List<PointF>[][] _indicatorsSpringListPositions = new List<PointF>[2][];
+        private List<PointF>[][] _menusSpringListPositions = new List<PointF>[2][];
+
         private PointF[] _mainMenuPositions = new PointF[7];
         private PointF[] _indicatorsPositions = new PointF[7];
 
@@ -288,6 +303,23 @@ namespace EOS.UI.Droid.Components
             _indicatorsPositions[4] = new PointF(normalIndicatorX - IndicatorMargin4 * denisty, normalIndicatorY - IndicatorMargin2 * denisty);
             _indicatorsPositions[5] = new PointF(Width - IndicatorMargin1 * denisty, Height + IndicatorMargin5 * denisty);
             _indicatorsPositions[6] = new PointF(Width - IndicatorMargin1 * denisty, Height + IndicatorMargin5 * denisty);
+
+            
+            var x0 = Width - (MenuDiameter + 16) * Resources.DisplayMetrics.Density;
+            var y0 = Height - (MenuDiameter + 16) * Resources.DisplayMetrics.Density;
+            var x20 = Width - (MenuDiameter/2 + IndicatorDiameter / 2 + 16) * Resources.DisplayMetrics.Density;
+            var y20 = Height - (MenuDiameter/2 + IndicatorDiameter / 2 + 16) * Resources.DisplayMetrics.Density;
+
+            var r = 96 * Resources.DisplayMetrics.Density;
+            var r2 = r + 35 * Resources.DisplayMetrics.Density;
+
+            for(int i = 0; i < 360; i++)
+            {
+                _menuPositions.Add(new PointF((float)(Math.Cos(2 * Math.PI * i / 360) * r + x0), (float)(Math.Sin(2 * Math.PI * i / 360) * r + y0)));
+                _menuIndicatorsPositions.Add(new PointF((float)(Math.Cos(2 * Math.PI * i / 360) * r2 + x20), (float)(Math.Sin(2 * Math.PI * i / 360) * r2 + y20)));
+            }
+
+            GeneratePositions();
         }
 
         private void Initialize(IAttributeSet attrs = null)
@@ -361,38 +393,37 @@ namespace EOS.UI.Droid.Components
         {
             for(int i = 0; i < _menuItems.Count; i++)
             {
-                var positionIndex = _forward ? _menuItems.Count - 1 - i : i + 1;
-                var position = _mainMenuPositions[positionIndex];
-                var indicatorPosition = _indicatorsPositions[positionIndex];
+                var afterEndAnimation = i == _menuItems.Count - 1 ? new Action(() => HandleOnScrollSpringAnimationEnd()) : null;
 
-                var viewIndex = (_forward || i == 0) ? i : _menuItems.Count - i;
-                var menu = _menuItems[viewIndex];
-                var indicator = _indicators[viewIndex];
+                var menu = _menuItems[i];
+                var indicator = _indicators[i];
 
-                var springX = new SpringAnimation(menu, DynamicAnimation.X, position.X);
-                var springY = new SpringAnimation(menu, DynamicAnimation.Y, position.Y);
+                var positions =  _menusListPositions[_forward ? 0 : 1][i];
+                var springPositions = _menusSpringListPositions[_forward ? 0 : 1][i];
+                var indicatorPositions = _indicatorsListPositions[_forward ? 0 : 1][i];
+                var indicatorSpringPositions = _indicatorsSpringListPositions[_forward ? 0 : 1][i];
 
-                var springXIndicator = new SpringAnimation(indicator, DynamicAnimation.X, indicatorPosition.X);
-                var springYIndicator = new SpringAnimation(indicator, DynamicAnimation.Y, indicatorPosition.Y);
+                StartAnimation(menu,
+                    positions.Select(item => item.X).ToArray(),
+                    positions.Select(item => item.Y).ToArray(),
+                    MainSwipeDuration,
+                    null,
+                    new Action(() => StartAnimation(menu,
+                        springPositions.Select(item => item.X).ToArray(),
+                        springPositions.Select(item => item.Y).ToArray(),
+                        MainSpringSwipeDuration,
+                        new DecelerateInterpolator(),
+                        afterEndAnimation)));
 
-                springX.Spring.SetDampingRatio(DampingRatio).SetStiffness(Stiffness);
-                springY.Spring.SetDampingRatio(DampingRatio).SetStiffness(Stiffness);
-                springXIndicator.Spring.SetDampingRatio(DampingRatio).SetStiffness(Stiffness);
-                springYIndicator.Spring.SetDampingRatio(DampingRatio).SetStiffness(Stiffness);
-
-                if(i == _menuItems.Count - 1)
-                {
-                    springX.AddEndListener(_scrollSpringAnimationEndListener);
-                    springY.AddEndListener(_scrollSpringAnimationEndListener);
-                    springXIndicator.AddEndListener(_scrollSpringAnimationEndListener);
-                    springYIndicator.AddEndListener(_scrollSpringAnimationEndListener);
-                }
-
-                springX.Start();
-                springY.Start();
-
-                springXIndicator.Start();
-                springYIndicator.Start();
+                StartAnimation(indicator,
+                    indicatorPositions.Select(item => item.X).ToArray(),
+                    indicatorPositions.Select(item => item.Y).ToArray(),
+                    MainSwipeDuration,
+                    null,
+                    new Action(() => StartAnimation(indicator,
+                        indicatorSpringPositions.Select(item => item.X).ToArray(),
+                        indicatorSpringPositions.Select(item => item.Y).ToArray(),
+                        IndicatorSpringSwipeDuration)));
             }
         }
 
@@ -461,11 +492,90 @@ namespace EOS.UI.Droid.Components
         private void UpdateMenuItemsVisiblility()
         {
             ++_showMenuItemsIteration;
+
             if(IsOpened)
                 _menuStateCommutator.HideMenuItems(_showMenuItemsIteration);
             else
                 _menuStateCommutator.ShowMenuItems(_showMenuItemsIteration);
         }
+
+        private void GeneratePositions()
+        {
+            for(int f = 0; f < 2; f++)
+            {
+                var forward = f == 0;
+                _menusListPositions[f] = new List<PointF>[6];
+                _indicatorsListPositions[f] = new List<PointF>[6];
+                _menusSpringListPositions[f] = new List<PointF>[6];
+                _indicatorsSpringListPositions[f] = new List<PointF>[6];
+
+                for(int i = 0; i < _menuItems.Count; i++)
+                {
+                    _menusListPositions[f][i] = new List<PointF>();
+                    _indicatorsListPositions[f][i] = new List<PointF>();
+                    if(forward)
+                    {
+                        _menusListPositions[f][i] = _menuPositions.GetRange(InitialIndex + i * PointsOnIteration, PointsOnIteration);
+                        _indicatorsListPositions[f][i] = _menuIndicatorsPositions.GetRange(InitialIndex + i * PointsOnIteration, PointsOnIteration);
+                    }
+                    else
+                    {
+                        _menusListPositions[f][i] = _menuPositions.GetRange(i == 0 ? InitialIndex + 5 * PointsOnIteration : InitialIndex + (i - 1) * PointsOnIteration, PointsOnIteration);
+                        _indicatorsListPositions[f][i] = _menuIndicatorsPositions.GetRange(i == 0 ? InitialIndex + 5 * PointsOnIteration : InitialIndex + (i - 1) * PointsOnIteration, PointsOnIteration);
+
+                        var tempList = new List<PointF>();
+                        for(int z = _menusListPositions[f][i].Count - 1; z >= 0; z--)
+                            tempList.Add(_menusListPositions[f][i][z]);
+                        _menusListPositions[f][i] = tempList;
+
+                        var tempIndicatorsList = new List<PointF>();
+                        for(int z = _indicatorsListPositions[f][i].Count - 1; z >= 0; z--)
+                            tempIndicatorsList.Add(_indicatorsListPositions[f][i][z]);
+                        _indicatorsListPositions[f][i] = tempIndicatorsList;
+                    }
+
+                    var baseIndex = forward ? InitialIndex + (i + 1) * PointsOnIteration : i == 0 ? InitialIndex + 5 * PointsOnIteration : InitialIndex + (i - 1) * PointsOnIteration;
+
+                    _menusSpringListPositions[f][i] = new List<PointF>();
+                    _indicatorsSpringListPositions[f][i] = new List<PointF>();
+
+                    _menusSpringListPositions[f][i].Add(forward ? _menuPositions[baseIndex + 4] :
+                        _menuPositions[baseIndex - 4]);
+                    _menusSpringListPositions[f][i].Add(forward ? _menuPositions[baseIndex - 2] :
+                        _menuPositions[baseIndex + 2]);
+                    _menusSpringListPositions[f][i].Add(forward ? _menuPositions[baseIndex + 1] :
+                        _menuPositions[baseIndex - 1]);
+                    _menusSpringListPositions[f][i].Add(forward ? _menuPositions[baseIndex] :
+                        _menuPositions[baseIndex]);
+
+                    _indicatorsSpringListPositions[f][i].Add(forward ? _menuIndicatorsPositions[baseIndex + 4] :
+                        _menuIndicatorsPositions[baseIndex - 4]);
+                    _indicatorsSpringListPositions[f][i].Add(forward ? _menuIndicatorsPositions[baseIndex - 2] :
+                        _menuIndicatorsPositions[baseIndex + 2]);
+                    _indicatorsSpringListPositions[f][i].Add(forward ? _menuIndicatorsPositions[baseIndex + 1] :
+                        _menuIndicatorsPositions[baseIndex - 1]);
+                    _indicatorsSpringListPositions[f][i].Add(forward ? _menuIndicatorsPositions[baseIndex] :
+                        _menuIndicatorsPositions[baseIndex]);
+                }
+            }
+        }
+
+        private void StartAnimation(View view, float[] xPositions, float[] yPositions, int duration, BaseInterpolator interpolator = null, Action action = null)
+        {
+            var xProp = PropertyValuesHolder.OfFloat("X", xPositions);
+            var yProp = PropertyValuesHolder.OfFloat("Y", yPositions);
+            var moveAnimation = ObjectAnimator.OfPropertyValuesHolder(view, xProp, yProp);
+            moveAnimation.SetDuration(duration);
+
+            if(interpolator != null)
+                moveAnimation.SetInterpolator(interpolator);
+
+            if(action != null)
+                moveAnimation.AnimationEnd += (s, e) => action.Invoke();
+
+            moveAnimation.Start();
+        }
+
 
         /// <summary>
         /// Method which responsible for open/show algorithm implementation
