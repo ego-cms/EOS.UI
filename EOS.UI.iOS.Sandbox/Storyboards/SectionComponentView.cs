@@ -80,6 +80,16 @@ namespace EOS.UI.iOS.Sandbox.Storyboards
             var rect = new CGRect(0, 0, 100, 150);
 
             InitThemeDropDown(rect);
+            InitSources(rect);
+            InitHasButton();
+            InitHasBorder();
+            InitResetButton();
+            _source.SectionModel.ResetCustomization = true;
+            ResetFields();
+        }
+        
+        private void InitSources(CGRect rect)
+        {
             InitSectionNameDropDown(rect);
             InitButtonTextDropDown(rect);
             InitSectionNameFontDropDown(rect);
@@ -97,12 +107,6 @@ namespace EOS.UI.iOS.Sandbox.Storyboards
             InitPaddingBottomDropDown(rect);
             InitPaddingLeftDropDown(rect);
             InitPaddingRightDropDown(rect);
-            InitHasButton();
-            InitHasBorder();
-            InitResetButton();
-
-            _source.SectionModel.ResetCustomization = true;
-            ResetFields();
         }
 
         private void InitResetButton()
@@ -362,6 +366,7 @@ namespace EOS.UI.iOS.Sandbox.Storyboards
                     _dropDowns.Except(new[] { themeDropDown }).ToList().ForEach(dropDown => dropDown.ResetValue());
                     hasBorderSwitch.On = defaultModel.HasBorder;
                     hasButtonSwitch.On = defaultModel.HasButton;
+                    InitSources(rect);
                     UpdateAppearance();
                 },
                 Fields.Theme,
