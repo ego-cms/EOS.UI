@@ -12,6 +12,7 @@ using EOS.UI.Droid.Models;
 using EOS.UI.Droid.Sandbox.Controls;
 using EOS.UI.Droid.Sandbox.RecyclerImplementation;
 using EOS.UI.Droid.Themes;
+using EOS.UI.Shared.Sandbox.ControlConstants.Android;
 using EOS.UI.Shared.Sandbox.Helpers;
 using EOS.UI.Shared.Themes.Helpers;
 using EOS.UI.Shared.Themes.Interfaces;
@@ -25,7 +26,7 @@ namespace EOS.UI.Droid.Sandbox.Activities
     {
         private RecyclerView _sectionRecyclerView;
         private List<object> _dataSource;
-        
+
         private EOSSandboxDropDown _themeDropDown;
         private EOSSandboxDropDown _sectionNameDropDown;
         private EOSSandboxDropDown _buttonTextDropDown;
@@ -70,8 +71,8 @@ namespace EOS.UI.Droid.Sandbox.Activities
             _dataSource = new List<object>()
             {
                 defaultModel,
-                "Terms of Use", 
-                "Privacy Policy", 
+                "Terms of Use",
+                "Privacy Policy",
                 "About Us"
             };
 
@@ -113,63 +114,63 @@ namespace EOS.UI.Droid.Sandbox.Activities
             _buttonTextDropDown.ItemSelected += ButtonTextItemSelected;
 
             _sectionNameLetterSpacingDropDown.Name = Fields.SectionNameLetterSpacing;
-            _sectionNameLetterSpacingDropDown.SetupAdapter(Sizes.LetterSpacingCollection.Select(item => item.Key).ToList());
+            _sectionNameLetterSpacingDropDown.SetupAdapter(SectionConstants.SectionLetterSpacings.Select(item => item.Key).ToList());
             _sectionNameLetterSpacingDropDown.ItemSelected += SectionNameLetterSpacingItemSelected;
 
             _buttonTextLetterSpacingDropDown.Name = Fields.ButtonTextLetterSpacing;
-            _buttonTextLetterSpacingDropDown.SetupAdapter(Sizes.LetterSpacingCollection.Select(item => item.Key).ToList());
+            _buttonTextLetterSpacingDropDown.SetupAdapter(SectionConstants.ButtonLetterSpacings.Select(item => item.Key).ToList());
             _buttonTextLetterSpacingDropDown.ItemSelected += ButtonTextLetterSpacingItemSelected;
 
             _sectionTextSizeDropDown.Name = Fields.SectionTextSize;
-            _sectionTextSizeDropDown.SetupAdapter(Sizes.TextSizeCollection.Select(item => item.Key).ToList());
+            _sectionTextSizeDropDown.SetupAdapter(SectionConstants.SectionTextSizes.Select(item => item.Key).ToList());
             _sectionTextSizeDropDown.ItemSelected += SectionTextSizeItemSelected;
 
             _buttonTextSizeDropDown.Name = Fields.ButtonTextSize;
-            _buttonTextSizeDropDown.SetupAdapter(Sizes.TextSizeCollection.Select(item => item.Key).ToList());
+            _buttonTextSizeDropDown.SetupAdapter(SectionConstants.ButtonTextSizes.Select(item => item.Key).ToList());
             _buttonTextSizeDropDown.ItemSelected += ButtonTextSizeItemSelected;
 
             _sectionTextColorDropDown.Name = Fields.SectionTextColor;
-            _sectionTextColorDropDown.SetupAdapter(Colors.FontColorsCollection.Select(item => item.Key).ToList());
+            _sectionTextColorDropDown.SetupAdapter(SectionConstants.SectionTextColors.Select(item => item.Key).ToList());
             _sectionTextColorDropDown.ItemSelected += SectionTextColorItemSelected;
 
             _buttonTextColorDropDown.Name = Fields.ButtonTextColor;
-            _buttonTextColorDropDown.SetupAdapter(Colors.FontColorsCollection.Select(item => item.Key).ToList());
+            _buttonTextColorDropDown.SetupAdapter(SectionConstants.ButtonTextColors.Select(item => item.Key).ToList());
             _buttonTextColorDropDown.ItemSelected += ButtonTextColorItemSelected;
 
             _backgroundColorDropDown.Name = Fields.BackgroundColor;
-            _backgroundColorDropDown.SetupAdapter(Colors.MainColorsCollection.Select(item => item.Key).ToList());
+            _backgroundColorDropDown.SetupAdapter(SectionConstants.BackgroundsColors.Select(item => item.Key).ToList());
             _backgroundColorDropDown.ItemSelected += BackgroundColorItemSelected;
 
             _borderColorDropDown.Name = Fields.BorderColor;
-            _borderColorDropDown.SetupAdapter(Colors.MainColorsCollection.Select(item => item.Key).ToList());
+            _borderColorDropDown.SetupAdapter(SectionConstants.BorderColors.Select(item => item.Key).ToList());
             _borderColorDropDown.ItemSelected += BorderColorItemSelected;
 
             _borderWidthDropDown.Name = Fields.BorderWidth;
-            _borderWidthDropDown.SetupAdapter(Sizes.BorderWidthCollection.Select(item => item.Key).ToList());
+            _borderWidthDropDown.SetupAdapter(SectionConstants.BorderWidth.Select(item => item.Key).ToList());
             _borderWidthDropDown.ItemSelected += BorderWidthItemSelected;
 
             _paddingTopDropDown.Name = Fields.PaddingTop;
-            _paddingTopDropDown.SetupAdapter(Sizes.PaddingsCollection.Select(item => item.Key).ToList());
+            _paddingTopDropDown.SetupAdapter(SectionConstants.TopPaddings.Select(item => item.Key).ToList());
             _paddingTopDropDown.ItemSelected += PaddingTopItemSelected;
 
             _paddingBottomDropDown.Name = Fields.PaddingBottom;
-            _paddingBottomDropDown.SetupAdapter(Sizes.PaddingsCollection.Select(item => item.Key).ToList());
-            _paddingBottomDropDown.ItemSelected += PaddingButtonItemSelected;
+            _paddingBottomDropDown.SetupAdapter(SectionConstants.BottomPaddings.Select(item => item.Key).ToList());
+            _paddingBottomDropDown.ItemSelected += PaddingBottomItemSelected;
 
             _paddingLeftDropDown.Name = Fields.PaddingLeft;
-            _paddingLeftDropDown.SetupAdapter(Sizes.PaddingsCollection.Select(item => item.Key).ToList());
+            _paddingLeftDropDown.SetupAdapter(SectionConstants.LeftPaddings.Select(item => item.Key).ToList());
             _paddingLeftDropDown.ItemSelected += PaddingLeftItemSelected;
 
             _paddingRightDropDown.Name = Fields.PaddingRight;
-            _paddingRightDropDown.SetupAdapter(Sizes.PaddingsCollection.Select(item => item.Key).ToList());
+            _paddingRightDropDown.SetupAdapter(SectionConstants.RightPaddings.Select(item => item.Key).ToList());
             _paddingRightDropDown.ItemSelected += PaddingRightItemSelected;
 
             _sectionFontDropDown.Name = Fields.SectionNameFont;
-            _sectionFontDropDown.SetupAdapter(Fonts.GetSectionFonts().Select(item => item.Key).ToList());
+            _sectionFontDropDown.SetupAdapter(SectionConstants.SectionFonts.Select(item => item.Key).ToList());
             _sectionFontDropDown.ItemSelected += SectionFontItemSelected;
 
             _buttonFontDropDown.Name = Fields.ButtonTextFont;
-            _buttonFontDropDown.SetupAdapter(Fonts.GetSectionFonts().Select(item => item.Key).ToList());
+            _buttonFontDropDown.SetupAdapter(SectionConstants.ButtonFonts.Select(item => item.Key).ToList());
             _buttonFontDropDown.ItemSelected += ButtonFontItemSelected;
 
             _hasBorderSwitch.CheckedChange += HasBorderSwitch_CheckedChange;
@@ -183,9 +184,9 @@ namespace EOS.UI.Droid.Sandbox.Activities
 
         private void SetCurrenTheme(IEOSTheme iEOSTheme)
         {
-            if(iEOSTheme is LightEOSTheme)
+            if (iEOSTheme is LightEOSTheme)
                 _themeDropDown.SetSpinnerSelection(1);
-            if(iEOSTheme is DarkEOSTheme)
+            if (iEOSTheme is DarkEOSTheme)
                 _themeDropDown.SetSpinnerSelection(2);
 
             _hasBorderSwitch.Checked = (bool)EOSThemeProvider.Instance.GetCurrentTheme().ThemeValues[EOSConstants.HasSectionBorder];
@@ -230,34 +231,28 @@ namespace EOS.UI.Droid.Sandbox.Activities
 
         private void ButtonFontItemSelected(int position)
         {
-            if(position > 0)
+            var adapter = _sectionRecyclerView.GetAdapter() as SectionAdapter;
+            if (adapter.Headers.FirstOrDefault() is SectionModel section)
             {
-                var adapter = _sectionRecyclerView.GetAdapter() as SectionAdapter;
-                if(adapter.Headers.FirstOrDefault() is SectionModel section)
-                {
-                    section.ButtonNameFont = Typeface.CreateFromAsset(Assets, Fonts.GetSectionFonts().ElementAt(position).Value);
-                    adapter.NotifyDataSetChanged();
-                }
+                section.ButtonNameFont = Typeface.CreateFromAsset(Assets, SectionConstants.ButtonFonts.ElementAt(position).Value);
+                adapter.NotifyDataSetChanged();
             }
         }
 
         private void SectionFontItemSelected(int position)
         {
-            if(position > 0)
+            var adapter = _sectionRecyclerView.GetAdapter() as SectionAdapter;
+            if (adapter.Headers.FirstOrDefault() is SectionModel section)
             {
-                var adapter = _sectionRecyclerView.GetAdapter() as SectionAdapter;
-                if(adapter.Headers.FirstOrDefault() is SectionModel section)
-                {
-                    section.SectionNameFont = Typeface.CreateFromAsset(Assets, Fonts.GetSectionFonts().ElementAt(position).Value);
-                    adapter.NotifyDataSetChanged();
-                }
+                section.SectionNameFont = Typeface.CreateFromAsset(Assets, SectionConstants.SectionFonts.ElementAt(position).Value);
+                adapter.NotifyDataSetChanged();
             }
         }
 
         private void HasButtonSwitch_CheckedChange(object sender, CompoundButton.CheckedChangeEventArgs e)
         {
             var adapter = _sectionRecyclerView.GetAdapter() as SectionAdapter;
-            if(adapter.Headers.FirstOrDefault() is SectionModel section)
+            if (adapter.Headers.FirstOrDefault() is SectionModel section)
             {
                 section.HasButton = e.IsChecked;
                 adapter.NotifyDataSetChanged();
@@ -267,7 +262,7 @@ namespace EOS.UI.Droid.Sandbox.Activities
         private void HasBorderSwitch_CheckedChange(object sender, CompoundButton.CheckedChangeEventArgs e)
         {
             var adapter = _sectionRecyclerView.GetAdapter() as SectionAdapter;
-            if(adapter.Headers.FirstOrDefault() is SectionModel section)
+            if (adapter.Headers.FirstOrDefault() is SectionModel section)
             {
                 section.HasBorder = e.IsChecked;
                 adapter.NotifyDataSetChanged();
@@ -276,171 +271,131 @@ namespace EOS.UI.Droid.Sandbox.Activities
 
         private void PaddingRightItemSelected(int position)
         {
-            if(position > 0)
+            var adapter = _sectionRecyclerView.GetAdapter() as SectionAdapter;
+            if (adapter.Headers.FirstOrDefault() is SectionModel section)
             {
-                var adapter = _sectionRecyclerView.GetAdapter() as SectionAdapter;
-                if(adapter.Headers.FirstOrDefault() is SectionModel section)
-                {
-                    section.RightPadding = Sizes.PaddingsCollection.ElementAt(position).Value;
-                    adapter.NotifyDataSetChanged();
-                }
+                section.RightPadding = SectionConstants.RightPaddings.ElementAt(position).Value;
+                adapter.NotifyDataSetChanged();
             }
         }
 
         private void PaddingLeftItemSelected(int position)
         {
-            if(position > 0)
+            var adapter = _sectionRecyclerView.GetAdapter() as SectionAdapter;
+            if (adapter.Headers.FirstOrDefault() is SectionModel section)
             {
-                var adapter = _sectionRecyclerView.GetAdapter() as SectionAdapter;
-                if(adapter.Headers.FirstOrDefault() is SectionModel section)
-                {
-                    section.LeftPadding = Sizes.PaddingsCollection.ElementAt(position).Value;
-                    adapter.NotifyDataSetChanged();
-                }
+                section.LeftPadding = SectionConstants.LeftPaddings.ElementAt(position).Value;
+                adapter.NotifyDataSetChanged();
             }
         }
 
-        private void PaddingButtonItemSelected(int position)
+        private void PaddingBottomItemSelected(int position)
         {
-            if(position > 0)
+            var adapter = _sectionRecyclerView.GetAdapter() as SectionAdapter;
+            if (adapter.Headers.FirstOrDefault() is SectionModel section)
             {
-                var adapter = _sectionRecyclerView.GetAdapter() as SectionAdapter;
-                if(adapter.Headers.FirstOrDefault() is SectionModel section)
-                {
-                    section.BottonPadding = Sizes.PaddingsCollection.ElementAt(position).Value;
-                    adapter.NotifyDataSetChanged();
-                }
+                section.BottonPadding = SectionConstants.BottomPaddings.ElementAt(position).Value;
+                adapter.NotifyDataSetChanged();
             }
-
         }
 
         private void PaddingTopItemSelected(int position)
         {
-            if(position > 0)
+            var adapter = _sectionRecyclerView.GetAdapter() as SectionAdapter;
+            if (adapter.Headers.FirstOrDefault() is SectionModel section)
             {
-                var adapter = _sectionRecyclerView.GetAdapter() as SectionAdapter;
-                if(adapter.Headers.FirstOrDefault() is SectionModel section)
-                {
-                    section.TopPadding = Sizes.PaddingsCollection.ElementAt(position).Value;
-                    adapter.NotifyDataSetChanged();
-                }
+                section.TopPadding = SectionConstants.TopPaddings.ElementAt(position).Value;
+                adapter.NotifyDataSetChanged();
             }
         }
 
         private void BorderWidthItemSelected(int position)
         {
-            if(position > 0)
+            var adapter = _sectionRecyclerView.GetAdapter() as SectionAdapter;
+            if (adapter.Headers.FirstOrDefault() is SectionModel section)
             {
-                var adapter = _sectionRecyclerView.GetAdapter() as SectionAdapter;
-                if(adapter.Headers.FirstOrDefault() is SectionModel section)
-                {
-                    section.BorderWidth = Sizes.BorderWidthCollection.ElementAt(position).Value;
-                    adapter.NotifyDataSetChanged();
-                }
+                section.BorderWidth = SectionConstants.BorderWidth.ElementAt(position).Value;
+                adapter.NotifyDataSetChanged();
             }
         }
 
         private void BorderColorItemSelected(int position)
         {
-            if(position > 0)
+            var adapter = _sectionRecyclerView.GetAdapter() as SectionAdapter;
+            if (adapter.Headers.FirstOrDefault() is SectionModel section)
             {
-                var adapter = _sectionRecyclerView.GetAdapter() as SectionAdapter;
-                if(adapter.Headers.FirstOrDefault() is SectionModel section)
-                {
-                    section.BorderColor = Colors.MainColorsCollection.ElementAt(position).Value;
-                    adapter.NotifyDataSetChanged();
-                }
+                section.BorderColor = SectionConstants.BorderColors.ElementAt(position).Value;
+                adapter.NotifyDataSetChanged();
             }
         }
 
         private void BackgroundColorItemSelected(int position)
         {
-            if(position > 0)
+            var adapter = _sectionRecyclerView.GetAdapter() as SectionAdapter;
+            if (adapter.Headers.FirstOrDefault() is SectionModel section)
             {
-                var adapter = _sectionRecyclerView.GetAdapter() as SectionAdapter;
-                if(adapter.Headers.FirstOrDefault() is SectionModel section)
-                {
-                    section.BackgroundColor = Colors.MainColorsCollection.ElementAt(position).Value;
-                    adapter.NotifyDataSetChanged();
-                }
+                section.BackgroundColor = SectionConstants.BackgroundsColors.ElementAt(position).Value;
+                adapter.NotifyDataSetChanged();
             }
         }
 
         private void ButtonTextColorItemSelected(int position)
         {
-            if(position > 0)
+            var adapter = _sectionRecyclerView.GetAdapter() as SectionAdapter;
+            if (adapter.Headers.FirstOrDefault() is SectionModel section)
             {
-                var adapter = _sectionRecyclerView.GetAdapter() as SectionAdapter;
-                if(adapter.Headers.FirstOrDefault() is SectionModel section)
-                {
-                    section.ButtonNameColor = Colors.FontColorsCollection.ElementAt(position).Value;
-                    adapter.NotifyDataSetChanged();
-                }
+                section.ButtonNameColor = SectionConstants.ButtonTextColors.ElementAt(position).Value;
+                adapter.NotifyDataSetChanged();
             }
         }
 
         private void SectionTextColorItemSelected(int position)
         {
-            if(position > 0)
+            var adapter = _sectionRecyclerView.GetAdapter() as SectionAdapter;
+            if (adapter.Headers.FirstOrDefault() is SectionModel section)
             {
-                var adapter = _sectionRecyclerView.GetAdapter() as SectionAdapter;
-                if(adapter.Headers.FirstOrDefault() is SectionModel section)
-                {
-                    section.SectionNameColor = Colors.FontColorsCollection.ElementAt(position).Value;
-                    adapter.NotifyDataSetChanged();
-                }
+                section.SectionNameColor = SectionConstants.SectionTextColors.ElementAt(position).Value;
+                adapter.NotifyDataSetChanged();
             }
         }
 
         private void ButtonTextSizeItemSelected(int position)
         {
-            if(position > 0)
+            var adapter = _sectionRecyclerView.GetAdapter() as SectionAdapter;
+            if (adapter.Headers.FirstOrDefault() is SectionModel section)
             {
-                var adapter = _sectionRecyclerView.GetAdapter() as SectionAdapter;
-                if(adapter.Headers.FirstOrDefault() is SectionModel section)
-                {
-                    section.ButtonTextTextSize = Sizes.TextSizeCollection.ElementAt(position).Value;
-                    adapter.NotifyDataSetChanged();
-                }
+                section.ButtonTextTextSize = SectionConstants.ButtonTextSizes.ElementAt(position).Value;
+                adapter.NotifyDataSetChanged();
             }
         }
 
         private void SectionTextSizeItemSelected(int position)
         {
-            if(position > 0)
+            var adapter = _sectionRecyclerView.GetAdapter() as SectionAdapter;
+            if (adapter.Headers.FirstOrDefault() is SectionModel section)
             {
-                var adapter = _sectionRecyclerView.GetAdapter() as SectionAdapter;
-                if(adapter.Headers.FirstOrDefault() is SectionModel section)
-                {
-                    section.SectionNameTextSize = Sizes.TextSizeCollection.ElementAt(position).Value;
-                    adapter.NotifyDataSetChanged();
-                }
+                section.SectionNameTextSize = SectionConstants.SectionTextSizes.ElementAt(position).Value;
+                adapter.NotifyDataSetChanged();
             }
         }
 
         private void ButtonTextLetterSpacingItemSelected(int position)
         {
-            if(position > 0)
+            var adapter = _sectionRecyclerView.GetAdapter() as SectionAdapter;
+            if (adapter.Headers.FirstOrDefault() is SectionModel section)
             {
-                var adapter = _sectionRecyclerView.GetAdapter() as SectionAdapter;
-                if(adapter.Headers.FirstOrDefault() is SectionModel section)
-                {
-                    section.ButtonTextLetterSpacing = Sizes.LetterSpacingCollection.ElementAt(position).Value;
-                    adapter.NotifyDataSetChanged();
-                }
+                section.ButtonTextLetterSpacing = SectionConstants.ButtonLetterSpacings.ElementAt(position).Value;
+                adapter.NotifyDataSetChanged();
             }
         }
 
         private void SectionNameLetterSpacingItemSelected(int position)
         {
-            if(position > 0)
+            var adapter = _sectionRecyclerView.GetAdapter() as SectionAdapter;
+            if (adapter.Headers.FirstOrDefault() is SectionModel section)
             {
-                var adapter = _sectionRecyclerView.GetAdapter() as SectionAdapter;
-                if(adapter.Headers.FirstOrDefault() is SectionModel section)
-                {
-                    section.SectionTextLetterSpacing = Sizes.LetterSpacingCollection.ElementAt(position).Value;
-                    adapter.NotifyDataSetChanged();
-                }
+                section.SectionTextLetterSpacing = SectionConstants.SectionLetterSpacings.ElementAt(position).Value;
+                adapter.NotifyDataSetChanged();
             }
         }
 
@@ -473,14 +428,14 @@ namespace EOS.UI.Droid.Sandbox.Activities
 
         private void ThemeItemSelected(int position)
         {
-            if(position > 0)
+            if (position > 0)
             {
                 EOSThemeProvider.Instance.SetCurrentTheme(ThemeTypes.ThemeCollection.ElementAt(position).Value);
                 ResetCustomValues();
                 UpdateAppearance();
                 var message = _toast.View.FindViewById<TextView>(Android.Resource.Id.Message);
                 message.SetShadowLayer(0, 0, 0, Color.Transparent);
-                if(EOSThemeProvider.Instance.GetCurrentTheme() is LightEOSTheme)
+                if (EOSThemeProvider.Instance.GetCurrentTheme() is LightEOSTheme)
                 {
                     message.SetTextColor(Color.Argb(255, 246, 246, 246));
                     _toast.View.Background = CreateGradientDrawable(Color.Argb(255, 52, 51, 52));
@@ -501,6 +456,5 @@ namespace EOS.UI.Droid.Sandbox.Activities
             drawable.SetCornerRadius(25);
             return drawable;
         }
-
     }
 }

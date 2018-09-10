@@ -5,6 +5,7 @@ using CoreGraphics;
 using EOS.UI.iOS.Controls;
 using EOS.UI.iOS.Extensions;
 using EOS.UI.iOS.Sandbox.Storyboards;
+using EOS.UI.Shared.Sandbox.ControlConstants.iOS;
 using EOS.UI.Shared.Themes.Themes;
 using UIKit;
 using static EOS.UI.Shared.Sandbox.Helpers.Constants;
@@ -82,7 +83,7 @@ namespace EOS.UI.iOS.Sandbox
         private void InitTextSizePicker(CGRect frame)
         {
             textSizeDropDown.InitSource(
-                Sizes.TextSizeCollection,
+                SimpleLabelConstants.TextSizes,
                 size => _simpleLabel.TextSize = size,
                 Fields.TextSize,
                 frame);
@@ -91,7 +92,7 @@ namespace EOS.UI.iOS.Sandbox
         private void InitFontPicker(CGRect frame)
         {
             fontDropDown.InitSource(
-                Fonts.GetGhostButtonSimpleLabelFonts().ToList(),
+                SimpleLabelConstants.SimpleLabelFonts,
                 font => _simpleLabel.Font = font,
                 Fields.Font,
                 frame);
@@ -100,7 +101,7 @@ namespace EOS.UI.iOS.Sandbox
         private void InitTextColorPicker(CGRect frame)
         {
             textColorDropDown.InitSource(
-                Colors.FontColorsCollection,
+                SimpleLabelConstants.FontColors,
                 color => _simpleLabel.TextColor = color,
                 Fields.TextColor,
                 frame);
@@ -109,7 +110,7 @@ namespace EOS.UI.iOS.Sandbox
         private void InitLetterSpacingPicker(CGRect frame)
         {
             letterSpacingDropDown.InitSource(
-                Sizes.LetterSpacingCollection,
+                SimpleLabelConstants.LetterSpacings,
                 spacing => _simpleLabel.LetterSpacing = spacing,
                 Fields.LetterSpacing,
                 frame);
