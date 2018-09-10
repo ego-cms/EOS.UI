@@ -52,21 +52,8 @@ namespace EOS.UI.iOS.Sandbox
                                                 _label.Frame.GetCenterY() == containerView.Frame.GetCenterY(), _label);
 
             var frame = new CGRect(0, 0, 100, 150);
-
-            themeDropDown.InitSource(
-                ThemeTypes.ThemeCollection,
-                (theme) => 
-                {
-                    _label.GetThemeProvider().SetCurrentTheme(theme);
-                    _label.ResetCustomization();
-                    _dropDowns.Except(new[] { themeDropDown }).ToList().ForEach(dropDown => dropDown.ResetValue());
-                    InitSources(frame);
-                    UpdateAppearance();
-                },
-                Fields.Theme,
-                frame);
-            themeDropDown.SetTextFieldText(_label.GetThemeProvider().GetCurrentTheme() is LightEOSTheme  ? "Light" : "Dark");
-
+            InitThemeDropDown(frame);
+            themeDropDown.SetTextFieldText(_label.GetThemeProvider().GetCurrentTheme() is LightEOSTheme ? "Light" : "Dark");
             resetButton.TouchUpInside += (sender, e) =>
             {
                 _label.ResetCustomization();
@@ -74,44 +61,85 @@ namespace EOS.UI.iOS.Sandbox
             };
             InitSources(frame);
         }
-        
-        void InitSources(CGRect frame)
+
+        private void InitSources(CGRect rect)
+        {
+            InitBackgroundColorDropDown(rect);
+            InitTextColorDropDown(rect);
+            InitFontDropDown(rect);
+            InitLetterSpacingDropDown(rect);
+            InitTextSizeDropDown(rect);
+            InitCornerRadiusDropDown(rect);
+        }
+
+        private void InitThemeDropDown(CGRect rect)
+        {
+            themeDropDown.InitSource(
+               ThemeTypes.ThemeCollection,
+               (theme) =>
+               {
+                   _label.GetThemeProvider().SetCurrentTheme(theme);
+                   _label.ResetCustomization();
+                   _dropDowns.Except(new[] { themeDropDown }).ToList().ForEach(dropDown => dropDown.ResetValue());
+                   InitSources(rect);
+                   UpdateAppearance();
+               },
+               Fields.Theme,
+               rect);
+        }
+
+        private void InitBackgroundColorDropDown(CGRect rect)
         {
             backgroundColorDropDown.InitSource(
                 BadgeLabelConstants.BackgroundColors,
                 color => _label.BackgroundColor = color,
                 Fields.Background,
-                frame);
+                rect);
+        }
 
+        private void InitTextColorDropDown(CGRect rect)
+        {
             textColorDropDown.InitSource(
                 BadgeLabelConstants.FontColors,
                 color => _label.TextColor = color,
                 Fields.TextColor,
-                frame);
+                rect);
+        }
 
+        private void InitFontDropDown(CGRect rect)
+        {
             fontDropDown.InitSource(
-                BadgeLabelConstants.BadgeLabelFonts,
-                font => _label.Font = font,
-                Fields.Font,
-                frame);
+               BadgeLabelConstants.BadgeLabelFonts,
+               font => _label.Font = font,
+               Fields.Font,
+               rect);
+        }
 
+        private void InitLetterSpacingDropDown(CGRect rect)
+        {
             letterSpaceDropDown.InitSource(
                 BadgeLabelConstants.LetterSpacings,
                 spacing => _label.LetterSpacing = spacing,
                 Fields.LetterSpacing,
-                frame);
+                rect);
+        }
 
+        private void InitTextSizeDropDown(CGRect rect)
+        {
             textSizeDropDown.InitSource(
-                BadgeLabelConstants.TextSizes,
-                size => _label.TextSize = size,
-                Fields.TextSize,
-                frame);
+               BadgeLabelConstants.TextSizes,
+               size => _label.TextSize = size,
+               Fields.TextSize,
+               rect);
+        }
 
+        private void InitCornerRadiusDropDown(CGRect rect)
+        {
             cornerRadiusDropDown.InitSource(
                 BadgeLabelConstants.CornerRadiusCollection,
                 radius => _label.CornerRadius = (int)radius,
                 Fields.ConerRadius,
-                frame);
+                rect);
         }
     }
 }

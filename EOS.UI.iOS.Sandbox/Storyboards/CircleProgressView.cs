@@ -69,21 +69,7 @@ namespace EOS.UI.iOS.Sandbox
 
 
             var frame = new CGRect(0, 0, 100, 100);
-
-            themeDropDown.InitSource(
-                ThemeTypes.ThemeCollection,
-                (theme) =>
-                {
-                    _circleProgress.GetThemeProvider().SetCurrentTheme(theme);
-                    _circleProgress.ResetCustomization();
-                    _dropDowns.Except(new[] { themeDropDown }).ToList().ForEach(dropDown => dropDown.ResetValue());
-                    _circleProgress.Progress = 0;
-                    showProgressSwitch.On = true;
-                    InitSources(frame);
-                    UpdateAppearance();
-                },
-                Fields.Theme,
-                frame);
+            InitThemeDropDown(frame);
             themeDropDown.SetTextFieldText(_circleProgress.GetThemeProvider().GetCurrentTheme() is LightEOSTheme ? "Light" : "Dark");
 
             showProgressSwitch.ValueChanged += (sender, e) =>
@@ -101,43 +87,82 @@ namespace EOS.UI.iOS.Sandbox
             InitSources(frame);
         }
 
-        void InitSources(CGRect frame)
+        private void InitSources(CGRect rect)
+        {
+            InitFontDropDown(rect);
+            InitTextSizeDropDown(rect);
+            InitColorDropDown(rect);
+            InitFillColorDropDown(rect);
+            InitAlternativeColorDropDown(rect);
+        }
+
+        private void TimerAction()
+        {
+            _percents += 1;
+            _circleProgress.Progress = _percents;
+        }
+
+        private void InitThemeDropDown(CGRect rect)
+        {
+            themeDropDown.InitSource(
+                ThemeTypes.ThemeCollection,
+                (theme) =>
+                {
+                    _circleProgress.GetThemeProvider().SetCurrentTheme(theme);
+                    _circleProgress.ResetCustomization();
+                    _dropDowns.Except(new[] { themeDropDown }).ToList().ForEach(dropDown => dropDown.ResetValue());
+                    _circleProgress.Progress = 0;
+                    showProgressSwitch.On = true;
+                    InitSources(rect);
+                    UpdateAppearance();
+                },
+                Fields.Theme,
+                rect);
+        }
+
+        private void InitFontDropDown(CGRect rect)
         {
             fontDropDown.InitSource(
-                CircleProgressConstants.CircleProgressFonts,
-                font => _circleProgress.Font = font,
-                Fields.Font,
-                frame);
+              CircleProgressConstants.CircleProgressFonts,
+              font => _circleProgress.Font = font,
+              Fields.Font,
+              rect);
+        }
 
+        private void InitTextSizeDropDown(CGRect rect)
+        {
             textSizeDropDown.InitSource(
                 CircleProgressConstants.TextSizes,
                 size => _circleProgress.TextSize = size,
                 Fields.TextSize,
-                frame);
+                rect);
+        }
 
+        private void InitColorDropDown(CGRect rect)
+        {
             colorDropDown.InitSource(
                 CircleProgressConstants.CircleProgressColors,
                 color => _circleProgress.Color = color,
                 Fields.Color,
-                frame);
+                rect);
+        }
 
+        private void InitAlternativeColorDropDown(CGRect rect)
+        {
             alternativeColorDropDown.InitSource(
                 CircleProgressConstants.AlternativeColors,
                 color => _circleProgress.AlternativeColor = color,
                 Fields.AlternativeColor,
-                frame);
+                rect);
+        }
 
+        private void InitFillColorDropDown(CGRect rect)
+        {
             fillColorDropDown.InitSource(
                 CircleProgressConstants.FillColors,
                 color => _circleProgress.FillColor = color,
                 Fields.FillColor,
-                frame);
-        }
-
-        void TimerAction()
-        {
-            _percents += 1;
-            _circleProgress.Progress = _percents;
+                rect);
         }
     }
 }

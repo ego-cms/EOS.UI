@@ -12,6 +12,8 @@ namespace EOS.UI.Shared.Sandbox.ControlConstants.iOS
     public static class InputConstants
     {
         private static FontStyleItem FontStyle => (FontStyleItem)EOSThemeProvider.Instance.GetCurrentTheme().ThemeValues[EOSConstants.R4C2];
+        private static FontStyleItem PlaceholderFontStyle => (FontStyleItem)EOSThemeProvider.Instance.GetCurrentTheme().ThemeValues[EOSConstants.R4C3];
+        private static FontStyleItem DisabledFontStyle => (FontStyleItem)EOSThemeProvider.Instance.GetCurrentTheme().ThemeValues[EOSConstants.R4C4];
 
         public static Dictionary<string, UIFont> InputFonts =>
             Fonts.GetInputFonts().AddDefault(Fields.Default, FontStyle.Font);
@@ -22,11 +24,11 @@ namespace EOS.UI.Shared.Sandbox.ControlConstants.iOS
         public static Dictionary<string, UIColor> FontColors =>
             Colors.FontColorsCollection.AddDefault(Fields.Default, FontStyle.Color);
         public static Dictionary<string, UIColor> DisabledFontColors =>
-            Colors.FontColorsCollection.AddDefault(Fields.Default, (UIColor)EOSThemeProvider.Instance.GetCurrentTheme().ThemeValues[EOSConstants.NeutralColor3]);
+            Colors.FontColorsCollection.AddDefault(Fields.Default, DisabledFontStyle.Color);
         public static Dictionary<string, UIColor> PlaceholderColors =>
-            Colors.MainColorsCollection.AddDefault(Fields.Default, (UIColor)EOSThemeProvider.Instance.GetCurrentTheme().ThemeValues[EOSConstants.NeutralColor2]);
+            Colors.MainColorsCollection.AddDefault(Fields.Default, PlaceholderFontStyle.Color);
         public static Dictionary<string, UIColor> DisabledPlaceholderColors =>
-            Colors.MainColorsCollection.AddDefault(Fields.Default, (UIColor)EOSThemeProvider.Instance.GetCurrentTheme().ThemeValues[EOSConstants.NeutralColor3]);
+            Colors.MainColorsCollection.AddDefault(Fields.Default, DisabledFontStyle.Color);
         public static Dictionary<string, UIColor> IconColors =>
             Colors.MainColorsCollection.AddDefault(Fields.Default, (UIColor)EOSThemeProvider.Instance.GetCurrentTheme().ThemeValues[EOSConstants.NeutralColor2]);
         public static Dictionary<string, UIColor> PopulatedIconColors =>

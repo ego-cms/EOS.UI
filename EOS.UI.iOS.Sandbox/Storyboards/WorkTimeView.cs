@@ -16,6 +16,7 @@ namespace EOS.UI.iOS.Sandbox
     {
         public const string Identifier = "WorkTimeView";
         private List<EOSSandboxDropDown> _dropDowns;
+        private WorkTimeCalendarCollectionSource _source;
 
         public WorkTimeView(IntPtr handle) : base(handle)
         {
@@ -26,9 +27,9 @@ namespace EOS.UI.iOS.Sandbox
             base.ViewDidLoad();
 
             var dataSource = CreateSchedule();
-            var source = (WorkTimeCalendarCollectionSource)workTimeCollection.Source;
-            source.CalendarModel.Items = dataSource;
-            workTimeCollection.Source = source;
+            _source = (WorkTimeCalendarCollectionSource)workTimeCollection.Source;
+            _source.CalendarModel.Items = dataSource;
+            workTimeCollection.Source = _source;
 
             _dropDowns = new List<EOSSandboxDropDown>()
             {
@@ -53,96 +54,14 @@ namespace EOS.UI.iOS.Sandbox
             }));
 
             var rect = new CGRect(0, 0, 100, 100);
-
-            themesDropDown.InitSource(
-                ThemeTypes.ThemeCollection,
-                (theme) =>
-                {
-                    source.CalendarModel.GetThemeProvider().SetCurrentTheme(theme);
-                    source.CalendarModel.ResetCustomization();
-                    _dropDowns.Except(new[] { themesDropDown }).ToList().ForEach(dropDown => dropDown.ResetValue());
-                    UpdateAppearance();
-                },
-                Fields.Theme,
-                rect);
-            themesDropDown.SetTextFieldText(source.CalendarModel.GetThemeProvider().GetCurrentTheme() is LightEOSTheme ? "Light" : "Dark");
-
-            titleFontDropDown.InitSource(
-                WorkTimeConstants.TitleFonts,
-                font => source.CalendarModel.TitleFont = font,
-                Fields.TitleFont,
-                rect);
-
-            dayFontDropDown.InitSource(
-                WorkTimeConstants.DayFonts,
-                font => source.CalendarModel.DayTextFont = font,
-                Fields.DayTextFont,
-                rect);
-
-            titleSizeDropDown.InitSource(
-                WorkTimeConstants.TitleTextSizes,
-                size => source.CalendarModel.TitleTextSize = size,
-                Fields.TitleTextSize,
-               rect);
-
-            dayTextSizeDropDown.InitSource(
-                WorkTimeConstants.DayTextSizes,
-                size => source.CalendarModel.DayTextSize = size,
-                Fields.DayTextSize,
-               rect);
-
-            dayTextColorDropDown.InitSource(
-                WorkTimeConstants.DayColors,
-                color => source.CalendarModel.DayTextColor = color,
-                Fields.DayTextColor,
-                rect);
-
-            currentDayTextColorDropDown.InitSource(
-                WorkTimeConstants.CurrentDayColors,
-               color => source.CalendarModel.CurrentDayTextColor = color,
-               Fields.CurrentDayTextColor,
-               rect);
-
-            titleColorDropDown.InitSource(
-                WorkTimeConstants.TitleColors,
-              color => source.CalendarModel.TitleColor = color,
-              Fields.TitleColor,
-              rect);
-
-            currentDayBackgroundColorDropDown.InitSource(
-                WorkTimeConstants.CurrentDayBackgroundColors,
-                color => source.CalendarModel.CurrentDayBackgroundColor = color,
-                Fields.CurrentDayBackgroundColor,
-               rect);
-
-            devidersColor.InitSource(
-                WorkTimeConstants.DividersColors,
-                color => source.CalendarModel.ColorDividers = color,
-                Fields.ColorDividers,
-                rect);
-
-            currentDayDevidersColor.InitSource(
-                WorkTimeConstants.CurrentDayDividerColors,
-                color => source.CalendarModel.CurrentColorDividers = color,
-                Fields.CurrentColorDividers,
-                rect);
-
-            dayEvenBackgroundColor.InitSource(
-                WorkTimeConstants.DayEvenBackgroundColors,
-                color => source.CalendarModel.DayEvenBackgroundColor = color,
-                Fields.DayEvenBackgroundColor,
-                rect);
-
-            weekStartDropdown.InitSource(
-                Days.DaysCollection,
-                weekStart => source.CalendarModel.WeekStart = weekStart,
-                Fields.WeekStartDay,
-                rect);
-
+            InitThemeDropDown(rect);
+            themesDropDown.SetTextFieldText(_source.CalendarModel.GetThemeProvider().GetCurrentTheme() is LightEOSTheme ? "Light" : "Dark");
+            InitSources(rect);
+            InitWeekStartDropDown(rect);
             resetButton.TouchUpInside += (sender, e) =>
             {
                 _dropDowns.Except(new[] { themesDropDown }).ToList().ForEach(dropDown => dropDown.ResetValue());
-                source.CalendarModel.ResetCustomization();
+                _source.CalendarModel.ResetCustomization();
             };
         }
 
@@ -169,6 +88,145 @@ namespace EOS.UI.iOS.Sandbox
             }
 
             return schedule;
+        }
+
+        private void InitSources(CGRect rect)
+        {
+            InitTitleFontDropDown(rect);
+            InitDayFontDropDown(rect);
+            InitTitleSizeDropDown(rect);
+            InitDayTextSizeDropDown(rect);
+            InitDayTextColorDropDown(rect);
+            InitCurrentDayTextColorDropDown(rect);
+            InitTitleColorDropDown(rect);
+            InitCurrentDayBackgroundColorDropDown(rect);
+            InitDevidersColorDropDown(rect);
+            InitCurrentDayDevidersColorDropDown(rect);
+            InitDayEvenBackgroundColor(rect);
+        }
+
+        private void InitThemeDropDown(CGRect rect)
+        {
+            themesDropDown.InitSource(
+               ThemeTypes.ThemeCollection,
+               (theme) =>
+               {
+                   _source.CalendarModel.GetThemeProvider().SetCurrentTheme(theme);
+                   _source.CalendarModel.ResetCustomization();
+                   _dropDowns.Except(new[] { themesDropDown }).ToList().ForEach(dropDown => dropDown.ResetValue());
+                   InitSources(rect);
+                   UpdateAppearance();
+               },
+               Fields.Theme,
+               rect);
+        }
+
+        private void InitTitleFontDropDown(CGRect rect)
+        {
+            titleFontDropDown.InitSource(
+                WorkTimeConstants.TitleFonts,
+                font => _source.CalendarModel.TitleFont = font,
+                Fields.TitleFont,
+                rect);
+        }
+
+        private void InitDayFontDropDown(CGRect rect)
+        {
+            dayFontDropDown.InitSource(
+                WorkTimeConstants.DayFonts,
+                font => _source.CalendarModel.DayTextFont = font,
+                Fields.DayTextFont,
+                rect);
+        }
+
+        private void InitTitleSizeDropDown(CGRect rect)
+        {
+            titleSizeDropDown.InitSource(
+               WorkTimeConstants.TitleTextSizes,
+               size => _source.CalendarModel.TitleTextSize = size,
+               Fields.TitleTextSize,
+              rect);
+        }
+
+        private void InitDayTextSizeDropDown(CGRect rect)
+        {
+            dayTextSizeDropDown.InitSource(
+                WorkTimeConstants.DayTextSizes,
+                size => _source.CalendarModel.DayTextSize = size,
+                Fields.DayTextSize,
+               rect);
+        }
+
+        private void InitDayTextColorDropDown(CGRect rect)
+        {
+            dayTextColorDropDown.InitSource(
+               WorkTimeConstants.DayColors,
+               color => _source.CalendarModel.DayTextColor = color,
+               Fields.DayTextColor,
+               rect);
+        }
+
+        private void InitCurrentDayTextColorDropDown(CGRect rect)
+        {
+            currentDayTextColorDropDown.InitSource(
+                WorkTimeConstants.CurrentDayColors,
+               color => _source.CalendarModel.CurrentDayTextColor = color,
+               Fields.CurrentDayTextColor,
+               rect);
+        }
+
+        private void InitTitleColorDropDown(CGRect rect)
+        {
+            titleColorDropDown.InitSource(
+               WorkTimeConstants.TitleColors,
+             color => _source.CalendarModel.TitleColor = color,
+             Fields.TitleColor,
+             rect);
+        }
+
+        private void InitCurrentDayBackgroundColorDropDown(CGRect rect)
+        {
+            currentDayBackgroundColorDropDown.InitSource(
+               WorkTimeConstants.CurrentDayBackgroundColors,
+               color => _source.CalendarModel.CurrentDayBackgroundColor = color,
+               Fields.CurrentDayBackgroundColor,
+              rect);
+        }
+
+        private void InitDevidersColorDropDown(CGRect rect)
+        {
+            devidersColor.InitSource(
+                WorkTimeConstants.DividersColors,
+                color => _source.CalendarModel.ColorDividers = color,
+                Fields.ColorDividers,
+                rect);
+        }
+
+        private void InitCurrentDayDevidersColorDropDown(CGRect rect)
+        {
+            currentDayDevidersColor.InitSource(
+               WorkTimeConstants.CurrentDayDividerColors,
+               color => _source.CalendarModel.CurrentColorDividers = color,
+               Fields.CurrentColorDividers,
+               rect);
+        }
+
+        private void InitDayEvenBackgroundColor(CGRect rect)
+        {
+            dayEvenBackgroundColor.InitSource(
+               WorkTimeConstants.DayEvenBackgroundColors,
+               color => _source.CalendarModel.DayEvenBackgroundColor = color,
+               Fields.DayEvenBackgroundColor,
+               rect);
+        }
+
+        private void InitWeekStartDropDown(CGRect rect)
+        {
+            weekStartDropdown.InitSource(
+               Days.DaysCollection,
+               weekStart => _source.CalendarModel.WeekStart = weekStart,
+               Fields.WeekStartDay,
+               rect);
         }
     }
 }
