@@ -1,4 +1,5 @@
-﻿using System;
+﻿#if __IOS__
+using System;
 using System.Collections.Generic;
 using EOS.UI.iOS.Themes;
 using EOS.UI.Shared.Themes.Extensions;
@@ -20,3 +21,4 @@ namespace EOS.UI.Shared.Sandbox.ControlConstants.iOS
             Colors.MainColorsCollection.AddDefault(Fields.Default, (UIColor)EOSThemeProvider.Instance.GetCurrentTheme().ThemeValues[EOSConstants.NeutralColor1S]);
     }
 }
+#endif

@@ -31,6 +31,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)ControlConstants\Android\SectionConstants.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ControlConstants\Android\WorkTimeConstants.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ControlConstants\iOS\CircleMenuConstants.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ControlConstants\Android\CircleMenuConstants.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="$(MSBuildThisFileDirectory)Helpers\" />
