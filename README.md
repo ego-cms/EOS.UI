@@ -6,6 +6,7 @@ EOS.UI
 * [Introduction](../..#introduction)
 * [iOS and Android Sample Apps](../..#ios-and-android-sample-apps)
 * [Documentation](../..#documentation)
+* [Nuget](../..#nuget)
 * [Issues or feature requests?](../..#issues-or-feature-requests)
 
 Introduction
