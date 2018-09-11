@@ -361,8 +361,8 @@ namespace EOS.UI.iOS.Sandbox
         {
             resetButton.TouchUpInside += (sender, e) =>
             {
-                _inputTop.Text = string.Empty;
-                _inputBotton.Text = string.Empty;
+                //_inputTop.Text = string.Empty;
+                //_inputBotton.Text = string.Empty;
                 _inputTop.ResetCustomization();
                 _inputBotton.ResetCustomization();
                 _validateRule = null;
