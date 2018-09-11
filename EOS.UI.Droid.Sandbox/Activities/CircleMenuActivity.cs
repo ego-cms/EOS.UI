@@ -103,45 +103,41 @@ namespace EOS.UI.Droid.Sandbox.Activities
 
         private void SetCurrenTheme(IEOSTheme iEOSTheme)
         {
-            if(iEOSTheme is LightEOSTheme)
+            if (iEOSTheme is LightEOSTheme)
                 _themeDropDown.SetSpinnerSelection(1);
-            if(iEOSTheme is DarkEOSTheme)
+            if (iEOSTheme is DarkEOSTheme)
                 _themeDropDown.SetSpinnerSelection(2);
         }
 
         private void CircleMenuItemsItemSelected(int position)
         {
-            if(position > 0)
+            if (position > 0)
                 _circleMenu.CircleMenuItems = GenerateSource(CircleMenuSource.SourceCollection.ElementAt(position).Value);
         }
 
         private void UnfocusedButtonColorItemSelected(int position)
         {
-            if(position > 0)
-                _circleMenu.UnfocusedIconColor = CircleMenuConstants.UnfocusedIconColors.ElementAt(position).Value;
+            _circleMenu.UnfocusedIconColor = CircleMenuConstants.UnfocusedIconColors.ElementAt(position).Value;
         }
 
         private void FocusedButtonColorItemSelected(int position)
         {
-            if(position > 0)
-                _circleMenu.FocusedIconColor = CircleMenuConstants.FocusedIconColors.ElementAt(position).Value;
+            _circleMenu.FocusedIconColor = CircleMenuConstants.FocusedIconColors.ElementAt(position).Value;
         }
 
         private void FocusedMainColorItemSelected(int position)
         {
-            if(position > 0)
-                _circleMenu.FocusedBackgroundColor = CircleMenuConstants.FocusedBackgroundColors.ElementAt(position).Value;
+            _circleMenu.FocusedBackgroundColor = CircleMenuConstants.FocusedBackgroundColors.ElementAt(position).Value;
         }
 
         private void MainColorItemSelected(int position)
         {
-            if(position > 0)
-                _circleMenu.UnfocusedBackgroundColor = CircleMenuConstants.UnfocusedBackgroundColors.ElementAt(position).Value;
+            _circleMenu.UnfocusedBackgroundColor = CircleMenuConstants.UnfocusedBackgroundColors.ElementAt(position).Value;
         }
 
         private void ThemeItemSelected(int position)
         {
-            if(position > 0)
+            if (position > 0)
             {
                 _circleMenu.GetThemeProvider().SetCurrentTheme(ThemeTypes.ThemeCollection.ElementAt(position).Value);
                 ResetCustomValues();
@@ -153,12 +149,12 @@ namespace EOS.UI.Droid.Sandbox.Activities
         {
             var menus = new List<CircleMenuItemModel>();
             var submenus = new List<CircleMenuItemModel>();
-            for(int i = 101; i <= 103; i++)
+            for (int i = 101; i <= 103; i++)
                 submenus.Add(new CircleMenuItemModel(i, BaseContext.Resources.GetDrawable(_iconsDictionary.GetValueOrDefault(i))));
 
-            for(int i = 1; i <= items; i++)
+            for (int i = 1; i <= items; i++)
             {
-                if(i == 3 || i == 4)
+                if (i == 3 || i == 4)
                     menus.Add(new CircleMenuItemModel(i, BaseContext.Resources.GetDrawable(_iconsDictionary.GetValueOrDefault(i)), submenus));
                 else
                     menus.Add(new CircleMenuItemModel(i, BaseContext.Resources.GetDrawable(_iconsDictionary.GetValueOrDefault(i))));
