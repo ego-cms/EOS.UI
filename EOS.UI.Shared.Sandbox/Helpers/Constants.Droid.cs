@@ -1,7 +1,6 @@
 ﻿#if __ANDROID__
 using System;
 using System.Collections.Generic;
-using System.Collections.
 using System.Linq;
 using Android.Graphics;
 using Android.Widget;
