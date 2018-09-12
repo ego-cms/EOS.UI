@@ -345,12 +345,8 @@ namespace EOS.UI.Droid.Controls
             if (HasShadowDrawable(layer))
             {
                 CreateAndAnimateRotationDrawable();
+                InProgress = true;
             }
-            else
-            {
-                CreateAndAnimateRotationDrawable();
-            }
-            InProgress = true;
         }
 
         public void StopProgressAnimation()

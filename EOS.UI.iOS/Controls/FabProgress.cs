@@ -221,7 +221,6 @@ namespace EOS.UI.iOS.Controls
                 Image = UIImage.FromBundle(provider.GetEOSProperty<string>(this, EOSConstants.CalendarImage));
                 PreloaderImage = UIImage.FromBundle(provider.GetEOSProperty<string>(this, EOSConstants.FabProgressPreloaderImage));
                 ShadowConfig = provider.GetEOSProperty<ShadowConfig>(this, EOSConstants.FabShadow);
-                Enabled = Enabled;
                 IsEOSCustomizationIgnored = false;
             }
         }
