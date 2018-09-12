@@ -122,11 +122,11 @@ namespace EOS.UI.Shared.Sandbox.Helpers
 
         public static partial class Sizes
         {
-            public static readonly Dictionary<string, float> TextSizeCollection = new Dictionary<string, float>();
-            public static readonly Dictionary<string, int> CornerRadiusCollection = new Dictionary<string, int>();
-            public static readonly Dictionary<string, int> BorderWidthCollection = new Dictionary<string, int>();
-            public static readonly Dictionary<string, int> PaddingsCollection = new Dictionary<string, int>();
-            public static readonly Dictionary<string, float> LetterSpacingCollection = new Dictionary<string, float>();
+            public static Dictionary<string, float> TextSizeCollection = new Dictionary<string, float>();
+            public static Dictionary<string, int> CornerRadiusCollection = new Dictionary<string, int>();
+            public static Dictionary<string, int> BorderWidthCollection = new Dictionary<string, int>();
+            public static Dictionary<string, int> PaddingsCollection = new Dictionary<string, int>();
+            public static Dictionary<string, float> LetterSpacingCollection = new Dictionary<string, float>();
 
             static Sizes()
             {
@@ -224,9 +224,9 @@ namespace EOS.UI.Shared.Sandbox.Helpers
 
         public static class Shadow
         {
-            public static readonly Dictionary<string, int> OffsetCollection = new Dictionary<string, int>();
-            public static readonly Dictionary<string, int> RadiusCollection = new Dictionary<string, int>();
-            public static readonly Dictionary<string, double> OpacityCollection = new Dictionary<string, double>();
+            public static Dictionary<string, int> OffsetCollection = new Dictionary<string, int>();
+            public static Dictionary<string, int> RadiusCollection = new Dictionary<string, int>();
+            public static Dictionary<string, double> OpacityCollection = new Dictionary<string, double>();
 
             static Shadow()
             {

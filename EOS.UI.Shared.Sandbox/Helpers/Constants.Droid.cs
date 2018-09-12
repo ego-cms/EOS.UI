@@ -1,6 +1,7 @@
 ﻿#if __ANDROID__
 using System;
 using System.Collections.Generic;
+using System.Collections.
 using System.Linq;
 using Android.Graphics;
 using Android.Widget;
@@ -12,7 +13,7 @@ namespace EOS.UI.Shared.Sandbox.Helpers
     {
         public static class Colors
         {
-            public static readonly Dictionary<string, Color> MainColorsCollection = new Dictionary<string, Color>()
+            public static Dictionary<string, Color> MainColorsCollection = new Dictionary<string, Color>()
             {
                 {ColorNameBlue, Color.ParseColor(ColorBlue)},
                 {ColorNameUltramarine, Color.ParseColor(ColorUltramarine)},
@@ -50,20 +51,6 @@ namespace EOS.UI.Shared.Sandbox.Helpers
 
         public static class Fonts
         {
-            //public const string Roboto = "Roboto";
-            //public const string Berkshireswash = "Berkshireswash";
-            //public const string Amita = "Amita";
-            //public const string AcademyEngraved = "AcademyEngraved";
-
-            //public static readonly Dictionary<string, string> FontsCollection = new Dictionary<string, string>()
-            //{
-            //    { string.Empty, string.Empty },
-            //    { Roboto, "Fonts/Roboto.ttf" },
-            //    { Berkshireswash, "Fonts/Berkshireswash.ttf" },
-            //    { Amita, "Fonts/Amita.ttf" },
-            //    { AcademyEngraved, "Fonts/academyEngraved.ttf" },
-            //};
-
             public const string ArimoRegular = "ArimoRegular";
             public const string ArimoBold = "ArimoBold";
             public const string LatoRegular = "LatoRegular";
@@ -209,7 +196,7 @@ namespace EOS.UI.Shared.Sandbox.Helpers
 
         public static class Validation
         {
-            public static readonly Dictionary<string, int> ValidationCollection = new Dictionary<string, int>()
+            public static Dictionary<string, int> ValidationCollection = new Dictionary<string, int>()
             {
                 { string.Empty, 0 },
                 { "without validation", 1 },
