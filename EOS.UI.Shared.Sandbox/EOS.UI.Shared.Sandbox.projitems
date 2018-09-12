@@ -12,8 +12,29 @@
     <Compile Include="$(MSBuildThisFileDirectory)Helpers\Constants.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Helpers\Constants.iOS.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Helpers\Constants.Droid.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ControlConstants\iOS\BadgeLabelConstants.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ControlConstants\iOS\CircleProgressConstants.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ControlConstants\iOS\SimpleButtonConstants.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ControlConstants\iOS\FabProgressConstants.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ControlConstants\iOS\GhostButtonConstants.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ControlConstants\iOS\InputConstants.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ControlConstants\iOS\SectionConstants.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ControlConstants\iOS\WorkTimeConstants.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ControlConstants\iOS\SimpleLabelConstants.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ControlConstants\Android\BadgeLabelConstants.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ControlConstants\Android\SimpleLabelConstants.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ControlConstants\Android\GhostButtonConstants.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ControlConstants\Android\SimpleButtonConstants.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ControlConstants\Android\FabProgressConstants.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ControlConstants\Android\InputConstants.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ControlConstants\Android\CircleProgressConstants.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ControlConstants\Android\SectionConstants.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ControlConstants\Android\WorkTimeConstants.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="$(MSBuildThisFileDirectory)Helpers\" />
+    <Folder Include="$(MSBuildThisFileDirectory)ControlConstants\" />
+    <Folder Include="$(MSBuildThisFileDirectory)ControlConstants\iOS\" />
+    <Folder Include="$(MSBuildThisFileDirectory)ControlConstants\Android\" />
   </ItemGroup>
 </Project>

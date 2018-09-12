@@ -6,6 +6,7 @@ using Android.OS;
 using Android.Widget;
 using EOS.UI.Droid.Controls;
 using EOS.UI.Droid.Sandbox.Controls;
+using EOS.UI.Shared.Sandbox.ControlConstants.Android;
 using EOS.UI.Shared.Sandbox.Helpers;
 using EOS.UI.Shared.Themes.Interfaces;
 using EOS.UI.Shared.Themes.Themes;
@@ -13,7 +14,7 @@ using static EOS.UI.Shared.Sandbox.Helpers.Constants;
 
 namespace EOS.UI.Droid.Sandbox.Activities
 {
-    [Activity(Label = ControlNames.BadgeLabel, Theme = "@style/Sandbox.Main", ScreenOrientation = ScreenOrientation.Portrait) ]
+    [Activity(Label = ControlNames.BadgeLabel, Theme = "@style/Sandbox.Main", ScreenOrientation = ScreenOrientation.Portrait)]
     public class BadgeLabelActivity : BaseActivity
     {
         private BadgeLabel _badge;
@@ -48,27 +49,27 @@ namespace EOS.UI.Droid.Sandbox.Activities
             _themeDropDown.ItemSelected += ThemeItemSelected;
 
             _backgroundColorDropDown.Name = Fields.Background;
-            _backgroundColorDropDown.SetupAdapter(Colors.MainColorsCollection.Select(item => item.Key).ToList());
+            _backgroundColorDropDown.SetupAdapter(BadgeLabelConstants.BackgroundColors.Select(item => item.Key).ToList());
             _backgroundColorDropDown.ItemSelected += BackgroundColorItemSelected;
 
             _textColorDropDown.Name = Fields.TextColor;
-            _textColorDropDown.SetupAdapter(Colors.FontColorsCollection.Select(item => item.Key).ToList());
+            _textColorDropDown.SetupAdapter(BadgeLabelConstants.FontColors.Select(item => item.Key).ToList());
             _textColorDropDown.ItemSelected += TextColorItemSelected;
 
             _fontDropDown.Name = Fields.Font;
-            _fontDropDown.SetupAdapter(Fonts.GetButtonBadgeFonts().Select(item => item.Key).ToList());
+            _fontDropDown.SetupAdapter(BadgeLabelConstants.BadgeLabelFonts.Select(item => item.Key).ToList());
             _fontDropDown.ItemSelected += FontItemSelected;
 
             _letterSpacingDropDown.Name = Fields.LetterSpacing;
-            _letterSpacingDropDown.SetupAdapter(Sizes.LetterSpacingCollection.Select(item => item.Key).ToList());
+            _letterSpacingDropDown.SetupAdapter(BadgeLabelConstants.LetterSpacings.Select(item => item.Key).ToList());
             _letterSpacingDropDown.ItemSelected += LetterSpacingItemSelected;
 
             _textSizeDropDown.Name = Fields.TextSize;
-            _textSizeDropDown.SetupAdapter(Sizes.TextSizeCollection.Select(item => item.Key).ToList());
+            _textSizeDropDown.SetupAdapter(BadgeLabelConstants.TextSizes.Select(item => item.Key).ToList());
             _textSizeDropDown.ItemSelected += TextSizeItemSelected;
 
             _cornerRadiusDropDown.Name = Fields.ConerRadius;
-            _cornerRadiusDropDown.SetupAdapter(Sizes.CornerRadiusCollection.Select(item => item.Key).ToList());
+            _cornerRadiusDropDown.SetupAdapter(BadgeLabelConstants.CornerRadiusCollection.Select(item => item.Key).ToList());
             _cornerRadiusDropDown.ItemSelected += CornerRadiusItemSelected;
 
             SetCurrenTheme(_badge.GetThemeProvider().GetCurrentTheme());
@@ -95,15 +96,15 @@ namespace EOS.UI.Droid.Sandbox.Activities
 
         private void SetCurrenTheme(IEOSTheme iEOSTheme)
         {
-            if(iEOSTheme is LightEOSTheme)
+            if (iEOSTheme is LightEOSTheme)
                 _themeDropDown.SetSpinnerSelection(1);
-            if(iEOSTheme is DarkEOSTheme)
+            if (iEOSTheme is DarkEOSTheme)
                 _themeDropDown.SetSpinnerSelection(2);
         }
 
         private void ThemeItemSelected(int position)
         {
-            if(position > 0)
+            if (position > 0)
             {
                 _badge.GetThemeProvider().SetCurrentTheme(ThemeTypes.ThemeCollection.ElementAt(position).Value);
                 ResetCustomValues();
@@ -113,38 +114,32 @@ namespace EOS.UI.Droid.Sandbox.Activities
 
         private void CornerRadiusItemSelected(int position)
         {
-            if(position > 0)
-                _badge.CornerRadius = Sizes.CornerRadiusCollection.ElementAt(position).Value * Resources.DisplayMetrics.Density;
+            _badge.CornerRadius = BadgeLabelConstants.CornerRadiusCollection.ElementAt(position).Value * Resources.DisplayMetrics.Density;
         }
 
         private void TextSizeItemSelected(int position)
         {
-            if(position > 0)
-                _badge.TextSize = Sizes.TextSizeCollection.ElementAt(position).Value;
+            _badge.TextSize = BadgeLabelConstants.TextSizes.ElementAt(position).Value;
         }
 
         private void LetterSpacingItemSelected(int position)
         {
-            if(position > 0)
-                _badge.LetterSpacing = Sizes.LetterSpacingCollection.ElementAt(position).Value;
+            _badge.LetterSpacing = BadgeLabelConstants.LetterSpacings.ElementAt(position).Value;
         }
 
         private void FontItemSelected(int position)
         {
-            if(position > 0)
-                _badge.Typeface = Typeface.CreateFromAsset(Assets, Fonts.GetButtonBadgeFonts().ElementAt(position).Value);
+            _badge.Typeface = Typeface.CreateFromAsset(Assets, BadgeLabelConstants.BadgeLabelFonts.ElementAt(position).Value);
         }
 
         private void TextColorItemSelected(int position)
         {
-            if(position > 0)
-                _badge.TextColor = Colors.FontColorsCollection.ElementAt(position).Value;
+            _badge.TextColor = BadgeLabelConstants.FontColors.ElementAt(position).Value;
         }
 
         private void BackgroundColorItemSelected(int position)
         {
-            if(position > 0)
-                _badge.BackgroundColor = Colors.MainColorsCollection.ElementAt(position).Value;
+            _badge.BackgroundColor = BadgeLabelConstants.BackgroundColors.ElementAt(position).Value;
         }
 
         private void ResetCustomValues()

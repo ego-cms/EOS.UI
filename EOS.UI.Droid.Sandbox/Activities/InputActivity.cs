@@ -7,6 +7,7 @@ using Android.Views;
 using Android.Widget;
 using EOS.UI.Droid.Controls;
 using EOS.UI.Droid.Sandbox.Controls;
+using EOS.UI.Shared.Sandbox.ControlConstants.Android;
 using EOS.UI.Shared.Sandbox.Helpers;
 using EOS.UI.Shared.Themes.Interfaces;
 using EOS.UI.Shared.Themes.Themes;
@@ -84,31 +85,31 @@ namespace EOS.UI.Droid.Sandbox.Activities
             _themeDropDown.ItemSelected += ThemeItemSelected;
 
             _fontDropDown.Name = Fields.Font;
-            _fontDropDown.SetupAdapter(Fonts.GetInputFonts().Select(item => item.Key).ToList());
+            _fontDropDown.SetupAdapter(InputConstants.InputFonts.Select(item => item.Key).ToList());
             _fontDropDown.ItemSelected += FontItemSelected;
 
             _letterSpacingDropDown.Name = Fields.LetterSpacing;
-            _letterSpacingDropDown.SetupAdapter(Sizes.LetterSpacingCollection.Select(item => item.Key).ToList());
+            _letterSpacingDropDown.SetupAdapter(InputConstants.LetterSpacings.Select(item => item.Key).ToList());
             _letterSpacingDropDown.ItemSelected += LetterSpacingItemSelected;
 
             _textSizeDropDown.Name = Fields.TextSize;
-            _textSizeDropDown.SetupAdapter(Sizes.TextSizeCollection.Select(item => item.Key).ToList());
+            _textSizeDropDown.SetupAdapter(InputConstants.TextSizes.Select(item => item.Key).ToList());
             _textSizeDropDown.ItemSelected += TextSizeView_ItemSelected;
 
             _textColorDropDown.Name = Fields.TextColor;
-            _textColorDropDown.SetupAdapter(Colors.FontColorsCollection.Select(item => item.Key).ToList());
+            _textColorDropDown.SetupAdapter(InputConstants.FontColors.Select(item => item.Key).ToList());
             _textColorDropDown.ItemSelected += TextColorItemSelected;
 
             _textColorDisabledDropDown.Name = Fields.DisabledTextColor;
-            _textColorDisabledDropDown.SetupAdapter(Colors.FontColorsCollection.Select(item => item.Key).ToList());
+            _textColorDisabledDropDown.SetupAdapter(InputConstants.DisabledFontColors.Select(item => item.Key).ToList());
             _textColorDisabledDropDown.ItemSelected += TextColorDisabledItemSelected;
 
             _hintTextColorDropDown.Name = Fields.HintTextColor;
-            _hintTextColorDropDown.SetupAdapter(Colors.FontColorsCollection.Select(item => item.Key).ToList());
+            _hintTextColorDropDown.SetupAdapter(InputConstants.PlaceholderColors.Select(item => item.Key).ToList());
             _hintTextColorDropDown.ItemSelected += HintTextColorItemSelected;
 
             _hintTextColorDisabledDropDown.Name = Fields.HintTextColorDisabled;
-            _hintTextColorDisabledDropDown.SetupAdapter(Colors.FontColorsCollection.Select(item => item.Key).ToList());
+            _hintTextColorDisabledDropDown.SetupAdapter(InputConstants.DisabledPlaceholderColors.Select(item => item.Key).ToList());
             _hintTextColorDisabledDropDown.ItemSelected += HintTextColorDisabledItemSelected;
 
             _leftDrawableDropDown.Name = Fields.Icon;
@@ -116,27 +117,27 @@ namespace EOS.UI.Droid.Sandbox.Activities
             _leftDrawableDropDown.ItemSelected += LeftDrawableItemSelected;
 
             _focusedColorDropDown.Name = Fields.FocusedColor;
-            _focusedColorDropDown.SetupAdapter(Colors.MainColorsCollection.Select(item => item.Key).ToList());
+            _focusedColorDropDown.SetupAdapter(InputConstants.FocusedColors.Select(item => item.Key).ToList());
             _focusedColorDropDown.ItemSelected += FocusedColorItemSelected;
 
             _disabledColorDropDown.Name = Fields.DisabledColor;
-            _disabledColorDropDown.SetupAdapter(Colors.MainColorsCollection.Select(item => item.Key).ToList());
+            _disabledColorDropDown.SetupAdapter(InputConstants.DisabledColors.Select(item => item.Key).ToList());
             _disabledColorDropDown.ItemSelected += DisabledColorItemSelected;
 
             _normalUnderlineColorDropDown.Name = Fields.NormalUnderlineColor;
-            _normalUnderlineColorDropDown.SetupAdapter(Colors.MainColorsCollection.Select(item => item.Key).ToList());
+            _normalUnderlineColorDropDown.SetupAdapter(InputConstants.UnderlineColors.Select(item => item.Key).ToList());
             _normalUnderlineColorDropDown.ItemSelected += NormalUnderlineColorItemSelected;
 
             _normalIconColorDropDown.Name = Fields.NormalIconColor;
-            _normalIconColorDropDown.SetupAdapter(Colors.MainColorsCollection.Select(item => item.Key).ToList());
+            _normalIconColorDropDown.SetupAdapter(InputConstants.IconColors.Select(item => item.Key).ToList());
             _normalIconColorDropDown.ItemSelected += NormalIconColorItemSelected;
 
             _populatedIconColorDropDown.Name = Fields.PopulatedIconColor;
-            _populatedIconColorDropDown.SetupAdapter(Colors.MainColorsCollection.Select(item => item.Key).ToList());
+            _populatedIconColorDropDown.SetupAdapter(InputConstants.PopulatedIconColors.Select(item => item.Key).ToList());
             _populatedIconColorDropDown.ItemSelected += PopulatedIconColorItemSelected;
 
             _populatedUnderlineColorDropDown.Name = Fields.PopulatedUnderlineColor;
-            _populatedUnderlineColorDropDown.SetupAdapter(Colors.MainColorsCollection.Select(item => item.Key).ToList());
+            _populatedUnderlineColorDropDown.SetupAdapter(InputConstants.PopulatedUnderlineColors.Select(item => item.Key).ToList());
             _populatedUnderlineColorDropDown.ItemSelected += PopulatedUnderlineColorItemSelected;
 
             _validatedRulesDropDown.Name = Fields.ValidationRules;
@@ -157,7 +158,7 @@ namespace EOS.UI.Droid.Sandbox.Activities
 
         private void ProceedValidation(int key)
         {
-            switch(_validationKey)
+            switch (_validationKey)
             {
                 case 0:
                 case 1:
@@ -178,7 +179,7 @@ namespace EOS.UI.Droid.Sandbox.Activities
             _validationKey = position;
             ProceedValidation(_validationKey);
 
-            if(_validationKey == 1 || _validationKey == 0)
+            if (_validationKey == 1 || _validationKey == 0)
             {
                 _inputTop.IsValid = true;
                 _inputBottom.IsValid = true;
@@ -187,42 +188,33 @@ namespace EOS.UI.Droid.Sandbox.Activities
 
         private void PopulatedUnderlineColorItemSelected(int position)
         {
-            if(position > 0)
-            {
-                _inputTop.PopulatedUnderlineColor = Colors.MainColorsCollection.ElementAt(position).Value;
-                _inputBottom.PopulatedUnderlineColor = Colors.MainColorsCollection.ElementAt(position).Value;
-            }
+            _inputTop.PopulatedUnderlineColor = InputConstants.PopulatedUnderlineColors.ElementAt(position).Value;
+            _inputBottom.PopulatedUnderlineColor = InputConstants.PopulatedUnderlineColors.ElementAt(position).Value;
         }
 
         private void PopulatedIconColorItemSelected(int position)
         {
-            if(position > 0)
-            {
-                _inputTop.PopulatedIconColor = Colors.MainColorsCollection.ElementAt(position).Value;
-                _inputBottom.PopulatedIconColor = Colors.MainColorsCollection.ElementAt(position).Value;
-            }
+            _inputTop.PopulatedIconColor = InputConstants.PopulatedIconColors.ElementAt(position).Value;
+            _inputBottom.PopulatedIconColor = InputConstants.PopulatedIconColors.ElementAt(position).Value;
         }
 
         private void NormalIconColorItemSelected(int position)
         {
-            if(position > 0)
-            {
-                _inputTop.NormalIconColor = Colors.MainColorsCollection.ElementAt(position).Value;
-                _inputBottom.NormalIconColor = Colors.MainColorsCollection.ElementAt(position).Value;
-            }
+            _inputTop.NormalIconColor = InputConstants.IconColors.ElementAt(position).Value;
+            _inputBottom.NormalIconColor = InputConstants.IconColors.ElementAt(position).Value;
         }
 
         private void SetCurrenTheme(IEOSTheme iEOSTheme)
         {
-            if(iEOSTheme is LightEOSTheme)
+            if (iEOSTheme is LightEOSTheme)
                 _themeDropDown.SetSpinnerSelection(1);
-            if(iEOSTheme is DarkEOSTheme)
+            if (iEOSTheme is DarkEOSTheme)
                 _themeDropDown.SetSpinnerSelection(2);
         }
 
         private void ThemeItemSelected(int position)
         {
-            if(position > 0)
+            if (position > 0)
             {
                 _inputTop.GetThemeProvider().SetCurrentTheme(ThemeTypes.ThemeCollection.ElementAt(position).Value);
                 ResetCustomValues();
@@ -232,70 +224,49 @@ namespace EOS.UI.Droid.Sandbox.Activities
 
         private void TextSizeView_ItemSelected(int position)
         {
-            if(position > 0)
-            {
-                _inputTop.TextSize = Sizes.TextSizeCollection.ElementAt(position).Value;
-                _inputBottom.TextSize = Sizes.TextSizeCollection.ElementAt(position).Value;
-            }
+            _inputTop.TextSize = InputConstants.TextSizes.ElementAt(position).Value;
+            _inputBottom.TextSize = InputConstants.TextSizes.ElementAt(position).Value;
         }
 
         private void LetterSpacingItemSelected(int position)
         {
-            if(position > 0)
-            {
-                _inputTop.LetterSpacing = Sizes.LetterSpacingCollection.ElementAt(position).Value;
-                _inputBottom.LetterSpacing = Sizes.LetterSpacingCollection.ElementAt(position).Value;
-            }
+            _inputTop.LetterSpacing = InputConstants.LetterSpacings.ElementAt(position).Value;
+            _inputBottom.LetterSpacing = InputConstants.LetterSpacings.ElementAt(position).Value;
         }
 
         private void FontItemSelected(int position)
         {
-            if(position > 0)
-            {
-                _inputTop.Typeface = Typeface.CreateFromAsset(Assets, Fonts.GetInputFonts().ElementAt(position).Value);
-                _inputBottom.Typeface = Typeface.CreateFromAsset(Assets, Fonts.GetInputFonts().ElementAt(position).Value);
-            }
+            _inputTop.Typeface = Typeface.CreateFromAsset(Assets, InputConstants.InputFonts.ElementAt(position).Value);
+            _inputBottom.Typeface = Typeface.CreateFromAsset(Assets, InputConstants.InputFonts.ElementAt(position).Value);
         }
 
         private void TextColorItemSelected(int position)
         {
-            if(position > 0)
-            {
-                _inputTop.TextColor = Colors.FontColorsCollection.ElementAt(position).Value;
-                _inputBottom.TextColor = Colors.FontColorsCollection.ElementAt(position).Value;
-            }
+            _inputTop.TextColor = InputConstants.FontColors.ElementAt(position).Value;
+            _inputBottom.TextColor = InputConstants.FontColors.ElementAt(position).Value;
         }
 
         private void TextColorDisabledItemSelected(int position)
         {
-            if(position > 0)
-            {
-                _inputTop.TextColorDisabled = Colors.FontColorsCollection.ElementAt(position).Value;
-                _inputBottom.TextColorDisabled = Colors.FontColorsCollection.ElementAt(position).Value;
-            }
+            _inputTop.TextColorDisabled = InputConstants.DisabledFontColors.ElementAt(position).Value;
+            _inputBottom.TextColorDisabled = InputConstants.DisabledFontColors.ElementAt(position).Value;
         }
 
         private void HintTextColorItemSelected(int position)
         {
-            if(position > 0)
-            {
-                _inputTop.HintTextColor = Colors.FontColorsCollection.ElementAt(position).Value;
-                _inputBottom.HintTextColor = Colors.FontColorsCollection.ElementAt(position).Value;
-            }
+            _inputTop.HintTextColor = InputConstants.PlaceholderColors.ElementAt(position).Value;
+            _inputBottom.HintTextColor = InputConstants.PlaceholderColors.ElementAt(position).Value;
         }
 
         private void HintTextColorDisabledItemSelected(int position)
         {
-            if(position > 0)
-            {
-                _inputTop.HintTextColorDisabled = Colors.FontColorsCollection.ElementAt(position).Value;
-                _inputBottom.HintTextColorDisabled = Colors.FontColorsCollection.ElementAt(position).Value;
-            }
+            _inputTop.HintTextColorDisabled = InputConstants.DisabledPlaceholderColors.ElementAt(position).Value;
+            _inputBottom.HintTextColorDisabled = InputConstants.DisabledPlaceholderColors.ElementAt(position).Value;
         }
 
         private void LeftDrawableItemSelected(int position)
         {
-            if(position > 0)
+            if (position > 0)
             {
                 _inputTop.LeftImage = BaseContext.GetDrawable(Icons.DrawableCollection.ElementAt(position).Value);
                 _inputBottom.LeftImage = BaseContext.GetDrawable(Icons.DrawableCollection.ElementAt(position).Value);
@@ -304,29 +275,20 @@ namespace EOS.UI.Droid.Sandbox.Activities
 
         private void FocusedColorItemSelected(int position)
         {
-            if(position > 0)
-            {
-                _inputTop.FocusedColor = Colors.MainColorsCollection.ElementAt(position).Value;
-                _inputBottom.FocusedColor = Colors.MainColorsCollection.ElementAt(position).Value;
-            }
+            _inputTop.FocusedColor = InputConstants.FocusedColors.ElementAt(position).Value;
+            _inputBottom.FocusedColor = InputConstants.FocusedColors.ElementAt(position).Value;
         }
 
         private void NormalUnderlineColorItemSelected(int position)
         {
-            if(position > 0)
-            {
-                _inputTop.NormalUnderlineColor = Colors.MainColorsCollection.ElementAt(position).Value;
-                _inputBottom.NormalUnderlineColor = Colors.MainColorsCollection.ElementAt(position).Value;
-            }
+            _inputTop.NormalUnderlineColor = InputConstants.UnderlineColors.ElementAt(position).Value;
+            _inputBottom.NormalUnderlineColor = InputConstants.UnderlineColors.ElementAt(position).Value;
         }
 
         private void DisabledColorItemSelected(int position)
         {
-            if(position > 0)
-            {
-                _inputTop.DisabledColor = Colors.MainColorsCollection.ElementAt(position).Value;
-                _inputBottom.DisabledColor = Colors.MainColorsCollection.ElementAt(position).Value;
-            }
+            _inputTop.DisabledColor = InputConstants.DisabledColors.ElementAt(position).Value;
+            _inputBottom.DisabledColor = InputConstants.DisabledColors.ElementAt(position).Value;
         }
 
         private void ResetCustomValues()
