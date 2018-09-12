@@ -380,7 +380,7 @@ namespace EOS.UI.Droid.Components
                 var indicatorPositions = _forward ? _indicatorsListPositionsForward[i] : _indicatorsListPositionsBack[i];
                 var indicatorSpringPositions = _forward ? _indicatorsSpringListPositionsForward[i] : _indicatorsSpringListPositionsBack[i];
 
-                SatrtAnimations(menu, indicator, positions, indicatorPositions, springPositions, indicatorSpringPositions, afterEndAnimation);
+                StartAnimations(menu, indicator, positions, indicatorPositions, springPositions, indicatorSpringPositions, afterEndAnimation);
             }
         }
 
@@ -461,9 +461,18 @@ namespace EOS.UI.Droid.Components
             }
         }
 
+        /// <summary>
+        /// Generation of positions for both directions are by start and end position on layout
+        /// Full lenth of points in base list are 360 points (each point according 1 degree) 
+        /// and length from each to another position are 40 degrees and its according 40 points
+        /// For move any menu from one to next position we should set to animation 40 poits
+        /// </summary>
         private void GeneratePositions()
         {
+            //for forward direction we should just find first and last point for moving menu
             GeneratePointsFoward();
+            //for back direction we should find first and last point for moving menuand revert positions back
+            //beecause in base list positions located in forward direction
             GeneratePointsBack();
         }
 
@@ -556,7 +565,7 @@ namespace EOS.UI.Droid.Components
                 return index == 0 ? InitialIndex + 5 * PointsOnIteration : InitialIndex + (index - 1) * PointsOnIteration;
         }
 
-        private void SatrtAnimations(CircleMenuItem menu, Indicator indicator, List<PointF> positions, List<PointF> indicatorPositions,
+        private void StartAnimations(CircleMenuItem menu, Indicator indicator, List<PointF> positions, List<PointF> indicatorPositions,
             List<PointF> springPositions, List<PointF> indicatorSpringPositions, Action afterEndAnimation)
         {
             //start swipe main menu animation with spring
