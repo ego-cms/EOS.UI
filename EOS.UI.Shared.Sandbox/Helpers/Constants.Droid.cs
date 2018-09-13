@@ -14,7 +14,6 @@ namespace EOS.UI.Shared.Sandbox.Helpers
         {
             public static readonly Dictionary<string, Color> MainColorsCollection = new Dictionary<string, Color>()
             {
-                { string.Empty, Color.Transparent },
                 {ColorNameBlue, Color.ParseColor(ColorBlue)},
                 {ColorNameUltramarine, Color.ParseColor(ColorUltramarine)},
                 {ColorNameCerulean, Color.ParseColor(ColorCerulean)},
@@ -34,7 +33,6 @@ namespace EOS.UI.Shared.Sandbox.Helpers
 
             public static Dictionary<string, Color> FontColorsCollection = new Dictionary<string, Color>()
             {
-                { string.Empty, Color.Transparent },
                 {ColorNameBlack, Color.ParseColor(ColorBlack)},
                 {ColorNameDarkGray, Color.ParseColor(ColorDarkGray)},
                 {ColorNameGray, Color.ParseColor(ColorGray)},
@@ -44,7 +42,7 @@ namespace EOS.UI.Shared.Sandbox.Helpers
                 {ColorNameUltramarine, Color.ParseColor(ColorUltramarine)}
             };
 
-            public static Dictionary<string, Color> GetGhostButtonFonts()
+            public static Dictionary<string, Color> GetGhostButtonFontColors()
             {
                 return MainColorsCollection.Union(FontColorsCollection).ToDictionary(a => a.Key, b => b.Value);
             }
@@ -91,7 +89,6 @@ namespace EOS.UI.Shared.Sandbox.Helpers
             {
                 return new Dictionary<string, string>
                 {
-                    { string.Empty, string.Empty },
                     { ArimoBold, "Fonts/Arimo-Bold.ttf" },
                     { LatoBlack, "Fonts/Lato-Black.ttf" },
                     { LatoBold, "Fonts/Lato-Bold.ttf" },
@@ -110,7 +107,6 @@ namespace EOS.UI.Shared.Sandbox.Helpers
             {
                 return new Dictionary<string, string>
                 {
-                    { string.Empty, string.Empty },
                     { ArimoBold, "Fonts/Arimo-Bold.ttf" },
                     { LatoBlack, "Fonts/Lato-Black.ttf" },
                     { LatoBold, "Fonts/Lato-Bold.ttf" },
@@ -131,7 +127,6 @@ namespace EOS.UI.Shared.Sandbox.Helpers
             {
                 return new Dictionary<string, string>
                 {
-                    { string.Empty, string.Empty },
                     { ArimoBold, "Fonts/Arimo-Bold.ttf" },
                     { LatoRegular, "Fonts/Lato-Regular.ttf" },
                     { LatoBold, "Fonts/Lato-Bold.ttf" },
@@ -152,7 +147,6 @@ namespace EOS.UI.Shared.Sandbox.Helpers
             {
                 return new Dictionary<string, string>
                 {
-                    { string.Empty, string.Empty },
                     { ArimoBold, "Fonts/Arimo-Bold.ttf" },
                     { LatoBlack, "Fonts/Lato-Black.ttf" },
                     { LatoBold, "Fonts/Lato-Bold.ttf" },
@@ -173,7 +167,6 @@ namespace EOS.UI.Shared.Sandbox.Helpers
             {
                 return new Dictionary<string, string>
                 {
-                    { string.Empty, string.Empty },
                     { ArimoBold, "Fonts/Arimo-Bold.ttf" },
                     { LatoBlack, "Fonts/Lato-Black.ttf" },
                     { LatoBold, "Fonts/Lato-Bold.ttf" },
@@ -191,7 +184,6 @@ namespace EOS.UI.Shared.Sandbox.Helpers
             {
                 return new Dictionary<string, string>
                 {
-                    { string.Empty, string.Empty },
                     { ArimoRegular, "Fonts/Arimo-Regular.ttf" },
                     { LatoRegular, "Fonts/Lato-Regular.ttf" },
                     { MontserratRegular, "Fonts/Montserrat-Regular.ttf" },
@@ -208,7 +200,6 @@ namespace EOS.UI.Shared.Sandbox.Helpers
             {
                 return new Dictionary<string, string>
                 {
-                    { string.Empty, string.Empty },
                     { RobotoRegular, "Fonts/Roboto-Regular.ttf" },
                     { RobotoMedium, "Fonts/Roboto-Medium.ttf" },
                     { RobotoBold, "Fonts/Roboto-Bold.ttf" }

@@ -22,7 +22,7 @@ namespace EOS.UI.Droid.Controls
         private TextView _percentText;
         private ImageView _checkmarkImage;
         private View _centralRectangle;
-        private const string _zeroPercents = "0 %";
+        private const string _zeroPercents = "0%";
 
         public event EventHandler Started;
         public event EventHandler Stopped;
@@ -46,7 +46,7 @@ namespace EOS.UI.Droid.Controls
                     if (ShouldShowProgress)
                         _percentText.Visibility = ViewStates.Visible;
                     _progressBar.Progress = _progress;
-                    _percentText.Text = $"{value} %";
+                    _percentText.Text = $"{value}%";
                     if(_progress == 100)
                     {
                         ShowCheckmark();

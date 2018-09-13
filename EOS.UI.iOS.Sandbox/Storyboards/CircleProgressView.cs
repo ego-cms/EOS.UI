@@ -4,6 +4,7 @@ using System.Linq;
 using CoreGraphics;
 using EOS.UI.iOS.Sandbox.Helpers;
 using EOS.UI.iOS.Sandbox.Storyboards;
+using EOS.UI.Shared.Sandbox.ControlConstants.iOS;
 using EOS.UI.Shared.Themes.Themes;
 using UIKit;
 using static EOS.UI.Shared.Sandbox.Helpers.Constants;
@@ -67,8 +68,42 @@ namespace EOS.UI.iOS.Sandbox
             }));
 
 
-            var rect = new CGRect(0, 0, 100, 100);
+            var frame = new CGRect(0, 0, 100, 100);
+            InitThemeDropDown(frame);
+            themeDropDown.SetTextFieldText(_circleProgress.GetThemeProvider().GetCurrentTheme() is LightEOSTheme ? "Light" : "Dark");
 
+            showProgressSwitch.ValueChanged += (sender, e) =>
+            {
+                _circleProgress.ShowProgress = showProgressSwitch.On;
+            };
+
+            resetButton.TouchUpInside += (sender, e) =>
+            {
+                _dropDowns.Except(new[] { themeDropDown }).ToList().ForEach(dropDown => dropDown.ResetValue());
+                showProgressSwitch.On = true;
+                _circleProgress.ResetCustomization();
+            };
+
+            InitSources(frame);
+        }
+
+        private void InitSources(CGRect rect)
+        {
+            InitFontDropDown(rect);
+            InitTextSizeDropDown(rect);
+            InitColorDropDown(rect);
+            InitFillColorDropDown(rect);
+            InitAlternativeColorDropDown(rect);
+        }
+
+        private void TimerAction()
+        {
+            _percents += 1;
+            _circleProgress.Progress = _percents;
+        }
+
+        private void InitThemeDropDown(CGRect rect)
+        {
             themeDropDown.InitSource(
                 ThemeTypes.ThemeCollection,
                 (theme) =>
@@ -78,59 +113,56 @@ namespace EOS.UI.iOS.Sandbox
                     _dropDowns.Except(new[] { themeDropDown }).ToList().ForEach(dropDown => dropDown.ResetValue());
                     _circleProgress.Progress = 0;
                     showProgressSwitch.On = true;
+                    InitSources(rect);
                     UpdateAppearance();
                 },
                 Fields.Theme,
                 rect);
-            themeDropDown.SetTextFieldText(_circleProgress.GetThemeProvider().GetCurrentTheme() is LightEOSTheme ? "Light" : "Dark");
+        }
 
+        private void InitFontDropDown(CGRect rect)
+        {
             fontDropDown.InitSource(
-                Fonts.GetCircleProgressFonts().ToList(),
-                font => _circleProgress.Font = font,
-                Fields.Font,
-                rect);
+              CircleProgressConstants.CircleProgressFonts,
+              font => _circleProgress.Font = font,
+              Fields.Font,
+              rect);
+        }
 
+        private void InitTextSizeDropDown(CGRect rect)
+        {
             textSizeDropDown.InitSource(
-                Sizes.TextSizeCollection,
+                CircleProgressConstants.TextSizes,
                 size => _circleProgress.TextSize = size,
                 Fields.TextSize,
                 rect);
+        }
 
+        private void InitColorDropDown(CGRect rect)
+        {
             colorDropDown.InitSource(
-                Colors.MainColorsCollection,
+                CircleProgressConstants.CircleProgressColors,
                 color => _circleProgress.Color = color,
                 Fields.Color,
                 rect);
+        }
 
+        private void InitAlternativeColorDropDown(CGRect rect)
+        {
             alternativeColorDropDown.InitSource(
-                Colors.MainColorsCollection,
+                CircleProgressConstants.AlternativeColors,
                 color => _circleProgress.AlternativeColor = color,
                 Fields.AlternativeColor,
                 rect);
-            
+        }
+
+        private void InitFillColorDropDown(CGRect rect)
+        {
             fillColorDropDown.InitSource(
-                Colors.MainColorsCollection,
+                CircleProgressConstants.FillColors,
                 color => _circleProgress.FillColor = color,
                 Fields.FillColor,
                 rect);
-
-            showProgressSwitch.ValueChanged += (sender, e) =>
-            {
-                _circleProgress.ShowProgress = showProgressSwitch.On;
-            };
-
-            resetButton.TouchUpInside += (sender, e) =>
-            {
-                _dropDowns.Except(new [] { themeDropDown }).ToList().ForEach(dropDown => dropDown.ResetValue());
-                showProgressSwitch.On = true;
-                _circleProgress.ResetCustomization();
-            };
-        }
-
-        public void TimerAction()
-        {
-            _percents += 1;
-            _circleProgress.Progress = _percents;
         }
     }
 }

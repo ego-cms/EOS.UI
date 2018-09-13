@@ -90,6 +90,7 @@
     <Compile Include="Models\WorkTimeCalendarModel.cs" />
     <Compile Include="Components\WorkTimeCalendarCollection.cs" />
     <Compile Include="Extensions\DateTimeExtensions.cs" />
+    <Compile Include="Extensions\AttributedStringExtension.cs" />
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="Components\Section.xib" />

@@ -123,51 +123,36 @@ namespace EOS.UI.Shared.Sandbox.Helpers
         public static partial class Sizes
         {
             public static readonly Dictionary<string, float> TextSizeCollection = new Dictionary<string, float>();
-            public static readonly Dictionary<string, float> CornerRadiusCollection = new Dictionary<string, float>();
+            public static readonly Dictionary<string, int> CornerRadiusCollection = new Dictionary<string, int>();
             public static readonly Dictionary<string, int> BorderWidthCollection = new Dictionary<string, int>();
             public static readonly Dictionary<string, int> PaddingsCollection = new Dictionary<string, int>();
             public static readonly Dictionary<string, float> LetterSpacingCollection = new Dictionary<string, float>();
 
             static Sizes()
             {
-#if __ANDROID__
-                LetterSpacingCollection.Add("default", 0);
-#endif
                 foreach (var val in Enumerable.Range(1, 10))
                 {
 #if __IOS__
                     var v = val;
 #else
-                    var v = (float)val / 10;
+                    var v = (float) val / 10;
 #endif
                     LetterSpacingCollection.Add(v.ToString(), v);
                 }
 
-#if __ANDROID__
-                TextSizeCollection.Add("default", 0);
-#endif
                 foreach (var val in Enumerable.Range(10, 11))
                 {
                     TextSizeCollection.Add(val.ToString(), val);
                 }
 
-#if __ANDROID__
-                CornerRadiusCollection.Add("default", 0);
-#endif
                 foreach (var val in Enumerable.Range(0, 11))
                 {
                     CornerRadiusCollection.Add(val.ToString(), val);
                 }
-#if __ANDROID__
-                BorderWidthCollection.Add("default", 0);
-#endif
                 foreach (var val in Enumerable.Range(1, 10))
                 {
                     BorderWidthCollection.Add(val.ToString(), val);
                 }
-#if __ANDROID__
-                PaddingsCollection.Add("default", 0);
-#endif
                 foreach (var val in Enumerable.Range(1, 20))
                 {
                     PaddingsCollection.Add(val.ToString(), val);
@@ -245,24 +230,15 @@ namespace EOS.UI.Shared.Sandbox.Helpers
 
             static Shadow()
             {
-#if __ANDROID__
-                OpacityCollection.Add("default", 0);
-#endif
                 foreach (var val in Enumerable.Range(0, 10))
                 {
                     var v = val * 0.1 + 0.1;
                     OpacityCollection.Add(v.ToString(), v);
                 }
 
-#if __ANDROID__
-                OffsetCollection.Add("default", -15);
-#endif
                 foreach (var val in Enumerable.Range(-14, 29))
                     OffsetCollection.Add(val.ToString(), val);
 
-#if __ANDROID__
-                RadiusCollection.Add("default", 0);
-#endif
                 foreach (var val in Enumerable.Range(1, 15))
                     RadiusCollection.Add(val.ToString(), val);
             }

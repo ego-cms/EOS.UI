@@ -9,6 +9,7 @@ using Android.Widget;
 using EOS.UI.Droid.Controls;
 using EOS.UI.Droid.Sandbox.Controls;
 using EOS.UI.Droid.Sandbox.Helpers;
+using EOS.UI.Shared.Sandbox.ControlConstants.Android;
 using EOS.UI.Shared.Sandbox.Helpers;
 using EOS.UI.Shared.Themes.Themes;
 using static EOS.UI.Shared.Sandbox.Helpers.Constants;
@@ -29,7 +30,7 @@ namespace EOS.UI.Droid.Sandbox.Activities
             var alternativeColorDropDown = FindViewById<EOSSandboxDropDown>(Resource.Id.alternativeColorDropDown);
             var fontDropDown = FindViewById<EOSSandboxDropDown>(Resource.Id.fontDropDown);
             var textSizeDropDown = FindViewById<EOSSandboxDropDown>(Resource.Id.textSizeDropDown);
-            var backgroundColorDropDown = FindViewById<EOSSandboxDropDown>(Resource.Id.backgroundColorDropDown);
+            var fillColorDropDown = FindViewById<EOSSandboxDropDown>(Resource.Id.backgroundColorDropDown);
             var showProgressSwitch = FindViewById<Switch>(Resource.Id.showProgressSwitch);
             var resetButton = FindViewById<Button>(Resource.Id.buttonResetCustomization);
             var spinners = new List<EOSSandboxDropDown>()
@@ -39,7 +40,7 @@ namespace EOS.UI.Droid.Sandbox.Activities
                 fontDropDown,
                 textSizeDropDown,
                 alternativeColorDropDown,
-                backgroundColorDropDown
+                fillColorDropDown
             };
 
             int percents = 0;
@@ -88,43 +89,38 @@ namespace EOS.UI.Droid.Sandbox.Activities
                 themeDropDown.SetSpinnerSelection(2);
 
             fontDropDown.Name = Fields.Font;
-            fontDropDown.SetupAdapter(Fonts.GetCircleProgressFonts().Select(item => item.Key).ToList());
+            fontDropDown.SetupAdapter(CircleProgressConstants.CircleProgressFonts.Select(item => item.Key).ToList());
             fontDropDown.ItemSelected += (position) =>
             {
-                if(position > 0)
-                    circleProgress.Typeface = Typeface.CreateFromAsset(Assets, Fonts.GetCircleProgressFonts().ElementAt(position).Value);
+                    circleProgress.Typeface = Typeface.CreateFromAsset(Assets, CircleProgressConstants.CircleProgressFonts.ElementAt(position).Value);
             };
 
             colorDropDown.Name = Fields.Color;
-            colorDropDown.SetupAdapter(Colors.MainColorsCollection.Select(item => item.Key).ToList());
+            colorDropDown.SetupAdapter(CircleProgressConstants.CircleProgressColors.Select(item => item.Key).ToList());
             colorDropDown.ItemSelected += (position) =>
             {
-                if(position > 0)
-                    circleProgress.Color = Colors.MainColorsCollection.ElementAt(position).Value;
+                    circleProgress.Color = CircleProgressConstants.CircleProgressColors.ElementAt(position).Value;
             };
 
             alternativeColorDropDown.Name = Fields.AlternativeColor;
-            alternativeColorDropDown.SetupAdapter(Colors.MainColorsCollection.Select(item => item.Key).ToList());
+            alternativeColorDropDown.SetupAdapter(CircleProgressConstants.AlternativeColors.Select(item => item.Key).ToList());
             alternativeColorDropDown.ItemSelected += (position) =>
             {
-                if(position > 0)
-                    circleProgress.AlternativeColor = Colors.MainColorsCollection.ElementAt(position).Value;
+                    circleProgress.AlternativeColor = CircleProgressConstants.AlternativeColors.ElementAt(position).Value;
             };
 
-            backgroundColorDropDown.Name = Fields.FillColor;
-            backgroundColorDropDown.SetupAdapter(Colors.MainColorsCollection.Select(item => item.Key).ToList());
-            backgroundColorDropDown.ItemSelected += (position) =>
+            fillColorDropDown.Name = Fields.FillColor;
+            fillColorDropDown.SetupAdapter(CircleProgressConstants.FillColors.Select(item => item.Key).ToList());
+            fillColorDropDown.ItemSelected += (position) =>
             {
-                if(position > 0)
-                    circleProgress.FillColor = Colors.MainColorsCollection.ElementAt(position).Value;
+                    circleProgress.FillColor = CircleProgressConstants.FillColors.ElementAt(position).Value;
             };
 
             textSizeDropDown.Name = Fields.TextSize;
-            textSizeDropDown.SetupAdapter(Sizes.TextSizeCollection.Select(item => item.Key).ToList());
+            textSizeDropDown.SetupAdapter(CircleProgressConstants.TextSizes.Select(item => item.Key).ToList());
             textSizeDropDown.ItemSelected += (position) =>
             {
-                if(position > 0)
-                    circleProgress.TextSize = Sizes.TextSizeCollection.ElementAt(position).Value;
+                    circleProgress.TextSize = CircleProgressConstants.TextSizes.ElementAt(position).Value;
             };
 
             showProgressSwitch.CheckedChange += (sender, e) =>

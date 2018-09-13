@@ -29,6 +29,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Themes\LightEOSTheme.Android.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Themes\LightEOSTheme.iOS.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Themes\StaticEOSTheme.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Extensions\DictionaryExtension.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="$(MSBuildThisFileDirectory)Themes\" />

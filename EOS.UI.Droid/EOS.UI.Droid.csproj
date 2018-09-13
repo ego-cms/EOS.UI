@@ -127,16 +127,13 @@
     <AndroidResource Include="Resources\drawable\RotateDrawable.xml" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidAsset Include="Assets\Fonts\OpenSansRegular.ttf" />
+    <AndroidAsset Include="Assets\Fonts\OpenSans-Regular.ttf" />
     <AndroidAsset Include="Assets\Animations\preloader-snake.json" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidAsset Include="Assets\Fonts\SFUITextBold.ttf" />
-    <AndroidAsset Include="Assets\Fonts\SFUITextSemibold.ttf" />
-    <AndroidAsset Include="Assets\Fonts\Roboto.ttf" />
-    <AndroidAsset Include="Assets\Fonts\RobotoBold.ttf" />
-    <AndroidAsset Include="Assets\Fonts\RobotoMedium.ttf" />
-    <AndroidAsset Include="Assets\Fonts\RobotoRegular.ttf" />
+    <AndroidAsset Include="Assets\Fonts\Roboto-Bold.ttf" />
+    <AndroidAsset Include="Assets\Fonts\Roboto-Medium.ttf" />
+    <AndroidAsset Include="Assets\Fonts\Roboto-Regular.ttf" />
     <None Include="packages.config" />
     <AndroidResource Include="Resources\layout\Section.axml">
       <SubType>Designer</SubType>
