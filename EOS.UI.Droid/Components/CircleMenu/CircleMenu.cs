@@ -495,13 +495,13 @@ namespace EOS.UI.Droid.Components
             var baseIndex = GetBaseIndexForSpringAnimation(index, true);
 
             _menusSpringListPositionsForward[index].Add(_menuPositions[baseIndex + 4]);
-            _menusSpringListPositionsForward[index].Add(_menuPositions[baseIndex - 2]);
-            _menusSpringListPositionsForward[index].Add(_menuPositions[baseIndex + 1]);
+            //_menusSpringListPositionsForward[index].Add(_menuPositions[baseIndex - 2]);
+            _menusSpringListPositionsForward[index].Add(_menuPositions[baseIndex - 1]);
             _menusSpringListPositionsForward[index].Add(_menuPositions[baseIndex]);
 
             _indicatorsSpringListPositionsForward[index].Add(_menuIndicatorsPositions[baseIndex + 4]);
-            _indicatorsSpringListPositionsForward[index].Add(_menuIndicatorsPositions[baseIndex - 2]);
-            _indicatorsSpringListPositionsForward[index].Add(_menuIndicatorsPositions[baseIndex + 1]);
+            //_indicatorsSpringListPositionsForward[index].Add(_menuIndicatorsPositions[baseIndex - 2]);
+            _indicatorsSpringListPositionsForward[index].Add(_menuIndicatorsPositions[baseIndex - 1]);
             _indicatorsSpringListPositionsForward[index].Add(_menuIndicatorsPositions[baseIndex]);
         }
 
@@ -537,13 +537,13 @@ namespace EOS.UI.Droid.Components
             var baseIndex = GetBaseIndexForSpringAnimation(index, false);
 
             _menusSpringListPositionsBack[index].Add(_menuPositions[baseIndex - 4]);
-            _menusSpringListPositionsBack[index].Add(_menuPositions[baseIndex + 2]);
-            _menusSpringListPositionsBack[index].Add(_menuPositions[baseIndex - 1]);
+            //_menusSpringListPositionsBack[index].Add(_menuPositions[baseIndex + 2]);
+            _menusSpringListPositionsBack[index].Add(_menuPositions[baseIndex + 1]);
             _menusSpringListPositionsBack[index].Add(_menuPositions[baseIndex]);
 
             _indicatorsSpringListPositionsBack[index].Add(_menuIndicatorsPositions[baseIndex - 4]);
-            _indicatorsSpringListPositionsBack[index].Add(_menuIndicatorsPositions[baseIndex + 2]);
-            _indicatorsSpringListPositionsBack[index].Add(_menuIndicatorsPositions[baseIndex - 1]);
+            //_indicatorsSpringListPositionsBack[index].Add(_menuIndicatorsPositions[baseIndex + 2]);
+            _indicatorsSpringListPositionsBack[index].Add(_menuIndicatorsPositions[baseIndex + 1]);
             _indicatorsSpringListPositionsBack[index].Add(_menuIndicatorsPositions[baseIndex]);
         }
 
@@ -575,7 +575,7 @@ namespace EOS.UI.Droid.Components
                 null,
                 new Action(() => StartAnimation(menu,
                     springPositions,
-                    MainSpringSwipeDuration,
+                    IndicatorSpringSwipeDuration,
                     new DecelerateInterpolator(),
                     afterEndAnimation)));
 
@@ -586,7 +586,9 @@ namespace EOS.UI.Droid.Components
                 null,
                 new Action(() => StartAnimation(indicator,
                     indicatorSpringPositions,
-                    IndicatorSpringSwipeDuration)));
+                    IndicatorSpringSwipeDuration,
+                    new DecelerateInterpolator(),
+                    null)));
         }
 
         private void StartAnimation(View view, List<PointF> positions, int duration, BaseInterpolator interpolator = null, Action action = null)
