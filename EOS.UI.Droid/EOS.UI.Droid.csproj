@@ -89,7 +89,6 @@
     <Reference Include="Java.Interop" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Class1.cs" />
     <Compile Include="Components\Section.cs" />
     <Compile Include="Components\Work time\WorkTime.cs" />
     <Compile Include="Components\Work time\WorkTimeItem.cs" />
