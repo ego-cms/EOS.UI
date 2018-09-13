@@ -7,6 +7,7 @@ using Android.Graphics;
 using Android.OS;
 using EOS.UI.Droid.Components;
 using EOS.UI.Droid.Sandbox.Controls;
+using EOS.UI.Shared.Sandbox.ControlConstants.Android;
 using EOS.UI.Shared.Sandbox.Helpers;
 using EOS.UI.Shared.Themes.DataModels;
 using EOS.UI.Shared.Themes.Interfaces;
@@ -76,47 +77,47 @@ namespace EOS.UI.Droid.Sandbox.Activities
             _themeDropDown.ItemSelected += ThemeItemSelected;
 
             _titleFontDropDown.Name = Fields.TitleFont;
-            _titleFontDropDown.SetupAdapter(Fonts.GetWorktimeTitleFonts().Select(item => item.Key).ToList());
+            _titleFontDropDown.SetupAdapter(WorkTimeConstants.TitleFonts.Select(item => item.Key).ToList());
             _titleFontDropDown.ItemSelected += TitleFontItemSelected;
 
             _dayTextFontDropDown.Name = Fields.DayTextFont;
-            _dayTextFontDropDown.SetupAdapter(Fonts.GetWorktimeDayFonts().Select(item => item.Key).ToList());
+            _dayTextFontDropDown.SetupAdapter(WorkTimeConstants.DayFonts.Select(item => item.Key).ToList());
             _dayTextFontDropDown.ItemSelected += DayTextFonItemSelected;
 
             _titleTextSizeDropDown.Name = Fields.TitleTextSize;
-            _titleTextSizeDropDown.SetupAdapter(Sizes.TextSizeCollection.Select(item => item.Key).ToList());
+            _titleTextSizeDropDown.SetupAdapter(WorkTimeConstants.TitleTextSizes.Select(item => item.Key).ToList());
             _titleTextSizeDropDown.ItemSelected += TitleTextSizeItemSelected;
 
             _dayTextSizeDropDown.Name = Fields.DayTextSize;
-            _dayTextSizeDropDown.SetupAdapter(Sizes.TextSizeCollection.Select(item => item.Key).ToList());
+            _dayTextSizeDropDown.SetupAdapter(WorkTimeConstants.DayTextSizes.Select(item => item.Key).ToList());
             _dayTextSizeDropDown.ItemSelected += DayTextSizeItemSelected;
 
             _titleColorDropDown.Name = Fields.TitleColor;
-            _titleColorDropDown.SetupAdapter(Colors.FontColorsCollection.Select(item => item.Key).ToList());
+            _titleColorDropDown.SetupAdapter(WorkTimeConstants.TitleColors.Select(item => item.Key).ToList());
             _titleColorDropDown.ItemSelected += TitleColorItemSelected;
 
             _dayTextColorDropDown.Name = Fields.DayTextColor;
-            _dayTextColorDropDown.SetupAdapter(Colors.FontColorsCollection.Select(item => item.Key).ToList());
+            _dayTextColorDropDown.SetupAdapter(WorkTimeConstants.DayColors.Select(item => item.Key).ToList());
             _dayTextColorDropDown.ItemSelected += DayTextColorItemSelected;
 
             _currentDayBackgroundColorDropDown.Name = Fields.CurrentDayBackgroundColor;
-            _currentDayBackgroundColorDropDown.SetupAdapter(Colors.MainColorsCollection.Select(item => item.Key).ToList());
+            _currentDayBackgroundColorDropDown.SetupAdapter(WorkTimeConstants.CurrentDayBackgroundColors.Select(item => item.Key).ToList());
             _currentDayBackgroundColorDropDown.ItemSelected += CurrentDayBackgroundColorItemSelected;
 
             _currentDayTextColorDropDown.Name = Fields.CurrentDayTextColor;
-            _currentDayTextColorDropDown.SetupAdapter(Colors.FontColorsCollection.Select(item => item.Key).ToList());
+            _currentDayTextColorDropDown.SetupAdapter(WorkTimeConstants.CurrentDayColors.Select(item => item.Key).ToList());
             _currentDayTextColorDropDown.ItemSelected += CurrentDayTextColorItemSelected;
 
             _dayEvenBackgroundColorDropDown.Name = Fields.DayEvenBackgroundColor;
-            _dayEvenBackgroundColorDropDown.SetupAdapter(Colors.MainColorsCollection.Select(item => item.Key).ToList());
+            _dayEvenBackgroundColorDropDown.SetupAdapter(WorkTimeConstants.DayEvenBackgroundColors.Select(item => item.Key).ToList());
             _dayEvenBackgroundColorDropDown.ItemSelected += DayEvenBackgroundColorItemSelected;
 
             _dividerColorDropDown.Name = Fields.ColorDividers;
-            _dividerColorDropDown.SetupAdapter(Colors.MainColorsCollection.Select(item => item.Key).ToList());
+            _dividerColorDropDown.SetupAdapter(WorkTimeConstants.DividersColors.Select(item => item.Key).ToList());
             _dividerColorDropDown.ItemSelected += DividerColorItemSelected;
 
             _currentDividerColorDropDown.Name = Fields.CurrentColorDividers;
-            _currentDividerColorDropDown.SetupAdapter(Colors.MainColorsCollection.Select(item => item.Key).ToList());
+            _currentDividerColorDropDown.SetupAdapter(WorkTimeConstants.CurrentDayDividerColors.Select(item => item.Key).ToList());
             _currentDividerColorDropDown.ItemSelected += CurrentDividerColorItemSelected;
 
             _firstDayOfWeekDropDown.Name = Fields.WeekStartDay;
@@ -143,81 +144,78 @@ namespace EOS.UI.Droid.Sandbox.Activities
 
         private void FirstDayOfWeekItemSelected(int position)
         {
-            if(position > 0)
+            if (position > 0)
                 _workTime.WeekStart = Days.DaysCollection.ElementAt(position).Value;
         }
 
         private void CurrentDividerColorItemSelected(int position)
         {
-            if(position > 0)
-                _workTime.CurrentDividerColor = Colors.MainColorsCollection.ElementAt(position).Value;
+            _workTime.CurrentDividerColor = WorkTimeConstants.CurrentDayDividerColors.ElementAt(position).Value;
         }
 
         private void DividerColorItemSelected(int position)
         {
-            if(position > 0)
-                _workTime.DividerColor = Colors.MainColorsCollection.ElementAt(position).Value;
+            _workTime.DividerColor = WorkTimeConstants.DividersColors.ElementAt(position).Value;
         }
 
         private void DayEvenBackgroundColorItemSelected(int position)
         {
-            if(position > 0)
-                _workTime.DayEvenBackgroundColor = Colors.MainColorsCollection.ElementAt(position).Value;
+            _workTime.DayEvenBackgroundColor = WorkTimeConstants.DayEvenBackgroundColors.ElementAt(position).Value;
         }
 
         private void CurrentDayTextColorItemSelected(int position)
         {
-            if(position > 0)
-                _workTime.CurrentDayTextColor = Colors.FontColorsCollection.ElementAt(position).Value;
+            _workTime.CurrentDayTextColor = WorkTimeConstants.CurrentDayColors.ElementAt(position).Value;
         }
 
         private void CurrentDayBackgroundColorItemSelected(int position)
         {
-            if(position > 0)
-                _workTime.CurrentDayBackgroundColor = Colors.MainColorsCollection.ElementAt(position).Value;
+            _workTime.CurrentDayBackgroundColor = WorkTimeConstants.CurrentDayBackgroundColors.ElementAt(position).Value;
         }
 
         private void DayTextColorItemSelected(int position)
         {
-            if(position > 0)
-                _workTime.DayTextColor = Colors.FontColorsCollection.ElementAt(position).Value;
+            _workTime.DayTextColor = WorkTimeConstants.DayColors.ElementAt(position).Value;
         }
 
         private void TitleColorItemSelected(int position)
         {
-            if(position > 0)
-                _workTime.TitleColor = Colors.FontColorsCollection.ElementAt(position).Value;
+            _workTime.TitleColor = WorkTimeConstants.TitleColors.ElementAt(position).Value;
         }
 
         private void DayTextSizeItemSelected(int position)
         {
-            if(position > 0)
-                _workTime.DayTextSize = (int)Sizes.TextSizeCollection.ElementAt(position).Value;
+            _workTime.DayTextSize = (int) WorkTimeConstants.DayTextSizes.ElementAt(position).Value;
         }
 
         private void TitleTextSizeItemSelected(int position)
         {
-            if(position > 0)
-                _workTime.TitleTextSize = (int)Sizes.TextSizeCollection.ElementAt(position).Value;
+            _workTime.TitleTextSize = (int)WorkTimeConstants.TitleTextSizes.ElementAt(position).Value;
         }
 
         private void DayTextFonItemSelected(int position)
         {
-            if(position > 0)
-                _workTime.DayTextFont = Typeface.CreateFromAsset(Assets, Fonts.GetWorktimeDayFonts().ElementAt(position).Value);
+            _workTime.DayTextFont = Typeface.CreateFromAsset(Assets, WorkTimeConstants.DayFonts.ElementAt(position).Value);
         }
 
         private void TitleFontItemSelected(int position)
         {
-            if(position > 0)
-                _workTime.TitleFont = Typeface.CreateFromAsset(Assets, Fonts.GetWorktimeTitleFonts().ElementAt(position).Value);
+            _workTime.TitleFont = Typeface.CreateFromAsset(Assets, WorkTimeConstants.TitleFonts.ElementAt(position).Value);
         }
 
         private void ThemeItemSelected(int position)
         {
-            if(position > 0)
+            if (position > 0)
             {
                 _workTime.GetThemeProvider().SetCurrentTheme(ThemeTypes.ThemeCollection.ElementAt(position).Value);
+                if(_workTime.GetThemeProvider().GetCurrentTheme() is LightEOSTheme)
+                {
+                    _workTime.SetBackgroundColor(Color.White);
+                }
+                else
+                {
+                    _workTime.SetBackgroundColor(Color.Transparent);
+                }
                 ResetCustomValues();
                 UpdateAppearance();
             }
@@ -225,9 +223,9 @@ namespace EOS.UI.Droid.Sandbox.Activities
 
         private void SetCurrenTheme(IEOSTheme iEOSTheme)
         {
-            if(iEOSTheme is LightEOSTheme)
+            if (iEOSTheme is LightEOSTheme)
                 _themeDropDown.SetSpinnerSelection(1);
-            if(iEOSTheme is DarkEOSTheme)
+            if (iEOSTheme is DarkEOSTheme)
                 _themeDropDown.SetSpinnerSelection(2);
         }
 

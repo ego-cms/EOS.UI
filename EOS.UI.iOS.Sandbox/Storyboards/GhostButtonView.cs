@@ -5,6 +5,7 @@ using CoreGraphics;
 using EOS.UI.iOS.Controls;
 using EOS.UI.iOS.Extensions;
 using EOS.UI.iOS.Sandbox.Storyboards;
+using EOS.UI.Shared.Sandbox.ControlConstants.iOS;
 using EOS.UI.Shared.Sandbox.Helpers;
 using EOS.UI.Shared.Themes.Themes;
 using UIKit;
@@ -16,6 +17,7 @@ namespace EOS.UI.iOS.Sandbox
     {
         public const string Identifier = "GhostButtonView";
         private List<EOSSandboxDropDown> _dropDowns;
+        private GhostButton _ghostButton;
 
         public GhostButtonView(IntPtr handle) : base(handle)
         {
@@ -25,11 +27,11 @@ namespace EOS.UI.iOS.Sandbox
         {
             base.ViewDidLoad();
 
-            var ghostButton = new GhostButton();
-            ghostButton.SetTitle(ControlNames.GhostButton, UIControlState.Normal);
-            containerView.ConstrainLayout(() => ghostButton.Frame.GetCenterX() == containerView.Frame.GetCenterX() &&
-                                          ghostButton.Frame.GetCenterY() == containerView.Frame.GetCenterY(), ghostButton);
-            ghostButton.ContentEdgeInsets = new UIEdgeInsets(6, 16, 6, 16);
+            _ghostButton = new GhostButton();
+            _ghostButton.SetTitle(ControlNames.GhostButton, UIControlState.Normal);
+            containerView.ConstrainLayout(() => _ghostButton.Frame.GetCenterX() == containerView.Frame.GetCenterX() &&
+                                          _ghostButton.Frame.GetCenterY() == containerView.Frame.GetCenterY(), _ghostButton);
+            _ghostButton.ContentEdgeInsets = new UIEdgeInsets(6, 16, 6, 16);
 
             _dropDowns = new List<EOSSandboxDropDown>()
             {
@@ -49,65 +51,99 @@ namespace EOS.UI.iOS.Sandbox
 
             var rect = new CGRect(0, 0, 100, 100);
 
-            themeDropDown.InitSource(
-                ThemeTypes.ThemeCollection,
-                (theme) =>
-                {
-                    ghostButton.GetThemeProvider().SetCurrentTheme(theme);
-                    ghostButton.ResetCustomization();
-                    _dropDowns.Except(new[] { themeDropDown }).ToList().ForEach(dropDown => dropDown.ResetValue());
-                    UpdateAppearance();
-                },
-                Fields.Theme,
-                rect);
-            themeDropDown.SetTextFieldText(ghostButton.GetThemeProvider().GetCurrentTheme() is LightEOSTheme  ? "Light" : "Dark");
-
-            fontDropDown.InitSource(
-                Fonts.GetGhostButtonSimpleLabelFonts().ToList(),
-                font => ghostButton.Font = font,
-                Fields.Font,
-                rect);
-
-            letterSpacingDropDown.InitSource(
-                Sizes.LetterSpacingCollection,
-                spacing => ghostButton.LetterSpacing = spacing,
-                Fields.LetterSpacing,
-                rect);
-
-            enabledTextColorDropDown.InitSource(
-                Colors.GetGhostButtonFonts(),
-                color => ghostButton.TextColor = color,
-                Fields.EnabledTextColor,
-                rect);
-
-            disabledTextColorDropDown.InitSource(
-                Colors.GetGhostButtonFonts(),
-                color => ghostButton.DisabledTextColor = color,
-                Fields.DisabledTextColor,
-                rect);
-
-            textSizeDropDown.InitSource(
-                Sizes.TextSizeCollection,
-                size => ghostButton.TextSize = size,
-                Fields.TextSize,
-                rect);
-            
-            rippleColorDropDown.InitSource(
-               Colors.MainColorsCollection,
-               color => ghostButton.RippleColor = color,
-               Fields.RippleColor,
-               rect);
-
+            InitThemeDropDown(rect);
+            themeDropDown.SetTextFieldText(_ghostButton.GetThemeProvider().GetCurrentTheme() is LightEOSTheme ? "Light" : "Dark");
+            InitSources(rect);
             stateSwitch.ValueChanged += (sender, e) =>
             {
-                ghostButton.Enabled = stateSwitch.On;
+                _ghostButton.Enabled = stateSwitch.On;
             };
 
             resetButton.TouchUpInside += (sender, e) =>
             {
-                _dropDowns.Except(new [] { themeDropDown }).ToList().ForEach(dropDown => dropDown.ResetValue());
-                ghostButton.ResetCustomization();
+                _dropDowns.Except(new[] { themeDropDown }).ToList().ForEach(dropDown => dropDown.ResetValue());
+                _ghostButton.ResetCustomization();
             };
+        }
+
+        private void InitSources(CGRect rect)
+        {
+            InitFontDropDown(rect);
+            InitLetterSpacingDropDown(rect);
+            InitEnabledTextColorDropDown(rect);
+            InitDisabledTextColorDropDown(rect);
+            InitTextSizeDropDown(rect);
+            InitRippleColorDropDown(rect);
+        }
+
+        private void InitThemeDropDown(CGRect rect)
+        {
+            themeDropDown.InitSource(
+               ThemeTypes.ThemeCollection,
+               (theme) =>
+               {
+                   _ghostButton.GetThemeProvider().SetCurrentTheme(theme);
+                   _ghostButton.ResetCustomization();
+                   _dropDowns.Except(new[] { themeDropDown }).ToList().ForEach(dropDown => dropDown.ResetValue());
+                   InitSources(rect);
+                   UpdateAppearance();
+               },
+               Fields.Theme,
+               rect);
+        }
+
+        private void InitFontDropDown(CGRect rect)
+        {
+            fontDropDown.InitSource(
+               GhostButtonConstants.GhostButtonFonts,
+               font => _ghostButton.Font = font,
+               Fields.Font,
+               rect);
+        }
+
+        private void InitLetterSpacingDropDown(CGRect rect)
+        {
+            letterSpacingDropDown.InitSource(
+                GhostButtonConstants.LetterSpacings,
+                spacing => _ghostButton.LetterSpacing = spacing,
+                Fields.LetterSpacing,
+                rect);
+        }
+
+        private void InitEnabledTextColorDropDown(CGRect rect)
+        {
+            enabledTextColorDropDown.InitSource(
+                GhostButtonConstants.FontColors,
+                color => _ghostButton.TextColor = color,
+                Fields.EnabledTextColor,
+                rect);
+        }
+
+        private void InitDisabledTextColorDropDown(CGRect rect)
+        {
+            disabledTextColorDropDown.InitSource(
+               GhostButtonConstants.DisabledFontColors,
+               color => _ghostButton.DisabledTextColor = color,
+               Fields.DisabledTextColor,
+               rect);
+        }
+
+        private void InitTextSizeDropDown(CGRect rect)
+        {
+            textSizeDropDown.InitSource(
+                GhostButtonConstants.TextSizes,
+                size => _ghostButton.TextSize = size,
+                Fields.TextSize,
+                rect);
+        }
+
+        private void InitRippleColorDropDown(CGRect rect)
+        {
+            rippleColorDropDown.InitSource(
+                GhostButtonConstants.RippleColors,
+                color => _ghostButton.RippleColor = color,
+                Fields.RippleColor,
+                rect);
         }
     }
 }
