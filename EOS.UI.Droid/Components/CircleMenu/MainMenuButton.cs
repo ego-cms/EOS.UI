@@ -34,7 +34,7 @@ namespace EOS.UI.Droid.Components
         private const int ScaleDimention = 150;
         private const int LottieViewSideSize = 24;
 
-        private const float ShadowRadiusValue = 8f;
+        private const float ShadowRadiusValue = 6f;
 
         private const string _forwardAnimationPath = "Animations/menu_animation_forward.json";
         private const string _backAnimationPath = "Animations/menu_animation_back.json";
@@ -122,7 +122,7 @@ namespace EOS.UI.Droid.Components
             roundedDrawable.SetColor(Color.White);
             roundedDrawable.SetShape(ShapeType.Oval);
             SetBackgroundDrawable(roundedDrawable);
-            Elevation = ShadowRadiusValue;
+            Elevation = ShadowRadiusValue * Resources.DisplayMetrics.Density;
 
             SetupLottieView(view);
             _lottieView.SetAnimation(AnimationName);

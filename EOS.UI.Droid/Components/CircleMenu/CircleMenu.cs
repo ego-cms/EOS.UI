@@ -28,7 +28,7 @@ namespace EOS.UI.Droid.Components
         private const float Stiffness = 2000f;
         private const float DampingRatio = 0.5f;
 
-        private const int HintElevationValue = 4;
+        private const int HintElevationValue = 2;
         private const int HintAnimationSmoothDuration = 200;
         private const int HintAnimationFirstDuration = 300;
         private const int HintAnimationSecondDuration = 400;
@@ -68,7 +68,7 @@ namespace EOS.UI.Droid.Components
         private const int SwipeAnimateDuration = 300;
         private const int SubMenuAnimateDuration = 150;
 
-        private const float ShadowRadiusValue = 8f;
+        private const float ShadowRadiusValue = 6f;
         //intermediate alpha values when should show or hide shadow
         private const float AlphaHidingValue = 0.8f;
         private const float AlphaShowingValue = 0.5f;
@@ -567,8 +567,8 @@ namespace EOS.UI.Droid.Components
                 }
             };
 
-            lastView.Elevation = HintElevationValue;
-            middleView.Elevation = HintElevationValue * 2;
+            lastView.Elevation = HintElevationValue * Resources.DisplayMetrics.Density;
+            middleView.Elevation = HintElevationValue * 2 * Resources.DisplayMetrics.Density;
 
             _container.AddView(middleView, 0);
             _container.AddView(lastView, 0);
@@ -765,7 +765,7 @@ namespace EOS.UI.Droid.Components
                 {
                     //when alpha is intermediate value it's necessary to add shadow
                     if(subMenu.Alpha >= AlphaShowingValue)
-                        subMenu.Elevation = ShadowRadiusValue;
+                        subMenu.Elevation = ShadowRadiusValue * Resources.DisplayMetrics.Density;
                 };
 
                 if(i == menuItemModel.Children.Count() - 1)

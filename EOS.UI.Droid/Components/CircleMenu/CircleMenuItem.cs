@@ -25,7 +25,7 @@ namespace EOS.UI.Droid.Components
         private const float EndAngle = 0f;
         private const float PivotScale = 0.5f;
         private const int RotateDuration = 380;
-        private const float ShadowRadiusValue = 12f;
+        private const float ShadowRadiusValue = 6f;
 
         #endregion
 
@@ -154,7 +154,7 @@ namespace EOS.UI.Droid.Components
             roundedDrawable.SetColor(Color.White);
             roundedDrawable.SetShape(ShapeType.Oval);
             SetBackgroundDrawable(roundedDrawable);
-            Elevation = ShadowRadiusValue;
+            Elevation = ShadowRadiusValue * Resources.DisplayMetrics.Density;
             AddView(CreateBlackoutView());
         }
 
