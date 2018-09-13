@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using Android.App;
 using Android.Content;
 using Android.Content.Res;
@@ -63,7 +63,7 @@ namespace EOS.UI.Droid.Controls
             {
                 _color = value;
                 IsEOSCustomizationIgnored = true;
-                ((_progressBar.ProgressDrawable as LayerDrawable).GetDrawable(1) as RotateDrawable).SetColorFilter(_color, PorterDuff.Mode.SrcIn);
+                _progressBar.ProgressTintList = ColorStateList.ValueOf(_color);
                 _centralRectangle.SetBackgroundColor(_color);
                 _percentText.SetTextColor(_color);
                 FontStyle.Color = value;
