@@ -462,33 +462,6 @@ namespace EOS.UI.Droid.Controls
             SetStopAnimationValues();
         }
 
-        //private RotateDrawable CreateRotateDrawable()
-        //{
-        //    if(Build.VERSION.SdkInt >= BuildVersionCodes.M)
-        //        return CreateRotateDrawableAPI23();
-        //    else
-        //        return CreateRotateDrawableAPI21();
-        //}
-
-        //private RotateDrawable CreateRotateDrawableAPI23()
-        //{
-        //    var drawable = new RotateDrawable();
-        //    drawable.PivotXRelative = true;
-        //    drawable.PivotX = _pivot;
-        //    drawable.PivotYRelative = true;
-        //    drawable.PivotY = _pivot;
-        //    return drawable;
-        //}
-
-        //private RotateDrawable CreateRotateDrawableAPI21()
-        //{
-        //    //It's impossible adequate creation from code due
-        //    //https://github.com/aosp-mirror/platform_frameworks_base/blob/lollipop-dev/graphics/java/android/graphics/drawable/RotateDrawable.java#L218
-        //    //use creation from xml hack
-        //    var drawable = (RotateDrawable)Drawable.CreateFromXml(Resources, Resources.GetXml(Resource.Drawable.RotateDrawable));
-        //    return drawable;
-        //}
-
         #endregion
 
         #region IEOSThemeControl implementation

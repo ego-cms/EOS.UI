@@ -665,7 +665,7 @@ namespace EOS.UI.Droid.Controls
 
             base.SetImageDrawable(_animationDrawable);
 
-            //apdating psdding according configuration shdow
+            //updating paddings according configuration shadow            
             base.SetPadding(0, 0, 2 * (int)(ShadowConfig.Offset.X * Resources.DisplayMetrics.Density), 2 * (int)(ShadowConfig.Offset.Y * Resources.DisplayMetrics.Density));
 
             _animationDrawable.PlayAnimation();
