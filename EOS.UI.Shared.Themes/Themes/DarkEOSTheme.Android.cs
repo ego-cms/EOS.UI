@@ -151,6 +151,16 @@ namespace EOS.UI.Shared.Themes.Themes
                     LineHeight = 13f
                 }
             },
+            { EOSConstants.R1C6S,
+                new FontStyleItem()
+                {
+                    Color = Color.ParseColor(neutralColor6S),
+                    Typeface = RobotoBold,
+                    Size = 11f,
+                    LetterSpacing = 0.0055f,
+                    LineHeight = 13f
+                }
+            },
             { EOSConstants.R2C1S,
                 new FontStyleItem()
                 {

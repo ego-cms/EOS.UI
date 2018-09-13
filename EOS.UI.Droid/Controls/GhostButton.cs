@@ -27,9 +27,14 @@ namespace EOS.UI.Droid.Controls
             set
             {
                 base.Typeface = value;
-                FontStyle.Typeface = value;
-                SetFontStyle();
-                IsEOSCustomizationIgnored = true;
+                //Should check FontStyle
+                //Set method works with base(context) constructor, which works ahead of FontStyle set
+                if (FontStyle != null)
+                {
+                    FontStyle.Typeface = value;
+                    SetFontStyle();
+                    IsEOSCustomizationIgnored = true;
+                }
             }
         }
 
@@ -39,9 +44,15 @@ namespace EOS.UI.Droid.Controls
             set
             {
                 base.LetterSpacing = value;
-                FontStyle.LetterSpacing = value;
-                SetFontStyle();
-                IsEOSCustomizationIgnored = true;
+
+                //Should check FontStyle
+                //Set method works with base(context) constructor, which works ahead of FontStyle set
+                if (FontStyle != null)
+                {
+                    FontStyle.LetterSpacing = value;
+                    SetFontStyle();
+                    IsEOSCustomizationIgnored = true;
+                }
             }
         }
 
@@ -51,9 +62,15 @@ namespace EOS.UI.Droid.Controls
             set
             {
                 base.TextSize = value;
-                FontStyle.Size = value;
-                SetFontStyle();
-                IsEOSCustomizationIgnored = true;
+
+                //Should check FontStyle
+                //Set method works with base(context) constructor, which works ahead of FontStyle set
+                if (FontStyle != null)
+                {
+                    FontStyle.Size = value;
+                    SetFontStyle();
+                    IsEOSCustomizationIgnored = true;
+                }
             }
         }
 
@@ -229,7 +246,13 @@ namespace EOS.UI.Droid.Controls
         public override void SetTypeface(Typeface tf, [GeneratedEnum] TypefaceStyle style)
         {
             base.SetTypeface(tf, style);
-            IsEOSCustomizationIgnored = true;
+
+            //Should check FontStyle
+            //Set method works with base(context) constructor, which works ahead of FontStyle set
+            if (FontStyle != null)
+            {
+                IsEOSCustomizationIgnored = true;
+            }
         }
 
         public IEOSStyle GetCurrentEOSStyle()

@@ -525,6 +525,13 @@ namespace EOS.UI.iOS.Extensions
             button.SetAttributedTitle(highlightedAttrString, UIControlState.Highlighted);
         }
 
+        internal static NSMutableAttributedString ChangeAttributedString(NSAttributedString attributedString, NSString attributeName, NSObject attributeValue)
+        {
+            var mutableAttributedString = new NSMutableAttributedString(attributedString);
+            mutableAttributedString.AddAttribute(attributeName, attributeValue, new NSRange(0, mutableAttributedString.Length));
+            return mutableAttributedString;
+        }
+
         /// <summary>
         /// Add ripple animation to the UIButton
         /// </summary>

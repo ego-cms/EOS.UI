@@ -1,12 +1,9 @@
 using CoreGraphics;
 using EOS.UI.iOS.Components;
 using EOS.UI.iOS.Sandbox.Storyboards;
-using EOS.UI.iOS.Themes;
+using EOS.UI.Shared.Sandbox.ControlConstants.iOS;
 using EOS.UI.Shared.Themes.DataModels;
-using EOS.UI.Shared.Themes.Extensions;
-using EOS.UI.Shared.Themes.Helpers;
 using EOS.UI.Shared.Themes.Themes;
-using Foundation;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -82,12 +79,17 @@ namespace EOS.UI.iOS.Sandbox
 
             var rect = new CGRect(0, 0, 100, 150);
             InitThemeDropDown(rect);
+            InitItemsCountDropDown(rect);
+            InitSources(rect);
+            InitResetButton();
+        }
+
+        private void InitSources(CGRect rect)
+        {
             InitFocusedIconColorDropDown(rect);
             InitFocusedBackgroundColorDropDown(rect);
             InitUnfocusedIconColorDropDown(rect);
             InitUnfocusedButtonColorDropDown(rect);
-            InitItemsCountDropDown(rect);
-            InitResetButton();
         }
 
         private void InitThemeDropDown(CGRect rect)
@@ -99,6 +101,7 @@ namespace EOS.UI.iOS.Sandbox
                     _circleMenu.GetThemeProvider().SetCurrentTheme(theme);
                     _circleMenu.ResetCustomization();
                     ResetFields();
+                    InitSources(rect);
                     UpdateAppearance();
                 },
                 Fields.Theme,
@@ -109,7 +112,7 @@ namespace EOS.UI.iOS.Sandbox
         private void InitFocusedBackgroundColorDropDown(CGRect rect)
         {
             focusedButtonColorDropDown.InitSource(
-                Colors.MainColorsCollection,
+                CircleMenuConstants.FocusedBackgroundColors,
                 color => _circleMenu.FocusedBackgroundColor = color,
                 Fields.FocusedBackgroundColor,
                rect);
@@ -118,7 +121,7 @@ namespace EOS.UI.iOS.Sandbox
         private void InitFocusedIconColorDropDown(CGRect rect)
         {
             focusedIconColorDropDown.InitSource(
-                Colors.MainColorsCollection,
+                CircleMenuConstants.FocusedIconColors,
                 color => _circleMenu.FocusedIconColor = color,
                 Fields.FocusedIconColor,
                rect);
@@ -127,7 +130,7 @@ namespace EOS.UI.iOS.Sandbox
         private void InitUnfocusedButtonColorDropDown(CGRect rect)
         {
             unfocusedButtonColorDropDown.InitSource(
-               Colors.MainColorsCollection,
+                CircleMenuConstants.UnfocusedBackgroundColors,
                 color => _circleMenu.UnfocusedBackgroundColor = color,
                 Fields.UnfocusedBackgroundColor,
               rect);
@@ -136,13 +139,12 @@ namespace EOS.UI.iOS.Sandbox
         private void InitUnfocusedIconColorDropDown(CGRect rect)
         {
             unfocusedIconColorDropDown.InitSource(
-               Colors.MainColorsCollection,
+                CircleMenuConstants.UnfocusedIconColors,
                 color => _circleMenu.UnfocusedIconColor = color,
                 Fields.UnfocusedIconColor,
               rect);
         }
-        
-        
+
         private void InitItemsCountDropDown(CGRect rect)
         {
             itemsCountDropDown.InitSource(
@@ -167,6 +169,7 @@ namespace EOS.UI.iOS.Sandbox
         private void ResetFields()
         {
             _dropDowns.Except(new[] { themeDropDown }).ToList().ForEach(dropDown => dropDown.ResetValue());
+            _circleMenu.CircleMenuItems = CreateSource(Convert.ToInt32(9));
         }
 
         private List<CircleMenuItemModel> CreateSource(int count)
