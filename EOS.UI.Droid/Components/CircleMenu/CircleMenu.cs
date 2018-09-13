@@ -345,7 +345,7 @@ namespace EOS.UI.Droid.Components
 
         private void MainMenuClick(object sender, EventArgs e)
         {
-            if(!IsBusy)
+            if(!IsBusy && !Locked)
             {
                 if(IsOpened)
                 {
@@ -617,6 +617,7 @@ namespace EOS.UI.Droid.Components
         {
             var afterHideAnimation = new Action(() =>
             {
+                _container.SetBackgroundColor(Color.Transparent);
                 _indicators.ForEach(indicator => indicator.Visibility = ViewStates.Gone);
                 InitialDataModelSetup();
                 IsOpened = !IsOpened;
@@ -625,7 +626,6 @@ namespace EOS.UI.Droid.Components
 
             var afterShowAnimation = new Action(() =>
             {
-                _container.SetBackgroundColor(Color.Transparent);
                 //reset data from model for part visible and not clickable menus
                 _menuItems[1].ResetDataFromModel();
 
