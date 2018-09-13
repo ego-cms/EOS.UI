@@ -122,11 +122,11 @@ namespace EOS.UI.Shared.Sandbox.Helpers
 
         public static partial class Sizes
         {
-            public static Dictionary<string, float> TextSizeCollection = new Dictionary<string, float>();
-            public static Dictionary<string, int> CornerRadiusCollection = new Dictionary<string, int>();
-            public static Dictionary<string, int> BorderWidthCollection = new Dictionary<string, int>();
-            public static Dictionary<string, int> PaddingsCollection = new Dictionary<string, int>();
-            public static Dictionary<string, float> LetterSpacingCollection = new Dictionary<string, float>();
+            public static Dictionary<string, float> TextSizeCollection { get; } = new Dictionary<string, float>();
+            public static Dictionary<string, int> CornerRadiusCollection { get; } = new Dictionary<string, int>();
+            public static Dictionary<string, int> BorderWidthCollection { get; } = new Dictionary<string, int>();
+            public static Dictionary<string, int> PaddingsCollection { get; } = new Dictionary<string, int>();
+            public static Dictionary<string, float> LetterSpacingCollection { get; } = new Dictionary<string, float>();
 
             static Sizes()
             {
@@ -135,7 +135,7 @@ namespace EOS.UI.Shared.Sandbox.Helpers
 #if __IOS__
                     var v = val;
 #else
-                    var v = (float) val / 10;
+                    var v = (float)val / 10;
 #endif
                     LetterSpacingCollection.Add(v.ToString(), v);
                 }
@@ -162,7 +162,7 @@ namespace EOS.UI.Shared.Sandbox.Helpers
 
         public static class ThemeTypes
         {
-            public static Dictionary<string, EOSThemeEnumeration> ThemeCollection = new Dictionary<string, EOSThemeEnumeration>()
+            public static Dictionary<string, EOSThemeEnumeration> ThemeCollection { get; } = new Dictionary<string, EOSThemeEnumeration>()
             {
 #if __ANDROID__
                 { string.Empty, EOSThemeEnumeration.Light },
@@ -178,7 +178,7 @@ namespace EOS.UI.Shared.Sandbox.Helpers
             public const string CTA = "CTA button";
             public const string FullBleed = "Full bleed button";
 
-            public static Dictionary<string, SimpleButtonTypeEnum> SimpleButtonTypeCollection = new Dictionary<string, SimpleButtonTypeEnum>()
+            public static Dictionary<string, SimpleButtonTypeEnum> SimpleButtonTypeCollection { get; } = new Dictionary<string, SimpleButtonTypeEnum>()
             {
 #if __ANDROID__
                 { string.Empty, SimpleButtonTypeEnum.Simple },
@@ -187,7 +187,7 @@ namespace EOS.UI.Shared.Sandbox.Helpers
                 { FullBleed, SimpleButtonTypeEnum.FullBleed },
             };
 
-            public static Dictionary<string, SimpleButtonTypeEnum> CTAButtonTypeCollection = new Dictionary<string, SimpleButtonTypeEnum>()
+            public static Dictionary<string, SimpleButtonTypeEnum> CTAButtonTypeCollection { get; } = new Dictionary<string, SimpleButtonTypeEnum>()
             {
 #if __ANDROID__
                 { string.Empty, SimpleButtonTypeEnum.Simple },
@@ -199,7 +199,7 @@ namespace EOS.UI.Shared.Sandbox.Helpers
 
         public static class Titles
         {
-            public static Dictionary<string, string> TitleCollection = new Dictionary<string, string>()
+            public static Dictionary<string, string> TitleCollection { get; } = new Dictionary<string, string>()
             {
 #if __ANDROID__
                 { string.Empty, string.Empty },
@@ -212,7 +212,7 @@ namespace EOS.UI.Shared.Sandbox.Helpers
 
         public static class Days
         {
-            public static Dictionary<string, WeekStartEnum> DaysCollection = new Dictionary<string, WeekStartEnum>()
+            public static Dictionary<string, WeekStartEnum> DaysCollection { get; } = new Dictionary<string, WeekStartEnum>()
             {
 #if __ANDROID__
                 { string.Empty, WeekStartEnum.Sunday },
@@ -224,9 +224,9 @@ namespace EOS.UI.Shared.Sandbox.Helpers
 
         public static class Shadow
         {
-            public static Dictionary<string, int> OffsetCollection = new Dictionary<string, int>();
-            public static Dictionary<string, int> RadiusCollection = new Dictionary<string, int>();
-            public static Dictionary<string, double> OpacityCollection = new Dictionary<string, double>();
+            public static Dictionary<string, int> OffsetCollection { get; } = new Dictionary<string, int>();
+            public static Dictionary<string, int> RadiusCollection { get; } = new Dictionary<string, int>();
+            public static Dictionary<string, double> OpacityCollection { get; } = new Dictionary<string, double>();
 
             static Shadow()
             {
@@ -243,7 +243,7 @@ namespace EOS.UI.Shared.Sandbox.Helpers
                     RadiusCollection.Add(val.ToString(), val);
             }
         }
-    
+
     }
 
 

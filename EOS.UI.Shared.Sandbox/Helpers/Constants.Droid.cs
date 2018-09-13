@@ -12,7 +12,7 @@ namespace EOS.UI.Shared.Sandbox.Helpers
     {
         public static class Colors
         {
-            public static Dictionary<string, Color> MainColorsCollection = new Dictionary<string, Color>()
+            public static Dictionary<string, Color> MainColorsCollection { get; } = new Dictionary<string, Color>()
             {
                 {ColorNameBlue, Color.ParseColor(ColorBlue)},
                 {ColorNameUltramarine, Color.ParseColor(ColorUltramarine)},
@@ -31,7 +31,7 @@ namespace EOS.UI.Shared.Sandbox.Helpers
                 {ColorNameIndigo, Color.ParseColor(ColorIndigo)},
             };
 
-            public static Dictionary<string, Color> FontColorsCollection = new Dictionary<string, Color>()
+            public static Dictionary<string, Color> FontColorsCollection { get; } = new Dictionary<string, Color>()
             {
                 {ColorNameBlack, Color.ParseColor(ColorBlack)},
                 {ColorNameDarkGray, Color.ParseColor(ColorDarkGray)},
@@ -50,26 +50,26 @@ namespace EOS.UI.Shared.Sandbox.Helpers
 
         public static class Fonts
         {
-            public const string ArimoRegular = "ArimoRegular";
-            public const string ArimoBold = "ArimoBold";
-            public const string LatoRegular = "LatoRegular";
-            public const string LatoBold = "LatoBold";
-            public const string LatoBlack = "LatoBlack";
-            public const string MontserratRegular = "MontserratRegular";
-            public const string MontserratMedium = "MontserratMedium";
-            public const string MontserratSemiBold = "MontserratSemiBold";
-            public const string MontserratBold = "MontserratBold";
-            public const string MontserratExtraBold = "MontserratExtraBold";
-            public const string OpenSansRegular = "OpenSansRegular";
-            public const string OpenSansSemiBold = "OpenSansSemiBold";
-            public const string OpenSansBold = "OpenSansBold";
-            public const string OpenSansExtraBold = "OpenSansExtraBold";
-            public const string UbuntuRegular = "UbuntuRegular";
-            public const string UbuntuMedium = "UbuntuMedium";
-            public const string UbuntuBold = "UbuntuBold";
-            public const string RobotoRegular = "RobotoRegular";
-            public const string RobotoMedium = "RobotoMedium";
-            public const string RobotoBold = "RobotoBold";
+            private const string ArimoRegular = "ArimoRegular";
+            private const string ArimoBold = "ArimoBold";
+            private const string LatoRegular = "LatoRegular";
+            private const string LatoBold = "LatoBold";
+            private const string LatoBlack = "LatoBlack";
+            private const string MontserratRegular = "MontserratRegular";
+            private const string MontserratMedium = "MontserratMedium";
+            private const string MontserratSemiBold = "MontserratSemiBold";
+            private const string MontserratBold = "MontserratBold";
+            private const string MontserratExtraBold = "MontserratExtraBold";
+            private const string OpenSansRegular = "OpenSansRegular";
+            private const string OpenSansSemiBold = "OpenSansSemiBold";
+            private const string OpenSansBold = "OpenSansBold";
+            private const string OpenSansExtraBold = "OpenSansExtraBold";
+            private const string UbuntuRegular = "UbuntuRegular";
+            private const string UbuntuMedium = "UbuntuMedium";
+            private const string UbuntuBold = "UbuntuBold";
+            private const string RobotoRegular = "RobotoRegular";
+            private const string RobotoMedium = "RobotoMedium";
+            private const string RobotoBold = "RobotoBold";
 
             public static Dictionary<string, string> GetButtonBadgeFonts()
             {
@@ -195,7 +195,7 @@ namespace EOS.UI.Shared.Sandbox.Helpers
 
         public static class Validation
         {
-            public static Dictionary<string, int> ValidationCollection = new Dictionary<string, int>()
+            public static Dictionary<string, int> ValidationCollection { get; } = new Dictionary<string, int>()
             {
                 { string.Empty, 0 },
                 { "without validation", 1 },
@@ -211,7 +211,7 @@ namespace EOS.UI.Shared.Sandbox.Helpers
             public const string Lock = "Lock";
             public const string AccountOff = "Account off";
 
-            public static Dictionary<string, int> DrawableCollection = new Dictionary<string, int>()
+            public static Dictionary<string, int> DrawableCollection { get; } = new Dictionary<string, int>()
             {
                 { string.Empty, 0 },
                 { Calendar, Resource.Drawable.icCalendar },

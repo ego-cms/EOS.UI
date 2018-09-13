@@ -28,8 +28,6 @@ namespace EOS.UI.Droid.Sandbox.Activities
         public const string ShadowColorGKey = "ShadowColorGKey";
         public const string ShadowColorBKey = "ShadowColorBKey";
 
-        EOSSandboxToolbar _toolbar;
-
         double _shadowAlpha = 1.0f;
 
         protected override void OnCreate(Bundle savedInstanceState)
@@ -87,7 +85,7 @@ namespace EOS.UI.Droid.Sandbox.Activities
                     ResetShadowFields(shadowOffsetXDropDown, shadowOffsetYDropDown, shadowBlurDropDown, shadowColorDropDown);
                     spinners.Except(new[] { themeDropDown }).ToList().ForEach(s => s.SetSpinnerSelection(0));
                     UpdateAppearance();
-                    _shadowAlpha = fab.ShadowConfig != null ? (float)fab.ShadowConfig?.Color.A / 255 : 1;
+                    _shadowAlpha = fab.ShadowConfig != null ? (float) fab.ShadowConfig.Color.A / 255 : 1;
                 }
             };
             var theme = fab.GetThemeProvider().GetCurrentTheme();
@@ -172,8 +170,8 @@ namespace EOS.UI.Droid.Sandbox.Activities
 
         private void SetToolbar()
         {
-            _toolbar = FindViewById<EOSSandboxToolbar>(Resource.Id.toolbar);
-            SetSupportActionBar(_toolbar);
+            var toolbar = FindViewById<EOSSandboxToolbar>(Resource.Id.toolbar);
+            SetSupportActionBar(toolbar);
         }
 
         private void ChangeShadow(FabProgress fab)
@@ -209,12 +207,6 @@ namespace EOS.UI.Droid.Sandbox.Activities
             shadowOffsetX.SetSpinnerSelection(0);
             shadowOffsetY.SetSpinnerSelection(0);
             shadowBlur.SetSpinnerSelection(0);
-        }
-
-        private void ChangeFabLayoutParameters(int width, FabProgress fab)
-        {
-            fab.ShadowConfig = null;
-            fab.SetLayoutParameters(width, width);
         }
 
         private void ResetCustomization(FabProgress fab, EOSSandboxDropDown themeDropDown, List<EOSSandboxDropDown> spinners)
