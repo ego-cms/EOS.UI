@@ -116,6 +116,9 @@ namespace EOS.UI.Droid.Sandbox.Activities
 
             resetButton.Click += delegate
             {
+                SetupSimpleButtonStyle();
+                EnableSimpleButtonFields();
+                _simpleButton.ResetCustomization();
                 ResetCustomValues();
             };
 
@@ -126,27 +129,34 @@ namespace EOS.UI.Droid.Sandbox.Activities
 
         private void ShadowRadiusItemSelected(int position)
         {
-            if (_buttonType == SimpleButtonTypeEnum.FullBleed)
-                return;
-            var config = _simpleButton.ShadowConfig;
-            config.Blur = SimpleButtonConstants.ShadowRadiusCollection.ElementAt(position).Value;
-            _simpleButton.ShadowConfig = config;
+            if(position > 0)
+            {
+                if(_buttonType == SimpleButtonTypeEnum.FullBleed)
+                    return;
+                var config = _simpleButton.ShadowConfig;
+                config.Blur = SimpleButtonConstants.ShadowRadiusCollection.ElementAt(position).Value;
+                _simpleButton.ShadowConfig = config;
+            }
         }
 
         private void ButtonTypeItemSelected(int position)
         {
-            _buttonType = Buttons.SimpleButtonTypeCollection.ElementAt(position).Value;
-            ResetCustomValues(true);
-            switch (_buttonType)
+            if(position > 0)
             {
-                case SimpleButtonTypeEnum.Simple:
-                    SetupSimpleButtonStyle();
-                    EnableSimpleButtonFields();
-                    break;
-                case SimpleButtonTypeEnum.FullBleed:
-                    SetupFullBleedButtonStyle();
-                    DisableSimpleButtonFields();
-                    break;
+                _buttonType = Buttons.SimpleButtonTypeCollection.ElementAt(position).Value;
+                ResetCustomValues(true);
+                switch(_buttonType)
+                {
+                    case SimpleButtonTypeEnum.Simple:
+                        SetupSimpleButtonStyle();
+                        EnableSimpleButtonFields();
+                        _simpleButton.ResetCustomization();
+                        break;
+                    case SimpleButtonTypeEnum.FullBleed:
+                        SetupFullBleedButtonStyle();
+                        DisableSimpleButtonFields();
+                        break;
+                }
             }
         }
 
@@ -182,7 +192,6 @@ namespace EOS.UI.Droid.Sandbox.Activities
                 (int)(SimpleButtonConstants.TopPadding * denisty),
                 (int)(SimpleButtonConstants.RightPadding * denisty),
                 (int)(SimpleButtonConstants.BottomPadding * denisty));
-            _simpleButton.ResetCustomization();
             _simpleButton.Text = Buttons.Simple;
         }
 
@@ -274,7 +283,6 @@ namespace EOS.UI.Droid.Sandbox.Activities
 
         private void ResetCustomValues(bool ignogeButtonType = false)
         {
-            _simpleButton.ResetCustomization();
             _fontDropDown.SetSpinnerSelection(0);
             _letterSpacingDropDown.SetSpinnerSelection(0);
             _textSizeDropDown.SetSpinnerSelection(0);
