@@ -193,15 +193,26 @@ namespace EOS.UI.Droid.Controls
             get => base.Typeface;
             set
             {
-                IsEOSCustomizationIgnored = true;
-                FontStyle.Typeface = value;
-                SetFontStyle();
+                base.Typeface = value;
+                //Should check FontStyle
+                //Set method works with base(context) constructor, which works ahead of FontStyle set
+                if (FontStyle != null)
+                {
+                    IsEOSCustomizationIgnored = true;
+                    FontStyle.Typeface = value;
+                    SetFontStyle();
+                }
             }
         }
 
         public override void SetTypeface(Typeface tf, [GeneratedEnum] TypefaceStyle style)
         {
-            IsEOSCustomizationIgnored = true;
+            //Should check FontStyle
+            //Set method works with base(context) constructor, which works ahead of FontStyle set
+            if (FontStyle != null)
+            {
+                IsEOSCustomizationIgnored = true;
+            }
             base.SetTypeface(tf, style);
         }
 
@@ -210,9 +221,15 @@ namespace EOS.UI.Droid.Controls
             get => base.LetterSpacing;
             set
             {
-                IsEOSCustomizationIgnored = true;
-                FontStyle.LetterSpacing = value;
-                SetFontStyle();
+                base.LetterSpacing = value;
+                //Should check FontStyle
+                //Set method works with base(context) constructor, which works ahead of FontStyle set
+                if (FontStyle != null)
+                {
+                    IsEOSCustomizationIgnored = true;
+                    FontStyle.LetterSpacing = value;
+                    SetFontStyle();
+                }
             }
         }
 
@@ -249,10 +266,15 @@ namespace EOS.UI.Droid.Controls
             get => base.TextSize;
             set
             {
-                IsEOSCustomizationIgnored = true;
+                //Should check FontStyle
+                //Set method works with base(context) constructor, which works ahead of FontStyle set
+                if (FontStyle != null)
+                {
+                    IsEOSCustomizationIgnored = true;
+                    FontStyle.Size = value;
+                    SetFontStyle();
+                }
                 base.TextSize = value;
-                FontStyle.Size = value;
-                SetFontStyle();
             }
         }
 
@@ -293,7 +315,7 @@ namespace EOS.UI.Droid.Controls
         private void SetDisabledTextColor()
         {
             if(!Enabled)
-                base.SetTextColor(DisabledColor);
+                base.SetTextColor(TextColorDisabled);
         }
 
         private void SetHintTextColor()

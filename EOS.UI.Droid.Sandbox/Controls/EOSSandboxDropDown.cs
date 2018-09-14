@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections;
 using Android.Content;
 using Android.Graphics;
@@ -98,6 +98,7 @@ namespace EOS.UI.Droid.Sandbox.Controls
 
             _nameTextView = view.FindViewById<TextView>(Resource.Id.dropDownName);
             _spinner = view.FindViewById<Spinner>(Resource.Id.dropDownSpinner);
+            _spinner.Id = Guid.NewGuid().GetHashCode();
             _divider = view.FindViewById<EOSSandboxDivider>(Resource.Id.dropDownDivider);
 
             _spinner.ItemSelected += (sender, e) =>

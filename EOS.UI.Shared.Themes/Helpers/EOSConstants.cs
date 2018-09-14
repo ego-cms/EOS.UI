@@ -50,6 +50,7 @@ namespace EOS.UI.Shared.Themes.Helpers
         public static string R1C4 = "R1C4";
         public static string R1C5 = "R1C5";
         public static string R1C6 = "R1C6";
+        public static string R1C6S = "R1C6S";
         public static string R2C1S = "R2C1S";
         public static string R2C2 = "R2C2";
         public static string R2C3 = "R2C3";
@@ -66,13 +67,4 @@ namespace EOS.UI.Shared.Themes.Helpers
         public static string R4C4 = "R4C4";
         public static string R4C5 = "R4C5";
     }
-
-    public static class SimpleButtonConstants
-    {
-        public const int LeftPadding = 15;
-        public const int RightPadding = 15;
-        public const int TopPadding = 0;
-        public const int BottomPadding = 0;
-    }
-
 }

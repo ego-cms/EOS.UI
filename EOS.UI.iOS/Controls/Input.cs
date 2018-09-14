@@ -8,7 +8,7 @@ using EOS.UI.iOS.Themes;
 using EOS.UI.Shared.Themes.Helpers;
 using EOS.UI.Shared.Themes.Interfaces;
 using EOS.UI.Shared.Themes.Extensions;
-
+using EOS.UI.iOS.Extensions;
 using static EOS.UI.iOS.Helpers.Constants;
 using EOS.UI.Shared.Themes.DataModels;
 
@@ -358,7 +358,10 @@ namespace EOS.UI.iOS.Controls
         {
             base.TextColor = (Enabled ? TextColor : TextColorDisabled);
             if (Placeholder != null)
-                base.AttributedPlaceholder = new NSAttributedString(Placeholder, null, Enabled ? PlaceholderColor : PlaceholderColorDisabled);
+            {
+                var color = Enabled ? PlaceholderColor : PlaceholderColorDisabled;
+                AttributedPlaceholder = AttributedPlaceholder.ChangeAttribute(UIStringAttributeKey.ForegroundColor, color);
+            }
 
             if (!Enabled)
             {
@@ -380,13 +383,8 @@ namespace EOS.UI.iOS.Controls
             if (AttributedPlaceholder == null)
                 Placeholder = " ";
 
-            var attributedText = new NSMutableAttributedString(AttributedText);
-            attributedText.AddAttribute(UIStringAttributeKey.KerningAdjustment, new NSNumber(spacing), new NSRange(0, AttributedText.Length));
-            AttributedText = attributedText;
-
-            var attributedPlaceholder = new NSMutableAttributedString(AttributedPlaceholder);
-            attributedPlaceholder.AddAttribute(UIStringAttributeKey.KerningAdjustment, new NSNumber(spacing), new NSRange(0, AttributedPlaceholder.Length));
-            AttributedPlaceholder = attributedPlaceholder;
+            AttributedText = AttributedText.ChangeAttribute(UIStringAttributeKey.KerningAdjustment, new NSNumber(spacing));
+            AttributedPlaceholder = AttributedPlaceholder.ChangeAttribute(UIStringAttributeKey.KerningAdjustment, new NSNumber(spacing));
         }
 
         private void SetTextSize(float size)
@@ -397,13 +395,8 @@ namespace EOS.UI.iOS.Controls
             if (AttributedPlaceholder == null)
                 Placeholder = " ";
 
-            var attributedText = new NSMutableAttributedString(AttributedText);
-            attributedText.AddAttribute(UIStringAttributeKey.Font, Font.WithSize(size), new NSRange(0, AttributedText.Length));
-            AttributedText = attributedText;
-
-            var attributedPlaceholder = new NSMutableAttributedString(AttributedPlaceholder);
-            attributedPlaceholder.AddAttribute(UIStringAttributeKey.Font, Font.WithSize(size), new NSRange(0, AttributedPlaceholder.Length));
-            AttributedPlaceholder = attributedPlaceholder;
+            AttributedText = AttributedText.ChangeAttribute(UIStringAttributeKey.Font, Font.WithSize(size));
+            AttributedPlaceholder = AttributedPlaceholder.ChangeAttribute(UIStringAttributeKey.Font, Font.WithSize(size));
         }
 
         public override void LayoutSubviews()
@@ -606,13 +599,13 @@ namespace EOS.UI.iOS.Controls
         private void SetPlaceholderTextColor()
         {
             if (Enabled && Placeholder != null)
-                AttributedPlaceholder = new NSAttributedString(Placeholder, null, PlaceholderColor);
+                AttributedPlaceholder = AttributedPlaceholder.ChangeAttribute(UIStringAttributeKey.ForegroundColor, PlaceholderColor);
         }
 
         private void SetPlaceholderDisabledTextColor()
         {
             if (!Enabled && Placeholder != null)
-                AttributedPlaceholder = new NSAttributedString(Placeholder, null, PlaceholderColorDisabled);
+                AttributedPlaceholder = AttributedPlaceholder.ChangeAttribute(UIStringAttributeKey.ForegroundColor, PlaceholderColorDisabled);
         }
 
         private void SetDisabledTextColor()

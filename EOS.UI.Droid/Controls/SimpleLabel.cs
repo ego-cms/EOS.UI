@@ -45,9 +45,14 @@ namespace EOS.UI.Droid.Controls
             get => base.Typeface;
             set
             {
-                IsEOSCustomizationIgnored = true;
-                FontStyle.Typeface = value;
-                SetFontStyle();
+                //Should check FontStyle
+                //Set method works with base(context) constructor, which works ahead of FontStyle set
+                if (FontStyle != null)
+                {
+                    IsEOSCustomizationIgnored = true;
+                    FontStyle.Typeface = value;
+                    SetFontStyle();
+                }
                 base.Typeface = value;
             }
         }
@@ -63,9 +68,14 @@ namespace EOS.UI.Droid.Controls
             get => base.LetterSpacing;
             set
             {
-                IsEOSCustomizationIgnored = true;
-                FontStyle.LetterSpacing = value;
-                SetFontStyle();
+                //Should check FontStyle
+                //Set method works with base(context) constructor, which works ahead of FontStyle set
+                if (FontStyle != null)
+                {
+                    IsEOSCustomizationIgnored = true;
+                    FontStyle.LetterSpacing = value;
+                    SetFontStyle();
+                }
                 base.LetterSpacing = value;
             }
         }
@@ -75,9 +85,14 @@ namespace EOS.UI.Droid.Controls
             get => FontStyle.Color;
             set
             {
-                IsEOSCustomizationIgnored = true;
-                FontStyle.Color = value;
-                SetFontStyle();
+                //Should check FontStyle
+                //Set method works with base(context) constructor, which works ahead of FontStyle set
+                if (FontStyle != null)
+                {
+                    IsEOSCustomizationIgnored = true;
+                    FontStyle.Color = value;
+                    SetFontStyle();
+                }
                 base.SetTextColor(value);
             }
         }
@@ -92,9 +107,14 @@ namespace EOS.UI.Droid.Controls
             get => base.TextSize;
             set
             {
-                IsEOSCustomizationIgnored = true;
-                FontStyle.Size = value;
-                SetFontStyle();
+                //Should check FontStyle
+                //Set method works with base(context) constructor, which works ahead of FontStyle set
+                if (FontStyle != null)
+                {
+                    IsEOSCustomizationIgnored = true;
+                    FontStyle.Size = value;
+                    SetFontStyle();
+                }
                 base.TextSize = value;
             }
         }

@@ -121,10 +121,15 @@ namespace EOS.UI.Droid.Controls
             get => base.Typeface;
             set
             {
-                IsEOSCustomizationIgnored = true;
-                _shouldRedraw = true;
-                FontStyle.Typeface = value;
-                SetFontStyle();
+                //Should check FontStyle
+                //Set method works with base(context) constructor, which works ahead of FontStyle set
+                if (FontStyle != null)
+                {
+                    IsEOSCustomizationIgnored = true;
+                    _shouldRedraw = true;
+                    FontStyle.Typeface = value;
+                    SetFontStyle();
+                }
                 base.Typeface = value;
             }
         }
@@ -134,10 +139,15 @@ namespace EOS.UI.Droid.Controls
             get => base.LetterSpacing;
             set
             {
-                IsEOSCustomizationIgnored = true;
-                _shouldRedraw = true;
-                FontStyle.LetterSpacing = value;
-                SetFontStyle();
+                //Should check FontStyle
+                //Set method works with base(context) constructor, which works ahead of FontStyle set
+                if (FontStyle != null)
+                {
+                    IsEOSCustomizationIgnored = true;
+                    _shouldRedraw = true;
+                    FontStyle.LetterSpacing = value;
+                    SetFontStyle();
+                }
                 base.LetterSpacing = value;
             }
         }
@@ -148,9 +158,14 @@ namespace EOS.UI.Droid.Controls
             set
             {
                 IsEOSCustomizationIgnored = true;
-                _shouldRedraw = true;
-                FontStyle.Size = value;
-                SetFontStyle();
+                //Should check FontStyle
+                //Set method works with base(context) constructor, which works ahead of FontStyle set
+                if (FontStyle != null)
+                {
+                    _shouldRedraw = true;
+                    FontStyle.Size = value;
+                    SetFontStyle();
+                }
                 base.TextSize = value;
             }
         }
