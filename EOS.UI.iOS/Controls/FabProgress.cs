@@ -1,4 +1,5 @@
 ﻿using System;
+using Airbnb.Lottie;
 using CoreAnimation;
 using CoreGraphics;
 using EOS.UI.iOS.Extensions;
@@ -17,13 +18,12 @@ namespace EOS.UI.iOS.Controls
     {
         //image padding percent
         private const double _paddingRatio = 0.27;
-        private const string _rotationAnimationKey = "rotationAnimation";
-        private const double _360degrees = 6.28319;//value in radians
         private const float _startScale = 0.85f;
         private const float _endScale = 1.0f;
-        private const double _animationDuration = 0.1;
-
-        private CABasicAnimation _rotationAnimation;
+        private const double _scaleAnimationDuration = 0.1;
+        private const string _snakeAnimationKey = "Animations/preloader-snake";
+        private LOTAnimationView _snakeAnimation;
+        private UIView _animationView;
 
         public bool IsEOSCustomizationIgnored { get; private set; }
 
@@ -97,17 +97,6 @@ namespace EOS.UI.iOS.Controls
             {
                 _image = value?.ImageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate);
                 SetImage(_image);
-                IsEOSCustomizationIgnored = true;
-            }
-        }
-
-        private UIImage _preloaderImage;
-        public UIImage PreloaderImage
-        {
-            get => _preloaderImage;
-            set
-            {
-                _preloaderImage = value?.ImageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate);
                 IsEOSCustomizationIgnored = true;
             }
         }
@@ -219,7 +208,6 @@ namespace EOS.UI.iOS.Controls
                 PressedBackgroundColor = provider.GetEOSProperty<UIColor>(this, EOSConstants.BrandPrimaryColorVariant1);
                 DisabledBackgroundColor = provider.GetEOSProperty<UIColor>(this, EOSConstants.NeutralColor4S);
                 Image = UIImage.FromBundle(provider.GetEOSProperty<string>(this, EOSConstants.CalendarImage));
-                PreloaderImage = UIImage.FromBundle(provider.GetEOSProperty<string>(this, EOSConstants.FabProgressPreloaderImage));
                 ShadowConfig = provider.GetEOSProperty<ShadowConfig>(this, EOSConstants.FabShadow);
                 Enabled = Enabled;
                 IsEOSCustomizationIgnored = false;
@@ -230,18 +218,21 @@ namespace EOS.UI.iOS.Controls
         {
             if (InProgress)
                 return;
-            SetImage(PreloaderImage);
-            ImageView.Layer.AddAnimation(_rotationAnimation, _rotationAnimationKey);
             InProgress = true;
+            UpdateAnimationFrame();
+            ImageView.Hidden = true;
+            _animationView.Hidden = false;
+            _snakeAnimation.Play();
         }
 
         public void StopProgressAnimation()
         {
             if (!InProgress)
                 return;
-            ImageView.Layer.RemoveAnimation(_rotationAnimationKey);
-            SetImage(Image);
             InProgress = false;
+            ImageView.Hidden = false;
+            _animationView.Hidden = true;
+            _snakeAnimation.Stop();
         }
 
         private void UpdateImageInsets()
@@ -262,17 +253,21 @@ namespace EOS.UI.iOS.Controls
 
         private void Initialize()
         {
-            TouchDown += (sender, e) => ScaleButton(_startScale, _animationDuration);
-            TouchUpInside += (sender, e) => ScaleButton(_endScale, _animationDuration);
-            TouchDragExit += (sender, e) => ScaleButton(_endScale, _animationDuration);
+            TouchDown += (sender, e) => ScaleButton(_startScale, _scaleAnimationDuration);
+            TouchUpInside += (sender, e) => ScaleButton(_endScale, _scaleAnimationDuration);
+            TouchDragExit += (sender, e) => ScaleButton(_endScale, _scaleAnimationDuration);
 
-            _rotationAnimation = new CABasicAnimation();
-            _rotationAnimation.KeyPath = "transform.rotation.z";
-            _rotationAnimation.From = new NSNumber(0);
-            _rotationAnimation.To = new NSNumber(_360degrees);
-            _rotationAnimation.Duration = 1;
-            _rotationAnimation.Cumulative = true;
-            _rotationAnimation.RepeatCount = Int32.MaxValue;
+            _snakeAnimation = LOTAnimationView.AnimationNamed(_snakeAnimationKey);
+            _snakeAnimation.LoopAnimation = true;
+            _animationView = new UIView()
+            {
+                Frame = new CGRect(0, 0, 0, 0),
+                BackgroundColor = UIColor.Clear,
+                Hidden = true
+            };
+            _animationView.AddSubview(_snakeAnimation);
+            AddSubview(_animationView);
+
             UpdateAppearance();
             ImageView.TintColor = GetThemeProvider().GetEOSProperty<UIColor>(this, EOSConstants.NeutralColor6S);
             AdjustsImageWhenDisabled = false;
@@ -284,6 +279,17 @@ namespace EOS.UI.iOS.Controls
             {
                 Transform = CGAffineTransform.MakeScale(scale, scale);
             });
+        }
+
+        private void UpdateAnimationFrame()
+        {
+            var padding = (nfloat)(_paddingRatio * Frame.Width);
+            var heightWidth = Frame.Height - padding * 2;
+            var x = (Frame.Width / 2) - heightWidth / 2;
+            var y = padding;
+            var newFrame = new CGRect(x, y, heightWidth, heightWidth);
+            _animationView.Frame = newFrame;
+            _snakeAnimation.Frame = _animationView.Bounds;
         }
     }
 }
