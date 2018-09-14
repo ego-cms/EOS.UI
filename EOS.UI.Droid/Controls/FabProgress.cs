@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using Android.Animation;
 using Android.Content;
 using Android.Graphics;
@@ -9,6 +9,7 @@ using Android.Support.V7.Widget;
 using Android.Util;
 using Android.Views;
 using Android.Views.Animations;
+using Com.Airbnb.Lottie;
 using EOS.UI.Droid.Helpers;
 using EOS.UI.Droid.Themes;
 using EOS.UI.Shared.Helpers;
@@ -30,6 +31,9 @@ namespace EOS.UI.Droid.Controls
         private const int _imageLayerIndex = 2;
         private const int _rotationAnimationDuration = 1000;
         private const float _pivot = 0.5f;
+        private const string AnimationKey = "Animations/preloader-snake.json";
+        private const int LottieAnimationSize = 24;
+
         private int _initialWidth = -1;
         //flag set when width recalculated to including shadows. 
         //When flag is set button will ignore setting new width and will biuld it's shadow based on an old one.
@@ -39,6 +43,7 @@ namespace EOS.UI.Droid.Controls
         private float? _initialYPosition;
         bool _shouldShadowDrawingWaitForLayout = false;
         bool _touchIsDown;
+        private LottieDrawable _animationDrawable;
 
         public bool IsEOSCustomizationIgnored { get; private set; }
 
@@ -222,6 +227,7 @@ namespace EOS.UI.Droid.Controls
 
         private void Initialize(IAttributeSet attrs = null)
         {
+            _animationDrawable = CreateLottieAnimationDrawable();
             if(attrs != null)
                 InitializeAttributes(attrs);
 
@@ -341,21 +347,18 @@ namespace EOS.UI.Droid.Controls
             if (InProgress)
                 return;
 
-            var layer = Background as LayerDrawable;
-            if (HasShadowDrawable(layer))
-            {
-                CreateAndAnimateRotationDrawable();
-                InProgress = true;
-            }
+            StartLottieAnimation();
+
+            InProgress = true;
         }
 
         public void StopProgressAnimation()
         {
             if (!InProgress)
                 return;
-            
-            SetImageDrawable(Image);
-            ClearAnimation();
+
+            StopLottieAnimation();
+
             InProgress = false;
         }
 
@@ -639,47 +642,41 @@ namespace EOS.UI.Droid.Controls
             return layer != null && layer.NumberOfLayers == 3;
         }
 
+        #region Lottie animation
 
-        #region Rotation animation
-
-        private void CreateAndAnimateRotationDrawable()
+        private LottieDrawable CreateLottieAnimationDrawable()
         {
-            var d = CreateRotateDrawable(PreloaderImage);
-            SetImageDrawable(d);
-            var anim = ObjectAnimator.OfInt(d, "level", 0, 10000);
-            anim.SetDuration(_rotationAnimationDuration);
-            anim.SetInterpolator(new LinearInterpolator());
-            anim.RepeatCount = ValueAnimator.Infinite;
-            anim.Start();
+            var animationDrawable = new LottieDrawable();
+            animationDrawable.Loop(true);
+
+            LottieComposition.Factory.FromAssetFileName(Context, AnimationKey, (composition) =>
+            {
+                animationDrawable.SetComposition(composition);
+                animationDrawable.Scale = (LottieAnimationSize * Resources.DisplayMetrics.Density) / animationDrawable.IntrinsicHeight;
+            });
+
+            return animationDrawable;
         }
 
-        private Drawable CreateRotateDrawable(Drawable childDrawable)
+        private void StartLottieAnimation()
         {
-            if (Build.VERSION.SdkInt >= BuildVersionCodes.M)
-                return CreateRotateDrawableAPI23(childDrawable);
-            else
-                return CreateRotateDrawableAPI21(childDrawable);
+            //clearing drawable if shadow is exist
+            SetImageDrawable(new ColorDrawable(Color.Transparent));
+
+            base.SetImageDrawable(_animationDrawable);
+
+            //updating paddings according configuration shadow            
+            base.SetPadding(0, 0, 2 * (int)(ShadowConfig.Offset.X * Resources.DisplayMetrics.Density), 2 * (int)(ShadowConfig.Offset.Y * Resources.DisplayMetrics.Density));
+
+            _animationDrawable.PlayAnimation();
         }
 
-        private Drawable CreateRotateDrawableAPI23(Drawable childDrawable)
+        private void StopLottieAnimation()
         {
-            var drawable = new RotateDrawable();
-            drawable.Drawable = childDrawable;
-            drawable.PivotXRelative = true;
-            drawable.PivotX = _pivot;
-            drawable.PivotYRelative = true;
-            drawable.PivotY = _pivot;
-            return drawable;
-        }
-
-        private Drawable CreateRotateDrawableAPI21(Drawable childDrawable)
-        {
-            //It's impossible adequate creation from code due
-            //https://github.com/aosp-mirror/platform_frameworks_base/blob/lollipop-dev/graphics/java/android/graphics/drawable/RotateDrawable.java#L218
-            //use creation from xml hack
-            var drawable = (RotateDrawable)Drawable.CreateFromXml(Resources, Resources.GetXml(Resource.Drawable.RotateDrawable));
-            drawable.Drawable = childDrawable;
-            return drawable;
+            _animationDrawable.Stop();
+            //clear lottie animation
+            base.SetImageDrawable(null);
+            SetImageDrawable(Image);
         }
 
         #endregion
