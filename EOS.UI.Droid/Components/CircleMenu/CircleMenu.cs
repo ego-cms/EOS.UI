@@ -54,7 +54,6 @@ namespace EOS.UI.Droid.Components
         private const string Child = "Child";
         private const string Indicator = "Indicator";
 
-        private const int SwipeAnimateDuration = 300;
         private const int SubMenuAnimateDuration = 150;
 
         private const float ShadowRadiusValue = 6f;
@@ -68,9 +67,8 @@ namespace EOS.UI.Droid.Components
         private const int PointsOnIteration = 40;
         private const int MarginToCenter = 16;
 
-        private const int MainSwipeDuration = 100;
-        private const int MainSpringSwipeDuration = 300;
-        private const int IndicatorSpringSwipeDuration = 200;
+        private const int MainSwipeDuration = 50;
+        private const int MainSpringSwipeDuration = 250;
 
         #endregion
 
@@ -97,7 +95,6 @@ namespace EOS.UI.Droid.Components
 
 
         private bool _forward;
-        private bool _isSubMenuOpened;
         private bool _canSwipe = true;
         private float _deltaNormalizePositions;
 
@@ -110,7 +107,7 @@ namespace EOS.UI.Droid.Components
 
         #region properties
 
-        private bool IsBusy => _isSubMenuOpened;
+        private bool IsBusy { get; set; }
         public bool ShowHintAnimation { get; set; } = true;
 
         #endregion
@@ -496,12 +493,12 @@ namespace EOS.UI.Droid.Components
 
             _menusSpringListPositionsForward[index].Add(_menuPositions[baseIndex + 4]);
             //_menusSpringListPositionsForward[index].Add(_menuPositions[baseIndex - 2]);
-            _menusSpringListPositionsForward[index].Add(_menuPositions[baseIndex - 1]);
+            _menusSpringListPositionsForward[index].Add(_menuPositions[baseIndex - 2]);
             _menusSpringListPositionsForward[index].Add(_menuPositions[baseIndex]);
 
             _indicatorsSpringListPositionsForward[index].Add(_menuIndicatorsPositions[baseIndex + 4]);
             //_indicatorsSpringListPositionsForward[index].Add(_menuIndicatorsPositions[baseIndex - 2]);
-            _indicatorsSpringListPositionsForward[index].Add(_menuIndicatorsPositions[baseIndex - 1]);
+            _indicatorsSpringListPositionsForward[index].Add(_menuIndicatorsPositions[baseIndex - 2]);
             _indicatorsSpringListPositionsForward[index].Add(_menuIndicatorsPositions[baseIndex]);
         }
 
@@ -538,12 +535,12 @@ namespace EOS.UI.Droid.Components
 
             _menusSpringListPositionsBack[index].Add(_menuPositions[baseIndex - 4]);
             //_menusSpringListPositionsBack[index].Add(_menuPositions[baseIndex + 2]);
-            _menusSpringListPositionsBack[index].Add(_menuPositions[baseIndex + 1]);
+            _menusSpringListPositionsBack[index].Add(_menuPositions[baseIndex + 2]);
             _menusSpringListPositionsBack[index].Add(_menuPositions[baseIndex]);
 
             _indicatorsSpringListPositionsBack[index].Add(_menuIndicatorsPositions[baseIndex - 4]);
             //_indicatorsSpringListPositionsBack[index].Add(_menuIndicatorsPositions[baseIndex + 2]);
-            _indicatorsSpringListPositionsBack[index].Add(_menuIndicatorsPositions[baseIndex + 1]);
+            _indicatorsSpringListPositionsBack[index].Add(_menuIndicatorsPositions[baseIndex + 2]);
             _indicatorsSpringListPositionsBack[index].Add(_menuIndicatorsPositions[baseIndex]);
         }
 
@@ -575,8 +572,8 @@ namespace EOS.UI.Droid.Components
                 null,
                 new Action(() => StartAnimation(menu,
                     springPositions,
-                    IndicatorSpringSwipeDuration,
-                    new DecelerateInterpolator(),
+                    MainSpringSwipeDuration,
+                    null,
                     afterEndAnimation)));
 
             //start swipe indicators animation with spring
@@ -586,8 +583,8 @@ namespace EOS.UI.Droid.Components
                 null,
                 new Action(() => StartAnimation(indicator,
                     indicatorSpringPositions,
-                    IndicatorSpringSwipeDuration,
-                    new DecelerateInterpolator(),
+                    MainSpringSwipeDuration,
+                    null,
                     null)));
         }
 
@@ -989,7 +986,7 @@ namespace EOS.UI.Droid.Components
                     if(subMenu.Tag.ToString() == $"{Child}{0}")
                     {
                         _indicators[index].Visibility = ViewStates.Visible;
-                        _isSubMenuOpened = false;
+                        IsBusy = false;
                         Locked = false;
                     }
                     _container.RemoveView(subMenu);
@@ -1126,7 +1123,7 @@ namespace EOS.UI.Droid.Components
                     if(menuItemModel.HasChildren)
                     {
                         if(!isOpened)
-                            _isSubMenuOpened = true;
+                            IsBusy = true;
 
                         var index = _menuItems.IndexOf(_menuItems.FirstOrDefault(item => item.CircleMenuModelId == menuItemModel.Id));
 
