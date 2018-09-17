@@ -305,6 +305,7 @@ namespace EOS.UI.Droid.Components
 
             _mainMenu = view.FindViewById<MainMenuButton>(Resource.Id.hamburgerMenu);
             _mainMenu.SetIIsOpenedItem(this);
+            _mainMenu.SetICircleMenuClickable(this);
             _mainMenu.Click += MainMenuClick;
 
             _container.SetOnTouchListener(this);

@@ -42,6 +42,8 @@ namespace EOS.UI.Droid.Components
 
         private IIsOpened _mainControl;
 
+        private ICircleMenuClickable _mainMenuClickable;
+
         #endregion
 
         #region properties
@@ -137,7 +139,6 @@ namespace EOS.UI.Droid.Components
                 _lottieView.SetAnimation(AnimationName);
                 SetCustomColorToLottieView();
                 _lottieView.PlayAnimation();
-                StartTouchAnimation();
             }
         }
 
@@ -146,10 +147,16 @@ namespace EOS.UI.Droid.Components
             _mainControl = isOpened;
         }
 
-        private void StartTouchAnimation()
+        public void SetICircleMenuClickable(ICircleMenuClickable circleMenuClickable)
         {
-            var scaleInAnimation = new ScaleAnimation(StartScale, EndScale, StartScale, EndScale, Dimension.RelativeToSelf, PivotScale, Dimension.RelativeToSelf, PivotScale);
+            _mainMenuClickable = circleMenuClickable;
+        }
+
+        private void StartTouchAnimation(float startScale, float endScale)
+        {
+            var scaleInAnimation = new ScaleAnimation(startScale, endScale, startScale, endScale, Dimension.RelativeToSelf, PivotScale, Dimension.RelativeToSelf, PivotScale);
             scaleInAnimation.Duration = ScaleDimention;
+            scaleInAnimation.FillAfter = true;
             StartAnimation(scaleInAnimation);
         }
 
@@ -181,6 +188,22 @@ namespace EOS.UI.Droid.Components
             view.SetBackgroundDrawable(roundedDrawable);
             view.Tag = BlackoutTag;
             return view;
+        }
+
+        #endregion
+
+        #region overrides
+
+        public override bool OnTouchEvent(MotionEvent e)
+        {
+            if(Enabled && !_mainMenuClickable.Locked)
+            {
+                if(e.Action == MotionEventActions.Down)
+                    StartTouchAnimation(StartScale, EndScale);
+                if(e.Action == MotionEventActions.Up || e.Action == MotionEventActions.Cancel)
+                    StartTouchAnimation(EndScale, StartScale);
+            }
+            return base.OnTouchEvent(e);
         }
 
         #endregion

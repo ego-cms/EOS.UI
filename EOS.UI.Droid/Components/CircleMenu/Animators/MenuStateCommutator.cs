@@ -10,7 +10,7 @@ namespace EOS.UI.Droid.Components
 {
     internal abstract class MenuStateCommutator
     {
-        protected const int AnimateDuration = 350;
+        protected const int AnimateDuration = 250;
         protected const int SpringAnimateDuration = 350;
 
         protected List<CircleMenuItem> _commutatorMenuItems;
