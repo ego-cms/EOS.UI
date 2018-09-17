@@ -5,7 +5,7 @@ namespace EOS.UI.iOS.Models
 {
     public class SectionModel
     {
-        public EventHandler OnPropertyChanged;
+        public EventHandler OnPropertyChanged { get; set; }
         public Action SectionAction { get; set; }
 
         private bool _resetCustomization;

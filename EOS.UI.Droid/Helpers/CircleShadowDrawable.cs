@@ -165,17 +165,17 @@ namespace EOS.UI.Droid.Helpers
             {
                 //shouldnt move anything because view itself already moved
                 //just draw on the center 
-                x = GetPivotParameter(canvas) / 2;
+                x = ((float)GetPivotParameter(canvas) / 2);
             }
             if (_densityOffsetY > 0)
             {
-                y = GetPivotParameter(canvas) / 2 - _offsetWithBlurY;
+                y = ((float)GetPivotParameter(canvas) / 2) - _offsetWithBlurY;
             }
             else
             {
                 if (_offsetWithBlurY == 0)
                 {
-                    y = GetPivotParameter(canvas) / 2;// + _densityOffsetY * -1;
+                    y = ((float)GetPivotParameter(canvas) / 2);// + _densityOffsetY * -1;
                 }
                 else
                 {

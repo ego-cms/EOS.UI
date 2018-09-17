@@ -9,11 +9,11 @@ namespace EOS.UI.iOS.Helpers
     {
         public static class InputConstants
         {
-            public static nfloat IconSize = 24f;
-            public static nfloat IconPadding = 10f;
-            public static nfloat UnderlineHeight = 1f;
-            public static string UnderlineName = "Underline";
-            public static string BorderName = "BorderName";
+            public static readonly nfloat IconSize = 24f;
+            public static readonly nfloat IconPadding = 10f;
+            public static readonly nfloat UnderlineHeight = 1f;
+            public const string UnderlineName = "Underline";
+            public const string BorderName = "BorderName";
         }
     }
 }
