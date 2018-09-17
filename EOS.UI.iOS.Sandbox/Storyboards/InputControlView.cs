@@ -106,7 +106,7 @@ namespace EOS.UI.iOS.Sandbox
             InitDisabledSwitch();
             InitResetButton();
         }
-        
+
         private void InitSources(CGRect rect)
         {
             InitFontDropDown(rect);

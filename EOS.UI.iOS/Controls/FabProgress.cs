@@ -209,7 +209,6 @@ namespace EOS.UI.iOS.Controls
                 DisabledBackgroundColor = provider.GetEOSProperty<UIColor>(this, EOSConstants.NeutralColor4S);
                 Image = UIImage.FromBundle(provider.GetEOSProperty<string>(this, EOSConstants.CalendarImage));
                 ShadowConfig = provider.GetEOSProperty<ShadowConfig>(this, EOSConstants.FabShadow);
-                Enabled = Enabled;
                 IsEOSCustomizationIgnored = false;
             }
         }

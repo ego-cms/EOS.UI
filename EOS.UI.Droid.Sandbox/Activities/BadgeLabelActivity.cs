@@ -25,7 +25,6 @@ namespace EOS.UI.Droid.Sandbox.Activities
         private EOSSandboxDropDown _letterSpacingDropDown;
         private EOSSandboxDropDown _textSizeDropDown;
         private EOSSandboxDropDown _cornerRadiusDropDown;
-        private ScrollView _rootView;
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
@@ -34,7 +33,6 @@ namespace EOS.UI.Droid.Sandbox.Activities
 
             _badge = FindViewById<BadgeLabel>(Resource.Id.badgeLabel);
 
-            _rootView = FindViewById<ScrollView>(Resource.Id.rootView);
             _themeDropDown = FindViewById<EOSSandboxDropDown>(Resource.Id.themeDropDown);
             _backgroundColorDropDown = FindViewById<EOSSandboxDropDown>(Resource.Id.backgroundDropDown);
             _textColorDropDown = FindViewById<EOSSandboxDropDown>(Resource.Id.textColorDropDown);
@@ -97,9 +95,14 @@ namespace EOS.UI.Droid.Sandbox.Activities
         private void SetCurrenTheme(IEOSTheme iEOSTheme)
         {
             if (iEOSTheme is LightEOSTheme)
+            {
                 _themeDropDown.SetSpinnerSelection(1);
+            }
+
             if (iEOSTheme is DarkEOSTheme)
+            {
                 _themeDropDown.SetSpinnerSelection(2);
+            }
         }
 
         private void ThemeItemSelected(int position)
