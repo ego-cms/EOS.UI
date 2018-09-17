@@ -24,7 +24,7 @@ namespace EOS.UI.Droid.Controls
     {
         #region fields
 
-        private readonly float _proportionHeight = 0.7f;
+        private const int LottieAnimationSize = 24;
         private float _pivot = 0.5f;
         private LottieDrawable _animationDrawable;
         private const string _animationKey = "Animations/preloader-snake.json";
@@ -34,7 +34,6 @@ namespace EOS.UI.Droid.Controls
         private int _baseRightPadding;
         private string _text;
         private bool _shouldRedraw = true;
-        private float _baseHeight;
 
         public bool InProgress { get; private set; }
 
@@ -314,7 +313,10 @@ namespace EOS.UI.Droid.Controls
             LottieComposition.Factory.FromAssetFileName(Context, _animationKey, (composition) =>
             {
                 _animationDrawable.SetComposition(composition);
-                _baseHeight = _animationDrawable.IntrinsicHeight;
+
+                //calculate scale of animation drawable for normalize to 24dp
+                if(_animationDrawable.Scale == 1)
+                    _animationDrawable.Scale = (LottieAnimationSize * Resources.DisplayMetrics.Density) / _animationDrawable.IntrinsicHeight;
             });
 
             var denisty = Resources.DisplayMetrics.Density;
@@ -447,10 +449,6 @@ namespace EOS.UI.Droid.Controls
         private void SetStartAnimationValues()
         {
             _text = Text;
-
-            //calculate scale of animation drawable like 70% of button's height 
-            var scale = (Height * _proportionHeight) / _baseHeight;
-            _animationDrawable.Scale = scale;
 
             //calculate padding around lottie drawable which saved normal button size 
             //after replacing text with lottie drawable
