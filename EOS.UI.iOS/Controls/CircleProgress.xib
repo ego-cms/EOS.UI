@@ -58,13 +58,13 @@
                     </userDefinedRuntimeAttributes>
                 </imageView>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="19b-uv-h1z">
-                    <rect key="frame" x="32.5" y="32" width="9" height="17"/>
+                    <rect key="frame" x="30.5" y="32" width="9" height="17"/>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                     <color key="textColor" red="0.016804177310000001" green="0.19835099580000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="%" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="243">
-                    <rect key="frame" x="41.5" y="32" width="12" height="17"/>
+                    <rect key="frame" x="39.5" y="32" width="12" height="17"/>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                     <color key="textColor" red="0.016804177310000001" green="0.19835099580000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <nil key="highlightedColor"/>
@@ -75,7 +75,7 @@
                 <constraint firstItem="UdR-8j-bjB" firstAttribute="centerY" secondItem="zOh-Iu-0Pu" secondAttribute="centerY" id="1FE-vZ-zu7"/>
                 <constraint firstItem="UdR-8j-bjB" firstAttribute="centerX" secondItem="zOh-Iu-0Pu" secondAttribute="centerX" id="P8J-sP-GMf"/>
                 <constraint firstItem="zOh-Iu-0Pu" firstAttribute="centerX" secondItem="1" secondAttribute="centerX" id="PcO-nm-Qfm"/>
-                <constraint firstItem="19b-uv-h1z" firstAttribute="centerX" secondItem="zOh-Iu-0Pu" secondAttribute="centerX" constant="2" id="WaD-rj-iVd"/>
+                <constraint firstItem="19b-uv-h1z" firstAttribute="centerX" secondItem="zOh-Iu-0Pu" secondAttribute="centerX" id="WaD-rj-iVd"/>
                 <constraint firstItem="19b-uv-h1z" firstAttribute="top" secondItem="zOh-Iu-0Pu" secondAttribute="bottom" constant="3" id="ch1-k9-maI"/>
                 <constraint firstItem="zOh-Iu-0Pu" firstAttribute="top" secondItem="1" secondAttribute="top" constant="5" id="w2F-t8-8WR"/>
                 <constraint id="244" firstItem="243" firstAttribute="leading" secondItem="19b-uv-h1z" secondAttribute="trailing"/>
