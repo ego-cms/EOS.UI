@@ -38,7 +38,6 @@ namespace EOS.UI.Droid.Sandbox.Activities
         private EOSSandboxDropDown _shadowRadiusDropDown;
         private SimpleButtonTypeEnum _buttonType;
 
-
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
@@ -125,6 +124,9 @@ namespace EOS.UI.Droid.Sandbox.Activities
             disableSwitch.SetOnCheckedChangeListener(this);
 
             SetCurrenTheme(_simpleButton.GetThemeProvider().GetCurrentTheme());
+
+            SetupSimpleButtonStyle();
+            EnableSimpleButtonFields();
         }
 
         private void ShadowRadiusItemSelected(int position)
