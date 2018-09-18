@@ -32,12 +32,23 @@
             android:layout_width="24dp"
             android:rotation="-60" />
     </RelativeLayout>
-    <TextView
-        android:id="@+id/percentText"
+    <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:text="10 %"
-        android:layout_marginTop="2dp"
-        android:gravity="center_horizontal" />
+        android:layout_marginTop="2dp">
+        <TextView
+            android:id="@+id/percentText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="10"
+            android:layout_centerInParent="true" />
+        <TextView
+            android:id="@+id/percentLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="    %"
+            android:layout_gravity="right"
+            android:layout_toRightOf="@+id/percentText" />
+    </RelativeLayout>
 </merge>

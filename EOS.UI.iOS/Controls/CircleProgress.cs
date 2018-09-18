@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using CoreAnimation;
 using CoreGraphics;
 using EOS.UI.iOS.Themes;
@@ -17,7 +17,7 @@ namespace EOS.UI.iOS
         private readonly nfloat _startAngle = 0f;
         private readonly nfloat _rotatienAngle = -1.57f;
         private readonly nfloat _360angle = 6.28319f;
-        private const string _zeroPercents = "0%";
+        private const string _zeroPercents = "0";
         private readonly nfloat _dotOffset = 0.5f;
         private const int _dotSize = 1;
         private CAShapeLayer _circleLayer;
@@ -29,7 +29,6 @@ namespace EOS.UI.iOS
         public event EventHandler Started;
         public event EventHandler Stopped;
         public event EventHandler Finished;
-
         public bool IsEOSCustomizationIgnored { get; private set; }
 
         private int _progress;
@@ -46,9 +45,12 @@ namespace EOS.UI.iOS
                 {
                     if (imageView.Hidden == false)
                         imageView.Hidden = true;
-                    if (ShouldShowProgress)
+                    if(ShouldShowProgress)
+                    {
                         percentLabel.Hidden = false;
-                    percentLabel.Text = $"{_progress.ToString()}%";
+                        percentSignLabel.Hidden = false;
+                    }
+                    percentLabel.Text = _progress.ToString();
                     RedrawCircle();
                     if (_progress == 100)
                     {
@@ -68,6 +70,7 @@ namespace EOS.UI.iOS
                 IsEOSCustomizationIgnored = true;
                 stopView.BackgroundColor = _color;
                 percentLabel.TextColor = _color;
+                percentSignLabel.TextColor = _color;
                 if (_circleLayer != null)
                 {
                     _circleLayer.StrokeColor = _color.CGColor;
@@ -113,6 +116,7 @@ namespace EOS.UI.iOS
                 _showProgress = value;
                 IsEOSCustomizationIgnored = true;
                 percentLabel.Hidden = !ShouldShowProgress;
+                percentSignLabel.Hidden = !ShouldShowProgress;
             }
         }
 
@@ -320,6 +324,7 @@ namespace EOS.UI.iOS
             Finished?.Invoke(this, EventArgs.Empty);
             imageView.Hidden = false;
             percentLabel.Hidden = true;
+            percentSignLabel.Hidden = true;
             ClearPathes();
             _isRunnung = false;
         }
@@ -327,6 +332,7 @@ namespace EOS.UI.iOS
         private void SetFontStyle()
         {
             percentLabel.Font = Font.WithSize(TextSize);
+            percentSignLabel.Font = Font.WithSize(TextSize);
         }
 
         private void ClearPathes()
