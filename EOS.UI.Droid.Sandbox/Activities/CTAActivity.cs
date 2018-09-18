@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Android.App;
@@ -141,6 +141,9 @@ namespace EOS.UI.Droid.Sandbox.Activities
 
             _resetButton.Click += delegate
             {
+                SetupSimpleButtonStyle();
+                EnableSimpleButtonFields();
+                _CTAButton.ResetCustomization();
                 ResetCustomValues();
             };
 
@@ -151,11 +154,14 @@ namespace EOS.UI.Droid.Sandbox.Activities
 
         private void ShadowRadiusItemSelected(int position)
         {
-            if (_buttonType == SimpleButtonTypeEnum.FullBleed)
-                return;
-            var config = _CTAButton.ShadowConfig;
-            config.Blur = SimpleButtonConstants.ShadowRadiusCollection.ElementAt(position).Value;
-            _CTAButton.ShadowConfig = config;
+            if(position > 0)
+            {
+                if(_buttonType == SimpleButtonTypeEnum.FullBleed)
+                    return;
+                var config = _CTAButton.ShadowConfig;
+                config.Blur = SimpleButtonConstants.ShadowRadiusCollection.ElementAt(position).Value;
+                _CTAButton.ShadowConfig = config;
+            }
         }
 
         private void ToggleEnableState()
@@ -241,7 +247,6 @@ namespace EOS.UI.Droid.Sandbox.Activities
 
         private void ResetCustomValues(bool ignogeButtonType = false)
         {
-            _CTAButton.ResetCustomization();
             _dropDowns.Except(new[] { _themeDropDown, _buttonTypeDropDown }).ToList().ForEach(dropDown => dropDown.SetSpinnerSelection(0));
             if (!ignogeButtonType)
                 _buttonTypeDropDown.SetSpinnerSelection(0);
@@ -254,18 +259,22 @@ namespace EOS.UI.Droid.Sandbox.Activities
 
         private void ButtonTypeItemSelected(int position)
         {
-            _buttonType = Buttons.CTAButtonTypeCollection.ElementAt(position).Value;
-            ResetCustomValues(true);
-            switch (_buttonType)
+            if(position > 0)
             {
-                case SimpleButtonTypeEnum.Simple:
-                    SetupSimpleButtonStyle();
-                    EnableSimpleButtonFields();
-                    break;
-                case SimpleButtonTypeEnum.FullBleed:
-                    SetupFullBleedButtonStyle();
-                    DisableSimpleButtonFields();
-                    break;
+                _buttonType = Buttons.CTAButtonTypeCollection.ElementAt(position).Value;
+                ResetCustomValues(true);
+                switch(_buttonType)
+                {
+                    case SimpleButtonTypeEnum.Simple:
+                        SetupSimpleButtonStyle();
+                        EnableSimpleButtonFields();
+                        _CTAButton.ResetCustomization();
+                        break;
+                    case SimpleButtonTypeEnum.FullBleed:
+                        SetupFullBleedButtonStyle();
+                        DisableSimpleButtonFields();
+                        break;
+                }
             }
         }
 
@@ -301,7 +310,6 @@ namespace EOS.UI.Droid.Sandbox.Activities
                 (int)(SimpleButtonConstants.TopPadding * denisty),
                 (int)(SimpleButtonConstants.RightPadding * denisty),
                 (int)(SimpleButtonConstants.BottomPadding * denisty));
-            _CTAButton.ResetCustomization();
             _CTAButton.Text = Buttons.CTA;
         }
 
