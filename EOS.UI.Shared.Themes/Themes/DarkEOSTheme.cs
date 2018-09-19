@@ -1,4 +1,4 @@
-﻿using EOS.UI.Shared.Themes.Interfaces;
+using EOS.UI.Shared.Themes.Interfaces;
 
 namespace EOS.UI.Shared.Themes.Themes
 {

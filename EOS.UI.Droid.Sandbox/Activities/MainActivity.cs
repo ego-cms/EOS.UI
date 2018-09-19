@@ -28,6 +28,7 @@ namespace EOS.UI.Droid.Sandbox
             { ControlNames.Section, typeof(SectionActivity) },
             { ControlNames.CTAButton, typeof(CTAActivity) },
             { ControlNames.WorkTimeCalendar, typeof(WorkTimeActivity) },
+            { ControlNames.CircleMenu, typeof(CircleMenuActivity) },
         };
 
         protected override void OnCreate(Bundle savedInstanceState)

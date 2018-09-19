@@ -1,4 +1,4 @@
-﻿#if __ANDROID__
+#if __ANDROID__
 using System;
 using System.Collections.Generic;
 using Android.App;
@@ -39,6 +39,9 @@ namespace EOS.UI.Shared.Themes.Themes
         {
             get
             {
+                var ccolor = Color.Argb(164,  Color.ParseColor(brandPrimaryColor).R, Color.ParseColor(brandPrimaryColor).G, Color.ParseColor(brandPrimaryColor).B);
+                ccolor.A = 164;
+
                 if (_robotoRegular == null)
                     _robotoRegular = Typeface.CreateFromAsset(Application.Context.Assets, "Fonts/Roboto-Regular.ttf");
                 return _robotoRegular;
@@ -64,6 +67,7 @@ namespace EOS.UI.Shared.Themes.Themes
             { EOSConstants.NeutralColor4S, Color.ParseColor(neutralColor4S)},
             { EOSConstants.NeutralColor5S, Color.ParseColor(neutralColor5S)},
             { EOSConstants.NeutralColor6S, Color.ParseColor(neutralColor6S)},
+            { EOSConstants.Blackout, Color.Argb(164, Color.ParseColor(neutralColor6).R, Color.ParseColor(neutralColor6).G, Color.ParseColor(neutralColor6).B) },
             { EOSConstants.RippleColor, Color.ParseColor(rippleColor) },
             { EOSConstants.DisabledInputColor, Color.ParseColor(neutralColor5)},
             { EOSConstants.LabelCornerRadius, 4f },

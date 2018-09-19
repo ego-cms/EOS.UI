@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+
 <Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -91,6 +91,12 @@
     <Compile Include="Components\WorkTimeCalendarCollection.cs" />
     <Compile Include="Extensions\DateTimeExtensions.cs" />
     <Compile Include="Extensions\AttributedStringExtension.cs" />
+    <Compile Include="Components\CircleMenu\CircleMenu.cs" />
+    <Compile Include="Components\CircleMenu\CircleMenuButton.cs" />
+    <Compile Include="Components\CircleMenu\CircleMenuMainButton.cs" />
+    <Compile Include="Components\CircleMenu\CircleButtonIndicator.cs" />
+    <Compile Include="Components\CircleMenu\BasicCircleMenuButton.cs" />
+    <Compile Include="Components\CircleMenu\CircleMenuPanGestureAnalyzer.cs" />
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="Components\Section.xib" />
@@ -100,6 +106,8 @@
     <InterfaceDefinition Include="Components\WorkTimeCalendarCell.xib" />
     <None Include="packages.config" />
     <BundleResource Include="Resources\Animations\preloader-snake.json" />
+    <BundleResource Include="Resources\Animations\hamburger-open.json" />
+    <BundleResource Include="Resources\Animations\hamburger-close.json" />
     <BundleResource Include="Resources\icCalendar%401x.png" />
     <BundleResource Include="Resources\icCalendar%402x.png" />
     <BundleResource Include="Resources\icCalendar%403x.png" />
@@ -120,6 +128,7 @@
   <ItemGroup>
     <Folder Include="CollectionViewSources\" />
     <Folder Include="Resources\Animations\" />
+    <Folder Include="Components\CircleMenu\" />
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="Controls\CircleProgress.xib" />

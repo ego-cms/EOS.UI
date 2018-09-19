@@ -19,6 +19,7 @@ namespace EOS.UI.Shared.Themes.Helpers
         public const string NeutralColor4S = "neutralColor4S";
         public const string NeutralColor5S = "neutralColor5S";
         public const string NeutralColor6S = "neutralColor6S";
+        public const string Blackout = "blackout";
         public const string RippleColor = "rippleColor";
         public const string LabelCornerRadius = "labelCornerRadius";
         public const string ButtonCornerRadius = "buttonCornerRadius";
