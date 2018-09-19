@@ -58,9 +58,9 @@ namespace EOS.UI.iOS.Sandbox
             }));
 
             var rect = new CGRect(0, 0, 100, 150);
-            InitThemeDropDown(frame);
+            InitThemeDropDown(rect);
             themeDropDown.SetTextFieldText(_fab.GetThemeProvider().GetCurrentTheme() is LightEOSTheme ? "Light" : "Dark");
-            InitSources(frame);
+            InitSources(rect);
             enableSwitch.ValueChanged += (sender, e) =>
             {
                 _fab.Enabled = enableSwitch.On;
