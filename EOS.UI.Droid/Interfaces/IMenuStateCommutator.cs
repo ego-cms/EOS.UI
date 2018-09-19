@@ -1,12 +1,12 @@
-﻿namespace EOS.UI.Droid.Interfaces
+namespace EOS.UI.Droid.Interfaces
 {
     /// <summary>
     /// Interface wich implements show/hide menu items logic
     /// </summary>
     internal interface IMenuStateCommutator
     {
-        void ShowMenuItems(int iteration);
+        void ShowMenuItems();
 
-        void HideMenuItems(int iteration);
+        void HideMenuItems();
     }
 }
