@@ -8,47 +8,47 @@ namespace EOS.UI.Shared.Sandbox.Helpers
 {
     public static partial class Constants
     {
-        private static string ColorNameBlue = "Blue";
-        private static string ColorNameUltramarine = "Ultramarine";
-        private static string ColorNameCerulean = "Cerulean";
-        private static string ColorNameTeal = "Teal";
-        private static string ColorNameGreen = "Green";
-        private static string ColorNameLime = "Lime";
-        private static string ColorNameYellow = "Yellow";
-        private static string ColorNameGold = "Gold";
-        private static string ColorNameOrange = "Orange";
-        private static string ColorNamePeach = "Peach";
-        private static string ColorNameRed = "Red";
-        private static string ColorNameMagenta = "Magenta";
-        private static string ColorNamePurple = "Purple";
-        private static string ColorNameViolet = "Violet";
-        private static string ColorNameIndigo = "Indigo";
-        private static string ColorNameBlack = "Black";
-        private static string ColorNameDarkGray = "Dark Gray";
-        private static string ColorNameGray = "Gray";
-        private static string ColorNameLightGray = "Light Gray";
-        private static string ColorNameWhite = "White";
+        private const string ColorNameBlue = "Blue";
+        private const string ColorNameUltramarine = "Ultramarine";
+        private const string ColorNameCerulean = "Cerulean";
+        private const string ColorNameTeal = "Teal";
+        private const string ColorNameGreen = "Green";
+        private const string ColorNameLime = "Lime";
+        private const string ColorNameYellow = "Yellow";
+        private const string ColorNameGold = "Gold";
+        private const string ColorNameOrange = "Orange";
+        private const string ColorNamePeach = "Peach";
+        private const string ColorNameRed = "Red";
+        private const string ColorNameMagenta = "Magenta";
+        private const string ColorNamePurple = "Purple";
+        private const string ColorNameViolet = "Violet";
+        private const string ColorNameIndigo = "Indigo";
+        private const string ColorNameBlack = "Black";
+        private const string ColorNameDarkGray = "Dark Gray";
+        private const string ColorNameGray = "Gray";
+        private const string ColorNameLightGray = "Light Gray";
+        private const string ColorNameWhite = "White";
 
-        private static string ColorBlue = "#2d74da";
-        private static string ColorUltramarine = "#3c6df0";
-        private static string ColorCerulean = "#047cc0";
-        private static string ColorTeal = "#00baa1";
-        private static string ColorGreen = "#34bc6e";
-        private static string ColorLime = "#81b532";
-        private static string ColorYellow = "#fed500";
-        private static string ColorGold = "#ffb000";
-        private static string ColorOrange = "#fe8500";
-        private static string ColorPeach = "#fc835c";
-        private static string ColorRed = "#ff5c49";
-        private static string ColorMagenta = "#dc267f";
-        private static string ColorPurple = "#c22dd5";
-        private static string ColorViolet = "#9753e1";
-        private static string ColorIndigo = "#785ef0";
-        private static string ColorBlack = "#343334";
-        private static string ColorDarkGray = "#777677";
-        private static string ColorGray = "#C0BFC0";
-        private static string ColorLightGray = "#EAEAEA";
-        private static string ColorWhite = "#FFFFFF";
+        private const string ColorBlue = "#2d74da";
+        private const string ColorUltramarine = "#3c6df0";
+        private const string ColorCerulean = "#047cc0";
+        private const string ColorTeal = "#00baa1";
+        private const string ColorGreen = "#34bc6e";
+        private const string ColorLime = "#81b532";
+        private const string ColorYellow = "#fed500";
+        private const string ColorGold = "#ffb000";
+        private const string ColorOrange = "#fe8500";
+        private const string ColorPeach = "#fc835c";
+        private const string ColorRed = "#ff5c49";
+        private const string ColorMagenta = "#dc267f";
+        private const string ColorPurple = "#c22dd5";
+        private const string ColorViolet = "#9753e1";
+        private const string ColorIndigo = "#785ef0";
+        private const string ColorBlack = "#343334";
+        private const string ColorDarkGray = "#777677";
+        private const string ColorGray = "#C0BFC0";
+        private const string ColorLightGray = "#EAEAEA";
+        private const string ColorWhite = "#FFFFFF";
 
         public static class Fields
         {
@@ -127,11 +127,11 @@ namespace EOS.UI.Shared.Sandbox.Helpers
 
         public static partial class Sizes
         {
-            public static readonly Dictionary<string, float> TextSizeCollection = new Dictionary<string, float>();
-            public static readonly Dictionary<string, int> CornerRadiusCollection = new Dictionary<string, int>();
-            public static readonly Dictionary<string, int> BorderWidthCollection = new Dictionary<string, int>();
-            public static readonly Dictionary<string, int> PaddingsCollection = new Dictionary<string, int>();
-            public static readonly Dictionary<string, float> LetterSpacingCollection = new Dictionary<string, float>();
+            public static Dictionary<string, float> TextSizeCollection { get; } = new Dictionary<string, float>();
+            public static Dictionary<string, int> CornerRadiusCollection { get; } = new Dictionary<string, int>();
+            public static Dictionary<string, int> BorderWidthCollection { get; } = new Dictionary<string, int>();
+            public static Dictionary<string, int> PaddingsCollection { get; } = new Dictionary<string, int>();
+            public static Dictionary<string, float> LetterSpacingCollection { get; } = new Dictionary<string, float>();
 
             static Sizes()
             {
@@ -140,7 +140,7 @@ namespace EOS.UI.Shared.Sandbox.Helpers
 #if __IOS__
                     var v = val;
 #else
-                    var v = (float) val / 10;
+                    var v = (float)val / 10;
 #endif
                     LetterSpacingCollection.Add(v.ToString(), v);
                 }
@@ -167,7 +167,7 @@ namespace EOS.UI.Shared.Sandbox.Helpers
 
         public static class ThemeTypes
         {
-            public static Dictionary<string, EOSThemeEnumeration> ThemeCollection = new Dictionary<string, EOSThemeEnumeration>()
+            public static Dictionary<string, EOSThemeEnumeration> ThemeCollection { get; } = new Dictionary<string, EOSThemeEnumeration>()
             {
 #if __ANDROID__
                 { string.Empty, EOSThemeEnumeration.Light },
@@ -183,7 +183,7 @@ namespace EOS.UI.Shared.Sandbox.Helpers
             public const string CTA = "CTA button";
             public const string FullBleed = "Full bleed button";
 
-            public static Dictionary<string, SimpleButtonTypeEnum> SimpleButtonTypeCollection = new Dictionary<string, SimpleButtonTypeEnum>()
+            public static Dictionary<string, SimpleButtonTypeEnum> SimpleButtonTypeCollection { get; } = new Dictionary<string, SimpleButtonTypeEnum>()
             {
 #if __ANDROID__
                 { string.Empty, SimpleButtonTypeEnum.Simple },
@@ -192,7 +192,7 @@ namespace EOS.UI.Shared.Sandbox.Helpers
                 { FullBleed, SimpleButtonTypeEnum.FullBleed },
             };
 
-            public static Dictionary<string, SimpleButtonTypeEnum> CTAButtonTypeCollection = new Dictionary<string, SimpleButtonTypeEnum>()
+            public static Dictionary<string, SimpleButtonTypeEnum> CTAButtonTypeCollection { get; } = new Dictionary<string, SimpleButtonTypeEnum>()
             {
 #if __ANDROID__
                 { string.Empty, SimpleButtonTypeEnum.Simple },
@@ -204,7 +204,7 @@ namespace EOS.UI.Shared.Sandbox.Helpers
 
         public static class Titles
         {
-            public static Dictionary<string, string> TitleCollection = new Dictionary<string, string>()
+            public static Dictionary<string, string> TitleCollection { get; } = new Dictionary<string, string>()
             {
 #if __ANDROID__
                 { string.Empty, string.Empty },
@@ -217,7 +217,7 @@ namespace EOS.UI.Shared.Sandbox.Helpers
 
         public static class Days
         {
-            public static Dictionary<string, WeekStartEnum> DaysCollection = new Dictionary<string, WeekStartEnum>()
+            public static Dictionary<string, WeekStartEnum> DaysCollection { get; } = new Dictionary<string, WeekStartEnum>()
             {
 #if __ANDROID__
                 { string.Empty, WeekStartEnum.Sunday },
@@ -229,9 +229,9 @@ namespace EOS.UI.Shared.Sandbox.Helpers
 
         public static class Shadow
         {
-            public static readonly Dictionary<string, int> OffsetCollection = new Dictionary<string, int>();
-            public static readonly Dictionary<string, int> RadiusCollection = new Dictionary<string, int>();
-            public static readonly Dictionary<string, double> OpacityCollection = new Dictionary<string, double>();
+            public static Dictionary<string, int> OffsetCollection { get; } = new Dictionary<string, int>();
+            public static Dictionary<string, int> RadiusCollection { get; } = new Dictionary<string, int>();
+            public static Dictionary<string, double> OpacityCollection { get; } = new Dictionary<string, double>();
 
             static Shadow()
             {

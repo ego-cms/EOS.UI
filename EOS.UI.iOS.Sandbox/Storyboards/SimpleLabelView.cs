@@ -49,14 +49,9 @@ namespace EOS.UI.iOS.Sandbox
                                           _simpleLabel.Frame.Left == containerView.Frame.Left &&
                                           _simpleLabel.Frame.Right == containerView.Frame.Right, _simpleLabel);
 
-            var frame = new CGRect(0, 0, 100, 150);
-
-            InitThemePicker(frame);
-            InitTextSizePicker(frame);
-            InitFontPicker(frame);
-            InitTextColorPicker(frame);
-            InitLetterSpacingPicker(frame);
-
+            var rect = new CGRect(0, 0, 100, 150);
+            InitThemeDropDown(rect);
+            InitSources(rect);
             resetButton.TouchUpInside += (sender, e) =>
             {
                 _simpleLabel.ResetCustomization();
@@ -64,7 +59,15 @@ namespace EOS.UI.iOS.Sandbox
             };
         }
 
-        private void InitThemePicker(CGRect frame)
+        private void InitSources(CGRect rect)
+        {
+            InitTextSizeDropDown(rect);
+            InitFontDropDown(rect);
+            InitTextColorDropDown(rect);
+            InitLetterSpacingDropDown(rect);
+        }
+        
+        private void InitThemeDropDown(CGRect rect)
         {
             themesDropDown.InitSource(
                 ThemeTypes.ThemeCollection,
@@ -73,47 +76,48 @@ namespace EOS.UI.iOS.Sandbox
                     _simpleLabel.GetThemeProvider().SetCurrentTheme(theme);
                     _simpleLabel.ResetCustomization();
                     _dropDowns.Except(new[] { themesDropDown }).ToList().ForEach(dropDown => dropDown.ResetValue());
+                    InitSources(rect);
                     UpdateAppearance();
                 },
                 Fields.Theme,
-                frame);
+                rect);
             themesDropDown.SetTextFieldText(_simpleLabel.GetThemeProvider().GetCurrentTheme() is LightEOSTheme ? "Light" : "Dark");
         }
 
-        private void InitTextSizePicker(CGRect frame)
+        private void InitTextSizeDropDown(CGRect rect)
         {
             textSizeDropDown.InitSource(
                 SimpleLabelConstants.TextSizes,
                 size => _simpleLabel.TextSize = size,
                 Fields.TextSize,
-                frame);
+                rect);
         }
 
-        private void InitFontPicker(CGRect frame)
+        private void InitFontDropDown(CGRect rect)
         {
             fontDropDown.InitSource(
                 SimpleLabelConstants.SimpleLabelFonts,
                 font => _simpleLabel.Font = font,
                 Fields.Font,
-                frame);
+                rect);
         }
 
-        private void InitTextColorPicker(CGRect frame)
+        private void InitTextColorDropDown(CGRect rect)
         {
             textColorDropDown.InitSource(
                 SimpleLabelConstants.FontColors,
                 color => _simpleLabel.TextColor = color,
                 Fields.TextColor,
-                frame);
+                rect);
         }
 
-        private void InitLetterSpacingPicker(CGRect frame)
+        private void InitLetterSpacingDropDown(CGRect rect)
         {
             letterSpacingDropDown.InitSource(
                 SimpleLabelConstants.LetterSpacings,
                 spacing => _simpleLabel.LetterSpacing = spacing,
                 Fields.LetterSpacing,
-                frame);
+                rect);
         }
     }
 }

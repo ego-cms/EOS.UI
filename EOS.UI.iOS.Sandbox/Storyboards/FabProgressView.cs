@@ -58,102 +58,9 @@ namespace EOS.UI.iOS.Sandbox
             }));
 
             var rect = new CGRect(0, 0, 100, 150);
-
-            themeDropDown.InitSource(
-                ThemeTypes.ThemeCollection,
-                (theme) =>
-                {
-                    _fab.GetThemeProvider().SetCurrentTheme(theme);
-                    _fab.ResetCustomization();
-                    _dropDowns.Except(new[] { themeDropDown }).ToList().ForEach(dropDown => dropDown.ResetValue());
-                    UpdateAppearance();
-                },
-                Fields.Theme,
-                rect);
+            InitThemeDropDown(frame);
             themeDropDown.SetTextFieldText(_fab.GetThemeProvider().GetCurrentTheme() is LightEOSTheme ? "Light" : "Dark");
-
-            backgroundDropDown.InitSource(
-                FabProgressConstants.BackgroundColors,
-                color => _fab.BackgroundColor = color,
-                Fields.Background,
-                rect);
-
-            pressedColorDropDown.InitSource(
-                FabProgressConstants.PressedBackgroundColors,
-                color => _fab.PressedBackgroundColor = color,
-                Fields.PressedColor,
-                rect);
-
-            disabledColorDropDown.InitSource(
-                FabProgressConstants.DisabledBackgroundColors,
-                color => _fab.DisabledBackgroundColor = color,
-                Fields.DisabledColor,
-                rect);
-
-            shadowColorDropDown.InitSource(
-                FabProgressConstants.ShadowColors,
-                color =>
-                {
-                    var config = _fab.ShadowConfig;
-                    if (_opacity != null)
-                    {
-                        config.Color = color.ColorWithAlpha((nfloat)_opacity); 
-                    }
-                    else
-                    {
-                        config.Color = color;
-                    }
-                    _fab.ShadowConfig = config;
-                },
-                Fields.ShadowColor,
-                rect);
-
-            shadowOffsetXDropDown.InitSource(
-                FabProgressConstants.ShadowOffsetXCollection,
-                offset =>
-                {
-                    var config = _fab.ShadowConfig;
-                    config.Offset = new CGPoint(offset, config.Offset.Y);
-                    _fab.ShadowConfig = config;
-                },
-                Fields.ShadowOffsetX,
-                rect);
-
-
-            shadowOffsetYDropDown.InitSource(
-                FabProgressConstants.ShadowOffsetYCollection,
-                offset =>
-                {
-                    var config = _fab.ShadowConfig;
-                    config.Offset = new CGPoint(config.Offset.X, offset);
-                    _fab.ShadowConfig = config;
-                },
-                Fields.ShadowOffsetY,
-                rect);
-
-            shadowRadiusDropDown.InitSource(
-                FabProgressConstants.ShadowRadiusCollection,
-                blur =>
-                {
-                    var config = _fab.ShadowConfig;
-                    config.Blur = blur;
-                    _fab.ShadowConfig = config;
-                },
-                Fields.ShadowRadius,
-                rect);
-
-            shadowOpacityDropDown.InitSource(
-                FabProgressConstants.ShadowOpacityCollection,
-                opacity =>
-                {
-                    var config = _fab.ShadowConfig;
-                    _opacity = opacity;
-                    config.Color = config.Color.ColorWithAlpha((nfloat)opacity); 
-                    _fab.ShadowConfig = config;
-                },
-                Fields.ShadowOpacity,
-                rect);
-
+            InitSources(frame);
             enableSwitch.ValueChanged += (sender, e) =>
             {
                 _fab.Enabled = enableSwitch.On;
@@ -183,6 +90,139 @@ namespace EOS.UI.iOS.Sandbox
             spinners.ToList().ForEach(s => s.Enabled = enabled);
             resetUIButton.Enabled = enabled;
             enabledSwitch.Enabled = enabled;
+        }
+
+        private void InitSources(CGRect rect)
+        {
+            InitBackgroundColorDropDown(rect);
+            InitPressedColorDropDown(rect);
+            InitDisabledColorDropDown(rect);
+            InitShadowColorDropDown(rect);
+            InitShadowRadiusDropDown(rect);
+            InitShadowOffsetXDropDown(rect);
+            InitShadowOffsetYDropDown(rect);
+            InitShadowOpacityDropDown(rect);
+        }
+
+        private void InitThemeDropDown(CGRect rect)
+        {
+            themeDropDown.InitSource(
+                ThemeTypes.ThemeCollection,
+                (theme) =>
+                {
+                    _fab.GetThemeProvider().SetCurrentTheme(theme);
+                    _fab.ResetCustomization();
+                    _dropDowns.Except(new[] { themeDropDown }).ToList().ForEach(dropDown => dropDown.ResetValue());
+                    InitSources(rect);
+                    UpdateAppearance();
+                },
+                Fields.Theme,
+                rect);
+        }
+
+        private void InitBackgroundColorDropDown(CGRect rect)
+        {
+            backgroundDropDown.InitSource(
+                FabProgressConstants.BackgroundColors,
+                color => _fab.BackgroundColor = color,
+                Fields.Background,
+                rect);
+        }
+
+        private void InitPressedColorDropDown(CGRect rect)
+        {
+            pressedColorDropDown.InitSource(
+               FabProgressConstants.PressedBackgroundColors,
+               color => _fab.PressedBackgroundColor = color,
+               Fields.PressedColor,
+               rect);
+        }
+
+        private void InitDisabledColorDropDown(CGRect rect)
+        {
+            disabledColorDropDown.InitSource(
+               FabProgressConstants.DisabledBackgroundColors,
+               color => _fab.DisabledBackgroundColor = color,
+               Fields.DisabledColor,
+               rect);
+        }
+
+        private void InitShadowColorDropDown(CGRect rect)
+        {
+            shadowColorDropDown.InitSource(
+                FabProgressConstants.ShadowColors,
+                color =>
+                {
+                    var config = _fab.ShadowConfig;
+                    if (_opacity != null)
+                    {
+                        config.Color = color.ColorWithAlpha((nfloat)_opacity);
+                    }
+                    else
+                    {
+                        config.Color = color;
+                    }
+                    _fab.ShadowConfig = config;
+                },
+                Fields.ShadowColor,
+                rect);
+        }
+
+        private void InitShadowOffsetXDropDown(CGRect rect)
+        {
+            shadowOffsetXDropDown.InitSource(
+               FabProgressConstants.ShadowOffsetXCollection,
+               offset =>
+               {
+                   var config = _fab.ShadowConfig;
+                   config.Offset = new CGPoint(offset, config.Offset.Y);
+                   _fab.ShadowConfig = config;
+               },
+               Fields.ShadowOffsetX,
+               rect);
+        }
+
+        private void InitShadowOffsetYDropDown(CGRect rect)
+        {
+            shadowOffsetYDropDown.InitSource(
+                            FabProgressConstants.ShadowOffsetYCollection,
+                            offset =>
+                            {
+                                var config = _fab.ShadowConfig;
+                                config.Offset = new CGPoint(config.Offset.X, offset);
+                                _fab.ShadowConfig = config;
+                            },
+                            Fields.ShadowOffsetY,
+                            rect);
+        }
+
+        private void InitShadowOpacityDropDown(CGRect rect)
+        {
+            shadowOpacityDropDown.InitSource(
+                FabProgressConstants.ShadowOpacityCollection,
+                opacity =>
+                {
+                    var config = _fab.ShadowConfig;
+                    _opacity = opacity;
+                    config.Color = config.Color.ColorWithAlpha((nfloat)opacity);
+                    _fab.ShadowConfig = config;
+                },
+                Fields.ShadowOpacity,
+                rect);
+        }
+
+        private void InitShadowRadiusDropDown(CGRect rect)
+        {
+            shadowRadiusDropDown.InitSource(
+                FabProgressConstants.ShadowRadiusCollection,
+                blur =>
+                {
+                    var config = _fab.ShadowConfig;
+                    config.Blur = blur;
+                    _fab.ShadowConfig = config;
+                },
+                Fields.ShadowRadius,
+                rect);
         }
     }
 }

@@ -83,23 +83,23 @@ namespace EOS.UI.iOS.Sandbox
             InitResetButton();
         }
         
-        private void InitSources(CGRect frame)
+        private void InitSources(CGRect rect)
         {
-            InitFontDropDown(frame);
-            InitLetterSpacingDropDown(frame);
-            InitTextSizeDropDown(frame);
-            InitTextColorEnabledDropDown(frame);
-            InitTextColorDisabledDropDown(frame);
-            InitBackgroundColorEnabledDropDown(frame);
-            InitBackgroundColorDisabledDropDown(frame);
-            InitBackgroundColorPressedDropDown(frame);
-            InitCornerRadiusDropDown(frame);
-            InitButtonTypeDropDown(frame);
-            InitShadowColorDropDown(frame);
-            InitShadowOffsetXDropDown(frame);
-            InitShadowOffsetYDropDown(frame);
-            InitShadowOpacityDropDown(frame);
-            InitShadowRadiusDropDown(frame);
+            InitFontDropDown(rect);
+            InitLetterSpacingDropDown(rect);
+            InitTextSizeDropDown(rect);
+            InitTextColorEnabledDropDown(rect);
+            InitTextColorDisabledDropDown(rect);
+            InitBackgroundColorEnabledDropDown(rect);
+            InitBackgroundColorDisabledDropDown(rect);
+            InitBackgroundColorPressedDropDown(rect);
+            InitCornerRadiusDropDown(rect);
+            InitButtonTypeDropDown(rect);
+            InitShadowColorDropDown(rect);
+            InitShadowOffsetXDropDown(rect);
+            InitShadowOffsetYDropDown(rect);
+            InitShadowOpacityDropDown(rect);
+            InitShadowRadiusDropDown(rect);
         }
 
         private void InitThemeDropDown(CGRect rect)

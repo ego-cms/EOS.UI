@@ -17,7 +17,7 @@ namespace EOS.UI.iOS.Models
     {
         public bool IsEOSCustomizationIgnored { get; private set; }
 
-        public EventHandler PropertyChanged;
+        public EventHandler PropertyChanged { get; set; }
 
         private IEnumerable<WorkTimeCalendarItem> _items;
         public IEnumerable<WorkTimeCalendarItem> Items

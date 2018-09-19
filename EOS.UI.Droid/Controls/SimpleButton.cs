@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using Android.Animation;
 using Android.Content;
 using Android.Content.Res;
@@ -24,7 +24,7 @@ namespace EOS.UI.Droid.Controls
     {
         #region fields
 
-        private readonly float _proportionHeight = 0.7f;
+        private const int LottieAnimationSize = 24;
         private float _pivot = 0.5f;
         private LottieDrawable _animationDrawable;
         private const string _animationKey = "Animations/preloader-snake.json";
@@ -34,7 +34,6 @@ namespace EOS.UI.Droid.Controls
         private int _baseRightPadding;
         private string _text;
         private bool _shouldRedraw = true;
-        private float _baseHeight;
 
         public bool InProgress { get; private set; }
 
@@ -314,7 +313,10 @@ namespace EOS.UI.Droid.Controls
             LottieComposition.Factory.FromAssetFileName(Context, _animationKey, (composition) =>
             {
                 _animationDrawable.SetComposition(composition);
-                _baseHeight = _animationDrawable.IntrinsicHeight;
+
+                //calculate scale of animation drawable for normalize to 24dp
+                if(_animationDrawable.Scale == 1)
+                    _animationDrawable.Scale = (LottieAnimationSize * Resources.DisplayMetrics.Density) / _animationDrawable.IntrinsicHeight;
             });
 
             var denisty = Resources.DisplayMetrics.Density;
@@ -448,10 +450,6 @@ namespace EOS.UI.Droid.Controls
         {
             _text = Text;
 
-            //calculate scale of animation drawable like 70% of button's height 
-            var scale = (Height * _proportionHeight) / _baseHeight;
-            _animationDrawable.Scale = scale;
-
             //calculate padding around lottie drawable which saved normal button size 
             //after replacing text with lottie drawable
             var paddingX = (int)((Width - _animationDrawable.IntrinsicWidth) / 2f);
@@ -475,33 +473,6 @@ namespace EOS.UI.Droid.Controls
             InProgress = false;
 
             SetStopAnimationValues();
-        }
-
-        private RotateDrawable CreateRotateDrawable()
-        {
-            if(Build.VERSION.SdkInt >= BuildVersionCodes.M)
-                return CreateRotateDrawableAPI23();
-            else
-                return CreateRotateDrawableAPI21();
-        }
-
-        private RotateDrawable CreateRotateDrawableAPI23()
-        {
-            var drawable = new RotateDrawable();
-            drawable.PivotXRelative = true;
-            drawable.PivotX = _pivot;
-            drawable.PivotYRelative = true;
-            drawable.PivotY = _pivot;
-            return drawable;
-        }
-
-        private RotateDrawable CreateRotateDrawableAPI21()
-        {
-            //It's impossible adequate creation from code due
-            //https://github.com/aosp-mirror/platform_frameworks_base/blob/lollipop-dev/graphics/java/android/graphics/drawable/RotateDrawable.java#L218
-            //use creation from xml hack
-            var drawable = (RotateDrawable)Drawable.CreateFromXml(Resources, Resources.GetXml(Resource.Drawable.RotateDrawable));
-            return drawable;
         }
 
         #endregion
