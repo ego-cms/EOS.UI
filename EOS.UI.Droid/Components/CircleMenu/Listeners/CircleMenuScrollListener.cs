@@ -5,7 +5,7 @@ namespace EOS.UI.Droid.Components
     internal class CircleMenuScrollListener
     {
         private const float MinScrollWidth = 20;
-        private const float MinSpinWidth = 10;
+        private const float MinSpinWidth = 15;
 
         private float _bufferScrollX;
         private float _bufferScrollY;
