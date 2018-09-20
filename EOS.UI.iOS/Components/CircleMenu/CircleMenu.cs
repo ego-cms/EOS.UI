@@ -525,18 +525,25 @@ namespace EOS.UI.iOS.Components
             secondAnimation.InitialVelocity = 70;
             secondAnimation.Duration = 0.6;
 
+            //We need to generate random animation names, because this will help us to remove certain animations correctly
+            //We shouldn't call RamoveAllAnimations() or remove animations with the same name, 
+            //we should remove only certain animations
+            var random = new Random();
+            var firstId = random.Next(0, 1000).ToString();
+            var secondId = random.Next(1001, 2000).ToString();
+
             firstAnimation.AnimationStopped += (sender, e) =>
             {
-                _menuButtonsView.Layer.AddAnimation(secondAnimation, null);
+                _menuButtonsView.Layer.AddAnimation(secondAnimation, firstId);
             };
 
             secondAnimation.AnimationStopped += (sender, e) =>
             {
-                _menuButtonsView.Layer.RemoveAnimation(nameof(firstAnimation));
-                _menuButtonsView.Layer.RemoveAnimation(nameof(secondAnimation));
+                _menuButtonsView.Layer.RemoveAnimation(firstId);
+                _menuButtonsView.Layer.RemoveAnimation(secondId);
                 tcs.SetResult(true);
             };
-            _menuButtonsView.Layer.AddAnimation(firstAnimation, null);
+            _menuButtonsView.Layer.AddAnimation(firstAnimation, firstId);
             return tcs.Task;
         }
 
