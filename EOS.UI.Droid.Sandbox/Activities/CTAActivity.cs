@@ -150,6 +150,9 @@ namespace EOS.UI.Droid.Sandbox.Activities
             _disableSwitch.SetOnCheckedChangeListener(this);
 
             SetCurrenTheme(_CTAButton.GetThemeProvider().GetCurrentTheme());
+
+            SetupSimpleButtonStyle();
+            EnableSimpleButtonFields();
         }
 
         private void ShadowRadiusItemSelected(int position)
