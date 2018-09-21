@@ -19,6 +19,7 @@ namespace EOS.UI.iOS.Sandbox
         private bool _navigationBarEnabled = true;
         private List<EOSSandboxDropDown> _dropDowns;
         private CircleMenu _circleMenu;
+        private readonly int[] _submenuIds = new int[] { 4, 5 };
 
         public CircleMenuView(IntPtr handle) : base(handle)
         {
@@ -54,7 +55,7 @@ namespace EOS.UI.iOS.Sandbox
                 }
                 else
                 {
-                    if (id != 2 && id != 3)
+                    if (!_submenuIds.Contains(id))
                         ShowItemController(_icons.ElementAt(id).Key);
                 }
             };
@@ -178,7 +179,7 @@ namespace EOS.UI.iOS.Sandbox
             for (int i = 0; i < count; ++i)
             {
                 var menuModel = new CircleMenuItemModel(i, _icons.ElementAt(i).Value);
-                if (i == 2 || i == 3)
+                if (_submenuIds.Contains(i))
                 {
                     for (int j = 9; j < 12; ++j)
                     {

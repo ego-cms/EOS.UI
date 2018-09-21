@@ -342,11 +342,7 @@ namespace EOS.UI.iOS.Components
             var task = StartOpenMenuAnimation();
             task = task.AnimateNext((t) => SwitchButtonsInteractions(false));
             task = task.AnimateNext((arg) => StartOpenSpringEffect(-_6Degrees)).Unwrap();
-            if (!_isHintShown)
-            {
-                task = task.AnimateNext((arg) => StartHintAnimation()).Unwrap();
-                _isHintShown = true;
-            }
+            task = task.AnimateNext((arg) => StartHintAnimationIfNeeded()).Unwrap();
             task = task.AnimateNext((t) =>
             {
                 SwitchButtonsInteractions(true);
@@ -765,11 +761,17 @@ namespace EOS.UI.iOS.Components
         /// Launchs hint animation
         /// </summary>
         /// <returns></returns>
-        Task<bool> StartHintAnimation()
+        Task<bool> StartHintAnimationIfNeeded()
         {
             var tcs = new TaskCompletionSource<bool>();
-            var hintViews = new List<UIView>();
             var invokedButton = _menuButtons.Single(b => b.PositionIndex == 1);
+            if(_isHintShown == true || !invokedButton.Model.HasChildren)
+            {
+                tcs.SetResult(false);
+                return tcs.Task;
+            }
+
+            var hintViews = new List<UIView>();
             for (int i = 0; i < 2; ++i)
             {
                 var hintView = new UIView(invokedButton.Frame);
@@ -801,6 +803,7 @@ namespace EOS.UI.iOS.Components
                 hintViews.ForEach(b => b.RemoveFromSuperview());
                 tcs.SetResult(true);
             });
+            _isHintShown = true;
             return tcs.Task;
         }
 
