@@ -693,6 +693,13 @@ namespace EOS.UI.Droid.Components
         private void StartHintAnimation(Action action)
         {
             ShowHintAnimation = false;
+
+            if(!_menuItems[4].HasSubMenus)
+            {
+                action?.Invoke();
+                return;
+            }
+
             Locked = true;
 
             var lastView = CreateHintView();
