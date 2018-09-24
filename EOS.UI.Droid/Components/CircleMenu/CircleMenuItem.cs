@@ -48,7 +48,7 @@ namespace EOS.UI.Droid.Components
 
         public int CircleMenuModelId { get; set; } = -1;
 
-        public bool HasSubMenus { get; set; }
+        public bool HasSubMenus => _hasChildren;
 
         public override bool Enabled
         {
