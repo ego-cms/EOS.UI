@@ -19,7 +19,7 @@ namespace EOS.UI.iOS.Sandbox
         private bool _navigationBarEnabled = true;
         private List<EOSSandboxDropDown> _dropDowns;
         private CircleMenu _circleMenu;
-        private readonly int[] _submenuIds = new int[] { 4, 5 };
+        private readonly int[] _submenuIds = new int[] { 2, 3 };
 
         public CircleMenuView(IntPtr handle) : base(handle)
         {
