@@ -694,6 +694,7 @@ namespace EOS.UI.Droid.Components
         {
             ShowHintAnimation = false;
 
+            //if menu item in highest position doesn't have submenu hint animation does not playing
             if(!_menuItems[4].HasSubMenus)
             {
                 action?.Invoke();
