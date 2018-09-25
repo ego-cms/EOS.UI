@@ -12,9 +12,8 @@ namespace EOS.UI.Shared.Sandbox.Helpers
     {
         public static class Colors
         {
-            public static readonly Dictionary<string, Color> MainColorsCollection = new Dictionary<string, Color>()
+            public static Dictionary<string, Color> MainColorsCollection { get; } = new Dictionary<string, Color>()
             {
-                { string.Empty, Color.Transparent },
                 {ColorNameBlue, Color.ParseColor(ColorBlue)},
                 {ColorNameUltramarine, Color.ParseColor(ColorUltramarine)},
                 {ColorNameCerulean, Color.ParseColor(ColorCerulean)},
@@ -32,9 +31,8 @@ namespace EOS.UI.Shared.Sandbox.Helpers
                 {ColorNameIndigo, Color.ParseColor(ColorIndigo)},
             };
 
-            public static Dictionary<string, Color> FontColorsCollection = new Dictionary<string, Color>()
+            public static Dictionary<string, Color> FontColorsCollection { get; } = new Dictionary<string, Color>()
             {
-                { string.Empty, Color.Transparent },
                 {ColorNameBlack, Color.ParseColor(ColorBlack)},
                 {ColorNameDarkGray, Color.ParseColor(ColorDarkGray)},
                 {ColorNameGray, Color.ParseColor(ColorGray)},
@@ -44,7 +42,7 @@ namespace EOS.UI.Shared.Sandbox.Helpers
                 {ColorNameUltramarine, Color.ParseColor(ColorUltramarine)}
             };
 
-            public static Dictionary<string, Color> GetGhostButtonFonts()
+            public static Dictionary<string, Color> GetGhostButtonFontColors()
             {
                 return MainColorsCollection.Union(FontColorsCollection).ToDictionary(a => a.Key, b => b.Value);
             }
@@ -52,46 +50,31 @@ namespace EOS.UI.Shared.Sandbox.Helpers
 
         public static class Fonts
         {
-            //public const string Roboto = "Roboto";
-            //public const string Berkshireswash = "Berkshireswash";
-            //public const string Amita = "Amita";
-            //public const string AcademyEngraved = "AcademyEngraved";
-
-            //public static readonly Dictionary<string, string> FontsCollection = new Dictionary<string, string>()
-            //{
-            //    { string.Empty, string.Empty },
-            //    { Roboto, "Fonts/Roboto.ttf" },
-            //    { Berkshireswash, "Fonts/Berkshireswash.ttf" },
-            //    { Amita, "Fonts/Amita.ttf" },
-            //    { AcademyEngraved, "Fonts/academyEngraved.ttf" },
-            //};
-
-            public const string ArimoRegular = "ArimoRegular";
-            public const string ArimoBold = "ArimoBold";
-            public const string LatoRegular = "LatoRegular";
-            public const string LatoBold = "LatoBold";
-            public const string LatoBlack = "LatoBlack";
-            public const string MontserratRegular = "MontserratRegular";
-            public const string MontserratMedium = "MontserratMedium";
-            public const string MontserratSemiBold = "MontserratSemiBold";
-            public const string MontserratBold = "MontserratBold";
-            public const string MontserratExtraBold = "MontserratExtraBold";
-            public const string OpenSansRegular = "OpenSansRegular";
-            public const string OpenSansSemiBold = "OpenSansSemiBold";
-            public const string OpenSansBold = "OpenSansBold";
-            public const string OpenSansExtraBold = "OpenSansExtraBold";
-            public const string UbuntuRegular = "UbuntuRegular";
-            public const string UbuntuMedium = "UbuntuMedium";
-            public const string UbuntuBold = "UbuntuBold";
-            public const string RobotoRegular = "RobotoRegular";
-            public const string RobotoMedium = "RobotoMedium";
-            public const string RobotoBold = "RobotoBold";
+            private const string ArimoRegular = "ArimoRegular";
+            private const string ArimoBold = "ArimoBold";
+            private const string LatoRegular = "LatoRegular";
+            private const string LatoBold = "LatoBold";
+            private const string LatoBlack = "LatoBlack";
+            private const string MontserratRegular = "MontserratRegular";
+            private const string MontserratMedium = "MontserratMedium";
+            private const string MontserratSemiBold = "MontserratSemiBold";
+            private const string MontserratBold = "MontserratBold";
+            private const string MontserratExtraBold = "MontserratExtraBold";
+            private const string OpenSansRegular = "OpenSansRegular";
+            private const string OpenSansSemiBold = "OpenSansSemiBold";
+            private const string OpenSansBold = "OpenSansBold";
+            private const string OpenSansExtraBold = "OpenSansExtraBold";
+            private const string UbuntuRegular = "UbuntuRegular";
+            private const string UbuntuMedium = "UbuntuMedium";
+            private const string UbuntuBold = "UbuntuBold";
+            private const string RobotoRegular = "RobotoRegular";
+            private const string RobotoMedium = "RobotoMedium";
+            private const string RobotoBold = "RobotoBold";
 
             public static Dictionary<string, string> GetButtonBadgeFonts()
             {
                 return new Dictionary<string, string>
                 {
-                    { string.Empty, string.Empty },
                     { ArimoBold, "Fonts/Arimo-Bold.ttf" },
                     { LatoBlack, "Fonts/Lato-Black.ttf" },
                     { LatoBold, "Fonts/Lato-Bold.ttf" },
@@ -110,7 +93,6 @@ namespace EOS.UI.Shared.Sandbox.Helpers
             {
                 return new Dictionary<string, string>
                 {
-                    { string.Empty, string.Empty },
                     { ArimoBold, "Fonts/Arimo-Bold.ttf" },
                     { LatoBlack, "Fonts/Lato-Black.ttf" },
                     { LatoBold, "Fonts/Lato-Bold.ttf" },
@@ -131,7 +113,6 @@ namespace EOS.UI.Shared.Sandbox.Helpers
             {
                 return new Dictionary<string, string>
                 {
-                    { string.Empty, string.Empty },
                     { ArimoBold, "Fonts/Arimo-Bold.ttf" },
                     { LatoRegular, "Fonts/Lato-Regular.ttf" },
                     { LatoBold, "Fonts/Lato-Bold.ttf" },
@@ -152,7 +133,6 @@ namespace EOS.UI.Shared.Sandbox.Helpers
             {
                 return new Dictionary<string, string>
                 {
-                    { string.Empty, string.Empty },
                     { ArimoBold, "Fonts/Arimo-Bold.ttf" },
                     { LatoBlack, "Fonts/Lato-Black.ttf" },
                     { LatoBold, "Fonts/Lato-Bold.ttf" },
@@ -173,7 +153,6 @@ namespace EOS.UI.Shared.Sandbox.Helpers
             {
                 return new Dictionary<string, string>
                 {
-                    { string.Empty, string.Empty },
                     { ArimoBold, "Fonts/Arimo-Bold.ttf" },
                     { LatoBlack, "Fonts/Lato-Black.ttf" },
                     { LatoBold, "Fonts/Lato-Bold.ttf" },
@@ -191,7 +170,6 @@ namespace EOS.UI.Shared.Sandbox.Helpers
             {
                 return new Dictionary<string, string>
                 {
-                    { string.Empty, string.Empty },
                     { ArimoRegular, "Fonts/Arimo-Regular.ttf" },
                     { LatoRegular, "Fonts/Lato-Regular.ttf" },
                     { MontserratRegular, "Fonts/Montserrat-Regular.ttf" },
@@ -208,7 +186,6 @@ namespace EOS.UI.Shared.Sandbox.Helpers
             {
                 return new Dictionary<string, string>
                 {
-                    { string.Empty, string.Empty },
                     { RobotoRegular, "Fonts/Roboto-Regular.ttf" },
                     { RobotoMedium, "Fonts/Roboto-Medium.ttf" },
                     { RobotoBold, "Fonts/Roboto-Bold.ttf" }
@@ -218,7 +195,7 @@ namespace EOS.UI.Shared.Sandbox.Helpers
 
         public static class Validation
         {
-            public static readonly Dictionary<string, int> ValidationCollection = new Dictionary<string, int>()
+            public static Dictionary<string, int> ValidationCollection { get; } = new Dictionary<string, int>()
             {
                 { string.Empty, 0 },
                 { "without validation", 1 },
@@ -234,7 +211,7 @@ namespace EOS.UI.Shared.Sandbox.Helpers
             public const string Lock = "Lock";
             public const string AccountOff = "Account off";
 
-            public static Dictionary<string, int> DrawableCollection = new Dictionary<string, int>()
+            public static Dictionary<string, int> DrawableCollection { get; } = new Dictionary<string, int>()
             {
                 { string.Empty, 0 },
                 { Calendar, Resource.Drawable.icCalendar },

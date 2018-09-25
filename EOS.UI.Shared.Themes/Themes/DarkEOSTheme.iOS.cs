@@ -31,6 +31,7 @@ namespace EOS.UI.Shared.Themes.Themes
             { EOSConstants.NeutralColor4S, ColorExtension.FromHex(neutralColor4S) },
             { EOSConstants.NeutralColor5S, ColorExtension.FromHex(neutralColor5S) },
             { EOSConstants.NeutralColor6S, ColorExtension.FromHex(neutralColor6S) },
+            { EOSConstants.Blackout, ColorExtension.FromHex(neutralColor6).ColorWithAlpha(0.64f)},
             { EOSConstants.RippleColor, ColorExtension.FromHex(rippleColor) },
             { EOSConstants.DisabledInputColor, ColorExtension.FromHex(neutralColor5)},
             { EOSConstants.ButtonCornerRadius, 24 },
@@ -49,7 +50,7 @@ namespace EOS.UI.Shared.Themes.Themes
                 Spread = 1
             }},
             { EOSConstants.SimpleButtonShadow, new ShadowConfig(){
-                Color = ColorExtension.FromHex(shadowColor),
+                Color = ColorExtension.FromHex(fabShadowColor),
                 Offset = new CGPoint(0, 12),
                 Blur = 12,
                 Spread = 200
@@ -160,9 +161,9 @@ namespace EOS.UI.Shared.Themes.Themes
                     LineHeight = 13f
             }},
             //worktimecalendar currentday fontstyle
-            { EOSConstants.R1C6, new FontStyleItem() {
+            { EOSConstants.R1C6S, new FontStyleItem() {
                     //color must always be white
-                    Color = ColorExtension.FromHex(neutralColor1),
+                    Color = ColorExtension.FromHex(neutralColor6S),
                     Font = UIFont.SystemFontOfSize(11f, UIFontWeight.Bold),
                     Size = 11f,
                     LetterSpacing = 0.06f,

@@ -14,11 +14,19 @@ Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "EOS.UI.Shared.Themes", "EOS
 EndProject
 Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "EOS.UI.Shared.Sandbox", "EOS.UI.Shared.Sandbox\EOS.UI.Shared.Sandbox.shproj", "{A40235BD-9F17-4586-B2C1-51A98AC464EC}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{7A363CB0-2F20-4E7C-8E66-F781D0BA2D3F}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
+		EOS.UI.Shared.Sandbox\EOS.UI.Shared.Sandbox.projitems*{28edc59e-9773-4482-9e73-80e8ac319614}*SharedItemsImports = 4
 		EOS.UI.Shared.Themes\EOS.UI.Shared.Themes.projitems*{3722ae67-fc49-4983-974d-d4bded69fce4}*SharedItemsImports = 13
 		EOS.UI.Shared.Themes\EOS.UI.Shared.Themes.projitems*{91a2a6a0-37b8-47ae-a38b-c80667b42049}*SharedItemsImports = 4
+		EOS.UI.Shared.Sandbox\EOS.UI.Shared.Sandbox.projitems*{a40235bd-9f17-4586-b2c1-51a98ac464ec}*SharedItemsImports = 13
 		EOS.UI.Shared.Themes\EOS.UI.Shared.Themes.projitems*{e321ba43-e86f-480f-b91e-1bcc90323ba1}*SharedItemsImports = 4
+		EOS.UI.Shared.Sandbox\EOS.UI.Shared.Sandbox.projitems*{fd08db79-4dc2-4a40-bddc-6149acabdfd9}*SharedItemsImports = 4
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -30,17 +38,17 @@ Global
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{28EDC59E-9773-4482-9E73-80E8AC319614}.Debug|Any CPU.ActiveCfg = Debug|iPhoneSimulator
+		{28EDC59E-9773-4482-9E73-80E8AC319614}.Debug|Any CPU.Build.0 = Debug|iPhoneSimulator
 		{28EDC59E-9773-4482-9E73-80E8AC319614}.Debug|iPhone.ActiveCfg = Debug|iPhone
 		{28EDC59E-9773-4482-9E73-80E8AC319614}.Debug|iPhone.Build.0 = Debug|iPhone
 		{28EDC59E-9773-4482-9E73-80E8AC319614}.Debug|iPhoneSimulator.ActiveCfg = Debug|iPhoneSimulator
 		{28EDC59E-9773-4482-9E73-80E8AC319614}.Debug|iPhoneSimulator.Build.0 = Debug|iPhoneSimulator
 		{28EDC59E-9773-4482-9E73-80E8AC319614}.Release|Any CPU.ActiveCfg = Release|iPhone
+		{28EDC59E-9773-4482-9E73-80E8AC319614}.Release|Any CPU.Build.0 = Release|iPhone
 		{28EDC59E-9773-4482-9E73-80E8AC319614}.Release|iPhone.ActiveCfg = Release|iPhone
 		{28EDC59E-9773-4482-9E73-80E8AC319614}.Release|iPhone.Build.0 = Release|iPhone
 		{28EDC59E-9773-4482-9E73-80E8AC319614}.Release|iPhoneSimulator.ActiveCfg = Release|iPhoneSimulator
 		{28EDC59E-9773-4482-9E73-80E8AC319614}.Release|iPhoneSimulator.Build.0 = Release|iPhoneSimulator
-		{28EDC59E-9773-4482-9E73-80E8AC319614}.Release|Any CPU.Build.0 = Release|iPhone
-		{28EDC59E-9773-4482-9E73-80E8AC319614}.Debug|Any CPU.Build.0 = Debug|iPhoneSimulator
 		{91A2A6A0-37B8-47AE-A38B-C80667B42049}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{91A2A6A0-37B8-47AE-A38B-C80667B42049}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{91A2A6A0-37B8-47AE-A38B-C80667B42049}.Debug|iPhone.ActiveCfg = Debug|Any CPU

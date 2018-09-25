@@ -6,6 +6,7 @@ using Android.OS;
 using Android.Widget;
 using EOS.UI.Droid.Controls;
 using EOS.UI.Droid.Sandbox.Controls;
+using EOS.UI.Shared.Sandbox.ControlConstants.Android;
 using EOS.UI.Shared.Sandbox.Helpers;
 using EOS.UI.Shared.Themes.Interfaces;
 using EOS.UI.Shared.Themes.Themes;
@@ -42,19 +43,19 @@ namespace EOS.UI.Droid.Sandbox.Activities
             _themeDropDown.ItemSelected += ThemeItemSelected;
 
             _textColorDropDown.Name = Fields.TextColor;
-            _textColorDropDown.SetupAdapter(Colors.FontColorsCollection.Select(item => item.Key).ToList());
+            _textColorDropDown.SetupAdapter(SimpleLabelConstants.FontColors.Select(item => item.Key).ToList());
             _textColorDropDown.ItemSelected += TextColorItemSelected;
 
             _fontDropDown.Name = Fields.Font;
-            _fontDropDown.SetupAdapter(Fonts.GetGhostButtonSimpleLabelFonts().Select(item => item.Key).ToList());
+            _fontDropDown.SetupAdapter(SimpleLabelConstants.SimpleLabelFonts.Select(item => item.Key).ToList());
             _fontDropDown.ItemSelected += FontItemSelected;
 
             _letterSpacingDropDown.Name = Fields.LetterSpacing;
-            _letterSpacingDropDown.SetupAdapter(Sizes.LetterSpacingCollection.Select(item => item.Key).ToList());
+            _letterSpacingDropDown.SetupAdapter(SimpleLabelConstants.LetterSpacings.Select(item => item.Key).ToList());
             _letterSpacingDropDown.ItemSelected += LetterSpacingItemSelected;
 
             _textSizeDropDown.Name = Fields.TextSize;
-            _textSizeDropDown.SetupAdapter(Sizes.TextSizeCollection.Select(item => item.Key).ToList());
+            _textSizeDropDown.SetupAdapter(SimpleLabelConstants.TextSizes.Select(item => item.Key).ToList());
             _textSizeDropDown.ItemSelected += TextSizeItemSelected;
 
             SetCurrenTheme(_simpleLabel.GetThemeProvider().GetCurrentTheme());
@@ -67,15 +68,15 @@ namespace EOS.UI.Droid.Sandbox.Activities
 
         private void SetCurrenTheme(IEOSTheme iEOSTheme)
         {
-            if(iEOSTheme is LightEOSTheme)
+            if (iEOSTheme is LightEOSTheme)
                 _themeDropDown.SetSpinnerSelection(1);
-            if(iEOSTheme is DarkEOSTheme)
+            if (iEOSTheme is DarkEOSTheme)
                 _themeDropDown.SetSpinnerSelection(2);
         }
 
         private void ThemeItemSelected(int position)
         {
-            if(position > 0)
+            if (position > 0)
             {
                 _simpleLabel.GetThemeProvider().SetCurrentTheme(ThemeTypes.ThemeCollection.ElementAt(position).Value);
                 ResetCustomValues();
@@ -85,26 +86,22 @@ namespace EOS.UI.Droid.Sandbox.Activities
 
         private void TextSizeItemSelected(int position)
         {
-            if(position > 0)
-                _simpleLabel.TextSize = Sizes.TextSizeCollection.ElementAt(position).Value;
+            _simpleLabel.TextSize = SimpleLabelConstants.TextSizes.ElementAt(position).Value;
         }
 
         private void LetterSpacingItemSelected(int position)
         {
-            if(position > 0)
-                _simpleLabel.LetterSpacing = Sizes.LetterSpacingCollection.ElementAt(position).Value;
+            _simpleLabel.LetterSpacing = SimpleLabelConstants.LetterSpacings.ElementAt(position).Value;
         }
 
         private void FontItemSelected(int position)
         {
-            if(position > 0)
-                _simpleLabel.Typeface = Typeface.CreateFromAsset(Assets, Fonts.GetGhostButtonSimpleLabelFonts().ElementAt(position).Value);
+            _simpleLabel.Typeface = Typeface.CreateFromAsset(Assets, SimpleLabelConstants.SimpleLabelFonts.ElementAt(position).Value);
         }
 
         private void TextColorItemSelected(int position)
         {
-            if(position > 0)
-                _simpleLabel.TextColor = Colors.FontColorsCollection.ElementAt(position).Value;
+            _simpleLabel.TextColor = SimpleLabelConstants.FontColors.ElementAt(position).Value;
         }
 
         private void ResetCustomValues()

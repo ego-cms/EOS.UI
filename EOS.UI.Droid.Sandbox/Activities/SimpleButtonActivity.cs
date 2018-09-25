@@ -8,6 +8,7 @@ using Android.Views;
 using Android.Widget;
 using EOS.UI.Droid.Controls;
 using EOS.UI.Droid.Sandbox.Controls;
+using EOS.UI.Shared.Sandbox.ControlConstants.Android;
 using EOS.UI.Shared.Sandbox.Helpers;
 using EOS.UI.Shared.Themes.Helpers;
 using EOS.UI.Shared.Themes.Interfaces;
@@ -35,7 +36,7 @@ namespace EOS.UI.Droid.Sandbox.Activities
         private EOSSandboxDropDown _cornerRadiusDropDown;
         private EOSSandboxDropDown _rippleColorDropDown;
         private EOSSandboxDropDown _shadowRadiusDropDown;
-
+        private SimpleButtonTypeEnum _buttonType;
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
@@ -60,7 +61,7 @@ namespace EOS.UI.Droid.Sandbox.Activities
             _shadowRadiusDropDown = FindViewById<EOSSandboxDropDown>(Resource.Id.shadowRadiusDropDown);
 
             _shadowRadiusDropDown.Name = Fields.ShadowRadius;
-            _shadowRadiusDropDown.SetupAdapter(Shadow.RadiusCollection.Select(item => item.Key).ToList());
+            _shadowRadiusDropDown.SetupAdapter(SimpleButtonConstants.ShadowRadiusCollection.Select(item => item.Key).ToList());
             _shadowRadiusDropDown.ItemSelected += ShadowRadiusItemSelected;
 
             _buttonTypeDropDown.Visibility = ViewStates.Visible;
@@ -73,79 +74,91 @@ namespace EOS.UI.Droid.Sandbox.Activities
             _themeDropDown.ItemSelected += ThemeItemSelected;
 
             _fontDropDown.Name = Fields.Font;
-            _fontDropDown.SetupAdapter(Fonts.GetButtonBadgeFonts().Select(item => item.Key).ToList());
+            _fontDropDown.SetupAdapter(SimpleButtonConstants.SimpleButtonFonts.Select(item => item.Key).ToList());
             _fontDropDown.ItemSelected += FontSpinner_ItemSelected;
 
             _letterSpacingDropDown.Name = Fields.LetterSpacing;
-            _letterSpacingDropDown.SetupAdapter(Sizes.LetterSpacingCollection.Select(item => item.Key).ToList());
+            _letterSpacingDropDown.SetupAdapter(SimpleButtonConstants.LetterSpacings.Select(item => item.Key).ToList());
             _letterSpacingDropDown.ItemSelected += LetterSpacingView_ItemSelected;
 
             _textSizeDropDown.Name = Fields.TextSize;
-            _textSizeDropDown.SetupAdapter(Sizes.TextSizeCollection.Select(item => item.Key).ToList());
+            _textSizeDropDown.SetupAdapter(SimpleButtonConstants.TextSizes.Select(item => item.Key).ToList());
             _textSizeDropDown.ItemSelected += TextSizeItemSelected;
 
             _textColorEnabledDropDown.Name = Fields.EnabledTextColor;
-            _textColorEnabledDropDown.SetupAdapter(Colors.FontColorsCollection.Select(item => item.Key).ToList());
+            _textColorEnabledDropDown.SetupAdapter(SimpleButtonConstants.FontColors.Select(item => item.Key).ToList());
             _textColorEnabledDropDown.ItemSelected += TextColorEnabledItemSelected;
 
             _textColorDisabledDropDown.Name = Fields.DisabledTextColor;
-            _textColorDisabledDropDown.SetupAdapter(Colors.FontColorsCollection.Select(item => item.Key).ToList());
+            _textColorDisabledDropDown.SetupAdapter(SimpleButtonConstants.DisabledFontColors.Select(item => item.Key).ToList());
             _textColorDisabledDropDown.ItemSelected += TextColorDisabledItemSelected;
 
             _backgroundColorEnabledDropDown.Name = Fields.EnabledBackground;
-            _backgroundColorEnabledDropDown.SetupAdapter(Colors.MainColorsCollection.Select(item => item.Key).ToList());
+            _backgroundColorEnabledDropDown.SetupAdapter(SimpleButtonConstants.BackgroundColors.Select(item => item.Key).ToList());
             _backgroundColorEnabledDropDown.ItemSelected += BackgroundColorEnabledItemSelected;
 
             _backgroundColorDisabledDropDown.Name = Fields.DisabledBackground;
-            _backgroundColorDisabledDropDown.SetupAdapter(Colors.MainColorsCollection.Select(item => item.Key).ToList());
+            _backgroundColorDisabledDropDown.SetupAdapter(SimpleButtonConstants.DisabledBackgroundColors.Select(item => item.Key).ToList());
             _backgroundColorDisabledDropDown.ItemSelected += BackgroundColorDisabledItemSelected;
 
             _backgroundColorPressedDropDown.Name = Fields.PressedBackground;
-            _backgroundColorPressedDropDown.SetupAdapter(Colors.MainColorsCollection.Select(item => item.Key).ToList());
+            _backgroundColorPressedDropDown.SetupAdapter(SimpleButtonConstants.PressedBackgroundColors.Select(item => item.Key).ToList());
             _backgroundColorPressedDropDown.ItemSelected += BackgroundColorPressedItemSelected;
 
             _cornerRadiusDropDown.Name = Fields.ConerRadius;
-            _cornerRadiusDropDown.SetupAdapter(Sizes.CornerRadiusCollection.Select(item => item.Key).ToList());
+            _cornerRadiusDropDown.SetupAdapter(SimpleButtonConstants.CornerRadiusCollection.Select(item => item.Key).ToList());
             _cornerRadiusDropDown.ItemSelected += CornerRadiurSpinner_ItemSelected;
 
             _rippleColorDropDown.Name = Fields.RippleColor;
-            _rippleColorDropDown.SetupAdapter(Colors.MainColorsCollection.Select(item => item.Key).ToList());
+            _rippleColorDropDown.SetupAdapter(SimpleButtonConstants.RippleColors.Select(item => item.Key).ToList());
             _rippleColorDropDown.ItemSelected += RippleColorItemSelected;
 
             resetButton.Click += delegate
             {
+                SetupSimpleButtonStyle();
+                EnableSimpleButtonFields();
+                _simpleButton.ResetCustomization();
                 ResetCustomValues();
             };
 
             disableSwitch.SetOnCheckedChangeListener(this);
 
             SetCurrenTheme(_simpleButton.GetThemeProvider().GetCurrentTheme());
+
+            SetupSimpleButtonStyle();
+            EnableSimpleButtonFields();
         }
 
         private void ShadowRadiusItemSelected(int position)
         {
             if(position > 0)
             {
+                if(_buttonType == SimpleButtonTypeEnum.FullBleed)
+                    return;
                 var config = _simpleButton.ShadowConfig;
-                config.Blur = Shadow.RadiusCollection.ElementAt(position).Value;
+                config.Blur = SimpleButtonConstants.ShadowRadiusCollection.ElementAt(position).Value;
                 _simpleButton.ShadowConfig = config;
             }
         }
 
         private void ButtonTypeItemSelected(int position)
         {
-            var type = Buttons.SimpleButtonTypeCollection.ElementAt(position).Value;
-            ResetCustomValues(true);
-            switch(type)
+            if(position > 0)
             {
-                case SimpleButtonTypeEnum.Simple:
-                    SetupSimpleButtonStyle();
-                    EnableSimpleButtonFields();
-                    break;
-                case SimpleButtonTypeEnum.FullBleed:
-                    SetupFullBleedButtonStyle();
-                    DisableSimpleButtonFields();
-                    break;
+                _buttonType = Buttons.SimpleButtonTypeCollection.ElementAt(position).Value;
+                ResetCustomValues(true);
+                switch(_buttonType)
+                {
+                    case SimpleButtonTypeEnum.Simple:
+                        SetupSimpleButtonStyle();
+                        EnableSimpleButtonFields();
+                        _simpleButton.ResetCustomization();
+                        break;
+                    case SimpleButtonTypeEnum.FullBleed:
+                        SetupFullBleedButtonStyle();
+                        DisableSimpleButtonFields();
+                        break;
+                }
             }
         }
 
@@ -181,13 +194,12 @@ namespace EOS.UI.Droid.Sandbox.Activities
                 (int)(SimpleButtonConstants.TopPadding * denisty),
                 (int)(SimpleButtonConstants.RightPadding * denisty),
                 (int)(SimpleButtonConstants.BottomPadding * denisty));
-            _simpleButton.ResetCustomization();
             _simpleButton.Text = Buttons.Simple;
         }
 
         private LinearLayout.LayoutParams GetSimpleButtonLayoutParameters()
         {
-            if(_cachedSize != null)
+            if (_cachedSize != null)
                 return new LinearLayout.LayoutParams(_cachedSize.Width, _cachedSize.Height);
 
             return _simpleButton.LayoutParameters as LinearLayout.LayoutParams;
@@ -203,7 +215,7 @@ namespace EOS.UI.Droid.Sandbox.Activities
 
         private void ThemeItemSelected(int position)
         {
-            if(position > 0)
+            if (position > 0)
             {
                 _simpleButton.GetThemeProvider().SetCurrentTheme(ThemeTypes.ThemeCollection.ElementAt(position).Value);
                 ResetCustomValues();
@@ -213,75 +225,66 @@ namespace EOS.UI.Droid.Sandbox.Activities
 
         private void FontSpinner_ItemSelected(int position)
         {
-            if(position > 0)
-                _simpleButton.Typeface = Typeface.CreateFromAsset(Assets, Fonts.GetButtonBadgeFonts().ElementAt(position).Value);
+            _simpleButton.Typeface = Typeface.CreateFromAsset(Assets, SimpleButtonConstants.SimpleButtonFonts.ElementAt(position).Value);
         }
 
         private void LetterSpacingView_ItemSelected(int position)
         {
-            if(position > 0)
-                _simpleButton.LetterSpacing = Sizes.LetterSpacingCollection.ElementAt(position).Value;
+            _simpleButton.LetterSpacing = SimpleButtonConstants.LetterSpacings.ElementAt(position).Value;
         }
 
         private void TextSizeItemSelected(int position)
         {
-            if(position > 0)
-                _simpleButton.TextSize = Sizes.TextSizeCollection.ElementAt(position).Value;
+            _simpleButton.TextSize = SimpleButtonConstants.TextSizes.ElementAt(position).Value;
         }
 
         private void TextColorEnabledItemSelected(int position)
         {
-            if(position > 0)
-                _simpleButton.TextColor = Colors.FontColorsCollection.ElementAt(position).Value;
+            _simpleButton.TextColor = SimpleButtonConstants.FontColors.ElementAt(position).Value;
         }
 
         private void TextColorDisabledItemSelected(int position)
         {
-            if(position > 0)
-                _simpleButton.DisabledTextColor = Colors.FontColorsCollection.ElementAt(position).Value;
+            _simpleButton.DisabledTextColor = SimpleButtonConstants.DisabledFontColors.ElementAt(position).Value;
         }
 
         private void BackgroundColorEnabledItemSelected(int position)
         {
-            if(position > 0)
-                _simpleButton.BackgroundColor = Colors.MainColorsCollection.ElementAt(position).Value;
+            _simpleButton.BackgroundColor = SimpleButtonConstants.BackgroundColors.ElementAt(position).Value;
         }
 
         private void BackgroundColorDisabledItemSelected(int position)
         {
-            if(position > 0)
-                _simpleButton.DisabledBackgroundColor = Colors.MainColorsCollection.ElementAt(position).Value;
+            _simpleButton.DisabledBackgroundColor = SimpleButtonConstants.DisabledBackgroundColors.ElementAt(position).Value;
         }
 
         private void BackgroundColorPressedItemSelected(int position)
         {
-            if(position > 0)
-                _simpleButton.PressedBackgroundColor = Colors.MainColorsCollection.ElementAt(position).Value;
+            _simpleButton.PressedBackgroundColor = SimpleButtonConstants.PressedBackgroundColors.ElementAt(position).Value;
         }
 
         private void CornerRadiurSpinner_ItemSelected(int position)
         {
-            if(position > 0)
-                _simpleButton.CornerRadius = Sizes.CornerRadiusCollection.ElementAt(position).Value * Resources.DisplayMetrics.Density;
+            if (_buttonType == SimpleButtonTypeEnum.FullBleed)
+                return;
+            _simpleButton.CornerRadius = SimpleButtonConstants.CornerRadiusCollection.ElementAt(position).Value * Resources.DisplayMetrics.Density;
         }
 
         private void RippleColorItemSelected(int position)
         {
-            if(position > 0)
-                _simpleButton.RippleColor = Colors.MainColorsCollection.ElementAt(position).Value;
+            _simpleButton.RippleColor = SimpleButtonConstants.RippleColors.ElementAt(position).Value;
         }
 
         private void SetCurrenTheme(IEOSTheme iEOSTheme)
         {
-            if(iEOSTheme is LightEOSTheme)
+            if (iEOSTheme is LightEOSTheme)
                 _themeDropDown.SetSpinnerSelection(1);
-            if(iEOSTheme is DarkEOSTheme)
+            if (iEOSTheme is DarkEOSTheme)
                 _themeDropDown.SetSpinnerSelection(2);
         }
 
         private void ResetCustomValues(bool ignogeButtonType = false)
         {
-            _simpleButton.ResetCustomization();
             _fontDropDown.SetSpinnerSelection(0);
             _letterSpacingDropDown.SetSpinnerSelection(0);
             _textSizeDropDown.SetSpinnerSelection(0);
@@ -293,7 +296,7 @@ namespace EOS.UI.Droid.Sandbox.Activities
             _cornerRadiusDropDown.SetSpinnerSelection(0);
             _rippleColorDropDown.SetSpinnerSelection(0);
             _shadowRadiusDropDown.SetSpinnerSelection(0);
-            if(!ignogeButtonType)
+            if (!ignogeButtonType)
                 _buttonTypeDropDown.SetSpinnerSelection(0);
         }
 

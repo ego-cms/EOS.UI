@@ -1,4 +1,4 @@
-﻿#if __ANDROID__
+#if __ANDROID__
 using System;
 using Android.Graphics;
 using Android.App;
@@ -64,6 +64,7 @@ namespace EOS.UI.Shared.Themes.Themes
             { EOSConstants.NeutralColor4S, Color.ParseColor(neutralColor4S)},
             { EOSConstants.NeutralColor5S, Color.ParseColor(neutralColor5S)},
             { EOSConstants.NeutralColor6S, Color.ParseColor(neutralColor6S)},
+            { EOSConstants.Blackout, Color.Argb(164, Color.ParseColor(neutralColor5).R, Color.ParseColor(neutralColor5).G, Color.ParseColor(neutralColor5).B) },
             { EOSConstants.RippleColor, Color.ParseColor(rippleColor) },
             { EOSConstants.DisabledInputColor, Color.ParseColor(neutralColor3)},
             { EOSConstants.LabelCornerRadius, 4f },
@@ -141,6 +142,16 @@ namespace EOS.UI.Shared.Themes.Themes
                 new FontStyleItem()
                 {
                     Color = Color.ParseColor(neutralColor6),
+                    Typeface = RobotoBold,
+                    Size = 11f,
+                    LetterSpacing = 0.0055f,
+                    LineHeight = 13f
+                }
+            },
+            { EOSConstants.R1C6S,
+                new FontStyleItem()
+                {
+                    Color = Color.ParseColor(neutralColor6S),
                     Typeface = RobotoBold,
                     Size = 11f,
                     LetterSpacing = 0.0055f,

@@ -13,7 +13,7 @@ namespace EOS.UI.Shared.Sandbox.Helpers
     {
         public static class Colors
         {
-            public static Dictionary<string, UIColor> MainColorsCollection = new Dictionary<string, UIColor>()
+            public static Dictionary<string, UIColor> MainColorsCollection { get; } = new Dictionary<string, UIColor>()
             {
                 {ColorNameBlue, ColorExtension.FromHex(ColorBlue)},
                 {ColorNameUltramarine, ColorExtension.FromHex(ColorUltramarine)},
@@ -32,8 +32,7 @@ namespace EOS.UI.Shared.Sandbox.Helpers
                 {ColorNameIndigo, ColorExtension.FromHex(ColorIndigo)},
             };
 
-
-            public static Dictionary<string, UIColor> FontColorsCollection = new Dictionary<string, UIColor>()
+            public static Dictionary<string, UIColor> FontColorsCollection { get; } = new Dictionary<string, UIColor>()
             {
                 {ColorNameBlack, ColorExtension.FromHex(ColorBlack)},
                 {ColorNameDarkGray, ColorExtension.FromHex(ColorDarkGray)},
@@ -44,7 +43,7 @@ namespace EOS.UI.Shared.Sandbox.Helpers
                 {ColorNameUltramarine, ColorExtension.FromHex(ColorUltramarine)}
             };
 
-            public static Dictionary<string, UIColor> GetGhostButtonFonts()
+            public static Dictionary<string, UIColor> GetGhostButtonFontColors()
             {
                 return MainColorsCollection.Union(FontColorsCollection).ToDictionary(a => a.Key, b => b.Value);
             }
@@ -53,58 +52,59 @@ namespace EOS.UI.Shared.Sandbox.Helpers
         public static class Fonts
         {
             public static Dictionary<string, UIFont> FontsCollection;
-            public static string AvenirBlack = "Avenir-Black";
-            public static string AvenirBook = "Avenir-Book";
-            public static string AvenirHeavy = "Avenir-Heavy";
-            public static string AvenirMedium = "Avenir-Medium";
-            public static string AvenirRoman = "Avenir-Roman";
-            public static string AvenirNextDemiBold = "AvenirNext-DemiBold";
-            public static string AvenirNextBold = "AvenirNext-Bold";
-            public static string AvenirNextMedium = "AvenirNext-Medium";
-            public static string AvenirNextRegular = "AvenirNext-Regular";
-            public static string FuturaBold = "Futura-Bold";
-            public static string FuturaMedium = "Futura-Medium";
-            public static string HelveticaBold = "Helvetica-Bold";
-            public static string HelveticaRoman = "Helvetica";
-            public static string HelveticaNeueBold = "HelveticaNeue-Bold";
-            public static string HelveticaNeueLight = "HelveticaNeue-Light";
-            public static string HelveticaNeueMedium = "HelveticaNeue-Medium";
-            public static string HelveticaNeueRoman = "HelveticaNeue";
-            public static string HiraginoSansW3 = "HiraginoSans-W3";
-            public static string SystemBold = "SystemBold";
-            public static string SystemMedium = "SystemMedium";
-            public static string SystemRegular = "SystemRegular";
-            public static string SystemSemibold = "SystemSemibold";
+            private const string AvenirBlack = "Avenir-Black";
+            private const string AvenirBook = "Avenir-Book";
+            private const string AvenirHeavy = "Avenir-Heavy";
+            private const string AvenirMedium = "Avenir-Medium";
+            private const string AvenirRoman = "Avenir-Roman";
+            private const string AvenirNextDemiBold = "AvenirNext-DemiBold";
+            private const string AvenirNextBold = "AvenirNext-Bold";
+            private const string AvenirNextMedium = "AvenirNext-Medium";
+            private const string AvenirNextRegular = "AvenirNext-Regular";
+            private const string FuturaBold = "Futura-Bold";
+            private const string FuturaMedium = "Futura-Medium";
+            private const string HelveticaBold = "Helvetica-Bold";
+            private const string HelveticaRoman = "Helvetica";
+            private const string HelveticaNeueBold = "HelveticaNeue-Bold";
+            private const string HelveticaNeueLight = "HelveticaNeue-Light";
+            private const string HelveticaNeueMedium = "HelveticaNeue-Medium";
+            private const string HelveticaNeueRoman = "HelveticaNeue";
+            private const string HiraginoSansW3 = "HiraginoSans-W3";
+            private const string SystemBold = "SystemBold";
+            private const string SystemMedium = "SystemMedium";
+            private const string SystemRegular = "SystemRegular";
+            private const string SystemSemibold = "SystemSemibold";
 
             static Fonts()
             {
-                FontsCollection = new Dictionary<string, UIFont>();
+                FontsCollection = new Dictionary<string, UIFont>
+                {
+                    { SystemBold, UIFont.SystemFontOfSize(UIFont.SystemFontSize, UIFontWeight.Bold) },
+                    { SystemMedium, UIFont.SystemFontOfSize(UIFont.SystemFontSize, UIFontWeight.Medium) },
+                    { SystemRegular, UIFont.SystemFontOfSize(UIFont.SystemFontSize, UIFontWeight.Regular) },
+                    { SystemSemibold, UIFont.SystemFontOfSize(UIFont.SystemFontSize, UIFontWeight.Semibold) },
 
-                FontsCollection.Add(SystemBold, UIFont.SystemFontOfSize(UIFont.SystemFontSize, UIFontWeight.Bold));
-                FontsCollection.Add(SystemMedium, UIFont.SystemFontOfSize(UIFont.SystemFontSize, UIFontWeight.Medium));
-                FontsCollection.Add(SystemRegular, UIFont.SystemFontOfSize(UIFont.SystemFontSize, UIFontWeight.Regular));
-                FontsCollection.Add(SystemSemibold, UIFont.SystemFontOfSize(UIFont.SystemFontSize, UIFontWeight.Semibold));
-
-                FontsCollection.Add(AvenirRoman, UIFont.FromName(AvenirRoman, UIFont.SystemFontSize));
-                FontsCollection.Add(AvenirBook, UIFont.FromName(AvenirBook, UIFont.SystemFontSize));
-                FontsCollection.Add(AvenirMedium, UIFont.FromName(AvenirMedium, UIFont.SystemFontSize));
-                FontsCollection.Add(AvenirBlack, UIFont.FromName(AvenirBlack, UIFont.SystemFontSize));
-                FontsCollection.Add(AvenirHeavy, UIFont.FromName(AvenirHeavy, UIFont.SystemFontSize));
-                FontsCollection.Add(AvenirNextRegular, UIFont.FromName(AvenirNextRegular, UIFont.SystemFontSize));
-                FontsCollection.Add(AvenirNextMedium, UIFont.FromName(AvenirNextMedium, UIFont.SystemFontSize));
-                FontsCollection.Add(AvenirNextDemiBold, UIFont.FromName(AvenirNextDemiBold, UIFont.SystemFontSize));
-                FontsCollection.Add(FuturaMedium, UIFont.FromName(FuturaMedium, UIFont.SystemFontSize));
-                FontsCollection.Add(FuturaBold, UIFont.FromName(FuturaBold, UIFont.SystemFontSize));
-                FontsCollection.Add(HelveticaRoman, UIFont.FromName(HelveticaRoman, UIFont.SystemFontSize));
-                FontsCollection.Add(HelveticaBold, UIFont.FromName(HelveticaBold, UIFont.SystemFontSize));
-                FontsCollection.Add(HelveticaNeueLight, UIFont.FromName(HelveticaNeueLight, UIFont.SystemFontSize));
-                FontsCollection.Add(HelveticaNeueRoman, UIFont.FromName(HelveticaNeueRoman, UIFont.SystemFontSize));
-                FontsCollection.Add(HelveticaNeueMedium, UIFont.FromName(HelveticaNeueMedium, UIFont.SystemFontSize));
-                FontsCollection.Add(HelveticaNeueBold, UIFont.FromName(HelveticaNeueBold, UIFont.SystemFontSize));
-                FontsCollection.Add(HiraginoSansW3, UIFont.FromName(HiraginoSansW3, UIFont.SystemFontSize));
+                    { AvenirRoman, UIFont.FromName(AvenirRoman, UIFont.SystemFontSize) },
+                    { AvenirBook, UIFont.FromName(AvenirBook, UIFont.SystemFontSize) },
+                    { AvenirMedium, UIFont.FromName(AvenirMedium, UIFont.SystemFontSize) },
+                    { AvenirBlack, UIFont.FromName(AvenirBlack, UIFont.SystemFontSize) },
+                    { AvenirHeavy, UIFont.FromName(AvenirHeavy, UIFont.SystemFontSize) },
+                    { AvenirNextRegular, UIFont.FromName(AvenirNextRegular, UIFont.SystemFontSize) },
+                    { AvenirNextMedium, UIFont.FromName(AvenirNextMedium, UIFont.SystemFontSize) },
+                    { AvenirNextDemiBold, UIFont.FromName(AvenirNextDemiBold, UIFont.SystemFontSize) },
+                    { FuturaMedium, UIFont.FromName(FuturaMedium, UIFont.SystemFontSize) },
+                    { FuturaBold, UIFont.FromName(FuturaBold, UIFont.SystemFontSize) },
+                    { HelveticaRoman, UIFont.FromName(HelveticaRoman, UIFont.SystemFontSize) },
+                    { HelveticaBold, UIFont.FromName(HelveticaBold, UIFont.SystemFontSize) },
+                    { HelveticaNeueLight, UIFont.FromName(HelveticaNeueLight, UIFont.SystemFontSize) },
+                    { HelveticaNeueRoman, UIFont.FromName(HelveticaNeueRoman, UIFont.SystemFontSize) },
+                    { HelveticaNeueMedium, UIFont.FromName(HelveticaNeueMedium, UIFont.SystemFontSize) },
+                    { HelveticaNeueBold, UIFont.FromName(HelveticaNeueBold, UIFont.SystemFontSize) },
+                    { HiraginoSansW3, UIFont.FromName(HiraginoSansW3, UIFont.SystemFontSize) }
+                };
             }
 
-            public static IEnumerable<UIFont> GetButtonLabelFonts()
+            public static Dictionary<string, UIFont> GetButtonLabelFonts()
             {
                 return FontsCollection.Keys.Except(new[] {
                     AvenirBook,
@@ -115,10 +115,10 @@ namespace EOS.UI.Shared.Sandbox.Helpers
                     AvenirNextRegular,
                     HiraginoSansW3,
                     HelveticaNeueLight
-                }).Select(k => FontsCollection[k]);
+                }).Select(k => FontsCollection.Single(s => s.Key == k)).ToDictionary(e => e.Key, e => e.Value);
             }
 
-            public static IEnumerable<UIFont> GetWorkTimeTitleFonts()
+            public static Dictionary<string, UIFont> GetWorkTimeTitleFonts()
             {
                 return FontsCollection.Keys.Except(new[] {
                    AvenirBook,
@@ -131,10 +131,10 @@ namespace EOS.UI.Shared.Sandbox.Helpers
                     FuturaBold,
                     HelveticaNeueLight,
                     HelveticaNeueRoman
-                }).Select(k => FontsCollection[k]);
+                }).Select(k => FontsCollection.Single(s => s.Key == k)).ToDictionary(e => e.Key, e => e.Value);
             }
 
-            public static IEnumerable<UIFont> GetCircleProgressFonts()
+            public static Dictionary<string, UIFont> GetCircleProgressFonts()
             {
                 return FontsCollection.Keys.Except(new[] {
                     AvenirBook,
@@ -150,10 +150,10 @@ namespace EOS.UI.Shared.Sandbox.Helpers
                     HelveticaNeueMedium,
                     HelveticaNeueLight,
                     HiraginoSansW3,
-                }).Select(k => FontsCollection[k]);
+                }).Select(k => FontsCollection.Single(s => s.Key == k)).ToDictionary(e => e.Key, e => e.Value);
             }
 
-            public static IEnumerable<UIFont> GetGhostButtonSimpleLabelFonts()
+            public static Dictionary<string, UIFont> GetGhostButtonSimpleLabelFonts()
             {
                 return FontsCollection.Keys.Except(new[] {
                         AvenirBook,
@@ -166,10 +166,10 @@ namespace EOS.UI.Shared.Sandbox.Helpers
                     HelveticaNeueRoman,
                     HelveticaNeueLight,
                     HiraginoSansW3
-                }).Select(k => FontsCollection[k]);
+                }).Select(k => FontsCollection.Single(s => s.Key == k)).ToDictionary(e => e.Key, e => e.Value);
             }
 
-            public static IEnumerable<UIFont> GetWorkTimeDayFonts()
+            public static Dictionary<string, UIFont> GetWorkTimeDayFonts()
             {
                 return FontsCollection.Keys.Except(new[] {
                     AvenirBook,
@@ -182,10 +182,10 @@ namespace EOS.UI.Shared.Sandbox.Helpers
                     HelveticaNeueBold,
                     HelveticaNeueLight,
                     FuturaBold
-                }).Select(k => FontsCollection[k]);
+                }).Select(k => FontsCollection.Single(s => s.Key == k)).ToDictionary(e => e.Key, e => e.Value);
             }
 
-            public static IEnumerable<UIFont> GetInputFonts()
+            public static Dictionary<string, UIFont> GetInputFonts()
             {
                 return FontsCollection.Keys.Except(new[] {
                     AvenirBlack,
@@ -197,13 +197,13 @@ namespace EOS.UI.Shared.Sandbox.Helpers
                     HelveticaNeueMedium,
                     FuturaBold,
                     FuturaMedium,
-                    }).Select(k => FontsCollection[k]);
+                    }).Select(k => FontsCollection.Single(s => s.Key == k)).ToDictionary(e => e.Key, e => e.Value);
             }
         }
 
         public static class Validation
         {
-            public static Dictionary<String, Predicate<string>> ValidationCollection = new Dictionary<string, Predicate<string>>()
+            public static Dictionary<string, Predicate<string>> ValidationCollection { get; } = new Dictionary<string, Predicate<string>>()
             {
                 {"without validation", null },
                 {"e-mail validation", (s) => s.Contains("@") && !String.IsNullOrEmpty(s)},
@@ -213,7 +213,7 @@ namespace EOS.UI.Shared.Sandbox.Helpers
 
         public static class Icons
         {
-            public static Dictionary<string, string> IconsCollection = new Dictionary<string, string>()
+            public static Dictionary<string, string> IconsCollection { get; } = new Dictionary<string, string>()
             {
                 { "Calendar", "icCalendar" },
                 { "Account circle", "icAccountCircle" },

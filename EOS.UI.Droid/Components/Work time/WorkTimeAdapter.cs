@@ -498,13 +498,13 @@ namespace EOS.UI.Droid.Components
                 DayFontStyle = GetThemeProvider().GetEOSProperty<FontStyleItem>(this, EOSConstants.R1C3);
 
                 CurrentTitleTextColor = GetThemeProvider().GetEOSProperty<FontStyleItem>(this, EOSConstants.R2C5S).Color;
-                CurrentDayTextColor = GetThemeProvider().GetEOSProperty<FontStyleItem>(this, EOSConstants.R1C5).Color;
+                CurrentDayTextColor = GetThemeProvider().GetEOSProperty<FontStyleItem>(this, EOSConstants.R1C6S).Color;
 
                 CurrentDayBackgroundColor = GetThemeProvider().GetEOSProperty<Color>(this, EOSConstants.BrandPrimaryColor);
-                DayEvenBackgroundColor = GetThemeProvider().GetEOSProperty<Color>(this, EOSConstants.NeutralColor4);
+                DayEvenBackgroundColor = GetThemeProvider().GetEOSProperty<Color>(this, EOSConstants.NeutralColor5);
 
-                DividerColor = GetThemeProvider().GetEOSProperty<Color>(this, EOSConstants.NeutralColor3);
-                CurrentDividerColor = Color.White;
+                DividerColor = GetThemeProvider().GetEOSProperty<Color>(this, EOSConstants.NeutralColor4);
+                CurrentDividerColor = GetThemeProvider().GetEOSProperty<Color>(this, EOSConstants.NeutralColor4);
             }
             NotifyDataSetChanged();
         }

@@ -17,7 +17,7 @@ namespace EOS.UI.iOS.Models
     {
         public bool IsEOSCustomizationIgnored { get; private set; }
 
-        public EventHandler PropertyChanged;
+        public EventHandler PropertyChanged { get; set; }
 
         private IEnumerable<WorkTimeCalendarItem> _items;
         public IEnumerable<WorkTimeCalendarItem> Items
@@ -220,7 +220,7 @@ namespace EOS.UI.iOS.Models
                 var provider = EOSThemeProvider.Instance;
                 TitleFontStyle = provider.GetEOSProperty<FontStyleItem>(this, EOSConstants.R2C2);
                 DayFontStyle = provider.GetEOSProperty<FontStyleItem>(this, EOSConstants.R1C3);
-                CurrentDayFontStyle = provider.GetEOSProperty<FontStyleItem>(this, EOSConstants.R1C6);
+                CurrentDayFontStyle = provider.GetEOSProperty<FontStyleItem>(this, EOSConstants.R1C6S);
                 CurrentDayBackgroundColor = provider.GetEOSProperty<UIColor>(this, EOSConstants.BrandPrimaryColor);
                 DayEvenBackgroundColor = provider.GetEOSProperty<UIColor>(this, EOSConstants.NeutralColor5);
                 ColorDividers = provider.GetEOSProperty<UIColor>(this, EOSConstants.NeutralColor4);

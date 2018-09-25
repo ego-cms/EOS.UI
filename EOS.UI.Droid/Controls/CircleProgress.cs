@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using Android.App;
 using Android.Content;
 using Android.Content.Res;
@@ -20,9 +20,10 @@ namespace EOS.UI.Droid.Controls
         private bool _isRunning;
         private ProgressBar _progressBar;
         private TextView _percentText;
+        private TextView _percentLabel;
         private ImageView _checkmarkImage;
         private View _centralRectangle;
-        private const string _zeroPercents = "0 %";
+        private const string _zeroPercents = "0";
 
         public event EventHandler Started;
         public event EventHandler Stopped;
@@ -43,10 +44,13 @@ namespace EOS.UI.Droid.Controls
                     _progress = value;
                     if(_checkmarkImage.Visibility == ViewStates.Visible)
                         _checkmarkImage.Visibility = ViewStates.Invisible;
-                    if (ShouldShowProgress)
+                    if(ShouldShowProgress)
+                    {
                         _percentText.Visibility = ViewStates.Visible;
+                        _percentLabel.Visibility = ViewStates.Visible;
+                    }
                     _progressBar.Progress = _progress;
-                    _percentText.Text = $"{value} %";
+                    _percentText.Text = value.ToString();//$"{value}%";
                     if(_progress == 100)
                     {
                         ShowCheckmark();
@@ -63,9 +67,10 @@ namespace EOS.UI.Droid.Controls
             {
                 _color = value;
                 IsEOSCustomizationIgnored = true;
-                _progressBar.ProgressTintList = ColorStateList.ValueOf(_color);
+                ((_progressBar.ProgressDrawable as LayerDrawable).GetDrawable(1) as RotateDrawable).SetColorFilter(_color, PorterDuff.Mode.SrcIn);
                 _centralRectangle.SetBackgroundColor(_color);
                 _percentText.SetTextColor(_color);
+                _percentLabel.SetTextColor(_color);
                 FontStyle.Color = value;
             }
         }
@@ -102,6 +107,7 @@ namespace EOS.UI.Droid.Controls
             {
                 _showProgress = value;
                 _percentText.Visibility = ShouldShowProgress ? ViewStates.Visible : ViewStates.Invisible;
+                _percentLabel.Visibility = ShouldShowProgress ? ViewStates.Visible : ViewStates.Invisible;
                 IsEOSCustomizationIgnored = true;
             }
         }
@@ -112,6 +118,7 @@ namespace EOS.UI.Droid.Controls
             set
             {
                 _percentText.Typeface = value;
+                _percentLabel.Typeface = value;
                 FontStyle.Typeface = value;
                 SetFontStyle();
                 IsEOSCustomizationIgnored = true;
@@ -124,6 +131,7 @@ namespace EOS.UI.Droid.Controls
             set
             {
                 _percentText.TextSize = value;
+                _percentLabel.TextSize = value;
                 FontStyle.Size = value;
                 SetFontStyle();
                 IsEOSCustomizationIgnored = true;
@@ -148,6 +156,11 @@ namespace EOS.UI.Droid.Controls
             _percentText.TextSize = FontStyle.Size;
             _percentText.SetTextColor(FontStyle.Color);
             _percentText.LetterSpacing = FontStyle.LetterSpacing;
+
+            _percentLabel.Typeface = FontStyle.Typeface;
+            _percentLabel.TextSize = FontStyle.Size;
+            _percentLabel.SetTextColor(FontStyle.Color);
+            _percentLabel.LetterSpacing = FontStyle.LetterSpacing;
         }
 
         protected CircleProgress(IntPtr javaReference, JniHandleOwnership transfer) : base(javaReference, transfer)
@@ -181,6 +194,7 @@ namespace EOS.UI.Droid.Controls
             var view = inflater.Inflate(Resource.Layout.CircleProgress, this);
             _progressBar = view.FindViewById<ProgressBar>(Resource.Id.circularProgressbar);
             _percentText = view.FindViewById<TextView>(Resource.Id.percentText);
+            _percentLabel = view.FindViewById<TextView>(Resource.Id.percentLabel);
             _checkmarkImage = view.FindViewById<ImageView>(Resource.Id.checkmark);
             _centralRectangle = view.FindViewById<View>(Resource.Id.centralRectangle);
             _checkmarkImage.Visibility = ViewStates.Invisible;
@@ -264,6 +278,7 @@ namespace EOS.UI.Droid.Controls
             Finished?.Invoke(this, EventArgs.Empty);
             _checkmarkImage.Visibility = ViewStates.Visible;
             _percentText.Visibility = ViewStates.Invisible;
+            _percentLabel.Visibility = ViewStates.Invisible;
             _isRunning = false;
         }
 

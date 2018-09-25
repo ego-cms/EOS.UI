@@ -1,4 +1,4 @@
-﻿<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">iPhoneSimulator</Platform>
@@ -129,18 +129,152 @@
     <ImageAsset Include="Assets.xcassets\icAccountOff.imageset\icAccountOff.pdf">
       <Visible>false</Visible>
     </ImageAsset>
-    <ImageAsset Include="Assets.xcassets\icAccountCircle.imageset\Contents.json" />
-    <ImageAsset Include="Assets.xcassets\icAccountCircle.imageset\icAccountCircle.pdf" />
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon-App-20x20%401x.png" />
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon-App-29x29%401x.png" />
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon-App-40x40%401x.png" />
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\iTunesArtwork%402x.png" />
-    <ImageAsset Include="Assets.xcassets\icLock.imageset\Contents.json" />
-    <ImageAsset Include="Assets.xcassets\icLock.imageset\icLock%401x.png" />
-    <ImageAsset Include="Assets.xcassets\icLock.imageset\cLock%402x.png" />
-    <ImageAsset Include="Assets.xcassets\icLock.imageset\icLock%403x.png" />
+    <ImageAsset Include="Assets.xcassets\icAccountCircle.imageset\Contents.json">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\icAccountCircle.imageset\icAccountCircle.pdf">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon-App-20x20%401x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon-App-29x29%401x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon-App-40x40%401x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\iTunesArtwork%402x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\icLock.imageset\Contents.json">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\icLock.imageset\icLock%401x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\icLock.imageset\cLock%402x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\icLock.imageset\icLock%403x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\icImage.imageset\Contents.json">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\icPanorama.imageset\Contents.json">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\icVideo.imageset\Contents.json">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\icPhoto.imageset\Contents.json">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\icTimelapse.imageset\Contents.json">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\icMacro.imageset\Contents.json">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\icPortrait.imageset\Contents.json">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\icSeries.imageset\Contents.json">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\icTimer.imageset\Contents.json">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\icSixteenToNine.imageset\Contents.json">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\icOneToOne.imageset\Contents.json">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\icHDR.imageset\Contents.json">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\icImage.imageset\icImage.pdf">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\icHDR.imageset\icHDR.pdf">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\icMacro.imageset\icMacro.pdf">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\icOneToOne.imageset\icOneToOne.pdf">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\icPanorama.imageset\icPanorama.pdf">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\icPhoto.imageset\icPhoto.pdf">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\icPortrait.imageset\icPortrait.pdf">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\icSeries.imageset\icSeries.pdf">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\icSixteenToNine.imageset\icSixteenToNine.pdf">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\icTimelapse.imageset\icTimelapse.pdf">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\icTimer.imageset\icTimer.pdf">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\icVideo.imageset\icVideo.pdf">
+      <Visible>false</Visible>
+    </ImageAsset>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Resources\" />
+    <Folder Include="Assets.xcassets\icOneToOne.imageset\" />
+    <Folder Include="Assets.xcassets\icSixteenToNine.imageset\" />
+    <Folder Include="Assets.xcassets\icDuration.imageset\" />
+    <Folder Include="Assets.xcassets\icEffects.imageset\" />
+    <Folder Include="Assets.xcassets\icHDR.imageset\" />
+    <Folder Include="Assets.xcassets\icHeal.imageset\" />
+    <Folder Include="Assets.xcassets\icMasks.imageset\" />
+    <Folder Include="Assets.xcassets\icReplay.imageset\" />
+    <Folder Include="Assets.xcassets\icShutter.imageset\" />
+    <Folder Include="Assets.xcassets\icTimer.imageset\" />
+    <Folder Include="Assets.xcassets\icVideo.imageset\" />
+    <Folder Include="Assets.xcassets\icCalendar.imageset\" />
+    <Folder Include="Assets.xcassets\icBrush.imageset\" />
+    <Folder Include="Assets.xcassets\BrushIcon.imageset\" />
+    <Folder Include="Assets.xcassets\MyBrash.imageset\" />
+    <Folder Include="Assets.xcassets\icBrush.imageset\" />
+    <Folder Include="Assets.xcassets\icEffects.imageset\" />
+    <Folder Include="Assets.xcassets\icDuration.imageset\" />
+    <Folder Include="Assets.xcassets\icHDR.imageset\" />
+    <Folder Include="Assets.xcassets\icHeal.imageset\" />
+    <Folder Include="Assets.xcassets\icMasks.imageset\" />
+    <Folder Include="Assets.xcassets\icOneToOne.imageset\" />
+    <Folder Include="Assets.xcassets\icReplay.imageset\" />
+    <Folder Include="Assets.xcassets\icShutter.imageset\" />
+    <Folder Include="Assets.xcassets\icSixteenToNine.imageset\" />
+    <Folder Include="Assets.xcassets\icTimer.imageset\" />
+    <Folder Include="Assets.xcassets\icVideo.imageset\" />
+    <Folder Include="Assets.xcassets\icClnd.imageset\" />
+    <Folder Include="Assets.xcassets\icImage.imageset\" />
+    <Folder Include="Assets.xcassets\icPanorama.imageset\" />
+    <Folder Include="Assets.xcassets\icVideo.imageset\" />
+    <Folder Include="Assets.xcassets\icPhoto.imageset\" />
+    <Folder Include="Assets.xcassets\icTimelapse.imageset\" />
+    <Folder Include="Assets.xcassets\icMacro.imageset\" />
+    <Folder Include="Assets.xcassets\icPortrait.imageset\" />
+    <Folder Include="Assets.xcassets\icSeries.imageset\" />
+    <Folder Include="Assets.xcassets\icTimer.imageset\" />
+    <Folder Include="Assets.xcassets\icSixteenToNine.imageset\" />
+    <Folder Include="Assets.xcassets\icOneToOne.imageset\" />
+    <Folder Include="Assets.xcassets\icHDR.imageset\" />
+  </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="LaunchScreen.storyboard" />
     <InterfaceDefinition Include="Storyboards\Main.storyboard" />
@@ -152,6 +286,8 @@
     <InterfaceDefinition Include="Storyboards\CircleProgressView.storyboard" />
     <InterfaceDefinition Include="Storyboards\CTAButtonView.storyboard" />
     <InterfaceDefinition Include="Storyboards\WorkTimeView.storyboard" />
+    <InterfaceDefinition Include="Storyboards\CircleMenuView.storyboard" />
+    <InterfaceDefinition Include="Storyboards\CircleMenuItemView.storyboard" />
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="Controls\EOSSandboxDropDown.xib" />
@@ -225,6 +361,14 @@
     <Compile Include="Storyboards\WorkTimeView.designer.cs">
       <DependentUpon>WorkTimeView.cs</DependentUpon>
     </Compile>
+    <Compile Include="Storyboards\CircleMenuView.cs" />
+    <Compile Include="Storyboards\CircleMenuView.designer.cs">
+      <DependentUpon>CircleMenuView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Storyboards\CircleMenuItemView.cs" />
+    <Compile Include="Storyboards\CircleMenuItemView.designer.cs">
+      <DependentUpon>CircleMenuItemView.cs</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\EOS.UI.iOS\EOS.UI.iOS.csproj">
@@ -232,12 +376,25 @@
       <Name>EOS.UI.iOS</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
+    <BundleResource Include="Resources\icOneToOne_HD.png" />
+    <BundleResource Include="Resources\icSixteenToNine_HD.png" />
+    <BundleResource Include="Resources\icHDR_HD.png" />
+    <BundleResource Include="Resources\icImage_HD.png" />
+    <BundleResource Include="Resources\icMacro_HD.png" />
+    <BundleResource Include="Resources\icPortrait_HD.png" />
+    <BundleResource Include="Resources\icSeries_HD.png" />
+    <BundleResource Include="Resources\icTimelapse_HD.png" />
+    <BundleResource Include="Resources\icTimer_HD.png" />
     <Folder Include="Resources\" />
     <Folder Include="Assets.xcassets\icAccountCircle.imageset\" />
     <Folder Include="Assets.xcassets\icAccountOff.imageset\" />
     <Folder Include="Assets.xcassets\icAccountKey.imageset\" />
     <Folder Include="Assets.xcassets\icLock.imageset\" />
+    <BundleResource Include="Resources\icVideo_HD.png" />
+    <BundleResource Include="Resources\icPhoto_HD.png" />
+    <BundleResource Include="Resources\icPanorama_HD.png" />
   </ItemGroup>
   <ItemGroup>
     <ITunesArtwork Include="iTunesArtwork%402x" />
