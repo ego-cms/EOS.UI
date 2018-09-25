@@ -59,6 +59,7 @@ Documentation
 * [Section](../../wiki/Section)
 * [Simple label](../../wiki/SimpleLabel)
 * [Worktime Calendar](../../wiki/Worktime-calendar)
+* [Circle Menu](../../wiki/Circle-menu)
 
 Nuget
 -----------
