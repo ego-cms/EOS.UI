@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using Android.Content;
 using Android.Graphics;
 using Android.Runtime;
@@ -33,7 +33,6 @@ namespace EOS.UI.Droid.Controls
 
         public SimpleLabel(IntPtr javaReference, JniHandleOwnership transfer) : base(javaReference, transfer)
         {
-            Initialize();
         }
 
         #endregion

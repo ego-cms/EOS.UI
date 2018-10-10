@@ -34,7 +34,6 @@ namespace EOS.UI.Droid.Controls
 
         public BadgeLabel(IntPtr javaReference, JniHandleOwnership transfer) : base(javaReference, transfer)
         {
-            Initialize();
         }
 
         #endregion

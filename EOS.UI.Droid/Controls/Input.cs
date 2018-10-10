@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using Android.Content;
 using Android.Graphics;
 using Android.Graphics.Drawables;
@@ -45,7 +45,6 @@ namespace EOS.UI.Droid.Controls
 
         public Input(IntPtr javaReference, JniHandleOwnership transfer) : base(javaReference, transfer)
         {
-            Initialize();
         }
 
         #endregion

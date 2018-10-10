@@ -167,7 +167,6 @@ namespace EOS.UI.Droid.Controls
 
         protected GhostButton(IntPtr javaReference, JniHandleOwnership transfer) : base(javaReference, transfer)
         {
-            Initialize();
         }
 
         private void Initialize(IAttributeSet attributeSet = null)

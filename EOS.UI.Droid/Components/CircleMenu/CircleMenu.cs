@@ -128,7 +128,6 @@ namespace EOS.UI.Droid.Components
 
         public CircleMenu(IntPtr javaReference, JniHandleOwnership transfer) : base(javaReference, transfer)
         {
-            Initialize();
         }
 
         public CircleMenu(Context context) : base(context)

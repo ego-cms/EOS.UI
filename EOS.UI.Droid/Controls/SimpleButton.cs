@@ -58,7 +58,6 @@ namespace EOS.UI.Droid.Controls
 
         public SimpleButton(IntPtr javaReference, JniHandleOwnership transfer) : base(javaReference, transfer)
         {
-            Initialize();
         }
 
         #endregion

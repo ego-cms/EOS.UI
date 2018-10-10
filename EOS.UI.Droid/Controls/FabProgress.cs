@@ -222,7 +222,6 @@ namespace EOS.UI.Droid.Controls
 
         protected FabProgress(IntPtr javaReference, JniHandleOwnership transfer) : base(javaReference, transfer)
         {
-            Initialize();
         }
 
         private void Initialize(IAttributeSet attrs = null)
