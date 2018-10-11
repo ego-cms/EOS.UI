@@ -13,9 +13,22 @@ namespace EOS.UI.iOS.Controls
     [Register("BadgeLabel")]
     public class BadgeLabel : UILabel, IEOSThemeControl
     {
-        private UIEdgeInsets _insets;
+        private bool _externalFrameUsed = false;
+        private readonly bool _createdFromDesigner = false;
+        private UIEdgeInsets _insets = new UIEdgeInsets(2, 15, 2, 15);
 
-        public bool IsEOSCustomizationIgnored { get; private set; }
+        public bool IsEOSCustomizationIgnored { get; set; }
+
+        public override CGRect Frame
+        {
+            get => base.Frame;
+            set
+            {
+                base.Frame = value;
+                if (!value.IsEmpty)
+                    _externalFrameUsed = true;
+            }
+        }
 
         private FontStyleItem _fontStyle;
         public FontStyleItem FontStyle
@@ -28,7 +41,7 @@ namespace EOS.UI.iOS.Controls
                 IsEOSCustomizationIgnored = true;
             }
         }
-        
+
         public float LetterSpacing
         {
             get => FontStyle.LetterSpacing;
@@ -50,7 +63,6 @@ namespace EOS.UI.iOS.Controls
                 IsEOSCustomizationIgnored = true;
             }
         }
-
 
         public override UIFont Font
         {
@@ -86,13 +98,14 @@ namespace EOS.UI.iOS.Controls
                 IsEOSCustomizationIgnored = true;
             }
         }
-        
+
         public int CornerRadius
         {
             get => (int)this.Layer.CornerRadius;
             set
             {
-                this.Layer.CornerRadius = value;
+                Layer.MasksToBounds = true;
+                Layer.CornerRadius = value;
                 IsEOSCustomizationIgnored = true;
             }
         }
@@ -117,10 +130,11 @@ namespace EOS.UI.iOS.Controls
                     return;
 
                 _text = value;
-                NSMutableAttributedString attributedString = AttributedText != null ?
+                var attributedString = AttributedText != null ?
                        new NSMutableAttributedString(AttributedText) : new NSMutableAttributedString(_text);
                 attributedString.MutableString.SetString(new NSString(_text));
                 AttributedText = attributedString;
+                UpdateFrame();
             }
         }
 
@@ -133,6 +147,7 @@ namespace EOS.UI.iOS.Controls
 
         public BadgeLabel(IntPtr handle) : base(handle)
         {
+            _createdFromDesigner = true;
             Initialize();
         }
 
@@ -148,6 +163,7 @@ namespace EOS.UI.iOS.Controls
 
         public BadgeLabel(CGRect frame) : base(frame)
         {
+            Frame = frame;
             Initialize();
         }
 
@@ -182,23 +198,44 @@ namespace EOS.UI.iOS.Controls
                 CornerRadius = provider.GetEOSProperty<int>(this, EOSConstants.LabelCornerRadius);
                 BackgroundColor = provider.GetEOSProperty<UIColor>(this, EOSConstants.BrandPrimaryColor);
                 IsEOSCustomizationIgnored = false;
-                SizeToFit();
             }
         }
 
         public override void DrawText(CGRect rect)
         {
-            rect = new CGRect(rect.X + _insets.Left, rect.Y - _insets.Top,
+            var x = rect.X;
+            if (Math.Floor(Frame.Width) == Math.Floor(AttributedText.Size.Width + _insets.Left + _insets.Right))
+            {
+                x += _insets.Left;
+            }
+            else
+            {
+                x = Frame.Width / 2 - AttributedText.Size.Width / 2;
+            }
+            var newRect = new CGRect(x, rect.Y - _insets.Top,
                               rect.Width + _insets.Left + _insets.Right, rect.Height + _insets.Top + _insets.Bottom);
-            base.DrawText(rect);
+            base.DrawText(newRect);
         }
 
         public override CGRect TextRectForBounds(CGRect bounds, nint numberOfLines)
         {
+            if (_externalFrameUsed)
+                return Frame;
+
             var textRect = base.TextRectForBounds(bounds, numberOfLines);
             var requredRect = new CGRect(textRect.GetMinX() + _insets.Left, textRect.GetMinY() - _insets.Top,
                            textRect.Width + _insets.Left + _insets.Right, textRect.Height + _insets.Bottom + _insets.Top);
             return requredRect;
+        }
+
+        public override void MovedToSuperview()
+        {
+            base.MovedToSuperview();
+            if (_createdFromDesigner)
+            {
+                IsEOSCustomizationIgnored = false;
+                UpdateAppearance();
+            }
         }
 
         private void Initialize()
@@ -206,20 +243,37 @@ namespace EOS.UI.iOS.Controls
             //AttributedText applies only for non-empty string. 
             //For attributed text initialization should have something here
             Text = " ";
-            Layer.MasksToBounds = true;
-            _insets = new UIEdgeInsets(2, 15, 2, 15);
             Lines = 1;
             LineBreakMode = UILineBreakMode.TailTruncation;
-            IsEOSCustomizationIgnored = false;
-            UpdateAppearance();
+            if (!_createdFromDesigner)
+            {
+                IsEOSCustomizationIgnored = false;
+                UpdateAppearance();
+            }
         }
-        
+
+        private void UpdateFrame()
+        {
+            var rect = AttributedText.GetBoundingRect(AttributedText.Size, NSStringDrawingOptions.UsesLineFragmentOrigin, null);
+            TextRectForBounds(rect, 1);
+            SizeToFitIfNeeded();
+        }
+
         private void SetFontStyle()
         {
             base.Font = this.Font.WithSize(TextSize);
             this.SetTextSize(TextSize);
-            base.TextColor = this.TextColor;
+            base.TextColor = FontStyle.Color;
             this.SetLetterSpacing(LetterSpacing);
+        }
+
+        private void SizeToFitIfNeeded()
+        {
+            if (!_externalFrameUsed)
+            {
+                SizeToFit();
+                _externalFrameUsed = false;
+            }
         }
     }
 }
