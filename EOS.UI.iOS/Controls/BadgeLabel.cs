@@ -15,11 +15,7 @@ namespace EOS.UI.iOS.Controls
     {
         private UIEdgeInsets _insets = new UIEdgeInsets(2, 15, 2, 15);
 
-        private bool _isEOSCustomizationIgnored;
-        public bool IsEOSCustomizationIgnored {
-            get => _isEOSCustomizationIgnored;
-            set => _isEOSCustomizationIgnored = value;
-        }
+        public bool IsEOSCustomizationIgnored { get; set; }
 
         public override void AwakeFromNib()
         {
@@ -136,12 +132,6 @@ namespace EOS.UI.iOS.Controls
                 attributedString.MutableString.SetString(new NSString(_text));
                 AttributedText = attributedString;
             }
-        }
-
-        public override NSAttributedString AttributedText
-        {
-            get => base.AttributedText;
-            set => base.AttributedText = value;
         }
 
         #region .ctors
