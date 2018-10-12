@@ -13,21 +13,19 @@ namespace EOS.UI.iOS.Controls
     [Register("BadgeLabel")]
     public class BadgeLabel : UILabel, IEOSThemeControl
     {
-        private bool _externalFrameUsed = false;
-        private readonly bool _createdFromDesigner = false;
         private UIEdgeInsets _insets = new UIEdgeInsets(2, 15, 2, 15);
 
-        public bool IsEOSCustomizationIgnored { get; set; }
+        private bool _isEOSCustomizationIgnored;
+        public bool IsEOSCustomizationIgnored {
+            get => _isEOSCustomizationIgnored;
+            set => _isEOSCustomizationIgnored = value;
+        }
 
-        public override CGRect Frame
+        public override void AwakeFromNib()
         {
-            get => base.Frame;
-            set
-            {
-                base.Frame = value;
-                if (!value.IsEmpty)
-                    _externalFrameUsed = true;
-            }
+            base.AwakeFromNib();
+            UpdateAppearance();
+            UpdateFrame();
         }
 
         private FontStyleItem _fontStyle;
@@ -116,7 +114,10 @@ namespace EOS.UI.iOS.Controls
             set
             {
                 base.BackgroundColor = value;
-                IsEOSCustomizationIgnored = true;
+                if (FontStyle != null)
+                {
+                    IsEOSCustomizationIgnored = true;
+                }
             }
         }
 
@@ -134,8 +135,13 @@ namespace EOS.UI.iOS.Controls
                        new NSMutableAttributedString(AttributedText) : new NSMutableAttributedString(_text);
                 attributedString.MutableString.SetString(new NSString(_text));
                 AttributedText = attributedString;
-                UpdateFrame();
             }
+        }
+
+        public override NSAttributedString AttributedText
+        {
+            get => base.AttributedText;
+            set => base.AttributedText = value;
         }
 
         #region .ctors
@@ -147,7 +153,6 @@ namespace EOS.UI.iOS.Controls
 
         public BadgeLabel(IntPtr handle) : base(handle)
         {
-            _createdFromDesigner = true;
             Initialize();
         }
 
@@ -163,7 +168,6 @@ namespace EOS.UI.iOS.Controls
 
         public BadgeLabel(CGRect frame) : base(frame)
         {
-            Frame = frame;
             Initialize();
         }
 
@@ -219,44 +223,27 @@ namespace EOS.UI.iOS.Controls
 
         public override CGRect TextRectForBounds(CGRect bounds, nint numberOfLines)
         {
-            if (_externalFrameUsed)
-                return Frame;
-
             var textRect = base.TextRectForBounds(bounds, numberOfLines);
             var requredRect = new CGRect(textRect.GetMinX() + _insets.Left, textRect.GetMinY() - _insets.Top,
                            textRect.Width + _insets.Left + _insets.Right, textRect.Height + _insets.Bottom + _insets.Top);
             return requredRect;
         }
 
-        public override void MovedToSuperview()
-        {
-            base.MovedToSuperview();
-            if (_createdFromDesigner)
-            {
-                IsEOSCustomizationIgnored = false;
-                UpdateAppearance();
-            }
-        }
-
         private void Initialize()
         {
             //AttributedText applies only for non-empty string. 
             //For attributed text initialization should have something here
-            Text = " ";
+            Text = AttributedText?.Value ?? " ";
             Lines = 1;
             LineBreakMode = UILineBreakMode.TailTruncation;
-            if (!_createdFromDesigner)
-            {
-                IsEOSCustomizationIgnored = false;
-                UpdateAppearance();
-            }
+            UpdateAppearance();
         }
 
         private void UpdateFrame()
         {
             var rect = AttributedText.GetBoundingRect(AttributedText.Size, NSStringDrawingOptions.UsesLineFragmentOrigin, null);
             TextRectForBounds(rect, 1);
-            SizeToFitIfNeeded();
+            SizeToFit();
         }
 
         private void SetFontStyle()
@@ -265,15 +252,6 @@ namespace EOS.UI.iOS.Controls
             this.SetTextSize(TextSize);
             base.TextColor = FontStyle.Color;
             this.SetLetterSpacing(LetterSpacing);
-        }
-
-        private void SizeToFitIfNeeded()
-        {
-            if (!_externalFrameUsed)
-            {
-                SizeToFit();
-                _externalFrameUsed = false;
-            }
         }
     }
 }
