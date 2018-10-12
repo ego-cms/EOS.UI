@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using CoreAnimation;
 using CoreGraphics;
 using EOS.UI.iOS.Extensions;
@@ -14,24 +14,12 @@ namespace EOS.UI.iOS.Controls
     [Register("GhostButton")]
     public class GhostButton : UIButton, IEOSThemeControl
     {
-        private bool _externalFrameUsed = false;
         private CAAnimationGroup _rippleAnimations;
         private CALayer _rippleLayer;
         private const string _rippleAnimationKey = "rippleAnimation";
         private UIEdgeInsets _contentInsets = new UIEdgeInsets(6, 16, 6, 16);
 
         public bool IsEOSCustomizationIgnored { get; private set; }
-
-        public override CGRect Frame
-        {
-            get => base.Frame;
-            set
-            {
-                base.Frame = value;
-                if (!value.IsEmpty)
-                    _externalFrameUsed = true;
-            }
-        }
 
         private FontStyleItem _fontStyle;
         public FontStyleItem FontStyle
@@ -130,6 +118,12 @@ namespace EOS.UI.iOS.Controls
             }
         }
 
+        public override bool Highlighted
+        {
+            get => false;
+            set => base.Highlighted = false;
+        }
+
         #region .ctors
 
         public GhostButton()
@@ -159,7 +153,6 @@ namespace EOS.UI.iOS.Controls
 
         public GhostButton(CoreGraphics.CGRect frame) : base(frame)
         {
-            Frame = frame;
             Initialize();
         }
 
@@ -210,7 +203,6 @@ namespace EOS.UI.iOS.Controls
                     SetAttributedTitle(resultString, forState);
                     break;
             }
-            SizeToFitIfNeeded();
         }
 
         public override void SetTitleColor(UIColor color, UIControlState forState)
@@ -267,16 +259,22 @@ namespace EOS.UI.iOS.Controls
 
         private void Initialize()
         {
-            Layer.MasksToBounds = true;
             Layer.CornerRadius = 5;
             BackgroundColor = UIColor.Clear;
             TitleLabel.Lines = 1;
             TitleLabel.LineBreakMode = UILineBreakMode.TailTruncation;
-            base.SetAttributedTitle(new NSAttributedString(String.Empty), UIControlState.Normal);
-            ContentEdgeInsets = _contentInsets;
+            InitMaskAndAttributedText();
             UpdateAppearance();
         }
-        
+
+        public override void AwakeFromNib()
+        {
+            base.AwakeFromNib();
+            InitMaskAndAttributedText();
+            UpdateAppearance();
+            SizeToFit();
+        }
+
         private void SetFontStyle()
         {
             //set font
@@ -288,13 +286,11 @@ namespace EOS.UI.iOS.Controls
             this.SetLetterSpacing(FontStyle.LetterSpacing);
         }
 
-        private void SizeToFitIfNeeded()
+        private void InitMaskAndAttributedText()
         {
-            if (!_externalFrameUsed)
-            {
-                SizeToFit();
-                _externalFrameUsed = false;
-            }
+            ContentEdgeInsets = _contentInsets;
+            Layer.MasksToBounds = true;
+            SetAttributedTitle(base.GetAttributedTitle(UIControlState.Normal) ?? new NSAttributedString(" "), UIControlState.Normal);
         }
     }
 }
