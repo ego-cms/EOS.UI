@@ -46,9 +46,9 @@ namespace EOS.UI.iOS.Sandbox
             _fab.TouchUpInside += async (sender, e) =>
             {
                 ToggleAllControlsEnabled(false, _dropDowns, resetButton, enableSwitch);
-                _fab.StartProgressAnimation();
+                _fab.StartLottieAnimation();
                 await Task.Delay(5000);
-                _fab.StopProgressAnimation();
+                _fab.StopLottieAnimation();
                 ToggleAllControlsEnabled(true, _dropDowns, resetButton, enableSwitch);
             };
 
