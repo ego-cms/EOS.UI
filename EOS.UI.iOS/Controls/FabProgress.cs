@@ -312,7 +312,11 @@ namespace EOS.UI.iOS.Controls
         public override void AwakeFromNib()
         {
             base.AwakeFromNib();
+            //Should call these methods from AwakeFromNib
+            //Otherwise iOS designers ignores any customization
+            SetEmptyTitle();
             UpdateFrames();
+            SetImage(_image);
         }
 
         public override void SetTitle(string title, UIControlState forState)
@@ -359,10 +363,6 @@ namespace EOS.UI.iOS.Controls
                 BackgroundColor = UIColor.Clear,
                 Hidden = true
             };
-            _animationView.AddGestureRecognizer(new UIGestureRecognizer(() => 
-            {
-
-            }));
             AddSubview(_animationView);
             UpdateAppearance();
             AdjustsImageWhenDisabled = false;
@@ -387,7 +387,7 @@ namespace EOS.UI.iOS.Controls
             LottieAnimation.Frame = _animationView.Bounds;
         }
 
-        private void SetEmtyTitle()
+        private void SetEmptyTitle()
         {
             base.SetTitle(String.Empty, UIControlState.Normal);
             base.SetTitle(String.Empty, UIControlState.Highlighted);
