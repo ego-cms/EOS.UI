@@ -25,7 +25,7 @@ namespace EOS.UI.Droid.Controls
         private const float _endScale = 1.0f;
         private const int _startPadding = 30;
         private const double _paddingRatio = 0.24;
-        private const int _cornerRadius = 200;
+        private const int _cornerRadius = 1000;
         private const int _shadowLayerIndex = 0;
         private const int _backgroundLayerIndex = 1;
         private const int _imageLayerIndex = 2;
@@ -226,6 +226,7 @@ namespace EOS.UI.Droid.Controls
 
         private void Initialize(IAttributeSet attrs = null)
         {
+            LayoutParameters = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WrapContent, ViewGroup.LayoutParams.WrapContent);
             _animationDrawable = CreateLottieAnimationDrawable();
             if(attrs != null)
                 InitializeAttributes(attrs);
