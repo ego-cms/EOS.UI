@@ -246,14 +246,7 @@ namespace EOS.UI.Droid.Controls
 
             UpdateAppearance();
 
-            try
-            {
-                LottieAnimation = CreateLottieAnimationDrawable(AnimationKey);
-            }
-            catch(Exception ex)
-            {
-                var m = ex.Message;
-            }
+            LottieAnimation = CreateLottieAnimationDrawable(AnimationKey);
             LottieAnimation.Loop(true);
             LottieAnimation.Scale = (Image.IntrinsicWidth * Resources.DisplayMetrics.Density) / LottieAnimation.IntrinsicWidth;
         }
