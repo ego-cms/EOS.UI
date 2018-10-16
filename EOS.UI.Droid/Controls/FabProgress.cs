@@ -383,21 +383,21 @@ namespace EOS.UI.Droid.Controls
             return true;
         }
 
-        public void StartProgressAnimation()
+        public void StartLottieAnimation()
         {
             if (InProgress)
                 return;
 
-            StartLottieAnimation();
+            StartLottie();
             InProgress = true;
         }
 
-        public void StopProgressAnimation()
+        public void StopLottieAnimation()
         {
             if (!InProgress)
                 return;
 
-            StopLottieAnimation();
+            StopLottie();
             InProgress = false;
         }
 
@@ -699,7 +699,7 @@ namespace EOS.UI.Droid.Controls
             return animationDrawable;
         }
 
-        private void StartLottieAnimation()
+        private void StartLottie()
         {
             //clearing drawable if shadow is exist
             SetImageDrawable(new ColorDrawable(Color.Transparent));
@@ -712,7 +712,7 @@ namespace EOS.UI.Droid.Controls
             LottieAnimation.PlayAnimation();
         }
 
-        private void StopLottieAnimation()
+        private void StopLottie()
         {
             LottieAnimation.Stop();
             //clear lottie animation
