@@ -49,7 +49,12 @@ namespace EOS.UI.iOS.Sandbox.TableSources
 
         public override nfloat GetHeightForHeader(UITableView tableView, nint section)
         {
-            return 36;
+            var header = tableView.DequeueReusableHeaderFooterView(Section.Key);
+            if (header is Section sectionHeader)
+            {
+                return sectionHeader.IntrinsicContentSize.Height;
+            }
+            return UITableView.AutomaticDimension;
         }
 
         public override nfloat GetHeightForRow(UITableView tableView, NSIndexPath indexPath)

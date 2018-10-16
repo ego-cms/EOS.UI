@@ -248,6 +248,16 @@ namespace EOS.UI.iOS.Components
             }
         }
 
+        public override CGSize IntrinsicContentSize
+        {
+            get
+            {
+                var width = base.IntrinsicContentSize.Width;
+                var height = sectionName.AttributedText.Size.Height + paddingTop.Constant + paddingBottom.Constant;
+                return new CGSize(width, height);
+            }
+        }
+
         #endregion
 
         #region utility methods
@@ -274,6 +284,7 @@ namespace EOS.UI.iOS.Components
                     _subscribed = true;
                 }
             }
+            UpdateAppearance();
         }
 
         private void SetButtonTextColor(UIColor color)
