@@ -1,4 +1,4 @@
-﻿using UIKit;
+using UIKit;
 using Foundation;
 using CoreGraphics;
 using CoreAnimation;
@@ -336,6 +336,7 @@ namespace EOS.UI.iOS.Controls
             Text = string.Empty;
             Placeholder = string.Empty;
             ClearButtonMode = UITextFieldViewMode.WhileEditing;
+            BorderStyle = UITextBorderStyle.None;
             UpdateAppearance();
         }
 
@@ -506,6 +507,12 @@ namespace EOS.UI.iOS.Controls
                 _clearImageColor = provider.GetEOSProperty<UIColor>(this, EOSConstants.NeutralColor3);
                 IsEOSCustomizationIgnored = false;
             }
+        }
+
+        public override void AwakeFromNib()
+        {
+            base.AwakeFromNib();
+            BorderStyle = UITextBorderStyle.None;
         }
 
         private void UpdateClearButtonColor()
