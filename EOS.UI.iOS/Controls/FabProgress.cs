@@ -69,7 +69,7 @@ namespace EOS.UI.iOS.Controls
             {
                 base.Enabled = value;
                 base.BackgroundColor = value ? BackgroundColor : DisabledBackgroundColor;
-                ImageView.TintColor = value ? EnabledImageColor : DisabledImageColor;
+                TintColor = value ? EnabledImageColor : DisabledImageColor;
                 SetShadowConfig(Enabled ? _shadowConfig : null);
             }
         }
@@ -152,7 +152,7 @@ namespace EOS.UI.iOS.Controls
                 IsEOSCustomizationIgnored = true;
                 if (Enabled)
                 {
-                    ImageView.TintColor = _enabledImageColor;
+                    TintColor = _enabledImageColor;
                 }
             }
         }
@@ -167,7 +167,7 @@ namespace EOS.UI.iOS.Controls
                 IsEOSCustomizationIgnored = true;
                 if (!Enabled)
                 {
-                    ImageView.TintColor = _disabledImageColor;
+                    TintColor = _disabledImageColor;
                 }
             }
         }
@@ -348,7 +348,7 @@ namespace EOS.UI.iOS.Controls
             VerticalAlignment = UIControlContentVerticalAlignment.Fill;
             HorizontalAlignment = UIControlContentHorizontalAlignment.Fill;
             ContentMode = UIViewContentMode.ScaleToFill;
-            ImageView.TintColor = Enabled ? EnabledImageColor : DisabledImageColor;
+            TintColor = Enabled ? EnabledImageColor : DisabledImageColor;
             UpdateImageInsets();
         }
 
