@@ -467,7 +467,7 @@ namespace EOS.UI.iOS.Controls
             //size
             this.SetTextSize(FontStyle.Size);
             //text color
-            ImageView.TintColor = FontStyle.Color;
+            TintColor = FontStyle.Color;
             //letter spacing
             this.SetLetterSpacing(FontStyle.LetterSpacing);
         }
