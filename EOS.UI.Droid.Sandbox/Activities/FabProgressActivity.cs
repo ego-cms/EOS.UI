@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Android.App;
@@ -68,9 +68,9 @@ namespace EOS.UI.Droid.Sandbox.Activities
                 if (fab.InProgress)
                     return;
                 ToggleAllControlsEnabled(false, spinners, resetButton, stateSwitch);
-                fab.StartProgressAnimation();
+                fab.StartLottieAnimation();
                 await Task.Delay(5000);
-                fab.StopProgressAnimation();
+                fab.StopLottieAnimation();
                 ToggleAllControlsEnabled(true, spinners, resetButton, stateSwitch);
             };
 
@@ -177,7 +177,7 @@ namespace EOS.UI.Droid.Sandbox.Activities
         private void ChangeShadow(FabProgress fab)
         {
             fab.ShadowConfig = CreateShadowConfig(fab);
-            fab.StopProgressAnimation();
+            fab.StopLottieAnimation();
         }
 
         private ShadowConfig CreateShadowConfig(FabProgress fab)
