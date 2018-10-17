@@ -237,9 +237,6 @@ namespace EOS.UI.Droid.Controls
 
         private void Initialize(IAttributeSet attrs = null)
         {
-            if(Id == -1)
-                Id = Guid.NewGuid().GetHashCode();
-
             LayoutParameters = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WrapContent, ViewGroup.LayoutParams.WrapContent);
             if(attrs != null)
                 InitializeAttributes(attrs);
@@ -247,8 +244,8 @@ namespace EOS.UI.Droid.Controls
             UpdateAppearance();
 
             LottieAnimation = CreateLottieAnimationDrawable(AnimationKey);
-            LottieAnimation.Loop(true);
-            LottieAnimation.Scale = (Image.IntrinsicWidth * Resources.DisplayMetrics.Density) / LottieAnimation.IntrinsicWidth;
+            LottieAnimation.RepeatCount = LottieDrawable.Infinite;
+            LottieAnimation.Scale = (float)Drawable.IntrinsicWidth / LottieAnimation.IntrinsicWidth;
         }
 
         private void InitializeAttributes(IAttributeSet attrs)
@@ -418,6 +415,7 @@ namespace EOS.UI.Droid.Controls
             base.OnSizeChanged(w, h, oldw, oldh);
             SetImageDrawable(Image);
             ChangeImageColor(Enabled ? EnabledImageColor : DisabledImageColor);
+            SetBackgroundColor(BackgroundColor);
         }
 
         #region Shadow methods
