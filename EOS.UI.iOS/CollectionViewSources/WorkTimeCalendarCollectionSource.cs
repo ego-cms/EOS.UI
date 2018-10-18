@@ -68,11 +68,10 @@ namespace EOS.UI.iOS.CollectionViewSources
         
         private void InitFlowLayout()
         {
-            var layout = new WorkTimeCalendarFlowLayout();
-            var width = UIApplication.SharedApplication.KeyWindow.Frame.Width;
+            var layout = (WorkTimeCalendarFlowLayout) _collectionView.CollectionViewLayout;
+            var width = UIScreen.MainScreen.Bounds.Width;
             layout.ItemSize = new CGSize((width - layout.SectionInset.Left - layout.SectionInset.Right) / 7,
                                          _collectionView.Frame.Height - layout.SectionInset.Top - layout.SectionInset.Bottom);
-            _collectionView.CollectionViewLayout = layout;
         }
     }
 }

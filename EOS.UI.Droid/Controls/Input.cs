@@ -463,7 +463,7 @@ namespace EOS.UI.Droid.Controls
             else
                 underlineColor = DisabledColor;
 
-            Background.Mutate().SetColorFilter(underlineColor, PorterDuff.Mode.SrcIn);
+            Background?.Mutate().SetColorFilter(underlineColor, PorterDuff.Mode.SrcIn);
         }
 
         private void UpdateRightImage()

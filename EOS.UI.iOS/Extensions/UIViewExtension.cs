@@ -448,7 +448,7 @@ namespace EOS.UI.iOS.Extensions
         internal static void SetLetterSpacing(this UILabel label, float spacing)
         {
             var attributedString = new NSMutableAttributedString(label.AttributedText);
-            attributedString.AddAttribute(UIStringAttributeKey.KerningAdjustment, new NSNumber(spacing), new NSRange(0, label.AttributedText.Length));
+            attributedString.AddAttribute(UIStringAttributeKey.KerningAdjustment, new NSNumber(spacing), new NSRange(0, label.AttributedText.Length-1));
             label.AttributedText = attributedString;
         }
 
