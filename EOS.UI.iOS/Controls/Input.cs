@@ -27,6 +27,7 @@ namespace EOS.UI.iOS.Controls
         private UIImage _clearImage;
         private UIColor _clearImageColor;
         private readonly UIColor _warningColor = ColorExtension.FromHex("#FF5C49");
+        private readonly CGSize _intrinsicSize = new CGSize(296, 48);
 
         #endregion
 
@@ -305,6 +306,8 @@ namespace EOS.UI.iOS.Controls
         #endregion
 
         #region utility methods
+
+        public override CGSize IntrinsicContentSize => _intrinsicSize; 
 
         private void Initialize()
         {
