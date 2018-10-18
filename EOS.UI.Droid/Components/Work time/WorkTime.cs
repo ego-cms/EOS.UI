@@ -147,6 +147,8 @@ namespace EOS.UI.Droid.Components
 
             if(attrs != null)
                 InitializeAttributes(attrs);
+
+            UpdateAppearance();
         }
 
         private void InitializeAttributes(IAttributeSet attrs)
