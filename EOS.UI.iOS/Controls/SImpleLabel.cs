@@ -4,10 +4,9 @@ using EOS.UI.iOS.Extensions;
 using EOS.UI.iOS.Themes;
 using EOS.UI.Shared.Themes.Helpers;
 using EOS.UI.Shared.Themes.Interfaces;
-using EOS.UI.Shared.Themes.Helpers;
-using EOS.UI.Shared.Themes.Interfaces;
 using UIKit;
 using EOS.UI.Shared.Themes.DataModels;
+using CoreGraphics;
 
 namespace EOS.UI.iOS.Controls
 {
@@ -117,16 +116,27 @@ namespace EOS.UI.iOS.Controls
 
         public SimpleLabel()
         {
-            Text = " ";
-            Layer.MasksToBounds = true;
-            Lines = 1;
-            LineBreakMode = UILineBreakMode.TailTruncation;
-            IsEOSCustomizationIgnored = false;
-            UpdateAppearance();
+            Initalize();
         }
 
         public SimpleLabel(IntPtr handle) : base(handle)
         {
+            Initalize();
+        }
+
+        public SimpleLabel(NSCoder coder) : base(coder)
+        {
+            Initalize();
+        }
+
+        protected SimpleLabel(NSObjectFlag t) : base(t)
+        {
+            Initalize();
+        }
+
+        public SimpleLabel(CGRect frame) : base(frame)
+        {
+            Initalize();
         }
 
         public IEOSStyle GetCurrentEOSStyle()
@@ -157,6 +167,16 @@ namespace EOS.UI.iOS.Controls
                 FontStyle = provider.GetEOSProperty<FontStyleItem>(this, EOSConstants.R2C1S);
                 IsEOSCustomizationIgnored = false;
             }
+        }
+
+        private void Initalize()
+        {
+            Text = " ";
+            Layer.MasksToBounds = true;
+            Lines = 1;
+            LineBreakMode = UILineBreakMode.TailTruncation;
+            IsEOSCustomizationIgnored = false;
+            UpdateAppearance();
         }
 
         private void SetFontStyle()
