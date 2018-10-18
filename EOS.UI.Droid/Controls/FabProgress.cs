@@ -245,6 +245,9 @@ namespace EOS.UI.Droid.Controls
 
             LottieAnimation = CreateLottieAnimationDrawable(AnimationKey);
             LottieAnimation.RepeatCount = LottieDrawable.Infinite;
+
+            //calculate how the width of the image and the width of the lottie animation correlate
+            //and normalize the width of the lottie by setting the appropriate scale
             LottieAnimation.Scale = (float)Drawable.IntrinsicWidth / LottieAnimation.IntrinsicWidth;
         }
 
