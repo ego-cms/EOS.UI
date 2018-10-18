@@ -1,5 +1,6 @@
-﻿using System;
+using System;
 using CoreAnimation;
+using CoreGraphics;
 using EOS.UI.iOS.Extensions;
 using EOS.UI.iOS.Themes;
 using EOS.UI.Shared.Themes.DataModels;
@@ -16,10 +17,10 @@ namespace EOS.UI.iOS.Controls
         private CAAnimationGroup _rippleAnimations;
         private CALayer _rippleLayer;
         private const string _rippleAnimationKey = "rippleAnimation";
+        private UIEdgeInsets _contentInsets = new UIEdgeInsets(6, 16, 6, 16);
 
         public bool IsEOSCustomizationIgnored { get; private set; }
-        
-        
+
         private FontStyleItem _fontStyle;
         public FontStyleItem FontStyle
         {
@@ -115,6 +116,12 @@ namespace EOS.UI.iOS.Controls
                     SetTitle(Title(UIControlState.Disabled), UIControlState.Disabled);
                 }
             }
+        }
+
+        public override bool Highlighted
+        {
+            get => false;
+            set => base.Highlighted = false;
         }
 
         #region .ctors
@@ -252,15 +259,22 @@ namespace EOS.UI.iOS.Controls
 
         private void Initialize()
         {
-            Layer.MasksToBounds = true;
             Layer.CornerRadius = 5;
             BackgroundColor = UIColor.Clear;
             TitleLabel.Lines = 1;
             TitleLabel.LineBreakMode = UILineBreakMode.TailTruncation;
-            base.SetAttributedTitle(new NSAttributedString(String.Empty), UIControlState.Normal);
+            InitMaskAndAttributedText();
             UpdateAppearance();
         }
-        
+
+        public override void AwakeFromNib()
+        {
+            base.AwakeFromNib();
+            InitMaskAndAttributedText();
+            UpdateAppearance();
+            SizeToFit();
+        }
+
         private void SetFontStyle()
         {
             //set font
@@ -270,6 +284,13 @@ namespace EOS.UI.iOS.Controls
             this.SetTextSize(FontStyle.Size);
             //letter spacing
             this.SetLetterSpacing(FontStyle.LetterSpacing);
+        }
+
+        private void InitMaskAndAttributedText()
+        {
+            ContentEdgeInsets = _contentInsets;
+            Layer.MasksToBounds = true;
+            SetAttributedTitle(base.GetAttributedTitle(UIControlState.Normal) ?? new NSAttributedString(" "), UIControlState.Normal);
         }
     }
 }
