@@ -65,12 +65,12 @@ namespace EOS.UI.iOS.Sandbox
             {
                 if (_simpleButton.InProgress)
                     return;
-                _simpleButton.StartLottieAnimation();
+                _simpleButton.StartProgressAnimation();
                 ToggleAllControlsEnabled(false, _dropDowns, resetButton, enableSwitch);
                 await Task.Delay(5000);
                 ToggleAllControlsEnabled(true, _dropDowns, resetButton, enableSwitch);
                 ToggleSimpleButtonFields(_currentButtonState == SimpleButtonTypeEnum.Simple);
-                _simpleButton.StopLottieAnimation();
+                _simpleButton.StopProgressAnimation();
             };
 
             View.AddGestureRecognizer(new UITapGestureRecognizer(() =>

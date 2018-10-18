@@ -17,6 +17,8 @@ namespace EOS.UI.iOS.Controls
     [Register("SimpleButton")]
     public class SimpleButton : UIButton, IEOSThemeControl
     {
+        private LOTAnimationView _snakeAnimation;
+        private const string _snakeAnimationKey = "Animations/preloader-snake";
         private const double _360degrees = 6.28319;//value in radians
         private Dictionary<UIControlState, NSAttributedString> _attributedTitles = new Dictionary<UIControlState, NSAttributedString>();
         private const double _verticalPaddingRatio = 0.25;
@@ -219,25 +221,6 @@ namespace EOS.UI.iOS.Controls
             }
         }
 
-        public LOTAnimationView LottieAnimation { get; private set; }
-
-        private string _lottieAnimationKey;
-        public string LottieAnimationKey
-        {
-            get => _lottieAnimationKey;
-            set
-            {
-                _lottieAnimationKey = value;
-                if (LottieAnimation != null)
-                {
-                    LottieAnimation.RemoveFromSuperview();
-                }
-                LottieAnimation = LOTAnimationView.AnimationNamed(_lottieAnimationKey);
-                LottieAnimation.LoopAnimation = true;
-                _animationView.AddSubview(LottieAnimation);
-            }
-        }
-
         public override CGSize IntrinsicContentSize
         {
             get
@@ -256,13 +239,17 @@ namespace EOS.UI.iOS.Controls
         {
             TitleLabel.Lines = 1;
             TitleLabel.LineBreakMode = UILineBreakMode.TailTruncation;
+            ContentEdgeInsets = new UIEdgeInsets(ContentEdgeInsets.Top, 10, ContentEdgeInsets.Bottom, 10);
             base.SetAttributedTitle(new NSAttributedString(string.Empty), UIControlState.Normal);
+            _snakeAnimation = LOTAnimationView.AnimationNamed(_snakeAnimationKey);
+            _snakeAnimation.LoopAnimation = true;
             _animationView = new UIView()
             {
                 Frame = CGRect.Empty,
                 BackgroundColor = UIColor.Clear,
                 Hidden = true
             };
+            _animationView.AddSubview(_snakeAnimation);
             AddSubview(_animationView);
             UpdateAppearance();
         }
@@ -391,25 +378,24 @@ namespace EOS.UI.iOS.Controls
                 CornerRadius = provider.GetEOSProperty<int>(this, EOSConstants.ButtonCornerRadius);
                 RippleColor = provider.GetEOSProperty<UIColor>(this, EOSConstants.RippleColor);
                 ShadowConfig = provider.GetEOSProperty<ShadowConfig>(this, EOSConstants.SimpleButtonShadow);
-                LottieAnimationKey = provider.GetEOSProperty<string>(this, EOSConstants.LottiePreloaderKey);
                 Enabled = base.Enabled;
                 IsEOSCustomizationIgnored = false;
             }
         }
 
-        public void StartLottieAnimation()
+        public void StartProgressAnimation()
         {
             InProgress = true;
             SaveTitles();
             SetTitle(string.Empty, UIControlState.Normal);
             UpdateAnimationFrame();
             _animationView.Hidden = false;
-            LottieAnimation.Play();
+            _snakeAnimation.Play();
         }
 
-        public void StopLottieAnimation()
+        public void StopProgressAnimation()
         {
-            LottieAnimation.Stop();
+            _snakeAnimation.Stop();
             _animationView.Hidden = true;
             RestoreTitles();
             InProgress = false;
@@ -423,7 +409,7 @@ namespace EOS.UI.iOS.Controls
             var y = padding;
             var newFrame = new CGRect(x, y, heightWidth, heightWidth);
             _animationView.Frame = newFrame;
-            LottieAnimation.Frame = _animationView.Bounds;
+            _snakeAnimation.Frame = _animationView.Bounds;
         }
 
         private void SaveTitles()
