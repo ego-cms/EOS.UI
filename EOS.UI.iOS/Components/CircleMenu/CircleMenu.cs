@@ -154,18 +154,22 @@ namespace EOS.UI.iOS.Components
                               MenuSize, MenuSize);
             BackgroundColor = UIColor.Clear;
 
-            var mainFrame = UIApplication.SharedApplication.KeyWindow.Frame;
+            var mainFrame = UIScreen.MainScreen.Bounds;
             //shadowview init
-            _shadowView = new UIView(mainFrame);
-            _shadowView.Hidden = true;
+            _shadowView = new UIView(mainFrame)
+            {
+                Hidden = true
+            };
             _rootView.AddSubview(_shadowView);
 
             //mainbutton init
-            _mainButton = new CircleMenuMainButton();
-            _mainButton.Frame = new CGRect(
+            _mainButton = new CircleMenuMainButton
+            {
+                Frame = new CGRect(
                 (Frame.Width - CircleMenuButton.Size) / 2,
                 (Frame.Height - CircleMenuButton.Size) / 2,
-                CircleMenuButton.Size, CircleMenuButton.Size);
+                CircleMenuButton.Size, CircleMenuButton.Size)
+            };
             _mainButton.TouchUpInside += OnMainButtonClicked;
 
             _gestureAnalyzer = new CircleMenuPanGestureAnalyzer(_rootView);
