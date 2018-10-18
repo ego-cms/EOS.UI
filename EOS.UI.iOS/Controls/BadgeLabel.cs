@@ -15,7 +15,7 @@ namespace EOS.UI.iOS.Controls
     {
         private UIEdgeInsets _insets = new UIEdgeInsets(2, 15, 2, 15);
 
-        public bool IsEOSCustomizationIgnored { get; set; }
+        public bool IsEOSCustomizationIgnored { get; private set; }
 
         public override void AwakeFromNib()
         {
