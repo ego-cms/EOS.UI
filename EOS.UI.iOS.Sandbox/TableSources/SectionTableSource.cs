@@ -25,6 +25,8 @@ namespace EOS.UI.iOS.Sandbox.TableSources
             SectionModel.OnPropertyChanged += (sender, e) => _tableView.ReloadData();
             _source = dataSource.FindAll(item => item is string).Select(item => (string)item).ToList();
             _tableView = table;
+            _tableView.EstimatedSectionHeaderHeight = 1;
+            _tableView.SectionHeaderHeight = UITableView.AutomaticDimension;
             _tableView.RegisterNibForHeaderFooterViewReuse(Section.Nib, Section.Key);
         }
 
@@ -45,16 +47,6 @@ namespace EOS.UI.iOS.Sandbox.TableSources
         public override nint NumberOfSections(UITableView tableView)
         {
             return 1;
-        }
-
-        public override nfloat GetHeightForHeader(UITableView tableView, nint section)
-        {
-            var header = tableView.DequeueReusableHeaderFooterView(Section.Key);
-            if (header is Section sectionHeader)
-            {
-                return sectionHeader.IntrinsicContentSize.Height;
-            }
-            return UITableView.AutomaticDimension;
         }
 
         public override nfloat GetHeightForRow(UITableView tableView, NSIndexPath indexPath)
