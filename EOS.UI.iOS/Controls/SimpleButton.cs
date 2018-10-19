@@ -26,6 +26,7 @@ namespace EOS.UI.iOS.Controls
         private CGSize _pressedShadowOffset;
         private const double _shadowYCoeff = 0.25;
         private const double _blurCoeff = 0.66;
+        private UIEdgeInsets _contentInsets = new UIEdgeInsets(14, 124, 14, 124);
 
         #region .ctors
 
@@ -204,16 +205,7 @@ namespace EOS.UI.iOS.Controls
 
         public StateEnum ButtonState { get; set; }
 
-        private bool _inProgress;
-        public bool InProgress
-        {
-            get => _inProgress;
-            private set
-            {
-                _inProgress = value;
-                UserInteractionEnabled = !value;
-            }
-        }
+        public bool InProgress { get; private set; }
 
         private ShadowConfig _shadowConfig;
         public ShadowConfig ShadowConfig
@@ -226,6 +218,16 @@ namespace EOS.UI.iOS.Controls
                 SetShadowConfig(Enabled ? _shadowConfig : null);
                 if (_shadowConfig != null)
                     _pressedShadowOffset = new CGSize(_shadowConfig.Offset.X, ShadowConfig.Offset.Y * _shadowYCoeff);
+            }
+        }
+
+        public override CGSize IntrinsicContentSize
+        {
+            get
+            {
+                var textSize = CurrentAttributedTitle.Size;
+                var size = new CGSize(textSize.Width + 2 * _contentInsets.Left, textSize.Height + 2 * _contentInsets.Top);
+                return size;
             }
         }
 
@@ -243,7 +245,7 @@ namespace EOS.UI.iOS.Controls
             _snakeAnimation.LoopAnimation = true;
             _animationView = new UIView()
             {
-                Frame = new CGRect(0, 0, 0, 0),
+                Frame = CGRect.Empty,
                 BackgroundColor = UIColor.Clear,
                 Hidden = true
             };
@@ -451,7 +453,7 @@ namespace EOS.UI.iOS.Controls
             //size
             this.SetTextSize(FontStyle.Size);
             //text color
-            ImageView.TintColor = FontStyle.Color;
+            TintColor = FontStyle.Color;
             //letter spacing
             this.SetLetterSpacing(FontStyle.LetterSpacing);
         }
