@@ -1,11 +1,10 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -15,7 +14,7 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="59"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="cxk-wN-pdQ" id="YTl-1W-gDM">
-                <rect key="frame" x="0.0" y="0.0" width="320" height="58"/>
+                <rect key="frame" x="0.0" y="0.0" width="320" height="58.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mbf-gm-wOK">
@@ -32,20 +31,22 @@
                             </label>
                         </subviews>
                         <constraints>
+                            <constraint firstItem="134" firstAttribute="width" secondItem="mbf-gm-wOK" secondAttribute="width" multiplier="0.66" id="626"/>
+                            <constraint firstItem="289" firstAttribute="width" secondItem="mbf-gm-wOK" secondAttribute="width" multiplier="0.33" id="627"/>
+                            <constraint firstItem="134" firstAttribute="top" relation="greaterThanOrEqual" secondItem="mbf-gm-wOK" secondAttribute="top" id="2fR-Sl-tXm"/>
                             <constraint firstItem="134" firstAttribute="centerY" secondItem="mbf-gm-wOK" secondAttribute="centerY" id="A5M-Kd-lV5"/>
                             <constraint firstAttribute="trailing" secondItem="289" secondAttribute="trailing" id="a49-SY-XIb"/>
                             <constraint firstItem="134" firstAttribute="leading" secondItem="mbf-gm-wOK" secondAttribute="leading" id="euQ-jh-PIN"/>
+                            <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="134" secondAttribute="bottom" id="lyn-aq-Rgw"/>
                             <constraint firstItem="289" firstAttribute="centerY" secondItem="mbf-gm-wOK" secondAttribute="centerY" id="zAt-MW-59E"/>
-                            <constraint id="626" firstItem="134" firstAttribute="width" secondItem="mbf-gm-wOK" secondAttribute="width" multiplier="0.66"/>
-                            <constraint id="627" firstItem="289" firstAttribute="width" secondItem="mbf-gm-wOK" secondAttribute="width" multiplier="0.33"/>
                         </constraints>
                     </view>
                 </subviews>
                 <constraints>
-                    <constraint firstAttribute="trailing" secondItem="mbf-gm-wOK" secondAttribute="trailing" id="1k2-52-Z1W" constant="16"/>
-                    <constraint firstItem="mbf-gm-wOK" firstAttribute="leading" secondItem="YTl-1W-gDM" secondAttribute="leading" id="R2Y-gv-hT0" constant="16"/>
-                    <constraint firstAttribute="bottom" secondItem="mbf-gm-wOK" secondAttribute="bottom" id="aNf-sX-L9P" constant="10"/>
-                    <constraint firstItem="mbf-gm-wOK" firstAttribute="top" secondItem="YTl-1W-gDM" secondAttribute="top" id="okr-Pk-lEd" constant="10"/>
+                    <constraint firstAttribute="trailing" secondItem="mbf-gm-wOK" secondAttribute="trailing" constant="16" id="1k2-52-Z1W"/>
+                    <constraint firstItem="mbf-gm-wOK" firstAttribute="leading" secondItem="YTl-1W-gDM" secondAttribute="leading" constant="16" id="R2Y-gv-hT0"/>
+                    <constraint firstAttribute="bottom" secondItem="mbf-gm-wOK" secondAttribute="bottom" constant="10" id="aNf-sX-L9P"/>
+                    <constraint firstItem="mbf-gm-wOK" firstAttribute="top" secondItem="YTl-1W-gDM" secondAttribute="top" constant="10" id="okr-Pk-lEd"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>

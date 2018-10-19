@@ -274,6 +274,7 @@ namespace EOS.UI.iOS.Components
                     _subscribed = true;
                 }
             }
+            UpdateAppearance();
         }
 
         private void SetButtonTextColor(UIColor color)
