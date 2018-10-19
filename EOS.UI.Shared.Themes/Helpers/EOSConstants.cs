@@ -32,6 +32,7 @@ namespace EOS.UI.Shared.Themes.Helpers
         public const string CalendarImage = "calendarImage";
         public const string FabProgressPreloaderImage = "fabProgressPreloaderImage";
         public const string FabShadow = "fabShadow";
+        public const string LottiePreloaderKey = "lottiePreloaderKey";
         //circle progress
         public const string CircleProgressShown = "CircleProgressShown";
         public const string BorderWidth = "borderWidth";
