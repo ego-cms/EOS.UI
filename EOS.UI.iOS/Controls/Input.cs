@@ -1,4 +1,4 @@
-﻿using UIKit;
+using UIKit;
 using Foundation;
 using CoreGraphics;
 using CoreAnimation;
@@ -27,6 +27,7 @@ namespace EOS.UI.iOS.Controls
         private UIImage _clearImage;
         private UIColor _clearImageColor;
         private readonly UIColor _warningColor = ColorExtension.FromHex("#FF5C49");
+        private readonly CGSize _intrinsicSize = new CGSize(296, 48);
 
         #endregion
 
@@ -306,6 +307,8 @@ namespace EOS.UI.iOS.Controls
 
         #region utility methods
 
+        public override CGSize IntrinsicContentSize => _intrinsicSize; 
+
         private void Initialize()
         {
             _leftImageView = new UIImageView(new CGRect(0, 0, InputConstants.IconSize, InputConstants.IconSize));
@@ -336,6 +339,7 @@ namespace EOS.UI.iOS.Controls
             Text = string.Empty;
             Placeholder = string.Empty;
             ClearButtonMode = UITextFieldViewMode.WhileEditing;
+            BorderStyle = UITextBorderStyle.None;
             UpdateAppearance();
         }
 
@@ -506,6 +510,12 @@ namespace EOS.UI.iOS.Controls
                 _clearImageColor = provider.GetEOSProperty<UIColor>(this, EOSConstants.NeutralColor3);
                 IsEOSCustomizationIgnored = false;
             }
+        }
+
+        public override void AwakeFromNib()
+        {
+            base.AwakeFromNib();
+            BorderStyle = UITextBorderStyle.None;
         }
 
         private void UpdateClearButtonColor()
