@@ -316,36 +316,57 @@ namespace EOS.UI.Droid.Controls
 
         public override bool OnTouchEvent(MotionEvent e)
         {
-            if(Enabled && IsNotShadowClick(e))
+            if (Enabled && IsNotShadowClick(e))
             {
-                if(e.Action == MotionEventActions.Down)
-                {
-                    _touchIsDown = true;
-                    var animation = StartTouchAnimation(_startScale, _endScale);
-                    animation.AnimationEnd += delegate
-                    {
-                        SetBackgroundColor(PressedBackgroundColor);
-                    };
-                    StartAnimation(StartTouchAnimation(_startScale, _endScale));
-                }
-                if(e.Action == MotionEventActions.Up || e.Action == MotionEventActions.Cancel)
-                {
-                    var animation = StartTouchAnimation(_endScale, _startScale);
-                    animation.AnimationEnd += delegate
-                    {
-                        SetActionUpUIStyle();
-                        PerformClick();
-                    };
-                    StartAnimation(animation);
-                }
-            }
-            //return in previous state if button is pressed outside its content
-            if(_touchIsDown && e.Action == MotionEventActions.Up || e.Action == MotionEventActions.Cancel)
-            {
-                SetActionUpUIStyle();
+                HandleTouchDownMotionEvent(e);
+                if (HandleTouchUpOrCancelMotionEvent(e))
+                    return true;
             }
 
+            HandleTouchUpOrCancelMotionEventOutsideContent(e);
+
             return true;
+        }
+
+        private void HandleTouchUpOrCancelMotionEventOutsideContent(MotionEvent e)
+        {
+            //return in previous state if button is pressed outside its content
+            if (_touchIsDown && e.Action == MotionEventActions.Up || e.Action == MotionEventActions.Cancel)
+            {
+                var animation = StartTouchAnimation(_endScale, _startScale);
+                SetActionUpUIStyle();
+                StartAnimation(animation);
+            }
+        }
+
+        private bool HandleTouchUpOrCancelMotionEvent(MotionEvent e)
+        {
+            if (e.Action == MotionEventActions.Up || e.Action == MotionEventActions.Cancel)
+            {
+                var animation = StartTouchAnimation(_endScale, _startScale);
+                animation.AnimationEnd += delegate
+                {
+                    SetActionUpUIStyle();
+                    PerformClick();
+                };
+                StartAnimation(animation);
+                return true;
+            }
+            return false;
+        }
+
+        private void HandleTouchDownMotionEvent(MotionEvent e)
+        {
+            if (e.Action == MotionEventActions.Down)
+            {
+                _touchIsDown = true;
+                var animation = StartTouchAnimation(_startScale, _endScale);
+                animation.AnimationEnd += delegate
+                {
+                    SetBackgroundColor(PressedBackgroundColor);
+                };
+                StartAnimation(StartTouchAnimation(_startScale, _endScale));
+            }
         }
 
         private ScaleAnimation StartTouchAnimation(float startScale, float endScale)
