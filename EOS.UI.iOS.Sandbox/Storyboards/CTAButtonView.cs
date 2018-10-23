@@ -63,6 +63,8 @@ namespace EOS.UI.iOS.Sandbox
 
             _simpleButton.TouchUpInside += async (sender, e) =>
             {
+                if (_simpleButton.InProgress)
+                    return;
                 _simpleButton.StartProgressAnimation();
                 ToggleAllControlsEnabled(false, _dropDowns, resetButton, enableSwitch);
                 await Task.Delay(5000);

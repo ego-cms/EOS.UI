@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using Android.Content;
 using Android.Graphics;
 using Android.Graphics.Drawables;
@@ -45,7 +45,6 @@ namespace EOS.UI.Droid.Controls
 
         public Input(IntPtr javaReference, JniHandleOwnership transfer) : base(javaReference, transfer)
         {
-            Initialize();
         }
 
         #endregion
@@ -464,7 +463,7 @@ namespace EOS.UI.Droid.Controls
             else
                 underlineColor = DisabledColor;
 
-            Background.Mutate().SetColorFilter(underlineColor, PorterDuff.Mode.SrcIn);
+            Background?.Mutate().SetColorFilter(underlineColor, PorterDuff.Mode.SrcIn);
         }
 
         private void UpdateRightImage()

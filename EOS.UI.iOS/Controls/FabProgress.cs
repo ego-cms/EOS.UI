@@ -21,8 +21,6 @@ namespace EOS.UI.iOS.Controls
         private const float _startScale = 0.85f;
         private const float _endScale = 1.0f;
         private const double _scaleAnimationDuration = 0.1;
-        private const string _snakeAnimationKey = "Animations/preloader-snake";
-        private LOTAnimationView _snakeAnimation;
         private UIView _animationView;
 
         public bool IsEOSCustomizationIgnored { get; private set; }
@@ -71,10 +69,7 @@ namespace EOS.UI.iOS.Controls
             {
                 base.Enabled = value;
                 base.BackgroundColor = value ? BackgroundColor : DisabledBackgroundColor;
-                base.ImageView.TintColor = value ?
-                    GetThemeProvider().GetEOSProperty<UIColor>(this, EOSConstants.NeutralColor6S) :
-                    GetThemeProvider().GetEOSProperty<UIColor>(this, EOSConstants.NeutralColor3S);
-
+                TintColor = value ? EnabledImageColor : DisabledImageColor;
                 SetShadowConfig(Enabled ? _shadowConfig : null);
             }
         }
@@ -112,15 +107,85 @@ namespace EOS.UI.iOS.Controls
                 SetShadowConfig(Enabled ? _shadowConfig : null);
             }
         }
+        public bool InProgress { get; private set; }
 
-        private bool _inProgress;
-        public bool InProgress
+        private string _lottieAnimationKey;
+        public string LottieAnimationKey
         {
-            get => _inProgress;
-            private set
+            get => _lottieAnimationKey;
+            set
             {
-                _inProgress = value;
-                UserInteractionEnabled = !value;
+                _lottieAnimationKey = value;
+                if (LottieAnimation != null)
+                {
+                    LottieAnimation.RemoveFromSuperview();
+                }
+                LottieAnimation = LOTAnimationView.AnimationNamed(_lottieAnimationKey);
+                LottieAnimation.LoopAnimation = true;
+                _animationView.AddSubview(LottieAnimation);
+            }
+        }
+
+        public LOTAnimationView LottieAnimation { get; private set; }
+
+        public override CGRect Frame
+        {
+            get => base.Frame;
+            set
+            {
+                base.Frame = value;
+                if (value != CGRect.Empty)
+                {
+                    UpdateAnimationFrame();
+                    UpdateImageInsets();
+                }
+            }
+        }
+
+        private UIColor _enabledImageColor;
+        public UIColor EnabledImageColor
+        {
+            get => _enabledImageColor;
+            set
+            {
+                _enabledImageColor = value;
+                IsEOSCustomizationIgnored = true;
+                if (Enabled)
+                {
+                    TintColor = _enabledImageColor;
+                }
+            }
+        }
+
+        private UIColor _disabledImageColor;
+        public UIColor DisabledImageColor
+        {
+            get => _disabledImageColor;
+            set
+            {
+                _disabledImageColor = value;
+                IsEOSCustomizationIgnored = true;
+                if (!Enabled)
+                {
+                    TintColor = _disabledImageColor;
+                }
+            }
+        }
+
+        public override CGSize IntrinsicContentSize
+        {
+            get
+            {
+                if (Image != null)
+                {
+                    var imageSize = Math.Max(Image.Size.Width, Image.Size.Height);
+                    var side = imageSize * (1 - 2 * _paddingRatio) / _paddingRatio;
+                    return new CGSize(side, side);
+                }
+                else
+                {
+                    return base.IntrinsicContentSize;
+                }
             }
         }
 
@@ -162,6 +227,7 @@ namespace EOS.UI.iOS.Controls
         {
             base.LayoutSubviews();
             Layer.CornerRadius = Frame.Width / 2;
+            UpdateImageInsets();
         }
 
         private void SetShadowConfig(ShadowConfig config)
@@ -171,7 +237,7 @@ namespace EOS.UI.iOS.Controls
                 Layer.ShadowColor = config.Color.CGColor;
                 Layer.ShadowOffset = new CGSize(config.Offset);
                 Layer.ShadowRadius = config.Blur / 2;
-                Layer.ShadowOpacity = 1.0f;//(float)config.Color.CGColor.Alpha;
+                Layer.ShadowOpacity = 1.0f;
             }
             else
             {
@@ -209,11 +275,14 @@ namespace EOS.UI.iOS.Controls
                 DisabledBackgroundColor = provider.GetEOSProperty<UIColor>(this, EOSConstants.NeutralColor4S);
                 Image = UIImage.FromBundle(provider.GetEOSProperty<string>(this, EOSConstants.CalendarImage));
                 ShadowConfig = provider.GetEOSProperty<ShadowConfig>(this, EOSConstants.FabShadow);
+                LottieAnimationKey = provider.GetEOSProperty<string>(this, EOSConstants.LottiePreloaderKey);
+                EnabledImageColor = provider.GetEOSProperty<UIColor>(this, EOSConstants.NeutralColor6S);
+                DisabledImageColor = provider.GetEOSProperty<UIColor>(this, EOSConstants.NeutralColor3S);
                 IsEOSCustomizationIgnored = false;
             }
         }
 
-        public void StartProgressAnimation()
+        public void StartLottieAnimation()
         {
             if (InProgress)
                 return;
@@ -221,17 +290,49 @@ namespace EOS.UI.iOS.Controls
             UpdateAnimationFrame();
             ImageView.Hidden = true;
             _animationView.Hidden = false;
-            _snakeAnimation.Play();
+            LottieAnimation.Play();
         }
 
-        public void StopProgressAnimation()
+        public void StopLottieAnimation()
         {
             if (!InProgress)
                 return;
             InProgress = false;
             ImageView.Hidden = false;
             _animationView.Hidden = true;
-            _snakeAnimation.Stop();
+            LottieAnimation.Stop();
+        }
+
+        public override void MovedToSuperview()
+        {
+            base.MovedToSuperview();
+            UpdateFrames();
+        }
+
+        public override void AwakeFromNib()
+        {
+            base.AwakeFromNib();
+            //Should call these methods from AwakeFromNib
+            //Otherwise iOS designers ignores any customization
+            SetEmptyTitle();
+            UpdateFrames();
+            SetImage(_image);
+        }
+
+        public override void SetTitle(string title, UIControlState forState)
+        {
+            //you cant set any text for this button
+        }
+
+        public override void SetAttributedTitle(NSAttributedString title, UIControlState state)
+        {
+            //you cant set any text for this button
+        }
+
+        private void UpdateFrames()
+        {
+            UpdateImageInsets();
+            UpdateAnimationFrame();
         }
 
         private void UpdateImageInsets()
@@ -247,6 +348,7 @@ namespace EOS.UI.iOS.Controls
             VerticalAlignment = UIControlContentVerticalAlignment.Fill;
             HorizontalAlignment = UIControlContentHorizontalAlignment.Fill;
             ContentMode = UIViewContentMode.ScaleToFill;
+            TintColor = Enabled ? EnabledImageColor : DisabledImageColor;
             UpdateImageInsets();
         }
 
@@ -255,20 +357,14 @@ namespace EOS.UI.iOS.Controls
             TouchDown += (sender, e) => ScaleButton(_startScale, _scaleAnimationDuration);
             TouchUpInside += (sender, e) => ScaleButton(_endScale, _scaleAnimationDuration);
             TouchDragExit += (sender, e) => ScaleButton(_endScale, _scaleAnimationDuration);
-
-            _snakeAnimation = LOTAnimationView.AnimationNamed(_snakeAnimationKey);
-            _snakeAnimation.LoopAnimation = true;
             _animationView = new UIView()
             {
-                Frame = new CGRect(0, 0, 0, 0),
+                Frame = CGRect.Empty,
                 BackgroundColor = UIColor.Clear,
                 Hidden = true
             };
-            _animationView.AddSubview(_snakeAnimation);
             AddSubview(_animationView);
-
             UpdateAppearance();
-            ImageView.TintColor = GetThemeProvider().GetEOSProperty<UIColor>(this, EOSConstants.NeutralColor6S);
             AdjustsImageWhenDisabled = false;
         }
 
@@ -288,7 +384,18 @@ namespace EOS.UI.iOS.Controls
             var y = padding;
             var newFrame = new CGRect(x, y, heightWidth, heightWidth);
             _animationView.Frame = newFrame;
-            _snakeAnimation.Frame = _animationView.Bounds;
+            LottieAnimation.Frame = _animationView.Bounds;
+        }
+
+        private void SetEmptyTitle()
+        {
+            base.SetTitle(String.Empty, UIControlState.Normal);
+            base.SetTitle(String.Empty, UIControlState.Highlighted);
+            base.SetTitle(String.Empty, UIControlState.Disabled);
+            base.SetTitle(String.Empty, UIControlState.Focused);
+            base.SetTitle(String.Empty, UIControlState.Application);
+            base.SetTitle(String.Empty, UIControlState.Reserved);
+            base.SetTitle(String.Empty, UIControlState.Selected);
         }
     }
 }

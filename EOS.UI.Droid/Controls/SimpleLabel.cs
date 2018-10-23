@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using Android.Content;
 using Android.Graphics;
 using Android.Runtime;
@@ -33,7 +33,6 @@ namespace EOS.UI.Droid.Controls
 
         public SimpleLabel(IntPtr javaReference, JniHandleOwnership transfer) : base(javaReference, transfer)
         {
-            Initialize();
         }
 
         #endregion
@@ -59,7 +58,9 @@ namespace EOS.UI.Droid.Controls
 
         public override void SetTypeface(Typeface tf, [GeneratedEnum] TypefaceStyle style)
         {
-            IsEOSCustomizationIgnored = true;
+            if(FontStyle != null)
+                IsEOSCustomizationIgnored = true;
+
             base.SetTypeface(tf, style);
         }
 
@@ -147,6 +148,7 @@ namespace EOS.UI.Droid.Controls
         {
             SetMaxLines(1);
             Ellipsize = TextUtils.TruncateAt.End;
+            Gravity = Android.Views.GravityFlags.Center;
             if(attrs != null)
                 InitializeAttributes(attrs);
             UpdateAppearance();

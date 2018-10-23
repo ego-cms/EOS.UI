@@ -165,7 +165,6 @@ namespace EOS.UI.Droid.Controls
 
         protected CircleProgress(IntPtr javaReference, JniHandleOwnership transfer) : base(javaReference, transfer)
         {
-            Initalize();
         }
 
         public CircleProgress(Context context) : base(context)

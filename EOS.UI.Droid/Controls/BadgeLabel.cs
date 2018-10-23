@@ -15,6 +15,15 @@ namespace EOS.UI.Droid.Controls
 {
     public class BadgeLabel: AppCompatTextView, IEOSThemeControl
     {
+        #region fields
+
+        private const int LeftPadding = 20;
+        private const int RightPadding = 20;
+        private const int TopPadding = 1;
+        private const int BottomPadding = 3;
+
+        #endregion
+
         #region constructors
 
         public BadgeLabel(Context context) : base(context)
@@ -34,7 +43,6 @@ namespace EOS.UI.Droid.Controls
 
         public BadgeLabel(IntPtr javaReference, JniHandleOwnership transfer) : base(javaReference, transfer)
         {
-            Initialize();
         }
 
         #endregion
@@ -179,6 +187,9 @@ namespace EOS.UI.Droid.Controls
             var denisty = Resources.DisplayMetrics.Density;
             SetMaxLines(1);
             Ellipsize = TextUtils.TruncateAt.End;
+            Gravity = Android.Views.GravityFlags.Center;
+            SetPadding((int)(denisty * LeftPadding), (int)(denisty * TopPadding), (int)(denisty * RightPadding), (int)(denisty * BottomPadding));
+
             if(attrs != null)
                 InitializeAttributes(attrs);
             UpdateAppearance();

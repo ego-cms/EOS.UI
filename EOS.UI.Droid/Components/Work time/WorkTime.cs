@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using Android.Content;
 using Android.Graphics;
@@ -47,7 +47,6 @@ namespace EOS.UI.Droid.Components
 
         protected WorkTime(IntPtr javaReference, JniHandleOwnership transfer) : base(javaReference, transfer)
         {
-            Initialize();
         }
 
         #endregion
@@ -148,6 +147,8 @@ namespace EOS.UI.Droid.Components
 
             if(attrs != null)
                 InitializeAttributes(attrs);
+
+            UpdateAppearance();
         }
 
         private void InitializeAttributes(IAttributeSet attrs)

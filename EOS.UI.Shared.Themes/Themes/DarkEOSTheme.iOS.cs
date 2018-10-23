@@ -40,6 +40,7 @@ namespace EOS.UI.Shared.Themes.Themes
             { EOSConstants.CalendarImage, "icCalendar"},
             //should always be white
             { EOSConstants.FabProgressPreloaderImage, "icPreloader"},
+            { EOSConstants.LottiePreloaderKey, "Animations/preloader-snake"},
             { EOSConstants.WarningInputImage, "icWarning"},
             { EOSConstants.ClearInputImage, "icClear"},
             { EOSConstants.CircleProgressShown, true},

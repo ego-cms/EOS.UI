@@ -1,10 +1,7 @@
 using System;
-using Android.Animation;
 using Android.Content;
 using Android.Graphics;
 using Android.Graphics.Drawables;
-using Android.OS;
-using Android.Runtime;
 using Android.Support.V7.Widget;
 using Android.Util;
 using Android.Views;
@@ -21,18 +18,15 @@ namespace EOS.UI.Droid.Controls
     public class FabProgress : AppCompatImageButton, IEOSThemeControl
     {
         private const int _animationDuration = 100;
-        private const float _startScale = 0.85f;
-        private const float _endScale = 1.0f;
+        private const float _startScale = 1f;
+        private const float _endScale = 0.9f;
         private const int _startPadding = 30;
-        private const double _paddingRatio = 0.24;
-        private const int _cornerRadius = 200;
+        private const int _cornerRadius = 1000;
         private const int _shadowLayerIndex = 0;
         private const int _backgroundLayerIndex = 1;
         private const int _imageLayerIndex = 2;
-        private const int _rotationAnimationDuration = 1000;
         private const float _pivot = 0.5f;
         private const string AnimationKey = "Animations/preloader-snake.json";
-        private const int LottieAnimationSize = 24;
 
         private int _initialWidth = -1;
         //flag set when width recalculated to including shadows. 
@@ -43,9 +37,21 @@ namespace EOS.UI.Droid.Controls
         private float? _initialYPosition;
         bool _shouldShadowDrawingWaitForLayout = false;
         bool _touchIsDown;
-        private LottieDrawable _animationDrawable;
 
         public bool IsEOSCustomizationIgnored { get; private set; }
+
+        public LottieDrawable LottieAnimation { get; set; }
+
+        private string _lottieAnimationKey;
+        public string LottieAnimationKey
+        {
+            get => _lottieAnimationKey;
+            set
+            {
+                _lottieAnimationKey = value;
+                LottieAnimation = CreateLottieAnimationDrawable(_lottieAnimationKey);
+            }
+        }
 
         public override bool Enabled
         {
@@ -55,14 +61,11 @@ namespace EOS.UI.Droid.Controls
                 var wasEnabled = base.Enabled;
                 base.Enabled = value;
 
-                if (wasEnabled!= value)
+                if(wasEnabled != value)
                 {
-                    //SetShadowOrBackground(value, ShadowConfig);
-                    SetBackgroundColor(value ? BackgroundColor : DisabledBackgroundColor);
-                    ChangeImageColor(value ?
-                                     GetThemeProvider().GetEOSProperty<Color>(this, EOSConstants.NeutralColor6S) :
-                                     GetThemeProvider().GetEOSProperty<Color>(this, EOSConstants.NeutralColor3S));
                     ToggleShadow(value);
+                    SetBackgroundColor(value ? BackgroundColor : DisabledBackgroundColor);
+                    ChangeImageColor(value ? EnabledImageColor : DisabledImageColor);
                 }
             }
         }
@@ -107,10 +110,8 @@ namespace EOS.UI.Droid.Controls
             {
                 _backgroundColor = value;
                 if(Enabled)
-                {
                     SetBackgroundColor(value);
-                    Image.SetColorFilter(GetThemeProvider().GetEOSProperty<Color>(this, EOSConstants.NeutralColor6S), PorterDuff.Mode.SrcIn);
-                }
+
                 IsEOSCustomizationIgnored = true;
             }
         }
@@ -123,10 +124,34 @@ namespace EOS.UI.Droid.Controls
             {
                 _disabledBackgroundColor = value;
                 if(!Enabled)
-                {
                     SetBackgroundColor(value);
-                    Image.SetColorFilter(GetThemeProvider().GetEOSProperty<Color>(this, EOSConstants.NeutralColor3S), PorterDuff.Mode.SrcIn);
-                }
+
+                IsEOSCustomizationIgnored = true;
+            }
+        }
+
+        private Color _enabledImageColor;
+        public Color EnabledImageColor
+        {
+            get => _enabledImageColor;
+            set
+            {
+                _enabledImageColor = value;
+                if(Enabled)
+                    ChangeImageColor(_enabledImageColor);
+                IsEOSCustomizationIgnored = true;
+            }
+        }
+
+        private Color _disabledImageColor;
+        public Color DisabledImageColor
+        {
+            get => _disabledImageColor;
+            set
+            {
+                _disabledImageColor = value;
+                if(!Enabled)
+                    ChangeImageColor(_disabledImageColor);
                 IsEOSCustomizationIgnored = true;
             }
         }
@@ -150,17 +175,7 @@ namespace EOS.UI.Droid.Controls
             {
                 _image = value;
                 SetImageDrawable(value);
-                IsEOSCustomizationIgnored = true;
-            }
-        }
-
-        private Drawable _preloaderImage;
-        public Drawable PreloaderImage
-        {
-            get => _preloaderImage;
-            set
-            {
-                _preloaderImage = value;
+                ChangeImageColor(Enabled ? EnabledImageColor : DisabledImageColor);
                 IsEOSCustomizationIgnored = true;
             }
         }
@@ -196,7 +211,7 @@ namespace EOS.UI.Droid.Controls
 
         private void SetBackground()
         {
-            if (_shadowConfig != null && _initialWidth>0)
+            if (_shadowConfig != null && _initialWidth > 0)
             {
                 ResetShadowParameters();
             }
@@ -220,18 +235,20 @@ namespace EOS.UI.Droid.Controls
             Initialize();
         }
 
-        protected FabProgress(IntPtr javaReference, JniHandleOwnership transfer) : base(javaReference, transfer)
-        {
-            Initialize();
-        }
-
         private void Initialize(IAttributeSet attrs = null)
         {
-            _animationDrawable = CreateLottieAnimationDrawable();
+            LayoutParameters = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WrapContent, ViewGroup.LayoutParams.WrapContent);
             if(attrs != null)
                 InitializeAttributes(attrs);
 
             UpdateAppearance();
+
+            LottieAnimation = CreateLottieAnimationDrawable(AnimationKey);
+            LottieAnimation.RepeatCount = LottieDrawable.Infinite;
+
+            //calculate how the width of the image and the width of the lottie animation correlate
+            //and normalize the width of the lottie by setting the appropriate scale
+            LottieAnimation.Scale = (float)Drawable.IntrinsicWidth / LottieAnimation.IntrinsicWidth;
         }
 
         private void InitializeAttributes(IAttributeSet attrs)
@@ -253,10 +270,6 @@ namespace EOS.UI.Droid.Controls
             var image = styledAttributes.GetDrawable(Resource.Styleable.FabProgress_eos_image);
             if(image != null)
                 Image = image;
-
-            var preloaderImage = styledAttributes.GetDrawable(Resource.Styleable.FabProgress_eos_preloaderimage);
-            if(preloaderImage != null)
-                PreloaderImage = preloaderImage;
         }
 
         public IEOSStyle GetCurrentEOSStyle()
@@ -286,7 +299,6 @@ namespace EOS.UI.Droid.Controls
             {
                 var provider = GetThemeProvider();
                 Image = Resources.GetDrawable(provider.GetEOSProperty<int>(this, EOSConstants.CalendarImage), null);
-                PreloaderImage = Resources.GetDrawable(provider.GetEOSProperty<int>(this, EOSConstants.FabProgressPreloaderImage), null);
                 ShadowConfig = provider.GetEOSProperty<ShadowConfig>(this, EOSConstants.FabShadow);
 
                 //Should initialize after ShadowConfig
@@ -294,6 +306,10 @@ namespace EOS.UI.Droid.Controls
                 BackgroundColor = provider.GetEOSProperty<Color>(this, EOSConstants.BrandPrimaryColor);
                 DisabledBackgroundColor = provider.GetEOSProperty<Color>(this, EOSConstants.NeutralColor4S);
                 PressedBackgroundColor = provider.GetEOSProperty<Color>(this, EOSConstants.BrandPrimaryColorVariant1);
+
+                EnabledImageColor = GetThemeProvider().GetEOSProperty<Color>(this, EOSConstants.NeutralColor6S);
+                DisabledImageColor = GetThemeProvider().GetEOSProperty<Color>(this, EOSConstants.NeutralColor3S);
+
                 IsEOSCustomizationIgnored = false;
             }
         }
@@ -302,32 +318,71 @@ namespace EOS.UI.Droid.Controls
         {
             if (Enabled && IsNotShadowClick(e))
             {
-                if (e.Action == MotionEventActions.Down)
-                {
-                    _touchIsDown = true;
-                    SetBackgroundColor(PressedBackgroundColor);
-                    Animate().ScaleX(_startScale).ScaleY(_startScale).SetDuration(_animationDuration).Start();
-                }
-                if (e.Action == MotionEventActions.Up || e.Action == MotionEventActions.Cancel)
-                {
-                    SetActionUpUIStyle();
-                    PerformClick();
-                }
+                HandleTouchDownMotionEvent(e);
+                if (HandleTouchUpOrCancelMotionEvent(e))
+                    return true;
             }
+
+            HandleTouchUpOrCancelMotionEventOutsideContent(e);
+
+            return true;
+        }
+
+        private void HandleTouchUpOrCancelMotionEventOutsideContent(MotionEvent e)
+        {
             //return in previous state if button is pressed outside its content
             if (_touchIsDown && e.Action == MotionEventActions.Up || e.Action == MotionEventActions.Cancel)
             {
+                var animation = StartTouchAnimation(_endScale, _startScale);
                 SetActionUpUIStyle();
+                StartAnimation(animation);
             }
+        }
 
-            return true;
+        private bool HandleTouchUpOrCancelMotionEvent(MotionEvent e)
+        {
+            if (e.Action == MotionEventActions.Up || e.Action == MotionEventActions.Cancel)
+            {
+                var animation = StartTouchAnimation(_endScale, _startScale);
+                animation.AnimationEnd += delegate
+                {
+                    SetActionUpUIStyle();
+                    PerformClick();
+                };
+                StartAnimation(animation);
+                return true;
+            }
+            return false;
+        }
+
+        private void HandleTouchDownMotionEvent(MotionEvent e)
+        {
+            if (e.Action == MotionEventActions.Down)
+            {
+                _touchIsDown = true;
+                var animation = StartTouchAnimation(_startScale, _endScale);
+                animation.AnimationEnd += delegate
+                {
+                    SetBackgroundColor(PressedBackgroundColor);
+                };
+                StartAnimation(animation);
+            }
+        }
+
+        private ScaleAnimation StartTouchAnimation(float startScale, float endScale)
+        {
+            var scaleInAnimation = new ScaleAnimation(startScale, endScale, startScale, endScale, Dimension.RelativeToSelf, _pivot, Dimension.RelativeToSelf, _pivot)
+            {
+                Duration = _animationDuration,
+                FillAfter = true
+            };
+            return scaleInAnimation;
         }
 
         private void SetActionUpUIStyle()
         {
             _touchIsDown = false;
             SetBackgroundColor(BackgroundColor);
-            Animate().ScaleX(_endScale).ScaleY(_endScale).SetDuration(_animationDuration).Start();
         }
 
         private bool IsNotShadowClick(MotionEvent e)
@@ -342,23 +397,21 @@ namespace EOS.UI.Droid.Controls
             return true;
         }
 
-        public void StartProgressAnimation()
+        public void StartLottieAnimation()
         {
             if (InProgress)
                 return;
 
-            StartLottieAnimation();
-
+            StartLottie();
             InProgress = true;
         }
 
-        public void StopProgressAnimation()
+        public void StopLottieAnimation()
         {
             if (!InProgress)
                 return;
 
-            StopLottieAnimation();
-
+            StopLottie();
             InProgress = false;
         }
 
@@ -378,6 +431,15 @@ namespace EOS.UI.Droid.Controls
             {
                 SetShadow(_shadowConfig);
             }
+        }
+
+        protected override void OnSizeChanged(int w, int h, int oldw, int oldh)
+        {
+            //if shadow is exist image should be resetted 
+            base.OnSizeChanged(w, h, oldw, oldh);
+            SetImageDrawable(Image);
+            ChangeImageColor(Enabled ? EnabledImageColor : DisabledImageColor);
+            SetBackgroundColor(BackgroundColor);
         }
 
         #region Shadow methods
@@ -608,14 +670,14 @@ namespace EOS.UI.Droid.Controls
         //Otherwise just set GradientDrawable color.
         public override void SetImageDrawable(Drawable drawable)
         {
-            if (drawable == null)
+            if(drawable == null)
             {
                 base.SetImageDrawable(null);
                 return;
             }
 
             var layer = Background as LayerDrawable;
-            if (HasShadowDrawable(layer))
+            if(HasShadowDrawable(layer))
             {
                 //Should use this method instead of GetDrawable for compatibility with API <23
                 layer.SetDrawableByLayerId(_imageLayerIndex, drawable);
@@ -623,9 +685,9 @@ namespace EOS.UI.Droid.Controls
                 var densityOffsetX = (int)Helpers.Helpers.DpToPx(ShadowConfig.Offset.X);
                 //Wrong implementation for y offset should be inverted
                 //TODO need to fix
-                var densityOffsetY = (int)Helpers.Helpers.DpToPx(ShadowConfig.Offset.Y) *-1;
+                var densityOffsetY = (int)Helpers.Helpers.DpToPx(ShadowConfig.Offset.Y) * -1;
                 var densityBlur = (int)Helpers.Helpers.DpToPx(ShadowConfig.Blur);
-                SetInsetForImageLayer(layer, drawable, _initialWidth/2, densityOffsetX, densityOffsetY, densityBlur);
+                SetInsetForImageLayer(layer, drawable, _initialWidth / 2, densityOffsetX, densityOffsetY, densityBlur);
                 layer.Mutate();
                 layer.InvalidateSelf();
             }
@@ -644,39 +706,53 @@ namespace EOS.UI.Droid.Controls
 
         #region Lottie animation
 
-        private LottieDrawable CreateLottieAnimationDrawable()
+        private LottieDrawable CreateLottieAnimationDrawable(string animationKey)
         {
             var animationDrawable = new LottieDrawable();
-            animationDrawable.Loop(true);
-
-            LottieComposition.Factory.FromAssetFileName(Context, AnimationKey, (composition) =>
-            {
-                animationDrawable.SetComposition(composition);
-                animationDrawable.Scale = (LottieAnimationSize * Resources.DisplayMetrics.Density) / animationDrawable.IntrinsicHeight;
-            });
-
+            var result = (LottieComposition)LottieCompositionFactory.FromAssetSync(Context, animationKey).Value;
+            animationDrawable.SetComposition(result);
             return animationDrawable;
         }
 
-        private void StartLottieAnimation()
+        private void StartLottie()
         {
             //clearing drawable if shadow is exist
             SetImageDrawable(new ColorDrawable(Color.Transparent));
 
-            base.SetImageDrawable(_animationDrawable);
+            base.SetImageDrawable(LottieAnimation);
 
-            //updating paddings according configuration shadow            
-            base.SetPadding(0, 0, 2 * (int)(ShadowConfig.Offset.X * Resources.DisplayMetrics.Density), 2 * (int)(ShadowConfig.Offset.Y * Resources.DisplayMetrics.Density));
+            //updating paddings according configuration shadow       
+            UpdateLottiePaddings();
 
-            _animationDrawable.PlayAnimation();
+            LottieAnimation.PlayAnimation();
         }
 
-        private void StopLottieAnimation()
+        private void UpdateLottiePaddings()
         {
-            _animationDrawable.Stop();
+            var densityOffsetX = (int)Helpers.Helpers.DpToPx(ShadowConfig.Offset.X);
+            var densityOffsetY = (int)Helpers.Helpers.DpToPx(ShadowConfig.Offset.Y) * -1;
+            var densityBlur = (int)Helpers.Helpers.DpToPx(ShadowConfig.Blur);
+            SetPaddingsForLottieAnimation(LottieAnimation, _initialWidth / 2, densityOffsetX, densityOffsetY, densityBlur);
+        }
+
+        private void SetPaddingsForLottieAnimation(Drawable drawable, int halfWidth, int offsetX, int offsetY, int blur)
+        {
+            var imagePosition = halfWidth - drawable.IntrinsicWidth / 2;
+
+            var paddingL = GetInsetLeft(offsetX, blur) + imagePosition;
+            var paddingT = GetInsetTop(offsetY, blur) + imagePosition;
+            var paddingR = GetInsetRight(offsetX, blur) + imagePosition;
+            var paddingB = GetInsetBottom(offsetY, blur) + imagePosition;
+            base.SetPadding(paddingL, paddingT, paddingR, paddingB);
+        }
+
+        private void StopLottie()
+        {
+            LottieAnimation.Stop();
             //clear lottie animation
             base.SetImageDrawable(null);
             SetImageDrawable(Image);
+            ChangeImageColor(Enabled ? EnabledImageColor : DisabledImageColor);
         }
 
         #endregion
