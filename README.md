@@ -59,12 +59,13 @@ Documentation
 * [Section](../../wiki/Section)
 * [Simple label](../../wiki/SimpleLabel)
 * [Worktime Calendar](../../wiki/Worktime-calendar)
+* [Circle Menu](../../wiki/Circle-menu)
 
 Nuget
 -----------
 You can download from Nuget here:
-* [Android](https://www.nuget.org/packages/Com.EgoCms.Eos.UI.Droid/)
-* [iOS](https://www.nuget.org/packages/Com.EgoCms.Eos.UI.iOS/)
+* [Android](https://www.nuget.org/packages/EOS.UI.Droid/)
+* [iOS](https://www.nuget.org/packages/EOS.UI.iOS/)
 
 Issues or feature requests?
 -----------
