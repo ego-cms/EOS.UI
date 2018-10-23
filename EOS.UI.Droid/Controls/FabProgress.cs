@@ -365,7 +365,7 @@ namespace EOS.UI.Droid.Controls
                 {
                     SetBackgroundColor(PressedBackgroundColor);
                 };
-                StartAnimation(StartTouchAnimation(_startScale, _endScale));
+                StartAnimation(animation);
             }
         }
 
@@ -721,10 +721,29 @@ namespace EOS.UI.Droid.Controls
 
             base.SetImageDrawable(LottieAnimation);
 
-            //updating paddings according configuration shadow            
-            base.SetPadding(0, 0, 2 * (int)(ShadowConfig.Offset.X * Resources.DisplayMetrics.Density), 2 * (int)(ShadowConfig.Offset.Y * Resources.DisplayMetrics.Density));
+            //updating paddings according configuration shadow       
+            UpdateLottiePaddings();
 
             LottieAnimation.PlayAnimation();
+        }
+
+        private void UpdateLottiePaddings()
+        {
+            var densityOffsetX = (int)Helpers.Helpers.DpToPx(ShadowConfig.Offset.X);
+            var densityOffsetY = (int)Helpers.Helpers.DpToPx(ShadowConfig.Offset.Y) * -1;
+            var densityBlur = (int)Helpers.Helpers.DpToPx(ShadowConfig.Blur);
+            SetPaddingsForLottieAnimation(LottieAnimation, _initialWidth / 2, densityOffsetX, densityOffsetY, densityBlur);
+        }
+
+        private void SetPaddingsForLottieAnimation(Drawable drawable, int halfWidth, int offsetX, int offsetY, int blur)
+        {
+            var imagePosition = halfWidth - drawable.IntrinsicWidth / 2;
+
+            var paddingL = GetInsetLeft(offsetX, blur) + imagePosition;
+            var paddingT = GetInsetTop(offsetY, blur) + imagePosition;
+            var paddingR = GetInsetRight(offsetX, blur) + imagePosition;
+            var paddingB = GetInsetBottom(offsetY, blur) + imagePosition;
+            base.SetPadding(paddingL, paddingT, paddingR, paddingB);
         }
 
         private void StopLottie()
