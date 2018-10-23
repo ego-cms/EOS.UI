@@ -225,7 +225,7 @@ namespace EOS.UI.iOS.Controls
         {
             get
             {
-                var textSize = CurrentAttributedTitle.Size;
+                var textSize = InProgress ? _attributedTitles[UIControlState.Normal].Size : CurrentAttributedTitle.Size;
                 var size = new CGSize(textSize.Width + 2 * _contentInsets.Left, textSize.Height + 2 * _contentInsets.Top);
                 return size;
             }
@@ -395,10 +395,18 @@ namespace EOS.UI.iOS.Controls
 
         public void StopProgressAnimation()
         {
+            InProgress = false;
             _snakeAnimation.Stop();
             _animationView.Hidden = true;
             RestoreTitles();
-            InProgress = false;
+        }
+
+        public override void AwakeFromNib()
+        {
+            base.AwakeFromNib();
+            var currentTitle = CurrentTitle;
+            base.SetTitle(string.Empty, UIControlState.Normal);
+            SetTitle(currentTitle, UIControlState.Normal);
         }
 
         private void UpdateAnimationFrame()
@@ -457,7 +465,6 @@ namespace EOS.UI.iOS.Controls
             //letter spacing
             this.SetLetterSpacing(FontStyle.LetterSpacing);
         }
-
         #endregion
     }
 }
