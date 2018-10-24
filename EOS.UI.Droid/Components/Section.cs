@@ -24,6 +24,13 @@ namespace EOS.UI.Droid.Components
 
         #region constructors
 
+        public static Section Create(ViewGroup parent)
+        {
+            var itemView = LayoutInflater.From(parent.Context).Inflate(Resource.Layout.Section, parent, false);
+            var newSection = new Section(itemView);
+            return newSection;
+        }
+
         public Section(View itemView) : base(itemView)
         {
             _containerLayout = itemView.FindViewById<LinearLayout>(Resource.Id.sectionContainer);
