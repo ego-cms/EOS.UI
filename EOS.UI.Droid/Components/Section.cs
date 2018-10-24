@@ -29,6 +29,7 @@ namespace EOS.UI.Droid.Components
             _containerLayout = itemView.FindViewById<LinearLayout>(Resource.Id.sectionContainer);
             _titleLabel = itemView.FindViewById<SimpleLabel>(Resource.Id.sectionTitle);
             _actionButton = itemView.FindViewById<Button>(Resource.Id.sectionButton);
+            _titleLabel.Gravity = GravityFlags.CenterVertical;
 
             _actionButton.Click += delegate
             {
