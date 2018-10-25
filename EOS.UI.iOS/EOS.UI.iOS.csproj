@@ -97,6 +97,7 @@
     <Compile Include="Components\CircleMenu\CircleButtonIndicator.cs" />
     <Compile Include="Components\CircleMenu\BasicCircleMenuButton.cs" />
     <Compile Include="Components\CircleMenu\CircleMenuPanGestureAnalyzer.cs" />
+    <Compile Include="Extensions\CGSizeExtension.cs" />
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="Components\Section.xib" />

@@ -1,9 +1,6 @@
 ﻿using System;
 using Airbnb.Lottie;
-using CoreAnimation;
 using CoreGraphics;
-using EOS.UI.iOS.Extensions;
-using EOS.UI.iOS.Helpers;
 using EOS.UI.iOS.Themes;
 using EOS.UI.Shared.Helpers;
 using EOS.UI.Shared.Themes.Helpers;
@@ -16,8 +13,8 @@ namespace EOS.UI.iOS.Controls
     [Register("FabProgress")]
     public class FabProgress : UIButton, IEOSThemeControl
     {
-        //image padding percent
-        private const double _paddingRatio = 0.27;
+        //image padding percent for intrinsic content size
+        private const double _intrinsicPaddingRatio = 0.27;
         private const float _startScale = 0.85f;
         private const float _endScale = 1.0f;
         private const double _scaleAnimationDuration = 0.1;
@@ -137,7 +134,6 @@ namespace EOS.UI.iOS.Controls
                 if (value != CGRect.Empty)
                 {
                     UpdateAnimationFrame();
-                    UpdateImageInsets();
                 }
             }
         }
@@ -179,7 +175,7 @@ namespace EOS.UI.iOS.Controls
                 if (Image != null)
                 {
                     var imageSize = Math.Max(Image.Size.Width, Image.Size.Height);
-                    var side = imageSize * (1 - 2 * _paddingRatio) / _paddingRatio;
+                    var side = imageSize * (1 - 2 * _intrinsicPaddingRatio) / _intrinsicPaddingRatio;
                     return new CGSize(side, side);
                 }
                 else
@@ -227,7 +223,6 @@ namespace EOS.UI.iOS.Controls
         {
             base.LayoutSubviews();
             Layer.CornerRadius = Frame.Width / 2;
-            UpdateImageInsets();
         }
 
         private void SetShadowConfig(ShadowConfig config)
@@ -306,7 +301,8 @@ namespace EOS.UI.iOS.Controls
         public override void MovedToSuperview()
         {
             base.MovedToSuperview();
-            UpdateFrames();
+
+            UpdateAnimationFrame();
         }
 
         public override void AwakeFromNib()
@@ -315,7 +311,7 @@ namespace EOS.UI.iOS.Controls
             //Should call these methods from AwakeFromNib
             //Otherwise iOS designers ignores any customization
             SetEmptyTitle();
-            UpdateFrames();
+            UpdateAnimationFrame();
             SetImage(_image);
         }
 
@@ -329,27 +325,13 @@ namespace EOS.UI.iOS.Controls
             //you cant set any text for this button
         }
 
-        private void UpdateFrames()
-        {
-            UpdateImageInsets();
-            UpdateAnimationFrame();
-        }
-
-        private void UpdateImageInsets()
-        {
-            var padding = (nfloat)(Frame.Width * _paddingRatio);
-            var insets = new UIEdgeInsets(padding, padding, padding, padding);
-            ImageEdgeInsets = insets;
-        }
-
         private void SetImage(UIImage image)
         {
             base.SetImage(image, UIControlState.Normal);
-            VerticalAlignment = UIControlContentVerticalAlignment.Fill;
-            HorizontalAlignment = UIControlContentHorizontalAlignment.Fill;
-            ContentMode = UIViewContentMode.ScaleToFill;
+            VerticalAlignment = UIControlContentVerticalAlignment.Center;
+            HorizontalAlignment = UIControlContentHorizontalAlignment.Center;
+            ContentMode = UIViewContentMode.Center;
             TintColor = Enabled ? EnabledImageColor : DisabledImageColor;
-            UpdateImageInsets();
         }
 
         private void Initialize()
@@ -378,11 +360,9 @@ namespace EOS.UI.iOS.Controls
 
         private void UpdateAnimationFrame()
         {
-            var padding = (nfloat)(_paddingRatio * Frame.Width);
-            var heightWidth = Frame.Height - padding * 2;
-            var x = (Frame.Width / 2) - heightWidth / 2;
-            var y = padding;
-            var newFrame = new CGRect(x, y, heightWidth, heightWidth);
+            var x = (Frame.Width / 2) - Image.Size.Width / 2;
+            var y = (Frame.Height / 2) - Image.Size.Height / 2;
+            var newFrame = new CGRect(x, y, Image.Size.Width, Image.Size.Height);
             _animationView.Frame = newFrame;
             LottieAnimation.Frame = _animationView.Bounds;
         }
