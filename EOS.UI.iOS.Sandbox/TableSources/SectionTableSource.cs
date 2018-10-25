@@ -74,7 +74,7 @@ namespace EOS.UI.iOS.Sandbox.TableSources
                 customSection.HasButton = SectionModel.HasButton;
 
                 if(!string.IsNullOrEmpty(SectionModel.SectionName))
-                    customSection.SectionName = SectionModel.SectionName;
+                    customSection.SectionTitleText = SectionModel.SectionName;
 
                 if(!string.IsNullOrEmpty(SectionModel.ButtonText))
                     customSection.ButtonText = SectionModel.ButtonText;
@@ -92,10 +92,10 @@ namespace EOS.UI.iOS.Sandbox.TableSources
                     customSection.ButtonTextLetterSpacing = SectionModel.ButtonTextLetterSpacing;
 
                 if(SectionModel.SectionNameFont != null)
-                    customSection.SectionNameFont = SectionModel.SectionNameFont;
+                    customSection.SectionTextFont = SectionModel.SectionNameFont;
 
                 if(SectionModel.ButtonNameFont != null)
-                    customSection.ButtonNameFont = SectionModel.ButtonNameFont;
+                    customSection.ButtonTextFont = SectionModel.ButtonNameFont;
 
                 if(SectionModel.BackgroundColor != null)
                     customSection.BackgroundColor = SectionModel.BackgroundColor;
@@ -107,10 +107,10 @@ namespace EOS.UI.iOS.Sandbox.TableSources
                     customSection.BorderColor = SectionModel.BorderColor;
 
                 if(SectionModel.SectionNameColor != null)
-                    customSection.SectionNameColor = SectionModel.SectionNameColor;
+                    customSection.SectionTextColor = SectionModel.SectionNameColor;
 
                 if(SectionModel.ButtonNameColor != null)
-                    customSection.ButtonNameColor = SectionModel.ButtonNameColor;
+                    customSection.ButtonTextColor = SectionModel.ButtonNameColor;
 
                 customSection.SetPaddings(SectionModel.LeftPadding, SectionModel.TopPadding, SectionModel.RightPadding, SectionModel.BottonPadding);
             }

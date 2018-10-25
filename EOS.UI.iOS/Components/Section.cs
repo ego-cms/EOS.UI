@@ -67,13 +67,13 @@ namespace EOS.UI.iOS.Components
             }
         }
 
-        private string _sectionName;
-        public string SectionName
+        private string _sectionTitleText;
+        public string SectionTitleText
         {
-            get => _sectionName;
+            get => _sectionTitleText;
             set
             {
-                _sectionName = value;
+                _sectionTitleText = value;
                 var attributedString = new NSAttributedString(value ?? string.Empty);
                 sectionName.AttributedText = attributedString;
                 SetTitleFontStyle();
@@ -140,7 +140,7 @@ namespace EOS.UI.iOS.Components
             }
         }
 
-        public UIFont SectionNameFont
+        public UIFont SectionTextFont
         {
             get => TitleFontStyle.Font;
             set
@@ -151,7 +151,7 @@ namespace EOS.UI.iOS.Components
             }
         }
 
-        public UIFont ButtonNameFont
+        public UIFont ButtonTextFont
         {
             get => ButtonFontStyle.Font;
             set
@@ -162,7 +162,7 @@ namespace EOS.UI.iOS.Components
             }
         }
 
-        public UIColor SectionNameColor
+        public UIColor SectionTextColor
         {
             get => TitleFontStyle.Color;
             set
@@ -173,7 +173,7 @@ namespace EOS.UI.iOS.Components
             }
         }
 
-        public UIColor ButtonNameColor
+        public UIColor ButtonTextColor
         {
             get => ButtonFontStyle.Color;
             set
@@ -257,7 +257,7 @@ namespace EOS.UI.iOS.Components
             if (sectionButton != null)
             {
                 sectionButton.SetAttributedTitle(new NSAttributedString(ButtonText ?? string.Empty), UIControlState.Normal);
-                sectionName.AttributedText = new NSAttributedString(SectionName ?? string.Empty);
+                sectionName.AttributedText = new NSAttributedString(SectionTitleText ?? string.Empty);
                 sectionButton.LineBreakMode = UILineBreakMode.TailTruncation;
 
                 if (ButtonFontStyle != null)
@@ -341,7 +341,7 @@ namespace EOS.UI.iOS.Components
                 var provider = GetThemeProvider();
                 HasBorder = provider.GetEOSProperty<bool>(this, EOSConstants.HasSectionBorder);
                 HasButton = provider.GetEOSProperty<bool>(this, EOSConstants.HasSectionAction);
-                SectionName = provider.GetEOSProperty<string>(this, EOSConstants.SectionTitle);
+                SectionTitleText = provider.GetEOSProperty<string>(this, EOSConstants.SectionTitle);
                 ButtonText = provider.GetEOSProperty<string>(this, EOSConstants.SectionActionTitle);
                 TitleFontStyle = provider.GetEOSProperty<FontStyleItem>(this, EOSConstants.R2C3);
                 ButtonFontStyle = provider.GetEOSProperty<FontStyleItem>(this, EOSConstants.R2C1S);
@@ -379,8 +379,8 @@ namespace EOS.UI.iOS.Components
                 return;
             sectionName.SetTextSize(SectionTextSize);
             sectionName.SetLetterSpacing(SectionTextLetterSpacing);
-            sectionName.Font = SectionNameFont;
-            sectionName.TextColor = SectionNameColor;
+            sectionName.Font = SectionTextFont;
+            sectionName.TextColor = SectionTextColor;
         }
 
         private void SetButtonFontStyle()
@@ -389,8 +389,8 @@ namespace EOS.UI.iOS.Components
                 return;
             sectionButton.SetTextSize(ButtonTextSize);
             sectionButton.SetLetterSpacing(ButtonTextLetterSpacing);
-            sectionButton.SetFont(ButtonNameFont);
-            SetButtonTextColor(ButtonNameColor);
+            sectionButton.SetFont(ButtonTextFont);
+            SetButtonTextColor(ButtonTextColor);
         }
 
         #endregion

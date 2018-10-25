@@ -56,7 +56,7 @@ namespace EOS.UI.Droid.Sandbox.RecyclerImplementation
                     section.SectionAction = sectionModel.SectionAction;
 
                     if(!string.IsNullOrEmpty(sectionModel.SectionName))
-                        section.SectionName = sectionModel.SectionName;
+                        section.SectionTitleText = sectionModel.SectionName;
 
                     if(!string.IsNullOrEmpty(sectionModel.ButtonText))
                         section.ButtonText = sectionModel.ButtonText;
@@ -74,10 +74,10 @@ namespace EOS.UI.Droid.Sandbox.RecyclerImplementation
                         section.ButtonTextLetterSpacing = sectionModel.ButtonTextLetterSpacing;
 
                     if(sectionModel.SectionNameFont != null)
-                        section.SectionNameFont = sectionModel.SectionNameFont;
+                        section.SectionTextFont = sectionModel.SectionNameFont;
 
                     if(sectionModel.ButtonNameFont != null)
-                        section.ButtonNameFont = sectionModel.ButtonNameFont;
+                        section.ButtonTextFont = sectionModel.ButtonNameFont;
 
                     if(sectionModel.BackgroundColor != Color.Transparent)
                         section.BackgroundColor = sectionModel.BackgroundColor;
@@ -89,10 +89,10 @@ namespace EOS.UI.Droid.Sandbox.RecyclerImplementation
                         section.BorderColor = sectionModel.BorderColor;
 
                     if(sectionModel.SectionNameColor != Color.Transparent)
-                        section.SectionNameColor = sectionModel.SectionNameColor;
+                        section.SectionTextColor = sectionModel.SectionNameColor;
 
                     if(sectionModel.ButtonNameColor != Color.Transparent)
-                        section.ButtonNameColor = sectionModel.ButtonNameColor;
+                        section.ButtonTextColor = sectionModel.ButtonNameColor;
 
                     section.SetPaddings(sectionModel.LeftPadding, sectionModel.TopPadding, sectionModel.RightPadding, sectionModel.BottonPadding);
                 }
@@ -110,9 +110,7 @@ namespace EOS.UI.Droid.Sandbox.RecyclerImplementation
         {
             if(viewType == 0)
             {
-                var itemView = LayoutInflater.From(parent.Context).Inflate(EOS.UI.Droid.Resource.Layout.Section, parent, false);
-                var viewHolder = new Section(itemView);
-                return viewHolder;
+                return Section.Create(parent);
             }
             else
             {
