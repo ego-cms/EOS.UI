@@ -24,11 +24,19 @@ namespace EOS.UI.Droid.Components
 
         #region constructors
 
+        public static Section Create(ViewGroup parent)
+        {
+            var itemView = LayoutInflater.From(parent.Context).Inflate(Resource.Layout.Section, parent, false);
+            var newSection = new Section(itemView);
+            return newSection;
+        }
+
         public Section(View itemView) : base(itemView)
         {
             _containerLayout = itemView.FindViewById<LinearLayout>(Resource.Id.sectionContainer);
             _titleLabel = itemView.FindViewById<SimpleLabel>(Resource.Id.sectionTitle);
             _actionButton = itemView.FindViewById<Button>(Resource.Id.sectionButton);
+            _titleLabel.Gravity = GravityFlags.CenterVertical;
 
             _actionButton.Click += delegate
             {
@@ -44,7 +52,7 @@ namespace EOS.UI.Droid.Components
 
         public Action SectionAction { get; set; }
 
-        public string SectionName
+        public string SectionTitleText
         {
             get => _titleLabel.Text;
             set
@@ -112,7 +120,7 @@ namespace EOS.UI.Droid.Components
             }
         }
 
-        public Typeface SectionNameFont
+        public Typeface SectionTextFont
         {
             get => _titleLabel.Typeface;
             set
@@ -124,7 +132,7 @@ namespace EOS.UI.Droid.Components
             }
         }
 
-        public Typeface ButtonNameFont
+        public Typeface ButtonTextFont
         {
             get => _actionButton.Typeface;
             set
@@ -136,7 +144,7 @@ namespace EOS.UI.Droid.Components
             }
         }
 
-        public Color SectionNameColor
+        public Color SectionTextColor
         {
             get => TitleFontStyle.Color;
             set
@@ -148,7 +156,7 @@ namespace EOS.UI.Droid.Components
             }
         }
 
-        public Color ButtonNameColor
+        public Color ButtonTextColor
         {
             get => ButtonFontStyle.Color;
             set
@@ -317,7 +325,7 @@ namespace EOS.UI.Droid.Components
             {
                 HasBorder = GetThemeProvider().GetEOSProperty<bool>(this, EOSConstants.HasSectionBorder);
                 HasButton = GetThemeProvider().GetEOSProperty<bool>(this, EOSConstants.HasSectionAction);
-                SectionName = GetThemeProvider().GetEOSProperty<string>(this, EOSConstants.SectionTitle);
+                SectionTitleText = GetThemeProvider().GetEOSProperty<string>(this, EOSConstants.SectionTitle);
                 ButtonText = GetThemeProvider().GetEOSProperty<string>(this, EOSConstants.SectionActionTitle);
                 TitleFontStyle = GetThemeProvider().GetEOSProperty<FontStyleItem>(this, EOSConstants.R2C3);
                 ButtonFontStyle = GetThemeProvider().GetEOSProperty<FontStyleItem>(this, EOSConstants.R2C1S);

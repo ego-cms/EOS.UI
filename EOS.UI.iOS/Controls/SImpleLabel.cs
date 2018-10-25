@@ -28,16 +28,6 @@ namespace EOS.UI.iOS.Controls
             }
         }
 
-        public int CornerRadius
-        {
-            get => (int)Layer.CornerRadius;
-            set
-            {
-                Layer.CornerRadius = value;
-                IsEOSCustomizationIgnored = true;
-            }
-        }
-
         public float LetterSpacing
         {
             get => FontStyle.LetterSpacing;
@@ -171,7 +161,9 @@ namespace EOS.UI.iOS.Controls
 
         private void Initalize()
         {
-            Text = " ";
+            //AttributedText applies only for non-empty string. 
+            //For attributed text initialization should have something here
+            Text = AttributedText?.Value ?? " ";
             Layer.MasksToBounds = true;
             Lines = 1;
             LineBreakMode = UILineBreakMode.TailTruncation;

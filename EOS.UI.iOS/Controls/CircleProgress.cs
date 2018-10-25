@@ -25,6 +25,9 @@ namespace EOS.UI.iOS
         private CAShapeLayer _endDotLayer;
         private CAShapeLayer _startDotLayer;
         private UIBezierPath _startDotPath;
+        private readonly CGSize _intristicContentSize = new CGSize(48, 48);
+
+        private bool ShouldShowProgress => ShowProgress && _progress != 100;
 
         public event EventHandler Started;
         public event EventHandler Stopped;
@@ -154,29 +157,15 @@ namespace EOS.UI.iOS
             }
         }
 
-        public CircleProgress(IntPtr handle) : base(handle)
-        {
-        }
+        public override CGSize IntrinsicContentSize => _intristicContentSize;
 
-        public CircleProgress()
+        public CircleProgress(IntPtr handle) : base(handle)
         {
             LoadNib();
         }
 
-        private void LoadNib()
+        public CircleProgress()
         {
-            var array = NSBundle.MainBundle.LoadNib(nameof(CircleProgress), this, null);
-            var view = array.GetItem<UIView>(0);
-
-            view.Frame = Bounds;
-            AddSubview(view);
-            Initialize();
-        }
-
-        public override void AwakeFromNib()
-        {
-            base.AwakeFromNib();
-
             LoadNib();
         }
 
@@ -214,8 +203,6 @@ namespace EOS.UI.iOS
         {
 
         }
-
-        private bool ShouldShowProgress => ShowProgress && _progress != 100;
 
         public override UIView HitTest(CGPoint point, UIEvent uievent)
         {
@@ -340,6 +327,17 @@ namespace EOS.UI.iOS
             _startDotLayer.Path = null;
             _endDotLayer.Path = null;
             _circleLayer.Path = null;
+        }
+
+        private void LoadNib()
+        {
+            var array = NSBundle.MainBundle.LoadNib(nameof(CircleProgress), this, null);
+            var view = array.GetItem<UIView>(0);
+
+            view.Frame = Bounds;
+            view.ClipsToBounds = true;
+            AddSubview(view);
+            Initialize();
         }
     }
 }
