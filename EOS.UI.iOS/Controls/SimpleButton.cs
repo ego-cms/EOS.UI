@@ -26,7 +26,7 @@ namespace EOS.UI.iOS.Controls
         private CGSize _pressedShadowOffset;
         private const double _shadowYCoeff = 0.25;
         private const double _blurCoeff = 0.66;
-        private UIEdgeInsets _contentInsets = new UIEdgeInsets(14, 124, 14, 124);
+        private UIEdgeInsets _contentInsets = new UIEdgeInsets(14, 15, 14, 15);
 
         #region .ctors
 
@@ -226,7 +226,8 @@ namespace EOS.UI.iOS.Controls
             get
             {
                 var textSize = InProgress ? _attributedTitles[UIControlState.Normal].Size : CurrentAttributedTitle.Size;
-                var size = new CGSize(textSize.Width + 2 * _contentInsets.Left, textSize.Height + 2 * _contentInsets.Top);
+                var width = textSize.GetEllipseWidth();
+                var size = new CGSize(width, textSize.Height +_contentInsets.Bottom + _contentInsets.Top);
                 return size;
             }
         }
